@@ -23,16 +23,16 @@
     "application/json"
   ],
   "paths": {
-    "/bigDataPools": {
+    "/integrationRuntimes": {
       "get": {
         "tags": [
-          "BigDataPools"
+          "IntegrationRuntimes"
         ],
-        "operationId": "BigDataPools_List",
-        "description": "List Big Data Pools",
+        "operationId": "IntegrationRuntimes_List",
+        "description": "List Integration Runtimes",
         "x-ms-examples": {
-          "List Big Data Pools": {
-            "$ref": "./examples/BigDataPools_List.json"
+          "List Integration Runtimes": {
+            "$ref": "./examples/IntegrationRuntimes_List.json"
           }
         },
         "parameters": [
@@ -44,28 +44,28 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfoListResult"
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
       }
     },
-    "/bigDataPools/{bigDataPoolName}": {
+    "/integrationRuntimes/{integrationRuntimeName}": {
       "get": {
         "tags": [
-          "BigDataPools"
+          "IntegrationRuntimes"
         ],
-        "operationId": "BigDataPools_Get",
-        "description": "Get Big Data Pool",
+        "operationId": "IntegrationRuntimes_Get",
+        "description": "Get Integration Runtime",
         "x-ms-examples": {
-          "Get Big Data Pool": {
-            "$ref": "./examples/BigDataPools_Get.json"
+          "Get Integration Runtime": {
+            "$ref": "./examples/IntegrationRuntimes_Get.json"
           }
         },
         "parameters": [
@@ -73,20 +73,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BigDataPoolNameParameter"
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfo"
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
@@ -111,12 +111,12 @@
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     },
-    "BigDataPoolNameParameter": {
-      "name": "bigDataPoolName",
+    "IntegrationRuntimeNameParameter": {
+      "name": "integrationRuntimeName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Big Data Pool name",
+      "description": "The Integration Runtime name",
       "x-ms-parameter-location": "method"
     }
   }

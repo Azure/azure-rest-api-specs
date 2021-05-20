@@ -23,62 +23,49 @@
     "application/json"
   ],
   "paths": {
-    "/operationResults/{operationId}": {
+    "/bigDataPools": {
       "get": {
         "tags": [
-          "OperationResult"
+          "BigDataPools"
         ],
-        "operationId": "OperationResult_Get",
-        "description": "Get operation result",
+        "operationId": "BigDataPools_List",
+        "description": "List Big Data Pools",
         "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/OperationResult_Get.json"
+          "List Big Data Pools": {
+            "$ref": "./examples/BigDataPools_List.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Operation ID."
           }
         ],
         "responses": {
           "200": {
-            "description": ""
-          },
-          "201": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfoListResult"
+            }
           },
           "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": ""
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
           }
         }
       }
     },
-    "/operationStatuses/{operationId}": {
+    "/bigDataPools/{bigDataPoolName}": {
       "get": {
         "tags": [
-          "OperationResult"
+          "BigDataPools"
         ],
-        "operationId": "OperationStatus_Get",
-        "description": "Get operation status",
+        "operationId": "BigDataPools_Get",
+        "description": "Get Big Data Pool",
         "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/OperationStatus_Get.json"
+          "Get Big Data Pool": {
+            "$ref": "./examples/BigDataPools_Get.json"
           }
         },
         "parameters": [
@@ -86,31 +73,21 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Operation ID."
+            "$ref": "#/parameters/BigDataPoolNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": ""
-          },
-          "201": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfo"
+            }
           },
           "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": ""
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
           }
         }
       }
@@ -133,6 +110,14 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "BigDataPoolNameParameter": {
+      "name": "bigDataPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Big Data Pool name",
+      "x-ms-parameter-location": "method"
     }
   }
 }

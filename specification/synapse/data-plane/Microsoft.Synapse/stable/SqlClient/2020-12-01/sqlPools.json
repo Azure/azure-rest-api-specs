@@ -23,16 +23,16 @@
     "application/json"
   ],
   "paths": {
-    "/integrationRuntimes": {
+    "/sqlPools": {
       "get": {
         "tags": [
-          "IntegrationRuntimes"
+          "SqlPools"
         ],
-        "operationId": "IntegrationRuntimes_List",
-        "description": "List Integration Runtimes",
+        "operationId": "SqlPools_List",
+        "description": "List Sql Pools",
         "x-ms-examples": {
-          "List Integration Runtimes": {
-            "$ref": "./examples/IntegrationRuntimes_List.json"
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_List.json"
           }
         },
         "parameters": [
@@ -44,28 +44,28 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolInfoListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
       }
     },
-    "/integrationRuntimes/{integrationRuntimeName}": {
+    "/sqlPools/{sqlPoolName}": {
       "get": {
         "tags": [
-          "IntegrationRuntimes"
+          "SqlPools"
         ],
-        "operationId": "IntegrationRuntimes_Get",
-        "description": "Get Integration Runtime",
+        "operationId": "SqlPools_Get",
+        "description": "Get Sql Pool",
         "x-ms-examples": {
-          "Get Integration Runtime": {
-            "$ref": "./examples/IntegrationRuntimes_Get.json"
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_Get.json"
           }
         },
         "parameters": [
@@ -73,20 +73,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
+            "$ref": "#/parameters/SqlPoolNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
+              "$ref": "../../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPool"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
@@ -111,12 +111,12 @@
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     },
-    "IntegrationRuntimeNameParameter": {
-      "name": "integrationRuntimeName",
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Integration Runtime name",
+      "description": "The Sql Pool name",
       "x-ms-parameter-location": "method"
     }
   }

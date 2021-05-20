@@ -23,49 +23,62 @@
     "application/json"
   ],
   "paths": {
-    "/sqlPools": {
+    "/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "SqlPools"
+          "OperationResult"
         ],
-        "operationId": "SqlPools_List",
-        "description": "List Sql Pools",
+        "operationId": "OperationResult_Get",
+        "description": "Get operation result",
         "x-ms-examples": {
           "List Sql Pools": {
-            "$ref": "./examples/SqlPools_List.json"
+            "$ref": "./examples/OperationResult_Get.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
           }
         ],
         "responses": {
           "200": {
-            "description": "Success response.",
-            "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolInfoListResult"
-            }
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            }
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         }
       }
     },
-    "/sqlPools/{sqlPoolName}": {
+    "/operationStatuses/{operationId}": {
       "get": {
         "tags": [
-          "SqlPools"
+          "OperationResult"
         ],
-        "operationId": "SqlPools_Get",
-        "description": "Get Sql Pool",
+        "operationId": "OperationStatus_Get",
+        "description": "Get operation status",
         "x-ms-examples": {
           "List Sql Pools": {
-            "$ref": "./examples/SqlPools_Get.json"
+            "$ref": "./examples/OperationStatus_Get.json"
           }
         },
         "parameters": [
@@ -73,21 +86,31 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SqlPoolNameParameter"
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
           }
         ],
         "responses": {
           "200": {
-            "description": "Success response.",
-            "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPool"
-            }
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            }
+              "$ref": "../../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         }
       }
@@ -110,14 +133,6 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
-    },
-    "SqlPoolNameParameter": {
-      "name": "sqlPoolName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Sql Pool name",
-      "x-ms-parameter-location": "method"
     }
   }
 }
