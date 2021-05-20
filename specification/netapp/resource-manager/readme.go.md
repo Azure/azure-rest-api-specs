@@ -13,7 +13,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-netapp-2021-04-01
+  - tag: package-netapp-2021-04-01-preview
   - tag: package-netapp-2021-02-01
   - tag: package-netapp-2020-12-01
   - tag: package-netapp-2020-11-01
