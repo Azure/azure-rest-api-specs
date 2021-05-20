@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2021-05` is specified on t
 ```yaml $(tag) == 'package-preview-2021-05'
 input-file:
   - Microsoft.BotService/preview/2021-05-01-preview/botservice.json
-  directive:
+directive:
   - suppress: R4009
     from: botservice.json
     reason: We don not yet support systemdata
