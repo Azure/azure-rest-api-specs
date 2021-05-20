@@ -380,7 +380,7 @@
         },
         "actions": {
           "description": "The actions that will activate when the condition is met.",
-          "$ref": "#/definitions/ActionList"
+          "$ref": "#/definitions/ActivityLogAlertActionList"
         },
         "enabled": {
           "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
@@ -454,19 +454,19 @@
         }
       }
     },
-    "ActionList": {
+    "ActivityLogAlertActionList": {
       "description": "A list of Activity Log Alert rule actions.",
       "properties": {
         "actionGroups": {
           "description": "The list of the Action Groups.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActionGroup"
+            "$ref": "#/definitions/ActivityLogAlertActionGroup"
           }
         }
       }
     },
-    "ActionGroup": {
+    "ActivityLogAlertActionGroup": {
       "description": "A pointer to an Azure Action Group.",
       "properties": {
         "actionGroupId": {
