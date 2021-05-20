@@ -262,6 +262,7 @@ directive:
       - $.definitions.MapsAccountProperties.properties.disableLocalAuth
       - $.definitions.OperationDetail.properties.isDataAction
       - $.definitions.MetricSpecification.properties.fillGapWithZero
+      - $.definitions.Dimension.properties.toBeExportedToShoebox
     from: maps-management.json
     reason: standard property being applied to all azure resources.
 ```

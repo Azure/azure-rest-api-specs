@@ -21,7 +21,16 @@
       },
       "properties": {
         "disableLocalAuth": false,
-        "linkedResources": {}
+        "linkedResources": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+            "uniqueName": "myBatchStorageAccount"
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+            "uniqueName": "myBlobDataSource"
+          }
+        ]
       }
     }
   },
@@ -63,7 +72,16 @@
           "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
           "provisioningState": "Succeeded",
           "disableLocalAuth": true,
-          "linkedResources": {}
+          "linkedResources": [
+            {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+              "uniqueName": "myBatchStorageAccount"
+            },
+            {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+              "uniqueName": "myBlobDataSource"
+            }
+          ]
         }
       }
     },
@@ -73,7 +91,7 @@
         "name": "myMapsAccount",
         "type": "Microsoft.Maps/accounts",
         "kind": "Gen2",
-        "location": "global",
+        "location": "eastus",
         "tags": {
           "test": "true"
         },
