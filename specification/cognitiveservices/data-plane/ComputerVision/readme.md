@@ -125,6 +125,7 @@ directive:
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+May need to supply `--version=V2` on the command line.
 
 ``` yaml $(python)
 python-mode: create
@@ -133,6 +134,7 @@ add-credentials: true
 payload-flattening-threshold: 2
 namespace: azure.cognitiveservices.vision.computervision
 package-name: azure-cognitiveservices-vision-computervision
+package-version: 0.9.0
 clear-output-folder: true
 use: "@microsoft.azure/autorest.python@~4.0.71" 
 version: V2
