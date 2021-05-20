@@ -37,9 +37,9 @@ python:
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/[[service]]/azure-mgmt-[[service]]/azure/mgmt/[[service]]
+output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric/azure/mgmt/servicefabric
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/[[service]]/azure-mgmt-[[service]]
+output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric
 ```
