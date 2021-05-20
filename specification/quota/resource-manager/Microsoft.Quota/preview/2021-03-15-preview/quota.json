@@ -926,12 +926,11 @@
         },
         "resourceQuery": {
           "description": "The resource query for dimension values",
-          "type": "string",
-          "isOptional": true
+          "$ref": "#/definitions/resourceQueryDetails"
         },
         "resourceUsagesQuery": {
           "description": "The resource usages query",
-          "type": "string"
+          "$ref": "#/definitions/resourceQueryDetails"
         },
         "dimensions": {
           "description": "The resource provider dimensions",
@@ -1038,6 +1037,55 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QuotaTypeInformationDimensionList"
         }
+      }
+    },
+    "resourceQueryDetails": {
+      "type": "object",
+      "description": "Resource query details",
+      "properties": {
+        "resourceQueryType": {
+          "description": "Resource query type",
+          "$ref": "#/definitions/ResourceQueryType"
+        },
+        "resourceQueryMethod": {
+          "description": "Resource query method",
+          "$ref": "#/definitions/ResourceQueryMethod"
+        },
+        "resourceQueryUri": {
+          "type": "string",
+          "description": "The base Uri for for resource query"
+        },
+        "resourceQueryPostTemplate": {
+          "description": "The template to create resource query",
+          "type": "string",
+          "isOptional": true
+        }
+      }
+    },
+    "ResourceQueryType": {
+      "description": "The resource query types. For extendibility, we can keep it as string.",
+      "enum": [
+        "ARG",
+        "RestAPI"
+      ],
+      "readOnly": false,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceQueryType",
+        "modelAsString": true
+      }
+    },
+    "ResourceQueryMethod": {
+      "description": "The resource query method. ",
+      "enum": [
+        "GET",
+        "POST"
+      ],
+      "readOnly": false,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceQueryMethod",
+        "modelAsString": true
       }
     },
     "QuotaTemplatesDetails": {

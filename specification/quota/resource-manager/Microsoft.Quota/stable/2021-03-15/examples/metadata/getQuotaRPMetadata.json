@@ -13,8 +13,17 @@
               "value": [
                 {
                   "resourceType": "virtualMachines",
-                  "resourceQuery": "resourceQuery placeholder",
-                  "resourceUsagesQuery": "Usages query",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "where type contains 'virtualMachines'"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "API",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01"
+                  },
                   "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
                   "dimensions": [
                     {
@@ -50,7 +59,17 @@
               "value": [
                 {
                   "resourceType": "batchAccounts/pool",
-                  "resourceQuery": "resourceQuery placeholder",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "where type contains 'BatchAccountName' and isnotempty(properties.batchAccountName)"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "API",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Batch/locations/{{location}}/usages?api-version=2020-12-01"
+                  },
                   "resourceUsagesApiTemplate": "",
                   "dimensions": [
                     {
@@ -115,7 +134,17 @@
               "value": [
                 {
                   "resourceType": "PublicIpAddresses",
-                  "resourceQuery": "resourceQuery placeholder",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "where type contains 'publicIPAddresses' and isnotempty(properties.ipAddress)"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "API",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01"
+                  },
                   "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Network/locations/{{location}}/usages?api-version=2020-07-01",
                   "dimensions": [
                     {
