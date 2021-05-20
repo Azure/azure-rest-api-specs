@@ -22,7 +22,8 @@
                   "resourceUsagesQuery": {
                     "resourceQueryType": "RestAPI",
                     "resourceQueryMethod": "GET",
-                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01"
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
                   },
                   "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
                   "dimensions": [
@@ -68,7 +69,8 @@
                   "resourceUsagesQuery": {
                     "resourceQueryType": "RestAPI",
                     "resourceQueryMethod": "GET",
-                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Batch/locations/{{location}}/usages?api-version=2020-12-01"
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Batch/locations/{{location}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
                   },
                   "resourceUsagesApiTemplate": "",
                   "dimensions": [
@@ -106,8 +108,19 @@
                 },
                 {
                   "resourceType": "batchAccounts",
-                  "resourceQuery": "resourceQuery placeholder",
-                  "resourceUsagesApiTemplate": "",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "where type contains 'virtualMachines'"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "RestAPI",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
+                  },
+                  "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
                   "dimensions": [
                     {
                       "name": "subscriptionId",
