@@ -439,6 +439,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "List operations available for the Maps Resource Provider",
+        "operationId": "Maps_ListSubscriptionOperations",
+        "x-ms-examples": {
+          "Get Operations by Subscription": {
+            "$ref": "./examples/GetOperationsSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsOperations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators": {
       "get": {
         "tags": [
@@ -1071,6 +1110,22 @@
         "displayName": {
           "type": "string",
           "description": "Display name of dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name of the dimension."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Source Mdm Namespace of the dimension."
+        },
+        "toBeExportedToShoebox": {
+          "type": "boolean",
+          "description": "Flag to indicate exporting to Azure Monitor."
         }
       }
     },
