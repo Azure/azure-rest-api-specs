@@ -60,7 +60,7 @@ directive:
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+``` yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
 input-file:
   - Microsoft.CertificateRegistration/stable/2021-01-01/AppServiceCertificateOrders.json
   - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateOrdersDiagnostics.json
