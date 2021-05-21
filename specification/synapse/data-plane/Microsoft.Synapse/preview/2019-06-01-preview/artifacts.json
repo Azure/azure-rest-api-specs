@@ -1653,6 +1653,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CreateDataFlowDebugSessionResponse"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1660,12 +1666,6 @@
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/CreateDataFlowDebugSessionResponse"
             }
           },
           "default": {
@@ -1822,6 +1822,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugCommandResponse"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1829,12 +1835,6 @@
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/DataFlowDebugCommandResponse"
             }
           },
           "default": {
@@ -2271,14 +2271,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
           },
-          "200": {
-            "description": "OK.",
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
@@ -2369,14 +2369,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
           },
-          "200": {
-            "description": "OK.",
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
@@ -2652,6 +2652,7 @@
   },
   "definitions": {
     "SubResource": {
+      "type": "object",
       "description": "Azure Synapse nested resource, which belongs to a workspace.",
       "allOf": [
         {
@@ -2728,11 +2729,9 @@
           "$ref": "#/definitions/LinkedServiceReference"
         },
         "secretName": {
-          "type": "object",
           "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
         },
         "secretVersion": {
-          "type": "object",
           "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
         }
       },
