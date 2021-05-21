@@ -24,6 +24,7 @@ batch:
   - tag: package-2021-03-01-preview-only
   - tag: package-2021-01-01-preview-only
   - tag: package-2020-04-01-preview-only
+  - tag: package-2020-10-01-preview
   - tag: package-2018-09-01-preview-only
   - tag: package-2018-07-01-preview-only
   - tag: package-2018-05-01-preview
@@ -120,4 +121,13 @@ These settings apply only when `--tag=package-2021-01-01-preview-only --python` 
 python:
   namespace: azure.mgmt.authorization.v2021_01_01_preview
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_01_01_preview
+```
+### Tag: package-2020-10-01-preview and python
+
+These settings apply only when `--tag=package-2020-10-01-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview' && $(python)
+python:
+  namespace: azure.mgmt.authorization.v2020_10_01_preview
+  output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2020_10_01_preview
 ```
