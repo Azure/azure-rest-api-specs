@@ -4,7 +4,14 @@
     "title": "Azure Maps Mobility Service",
     "version": "1.0"
   },
-  "host": "atlas.microsoft.com",
+    "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
