@@ -3546,6 +3546,45 @@
         }
       }
     },
+    "GuestAgentProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the hybrid machine agent.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "Details about the error state."
+        }
+      }
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -3591,6 +3630,10 @@
         "storageProfile": {
           "description": "Storage properties.",
           "$ref": "#/definitions/StorageProfile"
+        },
+        "guestAgentProfile": {
+          "description": "Guest agent status properties.",
+          "$ref": "#/definitions/GuestAgentProfile"
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
@@ -4286,6 +4329,35 @@
           "readOnly": true
         }
       }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "operation": {
       "description": "Operation provided by provider",
