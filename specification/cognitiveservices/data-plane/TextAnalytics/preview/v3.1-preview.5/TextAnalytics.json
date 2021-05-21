@@ -23,11 +23,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.5",
+    "hostTemplate": "{Endpoint}/text/analytics/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },	
+      {	
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -2664,6 +2667,15 @@
     }
   },
   "parameters": {
+    "ApiVersion": {	
+      "name": "ApiVersion",
+      "description": "Text Analytics API version (for example, v3.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
