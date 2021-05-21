@@ -20,3 +20,11 @@ output-folder: $(python-sdks-folder)/aks/azure-mgmt-devspaces/azure/mgmt/devspac
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/aks/azure-mgmt-devspaces
 ```
+
+``` yaml $(python) && $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.OrchestratorSpecificConnectionDetails
+    transform: >
+        $['required'] = ['instanceType'];  
+```
