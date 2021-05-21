@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/roleAssignments?$skipToken={skiptoken}": {
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "tags": [
           "RoleAssignments"
@@ -63,14 +63,6 @@
             "required": false,
             "type": "string",
             "description": "The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed."
-          },
-          {
-            "name": "skiptoken",
-            "in": "path",
-            "description": "A continuationtoken value returned in paginated result to load different pages.",
-            "required": false,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
