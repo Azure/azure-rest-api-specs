@@ -8461,43 +8461,23 @@
       "type": "object",
       "description": "Cosmos DB Cassandra view definition object",
       "properties": {
-        "schema": {
-          "description": "Schema of the Cosmos DB Cassandra view",
-          "$ref": "#/definitions/CassandraSchema"
+        "viewCqlDefinition": {
+          "type": "string",
+          "description": "Cql definition of Cosmos DB Cassandra view"
         },
-        "conditions": {
+        "partitionKeys": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CassandraViewCondition"
+            "$ref": "#/definitions/CassandraPartitionKey"
           },
-          "description": "conditions on which view is built"
-        }
-      }
-    },
-    "CassandraViewCondition": {
-      "type": "object",
-      "description": "Cosmos DB Cassandra view definition Condition",
-      "properties": {
-        "columnNames": {
-          "type": "object",
-          "description": "Names of Cassandra view columns(can have single ColumnName or list of ColumnNames based on Condition)"
+          "description": "List of partition key."
         },
-        "operator": {
-          "type": "string",
-          "enum": [
-            "=",
-            ">",
-            "<",
-            ">=",
-            "<=",
-            "IN",
-            "IS NOT"
-          ],
-          "description": "operator of view condition"
-        },
-        "values": {
-          "type": "object",
-          "description": "operand values of view condition(can have single value or list of values based on Condition)"
+        "clusterKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterKey"
+          },
+          "description": "List of cluster key."
         }
       }
     },

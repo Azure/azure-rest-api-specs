@@ -4,63 +4,26 @@
     "resourceGroupName": "rg1",
     "api-version": "2021-04-01-preview",
     "subscriptionId": "subid",
-    "keyspaceName": "keyspaceName",
-    "viewName": "viewName",
+    "keyspaceName": "keyspacename",
+    "viewName": "viewname",
     "createUpdateCassandraViewParameters": {
       "location": "West US",
       "tags": {},
       "properties": {
         "resource": {
-          "id": "viewName",
-          "soureTableName ": "srcTable",
+          "id": "viewname",
+          "soureTableName ": "srctable",
           "viewDefinition ": {
-            "schema": {
-              "columns": [
-                {
-                  "name": "columnA",
-                  "type": "Ascii"
-                },
-                {
-                  "name": "columnB",
-                  "type": "Ascii"
-                },
-                {
-                  "name": "columnC",
-                  "type": "Ascii"
-                }
-              ],
-              "partitionKeys": [
-                {
-                  "name": "columnC"
-                }
-              ],
-              "clusterKeys": [
-                {
-                  "name": "columnA",
-                  "orderBy": "Asc"
-                }
-              ]
-            },
-            "conditions": [
+            "viewCqlDefinition": "SELECT columna, columnb, columnc FROM keyspacename.srctablename WHERE columna IS NOT NULL AND columnc IS NOT NULL",
+            "partitionKeys": [
               {
-                "columnName": "columnA",
-                "operator": "IS NOT",
-                "value": "NULL"
-              },
+                "name": "columnc"
+              }
+            ],
+            "clusterKeys": [
               {
-                "columnName": "columnB",
-                "operator": "IS NOT",
-                "value": "NULL"
-              },
-              {
-                "columnName": "columnC",
-                "operator": "IS NOT",
-                "value": "NULL"
-              },
-              {
-                "columnName": "columnA",
-                "operator": "=",
-                "value": "valueA"
+                "name": "columna",
+                "orderBy": "Asc"
               }
             ]
           },
@@ -72,67 +35,26 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraViews/viewName",
-        "name": "viewName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspacename/cassandraViews/viewname",
+        "name": "viewname",
         "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraViews",
         "location": "West US",
         "tags": {},
         "properties": {
           "resource": {
-            "id": "viewName",
-            "soureTableName ": "srcTable",
+            "id": "viewname",
+            "soureTableName ": "srctablename",
             "viewDefinition ": {
-              "schema": {
-                "columns": [
-                  {
-                    "name": "columnA",
-                    "type": "Ascii"
-                  },
-                  {
-                    "name": "columnB",
-                    "type": "Bigint"
-                  },
-                  {
-                    "name": "columnC",
-                    "type": "Ascii"
-                  }
-                ],
-                "partitionKeys": [
-                  {
-                    "name": "columnC"
-                  }
-                ],
-                "clusterKeys": [
-                  {
-                    "name": "columnA",
-                    "orderBy": "Asc"
-                  },
-                  {
-                    "name": "columnB",
-                    "orderBy": "Asc"
-                  }
-                ]
-              },
-              "conditions": [
+              "viewCqlDefinition": "SELECT columna, columnb, columnc FROM keyspacename.srctablename WHERE columna IS NOT NULL AND columnc IS NOT NULL",
+              "partitionKeys": [
                 {
-                  "columnNames": "columnA",
-                  "operator": "IS NOT",
-                  "values": "NULL"
-                },
+                  "name": "columnc"
+                }
+              ],
+              "clusterKeys": [
                 {
-                  "columnNames": "columnB",
-                  "operator": "IS NOT",
-                  "values": "NULL"
-                },
-                {
-                  "columnNames": "columnC",
-                  "operator": "IS NOT",
-                  "values": "NULL"
-                },
-                {
-                  "columnNames": ["ColumnA", "ColumnB"],
-                  "operator": "IN",
-                  "values": [["valueA", 100], ["valueA1", 100]]
+                  "name": "columna",
+                  "orderBy": "Asc"
                 }
               ]
             }
