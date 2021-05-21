@@ -217,10 +217,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           }
         ],
         "responses": {
@@ -259,10 +259,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           },
           {
             "$ref": "#/parameters/restorableSqlDatabaseRidParameter"
@@ -310,10 +310,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           },
           {
             "$ref": "#/parameters/restoreLocationParameter"
@@ -358,10 +358,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           }
         ],
         "responses": {
@@ -400,10 +400,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           },
           {
             "$ref": "#/parameters/restorableMongodbDatabaseRidParameter"
@@ -445,10 +445,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/locationParameter"
+            "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "cosmos-db.json#/parameters/instanceIdParameter"
+            "$ref": "#/parameters/instanceIdParameter"
           },
           {
             "$ref": "#/parameters/restoreLocationParameter"
@@ -878,6 +878,37 @@
         "name": "OperationType",
         "modelAsString": true
       }
+    },
+    "ContinuousBackupRestoreLocation": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The name of the continuous backup restore location."
+        }
+      }
+    },
+    "BackupInformation": {
+      "description": "Backup information of a resource.",
+      "type": "object",
+      "properties": {
+        "continuousBackupInformation": {
+          "type": "object",
+          "$ref": "#/definitions/ContinuousBackupInformation"
+        }
+      }
+    },
+    "ContinuousBackupInformation": {
+      "description": "Continuous backup description.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "latestRestorableTimestamp": {
+          "type": "string",
+          "description": "The latest restorable timestamp for a resource."
+        }
+      }
     }
   },
   "parameters": {
@@ -928,6 +959,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The snapshot create timestamp before which snapshots need to be listed."
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "instanceIdParameter": {
+      "name": "instanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The instanceId GUID of a restorable database account."
     }
   }
 }
