@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2020-07-20-preview1
+tag: package-chat-2021-03-07
 ```
 
 ### Tag: package-2020-09-21-preview2
@@ -119,3 +119,33 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Swift
+
+These settings apply only when `--swift` is specified on the command line.
+
+```yaml $(swift)
+clear-output-folder: false
+namespace: AzureCommunicationChat
+title: AzureCommunicationChat
+package-name: AzureCommunicationChat
+package-version: 1.0.0
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credential: true
+generate-as-internal: >
+    AzureCommunicationChatClient=ChatClientInternal
+    CreateChatThreadResult=CreateChatThreadResultInternal
+    CreateChatThreadRequest=CreateChatThreadRequestInternal
+    ChatMessage=ChatMessageInternal
+    ChatMessageContent=ChatMessageContentInternal
+    ChatParticipant=ChatParticipantInternal
+    ChatMessageReadReceipt=ChatMessageReadReceiptInternal
+    ChatThreadProperties=ChatThreadPropertiesInternal
+directive:
+# Rename CommunicationError to ChatError
+- from: swagger-document
+  where: '$.definitions.CommunicationError'
+  transform: >
+    $["x-ms-client-name"] = "ChatError";
+```
+
