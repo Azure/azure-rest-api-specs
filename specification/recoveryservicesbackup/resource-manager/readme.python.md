@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.recoveryservicesbackup
   package-name: azure-mgmt-recoveryservicesbackup
-  package-version: 0.1.0
+  package-version: 1.0.0b1
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
