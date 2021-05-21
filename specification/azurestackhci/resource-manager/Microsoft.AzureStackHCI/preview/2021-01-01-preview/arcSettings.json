@@ -190,6 +190,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "OK"
+          },
           "204": {
             "description": "No content"
           },
@@ -244,7 +247,7 @@
         "systemData": {
           "description": "System data of ArcSetting resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true
+          "readOnly": true
         },
         "properties": {
           "description": "ArcSetting properties.",
@@ -282,11 +285,21 @@
           "description": "Aggregate state of Arc agent across the nodes in this HCI cluster.",
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
             "Connected",
-            "Partially Connected",
             "Disconnected",
-            "Installing",
-            "Error"
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
           ],
           "x-ms-enum": {
             "name": "ArcSettingAggregateState",
@@ -322,10 +335,18 @@
           "description": "State of Arc agent in this node.",
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
             "Connected",
             "Disconnected",
-            "Installing",
-            "Error"
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "NodeArcState",

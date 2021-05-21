@@ -268,6 +268,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "OK"
+          },
           "204": {
             "description": "OK"
           },
@@ -303,7 +306,7 @@
         "systemData": {
           "description": "System data of Extension resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true
+          "readOnly": true
         },
         "properties": {
           "description": "Describes Machine Extension Properties.",
@@ -313,11 +316,11 @@
       }
     },
     "ExtensionProperties": {
-      "description": "Extension properties.",
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the Extension proxy resource",
+          "description": "Provisioning state of the Extension proxy resource.",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -341,13 +344,21 @@
           "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
-            "Partially Succeeded",
+            "Canceled",
             "Failed",
-            "Not Started",
-            "Installing",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
             "Deleting",
-            "Error"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
           ],
           "x-ms-enum": {
             "name": "ExtensionAggregateState",
@@ -366,7 +377,7 @@
       }
     },
     "PerNodeExtensionState": {
-      "description": "Status of Arc Extension for a particular node in HCI Cluster",
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
       "type": "object",
       "properties": {
         "name": {
@@ -383,12 +394,18 @@
           "description": "State of Arc Extension in this node.",
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
+            "Canceled",
             "Failed",
-            "Not Started",
-            "Installing",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
             "Deleting",
-            "Error"
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "NodeExtensionState",
@@ -399,7 +416,7 @@
       }
     },
     "ExtensionList": {
-      "description": "List of Extensions in HCI cluster",
+      "description": "List of Extensions in HCI cluster.",
       "type": "object",
       "properties": {
         "value": {
@@ -447,7 +464,8 @@
         },
         "protectedSettings": {
           "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+          "description": "Protected settings (may contain secrets).",
+          "x-ms-secret": true
         }
       }
     }

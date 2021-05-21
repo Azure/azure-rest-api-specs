@@ -235,7 +235,7 @@
             "description": "Details of the HCI cluster.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterUpdate"
+              "$ref": "#/definitions/ClusterPatch"
             }
           }
         ],
@@ -327,12 +327,29 @@
         "systemData": {
           "description": "System data of Cluster resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true,
           "readOnly": true
         },
         "properties": {
           "description": "Cluster properties.",
           "$ref": "#/definitions/ClusterProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClusterPatch": {
+      "description": "Cluster details to update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "Cluster properties.",
+          "$ref": "#/definitions/ClusterPatchProperties",
           "x-ms-client-flatten": true
         }
       }
@@ -382,6 +399,10 @@
           "type": "string",
           "readOnly": true
         },
+        "cloudManagementEndpoint": {
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal"
+        },
         "aadClientId": {
           "description": "App id of cluster AAD identity.",
           "type": "string"
@@ -422,6 +443,16 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "description": "Cluster properties.",
+      "type": "object",
+      "properties": {
+        "cloudManagementEndpoint": {
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal"
         }
       }
     },
@@ -508,19 +539,6 @@
           "description": "Total available memory on the cluster node (in GiB).",
           "type": "number",
           "readOnly": true
-        }
-      }
-    },
-    "ClusterUpdate": {
-      "description": "Cluster details to update.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     }
