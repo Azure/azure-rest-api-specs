@@ -151,79 +151,80 @@
           "x-nullable": false,
           "description": "The type of the diagnostic settings category."
         },
-		"categoryGroups": {
+        "categoryGroups": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CategoryGroup"
           },
           "description": "the collection of category groups the category belongs to."
-      },
-      "description": "The diagnostic settings Category."
-    },
-    "DiagnosticSettingsCategoryResource": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DiagnosticSettingsCategory",
-          "description": "The properties of a Diagnostic Settings Category."
-        }
-      },
-      "description": "The diagnostic settings category resource."
-    },
-    "DiagnosticSettingsCategoryResourceCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
-          },
-          "description": "The collection of diagnostic settings category resources."
-        }
-      },
-      "description": "Represents a collection of diagnostic setting category resources."
-    },
-    "CategoryGroup": {
-      "type": "string",
-      "description": "the category group of the log category."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
         },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "description": "The diagnostic settings Category."
+      },
+      "DiagnosticSettingsCategoryResource": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyOnlyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DiagnosticSettingsCategory",
+            "description": "The properties of a Diagnostic Settings Category."
+          }
+        },
+        "description": "The diagnostic settings category resource."
+      },
+      "DiagnosticSettingsCategoryResourceCollection": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+            },
+            "description": "The collection of diagnostic settings category resources."
+          }
+        },
+        "description": "Represents a collection of diagnostic setting category resources."
+      },
+      "CategoryGroup": {
+        "type": "string",
+        "description": "the category group of the log category."
+      },
+      "ErrorResponse": {
+        "description": "Describes the format of Error response.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+          }
         }
       }
-    }
-  },
-  "parameters": {
-    "ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
     },
-    "NameParameter": {
-      "name": "name",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the diagnostic setting.",
-      "x-ms-parameter-location": "method"
+    "parameters": {
+      "ResourceUriParameter": {
+        "name": "resourceUri",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The identifier of the resource.",
+        "x-ms-parameter-location": "method",
+        "x-ms-skip-url-encoding": true
+      },
+      "NameParameter": {
+        "name": "name",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the diagnostic setting.",
+        "x-ms-parameter-location": "method"
+      }
     }
   }
 }
