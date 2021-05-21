@@ -22,7 +22,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.sql
 package-name: azure-mgmt-sql
-package-version: 1.0.0b1
+package-version: 0.8.0
 clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
