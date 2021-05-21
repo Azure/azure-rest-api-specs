@@ -58,6 +58,13 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
           },
           {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed."
+          },
+          {
             "name": "skiptoken",
             "in": "query",
             "description": "A continuationtoken value returned in paginated result to load different pages.",
