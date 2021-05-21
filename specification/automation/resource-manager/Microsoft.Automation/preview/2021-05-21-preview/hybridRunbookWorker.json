@@ -177,6 +177,13 @@
             "description": "The hybrid runbook worker group name"
           },
           {
+            "name": "hybridRunbookWorkerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker name"
+          },
+          {
             "name": "HybridRunbookWorkerCreationParameters",
             "in": "body",
             "required": true,
@@ -447,11 +454,11 @@
           "$ref": "#/definitions/HybridRunbookWorkerCreateOrUpdateParameters",
           "x-ms-client-flatten": true,
           "description": "Gets or sets hybrid runbook worker group create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
         }
-      },
-      "name": {
-        "type": "string",
-        "description": "Gets or sets the name of the resource."
       },
       "required": [
         "properties"
