@@ -3461,24 +3461,6 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
-        },
-        "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -3836,7 +3818,14 @@
             "$ref": "#/definitions/ResourceProviderCapabilities"
           }
         },
-        "metadata": {}
+        "metadata": {},
+        "templateDeploymentOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentOptions"
+            }
+          ]
+        }
       }
     },
     "ProviderRegistrationProperties": {
@@ -3875,6 +3864,13 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "subscriptionLifecycleNotificationSpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
         }
       }
     },
@@ -4529,24 +4525,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuSetting"
-          }
-        },
-        "provisioningState": {
-          "enum":  [
-            "NotSpecified",
-            "Accepted",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
           }
         }
       }
