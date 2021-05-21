@@ -354,6 +354,10 @@
           "items": {
             "$ref": "#/definitions/table"
           }
+        },
+        "statistics": {
+          "type": "object",
+          "description": "Statistics represented in JSON format."
         }
       },
       "required": [
@@ -1394,6 +1398,12 @@
         "body": {
           "type": "object",
           "$ref": "#/definitions/logQueryResult"
+        },
+        "headers" : {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
