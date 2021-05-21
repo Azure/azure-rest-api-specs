@@ -24,27 +24,42 @@ To see additional help and options, run:
 
 These are the global settings for the MonitorClient API.
 
-``` yaml
+``` yaml !$(python) || !$(track2)
 title: MonitorClient
-description: Monitor Management Client
-openapi-type: arm
-tag: package-2020-10
+```
+``` yaml $(python) && $(track2)
+title: MonitorManagementClient
 ```
 
-### Tag: package-2020-10
+``` yaml
+description: Monitor Management Client
+openapi-type: arm
+tag: package-2020-03
+```
 
-These settings apply only when `--tag=package-2020-10` is specified on the command line.
+### Tag: package-2021-02-preview-only
 
-``` yaml $(tag) == 'package-2020-10'
+These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-preview-only'
+input-file:
+- Microsoft.Insights/preview/2021-02-01-preview/scheduledQueryRule_API.json
+```
+
+### Tag: package-2020-10-only
+
+These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-only'
 input-file:
   - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
-### Tag: package-2020-05-preview
+### Tag: package-2020-05-preview-only
 
-These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-preview'
+``` yaml $(tag) == 'package-2020-05-preview-only'
 input-file:
 - Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
 ```
@@ -78,8 +93,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
@@ -109,8 +122,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
@@ -148,8 +159,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
@@ -177,8 +186,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
@@ -553,9 +560,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-monitor
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -565,8 +569,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js monitor/resource-manager
 ```
 
 ## Python
@@ -654,6 +656,4 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

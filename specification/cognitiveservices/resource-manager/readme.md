@@ -27,9 +27,18 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2021-04
 ```
 
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+- Microsoft.CognitiveServices/stable/2021-04-30/cognitiveservices.json
+```
 
 ### Tag: package-2017-04
 
@@ -71,8 +80,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cognitive_services']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cognitiveservices/resource-manager
 ```
 
 
@@ -144,7 +151,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

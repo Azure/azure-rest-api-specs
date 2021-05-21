@@ -29,7 +29,7 @@ openapi-type: arm
 tag: package-2018-01-preview
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -72,6 +72,22 @@ These settings apply only when `--tag=package-2014-09` is specified on the comma
 ``` yaml $(tag) == 'package-2014-09'
 input-file:
 - Microsoft.EventHub/stable/2014-09-01/EventHub.json
+```
+
+### Tag: package-2021-01-preview
+
+These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-preview'
+input-file:
+- Microsoft.EventHub/preview/2021-01-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/operations.json
+- Microsoft.EventHub/preview/2021-01-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2021-01-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2021-01-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/AuthorizationRules.json
+- Microsoft.EventHub/preview/2021-01-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
 
@@ -139,8 +155,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_hub']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js eventhub/resource-manager
 ```
 
 
@@ -170,7 +184,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
