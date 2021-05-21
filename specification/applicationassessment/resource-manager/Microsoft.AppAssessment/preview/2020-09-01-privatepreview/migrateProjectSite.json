@@ -203,6 +203,7 @@
         ],
         "operationId": "migrationProjectSite_delete",
         "description": "Deletes a site with name {siteName} in the migrate project {projectName}",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "migrationProjectSite_delete": {
             "$ref": "./examples/migrateProjectSite_delete.json"
@@ -235,7 +236,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Site was deleted"
+            "description": "Delete operation succeeded"
+          },
+          "202": {
+            "description": "Delete site accepted"
           },
           "204": {
             "description": "No Content"
