@@ -56,6 +56,12 @@ batch:
   - multiapiscript: true
 ```
 
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
+clear-output-folder: false
+perform-load: false
+```
+
 ### Tag: package-2020-11-preview and python
 
 These settings apply only when `--tag=package-2020-11-preview --python` is specified on the command line.
