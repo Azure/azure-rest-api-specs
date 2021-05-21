@@ -1899,26 +1899,26 @@
       "description": "Build resource properties payload",
       "type": "object",
       "properties": {
-        "Builder":{
+        "builder":{
           "description": "The name of builder to build the source code",
           "type": "string"
         },
-        "Name":{
+        "name":{
           "description": "The name of this build",
           "type": "string"
         },
-        "RelativePath":{
+        "relativePath":{
           "description": "The relative path of source code",
           "type": "string"
         },
-        "Env": {
+        "env": {
           "description": "The environment variables for this build",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
-        "TriggeredBuildResult": {
+        "triggeredBuildResult": {
           "$ref": "#/definitions/TriggeredBuildResult",
           "description": " The build result triggered by this build"
         }
@@ -1928,7 +1928,7 @@
       "description": "The build result triggered by a build",
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "description": "The unique build id of this build result",
           "type": "string"
         }
@@ -1954,11 +1954,11 @@
       "description": "Build result resource properties payload",
       "type": "object",
       "properties": {
-        "Name":{
+        "name":{
           "description": "The name of this build result",
           "type": "string"
         },
-        "Status":{
+        "status":{
           "description": "Provisioning state of the KPack build result",
           "enum": [
             "Queuing",
@@ -1975,7 +1975,7 @@
             "modelAsString": true
           }
         },
-        "ContainerImageReference": {
+        "containerImageReference": {
           "$ref": "#/definitions/BuildContainerImageReference",
           "description": "The generated container image reference"
         }
@@ -1985,19 +1985,19 @@
       "description": "The generated container image reference",
       "type": "object",
       "properties": {
-        "AcrName": {
+        "acrName": {
           "description": "The name of ACR",
           "type": "string"
         },
-        "ImageName": {
+        "imageName": {
           "description": "The name of image",
           "type": "string"
         },
-        "Digest": {
+        "digest": {
           "description": "The digest of this acr image",
           "type": "string"
         },
-        "Tag": {
+        "tag": {
           "description": "The tag of this acr image",
           "type": "string"
         }
