@@ -28,6 +28,14 @@ These are the global settings for the ContainerRegistry API.
 openapi-type: arm
 tag: package-2020-11-preview
 ```
+### Tag: package-2020-11-preview-only
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2020-11-01-preview/containerregistry.json
+```
 
 ### Tag: package-2020-11-preview
 
@@ -37,6 +45,15 @@ These settings apply only when `--tag=package-2020-11-preview` is specified on t
 input-file:
   - Microsoft.ContainerRegistry/preview/2020-11-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2019-12-preview-only
+
+These settings apply only when `--tag=package-2019-12-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2019-12-preview
@@ -70,6 +87,15 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
+### Tag: package-2019-05-only
+
+These settings apply only when `--tag=package-2019-05-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-only'
+input-file:
+- Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -78,6 +104,15 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 input-file:
 - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
 - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+```
+
+### Tag: package-2019-05-preview-only
+
+These settings apply only when `--tag=package-2019-05-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-05-preview
@@ -109,6 +144,15 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
 ```
 
+### Tag: package-2018-09-only
+
+These settings apply only when `--tag=package-2018-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-only'
+input-file:
+- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+```
+
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
@@ -117,6 +161,15 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+```
+
+### Tag: package-2018-02-preview-only
+
+These settings apply only when `--tag=package-2018-02-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2018-02-preview
