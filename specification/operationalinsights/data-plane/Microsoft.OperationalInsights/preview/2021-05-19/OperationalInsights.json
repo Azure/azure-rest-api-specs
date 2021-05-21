@@ -102,6 +102,9 @@
           },
           {
             "$ref": "#/parameters/queryBody"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
           }
         ],
         "responses": {
@@ -259,6 +262,14 @@
       "x-ms-parameter-location": "method",
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
       "type": "string"
+    },
+    "PreferHeaderParameter": {
+      "name": "Prefer",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Optional. The prefer header to set server timeout, ",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -270,8 +281,30 @@
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
       "type": "string"
     },
+
     "workspacesParam": {
+      "description": "Workspace names to include in cross-workspace queries.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workspaceIdsParam": {
       "description": "Workspace IDs to include in cross-workspace queries.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "qualifiedNamesParam": {
+      "description": "Qualified Name - string with format <subscriptionName>/<resourceGroup>/<workspaceName>.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "azureResourceIdsParam": {
+      "description": "Azure Resource ID - string with format /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.operationalinsights/workspaces/<workspaceName>.",
       "type": "array",
       "items": {
         "type": "string"
@@ -292,6 +325,18 @@
         "workspaces": {
           "description": "A list of workspaces that are included in the query.",
           "$ref": "#/definitions/workspacesParam"
+        },
+        "qualifiedNames": {
+          "description": "A list of qualified workspace names that are included in the query.",
+          "$ref": "#/definitions/qualifiedNamesParam"
+        },
+        "workspaceIds": {
+          "description": "A list of workspace IDs that are included in the query.",
+          "$ref": "#/definitions/workspaceIdsParam"
+        },
+        "azureResourceIds": {
+          "description": "A list of Azure resource IDs that are included in the query.",
+          "$ref": "#/definitions/azureResourceIdsParam"
         }
       },
       "required": [
