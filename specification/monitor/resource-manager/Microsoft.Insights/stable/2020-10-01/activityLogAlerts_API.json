@@ -295,19 +295,21 @@
 	},
 	"definitions": {
 		"AzureResource": {
-			"description": "An azure resource object",
-			"x-ms-azure-resource": true,
-			"type": "object",
 			"properties": {
 				"id": {
-					"description": "Azure resource Id",
 					"type": "string",
-					"readOnly": true
+					"readOnly": true,
+					"description": "Azure resource Id"
 				},
 				"name": {
-					"description": "Azure resource name",
 					"type": "string",
-					"readOnly": true
+					"readOnly": true,
+					"description": "Azure resource name"
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Azure resource type"
 				},
 				"kind": {
 					"type": "string",
@@ -319,28 +321,26 @@
 					"readOnly": true,
 					"description": "Azure resource identity"
 				},
-				"type": {
-					"description": "Azure resource type",
-					"type": "string",
-					"readOnly": true
-				},
 				"location": {
-					"description": "Resource location",
 					"type": "string",
-					"default": "global",
+					"description": "Resource location",
 					"x-ms-mutability": [
 						"create",
 						"read"
 					]
 				},
 				"tags": {
-					"description": "Resource tags",
-					"type": "object",
 					"additionalProperties": {
 						"type": "string"
-					}
+					},
+					"description": "Resource tags"
 				}
-			}
+			},
+			"required": [
+				"location"
+			],
+			"x-ms-azure-resource": true,
+			"description": "An azure resource object"
 		},
 		"ActivityLogAlertResource": {
 			"description": "An Activity Log Alert rule resource.",
