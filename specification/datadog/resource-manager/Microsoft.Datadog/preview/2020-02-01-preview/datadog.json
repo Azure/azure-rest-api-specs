@@ -679,6 +679,12 @@
               "$ref": "#/definitions/DatadogMonitorResource"
             }
           },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -686,6 +692,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Monitors_Update": {
             "$ref": "./examples/Monitors_Update.json"
@@ -1773,6 +1780,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
         }
       }
     },
