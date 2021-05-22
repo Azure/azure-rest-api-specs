@@ -1083,6 +1083,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/buildservice/default/builds/{buildName}/results/{buildResultName}/logs/{buildResultLogName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a KPack build result log download URL.",
+        "operationId": "BuildService_GetBuildResultLog",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildResultLogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Build result log exists and can be downloaded.",
+            "schema": {
+              "$ref": "#/definitions/BuildResultLog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetBuildResult": {
+            "$ref": "./examples/BuildService_GetBuildResultLog.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/configurationServices/default": {
       "get": {
         "tags": [
@@ -2002,6 +2053,32 @@
           "type": "string"
         }
       }
+    },
+    "BuildResultLog": {
+      "description": "Build result log resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildResultLogProperties",
+          "description": "Properties of the build result log resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildResultLogProperties": {
+      "description": "Build result log resource properties payload",
+      "type": "object",
+      "properties": {
+        "blobUrl":{
+          "description": "The public download URL of this build result log",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -2064,6 +2141,14 @@
       "name": "buildResultName",
       "in": "path",
       "description": "The name of the build result resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildResultLogNameParameter": {
+      "name": "buildResultLogName",
+      "in": "path",
+      "description": "The name of the build result log resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
