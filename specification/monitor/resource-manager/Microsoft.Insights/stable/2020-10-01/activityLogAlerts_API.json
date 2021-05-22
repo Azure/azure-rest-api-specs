@@ -91,7 +91,7 @@
 					"default": {
 						"description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -128,7 +128,7 @@
 					"default": {
 						"description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -165,7 +165,7 @@
 					"default": {
 						"description": "An error occurred and the Activity Log Alert rule could not be deleted.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -211,7 +211,7 @@
 					"default": {
 						"description": "Error response describing why the operation failed.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -247,7 +247,7 @@
 					"default": {
 						"description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -286,7 +286,7 @@
 					"default": {
 						"description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ActivityLogAlertErrorResponse"
 						}
 					}
 				}
@@ -320,12 +320,14 @@
 				"location": {
 					"type": "string",
 					"description": "Resource location",
+					"default": "global",
 					"x-ms-mutability": [
 						"create",
 						"read"
 					]
 				},
 				"tags": {
+					"type": "object",
 					"additionalProperties": {
 						"type": "string"
 					},
@@ -508,17 +510,19 @@
 				}
 			}
 		},
-		"ErrorResponse": {
-			"description": "Describes the format of Error response.",
+		"ActivityLogAlertErrorResponse": {
+			"description": "The error response.",
 			"type": "object",
 			"properties": {
 				"code": {
-					"description": "Error code",
-					"type": "string"
+					"description": "The error code.",
+					"type": "string",
+					"readOnly": true
 				},
 				"message": {
-					"description": "Error message indicating why the operation failed.",
-					"type": "string"
+					"description": "The error message indicating why the operation failed.",
+					"type": "string",
+					"readOnly": true
 				}
 			}
 		}
