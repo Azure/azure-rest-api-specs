@@ -149,6 +149,42 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/billingAccounts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_BillingAccounts",
+        "description": "Tenant billing accounts names",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountsResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingAccounts": {
+            "$ref": "./examples/BillingAccounts.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections": {
       "parameters": [
         {
@@ -279,8 +315,85 @@
           }
         },
         "x-ms-examples": {
-          "DeletePrivateStoreOffer": {
+          "DeletePrivateStoreCollection": {
             "$ref": "./examples/DeletePrivateStoreCollection.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollection_Post",
+        "description": "Delete Private store collection. This is a workaround.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostPrivateStoreCollection": {
+            "$ref": "./examples/PostPrivateStoreCollection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/transferOffers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/CollectionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollection_TransferOffers",
+        "description": "transferring offers (copy or move) from source collection to target collection(s)",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/TransferOffersProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransferOffers": {
+            "$ref": "./examples/TransferOffers.json"
           }
         }
       }
@@ -301,7 +414,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreOffer_List",
+        "operationId": "PrivateStoreCollectionOffer_List",
         "description": "Get a list of all private offers in the given private store and collection",
         "responses": {
           "200": {
@@ -346,7 +459,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreOffer_Get",
+        "operationId": "PrivateStoreCollectionOffer_Get",
         "description": "Gets information about a specific offer.",
         "responses": {
           "200": {
@@ -363,8 +476,8 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreOffer": {
-            "$ref": "./examples/GetPrivateStoreOffer.json"
+          "GetPrivateStoreCollectionOffer": {
+            "$ref": "./examples/GetPrivateStoreCollectionOffer.json"
           }
         }
       },
@@ -372,7 +485,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreOffer_CreateOrUpdate",
+        "operationId": "PrivateStoreCollectionOffer_CreateOrUpdate",
         "description": "Update or add an offer to a specific collection of the private store.",
         "parameters": [
           {
@@ -407,7 +520,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreOffer_Delete",
+        "operationId": "PrivateStoreCollectionOffer_Delete",
         "description": "Deletes an offer from the given collection of private store.",
         "responses": {
           "200": {
@@ -433,7 +546,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreOffer_Post",
+        "operationId": "PrivateStoreCollectionOffer_Post",
         "description": "Delete Private store offer. This is a workaround.",
         "parameters": [
           {
@@ -456,8 +569,8 @@
           }
         },
         "x-ms-examples": {
-          "PostPrivateStoreOffer": {
-            "$ref": "./examples/PostPrivateStoreOffer.json"
+          "PostPrivateStoreCollectionOffer": {
+            "$ref": "./examples/PostPrivateStoreCollectionOffer.json"
           }
         }
       }
@@ -1034,7 +1147,7 @@
           "type": "boolean"
         },
         "collectionIds": {
-          "description": "Gets or sets list of associated collection ids",
+          "description": "Gets list of associated collection ids",
           "type": "array",
           "items": {
             "type": "string"
@@ -1086,7 +1199,7 @@
       "type": "object",
       "properties": {
         "collectionId": {
-          "description": "Gets or sets collection Id.",
+          "description": "Gets collection Id.",
           "type": "string",
           "readOnly": true
         },
@@ -1108,6 +1221,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "enabled": {
+          "description": "Indicating whether the collection is enabled or disabled.",
+          "type": "boolean"
+        },
+        "numberOfOffers": {
+          "description": "Gets the number of offers associated with the collection.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
         }
       }
     },
@@ -1557,6 +1680,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "subscriptionId": {
+          "description": "Gets or sets the subscription id",
+          "type": "string"
         }
       }
     },
@@ -1768,11 +1895,61 @@
         }
       }
     },
+    "BillingAccountsResponse": {
+      "description": "Billing accounts response object",
+      "type": "object",
+      "properties": {
+        "billingAccounts": {
+          "description": "Billing accounts list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TransferOffersProperties": {
+      "description": "Transfer offers properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransferOffersDetails",
+          "description": "transfer offers properties details",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TransferOffersDetails": {
+      "description": "Transfer offers response details",
+      "type": "object",
+      "properties": {
+        "targetCollections": {
+          "description": "Target collections ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operation": {
+          "description": "Operation to perform (For example: Copy or Move)",
+          "type": "string"
+        },
+        "offerIdsList": {
+          "description": "Offers ids list to transfer from source collection to target collection(s)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PrivateStoreOperation": {
       "description": "Set the Operation for the POST method. Ping or Delete",
       "type": "string",
       "enum": [
         "DeletePrivateStoreOffer",
+        "DeletePrivateStoreCollection",
+        "DeletePrivateStoreCollectionOffer",
         "Ping"
       ],
       "x-ms-enum": {
