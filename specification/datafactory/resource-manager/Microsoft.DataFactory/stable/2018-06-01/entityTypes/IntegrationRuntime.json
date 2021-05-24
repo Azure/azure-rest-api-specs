@@ -178,6 +178,10 @@
             "type": "string",
             "description": "The ID of the public IP address."
           }
+        },
+        "subnetId": {
+          "description": "The ID of the Subnet that this integration runtime will join.",
+          "type": "string"
         }
       },
       "additionalProperties": {
@@ -599,6 +603,63 @@
       "required": [
         "resourceId"
       ]
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse": {
+      "description": "Integration runtime outbound network dependencies endpoints.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint": {
+      "description": "Integration runtime outbound network dependency endpoints of one category.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Endpoint category.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "Endpoints of one category.",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpoint": {
+      "description": "Integration runtime outbound network dependency endpoint.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "Domain name.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "Details of the endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails": {
+      "description": "Integration runtime outbound network dependency endpoint details.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "description": "port of the endpoint.",
+          "type": "integer"
+        }
+      }
     },
     "IntegrationRuntimeStatus": {
       "description": "Integration runtime status.",
