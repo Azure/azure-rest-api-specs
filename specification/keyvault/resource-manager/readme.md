@@ -60,6 +60,7 @@ These settings apply only when `--tag=package-preview-2020-04-full` is specified
 
 ``` yaml $(tag) == 'package-preview-2020-04-full'
 input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
@@ -161,8 +162,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_key_vault']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js keyvault/resource-manager
 ```
 
 ## Go
@@ -177,6 +176,4 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
