@@ -3470,7 +3470,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The schema '{json path}' is considered an object but without a 'type:object', please add the missing 'type:object'.
 
-**Description**: This rule ensure that any schema whose type is 'object' must defines its type explicity, as a schema without type indicates a free-form schema which means it can be any type. For this rule, a schema with keyword 'properties' or 'additionalProperties' is considered an object schema.
+**Description**: The rule is to ensure that any 'object' type schema must be defined with "type":"object" explicitly. Without "type" definition indicates the schema can be any type. Especially, a schema with keyword 'properties' or ‘addtionalProperties’ requires definition of "type":"object".
 
 **CreatedAt**: May 24, 2021
 
@@ -3483,7 +3483,7 @@ A free-form object would like:
   "type":"object"
 }
 ```
-A any type schema would like:
+An any type schema would like:
 ```json
 "foo": {
 }
