@@ -192,6 +192,9 @@
           "202": {
             "description": "The manifest has been deleted"
           },
+          "404": {
+            "description": "The manifest was not found"
+          },
           "default": {
             "description": "ACR error response describing why the operation failed.",
             "schema": {
@@ -677,10 +680,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The repository is deleted",
-            "schema": {
-              "$ref": "#/definitions/DeletedRepository"
-            }
+            "description": "The repository is deleted"
+          },
+          "404": {
+            "description": "The repository was not found"
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -883,6 +886,9 @@
         "responses": {
           "202": {
             "description": "The tag is deleted"
+          },
+          "404": {
+            "description": "The tag was not found"
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
