@@ -12,6 +12,7 @@ payload-flattening-threshold: 2
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-videoanalyzer
 
 service-name: Video Analyzer
+description: 'Azure Video Analyzer (AVA) provides a platform for you to build intelligent video applications that span the edge and the cloud.'
 ```
 
 ### Java multi-api
