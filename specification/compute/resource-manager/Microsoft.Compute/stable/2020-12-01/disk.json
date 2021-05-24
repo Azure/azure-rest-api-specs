@@ -1670,7 +1670,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess": {
-      "get": {
+      "post": {
         "tags": [
           "IncrementalRestorePoints"
         ],
@@ -1719,11 +1719,16 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Grants access to a diskRestorePoint.": {
+            "$ref": "./examples/BeginGetAccessDiskRestorePoint.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess": {
-      "get": {
+      "post": {
         "tags": [
           "IncrementalRestorePoints"
         ],
@@ -1760,6 +1765,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Revokes access to a diskRestorePoint.": {
+            "$ref": "./examples/EndGetAccessDiskRestorePoint.json"
+          }
         }
       }
     }
