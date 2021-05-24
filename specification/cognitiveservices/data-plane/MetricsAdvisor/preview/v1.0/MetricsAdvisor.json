@@ -109,8 +109,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -482,8 +485,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -588,7 +594,7 @@
         "tags": [
           "AnomalyDetection"
         ],
-        "summary": "Query all anomaly alerting configurations for specific anomaly detection configuration",
+        "summary": "List all anomaly alerting configurations for specific anomaly detection configuration",
         "operationId": "getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
@@ -601,6 +607,20 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -617,8 +637,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
         "x-ms-examples": {
-          "Query all anomaly alerting configurations for specific anomaly detection configuration": {
+          "List all anomaly alerting configurations for specific anomaly detection configuration": {
             "$ref": "./examples/getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration.json"
           }
         }
@@ -1112,8 +1135,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -1233,9 +1259,8 @@
               "AzureDataExplorer",
               "AzureDataLakeStorageGen2",
               "AzureEventHubs",
+              "AzureLogAnalytics",
               "AzureTable",
-              "Elasticsearch",
-              "HttpRequest",
               "InfluxDB",
               "MongoDB",
               "MySql",
@@ -1444,8 +1469,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -1822,8 +1850,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -2234,7 +2265,7 @@
         "tags": [
           "Metric"
         ],
-        "summary": "Query all anomaly detection configurations for specific metric",
+        "summary": "List all anomaly detection configurations for specific metric",
         "operationId": "getAnomalyDetectionConfigurationsByMetric",
         "produces": [
           "application/json"
@@ -2247,6 +2278,20 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2263,8 +2308,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
         "x-ms-examples": {
-          "Query all anomaly detection configurations for specific metric": {
+          "List all anomaly detection configurations for specific metric": {
             "$ref": "./examples/getAnomalyDetectionConfigurationsByMetric.json"
           }
         }
@@ -3514,6 +3562,139 @@
         ]
       }
     },
+    "SuppressConditionPatch": {
+      "type": "object",
+      "properties": {
+        "minNumber": {
+          "format": "int32",
+          "description": "min point number, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minRatio": {
+          "format": "double",
+          "description": "min point ratio, value range : (0, 100]",
+          "type": "number"
+        }
+      }
+    },
+    "SmartDetectionConditionPatch": {
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "format": "double",
+          "description": "sensitivity, value range : (0, 100]",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "HardThresholdConditionPatch": {
+      "type": "object",
+      "properties": {
+        "lowerBound": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Down",
+          "type": "number"
+        },
+        "upperBound": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Up",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "ChangeThresholdConditionPatch": {
+      "type": "object",
+      "properties": {
+        "changePercentage": {
+          "format": "double",
+          "description": "change percentage, value range : [0, +∞)",
+          "type": "number"
+        },
+        "shiftPoint": {
+          "format": "int32",
+          "description": "shift point, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "withinRange": {
+          "description": "if the withinRange = true, detected data is abnormal when the value falls in the range, in this case anomalyDetectorDirection must be Both\r\nif the withinRange = false, detected data is abnormal when the value falls out of the range",
+          "type": "boolean"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "WholeMetricConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionConditionPatch"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdConditionPatch"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdConditionPatch"
+        }
+      }
+    },
     "AnomalyDetectionConfigurationPatch": {
       "type": "object",
       "properties": {
@@ -3527,7 +3708,7 @@
           "type": "string"
         },
         "wholeMetricConfiguration": {
-          "$ref": "#/definitions/WholeMetricConfiguration"
+          "$ref": "#/definitions/WholeMetricConfigurationPatch"
         },
         "dimensionGroupOverrideConfigurations": {
           "description": "detection configuration for series group",
@@ -3547,126 +3728,26 @@
         }
       },
       "example": {
-        "name": "Anomaly detection configuration name",
-        "description": "Anomaly detection configuration description",
         "wholeMetricConfiguration": {
-          "conditionOperator": "AND",
           "smartDetectionCondition": {
-            "sensitivity": 91.0,
-            "anomalyDetectorDirection": "Both",
-            "suppressCondition": {
-              "minNumber": 1,
-              "minRatio": 100.0
-            }
-          },
-          "hardThresholdCondition": {
-            "lowerBound": 1.0,
-            "upperBound": 100.0,
-            "anomalyDetectorDirection": "Both",
-            "suppressCondition": {
-              "minNumber": 1,
-              "minRatio": 100.0
-            }
-          },
-          "changeThresholdCondition": {
-            "changePercentage": 5.0,
-            "shiftPoint": 1,
-            "withinRange": false,
-            "anomalyDetectorDirection": "Both",
-            "suppressCondition": {
-              "minNumber": 1,
-              "minRatio": 100.0
-            }
+            "sensitivity": 91.0
           }
-        },
-        "dimensionGroupOverrideConfigurations": [
-          {
-            "group": {
-              "dimension": {
-                "city": "Beijing"
-              }
-            },
-            "conditionOperator": "AND",
-            "smartDetectionCondition": {
-              "sensitivity": 91.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "hardThresholdCondition": {
-              "lowerBound": 1.0,
-              "upperBound": 100.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "changeThresholdCondition": {
-              "changePercentage": 5.0,
-              "shiftPoint": 1,
-              "withinRange": false,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            }
-          }
-        ],
-        "seriesOverrideConfigurations": [
-          {
-            "series": {
-              "dimension": {
-                "category": "Jewelry",
-                "city": "Beijing"
-              }
-            },
-            "conditionOperator": "AND",
-            "smartDetectionCondition": {
-              "sensitivity": 91.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "hardThresholdCondition": {
-              "lowerBound": 1.0,
-              "upperBound": 100.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "changeThresholdCondition": {
-              "changePercentage": 5.0,
-              "shiftPoint": 1,
-              "withinRange": false,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            }
-          }
-        ]
+        }
       }
     },
     "AnomalyAlertingConfigurationList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyAlertingConfiguration"
-          }
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3680,16 +3761,16 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "start time",
+          "description": "This is inclusive. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "description": "end time",
+          "description": "This is exclusive. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "series": {
-          "description": "series",
+          "description": "The series to be queried. The identity must be able to define one single time series instead of a group of time series. The maximum number of series is 100.",
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -4250,6 +4331,15 @@
         }
       }
     },
+    "AzureSQLConnectionStringParamPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string to access the Azure SQL.",
+          "type": "string"
+        }
+      }
+    },
     "DataSourceCredentialPatch": {
       "required": [
         "dataSourceCredentialType"
@@ -4259,24 +4349,14 @@
         "dataSourceCredentialType": {
           "description": "Type of data source credential",
           "enum": [
-            "AzureApplicationInsights",
-            "AzureBlob",
-            "AzureCosmosDB",
-            "AzureDataExplorer",
-            "AzureDataLakeStorageGen2",
-            "AzureEventHubs",
-            "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
-            "InfluxDB",
-            "MongoDB",
-            "MySql",
-            "PostgreSql",
-            "SqlServer"
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DataSourceType",
+            "name": "DataSourceCredentialType",
             "modelAsString": true
           }
         },
@@ -4291,9 +4371,7 @@
       },
       "discriminator": "dataSourceCredentialType",
       "example": {
-        "dataSourceCredentialName": "A data source credential",
-        "dataSourceCredentialDescription": "This is a data source credential",
-        "dataSourceCredentialType": "AzureApplicationInsights"
+        "dataSourceCredentialDescription": "This is a data source credential"
       }
     },
     "AzureSQLConnectionStringCredentialPatch": {
@@ -4305,10 +4383,19 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/AzureSQLConnectionStringParam"
+          "$ref": "#/definitions/AzureSQLConnectionStringParamPatch"
         }
       },
       "x-ms-discriminator-value": "AzureSQLConnectionString"
+    },
+    "DataLakeGen2SharedKeyParamPatch": {
+      "type": "object",
+      "properties": {
+        "accountKey": {
+          "description": "The account key to access the Azure Data Lake Storage Gen2.",
+          "type": "string"
+        }
+      }
     },
     "DataLakeGen2SharedKeyCredentialPatch": {
       "type": "object",
@@ -4319,10 +4406,27 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParamPatch"
         }
       },
       "x-ms-discriminator-value": "DataLakeGen2SharedKey"
+    },
+    "ServicePrincipalParamPatch": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The client id of the service principal.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of the service principal.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of the service principal.",
+          "type": "string"
+        }
+      }
     },
     "ServicePrincipalCredentialPatch": {
       "type": "object",
@@ -4333,10 +4437,39 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ServicePrincipalParam"
+          "$ref": "#/definitions/ServicePrincipalParamPatch"
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalInKVParamPatch": {
+      "type": "object",
+      "properties": {
+        "keyVaultEndpoint": {
+          "description": "The Key Vault endpoint that storing the service principal.",
+          "type": "string"
+        },
+        "keyVaultClientId": {
+          "description": "The Client Id to access the Key Vault.",
+          "type": "string"
+        },
+        "keyVaultClientSecret": {
+          "description": "The Client Secret to access the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalIdNameInKV": {
+          "description": "The secret name of the service principal's client Id in the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalSecretNameInKV": {
+          "description": "The secret name of the service principal's client secret in the Key Vault.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of your service principal.",
+          "type": "string"
+        }
+      }
     },
     "ServicePrincipalInKVCredentialPatch": {
       "type": "object",
@@ -4347,34 +4480,31 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ServicePrincipalInKVParam"
+          "$ref": "#/definitions/ServicePrincipalInKVParamPatch"
         }
       },
       "x-ms-discriminator-value": "ServicePrincipalInKV"
     },
     "AzureApplicationInsightsParameter": {
       "required": [
-        "apiKey",
-        "applicationId",
-        "azureCloud",
         "query"
       ],
       "type": "object",
       "properties": {
         "azureCloud": {
-          "description": "Azure cloud environment",
+          "description": "The Azure cloud that this Azure Application Insights in",
           "type": "string"
         },
         "applicationId": {
-          "description": "Azure Application Insights ID",
+          "description": "The application id of this Azure Application Insights",
           "type": "string"
         },
         "apiKey": {
-          "description": "API Key",
+          "description": "The API Key that can access this Azure Application Insights",
           "type": "string"
         },
         "query": {
-          "description": "Query",
+          "description": "The statement to query this Azure Application Insights",
           "type": "string"
         }
       }
@@ -4442,9 +4572,8 @@
             "AzureDataExplorer",
             "AzureDataLakeStorageGen2",
             "AzureEventHubs",
+            "AzureLogAnalytics",
             "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
             "InfluxDB",
             "MongoDB",
             "MySql",
@@ -4758,21 +4887,20 @@
     "AzureBlobParameter": {
       "required": [
         "blobTemplate",
-        "connectionString",
         "container"
       ],
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Azure Blob connection string",
+          "description": "The connection string of this Azure Blob",
           "type": "string"
         },
         "container": {
-          "description": "Container",
+          "description": "The container name in this Azure Blob",
           "type": "string"
         },
         "blobTemplate": {
-          "description": "Blob Template",
+          "description": "The path template in this container",
           "type": "string"
         }
       }
@@ -4797,26 +4925,25 @@
     "AzureCosmosDBParameter": {
       "required": [
         "collectionId",
-        "connectionString",
         "database",
         "sqlQuery"
       ],
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Azure CosmosDB connection string",
+          "description": "The connection string of this Azure CosmosDB",
           "type": "string"
         },
         "sqlQuery": {
-          "description": "Query script",
+          "description": "The statement to query this collection",
           "type": "string"
         },
         "database": {
-          "description": "Database name",
+          "description": "A database name in this Azure CosmosDB",
           "type": "string"
         },
         "collectionId": {
-          "description": "Collection id",
+          "description": "A collection id in this database",
           "type": "string"
         }
       }
@@ -4845,11 +4972,11 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Database connection string",
+          "description": "The connection string of this database",
           "type": "string"
         },
         "query": {
-          "description": "Query script",
+          "description": "The script to query this database",
           "type": "string"
         }
       }
@@ -4873,7 +5000,6 @@
     },
     "AzureDataLakeStorageGen2Parameter": {
       "required": [
-        "accountName",
         "directoryTemplate",
         "fileSystemName",
         "fileTemplate"
@@ -4881,23 +5007,23 @@
       "type": "object",
       "properties": {
         "accountName": {
-          "description": "Account name",
+          "description": "The account name of this Azure Data Lake",
           "type": "string"
         },
         "accountKey": {
-          "description": "Account key",
+          "description": "The account key that can access this Azure Data Lake",
           "type": "string"
         },
         "fileSystemName": {
-          "description": "File system name (Container)",
+          "description": "The file system (container) name in this Azure Data Lake",
           "type": "string"
         },
         "directoryTemplate": {
-          "description": "Directory template",
+          "description": "The directory template under this file system",
           "type": "string"
         },
         "fileTemplate": {
-          "description": "File template",
+          "description": "The file template",
           "type": "string"
         }
       }
@@ -4921,17 +5047,16 @@
     },
     "AzureEventHubsParameter": {
       "required": [
-        "connectionString",
         "consumerGroup"
       ],
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Azure Event Hubs connection string",
+          "description": "The connection string of this Azure Event Hubs",
           "type": "string"
         },
         "consumerGroup": {
-          "description": "Azure Event Hubs consumer group",
+          "description": "The consumer group to be used in this data feed",
           "type": "string"
         }
       }
@@ -4953,24 +5078,69 @@
       },
       "x-ms-discriminator-value": "AzureEventHubs"
     },
+    "AzureLogAnalyticsParameter": {
+      "required": [
+        "query",
+        "workspaceId"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspace id of this Log Analytics",
+          "type": "string"
+        },
+        "query": {
+          "description": "The KQL (Kusto Query Language) query to fetch data from this Log Analytics",
+          "type": "string"
+        }
+      }
+    },
+    "AzureLogAnalyticsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
     "AzureTableParameter": {
       "required": [
-        "connectionString",
         "query",
         "table"
       ],
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Azure Table connection string",
+          "description": "The connection string of this Azure Table",
           "type": "string"
         },
         "table": {
-          "description": "Table name",
+          "description": "A table name in this Azure Table",
           "type": "string"
         },
         "query": {
-          "description": "Query script",
+          "description": "The statement to query this table. Please find syntax and details from Azure Table documents.",
           "type": "string"
         }
       }
@@ -4992,122 +5162,30 @@
       },
       "x-ms-discriminator-value": "AzureTable"
     },
-    "ElasticsearchParameter": {
+    "InfluxDBParameter": {
       "required": [
-        "authHeader",
-        "host",
-        "port",
         "query"
       ],
       "type": "object",
       "properties": {
-        "host": {
-          "description": "Host",
-          "type": "string"
-        },
-        "port": {
-          "description": "Port",
-          "type": "string"
-        },
-        "authHeader": {
-          "description": "Authorization header",
-          "type": "string"
-        },
-        "query": {
-          "description": "Query",
-          "type": "string"
-        }
-      }
-    },
-    "ElasticsearchDataFeed": {
-      "required": [
-        "dataSourceParameter"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetail"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/ElasticsearchParameter"
-        }
-      },
-      "x-ms-discriminator-value": "Elasticsearch"
-    },
-    "HttpRequestParameter": {
-      "required": [
-        "httpHeader",
-        "httpMethod",
-        "payload",
-        "url"
-      ],
-      "type": "object",
-      "properties": {
-        "url": {
-          "description": "HTTP URL",
-          "type": "string"
-        },
-        "httpHeader": {
-          "description": "HTTP header",
-          "type": "string"
-        },
-        "httpMethod": {
-          "description": "HTTP method",
-          "type": "string"
-        },
-        "payload": {
-          "description": "HTTP request body",
-          "type": "string"
-        }
-      }
-    },
-    "HttpRequestDataFeed": {
-      "required": [
-        "dataSourceParameter"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetail"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/HttpRequestParameter"
-        }
-      },
-      "x-ms-discriminator-value": "HttpRequest"
-    },
-    "InfluxDBParameter": {
-      "required": [
-        "connectionString",
-        "database",
-        "password",
-        "query",
-        "userName"
-      ],
-      "type": "object",
-      "properties": {
         "connectionString": {
-          "description": "InfluxDB connection string",
+          "description": "The connection string of this InfluxDB",
           "type": "string"
         },
         "database": {
-          "description": "Database name",
+          "description": "A database name",
           "type": "string"
         },
         "userName": {
-          "description": "Database access user",
+          "description": "The user name of the account that can access this database",
           "type": "string"
         },
         "password": {
-          "description": "Database access password",
+          "description": "The password of the account that can access this database",
           "type": "string"
         },
         "query": {
-          "description": "Query script",
+          "description": "The script to query this database",
           "type": "string"
         }
       }
@@ -5182,22 +5260,20 @@
     },
     "MongoDBParameter": {
       "required": [
-        "command",
-        "connectionString",
-        "database"
+        "command"
       ],
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "MongoDB connection string",
+          "description": "The connection string of this MongoDB",
           "type": "string"
         },
         "database": {
-          "description": "Database name",
+          "description": "A database name in this MongoDB",
           "type": "string"
         },
         "command": {
-          "description": "Query script",
+          "description": "The script to query this database",
           "type": "string"
         }
       }
@@ -5235,6 +5311,27 @@
         }
       }
     },
+    "AzureApplicationInsightsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "azureCloud": {
+          "description": "The Azure cloud that this Azure Application Insights in",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "The application id of this Azure Application Insights",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "The API Key that can access this Azure Application Insights",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this Azure Application Insights",
+          "type": "string"
+        }
+      }
+    },
     "DataFeedDetailPatch": {
       "required": [
         "dataSourceType"
@@ -5250,9 +5347,8 @@
             "AzureDataExplorer",
             "AzureDataLakeStorageGen2",
             "AzureEventHubs",
+            "AzureLogAnalytics",
             "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
             "InfluxDB",
             "MongoDB",
             "MySql",
@@ -5438,10 +5534,27 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureApplicationInsightsParameter"
+          "$ref": "#/definitions/AzureApplicationInsightsParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureApplicationInsights"
+    },
+    "AzureBlobParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Blob",
+          "type": "string"
+        },
+        "container": {
+          "description": "The container name in this Azure Blob",
+          "type": "string"
+        },
+        "blobTemplate": {
+          "description": "The path template in this container",
+          "type": "string"
+        }
+      }
     },
     "AzureBlobDataFeedPatch": {
       "type": "object",
@@ -5452,10 +5565,31 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureBlobParameter"
+          "$ref": "#/definitions/AzureBlobParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureBlob"
+    },
+    "AzureCosmosDBParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure CosmosDB",
+          "type": "string"
+        },
+        "sqlQuery": {
+          "description": "The statement to query this collection",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this Azure CosmosDB",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "A collection id in this database",
+          "type": "string"
+        }
+      }
     },
     "AzureCosmosDBDataFeedPatch": {
       "type": "object",
@@ -5466,10 +5600,23 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureCosmosDBParameter"
+          "$ref": "#/definitions/AzureCosmosDBParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDB"
+    },
+    "SQLSourceParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
     },
     "AzureDataExplorerDataFeedPatch": {
       "type": "object",
@@ -5480,10 +5627,35 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/SqlSourceParameter"
+          "$ref": "#/definitions/SQLSourceParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorer"
+    },
+    "AzureDataLakeStorageGen2ParameterPatch": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "The account name of this Azure Data Lake",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "The account key that can access this Azure Data Lake",
+          "type": "string"
+        },
+        "fileSystemName": {
+          "description": "The file system (container) name in this Azure Data Lake",
+          "type": "string"
+        },
+        "directoryTemplate": {
+          "description": "The directory template under this file system",
+          "type": "string"
+        },
+        "fileTemplate": {
+          "description": "The file template",
+          "type": "string"
+        }
+      }
     },
     "AzureDataLakeStorageGen2DataFeedPatch": {
       "type": "object",
@@ -5494,10 +5666,23 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+          "$ref": "#/definitions/AzureDataLakeStorageGen2ParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
+    },
+    "AzureEventHubsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Event Hubs",
+          "type": "string"
+        },
+        "consumerGroup": {
+          "description": "The consumer group to be used in this data feed",
+          "type": "string"
+        }
+      }
     },
     "AzureEventHubsDataFeedPatch": {
       "type": "object",
@@ -5508,10 +5693,66 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureEventHubsParameter"
+          "$ref": "#/definitions/AzureEventHubsParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureEventHubs"
+    },
+    "AzureLogAnalyticsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspace id of this Log Analytics",
+          "type": "string"
+        },
+        "query": {
+          "description": "The KQL (Kusto Query Language) query to fetch data from this Log Analytics",
+          "type": "string"
+        }
+      }
+    },
+    "AzureLogAnalyticsDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
+    "AzureTableParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Table",
+          "type": "string"
+        },
+        "table": {
+          "description": "A table name in this Azure Table",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this table. Please find syntax and details from Azure Table documents.",
+          "type": "string"
+        }
+      }
     },
     "AzureTableDataFeedPatch": {
       "type": "object",
@@ -5522,38 +5763,35 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/AzureTableParameter"
+          "$ref": "#/definitions/AzureTableParameterPatch"
         }
       },
       "x-ms-discriminator-value": "AzureTable"
     },
-    "ElasticsearchDataFeedPatch": {
+    "InfluxDBParameterPatch": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetailPatch"
-        }
-      ],
       "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/ElasticsearchParameter"
+        "connectionString": {
+          "description": "The connection string of this InfluxDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The user name of the account that can access this database",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password of the account that can access this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
         }
-      },
-      "x-ms-discriminator-value": "Elasticsearch"
-    },
-    "HttpRequestDataFeedPatch": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetailPatch"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/HttpRequestParameter"
-        }
-      },
-      "x-ms-discriminator-value": "HttpRequest"
+      }
     },
     "InfluxDBDataFeedPatch": {
       "type": "object",
@@ -5564,7 +5802,7 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/InfluxDBParameter"
+          "$ref": "#/definitions/InfluxDBParameterPatch"
         }
       },
       "x-ms-discriminator-value": "InfluxDB"
@@ -5578,7 +5816,7 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/SqlSourceParameter"
+          "$ref": "#/definitions/SQLSourceParameterPatch"
         }
       },
       "x-ms-discriminator-value": "MySql"
@@ -5592,7 +5830,7 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/SqlSourceParameter"
+          "$ref": "#/definitions/SQLSourceParameterPatch"
         }
       },
       "x-ms-discriminator-value": "PostgreSql"
@@ -5606,16 +5844,30 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/SqlSourceParameter"
+          "$ref": "#/definitions/SQLSourceParameterPatch"
         }
       },
       "example": {
-        "dataFeedName": "Sample - cost/revenue - city/category (modified)",
-        "viewers": [
-          "viewer@company.example"
-        ]
+        "dataFeedName": "Sample - cost/revenue - city/category"
       },
       "x-ms-discriminator-value": "SqlServer"
+    },
+    "MongoDBParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this MongoDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this MongoDB",
+          "type": "string"
+        },
+        "command": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
     },
     "MongoDBDataFeedPatch": {
       "type": "object",
@@ -5626,7 +5878,7 @@
       ],
       "properties": {
         "dataSourceParameter": {
-          "$ref": "#/definitions/MongoDBParameter"
+          "$ref": "#/definitions/MongoDBParameterPatch"
         }
       },
       "x-ms-discriminator-value": "MongoDB"
@@ -6070,11 +6322,11 @@
           "type": "string"
         },
         "username": {
-          "description": "basic authentication",
+          "description": "(Deprecated) The username, if using basic authentication",
           "type": "string"
         },
         "password": {
-          "description": "basic authentication",
+          "description": "(Deprecated) The password, if using basic authentication",
           "type": "string"
         },
         "headers": {
@@ -6085,11 +6337,11 @@
           }
         },
         "certificateKey": {
-          "description": "client certificate",
+          "description": "The certificate key/URL, if using client certificate, please read documents for more informations.",
           "type": "string"
         },
         "certificatePassword": {
-          "description": "client certificate password",
+          "description": "The certificate password, if using client certificate, please read documents for more informations.",
           "type": "string"
         }
       }
@@ -6134,6 +6386,19 @@
             "$ref": "#/definitions/HookInfo"
           },
           "readOnly": true
+        }
+      }
+    },
+    "EmailHookParameterPatch": {
+      "type": "object",
+      "properties": {
+        "toList": {
+          "description": "Email TO: list.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6188,10 +6453,42 @@
       ],
       "properties": {
         "hookParameter": {
-          "$ref": "#/definitions/EmailHookParameter"
+          "$ref": "#/definitions/EmailHookParameterPatch"
         }
       },
       "x-ms-discriminator-value": "Email"
+    },
+    "WebhookHookParameterPatch": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "API address, will be called when alert is triggered, only support POST method via SSL",
+          "type": "string"
+        },
+        "username": {
+          "description": "(Deprecated) The username, if using basic authentication",
+          "type": "string"
+        },
+        "password": {
+          "description": "(Deprecated) The password, if using basic authentication",
+          "type": "string"
+        },
+        "headers": {
+          "description": "custom headers in api call",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "certificateKey": {
+          "description": "The certificate key, if using client certificate",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "The certificate password, if using client certificate",
+          "type": "string"
+        }
+      }
     },
     "WebhookHookInfoPatch": {
       "type": "object",
@@ -6202,12 +6499,11 @@
       ],
       "properties": {
         "hookParameter": {
-          "$ref": "#/definitions/WebhookHookParameter"
+          "$ref": "#/definitions/WebhookHookParameterPatch"
         }
       },
       "example": {
-        "hookName": "A webhook (modified)",
-        "description": "This is a webhook. (modified)"
+        "description": "This is a webhook."
       },
       "x-ms-discriminator-value": "Webhook"
     },
@@ -6335,16 +6631,16 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "series": {
-          "description": "query specific series",
+          "description": "query specific series. The maximum number of series is 100.",
           "type": "array",
           "items": {
             "type": "object",
@@ -6506,16 +6802,18 @@
       }
     },
     "AnomalyDetectionConfigurationList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyDetectionConfiguration"
-          }
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
