@@ -1082,6 +1082,76 @@
             "modelAsString": false,
             "name": "State"
           }
+        },
+        "entityRecognitionTasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/TaskState"
+              },
+              {
+                "$ref": "#/definitions/EntitiesTaskResult"
+              }
+            ]
+          }
+        },
+        "entityRecognitionPiiTasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/TaskState"
+              },
+              {
+                "$ref": "#/definitions/PiiTaskResult"
+              }
+            ]
+          }
+        },
+        "keyPhraseExtractionTasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/TaskState"
+              },
+              {
+                "$ref": "#/definitions/KeyPhraseTaskResult"
+              }
+            ]
+          }
+        },
+        "entityLinkingTasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/TaskState"
+              },
+              {
+                "$ref": "#/definitions/EntityLinkingTaskResult"
+              }
+            ]
+          }
+        },
+        "sentimentAnalysisTasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/TaskState"
+              },
+              {
+                "$ref": "#/definitions/SentimentTaskResult"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1099,76 +1169,6 @@
                   "$ref": "#/definitions/TaskState"
                 }
               ],
-							"entityRecognitionTasks": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"allOf": [
-										{
-											"$ref": "#/definitions/TaskState"
-										},
-										{
-											"$ref": "#/definitions/EntitiesTaskResult"
-										}
-									]
-								}
-							},
-							"entityRecognitionPiiTasks": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"allOf": [
-										{
-											"$ref": "#/definitions/TaskState"
-										},
-										{
-											"$ref": "#/definitions/PiiTaskResult"
-										}
-									]
-								}
-							},
-							"keyPhraseExtractionTasks": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"allOf": [
-										{
-											"$ref": "#/definitions/TaskState"
-										},
-										{
-											"$ref": "#/definitions/KeyPhraseTaskResult"
-										}
-									]
-								}
-							},
-							"entityLinkingTasks": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"allOf": [
-										{
-											"$ref": "#/definitions/TaskState"
-										},
-										{
-											"$ref": "#/definitions/EntityLinkingTaskResult"
-										}
-									]
-								}
-							},
-							"sentimentAnalysisTasks": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"allOf": [
-										{
-											"$ref": "#/definitions/TaskState"
-										},
-										{
-											"$ref": "#/definitions/SentimentTaskResult"
-										}
-									]
-								}
-							},
               "type": "object"
             },
             "completed": {
@@ -2721,46 +2721,6 @@
           "Address",
           "All",
           "Default"
-        ]
-      },
-      "type": "array",
-      "uniqueItems": true
-    },
-		"HealthcareCategories": {
-      "description": "Describes the health entity categories which will be returned",
-      "items": {
-        "type": "string",
-        "x-ms-enum": {
-          "name": "HealthcareCategories",
-          "modelAsString": true
-        },
-        "enum": [
-          "BODY_STRUCTURE",
-					"AGE",
-					"GENDER",
-					"EXAMINATION_NAME",
-					"DATE",
-					"DIRECTION",
-					"FREQUENCY",
-					"MEASUREMENT_VALUE",
-					"MEASUREMENT_UNIT",
-					"RELATIONAL_OPERATOR",
-					"TIME",
-					"GENE_OR_PROTEIN",
-					"VARIANT",
-					"ADMINISTRATIVE_EVENT",
-					"CARE_ENVIRONMENT",
-					"HEALTHCARE_PROFESSION",
-					"DIAGNOSIS",
-					"SYMPTOM_OR_SIGN",
-					"CONDITION_QUALIFIER",
-					"MEDICATION_CLASS",
-					"MEDICATION_NAME",
-					"DOSAGE",
-					"MEDICATION_FORM",
-					"MEDICATION_ROUTE",
-					"FAMILY_RELATION",
-					"TREATMENT_NAME"
         ]
       },
       "type": "array",
