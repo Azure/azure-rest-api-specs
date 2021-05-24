@@ -5020,6 +5020,11 @@
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
         },
+        "creditExpiredInBillingCurrency": {
+          "description": "The amount of expired credit or commitment for NewCredit or SettleCharges event in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "newCreditInBillingCurrency": {
           "description": "The amount of new credit or commitment for NewCredit or SettleCharges event in billing currency.",
           "readOnly": true,
@@ -5141,7 +5146,7 @@
           "x-ms-enum": {
             "name": "Status",
             "modelAsString": true
-            }
+          }
         },
         "creditCurrency": {
           "description": "The currency of the lot.",
