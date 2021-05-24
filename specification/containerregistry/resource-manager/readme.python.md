@@ -316,8 +316,8 @@ directive:
   - from: swagger-document
     where: $.definitions.TaskStepProperties
     transform: >
-        $['required'] = ['type'];  
+        $['type'] = 'string';  
   - from: swagger-document
     where: $.definitions.TaskStepUpdateParameters
     transform: >
-        $['required'] = ['type'];  
+        $['type'] = 'string';  
