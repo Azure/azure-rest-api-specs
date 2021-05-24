@@ -698,7 +698,7 @@
           "Registry"
         ],
         "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-    	"operationId": "ContainerRegistry_SetProperties",
+        "operationId": "ContainerRegistry_SetProperties",
         "x-ms-examples": {
           "Update repository attributes": {
             "$ref": "./examples/UpdateRepositoryAttributes.json"
@@ -712,7 +712,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-     	    "$ref": "#/parameters/RepositoryAttributeValue"
+            "$ref": "#/parameters/RepositoryAttributeValue"
           }
         ],
         "responses": {
@@ -1114,7 +1114,7 @@
             "x-ms-enum": {
               "name": "TokenGrantType"
             },
-            "x-accessibility" : "internal",
+            "x-accessibility": "internal",
             "x-ms-client-default": "refresh_token"
           }
         ],
@@ -1523,14 +1523,14 @@
             "value": "timeasc",
             "name": "LastUpdatedOnAscending",
             "description": "Order tags by LastUpdatedOn field, from least recently updated to most recently updated."
-            }
+          }
         ]
+      },
+      "x-accessibility": "public"
     },
-    "x-accessibility": "public"
-},
-"ArtifactArchitecture": {
-    "type": "string",
-    "enum": [
+    "ArtifactArchitecture": {
+      "type": "string",
+      "enum": [
         "386",
         "amd64",
         "arm",
@@ -1544,84 +1544,84 @@
         "riscv64",
         "s390x",
         "wasm"
-    ],
-    "x-ms-enum": {
+      ],
+      "x-ms-enum": {
         "name": "ArtifactArchitecture",
         "modelAsString": true,
         "values": [
-            {
-                "value": "386",
-                "name": "I386",
-                "description": ""
-            },
-            {
-                "value": "amd64",
-                "name": "Amd64",
-                "description": ""
-            },
-            {
-                "value": "arm",
-                "name": "Arm",
-                "description": ""
-            },
-            {
-                "value": "arm64",
-                "name": "Arm64",
-                "description": ""
-            },
-            {
-                "value": "mips",
-                "name": "Mips",
-                "description": ""
-            },
-            {
-                "value": "mipsle",
-                "name": "MipsLe",
-                "description": ""
-            },
-            {
-                "value": "mips64",
-                "name": "Mips64",
-                "description": ""
-            },
-            {
-                "value": "mips64le",
-                "name": "Mips64Le",
-                "description": ""
-            },
-            {
-                "value": "ppc64",
-                "name": "Ppc64",
-                "description": ""
-            },
-            {
-                "value": "ppc64le",
-                "name": "Ppc64Le",
-                "description": ""
-            },
-            {
-                "value": "riscv64",
-                "name": "RiscV64",
-                "description": ""
-            },
-            {
-                "value": "s390x",
-                "name": "S390x",
-                "description": ""
-            },
-            {
-                "value": "wasm",
-                "name": "Wasm",
-                "description": ""
-            }
+          {
+            "value": "386",
+            "name": "I386",
+            "description": ""
+          },
+          {
+            "value": "amd64",
+            "name": "Amd64",
+            "description": ""
+          },
+          {
+            "value": "arm",
+            "name": "Arm",
+            "description": ""
+          },
+          {
+            "value": "arm64",
+            "name": "Arm64",
+            "description": ""
+          },
+          {
+            "value": "mips",
+            "name": "Mips",
+            "description": ""
+          },
+          {
+            "value": "mipsle",
+            "name": "MipsLe",
+            "description": ""
+          },
+          {
+            "value": "mips64",
+            "name": "Mips64",
+            "description": ""
+          },
+          {
+            "value": "mips64le",
+            "name": "Mips64Le",
+            "description": ""
+          },
+          {
+            "value": "ppc64",
+            "name": "Ppc64",
+            "description": ""
+          },
+          {
+            "value": "ppc64le",
+            "name": "Ppc64Le",
+            "description": ""
+          },
+          {
+            "value": "riscv64",
+            "name": "RiscV64",
+            "description": ""
+          },
+          {
+            "value": "s390x",
+            "name": "S390x",
+            "description": ""
+          },
+          {
+            "value": "wasm",
+            "name": "Wasm",
+            "description": ""
+          }
         ]
+      },
+      "default": "none",
+      "x-accessibility": "public"
     },
-    "default": "none",
-    "x-accessibility": "public"
-},
-"ArtifactOperatingSystem": {
-    "type": "string",
-    "enum": [
+    "ArtifactOperatingSystem": {
+      "type": "string",
+      "enum": [
         "aix",
         "android",
         "darwin",
@@ -1636,80 +1636,80 @@
         "plan9",
         "solaris",
         "windows"
-    ],
-    "x-ms-enum": {
+      ],
+      "x-ms-enum": {
         "name": "ArtifactOperatingSystem",
         "modelAsString": true,
         "values": [
-            {
-                "value": "aix",
-                "name": "Aix",
-                "description": ""
-            },
-            {
-                "value": "android",
-                "name": "Android",
-                "description": ""
-            },
-            {
-                "value": "darwin",
-                "name": "Darwin",
-                "description": ""
-            },
-            {
-                "value": "dragonfly",
-                "name": "Dragonfly",
-                "description": ""
-            },
-            {
-                "value": "freebsd",
-                "name": "FreeBsd",
-                "description": ""
-            },
-            {
-                "value": "illumos",
-                "name": "Illumos",
-                "description": ""
-            },
-            {
-                "value": "ios",
-                "name": "iOS",
-                "description": ""
-            },
-            {
-                "value": "js",
-                "name": "JS",
-                "description": ""
-            },
-            {
-                "value": "linux",
-                "name": "Linux",
-                "description": ""
-            },
-            {
-                "value": "netbsd",
-                "name": "NetBsd",
-                "description": ""
-            },
-            {
-                "value": "openbsd",
-                "name": "OpenBsd",
-                "description": ""
-            },
-            {
-                "value": "plan9",
-                "name": "Plan9",
-                "description": ""
-            },
-            {
-                "value": "solaris",
-                "name": "Solaris",
-                "description": ""
-            },
-            {
-                "value": "windows",
-                "name": "Windows",
-                "description": ""
+          {
+            "value": "aix",
+            "name": "Aix",
+            "description": ""
+          },
+          {
+            "value": "android",
+            "name": "Android",
+            "description": ""
+          },
+          {
+            "value": "darwin",
+            "name": "Darwin",
+            "description": ""
+          },
+          {
+            "value": "dragonfly",
+            "name": "Dragonfly",
+            "description": ""
+          },
+          {
+            "value": "freebsd",
+            "name": "FreeBsd",
+            "description": ""
+          },
+          {
+            "value": "illumos",
+            "name": "Illumos",
+            "description": ""
+          },
+          {
+            "value": "ios",
+            "name": "iOS",
+            "description": ""
+          },
+          {
+            "value": "js",
+            "name": "JS",
+            "description": ""
+          },
+          {
+            "value": "linux",
+            "name": "Linux",
+            "description": ""
+          },
+          {
+            "value": "netbsd",
+            "name": "NetBsd",
+            "description": ""
+          },
+          {
+            "value": "openbsd",
+            "name": "OpenBsd",
+            "description": ""
+          },
+          {
+            "value": "plan9",
+            "name": "Plan9",
+            "description": ""
+          },
+          {
+            "value": "solaris",
+            "name": "Solaris",
+            "description": ""
+          },
+          {
+            "value": "windows",
+            "name": "Windows",
+            "description": ""
           }
         ]
       },
@@ -2136,7 +2136,7 @@
           "items": {
             "type": "string"
           },
-           "x-ms-client-name": "deletedManifests"
+          "x-ms-client-name": "deletedManifests"
         },
         "tagsDeleted": {
           "type": "array",
