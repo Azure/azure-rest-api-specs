@@ -293,3 +293,31 @@ python:
 namespace: azure.mgmt.containerregistry.v2017_03_01
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_03_01
 ```
+
+
+``` yaml $(python) && $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.BuildStepProperties
+    transform: >
+        $['type'] = 'string';
+  - from: swagger-document
+    where: $.definitions.BuildStepPropertiesUpdateParameters
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.QueueBuildRequest
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.RunRequest
+    transform: >
+        $['type'] = 'string';
+  - from: swagger-document
+    where: $.definitions.TaskStepProperties
+    transform: >
+        $['required'] = ['type'];  
+  - from: swagger-document
+    where: $.definitions.TaskStepUpdateParameters
+    transform: >
+        $['required'] = ['type'];  
