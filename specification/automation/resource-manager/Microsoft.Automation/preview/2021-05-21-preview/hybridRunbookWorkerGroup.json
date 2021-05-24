@@ -308,6 +308,62 @@
         },
         "x-ms-odata": "#/definitions/HybridRunbookWorkerGroup"
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/deleteV1Worker": {
+      "post": {
+        "tags": [
+          "HybridRunbookWorkerGroup"
+        ],
+        "operationId": "HybridRunbookWorkerGroup_DeleteV1Worker",
+        "description": "Delete V1 Worker in HybridRunbookWorker Group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
+        },
+        "x-ms-examples": {
+          "List hybrid worker groups by Automation Account": {
+            "$ref": "./examples/hybridRunbookWorkerGroupDeleteV1Worker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "machineId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The machineId of the v1 worker to be deleted."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
