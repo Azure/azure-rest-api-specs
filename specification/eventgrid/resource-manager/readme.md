@@ -199,6 +199,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/eventgrid/Microsoft.Azure.Management.EventGrid/src/Generated
   clear-output-folder: true
 ```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
