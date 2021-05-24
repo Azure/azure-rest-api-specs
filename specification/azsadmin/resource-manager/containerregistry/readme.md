@@ -33,13 +33,13 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/capacity.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/configuration.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/containerregistry.json"	
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/operations.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/quotas.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/registries.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setup.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/capacity.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/configuration.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/containerregistry.json"	
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/operations.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/quotas.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/registries.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/setup.json"
 ```
 
 ---
@@ -72,13 +72,13 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/capacity.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/configuration.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/containerregistry.json  
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/operations.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/quotas.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/registries.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setup.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/capacity.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/configuration.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/containerregistry.json  
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/operations.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/quotas.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/registries.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/setup.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
