@@ -42,13 +42,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Delete",
-        "description": "Delete a hybrid runbook worker.",
+        "description": "Delete a V2 hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
-          "Delete a hybrid worker group": {
-            "$ref": "./examples/deleteHybridRunbookWorker.json"
+          "Delete a V2 hybrid runbook worker": {
+            "$ref": "./examples/deleteV2HybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -96,13 +96,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Get",
-        "description": "Retrieve a hybrid runbook worker.",
+        "description": "Retrieve a V2 hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
-          "Get a hybrid worker group": {
-            "$ref": "./examples/hybridRunbookWorkerGet.json"
+          "Get a V2 hybrid runbook worker": {
+            "$ref": "./examples/getV2hybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -153,13 +153,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Put",
-        "description": "Create a hybrid runbook worker.",
+        "description": "Create a V2 hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
-          "Get a hybrid worker group": {
-            "$ref": "./examples/hybridRunbookWorkerPut.json"
+          "Create a V2 hybrid runbook worker": {
+            "$ref": "./examples/putV2HybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -221,13 +221,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Move",
-        "description": "Move a hybrid worker to a different group.",
+        "description": "Move a V2 hybrid worker to a different group.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
-          "Move a hybrid worker to a different group": {
-            "$ref": "./examples/hybridRunbookWorkerMove.json"
+          "Move a V2 hybrid worker to a different group": {
+            "$ref": "./examples/moveV2HybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -291,8 +291,8 @@
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
-          "List hybrid workers by Automation Account": {
-            "$ref": "./examples/hybridRunbookWorkerList.json"
+          "List hybrid workers by hybrid runbook worker group": {
+            "$ref": "./examples/listHybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -341,6 +341,117 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/HybridRunbookWorker"
+      },
+      "get": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorker_GetV1Worker",
+        "description": "Retrieve a V1 hybrid runbook worker.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Get a V1 hybrid runbook worker": {
+            "$ref": "./examples/getV1HybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "machineId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The machineId of the v1 worker to be deleted."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorker"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorker_DeleteV1Worker",
+        "description": "Delete a V1 hybrid runbook worker.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Delete a V1 hybrid runbook worker": {
+            "$ref": "./examples/deleteV1HybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "machineId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The machineId of the v1 worker to be deleted."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
