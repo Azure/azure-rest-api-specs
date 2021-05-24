@@ -2335,22 +2335,7 @@
           }
         },
         "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal ID of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client ID of user assigned identity."
-              }
-            }
-          },
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
@@ -2358,6 +2343,29 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of user assigned identity."
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity used by the Video Analyzer resource."
     }
   },
   "parameters": {
