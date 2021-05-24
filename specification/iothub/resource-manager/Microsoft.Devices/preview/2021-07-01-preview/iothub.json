@@ -3258,36 +3258,6 @@
         "endpointNames"
       ]
     },
-    "IotHubDescription": {
-      "description": "The description of the IoT hub.",
-      "type": "object",
-      "properties": {
-        "etag": {
-          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "IotHub properties",
-          "$ref": "#/definitions/IotHubProperties"
-        },
-        "sku": {
-          "description": "IotHub SKU info",
-          "$ref": "#/definitions/IotHubSkuInfo"
-        },
-        "identity": {
-          "description": "The managed identities for the IotHub.",
-          "$ref": "#/definitions/ArmIdentity"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "sku"
-      ]
-    },
     "Resource": {
       "description": "The common properties of an Azure resource.",
       "properties": {
@@ -3322,6 +3292,36 @@
       "x-ms-azure-resource": true,
       "required": [
         "location"
+      ]
+    },
+    "IotHubDescription": {
+      "description": "The description of the IoT hub.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "IotHub properties",
+          "$ref": "#/definitions/IotHubProperties"
+        },
+        "sku": {
+          "description": "IotHub SKU info",
+          "$ref": "#/definitions/IotHubSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IotHub.",
+          "$ref": "#/definitions/ArmIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "sku"
       ]
     },
     "SharedAccessSignatureAuthorizationRuleListResult": {
