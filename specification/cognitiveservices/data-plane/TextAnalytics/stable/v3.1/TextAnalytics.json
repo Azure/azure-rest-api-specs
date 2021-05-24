@@ -1067,6 +1067,13 @@
     },
     "TaskState": {
       "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "taskName": {
+          "type": "string"
+        },
         "status": {
           "enum": [
             "notStarted",
@@ -1082,80 +1089,11 @@
             "modelAsString": false,
             "name": "State"
           }
-        },
-        "entityRecognitionTasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/TaskState"
-              },
-              {
-                "$ref": "#/definitions/EntitiesTaskResult"
-              }
-            ]
-          }
-        },
-        "entityRecognitionPiiTasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/TaskState"
-              },
-              {
-                "$ref": "#/definitions/PiiTaskResult"
-              }
-            ]
-          }
-        },
-        "keyPhraseExtractionTasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/TaskState"
-              },
-              {
-                "$ref": "#/definitions/KeyPhraseTaskResult"
-              }
-            ]
-          }
-        },
-        "entityLinkingTasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/TaskState"
-              },
-              {
-                "$ref": "#/definitions/EntityLinkingTaskResult"
-              }
-            ]
-          }
-        },
-        "sentimentAnalysisTasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/TaskState"
-              },
-              {
-                "$ref": "#/definitions/SentimentTaskResult"
-              }
-            ]
-          }
         }
       },
       "required": [
-        "status"
+        "status",
+        "lastUpdateDateTime"
       ],
       "type": "object"
     },
@@ -1163,14 +1101,6 @@
       "properties": {
         "tasks": {
           "properties": {
-            "details": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/TaskState"
-                }
-              ],
-              "type": "object"
-            },
             "completed": {
               "type": "integer"
             },
@@ -1182,6 +1112,76 @@
             },
             "total": {
               "type": "integer"
+            },
+            "entityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/EntitiesTaskResult"
+                  }
+                ]
+              }
+            },
+            "entityRecognitionPiiTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/PiiTaskResult"
+                  }
+                ]
+              }
+            },
+            "keyPhraseExtractionTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/KeyPhraseTaskResult"
+                  }
+                ]
+              }
+            },
+            "entityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/EntityLinkingTaskResult"
+                  }
+                ]
+              }
+            },
+            "sentimentAnalysisTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/SentimentTaskResult"
+                  }
+                ]
+              }
             }
           },
           "required": [
