@@ -28,7 +28,15 @@ These are the global settings for the HybridCompute API.
 openapi-type: arm
 tag: package-preview-2021-03
 ```
+### Tag: package-preview-2021-04
 
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-04-22-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-04-22-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2021-03
 
@@ -118,20 +126,17 @@ swagger-to-sdk:
   - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hybridcompute/resource-manager
 ```
 
 ---
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## az CLI
 
