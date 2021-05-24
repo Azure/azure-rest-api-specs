@@ -3470,13 +3470,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The schema '{json path}' is considered an object but without a 'type:object', please add the missing 'type:object'.
 
-**Description**: The rule is to ensure that any 'object' type schema must be defined with "type":"object" explicitly. Without "type" definition indicates the schema can be any type. Especially, a schema with keyword 'properties' or ‘addtionalProperties’ requires definition of "type":"object".
+**Description**: The rule should apply to any schema with "properties" or "additionalProperties". It is to ensure a schema with "properties" or "additionalProperties" must have explicit "type:object" statement, which means a schema is an object. 
 
 **CreatedAt**: May 24, 2021
 
 **LastModifiedAt**: May 24, 2021
 
-**Why this rule is important**: It's used to differentiate free-form object and any type , as the SDK track1 doesn’t make a difference between the two syntax.
+**Why this rule is important**: The semantics of with and without "type:object" are different. With “type:object” means “it has to be an object”. Without “type: object” means “it could be any type”. Azure SDK Track 2 generator will honor the difference, and generate different SDK codes.
 A free-form object would like:
 ```json
 "foo": {
@@ -3490,7 +3490,7 @@ An any type schema would like:
 ```
 
 **How to fix the violation**
-Just add the missing 'type:object'.
+Just add the missing 'type:object'. For exception , you can request a suppression for it.
 
 The following would be valid:
 
