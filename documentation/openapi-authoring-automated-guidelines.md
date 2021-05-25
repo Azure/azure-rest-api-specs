@@ -3481,7 +3481,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 A free-form object would like:
 
 **How to fix the violation**
-Just add the missing 'type:object'. For exception , you can request a suppression for it.
+Just add the missing 'type:object'.
 
 The following would be valid:
 
@@ -3496,7 +3496,7 @@ The following would be valid:
     }
  }
 ```
-The following would be invalid by default, if you do it on purpose which means it could be any other types or object type,a suppression is needed.
+The following would be invalid by default (unless you do it on purpose , then a suppression is required):
 
 ```json
  "foo": {
