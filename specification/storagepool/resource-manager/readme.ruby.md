@@ -4,16 +4,16 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_storagepool
-package-version: 2020-03-15-preview
+package-version: 2021-04-01-preview
 azure-arm: true
 ```
 
-### Tag: package-2020-03-15-preview and ruby
+### Tag: package-2021-04-01-preview and ruby
 
-These settings apply only when `--tag=package-2020-03-15-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2020-03-15-preview' && $(ruby)
+```yaml $(tag) == 'package-2021-04-01-preview' && $(ruby)
 namespace: Microsoft.StoragePool
 output-folder: $(ruby-sdks-folder)/storagepool
 ```
