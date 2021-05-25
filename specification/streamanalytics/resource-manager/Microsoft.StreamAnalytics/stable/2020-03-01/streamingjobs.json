@@ -33,6 +33,36 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.StreamAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Stream Analytics related operations.",
+        "x-ms-examples": {
+          "List available operations for the Stream Analytics resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}": {
       "put": {
         "tags": [
@@ -617,7 +647,7 @@
       "properties": {
         "sku": {
           "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
-          "$ref": "#/definitions/StreamingJobSku"
+          "$ref": "#/definitions/Sku"
         },
         "jobId": {
           "readOnly": true,
@@ -754,7 +784,7 @@
         }
       }
     },
-    "StreamingJobSku": {
+    "Sku": {
       "description": "The properties that are associated with a SKU.",
       "properties": {
         "name": {
@@ -764,7 +794,7 @@
             "Standard"
           ],
           "x-ms-enum": {
-            "name": "StreamingJobSkuName",
+            "name": "SkuName",
             "modelAsString": true
           }
         }
