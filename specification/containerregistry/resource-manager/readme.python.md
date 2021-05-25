@@ -300,24 +300,25 @@ directive:
   - from: swagger-document
     where: $.definitions.BuildStepProperties
     transform: >
-        $['type'] = 'string';
+        $['required'] = ['type'];
   - from: swagger-document
     where: $.definitions.BuildStepPropertiesUpdateParameters
     transform: >
-        $['type'] = 'string'; 
+        $['required'] = ['type'];
   - from: swagger-document
     where: $.definitions.QueueBuildRequest
     transform: >
-        $['type'] = 'string'; 
+        $['required'] = ['type']; 
   - from: swagger-document
     where: $.definitions.RunRequest
     transform: >
-        $['type'] = 'string';
+        $['required'] = ['type'];
   - from: swagger-document
     where: $.definitions.TaskStepProperties
     transform: >
-        $['type'] = 'string';  
+        $['required'] = ['type']; 
   - from: swagger-document
     where: $.definitions.TaskStepUpdateParameters
     transform: >
-        $['type'] = 'string';  
+        $['required'] = ['type'];
+```
