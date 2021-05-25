@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-04
+tag: package-2020-04-01-preview-only
 ```
 
 ### Suppression
@@ -91,11 +91,11 @@ directive:
 ```
 
 
-### Tag: package-preview-2021-04
+### Tag: package-2021-04-01-preview-only
 
-These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-04'
+```yaml $(tag) == 'package-2021-04-01-preview-only'
 input-file:
   - Microsoft.Authorization/preview/2021-04-01-preview/authorization-RoleAssignmentPaginationCalls.json
 ```
