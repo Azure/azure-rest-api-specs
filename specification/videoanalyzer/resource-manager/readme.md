@@ -26,7 +26,7 @@ These are the global settings for the videoanalyzer.
 
 ```yaml
 title: VideoAnalyzer
-description: Azure Video Analyzer ARM Client
+description: Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the cloud
 openapi-type: arm
 tag: package-2021-05-01-preview
 ```
