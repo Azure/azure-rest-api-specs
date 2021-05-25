@@ -807,6 +807,20 @@
         "type"
       ]
     },
+    "EventSerializationType": {
+      "type": "string",
+      "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
+      "enum": [
+        "Csv",
+        "Avro",
+        "Json",
+        "Parquet"
+      ],
+      "x-ms-enum": {
+        "name": "EventSerializationType",
+        "modelAsString": true
+      }
+    },
     "ParquetSerialization": {
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Parquet format.",
       "x-ms-discriminator-value": "Parquet",
@@ -1066,20 +1080,6 @@
       ],
       "x-ms-enum": {
         "name": "RefreshType",
-        "modelAsString": true
-      }
-    },
-    "EventSerializationType": {
-      "type": "string",
-      "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
-      "enum": [
-        "Csv",
-        "Avro",
-        "Json",
-        "Parquet"
-      ],
-      "x-ms-enum": {
-        "name": "EventSerializationType",
         "modelAsString": true
       }
     }
