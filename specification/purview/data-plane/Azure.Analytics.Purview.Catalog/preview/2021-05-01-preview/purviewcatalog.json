@@ -2193,42 +2193,6 @@
         }
       }
     },
-    "/browse": {
-      "post": {
-        "tags": [
-          "Discovery"
-        ],
-        "description": "Browse entities by path or entity type.",
-        "operationId": "Discovery_Browse",
-        "x-ms-examples": {
-          "Discovery_Browse_Path": {
-            "$ref": "./examples/Discovery_Browse_Path.json"
-          },
-          "Discovery_Browse_EntityType": {
-            "$ref": "./examples/Discovery_Browse_EntityType.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "browseRequest",
-            "description": "An object specifying the browse criteria.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrowseRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. On successful get the entities to browse.",
-            "schema": {
-              "$ref": "#/definitions/BrowseResult"
-            }
-          }
-        }
-      }
-    },
     "/search/autocomplete": {
       "post": {
         "tags": [
@@ -3026,123 +2990,6 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity": {
-      "post": {
-        "tags": [
-          "CatalogCollection"
-        ],
-        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "CatalogCollection_createOrUpdate",
-        "x-ms-examples": {
-          "CatalogCollection_createOrUpdate": {
-            "$ref": "./examples/CatalogCollection_createOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "entity",
-            "description": "Atlas entity with extended information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AtlasEntityWithExtInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity/bulk": {
-      "post": {
-        "tags": [
-          "CatalogCollection"
-        ],
-        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "CatalogCollection_createOrUpdateBulk",
-        "x-ms-examples": {
-          "CatalogCollection_createOrUpdateBulk": {
-            "$ref": "./examples/CatalogCollection_createOrUpdateBulk.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "entities",
-            "description": "Atlas entities with extended information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity/moveHere": {
-      "post": {
-        "tags": [
-          "CatalogCollection"
-        ],
-        "description": "Move existing entities to the target collection.",
-        "operationId": "CatalogCollection_moveEntitiesToCollection",
-        "x-ms-examples": {
-          "CatalogCollection_moveEntitiesToCollection": {
-            "$ref": "./examples/CatalogCollection_moveEntitiesToCollection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "moveEntitiesRequest",
-            "description": "Entity guids to be moved to target collection.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveEntitiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
             }
           }
         }
@@ -6249,14 +6096,6 @@
         "name": "type",
         "modelAsString": true
       },
-      "x-ms-parameter-location": "method"
-    },
-    "collection": {
-      "name": "collection",
-      "description": "the collection unique name",
-      "in": "path",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
