@@ -773,6 +773,7 @@
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
           "$ref": "#/definitions/EventSerializationType"
         }
       },
@@ -793,7 +794,6 @@
         "modelAsString": true
       }
     },
-    
     "CsvSerialization": {
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in CSV format.",
       "x-ms-discriminator-value": "Csv",
