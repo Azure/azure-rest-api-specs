@@ -3061,10 +3061,6 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedClusterIdentity",
-          "description": "The identity of the managed cluster, if configured."
         }
       },
       "allOf": [
@@ -3072,7 +3068,17 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/ManagedClusterProperties"            
+          "properties": {
+            "properties": {
+              "description": "Properties of a managed cluster.",
+              "$ref": "#/definitions/ManagedClusterProperties",
+              "x-ms-client-flatten": true
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedClusterIdentity",
+              "description": "The identity of the managed cluster, if configured."
+            }
+          }
         }
       ],
       "description": "Managed cluster."
@@ -3251,11 +3257,9 @@
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
         },
         "identityProfile": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/UserAssignedIdentity"
-            }
-          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
           "description": "Identities associated with the cluster."
         },
         "privateLinkResources": {
