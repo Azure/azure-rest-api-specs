@@ -160,7 +160,6 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/checkAccessSynapseRbac.json
   - Microsoft.Synapse/stable/2020-12-01/roleAssignments.json
   - Microsoft.Synapse/stable/2020-12-01/roleDefinitions.json
-  - Microsoft.Synapse/stable/2020-12-01/roles.json
 ```
 
 ### Tag: package-vnet-2020-12-01
