@@ -1595,7 +1595,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
-**Description**: The allowed response status codes for a long DELETE operation are "200","202", & "204". The allowed response status codes for a POST operation are "200", "201" ,"202", & "204". The allowed response status codes for a PUT/PATCH operation are  "200","201", & "202".
+**Description**: For ARM spec, the allowed response status codes for a long DELETE operation are "200" & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200" & "201".
+                 For Data plane spec, the allowed response status codes for a long DELETE operation are "200","202", & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200","201", & "202".
 
 **Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
 
@@ -3478,16 +3479,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why this rule is important**: The semantics of with and without "type:object" are different. With “type:object” means “it has to be an object”. Without “type: object” means “it could be any type”. Azure SDK Track 2 generator will honor the difference, and generate different SDK codes.
 A free-form object would like:
-```json
-"foo": {
-  "type":"object"
-}
-```
-An any type schema would like:
-```json
-"foo": {
-}
-```
 
 **How to fix the violation**
 Just add the missing 'type:object'. For exception , you can request a suppression for it.
@@ -3505,7 +3496,7 @@ The following would be valid:
     }
  }
 ```
-The following would be invalid:
+The following would be invalid by default, if you do it on purpose which means it could be any other types or object type,a suppression is needed.
 
 ```json
  "foo": {
