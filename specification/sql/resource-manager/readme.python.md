@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.sql
   package-name: azure-mgmt-sql
-  package-version: 0.9.0
+  package-version: 0.26.0
   clear-output-folder: true
 ```
 
