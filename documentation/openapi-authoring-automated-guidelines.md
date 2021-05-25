@@ -3480,7 +3480,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Why this rule is important**: The semantics of with and without "type:object" are different. With “type:object” means “it has to be an object”. Without “type: object” means “it could be any type”. Azure SDK Track 2 generator will honor the difference, and generate different SDK codes.
 A free-form object would like:
 
-**How to fix the violation**
+**How to fix the violation**:
 Just add the missing 'type:object'.
 
 The following would be valid:
