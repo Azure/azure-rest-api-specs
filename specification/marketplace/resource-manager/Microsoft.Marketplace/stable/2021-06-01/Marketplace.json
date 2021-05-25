@@ -185,6 +185,51 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collectionsToSubscriptionsMapping": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_CollectionsToSubscriptionsMapping",
+        "description": "For a given subscriptions list, the API will return a map of collections and the related subscriptions from the supplied list.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/CollectionsToSubscriptionsMappingPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionsToSubscriptionsMappingResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionsToSubscriptionsMapping": {
+            "$ref": "./examples/CollectionsToSubscriptionsMapping.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections": {
       "parameters": [
         {
@@ -1936,6 +1981,63 @@
         },
         "offerIdsList": {
           "description": "Offers ids list to transfer from source collection to target collection(s)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CollectionsToSubscriptionsMappingPayload": {
+      "description": "The subscriptions list to get the related collections",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionsToSubscriptionsMappingProperties",
+          "description": "Subscriptions ids list"
+        }
+      }
+    },
+    "CollectionsToSubscriptionsMappingProperties": {
+      "description": "The subscriptions list to get the related collections",
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "description": "Subscriptions ids list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CollectionsToSubscriptionsMappingResponse": {
+      "description": "A map of collections subscriptions details",
+      "type": "object",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/CollectionsToSubscriptionsMappingResponseProperties",
+          "description": "The map of collections subscriptions"
+        }
+      }
+    },
+    "CollectionsToSubscriptionsMappingResponseProperties": {
+      "description": "Collections - subscriptions mapping details, map key is collectionId. In case subscriptions list is null or empty: no subscription from the list is related to that collection.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/collectionsSubscriptionsMappingDetails"
+      }
+    },
+    "collectionsSubscriptionsMappingDetails": {
+      "description": "Collection name and related subscriptions list",
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "description": "Collection name",
+          "type": "string"
+        },
+        "subscriptions": {
+          "description": "Subscriptions ids list",
           "type": "array",
           "items": {
             "type": "string"
