@@ -3061,6 +3061,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedClusterIdentity",
+          "description": "The identity of the managed cluster, if configured."
         }
       },
       "allOf": [
@@ -3068,17 +3072,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "properties": {
-            "properties": {
-              "description": "Properties of a managed cluster.",
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "x-ms-client-flatten": true
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedClusterIdentity",
-              "description": "The identity of the managed cluster, if configured."
-            }
-          }
+          "$ref": "#/definitions/ManagedClusterProperties"            
         }
       ],
       "description": "Managed cluster."
@@ -3257,13 +3251,11 @@
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
         },
         "identityProfile": {
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/UserAssignedIdentity"
-              }
-            ]
-          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserAssignedIdentity"
+            }
+          ],
           "description": "Identities associated with the cluster."
         },
         "privateLinkResources": {
@@ -3348,19 +3340,16 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal id of user assigned identity."
+            },
+            "clientId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The client id of user assigned identity."
             }
           },
           "description": "The user identity associated with the managed cluster. This identity will be used in control plane and only one user assigned identity is allowed. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
