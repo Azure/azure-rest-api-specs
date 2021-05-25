@@ -116,7 +116,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs |
 | [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs |
 | [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs |
-| [R4037](#r4032) | [MissingTypeObject](#r4037) | ARM OpenAPI(swagger) specs |
+| [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs |
 #### SDK Warnings
 
 | Id | Rule Name | Applies to |
