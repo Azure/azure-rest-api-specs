@@ -5,7 +5,14 @@
     "version": "1.0",
     "description": "APIs for managing Tilesets."
   },
-  "host": "atlas.microsoft.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -98,6 +105,33 @@
     }
   },
   "parameters": {
+    "GeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Creator resource in the United States"
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Creator resource in Europe"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "ClientId": {
       "name": "x-ms-client-id",
       "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
@@ -173,7 +207,7 @@
     "/tileset/create/vector": {
       "post": {
         "x-publish": true,
-        "description": "**Tileset Create API**\n\n**Applies to**: S1 pricing tier.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Tileset API is part of Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
+        "description": "**Tileset Create API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
         "operationId": "Tileset_CreatePreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -229,7 +263,7 @@
     "/tileset": {
       "get": {
         "x-publish": true,
-        "description": "**Tileset List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Tileset API is part of Creator.\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
+        "description": "**Tileset List API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
         "operationId": "Tileset_ListPreview",
         "x-ms-examples": {
           "Get a list of all tilesets": {
@@ -275,7 +309,7 @@
     "/tileset/{tilesetId}": {
       "delete": {
         "x-publish": true,
-        "description": "**Tileset Delete API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Tileset API is part of Creator.\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "**Tileset Delete API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Tileset_DeletePreview",
         "x-ms-examples": {
           "Delete a created tileset": {
