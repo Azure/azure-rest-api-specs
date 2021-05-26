@@ -120,7 +120,7 @@ input-file: preview/v3.1-preview.5/TextAnalytics.json
 
 These settings apply only when `--tag=release_3_1` is specified on the command line.
 
-``` yaml $(tag) == 'release_3_0'
+``` yaml $(tag) == 'release_3_1'
 input-file: stable/v3.1/TextAnalytics.json
 ```
 
