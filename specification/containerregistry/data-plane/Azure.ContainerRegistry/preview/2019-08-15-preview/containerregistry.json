@@ -698,7 +698,7 @@
           "Registry"
         ],
         "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-        "operationId": "ContainerRegistry_SetProperties",
+        "operationId": "ContainerRegistry_UpdateProperties",
         "x-ms-examples": {
           "Update repository attributes": {
             "$ref": "./examples/UpdateRepositoryAttributes.json"
@@ -1298,9 +1298,9 @@
         "tagCount",
         "changeableAttributes"
       ],
-      "x-ms-client-name": "RepositoryProperties",
+      "x-ms-client-name": "ContainerRepositoryProperties",
       "type": "object",
-      "description": "Repository attributes",
+      "description": "Properties of this repository.",
       "properties": {
         "registry": {
           "type": "string",
@@ -1533,7 +1533,7 @@
         "timeasc"
       ],
       "x-ms-enum": {
-        "name": "TagOrderBy",
+        "name": "ArtifactTagOrderBy",
         "values": [
           {
             "value": "none",
@@ -1919,8 +1919,8 @@
         "references": {
           "type": "array",
           "readOnly": true,
-          "description": "List of manifests referenced by this manifest list.  List will be empty if this manifest is not a manifest list.",
-          "x-ms-client-name": "manifestReferences",
+          "description": "List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.",
+          "x-ms-client-name": "relatedArtifacts",
           "items": {
             "$ref": "#/definitions/ManifestAttributes_manifest_references",
             "description": "Manifest attributes details"
@@ -1981,7 +1981,7 @@
         "timeasc"
       ],
       "x-ms-enum": {
-        "name": "ManifestOrderBy",
+        "name": "ArtifactManifestOrderBy",
         "values": [
           {
             "value": "none",
@@ -2294,11 +2294,9 @@
     },
     "ManifestAttributes_manifest_references": {
       "required": [
-        "digest",
-        "architecture",
-        "os"
+        "digest"
       ],
-      "x-ms-client-name": "ArtifactManifestReference",
+      "x-ms-client-name": "ArtifactManifestPlatform",
       "description": "Manifest attributes details",
       "properties": {
         "digest": {
