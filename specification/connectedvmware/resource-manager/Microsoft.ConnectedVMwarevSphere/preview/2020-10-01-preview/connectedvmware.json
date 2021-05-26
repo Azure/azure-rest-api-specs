@@ -2948,8 +2948,8 @@
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
         },
@@ -3059,6 +3059,11 @@
     "ResourceStatus": {
       "description": "The resource status information.",
       "properties": {
+        "type": {
+          "description": "The type of the condition.",
+          "type": "string",
+          "readOnly": true
+        },
         "status": {
           "description": "Status of the condition.",
           "type": "string",
@@ -3079,14 +3084,8 @@
           "type": "string",
           "readOnly": true
         },
-        "startedAt": {
-          "description": "The time this condition was entered.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "lastTransitionTime": {
-          "description": "The last transition time.",
+        "lastUpdatedAt": {
+          "description": "The last update time for this condition.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -3143,8 +3142,8 @@
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
         },
@@ -3676,8 +3675,8 @@
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
         },
@@ -3905,8 +3904,8 @@
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
         },
@@ -4028,8 +4027,8 @@
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
         },
