@@ -27,7 +27,6 @@ These are the global settings for the MonitorClient API.
 ``` yaml !$(python) || !$(track2)
 title: MonitorClient
 ```
-
 ``` yaml $(python) && $(track2)
 title: MonitorManagementClient
 ```
@@ -35,20 +34,9 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-preview-2017-09
+tag: package-2020-03
 ```
 
-
-### Tag: package-preview-2017-09
-
-These settings apply only when `--tag=package-preview-2017-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2017-09'
-input-file:
-  - Microsoft.Insights/preview/2017-09-01-preview/operations_API.json
-  - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
-  - Microsoft.Insights/preview/2017-09-01-preview/metrics_API.json
-```
 ### Tag: package-2021-02-preview-only
 
 These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
@@ -356,6 +344,17 @@ input-file:
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
 - Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
 - Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
+```
+
+### Tag: package-2017-09-preview-only
+
+These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2017-09-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2017-09-01-preview/operations_API.json
+  - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
+  - Microsoft.Insights/preview/2017-09-01-preview/metrics_API.json
 ```
 
 ### Tag: package-2017-08
