@@ -3074,8 +3074,8 @@
               "description": "The identity of the managed cluster, if configured."
             },
             "properties": {
-              "description": "Properties of a managed cluster.",
               "$ref": "#/definitions/ManagedClusterProperties",
+              "description": "Properties of a managed cluster.",
               "x-ms-client-flatten": true
             }
           }
@@ -3342,10 +3342,10 @@
             "modelAsString": false
           }
         },
-        "userAssignedIdentities": {
-          "type": "object",
-          "x-ms-client-name": "ManagedServiceIdentityUserAssignedIdentitiesValue",
+        "userAssignedIdentities": {          
           "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "ManagedServiceIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
