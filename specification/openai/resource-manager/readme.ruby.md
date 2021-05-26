@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml
-package-name: azure_mgmt_cognitive_services
+package-name: azure_mgmt_openai
 package-version: "0.16.0"
 azure-arm: true
 ```
@@ -12,26 +12,15 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
-  - tag: package-2021-10
-  - tag: package-2016-02-preview
+  - tag: package-2021-09-preview
 ```
 
-### Tag: package-2021-10 and ruby
+### Tag: package-2021-09-preview and ruby
 
-These settings apply only when `--tag=package-2021-10 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2021-09-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2021-10' && $(ruby)
-namespace: "Azure::OpenAI::Mgmt::V2017_04_18"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cognitive_services/lib
-```
-
-### Tag: package-2016-02-preview and ruby
-
-These settings apply only when `--tag=package-2016-02-preview --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-2016-02-preview' && $(ruby)
-namespace: "Azure::OpenAI::Mgmt::V2016_02_01_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cognitive_services/lib
+``` yaml $(tag) == 'package-2021-09-preview' && $(ruby)
+namespace: "Azure::OpenAI::Mgmt::V2021_09_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_openai/lib
 ```

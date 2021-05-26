@@ -772,7 +772,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
             },
             "description": "Check name availability parameter."
           }
@@ -781,7 +781,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/NameAvailability"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -1207,15 +1207,6 @@
           "readOnly": true,
           "$ref": "#/definitions/QuotaLimit"
         },
-        "restrictOutboundNetworkAccess": {
-          "type": "boolean"
-        },
-        "allowedFqdnList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "disableLocalAuth": {
           "type": "boolean"
         },
@@ -1376,7 +1367,7 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "The list of usages for Cognitive Service account."
+          "description": "The list of usages for OpenAI account."
         }
       },
       "description": "The response to a list usage request."
@@ -1531,42 +1522,6 @@
         }
       },
       "description": "SkuCapability indicates the capability of a certain feature."
-    },
-    "CheckNameAvailabilityParameter": {
-      "type": "object",
-      "description": "Check name availability parameter.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name to use."
-        },
-        "type": {
-          "type": "string",
-          "description": "The Type of the resource."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "NameAvailability": {
-      "type": "object",
-      "description": "name availability.",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicates the given SKU is available or not."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Invalid indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable."
-        },
-        "message": {
-          "type": "string",
-          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that is already in use, and direct them to select a different name. "
-        }
-      }
     },
     "ResourceSkuRestrictions": {
       "type": "object",
