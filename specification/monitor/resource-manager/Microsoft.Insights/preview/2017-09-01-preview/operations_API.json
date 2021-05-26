@@ -151,6 +151,10 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "legacyMetricSpecifications": {
+          "description": "Legacy Metric specifications for operation. Deprecated, do not use.",
+          "type": "object"
         }
       }
     },
@@ -176,23 +180,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of metric specification."
+          "description": "The name of the metric."
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of Metric specification."
+          "description": "Display name of the metric."
         },
         "displayDescription": {
           "type": "string",
-          "description": "Display description of Metric specification."
+          "description": "Display description of the metric."
         },
         "unit": {
           "type": "string",
-          "description": "The metric unit. Possible values include: 'Bytes', 'Count', 'Milliseconds'."
+          "description": "The metric unit. Possible values include: Count,Bytes,Seconds,Percent,CountPerSecond,BytesPerSecond,MilliSeconds,ByteSeconds,Unspecified,BitsPerSecond,Cores,MilliCores,NanoCores"
         },
         "aggregationType": {
           "type": "string",
-          "description": "The metric aggregation type. Possible values include: 'Average', 'Count', 'Total'."
+          "description": "The default metric aggregation type. Possible values include: Total,Average,Maximum,Minimum,Count"
         },
         "supportedAggregationTypes": {
           "type": "array",
@@ -208,9 +212,20 @@
             "type": "string"
           }
         },
+        "availabilities": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
         "lockAggregationType": {
           "type": "string",
           "description": "The metric lock aggregation type."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category or type of metric."
         },
         "dimensions": {
           "type": "array",
@@ -221,7 +236,7 @@
         },
         "fillGapWithZero": {
           "type": "boolean",
-          "description": "Property to specify whether to fill gap with zero."
+          "description": "Property to specify whether to fill empty gaps with zero."
         },
         "internalMetricName": {
           "type": "string",
@@ -242,7 +257,15 @@
         },
         "toBeExportedForShoebox": {
           "type": "boolean",
-          "description": "Property to specify whether the dimension should be exported for shoebox."
+          "description": "Legacy usage, should not set."
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "When set, the dimension is hidden from the customer, used in conjuction with the defaultDimensionValues field below"
+        },
+        "defaultDimensionValues": {
+          "type": "object",
+          "description": "Default dimension value to be sent down for the hidden dimension during query"
         }
       }
     }
