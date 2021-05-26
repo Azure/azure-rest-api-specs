@@ -63,7 +63,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Configuration patch.",
+            "description": "Configuration patch.\nPatch not containing trunks will not alter trunks.\nPatch not containing routes will not alter routes.\nTrunks list supports patch on the map items level.",
             "schema": {
               "$ref": "#/definitions/SipConfiguration"
             }
@@ -149,11 +149,11 @@
       }
     },
     "SipConfiguration": {
-      "description": "Represents a SIP configuration.",
+      "description": "Represents a SIP configuration.\nWhen a call is being routed the routes are applied in the same order as in the routes list. A route is matched by its number pattern. Call is then directed into route's first available trunk, based on the order in the route's trunks list.",
       "type": "object",
       "properties": {
         "trunks": {
-          "description": "SIP trunks for routing calls. Map key is trunk's fqdn (1-255 characters)",
+          "description": "SIP trunks for routing calls.\nMap key is trunk's fqdn (1-255 characters).",
           "maxLength": 250,
           "type": "object",
           "additionalProperties": {
@@ -161,7 +161,7 @@
           }
         },
         "routes": {
-          "description": "Trunk routes for routing calls. Route's name is used as the key.",
+          "description": "Trunk routes for routing calls.",
           "maxLength": 250,
           "type": "array",
           "items": {
