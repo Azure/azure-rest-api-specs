@@ -3061,6 +3061,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedClusterIdentity",
+          "description": "The identity of the managed cluster, if configured."
         }
       },
       "allOf": [
@@ -3068,23 +3072,12 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "properties": {
-            "identity": {
-              "$ref": "#/definitions/ManagedClusterIdentity",
-              "description": "The identity of the managed cluster, if configured."
-            },
-            "properties": {
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "description": "Properties of a managed cluster.",
-              "x-ms-client-flatten": true
-            }
-          }
+          "$ref": "#/definitions/ManagedClusterProperties"
         }
       ],
       "description": "Managed cluster."
     },
     "ManagedClusterProperties": {
-      "x-ms-client-name": "ManagedClusterProperties",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -3346,6 +3339,7 @@
         "userAssignedIdentities": {          
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "ManagedServiceIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
