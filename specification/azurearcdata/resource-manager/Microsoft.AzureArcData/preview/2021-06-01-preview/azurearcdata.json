@@ -1217,26 +1217,17 @@
     }
   },
   "definitions": {
-    "Sku": {
-      "description": "The resource model definition representing SKU",
+    "CommonSku": {
+      "description": "The resource model definition representing SKU for ARM resources",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+          "description": "The name of the SKU.  It is typically a letter+number code"
         },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "Free",
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          },
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        "dev": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose. "
         },
         "size": {
           "type": "string",
@@ -1254,6 +1245,51 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "SqlManagedInstanceSku": {
+      "description": "The resource model definition representing SKU for Azure Managed Instance - Azure Arc",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "GeneralPurpose",
+            "BusinessCritical"
+          ],
+          "x-ms-enum": {
+            "name": "SqlManagedInstanceSkuTier",
+            "modelAsString": false
+          },
+          "default": "GeneralPurpose",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonSku"
+        }
+      ]
+    },
+    "PostgresInstanceSku": {
+      "description": "The resource model definition representing SKU for Azure Database for PostgresSQL - Azure Arc",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Hyperscale"
+          ],
+          "x-ms-enum": {
+            "name": "PostgresInstanceSkuTier",
+            "modelAsString": false
+          },
+          "default": "Hyperscale",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonSku"
+        }
       ]
     },
     "Identity": {
@@ -1588,6 +1624,9 @@
           "type": "object",
           "description": "The raw kubernetes information"
         },
+        "uploadWatermark": {
+          "$ref": "#/definitions/UploadWatermark"
+        },
         "lastUploadedDate": {
           "type": "string",
           "format": "date-time",
@@ -1605,6 +1644,27 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "UploadWatermark": {
+      "description": "Properties on upload watermark.  Mostly timestamp for each upload data type",
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for metrics from kubernetes cluster. Defaults to current date time"
+        },
+        "logs": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for logs from kubernetes cluster. Defaults to current date time"
+        },
+        "usages": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for usages from kubernetes cluster. Defaults to current date time"
         }
       }
     },
@@ -1680,6 +1740,10 @@
           "$ref": "#/definitions/PostgresInstanceProperties",
           "x-ms-client-flatten": false,
           "description": "null"
+        },
+        "sku": {
+          "$ref": "#/definitions/PostgresInstanceSku",
+          "description": "Resource sku."
         }
       },
       "required": [
@@ -1777,6 +1841,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/SqlManagedInstanceSku",
+          "description": "Resource sku."
         }
       },
       "required": [
