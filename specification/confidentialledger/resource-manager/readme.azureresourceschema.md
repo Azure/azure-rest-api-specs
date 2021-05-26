@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-confidentialledger-2020-12-01-preview
+  - tag: schema-confidentialledger-2021-05-13-preview
 
 ```
 
@@ -20,5 +21,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.ConfidentialLedger/preview/2020-12-01-preview/confidentialledger.json
+
+```
+
+### Tag: schema-confidentialledger-2021-05-13-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-confidentialledger-2021-05-13-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2021-05-13-preview/confidentialledger.json
 
 ```
