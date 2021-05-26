@@ -28,6 +28,9 @@ These are the global settings for MapsClient.
 title: MapsClient
 openapi-type: data-plane
 tag: package-preview-2.0
+add-credentials: true
+credential-default-policy-type: AzureKeyCredentialPolicy
+credential-key-header-name: subscription-key
 ```
 
 ### Suppression
