@@ -3065,28 +3065,22 @@
         "identity": {
           "$ref": "#/definitions/ManagedClusterIdentity",
           "description": "The identity of the managed cluster, if configured."
+        },
+        "properties": {
+          "description": "Properties of a managed cluster.",
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "description": "Properties of a managed cluster.",
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "x-ms-client-flatten": true
-            }
-          }
         }
       ],
-      "description": "Managed cluster.",
-      "x-ms-azure-resource": false
+      "description": "Managed cluster."
     },
     "ManagedClusterProperties": {
       "type": "object",
-      "x-ms-client-name": "ManagedClusterProperties",
       "properties": {
         "provisioningState": {
           "readOnly": true,
