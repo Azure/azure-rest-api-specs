@@ -842,6 +842,13 @@
           },
           {
             "$ref": "#/parameters/StorageTargetParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Boolean value requesting the force delete operation for a storage target. Force delete discards unwritten-data in the cache instead of flushing it to back-end storage."
           }
         ],
         "responses": {
@@ -991,6 +998,171 @@
         ],
         "description": "Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
         "operationId": "StorageTargets_CreateOrUpdate"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/flush": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All data has been flushed to the storage target."
+          },
+          "202": {
+            "description": "Cache has started flushing to the storage target. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "Flush already in progress or has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Flush": {
+            "$ref": "./examples/StorageTargets_Flush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Tells the cache to write all dirty data to the Storage Target's backend storage. Client requests to this storage target's namespace will return errors until the flush operation completes.",
+        "operationId": "StorageTarget_Flush"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/suspend": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client access to the storage target has been suspended."
+          },
+          "202": {
+            "description": "Storage target suspend has started. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "The storage target is already suspended or suspend is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Suspend": {
+            "$ref": "./examples/StorageTargets_Suspend.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Suspends client access to a storage target.",
+        "operationId": "StorageTarget_Suspend"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/resume": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client access to the storage target has been resumed."
+          },
+          "202": {
+            "description": "Storage target resume has started. Poll the storage target's state field to monitor."
+          },
+          "204": {
+            "description": "The storage target has already resumed or resume is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Resume": {
+            "$ref": "./examples/StorageTargets_Resume.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Resumes client access to a previously suspended storage target.",
+        "operationId": "StorageTarget_Resume"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
@@ -1240,7 +1412,8 @@
         },
         "location": {
           "description": "Region name string.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "read", "create" ]
         },
         "name": {
           "description": "Name of Cache.",
@@ -1268,7 +1441,8 @@
             "cacheSizeGB": {
               "description": "The size of this Cache, in GB.",
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "x-ms-mutability": [ "read", "create" ]
             },
             "health": {
               "description": "Health of the Cache.",
@@ -1297,15 +1471,18 @@
                 "name": "ProvisioningStateType",
                 "modelAsString": true
               },
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "subnet": {
               "description": "Subnet used for the Cache.",
-              "$ref": "#/definitions/URLString"
+              "$ref": "#/definitions/URLString",
+              "x-ms-mutability": [ "read", "create" ]
             },
             "upgradeStatus": {
               "description": "Upgrade status of the Cache.",
-              "$ref": "#/definitions/CacheUpgradeStatus"
+              "$ref": "#/definitions/CacheUpgradeStatus",
+              "readOnly": true
             },
             "networkSettings": {
               "$ref": "#/definitions/CacheNetworkSettings",
@@ -1327,6 +1504,7 @@
           "type": "object"
         },
         "sku": {
+          "x-ms-mutability": [ "read", "create" ],
           "description": "SKU for the Cache.",
           "properties": {
             "name": {
@@ -1347,23 +1525,45 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal id of the cache."
+          "description": "The principal ID for the system-assigned identity of the cache."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant id associated with the cache."
+          "description": "The tenant ID associated with the cache."
         },
         "type": {
           "type": "string",
           "description": "The type of identity used for the cache",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "CacheIdentityType",
             "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary. The user assigned identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal ID of the user-assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client ID of the user-assigned identity."
+              }
+            }
           }
         }
       }
@@ -1413,6 +1613,10 @@
           "x-ms-secret": true,
           "$ref": "#/definitions/KeyVaultKeyReference",
           "description": "Specifies the location of the key encryption key in Key Vault."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the service will automatically rotate to the newest version of the key in the Key Vault."
         }
       }
     },
@@ -1893,7 +2097,8 @@
             "name": "StorageTargetType",
             "modelAsString": true
           },
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "read", "create" ]
         },
         "provisioningState": {
           "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
@@ -1909,7 +2114,8 @@
             "name": "ProvisioningStateType",
             "modelAsString": true
           },
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "nfs3": {
           "description": "Properties when targetType is nfs3.",
@@ -1935,8 +2141,9 @@
       "properties": {
         "target": {
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
-          "pattern": "^[-.0-9a-zA-Z]+$",
-          "type": "string"
+          "pattern": "^[-.,0-9a-zA-Z]+$",
+          "type": "string",
+          "x-ms-mutability": [ "read", "create" ]
         },
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
@@ -1950,7 +2157,8 @@
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
-          "$ref": "#/definitions/URLString"
+          "$ref": "#/definitions/URLString",
+          "x-ms-mutability": [ "read", "create" ]
         }
       }
     },
@@ -1970,7 +2178,8 @@
       "properties": {
         "target": {
           "description": "Resource ID of the storage container.",
-          "$ref": "#/definitions/URLString"
+          "$ref": "#/definitions/URLString",
+          "x-ms-mutability": [ "read", "create" ]
         },
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
