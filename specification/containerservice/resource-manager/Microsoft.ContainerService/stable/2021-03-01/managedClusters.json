@@ -2515,8 +2515,8 @@
         {
           "properties": {
             "properties": {
-              "description": "Properties of an agent pool.",
               "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties",
+              "description": "Properties of an agent pool.",
               "x-ms-client-flatten": true
             }
           }
@@ -3072,7 +3072,13 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/ManagedClusterProperties"
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/ManagedClusterProperties",
+              "description": "Properties of a managed cluster.",
+              "x-ms-client-flatten": true
+            }
+          }
         }
       ],
       "description": "Managed cluster."
