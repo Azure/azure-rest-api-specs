@@ -51,4 +51,10 @@ directive:
     where: $.definitions.ProtectionIntent
     transform: >
         $['required'] = ['protectionIntentItemType'];
+  - from: swagger-document
+    where: $.definitions.FeatureSupportRequest
+    transform: >
+        $['required'] = ['featureType'];
+
+
 ```
