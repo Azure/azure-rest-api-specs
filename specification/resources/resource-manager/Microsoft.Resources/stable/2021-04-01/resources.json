@@ -2841,7 +2841,7 @@
         "x-ms-odata": "#/definitions/ResourceGroupFilter"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
+    "/subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
       "post": {
         "tags": [
           "Resources"
@@ -2873,7 +2873,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SourceSubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2893,7 +2893,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources": {
+    "/subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources": {
       "post": {
         "tags": [
           "Resources"
@@ -2925,7 +2925,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SourceSubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -6598,12 +6598,19 @@
       "minLength": 1,
       "maxLength": 90
     },
+    "SourceSubscriptionIdParameter": {
+        "name": "sourceSubscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The ID of the source subscription."
+      },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The Microsoft Azure subscription ID."
     },
     "DeploymentNameParameter": {
       "name": "deploymentName",
