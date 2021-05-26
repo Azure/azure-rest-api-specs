@@ -4184,6 +4184,10 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "The retention policy for a container registry."
+        },
+        "exportPolicy": {
+          "$ref": "#/definitions/ExportPolicy",
+          "description": "The export policy for a container registry."
         }
       }
     },
@@ -4336,6 +4340,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExportPolicy": {
+      "description": "The export policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "enabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExportPolicyStatus",
             "modelAsString": true
           }
         }
