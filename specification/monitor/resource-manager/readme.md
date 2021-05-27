@@ -35,18 +35,9 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2016-06
+tag: package-2020-03
 ```
 
-
-### Tag: package-2016-06
-
-These settings apply only when `--tag=package-2016-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2016-06'
-input-file:
-  - Microsoft.Insights/stable/2016-06-01/metrics_API.json
-```
 ### Tag: package-2021-02-preview-only
 
 These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
@@ -528,6 +519,15 @@ These settings apply only when `--tag=package-2016-09-01-only` is specified on t
 input-file:
 - Microsoft.Insights/stable/2016-09-01/metrics_API.json
 - Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+```
+
+### Tag: package-2016-06-only
+
+These settings apply only when `--tag=package-2016-06-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2016-06-only'
+input-file:
+  - Microsoft.Insights/stable/2016-06-01/metrics_API.json
 ```
 
 ### Tag: package-2016-03-01-only
