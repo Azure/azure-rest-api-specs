@@ -626,6 +626,12 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: activityLogAlerts_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metrics_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metricDefinitions_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
