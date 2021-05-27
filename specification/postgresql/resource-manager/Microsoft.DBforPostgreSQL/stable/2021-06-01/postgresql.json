@@ -1190,7 +1190,7 @@
           "$ref": "#/definitions/ServerVersion",
           "description": "PostgreSQL Server version."
         },
-        "MinorVersion": {
+        "minorVersion": {
           "type": "string",
           "description": "The minor version of the server.",
           "readOnly": true
@@ -1338,6 +1338,21 @@
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
           "description": "Maintenance window properties of a server."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new PostgreSQL server.",
+          "enum": [
+            "Default",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -1442,7 +1457,7 @@
             "read"
           ]
         },
-        "earliestRestoreTime": {
+        "earliestRestoreDate": {
           "type": "string",
           "format": "date-time",
           "description": "The earliest restore point time (ISO8601 format) for server.",
@@ -1520,7 +1535,7 @@
           "type": "string",
           "description": "availability zone information of the standby.",
           "readOnly": true
-        },
+        }
       },
       "description": "High availability properties of a server"
     },
