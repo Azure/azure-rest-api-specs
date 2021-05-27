@@ -195,21 +195,10 @@
       ],
       "properties": {
         "properties": {
-          "offerId": {
-            "description": "legacy offer id of the notification (publisher.offer)",
-            "type": "string"
-          },
-          "date": {
-            "description": "date for creating the notification",
-            "type": "string"
-          },
-          "offerDisplayName": {
-            "description": "offer display name",
-            "type": "string"
-          },
-          "principalId": {
-            "description": "user's principal id",
-            "type": "string"
+          "properties": {
+            "$ref": "#/definitions/OfferProperties",
+            "description": "The privateStore offer data structure.",
+            "x-ms-client-flatten": true
           }
         }
       }
@@ -335,6 +324,31 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "OfferProperties": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "legacy offer id of the notification (publisher.offer)",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "description": "date for creating the notification",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDisplayName": {
+          "description": "offer display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "user's principal id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "securityDefinitions": {

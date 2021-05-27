@@ -26,7 +26,7 @@ These are the global settings for the Marketplace notifications API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-2021-03-03
 ```
 ### Composite packages
 
@@ -49,11 +49,11 @@ override-info:
   title: MarketplaceManagementClient
 ```
 
-### Tag: package-2020-01-01
+### Tag: package-2021-03-03
 
-These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-01'
+``` yaml $(tag) == 'package-2021-03-03'
 input-file:
   - Microsoft.MarketplaceNotifications/stable/2021-03-03/MarketplaceNotifications.json
 ```
