@@ -528,6 +528,7 @@ These settings apply only when `--tag=package-2016-06-only` is specified on the 
 ```yaml $(tag) == 'package-2016-06-only'
 input-file:
   - Microsoft.Insights/stable/2016-06-01/metrics_API.json
+  - Microsoft.Insights/stable/2016-06-01/operations_API.json
 ```
 
 ### Tag: package-2016-03-01-only
