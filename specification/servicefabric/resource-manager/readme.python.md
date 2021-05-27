@@ -43,9 +43,3 @@ output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric/azur
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric
 ```
-
-``` yaml $(python) && $(track2)
-directive:
-  - suppress: DuplicateOperation
-    reason: Compatible with existing definitions
-```
