@@ -14,7 +14,7 @@ python:
   package-name: azure-mgmt-servicefabric
   clear-output-folder: true
 ```
-``` yaml $(python)'update' && $(track2)
+``` yaml $(python) && $(track2)
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
