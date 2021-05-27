@@ -188,22 +188,12 @@
     "Notification": {
       "description": "Review notification",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "offerId": {
           "description": "legacy offer id of the notification (publisher.offer)",
           "type": "string"
