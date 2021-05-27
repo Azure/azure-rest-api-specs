@@ -1574,7 +1574,7 @@
         "tags": [
           "HostPoolUpdate"
         ],
-        "operationId": "HostPools_Update",
+        "operationId": "HostPoolPost_Update",
         "description": "Initiate update of a hostpool.",
         "x-ms-examples": {
           "HostPools_Update_Post": {
@@ -1614,6 +1614,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1693,13 +1697,16 @@
         ],
         "responses": {
           "200": {
-            "description": "List of errors if any.",
+            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
             "schema": {
               "$ref": "#/definitions/HostPoolUpdateFullProperties"
             }
           },
           "202": {
-            "description": "Accepted hostpool update validation request."
+            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateFullProperties"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -1708,7 +1715,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/validationStatuses/{validationInstanceId}": {
@@ -1742,13 +1752,13 @@
         ],
         "responses": {
           "200": {
-            "description": "List of errors if any.",
+            "description": "Errors and warnings returned by hostpool update validation.",
             "schema": {
               "$ref": "#/definitions/HostPoolUpdateValidationResponse"
             }
           },
           "202": {
-            "description": "Accepted hostpool update validation request."
+            "description": "Errors and warnings returned by hostpool update validation."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -1757,7 +1767,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/retrieveRegistrationToken": {
@@ -4033,7 +4046,7 @@
           "description": "When validateOnly is true this will run validations and return warnings and errors if any, hostpool will not be updated."
         },
         "parameters": {
-          "$ref": "#/definitions/ScheduledTimeProperties",
+          "$ref": "#/definitions/HostPoolUpdateParameters",
           "description": "Parameters for a hostpool update."
         }
       }
