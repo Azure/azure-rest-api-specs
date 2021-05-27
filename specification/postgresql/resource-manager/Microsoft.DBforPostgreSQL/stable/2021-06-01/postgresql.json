@@ -1307,6 +1307,10 @@
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "allOf": [
@@ -1341,13 +1345,13 @@
         },
         "createMode": {
           "type": "string",
-          "description": "The mode to create a new PostgreSQL server.",
+          "description": "The mode to update a new PostgreSQL server.",
           "enum": [
             "Default",
             "Update"
           ],
           "x-ms-enum": {
-            "name": "CreateMode",
+            "name": "CreateModeForUpdate",
             "modelAsString": true
           },
           "x-ms-mutability": [
@@ -1589,6 +1593,10 @@
           "$ref": "#/definitions/FirewallRuleProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a firewall rule."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "allOf": [
@@ -1667,6 +1675,10 @@
           "$ref": "#/definitions/ConfigurationProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a configuration."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "allOf": [
