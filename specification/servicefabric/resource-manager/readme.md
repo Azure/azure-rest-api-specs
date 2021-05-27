@@ -57,7 +57,8 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
   - suppress: Example Validations
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
-
+  - suppress: DuplicateOperation
+    reason: Compatible with existing definitions
 ```
 
 ### Tag: package-2020-03
