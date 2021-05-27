@@ -2841,7 +2841,7 @@
         "x-ms-odata": "#/definitions/ResourceGroupFilter"
       }
     },
-    "/subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
       "post": {
         "tags": [
           "Resources"
@@ -2873,7 +2873,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SourceSubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2893,7 +2893,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources": {
       "post": {
         "tags": [
           "Resources"
@@ -2925,7 +2925,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SourceSubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -6598,13 +6598,6 @@
       "minLength": 1,
       "maxLength": 90
     },
-    "SourceSubscriptionIdParameter": {
-        "name": "sourceSubscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The ID of the source subscription."
-      },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
