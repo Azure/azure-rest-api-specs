@@ -533,6 +533,7 @@ input-file:
 - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
 - Microsoft.Insights/stable/2015-07-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+- Microsoft.Insights/stable/2015-07-01/operations_API.json
 ```
 
 ### Tag: package-2015-04-01-only
