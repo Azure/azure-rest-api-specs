@@ -1,110 +1,88 @@
 {
   "parameters": {
     "resourceGroupName": "testrg",
-    "api-version": "2020-02-14-preview",
+    "api-version": "2021-06-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff//resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers?api-version=2020-02-14-privatepreview&$top=3&$skiptoken=skiptoken",
+        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers?api-version=2021-06-01&$top=3&$skiptoken=skiptoken",
         "value": [
           {
-            "sku": {
-              "tier": "GeneralPurpose",
-              "name": "Standard_D4s_v3"
-            },
-            "properties": {
-              "administratorLogin": "testuser",
-              "version": "12",
-              "state": "Ready",
-              "haState": "NotEnabled",
-              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
-              "displayName": "demosingleserver",
-              "publicNetworkAccess": "Enabled",
-              "storageProfile": {
-                "storageMB": 524288,
-                "backupRetentionDays": 7
+              "sku": {
+                  "name": "Standard_D4s_v3",
+                  "tier": "GeneralPurpose"
               },
-              "haEnabled": "Enabled",
-              "availabilityZone": "1",
-              "standbyAvailabilityZone": "2",
-              "maintenanceWindow": {
-                "dayOfWeek": 0,
-                "startHour": 10,
-                "startMinute": 30,
-                "customWindow": "Enabled"
-              }
-            },
-            "location": "westus",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
-            "name": "pgtestsvc1",
-            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              "properties": {
+                  "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.meru.com",
+                  "version": "12",
+                  "minorVersion": "6",
+                  "administratorLogin": "cloudsa",
+                  "state": "Ready",
+                  "availabilityZone": "1",
+                  "storage": {
+                      "storageSizeGB": 512
+                  },
+                  "backup": {
+                      "backupRetentionDays": 7,
+                      "geoRedundantBackup": "Disabled",
+                      "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00"
+                  },
+                  "network": {
+                      "publicNetworkAccess": "Disabled",
+                      "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
+                      "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.meru.com"
+                  },
+                  "highAvailability": {
+                      "mode": "ZoneRedundant",
+                      "state": "Healthy",
+                      "standbyAvailabilityZone": "2"
+                  }
+              },
+              "location": "westus",
+              "tags": {
+                  "ElasticServer": "1"
+              },
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+              "name": "pgtestsvc4",
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           },
           {
-            "sku": {
-              "tier": "GeneralPurpose",
-              "name": "Standard_D4s_v3"
-            },
-            "properties": {
-              "administratorLogin": "testuser",
-              "version": "12",
-              "state": "Ready",
-              "haState": "Healthy",
-              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
-              "displayName": "demosingleserver",
-              "publicNetworkAccess": "Enabled",
-              "storageProfile": {
-                "storageMB": 524288,
-                "backupRetentionDays": 7
+              "sku": {
+                  "name": "Standard_D4s_v3",
+                  "tier": "GeneralPurpose"
               },
-              "haEnabled": "Disabled",
-              "availabilityZone": "2",
-              "maintenanceWindow": {
-                "dayOfWeek": 0,
-                "startHour": 0,
-                "startMinute": 0,
-                "customWindow": "Disabled"
-              }
-            },
-            "location": "westus",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc2",
-            "name": "pgtestsvc2",
-            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
-          },
-          {
-            "sku": {
-              "tier": "GeneralPurpose",
-              "name": "Standard_D4s_v3"
-            },
-            "properties": {
-              "administratorLogin": "testuser",
-              "version": "12",
-              "state": "Ready",
-              "haState": "Healthy",
-              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
-              "displayName": "demosingleserver",
-              "publicNetworkAccess": "Enabled",
-              "storageProfile": {
-                "storageMB": 524288,
-                "backupRetentionDays": 7
+              "properties": {
+                  "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
+                  "version": "12",
+                  "minorVersion": "6",
+                  "administratorLogin": "cloudsa",
+                  "state": "Ready",
+                  "availabilityZone": "1",
+                  "storage": {
+                      "storageSizeGB": 512
+                  },
+                  "backup": {
+                      "backupRetentionDays": 7,
+                      "geoRedundantBackup": "Disabled",
+                      "earliestRestoreDate": "2021-05-26T23:15:38.8131437+00:00"
+                  },
+                  "network": {
+                      "publicNetworkAccess": "Enabled"
+                  },
+                  "highAvailability": {
+                      "mode": "Disabled",
+                      "state": "NotEnabled"
+                  }
               },
-              "haEnabled": "Disabled",
-              "availabilityZone": "3",
-              "maintenanceWindow": {
-                "dayOfWeek": 0,
-                "startHour": 10,
-                "startMinute": 30,
-                "customWindow": "Enabled"
-              }
-            },
-            "location": "westus",
-            "tags": {
-              "ElasticServer": "1"
-            },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-            "name": "pgtestsvc4",
-            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              "location": "westus",
+              "tags": {
+                  "ElasticServer": "1"
+              },
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc1",
+              "name": "pgtestsvc1",
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers"
           }
         ]
       }
