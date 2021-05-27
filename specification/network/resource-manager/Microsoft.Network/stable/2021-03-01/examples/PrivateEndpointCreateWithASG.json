@@ -4,23 +4,32 @@
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
     "privateEndpointName": "testPe",
+    "extendedLocation": {
+      "type": "EdgeZone",
+      "name": "edgeZone0"
+    },
     "parameters": {
-      "location": "eastus",
+      "location": "eastus2euap",
       "properties": {
-        "manualPrivateLinkServiceConnections": [
+        "privateLinkServiceConnections": [
           {
             "properties": {
               "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
               "groupIds": [
                 "groupIdFromResource"
               ],
-              "requestMessage": "Please manually approve my connection."
+              "requestMessage": "Please approve my connection."
             }
           }
         ],
         "subnet": {
           "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-        }
+        },
+        "applicationSecurityGroups":[
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+          }
+        ]
       }
     }
   },
@@ -29,26 +38,26 @@
       "body": {
         "name": "testPe",
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
-        "location": "eastus",
+        "location": "eastus2euap",
         "properties": {
           "provisioningState": "Succeeded",
-          "privateLinkServiceConnections": [],
-          "manualPrivateLinkServiceConnections": [
+          "privateLinkServiceConnections": [
             {
               "properties": {
                 "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
                 "groupIds": [
                   "groupIdFromResource"
                 ],
-                "requestMessage": "Please manually approve my connection.",
+                "requestMessage": "Please approve my connection.",
                 "privateLinkServiceConnectionState": {
-                  "status": "Pending",
-                  "description": "Awaiting approval",
+                  "status": "Approved",
+                  "description": "Auto-approved",
                   "actionsRequired": "None"
                 }
               }
             }
           ],
+          "manualPrivateLinkServiceConnections": [],
           "subnet": {
             "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
           },
@@ -71,7 +80,11 @@
               ]
             }
           ],
-          "applicationSecurityGroups":[]
+          "applicationSecurityGroups":[
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+            }
+          ]
         }
       }
     },
@@ -79,7 +92,7 @@
       "body": {
         "name": "testPe",
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
-        "location": "eastus",
+        "location": "eastus2euap",
         "properties": {
           "provisioningState": "Succeeded",
           "privateLinkServiceConnections": [
@@ -120,7 +133,11 @@
               ]
             }
           ],
-          "applicationSecurityGroups":[]
+          "applicationSecurityGroups":[
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+            }
+          ]
         }
       }
     }

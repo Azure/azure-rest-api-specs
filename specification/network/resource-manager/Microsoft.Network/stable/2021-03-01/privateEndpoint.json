@@ -145,6 +145,9 @@
           },
           "Get private endpoint with manual approval connection": {
             "$ref": "./examples/PrivateEndpointGetForManualApproval.json"
+          },
+          "Get private endpoint with application security groups": {
+            "$ref": "./examples/PrivateEndpointGetWithASG.json"
           }
         }
       },
@@ -215,6 +218,9 @@
           },
           "Create private endpoint with manual approval connection": {
             "$ref": "./examples/PrivateEndpointCreateForManualApproval.json"
+          },
+          "Create private endpoint with application security groups": {
+            "$ref": "./examples/PrivateEndpointCreateWithASG.json"
           }
         }
       }
@@ -708,6 +714,13 @@
             "$ref": "#/definitions/CustomDnsConfigPropertiesFormat"
           },
           "description": "An array of custom dns configurations."
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
+          },
+          "description": "Application security groups in which the private endpoint IP configuration is included."
         }
       },
       "description": "Properties of the private endpoint."
