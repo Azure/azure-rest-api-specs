@@ -59,6 +59,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
           }
         }
       }
@@ -266,6 +272,16 @@
         "defaultDimensionValues": {
           "type": "object",
           "description": "Default dimension value to be sent down for the hidden dimension during query"
+        }
+      }
+    },
+    "ErrorContract": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     }
