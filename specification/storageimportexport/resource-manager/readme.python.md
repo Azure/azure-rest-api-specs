@@ -14,9 +14,9 @@ clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/storageimportexport/azure-mgmt-storageimportexport/azure/mgmt/storageimportexport
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storageimportexport/azure/mgmt/storageimportexport
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/storageimportexport/azure-mgmt-storageimportexport
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storageimportexport
 ```
