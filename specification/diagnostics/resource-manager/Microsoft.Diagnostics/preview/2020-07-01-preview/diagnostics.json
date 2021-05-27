@@ -1,0 +1,558 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DiagnosticsRP",
+    "description": "Diagnostics RP provider",
+    "version": "2020-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Diagnostics/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Diagnostics/azureKB/azureKBSearch/invoke": {
+      "post": {
+        "tags": [
+          "AzureKB"
+        ],
+        "description": "This operation fetches AzureKB Search results using the search text.",
+        "operationId": "AzureKBSearch_Invoke",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "AzureKBSearchRequest",
+            "description": "AzureKB Search Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureKBSearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AzureKB Search Results Responses.",
+            "schema": {
+              "$ref": "#/definitions/SolutionExecutionResultResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the invoke failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureKBSearch_InvokeWithRequiredParameters": {
+            "$ref": "./examples/AzureKBSearch_InvokeWithRequiredParameters.json"
+          },
+          "AzureKBSearch_InvokeWithOptionalParameters": {
+            "$ref": "./examples/AzureKBSearch_InvokeWithOptionalParameters.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Diagnostics/insightDiagnostics/{solutionId}/invoke": {
+      "post": {
+        "tags": [
+          "Insights"
+        ],
+        "description": "Insight Diagnostic Invocation Request",
+        "operationId": "InsightDiagnostics_Invoke",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The required parameters for this solution invocation.",
+            "schema": {
+              "$ref": "#/definitions/KeyValuePairs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Insight Diagnostic Invocation (may contain errors)",
+            "schema": {
+              "$ref": "#/definitions/InsightResult"
+            }
+          },
+          "202": {
+            "description": "Accepted, diagnostic will be invoked and results patched back asyncrhonously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InsightDiagnostics_Invoke": {
+            "$ref": "./examples/InsightDiagnostics_Invoke.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureKBSearchRequest": {
+      "type": "object",
+      "description": "Search Request body",
+      "properties": {
+        "searchText": {
+          "description": "Search text string to search.",
+          "type": "string"
+        },
+        "maxResults": {
+          "description": "Number of search results desired. Default is 1 and maximum amount is 100.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "knowledgeSources": {
+          "description": "Sources from where articles are to fetched. Default is community & documentation.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Community",
+              "Documentation"
+            ],
+            "x-ms-enum": {
+              "name": "knowledgeSources",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "required": [
+        "searchText"
+      ]
+    },
+    "SolutionExecutionResultResponse": {
+      "description": "Solution Execution Result Response",
+      "properties": {
+        "value": {
+          "description": "AzureKB Solution Execution Result",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AzureKBSolutionExecutionResult"
+          }
+        }
+      }
+    },
+    "AzureKBSolutionExecutionResult": {
+      "description": "AzureKB Solution Execution Results",
+      "properties": {
+        "searchResults": {
+          "description": "Array of AzureKB Search Results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureKBSearchResultProperties"
+          }
+        }
+      }
+    },
+    "AzureKBSearchResultProperties": {
+      "description": "Details about an AzureKB Search Result",
+      "type": "object",
+      "properties": {
+        "resultId": {
+          "description": "Unique id of the result",
+          "type": "string"
+        },
+        "content": {
+          "description": "Content of the search result",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the search result",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Confidence of the search result",
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "confidence",
+            "modelAsString": true
+          }
+        },
+        "unifiedRank": {
+          "description": "unified rank of the search result",
+          "type": "integer",
+          "format": "int32"
+        },
+        "unifiedConfidence": {
+          "description": "Unified Confidence of the search result",
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "unifiedConfidence",
+            "modelAsString": true
+          }
+        },
+        "overAllRank": {
+          "description": "Overall rank of the search result",
+          "type": "integer",
+          "format": "int32"
+        },
+        "link": {
+          "description": "Link to the document",
+          "type": "string"
+        },
+        "knowledgeSource": {
+          "description": "Source of the results",
+          "type": "string",
+          "enum": [
+            "Community",
+            "Documentation"
+          ],
+          "x-ms-enum": {
+            "name": "knowledgeSource",
+            "modelAsString": true
+          }
+        },
+        "sectionMatchDetails": {
+          "description": "Source of the search result",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SectionMatchDetails"
+          }
+        }
+      }
+    },
+    "SectionMatchDetails": {
+      "description": "AzureKB Search Result SectionMatch details",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the section that matched"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the section that matched"
+        },
+        "link": {
+          "type": "string",
+          "description": "link to the section or document that matched"
+        }
+      }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Boolean for Data Action"
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            }
+          }
+        }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InsightResult": {
+      "description": "The insight invocation result.",
+      "properties": {
+        "id": {
+          "description": "A unique ID for this Insight.",
+          "type": "string"
+        },
+        "insights": {
+          "description": "The problems (if any) detected by this insight.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          }
+        },
+        "error": {
+          "description": "Any errors that potentially occurred during diagnostic invocation.",
+          "type": "object",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Insight": {
+      "description": "Detailed insights(s) obtained via the invocation of an insight diagnostic troubleshooter.",
+      "properties": {
+        "title": {
+          "description": "This insight's title.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A user friendly description of what this insight has detected.",
+          "type": "string"
+        },
+        "issueCategory": {
+          "description": "The category for the issue that this insight detected",
+          "type": "string"
+        },
+        "issueSubcategory": {
+          "description": "The subcategory for the issue that this insight detected.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "The recommended action to resolve the detected issue.",
+          "type": "object",
+          "$ref": "#/definitions/RecommendedAction"
+        },
+        "additionalDetails": {
+          "description": "Additional supporting information for additional context about this problem.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "curatedContent": {
+          "description": "Curated HTML Markup intended to be consumed by customer's or their designated third parties.",
+          "type": "string"
+        },
+        "relatedLinks": {
+          "description": "Any other related and relevant links to additional information about the problems detected by this insight.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "RecommendedAction": {
+      "description": "Detailed recommended action(s) to potentially resolve a detected problem.",
+      "properties": {
+        "action": {
+          "description": "The action to take.",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "A enumerative value indicating how the client can/should display the textual action given above.",
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "PLAIN_TEXT"
+          ],
+          "x-ms-enum": {
+            "name": "contentType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Link": {
+      "description": "Object representation of a URI/URL",
+      "properties": {
+        "type": {
+          "description": "The type of URI/URL this represents.",
+          "type": "string",
+          "enum": [
+            "URL",
+            "APP_LENS",
+            "RESOURCE"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of this link.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyValuePairs": {
+      "description": "A collection of key/value pairs useful for accepted free form request bodies.",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Error": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Service specific error type which serves as additional context for the error herein.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticExecutionResponse": {
+      "description": "The response from a Diagnostic Execution."
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Request scope",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "SolutionIdParameter": {
+      "name": "solutionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for the diagnostic solution has been invoked. (e.g. 00000000-0000-0000-0000-000000000000)",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
