@@ -1282,6 +1282,11 @@
           "type": "string",
           "description": "The URI of the vault for performing operations on keys and secrets."
         },
+        "hsmPoolResourceId": {
+          "type": "string",
+          "description": "The resource id of HSM Pool.",
+          "readOnly": true
+        },
         "enabledForDeployment": {
           "type": "boolean",
           "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
@@ -1320,7 +1325,11 @@
           "x-ms-enum": {
             "name": "CreateMode",
             "modelAsString": false
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "enablePurgeProtection": {
           "type": "boolean",
@@ -1814,6 +1823,10 @@
         "id": {
           "type": "string",
           "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured."
         }
       },
       "required": [
@@ -1823,6 +1836,14 @@
     },
     "PrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
