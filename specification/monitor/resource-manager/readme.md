@@ -35,18 +35,9 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2019-07
+tag: package-2020-03
 ```
 
-
-### Tag: package-2019-07
-
-These settings apply only when `--tag=package-2019-07` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-07'
-input-file:
-  - Microsoft.Insights/stable/2019-07-01/metrics_API.json
-```
 ### Tag: package-2021-02-preview-only
 
 These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
@@ -151,6 +142,16 @@ These settings apply only when `--tag=package-2019-10-17-preview-only` is specif
 ``` yaml $(tag) == 'package-2019-10-17-preview-only'
 input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+```
+
+### Tag: package-2019-07-only
+
+These settings apply only when `--tag=package-2019-07-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-only'
+input-file:
+  - Microsoft.Insights/stable/2019-07-01/metrics_API.json
+  - Microsoft.Insights/stable/2019-07-01/operations_API.json
 ```
 
 ### Tag: package-2019-06
@@ -643,6 +644,12 @@ directive:
     reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
   - suppress: DefaultErrorResponseSchema
     from: activityLogAlerts_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metrics_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
