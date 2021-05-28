@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-04-01-preview",
+    "version": "2021-06-01-preview",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -1761,6 +1761,22 @@
         "modelAsString": true
       }
     },
+    "SignalRAuthType": {
+      "description": "AuthType for the resource.",
+      "type": "object",
+      "properties": {
+        "signingKey": {
+          "description": "Indicate if authenticate requests via SigningKey (AccessKey) is allowed.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "azureActiveDirectory": {
+          "description": "Indicate if authenticate requests via AAD Token is allowed.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
+          "default": "Enabled",
+          "type": "string"
+        }
+      }
+    },
     "SignalRCorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings.",
       "type": "object",
@@ -1775,7 +1791,7 @@
       }
     },
     "SignalRFeature": {
-      "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
+      "description": "Feature of a resource, which controls the runtime behavior.",
       "required": [
         "flag",
         "value"
@@ -1808,22 +1824,38 @@
         "primaryKey": {
           "description": "The primary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryKey": {
           "description": "The secondary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "primaryConnectionString": {
           "description": "Connection string constructed via the primaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryConnectionString": {
           "description": "Connection string constructed via the secondaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -1923,6 +1955,22 @@
         "networkACLs": {
           "$ref": "#/definitions/SignalRNetworkACLs",
           "description": "Network ACLs"
+        },
+        "restrictOutboundNetworkAccess": {
+          "description": "Enable or disable outbound traffic. Default to \"Disabled\".\r\nWhen it's Enabled, outbound traffic will be banned if the FQDN is not in AllowedFQDNList.\r\nWhen it's Disabled, outbound traffic will not be banned.",
+          "default": "Disabled",
+          "type": "string"
+        },
+        "allowedFQDNList": {
+          "description": "WhiteList FQDN when RestrictOutboundNetworkAccess is enabled. This config takes no effect when RestrictOutboundNetworkAccess is disabled.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authType": {
+          "$ref": "#/definitions/SignalRAuthType",
+          "description": "AuthType\r\nThere are 2 types of Auth method, SigningKey and AzureActiveDirectory.\r\nWhen SigningKey is set Disabled, connectionString with AccessKey=xxx won't work.\r\nWhen AzureActiveDirectory is set Disabled, connection with AuthType=aad won't work.\r\nAt least 1 type has to be set enabled."
         }
       }
     },
