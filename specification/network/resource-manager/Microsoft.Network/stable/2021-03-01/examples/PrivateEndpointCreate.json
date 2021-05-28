@@ -24,7 +24,17 @@
         ],
         "subnet": {
           "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-        }
+        },
+        "ipConfigurations": [
+          {
+            "name": "pestaticconfig",
+            "properties": {
+              "groupId": "groupIdFromResource",
+              "memberName": "memberNameFromResource",
+              "privateIPAddress": "192.168.0.6"
+            }
+          }
+        ]
       }
     }
   },
@@ -74,6 +84,16 @@
                 "192.168.0.5"
               ]
             }
+          ],
+          "ipConfigurations": [
+            {
+              "name": "pestaticconfig",
+              "properties": {
+                "groupId": "groupIdFromResource",
+                "memberName": "memberNameFromResource",
+                "privateIPAddress": "192.168.0.6"
+              }
+            }
           ]
         }
       }
@@ -121,6 +141,16 @@
               "ipAddresses": [
                 "192.168.0.5"
               ]
+            }
+          ],
+          "ipConfigurations": [
+            {
+              "name": "pestaticconfig",
+              "properties": {
+                "groupId": "groupIdFromResource",
+                "memberName": "memberNameFromResource",
+                "privateIPAddress": "192.168.0.6"
+              }
             }
           ]
         }
