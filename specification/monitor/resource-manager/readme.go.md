@@ -15,6 +15,12 @@ module-name: sdk/monitor/arminsights
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+
+directive:
+  - from: scheduledQueryRule_API.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "TrackedEntityResource";
 ```
 
 ### Go multi-api
