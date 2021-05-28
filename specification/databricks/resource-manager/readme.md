@@ -94,6 +94,8 @@ directive:
     from: databricks.json 
     where: $.definitions.Encryption.properties.KeyName
     reason: Response from service is not camel case
+  - suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data. Currently our system support system data inside property field.
 ```
 
 ---
