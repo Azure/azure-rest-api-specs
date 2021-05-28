@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Web.
 
-
 The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,20 +21,20 @@ To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Web API.
 
 ``` yaml
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2020-12
+tag: package-2021-01
 ```
 
 ### Suppression
@@ -55,9 +55,110 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-01-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-01-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-01/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-01/Certificates.json
+  - Microsoft.Web/stable/2021-01-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-01/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-01/Global.json
+  - Microsoft.Web/stable/2021-01-01/Provider.json
+  - Microsoft.Web/stable/2021-01-01/Recommendations.json
+  - Microsoft.Web/stable/2021-01-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-01/StaticSites.json
+  - Microsoft.Web/stable/2021-01-01/WebApps.json
+  - Microsoft.Web/stable/2021-01-01/KubeEnvironments.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+```
 ### Tag: package-2020-12
+
 These settings apply only when `--tag=package-2020-12` or `--tag=package-2020-12-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
 ``` yaml $(tag) == 'package-2020-12' || $(tag) == 'package-2020-12-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-12-01/AppServiceCertificateOrders.json
@@ -150,8 +251,10 @@ directive:
 ```
 
 ### Tag: package-2020-10
+
 These settings apply only when `--tag=package-2020-10` or `--tag=package-2020-10-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
 ``` yaml $(tag) == 'package-2020-10' || $(tag) == 'package-2020-10-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-10-01/AppServiceCertificateOrders.json
@@ -188,8 +291,10 @@ directive:
 ```
 
 ### Tag: package-2020-09
+
 These settings apply only when `--tag=package-2020-09` or `--tag=package-2020-09-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
 ``` yaml $(tag) == 'package-2020-09' || $(tag) == 'package-2020-09-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-09-01/AppServiceCertificateOrders.json
@@ -230,9 +335,11 @@ directive:
 ```
 
 ### Tag: package-2020-06
+
 These settings apply only when `--tag=package-2020-06` or `--tag=package-2020-06-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
-``` yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only' 
+
+``` yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-06-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2020-06-01/CertificateRegistrationProvider.json
@@ -264,7 +371,7 @@ directive:
 These settings apply only when `--tag=package-2019-08` or `--tag=package-2019-08-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
 
-``` yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only' 
+``` yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only'
 
 input-file:
 - Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
@@ -1237,8 +1344,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -1272,7 +1379,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
 
 ## Java
 
@@ -1327,6 +1433,3 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```
-
-
-
