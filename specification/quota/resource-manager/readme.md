@@ -152,7 +152,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Ruby
 
-See configuration in [readme.java.md](./readme.ruby.md)
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -166,7 +166,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Quota/stable/2021-03-15/quota.json
+  - $(this-folder)/Microsoft.Quota/preview/2021-03-15-preview/quota.json
 
 ```
 
@@ -177,4 +177,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
