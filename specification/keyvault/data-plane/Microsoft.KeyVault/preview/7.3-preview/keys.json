@@ -2098,7 +2098,7 @@
           "items": {
             "$ref": "#/definitions/LifetimeActions"
           },
-          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions could only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable."
+          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions can only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable."
         },
         "attributes": {
           "$ref": "#/definitions/KeyRotationPolicyAttributes",
@@ -2139,8 +2139,8 @@
           "type": "string",
           "description": "The type of the action.",
           "enum": [
-            "Rotate",
-            "Notify"
+            "rotate",
+            "notify"
           ],
           "x-ms-enum": {
             "name": "ActionType",
@@ -2164,7 +2164,7 @@
       "properties": {
         "expiryTime": {
           "type": "string",
-          "description": "The expiration time duration to be applied on the new key version. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48 hours: PT48H, 1 year and 10 days: P1Y10D"
+          "description": "The expiryTime will be applied on the new key version. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48 hours: PT48H, 1 year and 10 days: P1Y10D"
         },
         "created": {
           "type": "integer",
