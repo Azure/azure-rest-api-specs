@@ -26,7 +26,7 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-2020-04
 ```
 
 
