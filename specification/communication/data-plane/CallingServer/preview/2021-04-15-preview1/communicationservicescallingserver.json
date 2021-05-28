@@ -380,6 +380,72 @@
         }
       }
     },
+    "/calling/conversations/{conversationId}/PlayAudio": {
+      "post": {
+        "tags": [
+          "Call"
+        ],
+        "summary": "Play audio in a call.",
+        "description": "Play audio in a call.",
+        "operationId": "Conversation_PlayAudio",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation id which can be guid or encoded cs url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Play audio request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlayAudioRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the play audio response.",
+            "schema": {
+              "$ref": "#/definitions/PlayAudioResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/CommunicationError"
+            },
+            "x-ms-error-response": true
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CommunicationError"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationError"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
     "/calling/conversations/{conversationId}/participants": {
       "post": {
         "tags": [
@@ -1033,6 +1099,10 @@
         },
         "audioFileId": {
           "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback Uri to receive PlayAudio status notifications.",
           "type": "string"
         }
       }
