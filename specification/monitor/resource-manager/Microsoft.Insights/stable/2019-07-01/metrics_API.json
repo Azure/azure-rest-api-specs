@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2019-07-01"
   },
   "host": "management.azure.com",
@@ -36,7 +33,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/metrics": {
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
           "Metrics"
@@ -92,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -204,20 +201,6 @@
         }
       },
       "description": "Represents a metric metadata value."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     },
     "Response": {
       "type": "object",
@@ -410,7 +393,7 @@
       "x-ms-parameter-location": "method"
     },
     "AutoAdjustTimegrain": {
-      "name": "autoadjusttimegrain",
+      "name": "AutoAdjustTimegrain",
       "in": "query",
       "required": false,
       "type": "boolean",
@@ -418,7 +401,7 @@
       "x-ms-parameter-location": "method"
     },
     "ValidateDimensions": {
-      "name": "validatedimensions",
+      "name": "ValidateDimensions",
       "in": "query",
       "required": false,
       "type": "boolean",
