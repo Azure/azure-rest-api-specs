@@ -1,0 +1,360 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Update run operation endpoints and objects.",
+    "title": "UpdateAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of update runs.": {
+            "$ref": "./examples/UpdateRuns/List.json"
+          }
+        },
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Get the list of update runs.",
+        "operationId": "UpdateRuns_List",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRunList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns/{runName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an update run.": {
+            "$ref": "./examples/UpdateRuns/Get.json"
+          }
+        },
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Get an instance of update run using the ID.",
+        "operationId": "UpdateRuns_Get",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updateRuns": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of update runs.": {
+            "$ref": "./examples/UpdateRuns/List.json"
+          }
+        },
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Get the list of update runs.",
+        "operationId": "UpdateRuns_ListTopLevel",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRunList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updateRuns/{runName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an update run.": {
+            "$ref": "./examples/UpdateRuns/Get.json"
+          }
+        },
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Get an instance of update run using the ID.",
+        "operationId": "UpdateRuns_GetTopLevel",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns/{runName}/rerun": {
+      "post": {
+        "x-ms-examples": {
+          "Rerun an update.": {
+            "$ref": "./examples/UpdateRuns/Rerun.json"
+          }
+        },
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Resume a failed update.",
+        "operationId": "UpdateRuns_Rerun",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateRun": {
+      "description": "Representation of a update run resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a update run.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateRunModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Update.json#/definitions/Resource"
+        }
+      ]
+    },
+    "UpdateRunModel": {
+      "description": "Properties of an update run.",
+      "type": "object",
+      "properties": {
+        "progress": {
+          "description": "Current progress of the update run.",
+          "$ref": "#/definitions/Step"
+        },
+        "timeStarted": {
+          "description": "Update start time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "duration": {
+          "description": "Duration of the update.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the update run.",
+          "$ref": "#/definitions/UpdateRunState"
+        }
+      }
+    },
+    "UpdateRunList": {
+      "description": "Pageable list of update runs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of update runs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateRun"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "Step": {
+      "description": "Information about each step of the update process.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the step.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the step.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message, if any.",
+          "type": "string"
+        },
+        "status": {
+          "description": "State of the step.",
+          "type": "string"
+        },
+        "startTimeUtc": {
+          "description": "Time at which this step started executing",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTimeUtc": {
+          "description": "Time at which this step stopped executing",
+          "type": "string",
+          "format": "date-time"
+        },
+        "steps": {
+          "description": "Inner steps",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        }
+      }
+    },
+    "UpdateRunState": {
+      "description": "State of the update run.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateRunState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "UpdateRunParameter": {
+      "name": "runName",
+      "description": "Update run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
