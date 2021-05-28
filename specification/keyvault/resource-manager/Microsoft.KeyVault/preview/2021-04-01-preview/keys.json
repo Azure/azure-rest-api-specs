@@ -420,14 +420,9 @@
           "description": "The URI to retrieve the specific version of the key.",
           "readOnly": true
         },
-        "rotationPolicyParameters": {
-          "$ref": "#/definitions/RotationPolicyParameters",
-          "required": false,
-          "description": "The parameters to set rotation policy for the key."
-        },
         "rotationPolicy": {
           "$ref": "#/definitions/RotationPolicy",
-          "description": "Key rotation policy in response. It will be omitted in input."
+          "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
       "description": "The properties of the key."
@@ -534,38 +529,6 @@
         }
       },
       "description": "The page of keys."
-    },
-    "RotationPolicyParameters": {
-      "properties": {
-        "rotateTriggerType": {
-          "type": "string",
-          "description": "Key rotation trigger type",
-          "enum": [
-            "timeAfterCreate",
-            "timeBeforeExpiry"
-          ]
-        },
-        "rotateTriggerValue": {
-          "type": "string",
-          "description": "The time duration to trigger key rotation. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'"
-        },
-        "notifyTriggerType": {
-          "type": "string",
-          "description": "Notification trigger type",
-          "enum": [
-            "timeBeforeExpiry"
-          ]
-        },
-        "notifyTriggerValue": {
-          "type": "string",
-          "description": "The time duration to trigger event. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'"
-        },
-        "expiryTime": {
-          "type": "string",
-          "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'"
-        }
-      },
-      "description": "The parameters only used for setting key rotation policy. It will be omitted in output."
     },
     "RotationPolicy": {
       "properties": {
