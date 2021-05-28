@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 azure-arm: false
 package-name: "@azure/maps-service"
 license-header: MICROSOFT_MIT_NO_VERSION
-output-folder: "$(typescript-sdks-folder)/sdk/maps/maps-service"
+output-folder: "$(typescript-sdks-folder)/sdk/maps/maps-service/generated"
 clear-output-folder: true
 generate-metadata: true
 v3: true
