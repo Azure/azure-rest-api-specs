@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-04-01-preview",
+    "version": "2021-06-01-preview",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -1775,7 +1775,7 @@
       }
     },
     "SignalRFeature": {
-      "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
+      "description": "Feature of a resource, which controls the runtime behavior.",
       "required": [
         "flag",
         "value"
@@ -1808,22 +1808,38 @@
         "primaryKey": {
           "description": "The primary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryKey": {
           "description": "The secondary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "primaryConnectionString": {
           "description": "Connection string constructed via the primaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryConnectionString": {
           "description": "Connection string constructed via the secondaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -1923,6 +1939,21 @@
         "networkACLs": {
           "$ref": "#/definitions/SignalRNetworkACLs",
           "description": "Network ACLs"
+        },
+        "publicNetworkAccess": {
+          "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "disableLocalAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable local auth with AccessKey\r\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "default": false,
+          "type": "boolean"
+        },
+        "disableAadAuth": {
+          "description": "disableAadAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
