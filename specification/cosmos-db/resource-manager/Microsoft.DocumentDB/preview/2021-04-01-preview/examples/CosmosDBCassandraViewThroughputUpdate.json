@@ -2,12 +2,11 @@
     "parameters": {
       "accountName": "ddb1",
       "resourceGroupName": "rg1",
-      "api-version": "2021-04-01-preview",
+      "api-version": "2021-07-01-preview",
       "subscriptionId": "subid",
-      "keyspaceName": "keyspaceName",
-      "viewName": "viewName",
+      "keyspaceName": "keyspacename",
+      "viewName": "viewname",
       "updateThroughputParameters": {
-        "location": "West US",
         "tags": {},
         "properties": {
           "resource": {
@@ -19,17 +18,14 @@
     "responses": {
       "200": {
         "body": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraTables/viewName/throughputSettings/default",
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/views/viewName/throughputSettings/default",
           "name": "default",
-          "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraViews/throughputSettings",
+          "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/views/throughputSettings",
           "properties": {
             "resource": {
               "throughput": 400,
               "minimumThroughput": "400",
-              "offerReplacePending": "true",
-              "_rid": "PD5DALigDgw=",
-              "_ts": 1459200611,
-              "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+              "offerReplacePending": "true"
             }
           }
         }

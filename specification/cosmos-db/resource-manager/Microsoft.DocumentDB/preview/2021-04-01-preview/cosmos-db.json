@@ -8444,42 +8444,14 @@
           "type": "string",
           "description": "Name of the Cosmos DB Cassandra view"
         },
-        "sourceTableName": {
+        "viewCqlDefinition": {
           "type": "string",
-          "description": "Name of the Cosmos DB Cassandra view source table"
-        },
-        "viewDefinition": {
-          "description": "View Definition of the Cosmos DB Cassandra view",
-          "$ref": "#/definitions/CassandraViewDefinition"
+          "description": "Cql api view Definition of the Cosmos DB Cassandra view"
         }
       },
       "required": [
         "id"
       ]
-    },
-    "CassandraViewDefinition": {
-      "type": "object",
-      "description": "Cosmos DB Cassandra view definition object",
-      "properties": {
-        "viewCqlDefinition": {
-          "type": "string",
-          "description": "Cql definition of Cosmos DB Cassandra view"
-        },
-        "partitionKeys": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CassandraPartitionKey"
-          },
-          "description": "List of partition key."
-        },
-        "clusterKeys": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClusterKey"
-          },
-          "description": "List of cluster key."
-        }
-      }
     },
     "CreateUpdateOptions": {
       "type": "object",
