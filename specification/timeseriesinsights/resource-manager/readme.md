@@ -116,9 +116,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js timeseriesinsights/resource-manager
 ```
 
 ## Go
@@ -205,7 +204,5 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
