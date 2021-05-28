@@ -54,6 +54,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/SourceControls.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
@@ -70,6 +71,10 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/SourceControls.json
+    where: $.definitions.SourceControl
+    reason: The sourceControl does not support list by subscription. It's not a top-level resource. 
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
     where: $.definitions.SentinelOnboardingState
