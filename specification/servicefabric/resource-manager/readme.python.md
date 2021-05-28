@@ -43,3 +43,18 @@ output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric/azur
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/servicefabric/azure-mgmt-servicefabric
 ```
+
+``` yaml $(python) && $(track2)
+directive:
+  - from: application.json
+    where: $.paths["/providers/Microsoft.ServiceFabric/operations"].get
+    transform: $['operationId'] = 'Application_List'
+
+  - from: managedcluster.json
+    where: $.paths["/providers/Microsoft.ServiceFabric/operations"].get
+    transform: $['operationId'] = 'Managedcluster_List'
+
+  - from: nodetype.json
+    where: $.paths["/providers/Microsoft.ServiceFabric/operations"].get
+    transform: $['operationId'] = 'Nodetype_List'
+```
