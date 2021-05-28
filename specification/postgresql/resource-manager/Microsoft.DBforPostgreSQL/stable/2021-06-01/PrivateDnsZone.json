@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-03-31-privatepreview",
+    "version": "2021-06-01",
     "title": "PostgreSQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
   },
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/getPrivateDnsZoneSuffix": {
+    "/providers/Microsoft.DBForPostgreSql/getPrivateDnsZoneSuffix/{serverType}": {
       "post": {
         "tags": [
           "GetPrivateDnsZoneSuffix"
@@ -51,23 +51,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "PostgreSQL",
-                "PostgreSQLCitus",
-                "MySQL",
-                "MariaDb",
-                "Oracle"
-              ]
-            },
-            "description": "The required parameters for getting private DNS zone suffix based on server type."
+            "$ref": "#/parameters/ServerTypeParameter"
           }
         ],
         "responses": {
@@ -100,6 +84,27 @@
         }
       },
       "description": "An error response from the Batch service."
+    }
+  },
+  "parameters": {
+    "ServerTypeParameter": {
+      "name": "serverType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "PostgreSQL",
+        "PostgreSQLCitus",
+        "MySQL",
+        "MariaDb",
+        "Oracle"
+      ],
+      "x-ms-enum": {
+        "name": "ServerType",
+        "modelAsString": true
+      },
+      "description": "The required parameters for getting private DNS zone suffix based on server type.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
