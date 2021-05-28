@@ -8,6 +8,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureadb2c
 package-version: 1.0.0b2
 no-namespace-folders: true
+python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
 ```
 
 ### Python multi-api
