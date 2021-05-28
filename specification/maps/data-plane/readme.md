@@ -29,8 +29,8 @@ title: MapsClient
 openapi-type: data-plane
 tag: package-preview-2.0
 add-credentials: true
-credential-default-policy-type: AzureKeyCredentialPolicy
-credential-key-header-name: subscription-key
+credential-default-policy-type: BearerTokenCredentialPolicy
+credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 ### Suppression
