@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview-only
+tag: package-2021-04-01-preview-only
 ```
 
 ### Suppression
@@ -97,8 +97,27 @@ These settings apply only when `--tag=package-2021-04-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2021-04-01-preview-only'
 input-file:
-  - Microsoft.Authorization/preview/2021-04-01-preview/authorization-RoleAssignmentPaginationCalls.json
+  - Microsoft.Authorization/preview/2021-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
+
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+- Microsoft.Authorization/preview/2021-04-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
