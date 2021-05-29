@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.DBForPostgreSql/getPrivateDnsZoneSuffix/{serverType}": {
+    "/providers/Microsoft.DBForPostgreSql/getPrivateDnsZoneSuffix": {
       "post": {
         "tags": [
           "GetPrivateDnsZoneSuffix"
@@ -49,9 +49,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerTypeParameter"
           }
         ],
         "responses": {
@@ -84,27 +81,6 @@
         }
       },
       "description": "An error response from the Batch service."
-    }
-  },
-  "parameters": {
-    "ServerTypeParameter": {
-      "name": "serverType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "PostgreSQL",
-        "PostgreSQLCitus",
-        "MySQL",
-        "MariaDb",
-        "Oracle"
-      ],
-      "x-ms-enum": {
-        "name": "ServerType",
-        "modelAsString": true
-      },
-      "description": "The required parameters for getting private DNS zone suffix based on server type.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
