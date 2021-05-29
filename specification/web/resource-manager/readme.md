@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2021-01-15
+tag: package-2021-02
 ```
 
 ### Suppression
@@ -191,6 +191,27 @@ directive:
   reason: Will fix in next version
 ```
 
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.Web/stable/2021-02-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-02-01/AppServicePlans.json
+  - Microsoft.Web/stable/2021-02-01/Certificates.json
+  - Microsoft.Web/stable/2021-02-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-02-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-02-01/Diagnostics.json
+  - Microsoft.Web/stable/2021-02-01/Global.json
+  - Microsoft.Web/stable/2021-02-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-02-01/Provider.json
+  - Microsoft.Web/stable/2021-02-01/Recommendations.json
+  - Microsoft.Web/stable/2021-02-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-02-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-02-01/StaticSites.json
+  - Microsoft.Web/stable/2021-02-01/WebApps.json
+```
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
