@@ -61,6 +61,9 @@
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -177,7 +180,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist.": {
+          "Create or update a watchlist.": {
             "$ref": "./examples/watchlists/CreateWatchlist.json"
           },
           "Creates or updates a watchlist and bulk creates watchlist items.": {
@@ -264,6 +267,9 @@
           },
           {
             "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -295,7 +301,7 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
+        "description": "Gets a watchlist item.",
         "operationId": "WatchlistItems_Get",
         "parameters": [
           {
@@ -344,7 +350,7 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Delete a watchlist item.",
+        "description": "Deletes a watchlist item.",
         "operationId": "WatchlistItems_Delete",
         "parameters": [
           {
@@ -386,7 +392,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist item.": {
+          "Create or update a watchlist item.": {
             "$ref": "./examples/watchlists/CreateWatchlistItem.json"
           }
         },
