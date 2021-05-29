@@ -26,18 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-03-28-preview0
-```
-
-### Tag: package-2021-03-28-preview0
-
-These settings apply only when `--tag=package-2021-03-28-preview0` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03-28-preview0'
-input-file:
-  - preview/2021-03-28-preview0/communicationservicescallingserver.json
-title:
-  Azure Communication Services
+tag: package-2021-04-15-preview1
 ```
 
 ### Tag: package-2021-04-15-preview1
@@ -47,6 +36,17 @@ These settings apply only when `--tag=package-2021-04-15-preview1` is specified 
 ```yaml $(tag) == 'package-2021-04-15-preview1'
 input-file:
   - preview/2021-04-15-preview1/communicationservicescallingserver.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2021-05-28-preview2
+
+These settings apply only when `--tag=package-2021-05-28-preview2` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-15-preview1'
+input-file:
+  - preview/2021-05-28-preview2/communicationservicescallingserver.json
 title:
   Azure Communication Services
 ```
