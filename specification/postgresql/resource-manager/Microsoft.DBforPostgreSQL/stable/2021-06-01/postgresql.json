@@ -331,6 +331,9 @@
         "x-ms-examples": {
           "ServerRestart": {
             "$ref": "./examples/ServerRestart.json"
+          },
+          "ServerRestartWithFailover": {
+            "$ref": "./examples/ServerRestartWithFailover.json"
           }
         },
         "description": "Restarts a server.",
@@ -346,6 +349,14 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestartParameter"
+            },
+            "description": "The parameters for restarting a server."
           }
         ],
         "responses": {
@@ -1829,6 +1840,20 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "RestartParameter": {
+      "type": "object",
+      "properties": {
+        "restartWithFailover": {
+          "type": "boolean",
+          "description": "Indicates whether to restart the server with failover."
+        },
+        "failoverMode": {
+          "type": "string",
+          "description": "Failover mode."
+        }
+      },
+      "description": "Represents server restart parameters."
     },
     "CloudError": {
       "x-ms-external": true,
