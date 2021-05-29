@@ -36,12 +36,7 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-07'
 input-file:
-  - Microsoft.SecurityInsights/stable/2021-07-01/Metadata.json
-  - Microsoft.SecurityInsights/stable/2021-07-01/OnboardingStates.json
-  - Microsoft.SecurityInsights/stable/2021-07-01/Settings.json
-  - Microsoft.SecurityInsights/stable/2021-07-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2021-07-01/Watchlists.json
-  - Microsoft.SecurityInsights/stable/2021-07-01/dataConnectors.json
   - Microsoft.SecurityInsights/stable/2021-07-01/operations.json
 ```
 ### Tag: package-2020-01
