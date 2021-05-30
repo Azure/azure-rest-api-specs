@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.IoTSecurity/alerts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/alerts": {
       "get": {
         "x-ms-examples": {
           "List IoT Alerts": {
@@ -51,7 +51,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AlertScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
           },
           {
             "in": "query",
@@ -133,7 +139,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/alerts/{alertId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/alerts/{alertId}": {
       "get": {
         "x-ms-examples": {
           "Get IoT Alert": {
@@ -150,7 +156,16 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AlertScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AlertId"
           },
           {
             "in": "path",
@@ -276,14 +291,21 @@
     }
   },
   "parameters": {
-    "AlertScope": {
-      "name": "scope",
+    "DeviceGroupName": {
+      "name": "deviceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Scope of the query: Subscription (i.e. /subscriptions/{subscriptionId}) or IoT Hub (i.e. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Devices/iotHubs/{iotHubName})",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "description": "Device group name",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertId": {
+      "name": "alertId",
+      "in": "path",
+      "required": true,
+      "description": "Alert Id",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
