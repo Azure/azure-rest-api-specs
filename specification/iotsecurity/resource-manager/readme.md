@@ -67,10 +67,6 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/locations.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceGroups.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/devices.json
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/alerts.json
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/alertTypes.json
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/recommendations.json
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/recommendationTypes.json
 ```
 
 ``` yaml
