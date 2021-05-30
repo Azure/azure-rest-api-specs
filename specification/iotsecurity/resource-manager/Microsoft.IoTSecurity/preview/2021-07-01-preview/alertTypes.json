@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Defender for IoT",
     "description": "API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider",
-    "version": "2021-02-01-preview"
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/recommendationTypes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/alertTypes": {
       "get": {
         "x-ms-examples": {
-          "Get IoT Recommendation Types": {
-            "$ref": "./examples/RecommendationTypes/GetRecommendationTypeList.json"
+          "Get IoT Alert Types": {
+            "$ref": "./examples/AlertTypes/GetAlertTypeList.json"
           }
         },
         "tags": [
-          "IoT Security Recommendation Types"
+          "IoT Security Alert Types"
         ],
-        "description": "List IoT recommendation types",
-        "operationId": "RecommendationTypes_List",
+        "description": "List IoT alert types",
+        "operationId": "AlertTypes_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RecommendationTypeList"
+              "$ref": "#/definitions/AlertTypeList"
             }
           },
           "default": {
@@ -70,18 +70,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/recommendationTypes/{recommendationTypeName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/alertTypes/{alertTypeName}": {
       "get": {
         "x-ms-examples": {
-          "Get IoT Recommendation Type": {
-            "$ref": "./examples/RecommendationTypes/GetRecommendationType.json"
+          "Get IoT Alert Type": {
+            "$ref": "./examples/AlertTypes/GetAlertType.json"
           }
         },
         "tags": [
-          "IoT Security Recommendation Types"
+          "IoT Security Alert Types"
         ],
-        "operationId": "RecommendationTypes_Get",
-        "description": "Get IoT recommendation type",
+        "operationId": "AlertTypes_Get",
+        "description": "Get IoT alert type",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -91,17 +91,17 @@
           },
           {
             "in": "path",
-            "name": "recommendationTypeName",
+            "name": "alertTypeName",
             "required": true,
             "type": "string",
-            "description": "Name of the recommendation type"
+            "description": "Name of the alert type"
           }
         ],
         "responses": {
           "200": {
-            "description": "IoT recommendation type",
+            "description": "IoT alert type",
             "schema": {
-              "$ref": "#/definitions/RecommendationType"
+              "$ref": "#/definitions/AlertType"
             }
           },
           "default": {
@@ -115,27 +115,27 @@
     }
   },
   "definitions": {
-    "RecommendationTypeList": {
+    "AlertTypeList": {
       "type": "object",
-      "description": "List of recommendation types",
+      "description": "List of alert types",
       "properties": {
         "value": {
           "type": "array",
           "description": "List data",
           "items": {
-            "$ref": "#/definitions/RecommendationType"
+            "$ref": "#/definitions/AlertType"
           }
         }
       }
     },
-    "RecommendationType": {
+    "AlertType": {
       "type": "object",
-      "description": "IoT recommendation type.",
+      "description": "IoT alert type.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Recommendation type properties",
-          "$ref": "#/definitions/RecommendationTypeProperties"
+          "description": "Alert type properties",
+          "$ref": "#/definitions/AlertTypeProperties"
         },
         "systemData": {
           "readOnly": true,
@@ -150,45 +150,33 @@
         }
       ]
     },
-    "RecommendationTypeProperties": {
+    "AlertTypeProperties": {
       "type": "object",
-      "description": "IoT recommendation type information.",
+      "description": "IoT alert type information.",
       "properties": {
-        "recommendationDisplayName": {
+        "alertDisplayName": {
           "readOnly": true,
           "type": "string",
-          "example": "TLS cipher suite upgrade needed",
-          "description": "The display name of the recommendation"
+          "example": "Privileged container detected",
+          "description": "The display name of the alert"
         },
         "severity": {
           "readOnly": true,
           "type": "string",
           "example": "Medium",
-          "description": "The severity of the recommendation",
+          "description": "The severity of the alert",
           "enum": [
-            "Unknown",
-            "NotApplicable",
-            "Healthy",
-            "OffByPolicy",
+            "Informational",
             "Low",
             "Medium",
             "High"
           ],
           "x-ms-enum": {
-            "name": "recommendationSeverity",
+            "name": "alertSeverity",
             "modelAsString": true,
             "values": [
               {
-                "value": "Unknown"
-              },
-              {
-                "value": "NotApplicable"
-              },
-              {
-                "value": "Healthy"
-              },
-              {
-                "value": "OffByPolicy"
+                "value": "Informational"
               },
               {
                 "value": "Low"
@@ -206,46 +194,118 @@
           "readOnly": true,
           "type": "string",
           "description": "Description of the suspected vulnerability and meaning.",
-          "example": "Insecure TLS configurations detected. Immediate TLS cipher suite upgrade recommended."
+          "example": "Machine logs indicate that a privileged Docker container is running. A privileged container has full access to host  resources. If compromised, a malicious actor can use the privileged container to gain access to the host machine."
+        },
+        "providerName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "IoTSecurity",
+          "description": "The name of the alert provider or internal partner"
         },
         "productName": {
           "readOnly": true,
           "type": "string",
           "example": "Azure Security Center for IoT",
-          "description": "The name of the product which published this recommendation"
+          "description": "The name of the product which published this alert"
         },
         "productComponentName": {
           "readOnly": true,
           "type": "string",
           "example": "IoT Hub",
-          "description": "The name of a component inside the product which generated the recommendation"
+          "description": "The name of a component inside the product which generated the alert"
         },
         "vendorName": {
           "readOnly": true,
           "type": "string",
           "example": "Microsoft",
-          "description": "The name of the vendor that raised the recommendation"
+          "description": "The name of the vendor that raise the alert"
         },
-        "control": {
+        "intent": {
           "readOnly": true,
           "type": "string",
-          "example": "Communication between device and IoT Hub is not optimized",
-          "description": "The name of the recommendation's control category "
+          "example": "Exploitation,Execution",
+          "description": "Kill chain related intent behind the alert. Could contain multiple enum values (separated by commas)",
+          "enum": [
+            "Unknown",
+            "PreAttack",
+            "InitialAccess",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact",
+            "Probing",
+            "Exploitation"
+          ],
+          "x-ms-enum": {
+            "name": "alertIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown"
+              },
+              {
+                "value": "PreAttack"
+              },
+              {
+                "value": "InitialAccess"
+              },
+              {
+                "value": "Persistence"
+              },
+              {
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "value": "DefenseEvasion"
+              },
+              {
+                "value": "CredentialAccess"
+              },
+              {
+                "value": "Discovery"
+              },
+              {
+                "value": "LateralMovement"
+              },
+              {
+                "value": "Execution"
+              },
+              {
+                "value": "Collection"
+              },
+              {
+                "value": "Exfiltration"
+              },
+              {
+                "value": "CommandAndControl"
+              },
+              {
+                "value": "Impact"
+              },
+              {
+                "value": "Probing"
+              },
+              {
+                "value": "Exploitation"
+              }
+            ]
+          }
         },
         "remediationSteps": {
           "readOnly": true,
-          "description": "Manual action items to take to resolve the recommendation",
+          "description": "Manual action items to take to remediate the alert",
           "type": "array",
           "items": {
             "type": "string",
-            "example": "Upgrade your TLS cipher suite to a secure configuration. See the Guide to TLS Standards Compliance for more information."
+            "example": "If the container doesn't need to run in privileged mode, remove the privileges from the container."
           }
-        },
-        "dataSource": {
-          "readOnly": true,
-          "description": "The alert's data source",
-          "type": "string",
-          "example": "IoT Hub"
         }
       }
     }
