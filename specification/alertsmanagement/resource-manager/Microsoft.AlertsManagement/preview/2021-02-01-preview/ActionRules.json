@@ -36,36 +36,6 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/targetResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/targetResourceType"
-          },
-          {
-            "$ref": "#/parameters/targetResource"
-          },
-          {
-            "$ref": "#/parameters/severity"
-          },
-          {
-            "$ref": "#/parameters/monitorService"
-          },
-          {
-            "$ref": "#/parameters/impactedScope"
-          },
-          {
-            "$ref": "#/parameters/description"
-          },
-          {
-            "$ref": "#/parameters/alertRuleId"
-          },
-          {
-            "$ref": "#/parameters/actionGroup"
-          },
-          {
-            "$ref": "#/parameters/actionRuleName"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -109,36 +79,6 @@
           },
           {
             "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/targetResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/targetResourceType"
-          },
-          {
-            "$ref": "#/parameters/targetResource"
-          },
-          {
-            "$ref": "#/parameters/severity"
-          },
-          {
-            "$ref": "#/parameters/monitorService"
-          },
-          {
-            "$ref": "#/parameters/impactedScope"
-          },
-          {
-            "$ref": "#/parameters/description"
-          },
-          {
-            "$ref": "#/parameters/alertRuleId"
-          },
-          {
-            "$ref": "#/parameters/actionGroup"
-          },
-          {
-            "$ref": "#/parameters/actionRuleName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -446,121 +386,6 @@
         "name": "api-version",
         "modelAsString": true
       }
-    },
-    "targetResourceGroup": {
-      "description": "Filter by target resource group name. Default value is select all.",
-      "name": "targetResourceGroup",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "targetResource": {
-      "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
-      "name": "targetResource",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "targetResourceType": {
-      "description": "Filter by target resource type. Default value is select all.",
-      "name": "targetResourceType",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "monitorService": {
-      "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
-      "name": "monitorService",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "ActivityLog Administrative",
-        "ActivityLog Autoscale",
-        "ActivityLog Policy",
-        "ActivityLog Recommendation",
-        "ActivityLog Security",
-        "Application Insights",
-        "Azure Backup",
-        "Custom",
-        "Azure Stack Edge",
-        "Data Box Gateway",
-        "Log Analytics",
-        "Platform",
-        "Resource Health",
-        "ServiceHealth",
-        "Smart Detector",
-        "Log Alerts V2",
-        "VM Insights - Health",
-        "Azure Stack Hub"
-      ],
-      "x-ms-enum": {
-        "name": "MonitorService",
-        "modelAsString": true
-      }
-    },
-    "severity": {
-      "description": "Filter by severity.  Default value is select all.",
-      "name": "severity",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "Sev0",
-        "Sev1",
-        "Sev2",
-        "Sev3",
-        "Sev4"
-      ],
-      "x-ms-enum": {
-        "name": "Severity",
-        "modelAsString": true
-      }
-    },
-    "description": {
-      "description": "Filter by alert rule description.",
-      "name": "description",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "alertRuleId": {
-      "description": "Filter by alert rule id.",
-      "name": "alertRuleId",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "actionGroup": {
-      "description": "Filter by action group configured as part of action rule.",
-      "name": "actionGroup",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "actionRuleName": {
-      "description": "Filter by action rule name.",
-      "name": "name",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "impactedScope": {
-      "description": "Filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be a well constructed ARM id of the scope.",
-      "name": "impactedScope",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
