@@ -82,6 +82,7 @@ These settings apply only when `--tag=2021-07-01-preview` is specified on the co
 
 ``` yaml $(tag) == '2021-07-01-preview'
 input-file:
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/alerts.json
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/alertTypes.json
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendations.json
