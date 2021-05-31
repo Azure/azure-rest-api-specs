@@ -79,7 +79,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -129,7 +129,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -188,7 +188,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -247,7 +247,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -299,7 +299,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -355,7 +355,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -416,7 +416,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -474,7 +474,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -482,6 +482,16 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../common/v1/definitions.json#/definitions/ErrorDetail",
+          "description": "Error response"
+        }
+      },
+      "description": "Error response of an operation failure"
+    },
     "RunAsCredentialAssociationProperty": {
       "properties": {
         "name": {
