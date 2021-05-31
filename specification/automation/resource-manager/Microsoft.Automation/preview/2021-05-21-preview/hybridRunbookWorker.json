@@ -341,117 +341,6 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/HybridRunbookWorker"
-      },
-      "post": {
-        "tags": [
-          "HybridRunbookWorker"
-        ],
-        "operationId": "HybridRunbookWorker_GetV1Worker",
-        "description": "Retrieve a V1 hybrid runbook worker.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
-        },
-        "x-ms-examples": {
-          "Get a V1 hybrid runbook worker": {
-            "$ref": "./examples/getV1HybridRunbookWorker.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "hybridRunbookWorkerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The hybrid runbook worker group name"
-          },
-          {
-            "name": "machineId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The machineId of the v1 worker to be deleted."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridRunbookWorker"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "HybridRunbookWorker"
-        ],
-        "operationId": "HybridRunbookWorker_DeleteV1Worker",
-        "description": "Delete a V1 hybrid runbook worker.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
-        },
-        "x-ms-examples": {
-          "Delete a V1 hybrid runbook worker": {
-            "$ref": "./examples/deleteV1HybridRunbookWorker.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-          },
-          {
-            "name": "hybridRunbookWorkerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The hybrid runbook worker group name"
-          },
-          {
-            "name": "machineId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The machineId of the v1 worker to be deleted."
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     }
   },
@@ -481,7 +370,7 @@
           "type": "string",
           "description": "Gets or sets the assigned machine IP address."
         },
-        "registrationTime": {
+        "registeredDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Gets or sets the registration time of the worker machine.",
@@ -513,7 +402,7 @@
             "modelAsString": true
           }
         },
-        "workerStatus": {
+        "workerConnectionStatus": {
           "type": "string",
           "description": "Status of the HybridWorker.",
           "enum": [
@@ -522,7 +411,7 @@
             "DisConnected"
           ],
           "x-ms-enum": {
-            "name": "WorkerStatusEnum",
+            "name": "workerConnectionStatusEnum",
             "modelAsString": true
           }
         }
