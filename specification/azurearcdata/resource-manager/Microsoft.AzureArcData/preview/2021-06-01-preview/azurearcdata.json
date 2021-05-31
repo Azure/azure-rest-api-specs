@@ -1219,6 +1219,7 @@
   "definitions": {
     "CommonSku": {
       "description": "The resource model definition representing SKU for ARM resources",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1249,6 +1250,7 @@
     },
     "SqlManagedInstanceSku": {
       "description": "The resource model definition representing SKU for Azure Managed Instance - Azure Arc",
+      "type": "object",
       "properties": {
         "tier": {
           "type": "string",
@@ -1272,6 +1274,7 @@
     },
     "PostgresInstanceSku": {
       "description": "The resource model definition representing SKU for Azure Database for PostgresSQL - Azure Arc",
+      "type": "object",
       "properties": {
         "tier": {
           "type": "string",
@@ -1294,6 +1297,7 @@
     },
     "Identity": {
       "description": "Identity for the resource.",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1319,6 +1323,7 @@
       }
     },
     "Plan": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1441,6 +1446,7 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1461,6 +1467,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -1498,6 +1505,7 @@
       ]
     },
     "ProxyResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
@@ -1544,6 +1552,7 @@
       ]
     },
     "DataControllerUpdate": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1640,7 +1649,7 @@
         "lastUploadedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Last uploaded date from on premise cluster. Defaults to current date time"
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
         },
         "basicLoginInformation": {
           "$ref": "#/definitions/BasicLoginInformation"
@@ -1679,17 +1688,17 @@
       }
     },
     "OnPremiseProperty": {
-      "description": "Properties from the on premise data controller",
+      "description": "Properties from the Kubernetes data controller",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "A globally unique ID identifying the associated on premise cluster"
+          "description": "A globally unique ID identifying the associated Kubernetes cluster"
         },
         "publicSigningKey": {
           "type": "string",
-          "description": "Certificate that contains the on premise cluster public key used to verify signing"
+          "description": "Certificate that contains the Kubernetes cluster public key used to verify signing"
         },
         "signingCertificateThumbprint": {
           "type": "string",
@@ -1724,7 +1733,7 @@
         "lastUploadedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Last uploaded date from on premise cluster. Defaults to current date time"
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
         },
         "provisioningState": {
           "type": "string",
@@ -1826,7 +1835,7 @@
         "lastUploadedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Last uploaded date from on premise cluster. Defaults to current date time"
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
         },
         "provisioningState": {
           "type": "string",
@@ -2013,6 +2022,7 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponseBody",
@@ -2022,6 +2032,7 @@
       "description": "An error response from the Azure Data on Azure Arc service."
     },
     "ErrorResponseBody": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -2071,6 +2082,7 @@
       "description": "Information about an error."
     },
     "ExtendedLocation": {
+      "type": "object",
       "description": "The complex type of the extended location.",
       "properties": {
         "name": {
@@ -2095,6 +2107,7 @@
       }
     },
     "BasicLoginInformation": {
+      "type": "object",
       "description": "Username and password for basic login authentication.",
       "properties": {
         "username": {
@@ -2113,6 +2126,7 @@
       }
     },
     "LogAnalyticsWorkspaceConfig": {
+      "type": "object",
       "description": "Log analytics workspace id and primary key",
       "properties": {
         "workspaceId": {
@@ -2132,6 +2146,7 @@
       }
     },
     "UploadServicePrincipal": {
+      "type": "object",
       "description": "Service principal for uploading billing, metrics and logs.",
       "properties": {
         "clientId": {
