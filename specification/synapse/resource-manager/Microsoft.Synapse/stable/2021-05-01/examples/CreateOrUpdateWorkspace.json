@@ -44,7 +44,10 @@
             }
           }
         },
-        "publicNetworkAccess": "Enabled"
+        "publicNetworkAccess": "Enabled",
+        "cspWorkspaceAdminProperties": {
+          "initialWorkspaceAdminObjectId": "6c20646f-8050-49ec-b3b1-80a0e58e454d"
+        }
       },
       "location": "East US",
       "tags": {
@@ -156,13 +159,17 @@
           "encryption": {
             "doubleEncryptionEnabled": true,
             "cmk": {
-              "status": "Updating",
-              "key": {
-                "name": "default",
-                "keyVaultUrl": "https://vault.azure.net/keys/key1"
-              }
-            }
-          },
+                "kekIdentity": {
+                    "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami",
+                    "useSystemAssignedIdentity": false
+                },
+                "status": "Consistent",
+                "key": {
+                    "name": "default",
+                    "keyVaultUrl": "https://vault.azure.net/keys/key1"
+                }
+            }            
+        },
           "publicNetworkAccess": "Enabled"
         },
         "tags": {

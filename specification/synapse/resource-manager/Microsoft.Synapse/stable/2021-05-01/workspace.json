@@ -961,6 +961,23 @@
         "key": {
           "description": "The key object of the workspace",
           "$ref": "#/definitions/WorkspaceKeyDetails"
+        },
+        "kekIdentity": {
+          "description": "Key encryption key",
+          "$ref": "#/definitions/KekIdentityProperties"
+        }
+      }
+    },
+    "KekIdentityProperties": {
+      "description": "Key encryption key properties",
+      "type" : "object",
+      "properties": { 
+        "userAssignedIdentity": {
+          "description": "User assigned identity resource Id",
+          "type": "string"
+        },
+        "useSystemAssignedIdentity": {
+          "description": "Boolean specifying whether to use system assigned identity or not"
         }
       }
     },
@@ -1108,6 +1125,15 @@
         }
       }
     },
+    "CspWorkspaceAdminProperties": {
+      "description": "Initial workspace AAD admin properties for a CSP subscription",
+      "properties": {
+        "initialWorkspaceAdminObjectId": {
+          "description": "AAD object ID of initial workspace admin",
+          "type": "string"
+        }
+      }
+    },
     "Workspace": {
       "description": "A workspace",
       "type": "object",
@@ -1221,6 +1247,10 @@
             "name": "WorkspacePublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "cspWorkspaceAdminProperties": {
+          "description": "Initial workspace AAD admin properties for a CSP subscription",
+          "$ref": "#/definitions/CspWorkspaceAdminProperties"
         }
       }
     },
