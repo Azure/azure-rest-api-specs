@@ -61,59 +61,6 @@
           },
           {
             "in": "query",
-            "name": "startTimeUtc>",
-            "x-ms-client-name": "minStartTimeUtc",
-            "required": false,
-            "type": "string",
-            "description": "Filter by minimum startTimeUtc (ISO 8601 format)"
-          },
-          {
-            "in": "query",
-            "name": "startTimeUtc<",
-            "x-ms-client-name": "maxStartTimeUtc",
-            "required": false,
-            "type": "string",
-            "description": "Filter by maximum startTimeUtc (ISO 8601 format)"
-          },
-          {
-            "in": "query",
-            "name": "alertType",
-            "required": false,
-            "type": "string",
-            "description": "Filter by alert type"
-          },
-          {
-            "in": "query",
-            "name": "deviceManagementType",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Managed",
-              "Unmanaged"
-            ],
-            "description": "Get devices only from specific type, Managed or Unmanaged.",
-            "x-ms-enum": {
-              "name": "ManagementState",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "query",
-            "name": "compromisedEntity",
-            "required": false,
-            "type": "string",
-            "description": "Filter by compromised device"
-          },
-          {
-            "in": "query",
-            "name": "$limit",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Limit the number of items returned in a single page"
-          },
-          {
-            "in": "query",
             "name": "$skipToken",
             "required": false,
             "type": "string",
@@ -237,7 +184,7 @@
           "type": "string",
           "example": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8"
         },
-        "compromisedEntity": {
+        "deviceResourceId": {
           "description": "Display name of the main entity being reported on",
           "readOnly": true,
           "type": "string",

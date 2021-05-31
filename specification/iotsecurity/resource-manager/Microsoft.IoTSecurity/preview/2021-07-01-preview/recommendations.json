@@ -61,28 +61,6 @@
           },
           {
             "in": "query",
-            "name": "recommendationType",
-            "required": false,
-            "type": "string",
-            "description": "Filter by recommendation type"
-          },
-          {
-            "in": "query",
-            "name": "deviceId",
-            "required": false,
-            "type": "string",
-            "description": "Filter by device id"
-          },
-          {
-            "in": "query",
-            "name": "$limit",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Limit the number of items returned in a single page"
-          },
-          {
-            "in": "query",
             "name": "$skipToken",
             "required": false,
             "type": "string",
@@ -200,8 +178,8 @@
       "type": "object",
       "description": "IoT recommendation properties",
       "properties": {
-        "deviceId": {
-          "description": "Identifier of the device being reported on",
+        "deviceResourceId": {
+          "description": "Azure Resource Identifier of the device being reported on",
           "readOnly": true,
           "type": "string",
           "example": "device-1"
