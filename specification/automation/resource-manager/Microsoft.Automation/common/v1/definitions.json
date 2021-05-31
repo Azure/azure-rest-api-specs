@@ -24,16 +24,6 @@
   },
   "paths": {},
   "definitions": {
-    "ErrorResponseV2": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponse",
-          "description": "Error response"
-        }
-      },
-      "description": "Error response of an operation failure"
-    },
     "ErrorResponse": {
       "type": "object",
       "properties": {
@@ -167,59 +157,6 @@
           "type": "string",
           "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
           "readOnly": true
-        }
-      }
-    },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
         }
       }
     }
