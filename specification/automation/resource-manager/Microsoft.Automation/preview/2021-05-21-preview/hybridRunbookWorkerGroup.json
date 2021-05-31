@@ -309,7 +309,7 @@
         "x-ms-odata": "#/definitions/HybridRunbookWorkerGroup"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/listV1Workers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/listV1Workers": {
       "post": {
         "tags": [
           "V1HybridRunbookWorker"
@@ -361,7 +361,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/getV1Worker": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/getV1Worker": {
       "post": {
         "tags": [
           "V1HybridRunbookWorker"
@@ -422,7 +422,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/deleteV1Worker": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/deleteV1Worker": {
       "post": {
         "tags": [
           "V1HybridRunbookWorker"
@@ -556,7 +556,7 @@
           "type": "string",
           "description": "Gets or sets the assigned machine IP address."
         },
-        "registrationTime": {
+        "registeredDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Gets or sets the registration time of the worker machine.",
@@ -588,7 +588,7 @@
             "modelAsString": true
           }
         },
-        "workerStatus": {
+        "workerConnectionStatus": {
           "type": "string",
           "description": "Status of the HybridWorker.",
           "enum": [
@@ -597,7 +597,7 @@
             "DisConnected"
           ],
           "x-ms-enum": {
-            "name": "WorkerStatusEnum",
+            "name": "workerConnectionStatusEnum",
             "modelAsString": true
           }
         }
