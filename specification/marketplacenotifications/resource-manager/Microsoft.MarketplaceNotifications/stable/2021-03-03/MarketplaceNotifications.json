@@ -1,0 +1,369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Blueprint API",
+    "description": "Microsoft Marketplace Blueprint API",
+    "version": "2021-03-03"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsNotifications": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "Notifications_GetWithAuthorization",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PrincipalId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceNotifications error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetReviewsNotifications": {
+            "$ref": "./examples/GetReviewsNotifications.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsNotification/{notification}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "Notification_GetWithAuthorization",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/NotificationId"
+          },
+          {
+            "$ref": "#/parameters/PrincipalId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceNotifications error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetReviewsNotifications": {
+            "$ref": "./examples/GetReviewsNotification.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MarketplaceNotifications/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Notification_GetOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceNotifications error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetReviewsNotificationsOperations": {
+            "$ref": "./examples/GetReviewsNotificationsOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NotificationId": {
+      "description": "the notification id",
+      "type": "string",
+      "name": "notification",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionId": {
+      "description": "user's subscription id",
+      "type": "string",
+      "name": "subscription",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "PrincipalId": {
+      "description": "user's principal id",
+      "type": "string",
+      "name": "principalId",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "NotificationList": {
+      "description": "Notifications List",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "Notification": {
+      "description": "Review notification",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OfferProperties",
+          "description": "The offer data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticsInfoDto": {
+      "description": "Diagnostics Info",
+      "type": "object",
+      "properties": {
+        "ms-cv": {
+          "description": "MS CV",
+          "type": "string"
+        },
+        "buildNumber": {
+          "description": "build number",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.MarketplaceNotifications service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "operation origin",
+          "type": "string"
+        },
+        "properties": {
+          "description": "operation properties",
+          "type": "object"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OfferProperties": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "legacy offer id of the notification (publisher.offer)",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDate": {
+          "description": "date for creating the notification",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDisplayName": {
+          "description": "offer display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "user's principal id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
