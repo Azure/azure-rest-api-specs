@@ -34,7 +34,7 @@
           "default": {
             "description": "Failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -88,7 +88,7 @@
           "default": {
             "description": "Failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -170,26 +170,47 @@
         }
       }
     },
-    "ErrorBody": {
-      "description": "Represents a service error response body.",
+    "CommunicationError": {
+      "description": "Represents the Communication Services error.",
+      "required": [
+        "code",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
-          "description": "The error code in the error response.",
+          "description": "The error code.",
           "type": "string"
         },
         "message": {
-          "description": "The error message in the error response.",
+          "description": "The error message.",
           "type": "string"
+        },
+        "target": {
+          "description": "The error target.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Further details about specific errors that led to this error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/CommunicationError"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Represents a service error response.",
+    "CommunicationErrorResponse": {
+      "description": "Represents the Communication Services error response.",
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorBody"
+          "$ref": "#/definitions/CommunicationError"
         }
       }
     }
