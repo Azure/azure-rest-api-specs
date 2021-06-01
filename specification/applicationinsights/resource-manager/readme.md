@@ -354,6 +354,15 @@ input-file:
 - Microsoft.Insights/preview/2020-02-02-preview/components_API.json
 ```
 
+### Tag: package-2020-02-02
+
+These settings apply only when `--tag=package-2020-02-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-02'
+input-file:
+- Microsoft.Insights/stable/2020-02-02/components_API.json
+```
+
 ### Tag: package-2019-10-17-preview
 
 These settings apply only when `--tag=package-2019-10-17-preview` is specified on the command line.
