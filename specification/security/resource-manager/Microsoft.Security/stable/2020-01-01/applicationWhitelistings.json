@@ -36,11 +36,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
       "get": {
-        "description": "Gets a list of application control VM/server groups for the subscription.",
+        "description": "Gets a list of application control machine groups for the subscription.",
         "operationId": "AdaptiveApplicationControls_List",
         "x-ms-examples": {
-          "Gets a list of application control VM/server groups for the subscription": {
-            "$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
+          "Gets a list of application control groups of machines for the subscription": {
+            "$ref": "./examples/ApplicationWhitelistings/GetAdaptiveApplicationControlsSubscription_example.json"
           }
         },
         "tags": [
@@ -67,7 +67,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppWhitelistingGroups"
+              "$ref": "#/definitions/AdaptiveApplicationControlGroups"
             }
           },
           "default": {
@@ -85,7 +85,7 @@
         "operationId": "AdaptiveApplicationControls_Get",
         "x-ms-examples": {
           "Gets a configured application control VM/server group": {
-            "$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
+            "$ref": "./examples/ApplicationWhitelistings/GetAdaptiveApplicationControlsGroup_example.json"
           }
         },
         "tags": [
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppWhitelistingGroup"
+              "$ref": "#/definitions/AdaptiveApplicationControlGroup"
             }
           },
           "default": {
@@ -128,11 +128,11 @@
           "applicationWhitelistings"
         ],
         "x-ms-examples": {
-          "Update an application control VM/server group by adding a new file": {
-            "$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
+          "Update an application control machine group by adding a new application": {
+            "$ref": "./examples/ApplicationWhitelistings/PutAdaptiveApplicationControls_example.json"
           }
         },
-        "description": "Update an application control VM/server group",
+        "description": "Update an application control machine group",
         "operationId": "AdaptiveApplicationControls_Put",
         "consumes": [
           "application/json"
@@ -151,14 +151,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/AppWhitelistingGroup"
+            "$ref": "#/parameters/AdaptiveApplicationControlGroup"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppWhitelistingGroup"
+              "$ref": "#/definitions/AdaptiveApplicationControlGroup"
             }
           },
           "default": {
@@ -171,14 +171,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete an application control VM/server group": {
-            "$ref": "./examples/ApplicationWhitelistings/DeleteApplicationWhitelistings_example.json"
+          "Delete an application control machine group": {
+            "$ref": "./examples/ApplicationWhitelistings/DeleteAdaptiveApplicationControls_example.json"
           }
         },
         "tags": [
           "applicationWhitelistings"
         ],
-        "description": "Delete an application control VM/server group",
+        "description": "Delete an application control machine group",
         "operationId": "AdaptiveApplicationControls_Delete",
         "parameters": [
           {
@@ -215,24 +215,24 @@
     }
   },
   "definitions": {
-    "AppWhitelistingGroups": {
+    "AdaptiveApplicationControlGroups": {
       "type": "object",
-      "description": "Represents a list of VM/server groups and set of rules that are Recommended by Azure Security Center to be allowed",
+      "description": "Represents a list of machine groups and set of rules that are recommended by Azure Security Center to be allowed",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AppWhitelistingGroup"
+            "$ref": "#/definitions/AdaptiveApplicationControlGroup"
           }
         }
       }
     },
-    "AppWhitelistingGroup": {
+    "AdaptiveApplicationControlGroup": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AppWhitelistingGroupData"
+          "$ref": "#/definitions/AdaptiveApplicationControlGroupData"
         }
       },
       "required": [
@@ -247,9 +247,9 @@
         }
       ]
     },
-    "AppWhitelistingGroupData": {
+    "AdaptiveApplicationControlGroupData": {
       "type": "object",
-      "description": "Represents a VM/server group and set of rules to be allowed running on a machine",
+      "description": "Represents a machines group and set of rules to be allowed running on a machine",
       "properties": {
         "enforcementMode": {
           "$ref": "#/definitions/EnforcementMode"
@@ -267,7 +267,7 @@
         },
         "issues": {
           "readOnly": true,
-          "$ref": "#/definitions/AppWhitelistingIssuesSummaries"
+          "$ref": "#/definitions/AdaptiveApplicationControlIssuesSummaries"
         },
         "sourceSystem": {
           "readOnly": true,
@@ -283,7 +283,7 @@
     },
     "ConfigurationStatus": {
       "type": "string",
-      "description": "The configuration status of the VM/server group or machine or rule on the machine",
+      "description": "The configuration status of the machines group or machine or rule",
       "enum": [
         "Configured",
         "NotConfigured",
@@ -294,7 +294,7 @@
     },
     "EnforcementMode": {
       "type": "string",
-      "description": "The application control policy enforcement/protection mode of the VM/server group",
+      "description": "The application control policy enforcement/protection mode of the machine group",
       "enum": [
         "Audit",
         "Enforce",
@@ -303,7 +303,7 @@
     },
     "EnforcementSupport": {
       "type": "string",
-      "description": "The VM/server supportability of Enforce feature",
+      "description": "The machine supportability of Enforce feature",
       "enum": [
         "Supported",
         "NotSupported",
@@ -330,7 +330,7 @@
     },
     "RecommendationStatus": {
       "type": "string",
-      "description": "The recommendation status of the VM/server group or VM/server",
+      "description": "The initial recommendation status of the machine group or machine",
       "enum": [
         "Recommended",
         "NotRecommended",
@@ -340,7 +340,7 @@
     },
     "RecommendationAction": {
       "type": "string",
-      "description": "The recommendation action of the VM/server or rule",
+      "description": "The recommendation action of the machine or rule",
       "enum": [
         "Recommended",
         "Add",
@@ -359,9 +359,9 @@
         "VersionAndAboveSignature"
       ]
     },
-    "AppWhitelistingIssue": {
+    "AdaptiveApplicationControlIssue": {
       "type": "string",
-      "description": "An alert that VMs/servers within a group can have",
+      "description": "An alert that machines within a group can have",
       "enum": [
         "ViolationsAudited",
         "ViolationsBlocked",
@@ -385,7 +385,7 @@
     },
     "SourceSystem": {
       "type": "string",
-      "description": "The source type of the VM/server group",
+      "description": "The source type of the machine group",
       "enum": [
         "Azure_AppLocker",
         "Azure_AuditD",
@@ -394,23 +394,23 @@
         "None"
       ]
     },
-    "AppWhitelistingIssueSummary": {
+    "AdaptiveApplicationControlIssueSummary": {
       "type": "object",
-      "description": "Represents a summary of the alerts of the VM/server group",
+      "description": "Represents a summary of the alerts of the machine group",
       "properties": {
         "issue": {
-          "$ref": "#/definitions/AppWhitelistingIssue"
+          "$ref": "#/definitions/AdaptiveApplicationControlIssue"
         },
         "numberOfVms": {
           "type": "number",
-          "description": "The number of machines in the VM/server group that have this alert"
+          "description": "The number of machines in the group that have this alert"
         }
       }
     },
-    "AppWhitelistingIssuesSummaries": {
+    "AdaptiveApplicationControlIssuesSummaries": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/AppWhitelistingIssueSummary"
+        "$ref": "#/definitions/AdaptiveApplicationControlIssueSummary"
       }
     },
     "VmRecommendations": {
@@ -421,7 +421,7 @@
     },
     "VmRecommendation": {
       "type": "object",
-      "description": "Represents a machine that is part of a VM/server group",
+      "description": "Represents a machine that is part of a machine group",
       "properties": {
         "configurationStatus": {
           "$ref": "#/definitions/ConfigurationStatus"
@@ -489,7 +489,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "The full path to whitelist",
+          "description": "The full path of the file, or an identifier of the application",
           "example": "C:\\Windows\\System32\\calc.exe"
         },
         "action": {
@@ -503,7 +503,7 @@
         },
         "common": {
           "type": "boolean",
-          "description": "Whether the path is commonly run on the machine"
+          "description": "Whether the application is commonly run on the machine"
         },
         "userSids": {
           "type": "array",
@@ -529,25 +529,20 @@
     },
     "GroupResourceId": {
       "type": "string",
-      "description": "The azure resource id of the application control VM/server group",
+      "description": "The azure resource id of the application control machine group",
       "example": "/subscriptions/12345678-1234-1234-1234-123456789123/providers/Microsoft.Security/applicationWhitelistings/GROUP1"
     },
     "VmResourceId": {
       "type": "string",
-      "description": "The full azure resource id of the machine",
+      "description": "The full resource id of the machine",
       "example": "/subscriptions/12345678-1234-1234-1234-123456789123/resourcegroups/group/providers/microsoft.compute/virtualmachines/vm"
-    },
-    "AppWhitelistingResourceType": {
-      "type": "string",
-      "description": "The resource type of the application control resources",
-      "example": "Microsoft.Security/applicationWhitelistings"
     }
   },
   "parameters": {
     "GroupName": {
       "name": "groupName",
       "in": "path",
-      "description": "Name of an application control VM/server group",
+      "description": "Name of an application control machine group",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -576,12 +571,12 @@
       ],
       "x-ms-parameter-location": "method"
     },
-    "AppWhitelistingGroup": {
+    "AdaptiveApplicationControlGroup": {
       "name": "body",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/AppWhitelistingGroup"
+        "$ref": "#/definitions/AdaptiveApplicationControlGroup"
       },
       "x-ms-parameter-location": "method"
     }

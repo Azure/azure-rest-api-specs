@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2020-07-31",
+    "storeType": "coldstore",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "getEvents": {
+        "timeSeriesId": [
+          "006dfc2d-0324-4937-998c-d16f3b4f1952",
+          "T1"
+        ],
+        "searchSpan": {
+          "from": "2016-08-01T00:00:00Z",
+          "to": "2016-08-01T00:16:50Z"
+        },
+        "filter": {
+          "tsx": "($event.Value.Double != null) OR ($event.Status.String = 'Good')"
+        },
+        "projectedProperties": [
+          {
+            "name": "Building",
+            "type": "String"
+          },
+          {
+            "name": "Temperature",
+            "type": "Double"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "progress": 50.0,
+        "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0="
+      }
+    }
+  }
+}

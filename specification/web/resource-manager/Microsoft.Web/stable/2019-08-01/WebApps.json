@@ -710,6 +710,253 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.",
+        "description": "Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.",
+        "operationId": "WebApps_GetBasicPublishingCredentialsPolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListPublishingCredentialsPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/ftp": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether FTP is allowed on the site or not.",
+        "description": "Description for Returns whether FTP is allowed on the site or not.",
+        "operationId": "WebApps_GetFtpAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FTP Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates whether FTP is allowed on the site or not.",
+        "description": "Description for Updates whether FTP is allowed on the site or not.",
+        "operationId": "WebApps_UpdateFtpAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csmPublishingAccessPoliciesEntity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update FTP Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether Scm basic auth is allowed on the site or not.",
+        "description": "Description for Returns whether Scm basic auth is allowed on the site or not.",
+        "operationId": "WebApps_GetScmAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SCM Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates whether user publishing credentials are allowed on the site or not.",
+        "description": "Description for Updates whether user publishing credentials are allowed on the site or not.",
+        "operationId": "WebApps_UpdateScmAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csmPublishingAccessPoliciesEntity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SCM Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config": {
       "get": {
         "tags": [
@@ -19827,9 +20074,10 @@
         },
         "identityType": {
           "enum": [
-            "None",
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -20581,6 +20829,59 @@
         }
       }
     },
+    "CsmPublishingCredentialsPoliciesCollection": {
+      "description": "Publishing Credentials Policies collection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesCollection resource specific properties",
+          "required": [
+            "ftp",
+            "scm"
+          ],
+          "properties": {
+            "ftp": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether FTP is allowed."
+            },
+            "scm": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether Scm Basic Auth is allowed."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CsmPublishingCredentialsPoliciesEntity": {
+      "description": "Publishing Credentials Policies parameters.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesEntity resource specific properties",
+          "required": [
+            "allow"
+          ],
+          "properties": {
+            "allow": {
+              "description": "<code>true</code> to allow access to a publishing method; otherwise, <code>false</code>.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "CsmPublishingProfileOptions": {
       "description": "Publishing options for requested profile.",
       "type": "object",
@@ -21289,9 +21590,10 @@
             },
             "identityType": {
               "enum": [
-                "None",
                 "SystemAssigned",
-                "UserAssigned"
+                "UserAssigned",
+                "SystemAssigned, UserAssigned",
+                "None"
               ],
               "type": "string",
               "x-ms-enum": {

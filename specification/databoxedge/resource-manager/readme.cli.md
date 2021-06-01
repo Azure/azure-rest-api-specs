@@ -7,6 +7,15 @@ cli:
   cli-name: databoxedge
   package-name: azure-mgmt-databoxedge
   namespace: azure.mgmt.databoxedge
+  cli-directive:
+    - where:
+        group: StorageAccountCredentials
+        op: CreateOrUpdate.*
+      hidden: true
+    - where:
+        group: StorageAccounts
+        op: CreateOrUpdate.*
+      hidden: true
   test-scenario:
     - name: DataBoxEdgeDevicePut
     - name: UserPut
@@ -47,6 +56,7 @@ cli:
     - name: DataBoxEdgeDeviceGetByResourceGroup
     - name: DataBoxEdgeDeviceGetBySubscription
     - name: ListSkus
+    - name: ListAvailableSkus
     - name: OperationsGet
     - name: ContainerRefresh
     - name: CreateOrUpdateSecuritySettings

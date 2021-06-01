@@ -1040,7 +1040,7 @@
           "Volumes Replication"
         ],
         "summary": "Resync volume replication",
-        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.",
+        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from from destination to source.",
         "operationId": "Volumes_ResyncReplication",
         "parameters": [
           {
@@ -1758,6 +1758,7 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
+          "default": "guid id",
           "description": "Id of the Active Directory"
         },
         "username": {
@@ -2124,6 +2125,12 @@
           "default": 107374182400,
           "example": 107374182400
         },
+        "usedBytes": {
+          "type": "integer",
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "readOnly": true,
+          "format": "int64"
+        },
         "exportPolicy": {
           "title": "exportPolicy",
           "description": "Set of export policy rules",
@@ -2140,7 +2147,7 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
@@ -2180,6 +2187,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
@@ -2272,9 +2280,7 @@
           "enum": [
             "_10minutely",
             "hourly",
-            "daily",
-            "weekly",
-            "monthly"
+            "daily"
           ],
           "x-ms-enum": {
             "name": "ReplicationSchedule",

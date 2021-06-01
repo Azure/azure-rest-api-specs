@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: storagetables
   clear-output-folder: true
 ```
@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2019-02 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2019-02' && $(go)
-output-folder: $(go-sdk-folder)/services/storage/tables/2019-02-02/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/storage/tables/2019-02-02-preview/$(namespace)
 ```

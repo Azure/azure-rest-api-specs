@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: devices
   clear-output-folder: true
 ```
@@ -13,7 +13,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-preview-2021-03
   - tag: package-2020-03
+  - tag: package-preview-2019-07
   - tag: package-preview-2019-03
   - tag: package-2018-12-preview
   - tag: package-2018-04
@@ -23,6 +25,15 @@ batch:
   - tag: package-2016-02
 ```
 
+### Tag: package-preview-2021-03 and go
+
+These settings apply only when `--tag=package-preview-2021-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-03' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/iothub/mgmt/2021-03-03-preview/$(namespace)
+```
+
 ### Tag: package-2020-03 and go
 
 These settings apply only when `--tag=package-2020-03 --go` is specified on the command line.
@@ -30,6 +41,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2020-03' && $(go)
 output-folder: $(go-sdk-folder)/services/iothub/mgmt/2020-03-01/$(namespace)
+```
+
+### Tag:package-preview-2019-07 and go
+
+These settings apply only when `--tag=package-preview-2019-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-preview-2019-07' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/iothub/mgmt/2019-07-01-preview/$(namespace)
 ```
 
 ### Tag:package-preview-2019-03 and go

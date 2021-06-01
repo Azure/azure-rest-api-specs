@@ -198,6 +198,33 @@
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
+    "AppTypeParameter": {
+      "name": "appType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Determines the type of application which send the create user request. Default is legacy publisher portal.",
+      "enum": [
+        "portal",
+        "developerPortal"
+      ],
+      "x-ms-enum": {
+        "name": "AppType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "portal",
+            "description": "User create request was sent by legacy developer portal."
+          },
+          {
+            "value": "developerPortal",
+            "description": "User create request was sent by new developer portal."
+          }
+        ]
+      },
+      "default": "portal",
+      "x-ms-parameter-location": "method"
+    },
     "AttachmentIdParameter": {
       "name": "attachmentId",
       "in": "path",
@@ -710,6 +737,26 @@
       "required": true,
       "type": "string",
       "description": "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ContentTypeIdParameter": {
+      "name": "contentTypeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Content type identifier.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ContentItemIdParameter": {
+      "name": "contentItemId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Content item identifier.",
       "minLength": 1,
       "maxLength": 80,
       "x-ms-parameter-location": "method"

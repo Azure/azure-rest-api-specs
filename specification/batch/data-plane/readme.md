@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Batch.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,27 @@ To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-03.11.0
+tag: package-2020-09.12.0
+```
+
+### Tag: package-2020-09.12.0
+
+These settings apply only when `--tag=package-2020-09.12.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09.12.0'
+input-file:
+- Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
 ```
 
 ### Tag: package-2020-03.11.0
@@ -104,6 +113,7 @@ input-file:
 ## Suppression
 
 Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
+
 ``` yaml
 directive:
   - suppress: R2063
@@ -112,6 +122,7 @@ directive:
 ```
 
 Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/69) is fixed.
+
 ``` yaml
 directive:
   - suppress: R2064
@@ -207,6 +218,20 @@ directive:
     reason: The suggested casing of this property is worse than the casing that we're using
 ```
 
+``` yaml
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ImageInformation.properties.nodeAgentSKUId
+    from: BatchService.json
+    reason: Changing the casing of this property would be a breaking change
+```
+
+``` yaml
+  - suppress: AvoidNestedProperties
+    where: $.definitions.NodeFile.properties.properties
+    from: BatchService.json
+    reason: Switching to x-ms-client-flatten would be a breaking change to the SDKs
+```
+
 ### Tag: package-2017-05.5.0
 
 These settings apply only when `--tag=package-2017-05.5.0` is specified on the command line.
@@ -215,7 +240,6 @@ These settings apply only when `--tag=package-2017-05.5.0` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2017-05-01.5.0/BatchService.json
 ```
-
 
 ### Tag: package-2017-01.4.0
 
@@ -253,10 +277,9 @@ input-file:
 - Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -302,11 +325,13 @@ python:
   package-name: azure-batch
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-batch/azure/batch
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -348,7 +373,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-batch
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -360,6 +385,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
@@ -376,11 +402,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
