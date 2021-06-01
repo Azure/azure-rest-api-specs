@@ -59,6 +59,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
 directive:
   - suppress: R4017
@@ -97,6 +98,10 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
     where: $.definitions.AlertRuleTemplate
     reason: The AlertRuleTemplate does not support list by subscription. It's not a top-level resource. To get the AlertRuleTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.  
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
+    where: $.definitions.EntityQuery
+    reason: The EntityQuery does not support list by subscription. It's not a top-level resource. To get the EntityQuery, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
     where: $.definitions.MetadataModel
