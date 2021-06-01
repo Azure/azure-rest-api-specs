@@ -75,27 +75,27 @@
         "tags": [
           "SupportTickets"
         ],
-        "summary": "This operation fetches ARM resource id of support ticket",
-        "operationId": "LookUpSupportTicketResourceId",
+        "summary": "This operation fetches ARM resource id of support resource type.",
+        "operationId": "LookUpResourceId",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "lookUpSupportTicketResourceIdRequest",
+            "name": "lookUpResourceIdRequest",
             "in": "body",
-            "description": "Get Support ticket resource id request body",
+            "description": "Look up resource id request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LookUpSupportTicketResourceIdRequest"
+              "$ref": "#/definitions/LookUpResourceIdRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. Successfully obtained resource id of support ticket.",
+            "description": "OK. Successfully obtained resource id of support resource type.",
             "schema": {
-              "$ref": "#/definitions/LookUpSupportTicketResourceIdResponse"
+              "$ref": "#/definitions/LookUpResourceIdResponse"
             }
           },
           "default": {
@@ -107,8 +107,8 @@
         },
         "deprecated": false,
         "x-ms-examples": {
-          "SupportTicketResourceIdLookUp": {
-            "$ref": "./examples/LookUpSupportTicketResourceId.json"
+          "Look up resource id of support resource type": {
+            "$ref": "./examples/LookUpResourceId.json"
           }
         }
       }
@@ -163,22 +163,33 @@
         }
       }
     },
-    "LookUpSupportTicketResourceIdRequest": {
-      "description": "The Get Support ticket resource Id request body",
+    "LookUpResourceIdRequest": {
+      "description": "The look up resource Id request body",
       "type": "object",
       "properties": {
         "supportTicketId": {
           "description": "The System generated support ticket Id that is unique.",
           "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Support/supportTickets"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource."
         }
       }
     },
-    "LookUpSupportTicketResourceIdResponse": {
-      "description": "The Get Support ticket resource id response",
+    "LookUpResourceIdResponse": {
+      "description": "The look up resource id response",
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "The resource Id of support ticket",
+          "description": "The resource Id of support resource type.",
           "type": "string"
         }
       }
