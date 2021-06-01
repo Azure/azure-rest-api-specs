@@ -3401,7 +3401,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "The error code.",
+          "description": "Deprecated: Use error.code",
           "type": "string",
           "readOnly": true
         },
@@ -3411,12 +3411,12 @@
           "readOnly": true
         },
         "message": {
-          "description": "The error message.",
+          "description": "Deprecated: use error.message",
           "type": "string",
           "readOnly": true
         },
         "details": {
-          "description": "The error details.",
+          "description": "Deprecated: use error.details",
           "type": "string",
           "readOnly": true
         },
@@ -3447,12 +3447,39 @@
           "readOnly": true
         },
         "details": {
-          "type": "string",
-          "description": "A list of additional details about the error.",
-          "readOnly": true
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "A list of additional details about the error."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
     },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+
     "IotHubQuotaMetricInfoListResult": {
       "description": "The JSON-serialized array of IotHubQuotaMetricInfo objects with a next link.",
       "type": "object",
