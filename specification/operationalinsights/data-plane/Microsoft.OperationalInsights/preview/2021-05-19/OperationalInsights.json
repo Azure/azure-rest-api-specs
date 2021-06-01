@@ -281,7 +281,6 @@
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
       "type": "string"
     },
-
     "workspacesParam": {
       "description": "Workspace names to include in cross-workspace queries.",
       "type": "array",
@@ -358,8 +357,7 @@
         "statistics": {
           "type": "object",
           "description": "Statistics represented in JSON format.",
-          "properties": {
-          }
+          "properties": {}
         }
       },
       "required": [
@@ -1331,7 +1329,7 @@
         "error"
       ]
     },
-    "batchRequest" : {
+    "batchRequest": {
       "type": "object",
       "description": "An array of requests.",
       "properties": {
@@ -1344,7 +1342,7 @@
         }
       }
     },
-    "logQueryRequest" : {
+    "logQueryRequest": {
       "type": "object",
       "description": "An single request in a batch.",
       "properties": {
@@ -1352,7 +1350,7 @@
           "description": "The error details.",
           "type": "string"
         },
-        "headers" : {
+        "headers": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1363,11 +1361,15 @@
         },
         "path": {
           "type": "string",
-          "enum": ["/query"]
+          "enum": [
+            "/query"
+          ]
         },
         "method": {
           "type": "string",
-          "enum": ["POST"]
+          "enum": [
+            "POST"
+          ]
         },
         "workspace": {
           "description": "Workspace Id to be included in the query",
@@ -1375,7 +1377,7 @@
         }
       }
     },
-    "batchResponse" : {
+    "batchResponse": {
       "type": "object",
       "description": "Response to a batch.",
       "properties": {
@@ -1388,7 +1390,7 @@
         }
       }
     },
-    "logQueryResponse" : {
+    "logQueryResponse": {
       "type": "object",
       "properties": {
         "id": {
@@ -1401,7 +1403,7 @@
           "type": "object",
           "$ref": "#/definitions/logQueryResult"
         },
-        "headers" : {
+        "headers": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
