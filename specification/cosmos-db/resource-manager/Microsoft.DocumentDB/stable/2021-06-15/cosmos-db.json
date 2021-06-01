@@ -115,6 +115,9 @@
           },
           "CosmosDBDatabaseAccountCreateMax": {
             "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json"
+          },
+          "CosmosDBRestoreDatabaseAccountCreateUpdate.json": {
+            "$ref": "./examples/CosmosDBRestoreDatabaseAccountCreateUpdate.json"
           }
         },
         "description": "Creates or updates an Azure Cosmos DB database account. The \"Update\" method is preferred when performing updates on an account.",
@@ -5395,6 +5398,11 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountGetProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -6116,6 +6124,22 @@
           "type": "object",
           "$ref": "#/definitions/AnalyticalStorageConfiguration"
         },
+        "instanceId": {
+          "description": "A unique identifier assigned to the database account",
+          "type": "string",
+          "readOnly": true
+        },
+        "createMode": {
+          "description": "Enum to indicate the mode of account creation.",
+          "type": "string",
+          "default": "Default",
+          "$ref": "#/definitions/CreateMode"
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore.",
+          "type": "object",
+          "$ref": "#/definitions/RestoreParameters"
+        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -6144,6 +6168,7 @@
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
+      "discriminator": "createMode",
       "properties": {
         "consistencyPolicy": {
           "description": "The consistency policy for the Cosmos DB account.",
@@ -6232,6 +6257,12 @@
           "type": "object",
           "$ref": "#/definitions/AnalyticalStorageConfiguration"
         },
+        "createMode": {
+          "description": "Enum to indicate the mode of account creation.",
+          "type": "string",
+          "default": "Default",
+          "$ref": "#/definitions/CreateMode"
+        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -6258,8 +6289,34 @@
       },
       "required": [
         "locations",
-        "databaseAccountOfferType"
+        "databaseAccountOfferType",
+        "createMode"
       ]
+    },
+    "DefaultRequestDatabaseAccountCreateUpdateProperties": {
+      "description": "Properties for non-restore Azure Cosmos DB database account requests.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "RestoreReqeustDatabaseAccountCreateUpdateProperties": {
+      "description": "Properties to restore Azure Cosmos DB database account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        }
+      ],
+      "properties": {
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore.",
+          "type": "object",
+          "$ref": "#/definitions/RestoreParameters"
+        }
+      },
+      "x-ms-discriminator-value": "Restore"
     },
     "DatabaseAccountCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB database accounts.",
@@ -6283,7 +6340,7 @@
           "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
         }
       },
@@ -8388,6 +8445,77 @@
         "modelAsString": true,
         "name": "AnalyticalStorageSchemaType"
       }
+    },
+    "CreateMode": {
+      "description": "Enum to indicate the mode of account creation.",
+      "type": "string",
+      "default": "Default",
+      "enum": [
+        "Default",
+        "Restore"
+      ],
+      "x-ms-enum": {
+        "name": "CreateMode",
+        "modelAsString": true
+      }
+    },
+    "RestoreParameters": {
+      "type": "object",
+      "description": "Parameters to indicate the information about the restore.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "restoreMode": {
+          "type": "string",
+          "enum": [
+            "PointInTime"
+          ],
+          "description": "Describes the mode of the restore.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RestoreMode"
+          }
+        },
+        "restoreSource": {
+          "type": "string",
+          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
+        },
+        "restoreTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time to which the account has to be restored (ISO-8601 format)."
+        },
+        "databasesToRestore": {
+          "type": "array",
+          "description": "List of specific databases available for restore.",
+          "items": {
+            "$ref": "#/definitions/DatabaseRestoreResource"
+          }
+        }
+      }
+    },
+    "DatabaseRestoreResource": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database available for restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections available for restore.",
+          "items": {
+            "$ref": "#/definitions/CollectionName"
+          }
+        }
+      }
+    },
+    "CollectionName": {
+      "type": "string",
+      "description": "The name of the collection."
     },
     "BackupPolicy": {
       "type": "object",
