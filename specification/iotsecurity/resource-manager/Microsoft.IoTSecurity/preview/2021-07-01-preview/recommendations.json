@@ -207,6 +207,48 @@
             "TotalCriticalFailedRules": "3",
             "TotalWarningFailedRules": "1"
           }
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Medium",
+          "description": "The severity of the recommendation",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "Healthy",
+            "OffByPolicy",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "recommendationSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown"
+              },
+              {
+                "value": "NotApplicable"
+              },
+              {
+                "value": "Healthy"
+              },
+              {
+                "value": "OffByPolicy"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
         }
       }
     }
