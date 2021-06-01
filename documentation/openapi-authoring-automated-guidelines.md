@@ -2275,7 +2275,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
-**Description** : This rule is to check all the swagger files with the same api-version or in the same readme tag, and ensure there is no duplicate x-ms-enum name. 
+**Description** : This rule checks all the swagger files with the same api-version or in the same readme tag, and ensure there is no duplicate x-ms-enum name. 
 The following cases are deemed as violation:
 1. if two enums have the same x-ms-enum name , but types are different.
 2. if two enums have the same x-ms-enum name , but 'modelAsString' are different.
