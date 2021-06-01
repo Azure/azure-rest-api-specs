@@ -2,6 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
     "version": "2017-05-01-preview"
   },
   "host": "management.azure.com",
@@ -46,9 +49,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/MetricNamespaceParameter"
           }
         ],
         "responses": {
@@ -214,8 +214,8 @@
         "BitsPerSecond"
       ],
       "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": true
+        "name": "Unit",
+        "modelAsString": false
       }
     },
     "MetricDefinition": {
@@ -320,14 +320,6 @@
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "MetricNamespaceParameter": {
-      "name": "metricnamespace",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
