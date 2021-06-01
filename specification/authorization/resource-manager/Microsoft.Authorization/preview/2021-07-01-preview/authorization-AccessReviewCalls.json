@@ -376,6 +376,63 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "PutAccessReviewInstance"
+        ],
+        "operationId": "AccessReviewInstances_Create",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/PutAccessReviewInstance.json"
+          }
+        },
+        "description": "Update access review instance.",
+        "parameters": [
+          {
+            "name": "scheduleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review schedule definition."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review instance."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessReviewInstanceProperties"
+            },
+            "description": "Access review instance properties."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "schema": {
+              "$ref": "#/definitions/AccessReviewInstance"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/stop": {
@@ -608,6 +665,59 @@
             "description": "Describe the result of a successful operation.",
             "schema": {
               "$ref": "#/definitions/AccessReviewDecisionListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
+      "get": {
+        "tags": [
+          "GetAccessReviewInstanceContactedReviewers"
+        ],
+        "operationId": "AccessReviewInstanceContactedReviewers_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetAccessReviewInstanceContactedReviewers.json"
+          }
+        },
+        "description": "Get access review instance contacted reviewers",
+        "parameters": [
+          {
+            "name": "scheduleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review schedule definition."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review instance."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/AccessReviewContactedReviewerListResult"
             }
           },
           "default": {
@@ -930,6 +1040,56 @@
         }
       }
     },
+    "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers": {
+      "get": {
+        "tags": [
+          "TenantLevelGetAccessReviewInstanceContactedReviewers"
+        ],
+        "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/TenantLevelGetAccessReviewInstanceContactedReviewers.json"
+          }
+        },
+        "description": "Get access review instance contacted reviewers",
+        "parameters": [
+          {
+            "name": "scheduleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review schedule definition."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review instance."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/AccessReviewContactedReviewerListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions/{decisionId}": {
       "get": {
         "tags": [
@@ -1225,6 +1385,34 @@
           "format": "date-time",
           "description": "The DateTime when the review instance is scheduled to end.",
           "x-nullable": false
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "description": "This is the collection of reviewers."
+        },
+        "backupReviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "description": "This is the collection of backup reviewers."
+        },
+        "reviewersType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field specifies the type of reviewers for a review. Usually for a review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be assigned and instead be chosen dynamically. For example managers review or self review.",
+          "enum": [
+            "Assigned",
+            "Self",
+            "Managers"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewInstanceReviewersType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Access Review Instance properties."
@@ -1404,7 +1592,8 @@
             "user",
             "guestUser",
             "servicePrincipal",
-            "user,group"
+            "user,group",
+            "redeemedGuestUser"
           ],
           "x-ms-enum": {
             "name": "AccessReviewScopePrincipalType",
@@ -1715,6 +1904,54 @@
       },
       "description": "Details of the actor identity"
     },
+    "AccessReviewContactedReviewer": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The access review reviewer id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The access review reviewer id."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewContactedReviewerProperties",
+          "description": "Access Review Contacted Reviewer properties."
+        }
+      },
+      "description": "Access Review Contacted Reviewer."
+    },
+    "AccessReviewContactedReviewerProperties": {
+      "properties": {
+        "userDisplayName": {
+          "type": "string",
+          "description": "The display name of the reviewer",
+          "readOnly": true
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name of the reviewer",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Date Time when the reviewer was contacted.",
+          "x-nullable": true
+        }
+      },
+      "description": "Properties of access review contacted reviewer."
+    },
     "AccessReviewScheduleDefinitionListResult": {
       "properties": {
         "value": {
@@ -1762,6 +1999,22 @@
         }
       },
       "description": "List of access review decisions."
+    },
+    "AccessReviewContactedReviewerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewContactedReviewer"
+          },
+          "description": "Access Review Contacted Reviewer."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of access review contacted reviewers."
     },
     "ErrorDefinition": {
       "type": "object",
