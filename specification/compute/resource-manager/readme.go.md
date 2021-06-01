@@ -2,9 +2,9 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+```yaml $(go) && !(track2)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 
 directive:
@@ -25,6 +25,20 @@ directive:
         replace(/DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
         replace(/,DummyOrchestrationServiceName/,'').
         replace(/, 'DummyOrchestrationServiceName'/,'');
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/compute/armcompute
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+
+directive:
+  - from: disk.json
+    where: "$.definitions.PurchasePlan"
+    transform: >
+      $["x-ms-client-name"] = "DiskPurchasePlan";
 ```
 
 ### Go multi-api

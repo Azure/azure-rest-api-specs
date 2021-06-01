@@ -13,7 +13,7 @@
     "/providers/Microsoft.AzureBridge.Admin/operations": {
       "get": {
         "x-ms-examples": {
-          "Returns the list of support REST operations.": {
+          "Returns the list of supported REST operations.": {
             "$ref": "./examples/Operations/List.json"
           }
         },
@@ -85,15 +85,26 @@
     },
     "Operation": {
       "description": "Describes the supported REST operation.",
+      "type": "object",
       "properties": {
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "name": {
           "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
           "type": "string",
           "readOnly": true
         },
-        "display": {
-          "description": "Contains the localized display information for this particular operation / action.",
-          "$ref": "#/definitions/Display",
+        "origin": {
+          "description": "Origin for the operation.",
+          "type": "string",
           "readOnly": true
         }
       }
