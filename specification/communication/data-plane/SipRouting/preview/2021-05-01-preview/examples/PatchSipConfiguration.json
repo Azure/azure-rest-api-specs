@@ -44,14 +44,18 @@
     "415": {},
     "422": {
       "error": {
-        "code": "InvalidRegex",
-        "message": "Request failed: 'Not supported regex format provided’."
+        "code": "UnprocessableEntity",
+        "message": "One or more request inputs are not valid.",
+        "innererror": {
+          "code": "InvalidRegex",
+          "message": "Unsupported regex format provided."
+        }
       }
     },
     "500": {
       "error": {
-        "code": "InternalServerError",
-        "message": "Internal Server Error."
+        "code": "InternalError",
+        "message": "The server encountered an internal error."
       }
     }
   }
