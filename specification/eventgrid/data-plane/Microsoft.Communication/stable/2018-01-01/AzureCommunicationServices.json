@@ -18,6 +18,13 @@
         "messageBody": {
           "description": "The body of the chat message",
           "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -47,7 +54,13 @@
           "description": "The body of the chat message",
           "type": "string"
         },
-        "editTime": {
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },"editTime": {
           "description": "The time at which the message was edited",
           "format": "date-time",
           "type": "string"
