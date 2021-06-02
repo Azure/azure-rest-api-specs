@@ -30,6 +30,15 @@ tag: package-2021-05
 ```
 
 
+### Tag: package-preview-2021-05
+
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-05-17-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-05-17-preview/privateLinkScopes.json
+```
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
