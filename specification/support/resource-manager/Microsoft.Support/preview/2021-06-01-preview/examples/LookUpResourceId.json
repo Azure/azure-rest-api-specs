@@ -11,5 +11,21 @@
         "resourceId": "/subscriptions/subId/providers/Microsoft.Support/supportTickets/SupportTicketName"
       }
     }
-  }
+  },
+   "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Support resource does not exist."
+        }
+      }
+    },
+   "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Access to the requested resource is forbidden."
+        }
+      }
+    }
 }
