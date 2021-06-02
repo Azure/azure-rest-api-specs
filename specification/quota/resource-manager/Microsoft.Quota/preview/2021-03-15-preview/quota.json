@@ -7,7 +7,7 @@
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{resourceUrl}",
-    "useSchemePrefix": false,
+    "useSchemePrefix": true,
     "parameters": [
       {
         "$ref": "#/parameters/resourceUrl"
@@ -59,7 +59,7 @@
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "createQuotaRequest",
@@ -264,7 +264,7 @@
             "$ref": "#/parameters/RequestIdInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -297,7 +297,7 @@
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -346,7 +346,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -380,7 +380,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [
@@ -920,10 +920,6 @@
           "type": "string",
           "description": "Resource type."
         },
-        "resourceUsagesApiTemplate": {
-          "description": "Resource usages API template.",
-          "type": "string"
-        },
         "resourceQuery": {
           "description": "Resource query for dimension values.",
           "$ref": "#/definitions/resourceQueryDetails"
@@ -1147,29 +1143,6 @@
       "required": true,
       "type": "string",
       "description": "Azure subscription ID."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "API version."
-    },
-    "LocationIdInParameters": {
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Azure region.",
-      "x-ms-parameter-location": "method"
-    },
-    "ProviderIdInParameters": {
-      "name": "providerId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Azure resource provider ID.",
-      "x-ms-parameter-location": "method"
     },
     "ResourceNameInParameters": {
       "name": "resourceName",
