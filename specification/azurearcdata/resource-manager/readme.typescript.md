@@ -6,9 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "azurearcdata"
-  output-folder: "$(typescript-sdks-folder)/packages/azurearcdata"
+  package-name: "@azure/arm-azurearcdata"
+  output-folder: "$(typescript-sdks-folder)/sdk/azurearcdata/arm-azurearcdata"
   clear-output-folder: true
-  payload-flattening-threshold: 1
   generate-metadata: true
 ```
