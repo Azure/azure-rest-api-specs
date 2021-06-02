@@ -443,6 +443,9 @@
           "readOnly": true,
           "description": "Resource Etag."
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
@@ -469,6 +472,32 @@
               "readOnly": true,
               "$ref": "#/definitions/ProvisioningState"
             }
+          }
+        }
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
           }
         }
       }
