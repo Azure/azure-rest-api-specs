@@ -19,8 +19,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2019-12
+  - tag: package-2021-05
   - tag: package-2020-08-02
+  - tag: package-2019-12
+```
+
+### Tag: package-2021-05 and go
+
+These settings apply only when `--tag=package-2021-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-05' && $(go)
+output-folder: $(go-sdk-folder)/services/hybridcompute/mgmt/2021-05-20/hybridcompute
 ```
 
 ### Tag: package-2020-08-02 and go
