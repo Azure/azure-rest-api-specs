@@ -7657,6 +7657,27 @@
     },
     "RestorePoint": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
+    "RestorePointProperties": {
+      "properties": {
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        },
         "sourceMetadata": {
           "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
@@ -7685,27 +7706,6 @@
           "$ref": "#/definitions/RestorePointProvisioningDetails",
           "readOnly": true,
           "description": "Gets the provisioning details set by the server during Create restore point operation."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RestorePointProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Restore Point details."
-    },
-    "RestorePointProperties": {
-      "properties": {
-        "excludeDisks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiEntityReference"
-          },
-          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         }
       },
       "description": "The restore point properties."
