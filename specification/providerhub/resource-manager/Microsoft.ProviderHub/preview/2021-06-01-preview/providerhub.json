@@ -3,7 +3,7 @@
   "info": {
     "title": "ProviderHub",
     "description": "Microsoft ProviderHub",
-    "version": "2021-05-01-preview",
+    "version": "2021-06-01-preview",
     "x-ms-code-generation-settings": {
       "name": "ProviderHubClient"
     }
@@ -804,7 +804,7 @@
           "200": {
             "description": "Successfully created or updated the operation.",
             "schema": {
-              "$ref": "#/definitions/OperationsContent"
+              "$ref": "#/definitions/OperationsPutContent"
             }
           },
           "default": {
@@ -2135,31 +2135,122 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/getResources": {
+      "post": {
+        "tags": [
+          "ResourceActions"
+        ],
+        "description": "Gets resources.",
+        "operationId": "ResourceActions_GetResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceActionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementEntity"
+            },
+            "description": "The properties supplied to the GetResources operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource management action completed.",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceActions_GetResources": {
+            "$ref": "./examples/ResourceActions_GetResources.json"
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/deleteResources": {
+      "post": {
+        "tags": [
+          "ResourceActions"
+        ],
+        "description": "Deletes resources.",
+        "operationId": "ResourceActions_DeleteResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceActionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementAction"
+            },
+            "description": "The properties supplied to the DeleteResources operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource management action started.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementAction"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceActions_DeleteResources": {
+            "$ref": "./examples/ResourceActions_DeleteResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "enum": [
-        "NotSpecified",
-        "Accepted",
-        "Running",
-        "Creating",
-        "Created",
-        "Deleting",
-        "Deleted",
-        "Canceled",
-        "Failed",
-        "Succeeded",
-        "MovingResources",
-        "TransientFailure",
-        "RolloutInProgress"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
-      }
-    },
     "TrafficRegions": {
       "type": "object",
       "properties": {
@@ -2281,8 +2372,26 @@
       ],
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "specification": {
           "allOf": [
@@ -2548,8 +2657,26 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "specification": {
           "allOf": [
@@ -3464,10 +3591,6 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
         }
       }
     },
@@ -3586,19 +3709,230 @@
       },
       "x-ms-azure-resource": true
     },
-    "OperationsPutContent": {
+    "LocalizedOperationDisplayDefinition": {
       "required": [
-        "contents"
+        "default"
       ],
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "en": {
+          "description": "Display information of the operation for en locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "cs": {
+          "description": "Display information of the operation for cs locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "de": {
+          "description": "Display information of the operation for de locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "es": {
+          "description": "Display information of the operation for es locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "fr": {
+          "description": "Display information of the operation for fr locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "hu": {
+          "description": "Display information of the operation for hu locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "it": {
+          "description": "Display information of the operation for it locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ja": {
+          "description": "Display information of the operation for ja locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ko": {
+          "description": "Display information of the operation for ko locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "nl": {
+          "description": "Display information of the operation for nl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "pl": {
+          "description": "Display information of the operation for pl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptBR": {
+          "description": "Display information of the operation for pt-BR locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptPT": {
+          "description": "Display information of the operation for pt-PT locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ru": {
+          "description": "Display information of the operation for ru locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "sv": {
+          "description": "Display information of the operation for sv locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHans": {
+          "description": "Display information of the operation for zh-Hans locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHant": {
+          "description": "Display information of the operation for zh-Hant locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        }
+      }
+    },
+    "LocalizedOperationDefinition": {
+      "required": [
+        "display",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "origin": {
+          "enum": [
+            "NotSpecified",
+            "User",
+            "System"
+          ],
+          "type": "string"
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LocalizedOperationDisplayDefinition"
+            }
+          ]
+        },
+        "actionType": {
+          "enum": [
+            "NotSpecified",
+            "Internal"
+          ],
+          "type": "string"
+        },
+        "properties": {}
+      }
+    },
+    "OperationsContentProperties": {
       "type": "object",
       "properties": {
         "contents": {
           "type": "array",
+          "description": "Operations content.",
+          "x-ms-client-flatten": true,
           "items": {
-            "$ref": "#/definitions/OperationsDefinition"
+            "$ref": "#/definitions/LocalizedOperationDefinition"
           }
         }
       }
+    },
+    "OperationsPutContent": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsContentProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "OperationsDefinitionArrayResponseWithContinuation": {
       "type": "object",
@@ -3825,7 +4159,14 @@
             "$ref": "#/definitions/ResourceProviderCapabilities"
           }
         },
-        "metadata": {}
+        "metadata": {},
+        "templateDeploymentOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentOptions"
+            }
+          ]
+        }
       }
     },
     "ProviderRegistrationProperties": {
@@ -3844,8 +4185,33 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "subscriptionLifecycleNotificationSpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
         }
       }
     },
@@ -4192,8 +4558,26 @@
           "type": "boolean"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "enableThirdPartyS2S": {
           "type": "boolean"
@@ -4532,8 +4916,8 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource."
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4562,6 +4946,59 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceManagementEntity": {
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "homeTenantId": {
+          "type": "string",
+          "description": "The home tenant id."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The operation status."
+        }
+      }
+    },
+    "ResourceManagementAction": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "resource management action content.",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/ResourceManagementEntity"
+          }
+        }
+      }
+    },
+    "ResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
           }
         },
         "nextLink": {
@@ -4684,6 +5121,14 @@
       "in": "path",
       "name": "resourceType",
       "description": "The resource type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceActionParameter": {
+      "in": "path",
+      "name": "resourceActionName",
+      "description": "The resource action name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
