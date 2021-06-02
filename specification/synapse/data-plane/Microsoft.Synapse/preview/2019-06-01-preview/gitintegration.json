@@ -71,12 +71,30 @@
     }
   },
   "definitions": {
+    "GitHubClientSecret": {
+      "description": "Client secret information for factory's bring your own app repository configuration",
+      "type": "object",
+      "properties": {
+        "byoaSecretAkvUrl": {
+          "description": "Bring your own app client secret AKV URL",
+          "type": "string"
+        },
+        "byoaSecretName": {
+          "description": "Bring your own app client secret name in AKV",
+          "type": "string"
+        }
+      }
+    },
     "GitHubAccessTokenRequest": {
       "type": "object",
       "properties": {
         "gitHubClientId": {
           "description": "The GitHub Client Id.",
           "type": "string"
+        },
+        "gitHubClientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
         },
         "gitHubAccessCode": {
           "description": "The GitHub Access code.",
