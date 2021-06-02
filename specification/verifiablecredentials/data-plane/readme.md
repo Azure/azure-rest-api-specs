@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-04-05-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-04-05-preview'
 input-file:
-  - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/verifiablecredentials.json
+  - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/adminservice.json
 ```
 
 ---

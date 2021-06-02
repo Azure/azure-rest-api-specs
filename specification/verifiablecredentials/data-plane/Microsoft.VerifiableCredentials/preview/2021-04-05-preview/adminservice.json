@@ -8,12 +8,20 @@
     }
   },
   "host": "beta.did.msidentity.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -30,10 +38,14 @@
   "paths": {
     "/{tenantId}/api/portable/v1.0/admin/issuers/{issuerId}": {
       "put": {
-        "tags": ["Issuers"],
+        "tags": [
+          "Issuers"
+        ],
         "operationId": "AdminService_IssuerPut",
         "x-ms-examples": {
-          "AdminPut": { "$ref": "./examples/AdminServiceIssuerPut.json" }
+          "AdminPut": {
+            "$ref": "./examples/AdminServiceIssuerPut.json"
+          }
         },
         "description": "Operation to modify an existing issuer object.",
         "parameters": [
