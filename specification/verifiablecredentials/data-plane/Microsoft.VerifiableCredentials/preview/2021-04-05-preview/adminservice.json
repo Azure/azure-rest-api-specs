@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-04-05-preview",
-    "title": "AdminService",
+    "title": "verifiablecredentials",
     "x-ms-code-generation-settings": {
       "name": "verifiablecredentialsClient"
     }
@@ -215,7 +215,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Tenant identifier GUID."
+      "description": "Tenant identifier GUID.",
+      "x-ms-parameter-location": "client"
     },
     "IssuerIdParameter": {
       "name": "issuerId",
@@ -223,14 +224,15 @@
       "required": true,
       "type": "string",
       "description": "Issuer identifier GUID.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "IssuerNameParameter": {
       "name": "issuerName",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "New name for Issuer Object."
+      "description": "New name for Issuer Object.",
+      "x-ms-parameter-location": "client"
     }
   }
 }
