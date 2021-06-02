@@ -1,0 +1,237 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation/{customRecommendationName}": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessments": {
+            "$ref": "./examples/getCustomRecommendation_example.json"
+          }
+        },
+        "description": "Get a single custom recommendation by name for the provided subscriptionId.",
+        "tags": [
+          "customRecommendations"
+        ],
+        "operationId": "customRecommendation_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation": {
+      "get": {
+        "tags": [
+          "customRecommendations"
+        ],
+        "operationId": "customRecommendation_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomRecommendationList": {
+      "type": "object",
+      "description": "Page of a security assessments list",
+      "properties": {
+        "value": {
+          "description": "Collection of custom recommendation objects",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecommendation"
+          }
+        }
+      }
+    },
+    "CustomRecommendation": {
+      "type": "object",
+      "description": "Custom Recommendation",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes custom recommendation properties.",
+          "$ref": "#/definitions/CustomRecommendationProperties"
+        }
+      }
+    },
+    "CustomRecommendationProperties": {
+      "type": "object",
+      "description": "describes custom recommendation properties",
+      "properties": {
+        "name": {
+          "description": "Name of the Custom Recommendation",
+          "type": "string"
+        },
+        "standard": {
+          "description": "The regulatory standard that relates to this custom recommendation",
+          "type": "string"
+        },
+        "assessmentAutomationType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Custom",
+            "BuiltIn"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentAutomationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Custom",
+                "description": "A custom recommendation created by the user."
+              },
+              {
+                "value": "BuiltIn",
+                "description": "A Microsoft built-in recommendation."
+              }
+            ]
+          }
+        },
+        "description": {
+          "description": "A description providing additional information on the custom recommendation.",
+          "type": "string"
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Tenant ID where the custom recommendations are generated and stored."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Subscription ID related to this custom recommendation."
+        },
+        "isEnabled": {
+          "description": "A flag that indicates whether this recommendation is enabled or disabled.",
+          "type": "boolean",
+          "default": true
+        },
+        "location": {
+          "description": "Data Center Location of the custom recommendation",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedClouds": {
+          "description": "Relevant cloud for the custom recommendation.",
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/SupportedCloud"
+          }
+        },
+        "query": {
+          "description": "KQL Syntax query representing the recommendation results required",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedCloud": {
+      "description": "A supported cloud to which a custom recommendation applies.",
+      "type": "string",
+      "enum": [
+        "GCP",
+        "AWS"
+      ],
+      "x-ms-enum": {
+        "name": "SupportedCloud",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "GCP",
+            "description": "Google Cloud Services Platform"
+          },
+          {
+            "value": "AWS",
+            "description": "Amazon Web Services"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "CustomRecommendationName": {
+      "name": "customRecommendationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the customRecommendation object",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
