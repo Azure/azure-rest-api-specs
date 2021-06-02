@@ -5,15 +5,7 @@
     "title": "Azure Quota Extension API",
     "description": "Microsoft Azure Quota Resource Provider"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{resourceUrl}",
-    "useSchemePrefix": true,
-    "parameters": [
-      {
-        "$ref": "#/parameters/resourceUrl"
-      }
-    ]
-  },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -42,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Quota/quotaLimits/{resourceName}": {
+    "/{scope}/providers/Microsoft.Quota/quotaLimits/{resourceName}": {
       "get": {
         "tags": [
           "QuotaInformation"
@@ -241,7 +233,7 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaLimitsRequests/{id}": {
+    "/{scope}/providers/Microsoft.Quota/quotaLimitsRequests/{id}": {
       "get": {
         "tags": [
           "QuotaRequests"
@@ -283,7 +275,7 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaLimitsRequests": {
+    "/{scope}/providers/Microsoft.Quota/quotaLimitsRequests": {
       "get": {
         "tags": [
           "QuotaRequests"
