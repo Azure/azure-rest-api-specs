@@ -28,16 +28,49 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-03
+tag: package-2021-04-preview
 generate-empty-classes: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-04-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/checkNameAvailability.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/firewallRule.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privateEndpointConnections.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privateLinkResources.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privatelinkhub.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/sqlPool.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/sqlServer.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/workspace.json
+```
+
+### Tag: package-kusto-pool-2021-04-preview
+
+These settings apply only when `--tag=package-kusto-pool-2021-04-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-kusto-pool-2021-04-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-04-01-preview/kustoPool.json
+```
 
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.Synapse/stable/2021-03-01/bigDataPool.json
   - Microsoft.Synapse/stable/2021-03-01/checkNameAvailability.json
@@ -53,6 +86,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-03-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-03-01/workspace.json
 ```
+
 ### Tag: package-2019-06-01-preview
 
 These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
@@ -214,8 +248,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js synapse/resource-manager
 ```
 
 ## Python
@@ -237,12 +269,13 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
+batch:
+ - tag: package-2021-04-preview
+ - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
