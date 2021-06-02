@@ -42,6 +42,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-06-15/privateEndpointConnection.json
   - Microsoft.DocumentDB/stable/2021-06-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-06-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-06-15/restorable.json
 ```
 ### Tag: package-2021-05
 
