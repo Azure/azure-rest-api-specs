@@ -593,7 +593,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "applicationData",
             "description": "Application data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/ApplicationData"
@@ -690,7 +690,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -844,14 +844,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "attachmentId",
-            "description": "Id of the attachment.",
+            "description": "ID of the attachment.",
             "required": true,
             "type": "string"
           },
@@ -899,14 +899,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer resource.",
+            "description": "ID of the associated farmer resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "attachmentId",
-            "description": "Id of the attachment resource.",
+            "description": "ID of the attachment resource.",
             "required": true,
             "type": "string"
           },
@@ -1038,14 +1038,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "attachmentId",
-            "description": "Id of the attachment.",
+            "description": "ID of the attachment.",
             "required": true,
             "type": "string"
           },
@@ -1090,14 +1090,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "attachmentId",
-            "description": "Id of attachment to be downloaded.",
+            "description": "ID of attachment to be downloaded.",
             "required": true,
             "type": "string"
           },
@@ -1145,7 +1145,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -1316,7 +1316,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
@@ -1329,7 +1329,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "query",
             "description": "Query filters.",
             "schema": {
               "$ref": "#/definitions/SearchBoundaryQuery"
@@ -1544,7 +1544,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "query",
             "description": "Query filters.",
             "schema": {
               "$ref": "#/definitions/SearchBoundaryQuery"
@@ -1589,7 +1589,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -1674,14 +1674,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Boundaries_CreateCascadeDeleteJob": {
             "$ref": "./examples/Boundaries_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1699,14 +1699,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "boundaryId",
-            "description": "Id of the boundary.",
+            "description": "ID of the boundary.",
             "required": true,
             "type": "string"
           },
@@ -1754,14 +1754,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer resource.",
+            "description": "ID of the farmer resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "boundaryId",
-            "description": "Id of the boundary resource.",
+            "description": "ID of the boundary resource.",
             "required": true,
             "type": "string"
           },
@@ -1774,7 +1774,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "boundary",
             "description": "Boundary resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Boundary"
@@ -1820,14 +1820,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "boundaryId",
-            "description": "Id of the boundary.",
+            "description": "ID of the boundary.",
             "required": true,
             "type": "string"
           },
@@ -1871,14 +1871,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "boundaryId",
-            "description": "Id of the boundary.",
+            "description": "ID of the boundary.",
             "required": true,
             "type": "string"
           },
@@ -1892,7 +1892,7 @@
           {
             "in": "query",
             "name": "otherBoundaryId",
-            "description": "Id of the other boundary.",
+            "description": "ID of the other boundary.",
             "required": true,
             "type": "string"
           },
@@ -2076,7 +2076,7 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the crop.",
+            "description": "ID of the crop.",
             "required": true,
             "type": "string"
           },
@@ -2124,7 +2124,7 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the crop resource.",
+            "description": "ID of the crop resource.",
             "required": true,
             "type": "string"
           },
@@ -2137,7 +2137,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "crop",
             "description": "Crop resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Crop"
@@ -2183,7 +2183,7 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of crop to be deleted.",
+            "description": "ID of crop to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -2227,7 +2227,7 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the associated crop.",
+            "description": "ID of the associated crop.",
             "required": true,
             "type": "string"
           },
@@ -2548,14 +2548,14 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the associated crop.",
+            "description": "ID of the associated crop.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cropVarietyId",
-            "description": "Id of the crop variety.",
+            "description": "ID of the crop variety.",
             "required": true,
             "type": "string"
           },
@@ -2603,14 +2603,14 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the crop resource.",
+            "description": "ID of the crop resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cropVarietyId",
-            "description": "Id of the crop variety resource.",
+            "description": "ID of the crop variety resource.",
             "required": true,
             "type": "string"
           },
@@ -2623,7 +2623,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "cropVariety",
             "description": "Crop variety resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/CropVariety"
@@ -2669,14 +2669,14 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the crop.",
+            "description": "ID of the crop.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "cropVarietyId",
-            "description": "Id of the crop variety.",
+            "description": "ID of the crop variety.",
             "required": true,
             "type": "string"
           },
@@ -2895,7 +2895,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer resource.",
+            "description": "ID of the farmer resource.",
             "required": true,
             "type": "string"
           },
@@ -2908,7 +2908,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "farmer",
             "description": "Farmer resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Farmer"
@@ -2954,7 +2954,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of farmer to be deleted.",
+            "description": "ID of farmer to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -2998,7 +2998,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -3076,14 +3076,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Farmers_CreateCascadeDeleteJob": {
             "$ref": "./examples/Farmers_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -3104,7 +3104,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Job Id supplied by user.",
+            "description": "Job ID supplied by user.",
             "required": true,
             "type": "string"
           },
@@ -3117,7 +3117,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/FarmOperationDataIngestionJob"
@@ -3138,14 +3138,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "FarmOperations_CreateDataIngestionJob": {
             "$ref": "./examples/FarmOperations_CreateDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -3161,7 +3161,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -3208,7 +3208,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -3524,14 +3524,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer resource.",
+            "description": "ID of the associated farmer resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "farmId",
-            "description": "Id of the farm resource.",
+            "description": "ID of the farm resource.",
             "required": true,
             "type": "string"
           },
@@ -3544,7 +3544,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "farm",
             "description": "Farm resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Farm"
@@ -3590,14 +3590,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "farmId",
-            "description": "Id of the farm.",
+            "description": "ID of the farm.",
             "required": true,
             "type": "string"
           },
@@ -3641,7 +3641,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -3726,6 +3726,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Farms_CreateCascadeDeleteJob": {
             "$ref": "./examples/Farms_CreateCascadeDeleteJob.json"
@@ -3747,7 +3751,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -4028,14 +4032,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "fieldId",
-            "description": "Id of the field.",
+            "description": "ID of the field.",
             "required": true,
             "type": "string"
           },
@@ -4083,14 +4087,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer resource.",
+            "description": "ID of the associated farmer resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "fieldId",
-            "description": "Id of the field resource.",
+            "description": "ID of the field resource.",
             "required": true,
             "type": "string"
           },
@@ -4103,7 +4107,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "field",
             "description": "Field resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Field"
@@ -4149,14 +4153,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "fieldId",
-            "description": "Id of the field.",
+            "description": "ID of the field.",
             "required": true,
             "type": "string"
           },
@@ -4200,7 +4204,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -4285,14 +4289,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Fields_CreateCascadeDeleteJob": {
             "$ref": "./examples/Fields_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -4986,7 +4990,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "harvestData",
             "description": "Harvest data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/HarvestData"
@@ -5072,7 +5076,7 @@
     "/image-processing/rasterize/{jobId}": {
       "put": {
         "tags": [
-          "ImageProcessingJob"
+          "ImageProcessing"
         ],
         "description": "Create a ImageProcessing Rasterize job.",
         "operationId": "ImageProcessing_CreateRasterizeJob",
@@ -5099,7 +5103,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/ImageProcessingRasterizeJob"
@@ -5117,19 +5121,19 @@
             "description": "Error"
           }
         },
-        "x-ms-examples": {
-          "OAuthProviders_List": {
-            "$ref": "./examples/ImageProcessing_CreateRasterizeJob.json"
-          }
-        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ImageProcessing_CreateRasterizeJob": {
+            "$ref": "./examples/ImageProcessing_CreateRasterizeJob.json"
+          }
         }
       },
       "get": {
         "tags": [
-          "ImageProcessingJob"
+          "ImageProcessing"
         ],
         "description": "Get ImageProcessing Rasterize job's details.",
         "operationId": "ImageProcessing_GetRasterizeJob",
@@ -5140,7 +5144,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -5161,7 +5165,7 @@
           }
         },
         "x-ms-examples": {
-          "OAuthProviders_List": {
+          "ImageProcessing_GetRasterizeJob": {
             "$ref": "./examples/ImageProcessing_GetRasterizeJob.json"
           }
         }
@@ -5369,7 +5373,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "oauthProvider",
             "description": "OauthProvider resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/OAuthProvider"
@@ -5558,57 +5562,6 @@
         }
       }
     },
-    "/oauth/tokens/:remove": {
-      "post": {
-        "tags": [
-          "OAuthTokens"
-        ],
-        "description": "Deletes OAuth Token for given oauth provider Id and farmer Id.",
-        "operationId": "OAuthTokens_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "farmerId",
-            "description": "Id of the associated farmer.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "oauthProviderId",
-            "description": "Id of the associated oauth provider.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OAuthTokens_Delete": {
-            "$ref": "./examples/OAuthTokens_Delete.json"
-          }
-        }
-      }
-    },
     "/oauth/tokens/:connect": {
       "post": {
         "tags": [
@@ -5632,7 +5585,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "connectRequest",
             "description": "OAuth Connect Request.",
             "schema": {
               "$ref": "#/definitions/OAuthConnectRequest"
@@ -5656,6 +5609,116 @@
         "x-ms-examples": {
           "OAuthTokens_GetOAuthConnectionLink": {
             "$ref": "./examples/OAuthTokens_GetOAuthConnectionLink.json"
+          }
+        }
+      }
+    },
+    "/oauth/tokens/remove/{jobId}": {
+      "get": {
+        "tags": [
+          "OAuthTokens"
+        ],
+        "description": "Get cascade delete job details for OAuth tokens for specified job ID.",
+        "operationId": "OAuthTokens_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "ID of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthTokens_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/OAuthTokens_GetCascadeDeleteJobDetails.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OAuthTokens"
+        ],
+        "description": "Create a cascade delete job for OAuth tokens.",
+        "operationId": "OAuthTokens_CreateCascadeDeleteJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Job ID supplied by end user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "farmerId",
+            "description": "ID of the farmer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "oauthProviderId",
+            "description": "ID of the OAuthProvider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "OAuthTokens_CreateCascadeDeleteJob": {
+            "$ref": "./examples/OAuthTokens_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -6266,7 +6329,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "plantingData",
             "description": "Planting data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/PlantingData"
@@ -6532,7 +6595,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/SatelliteDataIngestionJob"
@@ -6553,14 +6616,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Scenes_CreateSatelliteDataIngestionJob": {
             "$ref": "./examples/Scenes_CreateSatelliteDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -6576,7 +6639,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -6672,7 +6735,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -7141,14 +7204,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "seasonalFieldId",
-            "description": "Id of the seasonal field.",
+            "description": "ID of the seasonal field.",
             "required": true,
             "type": "string"
           },
@@ -7196,14 +7259,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associated farmer resource.",
+            "description": "ID of the associated farmer resource.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "seasonalFieldId",
-            "description": "Id of the seasonal field resource.",
+            "description": "ID of the seasonal field resource.",
             "required": true,
             "type": "string"
           },
@@ -7216,7 +7279,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "seasonalField",
             "description": "Seasonal field resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/SeasonalField"
@@ -7262,14 +7325,14 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the farmer.",
+            "description": "ID of the farmer.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "seasonalFieldId",
-            "description": "Id of the seasonal field.",
+            "description": "ID of the seasonal field.",
             "required": true,
             "type": "string"
           },
@@ -7313,7 +7376,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -7398,14 +7461,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SeasonalFields_CreateCascadeDeleteJob": {
             "$ref": "./examples/SeasonalFields_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -7589,7 +7652,7 @@
           {
             "in": "path",
             "name": "seasonId",
-            "description": "Id of the season.",
+            "description": "ID of the season.",
             "required": true,
             "type": "string"
           },
@@ -7637,7 +7700,7 @@
           {
             "in": "path",
             "name": "seasonId",
-            "description": "Id of the season resource.",
+            "description": "ID of the season resource.",
             "required": true,
             "type": "string"
           },
@@ -7650,7 +7713,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "season",
             "description": "Season resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Season"
@@ -7696,7 +7759,7 @@
           {
             "in": "path",
             "name": "seasonId",
-            "description": "Id of the season.",
+            "description": "ID of the season.",
             "required": true,
             "type": "string"
           },
@@ -8304,7 +8367,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "tillageData",
             "description": "Tillage data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/TillageData"
@@ -8514,7 +8577,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -8575,7 +8638,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/WeatherDataIngestionJob"
@@ -8596,14 +8659,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Weather_CreateDataIngestionJob": {
             "$ref": "./examples/Weather_CreateDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -8621,7 +8684,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Id of the job.",
+            "description": "ID of the job.",
             "required": true,
             "type": "string"
           },
@@ -8669,7 +8732,7 @@
           {
             "in": "path",
             "name": "jobId",
-            "description": "Job Id supplied by end user.",
+            "description": "Job ID supplied by end user.",
             "required": true,
             "type": "string"
           },
@@ -8682,7 +8745,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/WeatherDataDeleteJob"
@@ -8703,14 +8766,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Weather_CreateDataDeleteJob": {
             "$ref": "./examples/Weather_CreateDataDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     }
@@ -8952,7 +9015,7 @@
           "$ref": "#/definitions/Error"
         },
         "traceId": {
-          "description": "Unique trace Id.",
+          "description": "Unique trace ID.",
           "type": "string"
         }
       }
@@ -9073,12 +9136,12 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string",
           "readOnly": true
         },
         "parentId": {
-          "description": "Id of the parent(field or seasonalField) it belongs to.",
+          "description": "ID of the parent(field or seasonalField) it belongs to.",
           "type": "string"
         },
         "geometry": {
@@ -9314,7 +9377,7 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string"
         },
         "resourceId": {
@@ -9336,8 +9399,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -9504,7 +9568,7 @@
       "type": "object",
       "properties": {
         "cropId": {
-          "description": "Id of the crop it belongs to.",
+          "description": "ID of the crop it belongs to.",
           "type": "string",
           "readOnly": true
         },
@@ -9682,11 +9746,11 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string"
         },
         "authProviderId": {
-          "description": "Authentication provider Id.",
+          "description": "Authentication provider ID.",
           "type": "string"
         },
         "operations": {
@@ -9712,8 +9776,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -9775,7 +9840,7 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string",
           "readOnly": true
         },
@@ -9858,11 +9923,11 @@
       "type": "object",
       "properties": {
         "farmId": {
-          "description": "Id of the associated Farm.",
+          "description": "ID of the associated Farm.",
           "type": "string"
         },
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string",
           "readOnly": true
         },
@@ -10139,11 +10204,11 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string"
         },
         "shapefileAttachmentId": {
-          "description": "Shapefile attachment Id.",
+          "description": "Shapefile attachment ID.",
           "type": "string"
         },
         "shapefileColumnNames": {
@@ -10164,8 +10229,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -10227,7 +10293,7 @@
       "type": "object",
       "properties": {
         "appId": {
-          "description": "OAuth App Id for given OAuth Provider.",
+          "description": "OAuth App ID for given OAuth Provider.",
           "maxLength": 200,
           "minLength": 2,
           "type": "string"
@@ -10388,11 +10454,11 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Id of the farmer.",
+          "description": "ID of the farmer.",
           "type": "string"
         },
         "oAuthProviderId": {
-          "description": "Id of the OAuthProvider.",
+          "description": "ID of the OAuthProvider.",
           "type": "string"
         },
         "userRedirectLink": {
@@ -10764,7 +10830,7 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string"
         },
         "boundaryId": {
@@ -10801,8 +10867,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -10864,7 +10931,7 @@
       "type": "object",
       "properties": {
         "farmerId": {
-          "description": "Farmer Id.",
+          "description": "Farmer ID.",
           "type": "string",
           "readOnly": true
         },
@@ -10883,15 +10950,15 @@
           "readOnly": true
         },
         "farmId": {
-          "description": "Id of the associated Farm.",
+          "description": "ID of the associated Farm.",
           "type": "string"
         },
         "fieldId": {
-          "description": "Id of the associated Field.",
+          "description": "ID of the associated Field.",
           "type": "string"
         },
         "seasonId": {
-          "description": "Id of the season it belongs to.",
+          "description": "ID of the season it belongs to.",
           "type": "string"
         },
         "cropVarietyIds": {
@@ -10903,7 +10970,7 @@
           }
         },
         "cropId": {
-          "description": "Id of the crop it belongs to.",
+          "description": "ID of the crop it belongs to.",
           "type": "string"
         },
         "avgYieldValue": {
@@ -11420,7 +11487,7 @@
           "type": "string"
         },
         "extensionId": {
-          "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+          "description": "ID of the extension to be used for the providerInput. eg. DTN.ClearAg.",
           "maxLength": 100,
           "minLength": 2,
           "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$",
@@ -11462,8 +11529,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -11530,7 +11598,7 @@
       "type": "object",
       "properties": {
         "extensionId": {
-          "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+          "description": "ID of the extension to be used for the providerInput. eg. DTN.ClearAg.",
           "maxLength": 100,
           "minLength": 2,
           "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$",
@@ -11573,8 +11641,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
