@@ -50,6 +50,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -96,6 +99,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -151,6 +157,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -194,6 +203,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -249,13 +261,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -290,6 +295,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -344,13 +352,6 @@
               "$ref": "#/definitions/ValidationResponse"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -384,6 +385,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -424,6 +428,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -476,13 +483,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -508,6 +508,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -559,13 +562,6 @@
               "$ref": "#/definitions/ValidationResponse"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -585,15 +581,6 @@
     }
   },
   "definitions": {
-    "CustomErrorResponse": {
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        }
-      },
-      "description": "Descriptive error response."
-    },
     "ValidationResponseErrorInfo": {
       "description": "Failed validation result details",
       "properties": {
@@ -617,7 +604,7 @@
           "type": "boolean",
           "description": "Whether or not validation succeeded"
         },
-        "validationErrorInfo": {
+        "errorInfo": {
           "description": "Failed validation result details",
           "$ref": "#/definitions/ValidationResponseErrorInfo"
         }
@@ -652,6 +639,7 @@
     "RoleAssignmentProperties": {
       "properties": {
         "scope": {
+          "readOnly": true,
           "type": "string",
           "description": "The role assignment scope."
         },
@@ -805,6 +793,14 @@
         "$ref": "#/definitions/RoleAssignmentCreateParameters"
       },
       "description": "Parameters for the role assignment.",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdQueryParameter": {
+      "name": "tenantId",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Tenant ID for cross-tenant request",
       "x-ms-parameter-location": "method"
     }
   }
