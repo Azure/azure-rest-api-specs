@@ -288,27 +288,6 @@
         "type": "string"
       }
     },
-    "workspaceIdsParam": {
-      "description": "Workspace IDs to include in cross-workspace queries.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "qualifiedNamesParam": {
-      "description": "Qualified Name - string with format <subscriptionName>/<resourceGroup>/<workspaceName>.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "azureResourceIdsParam": {
-      "description": "Azure Resource ID - string with format /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.operationalinsights/workspaces/<workspaceName>.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "queryBody": {
       "description": "The Analytics query. Learn more about the [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
       "type": "object",
@@ -324,18 +303,6 @@
         "workspaces": {
           "description": "A list of workspaces that are included in the query.",
           "$ref": "#/definitions/workspacesParam"
-        },
-        "qualifiedNames": {
-          "description": "A list of qualified workspace names that are included in the query.",
-          "$ref": "#/definitions/qualifiedNamesParam"
-        },
-        "workspaceIds": {
-          "description": "A list of workspace IDs that are included in the query.",
-          "$ref": "#/definitions/workspaceIdsParam"
-        },
-        "azureResourceIds": {
-          "description": "A list of Azure resource IDs that are included in the query.",
-          "$ref": "#/definitions/azureResourceIdsParam"
         }
       },
       "required": [
