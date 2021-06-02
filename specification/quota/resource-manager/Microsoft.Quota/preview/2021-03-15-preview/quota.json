@@ -52,6 +52,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -257,6 +260,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -290,6 +296,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "$filter",
@@ -1186,8 +1195,8 @@
       "description": "The **Skiptoken** parameter is used only if a previous operation returned a partial result. If a previous response contains a **nextLink** element, the value of the **nextLink** element includes a **skiptoken** parameter that specifies a starting point to use for subsequent calls.",
       "x-ms-parameter-location": "method"
     },
-    "resourceUrl": {
-      "name": "resourceUrl",
+    "ScopeInPath": {
+      "name": "scope",
       "description": "The target Azure resource URI. For example, `/subscriptions/9f6cce51-6baf-4de5-a3c4-6f58b85315b9/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotaLimits`, then it's the target Azure resource URI in the GET operation for the specific resource.",
       "x-ms-parameter-location": "client",
       "required": true,
