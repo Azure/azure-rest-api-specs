@@ -4999,6 +4999,51 @@
           "description": "Identifies the source of the lot for which the event happened. ",
           "type": "string",
           "readOnly": true
+        },
+        "canceledCredit": {
+          "description": "Amount of canceled credit.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        },
+        "creditCurrency": {
+          "description": "The credit currency of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "The reseller of the event.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
+        },
+        "creditExpiredInBillingCurrency": {
+          "description": "The amount of expired credit or commitment for NewCredit or SettleCharges event in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "newCreditInBillingCurrency": {
+          "description": "The amount of new credit or commitment for NewCredit or SettleCharges event in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "adjustmentsInBillingCurrency": {
+          "description": "The amount of balance adjustment in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "chargesInBillingCurrency": {
+          "description": "The amount of charges for events of type SettleCharges and PendingEligibleCharges in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "The balance in billing currency after the event.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         }
       }
     },
@@ -5089,7 +5134,44 @@
         "status": {
           "description": "The status of the lot.",
           "type": "string",
+          "enum": [
+            "None",
+            "Active",
+            "Inactive",
+            "Expired",
+            "Complete",
+            "Canceled"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "creditCurrency": {
+          "description": "The currency of the lot.",
+          "type": "string",
           "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency of the lot.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originalAmountInBillingCurrency": {
+          "description": "The original amount of a lot in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "The balance as of the last invoice in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "reseller": {
+          "description": "The reseller of the lot.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -5132,6 +5214,21 @@
           "description": "Pending eligible charges.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "creditCurrency": {
+          "description": "The credit currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "Credit's reseller.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -5147,6 +5244,11 @@
           "description": "Current balance.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "estimatedBalanceInBillingCurrency": {
+          "description": "Estimated balance in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         }
       }
     },
@@ -5268,6 +5370,39 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "AmountWithExchangeRate": {
+      "description": "The amount with exchange rate.",
+      "properties": {
+        "exchangeRate": {
+          "description": "The exchange rate.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "exchangeRateMonth": {
+          "description": "The exchange rate month.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "Reseller": {
+      "description": "The reseller properties.",
+      "type": "object",
+      "properties": {
+        "resellerId": {
+          "description": "The reseller property ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerDescription": {
+          "description": "The reseller property description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
