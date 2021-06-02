@@ -38,7 +38,7 @@
       "get": {
         "description": "Get a single custom recommendation by name for the provided subscriptionId. ",
         "tags": [
-          "customRecommendations"
+          "CustomRecommendations"
         ],
         "operationId": "customRecommendation_Get",
         "parameters": [
@@ -71,7 +71,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation": {
       "get": {
         "tags": [
-          "customRecommendations"
+          "CustomRecommendations"
         ],
         "operationId": "customRecommendation_List",
         "parameters": [
@@ -145,16 +145,18 @@
             "BuiltIn"
           ],
           "x-ms-enum": {
-            "name": "assessmentAutomationType",
+            "name": "AssessmentAutomationType",
             "modelAsString": true,
             "values": [
               {
                 "value": "Custom",
-                "description": "A custom recommendation created by the user."
+                "description": "A custom recommendation created by the user.",
+                "name": "CustomAssessmentType"
               },
               {
                 "value": "BuiltIn",
-                "description": "A Microsoft built-in recommendation."
+                "description": "A Microsoft built-in recommendation.",
+                "name": "BuiltInAssessmentType"
               }
             ]
           }
