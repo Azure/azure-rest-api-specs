@@ -4333,6 +4333,9 @@
                     },
                     {
                         "$ref": "#/parameters/LeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/CopySourceAuthorization"
                     }
                 ],
                 "responses": {
@@ -5718,6 +5721,15 @@
             "type": "string",
             "x-ms-parameter-location": "method",
             "description": "Specifies the URL of the source file or blob, up to 2 KB in length. To copy a file to another file within the same storage account, you may use Shared Key to authenticate the source file. If you are copying a file from another storage account, or if you are copying a blob from the same storage account or another storage account, then you must authenticate the source file or blob using a shared access signature. If the source is a public blob, no authentication is required to perform the copy operation. A file in a share snapshot can also be specified as a copy source."
+        },
+        "CopySourceAuthorization": {
+            "name": "x-ms-copy-source-authorization",
+            "x-ms-client-name": "copySourceAuthorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source."
         },
         "FileCopyPermissionCopyMode": {
             "name": "x-ms-file-permission-copy-mode",
