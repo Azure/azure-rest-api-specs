@@ -59,7 +59,7 @@
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "createQuotaRequest",
@@ -264,7 +264,7 @@
             "$ref": "#/parameters/RequestIdInParameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -297,7 +297,7 @@
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -346,7 +346,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -380,7 +380,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [
@@ -1143,6 +1143,14 @@
       "required": true,
       "type": "string",
       "description": "Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
     },
     "ResourceNameInParameters": {
       "name": "resourceName",
