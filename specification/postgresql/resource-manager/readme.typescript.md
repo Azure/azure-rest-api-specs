@@ -25,7 +25,7 @@ These settings apply only when `--tag=package-2021-04-10-privatepreview --typesc
 Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
 
 ``` yaml $(tag) == 'package-2021-04-10-privatepreview' && $(typescript)
-output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql/"
+output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexibleserver/"
 ```
 
 ### Tag: package-2020-01-01 and TypeScript
@@ -34,6 +34,6 @@ These settings apply only when `--tag=package-2020-01-01 --typescript` is specif
 Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
 
 ``` yaml $(tag) == 'package-2020-01-01' && $(typescript)
-output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexibleserver/"
+output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql/"
 ```
 
