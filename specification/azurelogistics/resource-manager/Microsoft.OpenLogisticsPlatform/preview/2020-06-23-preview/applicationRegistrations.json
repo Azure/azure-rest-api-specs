@@ -161,6 +161,10 @@
               "$ref": "#/definitions/ApplicationRegistration"
             }
           },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this application registration. Please retry later.",
+            "x-ms-error-response": true
+          },
           "default": {
             "x-nullable": false,
             "description": "",
@@ -204,6 +208,10 @@
           },
           "204": {
             "description": ""
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this application registration. Please retry later.",
+            "x-ms-error-response": true
           },
           "default": {
             "x-nullable": false,
@@ -257,6 +265,10 @@
               "description": "The provisioning state of the resource.",
               "readOnly": true,
               "$ref": "#/definitions/ApplicationRegistrationProvisioningState"
+            },
+            "status": {
+              "type": "string",
+              "description": "ISV provided status on application"
             }
           }
         }

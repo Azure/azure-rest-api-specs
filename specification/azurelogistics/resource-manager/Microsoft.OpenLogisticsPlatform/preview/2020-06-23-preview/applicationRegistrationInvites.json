@@ -68,6 +68,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces/{applicationWorkspaceName}/applications/{applicationId}/applicationRegistrationInvites": {
+      "get": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_GetAll",
+        "x-ms-examples": {
+          "ApplicationRegistrationInvite Get": {
+            "$ref": "./examples/ApplicationRegistrationInvite_List_SubscriptionLevel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "type": "string",
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInviteList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -110,6 +162,10 @@
             "sourceWorkspaceId": {
               "type": "string",
               "description": "sourceWorkspaceId for application to register"
+            },
+            "status": {
+              "type": "string",
+              "description": "ISV provided status on application"
             }
           }
         }
@@ -162,6 +218,14 @@
       "in": "query",
       "required": true,
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationWorkspaceNameParameter": {
+      "type": "string",
+      "name": "applicationWorkspaceName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's applicationWorkspace.",
+      "in": "path",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   }
