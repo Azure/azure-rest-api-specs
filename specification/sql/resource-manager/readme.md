@@ -257,6 +257,7 @@ input-file:
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2021-02-01-preview/ManagedDatabases.json
 
 
 # Needed when there is more than one input file
