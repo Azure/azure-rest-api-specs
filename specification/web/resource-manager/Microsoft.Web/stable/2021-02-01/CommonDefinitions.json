@@ -151,6 +151,10 @@
           "description": "Dedicated Host Count",
           "type": "integer",
           "readOnly": true
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this App Service Environment is zone-redundant.",
+          "type": "boolean"
         }
       }
     },
@@ -303,6 +307,11 @@
             "kubeEnvironmentProfile": {
               "$ref": "#/definitions/KubeEnvironmentProfile",
               "description": "Specification for the Kubernetes Environment to use for the App Service plan."
+            },
+            "zoneRedundant": {
+              "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
+              "default": false,
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
