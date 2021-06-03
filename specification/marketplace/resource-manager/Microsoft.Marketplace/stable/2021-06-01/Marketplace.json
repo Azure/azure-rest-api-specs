@@ -149,6 +149,42 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryOffers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_QueryOffers",
+        "description": "List of offers, regardless the collections",
+        "responses": {
+          "200": {
+            "description": "List of offers",
+            "schema": {
+              "$ref": "#/definitions/QueryOffers"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryOffers": {
+            "$ref": "./examples/QueryOffers.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/billingAccounts": {
       "parameters": [
         {
@@ -1290,6 +1326,22 @@
         },
         "nextLink": {
           "description": "URL to get the next set of offer list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "QueryOffers": {
+      "description": "List of offers",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OfferProperties"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of PrivateStore list results if there are any.",
           "type": "string"
         }
       }
