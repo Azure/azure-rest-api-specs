@@ -304,6 +304,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Diagnose workspace setup issue",
+        "operationId": "Workspaces_Diagnose",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Diagnose Workspace": {
+            "$ref": "./examples/Workspace/diagnose.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnoseWorkspaceParameter"
+            },
+            "description": "diagnose workspace parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/DiagnoseWorkspaceResult"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
       "post": {
         "tags": [
@@ -2382,6 +2440,149 @@
       },
       "description": "Quota update parameters."
     },
+    "DiagnoseWorkspaceParameter": {
+      "properties": {
+        "value": {
+          "description": "The parameter of diagnosing workspace health",
+          "type": "object",
+          "properties": {
+            "UDR": {
+              "type": "object",
+              "description": "Setting for diagnosing user defined routing"
+            },
+            "NSG": {
+              "type": "object",
+              "description": "Setting for diagnosing network security group"
+            },
+            "ResourceLock": {
+              "type": "object",
+              "description": "Setting for diagnosing resource lock"
+            },
+            "DNSResolution": {
+              "type": "object",
+              "description": "Setting for diagnosing dns resolution"
+            },
+            "StorageAccount": {
+              "type": "object",
+              "description": "Setting for diagnosing dependent storage account"
+            },
+            "KeyVault": {
+              "type": "object",
+              "description": "Setting for diagnosing dependent key vault"
+            },
+            "ContainerRegistry": {
+              "type": "object",
+              "description": "Setting for diagnosing dependent container registry"
+            },
+            "Others": {
+              "type": "object",
+              "description": "Setting for diagnosing unclassified category of problems"
+            }
+          }
+        }
+      }
+    },
+    "DiagnoseWorkspaceResult": {
+      "properties": {
+        "value": {
+          "description": "The potential setup problem for the workspace",
+          "type": "object",
+          "properties": {
+            "UDR": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for user defined routing",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "NSG": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for network security group",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "ResourceLock": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for resource lock",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "DNSResolution": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for dns resolution",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "StorageAccount": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for dependent storage account",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "KeyVault": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for dependent key vault",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "ContainerRegistry": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for dependent container registry",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            },
+            "Others": {
+              "type": "array",
+              "readOnly": true,
+              "description": "The potential setup problem for unclassified category",
+              "items": {
+                "ref": "#/definitions/WorkspaceErrorResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WorkspaceErrorResult": {
+      "properties": {
+        "code": {
+          "description": "Code for workspace setup error",
+          "readOnly": true,
+          "type": "string"
+        },
+        "level": {
+          "description": "Level of workspace setup error",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorLevel",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "message of workspace setup error",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
     "UpdateWorkspaceQuotasResult": {
       "properties": {
         "value": {
