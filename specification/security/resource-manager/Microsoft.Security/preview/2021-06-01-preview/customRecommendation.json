@@ -45,7 +45,7 @@
         "tags": [
           "CustomRecommendations"
         ],
-        "operationId": "customRecommendation_Get",
+        "operationId": "CustomRecommendation_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -63,6 +63,43 @@
             "schema": {
               "$ref": "#/definitions/CustomRecommendation"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a custom recommendation by name for a provided subscriptionId",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "x-ms-examples": {
+          "Gets a custom recommendation by name": {
+            "$ref": "./examples/CustomRecommendations/customRecommendationDelete_example.json"
+          }
+        },
+        "operationId": "CustomRecommendation_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Custom Recommendation was deleted"
+          },
+          "204": {
+            "description": "No Content - Custom Recommendation does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
