@@ -309,15 +309,7 @@
           "200": {
             "description": "Terms returned successfully",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/AgreementTerms"
-                  }
-                }
-              }
+              "$ref": "#/definitions/AgreementTermsList"
             }
           },
           "default": {
@@ -386,6 +378,18 @@
     }
   },
   "definitions": {
+    "AgreementTermsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the array."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgreementTerms"
+          }
+        }
+      }
+    },
     "AgreementTerms": {
       "properties": {
         "properties": {
@@ -458,7 +462,7 @@
       "properties": {      
         "id": {
           "type": "string",
-          "description": "A unique identifyer of the agreement."
+          "description": "A unique identifier of the agreement."
         },
         "publisher": {
           "type": "string",
@@ -481,7 +485,11 @@
         "state": {
           "type": "boolean",
           "enum": ["Active", "Canceled"],
-          "description": "Whether the agreement is active or cancelled"
+          "description": "Whether the agreement is active or cancelled",
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
         }
       },
       "description": "Old Agreement Terms definition"
