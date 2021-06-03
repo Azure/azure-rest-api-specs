@@ -38,6 +38,15 @@ input-file:
   - Microsoft.Portal/stable/2018-10-01/CloudShell.json
 ```
 
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
+```
+
 ---
 
 # Code Generation
@@ -57,17 +66,35 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cloudshell']
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cloudshell/resource-manager
 ```
 
 ## Go
-
-These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: cloudshell
+```
+
+### Tag: package-2018-10-01 and go
+
+These settings apply only when `--tag=package-2018-10-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2018-10-01' && $(go)
+output-folder: $(go-sdk-folder)/services/cloudshell/mgmt/2018-10-01/cloudshell
+```
+
+### Tag: package-2020-04-01-preview and go
+
+These settings apply only when `--tag=package-2020-04-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2020-04-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/cloudshell/mgmt/2020-04-01-preview/cloudshell
 ```
 
 ## Python
@@ -108,12 +135,12 @@ namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/CloudShell
 ```
 
-### Tag: package-2020-04-01 and ruby
+### Tag: package-2020-04-01-preview and ruby
 
-These settings apply only when `--tag=package-2018-04-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2018-04-01' && $(ruby)
+```yaml $(tag) == 'package-2020-04-01-preview' && $(ruby)
 namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/CloudShell
 ```
@@ -147,5 +174,7 @@ csharp:
   namespace: Microsoft.CloudShell
   output-folder: $(csharp-sdks-folder)/CloudShell/management/Microsoft.CloudShell/GeneratedProtocol
 ```
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

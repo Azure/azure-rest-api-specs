@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-10-01",
+    "version": "2020-04-01-preview",
     "title": "CloudShellClient"
   },
   "host": "management.azure.com",
@@ -787,7 +787,36 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
       "x-ms-azure-resource": true
     },
     "UserSettingsResponse": {
@@ -838,12 +867,25 @@
       "type": "object",
       "required": [
         "preferredOsType",
+        "networkType",
         "preferredLocation",
         "storageProfile",
         "terminalSettings",
         "preferredShellType"
       ],
       "properties": {
+        "networkType": {
+          "description": "The network type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "Isolated",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "networkType",
+            "modelAsString": true
+          }
+        },
         "preferredOsType": {
           "description": "The operating system type of the cloud shell. Deprecated, use preferredShellType.",
           "type": "string",
@@ -865,6 +907,9 @@
         },
         "terminalSettings": {
           "$ref": "#/definitions/TerminalSettings"
+        },
+        "vnetSettings": {
+          "$ref": "#/definitions/VnetSettings"
         },
         "preferredShellType": {
           "description": "The shell type of the cloud shell.",
@@ -930,6 +975,27 @@
             "name": "fontStyle",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "VnetSettings": {
+      "description": "Settings for virtual network setup.",
+      "type": "object",
+      "properties": {
+        "isolatedStorageProfile": {
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of virtual network."
+        },
+        "networkProfileResourceId": {
+          "type": "string",
+          "description": "Resource id of network profile."
+        },
+        "relayNamespaceResourceId": {
+          "type": "string",
+          "description": "Resource id of relay namespace."
         }
       }
     },

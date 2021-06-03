@@ -1,9 +1,10 @@
 {
   "parameters": {
     "userSettingsName": "cloudconsole",
-    "api-version": "2018-10-01",
+    "api-version": "2020-04-01-preview",
     "parameters": {
       "properties": {
+        "networkType": "Isolated",
         "preferredOsType": "Linux",
         "preferredLocation": "eastus",
         "storageProfile": {
@@ -15,6 +16,16 @@
           "fontSize": "Medium",
           "fontStyle": "Monospace"
         },
+        "vnetSettings": {
+          "isolatedStorageProfile": {
+            "storageAccountResourceId": "string",
+            "fileShareName": "string",
+            "diskSizeInGB": 5
+          },
+          "location": "eastus",
+          "networkProfileResourceId": "string",
+          "relayNamespaceResourceId": "string"
+        },
         "preferredShellType": "bash"
       }
     }
@@ -23,6 +34,7 @@
     "200": {
       "body": {
         "properties": {
+          "networkType": "Isolated",
           "preferredOsType": "Linux",
           "preferredLocation": "eastus",
           "storageProfile": {
@@ -33,6 +45,16 @@
           "terminalSettings": {
             "fontSize": "Medium",
             "fontStyle": "Monospace"
+          },
+          "vnetSettings": {
+            "isolatedStorageProfile": {
+              "storageAccountResourceId": "string",
+              "fileShareName": "string",
+              "diskSizeInGB": 5
+            },
+            "location": "eastus",
+            "networkProfileResourceId": "string",
+            "relayNamespaceResourceId": "string"
           },
           "preferredShellType": "bash"
         }
