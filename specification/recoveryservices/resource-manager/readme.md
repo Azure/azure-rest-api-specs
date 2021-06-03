@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2021-03
+tag: package-2020-02
 ```
 
 ### Validations
@@ -124,7 +124,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -149,6 +149,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/recoveryservices/Microsoft.Azure.Management.RecoveryServices/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
