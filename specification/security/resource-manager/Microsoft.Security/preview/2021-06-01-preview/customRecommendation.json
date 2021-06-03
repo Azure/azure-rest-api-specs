@@ -165,16 +165,17 @@
           "description": "describes custom recommendation properties.",
           "$ref": "#/definitions/CustomRecommendationProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "CustomRecommendationProperties": {
       "type": "object",
       "description": "describes custom recommendation properties",
       "properties": {
-        "name": {
-          "description": "Name of the Custom Recommendation",
-          "type": "string"
-        },
         "description": {
           "description": "A description providing additional information on the custom recommendation.",
           "type": "string"
@@ -186,37 +187,30 @@
         },
         "supportedClouds": {
           "description": "Relevant cloud for the custom recommendation.",
-          "type":"array",
-          "items": {
-            "$ref": "#/definitions/SupportedCloud"
+          "type":"string",
+          "enum": [
+            "GCP",
+            "AWS"
+          ],
+          "x-ms-enum": {
+            "name": "SupportedCloud",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "GCP",
+                "description": "Google Cloud Services Platform"
+              },
+              {
+                "value": "AWS",
+                "description": "Amazon Web Services"
+              }
+            ]
           }
         },
         "queryMasked": {
           "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
           "type": "string"
         }
-      }
-    },
-    "SupportedCloud": {
-      "description": "A supported cloud to which a custom recommendation applies.",
-      "type": "string",
-      "enum": [
-        "GCP",
-        "AWS"
-      ],
-      "x-ms-enum": {
-        "name": "SupportedCloud",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "GCP",
-            "description": "Google Cloud Services Platform"
-          },
-          {
-            "value": "AWS",
-            "description": "Amazon Web Services"
-          }
-        ]
       }
     }
   },
