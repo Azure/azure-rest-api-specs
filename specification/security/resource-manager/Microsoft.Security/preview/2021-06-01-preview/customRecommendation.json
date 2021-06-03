@@ -37,6 +37,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation/{customRecommendationName}": {
       "get": {
         "description": "Get a single custom recommendation by name for the provided subscriptionId. ",
+        "x-ms-examples": {
+          "Gets a custom recommendation by name": {
+            "$ref": "./examples/CustomRecommendations/customRecommendationGet_example.json"
+          }
+        },
         "tags": [
           "CustomRecommendations"
         ],
@@ -133,58 +138,14 @@
           "description": "Name of the Custom Recommendation",
           "type": "string"
         },
-        "standard": {
-          "description": "The regulatory standard that relates to this custom recommendation",
-          "type": "string"
-        },
-        "assessmentAutomationType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The assessment type - values should always be one of [BuiltIn or Custom]",
-          "enum": [
-            "Custom",
-            "BuiltIn"
-          ],
-          "x-ms-enum": {
-            "name": "AssessmentAutomationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Custom",
-                "description": "A custom recommendation created by the user.",
-                "name": "CustomAssessmentType"
-              },
-              {
-                "value": "BuiltIn",
-                "description": "A Microsoft built-in recommendation.",
-                "name": "BuiltInAssessmentType"
-              }
-            ]
-          }
-        },
         "description": {
           "description": "A description providing additional information on the custom recommendation.",
           "type": "string"
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Tenant ID where the custom recommendations are generated and stored."
-        },
-        "subscriptionId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Subscription ID related to this custom recommendation."
         },
         "isEnabled": {
           "description": "A flag that indicates whether this recommendation is enabled or disabled.",
           "type": "boolean",
           "default": true
-        },
-        "location": {
-          "description": "Data Center Location of the custom recommendation",
-          "type": "string",
-          "readOnly": true
         },
         "supportedClouds": {
           "description": "Relevant cloud for the custom recommendation.",
@@ -193,8 +154,8 @@
             "$ref": "#/definitions/SupportedCloud"
           }
         },
-        "query": {
-          "description": "KQL Syntax query representing the recommendation results required",
+        "queryMasked": {
+          "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
           "type": "string"
         }
       }
