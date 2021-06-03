@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-preview-2021-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-06'
 input-file:
-  - Microsoft.Security/preview/2021-06-01-preview/softwareInventories.json
+  - Microsoft.Security/preview/2021-06-01-preview/customRecommendation.json
 ```
 ### Tag: package-composite-v1
 
@@ -100,6 +100,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2021-06-01-preview/customRecommendation.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -143,6 +144,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2021-06-01-preview/customRecommendation.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -240,6 +242,7 @@ input-file:
 - Microsoft.Security/stable/2021-01-01/alerts.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2021-06-01-preview/customRecommendation.json
 
 # Needed when there is more than one input file
 override-info:
