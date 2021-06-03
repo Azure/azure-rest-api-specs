@@ -34,14 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation/{customRecommendationName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
       "get": {
         "description": "Get a single custom recommendation by name for the provided subscriptionId. ",
         "tags": [
           "CustomRecommendations"
         ],
         "x-ms-examples": {
-          "Get a single custom assessment": {
+          "Get a single custom recommendation": {
             "$ref": "./examples/CustomRecommendations/customRecommendationGet_example.json"
           }
         },
@@ -78,7 +78,7 @@
           "CustomRecommendations"
         ],
         "x-ms-examples": {
-          "Delete a custom assessment by name": {
+          "Delete a custom recommendation by name": {
             "$ref": "./examples/CustomRecommendations/customRecommendationDelete_example.json"
           }
         },
@@ -110,7 +110,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendation": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations": {
       "get": {
         "tags": [
           "CustomRecommendations"
@@ -144,7 +144,7 @@
   "definitions": {
     "CustomRecommendationList": {
       "type": "object",
-      "description": "Page of a security assessments list",
+      "description": "A list of all custom recommendations",
       "properties": {
         "value": {
           "description": "Collection of custom recommendation objects",
@@ -189,35 +189,31 @@
           "description": "Relevant cloud for the custom recommendation.",
           "type":"array",
           "items": {
-            "$ref": "#/definitions/SupportedCloud"
+            "type": "string",
+            "enum": [
+              "AWS",
+              "GCP"
+            ],
+            "x-ms-enum": {
+              "name": "SupportedCloud",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "GCP",
+                  "description": "Google Cloud Services Platform"
+                },
+                {
+                  "value": "AWS",
+                  "description": "Amazon Web Services"
+                }
+              ]
+            }
           }
         },
         "queryMasked": {
           "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
           "type": "string"
         }
-      }
-    },
-    "SupportedCloud": {
-      "description": "A supported cloud to which a custom recommendation applies.",
-      "type": "string",
-      "enum": [
-        "GCP",
-        "AWS"
-      ],
-      "x-ms-enum": {
-        "name": "SupportedCloud",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "GCP",
-            "description": "Google Cloud Services Platform"
-          },
-          {
-            "value": "AWS",
-            "description": "Amazon Web Services"
-          }
-        ]
       }
     }
   },
