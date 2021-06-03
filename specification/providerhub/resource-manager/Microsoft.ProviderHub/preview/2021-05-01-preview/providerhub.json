@@ -2138,6 +2138,28 @@
     }
   },
   "definitions": {
+    "ProvisioningState": {
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "MovingResources",
+        "TransientFailure",
+        "RolloutInProgress"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
     "TrafficRegions": {
       "type": "object",
       "properties": {
@@ -2259,26 +2281,8 @@
       ],
       "properties": {
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "specification": {
           "allOf": [
@@ -2544,26 +2548,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "specification": {
           "allOf": [
@@ -3478,6 +3464,10 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       }
     },
@@ -3835,14 +3825,7 @@
             "$ref": "#/definitions/ResourceProviderCapabilities"
           }
         },
-        "metadata": {},
-        "templateDeploymentOptions": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TemplateDeploymentOptions"
-            }
-          ]
-        }
+        "metadata": {}
       }
     },
     "ProviderRegistrationProperties": {
@@ -3861,33 +3844,8 @@
           ]
         },
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "subscriptionLifecycleNotificationSpecifications": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
-            }
-          ]
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       }
     },
@@ -4234,26 +4192,8 @@
           "type": "boolean"
         },
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "enableThirdPartyS2S": {
           "type": "boolean"
@@ -4590,6 +4530,10 @@
           "items": {
             "$ref": "#/definitions/SkuSetting"
           }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       }
     },
