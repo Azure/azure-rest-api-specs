@@ -2,16 +2,17 @@
   "parameters": {
     "serverName": "pgtestsvc4",
     "resourceGroupName": "testrg",
-    "api-version": "2020-02-14-preview",
+    "api-version": "2021-06-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "location": "westus",
       "properties": {
+        "createMode": "Update",
         "maintenanceWindow": {
+          "customWindow": "Enabled",
           "dayOfWeek": 0,
           "startHour": 8,
-          "startMinute": 0,
-          "customWindow": "Enabled"
+          "startMinute": 0
         }
       }
     }
@@ -20,30 +21,39 @@
     "200": {
       "body": {
         "sku": {
-          "tier": "GeneralPurpose",
-          "name": "Standard_D4s_v3"
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
         },
         "properties": {
-          "administratorLogin": "cloudsa",
+          "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.postgres.database.azure.com",
           "version": "12",
+          "minorVersion": "6",
+          "administratorLogin": "cloudsa",
           "state": "Ready",
-          "haState": "NotEnabled",
-          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
-          "displayName": "demosingleserver",
-          "publicNetworkAccess": "Enabled",
-          "storageProfile": {
-            "storageMB": 524288,
-            "backupRetentionDays": 20
-          },
-          "delegatedSubnetArguments": {},
-          "privateDnsZoneArguments": {},
-          "haEnabled": "Disabled",
           "availabilityZone": "1",
+          "storage": {
+            "storageSizeGB": 512
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "2"
+          },
           "maintenanceWindow": {
+            "customWindow": "Enabled",
             "dayOfWeek": 0,
             "startHour": 8,
-            "startMinute": 0,
-            "customWindow": "Enabled"
+            "startMinute": 0
           }
         },
         "location": "westus",
