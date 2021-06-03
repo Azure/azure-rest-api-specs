@@ -805,6 +805,62 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Put",
+        "x-ms-examples": {
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/checkNameAvailability": {
