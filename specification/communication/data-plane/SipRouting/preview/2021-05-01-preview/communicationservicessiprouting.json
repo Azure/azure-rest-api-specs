@@ -32,9 +32,9 @@
             }
           },
           "default": {
-            "description": "Failure.",
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -86,9 +86,9 @@
             "description": "All other api errors."
           },
           "default": {
-            "description": "Failure.",
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -134,7 +134,7 @@
           "type": "string"
         },
         "numberPattern": {
-          "description": "Gets or sets regex number pattern for routing calls. .NET regex format is supported.\r\nThe regex should match only digits with an optional '+' prefix without spaces.\r\nI.e. \"^\\\\+[1-9][0-9]{3,23}$\".",
+          "description": "Gets or sets regex number pattern for routing calls. .NET regex format is supported.\r\nThe regex should match only digits with an optional '+' prefix without spaces.\r\nI.e. \"^\\+[1-9][0-9]{3,23}$\".",
           "maxLength": 1024,
           "type": "string"
         },
@@ -149,11 +149,11 @@
       }
     },
     "SipConfiguration": {
-      "description": "Represents a SIP configuration.\nWhen a call is being routed the routes are applied in the same order as in the routes list.\nA route is matched by its number pattern.\nCall is then directed into route's first available trunk, based on the order in the route's trunks list.",
+      "description": "Represents a SIP configuration.\r\nWhen a call is being routed the routes are applied in the same order as in the routes list.\r\nA route is matched by its number pattern.\r\nCall is then directed into route's first available trunk, based on the order in the route's trunks list.",
       "type": "object",
       "properties": {
         "trunks": {
-          "description": "SIP trunks for routing calls.\nMap key is trunk's FQDN (1-249 characters).",
+          "description": "SIP trunks for routing calls.\r\nMap key is trunk's FQDN (1-249 characters).",
           "maxLength": 250,
           "type": "object",
           "additionalProperties": {
@@ -167,50 +167,6 @@
           "items": {
             "$ref": "#/definitions/TrunkRoute"
           }
-        }
-      }
-    },
-    "CommunicationError": {
-      "description": "Represents the Communication Services error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The error target.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Further details about specific errors that led to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
-    },
-    "CommunicationErrorResponse": {
-      "description": "Represents the Communication Services error response.",
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CommunicationError"
         }
       }
     }
