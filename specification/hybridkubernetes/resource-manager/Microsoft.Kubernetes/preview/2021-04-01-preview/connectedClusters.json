@@ -143,11 +143,8 @@
               "$ref": "#/definitions/ConnectedCluster"
             }
           },
-          "201": {
-            "description": "Resource patch request accepted",
-            "schema": {
-              "$ref": "#/definitions/ConnectedCluster"
-            }
+          "202": {
+            "description": "Resource patch request accepted"
           },
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
@@ -155,6 +152,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
