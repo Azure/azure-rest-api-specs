@@ -35,10 +35,10 @@ python:
   output-folder: $(python-sdks-folder)/support/azure-mgmt-support
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/support/azure-mgmt-support/azure/mgmt/support
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/support/azure-mgmt-support/azure/mgmt/support
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/support/azure-mgmt-support
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/support/azure-mgmt-support
 ```
