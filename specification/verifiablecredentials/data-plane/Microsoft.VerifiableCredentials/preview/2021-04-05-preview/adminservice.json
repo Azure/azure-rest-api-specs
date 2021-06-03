@@ -69,7 +69,7 @@
           "default": {
             "description": "Error. Request for Verifiable Credentials Admin Service has failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AdminErrorResponse"
             }
           }
         }
@@ -176,16 +176,16 @@
         }
       }
     },
-    "ErrorResponse": {
+    "AdminErrorResponse": {
       "description": "Error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "#/definitions/AdminErrorDefinition",
           "description": "The error details."
         }
       }
     },
-    "ErrorDefinition": {
+    "AdminErrorDefinition": {
       "description": "Error definition.",
       "properties": {
         "code": {
@@ -202,7 +202,7 @@
           "description": "Internal error details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "$ref": "#/definitions/AdminErrorDefinition"
           },
           "readOnly": true
         }
@@ -224,7 +224,7 @@
       "required": true,
       "type": "string",
       "description": "Issuer identifier GUID.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "IssuerNameParameter": {
       "name": "issuerName",
@@ -232,7 +232,7 @@
       "required": true,
       "type": "string",
       "description": "New name for Issuer Object.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     }
   }
 }
