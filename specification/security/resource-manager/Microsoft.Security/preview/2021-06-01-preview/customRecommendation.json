@@ -187,30 +187,37 @@
         },
         "supportedClouds": {
           "description": "Relevant cloud for the custom recommendation.",
-          "type":"string",
-          "enum": [
-            "GCP",
-            "AWS"
-          ],
-          "x-ms-enum": {
-            "name": "SupportedClouds",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "GCP",
-                "description": "Google Cloud Services Platform"
-              },
-              {
-                "value": "AWS",
-                "description": "Amazon Web Services"
-              }
-            ]
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/SupportedCloud"
           }
         },
         "queryMasked": {
           "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
           "type": "string"
         }
+      }
+    },
+    "SupportedCloud": {
+      "description": "A supported cloud to which a custom recommendation applies.",
+      "type": "string",
+      "enum": [
+        "GCP",
+        "AWS"
+      ],
+      "x-ms-enum": {
+        "name": "SupportedCloud",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "GCP",
+            "description": "Google Cloud Services Platform"
+          },
+          {
+            "value": "AWS",
+            "description": "Amazon Web Services"
+          }
+        ]
       }
     }
   },
