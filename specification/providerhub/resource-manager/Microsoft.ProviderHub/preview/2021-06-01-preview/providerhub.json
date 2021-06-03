@@ -2136,6 +2136,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/getResource": {
+      "post": {
+        "tags": [
+          "ResourceActions"
+        ],
+        "description": "Gets resource.",
+        "operationId": "ResourceActions_GetResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceActionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementEntity"
+            },
+            "description": "The properties supplied to the GetResources operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource management action completed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceActions_GetResource": {
+            "$ref": "./examples/ResourceActions_GetResource.json"
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/getResources": {
       "post": {
         "tags": [
