@@ -268,7 +268,7 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "description": "Optional. The prefer header to set server timeout, ",
+      "description": "Optional. The prefer header to set server timeout, query statistics and visualization information.",
       "x-ms-parameter-location": "method"
     }
   },
@@ -325,6 +325,9 @@
           "type": "object",
           "description": "Statistics represented in JSON format.",
           "properties": {}
+        },
+        "error": {
+          "$ref": "#/definitions/errorInfo"
         }
       },
       "required": [
@@ -779,7 +782,10 @@
                   "int",
                   "long",
                   "real",
-                  "string"
+                  "string",
+                  "guid",
+                  "decimal",
+                  "timespan"
                 ],
                 "x-ms-enum": {
                   "name": "MetadataColumnDataType",
@@ -1310,7 +1316,10 @@
             "$ref": "#/definitions/batchQueryRequest"
           }
         }
-      }
+      },
+      "required": [
+        "requests"
+      ]
     },
     "batchQueryRequest": {
       "type": "object",
@@ -1345,11 +1354,16 @@
           "description": "Workspace Id to be included in the query",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "workspace",
+        "body",
+        "id"
+      ]
     },
     "batchResponse": {
       "type": "object",
-      "description": "Response to a batch.",
+      "description": "Response to a batch query.",
       "properties": {
         "responses": {
           "type": "array",
@@ -1371,35 +1385,13 @@
         },
         "body": {
           "type": "object",
-          "$ref": "#/definitions/batchQueryResult"
+          "$ref": "#/definitions/queryResults"
         },
         "headers": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "batchQueryResult": {
-      "title": "A query response for a single logs query in a batch.",
-      "description": "Contains the tables, columns & rows resulting from the query or the error details if the query failed.",
-      "type": "object",
-      "properties": {
-        "tables": {
-          "description": "The list of tables, columns and rows.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/table"
-          }
-        },
-        "statistics": {
-          "type": "object",
-          "description": "Statistics represented in JSON format.",
-          "properties": {}
-        },
-        "error": {
-          "$ref": "#/definitions/errorInfo"
         }
       }
     }

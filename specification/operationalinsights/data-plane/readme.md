@@ -54,7 +54,7 @@ directive:
 
 ``` yaml $(tag) == '20210519'
 input-file:
-- Microsoft.OperationalInsights/preview/2021-05-19/OperationalInsights.json
+- Microsoft.OperationalInsights/preview/2021-05-19_Preview/OperationalInsights.json
 directive:
   - reason: Include batch query and add prefer headers to query request
     where-operation: Query_Post
