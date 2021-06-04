@@ -294,7 +294,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -339,7 +339,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -381,7 +381,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "produces": [
           "application/json"
@@ -539,6 +539,7 @@
       }
     },
     "keyProperties": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The identifier of the key vault key used to encrypt data.",
@@ -559,6 +560,10 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkProperties"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
         }
       },
       "description": "A list of private link resources"
@@ -588,6 +593,7 @@
       }
     },
     "EnterprisePolicyList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -595,6 +601,10 @@
             "$ref": "#/definitions/EnterprisePolicy"
           },
           "description": "Result of the list EnterprisePolicy operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
         }
       },
       "description": "The response of the list EnterprisePolicy operation."
