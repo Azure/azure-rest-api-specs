@@ -188,6 +188,11 @@
         "operationId": "Query_Batch",
         "summary": "Execute a batch of Analytics queries",
         "description": "Executes a batch of Analytics queries for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "examples/batch-query-example.json"
+          }
+        },
         "parameters": [
           {
             "name": "body",
@@ -378,11 +383,11 @@
         },
         "type": {
           "description": "The data type of this column.",
-          "$ref": "#/definitions/logsColumnDataType"
+          "$ref": "#/definitions/logsColumnType"
         }
       }
     },
-    "logsColumnDataType": {
+    "logsColumnType": {
       "type": "string",
       "description": "The data type of this column.",
       "enum": [
@@ -398,7 +403,7 @@
         "timespan"
       ],
       "x-ms-enum": {
-        "name": "LogsColumnDataType",
+        "name": "logsColumnType",
         "modelAsString": true
       }
     },
