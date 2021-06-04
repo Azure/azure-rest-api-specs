@@ -48,7 +48,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -84,10 +84,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -123,13 +123,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -160,16 +160,16 @@
         "description": "Gets the properties of an Azure Video Analyzer for Media account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -198,19 +198,22 @@
         ],
         "operationId": "Accounts_Update",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "Updates the properties of an existing Azure Video Analyzer for Media account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -222,7 +225,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "The resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/Account"
@@ -259,16 +262,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -280,6 +283,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "201": {
             "description": "The resource will be updated asynchronously.",
             "schema": {
@@ -308,16 +317,16 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -373,16 +382,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -443,12 +452,12 @@
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -487,7 +496,6 @@
         "mediaServices": {
           "description": "The media services details",
           "type": "object",
-          "readOnly": false,
           "$ref": "#/definitions/MediaServices"
         },
         "provisioningState": {
@@ -503,7 +511,7 @@
             "Deleting"
           ],
           "x-ms-enum": {
-            "name": "Succeeded",
+            "name": "provisioningState",
             "modelAsString": true
           }
         }
@@ -535,7 +543,6 @@
       ],
       "properties": {
         "permissionType": {
-          "readOnly": false,
           "type": "string",
           "description": "The requested permission",
           "enum": [
@@ -543,12 +550,11 @@
             "Reader"
           ],
           "x-ms-enum": {
-            "name": "Contributor",
+            "name": "permissionType",
             "modelAsString": true
           }
         },
         "scope": {
-          "readOnly": false,
           "type": "string",
           "description": "The requested media type",
           "enum": [
@@ -557,21 +563,18 @@
             "Project"
           ],
           "x-ms-enum": {
-            "name": "Video",
+            "name": "scope",
             "modelAsString": true
           }
         },
         "videoId": {
           "description": "The video ID",
           "type": "string",
-          "readOnly": false,
           "example": "07ec9e38d4"
         },
         "projectId": {
           "description": "The project ID",
-          "type": "string",
-          "readOnly": false,
-          "example": ""
+          "type": "string"
         }
       }
     },
@@ -582,26 +585,57 @@
         "resourceId": {
           "type": "string",
           "description": "The media services resource id",
-          "readOnly": false,
           "example": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms"
         },
-        "userAssignedManagedIdentity": {
-          "type": "object",
-          "description": "The user assigned managed identity resource ID when connecting to media services resource",
-          "readOnly": false,
-          "$ref": "#/definitions/UserAssignedManagedIdentity"
+        "identity": {
+          "description": "The managed identity resource ID when connecting to media services resource",
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
-    "UserAssignedManagedIdentity": {
-      "description": "The user assigned managed identity details",
+    "ManagedServiceIdentity": {
       "type": "object",
+      "description": "Managed identity generic object.",
       "properties": {
-        "resourceId": {
+        "type": {
           "type": "string",
-          "description": "The user assigned managed identity resource id",
-          "readOnly": false,
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          "description": "Type of the managed identity.",
+          "enum": [
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the Azure Active Directory."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
+          "additionalProperties": {
+            "description": "User-assigned managed identity.",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Client App Id associated with this identity."
         }
       }
     },
@@ -624,26 +658,32 @@
       "properties": {
         "name": {
           "description": "Name of the operation",
+          "readOnly": true,
           "type": "string"
         },
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
+          "readOnly": true,
           "type": "boolean"
         },
         "actionType": {
           "description": "Indicates the action type.",
+          "readOnly": true,
           "type": "string"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
+          "readOnly": true,
           "description": "Display of the operation"
         },
         "origin": {
           "description": "Origin of the operation",
+          "readOnly": true,
           "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/OperationProperties",
+          "readOnly": true,
           "description": "Properties of the operation",
           "x-ms-client-flatten": true
         }
@@ -655,18 +695,22 @@
       "properties": {
         "provider": {
           "description": "Resource provider of the operation",
+          "readOnly": true,
           "type": "string"
         },
         "resource": {
           "description": "Resource of the operation",
+          "readOnly": true,
           "type": "string"
         },
         "operation": {
           "description": "Localized friendly name for the operation",
+          "readOnly": true,
           "type": "string"
         },
         "description": {
           "description": "Localized friendly description for the operation",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -678,6 +722,7 @@
       "properties": {
         "serviceSpecification": {
           "description": "Details about a service operation.",
+          "readOnly": true,
           "$ref": "#/definitions/OperationServiceSpecification"
         }
       }
@@ -688,6 +733,7 @@
       "properties": {
         "logSpecifications": {
           "description": "Details about operations related to logs.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
@@ -695,6 +741,7 @@
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
@@ -708,14 +755,17 @@
       "properties": {
         "name": {
           "description": "The name of the log category.",
+          "readOnly": true,
           "type": "string"
         },
         "displayName": {
           "description": "Localized display name.",
+          "readOnly": true,
           "type": "string"
         },
         "blobDuration": {
           "description": "Blobs created in the customer storage account, per hour.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -726,38 +776,47 @@
       "properties": {
         "name": {
           "description": "The name of the metric.",
+          "readOnly": true,
           "type": "string"
         },
         "displayName": {
           "description": "Localized display name of the metric.",
+          "readOnly": true,
           "type": "string"
         },
         "displayDescription": {
           "description": "The description of the metric.",
+          "readOnly": true,
           "type": "string"
         },
         "unit": {
           "description": "The unit that the metric is measured in.",
+          "readOnly": true,
           "type": "string"
         },
         "aggregationType": {
           "description": "The type of metric aggregation.",
+          "readOnly": true,
           "type": "string"
         },
         "enableRegionalMdmAccount": {
           "description": "Whether or not the service is using regional MDM accounts.",
+          "readOnly": true,
           "type": "string"
         },
         "sourceMdmAccount": {
           "description": "The name of the MDM account.",
+          "readOnly": true,
           "type": "string"
         },
         "sourceMdmNamespace": {
           "description": "The name of the MDM namespace.",
+          "readOnly": true,
           "type": "string"
         },
         "availabilities": {
           "description": "Defines how often data for metrics becomes available.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
@@ -771,10 +830,12 @@
       "properties": {
         "timeGrain": {
           "description": "The granularity for the metric.",
+          "readOnly": true,
           "type": "string"
         },
         "blobDuration": {
           "description": "Blob created in the customer storage account, per hour.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -784,6 +845,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -791,6 +853,7 @@
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "URL to get the next set of operation list results if there are any.",
           "example": "https://management.azure.com/{operation}?api-version={version}&%24skiptoken={token}"
         }

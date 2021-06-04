@@ -8,15 +8,18 @@
       "properties": {
         "mediaServices": {
           "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
-          "userAssignedManagedIdentity": {
-            "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentities": {
+              "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
+            }
           }
         }
       }
     }
   },
   "responses": {
-    "201": {
+    "202": {
       "body": {
         "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
         "name": "contosto-videoanalyzer",
@@ -24,12 +27,15 @@
         "type": "Microsoft.VideoIndexer/accounts",
         "tags": {},
         "properties": {
-          "accountId": "id",
+          "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
           "accountName": "contosto-videoanalyzer",
           "mediaServices": {
             "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
-            "userAssignedManagedIdentity": {
-              "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
+              }
             }
           },
           "provisioningState": "Succeeded"
