@@ -131,7 +131,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerDnsAliases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerKeys.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerOperations.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/Servers.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerTrustGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerVulnerabilityAssessments.json
