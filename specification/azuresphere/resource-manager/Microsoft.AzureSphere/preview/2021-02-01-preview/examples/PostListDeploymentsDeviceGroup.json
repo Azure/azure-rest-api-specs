@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "deviceGroupName": "MyDeviceGroup1",
+    "parameters": {
+      "$top": 10
+    },
+    "api-version": "2021-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The list of deployments for the device group retrieved successfully.",
+      "body": {
+        "value": [
+          {
+            "identifier": "DeploymentIdentifier1",
+            "deployedImages": [
+              "image1.1",
+              "image1.2"
+            ],
+            "deploymentDateUtc": "2021-6-2 15:53:15Z"
+          },
+          {
+            "identifier": "DeploymentIdentifier2",
+            "deployedImages": [
+              "image2.1",
+              "image2.2"
+            ],
+            "deploymentDateUtc": "2021-6-2 15:54:15Z"
+          }
+        ]
+      }
+    }
+  }
+}
