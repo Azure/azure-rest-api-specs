@@ -4046,13 +4046,13 @@
           "description": "When validateOnly is true this will run validations and return warnings and errors if any, hostpool will not be updated."
         },
         "parameters": {
-          "$ref": "#/definitions/HostPoolUpdateParameters",
+          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
           "description": "Parameters for a hostpool update."
         }
       }
     },
-    "HostPoolUpdateParameters": {
-      "description": "Parameters for a hostpool update.",
+    "HostPoolUpdateConfigurationProperties": {
+      "description": "The configurations of a hostpool update.",
       "type": "object",
       "properties": {
         "saveOriginalDisk": {
@@ -4307,11 +4307,11 @@
           "$ref": "#/definitions/HostPoolUpdateProgress",
           "description": "Properties of host pool update progress."
         },
-        "hostPoolUpdateParameters": {
-          "$ref": "#/definitions/HostPoolUpdateParameters",
-          "description": "Represents properties for a hostpool update."
+        "hostPoolUpdateConfiguration": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
+          "description": "The configurations of a hostpool update."
         },
-        "sessionHostConfigurations": {
+        "sessionHostConfiguration": {
           "$ref": "#/definitions/SessionHostConfigurationProperties",
           "description": "The session host configurations of HostPool."
         }
