@@ -3,7 +3,7 @@
   "info": {
     "description": "Update operation endpoints and objects.",
     "title": "UpdateAdminClient",
-    "version": "2016-05-01"
+    "version": "2021-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -26,7 +26,7 @@
         "tags": [
           "Updates"
         ],
-        "description": "Get the list of update locations",
+        "description": "Get the list of updates at an update locations",
         "operationId": "Updates_List",
         "parameters": [
           {
@@ -92,6 +92,98 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/Prepare": {
+      "post": {
+        "x-ms-examples": {
+          "Prepare a specified update at an update location.": {
+            "$ref": "./examples/Updates/Prepare.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Prepare a specified update at an update location.",
+        "operationId": "Updates_Prepare",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/HealthCheck": {
+      "post": {
+        "x-ms-examples": {
+          "Run health check for a specified update at an update location.": {
+            "$ref": "./examples/Updates/HealthCheck.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Run health check for a specified update at an update location.",
+        "operationId": "Updates_HealthCheck",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/Apply": {
@@ -160,30 +252,30 @@
     },
     "UpdateModel": {
       "description": "Properties of an update.",
+      "type": "object",
       "properties": {
-        "installedDate": {
-          "description": "Date update was installed.",
-          "type": "string",
-          "format": "date-time"
+        "displayName": {
+          "description": "Name of the update.",
+          "type": "string"
         },
         "description": {
           "description": "Description of the update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
           "type": "string"
         },
         "state": {
           "description": "Current state of the update.",
           "$ref": "#/definitions/UpdateState"
         },
-        "kbLink": {
-          "description": "Link to the KB article about the update.",
-          "type": "string"
+        "availabilityType": {
+          "description": "The availability type of the update. The location where the update is available.",
+          "$ref": "#/definitions/AvailabilityType"
         },
-        "minVersionRequired": {
-          "description": "The minimum version required to install.",
-          "type": "string"
-        },
-        "minOemVersionRequired": {
-          "description": "The minimum OEM version required to install.",
+        "releaseLink": {
+          "description": "Release link about the update.",
           "type": "string"
         },
         "packagePath": {
@@ -195,21 +287,28 @@
           "type": "integer",
           "format": "int64"
         },
-        "displayName": {
-          "description": "Name of the update.",
-          "type": "string"
-        },
-        "version": {
-          "description": "Version of the update.",
-          "type": "string"
-        },
-        "oemVersion": {
-          "description": "OEM version of the update.",
-          "type": "string"
-        },
         "publisher": {
           "description": "Publisher of the update.",
           "type": "string"
+        },
+        "prerequisites":{
+          "description": "List of prerequisites.",
+          "type": "array",
+		  "items": {
+            "$ref": "#/definitions/Prerequisite"
+          }
+        },
+        "updateStateProperties":{
+          "description": "Properties when update is in a specific state.",
+          "$ref": "#/definitions/UpdateStateProperties"
+        },
+        "azsUpdateProperties":{
+          "description": "Properties specific to Microsoft Azure update.",
+          "$ref": "#/definitions/AzsUpdateProperties"
+        },
+        "oemUpdateProperties":{
+          "description": "Properties specific to OEM update.",
+          "$ref": "#/definitions/OemUpdateProperties"
         }
       }
     },
@@ -234,19 +333,100 @@
       "description": "State of the update.",
       "type": "string",
       "enum": [
+        "Available",
+        "Downloading",
+        "DownloadFailed",
+        "HealthChecking",
+        "HealthCheckFailed",
+        "Invalid",
         "HasPrerequisite",
+        "Recalled",
         "Obsolete",
-        "Ready",
+        "ReadyToInstall",
         "NotApplicableBecauseAnotherUpdateIsInProgress",
-        "Preparing",
         "Installing",
         "Installed",
-        "PreparationFailed",
+        "AttentionNeeded",
         "InstallationFailed"
       ],
       "x-ms-enum": {
         "name": "UpdateState",
         "modelAsString": true
+      }
+    },
+    "AvailabilityType": {
+      "description": "Availability type of update.",
+      "type": "string",
+      "enum": [
+        "online",
+        "local",
+        "notify"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityType",
+        "modelAsString": true
+      }
+    },
+    "Prerequisite": {
+      "description": "Prerequisite of the update.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Title of the prerequisite.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the prerequisite.",
+          "type": "string"
+        },
+        "infomationLink": {
+          "description": "Supported link of the prerequisite.",
+          "type": "string"
+        }
+      }
+	},
+    "UpdateStateProperties": {
+      "description": "State related properties of the update.",
+      "type": "object",
+      "properties": {
+        "downloadPercentage": {
+          "description": "Package download percentage.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "installedDate": {
+          "description": "Date update was installed.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+	},
+    "AzsUpdateProperties": {
+      "description": "Properties for Microsoft update.",
+      "type": "object",
+      "properties": {
+        "minVersionRequired": {
+          "description": "The minimum version required to install.",
+          "type": "string"
+        },
+        "minOemVersionRequired": {
+          "description": "The minimum OEM version required to install.",
+          "type": "string"
+        }
+      }
+	},
+    "OemUpdateProperties": {
+      "description": "Properties for OEM update.",
+      "type": "object",
+      "properties": {
+        "oemFamily": {
+          "description": "The OEM family of OME update.",
+          "type": "string"
+        },
+        "oemNotifyMsg": {
+          "description": "The notify message of OEM update.",
+          "type": "string"
+        }
       }
     }
   },

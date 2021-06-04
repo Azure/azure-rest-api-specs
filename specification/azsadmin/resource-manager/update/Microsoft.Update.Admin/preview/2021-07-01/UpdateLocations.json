@@ -3,7 +3,7 @@
   "info": {
     "description": "Update location operation endpoints and objects.",
     "title": "UpdateAdminClient",
-    "version": "2016-05-01"
+    "version": "2021-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -123,6 +123,11 @@
           "format": "date-time",
           "type": "string"
         },
+        "lastChecked": {
+          "description": "Time of last successful check.",
+          "format": "date-time",
+          "type": "string"
+        },
         "state": {
           "description": "State with respect to the update.",
           "$ref": "#/definitions/RegionUpdateState"
@@ -134,6 +139,9 @@
       "type": "string",
       "enum": [
         "Unknown",
+        "DownloadAndPrepareInProgress",
+        "PrepareInProgress",
+        "HealthCheckInProgress",
         "AppliedSuccessfully",
         "AppliedUpdateAvailableSuccessfully",
         "UpdateInProgress",
