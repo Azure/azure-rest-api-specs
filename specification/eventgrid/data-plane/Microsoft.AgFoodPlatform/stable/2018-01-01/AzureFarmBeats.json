@@ -7,7 +7,7 @@
   },
   "paths": {},
   "definitions": {
-    "FarmBeatsResourceActionType": {
+    "AgriFoodFarmingResourceActionType": {
       "description": "Action occurred on a resource.",
       "enum": [
         "Created",
@@ -16,11 +16,11 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "FarmBeatsResourceActionType",
+        "name": "AgriFoodFarmingResourceActionType",
         "modelAsString": true
       }
     },
-    "FarmBeatsBoundaryChangedEventData": {
+    "AgriFoodFarmingBoundaryChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.BoundaryChanged event.",
       "type": "object",
       "properties": {
@@ -41,7 +41,7 @@
           "type": "boolean"
         },
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -82,12 +82,12 @@
         }
       }
     },
-    "FarmBeatsCropChangedEventData": {
+    "AgriFoodFarmingCropChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.CropChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -128,7 +128,7 @@
         }
       }
     },
-    "FarmBeatsCropVarietyChangedEventData": {
+    "AgriFoodFarmingCropVarietyChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.CropVarietyChanged event.",
       "type": "object",
       "properties": {
@@ -137,7 +137,7 @@
           "type": "string"
         },
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -178,7 +178,7 @@
         }
       }
     },
-    "FarmBeatsFarmChangedEventData": {
+    "AgriFoodFarmingFarmChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FarmChanged event.",
       "type": "object",
       "properties": {
@@ -187,7 +187,7 @@
           "type": "string"
         },
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -228,12 +228,12 @@
         }
       }
     },
-    "FarmBeatsFarmerChangedEventData": {
+    "AgriFoodFarmingFarmerChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FarmerChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -274,7 +274,7 @@
         }
       }
     },
-    "FarmBeatsFieldChangedEventData": {
+    "AgriFoodFarmingFieldChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FieldChanged event.",
       "type": "object",
       "properties": {
@@ -287,7 +287,7 @@
           "type": "string"
         },
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -328,7 +328,7 @@
         }
       }
     },
-    "FarmBeatsSeasonalFieldChangedEventData": {
+    "AgriFoodFarmingSeasonalFieldChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SeasonalFieldChanged event.",
       "type": "object",
       "properties": {
@@ -349,7 +349,7 @@
           "type": "string"
         },
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -390,12 +390,12 @@
         }
       }
     },
-    "FarmBeatsSeasonChangedEventData": {
+    "AgriFoodFarmingSeasonChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SeasonChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "status": {
           "description": "Status of the resource.",
@@ -436,12 +436,12 @@
         }
       }
     },
-    "FarmBeatsApplicationDataChangedEventData": {
+    "AgriFoodFarmingApplicationDataChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.ApplicationDataChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "farmerId": {
           "description": "Id of the farmer it belongs to.",
@@ -490,12 +490,12 @@
         }
       }
     },
-    "FarmBeatsPlantingDataChangedEventData": {
+    "AgriFoodFarmingPlantingDataChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PlantingDataChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "farmerId": {
           "description": "Id of the farmer it belongs to.",
@@ -544,12 +544,12 @@
         }
       }
     },
-    "FarmBeatsHarvestDataChangedEventData": {
+    "AgriFoodFarmingHarvestDataChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.HarvestDataChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "farmerId": {
           "description": "Id of the farmer it belongs to.",
@@ -598,12 +598,12 @@
         }
       }
     },
-    "FarmBeatsTillageDataChangedEventData": {
+    "AgriFoodFarmingTillageDataChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.TillageDataChanged event.",
       "type": "object",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/FarmBeatsResourceActionType"
+          "$ref": "#/definitions/AgriFoodFarmingResourceActionType"
         },
         "farmerId": {
           "description": "Id of the farmer it belongs to.",
@@ -652,7 +652,7 @@
         }
       }
     },
-    "FarmBeatsJobStatus": {
+    "AgriFoodFarmingJobStatus": {
       "description": "Various states a job can be in.",
       "enum": [
         "Waiting",
@@ -663,11 +663,11 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "FarmBeatsJobStatus",
+        "name": "AgriFoodFarmingJobStatus",
         "modelAsString": true
       }
     },
-    "FarmBeatsSatelliteDataIngestionJobStatusChangedEventData": {
+    "AgriFoodFarmingSatelliteDataIngestionJobStatusChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SatelliteDataIngestionJobStatusChanged event.",
       "type": "object",
       "properties": {
@@ -680,7 +680,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/FarmBeatsJobStatus"
+          "$ref": "#/definitions/AgriFoodFarmingJobStatus"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -717,7 +717,7 @@
         }
       }
     },
-    "FarmBeatsWeatherDataIngestionJobStatusChangedEventData": {
+    "AgriFoodFarmingWeatherDataIngestionJobStatusChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.WeatherDataIngestionJobStatusChanged event.",
       "type": "object",
       "properties": {
@@ -730,7 +730,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/FarmBeatsJobStatus"
+          "$ref": "#/definitions/AgriFoodFarmingJobStatus"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -767,7 +767,7 @@
         }
       }
     },
-    "FarmBeatsFarmOperationDataIngestionJobStatusChangedEventData": {
+    "AgriFoodFarmingFarmOperationDataIngestionJobStatusChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FarmOperationDataIngestionJobStatusChanged event.",
       "type": "object",
       "properties": {
@@ -780,7 +780,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/FarmBeatsJobStatus"
+          "$ref": "#/definitions/AgriFoodFarmingJobStatus"
         },
         "lastActionDateTime": {
           "format": "date-time",
