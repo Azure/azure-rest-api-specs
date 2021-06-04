@@ -26,12 +26,20 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-01
+tag: package-2021-03
 add-credentials: true
 title: StorageCacheManagementClient
 ```
 
 
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.StorageCache/stable/2021-03-01/storagecache.json
+```
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
@@ -40,6 +48,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 input-file:
   - Microsoft.StorageCache/stable/2020-10-01/storagecache.json
 ```
+
 ### Tag: package-2020-03-01
 
 These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
@@ -74,7 +83,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -84,8 +93,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js storagecache/resource-manager
 ```
 
 ## Python
@@ -112,6 +119,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

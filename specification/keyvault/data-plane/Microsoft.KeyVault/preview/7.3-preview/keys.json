@@ -1088,15 +1088,84 @@
           }
         }
       }
+    },
+    "/rng": {
+      "post": {
+        "tags": [
+          "RNG"
+        ],
+        "operationId": "GetRandomBytes",
+        "summary": "Get the requested number of bytes containing random values.",
+        "description": "Get the requested number of bytes containing random values from a managed HSM.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/GetRandomBytesRequest"
+            },
+            "description": "The request object to get random bytes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The bytes encoded as a base64url string.",
+            "schema": {
+              "$ref": "#/definitions/RandomBytes"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRandomBytes": {
+            "$ref": "./examples/GetRandomBytes-example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "GetRandomBytesRequest": {
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The requested number of random bytes."
+        }
+      },
+      "description": "The get random bytes request object.",
+      "required": [
+        "count"
+      ]
+    },
+    "RandomBytes": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The bytes encoded as a base64url string."
+        }
+      },
+      "description": "The get random bytes response object containing the bytes."
+    },
     "KeyReleasePolicy": {
       "properties": {
         "contentType": {
           "description": "Content type and version of key release policy",
           "type": "string",
-          "default": "application/json; charset=utf-8; version=1.0"
+          "default": "application/json; charset=utf-8"
         },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
@@ -1352,6 +1421,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1562,6 +1632,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1594,6 +1665,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1604,28 +1676,60 @@
     },
     "KeyExportParameters": {
       "properties": {
-        "kek": {
+        "wrappingKey": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        },
+        "wrappingKid": {
+          "type": "string",
+          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
-      "description": "The export key parameters.",
-      "required": [
-        "kek"
-      ]
+      "description": "The export key parameters."
     },
     "KeyReleaseParameters": {
       "properties": {
-        "env": {
-          "x-ms-client-name": "environment",
+        "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The target environment assertion."
+          "description": "The attestation assertion for the target of the key release."
+        },
+        "nonce": {
+          "type": "string",
+          "description": "A client provided nonce for freshness."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
       "description": "The release key parameters.",
       "required": [
-        "env"
+        "target"
       ]
     },
     "KeyOperationsParameters": {
@@ -1846,6 +1950,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1959,12 +2064,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
           "readOnly": true,
-          "description": "The blob containing the released key."
+          "description": "A signed object containing the released key."
         }
       },
-      "description": "The release result, containing the released key blob."
+      "description": "The release result, containing the released key."
     }
   },
   "parameters": {
