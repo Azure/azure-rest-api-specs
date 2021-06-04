@@ -72,6 +72,47 @@
           }
         }
       },
+      "put": {
+        "description": "Create or update a custom recommendation for the provided subscription.  Please note that providing an existing customRecommendationName will update/replace an existing record.",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "operationId": "CustomRecommendations_Put",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "description": "Delete a custom recommendation by name for a provided subscriptionId",
         "tags": [
@@ -224,6 +265,16 @@
       "required": true,
       "type": "string",
       "description": "Name of the customRecommendation object",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomRecommendationBody": {
+      "name": "customRecommendationBody",
+      "in":"body",
+      "description": "Custom recommendation body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CustomRecommendationProperties"
+      },
       "x-ms-parameter-location": "method"
     }
   }
