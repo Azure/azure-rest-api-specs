@@ -1089,12 +1089,12 @@
         }
       }
     },
-    "/randomnumbers": {
+    "/rng": {
       "post": {
         "tags": [
-          "RandomNumbers"
+          "RNG"
         ],
-        "operationId": "getRandomNumbers",
+        "operationId": "GetRandomBytes",
         "summary": "Get the requested number of bytes containing random values.",
         "description": "Get the requested number of bytes containing random values from a managed HSM.",
         "parameters": [
@@ -1104,9 +1104,9 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/GetRandomNumbersRequest"
+              "$ref": "#/definitions/GetRandomBytesRequest"
             },
-            "description": "The request object to get random numbers."
+            "description": "The request object to get random bytes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1116,7 +1116,7 @@
           "200": {
             "description": "The bytes encoded as a base64url string.",
             "schema": {
-              "$ref": "#/definitions/GetRandomNumbersResponse"
+              "$ref": "#/definitions/RandomBytes"
             }
           },
           "default": {
@@ -1127,17 +1127,17 @@
           }
         },
         "x-ms-examples": {
-          "GetRandomNumbers": {
-            "$ref": "./examples/RandomNumbers-example.json"
+          "GetRandomBytes": {
+            "$ref": "./examples/GetRandomBytes-example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "GetRandomNumbersRequest": {
+    "GetRandomBytesRequest": {
       "properties": {
-        "bytesLength": {
+        "count": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -1145,12 +1145,12 @@
           "description": "The requested number of random bytes."
         }
       },
-      "description": "The get random numbers request object.",
+      "description": "The get random bytes request object.",
       "required": [
-        "bytesLength"
+        "count"
       ]
     },
-    "GetRandomNumbersResponse": {
+    "RandomBytes": {
       "properties": {
         "value": {
           "type": "string",
@@ -1158,14 +1158,14 @@
           "description": "The bytes encoded as a base64url string."
         }
       },
-      "description": "The get random numbers response object containing the bytes."
+      "description": "The get random bytes response object containing the bytes."
     },
     "KeyReleasePolicy": {
       "properties": {
         "contentType": {
           "description": "Content type and version of key release policy",
           "type": "string",
-          "default": "application/json; charset=utf-8; version=1.0"
+          "default": "application/json; charset=utf-8"
         },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
@@ -1676,9 +1676,13 @@
     },
     "KeyExportParameters": {
       "properties": {
-        "kek": {
+        "wrappingKey": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        },
+        "wrappingKid": {
+          "type": "string",
+          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
         },
         "enc": {
           "type": "string",
@@ -1695,18 +1699,14 @@
           }
         }
       },
-      "description": "The export key parameters.",
-      "required": [
-        "kek"
-      ]
+      "description": "The export key parameters."
     },
     "KeyReleaseParameters": {
       "properties": {
-        "env": {
-          "x-ms-client-name": "environment",
+        "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The target environment assertion."
+          "description": "The attestation assertion for the target of the key release."
         },
         "nonce": {
           "type": "string",
@@ -1729,7 +1729,7 @@
       },
       "description": "The release key parameters.",
       "required": [
-        "env"
+        "target"
       ]
     },
     "KeyOperationsParameters": {
