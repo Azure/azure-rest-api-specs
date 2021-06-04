@@ -1699,13 +1699,7 @@
           "200": {
             "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
             "schema": {
-              "$ref": "#/definitions/HostPoolUpdateFullProperties"
-            }
-          },
-          "202": {
-            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
-            "schema": {
-              "$ref": "#/definitions/HostPoolUpdateFullProperties"
+              "$ref": "#/definitions/UpdateStatus"
             }
           },
           "default": {
@@ -1714,23 +1708,19 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/validationStatuses/{validationInstanceId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationResults/{validationInstanceId}": {
       "get": {
         "tags": [
           "HostPoolUpdate"
         ],
-        "operationId": "ValidationStatuses_Get",
+        "operationId": "UpdateValidationResults_Get",
         "description": "Operation status of a validate hostpool update.",
         "x-ms-examples": {
-          "ValidationStatuses_Get": {
-            "$ref": "./examples/ValidationStatuses_Get.json"
+          "UpdateValidationResults_Get": {
+            "$ref": "./examples/UpdateValidationResults_Get.json"
           }
         },
         "parameters": [
@@ -1747,7 +1737,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationInstanceIdParameter"
+            "$ref": "#/parameters/HostPoolUpdateValidationInstanceIdParameter"
           }
         ],
         "responses": {
@@ -1758,7 +1748,59 @@
             }
           },
           "202": {
-            "description": "Errors and warnings returned by hostpool update validation."
+            "description": "Async operation in progress."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateResults/{updateInstanceId}": {
+      "get": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "UpdateResults_Get",
+        "description": "Operation status of a validate hostpool update.",
+        "x-ms-examples": {
+          "UpdateResults_Get": {
+            "$ref": "./examples/UpdateResults_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolUpdateInstanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateFullProperties"
+            }
+          },
+          "202": {
+            "description": "Async operation in progress."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -4120,6 +4162,22 @@
         }
       }
     },
+    "UpdateStatus": {
+      "type": "object",
+      "description": "Represents a Update Status definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for Update Status",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HostPoolUpdateFullProperties"
+        }
+      }
+    },
     "HostPoolControlParameter": {
       "description": "Represents properties for a hostpool update.",
       "type": "object",
@@ -6304,8 +6362,18 @@
       "minLength": 3,
       "x-ms-parameter-location": "method"
     },
-    "ValidationInstanceIdParameter": {
-      "name": "validationInstanceId",
+    "HostPoolUpdateValidationInstanceIdParameter": {
+      "name": "updateValidationInstanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique id for operation result.",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "HostPoolUpdateInstanceIdParameter": {
+      "name": "updateInstanceId",
       "in": "path",
       "required": true,
       "type": "string",
