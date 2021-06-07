@@ -1821,74 +1821,7 @@
       "type": "object",
       "allOf": [
         {
-          "required": [
-            "text",
-            "category",
-            "offset",
-            "length",
-            "confidenceScore"
-          ],
-          "properties": {
-            "text": {
-              "type": "string",
-              "description": "Entity text as appears in the request."
-            },
-            "category": {
-              "x-ms-enum": {
-                "name": "healthcareEntityCategory",
-                "modelAsString": true
-              },
-              "type": "string",
-              "description": "Healthcare Entity Category.",
-              "enum": [
-                "BODY_STRUCTURE",
-                "AGE",
-                "GENDER",
-                "EXAMINATION_NAME",
-                "DATE",
-                "DIRECTION",
-                "FREQUENCY",
-                "MEASUREMENT_VALUE",
-                "MEASUREMENT_UNIT",
-                "RELATIONAL_OPERATOR",
-                "TIME",
-                "GENE_OR_PROTEIN",
-                "VARIANT",
-                "ADMINISTRATIVE_EVENT",
-                "CARE_ENVIRONMENT",
-                "HEALTHCARE_PROFESSION",
-                "DIAGNOSIS",
-                "SYMPTOM_OR_SIGN",
-                "CONDITION_QUALIFIER",
-                "MEDICATION_CLASS",
-                "MEDICATION_NAME",
-                "DOSAGE",
-                "MEDICATION_FORM",
-                "MEDICATION_ROUTE",
-                "FAMILY_RELATION",
-                "TREATMENT_NAME"
-              ]
-            },
-            "subcategory": {
-              "type": "string",
-              "description": "(Optional) Entity sub type."
-            },
-            "offset": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-            },
-            "length": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-            },
-            "confidenceScore": {
-              "type": "number",
-              "format": "double",
-              "description": "Confidence score between 0 and 1 of the extracted entity."
-            }
-          }
+          "$ref": "#/definitions/HealthcareEntityProperties"
         },
         {
           "$ref": "#/definitions/HealthcareLinkingProperties"
@@ -2018,6 +1951,77 @@
         "id": {
           "description": "Entity id in the given source catalog.",
           "type": "string"
+        }
+      }
+    },
+    "HealthcareEntityProperties": {
+      "type": "object",
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "x-ms-enum": {
+            "name": "healthcareEntityCategory",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Healthcare Entity Category.",
+          "enum": [
+            "BODY_STRUCTURE",
+            "AGE",
+            "GENDER",
+            "EXAMINATION_NAME",
+            "DATE",
+            "DIRECTION",
+            "FREQUENCY",
+            "MEASUREMENT_VALUE",
+            "MEASUREMENT_UNIT",
+            "RELATIONAL_OPERATOR",
+            "TIME",
+            "GENE_OR_PROTEIN",
+            "VARIANT",
+            "ADMINISTRATIVE_EVENT",
+            "CARE_ENVIRONMENT",
+            "HEALTHCARE_PROFESSION",
+            "DIAGNOSIS",
+            "SYMPTOM_OR_SIGN",
+            "CONDITION_QUALIFIER",
+            "MEDICATION_CLASS",
+            "MEDICATION_NAME",
+            "DOSAGE",
+            "MEDICATION_FORM",
+            "MEDICATION_ROUTE",
+            "FAMILY_RELATION",
+            "TREATMENT_NAME"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
         }
       }
     },
