@@ -1761,22 +1761,6 @@
         "modelAsString": true
       }
     },
-    "SignalRAuthType": {
-      "description": "AuthType for the resource.",
-      "type": "object",
-      "properties": {
-        "signingKey": {
-          "description": "Indicate if authenticate requests via SigningKey (AccessKey) is allowed.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
-          "default": "Enabled",
-          "type": "string"
-        },
-        "azureActiveDirectory": {
-          "description": "Indicate if authenticate requests via AAD Token is allowed.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
-          "default": "Enabled",
-          "type": "string"
-        }
-      }
-    },
     "SignalRCorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings.",
       "type": "object",
@@ -1973,9 +1957,15 @@
           "default": "Enabled",
           "type": "string"
         },
-        "authType": {
-          "$ref": "#/definitions/SignalRAuthType",
-          "description": "AuthType\r\nThere are 2 types of Auth method, SigningKey and AzureActiveDirectory.\r\nWhen SigningKey is set Disabled, connectionString with AccessKey=xxx won't work.\r\nWhen AzureActiveDirectory is set Disabled, connection with AuthType=aad won't work.\r\nAt least 1 type has to be set enabled."
+        "disableLocalAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable local auth with AccessKey\r\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "default": false,
+          "type": "boolean"
+        },
+        "disableAadAuth": {
+          "description": "disableAadAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
