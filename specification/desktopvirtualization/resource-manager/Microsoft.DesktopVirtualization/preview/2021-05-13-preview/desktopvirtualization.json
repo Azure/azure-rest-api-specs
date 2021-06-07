@@ -1488,6 +1488,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/current": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "SessionHostConfiguration_Get",
+        "description": "Get the session host configuration of hostpool.",
+        "x-ms-examples": {
+          "SessionHostConfiguration_Get": {
+            "$ref": "./examples/SessionHostConfiguration_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationProxyProperties"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools": {
       "get": {
         "tags": [
@@ -3875,6 +3917,25 @@
         "sessionHostComponentUpdateConfiguration": {
           "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+        }
+      }
+    },
+    "#/definitions/SessionHostConfigurationProxyProperties": {
+      "type": "object",
+      "description": "Represents a session host configuration definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "description": "Detailed properties for Update Status",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostConfigurationProperties"
         }
       }
     },
