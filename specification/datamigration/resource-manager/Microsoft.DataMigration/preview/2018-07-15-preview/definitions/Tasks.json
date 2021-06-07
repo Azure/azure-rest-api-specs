@@ -204,6 +204,30 @@
         }
       ]
     },
+    "ConnectToSourceOracleSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.Oracle.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates Oracle database connection",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToSourceOracleSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToSourceOracleSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetSqlDbTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.SqlDb",
       "type": "object",
@@ -276,6 +300,30 @@
         }
       ]
     },
+    "ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration for Oracle source.",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "GetUserTablesSqlTaskProperties": {
       "x-ms-discriminator-value": "GetUserTables.Sql",
       "type": "object",
@@ -324,6 +372,30 @@
         }
       ]
     },
+    "GetUserTablesOracleTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesOracle",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of Oracle schemas",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "GetUserTablesPostgreSqlTaskProperties": {
       "x-ms-discriminator-value": "GetUserTablesPostgreSql",
       "type": "object",
@@ -331,13 +403,13 @@
       "properties": {
         "input": {
           "description": "Task input",
-          "$ref": "./GetUserTablesPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskInput"
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskInput"
         },
         "output": {
           "description": "Task output. This is ignored if submitted.",
           "type": "array",
           "items": {
-            "$ref": "./GetUserTablesPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskOutput"
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskOutput"
           },
           "readOnly": true
         }
@@ -586,6 +658,30 @@
         }
       ]
     },
+    "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.Oracle.AzureDbForPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that migrates Oracle to Azure Database for PostgreSQL for online migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.SqlDb.Sync",
       "type": "object",
@@ -671,6 +767,29 @@
           "description": "An array containing a single MongoDbMigrationProgress object",
           "items": {
             "$ref": "./MongoDbTasks.json#/definitions/MongoDbMigrationProgress"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ValidateOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Validate.Oracle.AzureDbPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates a migration for Oracle to Azure Database for PostgreSQL for online migrations",
+      "properties": {
+        "input": {
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "type": "array",
+          "description": "An array containing a single validation error response object",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ValidateOracleAzureDbPostgreSqlSyncTaskOutput"
           },
           "readOnly": true
         }

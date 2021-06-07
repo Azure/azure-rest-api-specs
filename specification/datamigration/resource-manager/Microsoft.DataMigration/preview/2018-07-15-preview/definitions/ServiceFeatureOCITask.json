@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "OracleOCIDriverInfo": {
+      "type": "object",
+      "description": "Information about an Oracle OCI driver.",
+      "properties": {
+        "driverName": {
+          "type": "string",
+          "description": "The name of the driver package",
+          "readOnly": true
+        },
+        "driverSize": {
+          "type": "string",
+          "description": "The size in bytes of the driver package",
+          "readOnly": true
+        },
+        "archiveChecksum": {
+          "type": "string",
+          "description": "The MD5 Base64 encoded checksum for the driver package.",
+          "readOnly": true
+        },
+        "oracleChecksum": {
+          "type": "string",
+          "description": "The checksum for the driver package provided by Oracle.",
+          "readOnly": true
+        },
+        "assemblyVersion": {
+          "type": "string",
+          "description": "Version listed in the OCI assembly 'oci.dll'",
+          "readOnly": true
+        },
+        "supportedOracleVersions": {
+          "type": "array",
+          "description": "List of Oracle database versions supported by this driver. Only major minor of the version is listed.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CheckOCIDriverTaskInput": {
+      "type": "object",
+      "description": "Input for the service task to check for OCI drivers.",
+      "properties": {
+        "serverVersion": {
+          "type": "string",
+          "description": "Version of the source server to check against.  Optional."
+        }
+      }
+    },
+    "CheckOCIDriverTaskOutput": {
+      "type": "object",
+      "description": "Output for the service task to check for OCI drivers.",
+      "properties": {
+        "installedDriver": {
+          "description": "Information about the installed driver if found and valid.",
+          "$ref": "#/definitions/OracleOCIDriverInfo"
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "UploadOCIDriverTaskInput": {
+      "type": "object",
+      "description": "Input for the service task to upload an OCI driver.",
+      "properties": {
+        "driverShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "File share information for the OCI driver archive."
+        }
+      }
+    },
+    "UploadOCIDriverTaskOutput": {
+      "type": "object",
+      "description": "Output for the service task to upload an OCI driver.",
+      "properties": {
+        "driverPackageName": {
+          "type": "string",
+          "description": "The name of the driver package that was validated and uploaded.",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InstallOCIDriverTaskInput": {
+      "type": "object",
+      "description": "Input for the service task to install an OCI driver.",
+      "properties": {
+        "driverPackageName": {
+          "type": "string",
+          "description": "Name of the uploaded driver package to install."
+        }
+      }
+    },
+    "InstallOCIDriverTaskOutput": {
+      "type": "object",
+      "description": "Output for the service task to install an OCI driver.",
+      "properties": {
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
