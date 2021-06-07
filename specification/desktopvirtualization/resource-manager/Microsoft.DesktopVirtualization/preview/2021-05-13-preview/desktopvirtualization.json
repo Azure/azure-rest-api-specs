@@ -1669,16 +1669,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateStatuses/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateDetails/current": {
       "get": {
         "tags": [
           "HostPoolUpdate"
         ],
-        "operationId": "UpdateStatuses_Get",
+        "operationId": "UpdateDetails_Get",
         "description": "Operation status of a validate hostpool update.",
         "x-ms-examples": {
-          "UpdateStatuses_Get": {
-            "$ref": "./examples/UpdateStatuses_Get.json"
+          "UpdateDetails_Get": {
+            "$ref": "./examples/UpdateDetails_Get.json"
           }
         },
         "parameters": [
@@ -4291,7 +4291,6 @@
       "properties": {
         "updateStatus": {
           "enum": [
-            "Validating",
             "Scheduled",
             "InProgress",
             "Pausing",
@@ -4306,10 +4305,6 @@
             "name": "HostPoolUpdateStatus",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Validating",
-                "description": "Hostpool update validating."
-              },
               {
                 "value": "Scheduled",
                 "description": "Hostpool update scheduled."
