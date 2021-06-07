@@ -300,7 +300,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
         "description": "Lists order at subscription level.",
         "operationId": "ListOrderAtSubscriptionLevel",
@@ -343,7 +343,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrderCollectionsAtSubscriptionLevel": {
+          "ListOrderAtSubscriptionLevel": {
             "$ref": "./examples/ListOrderAtSubscriptionLevel.json"
           }
         }
@@ -402,7 +402,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrdersAtSubscriptionLevel": {
+          "ListOrderItemsAtSubscriptionLevel": {
             "$ref": "./examples/OrderItemGetBySubscription.json"
           }
         }
@@ -696,7 +696,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
         "description": "Lists order at resource group level.",
         "operationId": "ListOrderAtResourceGroupLevel",
@@ -742,7 +742,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrderCollectionsAtResourceGroupLevel": {
+          "ListOrderAtResourceGroupLevel": {
             "$ref": "./examples/ListOrderAtResourceGroupLevel.json"
           }
         }
@@ -751,7 +751,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
         "description": "Gets an order.",
         "operationId": "GetOrderByName",
@@ -2090,6 +2090,9 @@
     },
     "MeterDetails": {
       "description": "Holds details about billing type and its meter guids",
+			"required": [
+				"billingType"
+			],
       "type": "object",
       "properties": {
         "billingType": {
