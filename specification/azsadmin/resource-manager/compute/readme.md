@@ -17,6 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
+
 ### Basic Information
 These are the global settings for the Compute API.
 
@@ -27,17 +28,18 @@ openapi-type: arm
 tag: package-2021-04-01
 ```
 
-### Tag: package-2021-01-01
+### Tag: package-2021-03-30
 
 These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-01'
+``` yaml $(tag) == 'package-2021-04-01'
 input-file:
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
     - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
     - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
+    - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
     - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
     - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
 ```

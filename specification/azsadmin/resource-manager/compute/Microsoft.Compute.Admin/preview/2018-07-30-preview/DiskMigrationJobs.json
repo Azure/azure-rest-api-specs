@@ -48,6 +48,12 @@
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
           }
         },
         "x-ms-pageable": {
@@ -86,6 +92,12 @@
             "description": "OK -- The disk migration job has been returned.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -133,6 +145,12 @@
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
           }
         }
       }
@@ -168,6 +186,12 @@
             "description": "OK --  Disk migration job cancellation is called.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -360,6 +384,37 @@
       "description": "List of disks.",
       "items": {
         "$ref": "Disks.json#/definitions/Disk"
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     }
   },
