@@ -1711,7 +1711,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationResults/{updateValidationInstanceId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationResults/current": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -1735,9 +1735,6 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolUpdateValidationInstanceIdParameter"
           }
         ],
         "responses": {
@@ -1763,7 +1760,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateResults/{updateInstanceId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateResults/current": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -1787,9 +1784,6 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolUpdateInstanceIdParameter"
           }
         ],
         "responses": {
@@ -6357,26 +6351,6 @@
       "type": "string",
       "description": "The name of the scaling plan.",
       "maxLength": 24,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "HostPoolUpdateValidationInstanceIdParameter": {
-      "name": "updateValidationInstanceId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The unique id for operation result.",
-      "maxLength": 64,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "HostPoolUpdateInstanceIdParameter": {
-      "name": "updateInstanceId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The unique id for operation result.",
-      "maxLength": 64,
       "minLength": 3,
       "x-ms-parameter-location": "method"
     }
