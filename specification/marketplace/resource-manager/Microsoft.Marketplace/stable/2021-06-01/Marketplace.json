@@ -463,7 +463,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransferOffersResponse"
+            }
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -2013,6 +2016,40 @@
           "$ref": "#/definitions/TransferOffersDetails",
           "description": "transfer offers properties details",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TransferOffersResponse": {
+      "description": "The transfer items response. The response contains two lists that indicate for each collection whether the operation succeeded or failed",
+      "type": "object",
+      "properties": {
+        "succeeded": {
+          "description": "Succeeded collections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionsDetails"
+          }
+        },
+        "failed": {
+          "description": "Failed collections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionsDetails"
+          }
+        }
+      }
+    },
+    "CollectionsDetails": {
+      "description": "Collection name and id.",
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "description": "Collection name.",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "Collection id.",
+          "type": "string"
         }
       }
     },
