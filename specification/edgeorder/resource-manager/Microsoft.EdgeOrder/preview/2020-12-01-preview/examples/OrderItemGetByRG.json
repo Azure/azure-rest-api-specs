@@ -104,10 +104,6 @@
               "mango": "fruit",
               "carrot": "vegetable"
             },
-            "sku": {},
-            "identity": {
-              "type": "None"
-            },
             "name": "TestOrderItemName1",
             "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1",
             "type": "Microsoft.EdgeOrder/orderItems"
@@ -131,7 +127,7 @@
                 "orderItemType": "Purchase",
                 "currentStage": {
                   "stageStatus": "Succeeded",
-                  "stageName": "Cancelled",
+                  "stageName": "Placed",
                   "startTime": "2021-06-07T12:49:48.8869361+05:30"
                 },
                 "orderItemStageHistory": [
@@ -141,9 +137,24 @@
                     "startTime": "2021-06-07T12:31:07.7430555+05:30"
                   },
                   {
-                    "stageStatus": "Succeeded",
-                    "stageName": "Cancelled",
-                    "startTime": "2021-06-07T12:49:48.8869361+05:30"
+                    "stageStatus": "None",
+                    "stageName": "Confirmed"
+                  },
+                  {
+                    "stageStatus": "None",
+                    "stageName": "ReadyToShip"
+                  },
+                  {
+                    "stageStatus": "None",
+                    "stageName": "Shipped"
+                  },
+                  {
+                    "stageStatus": "None",
+                    "stageName": "Delivered"
+                  },
+                  {
+                    "stageStatus": "None",
+                    "stageName": "InUse"
                   }
                 ],
                 "preferences": {
@@ -151,12 +162,9 @@
                     "preferredShipmentType": "MicrosoftManaged"
                   }
                 },
-                "notificationEmailList": [
-                  ""
-                ],
-                "cancellationReason": "Order cancelled",
-                "cancellationStatus": "NotCancellable",
-                "deletionStatus": "Allowed",
+                "notificationEmailList": [],
+                "cancellationStatus": "Cancellable",
+                "deletionStatus": "NotAllowed",
                 "returnStatus": "NotReturnable"
               },
               "addressDetails": {
@@ -173,8 +181,12 @@
                     "addressType": "Residential"
                   },
                   "contactDetails": {
-                    "contactName": " ",
-                    "emailList": []
+                    "contactName": "164 TOWNSEND ST",
+                    "phone": "32131311",
+                    "emailList": [
+                      "ssemmail@microsoft.com",
+                      "vishwamdir@microsoft.com"
+                    ]
                   }
                 }
               },
@@ -185,10 +197,6 @@
             "tags": {
               "mango": "fruit",
               "carrot": "vegetable"
-            },
-            "sku": {},
-            "identity": {
-              "type": "None"
             },
             "name": "TestOrderName1",
             "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderName1",
