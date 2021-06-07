@@ -1657,7 +1657,7 @@
             "description": "The object for creating or updating a new workspace connection",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionDto"
+              "$ref": "#/definitions/WorkspaceConnection"
             }
           }
         ],
@@ -4593,22 +4593,6 @@
           "type": "string",
           "description": "Resource type of workspace connection.",
           "readOnly": true
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties of workspace connection.",
-          "$ref": "#/definitions/WorkspaceConnectionProps",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WorkspaceConnectionDto": {
-      "type": "object",
-      "description": "object used for creating workspace connection.",
-      "properties": {
-        "name": {
-          "description": "Friendly name of the workspace connection",
-          "type": "string"
         },
         "properties": {
           "type": "object",
