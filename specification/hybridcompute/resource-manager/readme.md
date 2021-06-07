@@ -26,19 +26,48 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-03
+tag: package-2021-05
 ```
 
+
+### Tag: package-preview-2021-05
+
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-05-17-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-05-17-preview/privateLinkScopes.json
+```
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.HybridCompute/stable/2021-05-20/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2021-05-20/privateLinkScopes.json
+```
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-04-22-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-04-22-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2021-03
 
 These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-03'
+``` yaml $(tag) == 'package-preview-2021-03'
 input-file:
   - Microsoft.HybridCompute/preview/2021-03-25-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2021-03-25-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
@@ -127,8 +156,6 @@ swagger-to-sdk:
 ```
 
 ---
-
-
 
 ## az CLI
 

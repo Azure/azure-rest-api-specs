@@ -10,4 +10,6 @@ input-file:
     - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
+    - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
+    - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
 ```

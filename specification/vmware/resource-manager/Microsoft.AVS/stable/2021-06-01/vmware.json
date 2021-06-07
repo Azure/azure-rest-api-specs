@@ -5199,14 +5199,6 @@
           "description": "The block of addresses should be unique across VNet in your subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is between 0 and 22",
           "type": "string"
         },
-        "externalCloudLinks": {
-          "description": "Array of cloud link IDs from other clouds that connect to this one",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        },
         "managementNetwork": {
           "description": "Network used to access vCenter Server and NSX-T Manager",
           "type": "string",
@@ -5241,6 +5233,14 @@
           "description": "Thumbprint of the NSX-T Manager SSL certificate",
           "type": "string",
           "readOnly": true
+        },
+        "externalCloudLinks": {
+          "description": "Array of cloud link IDs from other clouds that connect to this one",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5305,14 +5305,14 @@
     "CommonClusterProperties": {
       "description": "The common properties of a cluster",
       "properties": {
-        "provisioningState": {
-          "description": "The state of the cluster provisioning",
-          "$ref": "#/definitions/ClusterProvisioningState"
-        },
         "clusterSize": {
           "description": "The cluster size",
           "type": "integer",
           "format": "int32"
+        },
+        "provisioningState": {
+          "description": "The state of the cluster provisioning",
+          "$ref": "#/definitions/ClusterProvisioningState"
         },
         "clusterId": {
           "description": "The identity",
