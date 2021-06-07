@@ -25,6 +25,8 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the videoanalyzer.
 
 ```yaml
+title: VideoAnalyzer
+description: Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the cloud
 openapi-type: arm
 tag: package-2021-05-01-preview
 ```
@@ -57,10 +59,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js videoanalyzer/resource-manager
   - repo: azure-cli-extensions
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -85,6 +86,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
