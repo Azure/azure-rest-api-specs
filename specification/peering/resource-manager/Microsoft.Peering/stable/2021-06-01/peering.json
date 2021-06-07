@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-01-01",
+    "version": "2021-06-01",
     "title": "PeeringManagementClient",
     "description": "APIs to manage Peering resources through the Azure Resource Manager."
   },
@@ -62,7 +62,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/CheckServiceProviderAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/checkServiceProviderAvailability": {
       "post": {
         "tags": [
           "CheckServiceProviderAvailability"
@@ -422,7 +422,8 @@
               "Cdn",
               "Internal",
               "Ix",
-              "IxRs"
+              "IxRs",
+              "Voice"
             ]
           },
           {
@@ -2166,6 +2167,7 @@
             "Premium"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "tier",
             "modelAsString": true
@@ -2178,6 +2180,7 @@
             "Exchange"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "family",
             "modelAsString": true
@@ -2191,6 +2194,7 @@
             "Unlimited"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "size",
             "modelAsString": true
@@ -2259,7 +2263,8 @@
             "Cdn",
             "Internal",
             "Ix",
-            "IxRs"
+            "IxRs",
+            "Voice"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2537,6 +2542,12 @@
           "description": "The flag that indicates whether the operation applies to data plane.",
           "type": "boolean",
           "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "The properties of the operation.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2561,6 +2572,94 @@
         },
         "description": {
           "description": "The description of the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "The properties of the operation.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification payload.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "Aggregation type will be set to one of the values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types for the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Dimensions of the metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension.",
           "type": "string",
           "readOnly": true
         }
@@ -2611,6 +2710,7 @@
             "Failed"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "validationState",
             "modelAsString": true
@@ -2790,7 +2890,8 @@
             "Cdn",
             "Internal",
             "Ix",
-            "IxRs"
+            "IxRs",
+            "Voice"
           ],
           "type": "string",
           "x-ms-enum": {
