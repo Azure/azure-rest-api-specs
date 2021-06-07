@@ -140,6 +140,7 @@ use: "@microsoft.azure/autorest.python@~4.0.71"
 version: V2
 multiapi: true
 no-async: true
+client-side-validation: false
 
 directive:
   from: source-file-python
