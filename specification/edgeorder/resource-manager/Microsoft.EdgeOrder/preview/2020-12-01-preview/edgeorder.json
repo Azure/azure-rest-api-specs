@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-12-01-preview",
-    "title": "Edge Ordering Service"
+    "title": "Edge Ordering Service-Customer"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -300,7 +300,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Orders"
+          "Order"
         ],
         "description": "Lists order at subscription level.",
         "operationId": "ListOrderAtSubscriptionLevel",
@@ -343,7 +343,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrderAtSubscriptionLevel": {
+          "ListOrderCollectionsAtSubscriptionLevel": {
             "$ref": "./examples/ListOrderAtSubscriptionLevel.json"
           }
         }
@@ -402,7 +402,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrderItemsAtSubscriptionLevel": {
+          "ListOrdersAtSubscriptionLevel": {
             "$ref": "./examples/OrderItemGetBySubscription.json"
           }
         }
@@ -696,7 +696,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Orders"
+          "Order"
         ],
         "description": "Lists order at resource group level.",
         "operationId": "ListOrderAtResourceGroupLevel",
@@ -742,7 +742,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrderAtResourceGroupLevel": {
+          "ListOrderCollectionsAtResourceGroupLevel": {
             "$ref": "./examples/ListOrderAtResourceGroupLevel.json"
           }
         }
@@ -751,7 +751,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}": {
       "get": {
         "tags": [
-          "Orders"
+          "Order"
         ],
         "description": "Gets an order.",
         "operationId": "GetOrderByName",
@@ -912,7 +912,7 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Creates an order item. Existing order item cannot be updated with this api and should instead be updated with the Update order item API.",
+        "description": "Creates an order item. Existing order itemcannot be updated with this api and should instead be updated with the Update order item API.",
         "operationId": "CreateOrderItem",
         "consumes": [
           "application/json"
@@ -1332,7 +1332,9 @@
             "Available",
             "ComingSoon",
             "Preview",
-            "Deprecated"
+            "Deprecated",
+            "Signup",
+            "Unavailable"
           ],
           "type": "string",
           "readOnly": true,
@@ -1355,6 +1357,14 @@
               {
                 "value": "Deprecated",
                 "description": "Product is deprecated."
+              },
+              {
+                "value": "Signup",
+                "description": "Product is available only on signup."
+              },
+              {
+                "value": "Unavailable",
+                "description": "Product is not available."
               }
             ]
           }
@@ -1552,6 +1562,12 @@
           "items": {
             "$ref": "#/definitions/Specification"
           },
+          "readOnly": true
+        },
+        "dimensions": {
+          "description": "Dimensions of the configuration",
+          "type": "object",
+          "$ref": "#/definitions/Dimensions",
           "readOnly": true
         }
       }
@@ -1764,13 +1780,117 @@
           "type": "string",
           "readOnly": true
         },
-        "deviceHistory": {
-          "description": "Device history",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+        "managementResourceId": {
+          "description": "Management Resource Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Dimensions": {
+      "description": "Dimensions of a configuration",
+      "type": "object",
+      "properties": {
+        "length": {
+          "description": "Length of the device",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "height": {
+          "description": "Height of the device",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "width": {
+          "description": "Width of the device",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "lengthHeightUnit": {
+          "description": "Unit for the dimensions of length, height and width",
+          "enum": [
+            "Invalid ",
+            "IN",
+            "CM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "LengthHeightUnit",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "Invalid"
+              },
+              {
+                "value": "IN",
+                "description": "Inch, applicable for West US"
+              },
+              {
+                "value": "CM",
+                "description": "Centimeter"
+              }
+            ]
+          }
+        },
+        "weight": {
+          "description": "Weight of the device",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "depth": {
+          "description": "Depth of the device",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "weightUnit": {
+          "description": "Unit for the dimensions of weight",
+          "enum": [
+            "Invalid ",
+            "LBS",
+            "KGS"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "WeightMeasurementUnit",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "Invalid"
+              },
+              {
+                "value": "LBS",
+                "description": "Pounds"
+              },
+              {
+                "value": "KGS",
+                "description": "Kilograms"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DisplayInfo": {
+      "description": "Describes product display information",
+      "type": "object",
+      "properties": {
+        "productFamilyDisplayName": {
+          "description": "Product family display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationDisplayName": {
+          "description": "Configuration display name",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -1958,15 +2078,12 @@
         }
       }
     },
-    "ManagementResourceDetails": {
-      "description": "Management resource details to link device",
+    "ManagementResourcePreferences": {
+      "description": "Management resource preference to link device",
       "type": "object",
-      "required": [
-        "managementResourceArmId"
-      ],
       "properties": {
-        "managementResourceArmId": {
-          "description": "Management resource ARM ID",
+        "preferedManagementResourceId": {
+          "description": "Customer prefered Management resource ARM ID",
           "type": "string"
         }
       }
@@ -2028,7 +2145,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "billingType"
+      "discriminator": "billingType"
     },
     "NotificationPreference": {
       "description": "Notification preference for a job stage.",
@@ -2234,7 +2351,7 @@
           "readOnly": true
         },
         "cancellationStatus": {
-          "description": "Describes whether the order is cancellable or not.",
+          "description": "Describes whether the order item is cancellable or not.",
           "enum": [
             "Cancellable",
             "CancellableWithFee",
@@ -2262,7 +2379,7 @@
           }
         },
         "deletionStatus": {
-          "description": "Describes whether the order item is deletable or not.",
+          "description": "Describes whether the orderItem is deletable or not.",
           "enum": [
             "Allowed",
             "NotAllowed"
@@ -2321,10 +2438,6 @@
           "$ref": "#/definitions/ResourceProviderDetails",
           "description": "parent RP details",
           "readOnly": true
-        },
-        "managementResourceDetails": {
-          "$ref": "#/definitions/ManagementResourceDetails",
-          "description": "Management resource details"
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
@@ -2470,7 +2583,7 @@
             "Placed",
             "InReview",
             "Confirmed",
-            "ReadyForDispatch",
+            "ReadyToShip",
             "Shipped",
             "Delivered",
             "InUse"
@@ -2542,8 +2655,8 @@
                 "description": "Order is confirmed"
               },
               {
-                "value": "ReadyForDispatch",
-                "description": "Order is ready for dispatch"
+                "value": "ReadyToShip",
+                "description": "Order is ready to ship"
               },
               {
                 "value": "Shipped",
@@ -2604,7 +2717,7 @@
           "description": "Customer preference."
         },
         "notificationEmailList": {
-          "description": "Customer preference.",
+          "description": "Additional notification email list.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2649,6 +2762,10 @@
         "encryptionPreferences": {
           "$ref": "#/definitions/EncryptionPreferences",
           "description": "Preferences related to the Encryption."
+        },
+        "managementResourcePreferences": {
+          "$ref": "#/definitions/ManagementResourcePreferences",
+          "description": "Preferences related to the Management resource."
         }
       }
     },
@@ -2671,6 +2788,10 @@
       ],
       "type": "object",
       "properties": {
+        "displayInfo": {
+          "$ref": "#/definitions/DisplayInfo",
+          "description": "Display details of the product"
+        },
         "hierarchyInformation": {
           "$ref": "#/definitions/HierarchyInformation",
           "description": " Hierarchy of the product which uniquely identifies the product"
