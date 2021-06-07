@@ -209,7 +209,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
-- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
