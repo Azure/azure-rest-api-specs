@@ -305,6 +305,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerFqdnParameter"
           }
         ],
         "responses": {
@@ -348,6 +351,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerFqdnParameter"
           }
         ],
         "responses": {
@@ -391,6 +397,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerFqdnParameter"
           }
         ],
         "responses": {
@@ -4695,6 +4704,14 @@
       "required": false,
       "type": "string",
       "description": "resource type for which the OS options needs to be returned",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerFqdnParameter": {
+      "name": "server-fqdn",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "server fqdn type for credentials to be returned",
       "x-ms-parameter-location": "method"
     }
   }
