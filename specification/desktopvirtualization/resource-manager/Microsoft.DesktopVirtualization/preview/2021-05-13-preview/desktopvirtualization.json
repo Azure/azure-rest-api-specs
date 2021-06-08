@@ -50,6 +50,9 @@
               "$ref": "#/definitions/ResourceProviderOperationList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1292,6 +1295,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1669,6 +1675,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateDetails": {
+      "get": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "UpdateDetails_List",
+        "description": "Operation status of a validate hostpool update.",
+        "x-ms-examples": {
+          "UpdateDetails_List": {
+            "$ref": "./examples/UpdateDetails_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
+            "schema": {
+              "$ref": "#/definitions/UpdateStatusList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateDetails/current": {
       "get": {
         "tags": [
@@ -1711,16 +1762,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationResults/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/current": {
       "get": {
         "tags": [
           "HostPoolUpdate"
         ],
-        "operationId": "UpdateValidationResults_Get",
+        "operationId": "UpdateValidationOperationResults_Get",
         "description": "Operation status of a validate hostpool update.",
         "x-ms-examples": {
-          "UpdateValidationResults_Get": {
-            "$ref": "./examples/UpdateValidationResults_Get.json"
+          "UpdateValidationOperationResults_Get": {
+            "$ref": "./examples/UpdateValidationOperationResults_Get.json"
           }
         },
         "parameters": [
@@ -1760,16 +1811,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateResults/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateOperationResults/current": {
       "get": {
         "tags": [
           "HostPoolUpdate"
         ],
-        "operationId": "UpdateResults_Get",
+        "operationId": "UpdateOperationResults_Get",
         "description": "Operation status of a validate hostpool update.",
         "x-ms-examples": {
-          "UpdateResults_Get": {
-            "$ref": "./examples/UpdateResults_Get.json"
+          "UpdateOperationResults_Get": {
+            "$ref": "./examples/UpdateOperationResults_Get.json"
           }
         },
         "parameters": [
@@ -2725,6 +2776,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2901,7 +2955,7 @@
           "200": {
             "description": "Successfully retrieved the list of resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -2911,6 +2965,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2954,6 +3011,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3130,7 +3190,7 @@
           "200": {
             "description": "Successfully retrieved the list of resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -3140,6 +3200,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -3176,6 +3239,11 @@
             "$ref": "#/definitions/ResourceProviderOperation"
           },
           "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
         }
       }
     },
@@ -4156,6 +4224,25 @@
         }
       }
     },
+    "UpdateStatusList": {
+      "type": "object",
+      "title": "UpdateStatusList",
+      "description": "List of UpdateStatus definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of UpdateStatus definitions.",
+          "items": {
+            "$ref": "#/definitions/UpdateStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
     "UpdateStatus": {
       "type": "object",
       "description": "Represents a Update Status definition.",
@@ -4166,7 +4253,8 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
         },
         "properties": {
           "description": "Detailed properties for Update Status",
@@ -4275,6 +4363,25 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of session hosts that failed to rollback."
+        }
+      }
+    },
+    "HostPoolUpdateFullPropertiesList": {
+      "type": "object",
+      "title": "HostPoolUpdateFullPropertiesList",
+      "description": "List of HostPoolUpdateFullPropertiesList definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of HostPoolUpdateFullPropertiesList definitions.",
+          "items": {
+            "$ref": "#/definitions/HostPoolUpdateFullProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
         }
       }
     },
@@ -6230,6 +6337,63 @@
       ],
       "description": "The Private Endpoint Connection resource."
     },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
     "PrivateEndpointConnectionListResultWithSystemData": {
       "properties": {
         "value": {
@@ -6238,6 +6402,11 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
         }
       },
       "description": "List of private endpoint connection associated with the specified storage account"
