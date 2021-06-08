@@ -3131,6 +3131,9 @@
           },
           "Create a VM with UserData": {
             "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
+          },
+          "Create a VM with Capacity Reservation": {
+            "$ref": "./examples/CreateOrUpdateAVmWithCapacityReservation.json"
           }
         }
       },
@@ -4066,6 +4069,571 @@
           "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
             "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}": {
+      "put": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_CreateOrUpdate",
+        "description": "Create or update a capacity reservation group. For details of Capacity Reservation and Capacity Reservation Groups please see [Capacity Reservation Documentation] (link to capacity reservation)",
+        "parameters": [
+          { 
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroup"
+            },
+            "description": "Parameters supplied to the Create Capacity Reservation Group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a capacity reservation group.": {
+            "$ref": "./examples/CreateOrUpdateACapacityReservationGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_Update",
+        "description": "Update an capacity reservation group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupUpdate"
+            },
+            "description": "Parameters supplied to the Update Capacity Reservation Group operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroup"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_Delete",
+        "description": "Delete a capacity reservation group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_Get",
+        "description": "Retrieves information about a capacity reservation group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the Capacity Reservations under the capacity reservation group.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Capacity Reservation Group.": {
+            "$ref": "./examples/GetACapacityReservationGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups": {
+      "get": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_ListByResourceGroup",
+        "description": "Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups": {
+      "get": {
+        "tags": [
+          "CapacityReservationGroups"
+        ],
+        "operationId": "CapacityReservationGroups_ListBySubscription",
+        "description": "Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityreservations/{capacityReservationName}": {
+      "put": {
+        "tags": [
+          "CapacityReservations"
+        ],
+        "operationId": "CapacityReservations_CreateOrUpdate",
+        "description": "Create or update a Capacity Reservation .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Capacity Reservation ."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            },
+            "description": "Parameters supplied to the Create Capacity Reservation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Capacity Reservation .": {
+            "$ref": "./examples/CreateOrUpdateACapacityReservation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "CapacityReservations"
+        ],
+        "operationId": "CapacityReservations_Update",
+        "description": "Update an Capacity Reservation .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Capacity Reservation ."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationUpdate"
+            },
+            "description": "Parameters supplied to the Update Capacity Reservation operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "CapacityReservations"
+        ],
+        "operationId": "CapacityReservations_Delete",
+        "description": "Delete a Capacity Reservation.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Capacity Reservation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "CapacityReservations"
+        ],
+        "operationId": "CapacityReservations_Get",
+        "description": "Retrieves information about a Capacity Reservation.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Capacity Reservation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the Capacity Reservation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Capacity Reservation.": {
+            "$ref": "./examples/GetACapacityReservation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityreservations": {
+      "get": {
+        "tags": [
+          "CapacityReservation"
+        ],
+        "operationId": "CapacityReservations_ListByCapacityReservationGroup",
+        "description": "Lists all of the Capacity Reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of Capacity Reservations.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8318,6 +8886,247 @@
       ],
       "description": "The list dedicated host operation response."
     },
+    "CapacityReservationGroupInstanceView": {
+      "properties": {
+        "capacityReservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapacityReservationInstanceViewWithName"
+          },
+          "description": "List of instance view of the Capacity Reservations under the Capacity Reservation group."
+        }
+      }
+    },
+    "CapacityReservationGroupProperties": {
+      "properties": {
+        "capacityReservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all capacity reservations in the capacity reservation group."
+        },
+        "virtualMachinesAssociated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all virtual machines associated to the capacity reservation group."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/CapacityReservationGroupInstanceView",
+          "readOnly": true,
+          "description": "The Capacity Reservation group instance view, which has the list of instance view of the Capacity Reservations under the Capacity Reservation group."
+        }
+      },
+      "description": "Capacity Reservation Group Properties."
+    },
+    "CapacityReservationGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CapacityReservationGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zones to use for this capacity reservation group. . The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each capacity reservation in the group to be in one of the zones."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the capacity reservation group that the capacity reservations should be assigned to. <br><br> Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added to another capacity reservation group."
+    },
+    "CapacityReservationGroupUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CapacityReservationGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zones to use for this capacity reservation group. . The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each capacity reservation in the group to be in one of the zones."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the Capacity Reservation group that the Capacity Reservation should be assigned to. Only tags can be updated."
+    },
+    "CapacityReservationGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapacityReservationGroup"
+          },
+          "description": "The list of Capacity Reservation groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Capacity Reservation Groups. Call ListNext() with this URI to fetch the next page of Capacity Reservation Groups."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Capacity Reservation Group with resource group response."
+    },
+    "CapacityReservationInstanceView": {
+      "properties": {
+        "utilizationInfo": {
+          "$ref": "#/definitions/CapacityReservationUtilization",
+          "description": "Unutilized capacity of the capacity reservation."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a dedicated host."
+    },
+    "CapacityReservationUtilization": {
+      "properties": {
+        "virtualMachinesAllocated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all virtual machines allocated in the Capacity reservation."
+        }
+      },
+      "description": "Capacity Reservation utilized capacity."
+    },
+    "CapacityReservationInstanceViewWithName": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the Capacity Reservation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CapacityReservationInstanceView"
+        }
+      ],
+      "description": "The instance view of a Capacity Reservation that includes the name of the Capacity Reservation. It is used for the response to the instance view of a Capacity Reservation group."
+    },
+    "CapacityReservationProperties": {
+      "properties": {
+        "reservationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique id generated and assigned to the capacity reservation by the platform. <br><br> Does not change throughout the lifetime of the capacity reservation."
+        },
+        "virtualMachinesAssociated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all virtual machines associated in the Capacity reservation."
+        },
+        "provisioningTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the capacity reservation was last time updated."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/CapacityReservationInstanceView",
+          "readOnly": true,
+          "description": "The Capacity reservation instance view."
+        }
+      },
+      "description": "Properties of the Capacity reservation."
+    },
+    "CapacityReservation": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CapacityReservationProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the capacity reservation. List Microsoft.Compute SKUs for a list of possible values."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zones to use for this capacity reservation. . The zone can be assigned only during creation. If not provided, the reservation supports all zones in the region. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "sku"
+      ],
+      "description": "Specifies information about the capacity reservation."
+    },
+    "CapacityReservationUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CapacityReservationProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the capacity reservation. List Microsoft.Compute SKUs for a list of possible values."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the Capacity Reservation. Only tags, sku.capacity can be updated."
+    },
+    "CapacityReservationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapacityReservation"
+          },
+          "description": "The list of Capacity Reservations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Capacity Reservations. Call ListNext() with this URI to fetch the next page of Capacity Reservations."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The list Capacity Reservation operation response."
+    },
     "SshPublicKeyGenerateKeyPairResult": {
       "properties": {
         "privateKey": {
@@ -9968,6 +10777,15 @@
       ],
       "description": "Describes a data disk."
     },
+    "CapacityReservationProfile": {
+      "properties": {
+        "capacityReservationGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Describes the parameter of capacity Reservation resource id that can be used for allocating the virtual machine. <br><br> NOTE:Please refer https://aka.ms/CapacityReservation for more details."
+        }
+      },
+      "description": "The parameters of a Capacity Reservation Profile."
+    },
     "StorageProfile": {
       "properties": {
         "imageReference": {
@@ -10959,6 +11777,10 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies the capacity reservation related details of a virtual machine. <br><br>Minimum api-version: 2021-07-01."
         },
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
