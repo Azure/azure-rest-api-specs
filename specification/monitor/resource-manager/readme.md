@@ -615,6 +615,14 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: MissingTypeObject
+    from: types.json
+    where: $.definitions.ErrorResponse
+    reason: 'Cannot modify the common shared error response.'
+  - suppress: MissingTypeObject
+    from: types.json
+    where: $.definitions.ErrorAdditionalInfo
+    reason: 'Cannot modify the common shared error response.'
   - suppress: OperationsAPIImplementation
     from: dataCollectionEndpoints_API.json
     where: $.paths
