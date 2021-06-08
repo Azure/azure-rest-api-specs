@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/UpdateLocationList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -84,6 +90,12 @@
             "schema": {
               "$ref": "#/definitions/UpdateLocation"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
@@ -98,6 +110,12 @@
           "description": "Model which holds information related to update location.",
           "$ref": "#/definitions/UpdateLocationModel",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -111,11 +129,11 @@
       "type": "object",
       "properties": {
         "currentVersion": {
-          "description": "Current version of your AzureStack deployment.",
+          "description": "Current version of your Azure Stack Hub deployment.",
           "type": "string"
         },
         "currentOemVersion": {
-          "description": "Current OEM version of your AzureStack deployment.",
+          "description": "Current OEM version of your Azure Stack Hub deployment.",
           "type": "string"
         },
         "lastUpdated": {
@@ -124,7 +142,7 @@
           "type": "string"
         },
         "lastChecked": {
-          "description": "Time of last successful check.",
+          "description": "Time of last successful check for new available updates.",
           "format": "date-time",
           "type": "string"
         },
@@ -139,13 +157,14 @@
       "type": "string",
       "enum": [
         "Unknown",
-        "DownloadAndPrepareInProgress",
-        "PrepareInProgress",
+        "UpdateAvailable",
+        "DownloadAndPreparationInProgress",
+        "PreparationInProgress",
         "HealthCheckInProgress",
         "AppliedSuccessfully",
-        "AppliedUpdateAvailableSuccessfully",
         "UpdateInProgress",
-        "UpdateFailed"
+        "UpdateFailed",
+        "NeedsAttention"
       ],
       "x-ms-enum": {
         "name": "RegionUpdateState",

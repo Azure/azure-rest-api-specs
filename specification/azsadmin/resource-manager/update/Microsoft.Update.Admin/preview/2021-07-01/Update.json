@@ -39,13 +39,19 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
-    }
+	}
   },
   "definitions": {
     "Resource": {
@@ -128,6 +134,40 @@
         "nextLink": {
           "description": "URI to the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     }

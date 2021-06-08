@@ -19,7 +19,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates": {
       "get": {
         "x-ms-examples": {
-          "Get the list of updates at an update locations.": {
+          "Get the list of updates at an update location.": {
             "$ref": "./examples/Updates/List.json"
           }
         },
@@ -47,6 +47,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/UpdateList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
             }
           }
         },
@@ -90,11 +96,17 @@
             "schema": {
               "$ref": "#/definitions/Update"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/Prepare": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/prepare": {
       "post": {
         "x-ms-examples": {
           "Prepare a specified update at an update location.": {
@@ -124,23 +136,23 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
-            }
-          },
           "202": {
             "description": "ACCEPTED",
             "schema": {
               "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
             }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/HealthCheck": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/healthCheck": {
       "post": {
         "x-ms-examples": {
           "Run health check for a specified update at an update location.": {
@@ -170,23 +182,23 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
-            }
-          },
           "202": {
             "description": "ACCEPTED",
             "schema": {
               "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
             }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/Apply": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/apply": {
       "post": {
         "x-ms-examples": {
           "Apply a specific update at an update location.": {
@@ -216,16 +228,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
-            }
-          },
           "202": {
             "description": "ACCEPTED",
             "schema": {
               "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
             }
           }
         },
@@ -242,6 +254,12 @@
           "description": "Properties of an update.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateModel"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -275,7 +293,7 @@
           "$ref": "#/definitions/AvailabilityType"
         },
         "releaseLink": {
-          "description": "Release link about the update.",
+          "description": "Link to release notes or other details about the update.",
           "type": "string"
         },
         "packagePath": {
@@ -303,7 +321,7 @@
           "$ref": "#/definitions/UpdateStateProperties"
         },
         "azsUpdateProperties":{
-          "description": "Properties specific to Microsoft Azure update.",
+          "description": "Properties specific to Microsoft Azure Stack Hub update.",
           "$ref": "#/definitions/AzsUpdateProperties"
         },
         "oemUpdateProperties":{
@@ -338,6 +356,8 @@
         "DownloadFailed",
         "HealthChecking",
         "HealthCheckFailed",
+        "Preparing",
+        "PreparationFailed",
         "Invalid",
         "HasPrerequisite",
         "Recalled",
@@ -379,8 +399,8 @@
           "description": "Description of the prerequisite.",
           "type": "string"
         },
-        "infomationLink": {
-          "description": "Supported link of the prerequisite.",
+        "informationLink": {
+          "description": "Link providing details about prerequisite.",
           "type": "string"
         }
       }
@@ -420,11 +440,11 @@
       "type": "object",
       "properties": {
         "oemFamily": {
-          "description": "The OEM family of OME update.",
+          "description": "The family of models to which the OEM update is applicable.",
           "type": "string"
         },
         "oemNotifyMsg": {
-          "description": "The notify message of OEM update.",
+          "description": "The message from the OEM availability a relevant OEM update.",
           "type": "string"
         }
       }
