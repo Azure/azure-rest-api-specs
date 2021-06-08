@@ -1390,13 +1390,35 @@
         },
         "body": {
           "type": "object",
-          "$ref": "#/definitions/queryResults"
+          "$ref": "#/definitions/batchQueryResults"
         },
         "headers": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "batchQueryResults": {
+      "title": "A query response for a single query in a batch.",
+      "description": "Contains the tables, columns & rows resulting from a query.",
+      "type": "object",
+      "properties": {
+        "tables": {
+          "description": "The list of tables, columns and rows.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/table"
+          }
+        },
+        "statistics": {
+          "type": "object",
+          "description": "Statistics represented in JSON format.",
+          "properties": {}
+        },
+        "error": {
+          "$ref": "#/definitions/errorInfo"
         }
       }
     }
