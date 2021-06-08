@@ -45,3 +45,23 @@ output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/sec
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security
 ```
+
+```yaml $(python) && $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.AadConnectivityState.properties.connectivityState
+    transform: > 
+        $['x-ms-enum']['name'] = 'AadConnectivityStateEnum';
+  - from: swagger-document
+    where: $.definitions.ExternalSecuritySolutionKind.properties.kind
+    transform: > 
+        $['x-ms-enum']['name'] = 'ExternalSecuritySolutionKindEnum';
+  - from: jitNetworkAccessPolicies.json
+    where: $.definitions.JitNetworkAccessPortRule.properties.protocol
+    transform: > 
+        $['x-ms-enum']['name'] = 'protocolEnum';
+  - from: alerts.json
+    where: $.definitions.AlertSimulatorRequestProperties.properties.kind
+    transform: > 
+        $['x-ms-enum']['name'] = 'kindEnum';
+```
