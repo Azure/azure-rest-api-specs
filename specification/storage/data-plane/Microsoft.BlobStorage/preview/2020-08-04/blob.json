@@ -10820,40 +10820,47 @@
       "xml": {
         "name": "DelimitedTextConfiguration"
       },
-      "description": "Groups the settings used for interpreting the blob data if the blob is delimited text formatted.",
+      "description": "delimited text configuration",
       "type": "object",
+      "required": [
+        "ColumnSeparator",
+        "FieldQuote",
+        "RecordSeparator",
+        "EscapeChar",
+        "HeadersPresent"
+      ],
       "properties": {
         "ColumnSeparator": {
           "type": "string",
-          "description": "The string used to separate columns.",
+          "description": "column separator",
           "xml": {
             "name": "ColumnSeparator"
           }
         },
         "FieldQuote": {
           "type": "string",
-          "description": "The string used to quote a specific field.",
+          "description": "field quote",
           "xml": {
             "name": "FieldQuote"
           }
         },
         "RecordSeparator": {
           "type": "string",
-          "description": "The string used to separate records.",
+          "description": "record separator",
           "xml": {
             "name": "RecordSeparator"
           }
         },
         "EscapeChar": {
           "type": "string",
-          "description": "The string used as an escape character.",
+          "description": "escape char",
           "xml": {
             "name": "EscapeChar"
           }
         },
         "HeadersPresent": {
           "type": "boolean",
-          "description": "Represents whether the data has headers.",
+          "description": "has headers",
           "xml": {
             "name": "HasHeaders"
           }
@@ -10866,10 +10873,13 @@
       },
       "description": "json text configuration",
       "type": "object",
+      "required": [
+        "RecordSeparator"
+      ],
       "properties": {
         "RecordSeparator": {
           "type": "string",
-          "description": "The string used to separate records.",
+          "description": "record separator",
           "xml": {
             "name": "RecordSeparator"
           }
@@ -10880,7 +10890,7 @@
       "xml": {
         "name": "ArrowConfiguration"
       },
-      "description": "Groups the settings used for formatting the response if the response should be Arrow formatted.",
+      "description": "arrow configuration",
       "type": "object",
       "required": [
         "Schema"
@@ -10909,7 +10919,7 @@
       "xml": {
         "name": "Field"
       },
-      "description": "Groups settings regarding specific field of an arrow schema",
+      "description": "field of an arrow schema",
       "type": "object",
       "required": [
         "Type"
@@ -11375,7 +11385,7 @@
       }
     },
     "QueryRequest": {
-      "description": "Groups the set of query request settings.",
+      "description": "the quick query body",
       "type": "object",
       "required": [
         "QueryType",
@@ -11384,7 +11394,7 @@
       "properties": {
         "QueryType": {
           "type": "string",
-          "description": "Required. The type of the provided query expression.",
+          "description": "the query type",
           "xml": {
             "name": "QueryType"
           },
@@ -11394,7 +11404,7 @@
         },
         "Expression": {
           "type": "string",
-          "description": "The query expression in SQL. The maximum size of the query expression is 256KiB.",
+          "description": "a query statement",
           "xml": {
             "name": "Expression"
           }
