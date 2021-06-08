@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AgFoodPlatform
-  output-folder: $(csharp-sdks-folder)/agfood/management/Microsoft.AgFoodPlatform/Generated
+  namespace: Microsoft.Azure.Management.AgriFood
+  output-folder: $(csharp-sdks-folder)/agrifood/Microsoft.Azure.Management.AgriFood/src/Generated
 ```
