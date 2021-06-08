@@ -36,7 +36,6 @@ description: Monitor Management Client
 openapi-type: arm
 tag: package-2020-03
 ```
-
 ### Tag: package-2021-05-01-preview-only
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
@@ -48,7 +47,6 @@ input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
-
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
@@ -622,6 +620,10 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionEndpoints_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: OperationsAPIImplementation
     from: dataCollectionRules_API.json
     where: $.paths
