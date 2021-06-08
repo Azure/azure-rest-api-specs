@@ -116,6 +116,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -155,6 +156,7 @@
       }
     },
     "MetricValue": {
+      "type": "object",
       "required": [
         "timeStamp"
       ],
@@ -193,6 +195,7 @@
       "description": "Represents a metric value."
     },
     "MetadataValue": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
@@ -274,7 +277,7 @@
         },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "the unit of the metric."
+          "description": "The unit of the metric."
         },
         "timeseries": {
           "type": "array",
