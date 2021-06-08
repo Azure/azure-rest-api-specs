@@ -7,12 +7,16 @@ cli:
             group: .*
             parameter: privateLinkResourceId
         alias:
-            - privLinkResourceId
+            - priv_link_resource_id
         ## hide an operation
       - where:
             group: .*
             op: Patch
-        hidden: true
+        hidden: true            
+      - where:
+            group: .*
+            op: PatchDetails            
+        hidden: true   
       - where:
             group: .*
             op: GetDetails
