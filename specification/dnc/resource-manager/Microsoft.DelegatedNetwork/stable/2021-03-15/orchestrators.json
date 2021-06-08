@@ -154,6 +154,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
           }
         ],
         "responses": {
@@ -498,6 +501,14 @@
       "maxLength": 63,
       "x-ms-parameter-location": "method",
       "description": "The name of the resource. It must be a minimum of 3 characters, and a maximum of 63."
+    },
+    "ForceDeleteParameter": {
+      "name": "forceDelete",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Force delete resource",
+      "x-ms-parameter-location": "method"
     }
   }
 }
