@@ -118,6 +118,68 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 ```
 
+### Tag: package-artifacts-2020-12-01
+
+These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/operations.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-monitoring-2020-12-01
+
+These settings apply only when `--tag=package-monitoring-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-monitoring-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/monitoring.json
+```
+
+### Tag: package-access-control-2020-12-01
+
+These settings apply only when `--tag=package-access-control-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/checkAccessSynapseRbac.json
+  - Microsoft.Synapse/stable/2020-12-01/roleAssignments.json
+  - Microsoft.Synapse/stable/2020-12-01/roleDefinitions.json
+```
+
+### Tag: package-vnet-2020-12-01
+
+These settings apply only when `--tag=package-vnet-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-vnet-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/managedPrivateEndpoints.json
+```
+
+### Tag: package-spark-2020-12-01
+
+These settings apply only when `--tag=package-spark-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-spark-2020-12-01'
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/sparkJob.json
+```
+
 ## Suppression
 ``` yaml
 directive:
