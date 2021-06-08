@@ -373,7 +373,8 @@
       "enum": [
         "systemAssignedIdentity",
         "userAssignedIdentity",
-        "servicePrincipal",
+        "servicePrincipalSecret",
+        "servicePrincipalCertificate",
         "secret"
       ],
       "x-ms-enum": {
@@ -444,27 +445,60 @@
         }
       ]
     },
-    "ServicePrincipalAuthInfo": {
-      "x-ms-discriminator-value": "servicePrincipal",
-      "description": "The authentication info when authType is servicePrincipal",
+    "ServicePrincipalSecretAuthInfo": {
+      "x-ms-discriminator-value": "servicePrincipalSecret",
+      "description": "The authentication info when authType is servicePrincipal secret",
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
         }
       ],
       "properties": {
-        "id": {
-          "description": "ServicePrincipal Id for servicePrincipal auth.",
+        "clientId": {
+          "description": "ServicePrincipal application clientId for servicePrincipal auth.",
           "type": "string"
         },
-        "name": {
-          "description": "ServicePrincipal Name for servicePrincipal auth.",
+        "principalId": {
+          "description": "Principal Id for servicePrincipal auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Secret for servicePrincipal auth.",
           "type": "string"
         }
       },
       "required": [
-        "id",
-        "name"
+        "clientId",
+        "principalId",
+        "secret"
+      ]
+    },
+    "ServicePrincipalCertificateAuthInfo": {
+      "x-ms-discriminator-value": "servicePrincipalCertificate",
+      "description": "The authentication info when authType is servicePrincipal certificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "description": "Application clientId for servicePrincipal auth.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "Principal Id for servicePrincipal auth.",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "ServicePrincipal certificate for servicePrincipal auth.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientId",
+        "principalId",
+        "certificate"
       ]
     },
     "LinkerResource": {
@@ -531,6 +565,25 @@
         "authInfo": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthInfoBase"
+        },
+        "clientType": {
+          "type": "string",
+          "enum": [
+            "none",
+            "dotnet",
+            "dotnetCore",
+            "python",
+            "django",
+            "php",
+            "Nodejs",
+            "java",
+            "go",
+            "springCloudBinding"
+          ],
+          "x-ms-enum": {
+            "name": "clientType",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "readOnly": true,
