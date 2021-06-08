@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2018-01-01"
   },
   "host": "management.azure.com",
@@ -36,7 +33,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/metricDefinitions": {
+    "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
       "get": {
         "tags": [
           "MetricDefinitions"
@@ -58,7 +55,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -84,6 +81,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -100,6 +98,7 @@
       "description": "The localizable string class."
     },
     "MetricAvailability": {
+      "type": "object",
       "properties": {
         "timeGrain": {
           "type": "string",
@@ -154,6 +153,7 @@
       }
     },
     "MetricDefinition": {
+      "type": "object",
       "properties": {
         "isDimensionRequired": {
           "type": "boolean",
@@ -181,7 +181,7 @@
         },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "the unit of the metric."
+          "description": "The unit of the metric."
         },
         "primaryAggregationType": {
           "$ref": "#/definitions/AggregationType",
@@ -216,6 +216,7 @@
       "description": "Metric definition class specifies the metadata for a metric."
     },
     "MetricDefinitionCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -229,20 +230,6 @@
         "value"
       ],
       "description": "Represents collection of metric definitions."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
