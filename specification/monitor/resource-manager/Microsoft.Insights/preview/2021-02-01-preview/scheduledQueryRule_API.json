@@ -316,14 +316,6 @@
         "actionGroupId": {
           "type": "string",
           "description": "Action Group resource Id to invoke when the alert fires."
-        },
-        "webHookProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
-          },
-          "description": "The properties of a webhook object."
         }
       }
     },
@@ -410,6 +402,14 @@
             "$ref": "#/definitions/Action"
           },
           "description": "Actions to invoke when the alert fires."
+        },
+        "webHookProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+          },
+          "description": "The properties of a webhook object."
         },
         "isWorkspaceAlertsStorageConfigured": {
           "type": "boolean",
