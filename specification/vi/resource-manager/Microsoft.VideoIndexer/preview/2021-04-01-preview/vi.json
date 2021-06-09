@@ -668,17 +668,20 @@
         "name": {
           "description": "Name of the operation",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "Microsoft.VideoIndexer/accounts/read"
         },
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
           "readOnly": true,
-          "type": "boolean"
+          "type": "boolean",
+          "example": false
         },
         "actionType": {
           "description": "Indicates the action type.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "Internal"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
@@ -688,13 +691,8 @@
         "origin": {
           "description": "Origin of the operation",
           "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "readOnly": true,
-          "description": "Properties of the operation",
-          "x-ms-client-flatten": true
+          "type": "string",
+          "example": "user"
         }
       }
     },
@@ -705,147 +703,26 @@
         "provider": {
           "description": "Resource provider of the operation",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "Microsoft Azure Video Analyzer for Media" 
         },
         "resource": {
           "description": "Resource of the operation",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "accounts"
         },
         "operation": {
           "description": "Localized friendly name for the operation",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "Read accounts"
         },
         "description": {
           "description": "Localized friendly description for the operation",
           "readOnly": true,
-          "type": "string"
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Additional details about an operation.",
-      "type": "object",
-      "x-ms-client-flatten": true,
-      "properties": {
-        "serviceSpecification": {
-          "description": "Details about a service operation.",
-          "readOnly": true,
-          "$ref": "#/definitions/OperationServiceSpecification"
-        }
-      }
-    },
-    "OperationServiceSpecification": {
-      "description": "Details about a service operation.",
-      "type": "object",
-      "properties": {
-        "logSpecifications": {
-          "description": "Details about operations related to logs.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationLogSpecification"
-          }
-        },
-        "metricSpecifications": {
-          "description": "Details about operations related to metrics.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationMetricSpecification"
-          }
-        }
-      }
-    },
-    "OperationLogSpecification": {
-      "description": "Details about an operation related to logs.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the log category.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Localized display name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "blobDuration": {
-          "description": "Blobs created in the customer storage account, per hour.",
-          "readOnly": true,
-          "type": "string"
-        }
-      }
-    },
-    "OperationMetricSpecification": {
-      "description": "Details about an operation related to metrics.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the metric.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Localized display name of the metric.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayDescription": {
-          "description": "The description of the metric.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "unit": {
-          "description": "The unit that the metric is measured in.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "aggregationType": {
-          "description": "The type of metric aggregation.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "enableRegionalMdmAccount": {
-          "description": "Whether or not the service is using regional MDM accounts.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "sourceMdmAccount": {
-          "description": "The name of the MDM account.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "sourceMdmNamespace": {
-          "description": "The name of the MDM namespace.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "availabilities": {
-          "description": "Defines how often data for metrics becomes available.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationMetricAvailability"
-          }
-        }
-      }
-    },
-    "OperationMetricAvailability": {
-      "description": "Defines how often data for a metric becomes available.",
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "description": "The granularity for the metric.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "blobDuration": {
-          "description": "Blob created in the customer storage account, per hour.",
-          "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "example": "Read accounts details"
         }
       }
     },
