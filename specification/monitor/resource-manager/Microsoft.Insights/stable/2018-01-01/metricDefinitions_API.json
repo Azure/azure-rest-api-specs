@@ -74,6 +74,9 @@
           },
           "Get Application Insights Metric Definitions without filter": {
             "$ref": "./examples/GetMetricDefinitionsApplicationInsights.json"
+          },
+          "Get StorageCache Metric Definitions with metric class": {
+            "$ref": "./examples/GetMetricDefinitionsMetricClass.json"
           }
         }
       }
@@ -152,6 +155,21 @@
         "modelAsString": false
       }
     },
+    "MetricClass": {
+      "type": "string",
+      "description": "The class of the metric.",
+      "enum": [
+        "Availability",
+        "Transactions",
+        "Errors",
+        "Latency",
+        "Saturation"
+      ],
+      "x-ms-enum": {
+        "name": "MetricClass",
+        "modelAsString": true
+      }
+    },
     "MetricDefinition": {
       "type": "object",
       "properties": {
@@ -178,6 +196,10 @@
         "category": {
           "type": "string",
           "description": "Custom category name for this metric."
+        },
+        "metricClass": {
+          "$ref": "#/definitions/MetricClass",
+          "description": "The class of the metric."
         },
         "unit": {
           "$ref": "#/definitions/Unit",
