@@ -757,6 +757,35 @@
           "readOnly": true,
           "description": "Version of the managed rule set type."
         },
+        "features": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/Features",
+          "description": "Feature set applying to the Ruleset."
+        },
+        "supportedRuleActions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ActionType"
+          },
+          "description": "Supported actions for the Rule."
+        },
+        "supportedRuleSetActions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ActionType"
+          },
+          "description": "Supported actions for the entire RuleSet."
+        },
+        "supportedSkus": {
+          "description": "Key value pair of sku to supported state.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "ruleGroups": {
           "type": "array",
           "readOnly": true,
@@ -859,6 +888,17 @@
         }
       }
     },
+    "Features": {
+      "description": "Defines the feature set for a RuleSet.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "AnomalyScoring": {
+          "type": "bool",
+          "description": "Flag for if AnomalyScoring is supported or not."
+        }
+      }
+    },
     "ActionType": {
       "description": "Defines the action to take on rule match.",
       "type": "string",
@@ -866,7 +906,8 @@
         "Allow",
         "Block",
         "Log",
-        "Redirect"
+        "Redirect",
+        "AnomalyScoring"
       ],
       "x-ms-enum": {
         "name": "ActionType",
