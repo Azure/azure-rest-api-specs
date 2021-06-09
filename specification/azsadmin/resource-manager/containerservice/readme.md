@@ -33,9 +33,9 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-11-01'
 input-file:
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01/managedclusters.json"
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01/operations.json" 
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01/quotas.json" 
+    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/managedClusters.json"
+    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json" 
+    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json" 
 ```
 
 ---
@@ -68,9 +68,9 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/managedclusters.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/operations.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/quotas.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

@@ -29,9 +29,9 @@ tag: package-2019-11-01
 
 ``` yaml
 input-file:
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/managedclusters.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/operations.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01/quotas.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json
 ```
 
 ---
