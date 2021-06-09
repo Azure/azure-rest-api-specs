@@ -29,6 +29,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-preview-2021-06
   - tag: package-preview-2020-11
   - tag: package-2020-07
   - tag: package-2019-05-01-preview
@@ -37,6 +38,7 @@ batch:
 ```yaml $(python) && $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-preview-2021-06
   - tag: package-preview-2020-11
   - tag: package-2020-07
   - tag: package-2019-05-01-preview
@@ -47,6 +49,21 @@ batch:
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-preview-2021-06 and python
+
+These settings apply only when `--tag=package-preview-2021-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-06' && $(python) && !$(track2)
+python:
+  namespace: azure.mgmt.appplatform.v2021_06_01_preview
+  output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2021_06_01_preview
+```
+``` yaml $(tag) == 'package-preview-2021-06' && $(python) && $(track2)
+namespace: azure.mgmt.appplatform.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2021_06_01_preview
 ```
 
 ### Tag: package-preview-2020-11 and python

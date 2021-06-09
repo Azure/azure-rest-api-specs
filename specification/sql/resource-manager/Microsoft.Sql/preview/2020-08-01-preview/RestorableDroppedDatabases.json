@@ -166,19 +166,31 @@
     },
     "RestorableDroppedDatabase": {
       "description": "A restorable dropped database resource.",
-      "required": [
-        "location"
-      ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "sku": {
           "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The name and tier of the SKU."
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "$ref": "#/definitions/RestorableDroppedDatabaseProperties",

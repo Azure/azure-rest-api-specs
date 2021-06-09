@@ -226,6 +226,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/pause": {
+      "post": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Deactivates the SqlPool.",
+        "operationId": "SqlPoolsV3_Deactivate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Pausing the SqlPool is in progress."
+          },
+          "204": {
+            "description": "The specified SqlPool does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deactivates a sqlpool.": {
+            "$ref": "./examples/PostSqlPoolDeactivate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/resume": {
+      "post": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Activates the SqlPool.",
+        "operationId": "SqlPoolsV3_Activate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resuming the SqlPool is in progress."
+          },
+          "204": {
+            "description": "The specified SqlPool does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Activate a sqlpool.": {
+            "$ref": "./examples/PostSqlPoolActivate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools": {
       "get": {
         "tags": [
@@ -315,6 +407,19 @@
           "description": "The requested service level objective name of the sql pool.",
           "type": "string",
           "readOnly": true
+        },
+        "maxServiceObjectiveName": {
+          "description": "The max service level objective name of the sql pool.",
+          "type": "string"
+        },
+        "autoPauseTimer": {
+          "format": "int32",
+          "description": "The period of inactivity in minutes before automatically pausing the sql pool.",
+          "type": "integer"
+        },
+        "autoResume": {
+          "description": "Indicates whether the sql pool can automatically resume when connection attempts are made.",
+          "type": "boolean"
         }
       }
     },
