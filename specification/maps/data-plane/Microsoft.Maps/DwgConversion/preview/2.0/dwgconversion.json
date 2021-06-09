@@ -56,6 +56,15 @@
   },
   "responses": {},
   "parameters": {
+    "ApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
     "UdidQuery": {
       "name": "udid",
       "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data%20v2/uploadpreview) call.",
@@ -115,7 +124,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/UdidQuery"
@@ -164,7 +173,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "x-ms-pageable": {
@@ -210,7 +219,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/ConversionId"
@@ -253,7 +262,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/ConversionId"
@@ -295,7 +304,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/ConversionOperationId"

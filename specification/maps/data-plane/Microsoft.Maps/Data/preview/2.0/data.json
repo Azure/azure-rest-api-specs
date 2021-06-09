@@ -56,6 +56,15 @@
   },
   "responses": {},
   "parameters": {
+    "ApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
     "UploadDataFormat": {
       "name": "dataFormat",
       "x-ms-client-name": "UploadDataFormat",
@@ -133,7 +142,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/UploadDataDescription"
@@ -191,7 +200,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -237,7 +246,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/UniqueDataId"
@@ -300,7 +309,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/UniqueDataId"
@@ -341,7 +350,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/UniqueDataId"
@@ -383,7 +392,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DataUploadOperationId"

@@ -56,6 +56,15 @@
   },
   "responses": {},
   "parameters": {
+    "ApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
     "DatasetIdQuery": {
       "name": "datasetId",
       "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](/en-us/rest/api/maps/dataset/createpreview) call.",
@@ -107,7 +116,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DatasetIdQuery"
@@ -157,7 +166,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "x-ms-pageable": {
@@ -203,7 +212,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/TilesetId"
@@ -246,7 +255,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/TilesetId"
@@ -288,7 +297,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/TilesetOperationId"

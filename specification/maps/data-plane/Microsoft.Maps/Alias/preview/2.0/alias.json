@@ -56,6 +56,15 @@
   },
   "responses": {},
   "parameters": {
+    "ApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
     "CreateCreatorDataItemId": {
       "name": "creatorDataItemId",
       "description": "The unique id that references a creator data item to be aliased.",
@@ -92,7 +101,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/CreateCreatorDataItemId"
@@ -102,7 +111,7 @@
           "201": {
             "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
             "schema": {
-              "$ref": "#/definitions/AliasCreateResponseV2"
+              "$ref": "#/definitions/AliasCreateResponse"
             },
             "headers": {
               "Access-Control-Expose-Headers": {
@@ -138,7 +147,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "x-ms-pageable": {
@@ -184,7 +193,7 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/AssignCreatorDataItemId"
@@ -227,7 +236,7 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -264,7 +273,7 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "responses": {

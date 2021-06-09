@@ -56,6 +56,15 @@
   },
   "responses": {},
   "parameters": {
+    "ApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
     "ConversionIdQuery": {
       "name": "conversionId",
       "description": "The unique ID used to create the dataset. The `conversionId` must have been obtained from a successful call to the Conversion Service Convert API and may be provided with multiple query parameters with same name (if more than one is provided).",
@@ -112,7 +121,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/ConversionIdQuery"
@@ -158,7 +167,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "x-ms-pageable": {
@@ -204,7 +213,7 @@
             "$ref": "#/parameters/DatasetId"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -241,7 +250,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DatasetId"
@@ -283,7 +292,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
+            "$ref": "#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DatasetOperationId"
