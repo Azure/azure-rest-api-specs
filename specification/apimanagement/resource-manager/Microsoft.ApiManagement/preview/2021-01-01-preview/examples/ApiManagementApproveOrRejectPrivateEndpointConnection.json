@@ -1,34 +1,34 @@
 {
-    "parameters": {
-      "serviceName": "apimService1",
-      "resourceGroupName": "rg1",
-      "api-version": "2021-01-01-preview",
-      "subscriptionId": "subid",
-      "privateEndpointConnectionName": "privateEndpointConnectionName",
-      "privateEndpointConnectionRequest": {
-        "privateEndpointConnectionName": "connectionName",
-        "status": "Approved",
-        "description": "The Private Endpoint Connection is approved."
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "subid",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "privateEndpointConnectionRequest": {
+      "privateEndpointConnectionName": "connectionName",
+      "status": "Approved",
+      "description": "The Private Endpoint Connection is approved."
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-01-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
       }
     },
-    "responses": {
-      "201": {
-        "headers": {
-            "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-01-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
-        }
-      },
-      "200": {
-        "body": {
-          "privateEndpointConnectionName": "privateEndpointConnectionName",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/connectionName",
-          "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
-          "properties": {
-              "provisioningState": "Succeeded",
-              "privateEndpointId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName",
-              "status": "Succeeded",
-              "description": "The request has been approved."
-          }
+    "200": {
+      "body": {
+        "privateEndpointConnectionName": "privateEndpointConnectionName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/connectionName",
+        "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpointId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName",
+          "status": "Succeeded",
+          "description": "The request has been approved."
         }
       }
     }
+  }
 }
