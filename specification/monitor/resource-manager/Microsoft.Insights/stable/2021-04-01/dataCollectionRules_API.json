@@ -34,7 +34,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameterCommonV2"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -50,7 +50,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -92,7 +92,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -121,7 +121,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref":  "#/parameters/ResourceGroupNameParameterCommonV2"
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
@@ -140,7 +140,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -167,7 +167,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref":  "#/parameters/ResourceGroupNameParameterCommonV2"
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
@@ -200,7 +200,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -227,7 +227,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref":  "#/parameters/ResourceGroupNameParameterCommonV2"
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
@@ -254,7 +254,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -278,7 +278,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref":  "#/parameters/ResourceGroupNameParameterCommonV2"
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
@@ -297,7 +297,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseCommonV2"
             }
           }
         },
@@ -821,9 +821,30 @@
           }
         }
       }
+    },
+    "ErrorResponseCommonV2": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
     }
   },
   "parameters": {
+    "ResourceGroupNameParameterCommonV2": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
     "DataCollectionRuleNameParameter": {
       "in": "path",
       "name": "dataCollectionRuleName",
