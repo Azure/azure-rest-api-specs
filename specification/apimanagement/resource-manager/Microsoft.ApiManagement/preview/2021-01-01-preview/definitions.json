@@ -6503,6 +6503,11 @@
             "$ref": "#/definitions/RemotePrivateEndpointConnectionWrapper"
           }
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "description": "Link to next page of resources.",
           "type": "string",
@@ -6543,6 +6548,9 @@
         },
         "groupIds": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true,
           "description": "All the Group ids."
         }
