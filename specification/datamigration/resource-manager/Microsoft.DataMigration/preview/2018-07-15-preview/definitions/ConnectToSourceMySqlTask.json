@@ -17,30 +17,6 @@
   },
   "paths": {},
   "definitions": {
-    "ConnectToSourceMySqlTaskProperties": {
-      "x-ms-discriminator-value": "ConnectToSource.MySql",
-      "type": "object",
-      "description": "Properties for the task that validates MySQL database connection",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "#/definitions/ConnectToSourceMySqlTaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "./TasksCommon.json#/definitions/ConnectToSourceNonSqlTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "ConnectToSourceMySqlTaskInput": {
       "type": "object",
       "description": "Input for the task that validates MySQL database connection",
