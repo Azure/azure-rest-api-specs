@@ -368,6 +368,18 @@
             }
           },
           {
+            "name": "semanticFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names used for semantic search.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "searchMode",
             "in": "query",
             "type": "string",
@@ -1680,6 +1692,10 @@
         "answers": {
           "$ref": "#/definitions/Answers",
           "description": "A value that specifies whether answers should be returned as part of the search response."
+        },
+        "semanticFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names used for semantic search."
         },
         "select": {
           "type": "string",
