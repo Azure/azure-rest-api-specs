@@ -729,6 +729,9 @@
           },
           "Creates or updates a SQL virtual machine for Storage Configuration Settings to EXTEND Data, Log or TempDB storage pool.": {
             "$ref": "./examples/CreateOrUpdateSqlVirtualMachineStorageConfigurationEXTEND.json"
+          },
+          "Creates or updates a SQL virtual machine for Automated Back up Settings with Weekly and Days of the week to run the back up.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineAutomatedBackupWeekly.json"
           }
         }
       },
@@ -1589,6 +1592,26 @@
           "x-ms-enum": {
             "name": "FullBackupFrequencyType",
             "modelAsString": true
+          }
+        },
+        "daysOfWeek": {
+          "description": "Days of the week for the backups when FullBackupFrequency is set to Weekly.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": true
+            }
           }
         },
         "fullBackupStartTime": {
