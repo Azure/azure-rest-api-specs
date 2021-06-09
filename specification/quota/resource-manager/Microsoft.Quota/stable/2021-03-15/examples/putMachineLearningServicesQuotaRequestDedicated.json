@@ -1,24 +1,28 @@
 {
   "parameters": {
-    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus",
-    "resourceName": "StandardDv2Family",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus",
+    "resourceName": "standardFSv2Family",
     "api-version": "2021-03-15",
     "createQuotaRequest": {
       "properties": {
         "limit": 200,
         "unit": "Count",
         "name": {
-          "value": "StandardDv2Family"
-        },
-        "resourceType": "dedicated"
+          "value": "standardFSv2Family"
+        }
       }
     }
   },
   "responses": {
-    "202": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15",
+        "Retry-After": "30",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/operationsStatus/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15"
+      },
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "name": "StandardDv2Family",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "name": "standardFSv2Family",
         "type": "Microsoft.Quota/ServiceLimits",
         "properties": {
           "provisioningState": "InProgress",
@@ -28,26 +32,21 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "name": "StandardDv2Family",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimits/standardFSv2Family",
+        "name": "standardFSv2Family",
         "type": "Microsoft.Quota/serviceLimits",
         "properties": {
           "provisioningState": "Succeeded",
           "message": "Request succeeded",
-          "properties": {
-            "properties": {
-              "limit": 200,
-              "unit": "Count",
-              "currentValue": 160,
-              "name": {
-                "value": "StandardDv2Family",
-                "localizedValue": "Standard Dv2 Family Cluster Dedicated vCPUs"
-              },
-              "resourceType": "dedicated",
-              "quotaPeriod": "",
-              "properties": {}
-            }
-          }
+          "limit": 200,
+          "unit": "Count",
+          "currentValue": 160,
+          "name": {
+            "value": "standardFSv2Family",
+            "localizedValue": "Standard FSv2 Family vCPUs"
+          },
+          "quotaPeriod": "",
+          "properties": {}
         }
       }
     }

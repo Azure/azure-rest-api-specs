@@ -126,10 +126,10 @@
               "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
             }
           },
-          "202": {
+          "201": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse201"
+              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
             }
           },
           "default": {
@@ -185,7 +185,7 @@
           "202": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse201"
+              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
             }
           },
           "default": {
@@ -719,7 +719,7 @@
         }
       }
     },
-    "QuotaRequestSubmitResponse201": {
+    "QuotaRequestSubmitResponse202": {
       "description": "The quota request response with the quota request ID.",
       "type": "object",
       "properties": {
