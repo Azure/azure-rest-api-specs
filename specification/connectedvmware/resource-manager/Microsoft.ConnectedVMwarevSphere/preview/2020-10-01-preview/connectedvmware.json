@@ -3549,6 +3549,11 @@
       "description": "Defines the resource properties.",
       "type": "object",
       "properties": {
+        "vmUuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM's unique SMBIOS ID."
+        },
         "status": {
           "readOnly": true,
           "type": "string",
@@ -3656,6 +3661,10 @@
           "description": "Gets or sets the instance uuid of the vm.",
           "type": "string",
           "readOnly": true
+        },
+        "smbiosUuid": {
+          "type": "string",
+          "description": "Gets or sets the SMBIOS UUID of the vm."
         },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
@@ -4575,6 +4584,10 @@
         "instanceUuid": {
           "description": "Gets or sets the instance uuid of the vm.",
           "type": "string"
+        },
+        "smbiosUuid": {
+          "type": "string",
+          "description": "Gets or sets the SMBIOS UUID of the vm."
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
