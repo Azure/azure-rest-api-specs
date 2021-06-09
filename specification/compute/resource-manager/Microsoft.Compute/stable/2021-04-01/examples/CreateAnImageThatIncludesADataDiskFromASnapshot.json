@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+            "osType": "Linux",
+            "snapshot": {
+              "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+            },
+            "osState": "Generalized"
+          },
+          "dataDisks": [
+            {
+              "lun": 1,
+              "snapshot": {
+                "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+              }
+            }
+          ],
+          "zoneResilient": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "osState": "Generalized",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [
+              {
+                "lun": 1,
+                "snapshot": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                }
+              }
+            ],
+            "zoneResilient": true
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "osState": "Generalized",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [
+              {
+                "lun": 1,
+                "snapshot": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                }
+              }
+            ],
+            "zoneResilient": true
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    }
+  }
+}
