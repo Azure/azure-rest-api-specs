@@ -6,13 +6,13 @@
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2020-12-01-preview"
+      "https://localhost/subscriptions/{{subscriptionId}}/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2020-12-01-preview"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "485"
+      "396"
     ],
     "configurationsRequest": {
       "configurationFilters": [
@@ -20,19 +20,13 @@
           "hierarchyInformation": {
             "productFamilyName": "AzureStackEdge",
             "productLineName": "AzureStackEdge",
-            "productName": "AzureStackEdgeProR"
+            "productName": "AzureStackEdgeGPU"
           },
           "filterableProperty": [
             {
               "type": "ShipToCountries",
               "supportedValues": [
                 "US"
-              ]
-            },
-            {
-              "type": "DoubleEncryptionStatus",
-              "supportedValues": [
-                "Enabled"
               ]
             }
           ]
@@ -49,28 +43,24 @@
               "specifications": [
                 {
                   "name": "Usable compute",
-                  "value": "32 vCPU"
+                  "value": "40 vCPU"
                 },
                 {
                   "name": "Usable memory",
-                  "value": "230 GB"
+                  "value": "102 GB"
                 },
                 {
                   "name": "Usable storage",
-                  "value": "42 TB"
-                },
-                {
-                  "name": "GPU",
-                  "value": "1"
+                  "value": "4.2 TB"
                 }
               ],
               "dimensions": {
-                "length": 50,
-                "height": 15,
-                "width": 5,
+                "length": 50.0,
+                "height": 15.0,
+                "width": 5.0,
                 "lengthHeightUnit": "IN",
-                "weight": 50,
-                "depth": 2,
+                "weight": 50.0,
+                "depth": 2.0,
                 "weightUnit": "LBS"
               },
               "filterableProperties": [
@@ -78,174 +68,18 @@
                   "type": "ShipToCountries",
                   "supportedValues": [
                     "US",
-                    "AU",
-                    "AT",
-                    "BE",
-                    "BG",
-                    "CA",
-                    "HR",
-                    "CY",
-                    "CZ",
-                    "DK",
-                    "EE",
-                    "FI",
-                    "FR",
-                    "DE",
-                    "GR",
-                    "HU",
-                    "IE",
-                    "IL",
-                    "IT",
-                    "JP",
-                    "LV",
-                    "LT",
-                    "LU",
-                    "MT",
-                    "MX",
-                    "NL",
-                    "NO",
-                    "PH",
-                    "PL",
-                    "PT",
-                    "PR",
-                    "RO",
-                    "SA",
-                    "RS",
-                    "SG",
-                    "SK",
-                    "SI",
-                    "ZA",
-                    "KR",
-                    "ES",
-                    "SE",
-                    "CH",
-                    "TW",
-                    "TR",
-                    "AE",
-                    "GB",
-                    "NZ"
-                  ]
-                },
-                {
-                  "type": "DoubleEncryptionStatus",
-                  "supportedValues": [
-                    "Enabled"
+                    "AR"
                   ]
                 }
               ],
-              "displayName": "Azure Stack Edge Pro R - single node",
-              "description": {
-                "descriptionType": "Base",
-                "shortDescription": "Rugged, physical edge compute device",
-                "longDescription": "",
-                "keywords": [],
-                "attributes": [],
-                "links": []
-              },
-              "imageInformation": [],
-              "costInformation": {
-                "billingMeterDetails": []
-              },
-              "availabilityInformation": {
-                "availabilityStage": "Available",
-                "disabledReason": "None"
-              },
-              "hierarchyInformation": {
-                "productFamilyName": "azurestackedge",
-                "productLineName": "azurestackedge",
-                "productName": "azurestackedgepror",
-                "configurationName": "azurestackedgeprorsinglenode"
-              }
-            }
-          },
-          {
-            "properties": {
-              "specifications": [
-                {
-                  "name": "Usable compute",
-                  "value": "32 vCPU"
-                },
-                {
-                  "name": "Usable memory",
-                  "value": "230 GB"
-                },
-                {
-                  "name": "Usable storage",
-                  "value": "42 TB"
-                },
-                {
-                  "name": "GPU",
-                  "value": "1"
-                }
-              ],
-              "dimensions": {
-                "length": 50,
-                "height": 15,
-                "width": 5,
-                "lengthHeightUnit": "IN",
-                "weight": 50,
-                "depth": 2,
-                "weightUnit": "LBS"
-              },
-              "filterableProperties": [
-                {
-                  "type": "ShipToCountries",
-                  "supportedValues": [
-                    "US",
-                    "AU",
-                    "AT",
-                    "BE",
-                    "BG",
-                    "CA",
-                    "HR",
-                    "CY",
-                    "CZ",
-                    "DK",
-                    "EE",
-                    "FI",
-                    "FR",
-                    "DE",
-                    "GR",
-                    "HU",
-                    "IE",
-                    "IT",
-                    "LV",
-                    "LT",
-                    "LU",
-                    "MT",
-                    "NL",
-                    "NO",
-                    "PH",
-                    "PL",
-                    "PT",
-                    "PR",
-                    "RO",
-                    "SA",
-                    "RS",
-                    "SG",
-                    "SK",
-                    "SI",
-                    "ES",
-                    "SE",
-                    "CH",
-                    "AE",
-                    "GB",
-                    "NZ"
-                  ]
-                },
-                {
-                  "type": "DoubleEncryptionStatus",
-                  "supportedValues": [
-                    "Enabled"
-                  ]
-                }
-              ],
-              "displayName": "Azure Stack Edge Pro R - single node with UPS",
+              "displayName": "Azure Stack Edge Pro - 1 GPU",
               "description": {
                 "descriptionType": "Base",
                 "shortDescription": "",
                 "longDescription": "",
-                "keywords": [],
+                "keywords": [
+                  "GPU"
+                ],
                 "attributes": [],
                 "links": []
               },
@@ -260,8 +94,8 @@
               "hierarchyInformation": {
                 "productFamilyName": "azurestackedge",
                 "productLineName": "azurestackedge",
-                "productName": "azurestackedgepror",
-                "configurationName": "azurestackedgeprorwithups"
+                "productName": "azurestackedgegpu",
+                "configurationName": "edgep_base"
               }
             }
           }
