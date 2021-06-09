@@ -3922,6 +3922,26 @@
       "minimum": 0,
       "maximum": 1
     },
+    "NonNullableNameAndNullableUserDataContract": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
     "NameAndUserDataContract": {
       "type": "object",
       "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
@@ -3948,7 +3968,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NameAndUserDataContract"
+          "$ref": "#/definitions/NonNullableNameAndNullableUserDataContract"
         }
       ]
     },
