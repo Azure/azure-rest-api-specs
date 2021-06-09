@@ -1575,6 +1575,234 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/singleton": {
+      "get": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_Get",
+        "description": "Get a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Get": {
+            "$ref": "./examples/SessionHostConfigurations_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_CreateOrUpdate",
+        "description": "Create or update a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Create": {
+            "$ref": "./examples/SessionHostConfigurations_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "sessionHostConfiguration",
+            "description": "Object containing HostPool definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated SessionHostConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successfully created SessionHostConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_Delete",
+        "description": "Remove a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Delete": {
+            "$ref": "./examples/SessionHostConfigurations_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed host pool."
+          },
+          "204": {
+            "description": "Host pool does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_Update",
+        "description": "Update a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Update": {
+            "$ref": "./examples/SessionHostConfigurations_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPool",
+            "description": "Object containing HostPool definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/HostPoolPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated SessionHostConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations": {
+      "get": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_ListByHostPool",
+        "description": "List sessionHostConfigurations.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_ListByHostPool": {
+            "$ref": "./examples/SessionHostConfigurations_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in resource group.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/update": {
       "post": {
         "tags": [
@@ -1720,7 +1948,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateDetails/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateDetails/singleton": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -1762,7 +1990,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/singleton": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -1811,7 +2039,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateOperationResults/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateOperationResults/singleton": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -3793,10 +4021,6 @@
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
           "x-nullable": false
         },
-        "sessionHostConfiguration": {
-          "$ref": "#/definitions/SessionHostConfigurationProperties",
-          "description": "The session host configurations of HostPool."
-        },
         "sessionHostConfigurationLastUpdateTime": {
           "type": "string",
           "format": "date-time",
@@ -3948,13 +4172,48 @@
           "type": "string",
           "description": "Enabled to allow this resource to be access from the public network"
         },
-        "sessionHostConfiguration": {
-          "$ref": "#/definitions/SessionHostConfigurationProperties",
-          "description": "The session host configurations of HostPool."
-        },
         "sessionHostComponentUpdateConfiguration": {
           "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+        }
+      }
+    },
+    "SessionHostConfigurationList": {
+      "type": "object",
+      "title": "SessionHostConfigurationList",
+      "description": "List of SessionHostConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHostConfiguration definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionHostConfiguration": {
+      "type": "object",
+      "description": "Represents a SessionHostConfiguration definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostConfigurationProperties"
         }
       }
     },
