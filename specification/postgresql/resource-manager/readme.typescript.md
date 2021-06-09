@@ -25,6 +25,7 @@ These settings apply only when `--tag=package-2021-04-10-privatepreview --typesc
 Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
 
 ``` yaml $(tag) == 'package-2021-04-10-privatepreview' && $(typescript)
+title: PostgreSQLManagementFlexibleServerClient
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexibleserver/"
 ```
 
