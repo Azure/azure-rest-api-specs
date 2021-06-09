@@ -780,10 +780,10 @@
           "description": "Supported actions for the entire RuleSet."
         },
         "supportedSkus": {
-          "description": "Key value pair of sku to supported state.",
+          "description": "Map of objects for sku to related properties like state, etc.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/RuleSetDataBag"
           }
         },
         "ruleGroups": {
@@ -888,6 +888,16 @@
         }
       }
     },
+    "RuleSetDataBag": {
+      "description": "Holds properties relating to a ruleset and sku association.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ManagedRuleSetDefinitionState"
+        }
+      }
+    },
     "Features": {
       "description": "Defines the feature set for a RuleSet.",
       "type": "object",
@@ -897,6 +907,19 @@
           "type": "boolean",
           "description": "Flag for if AnomalyScoring is supported or not."
         }
+      }
+    },
+    "ManagedRuleSetDefinitionState": {
+      "description": "Enumeration values for a ManagedRuleSet's state.",
+      "type": "string",
+      "enum": [
+        "GeneralAvailability",
+        "Preview",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedRuleSetDefinitionState",
+        "modelAsString": true
       }
     },
     "ActionType": {
