@@ -62,12 +62,12 @@ These settings apply only when `--tag=package-2021-01-15` is specified on the co
 
 ```yaml $(tag) == 'package-2021-01-15'
 input-file:
-  - Microsoft.CertificateRegistration/stable/2021-01-01/AppServiceCertificateOrders.json
-  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateOrdersDiagnostics.json
-  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateRegistrationProvider.json
-  - Microsoft.DomainRegistration/stable/2021-01-01/Domains.json
-  - Microsoft.DomainRegistration/stable/2021-01-01/TopLevelDomains.json
-  - Microsoft.DomainRegistration/stable/2021-01-01/DomainRegistrationProvider.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/DomainRegistrationProvider.json
   - Microsoft.Web/stable/2021-01-15/AppServiceEnvironments.json
   - Microsoft.Web/stable/2021-01-15/AppServicePlans.json
   - Microsoft.Web/stable/2021-01-15/Certificates.json
@@ -251,6 +251,63 @@ directive:
 - suppress: R4009
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
+- suppress: R4037
+  from: AppServiceCertificateOrders.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: CertificateOrdersDiagnostics.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: CertificateRegistrationProvider.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Domains.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: TopLevelDomains.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: DomainRegistrationProvider.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Certificates.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: CommonDefinitions.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: DeletedWebApps.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Diagnostics.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Global.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Provider.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: Recommendations.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: WebApps.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: StaticSites.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: AppServicePlans.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: ResourceHealthMetadata.json
+  reason: Will fix in next version.
+- suppress: R4037
+  from: KubeEnvironments.json
+  reason: Will fix in next version.
 ```
 
 ### Tag: package-2020-12
