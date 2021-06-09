@@ -31,16 +31,16 @@ openapi-type: arm
 tag: package-2021-06
 ```
 
-
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.Network/stable/2021-06-09/network.json
   - Microsoft.Network/stable/2021-06-09/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
@@ -268,4 +268,14 @@ directive:
     where: [$.definitions.ValidateCustomDomainOutput.properties.customDomainValidated]
     suppress: EnumInsteadOfBoolean
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DescriptionAndTitleMissing
+    where: $.definitions.ErrorDetails
+    from: network.json
+    reason: Existing Warning
 ```
