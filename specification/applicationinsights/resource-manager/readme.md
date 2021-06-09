@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-06
+tag: package-2020-11-only
 ```
 
 ### Suppression
@@ -133,6 +133,12 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: workbooks_API.json
     reason: 'consistent with existing default error response'
+  - suppress: R4009
+    from: workbookTemplates_API.json
+    reason: Existing APIs don't have systemData attribute. Suppressing so don't have to make breaking change
+  - suppress: R4017
+    from: workbookTemplates_API.json
+    reason: Does not support list by subscription
   - suppress: DefaultErrorResponseSchema
     from: workbookOperations_API.json
     reason: 'consistent with existing default error response'
@@ -236,6 +242,15 @@ input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
 
+### Tag: package-2020-11-only
+
+These settings apply only when `--tag=package-2020-11-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-only'
+input-file:
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+```
+
 ### Tag: package-2020-10-only
 
 These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
@@ -337,6 +352,15 @@ These settings apply only when `--tag=package-2020-02-02-preview` is specified o
 ``` yaml $(tag) == 'package-2020-02-02-preview'
 input-file:
 - Microsoft.Insights/preview/2020-02-02-preview/components_API.json
+```
+
+### Tag: package-2020-02-02
+
+These settings apply only when `--tag=package-2020-02-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-02'
+input-file:
+- Microsoft.Insights/stable/2020-02-02/components_API.json
 ```
 
 ### Tag: package-2019-10-17-preview
