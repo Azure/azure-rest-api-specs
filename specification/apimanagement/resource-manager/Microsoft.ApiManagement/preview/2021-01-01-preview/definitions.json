@@ -6489,6 +6489,225 @@
           "description": "Last updated date and time."
         }
       }
+    },
+    "PrivateEndpointConnectionCollection": {
+      "required": [
+        "value"
+      ],
+      "type": "object", 
+      "properties": {
+        "value": {
+          "description": "Collection of private endpoint connection resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemotePrivateEndpointConnectionWrapper"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RemotePrivateEndpointConnectionWrapper": {
+      "description": "Remote Private Endpoint Connection resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "groupIds": {
+          "type": "array",
+          "readOnly": true,
+          "description": "All the groupids."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties."
+    },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "description": "The state of a private link connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateEndpointConnectionName": {
+          "description": "Private Endpoint Connection Name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of a private endpoint connection.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this private endpoint connection request.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestResponse": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateEndpointConnectionName": {
+          "description": "Private Endpoint Connection Name.",
+          "type": "string"
+        },
+        "id": {          
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {          
+          "$ref": "#/definitions/PrivateEndpointConnectionRequestProperty",
+          "description": "Private Endpoint Connection Request Property."
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestProperty": {
+      "description": "Private Endpoint Connection Request Property.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "privateEndpointId": {
+          "type": "string",
+          "description": "The Arm Resource Id of a private endpoint."
+        },
+        "status": {
+          "description": "Status of a private endpoint connection.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this private endpoint connection request.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkGroupResources": {
+      "description": "Wrapper for a collection of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkGroupResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkGroupResource": {
+      "description": "A private link resource",
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of a private link resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkGroupResourceProperty",
+          "description": "Properties of a private link resource"
+        }
+      }
+    },
+    "PrivateLinkGroupResourceProperty": {
+      "description": "Properties of a private link resource",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "GroupId of a private link resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "RequiredMembers of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "RequiredZoneNames of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {}
