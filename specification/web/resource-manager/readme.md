@@ -60,6 +60,27 @@ directive:
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.Web/stable/2021-01-15/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-15/Certificates.json
+  - Microsoft.Web/stable/2021-01-15/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-15/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-15/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-15/Global.json
+  - Microsoft.Web/stable/2021-01-15/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/Provider.json
+  - Microsoft.Web/stable/2021-01-15/Recommendations.json
+  - Microsoft.Web/stable/2021-01-15/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-15/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-15/StaticSites.json
+  - Microsoft.Web/stable/2021-01-15/WebApps.json
+```
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
 input-file:
   - Microsoft.CertificateRegistration/stable/2021-01-01/AppServiceCertificateOrders.json
@@ -154,6 +175,7 @@ directive:
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` or `--tag=package-2020-12-only` is specified on the command line.
