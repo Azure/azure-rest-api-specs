@@ -740,7 +740,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesCollection"
+              "$ref": "#/definitions/PublishingCredentialsPoliciesCollection"
             }
           },
           "default": {
@@ -6044,6 +6044,55 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionWithCheck",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
@@ -9133,7 +9182,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesCollection"
+              "$ref": "#/definitions/PublishingCredentialsPoliciesCollection"
             }
           },
           "default": {
@@ -14846,6 +14895,62 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "WebApps"
@@ -14884,6 +14989,62 @@
           },
           "404": {
             "description": "Virtual network does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionWithCheckSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -22025,35 +22186,6 @@
         }
       }
     },
-    "CsmPublishingCredentialsPoliciesCollection": {
-      "description": "Publishing Credentials Policies collection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "CsmPublishingCredentialsPoliciesCollection resource specific properties",
-          "required": [
-            "ftp",
-            "scm"
-          ],
-          "properties": {
-            "ftp": {
-              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
-              "description": "Whether FTP is allowed."
-            },
-            "scm": {
-              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
-              "description": "Whether Scm Basic Auth is allowed."
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "CsmPublishingCredentialsPoliciesEntity": {
       "description": "Publishing Credentials Policies parameters.",
       "type": "object",
@@ -24392,6 +24524,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublicCertificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PublishingCredentialsPoliciesCollection": {
+      "description": "Publishing Credentials Policies entity collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
           }
         },
         "nextLink": {
