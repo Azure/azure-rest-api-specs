@@ -8523,8 +8523,14 @@
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "Describes the mode of backups.",
           "type": "string",
           "$ref": "#/definitions/BackupPolicyType"
+        },
+        "migrationState": {
+          "description": "The object representing the state of the migration between the backup policies.",
+          "type": "object",
+          "$ref": "#/definitions/BackupPolicyMigrationState"
         }
       },
       "required": [
@@ -8541,6 +8547,41 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "BackupPolicyType"
+      }
+    },
+    "BackupPolicyMigrationState": {
+      "type": "object",
+      "description": "The object representing the state of the migration between the backup policies.",
+      "properties": {
+        "status": {
+          "description": "Describes the status of migration between backup policy types.",
+          "type": "string",
+          "$ref": "#/definitions/BackupPolicyMigrationStatus"
+        },
+        "targetType": {
+          "description": "Describes the target backup policy type of the backup policy migration.",
+          "type": "string",
+          "$ref": "#/definitions/BackupPolicyType"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the backup policy migration started (ISO-8601 format)."
+        }
+      }
+    },
+    "BackupPolicyMigrationStatus": {
+      "description": "Describes the status of migration between backup policy types.",
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BackupPolicyMigrationStatus"
       }
     },
     "PeriodicModeBackupPolicy": {
