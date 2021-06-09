@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DatabricksClient",
-    "version": "2018-04-01",
+    "version": "2021-04-01-preview",
     "description": "ARM Databricks"
   },
   "host": "management.azure.com",
@@ -373,6 +373,12 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "required": [
@@ -436,6 +442,19 @@
         "storageAccountIdentity": {
           "description": "The details of Managed Identity of Storage Account",
           "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption properties for databricks workspace",
+          "properties": {
+            "entities": {
+              "$ref": "#/definitions/EncryptionEntitiesDefinition",
+              "description": "Encryption entities definition for the workspace."
+            }
+          },
+          "required": [
+            "entities"
+          ]
         }
       },
       "required": [
@@ -532,6 +551,21 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PeeringProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringProvisioningState",
         "modelAsString": true
       }
     },
@@ -762,6 +796,57 @@
       },
       "description": "The object that contains details of encryption used on the workspace."
     },
+    "EncryptionEntitiesDefinition": {
+      "properties": {
+        "managedServices": {
+          "type": "object",
+          "description": "Encryption properties for the databricks managed services.",
+          "$ref": "#/definitions/EncryptionV2"
+        }
+      },
+      "description": "Encryption entities for databricks workspace resource."
+    },
+    "EncryptionV2": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The Uri of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName",
+            "keyVersion"
+          ],
+          "description": "Key Vault input properties for encryption."
+        }
+      },
+      "required": [
+        "keySource"
+      ],
+      "description": "The object that contains details of encryption used on the workspace."
+    },
     "WorkspaceProviderAuthorization": {
       "properties": {
         "principalId": {
@@ -953,6 +1038,14 @@
       "description": "The name of the workspace.",
       "minLength": 3,
       "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PeeringNameParameter": {
+      "name": "peeringName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace vNet peering.",
       "x-ms-parameter-location": "method"
     }
   }
