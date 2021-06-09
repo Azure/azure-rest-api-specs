@@ -11,14 +11,6 @@ typescript:
   generate-metadata: true
 ```
 
-### TypeScript multi-api
-
-```yaml $(typescript) && $(multiapi)
-batch:
-  - tag: package-2020-01-01
-  - tag: package-2021-04-10-privatepreview
-```
-
 ### Tag: package-2021-04-10-privatepreview and TypeScript
 
 These settings apply only when `--tag=package-2021-04-10-privatepreview --typescript` is specified on the command line.
