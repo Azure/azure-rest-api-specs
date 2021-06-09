@@ -6489,6 +6489,114 @@
           "description": "Last updated date and time."
         }
       }
+    },
+    "EventGridFilterCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGridFilterContract"
+          },
+          "description": "Collection of eventGrid filter.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of eventGrid filters."
+    },
+    "EventGridFilterContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EventGridFilterContractProperties",
+          "description": "Properties of the eventGrid filters."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "EventGridFilter's contract details."
+    },
+    "EventGridFilterContractProperties": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/EventGridFilterDescription",
+          "description": "EventGridFilter description."
+        },
+        "subscriberIdentityInfo": {
+          "$ref": "#/definitions/SubscriberIdentityInfo",
+          "description": "subscriber Identity Info of this eventGridFilter."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "provisioning State of this eventGridFilter."
+        }
+      }
+    },
+    "EventGridFilterDescription": {
+      "type": "object",
+      "properties": {
+        "subjectBeginsWith": {
+          "type": "string",
+          "description": "EventGridFilter subjectBeginsWith."
+        },
+        "subjectEndsWith": {
+          "type": "string",
+          "description": "EventGridFilter subjectEndsWith."
+        },
+        "includedEventTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "included Event Types of this eventGridFilter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridFilterContractProperties"
+        }
+      ],
+      "description": "EventGridFilter description details."
+    },
+    "SubscriberIdentityInfo": {
+      "type": "object",
+      "properties": {
+        "clientPrincipalId": {
+          "type": "string",
+          "description": "client Principle Id of this eventGridFilter."
+        },
+        "clientObjectId": {
+          "type": "string",
+          "description": "client Object Id of this eventGridFilter."
+        },
+        "clientTenantId": {
+          "type": "string",
+          "description": "client Tenant Id of this eventGridFilter."
+        },
+        "clientApplicationId": {
+          "type": "string",
+          "description": "client Application Id of this eventGridFilter."
+        },
+        "clientAuthorizationSource": {
+          "type": "string",
+          "description": "client Authorization Source of this eventGridFilter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridFilterContractProperties"
+        }
+      ]
     }
   },
   "parameters": {}
