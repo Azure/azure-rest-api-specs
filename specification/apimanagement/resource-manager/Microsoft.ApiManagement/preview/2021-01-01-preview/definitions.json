@@ -6491,6 +6491,7 @@
       }
     },
     "EventGridFilterCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -6509,6 +6510,7 @@
       "description": "Paged list of eventGrid filters."
     },
     "EventGridFilterContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6524,6 +6526,7 @@
       "description": "EventGridFilter's contract details."
     },
     "EventGridFilterContractProperties": {
+      "type": "object",
       "properties": {
         "filter": {
           "$ref": "#/definitions/EventGridFilterDescription",
@@ -6531,15 +6534,16 @@
         },
         "subscriberIdentityInfo": {
           "$ref": "#/definitions/SubscriberIdentityInfo",
-          "description": "subscriberIdentityInfo."
+          "description": "subscriber Identity Info of this eventGridFilter."
         },
         "provisioningState": {
           "type": "string",
-          "description": "provisioningState."
+          "description": "provisioning State of this eventGridFilter."
         }
       }
     },
     "EventGridFilterDescription": {
+      "type": "object",
       "properties": {
         "subjectBeginsWith": {
           "type": "string",
@@ -6554,7 +6558,7 @@
           "items": {
             "type": "string"
           },
-          "description": "includedEventTypes."
+          "description": "included Event Types of this eventGridFilter."
         }
       },
       "allOf": [
@@ -6565,26 +6569,27 @@
       "description": "EventGridFilter description details."
     },
     "SubscriberIdentityInfo": {
+      "type": "object",
       "properties": {
         "clientPrincipalId": {
           "type": "string",
-          "description": "clientPrincipleId."
+          "description": "client Principle Id of this eventGridFilter."
         },
         "clientObjectId": {
           "type": "string",
-          "description": "clientObjectId."
+          "description": "client Object Id of this eventGridFilter."
         },
         "clientTenantId": {
           "type": "string",
-          "description": "clientTenantId."
+          "description": "client Tenant Id of this eventGridFilter."
         },
         "clientApplicationId": {
           "type": "string",
-          "description": "clientApplicationId."
+          "description": "client Application Id of this eventGridFilter."
         },
         "clientAuthorizationSource": {
           "type": "string",
-          "description": "clientAuthorizationSource."
+          "description": "client Authorization Source of this eventGridFilter."
         }
       },
       "allOf": [
