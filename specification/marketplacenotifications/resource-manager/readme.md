@@ -26,7 +26,7 @@ These are the global settings for the Marketplace notifications API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-06
+tag: package-2021-03-03
 ```
 ### Composite packages
 
