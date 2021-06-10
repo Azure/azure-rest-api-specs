@@ -179,6 +179,16 @@ directive:
   reason: Will fix in next version
 - suppress: D5001
   reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
 ```
 
 ### Tag: package-2021-01
