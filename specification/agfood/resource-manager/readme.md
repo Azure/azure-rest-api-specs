@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the agfood.
+These are the global settings for the agrifood.
 
 ```yaml
 openapi-type: arm
@@ -50,7 +50,6 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
 ```
 ## Go
