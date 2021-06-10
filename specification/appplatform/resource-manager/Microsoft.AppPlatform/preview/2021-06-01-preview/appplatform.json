@@ -3395,6 +3395,13 @@
           "type": "string",
           "readOnly": true
         },
+        "addonConfig": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the App",
           "enum": [
@@ -3991,6 +3998,29 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "addonConfig": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
+          }
+        }
+      }
+    },
+    "AddonProfile": {
+      "description": "Deployment addon profile",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the add-on is enabled or not"
+        },
+        "properties": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs for configurations of add-on"
         }
       }
     },
