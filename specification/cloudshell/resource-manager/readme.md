@@ -26,16 +26,7 @@ These are the global settings for the CloudShell.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-10-01
-```
-
-### Tag: package-2018-10-01
-
-These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2018-10-01'
-input-file:
-  - Microsoft.Portal/stable/2018-10-01/CloudShell.json
+tag: package-2020-04-01-preview
 ```
 
 ### Tag: package-2020-04-01-preview
@@ -44,7 +35,7 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
+  - Microsoft.Portal/preview/2020-04-01/CloudShell.json
 ```
 
 ---
@@ -77,15 +68,6 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: cloudshell
-```
-
-### Tag: package-2018-10-01 and go
-
-These settings apply only when `--tag=package-2018-10-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2018-10-01' && $(go)
-output-folder: $(go-sdk-folder)/services/cloudshell/mgmt/2018-10-01/cloudshell
 ```
 
 ### Tag: package-2020-04-01-preview and go
@@ -121,18 +103,8 @@ python:
 
 ```yaml
 package-name: azure_mgmt_cloudshell
-package-version: 2018-10-01
+package-version: 2020-04-01-preview
 azure-arm: true
-```
-
-### Tag: package-2018-10-01 and ruby
-
-These settings apply only when `--tag=package-2018-10-01 --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-```yaml $(tag) == 'package-2018-10-01' && $(ruby)
-namespace: Microsoft.Portal
-output-folder: $(ruby-sdks-folder)/CloudShell
 ```
 
 ### Tag: package-2020-04-01-preview and ruby
