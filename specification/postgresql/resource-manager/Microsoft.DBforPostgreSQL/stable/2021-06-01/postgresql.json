@@ -1438,7 +1438,11 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "availability zone information of the server."
+          "description": "availability zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -1713,8 +1717,7 @@
         },
         "standbyAvailabilityZone": {
           "type": "string",
-          "description": "availability zone information of the standby.",
-          "readOnly": true
+          "description": "availability zone information of the standby."
         }
       },
       "description": "High availability properties of a server"
