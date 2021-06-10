@@ -670,6 +670,14 @@ directive:
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
+``` yaml $(go) || $(csharp) || $(validation) || $(azure-validator)
+directive:
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["Resource"]
+  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+```
+
 ### Tag: profile-hybrid-2019-03-01
 
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.

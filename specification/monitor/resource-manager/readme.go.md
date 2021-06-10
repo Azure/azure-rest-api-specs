@@ -7,11 +7,6 @@ go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: insights
   clear-output-folder: true
-directive:
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
 ```
 
 ### Go multi-api
@@ -107,5 +102,5 @@ These settings apply only when `--tag=package-2021-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-04' && $(go)
-output-folder: $(go-sdk-folder)/services/monitor/mgmt/2021-04-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-04-01-preview/$(namespace)
 ```

@@ -20,11 +20,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Monitor
   output-folder: $(csharp-sdks-folder)/monitor/Microsoft.Azure.Management.Monitor/src/Generated
   clear-output-folder: true
-directive:
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
 ```
 
 ### Profile: hybrid_2019_03_01
