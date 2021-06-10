@@ -2614,7 +2614,7 @@
           "description": "Has time period for pulling data for the forecast.",
           "$ref": "#/definitions/QueryTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this forecast.",
           "$ref": "#/definitions/QueryDataset"
         },
@@ -2629,7 +2629,8 @@
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataSet"
       ]
     },
     "QueryDefinition": {
@@ -2668,14 +2669,15 @@
           "description": "Has time period for pulling data for the query.",
           "$ref": "#/definitions/QueryTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this query.",
           "$ref": "#/definitions/QueryDataset"
         }
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataSet"
       ]
     },
     "QueryTimePeriod": {
