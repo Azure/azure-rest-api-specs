@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2020-04-01/CloudShell.json
+  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
 ```
 
 ---
