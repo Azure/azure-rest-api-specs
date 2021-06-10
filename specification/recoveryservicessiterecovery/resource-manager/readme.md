@@ -54,7 +54,7 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03
+tag: package-2021-04
 directive:
   - where:
       - $.paths
