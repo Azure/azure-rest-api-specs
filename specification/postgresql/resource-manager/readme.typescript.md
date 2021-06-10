@@ -10,12 +10,12 @@ typescript:
   generate-metadata: true
 ```
 
-### Tag: package-2021-06-01-preview and TypeScript
+### Tag: package-2021-04-10-privatepreview and TypeScript
 
-These settings apply only when `--tag=package-2021-06-01-preview --typescript` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-10-privatepreview --typescript` is specified on the command line.
 Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
 
-``` yaml $(tag) == 'package-2021-06-01-preview' && $(typescript)
+``` yaml $(tag) == 'package-2021-04-10-privatepreview' && $(typescript)
 title: PostgreSQLManagementFlexibleServerClient
 package-name: "@azure/arm-postgresql-flexible"
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexible/"
