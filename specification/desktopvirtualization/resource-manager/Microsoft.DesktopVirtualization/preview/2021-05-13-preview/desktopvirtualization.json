@@ -4290,7 +4290,7 @@
             "values": [
               {
                 "value": "Gallery",
-                "description": "Using default gallery images offered by azure market place."
+                "description": "Using default gallery images offered by Azure Marketplace."
               },
               {
                 "value": "StorageBlob",
@@ -4388,16 +4388,16 @@
       "type": "object",
       "properties": {
         "localAdmin": {
-          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
           "description": "The local admin credentials."
         },
         "domainAdmin": {
-          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
           "description": "The domain admin credentials."
         }
       }
     },
-    "KeyvaultCredentialProperties": {
+    "KeyVaultCredentialProperties": {
       "description": "Credentials kept in the keyvault.",
       "type": "object",
       "properties": {
@@ -4416,7 +4416,7 @@
       }
     },
     "HostPoolUpdate": {
-      "description": "Represents properties for a hostpool update.",
+      "description": "Properties for a hostpool update.",
       "type": "object",
       "properties": {
         "validateOnly": {
@@ -4487,7 +4487,7 @@
       "type": "object",
       "description": "When set schedules the hostpool update at specific time.",
       "properties": {
-        "time": {
+        "dateTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time the hostpool update is schedule for."
@@ -4610,7 +4610,7 @@
           "type": "string",
           "description": "The hostpool update end time."
         },
-        "listOfErrors": {
+        "errors": {
           "type": "array",
           "description": "The alerts given to customers for hostpool update.",
           "items": {
@@ -4748,7 +4748,7 @@
         },
         "sessionHostConfiguration": {
           "$ref": "#/definitions/SessionHostConfigurationProperties",
-          "description": "The session host configurations of HostPool."
+          "description": "The session host configurations of a host pool."
         }
       }
     },
@@ -5889,7 +5889,7 @@
         "sessionHostConfigurationLastUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This time will match the time in the SHC for when the update was initiated.",
+          "description": "This time will match the time in the session host configuration for when the update was initiated.",
           "readOnly": true
         },
         "imageResourceId": {
