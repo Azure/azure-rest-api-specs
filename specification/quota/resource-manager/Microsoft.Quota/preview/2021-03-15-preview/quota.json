@@ -123,13 +123,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -179,13 +179,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "202": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -542,7 +542,7 @@
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
           "type": "string",
-          "readOnly": false
+          "readOnly": true
         },
         "name": {
           "description": "Resource name provided by the resource provider. Use this property name when requesting quota.",
