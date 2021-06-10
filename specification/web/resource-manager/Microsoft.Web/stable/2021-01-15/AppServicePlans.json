@@ -138,7 +138,8 @@
             }
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -966,7 +967,8 @@
             }
           },
           "404": {
-            "description": "Virtual network could not be found."
+            "description": "Virtual network could not be found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1199,7 +1201,8 @@
             }
           },
           "404": {
-            "description": "Specified route does not exist."
+            "description": "Specified route does not exist.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1265,10 +1268,12 @@
             }
           },
           "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Route not found."
+            "description": "Route not found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1322,7 +1327,8 @@
             "description": "Successfully deleted Virtual Network route."
           },
           "404": {
-            "description": "Specified Virtual Network route does not exist."
+            "description": "Specified Virtual Network route does not exist.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1388,10 +1394,12 @@
             }
           },
           "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Route not found."
+            "description": "Route not found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1461,6 +1469,7 @@
       "properties": {
         "properties": {
           "description": "AppServicePlanPatchResource resource specific properties",
+          "type": "object",
           "properties": {
             "workerTierName": {
               "description": "Target worker tier assigned to the App Service plan.",
@@ -1637,6 +1646,7 @@
       "properties": {
         "properties": {
           "description": "HybridConnectionKey resource specific properties",
+          "type": "object",
           "properties": {
             "sendKeyName": {
               "description": "The name of the send key.",
@@ -1664,6 +1674,7 @@
       "properties": {
         "properties": {
           "description": "HybridConnectionLimits resource specific properties",
+          "type": "object",
           "properties": {
             "current": {
               "format": "int32",

@@ -165,6 +165,7 @@
       "properties": {
         "properties": {
           "description": "AppServicePlan resource specific properties",
+          "type": "object",
           "properties": {
             "workerTierName": {
               "description": "Target worker tier assigned to the App Service plan.",
@@ -211,6 +212,10 @@
             "perSiteScaling": {
               "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
               "default": false,
+              "type": "boolean"
+            },
+            "elasticScaleEnabled": {
+              "description": "ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku",
               "type": "boolean"
             },
             "maximumElasticWorkerCount": {
@@ -823,6 +828,7 @@
               "type": "array",
               "items": {
                 "description": "Detailed errors.",
+                "type": "object",
                 "properties": {
                   "code": {
                     "description": "Standardized string to programmatically identify the error.",
@@ -864,6 +870,7 @@
       "properties": {
         "properties": {
           "description": "DeletedSite resource specific properties",
+          "type": "object",
           "properties": {
             "deletedSiteId": {
               "format": "int32",
@@ -989,6 +996,7 @@
       "properties": {
         "properties": {
           "description": "DetectorResponse resource specific properties",
+          "type": "object",
           "properties": {
             "metadata": {
               "$ref": "#/definitions/DetectorInfo",
@@ -1234,6 +1242,7 @@
       "properties": {
         "properties": {
           "description": "HybridConnection resource specific properties",
+          "type": "object",
           "properties": {
             "serviceBusNamespace": {
               "description": "The name of the Service Bus namespace.",
@@ -1292,6 +1301,7 @@
       "properties": {
         "properties": {
           "description": "Identifier resource specific properties",
+          "type": "object",
           "properties": {
             "id": {
               "description": "String representation of the identity.",
@@ -1489,19 +1499,7 @@
           "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "description": "Principal Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              },
-              "clientId": {
-                "description": "Client Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/definitions/userAssignedIdentity"
           }
         }
       }
@@ -1709,6 +1707,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
           "description": "Core resource properties",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       }
@@ -1801,6 +1800,7 @@
     },
     "ProxyOnlyResource": {
       "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -1838,6 +1838,7 @@
           "required": [
             "isPushEnabled"
           ],
+          "type": "object",
           "properties": {
             "isPushEnabled": {
               "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
@@ -1946,6 +1947,7 @@
       "properties": {
         "properties": {
           "description": "RemotePrivateEndpointConnectionARMResource resource specific properties",
+          "type": "object",
           "properties": {
             "provisioningState": {
               "type": "string",
@@ -2039,6 +2041,7 @@
       "required": [
         "location"
       ],
+      "type": "object",
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -2123,6 +2126,7 @@
       "properties": {
         "properties": {
           "description": "Site resource specific properties",
+          "type": "object",
           "properties": {
             "state": {
               "description": "Current state of the app.",
@@ -2957,6 +2961,7 @@
       "properties": {
         "properties": {
           "description": "Snapshot resource specific properties",
+          "type": "object",
           "properties": {
             "time": {
               "description": "The time the snapshot was taken.",
@@ -3098,6 +3103,7 @@
           "required": [
             "publishingUserName"
           ],
+          "type": "object",
           "properties": {
             "publishingUserName": {
               "description": "Username used for publishing.",
@@ -3207,6 +3213,7 @@
           "required": [
             "vpnPackageUri"
           ],
+          "type": "object",
           "properties": {
             "vnetName": {
               "description": "The Virtual Network name.",
@@ -3240,6 +3247,7 @@
       "properties": {
         "properties": {
           "description": "VnetInfo resource specific properties",
+          "type": "object",
           "properties": {
             "vnetResourceId": {
               "description": "The Virtual Network's resource ID.",
@@ -3291,6 +3299,7 @@
       "properties": {
         "properties": {
           "description": "VnetRoute resource specific properties",
+          "type": "object",
           "properties": {
             "startAddress": {
               "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified.",
@@ -3334,6 +3343,22 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "userAssignedIdentity": {
+      "description": "User Assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
           "type": "string",
           "readOnly": true
         }
