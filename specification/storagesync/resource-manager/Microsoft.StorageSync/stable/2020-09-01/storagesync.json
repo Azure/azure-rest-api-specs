@@ -3416,7 +3416,8 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 100,
-          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
+          "default": 20
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
@@ -3442,11 +3443,18 @@
         },
         "initialDownloadPolicy": {
           "$ref": "#/definitions/InitialDownloadPolicy",
-          "description": "Policy for how namespace and files are recalled during FastDr."
+          "description": "Policy for how namespace and files are recalled during FastDr.",
+          "default": "NamespaceThenModifiedFiles"
         },
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
-          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
+          "default": "UpdateLocallyCachedFiles"
+        },
+        "initialUploadPolicy": {
+          "$ref": "#/definitions/InitialUploadPolicy",
+          "description": "Policy for how the initial upload sync session is performed.",
+          "default": "Merge"
         }
       }
     },
@@ -4097,28 +4105,23 @@
       "properties": {
         "lastStepName": {
           "type": "string",
-          "description": "last step name",
-          "readOnly": true
+          "description": "last step name"
         },
         "status": {
           "$ref": "#/definitions/WorkflowStatus",
-          "description": "workflow status.",
-          "readOnly": true
+          "description": "workflow status."
         },
         "operation": {
           "$ref": "#/definitions/OperationDirection",
-          "description": "operation direction.",
-          "readOnly": true
+          "description": "operation direction."
         },
         "steps": {
           "type": "string",
-          "description": "workflow steps",
-          "readOnly": true
+          "description": "workflow steps"
         },
         "lastOperationId": {
           "type": "string",
-          "description": "workflow last operation identifier.",
-          "readOnly": true
+          "description": "workflow last operation identifier."
         },
         "commandName": {
           "type": "string",
@@ -4184,19 +4187,15 @@
         },
         "serverManagementErrorCode": {
           "type": "integer",
-          "description": "Registered Server Management Error Code",
-          "readOnly": true
+          "description": "Registered Server Management Error Code"
         },
         "lastHeartBeat": {
           "type": "string",
-          "format": "date-time",
-          "description": "Registered Server last heart beat",
-          "readOnly": true
+          "description": "Registered Server last heart beat"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Registered Server Provisioning State",
-          "readOnly": true
+          "description": "Registered Server Provisioning State"
         },
         "serverRole": {
           "type": "string",
@@ -4216,33 +4215,27 @@
         },
         "storageSyncServiceUid": {
           "type": "string",
-          "description": "Registered Server storageSyncServiceUid",
-          "readOnly": true
+          "description": "Registered Server storageSyncServiceUid"
         },
         "lastWorkflowId": {
           "type": "string",
-          "description": "Registered Server lastWorkflowId",
-          "readOnly": true
+          "description": "Registered Server lastWorkflowId"
         },
         "lastOperationName": {
           "type": "string",
-          "description": "Resource Last Operation Name",
-          "readOnly": true
+          "description": "Resource Last Operation Name"
         },
         "discoveryEndpointUri": {
           "type": "string",
-          "description": "Resource discoveryEndpointUri",
-          "readOnly": true
+          "description": "Resource discoveryEndpointUri"
         },
         "resourceLocation": {
           "type": "string",
-          "description": "Resource Location",
-          "readOnly": true
+          "description": "Resource Location"
         },
         "serviceLocation": {
           "type": "string",
-          "description": "Service Location",
-          "readOnly": true
+          "description": "Service Location"
         },
         "friendlyName": {
           "type": "string",
@@ -4250,18 +4243,15 @@
         },
         "managementEndpointUri": {
           "type": "string",
-          "description": "Management Endpoint Uri",
-          "readOnly": true
+          "description": "Management Endpoint Uri"
         },
         "monitoringEndpointUri": {
           "type": "string",
-          "description": "Telemetry Endpoint Uri",
-          "readOnly": true
+          "description": "Telemetry Endpoint Uri"
         },
         "monitoringConfiguration": {
           "type": "string",
-          "description": "Monitoring Configuration",
-          "readOnly": true
+          "description": "Monitoring Configuration"
         },
         "serverName": {
           "type": "string",
@@ -4310,6 +4300,12 @@
         "lastOperationName": {
           "type": "string",
           "description": "Resource Last Operation Name"
+        },
+        "changeEnumerationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/CloudEndpointChangeEnumerationStatus",
+          "description": "Cloud endpoint change enumeration status",
+          "readOnly": true
         }
       }
     },
@@ -4437,6 +4433,10 @@
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
           "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
+        },
+        "initialUploadPolicy": {
+          "$ref": "#/definitions/InitialUploadPolicy",
+          "description": "Policy for how the initial upload sync session is performed."
         },
         "serverName": {
           "type": "string",
@@ -4621,6 +4621,13 @@
           "$ref": "#/definitions/ServerEndpointSyncMode",
           "description": "Sync mode",
           "readOnly": true
+        },
+        "sessionMinutesRemaining": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Session minutes remaining (if available)",
+          "readOnly": true
         }
       }
     },
@@ -4658,6 +4665,12 @@
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when properties were updated",
+          "readOnly": true
+        },
+        "startedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation started",
           "readOnly": true
         },
         "percentProgress": {
@@ -4750,6 +4763,18 @@
       ],
       "x-ms-enum": {
         "name": "InitialDownloadPolicy",
+        "modelAsString": true
+      }
+    },
+    "InitialUploadPolicy": {
+      "type": "string",
+      "description": "Policy for how the initial upload sync session is performed.",
+      "enum": [
+        "ServerAuthoritative",
+        "Merge"
+      ],
+      "x-ms-enum": {
+        "name": "InitialUploadPolicy",
         "modelAsString": true
       }
     },
@@ -5160,6 +5185,189 @@
       ],
       "x-ms-enum": {
         "name": "RegisteredServerAgentVersionStatus",
+        "modelAsString": true
+      }
+    },
+    "CloudEndpointChangeEnumerationStatus": {
+      "type": "object",
+      "description": "Cloud endpoint change enumeration status object",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "lastEnumerationStatus": {
+          "$ref": "#/definitions/CloudEndpointLastChangeEnumerationStatus",
+          "description": "Status of last completed change enumeration",
+          "readOnly": true
+        },
+        "activity": {
+          "$ref": "#/definitions/CloudEndpointChangeEnumerationActivity",
+          "description": "Change enumeration activity",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudEndpointLastChangeEnumerationStatus": {
+      "type": "object",
+      "description": "Cloud endpoint change enumeration status object",
+      "properties": {
+        "startedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when change enumeration started",
+          "readOnly": true
+        },
+        "completedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when change enumeration completed",
+          "readOnly": true
+        },
+        "namespaceFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of files in the namespace",
+          "readOnly": true
+        },
+        "namespaceDirectoriesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of directories in the namespace",
+          "readOnly": true
+        },
+        "namespaceSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Namespace size in bytes",
+          "readOnly": true
+        },
+        "nextRunTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of when change enumeration is expected to run again",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudEndpointChangeEnumerationActivity": {
+      "type": "object",
+      "description": "Cloud endpoint change enumeration activity object",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "operationState": {
+          "$ref": "#/definitions/CloudEndpointChangeEnumerationActivityState",
+          "description": "Change enumeration operation state",
+          "readOnly": true
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "When non-zero, indicates an issue that is delaying change enumeration",
+          "readOnly": true
+        },
+        "startedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when change enumeration started",
+          "readOnly": true
+        },
+        "processedFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of files processed",
+          "readOnly": true
+        },
+        "processedDirectoriesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of directories processed",
+          "readOnly": true
+        },
+        "totalFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total count of files enumerated",
+          "readOnly": true
+        },
+        "totalDirectoriesCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total count of directories enumerated",
+          "readOnly": true
+        },
+        "totalSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total enumerated size in bytes",
+          "readOnly": true
+        },
+        "progressPercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Progress percentage for change enumeration run, excluding processing of deletes",
+          "readOnly": true
+        },
+        "minutesRemaining": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Estimate of time remaining for the enumeration run",
+          "readOnly": true
+        },
+        "totalCountsState": {
+          "$ref": "#/definitions/CloudEndpointChangeEnumerationTotalCountsState",
+          "description": "Change enumeration total counts state",
+          "readOnly": true
+        },
+        "deletesProgressPercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Progress percentage for processing deletes. This is done separately from the rest of the enumeration run",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudEndpointChangeEnumerationActivityState": {
+      "type": "string",
+      "description": "State of change enumeration activity",
+      "enum": [
+        "InitialEnumerationInProgress",
+        "EnumerationInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "CloudEndpointChangeEnumerationActivityState",
+        "modelAsString": true
+      }
+    },
+    "CloudEndpointChangeEnumerationTotalCountsState": {
+      "type": "string",
+      "description": "State of the total counts of change enumeration activity",
+      "enum": [
+        "Calculating",
+        "Final"
+      ],
+      "x-ms-enum": {
+        "name": "CloudEndpointChangeEnumerationTotalCountsState",
         "modelAsString": true
       }
     }
