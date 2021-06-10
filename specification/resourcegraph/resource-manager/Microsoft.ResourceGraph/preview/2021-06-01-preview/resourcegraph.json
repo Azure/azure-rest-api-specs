@@ -225,6 +225,21 @@
           "description": "Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.",
           "type": "boolean",
           "default": false
+        },
+        "authorizationScopeFilter": {
+          "description": "Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.",
+          "type": "string",
+          "enum": [
+            "AtScopeAndBelow",
+            "AtScopeAndAbove",
+            "AtScopeExact",
+            "AtScopeAboveAndBelow"
+          ],
+          "default": "AtScopeAndBelow",
+          "x-ms-enum": {
+            "name": "AuthorizationScopeFilter",
+            "modelAsString": false
+          }
         }
       }
     },
