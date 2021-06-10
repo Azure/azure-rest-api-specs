@@ -2,13 +2,16 @@
   "parameters": {
     "resourceGroupName": "MyResourceGroup",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2020-10-01",
+    "api-version": "2021-06-01-preview",
     "providerName": "myattestationprovider",
     "updateParams": {
       "tags": {
         "Property1": "Value1",
         "Property2": "Value2",
         "Property3": "Value3"
+      },
+      "properties": {
+        "publicNetworkAccess": "Disabled"
       }
     }
   },
@@ -25,6 +28,7 @@
           "Property3": "Value3"
         },
         "properties": {
+          "publicNetworkAccess": "Disabled",
           "trustModel": "Isolated",
           "status": "Ready",
           "attestUri": "https://superservice.attestation.azure.net"
