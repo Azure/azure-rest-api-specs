@@ -338,6 +338,55 @@
     }
   },
   "definitions": {
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the Healthbot",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "IdentityUserAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
     "Sku": {
       "description": "The resource model definition representing SKU",
       "properties": {
@@ -434,6 +483,10 @@
         "properties": {
           "$ref": "#/definitions/HealthBotProperties",
           "description": "The set of properties specific to Healthbot resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the Healthbot."
         }
       },
       "required": [
@@ -475,6 +528,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the HealthBot."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the Healthbot."
         }
       }
     },
