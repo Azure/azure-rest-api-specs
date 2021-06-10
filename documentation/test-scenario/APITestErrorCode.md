@@ -7,7 +7,7 @@
 
 # API testing error code
 
-OAV api testing define some rules and check whether actual service response match with example. Example is very important for downstream SDK test code generation, code samples and doc. The goal to detect example quality issues and check service behaviors consistent with example.
+OAV api testing define some rules and check whether actual service response match with example. Example is very important for downstream SDK test code generation, code samples and docs. The goal to detect example quality issues and check service behaviors consistent with example.
 
 ## Rule descriptions
 
@@ -21,7 +21,7 @@ The provisioning state is very important for downstream terraform or cli to mana
 
 **Error message**: The response value is missing. Path: {}. Expected: {}. Actual: undefined
 
-The example has defined response value, but actually the in api testing server doesn't return that value.
+The example has defined response value, but actually the server doesn't return that value.
 
 Example:
 
@@ -46,6 +46,8 @@ Example:
 
 **Error message** Return additional response value. Path: {}. Expected: undefined. Actual: {}
 
+The example doesn't define the response value, but service actually return this value.
+
 Example:
 
 ```diff
@@ -69,6 +71,8 @@ Example:
 #### RESPONSE_INCONSISTENT_VALUE
 
 **Error message** The actual response value is different from example. Path: {}. Expected: {}. Actual: {}
+
+The service returned value is different from example value.
 
 Example:
 
