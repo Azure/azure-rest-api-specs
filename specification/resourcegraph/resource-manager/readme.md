@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-preview-2021-06` is specified on t
 ```yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
 ```
 ### Tag: package-preview-2021-03
 
