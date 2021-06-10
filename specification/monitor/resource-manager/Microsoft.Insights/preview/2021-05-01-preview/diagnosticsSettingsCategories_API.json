@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/diagnosticSettingsCategories/{name}": {
+    "/{resourceUri}/providers/Microsoft.Insights/diagnosticSettingsCategories/{name}": {
       "get": {
         "tags": [
           "DiagnosticSettingsCategories"
@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -75,7 +75,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/microsoft.insights/diagnosticSettingsCategories": {
+    "/{resourceUri}/providers/Microsoft.Insights/diagnosticSettingsCategories": {
       "get": {
         "tags": [
           "DiagnosticSettingsCategories"
@@ -94,7 +94,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -194,20 +194,6 @@
         }
       },
       "description": "Represents a collection of diagnostic setting category resources."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
