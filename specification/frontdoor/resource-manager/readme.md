@@ -28,31 +28,21 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2021-06
+tag: package-2020-11
 ```
 
-### Tag: package-2021-06
-
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06'
-input-file:
-  - Microsoft.Network/stable/2021-06-09/network.json
-  - Microsoft.Network/stable/2021-06-09/webapplicationfirewall.json
-```
 
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11'
+```yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.Network/stable/2020-11-01/network.json
   - Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - Microsoft.Network/stable/2020-05-01/frontdoor.json
   - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
 ```
-
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -270,12 +260,4 @@ directive:
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
 
-## Suppression
 
-``` yaml
-directive:
-  - suppress: DescriptionAndTitleMissing
-    where: $.definitions.ErrorDetails
-    from: network.json
-    reason: Existing Warning
-```
