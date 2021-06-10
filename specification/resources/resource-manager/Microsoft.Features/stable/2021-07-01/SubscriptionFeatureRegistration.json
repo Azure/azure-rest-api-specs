@@ -285,6 +285,7 @@
   },
   "definitions": {
     "ProxyResource": {
+      "type": "object",
       "description": "An Azure proxy resource.",
       "properties": {
         "id": {
@@ -304,56 +305,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "operation": {
-      "description": "Operation provided by provider",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name"
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name"
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name"
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation"
-            }
-          }
-        }
-      }
-    },
-    "operationsList": {
-      "description": "Lists the operations available.",
-      "properties": {
-        "nextLink": {
-          "description": "Url to follow for getting next page of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SubscriptionFeatureRegistration": {
       "type": "object",
@@ -392,6 +343,7 @@
               "readOnly": true
             },
             "state": {
+              "type": "string",
               "description": "The state.",
               "enum": [
                 "NotSpecified",
