@@ -751,7 +751,7 @@
           "description": "Gets the uri of attestation service"
         },
         "publicNetworkAccess": {
-          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider dataplane APIs.",
+          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "privateEndpointConnections": {
@@ -822,10 +822,11 @@
       }
     },
     "AttestationServicePatchSpecificParams": {
+      "type": "object",
       "description": "Client supplied parameters used to patch an existing attestation provider.",
       "properties": {
         "publicNetworkAccess": {
-          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider dataplane APIs.",
+          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         }
       }
@@ -862,7 +863,7 @@
       ],
       "properties": {
         "publicNetworkAccess": {
-          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider dataplane APIs.",
+          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "policySigningCertificates": {
@@ -873,7 +874,7 @@
     },
     "PublicNetworkAccessType": {
       "type": "string",
-      "description": "The public network access type for dataplane API calls to the Attestation Provider.",
+      "description": "The public network access type for API calls to the Attestation Provider.",
       "default": "Enabled",
       "enum": [
         "Enabled",
@@ -885,11 +886,11 @@
         "values": [
           {
             "value": "Enabled",
-            "description": "Enables public network connectivity to the Attestation Provider dataplane REST APIs."
+            "description": "Enables public network connectivity to the Attestation Provider REST APIs."
           },
           {
             "value": "Disabled",
-            "description": "Disables public network connectivity to the Attestation Provider dataplane REST APIs."
+            "description": "Disables public network connectivity to the Attestation Provider REST APIs."
           }
         ]
       }
