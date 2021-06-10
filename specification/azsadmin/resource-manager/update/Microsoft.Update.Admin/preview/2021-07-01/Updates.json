@@ -254,12 +254,6 @@
           "description": "Properties of an update.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateModel"
-        },
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -309,22 +303,22 @@
           "description": "Publisher of the update.",
           "type": "string"
         },
-        "prerequisites":{
+        "prerequisites": {
           "description": "List of prerequisites.",
           "type": "array",
-		  "items": {
+          "items": {
             "$ref": "#/definitions/Prerequisite"
           }
         },
-        "updateStateProperties":{
+        "updateStateProperties": {
           "description": "Properties when update is in a specific state.",
           "$ref": "#/definitions/UpdateStateProperties"
         },
-        "azsUpdateProperties":{
+        "azsUpdateProperties": {
           "description": "Properties specific to Microsoft Azure Stack Hub update.",
           "$ref": "#/definitions/AzsUpdateProperties"
         },
-        "oemUpdateProperties":{
+        "oemUpdateProperties": {
           "description": "Properties specific to OEM update.",
           "$ref": "#/definitions/OemUpdateProperties"
         }
@@ -404,13 +398,13 @@
           "type": "string"
         }
       }
-	},
+    },
     "UpdateStateProperties": {
       "description": "State related properties of the update.",
       "type": "object",
       "properties": {
-        "downloadPercentage": {
-          "description": "Package download percentage.",
+        "progressPercentage": {
+          "description": "Overall percentage of a running sate.",
           "type": "integer",
           "format": "int64"
         },
@@ -420,7 +414,7 @@
           "format": "date-time"
         }
       }
-	},
+    },
     "AzsUpdateProperties": {
       "description": "Properties for Microsoft update.",
       "type": "object",
@@ -434,7 +428,7 @@
           "type": "string"
         }
       }
-	},
+    },
     "OemUpdateProperties": {
       "description": "Properties for OEM update.",
       "type": "object",
