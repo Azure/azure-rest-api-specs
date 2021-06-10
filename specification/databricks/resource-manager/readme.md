@@ -48,7 +48,7 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-04-01
+tag: package-2021-04-01-preview
 ```
 
 
@@ -59,6 +59,17 @@ These settings apply only when `--tag=package-2018-04-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-04-01'
 input-file:
 - Microsoft.Databricks/stable/2018-04-01/databricks.json
+- Microsoft.Databricks/stable/2018-04-01/vnetpeering.json
+```
+
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.Databricks/preview/2021-04-01-preview/databricks.json
+- Microsoft.Databricks/stable/2018-04-01/vnetpeering.json
 ```
 
 ---
