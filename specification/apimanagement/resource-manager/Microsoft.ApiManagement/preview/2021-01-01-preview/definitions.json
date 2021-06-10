@@ -6505,6 +6505,11 @@
           "type": "integer",
           "format": "int64",
           "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
         }
       },
       "description": "Paged list of eventGrid filters."
@@ -6556,17 +6561,48 @@
         "includedEventTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/EventGridEventTypeContract"
           },
           "description": "included Event Types of this eventGridFilter."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventGridFilterContractProperties"
-        }
-      ],
       "description": "EventGridFilter description details."
+    },
+    "EventGridEventTypeContract": {
+      "type": "string",
+      "description": "Types of EventGridEvent.",
+      "enum": [
+        "All",
+        "MicrosoftApiManagementUserCreated",
+        "MicrosoftApiManagementUserUpdated",
+        "MicrosoftApiManagementUserDeleted",
+        "MicrosoftApiManagementSubscriptionCreated",
+        "MicrosoftApiManagementSubscriptionUpdated",
+        "MicrosoftApiManagementSubscriptionDeleted",
+        "MicrosoftApiManagementAPICreated",
+        "MicrosoftApiManagementAPIUpdated",
+        "MicrosoftApiManagementAPIDeleted",
+        "MicrosoftApiManagementAPIReleaseCreated",
+        "MicrosoftApiManagementAPIReleaseUpdated",
+        "MicrosoftApiManagementAPIReleaseDeleted",
+        "MicrosoftApiManagementProductCreated",
+        "MicrosoftApiManagementProductUpdated",
+        "MicrosoftApiManagementProductDeleted"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "wventGridEventType",
+        "values": [
+          {
+            "value": "authorizationHeader",
+            "description": "Access token will be transmitted in the Authorization header using Bearer schema"
+          },
+          {
+            "value": "query",
+            "description": "Access token will be transmitted as query parameters."
+          }
+        ]
+      }
     },
     "SubscriberIdentityInfo": {
       "type": "object",
@@ -6591,12 +6627,7 @@
           "type": "string",
           "description": "client Authorization Source of this eventGridFilter."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventGridFilterContractProperties"
-        }
-      ]
+      }
     }
   },
   "parameters": {}
