@@ -735,6 +735,19 @@
           "description": "The details of Managed Identity of Storage Account",
           "$ref": "#/definitions/ManagedIdentityConfiguration"
         },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption properties for databricks workspace",
+          "properties": {
+            "entities": {
+              "$ref": "#/definitions/EncryptionEntitiesDefinition",
+              "description": "Encryption entities definition for the workspace."
+            }
+          },
+          "required": [
+            "entities"
+          ]
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "description": "Private endpoint connections created on the workspace",
