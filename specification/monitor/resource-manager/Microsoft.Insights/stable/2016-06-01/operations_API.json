@@ -69,6 +69,7 @@
   },
   "definitions": {
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -98,6 +99,7 @@
         },
         "display": {
           "description": "Display metadata associated with the operation.",
+          "type": "object",
           "properties": {
             "publisher": {
               "description": "The publisher of this operation.",
@@ -131,6 +133,7 @@
     },
     "OperationProperties": {
       "description": "Properties of operation, include metric specifications.",
+      "type": "object",
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
@@ -140,6 +143,7 @@
     },
     "ServiceSpecification": {
       "description": "One property of operation, include log specifications.",
+      "type": "object",
       "properties": {
         "logSpecifications": {
           "description": "Log specifications of operation.",
@@ -163,6 +167,7 @@
     },
     "LogSpecification": {
       "description": "Log specification of operation.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -180,6 +185,7 @@
     },
     "MetricSpecification": {
       "description": "Metric specification of operation.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -249,6 +255,7 @@
     },
     "DimensionProperties": {
       "description": "Type of operation: get, read, delete, etc.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -279,7 +286,21 @@
       "properties": {
         "error": {
           "description": "The error object.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     }
