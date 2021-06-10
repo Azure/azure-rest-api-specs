@@ -3129,24 +3129,20 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedClusterIdentity",
+          "description": "The identity of the managed cluster, if configured."
+        },
+        "properties": {
+          "description": "Properties of a managed cluster.",
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "description": "Properties of a managed cluster.",
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "x-ms-client-flatten": true
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedClusterIdentity",
-              "description": "The identity of the managed cluster, if configured."
-            }
-          }
         }
       ],
       "description": "Managed cluster."
@@ -3326,11 +3322,7 @@
         },
         "identityProfile": {
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/UserAssignedIdentity"
-              }
-            ]
+            "$ref": "#/definitions/UserAssignedIdentity"
           },
           "description": "Identities associated with the cluster."
         },
@@ -3419,13 +3411,13 @@
           }
         },
         "userAssignedIdentities": {
-          "type": "object",
           "additionalProperties": {
             "type": "object",
             "properties": {
               "principalId": {
                 "readOnly": true,
                 "type": "string",
+                "x-ms-client-name": "ManagedServiceIdentityUserAssignedIdentitiesValue",
                 "description": "The principal id of user assigned identity."
               },
               "clientId": {
