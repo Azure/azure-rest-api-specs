@@ -135,7 +135,6 @@ These settings apply only when `--tag=package-features-2021-07` is specified on 
 ``` yaml $(tag) == 'package-features-2021-07'
 input-file:
 - Microsoft.Features/stable/2021-07-01/features.json
-- Microsoft.Features/stable/2021-07-01/featureConfigurations.json
 - Microsoft.Features/stable/2021-07-01/subscriptionFeatureRegistration.json
 ```
 
