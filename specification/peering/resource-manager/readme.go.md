@@ -14,10 +14,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2021-06-01
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2021-01-01
   - tag: package-2020-10-01
   - tag: package-2020-04-01
@@ -33,6 +29,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2021-06-01' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-06-01/$(namespace)
+```
 
 ### Tag: package-2021-01-01 and go
 
