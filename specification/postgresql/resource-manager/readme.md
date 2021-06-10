@@ -30,6 +30,7 @@ description: The Microsoft Azure management API provides create, read, update, a
 openapi-type: arm
 tag: package-2020-01-01
 ```
+
 ### Tag: package-2021-06-01
 
 These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
@@ -237,6 +238,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 
 
