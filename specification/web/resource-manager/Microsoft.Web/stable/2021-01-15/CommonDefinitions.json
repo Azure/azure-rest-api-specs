@@ -1499,19 +1499,7 @@
           "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "description": "Principal Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              },
-              "clientId": {
-                "description": "Client Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/definitions/userAssignedIdentity"
           }
         }
       }
@@ -1719,6 +1707,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
           "description": "Core resource properties",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       }
@@ -3354,6 +3343,22 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "userAssignedIdentity": {
+      "description": "User Assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
           "type": "string",
           "readOnly": true
         }

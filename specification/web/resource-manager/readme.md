@@ -55,7 +55,6 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
-
 ### Tag: package-2021-01-15
 
 These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
@@ -153,7 +152,35 @@ directive:
 - suppress: R4009
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -251,63 +278,6 @@ directive:
 - suppress: R4009
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
-- suppress: R4037
-  from: AppServiceCertificateOrders.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: CertificateOrdersDiagnostics.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: CertificateRegistrationProvider.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Domains.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: TopLevelDomains.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: DomainRegistrationProvider.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Certificates.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: CommonDefinitions.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: DeletedWebApps.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Diagnostics.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Global.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Provider.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: Recommendations.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: WebApps.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: StaticSites.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: AppServiceEnvironments.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: AppServicePlans.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: ResourceHealthMetadata.json
-  reason: Will fix in next version.
-- suppress: R4037
-  from: KubeEnvironments.json
-  reason: Will fix in next version.
 ```
 
 ### Tag: package-2020-12
