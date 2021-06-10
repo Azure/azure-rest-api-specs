@@ -3359,6 +3359,9 @@
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
         },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "identity": {
           "$ref": "#/definitions/ManagedIdentityProperties",
           "description": "The Managed Identity type of the app resource"
@@ -3398,7 +3401,8 @@
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -3407,10 +3411,6 @@
             "modelAsString": true
           }
         },
-        "activeDeploymentName": {
-          "description": "Name of the active deployment of the App",
-          "type": "string"
-        },
         "fqdn": {
           "description": "Fully qualified dns Name.",
           "type": "string"
@@ -3418,12 +3418,6 @@
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
           "type": "boolean"
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "Date time when the resource is created",
-          "type": "string",
-          "readOnly": true
         },
         "temporaryDisk": {
           "$ref": "#/definitions/TemporaryDisk",
@@ -3822,6 +3816,9 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Sku of the Deployment resource"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -3832,11 +3829,6 @@
         "source": {
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the deployment."
-        },
-        "appName": {
-          "description": "App name of the deployment",
-          "type": "string",
-          "readOnly": true
         },
         "deploymentSettings": {
           "$ref": "#/definitions/DeploymentSettings",
@@ -3860,13 +3852,8 @@
         "status": {
           "description": "Status of the Deployment",
           "enum": [
-            "Unknown",
             "Stopped",
-            "Running",
-            "Failed",
-            "Allocating",
-            "Upgrading",
-            "Compiling"
+            "Running"
           ],
           "type": "string",
           "readOnly": true,
@@ -3877,14 +3864,7 @@
         },
         "active": {
           "description": "Indicates whether the Deployment is active",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "Date time when the resource is created",
-          "type": "string",
-          "readOnly": true
+          "type": "boolean"
         },
         "instances": {
           "description": "Collection of instances belong to the Deployment",
@@ -3917,6 +3897,10 @@
         },
         "relativePath": {
           "description": "Relative path of the storage which stores the source",
+          "type": "string"
+        },
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
           "type": "string"
         },
         "version": {
@@ -4001,32 +3985,11 @@
           "$ref": "#/definitions/ResourceRequests",
           "description": "The requested resource quantity for required CPU and Memory. It is recommended that using this field to represent the required CPU and Memory, the old field cpu and memoryInGB will be deprecated later."
         },
-        "jvmOptions": {
-          "description": "JVM parameter",
-          "type": "string"
-        },
-        "netCoreMainEntryPath": {
-          "description": "The path to the .NET executable relative to zip root",
-          "type": "string"
-        },
         "environmentVariables": {
           "description": "Collection of environment variables",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "runtimeVersion": {
-          "description": "Runtime version",
-          "enum": [
-            "Java_8",
-            "Java_11",
-            "NetCore_31"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RuntimeVersion",
-            "modelAsString": true
           }
         }
       }
