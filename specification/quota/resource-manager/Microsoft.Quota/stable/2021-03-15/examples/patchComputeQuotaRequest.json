@@ -6,7 +6,6 @@
     "createQuotaRequest": {
       "properties": {
         "limit": 200,
-        "unit": "Count",
         "name": {
           "value": "standardFSv2Family"
         }
@@ -22,31 +21,25 @@
       },
       "body": {
         "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimits/standardFSv2Family",
-        "name": "standardFSv2Family",
-        "type": "Microsoft.Quota/ServiceLimits",
+        "type": "Microsoft.Quota/quotaLimits",
         "properties": {
-          "provisioningState": "InProgress",
-          "message": ""
+          "limit": 200,
+          "name": {
+            "value": "standardFSv2Family"
+          }
         }
       }
     },
     "200": {
       "body": {
         "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "name": "standardFSv2Family",
-        "type": "Microsoft.Quota/serviceLimits",
+        "type": "Microsoft.Quota/quotaLimits",
         "properties": {
-          "provisioningState": "Succeeded",
-          "message": "",
           "limit": 200,
-          "unit": "Count",
-          "currentValue": 160,
           "name": {
             "value": "standardFSv2Family",
             "localizedValue": "Standard FSv2 Family vCPUs"
-          },
-          "quotaPeriod": "",
-          "properties": {}
+          }
         }
       }
     }

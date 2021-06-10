@@ -6,7 +6,6 @@
     "createQuotaRequest": {
       "properties": {
         "limit": 200,
-        "unit": "Count",
         "name": {
           "value": "TotalLowPriorityCores"
         },
@@ -18,11 +17,12 @@
     "201": {
       "body": {
         "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "name": "TotalLowPriorityCores",
-        "type": "Microsoft.Quota/ServiceLimits",
+        "type": "Microsoft.Quota/quotaLimits",
         "properties": {
-          "provisioningState": "InProgress",
-          "message": ""
+          "name": {
+            "value": "TotalLowPriorityCores"
+          },
+          "resourceType": "lowPriority"
         }
       }
     },
@@ -34,21 +34,12 @@
       },
       "body": {
         "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotaLimits/standardFSv2Family",
-        "name": "TotalLowPriorityCores",
-        "type": "Microsoft.Quota/serviceLimits",
+        "type": "Microsoft.Quota/quotaLimits",
         "properties": {
-          "provisioningState": "Succeeded",
-          "message": "Request succeeded",
-          "limit": 200,
-          "unit": "Count",
-          "currentValue": 160,
           "name": {
-            "value": "TotalLowPriorityCores",
-            "localizedValue": "Total Cluster Low Priority Regional vCPUs"
+            "value": "TotalLowPriorityCores"
           },
-          "resourceType": "lowPriority",
-          "quotaPeriod": "",
-          "properties": {}
+          "resourceType": "lowPriority"
         }
       }
     }

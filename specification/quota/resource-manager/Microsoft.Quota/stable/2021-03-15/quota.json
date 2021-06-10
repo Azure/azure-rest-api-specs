@@ -123,13 +123,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -179,13 +179,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "202": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestSubmitResponse202"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -507,6 +507,21 @@
       "description": "Quota limit.",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The resource name.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "description": "Quota properties for the specified resource.",
           "$ref": "#/definitions/QuotaProperties"
@@ -517,11 +532,6 @@
       "description": "Quota properties for the specified resource.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
         "limit": {
           "description": "Quota limit.",
           "type": "integer",
@@ -537,7 +547,7 @@
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
           "type": "string",
-          "readOnly": false
+          "readOnly": true
         },
         "name": {
           "description": "Resource name provided by the resource provider. Use this property name when requesting quota.",
@@ -758,6 +768,40 @@
           "description": "User-friendly message.",
           "type": "string",
           "readOnly": true
+        },
+        "limit": {
+          "description": "Quota limit.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": false
+        },
+        "currentValue": {
+          "description": "Usage information for the current resource.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "unit": {
+          "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "type": "string",
+          "readOnly": false
+        },
+        "name": {
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota.",
+          "$ref": "#/definitions/ResourceName"
+        },
+        "resourceType": {
+          "description": "Resource type name.",
+          "$ref": "#/definitions/ResourceTypesName"
+        },
+        "quotaPeriod": {
+          "description": "The time period over which the quota usage values are summarized. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider.",
+          "type": "object"
         }
       }
     },
