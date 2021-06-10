@@ -1,0 +1,72 @@
+{
+  "operationId": "MeshGateway_Get",
+  "description": "This example shows how to get a gateway resource. If the gateway resource exists, its description is returned along with an OK (200) status code. If the gateway resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "gatewayResourceName": "sampleGateway"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleGateway",
+        "properties": {
+          "description": "Service Fabric Mesh sample gateway.",
+          "sourceNetwork": {
+            "name": "Open"
+          },
+          "destinationNetwork": {
+            "name": "helloWorldNetwork"
+          },
+          "tcp": [
+            {
+              "name": "web",
+              "port": 80,
+              "destination": {
+                "applicationName": "helloWorldApp",
+                "serviceName": "helloWorldService",
+                "endpointName": "helloWorldListener"
+              }
+            }
+          ],
+          "http": [
+            {
+              "name": "contosoWebsite",
+              "port": 8081,
+              "hosts": [
+                {
+                  "name": "contoso.com",
+                  "routes": [
+                    {
+                      "name": "index",
+                      "match": {
+                        "path": {
+                          "value": "/index",
+                          "rewrite": "/",
+                          "type": "prefix"
+                        },
+                        "headers": [
+                          {
+                            "name": "accept",
+                            "value": "application/json",
+                            "type": "exact"
+                          }
+                        ]
+                      },
+                      "destination": {
+                        "applicationName": "httpHelloWorldApp",
+                        "serviceName": "indexService",
+                        "endpointName": "indexHttpEndpoint"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "Ready",
+          "ipAddress": "192.168.1.1"
+        }
+      }
+    }
+  }
+}
