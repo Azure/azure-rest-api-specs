@@ -17,6 +17,7 @@ Please also specify `--typescript-sdks-folder=<path to the root directory of you
 
 ``` yaml $(tag) == 'package-2021-04-10-privatepreview' && $(typescript)
 title: PostgreSQLManagementFlexibleServerClient
+package-name: "@azure/arm-postgresqlflexibleserver"
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexibleserver/"
 ```
 
