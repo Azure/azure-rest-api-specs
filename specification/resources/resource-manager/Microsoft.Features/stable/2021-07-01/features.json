@@ -59,6 +59,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -91,6 +97,12 @@
             "description": "OK - Returns an array containing metadata for each feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureOperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,6 +143,12 @@
             "description": "OK - Returns an array containing metadata for each feature in the resource provider. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureOperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -179,6 +197,12 @@
             "schema": {
               "$ref": "#/definitions/FeatureResult"
             }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -223,6 +247,12 @@
             "schema": {
               "$ref": "#/definitions/FeatureResult"
             }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -266,6 +296,12 @@
             "description": "OK - Returns metadata about the unregistered feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -347,6 +383,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list Microsoft.Features operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -359,6 +396,39 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
         }
       }
     }
