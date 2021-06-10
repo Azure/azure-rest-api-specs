@@ -52,6 +52,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2021-04-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-04-01/vaults.json
   - Microsoft.RecoveryServices/stable/2021-04-01/vaultusages.json
+  ```
 
 ### Tag: package-2021-03
 
