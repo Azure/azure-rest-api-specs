@@ -6,7 +6,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-postgresql"
   clear-output-folder: true
   generate-metadata: true
 ```
@@ -29,4 +28,3 @@ Please also specify `--typescript-sdks-folder=<path to the root directory of you
 ``` yaml $(tag) == 'package-2020-01-01' && $(typescript)
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql/"
 ```
-
