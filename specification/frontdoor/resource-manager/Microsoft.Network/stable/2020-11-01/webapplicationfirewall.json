@@ -757,10 +757,10 @@
           "readOnly": true,
           "description": "Version of the managed rule set type."
         },
-        "features": {
+        "managedRuleSetFeatures": {
           "type": "object",
           "readOnly": true,
-          "$ref": "#/definitions/Features",
+          "$ref": "#/definitions/ManagedRuleSetFeatures",
           "description": "Feature set applying to the Ruleset."
         },
         "supportedRuleActions": {
@@ -775,13 +775,14 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ActionType"
+            "$ref": "#/definitions/ManagedRuleSetActionType"
           },
           "description": "Supported actions for the entire RuleSet."
         },
         "supportedSkus": {
           "description": "Map of objects for sku to related properties like state, etc.",
           "type": "object",
+          "readOnly": true,
           "additionalProperties": {
             "$ref": "#/definitions/RuleSetDataBag"
           }
@@ -899,7 +900,7 @@
         }
       }
     },
-    "Features": {
+    "ManagedRuleSetFeatures": {
       "description": "Defines the feature set for a RuleSet.",
       "type": "object",
       "readOnly": true,
