@@ -115,7 +115,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           }
         ],
@@ -123,13 +123,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -171,7 +171,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           }
         ],
@@ -179,13 +179,13 @@
           "200": {
             "description": "OK. Returns the quota request details.",
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "202": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
-              "$ref": "#/definitions/QuotaProperties"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "default": {
@@ -507,17 +507,6 @@
       "description": "Quota limit.",
       "x-ms-azure-resource": true,
       "properties": {
-        "properties": {
-          "description": "Quota properties for the specified resource.",
-          "$ref": "#/definitions/QuotaProperties"
-        }
-      }
-    },
-    "QuotaProperties": {
-      "description": "Quota properties for the specified resource.",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
         "id": {
           "description": "The resource Id.",
           "type": "string",
@@ -528,6 +517,16 @@
           "type": "string",
           "readOnly": true
         },
+        "properties": {
+          "description": "Quota properties for the specified resource.",
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      }
+    },
+    "QuotaProperties": {
+      "description": "Quota properties for the specified resource.",
+      "type": "object",
+      "properties": {
         "limit": {
           "description": "Quota limit.",
           "type": "integer",
