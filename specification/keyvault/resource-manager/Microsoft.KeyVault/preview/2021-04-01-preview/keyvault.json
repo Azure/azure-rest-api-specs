@@ -63,20 +63,6 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "A conflict occurred to prevent the operation from completing.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -150,20 +136,6 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "A conflict occurred to prevent the operation from completing.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -217,13 +189,6 @@
           },
           "204": {
             "description": "No Content."
-          },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -367,22 +332,8 @@
               "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
           },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
           "404": {
             "description": "The specified resource does not exist.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "A conflict occurred to prevent the operation from completing.",
             "schema": {
               "$ref": "common.json#/definitions/CloudError"
             },
@@ -656,13 +607,6 @@
           },
           "202": {
             "description": "Vault is being purged."
-          },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            },
-            "x-ms-error-response": true
           },
           "404": {
             "description": "The specified resource does not exist.",
@@ -1171,7 +1115,8 @@
               "backup",
               "restore",
               "recover",
-              "purge"
+              "purge",
+              "release"
             ],
             "x-ms-enum": {
               "name": "KeyPermissions",
