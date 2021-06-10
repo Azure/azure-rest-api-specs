@@ -670,7 +670,7 @@ directive:
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
-``` yaml $(go) || $(csharp) || $(validation) || $(azure-validator)
+``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
