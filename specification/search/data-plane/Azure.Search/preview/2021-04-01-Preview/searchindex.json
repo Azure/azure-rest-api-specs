@@ -339,6 +339,47 @@
             }
           },
           {
+            "name": "captions",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Captions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return captions for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names used for semantic search.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "searchMode",
             "in": "query",
             "type": "string",
@@ -1455,6 +1496,30 @@
       },
       "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1."
     },
+    "Captions": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "Captions",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return captions for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
+    },
     "QueryLanguage": {
       "type": "string",
       "enum": [
@@ -1627,6 +1692,14 @@
         "answers": {
           "$ref": "#/definitions/Answers",
           "description": "A value that specifies whether answers should be returned as part of the search response."
+        },
+        "captions": {
+          "$ref": "#/definitions/Captions",
+          "description": "A value that specifies whether captions should be returned as part of the search response."
+        },
+        "semanticFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names used for semantic search."
         },
         "select": {
           "type": "string",
