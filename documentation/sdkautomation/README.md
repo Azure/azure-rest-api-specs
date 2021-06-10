@@ -34,7 +34,7 @@ If the configured language is not found here, generation for this readme.md will
 
 7. Launch __initScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig). All the script's working directory is root folder of cloned SDK repository.
 
-8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-configs__) ___loop the rest steps___ with each `readme.md`.
+8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-config__) ___loop the rest steps___ with each `readme.md`.
 
 9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true then first run of __generateScript__ will be used to collect package information , then loop each package info and checkout package related branch and launch __generateScript__ with package related readmeMd and dryRun set to false.
 
