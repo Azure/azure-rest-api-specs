@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-06-15-preview",
-    "title": "Azure Communication Calling Server Service",
-    "description": "Azure Communication Calling Server Service"
+    "title": "Azure Communication CallingServer Service",
+    "description": "Azure Communication CallingServer Service"
   },
   "schemes": [
     "https"
@@ -47,7 +47,7 @@
           "201": {
             "description": "Returns the create call response.",
             "schema": {
-              "$ref": "#/definitions/CreateCallResponse"
+              "$ref": "#/definitions/CreateCallResult"
             }
           },
           "401": {
@@ -167,7 +167,7 @@
           "202": {
             "description": "Returns the play audio response.",
             "schema": {
-              "$ref": "#/definitions/PlayAudioResponse"
+              "$ref": "#/definitions/PlayAudioResult"
             }
           },
           "401": {
@@ -233,7 +233,7 @@
           "200": {
             "description": "Returns the cancel all media operations response.",
             "schema": {
-              "$ref": "#/definitions/CancelAllMediaOperationsResponse"
+              "$ref": "#/definitions/CancelAllMediaOperationsResult"
             }
           },
           "401": {
@@ -546,7 +546,7 @@
           "200": {
             "description": "Returns the start call recording response.",
             "schema": {
-              "$ref": "#/definitions/StartCallRecordingResponse"
+              "$ref": "#/definitions/StartCallRecordingResult"
             }
           },
           "400": {
@@ -609,7 +609,7 @@
           "200": {
             "description": "Returns the recording state.",
             "schema": {
-              "$ref": "#/definitions/GetCallRecordingStateResponse"
+              "$ref": "#/definitions/CallRecordingStateResult"
             }
           },
           "400": {
@@ -832,7 +832,7 @@
           "202": {
             "description": "Returns the join call response.",
             "schema": {
-              "$ref": "#/definitions/JoinCallResponse"
+              "$ref": "#/definitions/JoinCallResult"
             }
           },
           "401": {
@@ -898,7 +898,7 @@
           "202": {
             "description": "Returns the play audio response.",
             "schema": {
-              "$ref": "#/definitions/PlayAudioResponse"
+              "$ref": "#/definitions/PlayAudioResult"
             }
           },
           "401": {
@@ -1012,7 +1012,7 @@
     "MicrosoftTeamsUserIdentifier": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
-    "CreateCallResponse": {
+    "CreateCallResult": {
       "description": "The response payload of the create call operation.",
       "type": "object",
       "properties": {
@@ -1065,7 +1065,7 @@
         "modelAsString": true
       }
     },
-    "PlayAudioResponse": {
+    "PlayAudioResult": {
       "description": "The response payload for play audio operation.",
       "type": "object",
       "properties": {
@@ -1116,7 +1116,7 @@
         }
       }
     },
-    "CancelAllMediaOperationsResponse": {
+    "CancelAllMediaOperationsResult": {
       "description": "The response payload of the cancel all media operations.",
       "type": "object",
       "properties": {
@@ -1175,7 +1175,7 @@
         }
       }
     },
-    "StartCallRecordingResponse": {
+    "StartCallRecordingResult": {
       "description": "The response payload of start call recording operation.",
       "type": "object",
       "properties": {
@@ -1197,7 +1197,7 @@
         "modelAsString": true
       }
     },
-    "GetCallRecordingStateResponse": {
+    "CallRecordingStateResult": {
       "description": "The response payload of get call recording state operation.",
       "type": "object",
       "properties": {
@@ -1242,7 +1242,7 @@
         }
       }
     },
-    "JoinCallResponse": {
+    "JoinCallResult": {
       "description": "The response payload of the join call operation.",
       "type": "object",
       "properties": {
