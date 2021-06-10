@@ -136,6 +136,10 @@ These settings apply only when `--tag=package-features-2021-07` is specified on 
 input-file:
 - Microsoft.Features/stable/2021-07-01/features.json
 - Microsoft.Features/stable/2021-07-01/SubscriptionFeatureRegistration.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-features-2015-12
