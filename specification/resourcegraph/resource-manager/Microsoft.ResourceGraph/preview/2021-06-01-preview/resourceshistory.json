@@ -48,7 +48,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourcesHistoryRequest"
-            }
+            },
+            "description": "Request specifying the query and its options."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -81,19 +82,23 @@
   },
   "definitions": {
     "ResourcesHistoryRequest": {
+      "description": "Describes a history request to be executed.",
       "type": "object",
       "properties": {
         "subscriptions": {
-          "uniqueItems": false,
+          "description": "Azure subscriptions against which to execute the query.",
           "type": "array",
           "items": {
             "type": "string"
+            "description": "Subscription Id."
           }
         },
         "query": {
+          "description": "The resources query.",
           "type": "string"
         },
         "options": {
+          "description": "The history request evaluation options",
           "$ref": "#/definitions/ResourcesHistoryRequestOptions"
         },
         "managementGroups": {
@@ -107,28 +112,42 @@
       }
     },
     "ResourcesHistoryRequestOptions": {
+      "description": "The options for history request evaluation",
       "type": "object",
       "properties": {
         "interval": {
+          "description": "The time interval used to fetch history.",
           "$ref": "#/definitions/DateTimeInterval"
         },
         "$top": {
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
         },
         "$skip": {
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "type": "integer",
           "format": "int32",
-          "type": "integer"
+          "minimum": 0
         },
         "$skipToken": {
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
           "type": "string"
         },
         "resultFormat": {
+          "description": "Defines in which format query result returned.",
+          "type": "string",
           "enum": [
             "table",
             "objectArray"
           ],
-          "type": "string"
+          "default": "objectArray",
+          "x-ms-enum": {
+            "name": "ResultFormat",
+            "modelAsString": false
+          }
         }
       }
     },
