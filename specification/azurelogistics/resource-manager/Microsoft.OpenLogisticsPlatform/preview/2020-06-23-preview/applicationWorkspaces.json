@@ -154,6 +154,9 @@
           "200": {
             "description": "Returned when the operation is successful."
           },
+          "202": {
+            "description": "Returned when the operation is accepted."
+          },
           "204": {
             "description": "Returned when the operation returns no content."
           },
@@ -164,6 +167,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
