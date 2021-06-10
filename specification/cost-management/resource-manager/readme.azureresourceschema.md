@@ -23,6 +23,19 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-costmanagement-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-costmanagement-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CostManagement/stable/2021-01-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-01-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+
+```
+
 ### Tag: schema-costmanagement-2020-12-01-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-costmanagement-2020-12-01-preview' && $(azureresourceschema)

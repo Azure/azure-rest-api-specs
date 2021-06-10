@@ -7679,7 +7679,7 @@
           }
         },
         "summary": "Removes Compute Nodes from the specified Pool.",
-        "description": "This operation can only run when the allocation state of the Pool is steady. When this operation runs, the allocation state changes from steady to resizing.",
+        "description": "This operation can only run when the allocation state of the Pool is steady. When this operation runs, the allocation state changes from steady to resizing. Each request may remove up to 100 nodes.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -15862,7 +15862,8 @@
           "items": {
             "type": "string"
           },
-          "title": "A list containing the IDs of the Compute Nodes to be removed from the specified Pool."
+          "title": "A list containing the IDs of the Compute Nodes to be removed from the specified Pool.",
+          "description": "A maximum of 100 nodes may be removed per request."
         },
         "resizeTimeout": {
           "type": "string",

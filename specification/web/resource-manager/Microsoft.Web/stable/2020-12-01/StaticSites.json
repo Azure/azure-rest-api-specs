@@ -2826,11 +2826,6 @@
           "description": "The target branch in the repository.",
           "type": "string"
         },
-        "provider": {
-          "description": "The provider that submitted the last deployment to the primary environment of the static site.",
-          "type": "string",
-          "readOnly": true
-        },
         "customDomains": {
           "description": "The custom domains associated with this static site.",
           "type": "array",
@@ -2847,10 +2842,6 @@
           "$ref": "#/definitions/StaticSiteBuildProperties",
           "description": "Build properties to configure on the repository."
         },
-        "templateProperties": {
-          "$ref": "#/definitions/StaticSiteTemplateOptions",
-          "description": "Template options for generating a new repository."
-        },
         "privateEndpointConnections": {
           "description": "Private endpoint connections",
           "type": "array",
@@ -2858,6 +2849,26 @@
             "$ref": "#/definitions/ResponseMessageEnvelope[RemotePrivateEndpointConnection]"
           },
           "readOnly": true
+        },
+        "stagingEnvironmentPolicy": {
+          "description": "State indicating whether staging environments are allowed or not allowed for a static web app.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StagingEnvironmentPolicy",
+            "modelAsString": false
+          }
+        },
+        "allowConfigFileUpdates": {
+          "description": "<code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "templateProperties": {
+          "$ref": "#/definitions/StaticSiteTemplateOptions",
+          "description": "Template options for generating a new repository."
         },
         "contentDistributionEndpoint": {
           "description": "The content distribution endpoint for the static site.",
@@ -2877,21 +2888,10 @@
           },
           "readOnly": true
         },
-        "stagingEnvironmentPolicy": {
-          "description": "State indicating whether staging environments are allowed or not allowed for a static web app.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+        "provider": {
+          "description": "The provider that submitted the last deployment to the primary environment of the static site.",
           "type": "string",
-          "x-ms-enum": {
-            "name": "StagingEnvironmentPolicy",
-            "modelAsString": false
-          }
-        },
-        "allowConfigFileUpdates": {
-          "description": "<code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.",
-          "type": "boolean"
+          "readOnly": true
         }
       }
     },

@@ -140,8 +140,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_peering']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js peering/resource-manager
 ```
 
 ## Python 
@@ -160,7 +158,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.cli.md](./readme.cli.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
