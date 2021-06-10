@@ -4027,12 +4027,6 @@
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
           "x-nullable": false
         },
-        "sessionHostConfigurationLastUpdateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This time will match the time in the SHC for when the update was initiated.",
-          "readOnly": true
-        },
         "sessionHostComponentUpdateConfiguration": {
           "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
@@ -4227,6 +4221,12 @@
       "description": "Session host configurations of HostPool.",
       "type": "object",
       "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when session host configuration was last modified and something was changed.",
+          "readOnly": true
+        },
         "vMSizeId": {
           "type": "string",
           "description": "The id of the size of a virtual machine connected to a hostpool."
