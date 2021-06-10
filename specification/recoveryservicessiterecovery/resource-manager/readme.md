@@ -61,7 +61,14 @@ directive:
     suppress:
       - UniqueResourcePaths
 ```
+### Tag: package-2021-04
 
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-04-01/service.json
+```
 
 ### Tag: package-2021-03
 
