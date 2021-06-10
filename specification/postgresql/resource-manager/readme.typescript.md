@@ -27,5 +27,6 @@ These settings apply only when `--tag=package-2020-01-01 --typescript` is specif
 Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
 
 ``` yaml $(tag) == 'package-2020-01-01' && $(typescript)
+package-name: "@azure/arm-postgresql"
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql/"
 ```
