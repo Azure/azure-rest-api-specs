@@ -30,7 +30,6 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
-  - tag: package-features-2021-07
   - tag: package-features-2015-12
   - tag: package-links-2016-09
   - tag: package-locks-2016-09
@@ -75,7 +74,6 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
-  - tag: package-features-2021-07
   - tag: package-features-2015-12
   - multiapiscript-features: true
   - tag: package-links-2016-09
