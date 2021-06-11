@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-04-05-preview",
+    "title": "verifiablecredentials",
+    "description": "Issues Verifiable Credentials. Part of the Portable Identity Card Services.",
+    "x-ms-code-generation-settings": {
+      "name": "verifiablecredentialsClient"
+    }
+  },
+  "host": "beta.did.msidentity.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "text/plain; charset=utf-8"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/{apiVersion}/{tenantId}/verifiableCredential/card/issue": {
+      "post": {
+        "tags": [
+          "Issuance"
+        ],
+        "operationId": "VerifiableCredential_Issue",
+        "summary": "Issues a Verifiable Credential.",
+        "description": "Given a contract with a set of predefined rules, this operation accepts multiple types of attestations and issues the corresponding Verifiable Credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TenantId"
+          },
+          {
+            "name": "issuanceRequest",
+            "in": "body",
+            "description": "An RFC7519 JSON Web Token whose body is an IssuanceRequestBody object. Must be signed by the intended subject of the Verifiable Credential.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Verifiable Credential RFC7519 JSON Web Token.",
+            "schema": {
+              "$ref": "#/definitions/IssuanceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PortableIdentityCardError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue Self-Attested Verifiable Credential": {
+            "$ref": "./examples/Issue_SelfAttestedVc.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IssuanceRequestBody": {
+      "type": "object",
+      "description": "The body of the JWT used to issue a Verifiable Credential.",
+      "properties": {
+        "contract": {
+          "type": "string",
+          "description": "Full URL of the contract with the rules needed to issue the VerifiableCredential."
+        },
+        "attestations": {
+          "type": "object",
+          "description": "Contains all input attestations.",
+          "properties": {
+            "selfIssued": {
+              "type": "object",
+              "description": "Self-attested claims specified in the Verifiable Credential contract."
+            },
+            "idTokens": {
+              "type": "object",
+              "description": "IdToken claims specified in the Verifiable Credential contract. These are expected in the form of RFC7519 JSON Web Tokens"
+            },
+            "verifiableCredentials": {
+              "type": "object",
+              "description": "Verifiable Presentation claims specified in the Verifiable Credential contract. These are expected in the form of Verifiable Presentation RFC7519 JSON Web Tokens."
+            }
+          }
+        },
+        "sub_jwk": {
+          "description": "RFC 7517 Json Web Key used to sign the request.",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "IssuanceResponse": {
+      "description": "Payload containing an issued Verifiable Credential.",
+      "type": "object",
+      "properties": {
+        "vc": {
+          "description": "An RFC7519 JSON Web Token structure whose body is a VerifiableCredential object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "JsonWebToken": {
+      "description": "An RFC 7519 Json Web Token",
+      "type": "string",
+      "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+",
+      "externalDocs": {
+        "description": "JSON Web Token RFC",
+        "url": "https://tools.ietf.org/html/rfc7519"
+      }
+    },
+    "PortableIdentityCardError": {
+      "description": "Error response describing why the operation failed.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Descriptive error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "In detail description of why the error occurred.",
+              "type": "string"
+            },
+            "innerError": {
+              "description": "Nested error object containing more information with an arbitrary structure.",
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersion": {
+      "name": "apiVersion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Issuance API version. Current version is v1.0.",
+      "x-ms-parameter-location": "client"
+    },
+    "TenantId": {
+      "name": "tenantId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "AAD tenant ID.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

@@ -20,4 +20,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/verifiablecredentials.json
+  - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/picsissuance.json
 ```
