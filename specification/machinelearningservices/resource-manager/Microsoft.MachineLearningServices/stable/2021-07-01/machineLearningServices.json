@@ -303,21 +303,15 @@
         "tags": [
           "Workspaces"
         ],
-        "description": "Diagnose workspace setup issue",
+        "summary": "Diagnose workspace setup issue.",
         "operationId": "Workspaces_Diagnose",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Diagnose Workspace": {
-            "$ref": "./examples/Workspace/diagnose.json"
-          }
-        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -328,31 +322,55 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "name": "parameters",
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
-            "required": true,
+            "name": "parameters",
+            "description": "The parameter of diagnosing workspace health",
             "schema": {
-              "$ref": "#/definitions/DiagnoseWorkspaceParameter"
-            },
-            "description": "diagnose workspace parameter."
+              "$ref": "#/definitions/DiagnoseWorkspaceParameters"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/DiagnoseWorkspaceResult"
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
             }
           },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DiagnoseResponseResult"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Diagnose Workspace": {
+            "$ref": "./examples/Workspace/diagnose.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2434,146 +2452,134 @@
       },
       "description": "Quota update parameters."
     },
-    "DiagnoseWorkspaceParameter": {
+    "DiagnoseRequestProperties": {
+      "type": "object",
       "properties": {
-        "value": {
-          "description": "The parameter of diagnosing workspace health",
-          "type": "object",
-          "properties": {
-            "UDR": {
-              "type": "object",
-              "description": "Setting for diagnosing user defined routing"
-            },
-            "NSG": {
-              "type": "object",
-              "description": "Setting for diagnosing network security group"
-            },
-            "ResourceLock": {
-              "type": "object",
-              "description": "Setting for diagnosing resource lock"
-            },
-            "DNSResolution": {
-              "type": "object",
-              "description": "Setting for diagnosing dns resolution"
-            },
-            "StorageAccount": {
-              "type": "object",
-              "description": "Setting for diagnosing dependent storage account"
-            },
-            "KeyVault": {
-              "type": "object",
-              "description": "Setting for diagnosing dependent key vault"
-            },
-            "ContainerRegistry": {
-              "type": "object",
-              "description": "Setting for diagnosing dependent container registry"
-            },
-            "Others": {
-              "type": "object",
-              "description": "Setting for diagnosing unclassified category of problems"
-            }
-          }
+        "udr": {
+          "description": "Setting for diagnosing user defined routing",
+          "type": "object"
+        },
+        "nsg": {
+          "description": "Setting for diagnosing network security group",
+          "type": "object"
+        },
+        "resourceLock": {
+          "description": "Setting for diagnosing resource lock",
+          "type": "object"
+        },
+        "dnsResolution": {
+          "description": "Setting for diagnosing dns resolution",
+          "type": "object"
+        },
+        "storageAccount": {
+          "description": "Setting for diagnosing dependent storage account",
+          "type": "object"
+        },
+        "keyVault": {
+          "description": "Setting for diagnosing dependent key vault",
+          "type": "object"
+        },
+        "containerRegistry": {
+          "description": "Setting for diagnosing dependent container registry",
+          "type": "object"
+        },
+        "others": {
+          "description": "Setting for diagnosing unclassified category of problems",
+          "type": "object"
         }
       }
     },
-    "DiagnoseWorkspaceResult": {
+    "DiagnoseWorkspaceParameters": {
+      "type": "object",
       "properties": {
         "value": {
-          "description": "The potential setup problem for the workspace",
-          "type": "object",
-          "properties": {
-            "UDR": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for user defined routing",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "NSG": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for network security group",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "ResourceLock": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for resource lock",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "DNSResolution": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for dns resolution",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "StorageAccount": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for dependent storage account",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "KeyVault": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for dependent key vault",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "ContainerRegistry": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for dependent container registry",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            },
-            "Others": {
-              "type": "array",
-              "readOnly": true,
-              "description": "The potential setup problem for unclassified category",
-              "items": {
-                "$ref": "#/definitions/WorkspaceErrorResult"
-              }
-            }
-          }
+          "$ref": "#/definitions/DiagnoseRequestProperties"
         }
       }
     },
-    "WorkspaceErrorResult": {
+    "DiagnoseResult": {
+      "type": "object",
       "properties": {
         "code": {
           "description": "Code for workspace setup error",
-          "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "level": {
           "description": "Level of workspace setup error",
-          "readOnly": true,
-          "type": "string",
           "enum": [
             "Warning",
             "Error"
           ],
+          "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
-            "name": "ErrorLevel",
+            "name": "DiagnoseResultLevel",
             "modelAsString": true
           }
         },
         "message": {
-          "description": "message of workspace setup error",
-          "readOnly": true,
-          "type": "string"
+          "description": "Message of workspace setup error",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnoseResponseResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "properties": {
+            "UDR": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "NSG": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "ResourceLock": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "DNSResolution": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "StorageAccount": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "KeyVault": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "ContainerRegistry": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "Others": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            }
+          }
         }
       }
     },
@@ -3110,6 +3116,134 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
+    "AmlComputeProperties": {
+      "type": "object",
+      "description": "AML Compute properties",
+      "properties": {
+        "osType": {
+          "description": "Compute OS Type",
+          "type": "string",
+          "default": "Linux",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          }
+        },
+        "vmSize": {
+          "description": "Virtual Machine Size",
+          "type": "string"
+        },
+        "vmPriority": {
+          "description": "Virtual Machine priority",
+          "type": "string",
+          "enum": [
+            "Dedicated",
+            "LowPriority"
+          ],
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": true
+          }
+        },
+        "virtualMachineImage": {
+          "description": "Virtual Machine image for AML Compute - windows only",
+          "$ref": "#/definitions/VirtualMachineImage"
+        },
+        "isolatedNetwork": {
+          "description": "Network is isolated or not",
+          "type": "boolean"
+        },
+        "scaleSettings": {
+          "description": "Scale settings for AML Compute",
+          "$ref": "#/definitions/ScaleSettings"
+        },
+        "userAccountCredentials": {
+          "title": "User account credentials.",
+          "description": "Credentials for an administrator user account that will be created on each compute node.",
+          "$ref": "#/definitions/UserAccountCredentials"
+        },
+        "subnet": {
+          "title": "Subnet.",
+          "description": "Virtual network subnet resource ID the compute nodes belong to.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "remoteLoginPortPublicAccess": {
+          "type": "string",
+          "default": "NotSpecified",
+          "title": "Close remote Login Access Port",
+          "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "remoteLoginPortPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "allocationState": {
+          "type": "string",
+          "readOnly": true,
+          "title": "Allocation state.",
+          "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
+          "enum": [
+            "Steady",
+            "Resizing"
+          ],
+          "x-ms-enum": {
+            "name": "AllocationState",
+            "modelAsString": true
+          }
+        },
+        "allocationStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Allocation state transition time.",
+          "description": "The time at which the compute entered its current allocation state."
+        },
+        "errors": {
+          "readOnly": true,
+          "title": "Errors.",
+          "description": "Collection of errors encountered by various compute nodes during node setup.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+          }
+        },
+        "currentNodeCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "title": "Current node count.",
+          "description": "The number of compute nodes currently assigned to the compute."
+        },
+        "targetNodeCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "title": "Target node count.",
+          "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
+        },
+        "nodeStateCounts": {
+          "title": "Node state counts.",
+          "description": "Counts of various node states on the compute.",
+          "readOnly": true,
+          "$ref": "#/definitions/NodeStateCounts"
+        },
+        "enableNodePublicIp": {
+          "type": "boolean",
+          "default": true,
+          "title": "Enable node public IP.",
+          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+        }
+      }
+    },
     "AmlCompute": {
       "description": "An Azure Machine Learning compute.",
       "allOf": [
@@ -3120,137 +3254,104 @@
           "type": "object",
           "properties": {
             "properties": {
-              "type": "object",
-              "description": "AML Compute properties",
-              "properties": {
-                "osType": {
-                  "description": "Compute OS Type",
-                  "type": "string",
-                  "default": "Linux",
-                  "enum": [
-                    "Linux",
-                    "Windows"
-                  ],
-                  "x-ms-enum": {
-                    "name": "OsType",
-                    "modelAsString": true
-                  }
-                },
-                "vmSize": {
-                  "description": "Virtual Machine Size",
-                  "type": "string"
-                },
-                "vmPriority": {
-                  "description": "Virtual Machine priority",
-                  "type": "string",
-                  "enum": [
-                    "Dedicated",
-                    "LowPriority"
-                  ],
-                  "x-ms-enum": {
-                    "name": "VmPriority",
-                    "modelAsString": true
-                  }
-                },
-                "virtualMachineImage": {
-                  "description": "Virtual Machine image for AML Compute - windows only",
-                  "$ref": "#/definitions/VirtualMachineImage"
-                },
-                "isolatedNetwork": {
-                  "description": "Network is isolated or not",
-                  "type": "boolean"
-                },
-                "scaleSettings": {
-                  "description": "Scale settings for AML Compute",
-                  "$ref": "#/definitions/ScaleSettings"
-                },
-                "userAccountCredentials": {
-                  "title": "User account credentials.",
-                  "description": "Credentials for an administrator user account that will be created on each compute node.",
-                  "$ref": "#/definitions/UserAccountCredentials"
-                },
-                "subnet": {
-                  "title": "Subnet.",
-                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
-                  "$ref": "#/definitions/ResourceId"
-                },
-                "remoteLoginPortPublicAccess": {
-                  "type": "string",
-                  "default": "NotSpecified",
-                  "title": "Close remote Login Access Port",
-                  "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.",
-                  "enum": [
-                    "Enabled",
-                    "Disabled",
-                    "NotSpecified"
-                  ],
-                  "x-ms-enum": {
-                    "name": "remoteLoginPortPublicAccess",
-                    "modelAsString": true
-                  }
-                },
-                "allocationState": {
-                  "type": "string",
-                  "readOnly": true,
-                  "title": "Allocation state.",
-                  "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
-                  "enum": [
-                    "Steady",
-                    "Resizing"
-                  ],
-                  "x-ms-enum": {
-                    "name": "AllocationState",
-                    "modelAsString": true
-                  }
-                },
-                "allocationStateTransitionTime": {
-                  "type": "string",
-                  "readOnly": true,
-                  "format": "date-time",
-                  "title": "Allocation state transition time.",
-                  "description": "The time at which the compute entered its current allocation state."
-                },
-                "errors": {
-                  "readOnly": true,
-                  "title": "Errors.",
-                  "description": "Collection of errors encountered by various compute nodes during node setup.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-                  }
-                },
-                "currentNodeCount": {
-                  "type": "integer",
-                  "readOnly": true,
-                  "format": "int32",
-                  "title": "Current node count.",
-                  "description": "The number of compute nodes currently assigned to the compute."
-                },
-                "targetNodeCount": {
-                  "type": "integer",
-                  "readOnly": true,
-                  "format": "int32",
-                  "title": "Target node count.",
-                  "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
-                },
-                "nodeStateCounts": {
-                  "title": "Node state counts.",
-                  "description": "Counts of various node states on the compute.",
-                  "readOnly": true,
-                  "$ref": "#/definitions/NodeStateCounts"
-                },
-                "enableNodePublicIp": {
-                  "type": "boolean",
-                  "default": true,
-                  "title": "Enable node public IP.",
-                  "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
-                }
-              }
+              "$ref": "#/definitions/AmlComputeProperties"
             }
           }
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "ComputeInstanceProperties": {
+      "description": "Compute Instance properties",
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "description": "Virtual Machine Size",
+          "type": "string"
+        },
+        "subnet": {
+          "title": "Subnet.",
+          "description": "Virtual network subnet resource ID the compute nodes belong to.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "applicationSharingPolicy": {
+          "type": "string",
+          "default": "Shared",
+          "title": "Sharing policy for applications on this compute instance",
+          "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
+          "enum": [
+            "Personal",
+            "Shared"
+          ],
+          "x-ms-enum": {
+            "name": "applicationSharingPolicy",
+            "modelAsString": true
+          }
+        },
+        "sshSettings": {
+          "description": "Specifies policy and settings for SSH access.",
+          "$ref": "#/definitions/ComputeInstanceSshSettings"
+        },
+        "connectivityEndpoints": {
+          "readOnly": true,
+          "description": "Describes all connectivity endpoints available for this ComputeInstance.",
+          "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
+        },
+        "applications": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes available applications and their endpoints on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceApplication"
+          }
+        },
+        "createdBy": {
+          "readOnly": true,
+          "description": "Describes information on user who created this ComputeInstance.",
+          "$ref": "#/definitions/ComputeInstanceCreatedBy"
+        },
+        "errors": {
+          "readOnly": true,
+          "title": "Errors.",
+          "description": "Collection of errors encountered on this ComputeInstance.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+          }
+        },
+        "state": {
+          "description": "The current state of this ComputeInstance.",
+          "$ref": "#/definitions/ComputeInstanceState",
+          "readOnly": true
+        },
+        "computeInstanceAuthorizationType": {
+          "type": "string",
+          "title": "Compute Instance Authorization type.",
+          "description": "The Compute Instance Authorization type. Available values are personal (default).",
+          "default": "personal",
+          "enum": [
+            "personal"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeInstanceAuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "personalComputeInstanceSettings": {
+          "title": "Personal Compute Instance settings.",
+          "description": "Settings for a personal compute instance.",
+          "$ref": "#/definitions/PersonalComputeInstanceSettings"
+        },
+        "setupScripts": {
+          "description": "Details of customized scripts to execute for setting up the cluster.",
+          "$ref": "#/definitions/SetupScripts"
+        },
+        "lastOperation": {
+          "description": "The last operation on ComputeInstance.",
+          "$ref": "#/definitions/ComputeInstanceLastOperation",
+          "readOnly": true
+        }
+      }
     },
     "ComputeInstance": {
       "description": "An Azure Machine Learning compute instance.",
@@ -3262,96 +3363,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "Compute Instance properties",
-              "type": "object",
-              "properties": {
-                "vmSize": {
-                  "description": "Virtual Machine Size",
-                  "type": "string"
-                },
-                "subnet": {
-                  "title": "Subnet.",
-                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
-                  "$ref": "#/definitions/ResourceId"
-                },
-                "applicationSharingPolicy": {
-                  "type": "string",
-                  "default": "Shared",
-                  "title": "Sharing policy for applications on this compute instance",
-                  "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
-                  "enum": [
-                    "Personal",
-                    "Shared"
-                  ],
-                  "x-ms-enum": {
-                    "name": "applicationSharingPolicy",
-                    "modelAsString": true
-                  }
-                },
-                "sshSettings": {
-                  "description": "Specifies policy and settings for SSH access.",
-                  "$ref": "#/definitions/ComputeInstanceSshSettings"
-                },
-                "connectivityEndpoints": {
-                  "readOnly": true,
-                  "description": "Describes all connectivity endpoints available for this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
-                },
-                "applications": {
-                  "type": "array",
-                  "readOnly": true,
-                  "description": "Describes available applications and their endpoints on this ComputeInstance.",
-                  "items": {
-                    "$ref": "#/definitions/ComputeInstanceApplication"
-                  }
-                },
-                "createdBy": {
-                  "readOnly": true,
-                  "description": "Describes information on user who created this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceCreatedBy"
-                },
-                "errors": {
-                  "readOnly": true,
-                  "title": "Errors.",
-                  "description": "Collection of errors encountered on this ComputeInstance.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-                  }
-                },
-                "state": {
-                  "description": "The current state of this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceState",
-                  "readOnly": true
-                },
-                "computeInstanceAuthorizationType": {
-                  "type": "string",
-                  "title": "Compute Instance Authorization type.",
-                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
-                  "default": "personal",
-                  "enum": [
-                    "personal"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ComputeInstanceAuthorizationType",
-                    "modelAsString": true
-                  }
-                },
-                "personalComputeInstanceSettings": {
-                  "title": "Personal Compute Instance settings.",
-                  "description": "Settings for a personal compute instance.",
-                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
-                },
-                "setupScripts": {
-                  "description": "Details of customized scripts to execute for setting up the cluster.",
-                  "$ref": "#/definitions/SetupScripts"
-                },
-                "lastOperation": {
-                  "description": "The last operation on ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceLastOperation",
-                  "readOnly": true
-                }
-              }
+              "$ref": "#/definitions/ComputeInstanceProperties"
             }
           }
         }
@@ -3398,6 +3410,25 @@
       ],
       "x-ms-discriminator-value": "VirtualMachine"
     },
+    "HDInsightProperties": {
+      "type": "object",
+      "description": "HDInsight compute properties",
+      "properties": {
+        "sshPort": {
+          "description": "Port open for ssh connections on the master node of the cluster.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "description": "Public IP address of the master node of the cluster.",
+          "type": "string"
+        },
+        "administratorAccount": {
+          "description": "Admin credentials for master node of the cluster",
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        }
+      }
+    },
     "HDInsight": {
       "description": "A HDInsight compute.",
       "allOf": [
@@ -3408,22 +3439,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "type": "object",
-              "properties": {
-                "sshPort": {
-                  "description": "Port open for ssh connections on the master node of the cluster.",
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "address": {
-                  "description": "Public IP address of the master node of the cluster.",
-                  "type": "string"
-                },
-                "administratorAccount": {
-                  "description": "Admin credentials for master node of the cluster",
-                  "$ref": "#/definitions/VirtualMachineSshCredentials"
-                }
-              }
+              "$ref": "#/definitions/HDInsightProperties"
             }
           }
         }
@@ -3439,6 +3455,19 @@
       ],
       "x-ms-discriminator-value": "DataFactory"
     },
+    "DatabricksProperties": {
+      "type": "object",
+      "properties": {
+        "databricksAccessToken": {
+          "description": "Databricks access token",
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "description": "Workspace Url",
+          "type": "string"
+        }
+      }
+    },
     "Databricks": {
       "description": "A DataFactory compute.",
       "allOf": [
@@ -3449,17 +3478,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "type": "object",
-              "properties": {
-                "databricksAccessToken": {
-                  "description": "Databricks access token",
-                  "type": "string"
-                },
-                "workspaceUrl": {
-                  "description": "Workspace Url",
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/DatabricksProperties"
             }
           }
         }
@@ -3756,25 +3775,23 @@
           "$ref": "#/definitions/ComputeNodesInformation"
         },
         {
-          "type": "object",
-          "properties": {
-            "nodes": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AmlComputeNodeInformation"
-              },
-              "description": "The collection of returned AmlCompute nodes details."
-            },
-            "nextLink": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The continuation token."
-            }
-          }
+          "$ref": "#/definitions/AmlComputeNodesResult"
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "AmlComputeNodesResult": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmlComputeNodeInformation"
+          },
+          "description": "The collection of returned AmlCompute nodes details."
+        }
+      }
     },
     "AmlComputeNodeInformation": {
       "description": "Compute node information related to a AmlCompute.",
@@ -3866,6 +3883,23 @@
         "computeType"
       ]
     },
+    "AksComputeSecretsProperties": {
+      "type": "object",
+      "properties": {
+        "userKubeConfig": {
+          "type": "string",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+        },
+        "adminKubeConfig": {
+          "type": "string",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+        },
+        "imagePullSecretName": {
+          "type": "string",
+          "description": "Image registry pull secret."
+        }
+      }
+    },
     "AksComputeSecrets": {
       "description": "Secrets related to a Machine Learning compute based on AKS.",
       "allOf": [
@@ -3873,21 +3907,7 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "userKubeConfig": {
-              "type": "string",
-              "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
-            },
-            "adminKubeConfig": {
-              "type": "string",
-              "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
-            },
-            "imagePullSecretName": {
-              "type": "string",
-              "description": "Image registry pull secret."
-            }
-          }
+          "$ref": "#/definitions/AksComputeSecretsProperties"
         }
       ],
       "x-ms-discriminator-value": "AKS"
@@ -3910,6 +3930,15 @@
       ],
       "x-ms-discriminator-value": "VirtualMachine"
     },
+    "DatabricksComputeSecretsProperties": {
+      "type": "object",
+      "properties": {
+        "databricksAccessToken": {
+          "description": "access token for databricks account.",
+          "type": "string"
+        }
+      }
+    },
     "DatabricksComputeSecrets": {
       "description": "Secrets related to a Machine Learning compute based on Databricks.",
       "allOf": [
@@ -3917,13 +3946,7 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "databricksAccessToken": {
-              "description": "access token for databricks account.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/DatabricksComputeSecretsProperties"
         }
       ],
       "x-ms-discriminator-value": "Databricks"
@@ -4713,56 +4736,59 @@
         }
       }
     },
+    "AKSProperties": {
+      "type": "object",
+      "description": "AKS properties",
+      "properties": {
+        "autoScaleProperties": {
+          "description": "Auto scale properties.",
+          "$ref": "#/definitions/AutoScaleProperties"
+        },
+        "autoPauseProperties": {
+          "description": "Auto pause properties.",
+          "$ref": "#/definitions/AutoPauseProperties"
+        },
+        "sparkVersion": {
+          "description": "Spark version.",
+          "type": "string"
+        },
+        "nodeCount": {
+          "description": "The number of compute nodes currently assigned to the compute.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodeSize": {
+          "description": "Node size.",
+          "type": "string"
+        },
+        "nodeSizeFamily": {
+          "description": "Node size family.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Azure subscription identifier.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Name of the resource group in which workspace is located.",
+          "type": "string"
+        },
+        "workspaceName": {
+          "description": "Name of Azure Machine Learning workspace.",
+          "type": "string"
+        },
+        "poolName": {
+          "description": "Pool name.",
+          "type": "string"
+        }
+      }
+    },
     "SynapseSparkPoolProperties": {
       "type": "object",
       "description": "Properties specific to Synapse Spark pools.",
       "properties": {
         "properties": {
-          "type": "object",
-          "description": "AKS properties",
-          "properties": {
-            "autoScaleProperties": {
-              "description": "Auto scale properties.",
-              "$ref": "#/definitions/AutoScaleProperties"
-            },
-            "autoPauseProperties": {
-              "description": "Auto pause properties.",
-              "$ref": "#/definitions/AutoPauseProperties"
-            },
-            "sparkVersion": {
-              "description": "Spark version.",
-              "type": "string"
-            },
-            "nodeCount": {
-              "description": "The number of compute nodes currently assigned to the compute.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "nodeSize": {
-              "description": "Node size.",
-              "type": "string"
-            },
-            "nodeSizeFamily": {
-              "description": "Node size family.",
-              "type": "string"
-            },
-            "subscriptionId": {
-              "description": "Azure subscription identifier.",
-              "type": "string"
-            },
-            "resourceGroup": {
-              "description": "Name of the resource group in which workspace is located.",
-              "type": "string"
-            },
-            "workspaceName": {
-              "description": "Name of Azure Machine Learning workspace.",
-              "type": "string"
-            },
-            "poolName": {
-              "description": "Pool name.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/AKSProperties"
         }
       }
     }
