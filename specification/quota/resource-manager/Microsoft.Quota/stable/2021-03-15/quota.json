@@ -126,7 +126,7 @@
               "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
-          "201": {
+          "202": {
             "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
@@ -482,23 +482,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
-        }
-      }
-    },
-    "CurrentQuotaLimit": {
-      "type": "object",
-      "description": "Quota limit.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "quotaInformation": {
-          "description": "Quota information details.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CurrentQuotaLimitBase"
-        },
-        "properties": {
-          "description": "Additional properties for the quota request status for the specified resource.",
-          "$ref": "#/definitions/QuotaRequestStatusDetails",
-          "x-ms-client-flatten": true
         }
       }
     },
