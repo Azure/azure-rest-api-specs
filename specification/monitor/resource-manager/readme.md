@@ -23,6 +23,7 @@ To see additional help and options, run:
 ### Basic Information
 
 There are the global settings for the Azure Monitor Control Service (AMCS) extension.
+
 ``` yaml $(AMCS)
 tag: package-2021-04-only
 ```
@@ -32,6 +33,7 @@ These are the global settings for the MonitorClient API.
 ``` yaml !$(python) || !$(track2)
 title: MonitorClient
 ```
+
 ``` yaml $(python) && $(track2)
 title: MonitorManagementClient
 ```
@@ -39,9 +41,19 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2020-03
+tag: package-2021-05
 ```
 
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2021-05-01/metrics_API.json
+```
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
@@ -673,5 +685,3 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
-
-
