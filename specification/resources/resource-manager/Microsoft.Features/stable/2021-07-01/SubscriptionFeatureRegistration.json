@@ -62,7 +62,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -108,7 +108,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -145,7 +145,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -232,7 +232,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -268,7 +268,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../features.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -463,39 +463,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionFeatureRegistration"
-          }
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response indicates that the service is not able to process the incoming request.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
           }
         }
       }
