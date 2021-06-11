@@ -2799,18 +2799,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MasterSite"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MasterSite"
-            }
-          }
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
         },
         "x-ms-examples": {
           "Create Master site": {
@@ -2932,11 +2927,12 @@
               "$ref": "#/definitions/MasterSite"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MasterSite"
-            }
+         "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
           }
         },
         "x-ms-examples": {
@@ -2953,7 +2949,7 @@
           "MasterSitesError"
         ],
         "summary": "Method to get error summary on a master site.",
-        "operationId": "MasterSitesController_GetErrorSummary",
+        "operationId": "MasterSites_GetErrorSummary",
         "consumes": [],
         "produces": [
           "application/json"
@@ -3009,10 +3005,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/operationsstatus/{operationStatusName}": {
       "get": {
         "tags": [
-          "MasterSitesOperationsStatusController"
+          "MasterSitesOperationsStatus"
         ],
         "summary": "Method to get operation status.",
-        "operationId": "MasterSitesOperationsStatusController_GetOperationStatus",
+        "operationId": "MasterSitesOperationsStatus_GetOperationStatus",
         "consumes": [],
         "produces": [
           "application/json"
@@ -3068,10 +3064,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnections/{peConnectionName}": {
       "get": {
         "tags": [
-          "PrivateEndpointConnectionController"
+          "PrivateEndpointConnection"
         ],
         "summary": "Gets the private link resource.",
-        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnection_GetPrivateEndpointConnection",
         "consumes": [],
         "produces": [
           "application/json"
@@ -3125,9 +3121,9 @@
       },
       "put": {
         "tags": [
-          "PrivateEndpointConnectionController"
+          "PrivateEndpointConnection"
         ],
-        "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnection_PutPrivateEndpointConnection",
         "consumes": [
           "application/json"
         ],
@@ -3191,10 +3187,10 @@
       },
       "delete": {
         "tags": [
-          "PrivateEndpointConnectionController"
+          "PrivateEndpointConnection"
         ],
         "summary": "Gets the private link resource.",
-        "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnection_DeletePrivateEndpointConnection",
         "consumes": [
           
         ],
@@ -3255,10 +3251,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "PrivateEndpointConnectionController"
+          "PrivateEndpointConnection"
         ],
         "summary": "Gets the private link resource.",
-        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnections",
+        "operationId": "PrivateEndpointConnection_GetPrivateEndpointConnections",
         "consumes": [
           
         ],
@@ -3309,10 +3305,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "tags": [
-          "PrivateLinkResourcesController"
+          "PrivateLinkResources"
         ],
         "summary": "Gets the private link resource.",
-        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResource",
+        "operationId": "PrivateLinkResources_GetPrivateLinkResource",
         "consumes": [
           
         ],
@@ -3370,10 +3366,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateLinkResources": {
       "get": {
         "tags": [
-          "PrivateLinkResourcesController"
+          "PrivateLinkResources"
         ],
         "summary": "Gets the private link resource.",
-        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResources",
+        "operationId": "PrivateLinkResources_GetPrivateLinkResources",
         "consumes": [
           
         ],
@@ -5445,7 +5441,12 @@
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
-          "description": "State of public network access.",
+          "description": "Gets or sets the state of public network access.",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string"
         },
         "allowMultipleSites": {
@@ -5458,6 +5459,184 @@
           "items": {
             "type": "string"
           }
+        },	
+		"customerStorageAccountArmId": {
+          "description": "Gets or sets a value for customer storage account ARM id.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }	
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Gets the tag for optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Gets the properties of the object.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "actionsRequired": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionCollection": {
+      "description": "Collection of PrivateLink resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "REST model used to encapsulate Private Link properties for tracked resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "description": "Collection of PrivateLink resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5907,6 +6086,47 @@
         },
         "nextLink": {
           "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SiteErrorSummary": {
+      "type": "object",
+      "properties": {
+        "applianceName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "discoveryScopeErrorSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoveryScopeErrorSummary"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiscoveryScopeErrorSummary": {
+      "type": "object",
+      "properties": {
+        "affectedResourceType": {
+          "type": "string"
+        },
+        "affectedObjectsCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "discoveryScope": {
+          "enum": [
+            "AppsAndRoles",
+            "DependencyMap",
+            "StaticData"
+          ],
           "type": "string",
           "readOnly": true
         }
