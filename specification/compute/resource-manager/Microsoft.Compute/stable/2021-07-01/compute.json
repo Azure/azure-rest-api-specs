@@ -3132,7 +3132,7 @@
           "Create a VM with UserData": {
             "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
           },
-          "Create a VM with Capacity Reservation": {
+          "Create or update a VM with Capacity Reservation": {
             "$ref": "./examples/CreateOrUpdateAVmWithCapacityReservation.json"
           }
         }
@@ -4078,7 +4078,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_CreateOrUpdate",
-        "description": "Create or update a capacity reservation group. For details of Capacity Reservation and Capacity Reservation Groups please see [Capacity Reservation Documentation] (link to capacity reservation)",
+        "description": "Create or update a capacity reservation group. <br><br> NOTE: Please refer https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4193,7 +4193,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_Delete",
-        "description": "Delete a capacity reservation group.",
+        "description": "Delete a capacity reservation group.<br><br> NOTE: Capacity Reservation group can only be deleted if all the capacity reservations under the reservation group and associated resources are disassociated from the reservation group first. Please refer https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4405,7 +4405,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_CreateOrUpdate",
-        "description": "Create or update a Capacity Reservation .",
+        "description": "Create or update a Capacity Reservation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4536,7 +4536,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Delete",
-        "description": "Delete a Capacity Reservation.",
+        "description": "Delete a Capacity Reservation.<br><br> NOTE: Deleting a capacity reservation allowed only when all the associated resources are disassociated from the reservation first. Please refer https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -9000,7 +9000,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Availability Zones to use for this capacity reservation group. . The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each capacity reservation in the group to be in one of the zones."
+          "description": "Availability Zones to use for this capacity reservation group. The zones can be assigned only during creation. If not provided, the group supports only non-zonal resources in the region. If provided, enforces each capacity reservation in the group to be in one of the zones."
         }
       },
       "allOf": [
@@ -9015,13 +9015,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CapacityReservationGroupProperties"
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Availability Zones to use for this capacity reservation group. . The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each capacity reservation in the group to be in one of the zones."
         }
       },
       "allOf": [
@@ -9136,14 +9129,14 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the capacity reservation. List Microsoft.Compute SKUs for a list of possible values."
+          "description": "SKU of the capacity reservation. Currently skus with the sku capability called 'CapacityReservationSupported' set as true are only supported for creating the capacity reservation."
         },
         "zones": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Availability Zones to use for this capacity reservation. . The zone can be assigned only during creation. If not provided, the reservation supports all zones in the region. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."
+          "description": "Availability Zone to use for this capacity reservation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."
         }
       },
       "allOf": [
@@ -9164,7 +9157,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the capacity reservation. List Microsoft.Compute SKUs for a list of possible values."
+          "description": "SKU of the capacity reservation. Currently skus with the sku capability called 'CapacityReservationSupported' set as true are only supported for creating the capacity reservation."
         }
       },
       "allOf": [
