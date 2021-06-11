@@ -12,7 +12,21 @@ This is the AutoRest configuration file for Databricks.
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-04-01-preview
   - tag: package-2018-04-01
+```
+
+### Tag: package-2021-04-01-preview and java
+
+These settings apply only when `--tag=package-2021-04-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-04-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2021_04_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2021_04_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-04-01 and java
@@ -47,10 +61,20 @@ To see additional help and options, run:
 These are the global settings for the Databricks API.
 
 ``` yaml
+title: AzureDatabricksManagementClient
+description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace resources.'
 openapi-type: arm
 tag: package-2021-04-01-preview
 ```
 
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.Databricks/preview/2021-04-01-preview/databricks.json
+```
 
 ### Tag: package-2018-04-01
 
@@ -81,6 +105,8 @@ directive:
     from: databricks.json 
     where: $.definitions.Encryption.properties.KeyName
     reason: Response from service is not camel case
+  - suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data. Currently our system support system data inside property field.
 ```
 
 ---
