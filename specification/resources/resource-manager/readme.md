@@ -769,6 +769,9 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - from: SubscriptionFeatureRegistration.json
+    suppress: R4009
+    reason: Currently systemData is not allowed
 ```
 
 ---
