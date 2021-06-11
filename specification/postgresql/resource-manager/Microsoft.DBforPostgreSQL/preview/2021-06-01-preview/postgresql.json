@@ -1181,6 +1181,7 @@
       "description": "storage edition capability"
     },
     "NodeTypeCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1201,6 +1202,7 @@
       "description": "node type capability"
     },
     "FlexibleServerEditionCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1212,6 +1214,7 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
         "supportedServerVersions": {
@@ -1219,6 +1222,7 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
         "status": {
@@ -1230,6 +1234,7 @@
       "description": "Flexible server edition capabilities."
     },
     "HyperscaleNodeEditionCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1241,6 +1246,7 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
         "supportedServerVersions": {
@@ -1248,6 +1254,7 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
         "supportedNodeTypes": {
@@ -1255,6 +1262,7 @@
           "items": {
             "$ref": "#/definitions/NodeTypeCapability"
           },
+          "description": "The list of Node Types supported by this server edition.",
           "readOnly": true
         },
         "status": {
