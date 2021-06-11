@@ -61,7 +61,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -69,24 +68,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js cloudshell/resource-manager
-```
-
-## Go
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: cloudshell
-```
-
-### Tag: package-2020-04-01-preview and go
-
-These settings apply only when `--tag=package-2020-04-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2020-04-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/cloudshell/mgmt/2020-04-01-preview/cloudshell
 ```
 
 ## Python
