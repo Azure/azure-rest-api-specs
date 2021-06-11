@@ -56,6 +56,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -569,6 +575,7 @@
   },
   "definitions": {
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -595,7 +602,12 @@
           "type": "string",
           "readOnly": true
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
+          "type": "object",
           "description": "Contains the localized display information for this particular operation / action.",
           "readOnly": true,
           "properties": {
@@ -624,6 +636,7 @@
       }
     },
     "StreamingJob": {
+      "type": "object",
       "description": "A streaming job object, containing all information associated with the named streaming job.",
       "allOf": [
         {
@@ -643,6 +656,7 @@
       }
     },
     "StreamingJobProperties": {
+      "type": "object",
       "description": "The properties that are associated with a streaming job.",
       "properties": {
         "sku": {
@@ -776,6 +790,7 @@
       }
     },
     "ClusterInfo": {
+      "type": "object",
       "description": "The properties associated with a Stream Analytics cluster.",
       "properties": {
         "id": {
@@ -785,6 +800,7 @@
       }
     },
     "Sku": {
+      "type": "object",
       "description": "The properties that are associated with a SKU.",
       "properties": {
         "name": {
@@ -801,6 +817,7 @@
       }
     },
     "StreamingJobListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -819,6 +836,7 @@
       "description": "Object containing a list of streaming jobs."
     },
     "StartStreamingJobParameters": {
+      "type": "object",
       "description": "Parameters supplied to the Start Streaming Job operation.",
       "properties": {
         "outputStartMode": {
@@ -846,6 +864,7 @@
       }
     },
     "ScaleStreamingJobParameters": {
+      "type": "object",
       "description": "Parameters supplied to the Scale Streaming Job operation.",
       "properties": {
         "streamingUnits": {
@@ -892,6 +911,7 @@
       }
     },
     "JobStorageAccount": {
+      "type": "object",
       "description": "The properties that are associated with an Azure Storage account with MSI",
       "allOf": [
         {
@@ -906,6 +926,7 @@
       }
     },
     "Identity": {
+      "type": "object",
       "description": "Describes how identity is verified",
       "properties": {
         "tenantId": {

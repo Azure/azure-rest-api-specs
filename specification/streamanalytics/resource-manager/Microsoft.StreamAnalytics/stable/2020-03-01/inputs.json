@@ -422,6 +422,7 @@
   },
   "definitions": {
     "Input": {
+      "type": "object",
       "description": "An input object, containing all information associated with the named input. All inputs are contained under a streaming job.",
       "allOf": [
         {
@@ -436,6 +437,7 @@
       }
     },
     "InputProperties": {
+      "type": "object",
       "description": "The properties that are associated with an input.",
       "discriminator": "type",
       "properties": {
@@ -470,6 +472,7 @@
       ]
     },
     "StreamInputProperties": {
+      "type": "object",
       "description": "The properties that are associated with an input containing stream data.",
       "x-ms-discriminator-value": "Stream",
       "allOf": [
@@ -485,6 +488,7 @@
       }
     },
     "ReferenceInputProperties": {
+      "type": "object",
       "description": "The properties that are associated with an input containing reference data.",
       "x-ms-discriminator-value": "Reference",
       "allOf": [
@@ -500,6 +504,7 @@
       }
     },
     "StreamInputDataSource": {
+      "type": "object",
       "description": "Describes an input data source that contains stream data.",
       "discriminator": "type",
       "properties": {
@@ -513,6 +518,7 @@
       ]
     },
     "BlobStreamInputDataSource": {
+      "type": "object",
       "description": "Describes a blob input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
@@ -529,6 +535,7 @@
       }
     },
     "BlobStreamInputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a blob input containing stream data.",
       "allOf": [
         {
@@ -544,6 +551,7 @@
       }
     },
     "EventHubStreamInputDataSource": {
+      "type": "object",
       "description": "Describes an Event Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
       "allOf": [
@@ -560,6 +568,7 @@
       }
     },
     "EventHubV2StreamInputDataSource": {
+      "type": "object",
       "description": "Describes an Event Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
       "allOf": [
@@ -576,6 +585,7 @@
       }
     },
     "EventHubStreamInputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a Event Hub input containing stream data.",
       "allOf": [
         {
@@ -590,6 +600,7 @@
       }
     },
     "IoTHubStreamInputDataSource": {
+      "type": "object",
       "description": "Describes an IoT Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.Devices/IotHubs",
       "allOf": [
@@ -606,6 +617,7 @@
       }
     },
     "IoTHubStreamInputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a IoT Hub input containing stream data.",
       "properties": {
         "iotHubNamespace": {
@@ -631,6 +643,7 @@
       }
     },
     "ReferenceInputDataSource": {
+      "type": "object",
       "description": "Describes an input data source that contains reference data.",
       "discriminator": "type",
       "properties": {
@@ -644,6 +657,7 @@
       ]
     },
     "BlobReferenceInputDataSource": {
+      "type": "object",
       "description": "Describes a blob input data source that contains reference data.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
@@ -660,6 +674,7 @@
       }
     },
     "BlobReferenceInputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a blob input containing reference data.",
       "allOf": [
         {
@@ -669,6 +684,7 @@
       "properties": {}
     },
     "BlobDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a blob data source.",
       "properties": {
         "storageAccounts": {
@@ -697,6 +713,7 @@
       }
     },
     "StorageAccount": {
+      "type": "object",
       "description": "The properties that are associated with an Azure Storage account",
       "properties": {
         "accountName": {
@@ -710,6 +727,7 @@
       }
     },
     "ServiceBusDataSourceProperties": {
+      "type": "object",
       "description": "The common properties that are associated with Service Bus data sources (Queues, Topics, Event Hubs, etc.).",
       "properties": {
         "serviceBusNamespace": {
@@ -731,6 +749,7 @@
       }
     },
     "EventHubDataSourceProperties": {
+      "type": "object",
       "description": "The common properties that are associated with Event Hub data sources.",
       "allOf": [
         {
@@ -745,6 +764,7 @@
       }
     },
     "Diagnostics": {
+      "type": "object",
       "description": "Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention.",
       "properties": {
         "conditions": {
@@ -758,6 +778,7 @@
       }
     },
     "DiagnosticCondition": {
+      "type": "object",
       "description": "Condition applicable to the resource, or to the job overall, that warrant customer attention.",
       "properties": {
         "since": {
@@ -778,6 +799,7 @@
       }
     },
     "InputListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -796,6 +818,7 @@
       "description": "Object containing a list of inputs under a streaming job."
     },
     "Serialization": {
+      "type": "object",
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output.",
       "discriminator": "type",
       "properties": {
@@ -822,6 +845,7 @@
       }
     },
     "ParquetSerialization": {
+      "type": "object",
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Parquet format.",
       "x-ms-discriminator-value": "Parquet",
       "allOf": [
@@ -838,10 +862,12 @@
       }
     },
     "ParquetSerializationProperties": {
+      "type": "object",
       "description": "The properties that are associated with the Parquet serialization type.",
       "properties": {}
     },
     "CsvSerialization": {
+      "type": "object",
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in CSV format.",
       "x-ms-discriminator-value": "Csv",
       "allOf": [
@@ -858,6 +884,7 @@
       }
     },
     "CsvSerializationProperties": {
+      "type": "object",
       "description": "The properties that are associated with the CSV serialization type.",
       "properties": {
         "fieldDelimiter": {
@@ -871,6 +898,7 @@
       }
     },
     "JsonSerialization": {
+      "type": "object",
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in JSON format.",
       "x-ms-discriminator-value": "Json",
       "allOf": [
@@ -887,6 +915,7 @@
       }
     },
     "JsonSerializationProperties": {
+      "type": "object",
       "description": "The properties that are associated with the JSON serialization type.",
       "properties": {
         "encoding": {
@@ -900,6 +929,7 @@
       }
     },
     "AvroSerialization": {
+      "type": "object",
       "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Avro format.",
       "x-ms-discriminator-value": "Avro",
       "allOf": [
@@ -916,6 +946,7 @@
       }
     },
     "AvroSerializationProperties": {
+      "type": "object",
       "description": "The properties that are associated with the Avro serialization type.",
       "properties": {}
     },
@@ -943,6 +974,7 @@
       }
     },
     "ResourceTestStatus": {
+      "type": "object",
       "description": "Describes the status of the test operation along with error information, if applicable.",
       "properties": {
         "status": {
@@ -958,6 +990,7 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
       "description": "Describes the error that occurred.",
       "properties": {
         "code": {
@@ -973,6 +1006,7 @@
       }
     },
     "SubResource": {
+      "type": "object",
       "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
@@ -993,6 +1027,7 @@
       "x-ms-azure-resource": true
     },
     "Compression": {
+      "type": "object",
       "description": "Describes how input data is compressed",
       "properties": {
         "type": {
@@ -1017,6 +1052,7 @@
       }
     },
     "AzureSqlReferenceInputDataSource": {
+      "type": "object",
       "description": "Describes an Azure SQL database reference input data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
@@ -1031,6 +1067,7 @@
       }
     },
     "AzureSqlReferenceInputDataSourceProperties": {
+      "type": "object",
       "properties": {
         "server": {
           "description": "This element is associated with the datasource element. This is the name of the server that contains the database that will be written to.",
