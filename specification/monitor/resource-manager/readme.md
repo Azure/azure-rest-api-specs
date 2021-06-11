@@ -678,7 +678,7 @@ directive:
   reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
 ```
 
-``` yaml !$(python) 
+``` yaml !$(python) && !$(go)
 directive:
 - from: activityLogAlerts_API.json
   where: $.parameters
