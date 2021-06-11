@@ -87,7 +87,7 @@ swagger-to-sdk:
   #track1 doesn't support features needed for typescript
   #manually generate for now with track2
   #- repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
 ```
 ## Python
 
