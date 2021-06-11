@@ -768,6 +768,7 @@
           "description": "The current entity tag for the streaming job. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
         },
         "jobStorageAccount": {
+          "description": "The properties that are associated with an Azure Storage account with MSI",
           "$ref": "#/definitions/JobStorageAccount"
         },
         "contentStoragePolicy": {
@@ -930,13 +931,16 @@
       "description": "Describes how identity is verified",
       "properties": {
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "The identity tenantId"
         },
         "principalId": {
-          "type": "string"
+          "type": "string",
+          "description": "The identity principal ID"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The identity type"
         }
       }
     }

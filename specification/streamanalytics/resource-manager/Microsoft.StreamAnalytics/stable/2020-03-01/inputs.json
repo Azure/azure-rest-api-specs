@@ -460,7 +460,8 @@
           "description": "The current entity tag for the input. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
         },
         "compression": {
-          "$ref": "#/definitions/Compression"
+          "$ref": "#/definitions/Compression",
+          "description": "Describes how input data is compressed"
         },
         "partitionKey": {
           "type": "string",
@@ -823,6 +824,7 @@
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
           "$ref": "#/definitions/EventSerializationType"
         }
       },
@@ -1031,6 +1033,7 @@
       "description": "Describes how input data is compressed",
       "properties": {
         "type": {
+          "description": "Indicates the type of compression that the input uses. Required on PUT (CreateOrReplace) requests.",
           "$ref": "#/definitions/CompressionType"
         }
       },
@@ -1062,11 +1065,14 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureSqlReferenceInputDataSourceProperties"
+          "description": "The properties that are associated with SQL DB input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/AzureSqlReferenceInputDataSourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureSqlReferenceInputDataSourceProperties": {
+      "description": "The properties that are associated with SQL DB input containing reference data. Required on PUT (CreateOrReplace) requests.",
       "type": "object",
       "properties": {
         "server": {
@@ -1091,6 +1097,8 @@
           "type": "string"
         },
         "refreshType": {
+          "type": "object",
+          "description": "Indicates the type of data refresh option.",
           "$ref": "#/definitions/RefreshType"
         },
         "refreshRate": {
@@ -1109,7 +1117,7 @@
     },
     "RefreshType": {
       "type": "string",
-      "description": "This element is associated with the datasource element. It indicates what kind of data refresh option do we want to use.",
+      "description": "Indicates the type of data refresh option.",
       "enum": [
         "Static",
         "RefreshPeriodicallyWithFull",
