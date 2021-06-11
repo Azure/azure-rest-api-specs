@@ -32,6 +32,7 @@ These are the global settings for the MonitorClient API.
 ``` yaml !$(python) || !$(track2)
 title: MonitorClient
 ```
+
 ``` yaml $(python) && $(track2)
 title: MonitorManagementClient
 ```
@@ -535,6 +536,16 @@ These settings apply only when `--tag=package-2016-09-01-only` is specified on t
 input-file:
 - Microsoft.Insights/stable/2016-09-01/metrics_API.json
 - Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+```
+
+### Tag: package-2016-06-only
+
+These settings apply only when `--tag=package-2016-06-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2016-06-only'
+input-file:
+  - Microsoft.Insights/stable/2016-06-01/metrics_API.json
+  - Microsoft.Insights/stable/2016-06-01/operations_API.json
 ```
 
 ### Tag: package-2016-03-01-only
