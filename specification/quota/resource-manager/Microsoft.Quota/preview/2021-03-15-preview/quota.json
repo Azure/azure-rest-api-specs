@@ -791,7 +791,6 @@
     "QuotaRequestDetails": {
       "type": "object",
       "description": "List of quota requests with details.",
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "Quota request ID.",
@@ -803,15 +802,15 @@
           "type": "string",
           "readOnly": true
         },
-        "properties": {
-          "description": "Quota request details.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaRequestProperties"
-        },
         "type": {
           "type": "string",
           "readOnly": true,
           "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+        },
+        "properties": {
+          "description": "Quota request details.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaRequestProperties"
         }
       }
     },
