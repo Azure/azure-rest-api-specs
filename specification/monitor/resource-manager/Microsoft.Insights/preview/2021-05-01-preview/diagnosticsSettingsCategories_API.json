@@ -116,28 +116,8 @@
     }
   },
   "definitions": {
-    "ProxyOnlyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "A proxy only azure resource object"
-    },
     "DiagnosticSettingsCategory": {
+      "readOnly": true,
       "properties": {
         "categoryType": {
           "enum": [
@@ -166,7 +146,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -178,7 +158,7 @@
         "systemData": {
           "readOnly": true,
           "description": "The system metadata related to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "description": "The diagnostic settings category resource."
