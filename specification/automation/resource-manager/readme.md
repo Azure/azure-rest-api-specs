@@ -225,9 +225,10 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/job.json
 - Microsoft.Automation/stable/2019-06-01/operations.json
-- Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
@@ -278,8 +279,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_automation']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js automation/resource-manager
 ```
 
 
@@ -341,7 +340,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

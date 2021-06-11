@@ -33,6 +33,7 @@ batch:
   - tag: package-2018-06-17-preview
   - tag: package-2019-10-17-preview
   - tag: package-2020-02-02-preview
+  - tag: package-2020-02-02
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
 ```
@@ -44,6 +45,7 @@ batch:
   - tag: package-2018-06-17-preview
   - tag: package-2019-10-17-preview
   - tag: package-2020-02-02-preview
+  - tag: package-2020-02-02
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
   - multiapiscript: true
@@ -160,7 +162,7 @@ These settings apply only when `--tag=package-preview-2020-06-only --python` is 
 ``` yaml $(tag) == 'package-preview-2020-06-only' && $(python) && !$(track2)
 python:
   namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
-  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02-preview
+  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02_preview
 ```
 ``` yaml $(tag) == 'package-preview-2020-06-only' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2020_06_02_preview

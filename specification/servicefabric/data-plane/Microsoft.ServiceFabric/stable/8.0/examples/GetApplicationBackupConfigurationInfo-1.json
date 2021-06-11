@@ -1,0 +1,39 @@
+{
+  "operationId": "GetApplicationBackupConfigurationInfo",
+  "description": "This example shows how to get list of backup configuration for this application and entities (services and partitions) under this application. The number of results in a page are limited to maximum of two using the MaxResult parameter.",
+  "parameters": {
+    "api-version": "6.4",
+    "applicationId": "CalcApp",
+    "MaxResults": 2
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "fabric:/CalcApp/CalcService",
+        "Items": [
+          {
+            "Kind": "Application",
+            "PolicyName": "BackupPolicy1",
+            "PolicyInheritedFrom": "Application",
+            "ApplicationName": "fabric:/CalcApp",
+            "SuspensionInfo": {
+              "IsSuspended": false,
+              "SuspensionInheritedFrom": "Invalid"
+            }
+          },
+          {
+            "Kind": "Service",
+            "PolicyName": "BackupPolicy2",
+            "PolicyInheritedFrom": "Service",
+            "ServiceName": "fabric:/CalcApp/CalcService",
+            "SuspensionInfo": {
+              "IsSuspended": false,
+              "SuspensionInheritedFrom": "Invalid"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

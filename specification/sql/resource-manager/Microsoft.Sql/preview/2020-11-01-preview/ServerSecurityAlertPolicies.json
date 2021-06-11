@@ -127,11 +127,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a server's threat detection policy with all parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
-          },
           "Update a server's threat detection policy with minimal parameters": {
             "$ref": "./examples/ServerSecurityAlertsCreateMin.json"
+          },
+          "Update a server's threat detection policy with all parameters": {
+            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
           }
         }
       }
@@ -200,7 +200,7 @@
           }
         },
         "disabledAlerts": {
-          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action",
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force",
           "type": "array",
           "items": {
             "type": "string"
@@ -248,8 +248,9 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
+          "description": "SystemData of SecurityAlertPolicyResource.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/SecurityAlertsPolicyProperties",

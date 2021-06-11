@@ -5,7 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: peering
   clear-output-folder: true
 ```
@@ -14,30 +14,10 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2021-01-01
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2020-10-01
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2020-04-01
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2020-01-01-preview
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2019-09-01-preview
-```
-or
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2019-08-01-preview
 ```
 

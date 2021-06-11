@@ -13,10 +13,35 @@
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
         "type": "Microsoft.PowerPlatform/enterprisePolicies",
         "location": "East US",
+        "kind": "Lockbox",
         "identity": {
           "systemAssignedIdentityPrincipalId": "principalId",
           "tenantId": "tenantId",
           "type": "SystemAssigned"
+        },
+        "properties": {
+          "lockbox": {
+            "state": "succeeded"
+          },
+          "encryption": {
+            "keyVault": {
+              "id": "nnn",
+              "key": {
+                "name": "name",
+                "version": "1.0"
+              }
+            }
+          },
+          "networkInjection": {
+            "virtualNetworks": [
+              {
+                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/virtualNetwork",
+                "subnet": {
+                  "name": "testSubnet"
+                }
+              }
+            ]
+          }
         },
         "systemData": {
           "createdBy": "user1",

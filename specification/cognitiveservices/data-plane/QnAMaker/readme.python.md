@@ -27,3 +27,8 @@ output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-k
 namespace: azure.cognitiveservices.knowledge.qnamaker.preview
 output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/preview/
 ```
+
+``` yaml $(tag) == 'release_5_0_preview.2'
+namespace: azure.cognitiveservices.knowledge.qnamaker.preview
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/preview/
+```

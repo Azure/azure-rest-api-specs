@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 3,
+      "filter": {
+        "and": [
+          {
+            "term": "TestTerm",
+            "glossaryName": "Glossary"
+          }
+        ]
+      }
+    },
+    "api-version": "2021-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 1,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "b20ac13a-7883-4376-b076-bac9f8f214a8",
+            "qualifiedName": "https://adcperftest_34f7fbad-a.blob.core.windows.net/tcphcontainer_34f7fbad-a",
+            "name": "tcphcontainer_34f7fbad-a",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_container",
+            "classification": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [
+              {
+                "name": "TestTerm",
+                "glossaryName": "Glossary"
+              }
+            ],
+            "contact": [],
+            "label": [
+              "Microsoft.Label.9FBDE396_1A24_4C79_8EDF_9254A0F35055"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
