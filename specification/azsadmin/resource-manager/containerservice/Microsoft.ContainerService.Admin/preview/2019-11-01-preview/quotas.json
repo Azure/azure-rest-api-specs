@@ -27,7 +27,7 @@
           "ContainerServiceQuotas"
         ],
         "description": "Returns a list of container service quotas at the given location.",
-        "operationId": "ContainerServiceQuota",
+        "operationId": "ContainerServiceQuota_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -52,6 +52,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -79,22 +82,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ContainerServiceQuota": {
-      "description": "Container service quota.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Container service quota properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerServiceQuotaProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "ContainerServiceQuotaProperties": {
       "description": "Container service quota properties.",
       "type": "object",
@@ -114,8 +101,25 @@
           "description": "List of container service quotas.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerServiceQuota"
+            "description": "Container service quota.",
+            "type": "object",
+            "properties": {
+              "properties": {
+                "description": "Container service quota properties.",
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/ContainerServiceQuotaProperties"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/Resource"
+              }
+            ]
           }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
         }
       }
     },

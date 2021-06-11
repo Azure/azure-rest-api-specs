@@ -52,27 +52,14 @@
               "$ref": "quotas.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "ContainerService": {
-      "description": "Container service properties.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Container service properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerServiceProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "quotas.json#/definitions/Resource"
-        }
-      ]
-    },
     "ContainerServiceProperties": {
       "description": "Container service properties.",
       "type": "object",
@@ -122,8 +109,25 @@
           "description": "List of managed clusters.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerService"
+            "description": "Container service properties.",
+            "type": "object",
+            "properties": {
+              "properties": {
+                "description": "Container service properties.",
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/ContainerServiceProperties"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "quotas.json#/definitions/Resource"
+              }
+            ]
           }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
         }
       }
     }

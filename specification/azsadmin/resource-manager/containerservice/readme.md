@@ -37,7 +37,15 @@ input-file:
     - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json" 
     - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json" 
 ```
-
+## Suppression
+``` yaml
+directive:
+  - from: managedClusters.json
+    suppress: R3018  # EnumInsteadOfBoolean
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+```
 ---
 # Code Generation
 
