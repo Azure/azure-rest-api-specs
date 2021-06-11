@@ -40,7 +40,7 @@ input-file:
 ## Suppression
 ``` yaml
 directive:
-  - from: managedClusters.json
+  - from: operations.json
     suppress: R3018  # EnumInsteadOfBoolean
     where:
       - $.definitions.Operation.properties.isDataAction
