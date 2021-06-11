@@ -602,6 +602,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/clusterTypeVersions": {
+      "get": {
+        "description": "Returns a list of cluster type versions.",
+        "operationId": "ClusterTypeVersions_ListBySubscription",
+        "x-ms-examples": {
+          "ClusterTypeVersionListResult": {
+            "$ref": "./examples/ListClusterTypeVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusters successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterTypeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -796,6 +835,54 @@
         "reason": {
           "type": "string",
           "description": "The reason of unavailability."
+        }
+      }
+    },
+    "ClusterTypeVersionsListResult": {
+      "type": "object",
+      "description": "Represents a list of cluster type and stack version mappings.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The cluster type and stack version mappings in the array.",
+          "items": {
+            "$ref": "#/definitions/HDInsightClusterTypeVersions"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "HDInsightClusterTypeVersions": {
+      "type": "object",
+      "description": "Cluster type and stack versions mapping.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of cluster type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster type versions properties.",
+          "$ref": "#/definitions/ClusterTypeVersionsProperties"
+        }
+      }
+    },
+    "ClusterTypeVersionsProperties": {
+      "type": "object",
+      "description": "ClusterTypeVersion internal properties.",
+      "properties": {
+        "stackVersions": {
+          "description": "A list of cluster type versions.",
+          "type": "array",
+          "items": {
+            "description": "A list of stack versions.",
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})-(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})$"
+          }
         }
       }
     }
