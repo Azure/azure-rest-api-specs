@@ -4478,7 +4478,7 @@
         "duration": {
           "type": "integer",
           "format": "int32",
-          "description": "The duration of the hostpool update in seconds."
+          "description": "The time maintenance notification will be sent relative to before/after the update kickoff in minutes."
         },
         "beforeKickOff": {
           "type": "boolean",
@@ -4625,20 +4625,20 @@
           "format": "float",
           "description": "The progress percentage."
         },
-        "sessionHostsToMigrate": {
+        "sessionHostsToUpdate": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of session hosts to migrate by hostpool update."
+          "description": "The number of session hosts to update by hostpool update."
         },
-        "sessionHostsMigrating": {
+        "sessionHostsUpdating": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of session hosts migrating by hostpool update."
+          "description": "The number of session hosts updating by hostpool update."
         },
-        "sessionHostsMigrated": {
+        "sessionHostsUpdated": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of session hosts migrated by hostpool update."
+          "description": "The number of session hosts updated by hostpool update."
         },
         "sessionHostsRollbackFailed": {
           "type": "integer",
@@ -4667,7 +4667,7 @@
       }
     },
     "HostPoolUpdateFullProperties": {
-      "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
+      "description": "Hostpool update full properties including session host config, hostpool update parameters, and update progress.",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -4741,7 +4741,7 @@
           "type": "string",
           "description": "The correlationId of the hostpool update."
         },
-        "migrateProgress": {
+        "updateProgress": {
           "$ref": "#/definitions/HostPoolUpdateProgress",
           "description": "Properties of host pool update progress."
         },
