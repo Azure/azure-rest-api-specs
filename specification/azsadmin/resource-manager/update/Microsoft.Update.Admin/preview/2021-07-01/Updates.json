@@ -314,9 +314,9 @@
           "description": "Properties when update is in a specific state.",
           "$ref": "#/definitions/UpdateStateProperties"
         },
-        "azsUpdateProperties": {
-          "description": "Properties specific to Microsoft Azure Stack Hub update.",
-          "$ref": "#/definitions/AzsUpdateProperties"
+        "versionReqiredProperties": {
+          "description": "Version required properties of an update.",
+          "$ref": "#/definitions/VersionReqiredProperties"
         },
         "oemUpdateProperties": {
           "description": "Properties specific to OEM update.",
@@ -403,8 +403,8 @@
       "description": "State related properties of the update.",
       "type": "object",
       "properties": {
-        "progressPercentage": {
-          "description": "Overall percentage of a running sate.",
+        "downloadPercentage": {
+          "description": "Package download percentage.",
           "type": "integer",
           "format": "int64"
         },
@@ -415,16 +415,24 @@
         }
       }
     },
-    "AzsUpdateProperties": {
+    "VersionReqiredProperties": {
       "description": "Properties for Microsoft update.",
       "type": "object",
       "properties": {
         "minVersionRequired": {
-          "description": "The minimum version required to install.",
+          "description": "The minimum Azure Stack Hub version required to install.",
           "type": "string"
         },
         "minOemVersionRequired": {
           "description": "The minimum OEM version required to install.",
+          "type": "string"
+        },
+        "versionRangeRequired": {
+          "description": "The Azure Stack Hub version range required to install.",
+          "type": "string"
+        },
+        "oemVersionRangeRequired": {
+          "description": "The OEM version range required to install.",
           "type": "string"
         }
       }
@@ -438,7 +446,7 @@
           "type": "string"
         },
         "oemNotifyMsg": {
-          "description": "The message from the OEM availability a relevant OEM update.",
+          "description": "The message from the OEM availability of a relevant OEM update.",
           "type": "string"
         }
       }
