@@ -154,6 +154,16 @@ input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
+### Tag: package-2019-07-only
+
+These settings apply only when `--tag=package-2019-07-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-only'
+input-file:
+  - Microsoft.Insights/stable/2019-07-01/metrics_API.json
+  - Microsoft.Insights/stable/2019-07-01/operations_API.json
+```
+
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
