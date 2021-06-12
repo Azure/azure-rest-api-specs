@@ -58,69 +58,13 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/OperationListResponse"
+              "$ref": "definitions.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "OperationListResponse": {
-      "description": "Result of the request to list operations supported by the Microsoft.AppAssessment provider. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of app assessment operations supported by the Microsoft.AppAssessment resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "type": "object",
-      "description": "An operation description object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation"
-        },
-        "display": {
-          "type": "object",
-          "description": "Display properties of the operation",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The service provider: Microsoft.AppAssessment"
-            },
-            "resource": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The resource being operated on"
-            },
-            "operation": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Operation type: Read, write, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The description of this operation"
             }
           }
         }

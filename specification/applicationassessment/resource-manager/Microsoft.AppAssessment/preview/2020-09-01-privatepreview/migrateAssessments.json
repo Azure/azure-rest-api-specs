@@ -202,6 +202,7 @@
         ],
         "operationId": "migrateProjectsAssessment_delete",
         "description": "Deletes a migrate project assessment",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "migrateAssessment_delete": {
             "$ref": "./examples/migrateAssessment_delete.json"
@@ -235,6 +236,9 @@
         "responses": {
           "200": {
             "description": "Assessment was deleted"
+          },
+          "202": {
+            "description": "Delete assessment accepted"
           },
           "204": {
             "description": "No Content"
