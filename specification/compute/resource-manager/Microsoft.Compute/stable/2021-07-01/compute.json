@@ -3131,6 +3131,9 @@
           },
           "Create a VM with UserData": {
             "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
+          },
+          "Create a VM with VM Size Properties": {
+            "$ref": "./examples/CreateOrUpdateAVmWithVMSizeProperties.json"
           }
         }
       },
@@ -9612,7 +9615,24 @@
           }
         }
       },
+      "vmSizeProperties": {
+        "$ref": "#/definitions/VMSizeProperties",
+        "description": "Specifies the VM Size Properties for customizing VM sizes."
+      },
       "description": "Specifies the hardware settings for the virtual machine."
+    },
+    "VMSizeProperties": {
+      "properties": {
+        "vCPUsAvailable": {
+          "type": "integer",
+          "description": "Indicates the number of vCPUs available for the VM. <br><br> When this property is not specified in the request body, default behavior is to set it to the default number of vCPUs available for that VM size."
+        },
+        "vCPUsPerCore": {
+          "type": "integer",
+          "description": "Indicates the vCPU to physical core ratio. Default value is set to the vCPUsPerCore available for the VM Size. <br><br> Setting this property to 1 also means that hyper-threading is disabled."
+        }
+      },
+      "description": "Specifies VM Size Property settings on the virtual machine."
     },
     "ImageReference": {
       "properties": {
