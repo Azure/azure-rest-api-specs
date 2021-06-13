@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2021-06-10` is specified on the co
 
 ```yaml $(tag) == 'package-2021-06-10'
 input-file:
-  - Microsoft.HealthBot/preview/2021-06-10/healthbot.json
+  - Microsoft.HealthBot/stable/2021-06-10/healthbot.json
 ```
 
 ---
