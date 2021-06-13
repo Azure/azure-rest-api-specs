@@ -32,6 +32,7 @@ These are the global settings for the MonitorClient API.
 ``` yaml !$(python) || !$(track2)
 title: MonitorClient
 ```
+
 ``` yaml $(python) && $(track2)
 title: MonitorManagementClient
 ```
@@ -151,6 +152,16 @@ These settings apply only when `--tag=package-2019-10-17-preview-only` is specif
 ``` yaml $(tag) == 'package-2019-10-17-preview-only'
 input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+```
+
+### Tag: package-2019-07-only
+
+These settings apply only when `--tag=package-2019-07-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-only'
+input-file:
+  - Microsoft.Insights/stable/2019-07-01/metrics_API.json
+  - Microsoft.Insights/stable/2019-07-01/operations_API.json
 ```
 
 ### Tag: package-2019-06
@@ -360,6 +371,17 @@ input-file:
 - Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
+### Tag: package-2017-09-preview-only
+
+These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2017-09-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2017-09-01-preview/operations_API.json
+  - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
+  - Microsoft.Insights/preview/2017-09-01-preview/metrics_API.json
+```
+
 ### Tag: package-2017-08
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
@@ -526,6 +548,16 @@ input-file:
 - Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
 ```
 
+### Tag: package-2016-06-only
+
+These settings apply only when `--tag=package-2016-06-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2016-06-only'
+input-file:
+  - Microsoft.Insights/stable/2016-06-01/metrics_API.json
+  - Microsoft.Insights/stable/2016-06-01/operations_API.json
+```
+
 ### Tag: package-2016-03-01-only
 
 These settings apply only when `--tag=package-2016-03-01-only` is specified on the command line.
@@ -641,6 +673,12 @@ directive:
     reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
   - suppress: DefaultErrorResponseSchema
     from: activityLogAlerts_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metrics_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
