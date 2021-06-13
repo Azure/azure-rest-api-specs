@@ -69,6 +69,26 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/devices.json
 ```
 
+``` yaml
+title: IoTSecurity
+description: API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider
+openapi-type: arm
+tag: 2021-07-01-preview
+```
+
+### Tag: 2021-07-01-preview
+
+These settings apply only when `--tag=2021-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2021-07-01-preview'
+input-file:
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/alerts.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/alertTypes.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendations.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendationTypes.json
+```
+
 ---
 
 # Code Generation
