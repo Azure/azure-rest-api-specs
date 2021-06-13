@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "subscription-id",
     "resourceGroupName": "OneResourceGroupName",
-    "api-version": "2020-12-08"
+    "api-version": "2021-06-10"
   },
   "responses": {
     "200": {
@@ -10,14 +10,23 @@
         "value": [
           {
             "location": "East US",
-            "name": "samplebotname",
+            "name": "samplebotname2",
             "type": "Microsoft.HealthBot/healthBots",
-            "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname",
+            "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname2",
             "sku": {
-              "name": "F0"
+              "name": "S1"
+            },
+            "identity": {
+              "userAssignedIdentities": {
+                "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
+                "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
+              },
+              "principalId": "principalId",
+              "tenantId": "tenantId",
+              "type": "SystemAssigned, UserAssigned"
             },
             "properties": {
-              "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/contoso/scenarios/manage"
+              "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/samplebotname2-hdi1osc"
             },
             "systemData": {
               "createdBy": "jack@outlook.com",

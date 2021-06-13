@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-12-08",
-    "title": "healthbot",
-    "description": "Microsoft Healthcare Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
+    "version": "2021-06-10",
+    "title": "Azure Health Bot",
+    "description": "Azure Health Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
     "x-ms-code-generation-settings": {
       "name": "healthbotClient"
     }
@@ -45,7 +45,7 @@
             "$ref": "./examples/ResourceCreationPut.json"
           }
         },
-        "description": "Create a new HealthBot.",
+        "description": "Create a new Azure Health Bot.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -63,7 +63,7 @@
             "schema": {
               "$ref": "#/definitions/HealthBot"
             },
-            "description": "The parameters to provide for the created bot."
+            "description": "The parameters to provide for the created Azure Health Bot."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -156,7 +156,7 @@
             "schema": {
               "$ref": "#/definitions/HealthBotUpdateParameters"
             },
-            "description": "The parameters to provide for the required bot."
+            "description": "The parameters to provide for the required Azure Health Bot."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -305,7 +305,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all the available HealthBot operations.",
+        "description": "Lists all the available Azure Health Bot operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Get Operations": {
@@ -338,12 +338,70 @@
     }
   },
   "definitions": {
+    "Identity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the Azure Health Bot",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentityMap",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n"
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "UserAssignedIdentityMap": {
+      "type": "object",
+      "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of user assigned identity."
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity used by the Video Analyzer resource."
+    },
     "Sku": {
+      "type": "object",
       "description": "The resource model definition representing SKU",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the HealthBot SKU",
+          "description": "The name of the Azure Health Bot SKU",
           "enum": [
             "F0",
             "S1",
@@ -360,6 +418,7 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "x-ms-azure-resource": true,
       "properties": {
@@ -386,6 +445,7 @@
       }
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -420,7 +480,7 @@
     },
     "HealthBot": {
       "type": "object",
-      "description": "HealthBot resource definition",
+      "description": "Azure Health Bot resource definition",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -429,11 +489,15 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the HealthBot."
+          "description": "SKU of the Azure Health Bot."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the Azure Health Bot."
         },
         "properties": {
           "$ref": "#/definitions/HealthBotProperties",
-          "description": "The set of properties specific to Healthbot resource."
+          "description": "The set of properties specific to Azure Health Bot resource."
         }
       },
       "required": [
@@ -441,12 +505,13 @@
       ]
     },
     "HealthBotProperties": {
+      "type": "object",
       "title": "HealthBotProperties",
-      "description": "The properties of a HealthBot. The Health Bot Service is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
+      "description": "The properties of a Azure Health Bot. The Health Bot Service is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the Healthbot resource.",
+          "description": "The provisioning state of the Azure Health Bot resource.",
           "readOnly": true
         },
         "botManagementPortalLink": {
@@ -458,11 +523,11 @@
     },
     "HealthBotUpdateParameters": {
       "type": "object",
-      "description": "Parameters for updating a HealthBot.",
+      "description": "Parameters for updating a Azure Health Bot.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Tags for a HealthBot.",
+          "description": "Tags for a Azure Health Bot.",
           "additionalProperties": {
             "type": "string"
           },
@@ -474,7 +539,11 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the HealthBot."
+          "description": "SKU of the Azure Health Bot."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the Azure Health Bot."
         }
       }
     },
@@ -526,6 +595,7 @@
       }
     },
     "ValidationResult": {
+      "type": "object",
       "title": "ValidationResult",
       "description": "The response returned from validation process",
       "properties": {
@@ -536,6 +606,7 @@
       }
     },
     "Error": {
+      "type": "object",
       "properties": {
         "error": {
           "type": "object",
@@ -578,6 +649,7 @@
       "description": "The resource management error response."
     },
     "ErrorAdditionalInfo": {
+      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,
@@ -659,6 +731,7 @@
       }
     },
     "BotResponseList": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "readOnly": true,
@@ -671,10 +744,10 @@
           "items": {
             "$ref": "#/definitions/HealthBot"
           },
-          "description": "Gets the list of Healthbot results and their properties."
+          "description": "Gets the list of Azure Health Bot results and their properties."
         }
       },
-      "description": "The list of Healthbot operation response."
+      "description": "The list of Azure Health Bot operation response."
     }
   },
   "parameters": {
