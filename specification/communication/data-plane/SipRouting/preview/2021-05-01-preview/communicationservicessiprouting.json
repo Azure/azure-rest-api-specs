@@ -35,7 +35,8 @@
             "description": "Failure",
             "schema": {
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -77,19 +78,23 @@
             }
           },
           "415": {
-            "description": "Unsupported media type of the patch."
+            "description": "Unsupported media type of the patch.",
+            "x-ms-error-response": true
           },
           "422": {
-            "description": "If the request is empty, unprocessable or inconsistent with the stored data."
+            "description": "If the request is empty, unprocessable or inconsistent with the stored data.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "All other api errors."
+            "description": "All other api errors.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
