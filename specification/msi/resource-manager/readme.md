@@ -75,6 +75,9 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
+## Pyhton
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C#
 

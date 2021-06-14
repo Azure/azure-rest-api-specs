@@ -9,6 +9,9 @@
       "sku": {
         "name": "Standard",
         "capacity": 4
+      },
+      "properties": {
+        "managedResourceGroupName": "custom-rgname"
       }
     }
   },
@@ -66,10 +69,19 @@
             "guardian": "https://account1.guardian.purview.azure-test.com"
           },
           "publicNetworkAccess": "Enabled",
+          "managedResourceGroupName": "custom-rgname",
           "managedResources": {
-            "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
-            "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
-            "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
+            "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/custom-rgname",
+            "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/custom-rgname/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
+            "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/custom-rgname/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
+          },
+          "systemData": {
+            "createdBy": "client-name",
+            "createdByType": "User",
+            "createdAt": "2019-11-22T18:39:58.6929344Z",
+            "lastModifiedBy": "client-name",
+            "lastModifiedByType": "User",
+            "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
           }
         }
       }
