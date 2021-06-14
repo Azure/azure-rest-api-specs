@@ -2426,42 +2426,6 @@
         }
       }
     },
-    "/notebooks/summary": {
-      "get": {
-        "tags": [
-          "notebooks"
-        ],
-        "operationId": "Notebook_GetNotebookSummaryByWorkSpace",
-        "x-ms-examples": {
-          "Notebooks_ListSummaryByWorkSpace": {
-            "$ref": "./examples/Notebooks_ListSummaryByWorkSpace.json"
-          }
-        },
-        "description": "Lists a summary of Notebooks.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/NotebookListResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Synapse service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/notebooksSummary": {
       "get": {
         "tags": [
