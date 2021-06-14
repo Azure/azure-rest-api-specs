@@ -761,15 +761,42 @@
       "description": "Describes the properties of a Hybrid Compute Operation Value Display."
     },
     "OSProfile": {
-      "readOnly": true,
       "properties": {
         "computerName": {
           "type": "string",
           "readOnly": true,
           "description": "Specifies the host OS name of the hybrid machine."
+        },
+        "windowsConfiguration": {
+          "type": "object",
+          "properties":{
+            "patchSettings": {
+              "$ref": "#/definitions/PatchSettings",
+              "description": "Specifies the patch settings."
+            }
+          },
+          "description": "Specifies the windows configuration for update management."
+        },
+        "linuxConfiguration": {
+          "type": "object",
+          "properties":{
+            "patchSettings": {
+              "$ref": "#/definitions/PatchSettings",
+              "description": "Specifies the patch settings."
+            },
+          "description": "Specifies the linux configuration for update management."
         }
       },
       "description": "Specifies the operating system settings for the hybrid machine."
+    },
+    "PatchSettings": {
+      "properties": {
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the assessment mode."
+        }
+      },
+      "description": "Specifies the patch settings."
     },
     "DetectedProperties": {
       "readOnly": true,
@@ -858,6 +885,10 @@
           "type": "string",
           "description": "The version of Operating System running on the hybrid machine."
         },
+        "osType": {
+          "type": "string",
+          "description": "The type of Operating System (windows/linux)."
+        },
         "vmUuid": {
           "readOnly": true,
           "type": "string",
@@ -897,6 +928,10 @@
         "parentClusterResourceId": {
           "type": "string",
           "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
+        },
+        "mssqlDiscovered": {
+          "type": "string",
+          "description": "Specifies whether any MS SQL instance is discovered on the machine."
         },
         "detectedProperties": {
           "$ref": "#/definitions/DetectedProperties",
