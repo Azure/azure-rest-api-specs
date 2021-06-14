@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01-preview",
+    "version": "2020-10-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -3630,6 +3630,44 @@
         }
       }
     },
+    "/providers/Microsoft.EventGrid/partnerRegistrations": {
+      "get": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "List all available partners registrations.",
+        "description": "List all partners registrations.",
+        "operationId": "PartnerRegistrations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistrationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_List": {
+            "$ref": "./examples/PartnerRegistrations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}": {
       "get": {
         "tags": [
@@ -4011,7 +4049,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Get a specific private endpoint connection.",
-        "description": "Get a specific private endpoint connection under a topic, domain, or partner namespace.",
+        "description": "Get a specific private endpoint connection under a topic or domain.",
         "operationId": "PrivateEndpointConnections_Get",
         "consumes": [],
         "produces": [
@@ -4031,19 +4069,18 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string",
             "enum": [
               "topics",
-              "domains",
-              "partnerNamespaces"
+              "domains"
             ]
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -4080,7 +4117,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Update a specific private endpoint connection.",
-        "description": "Update a specific private endpoint connection under a topic, domain or partner namespace.",
+        "description": "Update a specific private endpoint connection under a topic or domain.",
         "operationId": "PrivateEndpointConnections_Update",
         "consumes": [
           "application/json"
@@ -4102,19 +4139,18 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string",
             "enum": [
               "topics",
-              "domains",
-              "partnerNamespaces"
+              "domains"
             ]
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -4167,7 +4203,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Delete a specific private endpoint connection.",
-        "description": "Delete a specific private endpoint connection under a topic, domain, or partner namespace.",
+        "description": "Delete a specific private endpoint connection under a topic or domain.",
         "operationId": "PrivateEndpointConnections_Delete",
         "consumes": [],
         "produces": [
@@ -4187,19 +4223,18 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string",
             "enum": [
               "topics",
-              "domains",
-              "partnerNamespaces"
+              "domains"
             ]
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -4239,7 +4274,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Lists all private endpoint connections under a resource.",
-        "description": "Get all private endpoint connections under a topic, domain, or partner namespace.",
+        "description": "Get all private endpoint connections under a topic or domain.",
         "operationId": "PrivateEndpointConnections_ListByResource",
         "consumes": [],
         "produces": [
@@ -4259,19 +4294,18 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string",
             "enum": [
               "topics",
-              "domains",
-              "partnerNamespaces"
+              "domains"
             ]
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -4332,14 +4366,14 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -4377,8 +4411,8 @@
         "tags": [
           "PrivateLinkResources"
         ],
-        "summary": "List private link resources under specific topic, domain, or partner namespace.",
-        "description": "List all the private link resources under a topic, domain, or partner namespace.",
+        "summary": "List private link resources under specific topic or domain.",
+        "description": "List all the private link resources under a topic or domain.",
         "operationId": "PrivateLinkResources_ListByResource",
         "consumes": [],
         "produces": [
@@ -4398,14 +4432,14 @@
           {
             "name": "parentType",
             "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentName",
             "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name).",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
             "required": true,
             "type": "string"
           },
@@ -5475,7 +5509,7 @@
   },
   "definitions": {
     "DomainProperties": {
-      "description": "Properties of the Event Grid Domain Resource.",
+      "description": "Properties of the Domain.",
       "type": "object",
       "properties": {
         "privateEndpointConnections": {
@@ -5487,7 +5521,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Provisioning state of the Event Grid Domain Resource.",
+          "description": "Provisioning state of the domain.",
           "enum": [
             "Creating",
             "Updating",
@@ -5504,12 +5538,12 @@
           }
         },
         "endpoint": {
-          "description": "Endpoint for the Event Grid Domain Resource which is used for publishing the events.",
+          "description": "Endpoint for the domain.",
           "type": "string",
           "readOnly": true
         },
         "inputSchema": {
-          "description": "This determines the format that Event Grid should expect for incoming events published to the Event Grid Domain Resource.",
+          "description": "This determines the format that Event Grid should expect for incoming events published to the domain.",
           "enum": [
             "EventGridSchema",
             "CustomEventSchema",
@@ -5527,7 +5561,7 @@
           "description": "Information about the InputSchemaMapping which specified the info about mapping event payload."
         },
         "metricResourceId": {
-          "description": "Metric resource id for the Event Grid Domain Resource.",
+          "description": "Metric resource id for the domain.",
           "type": "string",
           "readOnly": true
         },
@@ -5550,21 +5584,6 @@
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the domain.",
-          "default": false,
-          "type": "boolean"
-        },
-        "autoCreateTopicWithFirstSubscription": {
-          "description": "This Boolean is used to specify the creation mechanism for 'all' the Event Grid Domain Topics associated with this Event Grid Domain resource.\r\nIn this context, creation of domain topic can be auto-managed (when true) or self-managed (when false). The default value for this property is true.\r\nWhen this property is null or set to true, Event Grid is responsible of automatically creating the domain topic when the first event subscription is\r\ncreated at the scope of the domain topic. If this property is set to false, then creating the first event subscription will require creating a domain topic\r\nby the user. The self-management mode can be used if the user wants full control of when the domain topic is created, while auto-managed mode provides the\r\nflexibility to perform less operations and manage fewer resources by the user. Also, note that in auto-managed creation mode, user is allowed to create the\r\ndomain topic on demand if needed.",
-          "default": true,
-          "type": "boolean"
-        },
-        "autoDeleteTopicWithLastSubscription": {
-          "description": "This Boolean is used to specify the deletion mechanism for 'all' the Event Grid Domain Topics associated with this Event Grid Domain resource.\r\nIn this context, deletion of domain topic can be auto-managed (when true) or self-managed (when false). The default value for this property is true.\r\nWhen this property is set to true, Event Grid is responsible of automatically deleting the domain topic when the last event subscription at the scope\r\nof the domain topic is deleted. If this property is set to false, then the user needs to manually delete the domain topic when it is no longer needed\r\n(e.g., when last event subscription is deleted and the resource needs to be cleaned up). The self-management mode can be used if the user wants full\r\ncontrol of when the domain topic needs to be deleted, while auto-managed mode provides the flexibility to perform less operations and manage fewer\r\nresources by the user.",
-          "default": true,
-          "type": "boolean"
         }
       }
     },
@@ -5900,19 +5919,19 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DomainProperties",
-          "description": "Properties of the Event Grid Domain resource.",
+          "description": "Properties of the domain.",
           "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the Event Grid Domain resource."
+          "description": "The Sku pricing tier for the domain."
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
-          "description": "Identity information for the Event Grid Domain resource."
+          "description": "Identity information for the resource."
         },
         "systemData": {
-          "description": "The system metadata relating to the Event Grid Domain resource.",
+          "description": "The system metadata relating to Domain resource.",
           "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -5959,7 +5978,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -5967,18 +5987,6 @@
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the domain.",
-          "type": "boolean"
-        },
-        "autoCreateTopicWithFirstSubscription": {
-          "description": "This Boolean is used to specify the creation mechanism for 'all' the Event Grid Domain Topics associated with this Event Grid Domain resource.\r\nIn this context, creation of domain topic can be auto-managed (when true) or self-managed (when false). The default value for this property is true.\r\nWhen this property is null or set to true, Event Grid is responsible of automatically creating the domain topic when the first event subscription is\r\ncreated at the scope of the domain topic. If this property is set to false, then creating the first event subscription will require creating a domain topic\r\nby the user. The self-management mode can be used if the user wants full control of when the domain topic is created, while auto-managed mode provides the\r\nflexibility to perform less operations and manage fewer resources by the user. Also, note that in auto-managed creation mode, user is allowed to create the\r\ndomain topic on demand if needed.",
-          "type": "boolean"
-        },
-        "autoDeleteTopicWithLastSubscription": {
-          "description": "This Boolean is used to specify the deletion mechanism for 'all' the Event Grid Domain Topics associated with this Event Grid Domain resource.\r\nIn this context, deletion of domain topic can be auto-managed (when true) or self-managed (when false). The default value for this property is true.\r\nWhen this property is set to true, Event Grid is responsible of automatically deleting the domain topic when the last event subscription at the scope\r\nof the domain topic is deleted. If this property is set to false, then the user needs to manually delete the domain topic when it is no longer needed\r\n(e.g., when last event subscription is deleted and the resource needs to be cleaned up). The self-management mode can be used if the user wants full\r\ncontrol of when the domain topic needs to be deleted, while auto-managed mode provides the flexibility to perform less operations and manage fewer\r\nresources by the user.",
-          "type": "boolean"
         }
       }
     },
@@ -6181,8 +6189,7 @@
       "type": "object",
       "properties": {
         "enableAdvancedFilteringOnArrays": {
-          "description": "Allows advanced filters to be evaluated against an array of values instead of expecting a singular value. The default value is either false or null.",
-          "default": false,
+          "description": "Allows advanced filters to be evaluated against an array of values instead of expecting a singular value.",
           "type": "boolean"
         },
         "advancedFilters": {
@@ -7391,10 +7398,6 @@
           "description": "Origin of the operation",
           "type": "string"
         },
-        "isDataAction": {
-          "description": "This Boolean is used to determine if the operation is a data plane action or not.",
-          "type": "boolean"
-        },
         "properties": {
           "description": "Properties of the operation",
           "type": "object",
@@ -7428,13 +7431,6 @@
       "description": "Properties of the partner namespace.",
       "type": "object",
       "properties": {
-        "privateEndpointConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
         "provisioningState": {
           "description": "Provisioning state of the partner namespace.",
           "enum": [
@@ -7460,31 +7456,6 @@
           "description": "Endpoint for the partner namespace.",
           "type": "string",
           "readOnly": true
-        },
-        "publicNetworkAccess": {
-          "description": "This determines if traffic is allowed over public network. By default it is enabled.\r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceProperties.InboundIpRules\" />",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "default": "Enabled"
-        },
-        "inboundIpRules": {
-          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InboundIpRule"
-          }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the partner namespace.",
-          "default": false,
-          "type": "boolean"
         }
       }
     },
@@ -7520,40 +7491,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/PartnerNamespaceUpdateParameterProperties",
-          "description": "Properties of the Partner Namespace.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PartnerNamespaceUpdateParameterProperties": {
-      "description": "Information of Partner Namespace update parameter properties.",
-      "type": "object",
-      "properties": {
-        "publicNetworkAccess": {
-          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceUpdateParameterProperties.InboundIpRules\" />",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          }
-        },
-        "inboundIpRules": {
-          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InboundIpRule"
-          }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the partner namespace.",
-          "type": "boolean"
         }
       }
     },
@@ -7801,20 +7738,33 @@
         }
       }
     },
+    "PartnerRegistrationEventTypesListResult": {
+      "description": "Result of the List Partner Registration Event Types operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner registration event types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventType"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner registration event types.",
+          "type": "string"
+        }
+      }
+    },
     "PartnerTopicUpdateParameters": {
       "description": "Properties of the Partner Topic update.",
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Tags of the Partner Topic resource.",
+          "description": "Tags of the partner topic.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityInfo",
-          "description": "Identity information for the Partner Topic resource."
         }
       }
     },
@@ -7881,15 +7831,15 @@
           "description": "Properties of the partner topic.",
           "x-ms-client-flatten": true
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
+        },
         "systemData": {
           "description": "The system metadata relating to Partner Topic resource.",
           "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityInfo",
-          "description": "Identity information for the Partner Topic resource."
         }
       }
     },
@@ -7907,6 +7857,74 @@
         "nextLink": {
           "description": "A link for the next page of partner topics.",
           "type": "string"
+        }
+      }
+    },
+    "PartnerTopicTypesListResult": {
+      "description": "Result of the List Partner Topic Types operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner topic types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerTopicType"
+          }
+        }
+      }
+    },
+    "PartnerTopicTypeProperties": {
+      "description": "Properties of a partner topic type.",
+      "type": "object",
+      "properties": {
+        "partnerName": {
+          "description": "Official name of the partner.",
+          "type": "string"
+        },
+        "topicTypeName": {
+          "description": "Name of the partner topic type. This name should be unique among all partner topic types names.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display Name for the partner topic type.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the partner topic type.",
+          "type": "string"
+        },
+        "setupUri": {
+          "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\r\nintegration on an event source.",
+          "type": "string"
+        },
+        "authorizationState": {
+          "description": "Status of whether the customer has authorized a partner to create partner topics\r\nin the customer's subscription.",
+          "enum": [
+            "NotApplicable",
+            "NotAuthorized",
+            "Authorized"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PartnerTopicTypeAuthorizationState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PartnerTopicType": {
+      "description": "Properties of a partner topic type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerTopicTypeProperties",
+          "description": "Properties of the partner topic type.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -8053,15 +8071,15 @@
           "description": "Properties of the system topic.",
           "x-ms-client-flatten": true
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
+        },
         "systemData": {
           "description": "The system metadata relating to System Topic resource.",
           "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityInfo",
-          "description": "Identity information for the resource."
         }
       }
     },
@@ -8100,7 +8118,7 @@
       }
     },
     "TopicProperties": {
-      "description": "Properties of the Topic.",
+      "description": "Properties of the Topic",
       "type": "object",
       "properties": {
         "privateEndpointConnections": {
@@ -8174,11 +8192,6 @@
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the topic.",
-          "default": false,
-          "type": "boolean"
         }
       }
     },
@@ -8247,7 +8260,7 @@
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Tags of the Topic resource.",
+          "description": "Tags of the resource.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -8255,11 +8268,11 @@
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
-          "description": "Topic resource identity information."
+          "description": "Resource identity information."
         },
         "properties": {
           "$ref": "#/definitions/TopicUpdateParameterProperties",
-          "description": "Properties of the Topic resource.",
+          "description": "Properties of the resource.",
           "x-ms-client-flatten": true
         },
         "sku": {
@@ -8282,7 +8295,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -8290,10 +8304,6 @@
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
-        },
-        "disableLocalAuth": {
-          "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the topic.",
-          "type": "boolean"
         }
       }
     },
