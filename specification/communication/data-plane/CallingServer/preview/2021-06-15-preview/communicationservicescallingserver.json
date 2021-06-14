@@ -22,13 +22,7 @@
         ],
         "summary": "Create a new call.",
         "description": "Create a new call.",
-        "operationId": "CallConnection_CreateCall",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "CallConnections_CreateCall",
         "parameters": [
           {
             "name": "callRequest",
@@ -49,27 +43,6 @@
             "schema": {
               "$ref": "#/definitions/CreateCallResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -81,13 +54,7 @@
         ],
         "summary": "Hangup a call.",
         "description": "Hangup a call.",
-        "operationId": "CallConnection_HangupCall",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "CallConnections_HangupCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -103,27 +70,6 @@
         "responses": {
           "202": {
             "description": "Returns the hangup call response."
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -135,13 +81,7 @@
         ],
         "summary": "Play audio in a call.",
         "description": "Play audio in a call.",
-        "operationId": "CallConnection_PlayAudio",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "CallConnections_PlayAudio",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -169,27 +109,6 @@
             "schema": {
               "$ref": "#/definitions/PlayAudioResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -201,13 +120,7 @@
         ],
         "summary": "Cancel all media operations.",
         "description": "Cancel all media operations.",
-        "operationId": "CallConnection_CancelAllMediaOperations",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "CallConnections_CancelAllMediaOperations",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -235,27 +148,6 @@
             "schema": {
               "$ref": "#/definitions/CancelAllMediaOperationsResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -265,15 +157,9 @@
         "tags": [
           "ServerCall"
         ],
-        "summary": "Invite participants to the call.",
-        "description": "Invite participants to the call.",
-        "operationId": "ServerCall_InviteParticipants",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
+        "operationId": "ServerCalls_AddParticipant",
         "parameters": [
           {
             "name": "serverCallId",
@@ -283,12 +169,12 @@
             "type": "string"
           },
           {
-            "name": "inviteParticipantsRequest",
+            "name": "addParticipantRequest",
             "in": "body",
-            "description": "The invite participant request.",
+            "description": "The add participant request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InviteParticipantsRequest"
+              "$ref": "#/definitions/AddParticipantRequest"
             }
           },
           {
@@ -297,28 +183,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the invite participants response."
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
+            "description": "Returns the add participant response."
           }
         }
       }
@@ -330,13 +195,7 @@
         ],
         "summary": "Remove participant from the call.",
         "description": "Remove participant from the call.",
-        "operationId": "ServerCall_RemoveParticipant",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_RemoveParticipant",
         "parameters": [
           {
             "name": "serverCallId",
@@ -359,27 +218,6 @@
         "responses": {
           "202": {
             "description": "Returns the remove participant response."
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -389,15 +227,9 @@
         "tags": [
           "CallConnection"
         ],
-        "summary": "Invite participants to the call.",
-        "description": "Invite participants to the call.",
-        "operationId": "CallConnection_InviteParticipants",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
+        "operationId": "CallConnections_AddParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -407,12 +239,12 @@
             "type": "string"
           },
           {
-            "name": "inviteParticipantsRequest",
+            "name": "addParticipantRequest",
             "in": "body",
-            "description": "Invite participant request.",
+            "description": "Add participant request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InviteParticipantsRequest"
+              "$ref": "#/definitions/AddParticipantRequest"
             }
           },
           {
@@ -421,28 +253,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the invite participants response."
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
+            "description": "Returns the add participant response."
           }
         }
       }
@@ -454,13 +265,7 @@
         ],
         "summary": "Remove participant from the call.",
         "description": "Remove participant from the call.",
-        "operationId": "CallConnection_RemoveParticipant",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "CallConnections_RemoveParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -483,27 +288,6 @@
         "responses": {
           "202": {
             "description": "Returns the remove participant response."
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -514,13 +298,7 @@
           "Recording"
         ],
         "summary": "Start call recording request.",
-        "operationId": "ServerCall_StartRecording",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_StartRecording",
         "parameters": [
           {
             "name": "serverCallId",
@@ -548,27 +326,6 @@
             "schema": {
               "$ref": "#/definitions/StartCallRecordingResult"
             }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -578,14 +335,8 @@
         "tags": [
           "Recording"
         ],
-        "summary": "Get call recording state.",
-        "operationId": "ServerCall_RecordingState",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Get call recording properties.",
+        "operationId": "ServerCalls_GetRecordingProperties",
         "parameters": [
           {
             "name": "serverCallId",
@@ -609,29 +360,8 @@
           "200": {
             "description": "Returns the recording state.",
             "schema": {
-              "$ref": "#/definitions/CallRecordingStateResult"
+              "$ref": "#/definitions/CallRecordingProperties"
             }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -640,13 +370,7 @@
           "Recording"
         ],
         "summary": "Stop recording a call.",
-        "operationId": "ServerCall_StopRecording",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_StopRecording",
         "parameters": [
           {
             "name": "serverCallId",
@@ -669,20 +393,6 @@
         "responses": {
           "200": {
             "description": "Returns the stop call recording response."
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -693,13 +403,7 @@
           "Recording"
         ],
         "summary": "Pause recording a call.",
-        "operationId": "ServerCall_PauseRecording",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_PauseRecording",
         "parameters": [
           {
             "name": "serverCallId",
@@ -722,20 +426,6 @@
         "responses": {
           "200": {
             "description": "Returns the pause call recording response."
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -746,13 +436,7 @@
           "Recording"
         ],
         "summary": "Resume recording a call.",
-        "operationId": "ServerCall_ResumeRecording",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_ResumeRecording",
         "parameters": [
           {
             "name": "serverCallId",
@@ -775,20 +459,6 @@
         "responses": {
           "200": {
             "description": "Returns the resume call recording response."
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -800,13 +470,7 @@
         ],
         "summary": "Join a call.",
         "description": "Join a call.",
-        "operationId": "ServerCall_JoinCall",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_JoinCall",
         "parameters": [
           {
             "name": "serverCallId",
@@ -834,27 +498,6 @@
             "schema": {
               "$ref": "#/definitions/JoinCallResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -866,13 +509,7 @@
         ],
         "summary": "Play audio in a call.",
         "description": "Play audio in a call.",
-        "operationId": "ServerCall_PlayAudio",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ServerCalls_PlayAudio",
         "parameters": [
           {
             "name": "serverCallId",
@@ -900,41 +537,20 @@
             "schema": {
               "$ref": "#/definitions/PlayAudioResult"
             }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal server error.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationError"
-            },
-            "x-ms-error-response": true
           }
         }
       }
     }
   },
   "definitions": {
-    "CallModality": {
+    "MediaType": {
       "enum": [
         "audio",
         "video"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "CallModality",
+        "name": "MediaType",
         "modelAsString": true
       }
     },
@@ -985,7 +601,7 @@
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CallModality"
+            "$ref": "#/definitions/MediaType"
           }
         },
         "requestedCallEvents": {
@@ -1022,9 +638,6 @@
         }
       }
     },
-    "CommunicationError": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
-    },
     "PlayAudioRequest": {
       "description": "The request payload for playing audio.",
       "type": "object",
@@ -1052,7 +665,7 @@
       }
     },
     "OperationStatus": {
-      "description": "Gets or sets the status of the operation",
+      "description": "The status of the operation",
       "enum": [
         "notStarted",
         "running",
@@ -1069,20 +682,20 @@
       "description": "The response payload for play audio operation.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Gets or sets the identifier.",
+        "operationId": {
+          "description": "The operation id.",
           "type": "string"
         },
         "status": {
           "$ref": "#/definitions/OperationStatus"
         },
         "operationContext": {
-          "description": "Gets or sets the operation context",
+          "description": "The operation context provided by client.",
           "type": "string"
         },
         "resultInfo": {
           "$ref": "#/definitions/ResultInfo",
-          "description": "Gets or sets the result info"
+          "description": "The result info for the operation."
         }
       }
     },
@@ -1120,40 +733,34 @@
       "description": "The response payload of the cancel all media operations.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Gets or sets the identifier.",
+        "operationId": {
+          "description": "The operation id.",
           "type": "string"
         },
         "status": {
           "$ref": "#/definitions/OperationStatus"
         },
         "operationContext": {
-          "description": "Gets or sets the operation context",
+          "description": "The operation context provided by client.",
           "type": "string"
         },
         "resultInfo": {
           "$ref": "#/definitions/ResultInfo",
-          "description": "Gets or sets the result info"
+          "description": "The result info for the operation."
         }
       }
     },
-    "InviteParticipantsRequest": {
-      "description": "The invite participants request.",
-      "required": [
-        "participants"
-      ],
+    "AddParticipantRequest": {
+      "description": "The add participant request.",
       "type": "object",
       "properties": {
         "alternateCallerId": {
           "$ref": "#/definitions/PhoneNumberIdentifier",
           "description": "The alternate identity of source participant."
         },
-        "participants": {
-          "description": "The list of participants to be added to the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifier"
-          }
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The participant to be added to the call."
         },
         "operationContext": {
           "description": "The operation context.",
@@ -1186,7 +793,7 @@
       }
     },
     "CallRecordingState": {
-      "description": "The recording state of the recording",
+      "description": "The state of the recording",
       "enum": [
         "active",
         "inactive"
@@ -1197,8 +804,8 @@
         "modelAsString": true
       }
     },
-    "CallRecordingStateResult": {
-      "description": "The response payload of get call recording state operation.",
+    "CallRecordingProperties": {
+      "description": "The response payload of get call recording properties operation.",
       "type": "object",
       "properties": {
         "recordingState": {
@@ -1230,7 +837,7 @@
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CallModality"
+            "$ref": "#/definitions/MediaType"
           }
         },
         "requestedCallEvents": {
@@ -1255,17 +862,11 @@
     "CallConnectionState": {
       "description": "The call connection state.",
       "enum": [
-        "unknown",
-        "idle",
         "incoming",
-        "establishing",
-        "established",
-        "hold",
-        "unhold",
-        "transferring",
-        "redirecting",
-        "terminating",
-        "terminated"
+        "connecting",
+        "connected",
+        "disconnecting",
+        "disconnected"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1312,7 +913,7 @@
         }
       }
     },
-    "InviteParticipantsResultEvent": {
+    "AddParticipantResultEvent": {
       "type": "object",
       "properties": {
         "resultInfo": {
@@ -1340,12 +941,12 @@
           "description": "The list of participants.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CommunicationParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         }
       }
     },
-    "CommunicationParticipant": {
+    "CallParticipant": {
       "description": "A participant in a call.",
       "type": "object",
       "properties": {
@@ -1434,6 +1035,9 @@
           "$ref": "#/definitions/ToneValue"
         }
       }
+    },
+    "CommunicationError": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     }
   },
   "parameters": {
