@@ -31,9 +31,9 @@ tag: package-1-0
 
 ### Tag: package-2021-05
 
-These settings apply only when `--tag=package-keyVaultReference-1-0` is specified on the command line.
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-keyVaultReference-1-0'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
 - Microsoft.AppConfiguration/stable/1.0/featureManagement.json
 - Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
