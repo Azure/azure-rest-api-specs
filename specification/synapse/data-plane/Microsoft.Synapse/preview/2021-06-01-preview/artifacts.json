@@ -2462,6 +2462,42 @@
         }
       }
     },
+    "/notebooksSummary": {
+      "get": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_GetNotebookSummaryByWorkSpace",
+        "x-ms-examples": {
+          "Notebooks_ListSummaryByWorkSpace": {
+            "$ref": "./examples/Notebooks_ListSummaryByWorkSpace.json"
+          }
+        },
+        "description": "Lists a summary of Notebooks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NotebookListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/notebooks/{notebookName}": {
       "put": {
         "tags": [
@@ -2848,6 +2884,52 @@
         "x-ms-examples": {
           "KqlScript_Rename": {
             "$ref": "./examples/KqlScript_Rename.json"
+          }
+        }
+      }
+    },
+    "/notebookOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationResult"
+        ],
+        "operationId": "NotebookOperationResult_Get",
+        "description": "Get notebook operation result",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/NotebookOperationResult_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         }
       }
