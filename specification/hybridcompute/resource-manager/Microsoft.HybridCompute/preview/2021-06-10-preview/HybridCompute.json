@@ -770,7 +770,12 @@
         "windowsConfiguration": {
           "properties":{
             "patchSettings": {
-              "$ref": "#/definitions/PatchSettings",
+              "properties": {
+                  "assessmentMode": {
+                    "type": "string",
+                    "description": "Specifies the assessment mode."
+                  }
+                },
               "description": "Specifies the patch settings."
             }
           },
@@ -779,23 +784,18 @@
         "linuxConfiguration": {
           "properties":{
             "patchSettings": {
-              "$ref": "#/definitions/PatchSettings",
+              "properties": {
+                  "assessmentMode": {
+                    "type": "string",
+                    "description": "Specifies the assessment mode."
+                  }
+                },
               "description": "Specifies the patch settings."
-            },
-          "description": "Specifies the linux configuration for update management."
+            }
           }
         }
       },
       "description": "Specifies the operating system settings for the hybrid machine."
-    },
-    "PatchSettings": {
-      "properties": {
-        "assessmentMode": {
-          "type": "string",
-          "description": "Specifies the assessment mode."
-        }
-      },
-      "description": "Specifies the patch settings."
     },
     "DetectedProperties": {
       "readOnly": true,
