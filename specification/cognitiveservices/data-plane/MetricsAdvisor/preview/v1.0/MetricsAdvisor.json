@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Cognitive Service Metrics Advisor REST API (OpenAPI v2)",
-    "description": "Azure Cognitive Service Metrics Advisor REST API (OpenAPI v2)",
+    "title": "Microsoft Azure Metrics Advisor REST API (OpenAPI v2)",
+    "description": "Microsoft Azure Metrics Advisor REST API (OpenAPI v2)",
     "version": "1.0"
   },
   "paths": {
@@ -1284,7 +1284,6 @@
               "Daily",
               "Hourly",
               "Minutely",
-              "Secondly",
               "Custom"
             ],
             "x-ms-enum": {
@@ -4116,9 +4115,6 @@
       }
     },
     "AzureSQLConnectionStringParam": {
-      "required": [
-        "connectionString"
-      ],
       "type": "object",
       "properties": {
         "connectionString": {
@@ -4193,9 +4189,6 @@
       "x-ms-discriminator-value": "AzureSQLConnectionString"
     },
     "DataLakeGen2SharedKeyParam": {
-      "required": [
-        "accountKey"
-      ],
       "type": "object",
       "properties": {
         "accountKey": {
@@ -4224,7 +4217,6 @@
     "ServicePrincipalParam": {
       "required": [
         "clientId",
-        "clientSecret",
         "tenantId"
       ],
       "type": "object",
@@ -4263,7 +4255,6 @@
     "ServicePrincipalInKVParam": {
       "required": [
         "keyVaultClientId",
-        "keyVaultClientSecret",
         "keyVaultEndpoint",
         "servicePrincipalIdNameInKV",
         "servicePrincipalSecretNameInKV",
@@ -4611,7 +4602,6 @@
             "Daily",
             "Hourly",
             "Minutely",
-            "Secondly",
             "Custom"
           ],
           "type": "string",
@@ -6288,8 +6278,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "discriminator": "hookType"
@@ -6438,8 +6427,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "discriminator": "hookType"
