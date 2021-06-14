@@ -92,7 +92,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -315,6 +315,17 @@
         }
       },
       "description": "A time series result type. The discriminator value is always TimeSeries in this case."
+    },
+    "ErrorContract": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",

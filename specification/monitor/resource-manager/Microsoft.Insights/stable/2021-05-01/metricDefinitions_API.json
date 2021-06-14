@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -81,6 +81,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -229,6 +230,17 @@
         "value"
       ],
       "description": "Represents collection of metric definitions."
+    },
+    "ErrorContract": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
