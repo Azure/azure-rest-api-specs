@@ -780,16 +780,20 @@
         "windowsConfiguration": {
           "type": "object",
           "properties":{
-              "x-ms-client-flatten" : true,
-              "$ref": "#/definitions/PatchSettings" 
+              "patchSettings": {
+                "x-ms-client-flatten" : true,
+                "$ref": "#/definitions/PatchSettings"
+              }
           },
           "description": "Specifies the windows configuration for update management."
         },
         "linuxConfiguration": {
           "type": "object",
           "properties":{
+            "patchSettings": {
               "x-ms-client-flatten" : true,
-              "$ref": "#/definitions/PatchSettings" 
+              "$ref": "#/definitions/PatchSettings"
+            }
           },
           "description": "Specifies the linux configuration for update management."
         }
