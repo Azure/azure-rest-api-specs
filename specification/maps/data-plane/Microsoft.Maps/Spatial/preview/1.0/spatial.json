@@ -136,6 +136,33 @@
       "in": "query",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "SearchGeofenceRequestBody": {
+      "name": "searchGeofenceRequestBody",
+      "in": "body",
+      "description": "The geofencing GeoJSON data.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      }
+    },
+    "ClosestPointRequestBody": {
+      "name": "closestPointRequestBody",
+      "in": "body",
+      "description": "The FeatureCollection of Point geometries from which closest point to source point should be determined. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      }
+    },
+    "PointInPolygonRequestBody": {
+      "name": "pointInPolygonRequestBody",
+      "in": "body",
+      "description": "A FeatureCollection with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      }
     }
   },
   "paths": {
@@ -289,13 +316,7 @@
             "$ref": "#/parameters/GeofenceMode"
           },
           {
-            "name": "searchGeofenceRequestBody",
-            "in": "body",
-            "description": "The geofencing GeoJSON data.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
-            }
+            "$ref": "#/parameters/SearchGeofenceRequestBody"
           }
         ],
         "responses": {
@@ -432,13 +453,7 @@
             "type": "integer"
           },
           {
-            "name": "closestPointRequestBody",
-            "in": "body",
-            "description": "The FeatureCollection of Point geometries from which closest point to source point should be determined. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
-            }
+            "$ref": "#/parameters/ClosestPointRequestBody"
           }
         ],
         "responses": {
@@ -526,13 +541,7 @@
             "$ref": "#/parameters/SpatialLongitude"
           },
           {
-            "name": "pointInPolygonRequestBody",
-            "in": "body",
-            "description": "A FeatureCollection with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
-            }
+            "$ref": "#/parameters/PointInPolygonRequestBody"
           }
         ],
         "responses": {
