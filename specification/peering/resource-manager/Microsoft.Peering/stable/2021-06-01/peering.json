@@ -176,6 +176,88 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/lookingGlass": {
+      "post": {
+        "tags": [
+          "LookingGlasses"
+        ],
+        "description": "Run looking glass functionality",
+        "operationId": "LookingGlass_Invoke",
+        "parameters": [
+          {
+            "name": "command",
+            "in": "query",
+            "description": "The command to be executed: ping, traceroute, bgpRoute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Traceroute",
+              "Ping",
+              "BgpRoute"
+            ]
+          },
+          {
+            "name": "sourceType",
+            "in": "query",
+            "description": "The type of the source: Edge site or Azure Region.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "EdgeSite",
+              "AzureRegion"
+            ]
+          },
+          {
+            "name": "sourceLocation",
+            "in": "query",
+            "description": "The location of the source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destinationIP",
+            "in": "query",
+            "description": "The IP address of the destination.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LookingGlassOutput"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters"
+          },
+          "429": {
+            "description": "The user sent too many requests."
+          },
+          "503": {
+            "description": "A router went down or received too many requests."
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Call looking glass to execute a command": {
+            "$ref": "./examples/LookingGlassInvokeCommand.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Peering/operations": {
       "get": {
         "tags": [
@@ -2503,6 +2585,29 @@
         },
         "md5AuthenticationKey": {
           "description": "The MD5 authentication key of the session.",
+          "type": "string"
+        }
+      }
+    },
+    "LookingGlassOutput": {
+      "description": "Looking glass output model",
+      "type": "object",
+      "properties": {
+        "command": {
+          "description": "Invoked command",
+          "enum": [
+            "Traceroute",
+            "Ping",
+            "BgpRoute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "command",
+            "modelAsString": true
+          }
+        },
+        "output": {
+          "description": "Output of the command",
           "type": "string"
         }
       }
