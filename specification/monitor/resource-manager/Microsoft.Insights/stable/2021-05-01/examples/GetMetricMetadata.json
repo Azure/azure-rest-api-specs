@@ -1,42 +1,38 @@
 {
   "parameters": {
-    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
-    "metric": "BlobCapacity",
-    "metricnamespace": "Microsoft.Storage/storageAccounts/blobServices",
-    "$filter": "BlobType eq '*'",
-    "top": 3,
-    "orderby": "Average asc",
-    "aggregation": "Average,count",
-    "interval": "PT1M",
+    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
+    "region": "westus2",
+    "timespan": "2021-06-10T02:23:16.129Z/2021-06-12T02:23:16.129Z",
+    "metric": "Data Disk Max Burst IOPS",
+    "metricnamespace": "microsoft.compute/virtualmachines",
+    "$filter": "LUN eq '0'",
     "resulttype": "metadata",
-    "resourceUri": "subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default",
     "api-version": "2021-05-01"
   },
   "responses": {
     "200": {
       "body": {
-        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
-        "namespace": "Microsoft.Storage/storageAccounts/blobServices",
-        "resourceregion": "eastus2",
+        "timespan": "2021-06-10T02:23:16Z/2021-06-12T02:23:16Z",
+        "interval": "PT1M",
         "value": [
           {
-            "id": "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Read Bytes/sec",
             "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "BlobCapacity",
-              "localizedValue": "Blob Capacity"
+              "value": "Data Disk Read Bytes/sec",
+              "localizedValue": "Data Disk Read Bytes/Sec"
             },
-            "displayDescription": "The amount of storage used by the storage account’s Blob service in bytes.",
-            "unit": "Bytes",
+            "displayDescription": "Bytes/Sec read from a single disk during monitoring period",
+            "unit": "BytesPerSecond",
             "timeseries": [
               {
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "lun",
+                      "localizedValue": "lun"
                     },
-                    "value": "BlockBlob"
+                    "value": "0"
                   }
                 ]
               },
@@ -44,16 +40,18 @@
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "lun",
+                      "localizedValue": "lun"
                     },
-                    "value": "PageBlob"
+                    "value": "1"
                   }
                 ]
               }
             ]
           }
-        ]
+        ],
+        "namespace": "microsoft.compute/virtualmachines",
+        "resourceregion": "westus2"
       }
     }
   }
