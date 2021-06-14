@@ -1363,6 +1363,7 @@
   "definitions": {
     "OperationListResult": {
       "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1389,6 +1390,7 @@
         },
         "display": {
           "title": "The object that describes the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "title": "Friendly name of the resource provider.",
@@ -1421,6 +1423,7 @@
       }
     },
     "KustoPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1495,6 +1498,7 @@
       "description": "Azure SKU definition."
     },
     "KustoPoolProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -1555,6 +1559,7 @@
       "description": "Class representing the Kusto pool properties."
     },
     "KustoPool": {
+      "type": "object",
       "required": [
         "sku"
       ],
@@ -1588,6 +1593,7 @@
       "description": "Class representing a Kusto kusto pool."
     },
     "KustoPoolUpdate": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1619,6 +1625,7 @@
       "description": "Class representing an update to a Kusto kusto pool."
     },
     "DatabaseListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1631,6 +1638,7 @@
       "description": "The list Kusto databases operation response."
     },
     "Database": {
+      "type": "object",
       "required": [
         "kind"
       ],
@@ -1667,6 +1675,7 @@
       "discriminator": "kind"
     },
     "ReadWriteDatabase": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1683,6 +1692,7 @@
       "x-ms-discriminator-value": "ReadWrite"
     },
     "ReadWriteDatabaseProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -1722,6 +1732,7 @@
       "description": "A class that contains database statistics information."
     },
     "DataConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1734,6 +1745,7 @@
       "description": "The list Kusto data connections operation response."
     },
     "DataConnection": {
+      "type": "object",
       "required": [
         "kind"
       ],
@@ -1771,6 +1783,7 @@
       "discriminator": "kind"
     },
     "EventHubDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1787,6 +1800,7 @@
       "x-ms-discriminator-value": "EventHub"
     },
     "IotHubDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1803,6 +1817,7 @@
       "x-ms-discriminator-value": "IotHub"
     },
     "EventGridDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1819,6 +1834,7 @@
       "x-ms-discriminator-value": "EventGrid"
     },
     "EventHubConnectionProperties": {
+      "type": "object",
       "properties": {
         "eventHubResourceId": {
           "type": "string",
@@ -1863,6 +1879,7 @@
       "description": "Class representing the Kusto event hub connection properties."
     },
     "IotHubConnectionProperties": {
+      "type": "object",
       "properties": {
         "iotHubResourceId": {
           "type": "string",
@@ -1908,6 +1925,7 @@
       "description": "Class representing the Kusto Iot hub connection properties."
     },
     "EventGridConnectionProperties": {
+      "type": "object",
       "properties": {
         "storageAccountResourceId": {
           "type": "string",
@@ -2074,6 +2092,7 @@
       }
     },
     "ClusterPrincipalAssignmentListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2086,6 +2105,7 @@
       "description": "The list Kusto cluster principal assignments operation response."
     },
     "ClusterPrincipalAssignment": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2165,6 +2185,7 @@
       "description": "A class representing cluster principal property."
     },
     "DatabasePrincipalAssignmentListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2177,6 +2198,7 @@
       "description": "The list Kusto database principal assignments operation response."
     },
     "DatabasePrincipalAssignment": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,

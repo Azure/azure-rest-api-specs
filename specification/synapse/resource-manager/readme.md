@@ -39,7 +39,7 @@ modelerfour:
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
   - Microsoft.Synapse/preview/2021-06-01-preview/checkNameAvailability.json
