@@ -6172,7 +6172,6 @@
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
-      "discriminator": "createMode",
       "properties": {
         "consistencyPolicy": {
           "description": "The consistency policy for the Cosmos DB account.",
@@ -6293,40 +6292,17 @@
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
           "type": "boolean"
-        }
-      },
-      "required": [
-        "locations",
-        "databaseAccountOfferType",
-        "createMode"
-      ]
-    },
-    "DefaultRequestDatabaseAccountCreateUpdateProperties": {
-      "type": "object",
-      "description": "Properties for non-restore Azure Cosmos DB database account requests.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Default"
-    },
-    "RestoreReqeustDatabaseAccountCreateUpdateProperties": {
-      "type": "object",
-      "description": "Properties to restore Azure Cosmos DB database account.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        }
-      ],
-      "properties": {
+        },
         "restoreParameters": {
           "description": "Parameters to indicate the information about the restore.",
           "type": "object",
           "$ref": "#/definitions/RestoreParameters"
         }
       },
-      "x-ms-discriminator-value": "Restore"
+      "required": [
+        "locations",
+        "databaseAccountOfferType"
+      ]
     },
     "DatabaseAccountCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB database accounts.",
@@ -6350,7 +6326,7 @@
           "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "properties": {
-          "x-ms-client-flatten": false,
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
         }
       },
