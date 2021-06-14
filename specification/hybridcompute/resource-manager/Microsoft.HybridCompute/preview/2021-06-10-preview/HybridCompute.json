@@ -760,6 +760,16 @@
       },
       "description": "Describes the properties of a Hybrid Compute Operation Value Display."
     },
+    "PatchSettings":{
+      "type": "object",
+      "properties": {
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the assessment mode."
+        }
+      },
+      "description": "Specifies the patch settings."
+    },
     "OSProfile": {
       "properties": {
         "computerName": {
@@ -768,31 +778,20 @@
           "description": "Specifies the host OS name of the hybrid machine."
         },
         "windowsConfiguration": {
+          "type": "object",
           "properties":{
-            "patchSettings": {
-              "properties": {
-                  "assessmentMode": {
-                    "type": "string",
-                    "description": "Specifies the assessment mode."
-                  }
-                },
-              "description": "Specifies the patch settings."
-            }
+              "x-ms-client-flatten" : true,
+              "$ref": "#/definitions/PatchSettings" 
           },
           "description": "Specifies the windows configuration for update management."
         },
         "linuxConfiguration": {
+          "type": "object",
           "properties":{
-            "patchSettings": {
-              "properties": {
-                  "assessmentMode": {
-                    "type": "string",
-                    "description": "Specifies the assessment mode."
-                  }
-                },
-              "description": "Specifies the patch settings."
-            }
-          }
+              "x-ms-client-flatten" : true,
+              "$ref": "#/definitions/PatchSettings" 
+          },
+          "description": "Specifies the linux configuration for update management."
         }
       },
       "description": "Specifies the operating system settings for the hybrid machine."
