@@ -999,6 +999,7 @@
           "description": "The name of the resource that is unique within a resource group."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "The resource type."
         },
@@ -1008,11 +1009,6 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ],
       "description": "An IP Configuration of the private endpoint."
     },
     "PrivateEndpointIPConfigurationProperties": {
