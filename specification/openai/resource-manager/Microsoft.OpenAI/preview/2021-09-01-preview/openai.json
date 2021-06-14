@@ -1079,12 +1079,15 @@
       "type": "object",
       "properties": {
         "sku": {
+          "description": "SKU properties of the of the OpenAI account.",
           "$ref": "#/definitions/Sku"
         },
         "identity": {
+          "description": "Managed service identity of the OpenAI account.",
           "$ref": "#/definitions/Identity"
         },
         "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
@@ -1201,24 +1204,29 @@
         },
         "callRateLimit": {
           "readOnly": true,
-          "$ref": "#/definitions/CallRateLimit"
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit for the OpenAI account."
         },
         "quotaLimit": {
           "readOnly": true,
-          "$ref": "#/definitions/QuotaLimit"
+          "$ref": "#/definitions/QuotaLimit",
+          "description": "The quota limit for the OpenAI account."
         },
         "disableLocalAuth": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Disable local authentication, such as key based authentication."
         },
         "endpoints": {
           "readOnly": true,
           "type": "object",
+          "description": "The endpoint list for the OpenAI account.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "restore": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Restore a soft-deleted account."
         }
       },
       "description": "Properties of OpenAI account."
@@ -1236,6 +1244,7 @@
         },
         "rules": {
           "type": "array",
+          "description": "The rate limit rules.",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
           }
@@ -1247,55 +1256,69 @@
       "type": "object",
       "properties": {
         "count": {
-          "type": "number"
+          "type": "number",
+          "description": "The count value of quota Limit."
         },
         "renewalPeriod": {
-          "type": "number"
+          "type": "number",
+          "description": "The renewal period in seconds of quota Limit."
         },
         "rules": {
           "type": "array",
+          "description": "The quota limit rules.",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
           }
         }
-      }
+      },
+      "description": "The quota limit OpenAI account."
     },
     "ThrottlingRule": {
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "description": "The rule key that uniquely identify the throttling rule."
         },
         "renewalPeriod": {
-          "type": "number"
+          "type": "number",
+          "description": "The renewal period in seconds of call rate limit or quota limit."
         },
         "count": {
-          "type": "number"
+          "type": "number",
+          "description": "The count value of call rate limit or quota limit."
         },
         "minCount": {
-          "type": "number"
+          "type": "number",
+          "description": "The minimal count value of call rate limit or quota limit."
         },
         "dynamicThrottlingEnabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "A flag indicates if dynamical throttling is enabled."
         },
         "matchPatterns": {
           "type": "array",
+          "description": "The patterns for matching the requests that need to apply this rule.",
           "items": {
             "$ref": "#/definitions/RequestMatchPattern"
           }
         }
-      }
+      },
+      "description": "The quota limit rules."
     },
     "RequestMatchPattern": {
       "type": "object",
       "properties": {
         "path": {
-          "type": "string"
+          "type": "string",
+          "description": "The request URL path."
         },
         "method": {
-          "type": "string"
+          "type": "string",
+          "description": "The request HTTP method."
         }
-      }
+      },
+      "description": "The patterns for matching the requests that need to apply this rule."
     },
     "ApiKeys": {
       "type": "object",
@@ -1613,7 +1636,8 @@
           },
           "description": "List of availability zones where the SKU is restricted."
         }
-      }
+      },
+      "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
     },
     "ResourceSkuListResult": {
       "type": "object",
@@ -1794,7 +1818,8 @@
           "description": "Uri of KeyVault"
         },
         "identityClientId": {
-          "type": "string"
+          "type": "string",
+          "description": "The client Id of managed identity that will be used to access KeyVault secret."
         }
       },
       "description": "Properties to configure keyVault Properties"
