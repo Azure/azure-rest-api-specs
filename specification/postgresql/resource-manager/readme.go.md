@@ -54,7 +54,7 @@ namespace: postgresqlflexibleservers
 output-folder: $(go-sdk-folder)/services/preview/$(rpname)/mgmt/2020-11-05-preview/$(namespace)
 ```
 
-### Tag: package-2020-02-14 and go
+### Tag: package-2020-02-14-preview and go
 
 These settings apply only when `--tag=package-2020-02-14-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.

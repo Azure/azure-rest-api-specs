@@ -9,7 +9,6 @@ These settings apply only when `--track2` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
-package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 
@@ -21,10 +20,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2021-06-01
-  - tag: package-2021-06-01-preview
   - tag: package-2020-01-01
-  - tag: package-2020-11-05-preview
-  - tag: package-2021-03-31-privatepreview
 ```
 
 ### Tag: package-2021-06-01 and python
