@@ -38,6 +38,8 @@
       }
     },
     "Resource": {
+      "type": "object",
+      "description": "The base resource definition",
       "properties": {
         "id": {
           "readOnly": true,
@@ -58,6 +60,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -88,6 +91,7 @@
       ]
     },
     "ProxyResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
@@ -96,8 +100,10 @@
       ]
     },
     "Error": {
+      "type": "object",
       "properties": {
         "error": {
+          "type": "object",
           "properties": {
             "code": {
               "type": "string",
@@ -125,6 +131,7 @@
       "description": "Common error representation."
     },
     "ErrorDetails": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
