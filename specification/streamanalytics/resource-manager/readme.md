@@ -50,6 +50,20 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```
 
+### Tag: package-pure-2020-03
+
+These settings apply only when `--tag=package-pure-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-pure-2020-03'
+input-file:
+- Microsoft.StreamAnalytics/stable/2020-03-01/streamingjobs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/inputs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/outputs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/transformations.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/functions.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/subscriptions.json
+```
+
 ### Tag: package-pure-2020-03-preview
 
 These settings apply only when `--tag=package-pure-2020-03-preview` is specified on the command line.

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2016-03-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -96,16 +96,16 @@
             "description": "Set to '*' to allow a new output to be created, but to prevent updating an existing output. Other values will result in a 412 Pre-condition Failed response."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/OutputNameParameter"
@@ -198,16 +198,16 @@
             "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/OutputNameParameter"
@@ -247,16 +247,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/OutputNameParameter"
@@ -296,6 +296,9 @@
           "Get a DocumentDB output": {
             "$ref": "./examples/Output_Get_DocumentDB.json"
           },
+          "Get an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Get_DataWarehouse.json"
+          },
           "Get an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Get_EventHub_JSON.json"
           },
@@ -314,16 +317,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/OutputNameParameter"
@@ -372,16 +375,16 @@
             "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           }
         ],
         "responses": {
@@ -426,16 +429,16 @@
             "description": "If the output specified does not already exist, this parameter must contain the full output definition intended to be tested. If the output specified already exists, this parameter can be left null to test the existing output as is or if specified, the properties specified will overwrite the corresponding properties in the existing output (exactly like a PATCH operation) and the resulting output will be tested."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/OutputNameParameter"
@@ -464,6 +467,7 @@
   },
   "definitions": {
     "Output": {
+      "type": "object",
       "description": "An output object, containing all information associated with the named output. All outputs are contained under a streaming job.",
       "allOf": [
         {
@@ -479,11 +483,20 @@
       }
     },
     "OutputProperties": {
+      "type": "object",
       "description": "The properties that are associated with an output.",
       "properties": {
         "datasource": {
           "$ref": "#/definitions/OutputDataSource",
           "description": "Describes the data source that output will be written to. Required on PUT (CreateOrReplace) requests."
+        },
+        "timeWindow": {
+          "type": "string",
+          "description": "The time frame for filtering Stream Analytics job outputs."
+        },
+        "sizeWindow": {
+          "type": "number",
+          "description": "The size window to constrain a Stream Analytics output to."
         },
         "serialization": {
           "$ref": "./inputs.json#/definitions/Serialization",
@@ -502,6 +515,7 @@
       }
     },
     "OutputDataSource": {
+      "type": "object",
       "description": "Describes the data source that output will be written to.",
       "discriminator": "type",
       "properties": {
@@ -515,6 +529,7 @@
       ]
     },
     "BlobOutputDataSource": {
+      "type": "object",
       "description": "Describes a blob output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
@@ -531,15 +546,22 @@
       }
     },
     "BlobOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a blob output.",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/BlobDataSourceProperties"
         }
       ],
-      "properties": {}
+      "properties": {
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
     },
     "AzureTableOutputDataSource": {
+      "type": "object",
       "description": "Describes an Azure Table output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Table",
       "allOf": [
@@ -556,6 +578,7 @@
       }
     },
     "AzureTableOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with an Azure Table output.",
       "properties": {
         "accountName": {
@@ -564,7 +587,8 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests."
+          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
         },
         "table": {
           "type": "string",
@@ -593,6 +617,7 @@
       }
     },
     "EventHubOutputDataSource": {
+      "type": "object",
       "description": "Describes an Event Hub output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
       "allOf": [
@@ -608,7 +633,25 @@
         }
       }
     },
+    "EventHubV2OutputDataSource": {
+      "type": "object",
+      "description": "Describes an Event Hub output data source.",
+      "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubOutputDataSourceProperties",
+          "description": "The properties that are associated with an Event Hub output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "EventHubOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with an Event Hub output.",
       "allOf": [
         {
@@ -619,10 +662,18 @@
         "partitionKey": {
           "type": "string",
           "description": "The key/column that is used to determine to which partition to send event data."
+        },
+        "propertyColumns": {
+          "type": "array",
+          "description": "The properties associated with this Event Hub output.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "AzureSqlDatabaseOutputDataSource": {
+      "type": "object",
       "description": "Describes an Azure SQL database output data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
@@ -639,6 +690,7 @@
       }
     },
     "AzureSqlDatabaseOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with an Azure SQL database output.",
       "allOf": [
         {
@@ -647,7 +699,62 @@
       ],
       "properties": {}
     },
+    "AzureSynapseOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure Synapse output data source.",
+      "x-ms-discriminator-value": "Microsoft.Sql/Server/DataWarehouse",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureSynapseOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Synapse output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureSynapseOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure Synapse output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSynapseDataSourceProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "AzureSynapseDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The name of the SQL server containing the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user name that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
+        }
+      }
+    },
     "DocumentDbOutputDataSource": {
+      "type": "object",
       "description": "Describes a DocumentDB output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/DocumentDB",
       "allOf": [
@@ -664,6 +771,7 @@
       }
     },
     "DocumentDbOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a DocumentDB output.",
       "properties": {
         "accountId": {
@@ -693,6 +801,7 @@
       }
     },
     "ServiceBusQueueOutputDataSource": {
+      "type": "object",
       "description": "Describes a Service Bus Queue output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",
       "allOf": [
@@ -709,6 +818,7 @@
       }
     },
     "ServiceBusQueueOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a Service Bus Queue output.",
       "allOf": [
         {
@@ -726,10 +836,15 @@
             "type": "string"
           },
           "description": "A string array of the names of output columns to be attached to Service Bus messages as custom properties."
+        },
+        "systemPropertyColumns": {
+          "type": "object",
+          "description": "The system properties associated with the Service Bus Queue. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc."
         }
       }
     },
     "ServiceBusTopicOutputDataSource": {
+      "type": "object",
       "description": "Describes a Service Bus Topic output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Topic",
       "allOf": [
@@ -746,6 +861,7 @@
       }
     },
     "ServiceBusTopicOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a Service Bus Topic output.",
       "allOf": [
         {
@@ -763,10 +879,18 @@
             "type": "string"
           },
           "description": "A string array of the names of output columns to be attached to Service Bus messages as custom properties."
+        },
+        "systemPropertyColumns": {
+          "type": "object",
+          "description": "The system properties associated with the Service Bus Topic Output. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PowerBIOutputDataSource": {
+      "type": "object",
       "description": "Describes a Power BI output data source.",
       "x-ms-discriminator-value": "PowerBI",
       "allOf": [
@@ -783,6 +907,7 @@
       }
     },
     "PowerBIOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with a Power BI output.",
       "allOf": [
         {
@@ -805,10 +930,15 @@
         "groupName": {
           "type": "string",
           "description": "The name of the Power BI group. Use this property to help remember which specific Power BI group id was used."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
     "AzureDataLakeStoreOutputDataSource": {
+      "type": "object",
       "description": "Describes an Azure Data Lake Store output data source.",
       "x-ms-discriminator-value": "Microsoft.DataLake/Accounts",
       "allOf": [
@@ -825,6 +955,7 @@
       }
     },
     "AzureDataLakeStoreOutputDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with an Azure Data Lake Store.",
       "allOf": [
         {
@@ -851,10 +982,15 @@
         "timeFormat": {
           "type": "string",
           "description": "The time format. Wherever {time} appears in filePathPrefix, the value of this property is used as the time format instead."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
     "OutputListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -873,6 +1009,7 @@
       "description": "Object containing a list of outputs under a streaming job."
     },
     "AzureSqlDatabaseDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with an Azure SQL database data source.",
       "properties": {
         "server": {
@@ -894,10 +1031,23 @@
         "table": {
           "type": "string",
           "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "maxBatchCount": {
+          "type": "number",
+          "description": "Max Batch count for write to Sql database, the default value is 10,000. Optional on PUT requests."
+        },
+        "maxWriterCount": {
+          "type": "number",
+          "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
     "OAuthBasedDataSourceProperties": {
+      "type": "object",
       "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
       "properties": {
         "refreshToken": {
@@ -915,6 +1065,7 @@
       }
     },
     "SubResource": {
+      "type": "object",
       "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
@@ -936,29 +1087,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "GUID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
-    "StreamingJobNameParameter": {
-      "name": "jobName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the streaming job.",
-      "x-ms-parameter-location": "method"
-    },
     "OutputNameParameter": {
       "name": "outputName",
       "in": "path",
@@ -966,13 +1094,6 @@
       "type": "string",
       "description": "The name of the output.",
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
