@@ -54,13 +54,14 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
 
-### Tag: package-2021-05-31-privatepreview
+### Tag: package-2021-06-01-privatepreview
 
-These settings apply only when `--tag=package-2021-05-31-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2021-06-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-05-31-privatepreview'
+``` yaml $(tag) == 'package-2021-06-01-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-05-31-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
 ```
 
 ### Tag: package-2021-04-10-privatepreview
