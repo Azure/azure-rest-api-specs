@@ -5274,6 +5274,359 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views": {
+      "get": {
+        "operationId": "CassandraResources_ListCassandraViews",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewList": {
+            "$ref": "./examples/CosmosDBCassandraViewList.json"
+          }
+        },
+        "description": "Lists the Cassandra materialized views under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra view properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraViewListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}": {
+      "get": {
+        "operationId": "CassandraResources_GetCassandraView",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewGet": {
+            "$ref": "./examples/CosmosDBCassandraViewGet.json"
+          }
+        },
+        "description": "Gets the Cassandra view under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra view property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraViewGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CassandraResources_CreateUpdateCassandraView",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewCreateUpdate": {
+            "$ref": "./examples/CosmosDBCassandraViewCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Cassandra View",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateCassandraViewParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraViewCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra View."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra View create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra View create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraViewGetResults"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CassandraResources_DeleteCassandraView",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewDelete": {
+            "$ref": "./examples/CosmosDBCassandraViewDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Cassandra view.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra view delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Cassandra view delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default": {
+      "get": {
+        "operationId": "CassandraResources_GetCassandraViewThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewThroughputGet": {
+            "$ref": "./examples/CosmosDBCassandraViewThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Cassandra view was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CassandraResources_UpdateCassandraViewThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewThroughputUpdate": {
+            "$ref": "./examples/CosmosDBCassandraViewThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Cassandra view",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current Cassandra view."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Cassandra view update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Cassandra view update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraViewToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBCassandraViewMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra view from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra view migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra view migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraViewToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraViewMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBCassandraViewMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra view from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra view migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra view migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5445,6 +5798,19 @@
         }
       },
       "description": "The List operation response, that contains the graphs and their properties."
+    },
+    "CassandraViewListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraViewGetResults"
+          },
+          "description": "List of Cassandra views and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Cassandra views and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -6132,6 +6498,45 @@
           "allOf": [
             {
               "$ref": "#/definitions/GremlinGraphResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
+        }
+      }
+    },
+    "CassandraViewGetResults": {
+      "description": "An Azure Cosmos DB Cassandra view.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Cassandra view",
+          "$ref": "#/definitions/CassandraViewGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "CassandraViewGetProperties": {
+      "description": "The properties of an Azure Cosmos DB Cassandra view",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CassandraViewResource"
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
@@ -7252,6 +7657,42 @@
         "resource"
       ]
     },
+    "CassandraViewCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Cassandra view.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Cassandra view.",
+          "$ref": "#/definitions/CassandraViewCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "CassandraViewCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Cassandra view.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Cassandra view",
+          "$ref": "#/definitions/CassandraViewResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
     "ThroughputSettingsResource": {
       "type": "object",
       "description": "Cosmos DB resource throughput object. Either throughput is required or autoscaleSettings is required, but not both.",
@@ -7989,6 +8430,23 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the graph."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraViewResource": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra view resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra view"
+        },
+        "viewDefinition": {
+          "type": "string",
+          "description": "View Definition of the Cosmos DB Cassandra view"
         }
       },
       "required": [
@@ -9178,6 +9636,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The instanceId GUID of a restorable database account."
+    },
+    "viewNameParameter": {
+      "name": "viewName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB view name."
     }
   }
 }

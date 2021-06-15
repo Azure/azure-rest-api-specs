@@ -2,7 +2,7 @@
   "parameters": {
     "accountName": "ddb1",
     "resourceGroupName": "rg1",
-    "api-version": "2021-04-01-preview",
+    "api-version": "2021-06-15",
     "subscriptionId": "subid",
     "databaseName": "databaseName",
     "collectionName": "collectionName",
@@ -16,19 +16,25 @@
             {
               "key": {
                 "keys": [
-                  "testKey"
+                  "_ts"
                 ]
               },
               "options": {
                 "expireAfterSeconds": 100,
                 "unique": true
               }
+            },
+            {
+              "key": {
+                "keys": [
+                  "_id"
+                ]
+              }
             }
           ],
           "shardKey": {
             "testKey": "Hash"
-          },
-          "analyticalStorageTtl": 500
+          }
         },
         "options": {}
       }
@@ -49,19 +55,25 @@
               {
                 "key": {
                   "keys": [
-                    "testKey"
+                    "_ts"
                   ]
                 },
                 "options": {
                   "expireAfterSeconds": 100,
                   "unique": true
                 }
+              },
+              {
+                "key": {
+                  "keys": [
+                    "_id"
+                  ]
+                }
               }
             ],
             "shardKey": {
               "testKey": "Hash"
-            },
-            "analyticalStorageTtl": 500
+            }
           }
         }
       }
