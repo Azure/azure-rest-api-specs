@@ -129,6 +129,52 @@
             }
           }
         }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Get IoT Alert": {
+            "$ref": "./examples/Alerts/PutAlert.json"
+          }
+        },
+        "tags": [
+          "IoT Security Alerts"
+        ],
+        "operationId": "IotAlerts_Put",
+        "description": "Update alert",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AlertId"
+          },
+          {
+            "$ref": "#/parameters/AlertModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT alert",
+            "schema": {
+              "$ref": "#/definitions/AlertModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -346,6 +392,31 @@
           "type": "string",
           "example": "IoT Hub",
           "description": "The name of a component inside the product which generated the alert"
+        },
+        "status": {
+          "type": "string",
+          "example": "New",
+          "description": "The status of the alert",
+          "enum": [
+            "New",
+            "InProgress",
+            "Closed"
+          ],
+          "x-ms-enum": {
+            "name": "alertStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "New"
+              },
+              {
+                "value": "InProgress"
+              },
+              {
+                "value": "Closed"
+              }
+            ]
+          }
         }
       }
     }
@@ -365,6 +436,16 @@
       "required": true,
       "description": "Alert Id",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertModel": {
+      "name": "alertModel",
+      "in": "body",
+      "required": true,
+      "description": "IoT alert",
+      "schema": {
+        "$ref": "#/definitions/AlertModel"
+      },
       "x-ms-parameter-location": "method"
     }
   }
