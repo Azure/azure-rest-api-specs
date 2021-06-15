@@ -46,3 +46,7 @@ basic-setup-py: true
 output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid
 ```
 
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
