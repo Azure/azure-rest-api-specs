@@ -3841,7 +3841,14 @@
             "$ref": "#/definitions/ResourceProviderCapabilities"
           }
         },
-        "metadata": {}
+        "metadata": {},
+        "templateDeploymentOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentOptions"
+            }
+          ]
+        }
       }
     },
     "ProviderRegistrationProperties": {
@@ -3862,6 +3869,13 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioned state of the resource."
+        },
+        "subscriptionLifecycleNotificationSpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
         }
       }
     },
