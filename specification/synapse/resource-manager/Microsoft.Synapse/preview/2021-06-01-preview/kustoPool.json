@@ -420,6 +420,164 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Returns a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_ListLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolListLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of language extensions.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/addLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Add a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_AddLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolAddLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsAdd.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/removeLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Remove a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_RemoveLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolRemoveLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsRemove.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases": {
       "get": {
         "tags": [
@@ -2131,6 +2289,40 @@
         "name": "blobStorageEventType",
         "modelAsString": true
       }
+    },
+    "LanguageExtensionName": {
+      "description": "Language extension that can run within KQL query.",
+      "type": "string",
+      "enum": [
+        "PYTHON",
+        "R"
+      ],
+      "x-ms-enum": {
+        "name": "languageExtensionName",
+        "modelAsString": true
+      }
+    },
+    "LanguageExtension": {
+      "type": "object",
+      "description": "The language extension object.",
+      "properties": {
+        "languageExtensionName": {
+          "$ref": "#/definitions/LanguageExtensionName",
+          "description": "The language extension name."
+        }
+      }
+    },
+    "LanguageExtensionsList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageExtension"
+          },
+          "description": "The list of language extensions."
+        }
+      },
+      "description": "The list of language extension objects."
     },
     "ResourceProvisioningState": {
       "type": "string",
