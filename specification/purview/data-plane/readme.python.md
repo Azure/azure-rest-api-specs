@@ -27,3 +27,15 @@ output-folder: $(python-sdks-folder)/purview/azure-purview-scanning/
 credential-scopes: https://purview.azure.net/.default
 low-level-client: true
 ```
+add-credential: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.purview.account
+package-name: azure-purview-account
+clear-output-folder: truefr
+package-version: 1.0.0b1
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/purview/azure-purview-account/
+credential-scopes: https://purview.azure.net/.default
+low-level-client: true
+```
+

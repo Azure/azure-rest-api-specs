@@ -57,6 +57,24 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+``` yaml
+openapi-type: data-plane
+tag: package-2019-11-01-preview
+title: PurviewAccountClient
+```
+
+
+### Tag: package-2019-11-01-preview
+
+These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01-preview'
+input-file:
+- Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ---
 # Code Generation
 
@@ -71,6 +89,20 @@ csharp:
   namespace: Microsoft.Azure.Purview.CatalogClient
   add-credentials: true
   output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Analytics.Purview.Catalog/src/Generated
+  clear-output-folder: true
+```
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Purview.Account
+  add-credentials: true
+  output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Analytics.Purview.Account/src/Generated
   clear-output-folder: true
 ```
 
@@ -91,6 +123,21 @@ add-credentials: true
 sync-methods: all
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: Azure.Analytics.Purview.Scanning
+clear-output-folder: true
+```
+
+``` yaml $(java)
+java:
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Purview.AccountClient
+  add-credentials: true
+  output-folder: $(azure-libraries-for-java-folder)/purview/Microsoft.Azure.Analytics.Purview.Account/src/Generated
+  clear-output-folder: true
+output-folder: $(csharp-sdks-folder)/Purview/AccountClient/Generated
+add-credentials: true
+sync-methods: all
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: Azure.Analytics.Purview.Account
 clear-output-folder: true
 ```
 
