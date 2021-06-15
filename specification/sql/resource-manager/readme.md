@@ -119,7 +119,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAdvisors.json
@@ -151,6 +150,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
