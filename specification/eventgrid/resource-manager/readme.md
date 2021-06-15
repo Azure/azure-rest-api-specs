@@ -40,13 +40,6 @@ input-file:
 
 ### Tag: package-2020-10-preview
 
-``` yaml
-openapi-type: arm
-tag: package-2020-10-preview
-```
-
-### Tag: package-2020-10-preview
-
 These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-10-preview'
