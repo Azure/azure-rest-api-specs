@@ -1940,18 +1940,6 @@
           "$ref": "#/definitions/SignalRNetworkACLs",
           "description": "Network ACLs"
         },
-        "restrictOutboundNetworkAccess": {
-          "description": "Enable or disable outbound traffic. Default to \"Disabled\".\r\nWhen it's Enabled, outbound traffic will be banned if the FQDN is not in AllowedFQDNList.\r\nWhen it's Disabled, outbound traffic will not be banned.",
-          "default": "Disabled",
-          "type": "string"
-        },
-        "allowedFqdnList": {
-          "description": "WhiteList FQDN when RestrictOutboundNetworkAccess is enabled. This config takes no effect when RestrictOutboundNetworkAccess is disabled.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "publicNetworkAccess": {
           "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
           "default": "Enabled",
