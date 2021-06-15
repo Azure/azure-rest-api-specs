@@ -13,7 +13,6 @@
         "name": "Standard"
       },
       "properties": {
-        "adminUserEnabled": true,
         "zoneRedundancy": "Enabled"
       }
     }
@@ -33,16 +32,43 @@
           "tier": "Standard"
         },
         "properties": {
-          "loginServer": "myregistry.azurecr.io",
-          "creationDate": "2017-03-01T23:14:37.0707808Z",
+          "loginServer": "myRegistry.azurecr-test.io",
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
           "provisioningState": "Succeeded",
-          "status": {
-            "displayStatus": "Ready",
-            "message": "The registry is ready.",
-            "timestamp": "2017-03-01T23:15:37.0707808Z"
+          "adminUserEnabled": false,
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "virtualNetworkRules": [],
+            "ipRules": []
           },
-          "adminUserEnabled": true,
-          "zoneRedundancy": "Enabled"
+          "policies": {
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "exportPolicy": {
+              "status": "enabled"
+            }
+          },
+          "encryption": {
+            "status": "disabled"
+          },
+          "status": null,
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "networkRuleBypassOptions": "AzureServices",
+          "zoneRedundancy": "Enabled",
+          "anonymousPullEnabled": false
         }
       }
     },
@@ -60,16 +86,43 @@
           "tier": "Standard"
         },
         "properties": {
-          "loginServer": "myregistry.azurecr.io",
-          "creationDate": "2017-03-01T23:14:37.0707808Z",
+          "loginServer": "myRegistry.azurecr-test.io",
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
           "provisioningState": "Creating",
-          "status": {
-            "displayStatus": "Provisioning",
-            "message": "The registry is provisioning.",
-            "timestamp": "2017-03-01T23:15:37.0707808Z"
+          "adminUserEnabled": false,
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "virtualNetworkRules": [],
+            "ipRules": []
           },
-          "adminUserEnabled": true,
-          "zoneRedundancy": "Enabled"
+          "policies": {
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "exportPolicy": {
+              "status": "enabled"
+            }
+          },
+          "encryption": {
+            "status": "disabled"
+          },
+          "status": null,
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "networkRuleBypassOptions": "AzureServices",
+          "zoneRedundancy": "Enabled",
+          "anonymousPullEnabled": false
         }
       }
     }
