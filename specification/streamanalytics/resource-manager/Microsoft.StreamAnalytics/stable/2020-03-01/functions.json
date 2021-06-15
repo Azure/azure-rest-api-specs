@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2016-03-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -75,16 +75,16 @@
             "description": "Set to '*' to allow a new function to be created, but to prevent updating an existing function. Other values will result in a 412 Pre-condition Failed response."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -156,16 +156,16 @@
             "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -205,16 +205,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -251,16 +251,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -309,16 +309,16 @@
             "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           }
         ],
         "responses": {
@@ -366,16 +366,16 @@
             "description": "If the function specified does not already exist, this parameter must contain the full function definition intended to be tested. If the function specified already exists, this parameter can be left null to test the existing function as is or if specified, the properties specified will overwrite the corresponding properties in the existing function (exactly like a PATCH operation) and the resulting function will be tested."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -424,16 +424,16 @@
             "description": "Parameters used to specify the type of function to retrieve the default definition for."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -458,6 +458,7 @@
   },
   "definitions": {
     "Function": {
+      "type": "object",
       "description": "A function object, containing all information associated with the named function. All functions are contained under a streaming job.",
       "allOf": [
         {
@@ -472,6 +473,7 @@
       }
     },
     "FunctionProperties": {
+      "type": "object",
       "description": "The properties that are associated with a function.",
       "discriminator": "type",
       "properties": {
@@ -490,6 +492,7 @@
       ]
     },
     "ScalarFunctionProperties": {
+      "type": "object",
       "description": "The properties that are associated with a scalar function.",
       "x-ms-discriminator-value": "Scalar",
       "allOf": [
@@ -506,6 +509,7 @@
       }
     },
     "ScalarFunctionConfiguration": {
+      "type": "object",
       "description": "Describes the configuration of the scalar function.",
       "properties": {
         "inputs": {
@@ -526,6 +530,7 @@
       }
     },
     "FunctionInput": {
+      "type": "object",
       "description": "Describes one input parameter of a function.",
       "properties": {
         "dataType": {
@@ -539,6 +544,7 @@
       }
     },
     "FunctionOutput": {
+      "type": "object",
       "description": "Describes the output of a function.",
       "properties": {
         "dataType": {
@@ -548,6 +554,7 @@
       }
     },
     "FunctionBinding": {
+      "type": "object",
       "description": "The physical binding of the function. For example, in the Azure Machine Learning web service’s case, this describes the endpoint.",
       "discriminator": "type",
       "properties": {
@@ -561,6 +568,7 @@
       ]
     },
     "AzureMachineLearningWebServiceFunctionBinding": {
+      "type": "object",
       "description": "The binding to an Azure Machine Learning web service.",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
@@ -577,6 +585,7 @@
       }
     },
     "AzureMachineLearningWebServiceFunctionBindingProperties": {
+      "type": "object",
       "description": "The binding properties associated with an Azure Machine learning web service.",
       "properties": {
         "endpoint": {
@@ -606,6 +615,7 @@
       }
     },
     "AzureMachineLearningWebServiceInputs": {
+      "type": "object",
       "description": "The inputs for the Azure Machine Learning web service endpoint.",
       "properties": {
         "name": {
@@ -622,6 +632,7 @@
       }
     },
     "AzureMachineLearningWebServiceInputColumn": {
+      "type": "object",
       "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
       "properties": {
         "name": {
@@ -640,6 +651,7 @@
       }
     },
     "AzureMachineLearningWebServiceOutputColumn": {
+      "type": "object",
       "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
       "properties": {
         "name": {
@@ -653,6 +665,7 @@
       }
     },
     "JavaScriptFunctionBinding": {
+      "type": "object",
       "description": "The binding to a JavaScript function.",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/JavascriptUdf",
       "allOf": [
@@ -669,6 +682,7 @@
       }
     },
     "JavaScriptFunctionBindingProperties": {
+      "type": "object",
       "description": "The binding properties associated with a JavaScript function.",
       "properties": {
         "script": {
@@ -678,6 +692,7 @@
       }
     },
     "FunctionRetrieveDefaultDefinitionParameters": {
+      "type": "object",
       "description": "Parameters used to specify the type of function to retrieve the default definition for.",
       "discriminator": "bindingType",
       "properties": {
@@ -691,6 +706,7 @@
       ]
     },
     "AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters": {
+      "type": "object",
       "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning web service function.",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
@@ -707,6 +723,7 @@
       }
     },
     "AzureMachineLearningWebServiceFunctionBindingRetrievalProperties": {
+      "type": "object",
       "description": "The binding retrieval properties associated with an Azure Machine learning web service.",
       "properties": {
         "executeEndpoint": {
@@ -720,6 +737,7 @@
       }
     },
     "JavaScriptFunctionRetrieveDefaultDefinitionParameters": {
+      "type": "object",
       "description": "The parameters needed to retrieve the default function definition for a JavaScript function.",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/JavascriptUdf",
       "allOf": [
@@ -736,6 +754,7 @@
       }
     },
     "JavaScriptFunctionBindingRetrievalProperties": {
+      "type": "object",
       "description": "The binding retrieval properties associated with a JavaScript function.",
       "properties": {
         "script": {
@@ -749,6 +768,7 @@
       }
     },
     "FunctionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -778,6 +798,7 @@
       }
     },
     "SubResource": {
+      "type": "object",
       "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
@@ -799,29 +820,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "GUID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
-    "StreamingJobNameParameter": {
-      "name": "jobName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the streaming job.",
-      "x-ms-parameter-location": "method"
-    },
     "FunctionNameParameter": {
       "name": "functionName",
       "in": "path",
@@ -829,13 +827,6 @@
       "type": "string",
       "description": "The name of the function.",
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
