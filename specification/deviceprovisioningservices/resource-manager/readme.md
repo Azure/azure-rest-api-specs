@@ -26,14 +26,23 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+tag: package-2021-07
 ```
 
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.Devices/stable/2021-07-01/iotdps.json
+```
 ### Tag: package-preview-2020-09
 
 These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-09'
+``` yaml $(tag) == 'package-preview-2020-09'
 input-file:
   - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
 ```
@@ -119,4 +128,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-#
+# 
