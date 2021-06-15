@@ -1092,6 +1092,11 @@
           "format": "int64",
           "description": "storage size in MB",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "storage size in MB capability"
@@ -1121,6 +1126,11 @@
           "format": "int64",
           "description": "supported memory per vCore in MB",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "Vcores capability"
@@ -1139,6 +1149,11 @@
             "$ref": "#/definitions/VcoreCapability"
           },
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "Server version capabilities."
@@ -1156,11 +1171,38 @@
             "$ref": "#/definitions/StorageMBCapability"
           },
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "storage edition capability"
     },
-    "ServerEditionCapability": {
+    "NodeTypeCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "note type name",
+          "readOnly": true
+        },
+        "nodeType": {
+          "type": "string",
+          "description": "note type",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "node type capability"
+    },
+    "FlexibleServerEditionCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1172,6 +1214,7 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
         "supportedServerVersions": {
@@ -1179,10 +1222,56 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
           "readOnly": true
         }
       },
-      "description": "Server edition capabilities."
+      "description": "Flexible server edition capabilities."
+    },
+    "HyperscaleNodeEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "description": "The list of editions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedNodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeCapability"
+          },
+          "description": "The list of Node Types supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Hyperscale node edition capabilities."
     },
     "CapabilityProperties": {
       "properties": {
@@ -1191,11 +1280,38 @@
           "description": "zone name",
           "readOnly": true
         },
+        "geoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
+        "zoneRedundantHaSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can support multi zone HA.",
+          "readOnly": true
+        },
+        "zoneRedundantHaAndGeoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
         "supportedFlexibleServerEditions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerEditionCapability"
+            "$ref": "#/definitions/FlexibleServerEditionCapability"
           },
+          "readOnly": true
+        },
+        "supportedHyperscaleNodeEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperscaleNodeEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
           "readOnly": true
         }
       },
@@ -1330,7 +1446,11 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "availability zone information of the server."
+          "description": "availability zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -1605,8 +1725,7 @@
         },
         "standbyAvailabilityZone": {
           "type": "string",
-          "description": "availability zone information of the standby.",
-          "readOnly": true
+          "description": "availability zone information of the standby."
         }
       },
       "description": "High availability properties of a server"
