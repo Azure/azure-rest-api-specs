@@ -231,6 +231,32 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "examples": {
+              "Event grid not registered": {
+                "error": {
+                  "code": "EVENT_GRID_NOT_REGISTERED",
+                  "message": "Microsoft.EventGrid resource provider is not registered in subscription"
+                }
+              },
+              "Media services in another location": {
+                "error": {
+                  "code": "MS_IN_ANOTHER_LOCATION",
+                  "message": "Can not connect to a Media Services account which is not in the same location as the VideoIndexer account"
+                }
+              },
+              "Media services is unreachable": {
+                "error": {
+                  "code": "MS_UNREACHABLE",
+                  "message": "Failed to connect to Media Services account"
+                }
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -295,6 +321,32 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "examples": {
+              "Event grid not registered": {
+                "error": {
+                  "code": "EVENT_GRID_NOT_REGISTERED",
+                  "message": "Microsoft.EventGrid resource provider is not registered in subscription"
+                }
+              },
+              "Media services in another location": {
+                "error": {
+                  "code": "MS_IN_ANOTHER_LOCATION",
+                  "message": "Can not connect to a Media Services account which is not in the same location as the VideoIndexer account"
+                }
+              },
+              "Media services is unreachable": {
+                "error": {
+                  "code": "MS_UNREACHABLE",
+                  "message": "Failed to connect to Media Services account"
+                }
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -305,15 +357,6 @@
         "x-ms-examples": {
           "Put account": {
             "$ref": "./examples/ViAccountPut.json"
-          },
-          "Put account where event grid not registered": {
-            "$ref": "./examples/ViAccountPutEventGridNotRegistered.json"
-          },
-          "Put account where media services in other locations": {
-            "$ref": "./examples/ViAccountPutMediaServicesInOtherLocation.json"
-          },
-          "Put account where media services is unreachable": {
-            "$ref": "./examples/ViAccountPutMediaServicesIsUnreachable.json"
           }
         }
       },
@@ -639,12 +682,14 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "Azure Active Directory principal ID associated with this identity."
+          "description": "Azure Active Directory principal ID associated with this identity.",
+          "example": "a661c16c-ee39-46e7-93f6-7fb80d17ef13"
         },
         "clientId": {
           "readOnly": true,
           "type": "string",
-          "description": "Client App Id associated with this identity."
+          "description": "Client App Id associated with this identity.",
+          "example": "92e65ecf-0fae-432e-8272-fedb6edb96c7"
         }
       }
     },
