@@ -21,4 +21,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/verifiablecredentials.json
   - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/adminservice.json
+  - Microsoft.VerifiableCredentials/preview/2021-04-05-preview/picsissuance.json
 ```
