@@ -187,10 +187,6 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-- Microsoft.Security/stable/2019-08-01/iotAlerts.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -486,6 +482,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
