@@ -1,0 +1,375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-01-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings": {
+      "get": {
+        "x-ms-examples": {
+          "Get ingestion settings on subscription": {
+            "$ref": "./examples/IngestionSettings/GetIngestionSettings_example.json"
+          }
+        },
+        "tags": [
+          "Ingestion Settings"
+        ],
+        "description": "Settings for ingesting security data and logs to correlate with resources associated with the subscription.",
+        "operationId": "IngestionSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IngestionSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings/{ingestionSettingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a ingestion setting on subscription": {
+            "$ref": "./examples/IngestionSettings/GetIngestionSetting_example.json"
+          }
+        },
+        "tags": [
+          "Ingestion Settings"
+        ],
+        "description": "Settings for ingesting security data and logs to correlate with resources associated with the subscription.",
+        "operationId": "IngestionSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IngestionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IngestionSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create an ingestion setting for subscription": {
+            "$ref": "./examples/IngestionSettings/CreateIngestionSetting_example.json"
+          }
+        },
+        "tags": [
+          "Ingestion Settings"
+        ],
+        "description": "Create setting for ingesting security data and logs to correlate with resources associated with the subscription.",
+        "operationId": "IngestionSettings_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IngestionSettingName"
+          },
+          {
+            "$ref": "#/parameters/IngestionSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IngestionSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an ingestion setting for the subscription": {
+            "$ref": "./examples/IngestionSettings/DeleteIngestionSetting_example.json"
+          }
+        },
+        "tags": [
+          "Ingestion Settings"
+        ],
+        "description": "Deletes the ingestion settings for this subscription.",
+        "operationId": "IngestionSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IngestionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully"
+          },
+          "204": {
+            "description": "The resource was not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings/{ingestionSettingName}/listTokens": {
+      "post": {
+        "x-ms-examples": {
+          "List ingestion setting tokens": {
+            "$ref": "./examples/IngestionSettings/ListTokensIngestionSetting_example.json"
+          }
+        },
+        "tags": [
+          "Ingestion Settings"
+        ],
+        "description": "Returns the token that is used for correlating ingested telemetry with the resources in the subscription.",
+        "operationId": "IngestionSettings_ListTokens",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IngestionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IngestionSettingToken"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings/{ingestionSettingName}/listConnectionStrings": {
+      "post": {
+        "x-ms-examples": {
+          "List connection strings for ingesting security data and logs": {
+            "$ref": "./examples/IngestionSettings/ListConnectionStrings_example.json"
+          }
+        },
+        "tags": [
+          "Connection Strings"
+        ],
+        "description": "Connection strings for ingesting security scan logs and data.",
+        "operationId": "IngestionSettings_ListConnectionStrings",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IngestionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionStrings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IngestionSettingList": {
+      "description": "List of ingestion settings",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of ingestion settings",
+          "items": {
+            "$ref": "#/definitions/IngestionSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "IngestionSetting": {
+      "type": "object",
+      "description": "Configures how to correlate scan data and logs with resources associated with the subscription.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Ingestion setting data",
+          "$ref": "#/definitions/IngestionSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IngestionSettingToken": {
+      "type": "object",
+      "description": "Configures how to correlate scan data and logs with resources associated with the subscription.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true,
+          "description": "The token is used for correlating security data and logs with the resources in the subscription."
+        }
+      }
+    },
+    "IngestionSettingProperties": {
+      "type": "object",
+      "description": "Ingestion setting data"
+    },
+    "IngestionConnectionString": {
+      "type": "object",
+      "description": "Connection string for ingesting security data and logs",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The region where ingested logs and data resides"
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true,
+          "description": "Connection string value"
+        }
+      }
+    },
+    "ConnectionStrings": {
+      "description": "Connection string for ingesting security data and logs",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Connection strings",
+          "items": {
+            "$ref": "#/definitions/IngestionConnectionString"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "IngestionSettingName": {
+      "name": "ingestionSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the ingestion setting",
+      "x-ms-parameter-location": "method"
+    },
+    "IngestionSetting": {
+      "name": "ingestionSetting",
+      "in": "body",
+      "required": true,
+      "description": "Ingestion setting object",
+      "schema": {
+        "$ref": "#/definitions/IngestionSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

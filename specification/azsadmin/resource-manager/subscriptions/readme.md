@@ -2,7 +2,8 @@
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Subscriptions Admin.
+This is the AutoRest configuration file for Subscriptions Admin. We do not ship any language SDKs for AzureStack Administrator APIs and these APIs do not exist in azure.
+
 
 ---
 ## Getting Started 
@@ -104,12 +105,6 @@ csharp:
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
