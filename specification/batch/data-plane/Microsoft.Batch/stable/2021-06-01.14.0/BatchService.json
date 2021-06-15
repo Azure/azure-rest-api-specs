@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2020-09-01.12.0",
-    "description": "A client for issuing REST requests to the Azure Batch service.",
-    "x-ms-code-generation-settings": {
-      "name": "BatchServiceClient"
-    }
+    "version": "2021-06-01.14.0",
+    "description": "A client for issuing REST requests to the Azure Batch service."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{batchUrl}",
@@ -5979,6 +5976,9 @@
           "Add a VirtualMachineConfiguration pool with containers": {
             "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithContainers.json"
           },
+          "Add a VirtualMachineConfiguration pool with extensions": {
+            "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithExtensions.json"
+          },
           "Add a pool with mount drive specified": {
             "$ref": "./examples/PoolAdd_MountConfiguration.json"
           }
@@ -6523,6 +6523,9 @@
         "x-ms-examples": {
           "Pool get": {
             "$ref": "./examples/PoolGet_Basic.json"
+          },
+          "Get a VirtualMachineConfiguration pool with extensions": {
+            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json"
           }
         },
         "description": "Gets information about the specified Pool.",
@@ -10638,10 +10641,286 @@
           }
         }
       }
+    },
+    "/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "ComputeNodes"
+        ],
+        "operationId": "ComputeNodeExtension_Get",
+        "x-ms-examples": {
+          "Get compute node extension": {
+            "$ref": "./examples/ComputeNodeExtensionGet.json"
+          }
+        },
+        "summary": "Gets information about the specified Compute Node Extension.",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "poolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Pool that contains the Compute Node."
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Compute Node that contains the extensions."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the of the Compute Node Extension that you want to get information about."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData $select clause.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The time at which the resource was last modified.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            },
+            "description": "A response containing the Compute Node Extension.",
+            "schema": {
+              "$ref": "#/definitions/NodeVMExtension"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
+    "/pools/{poolId}/nodes/{nodeId}/extensions": {
+      "get": {
+        "tags": [
+          "ComputeNodes"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        },
+        "operationId": "ComputeNodeExtensions_List",
+        "x-ms-examples": {
+          "List compute node extensions": {
+            "$ref": "./examples/ComputeNodeExtensionList.json"
+          }
+        },
+        "summary": "Lists the Compute Nodes Extensions in the specified Pool.",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "poolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Pool that contains Compute Node."
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Compute Node that you want to list extensions."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData $select clause.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "maxresults",
+            "x-ms-client-name": "maxResults",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000,
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response. A maximum of 1000 Compute Nodes can be returned.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The time at which the resource was last modified.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            },
+            "description": "A response containing the list of Compute Nodes.",
+            "schema": {
+              "$ref": "#/definitions/NodeVMExtensionList"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
     "PoolUsageMetrics": {
+      "type": "object",
       "properties": {
         "poolId": {
           "type": "string",
@@ -10678,6 +10957,7 @@
       "title": "Usage metrics for a Pool across an aggregation interval."
     },
     "PoolListUsageMetricsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -10694,6 +10974,7 @@
       "title": "The result of a listing the usage metrics for an Account."
     },
     "ImageInformation": {
+      "type": "object",
       "properties": {
         "nodeAgentSKUId": {
           "type": "string",
@@ -10770,6 +11051,7 @@
       "title": "A reference to the Azure Virtual Machines Marketplace Image and additional information about the Image."
     },
     "AuthenticationTokenSettings": {
+      "type": "object",
       "properties": {
         "access": {
           "type": "array",
@@ -10797,6 +11079,7 @@
       "title": "The settings for an authentication token that the Task can use to perform Batch service operations."
     },
     "AccountListSupportedImagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -10813,6 +11096,7 @@
       "title": "The result of listing the supported Virtual Machine Images."
     },
     "UsageStatistics": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -10838,6 +11122,7 @@
       "title": "Statistics related to Pool usage information."
     },
     "ResourceStatistics": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -10923,6 +11208,7 @@
       "title": "Statistics related to resource consumption by Compute Nodes in a Pool."
     },
     "PoolStatistics": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -10955,6 +11241,7 @@
       "title": "Contains utilization and resource usage statistics for the lifetime of a Pool."
     },
     "JobStatistics": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -11049,6 +11336,7 @@
       "title": "Resource usage statistics for a Job."
     },
     "NameValuePair": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -11062,6 +11350,7 @@
       "title": "Represents a name-value pair."
     },
     "DeleteCertificateError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -11083,6 +11372,7 @@
       "title": "An error encountered by the Batch service when deleting a Certificate."
     },
     "Certificate": {
+      "type": "object",
       "properties": {
         "thumbprint": {
           "type": "string",
@@ -11129,6 +11419,7 @@
       "description": "A Certificate that can be installed on Compute Nodes and can be used to authenticate operations on the machine."
     },
     "ApplicationPackageReference": {
+      "type": "object",
       "properties": {
         "applicationId": {
           "type": "string",
@@ -11146,6 +11437,7 @@
       "title": "A reference to an Package to be deployed to Compute Nodes."
     },
     "ApplicationSummary": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -11171,6 +11463,7 @@
       "title": "Contains information about an application in an Azure Batch Account."
     },
     "CertificateAddParameter": {
+      "type": "object",
       "properties": {
         "thumbprint": {
           "type": "string",
@@ -11220,6 +11513,7 @@
       "title": "A Certificate that can be installed on Compute Nodes and can be used to authenticate operations on the machine."
     },
     "CertificateListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -11236,6 +11530,7 @@
       "title": "The result of listing the Certificates in the Account."
     },
     "FileProperties": {
+      "type": "object",
       "properties": {
         "creationTime": {
           "type": "string",
@@ -11270,6 +11565,7 @@
       "title": "The properties of a file on a Compute Node."
     },
     "NodeFile": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -11291,6 +11587,7 @@
       "title": "Information about a file or directory on a Compute Node."
     },
     "NodeFileListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -11307,6 +11604,7 @@
       "title": "The result of listing the files on a Compute Node, or the files associated with a Task on a Compute Node."
     },
     "Schedule": {
+      "type": "object",
       "properties": {
         "doNotRunUntil": {
           "type": "string",
@@ -11336,6 +11634,7 @@
       "title": "The schedule according to which Jobs will be created"
     },
     "JobConstraints": {
+      "type": "object",
       "properties": {
         "maxWallClockTime": {
           "type": "string",
@@ -11353,6 +11652,7 @@
       "title": "The execution constraints for a Job."
     },
     "JobNetworkConfiguration": {
+      "type": "object",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -11370,6 +11670,7 @@
       "title": "The network configuration for the Job."
     },
     "TaskContainerSettings": {
+      "type": "object",
       "properties": {
         "containerRunOptions": {
           "type": "string",
@@ -11416,6 +11717,7 @@
       "title": "The container settings for a Task."
     },
     "ResourceFile": {
+      "type": "object",
       "properties": {
         "autoStorageContainerName": {
           "type": "string",
@@ -11425,12 +11727,12 @@
         "storageContainerUrl": {
           "type": "string",
           "title": "The URL of the blob container within Azure Blob Storage.",
-          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous access; that is, the Batch service does not present any credentials when downloading blobs from the container. There are two ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, or set the ACL for the container to allow public access."
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access."
         },
         "httpUrl": {
           "type": "string",
           "title": "The URL of the file to download.",
-          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access."
         },
         "blobPrefix": {
           "type": "string",
@@ -11446,11 +11748,16 @@
           "type": "string",
           "title": "The file permission mode attribute in octal format.",
           "description": "This property applies only to files being downloaded to Linux Compute Nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows Compute Node. If this property is not specified for a Linux Compute Node, then a default value of 0770 is applied to the file."
+        },
+        "identityReference": {
+          "title": "The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl",
+          "$ref": "#/definitions/ComputeNodeIdentityReference"
         }
       },
       "title": "A single file or multiple files to be downloaded to a Compute Node."
     },
     "EnvironmentSetting": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -11467,6 +11774,7 @@
       "title": "An environment variable to be set on a Task process."
     },
     "ExitConditions": {
+      "type": "object",
       "properties": {
         "exitCodes": {
           "type": "array",
@@ -11500,6 +11808,7 @@
       "title": "Specifies how the Batch service should respond when the Task completes."
     },
     "ExitCodeMapping": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "integer",
@@ -11518,6 +11827,7 @@
       ]
     },
     "ExitCodeRangeMapping": {
+      "type": "object",
       "properties": {
         "start": {
           "type": "integer",
@@ -11542,6 +11852,7 @@
       ]
     },
     "ExitOptions": {
+      "type": "object",
       "properties": {
         "jobAction": {
           "type": "string",
@@ -11598,6 +11909,7 @@
       "title": "Specifies how the Batch service responds to a particular exit condition."
     },
     "AutoUserSpecification": {
+      "type": "object",
       "properties": {
         "scope": {
           "type": "string",
@@ -11631,6 +11943,7 @@
       "title": "Specifies the parameters for the auto user that runs a Task on the Batch service."
     },
     "UserIdentity": {
+      "type": "object",
       "properties": {
         "username": {
           "type": "string",
@@ -11648,6 +11961,7 @@
       "description": "Specify either the userName or autoUser property, but not both."
     },
     "LinuxUserConfiguration": {
+      "type": "object",
       "properties": {
         "uid": {
           "type": "integer",
@@ -11670,6 +11984,7 @@
       "title": "Properties used to create a user Account on a Linux Compute Node."
     },
     "WindowsUserConfiguration": {
+      "type": "object",
       "properties": {
         "loginMode": {
           "type": "string",
@@ -11698,6 +12013,7 @@
       "title": "Properties used to create a user Account on a Windows Compute Node."
     },
     "UserAccount": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -11730,6 +12046,7 @@
       "title": "Properties used to create a user used to execute Tasks on an Azure Batch Compute Node."
     },
     "TaskConstraints": {
+      "type": "object",
       "properties": {
         "maxWallClockTime": {
           "type": "string",
@@ -11753,6 +12070,7 @@
       "title": "Execution constraints to apply to a Task."
     },
     "JobManagerTask": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -11805,7 +12123,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The number of scheduling slots that the Task requires to run.",
-          "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
+          "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this property is not supported and must not be specified."
         },
         "killJobOnCompletion": {
           "type": "boolean",
@@ -11849,6 +12167,7 @@
       "description": "The Job Manager Task is automatically started when the Job is created. The Batch service tries to schedule the Job Manager Task before any other Tasks in the Job. When shrinking a Pool, the Batch service tries to preserve Nodes where Job Manager Tasks are running for as long as possible (that is, Compute Nodes running 'normal' Tasks are removed before Compute Nodes running Job Manager Tasks). When a Job Manager Task fails and needs to be restarted, the system tries to schedule it at the highest priority. If there are no idle Compute Nodes available, the system may terminate one of the running Tasks in the Pool and return it to the queue in order to make room for the Job Manager Task to restart. Note that a Job Manager Task in one Job does not have priority over Tasks in other Jobs. Across Jobs, only Job level priorities are observed. For example, if a Job Manager in a priority 0 Job needs to be restarted, it will not displace Tasks of a priority 1 Job. Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing."
     },
     "JobPreparationTask": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -11907,6 +12226,7 @@
       "description": "You can use Job Preparation to prepare a Node to run Tasks for the Job. Activities commonly performed in Job Preparation include: Downloading common resource files used by all the Tasks in the Job. The Job Preparation Task can download these common resource files to the shared location on the Node. (AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the Node so that all Tasks of that Job can communicate with it. If the Job Preparation Task fails (that is, exhausts its retry count before exiting with exit code 0), Batch will not run Tasks of this Job on the Node. The Compute Node remains ineligible to run Tasks of this Job until it is reimaged. The Compute Node remains active and can be used for other Jobs. The Job Preparation Task can run multiple times on the same Node. Therefore, you should write the Job Preparation Task to handle re-execution. If the Node is rebooted, the Job Preparation Task is run again on the Compute Node before scheduling any other Task of the Job, if rerunOnNodeRebootAfterSuccess is true or if the Job Preparation Task did not previously complete. If the Node is reimaged, the Job Preparation Task is run again before scheduling any Task of the Job. Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing."
     },
     "JobReleaseTask": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -11962,6 +12282,7 @@
       "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the Job's maximum wall clock time constraint is reached, and the Job is still active, or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the taskSlotsPerNode limit specified on the Pool."
     },
     "TaskSchedulingPolicy": {
+      "type": "object",
       "properties": {
         "nodeFillType": {
           "type": "string",
@@ -11993,6 +12314,7 @@
       "title": "Specifies how Tasks should be distributed across Compute Nodes."
     },
     "StartTask": {
+      "type": "object",
       "properties": {
         "commandLine": {
           "type": "string",
@@ -12043,6 +12365,7 @@
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing. In some cases the StartTask may be re-run even though the Compute Node was not rebooted. Special care should be taken to avoid StartTasks which create breakaway process or install/launch services from the StartTask working directory, as this will block Batch from being able to re-run the StartTask."
     },
     "CertificateReference": {
+      "type": "object",
       "properties": {
         "thumbprint": {
           "type": "string",
@@ -12124,6 +12447,7 @@
       "title": "A reference to a Certificate to be installed on Compute Nodes in a Pool."
     },
     "MetadataItem": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -12142,6 +12466,7 @@
       "description": "The Batch service does not assign any meaning to this metadata; it is solely for the use of user code."
     },
     "PoolSpecification": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -12195,7 +12520,7 @@
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -12275,6 +12600,7 @@
       "title": "Specification for creating a new Pool."
     },
     "AutoPoolSpecification": {
+      "type": "object",
       "properties": {
         "autoPoolIdPrefix": {
           "type": "string",
@@ -12320,6 +12646,7 @@
       "title": "Specifies characteristics for a temporary 'auto pool'. The Batch service will create this auto Pool when the Job is submitted."
     },
     "PoolInformation": {
+      "type": "object",
       "properties": {
         "poolId": {
           "type": "string",
@@ -12335,12 +12662,20 @@
       "title": "Specifies how a Job should be assigned to a Pool."
     },
     "JobSpecification": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
           "format": "int32",
           "title": "The priority of Jobs created under this schedule.",
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "default": -1,
+          "title": "The maximum number of tasks that can be executed in parallel for the job.",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "displayName": {
           "type": "string",
@@ -12411,6 +12746,7 @@
       "title": "Specifies details of the Jobs to be created on a schedule."
     },
     "RecentJob": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -12424,6 +12760,7 @@
       "title": "Information about the most recent Job to run under the Job Schedule."
     },
     "JobScheduleExecutionInformation": {
+      "type": "object",
       "properties": {
         "nextRunTime": {
           "type": "string",
@@ -12446,6 +12783,7 @@
       "title": "Contains information about Jobs that have been and will be run under a Job Schedule."
     },
     "JobScheduleStatistics": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -12538,6 +12876,7 @@
       "title": "Resource usage statistics for a Job Schedule."
     },
     "CloudJobSchedule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -12615,6 +12954,7 @@
       "title": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a specification used to create each Job."
     },
     "JobScheduleAddParameter": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -12651,6 +12991,7 @@
       "title": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a specification used to create each Job."
     },
     "CloudJobScheduleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -12667,6 +13008,7 @@
       "title": "The result of listing the Job Schedules in an Account."
     },
     "JobSchedulingError": {
+      "type": "object",
       "properties": {
         "category": {
           "title": "The category of the Job scheduling error.",
@@ -12694,6 +13036,7 @@
       "title": "An error encountered by the Batch service when scheduling a Job."
     },
     "JobExecutionInformation": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -12729,6 +13072,7 @@
       "title": "Contains information about the execution of a Job in the Azure Batch service."
     },
     "CloudJob": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -12788,6 +13132,13 @@
           "format": "int32",
           "title": "The priority of the Job.",
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "default": -1,
+          "title": "The maximum number of tasks that can be executed in parallel for the job.",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -12854,6 +13205,7 @@
       "title": "An Azure Batch Job."
     },
     "JobAddParameter": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -12870,6 +13222,13 @@
           "format": "int32",
           "title": "The priority of the Job.",
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "default": -1,
+          "title": "The maximum number of tasks that can be executed in parallel for the job.",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -12936,6 +13295,7 @@
       "title": "An Azure Batch Job to add."
     },
     "CloudJobListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -12952,6 +13312,7 @@
       "title": "The result of listing the Jobs in an Account."
     },
     "TaskContainerExecutionInformation": {
+      "type": "object",
       "properties": {
         "containerId": {
           "type": "string",
@@ -12971,6 +13332,7 @@
       "title": "Contains information about the container which a Task is executing."
     },
     "TaskFailureInformation": {
+      "type": "object",
       "properties": {
         "category": {
           "title": "The category of the Task error.",
@@ -12998,6 +13360,7 @@
       "title": "Information about a Task failure."
     },
     "JobPreparationTaskExecutionInformation": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -13083,6 +13446,7 @@
       "title": "Contains information about the execution of a Job Preparation Task on a Compute Node."
     },
     "JobReleaseTaskExecutionInformation": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -13155,6 +13519,7 @@
       "title": "Contains information about the execution of a Job Release Task on a Compute Node."
     },
     "JobPreparationAndReleaseTaskExecutionInformation": {
+      "type": "object",
       "properties": {
         "poolId": {
           "type": "string",
@@ -13181,6 +13546,7 @@
       "title": "The status of the Job Preparation and Job Release Tasks on a Compute Node."
     },
     "CloudJobListPreparationAndReleaseTaskStatusResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -13197,6 +13563,7 @@
       "title": "The result of listing the status of the Job Preparation and Job Release Tasks for a Job."
     },
     "TaskCountsResult": {
+      "type": "object",
       "properties": {
         "taskCounts": {
           "$ref": "#/definitions/TaskCounts",
@@ -13214,6 +13581,7 @@
       "title": "The Task and TaskSlot counts for a Job."
     },
     "TaskCounts": {
+      "type": "object",
       "properties": {
         "active": {
           "type": "integer",
@@ -13251,6 +13619,7 @@
       "title": "The Task counts for a Job."
     },
     "TaskSlotCounts": {
+      "type": "object",
       "properties": {
         "active": {
           "type": "integer",
@@ -13288,6 +13657,7 @@
       "title": "The TaskSlot counts for a Job."
     },
     "AutoScaleRunError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -13308,6 +13678,7 @@
       "title": "An error that occurred when executing or evaluating a Pool autoscale formula."
     },
     "AutoScaleRun": {
+      "type": "object",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -13330,6 +13701,7 @@
       "title": "The results and errors from an execution of a Pool autoscale formula."
     },
     "ResizeError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -13350,6 +13722,7 @@
       "title": "An error that occurred when resizing a Pool."
     },
     "CloudServiceConfiguration": {
+      "type": "object",
       "properties": {
         "osFamily": {
           "type": "string",
@@ -13368,6 +13741,7 @@
       "title": "The configuration for Compute Nodes in a Pool based on the Azure Cloud Services platform."
     },
     "ImageReference": {
+      "type": "object",
       "properties": {
         "publisher": {
           "type": "string",
@@ -13393,11 +13767,17 @@
           "type": "string",
           "title": "The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version.",
           "description": "This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+        },
+        "exactVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'."
         }
       },
       "title": "A reference to an Azure Virtual Machines Marketplace Image or a Shared Image Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
     },
     "WindowsConfiguration": {
+      "type": "object",
       "properties": {
         "enableAutomaticUpdates": {
           "type": "boolean",
@@ -13408,6 +13788,7 @@
       "title": "Windows operating system settings to apply to the virtual machine."
     },
     "DataDisk": {
+      "type": "object",
       "properties": {
         "lun": {
           "type": "integer",
@@ -13492,6 +13873,7 @@
       }
     },
     "VirtualMachineConfiguration": {
+      "type": "object",
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
@@ -13529,6 +13911,23 @@
           "$ref": "#/definitions/DiskEncryptionConfiguration",
           "title": "The disk encryption configuration for the pool.",
           "description": "If specified, encryption is performed on each node in the pool during node provisioning."
+        },
+        "nodePlacementConfiguration": {
+          "$ref": "#/definitions/NodePlacementConfiguration",
+          "title": "The node placement configuration for the pool.",
+          "description": "This configuration will specify rules on how nodes in the pool will be physically allocated."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMExtension"
+          },
+          "title": "The virtual machine extension for the pool.",
+          "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
+        },
+        "osDisk": {
+          "$ref": "#/definitions/OSDisk",
+          "title": "Settings for the operating system disk of the Virtual Machine."
         }
       },
       "required": [
@@ -13538,6 +13937,7 @@
       "title": "The configuration for Compute Nodes in a Pool based on the Azure Virtual Machines infrastructure."
     },
     "ContainerRegistry": {
+      "type": "object",
       "properties": {
         "registryServer": {
           "type": "string",
@@ -13552,15 +13952,16 @@
         "password": {
           "type": "string",
           "title": "The password to log into the registry server."
+        },
+        "identityReference": {
+          "title": "The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.",
+          "$ref": "#/definitions/ComputeNodeIdentityReference"
         }
       },
-      "required": [
-        "username",
-        "password"
-      ],
       "title": "A private container registry."
     },
     "ContainerConfiguration": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -13602,6 +14003,7 @@
       "title": "The configuration for container-enabled Pools."
     },
     "DiskEncryptionConfiguration": {
+      "type": "object",
       "properties": {
         "targets": {
           "type": "array",
@@ -13619,7 +14021,7 @@
               "values": [
                 {
                   "value": "osdisk",
-                  "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.",
+                  "description": "The OS Disk on the compute node is encrypted.",
                   "name": "OsDisk"
                 },
                 {
@@ -13635,6 +14037,236 @@
         }
       },
       "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Shared Image Gallery Image."
+    },
+    "NodePlacementPolicyType": {
+      "type": "string",
+      "title": "The placement policy for allocating nodes in the pool.",
+      "description": "The default value is regional.",
+      "enum": [
+        "regional",
+        "zonal"
+      ],
+      "x-ms-enum": {
+        "name": "NodePlacementPolicyType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "regional",
+            "description": "All nodes in the pool will be allocated in the same region.",
+            "name": "regional"
+          },
+          {
+            "value": "zonal",
+            "description": "Nodes in the pool will be spread across different availability zones with best effort balancing.",
+            "name": "zonal"
+          }
+        ]
+      }
+    },
+    "NodePlacementConfiguration": {
+      "type": "object",
+      "title": "Node placement configuration for a pool.",
+      "description": "For regional placement, nodes in the pool will be allocated in the same region. For zonal placement, nodes in the pool will be spread across different zones with best effort balancing.",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/NodePlacementPolicyType",
+          "title": "Node placement Policy type on Batch Pools.",
+          "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
+        }
+      }
+    },
+    "VMExtension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the virtual machine extension."
+        },
+        "publisher": {
+          "type": "string",
+          "title": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "title": "The type of the extensions."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "title": "The version of script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "title": "JSON formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "x-ms-secret": true,
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. "
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The collection of extension names.",
+          "description": "Collection of extension names after which this extension needs to be provisioned."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "type"
+      ],
+      "title": "The configuration for virtual machine extensions."
+    },
+    "InstanceViewStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "The status code."
+        },
+        "displayStatus": {
+          "type": "string",
+          "title": "The localized label for the status."
+        },
+        "level": {
+          "type": "string",
+          "title": "Level code.",
+          "enum": [
+            "Error",
+            "Info",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Error"
+              },
+              {
+                "value": "Info"
+              },
+              {
+                "value": "Warning"
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "title": "The detailed status message."
+        },
+        "time": {
+          "type": "string",
+          "description": "The time of the status."
+        }
+      },
+      "title": "The instance view status."
+    },
+    "VMExtensionInstanceView": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the vm extension instance view."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        },
+        "subStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "title": "The vm extension instance view."
+    },
+    "NodeVMExtension": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "title": "The provisioning state of the virtual machine extension."
+        },
+        "vmExtension": {
+          "$ref": "#/definitions/VMExtension",
+          "title": "The name of the extension handler publisher."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VMExtensionInstanceView",
+          "title": "The type of the extensions."
+        }
+      },
+      "title": "The configuration for virtual machine extension instance view."
+    },
+    "NodeVMExtensionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeVMExtension"
+          },
+          "title": "The list of Compute Node extensions."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of results."
+        }
+      },
+      "title": "The result of listing the Compute Node extensions in a Node."
+    },
+    "DiffDiskPlacement": {
+      "type": "string",
+      "title": "Specifies the ephemeral disk placement for operating system disk for all compute nodes (VMs) in the pool.",
+      "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
+      "enum": [
+        "CacheDisk"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskPlacement",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "CacheDisk",
+            "description": "The Ephemeral OS Disk is stored on the VM cache.",
+            "name": "CacheDisk"
+          }
+        ]
+      }
+    },
+    "DiffDiskSettings": {
+      "type": "object",
+      "properties": {
+        "placement": {
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "title": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.",
+          "description": "This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
+        }
+      },
+      "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
+    },
+    "OSDisk": {
+      "type": "object",
+      "properties": {
+        "ephemeralOSDiskSettings": {
+          "$ref": "#/definitions/DiffDiskSettings",
+          "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
+        }
+      },
+      "title": "Settings for the operating system disk of the compute node (VM)."
     },
     "IPAddressProvisioningType": {
       "type": "string",
@@ -13667,6 +14299,7 @@
       }
     },
     "PublicIPAddressConfiguration": {
+      "type": "object",
       "properties": {
         "provision": {
           "$ref": "#/definitions/IPAddressProvisioningType",
@@ -13685,6 +14318,7 @@
       "description": "The public IP Address configuration of the networking configuration of a Pool."
     },
     "NetworkConfiguration": {
+      "type": "object",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -13731,6 +14365,7 @@
       "description": "The network configuration for a Pool."
     },
     "CloudPool": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -13859,7 +14494,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The number of low-priority Compute Nodes currently in the Pool.",
-          "description": "Low-priority Compute Nodes which have been preempted are included in this count."
+          "description": "low-priority Compute Nodes which have been preempted are included in this count."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -13874,7 +14509,7 @@
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -13966,11 +14601,17 @@
           },
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
+        },
+        "identity": {
+          "title": "The identity of the Batch pool, if configured.",
+          "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "$ref": "#/definitions/BatchPoolIdentity"
         }
       },
       "title": "A Pool in the Azure Batch service."
     },
     "PoolAddParameter": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -14018,7 +14659,7 @@
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -14111,6 +14752,7 @@
       "title": "A Pool in the Azure Batch service to add."
     },
     "ApplicationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14127,6 +14769,7 @@
       "title": "The result of listing the applications available in an Account."
     },
     "CloudPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14143,6 +14786,7 @@
       "title": "The result of listing the Pools in an Account."
     },
     "AffinityInformation": {
+      "type": "object",
       "properties": {
         "affinityId": {
           "type": "string",
@@ -14156,6 +14800,7 @@
       "title": "A locality hint that can be used by the Batch service to select a Compute Node on which to start a Task."
     },
     "TaskExecutionInformation": {
+      "type": "object",
       "properties": {
         "startTime": {
           "type": "string",
@@ -14222,6 +14867,7 @@
       "title": "Information about the execution of a Task."
     },
     "ComputeNodeInformation": {
+      "type": "object",
       "properties": {
         "affinityId": {
           "type": "string",
@@ -14251,6 +14897,7 @@
       "title": "Information about the Compute Node on which a Task ran."
     },
     "NodeAgentInformation": {
+      "type": "object",
       "properties": {
         "version": {
           "type": "string",
@@ -14272,6 +14919,7 @@
       "description": "The Batch Compute Node agent is a program that runs on each Compute Node in the Pool and provides Batch capability on the Compute Node."
     },
     "MultiInstanceSettings": {
+      "type": "object",
       "properties": {
         "numberOfInstances": {
           "type": "integer",
@@ -14300,6 +14948,7 @@
       "description": "Multi-instance Tasks are commonly used to support MPI Tasks. In the MPI case, if any of the subtasks fail (for example due to exiting with a non-zero exit code) the entire multi-instance Task fails. The multi-instance Task is then terminated and retried, up to its retry limit."
     },
     "TaskStatistics": {
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -14373,6 +15022,7 @@
       "title": "Resource usage statistics for a Task."
     },
     "TaskDependencies": {
+      "type": "object",
       "properties": {
         "taskIds": {
           "type": "array",
@@ -14393,6 +15043,7 @@
       "title": "Specifies any dependencies of a Task. Any Task that is explicitly specified or within a dependency range must complete before the dependant Task will be scheduled."
     },
     "TaskIdRange": {
+      "type": "object",
       "properties": {
         "start": {
           "type": "integer",
@@ -14413,6 +15064,7 @@
       ]
     },
     "CloudTask": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -14558,6 +15210,7 @@
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing."
     },
     "TaskAddParameter": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -14657,6 +15310,7 @@
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing."
     },
     "TaskAddCollectionParameter": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14674,6 +15328,7 @@
       "title": "A collection of Azure Batch Tasks to add."
     },
     "TaskAddResult": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -14734,6 +15389,7 @@
       "title": "Result for a single Task added as part of an add Task collection operation."
     },
     "TaskAddCollectionResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14746,6 +15402,7 @@
       "title": "The result of adding a collection of Tasks to a Job."
     },
     "SubtaskInformation": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "integer",
@@ -14812,6 +15469,7 @@
       "title": "Information about an Azure Batch subtask."
     },
     "CloudTaskListSubtasksResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14824,6 +15482,7 @@
       "title": "The result of listing the subtasks of a Task."
     },
     "CloudTaskListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -14840,6 +15499,7 @@
       "title": "The result of listing the Tasks in a Job."
     },
     "TaskInformation": {
+      "type": "object",
       "properties": {
         "taskUrl": {
           "type": "string",
@@ -14873,6 +15533,7 @@
       "title": "Information about a Task running on a Compute Node."
     },
     "StartTaskInformation": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -14950,6 +15611,7 @@
       "title": "Information about a StartTask running on a Compute Node."
     },
     "ComputeNodeError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -14970,6 +15632,7 @@
       "title": "An error encountered by a Compute Node."
     },
     "ComputeNode": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -15177,11 +15840,26 @@
         "nodeAgentInfo": {
           "$ref": "#/definitions/NodeAgentInformation",
           "title": "Information about the Compute Node agent version and the time the Compute Node upgraded to a new version."
+        },
+        "virtualMachineInfo": {
+          "$ref": "#/definitions/VirtualMachineInfo",
+          "title": "Info about the current state of the virtual machine."
         }
       },
       "title": "A Compute Node in the Batch service."
     },
+    "VirtualMachineInfo": {
+      "type": "object",
+      "title": "Info about the current state of the virtual machine.",
+      "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "title": "The reference to the Azure Virtual Machine's Marketplace Image."
+        }
+      }
+    },
     "PoolEndpointConfiguration": {
+      "type": "object",
       "properties": {
         "inboundNATPools": {
           "type": "array",
@@ -15198,6 +15876,7 @@
       "title": "The endpoint configuration for a Pool."
     },
     "InboundNATPool": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -15245,6 +15924,7 @@
       "title": "A inbound NAT Pool that can be used to address specific ports on Compute Nodes in a Batch Pool externally."
     },
     "NetworkSecurityGroupRule": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
@@ -15296,6 +15976,7 @@
       "title": "A network security group rule to apply to an inbound endpoint."
     },
     "ComputeNodeEndpointConfiguration": {
+      "type": "object",
       "properties": {
         "inboundEndpoints": {
           "type": "array",
@@ -15311,6 +15992,7 @@
       "title": "The endpoint configuration for the Compute Node."
     },
     "InboundEndpoint": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -15350,6 +16032,7 @@
       "title": "An inbound endpoint on a Compute Node."
     },
     "ComputeNodeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -15366,6 +16049,7 @@
       "title": "The result of listing the Compute Nodes in a Pool."
     },
     "ComputeNodeUser": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -15399,6 +16083,7 @@
       "title": "A user Account for RDP or SSH access on a Compute Node."
     },
     "ComputeNodeGetRemoteLoginSettingsResult": {
+      "type": "object",
       "properties": {
         "remoteLoginIPAddress": {
           "type": "string",
@@ -15417,6 +16102,7 @@
       "title": "The remote login settings for a Compute Node."
     },
     "JobSchedulePatchParameter": {
+      "type": "object",
       "properties": {
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -15440,6 +16126,7 @@
       "title": "The set of changes to be made to a Job Schedule."
     },
     "JobScheduleUpdateParameter": {
+      "type": "object",
       "properties": {
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -15467,6 +16154,7 @@
       "title": "The set of changes to be made to a Job Schedule."
     },
     "JobDisableParameter": {
+      "type": "object",
       "properties": {
         "disableTasks": {
           "type": "string",
@@ -15502,6 +16190,7 @@
       "title": "Options when disabling a Job."
     },
     "JobTerminateParameter": {
+      "type": "object",
       "properties": {
         "terminateReason": {
           "type": "string",
@@ -15511,12 +16200,19 @@
       "title": "Options when terminating a Job."
     },
     "JobPatchParameter": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
           "format": "int32",
           "title": "The priority of the Job.",
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged."
+        },
+        "maxParallelTasks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The maximum number of tasks that can be executed in parallel for the job.",
+          "description": "The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",
@@ -15545,6 +16241,7 @@
       "title": "The set of changes to be made to a Job."
     },
     "JobUpdateParameter": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
@@ -15582,6 +16279,7 @@
       "title": "The set of changes to be made to a Job."
     },
     "PoolEnableAutoScaleParameter": {
+      "type": "object",
       "properties": {
         "autoScaleFormula": {
           "type": "string",
@@ -15598,6 +16296,7 @@
       "title": "Options for enabling automatic scaling on a Pool."
     },
     "PoolEvaluateAutoScaleParameter": {
+      "type": "object",
       "properties": {
         "autoScaleFormula": {
           "type": "string",
@@ -15611,6 +16310,7 @@
       "title": "Options for evaluating an automatic scaling formula on a Pool."
     },
     "PoolResizeParameter": {
+      "type": "object",
       "properties": {
         "targetDedicatedNodes": {
           "type": "integer",
@@ -15637,6 +16337,7 @@
       "title": "Options for changing the size of a Pool."
     },
     "PoolUpdatePropertiesParameter": {
+      "type": "object",
       "properties": {
         "startTask": {
           "$ref": "#/definitions/StartTask",
@@ -15676,6 +16377,7 @@
       "title": "The set of changes to be made to a Pool."
     },
     "PoolPatchParameter": {
+      "type": "object",
       "properties": {
         "startTask": {
           "$ref": "#/definitions/StartTask",
@@ -15710,6 +16412,7 @@
       "title": "The set of changes to be made to a Pool."
     },
     "TaskUpdateParameter": {
+      "type": "object",
       "properties": {
         "constraints": {
           "$ref": "#/definitions/TaskConstraints",
@@ -15720,6 +16423,7 @@
       "title": "The set of changes to be made to a Task."
     },
     "NodeUpdateUserParameter": {
+      "type": "object",
       "properties": {
         "password": {
           "type": "string",
@@ -15741,6 +16445,7 @@
       "title": "The set of changes to be made to a user Account on a Compute Node."
     },
     "NodeRebootParameter": {
+      "type": "object",
       "properties": {
         "nodeRebootOption": {
           "type": "string",
@@ -15781,6 +16486,7 @@
       "title": "Options for rebooting a Compute Node."
     },
     "NodeReimageParameter": {
+      "type": "object",
       "properties": {
         "nodeReimageOption": {
           "type": "string",
@@ -15821,6 +16527,7 @@
       "title": "Options for reimaging a Compute Node."
     },
     "NodeDisableSchedulingParameter": {
+      "type": "object",
       "properties": {
         "nodeDisableSchedulingOption": {
           "type": "string",
@@ -15855,6 +16562,7 @@
       "title": "Options for disabling scheduling on a Compute Node."
     },
     "NodeRemoveParameter": {
+      "type": "object",
       "properties": {
         "nodeList": {
           "type": "array",
@@ -15883,6 +16591,7 @@
       "title": "Options for removing Compute Nodes from a Pool."
     },
     "OutputFile": {
+      "type": "object",
       "properties": {
         "filePattern": {
           "type": "string",
@@ -15907,6 +16616,7 @@
       "description": "On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure."
     },
     "OutputFileDestination": {
+      "type": "object",
       "properties": {
         "container": {
           "title": "A location in Azure blob storage to which files are uploaded.",
@@ -15916,6 +16626,7 @@
       "title": "The destination to which a file should be uploaded."
     },
     "OutputFileBlobContainerDestination": {
+      "type": "object",
       "properties": {
         "path": {
           "type": "string",
@@ -15925,7 +16636,12 @@
         "containerUrl": {
           "type": "string",
           "title": "The URL of the container within Azure Blob Storage to which to upload the file(s).",
-          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container."
+          "description": "If not using a managed identity, the URL must include a Shared Access Signature (SAS) granting write permissions to the container."
+        },
+        "identityReference": {
+          "title": "The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl",
+          "description": "The identity must have write access to the Azure Blob Storage container",
+          "$ref": "#/definitions/ComputeNodeIdentityReference"
         }
       },
       "required": [
@@ -15934,6 +16650,7 @@
       "title": "Specifies a file upload destination within an Azure blob storage container."
     },
     "OutputFileUploadOptions": {
+      "type": "object",
       "properties": {
         "uploadCondition": {
           "title": "The conditions under which the Task output file or set of files should be uploaded.",
@@ -15947,6 +16664,7 @@
       "title": "Details about an output file upload operation, including under what conditions to perform the upload."
     },
     "ErrorMessage": {
+      "type": "object",
       "properties": {
         "lang": {
           "type": "string",
@@ -15960,6 +16678,7 @@
       "title": "An error message received in an Azure Batch error response."
     },
     "BatchErrorDetail": {
+      "type": "object",
       "properties": {
         "key": {
           "type": "string",
@@ -15973,6 +16692,7 @@
       "title": "An item of additional information included in an Azure Batch error response."
     },
     "BatchError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -16373,11 +17093,12 @@
       }
     },
     "UploadBatchServiceLogsConfiguration": {
+      "type": "object",
       "properties": {
         "containerUrl": {
           "type": "string",
           "title": "The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s).",
-          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified."
+          "description": "If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified."
         },
         "startTime": {
           "type": "string",
@@ -16390,6 +17111,11 @@
           "format": "date-time",
           "title": "The end of the time range from which to upload Batch Service log file(s).",
           "description": "Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve fewer logs than have been requested. If omitted, the default is to upload all logs available after the startTime."
+        },
+        "identityReference": {
+          "title": "The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl.",
+          "description": "The identity must have write access to the Azure Blob Storage container.",
+          "$ref": "#/definitions/ComputeNodeIdentityReference"
         }
       },
       "required": [
@@ -16399,6 +17125,7 @@
       "title": "The Azure Batch service log files upload configuration for a Compute Node."
     },
     "UploadBatchServiceLogsResult": {
+      "type": "object",
       "properties": {
         "virtualDirectoryName": {
           "type": "string",
@@ -16418,6 +17145,7 @@
       "title": "The result of uploading Batch service log files from a specific Compute Node."
     },
     "PoolNodeCountsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -16434,6 +17162,7 @@
       "title": "The result of listing the Compute Node counts in the Account."
     },
     "PoolNodeCounts": {
+      "type": "object",
       "properties": {
         "poolId": {
           "type": "string",
@@ -16445,7 +17174,7 @@
         },
         "lowPriority": {
           "$ref": "#/definitions/NodeCounts",
-          "title": "The number of low priority Compute Nodes in each state."
+          "title": "The number of low-priority Compute Nodes in each state."
         }
       },
       "required": [
@@ -16454,6 +17183,7 @@
       "title": "The number of Compute Nodes in each state for a Pool."
     },
     "NodeCounts": {
+      "type": "object",
       "properties": {
         "creating": {
           "type": "integer",
@@ -16545,6 +17275,7 @@
       "title": "The number of Compute Nodes in each Compute Node state."
     },
     "MountConfiguration": {
+      "type": "object",
       "properties": {
         "azureBlobFileSystemConfiguration": {
           "$ref": "#/definitions/AzureBlobFileSystemConfiguration",
@@ -16570,6 +17301,7 @@
       "title": "The file system to mount on each node."
     },
     "AzureBlobFileSystemConfiguration": {
+      "type": "object",
       "properties": {
         "accountName": {
           "type": "string",
@@ -16582,12 +17314,12 @@
         "accountKey": {
           "type": "string",
           "title": "The Azure Storage Account key.",
-          "description": "This property is mutually exclusive with sasKey and one must be specified."
+          "description": "This property is mutually exclusive with both sasKey and identity; exactly one must be specified."
         },
         "sasKey": {
           "type": "string",
           "title": "The Azure Storage SAS token.",
-          "description": "This property is mutually exclusive with accountKey and one must be specified."
+          "description": "This property is mutually exclusive with both accountKey and identity; exactly one must be specified."
         },
         "blobfuseOptions": {
           "type": "string",
@@ -16598,6 +17330,11 @@
           "type": "string",
           "title": "The relative path on the compute node where the file system will be mounted",
           "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "identityReference": {
+          "title": "The reference to the user assigned identity to use to access containerName",
+          "description": "This property is mutually exclusive with both accountKey and sasKey; exactly one must be specified.",
+          "$ref": "#/definitions/ComputeNodeIdentityReference"
         }
       },
       "required": [
@@ -16608,6 +17345,7 @@
       "title": "Information used to connect to an Azure Storage Container using Blobfuse."
     },
     "NFSMountConfiguration": {
+      "type": "object",
       "properties": {
         "source": {
           "type": "string",
@@ -16631,6 +17369,7 @@
       "title": "Information used to connect to an NFS file system."
     },
     "CIFSMountConfiguration": {
+      "type": "object",
       "properties": {
         "username": {
           "type": "string",
@@ -16664,6 +17403,7 @@
       "title": "Information used to connect to a CIFS file system."
     },
     "AzureFileShareConfiguration": {
+      "type": "object",
       "properties": {
         "accountName": {
           "type": "string",
@@ -16696,6 +17436,79 @@
         "relativeMountPath"
       ],
       "title": "Information used to connect to an Azure Fileshare."
+    },
+    "BatchPoolIdentity": {
+      "type": "object",
+      "title": "The identity of the Batch pool, if configured.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "The identity of the Batch pool, if configured.",
+          "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "PoolIdentityType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "UserAssigned",
+                "description": "Batch pool has user assigned identities with it."
+              },
+              {
+                "value": "None",
+                "description": "Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities."
+              }
+            ]
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "title": "The list of user identities associated with the Batch account.",
+          "description": "The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "items": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "description": "The identity of the Batch pool, if configured.",
+      "required": [
+        "type"
+      ]
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource id of the user assigned identity"
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of the user assigned identity."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the user assigned identity."
+        }
+      },
+      "description": "The user assigned Identity",
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ComputeNodeIdentityReference": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource id of the user assigned identity."
+        }
+      },
+      "description": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
     }
   },
   "parameters": {

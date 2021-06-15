@@ -48,7 +48,17 @@
             "sku": "20_04-lts",
             "version": "latest"
           },
-          "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+          "nodeAgentSKUId": "batch.node.ubuntu 20.04",
+          "extensions": [
+            {
+              "name": "batchextension1",
+              "type": "SecurityMonitoringForLinux",
+              "publisher": "Microsoft.Azure.Security.Monitoring",
+              "typeHandlerVersion": "1.0",
+              "autoUpgradeMinorVersion": true,
+              "settings": "{\"settingsKey\":\"settingsValue\"}"
+            }
+          ]
         }
       }
     }
