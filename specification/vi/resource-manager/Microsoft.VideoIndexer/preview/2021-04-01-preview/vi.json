@@ -225,6 +225,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "202": {
             "description": "The resource will be updated asynchronously.",
             "schema": {
@@ -233,6 +239,7 @@
           },
           "400": {
             "description": "Bad Request.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             },
@@ -323,6 +330,7 @@
           },
           "400": {
             "description": "Bad Request.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             },
@@ -532,6 +540,7 @@
     },
     "AccountProperties": {
       "description": "Azure Video Analyzer for Media account properties",
+      "type": "object",
       "properties": {
         "accountId": {
           "description": "The account's data-plane ID",
@@ -585,10 +594,12 @@
           "example": "https://management.azure.com/{accountsOperation}?api-version={version}&%24skiptoken={token}"
         }
       },
-      "description": "The list operation response, that contains the data pools and their properties."
+      "description": "The list operation response, that contains the data pools and their properties.",
+      "type": "object"
     },
     "GenerateAccessTokenParameters": {
       "description": "Access token generation request's parameters",
+      "type": "object",
       "required": [
         "permissionType",
         "scope"
@@ -773,6 +784,7 @@
     },
     "OperationListResult": {
       "description": "Available operations of the service.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -792,6 +804,7 @@
     },
     "ErrorResponse": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -801,6 +814,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
