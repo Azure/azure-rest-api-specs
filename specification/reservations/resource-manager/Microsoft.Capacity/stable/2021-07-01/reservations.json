@@ -106,6 +106,7 @@
   "definitions": {
     "ErrorResponseCode": {
       "type": "string",
+      "description": "Possible error codes returned in response",
       "enum": [
         "NotSpecified",
         "InternalServerError",
@@ -258,7 +259,7 @@
     },
     "UserFriendlyAppliedScopeType": {
       "type": "string",
-      "description": "",
+      "description": "The applied scope type",
       "enum": [
         "None",
         "Shared",
@@ -269,7 +270,7 @@
     },
     "UserFriendlyRenewState": {
       "type": "string",
-      "description": "",
+      "description": "The renew state of the reservation",
       "enum": [
         "On",
         "Off",
@@ -358,15 +359,18 @@
     },
     "ReservationProperties": {
       "type": "object",
+      "description": "The properties of the reservations",
       "properties": {
         "displayName": {
           "type": "string",
           "description": "Friendly name for user to easily identify the reservation"
         },
         "appliedScopes": {
+          "description": "The list of applied scopes",
           "$ref": "#/definitions/AppliedScopes"
         },
         "appliedScopeType": {
+          "description": "The applied scope type",
           "$ref": "#/definitions/AppliedScopeType"
         },
         "archived": {
@@ -375,6 +379,7 @@
           "readOnly": true
         },
         "displayProvisioningState": {
+          "description": "Represent the current display state of the Reservation.",
           "$ref": "#/definitions/DisplayProvisioningState"
         },
         "effectiveDateTime": {
@@ -398,6 +403,7 @@
           "description": "The management group display name."
         },
         "provisioningState": {
+          "description": "Represent the current state of the Reservation.",
           "$ref": "#/definitions/ProvisioningState"
         },
         "provisioningSubState": {
@@ -424,6 +430,7 @@
           "description": "Reservation Id of the reservation from which this reservation is renewed."
         },
         "reservedResourceType": {
+          "description": "The type of the resource that is being reserved.",
           "$ref": "#/definitions/ReservedResourceType"
         },
         "reviewDate": {
@@ -440,12 +447,15 @@
           "description": "Subscription name, which is set when appliedScope is Single."
         },
         "term": {
+          "description": "Represent the term of Reservation.",
           "$ref": "#/definitions/ReservationTerm"
         },
         "userFriendlyAppliedScopeType": {
+          "description": "The applied scope type",
           "$ref": "#/definitions/UserFriendlyAppliedScopeType"
         },
         "userFriendlyRenewState": {
+          "description": "The renew state of the reservation",
           "$ref": "#/definitions/UserFriendlyRenewState"
         },
         "utilization": {
@@ -543,19 +553,24 @@
     },
     "Error": {
       "type": "object",
+      "description": "Information about the error response.",
       "properties": {
         "error": {
+          "description": "The details of the error.",
           "$ref": "#/definitions/ExtendedErrorInfo"
         }
       }
     },
     "ExtendedErrorInfo": {
       "type": "object",
+      "description": "Additional information about the error",
       "properties": {
         "code": {
+          "description": "Error code.",
           "$ref": "#/definitions/ErrorResponseCode"
         },
         "message": {
+          "description": "Error message indicating why the operation failed.",
           "type": "string"
         }
       }
@@ -582,9 +597,11 @@
     },
     "ReservationList": {
       "type": "object",
+      "description": "The list of reservations",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The array of reservations.",
           "items": {
             "$ref": "#/definitions/ReservationResponse"
           }
