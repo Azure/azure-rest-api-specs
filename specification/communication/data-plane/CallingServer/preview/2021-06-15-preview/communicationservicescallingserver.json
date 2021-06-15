@@ -43,10 +43,22 @@
             "schema": {
               "$ref": "#/definitions/CreateCallResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Create a new outbound call": {
+          "Create a new call.": {
             "$ref": "./examples/CallConnections_CreateCall.json"
           }
         }
@@ -57,8 +69,8 @@
         "tags": [
           "CallConnection"
         ],
-        "summary": "Hangup a call.",
-        "description": "Hangup a call.",
+        "summary": "Hangup the call.",
+        "description": "Hangup the call.",
         "operationId": "CallConnections_HangupCall",
         "parameters": [
           {
@@ -75,10 +87,25 @@
         "responses": {
           "202": {
             "description": "Returns the hangup call response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Hangup a call": {
+          "Hangup the call.": {
             "$ref": "./examples/CallConnections_HangupCall.json"
           }
         }
@@ -89,8 +116,8 @@
         "tags": [
           "CallConnection"
         ],
-        "summary": "Play audio in a call.",
-        "description": "Play audio in a call.",
+        "summary": "Play audio in the call.",
+        "description": "Play audio in the call.",
         "operationId": "CallConnections_PlayAudio",
         "parameters": [
           {
@@ -119,10 +146,25 @@
             "schema": {
               "$ref": "#/definitions/PlayAudioResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Play audio in a call": {
+          "Play audio in the call.": {
             "$ref": "./examples/CallConnections_PlayAudio.json"
           }
         }
@@ -163,10 +205,25 @@
             "schema": {
               "$ref": "#/definitions/CancelAllMediaOperationsResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Cancel all media operations": {
+          "Cancel all media operations.": {
             "$ref": "./examples/CallConnections_CancelAllMediaOperations.json"
           }
         }
@@ -203,11 +260,29 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the add participant response."
+            "description": "Returns the add participant response.",
+            "schema": {
+              "$ref": "#/definitions/AddParticipantResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Add participant to the call": {
+          "Add a participant to the call.": {
             "$ref": "./examples/ServerCalls_AddParticipant.json"
           }
         }
@@ -243,10 +318,25 @@
         "responses": {
           "202": {
             "description": "Returns the remove participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Remove participant from the call": {
+          "Remove participant from the call.": {
             "$ref": "./examples/ServerCalls_RemoveParticipant.json"
           }
         }
@@ -283,11 +373,29 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the add participant response."
+            "description": "Returns the add participant response.",
+            "schema": {
+              "$ref": "#/definitions/AddParticipantResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Add participant to the call": {
+          "Add a participant to the call.": {
             "$ref": "./examples/CallConnections_AddParticipant.json"
           }
         }
@@ -298,8 +406,8 @@
         "tags": [
           "CallConnection"
         ],
-        "summary": "Remove participant from the call.",
-        "description": "Remove participant from the call.",
+        "summary": "Remove a participant from the call.",
+        "description": "Remove a participant from the call.",
         "operationId": "CallConnections_RemoveParticipant",
         "parameters": [
           {
@@ -323,10 +431,25 @@
         "responses": {
           "202": {
             "description": "Returns the remove participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Remove participant from the call": {
+          "Remove a participant from the call.": {
             "$ref": "./examples/CallConnections_RemoveParticipant.json"
           }
         }
@@ -337,7 +460,7 @@
         "tags": [
           "Recording"
         ],
-        "summary": "Start call recording request.",
+        "summary": "Start recording of the call.",
         "operationId": "ServerCalls_StartRecording",
         "parameters": [
           {
@@ -366,10 +489,25 @@
             "schema": {
               "$ref": "#/definitions/StartCallRecordingResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Start call recording": {
+          "Start recording of the call.": {
             "$ref": "./examples/ServerCalls_StartRecording.json"
           }
         }
@@ -407,10 +545,25 @@
             "schema": {
               "$ref": "#/definitions/CallRecordingProperties"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Get recording properties": {
+          "Get call recording properties.": {
             "$ref": "./examples/ServerCalls_GetRecordingProperties.json"
           }
         }
@@ -419,7 +572,7 @@
         "tags": [
           "Recording"
         ],
-        "summary": "Stop recording a call.",
+        "summary": "Stop recording the call.",
         "operationId": "ServerCalls_StopRecording",
         "parameters": [
           {
@@ -443,10 +596,25 @@
         "responses": {
           "200": {
             "description": "Returns the stop call recording response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Stop the recording": {
+          "Stop recording the call.": {
             "$ref": "./examples/ServerCalls_StopRecording.json"
           }
         }
@@ -457,7 +625,7 @@
         "tags": [
           "Recording"
         ],
-        "summary": "Pause recording a call.",
+        "summary": "Pause recording the call.",
         "operationId": "ServerCalls_PauseRecording",
         "parameters": [
           {
@@ -481,10 +649,25 @@
         "responses": {
           "200": {
             "description": "Returns the pause call recording response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Pause the recording": {
+          "Pause recording the call.": {
             "$ref": "./examples/ServerCalls_PauseRecording.json"
           }
         }
@@ -495,7 +678,7 @@
         "tags": [
           "Recording"
         ],
-        "summary": "Resume recording a call.",
+        "summary": "Resume recording the call.",
         "operationId": "ServerCalls_ResumeRecording",
         "parameters": [
           {
@@ -519,10 +702,25 @@
         "responses": {
           "200": {
             "description": "Returns the resume call recording response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Resume the recording": {
+          "Resume recording the call.": {
             "$ref": "./examples/ServerCalls_ResumeRecording.json"
           }
         }
@@ -563,10 +761,22 @@
             "schema": {
               "$ref": "#/definitions/JoinCallResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Join a call": {
+          "Join a call.": {
             "$ref": "./examples/ServerCalls_JoinCall.json"
           }
         }
@@ -577,8 +787,8 @@
         "tags": [
           "ServerCall"
         ],
-        "summary": "Play audio in a call.",
-        "description": "Play audio in a call.",
+        "summary": "Play audio in the call.",
+        "description": "Play audio in the call.",
         "operationId": "ServerCalls_PlayAudio",
         "parameters": [
           {
@@ -607,10 +817,25 @@
             "schema": {
               "$ref": "#/definitions/PlayAudioResult"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         },
         "x-ms-examples": {
-          "Play audio in a call": {
+          "Play audio in the call.": {
             "$ref": "./examples/ServerCalls_PlayAudio.json"
           }
         }
@@ -843,6 +1068,16 @@
         },
         "callbackUri": {
           "description": "The callback URI.",
+          "type": "string"
+        }
+      }
+    },
+    "AddParticipantResult": {
+      "description": "The add participant result",
+      "type": "object",
+      "properties": {
+        "participantId": {
+          "description": "The id of the added participant.",
           "type": "string"
         }
       }
@@ -1111,6 +1346,9 @@
         }
       }
     },
+    "CommunicationErrorResponse": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+    },
     "CommunicationError": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     }
@@ -1132,6 +1370,43 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    }
+  },
+  "responses": {
+    "400": {
+      "description": "BadRequest",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "401": {
+      "description": "Unauthorized",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "403": {
+      "description": "Forbidden",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "404": {
+      "description": "NotFound",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "500": {
+      "description": "InternalServerError",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
     }
   },
   "x-ms-parameterized-host": {
