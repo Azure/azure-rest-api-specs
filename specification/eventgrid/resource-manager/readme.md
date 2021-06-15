@@ -26,7 +26,16 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-preview
+tag: package-2021-06-preview
+```
+
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.EventGrid/preview/2021-06-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-10-preview

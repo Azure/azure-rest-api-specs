@@ -45,4 +45,3 @@ output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid/azure/mgmt/e
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid
 ```
-
