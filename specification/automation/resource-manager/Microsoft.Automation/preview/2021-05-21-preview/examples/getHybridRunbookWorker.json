@@ -4,24 +4,23 @@
     "resourceGroupName": "rg",
     "automationAccountName": "testaccount",
     "hybridRunbookWorkerGroupName": "TestHybridGroup",
-    "api-version": "2021-05-21-preview",
-    "GetV1HybridRunbookWorkerParameters": {
-      "machineId": "00000000-0000-0000-0000-000000000001"
-    }
+    "hybridRunbookWorkerId": "c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+    "api-version": "2021-05-21-preview"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "name": "myworker",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup/hybridRunbookWorkers/c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+        "name": "c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+        "type": "Microsoft.Automation/AutomationAccounts/HybridRunbookWorkerGroups/HybridRunbookWorkers",
         "properties": {
           "ip": "10.0.0.0",
           "registeredDateTime": "2018-04-24T16:30:55+00:00",
           "lastSeenDateTime": "2018-04-24T16:30:55+00:00",
-          "azureResourceId": "",
-          "machineId": "00000000-0000-0000-0000-000000000001",
-          "workerConnectionStatus": "Connected",
-          "workerType": "HybridV1"
+          "vmResourceId": "/subscriptions/vmsubid/resourceGroups/vmrg/providers/Microsoft.Compute/virtualMachines/vmname",
+          "workerName": "vmname",
+          "workerType": "HybridV2"
         },
         "systemData": {
           "createdBy": "foo@contoso.com",

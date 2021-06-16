@@ -36,19 +36,19 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerId}": {
       "delete": {
         "tags": [
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Delete",
-        "description": "Delete a V2 hybrid runbook worker.",
+        "description": "Delete a hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
           "Delete a V2 hybrid runbook worker": {
-            "$ref": "./examples/deleteV2HybridRunbookWorker.json"
+            "$ref": "./examples/deleteHybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -66,11 +66,11 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "name": "hybridRunbookWorkerName",
+            "name": "hybridRunbookWorkerId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The hybrid runbook worker name"
+            "description": "The hybrid runbook worker id"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -99,13 +99,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Get",
-        "description": "Retrieve a V2 hybrid runbook worker.",
+        "description": "Retrieve a hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
           "Get a V2 hybrid runbook worker": {
-            "$ref": "./examples/getV2HybridRunbookWorker.json"
+            "$ref": "./examples/getHybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -123,11 +123,11 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "name": "hybridRunbookWorkerName",
+            "name": "hybridRunbookWorkerId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The hybrid runbook worker name"
+            "description": "The hybrid runbook worker id"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -156,13 +156,13 @@
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Put",
-        "description": "Create a V2 hybrid runbook worker.",
+        "description": "Create a hybrid runbook worker.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
           "Create a V2 hybrid runbook worker": {
-            "$ref": "./examples/putV2HybridRunbookWorker.json"
+            "$ref": "./examples/putHybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -180,11 +180,11 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "name": "hybridRunbookWorkerName",
+            "name": "hybridRunbookWorkerId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The hybrid runbook worker name"
+            "description": "The hybrid runbook worker id"
           },
           {
             "name": "HybridRunbookWorkerCreationParameters",
@@ -218,19 +218,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerName}/move": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerId}/move": {
       "post": {
         "tags": [
           "HybridRunbookWorker"
         ],
         "operationId": "HybridRunbookWorker_Move",
-        "description": "Move a V2 hybrid worker to a different group.",
+        "description": "Move a hybrid worker to a different group.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
         },
         "x-ms-examples": {
           "Move a V2 hybrid worker to a different group": {
-            "$ref": "./examples/moveV2HybridRunbookWorker.json"
+            "$ref": "./examples/moveHybridRunbookWorker.json"
           }
         },
         "parameters": [
@@ -248,11 +248,11 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "name": "hybridRunbookWorkerName",
+            "name": "hybridRunbookWorkerId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The hybrid runbook worker name"
+            "description": "The hybrid runbook worker id"
           },
           {
             "name": "HybridRunbookWorkerMoveParameters",
@@ -385,13 +385,9 @@
           "description": "Last Heartbeat from the Worker",
           "x-nullable": false
         },
-        "azureResourceId": {
+        "vmResourceId": {
           "type": "string",
           "description": "Azure Resource Manager Id for a virtual machine."
-        },
-        "machineId": {
-          "type": "string",
-          "description": "Machine Id of the HybridWorker"
         },
         "workerType": {
           "type": "string",
@@ -405,18 +401,9 @@
             "modelAsString": true
           }
         },
-        "workerConnectionStatus": {
+        "workerName": {
           "type": "string",
-          "description": "Status of the HybridWorker.",
-          "enum": [
-            "NotConnected",
-            "Connected",
-            "DisConnected"
-          ],
-          "x-ms-enum": {
-            "name": "workerConnectionStatusEnum",
-            "modelAsString": true
-          }
+          "description": "Name of the HybridWorker."
         }
       },
       "description": "Definition of hybrid runbook worker property."
@@ -439,7 +426,7 @@
     },
     "HybridRunbookWorkerMoveParameters": {
       "properties": {
-        "targetHybridRunbookWorkerGroup": {
+        "hybridRunbookWorkerGroupName": {
           "type": "string",
           "description": "Gets or sets the target hybrid runbook worker group."
         }
