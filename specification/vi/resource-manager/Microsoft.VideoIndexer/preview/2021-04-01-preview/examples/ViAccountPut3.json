@@ -5,9 +5,16 @@
     "api-version": "2021-04-01-preview",
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
+      "location": "NorthEurope",
       "properties": {
         "mediaServices": {
-          "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms"
+          "resourceId": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentities": {
+              "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
+            }
+          }
         }
       }
     }
@@ -36,7 +43,7 @@
         }
       }
     },
-    "202": {
+    "201": {
       "body": {
         "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
         "name": "contosto-videoanalyzer",
@@ -62,8 +69,8 @@
     "400": {
       "body": {
         "error": {
-          "code": "MS_IN_ANOTHER_LOCATION",
-          "message": "Can not connect to a Media Services account which is not in the same location as the VideoIndexer account"
+          "code": "MS_UNREACHABLE",
+          "message": "Failed to connect to Media Services account"
         }
       }
     }
