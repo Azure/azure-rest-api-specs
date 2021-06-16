@@ -5,6 +5,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 azure-arm: true
+tag: package-2020-01-01
 fluent: true
 namespace: com.microsoft.azure.management.postgresql
 license-header: MICROSOFT_MIT_NO_CODEGEN
