@@ -7,36 +7,41 @@
     "alertId": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8",
     "alertModel": {
       "properties": {
-        "entities": [
-          {
-            "$id": "1",
-            "CommandLine": "docker run --privileged",
-            "Type": "process"
-          }
-        ],
-        "extendedProperties": {
-          "CommandLine": "docker run --privileged",
-          "User Name": "aUser",
-          "UserId": "",
-          "ParentProcessId": 1593,
-          "DeviceId": "device-1"
-        },
-        "status": "New"
+        "severity": "Medium",
+        "status": "InProgress"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "default",
-        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/myHub/providers/Microsoft.IoTSecurity/sites/default",
-        "type": "Microsoft.IoTSecurity/sites",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.IoTSecurity/locations/eastus/deviceGroups/default/alerts/903e76ff-17eb-4bac-ac8a-2bc31ab68fd8",
+        "name": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8",
+        "type": "Microsoft.IoTSecurity/alerts",
         "properties": {
-          "displayName": "IoT site name",
-          "tags": {
-            "key1": "value1",
-            "key2": "value2"
-          }
+          "systemAlertId": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8",
+          "azureResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.IoTSecurity/locations/eastus/deviceGroups/default/devices/device-1",
+          "alertType": "IoT_PrivilegedContainer",
+          "startTimeUtc": "2020-05-13T06:32:25Z",
+          "endTimeUtc": "2020-05-13T06:32:25Z",
+          "entities": [
+            {
+              "$id": "1",
+              "CommandLine": "docker run --privileged",
+              "Type": "process"
+            }
+          ],
+          "extendedProperties": {
+            "CommandLine": "docker run --privileged",
+            "User Name": "aUser",
+            "UserId": "",
+            "ParentProcessId": 1593,
+            "DeviceId": "device-1"
+          },
+          "severity": "Medium",
+          "intent": "PreAttack",
+          "productComponentName": "IoT Hub",
+          "status": "InProgress"
         },
         "systemData": {
           "createdBy": "string",
