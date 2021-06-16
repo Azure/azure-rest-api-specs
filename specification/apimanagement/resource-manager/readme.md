@@ -488,6 +488,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_api_management']
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli
 ```
 
 ## C#
@@ -516,7 +517,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AZ
 
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Suppression
 
