@@ -51,7 +51,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdeployment.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdiagnostics.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimemailtemplates.json
-  - Microsoft.ApiManagement/preview/2021-01-01-preview/apimeventgridfilters.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimeventgridfilters.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgateways.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgroups.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimidentityprovider.json
