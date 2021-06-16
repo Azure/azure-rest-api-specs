@@ -1,0 +1,470 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Analyze Conversations",
+    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, LUIS Deepstack, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
+    "version": "2021-05-01-preview"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "common.json#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/:analyze-conversations": {
+      "post": {
+        "description": "Analyzes the input conversation.",
+        "operationId": "ConversationAnalysis_AnalyzeConversations",
+        "parameters": [
+          {
+            "name": "projectName",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The project name."
+          },
+          {
+            "name": "deploymentName",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The deployment name/deployed version."
+          },
+          {
+            "$ref": "#/parameters/ConversationAnalysisInput"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The conversation analysis response.",
+            "schema": {
+              "$ref": "#/definitions/ConversationAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulAnalyzeConversations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConversationAnalysisInput": {
+      "type": "object",
+      "description": "The request body.",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The conversation utterance to be analyzed.",
+          "type": "string"
+        },
+        "directTarget": {
+          "type": "string",
+          "description": "The name of the target project this request is sending to directly."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language to use in this request. This will be the language setting when communicating all target projects."
+        },
+        "verbose": {
+          "type": "boolean",
+          "description": "If true, the service will return more detailed information in the response."
+        },
+        "isLoggingEnabled": {
+          "description": "If true, the query will be kept by the service for customers to further review, to improve the model quality.",
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "A dictionary representing the input for each target project.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeParameters"
+          }
+        }
+      }
+    },
+    "AnalyzeParameters": {
+      "type": "object",
+      "description": "This is the parameter set of either the conversation application itself or one of the target projects.",
+      "required": [
+        "projectType"
+      ],
+      "discriminator": "projectType",
+      "properties": {
+        "projectType": {
+          "type": "string",
+          "description": "The type of the project. It could be one of the following values.",
+          "enum": [
+            "luis_v2",
+            "luis_v3",
+            "luis_deepstack",
+            "question_answering"
+          ],
+          "x-ms-enum": {
+            "name": "projectType",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use when call a specific target project."
+        }
+      }
+    },
+    "LUISV2Parameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
+      "x-ms-discriminator-value": "luis_v2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeParameters"
+        }
+      ],
+      "properties": {
+        "projectParameters": {
+          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/Q"
+        }
+      }
+    },
+    "LUISV3Parameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v3.0.",
+      "x-ms-discriminator-value": "luis_v3",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeParameters"
+        }
+      ],
+      "properties": {
+        "projectParameters": {
+          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
+        }
+      }
+    },
+    "DeepstackParameters": {
+      "description": "This is a set of request parameters for LUIS Deepstack projects.",
+      "x-ms-discriminator-value": "luis_deepstack",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeParameters"
+        }
+      ],
+      "properties": {
+        "language": {
+          "description": "The detected language of the input query.",
+          "type": "string"
+        },
+        "verbose": {
+          "description": "If true, the service will return more detailed information.",
+          "type": "boolean"
+        },
+        "isLoggingEnabled": {
+          "description": "If true, the query will be saved for customers to further review in authoring, to improve the model quality.",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuestionAnsweringParameters": {
+      "description": "This is a set of request parameters for Question Answering knowledge bases.",
+      "x-ms-discriminator-value": "question_answering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeParameters"
+        }
+      ],
+      "properties": {
+        "projectParameters": {
+          "$ref": "questionanswering.json#/definitions/KnowledgebaseQueryParameters"
+        }
+      }
+    },
+    "ConversationAnalysisResult": {
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "type": "object",
+      "description": "Represents a conversation analysis response.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The conversation utterance given by the caller."
+        },
+        "prediction": {
+          "description": "The prediction result of a conversation project.",
+          "$ref": "#/definitions/AnalyzePrediction"
+        }
+      }
+    },
+    "AnalyzePrediction": {
+      "required": [
+        "topIntent",
+        "intents"
+      ],
+      "description": "Represents the prediction section in the response body.",
+      "type": "object",
+      "properties": {
+        "topIntent": {
+          "description": "The name of the top scoring intent.",
+          "type": "string"
+        },
+        "intents": {
+          "description": "A dictionary that contains all intents. Each key is an intent name and the value is its confidence score and project type. The top intent's value also contains the actual response from the target project.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseIntent"
+          }
+        }
+      }
+    },
+    "BaseIntent": {
+      "type": "object",
+      "description": "This is the base class of an intent prediction",
+      "discriminator": "projectType",
+      "required": [
+        "confidenceScore",
+        "projectType"
+      ],
+      "properties": {
+        "projectType": {
+          "type": "string",
+          "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
+          "enum": [
+            "luis_v2",
+            "luis_v3",
+            "luis_deepstack",
+            "question_answering"
+          ],
+          "x-ms-enum": {
+            "name": "projectType",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version used to call a target project."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The prediction score and it ranges from 0.0 to 1.0.",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "DeepstackIntent": {
+      "description": "A wrap up of LUIS Deepstack response.",
+      "x-ms-discriminator-value": "luis_deepstack",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseIntent"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "#/definitions/DeepstackResult",
+          "description": "The actual response from a LUIS Deepstack application.",
+          "x-nullable": true
+        }
+      }
+    },
+    "DeepstackResult": {
+      "type": "object",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "properties": {
+        "query": {
+          "description": "The same query given in request.",
+          "type": "string"
+        },
+        "detectedLanguage": {
+          "description": "The detected language from the query.",
+          "type": "string"
+        },
+        "prediction": {
+          "description": "The predicted result for the query.",
+          "$ref": "#/definitions/DeepstackPrediction"
+        }
+      }
+    },
+    "DeepstackPrediction": {
+      "required": [
+        "classifications",
+        "entities"
+      ],
+      "type": "object",
+      "properties": {
+        "classifications": {
+          "description": "The classification results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepstackClassification"
+          }
+        },
+        "entities": {
+          "description": "The entity extraction results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepstackEntity"
+          }
+        }
+      }
+    },
+    "DeepstackClassification": {
+      "required": [
+        "category",
+        "confidenceScore"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "A predicted class.",
+          "type": "string"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "description": "The confidence score of the class from 0.0 to 1.0.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "DeepstackEntity": {
+      "required": [
+        "category",
+        "text",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The entity category.",
+          "type": "string"
+        },
+        "text": {
+          "description": "The predicted entity text.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "The starting index of this entity in the query.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "The length of the text.",
+          "type": "integer"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "description": "The entity confidence score.",
+          "type": "number"
+        }
+      }
+    },
+    "LUISIntentV2": {
+      "description": "It is a wrap up of LUIS Generally Available v2.0 response.",
+      "x-ms-discriminator-value": "luis_v2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseIntent"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/LuisResult",
+          "description": "The actual response from a LUIS Generally Available application and API version v2.0.",
+          "x-nullable": true
+        }
+      }
+    },
+    "LUISIntentV3": {
+      "description": "It is a wrap up a LUIS Generally Available v3.0 response.",
+      "x-ms-discriminator-value": "luis_v3",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseIntent"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionResponse",
+          "description": "The actual response from a LUIS Generally Available application and API version v3.0.",
+          "x-nullable": true
+        }
+      }
+    },
+    "QuestionAnsweringIntent": {
+      "description": "It is a wrap up a Question Answering KB response.",
+      "x-ms-discriminator-value": "question_answering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseIntent"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "questionanswering.json#/definitions/KnowledgebaseAnswers",
+          "description": "The generated answer by a Question Answering KB.",
+          "x-nullable": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConversationAnalysisInput": {
+      "name": "ConversationAnalysisInput",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ConversationAnalysisInput"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
