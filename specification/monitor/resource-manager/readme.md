@@ -656,6 +656,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: R4009
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateLinkResource
+    reason: 'This is a read only resource as defined in the Network RP private endpoint spec.'
+  - suppress: R4009
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnection
+    reason: 'Contract is defined in the Network RP private endpoint spec, can be updated by internal calls from Network RP. '
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.queryOnlyPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
   - suppress: OperationsAPIImplementation
     from: privateLinkScopes_API.json
     where: $.paths
