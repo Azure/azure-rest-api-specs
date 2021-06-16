@@ -43,7 +43,11 @@
                 ],
                 "operationId": "Share_Create",
                 "description": "Creates a new share under the specified account. If the share with the same name already exists, the operation fails.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -116,7 +120,11 @@
                 ],
                 "operationId": "Share_Delete",
                 "description": "Operation marks the specified share or share snapshot for deletion. The share or share snapshot and any files contained within it are later deleted during garbage collection.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
                         "$ref": "#/parameters/ShareSnapshot"
                     },
                     {
@@ -177,14 +185,21 @@
                 ]
             }]
         },
-        "/{shareName}/{directory}?restype=directory": {
+        "/{shareName}/{directoryPath}?restype=directory": {
             "put": {
                 "tags": [
                     "directory"
                 ],
                 "operationId": "Directory_Create",
                 "description": "Creates a new directory under the specified share or parent directory.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -303,7 +318,14 @@
                 ],
                 "operationId": "Directory_Delete",
                 "description": "Removes the specified empty directory. Note that the directory must be empty before it can be deleted.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -355,7 +377,7 @@
                 ]
             }]
         },
-        "/{shareName}/{directory}?restype=directory&comp=list": {
+        "/{shareName}/{directoryPath}?restype=directory&comp=list": {
             "get": {
                 "tags": [
                     "directory"
@@ -363,6 +385,12 @@
                 "operationId": "Directory_ListFilesAndDirectoriesSegment",
                 "description": "Returns a list of files or directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy.",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
                     {
                         "$ref": "#/parameters/Prefix"
                     },
@@ -444,7 +472,7 @@
                 }
             ]
         },
-        "/{shareName}/{directory}/{fileName}": {
+        "/{shareName}/{directoryPath}/{filePath}": {
             "put": {
                 "tags": [
                     "file"
@@ -452,6 +480,15 @@
                 "operationId": "File_Create",
                 "description": "Creates a new file or replaces a file. Note it only initializes the file with no content.",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePath"
+                    },
                     {
                         "$ref": "#/parameters/Timeout"
                     },
@@ -604,7 +641,17 @@
                 ],
                 "operationId": "File_Download",
                 "description": "Reads or downloads a file from the system, including its metadata and properties.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePath"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -1061,7 +1108,17 @@
                 ],
                 "operationId": "File_Delete",
                 "description": "removes the file from the storage account.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePath"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -1110,7 +1167,7 @@
 
             ]
         },
-        "/{shareName}/{directory}/{fileName}?comp=range": {
+        "/{shareName}/{directoryPath}/{filePath}?comp=range": {
             "put": {
                 "tags": [
                     "file"
@@ -1121,6 +1178,15 @@
                     "application/octet-stream"
                 ],
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePath"
+                    },
                     {
                         "$ref": "#/parameters/OptionalBody"
                     },
@@ -1230,14 +1296,24 @@
                 ]
             }]
         },
-        "/{shareName}/{directory}/{fileName}?comp=rangelist": {
+        "/{shareName}/{directoryPath}/{filePath}?comp=rangelist": {
             "get": {
                 "tags": [
                     "file"
                 ],
                 "operationId": "File_GetRangeList",
                 "description": "Returns the list of valid ranges for a file.",
-                "parameters": [{
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ShareName"
+                    },
+                    {
+                        "$ref": "#/parameters/DirectoryPath"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePath"
+                    },
+                    {
                         "$ref": "#/parameters/ShareSnapshot"
                     },
                     {
@@ -1615,6 +1691,32 @@
         }
     },
     "parameters": {
+        "ShareName": {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the target share.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "DirectoryPath": {
+            "name": "directoryPath",
+            "in": "path",
+            "description": "The path of the target directory.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": false
+        },
+        "FilePath": {
+            "name": "filePath",
+            "in": "path",
+            "description": "The path of the target file.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": false
+        },
         "AccessTierOptional": {
             "name": "x-ms-access-tier",
             "x-ms-client-name": "accessTier",

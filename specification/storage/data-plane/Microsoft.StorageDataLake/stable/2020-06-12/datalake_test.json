@@ -37,14 +37,13 @@
         "operationId": "FileSystem_ListPaths",
         "summary": "List Paths",
         "description": "List FileSystem paths and their properties.",
-        "x-ms-pageable": {
-          "itemName": "paths",
-          "nextLinkName": null
-        },
         "tags": [
           "FileSystem Operations"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/FileSystem"
+          },
           {
             "$ref": "#/parameters/Continuation"
           },
@@ -142,6 +141,12 @@
           "File and Directory Operations"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/FileSystem"
+          },
+          {
+            "$ref": "#/parameters/Path"
+          },
           {
             "name": "resource",
             "in": "query",
@@ -298,6 +303,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/FileSystem"
+          },
+          {
+            "$ref": "#/parameters/Path"
+          },
+          {
             "$ref": "#/parameters/RecursiveOptional"
           },
           {
@@ -385,6 +396,12 @@
         "operationId": "Path_FlushData",
         "description": "Set the owner, group, permissions, or access control list for a path.",
         "parameters": [
+          {
+            "$ref": "#/parameters/FileSystem"
+          },
+          {
+            "$ref": "#/parameters/Path"
+          },
           {
             "$ref": "#/parameters/Timeout"
           },
@@ -524,9 +541,18 @@
         "tags": [
           "directory"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "Path_AppendData",
         "description": "Append data to the file.",
         "parameters": [
+          {
+            "$ref": "#/parameters/FileSystem"
+          },
+          {
+            "$ref": "#/parameters/Path"
+          },
           {
             "$ref": "#/parameters/Position"
           },
@@ -887,7 +913,8 @@
       "in": "path",
       "description": "The file or directory path.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-skip-url-encoding": true
     },
     "CacheControl": {
       "name": "x-ms-cache-control",
@@ -897,7 +924,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Optional. Sets the blob's cache control. If specified, this property is stored with the blob and returned with a read request."
     },
@@ -909,7 +936,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Optional. Sets the blob's Content-Disposition header."
     },
@@ -921,7 +948,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Optional. Sets the blob's content encoding. If specified, this property is stored with the blob and returned with a read request."
     },
@@ -933,7 +960,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Optional. Set the blob's content language. If specified, this property is stored with the blob and returned with a read request."
     },
@@ -945,7 +972,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request."
     },
@@ -958,7 +985,7 @@
       "format": "byte",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Specify the transactional md5 for the body, to be validated by the service."
     },
@@ -971,7 +998,7 @@
       "format": "byte",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
-        "name": "path-HTTP-headers"
+        "name": "path-http-headers"
       },
       "description": "Specify the transactional md5 for the body, to be validated by the service."
     },

@@ -114,10 +114,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "itemName": "Segment",
-          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -222,10 +218,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "itemName": "Segment",
-          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -256,6 +248,7 @@
         ],
         "operationId": "Blob_Download",
         "description": "The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot.",
+        "x-csharp-buffer-response": false,
         "parameters": [
           {
             "$ref": "#/parameters/ContainerName"
@@ -859,6 +852,16 @@
             "schema": {
               "type": "object",
               "format": "file"
+            }
+          },
+          "304": {
+            "description": "The condition specified using HTTP conditional header(s) is not met.",
+            "x-az-response-name": "ConditionNotMetError",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2368,14 +2371,6 @@
       "xml": {
         "name": "Metadata"
       },
-      "properties": {
-        "Encrypted": {
-          "type": "string",
-          "xml": {
-            "attribute": true
-          }
-        }
-      },
       "additionalProperties": {
         "type": "string"
       }
@@ -2442,7 +2437,7 @@
       ],
       "x-ms-enum": {
         "name": "RehydratePriority",
-        "modelAsString": true
+        "modelAsString": false
       },
       "xml": {
         "name": "RehydratePriority"
@@ -3204,7 +3199,8 @@
       "in": "header",
       "required": false,
       "enum": [
-        "AES256"
+        "AES256",
+        "None"
       ],
       "x-ms-enum": {
         "name": "EncryptionAlgorithmType",
