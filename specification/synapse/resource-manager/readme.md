@@ -52,6 +52,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
   - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
 ```
 
 ### Tag: package-2021-05
