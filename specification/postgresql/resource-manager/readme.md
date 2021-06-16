@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2021-06-15-privatepreview` is spec
 ``` yaml $(tag) == 'package-2021-06-15-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
 ```
 
 ### Tag: package-2021-06-01
