@@ -1337,27 +1337,6 @@
         "$ref": "#/definitions/ArmServiceTypeHealthPolicy"
       }
     },
-    "AvailableOperationDisplay": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The name of the provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that can be performed."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description"
-        }
-      },
-      "description": "Operation supported by the Service Fabric resource provider"
-    },
     "CorrelationSchemeList": {
       "type": "array",
       "items": {
@@ -1500,44 +1479,6 @@
           "description": "Array of size specified by the ‘count’ parameter, for the names of the partitions."
         }
       }
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the Service Fabric resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      },
-      "description": "Describes the result of the request to list Service Fabric resource provider operations."
-    },
-    "OperationResult": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "display": {
-          "$ref": "#/definitions/AvailableOperationDisplay",
-          "description": "The object that represents the operation."
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin result"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Available operation list result"
     },
     "PartitionScheme": {
       "type": "string",
