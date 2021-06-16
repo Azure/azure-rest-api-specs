@@ -990,7 +990,6 @@
     "PrivateEndpointIPConfiguration": {
       "type":"object",
       "properties": {
-        "type":"object",
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateEndpointIPConfigurationProperties",
@@ -999,6 +998,16 @@
         "name": {
           "type": "string",
           "description": "The name of the resource that is unique within a resource group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "description": "An IP Configuration of the private endpoint."
