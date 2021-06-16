@@ -158,7 +158,7 @@
             "$ref": "#/parameters/AlertId"
           },
           {
-            "$ref": "#/parameters/AlertModel"
+            "$ref": "#/parameters/AlertPatchModel"
           }
         ],
         "responses": {
@@ -420,6 +420,66 @@
           }
         }
       }
+    },
+    "AlertPatchPropertiesModel": {
+      "type": "object",
+      "description": "IoT alert properties",
+      "properties": {
+        "severity": {
+          "type": "string",
+          "example": "Medium",
+          "description": "The severity of the alert",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "alertSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "status": {
+          "type": "string",
+          "example": "New",
+          "description": "The status of the alert",
+          "enum": [
+            "New",
+            "InProgress",
+            "Closed"
+          ],
+          "x-ms-enum": {
+            "name": "alertStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "New"
+              },
+              {
+                "value": "InProgress"
+              },
+              {
+                "value": "Closed"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -439,13 +499,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "AlertModel": {
-      "name": "alertModel",
+    "AlertPatchModel": {
+      "name": "alertPatchModel",
       "in": "body",
       "required": true,
       "description": "IoT alert",
       "schema": {
-        "$ref": "#/definitions/AlertModel"
+        "$ref": "#/definitions/AlertPatchPropertiesModel"
       },
       "x-ms-parameter-location": "method"
     }
