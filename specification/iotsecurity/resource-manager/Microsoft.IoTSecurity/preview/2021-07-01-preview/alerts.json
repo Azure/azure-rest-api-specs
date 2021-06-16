@@ -139,8 +139,8 @@
         "tags": [
           "IoT Security Alerts"
         ],
-        "operationId": "IotAlerts_Put",
-        "description": "Update alert",
+        "operationId": "IotAlerts_Patch",
+        "description": "Update an existing alert",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -220,6 +220,44 @@
         }
       ]
     },
+    "AlertSeverity": {
+      "type": "string",
+      "description": "Alert Severity",
+      "enum": [
+        "Informational",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "alertSeverity",
+        "modelAsString": true
+      }
+    },
+    "AlertStatus": {
+      "type": "string",
+      "description": "Alert Status",
+      "enum": [
+        "New",
+        "InProgress",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "alertStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "New"
+          },
+          {
+            "value": "InProgress"
+          },
+          {
+            "value": "Closed"
+          }
+        ]
+      }
+    },
     "AlertPropertiesModel": {
       "type": "object",
       "description": "IoT alert properties",
@@ -256,7 +294,6 @@
         },
         "entities": {
           "description": "A list of entities related to the alert",
-          "readOnly": true,
           "type": "array",
           "items": {
             "type": "object"
@@ -271,7 +308,6 @@
         },
         "extendedProperties": {
           "type": "object",
-          "readOnly": true,
           "description": "A bag of fields which extends the alert information",
           "example": {
             "CommandLine": "docker run --privileged",
@@ -282,33 +318,11 @@
           }
         },
         "severity": {
+          "readOnly": true,
           "type": "string",
           "example": "Medium",
-          "description": "The severity of the alert",
-          "enum": [
-            "Informational",
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "alertSeverity",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Informational"
-              },
-              {
-                "value": "Low"
-              },
-              {
-                "value": "Medium"
-              },
-              {
-                "value": "High"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
         },
         "intent": {
           "readOnly": true,
@@ -398,26 +412,7 @@
           "type": "string",
           "example": "New",
           "description": "The status of the alert",
-          "enum": [
-            "New",
-            "InProgress",
-            "Closed"
-          ],
-          "x-ms-enum": {
-            "name": "alertStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "New"
-              },
-              {
-                "value": "InProgress"
-              },
-              {
-                "value": "Closed"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertStatus"
         }
       }
     },
@@ -429,55 +424,13 @@
           "type": "string",
           "example": "Medium",
           "description": "The severity of the alert",
-          "enum": [
-            "Informational",
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "alertSeverity",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Informational"
-              },
-              {
-                "value": "Low"
-              },
-              {
-                "value": "Medium"
-              },
-              {
-                "value": "High"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertSeverity"
         },
         "status": {
           "type": "string",
           "example": "New",
           "description": "The status of the alert",
-          "enum": [
-            "New",
-            "InProgress",
-            "Closed"
-          ],
-          "x-ms-enum": {
-            "name": "alertStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "New"
-              },
-              {
-                "value": "InProgress"
-              },
-              {
-                "value": "Closed"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertStatus"
         }
       }
     }
