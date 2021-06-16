@@ -33,7 +33,7 @@
         "operationId": "Reservations_List",
         "x-ms-examples": {
           "Catalog": {
-            "$ref": "./examples/reservations.json"
+            "$ref": "./examples/GetReservations.json"
           }
         },
         "parameters": [
@@ -351,6 +351,70 @@
         }
       }
     },
+    "ReservationQuantity": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
+    },
+    "InstanceFlexibility": {
+      "type": "string",
+      "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceFlexibility",
+        "modelAsString": true
+      }
+    },
+    "ReservationStatusCode": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Pending",
+        "Active",
+        "PurchaseError",
+        "PaymentInstrumentError",
+        "Split",
+        "Merged",
+        "Expired",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationStatusCode",
+        "modelAsString": true
+      }
+    },
+    "ExtendedStatusInfo": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/ReservationStatusCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message giving detailed information about the status code."
+        }
+      }
+    },
+    "ReservationBillingPlan": {
+      "type": "string",
+      "description": "Represent the billing plans.",
+      "enum": [
+        "Upfront",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationBillingPlan",
+        "modelAsString": true
+      }
+    },
+    "Renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+    },
     "SkuName": {
       "type": "object",
       "properties": {
@@ -419,8 +483,23 @@
           "description": "The billing plan options available for this SKU.",
           "$ref": "#/definitions/ReservationBillingPlan"
         },
+        "displayProvisioningState": {
+          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningSubState": {
+          "description": "The provisioning state of the reservation, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation was purchased."
+        },
         "renew": {
-          "description": "Whether or not it will automatically purchase a new reservation on the expiration date time.",
+          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time.",
           "$ref": "#/definitions/Renew"
         },
         "renewSource": {
@@ -434,6 +513,35 @@
         "term": {
           "description": "Represent the term of Reservation.",
           "$ref": "#/definitions/ReservationTerm"
+        },
+        "userFriendlyAppliedScopeType": {
+          "description": "The applied scope type of the reservation for display, e.g. Shared",
+          "type": "string",
+          "readOnly": true
+        },
+        "userFriendlyRenewState": {
+          "description": "The renew state of the reservation for display, e.g. On",
+          "type": "string",
+          "readOnly": true
+        },
+        "utilization": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Reservation utilization",
+          "properties": {
+            "trend": {
+              "description": "The number of days trend for a reservation",
+              "readOnly": true,
+              "type": "string"
+            },
+            "aggregates": {
+              "description": "The array of aggregates of a reservation's utilization",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReservationUtilizationAggregates"
+              }
+            }
+          }
         }
       }
     },
