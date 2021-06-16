@@ -27,7 +27,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
 
 - Microsoft.Automation/stable/2021-04-01/operations.json
-- Microsoft.Automation/stable/2021-04-01/sourceControl.json
 
 ```
 

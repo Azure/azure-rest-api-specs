@@ -238,7 +238,7 @@ These settings apply only when `--tag=package-2021-04-01` is specified on the co
 ``` yaml $(tag) == 'package-2021-04-01'
 input-file:
 - Microsoft.Automation/stable/2021-04-01/operations.json
-- Microsoft.Automation/stable/2021-04-01/sourceControl.json
+
 ```
 
 ---
