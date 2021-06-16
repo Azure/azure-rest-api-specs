@@ -2163,6 +2163,12 @@
             "schema": {
               "$ref": "#/definitions/SqlStoredProcedureListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2894,6 +2900,12 @@
             "description": "The RUs per second of the MongoDB database update operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -5987,6 +5999,9 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountGetProperties"
@@ -6750,6 +6765,11 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
+        },
         "instanceId": {
           "description": "A unique identifier assigned to the database account",
           "type": "string",
@@ -6788,6 +6808,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "disableLocalAuth": {
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
+          "type": "boolean"
         }
       }
     },
@@ -6878,6 +6902,11 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
+        },
         "createMode": {
           "description": "Enum to indicate the mode of account creation.",
           "type": "string",
@@ -6906,6 +6935,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "disableLocalAuth": {
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
+          "type": "boolean"
+        },
+        "restoreParameters": {
+          "description": "Parameters to indicate the information about the restore.",
+          "type": "object",
+          "$ref": "#/definitions/RestoreParameters"
         }
       },
       "required": [
@@ -6957,7 +6995,11 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
         }
       },
@@ -7052,6 +7094,11 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
+        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -7074,6 +7121,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "disableLocalAuth": {
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
+          "type": "boolean"
         }
       }
     },
@@ -7088,12 +7139,12 @@
           "type": "string",
           "description": "The location of the resource group to which the resource belongs."
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountUpdateProperties"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -9089,6 +9140,28 @@
         }
       }
     },
+    "AnalyticalStorageConfiguration": {
+      "type": "object",
+      "description": "Analytical storage specific properties.",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "$ref": "#/definitions/AnalyticalStorageSchemaType"
+        }
+      }
+    },
+    "AnalyticalStorageSchemaType": {
+      "type": "string",
+      "description": "Describes the types of schema for analytical storage.",
+      "enum": [
+        "WellDefined",
+        "FullFidelity"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AnalyticalStorageSchemaType"
+      }
+    },
     "CreateMode": {
       "description": "Enum to indicate the mode of account creation.",
       "type": "string",
@@ -9166,8 +9239,14 @@
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "Describes the mode of backups.",
           "type": "string",
           "$ref": "#/definitions/BackupPolicyType"
+        },
+        "migrationState": {
+          "description": "The object representing the state of the migration between the backup policies.",
+          "type": "object",
+          "$ref": "#/definitions/BackupPolicyMigrationState"
         }
       },
       "required": [
@@ -9184,6 +9263,41 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "BackupPolicyType"
+      }
+    },
+    "BackupPolicyMigrationState": {
+      "type": "object",
+      "description": "The object representing the state of the migration between the backup policies.",
+      "properties": {
+        "status": {
+          "description": "Describes the status of migration between backup policy types.",
+          "type": "string",
+          "$ref": "#/definitions/BackupPolicyMigrationStatus"
+        },
+        "targetType": {
+          "description": "Describes the target backup policy type of the backup policy migration.",
+          "type": "string",
+          "$ref": "#/definitions/BackupPolicyType"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the backup policy migration started (ISO-8601 format)."
+        }
+      }
+    },
+    "BackupPolicyMigrationStatus": {
+      "description": "Describes the status of migration between backup policy types.",
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BackupPolicyMigrationStatus"
       }
     },
     "PeriodicModeBackupPolicy": {

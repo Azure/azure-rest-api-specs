@@ -44,6 +44,7 @@
             "isZoneRedundant": false
           }
         ],
+        "createMode": "Default",
         "consistencyPolicy": {
           "defaultConsistencyLevel": "BoundedStaleness",
           "maxIntervalInSeconds": 10,
@@ -59,12 +60,12 @@
         "analyticalStorageConfiguration": {
           "schemaType": "WellDefined"
         },
-        "createMode": "Default",
         "backupPolicy": {
           "type": "Periodic",
           "periodicModeProperties": {
             "backupIntervalInMinutes": 240,
-            "backupRetentionIntervalInHours": 8
+            "backupRetentionIntervalInHours": 8,
+            "backupStorageRedundancy": "Geo"
           }
         },
         "cors": [
@@ -95,7 +96,7 @@
           "userAssignedIdentities": {
             "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
               "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
-              "principalId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
             }
           }
         },
@@ -192,7 +193,8 @@
             "type": "Periodic",
             "periodicModeProperties": {
               "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 8
+              "backupRetentionIntervalInHours": 8,
+              "backupStorageRedundancy": "Geo"
             }
           },
           "cors": [

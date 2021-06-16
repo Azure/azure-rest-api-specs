@@ -46,7 +46,8 @@
           "type": "Periodic",
           "periodicModeProperties": {
             "backupIntervalInMinutes": 240,
-            "backupRetentionIntervalInHours": 720
+            "backupRetentionIntervalInHours": 720,
+            "backupStorageRedundancy": "Geo"
           }
         },
         "networkAclBypass": "AzureServices",
@@ -74,7 +75,7 @@
           "userAssignedIdentities": {
             "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
               "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
-              "principalId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
             }
           }
         },
@@ -131,6 +132,7 @@
               "failoverPriority": 0
             }
           ],
+          "cors": [],
           "virtualNetworkRules": [
             {
               "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
@@ -151,11 +153,12 @@
               }
             }
           ],
-          "cors": [],
           "defaultIdentity": "FirstPartyIdentity",
           "enableFreeTier": false,
           "apiProperties": {},
           "enableAnalyticalStorage": true,
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "createMode": "Default",
           "analyticalStorageConfiguration": {
             "schemaType": "WellDefined"
           },
@@ -163,13 +166,17 @@
             "type": "Periodic",
             "periodicModeProperties": {
               "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 720
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Geo"
             }
           },
           "networkAclBypass": "AzureServices",
           "networkAclBypassResourceIds": [
             "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
           ]
+        },
+        "systemData": {
+          "createdAt": "2021-03-12T22:05:09Z"
         }
       }
     }
