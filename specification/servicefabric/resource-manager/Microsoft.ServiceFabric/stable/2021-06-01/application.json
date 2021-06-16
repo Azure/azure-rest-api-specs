@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2020-03-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1013,13 +1013,11 @@
       "description": "The application resource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "Describes the managed identities for an Azure resource."
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplicationResourceProperties",
-          "description": "The application resource properties."
+          "$ref": "#/definitions/ApplicationResourceProperties"
         }
       },
       "allOf": [
@@ -1058,8 +1056,7 @@
           "description": "The current deployment or provisioning state, which only appears in the response"
         },
         "typeName": {
-          "$ref": "#/definitions/ApplicationTypeName",
-          "description": "The application type name as defined in the application manifest."
+          "$ref": "#/definitions/ApplicationTypeName"
         }
       }
     },
@@ -1068,8 +1065,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplicationResourceUpdateProperties",
-          "description": "The application resource properties for patch operations."
+          "$ref": "#/definitions/ApplicationResourceUpdateProperties"
         }
       },
       "allOf": [
@@ -1082,16 +1078,13 @@
       "description": "The application resource properties for patch operations.",
       "properties": {
         "typeVersion": {
-          "$ref": "#/definitions/ApplicationTypeVersion",
-          "description": "The version of the application type as defined in the application manifest."
+          "$ref": "#/definitions/ApplicationTypeVersion"
         },
         "parameters": {
-          "$ref": "#/definitions/ApplicationParameterList",
-          "description": "List of application parameters with overridden values from their default values specified in the application manifest."
+          "$ref": "#/definitions/ApplicationParameterList"
         },
         "upgradePolicy": {
-          "$ref": "#/definitions/ApplicationUpgradePolicy",
-          "description": "Describes the policy for a monitored application upgrade."
+          "$ref": "#/definitions/ApplicationUpgradePolicy"
         },
         "minimumNodes": {
           "type": "integer",
@@ -1111,8 +1104,7 @@
           "description": "Remove the current application capacity settings."
         },
         "metrics": {
-          "$ref": "#/definitions/ApplicationMetricDescriptionList",
-          "description": "List of application capacity metric description."
+          "$ref": "#/definitions/ApplicationMetricDescriptionList"
         },
         "managedIdentities": {
           "description": "List of user assigned identities for the application, each mapped to a friendly name.",
@@ -1139,8 +1131,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplicationTypeResourceProperties",
-          "description": "The application type name properties"
+          "$ref": "#/definitions/ApplicationTypeResourceProperties"
         }
       },
       "allOf": [
@@ -1184,8 +1175,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplicationTypeVersionResourceProperties",
-          "description": "The properties of the application type version resource."
+          "$ref": "#/definitions/ApplicationTypeVersionResourceProperties"
         }
       },
       "allOf": [
@@ -1227,8 +1217,7 @@
         },
         "defaultParameterList": {
           "readOnly": true,
-          "$ref": "#/definitions/ApplicationTypeParameterList",
-          "description": "List of application type parameters that can be overridden when creating or updating the application."
+          "$ref": "#/definitions/ApplicationTypeParameterList"
         }
       }
     },
@@ -1240,20 +1229,16 @@
           "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
         },
         "forceRestart": {
-          "$ref": "#/definitions/ForceRestart",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+          "$ref": "#/definitions/ForceRestart"
         },
         "rollingUpgradeMonitoringPolicy": {
-          "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy",
-          "description": "The policy used for monitoring the application upgrade"
+          "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy"
         },
         "applicationHealthPolicy": {
-          "$ref": "#/definitions/ArmApplicationHealthPolicy",
-          "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n"
+          "$ref": "#/definitions/ArmApplicationHealthPolicy"
         },
         "upgradeMode": {
-          "$ref": "#/definitions/RollingUpgradeMode",
-          "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored."
+          "$ref": "#/definitions/RollingUpgradeMode"
         }
       }
     },
@@ -1323,24 +1308,19 @@
           }
         },
         "healthCheckWaitDuration": {
-          "$ref": "#/definitions/HealthCheckWaitDuration",
-          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+          "$ref": "#/definitions/HealthCheckWaitDuration"
         },
         "healthCheckStableDuration": {
-          "$ref": "#/definitions/HealthCheckStableDuration",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+          "$ref": "#/definitions/HealthCheckStableDuration"
         },
         "healthCheckRetryTimeout": {
-          "$ref": "#/definitions/HealthCheckRetryTimeout",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+          "$ref": "#/definitions/HealthCheckRetryTimeout"
         },
         "upgradeTimeout": {
-          "$ref": "#/definitions/UpgradeTimeout",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+          "$ref": "#/definitions/UpgradeTimeout"
         },
         "upgradeDomainTimeout": {
-          "$ref": "#/definitions/UpgradeDomainTimeout",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+          "$ref": "#/definitions/UpgradeDomainTimeout"
         }
       }
     },
@@ -1440,12 +1420,10 @@
           "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity."
         },
         "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
-          "description": "The type of managed identity for the resource."
+          "$ref": "#/definitions/ManagedIdentityType"
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentityMap",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n"
+          "$ref": "#/definitions/UserAssignedIdentityMap"
         }
       }
     },
@@ -1870,8 +1848,7 @@
       ],
       "properties": {
         "type": {
-          "$ref": "#/definitions/ServicePlacementPolicyType",
-          "description": "The type of placement policy for a service fabric service. Following are the possible values."
+          "$ref": "#/definitions/ServicePlacementPolicyType"
         }
       }
     },
@@ -1922,8 +1899,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceResourceProperties",
-          "description": "The service resource properties."
+          "$ref": "#/definitions/ServiceResourceProperties"
         }
       },
       "allOf": [
@@ -1966,16 +1942,14 @@
           "description": "The current deployment or provisioning state, which only appears in the response"
         },
         "serviceKind": {
-          "$ref": "#/definitions/ServiceKind",
-          "description": "The kind of service (Stateless or Stateful)."
+          "$ref": "#/definitions/ServiceKind"
         },
         "serviceTypeName": {
           "type": "string",
           "description": "The name of the service type"
         },
         "partitionDescription": {
-          "$ref": "#/definitions/PartitionSchemeDescription",
-          "description": "Describes how the service is partitioned."
+          "$ref": "#/definitions/PartitionSchemeDescription"
         },
         "servicePackageActivationMode": {
           "type": "string",
@@ -2013,20 +1987,16 @@
           "description": "The placement constraints as a string. Placement constraints are boolean expressions on node properties and allow for restricting a service to particular nodes based on the service requirements. For example, to place a service on nodes where NodeType is blue specify the following: \"NodeColor == blue)\"."
         },
         "correlationScheme": {
-          "$ref": "#/definitions/CorrelationSchemeList",
-          "description": "A list that describes the correlation of the service with other services."
+          "$ref": "#/definitions/CorrelationSchemeList"
         },
         "serviceLoadMetrics": {
-          "$ref": "#/definitions/ServiceLoadMetricsList",
-          "description": "The service load metrics is given as an array of ServiceLoadMetricDescription objects."
+          "$ref": "#/definitions/ServiceLoadMetricsList"
         },
         "servicePlacementPolicies": {
-          "$ref": "#/definitions/ServicePlacementPoliciesList",
-          "description": "A list that describes the correlation of the service with other services."
+          "$ref": "#/definitions/ServicePlacementPoliciesList"
         },
         "defaultMoveCost": {
-          "$ref": "#/definitions/MoveCost",
-          "description": "Specifies the move cost for the service."
+          "$ref": "#/definitions/MoveCost"
         }
       }
     },
@@ -2035,8 +2005,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceResourceUpdateProperties",
-          "description": "The service resource properties for patch operations."
+          "$ref": "#/definitions/ServiceResourceUpdateProperties"
         }
       },
       "allOf": [
@@ -2058,8 +2027,7 @@
       "discriminator": "serviceKind",
       "properties": {
         "serviceKind": {
-          "$ref": "#/definitions/ServiceKind",
-          "description": "The kind of service (Stateless or Stateful)."
+          "$ref": "#/definitions/ServiceKind"
         }
       }
     },
@@ -2258,8 +2226,7 @@
     "ErrorModel": {
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorModelError",
-          "description": "The error details."
+          "$ref": "#/definitions/ErrorModelError"
         }
       },
       "description": "The structure of the error."
@@ -2282,13 +2249,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-06-01\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2020-03-01"
+        "2021-06-01"
       ],
-      "default": "2020-03-01",
+      "default": "2021-06-01",
       "x-ms-parameter-location": "client"
     },
     "applicationName": {

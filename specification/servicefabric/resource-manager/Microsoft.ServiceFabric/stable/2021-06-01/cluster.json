@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2020-03-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -462,6 +462,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/listUpgradableVersions": {
+      "post": {
+        "operationId": "ListUpgradableVersions_Post",
+        "summary": "Operation to get the minimum and maximum upgradable version from the current cluster version, or the required path to get to the an specific target version.",
+        "description": "If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "versionsDescription",
+            "in": "body",
+            "description": "The upgrade path description with target version.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionsDescription"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Get upgrade path": {
+            "$ref": "./examples/ListUpgradableVersionsPath_example.json"
+          },
+          "Get minimum and maximum code versions": {
+            "$ref": "./examples/ListUpgradableVersionsMinMax_example.json"
+          }
+        },
+        "tags": [
+          "ListUpgradableVersions"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionPathResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ServiceFabric/operations": {
       "get": {
         "tags": [
@@ -616,8 +671,7 @@
           "description": "Thumbprint of the secondary certificate."
         },
         "x509StoreName": {
-          "$ref": "#/definitions/StoreName",
-          "description": "The local certificate store location."
+          "$ref": "#/definitions/StoreName"
         }
       },
       "description": "Describes the certificate details."
@@ -714,8 +768,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterVersionDetails",
-          "description": "The detail of the Service Fabric runtime version result"
+          "$ref": "#/definitions/ClusterVersionDetails"
         }
       },
       "description": "The result of the Service Fabric runtime versions"
@@ -797,8 +850,7 @@
           "description": "The certificate to use for securing the cluster. The certificate provided will be used for node to node security within the cluster, SSL certificate for cluster management endpoint and default admin client."
         },
         "certificateCommonNames": {
-          "$ref": "#/definitions/ServerCertificateCommonNames",
-          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+          "$ref": "#/definitions/ServerCertificateCommonNames"
         },
         "clientCertificateCommonNames": {
           "type": "array",
@@ -830,8 +882,7 @@
         },
         "clusterState": {
           "readOnly": true,
-          "$ref": "#/definitions/ClusterState",
-          "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.\n  - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.\n  - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.\n  - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.\n  - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.\n  - Ready - Indicates that the cluster is in a stable state.\n"
+          "$ref": "#/definitions/ClusterState"
         },
         "diagnosticsStorageAccountConfig": {
           "$ref": "#/definitions/DiagnosticsStorageAccountConfig",
@@ -875,24 +926,21 @@
           }
         },
         "reliabilityLevel": {
-          "$ref": "#/definitions/ReliabilityLevel",
-          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n  - Silver - Run the System services with a target replica set count of 5.\n  - Gold - Run the System services with a target replica set count of 7.\n  - Platinum - Run the System services with a target replica set count of 9.\n"
+          "$ref": "#/definitions/ReliabilityLevel"
         },
         "reverseProxyCertificate": {
           "$ref": "#/definitions/CertificateDescription",
           "description": "The server certificate used by reverse proxy."
         },
         "reverseProxyCertificateCommonNames": {
-          "$ref": "#/definitions/ServerCertificateCommonNames",
-          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+          "$ref": "#/definitions/ServerCertificateCommonNames"
         },
         "upgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "The policy to use when upgrading the cluster."
         },
         "upgradeMode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
+          "$ref": "#/definitions/UpgradeMode"
         },
         "applicationTypeVersionsCleanupPolicy": {
           "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
@@ -919,8 +967,7 @@
           "description": "The certificate to use for securing the cluster. The certificate provided will be used for  node to node security within the cluster, SSL certificate for cluster management endpoint and default  admin client."
         },
         "certificateCommonNames": {
-          "$ref": "#/definitions/ServerCertificateCommonNames",
-          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+          "$ref": "#/definitions/ServerCertificateCommonNames"
         },
         "clientCertificateCommonNames": {
           "type": "array",
@@ -959,8 +1006,7 @@
           }
         },
         "reliabilityLevel": {
-          "$ref": "#/definitions/ReliabilityLevel",
-          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n  - Silver - Run the System services with a target replica set count of 5.\n  - Gold - Run the System services with a target replica set count of 7.\n  - Platinum - Run the System services with a target replica set count of 9.\n"
+          "$ref": "#/definitions/ReliabilityLevel"
         },
         "reverseProxyCertificate": {
           "$ref": "#/definitions/CertificateDescription",
@@ -970,13 +1016,12 @@
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "The policy to use when upgrading the cluster."
         },
-        "upgradeMode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
-        },
         "applicationTypeVersionsCleanupPolicy": {
           "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
           "description": "The policy used to clean up unused versions."
+        },
+        "upgradeMode": {
+          "$ref": "#/definitions/UpgradeMode"
         }
       },
       "description": "Describes the cluster resource properties that can be updated during PATCH operation."
@@ -1001,8 +1046,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterPropertiesUpdateParameters",
-          "description": "Describes the cluster resource properties that can be updated during PATCH operation."
+          "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         },
         "tags": {
           "type": "object",
@@ -1213,8 +1257,7 @@
           "description": "The HTTP cluster management endpoint port."
         },
         "durabilityLevel": {
-          "$ref": "#/definitions/DurabilityLevel",
-          "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - Bronze - No privileges. This is the default.\n  - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.\n  - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.\n"
+          "$ref": "#/definitions/DurabilityLevel"
         },
         "applicationPorts": {
           "$ref": "#/definitions/EndpointRangeDescription",
@@ -1236,6 +1279,7 @@
         },
         "reverseProxyEndpointPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The endpoint used by reverse proxy."
         }
       },
@@ -1362,8 +1406,7 @@
           }
         },
         "x509StoreName": {
-          "$ref": "#/definitions/StoreName",
-          "description": "The local certificate store location."
+          "$ref": "#/definitions/StoreName"
         }
       }
     },
@@ -1438,6 +1481,29 @@
         "TrustedPublisher"
       ]
     },
+    "UpgradableVersionPathResult": {
+      "properties": {
+        "supportedPath": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The cluster code version."
+          }
+        }
+      },
+      "description": "The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given"
+    },
+    "UpgradableVersionsDescription": {
+      "required": [
+        "targetVersion"
+      ],
+      "properties": {
+        "targetVersion": {
+          "type": "string",
+          "description": "The target code version."
+        }
+      }
+    },
     "UpgradeMode": {
       "type": "string",
       "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n",
@@ -1449,8 +1515,7 @@
     "ErrorModel": {
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorModelError",
-          "description": "The error details."
+          "$ref": "#/definitions/ErrorModelError"
         }
       },
       "description": "The structure of the error."
@@ -1493,13 +1558,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-06-01\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2020-03-01"
+        "2021-06-01"
       ],
-      "default": "2020-03-01",
+      "default": "2021-06-01",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
