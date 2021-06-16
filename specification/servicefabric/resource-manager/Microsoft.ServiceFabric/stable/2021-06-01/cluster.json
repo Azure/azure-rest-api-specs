@@ -347,6 +347,12 @@
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
@@ -387,6 +393,12 @@
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
@@ -420,6 +432,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -458,13 +476,19 @@
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/listUpgradableVersions": {
       "post": {
-        "operationId": "ListUpgradableVersions_Post",
+        "operationId": "Clusters_ListUpgradableVersions",
         "summary": "Operation to get the minimum and maximum upgradable version from the current cluster version, or the required path to get to the an specific target version.",
         "description": "If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.",
         "parameters": [
@@ -566,12 +590,14 @@
       ]
     },
     "ApplicationTypeVersionsCleanupPolicy": {
+      "type": "object",
       "required": [
         "maxUnusedVersionsToKeep"
       ],
       "properties": {
         "maxUnusedVersionsToKeep": {
           "type": "integer",
+          "format": "int64",
           "minimum": 0,
           "description": "Number of unused versions per application type to keep."
         }
@@ -620,6 +646,7 @@
       }
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -641,6 +668,7 @@
       "description": "Operation supported by the Service Fabric resource provider"
     },
     "AzureActiveDirectory": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -658,6 +686,7 @@
       "description": "The settings to enable AAD authentication on the cluster."
     },
     "CertificateDescription": {
+      "type": "object",
       "required": [
         "thumbprint"
       ],
@@ -677,6 +706,7 @@
       "description": "Describes the certificate details."
     },
     "ClientCertificateCommonName": {
+      "type": "object",
       "required": [
         "certificateCommonName",
         "isAdmin",
@@ -699,6 +729,7 @@
       "description": "Describes the client certificate details using common name."
     },
     "ClientCertificateThumbprint": {
+      "type": "object",
       "required": [
         "certificateThumbprint",
         "isAdmin"
@@ -726,18 +757,19 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ClusterProperties",
-              "description": "The cluster resource properties"
-            }
-          }
+          "type": "object"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The cluster resource properties"
+        }
+      }
     },
     "ClusterCodeVersionsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -753,6 +785,7 @@
       "description": "The list results of the Service Fabric runtime versions."
     },
     "ClusterCodeVersionsResult": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -787,6 +820,7 @@
       "properties": {
         "maxPercentUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.\n",
           "default": 0,
           "minimum": 0,
@@ -794,6 +828,7 @@
         },
         "maxPercentUnhealthyApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.\n",
           "default": 0,
           "minimum": 0,
@@ -806,6 +841,7 @@
       }
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -821,6 +857,7 @@
       "description": "Cluster list results"
     },
     "ClusterProperties": {
+      "type": "object",
       "required": [
         "managementEndpoint",
         "nodeTypes"
@@ -954,6 +991,7 @@
       "description": "Describes the cluster resource properties."
     },
     "ClusterPropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
         "addOnFeatures": {
           "type": "array",
@@ -1043,6 +1081,7 @@
       ]
     },
     "ClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1059,6 +1098,7 @@
       "description": "Cluster update request"
     },
     "ClusterUpgradeDeltaHealthPolicy": {
+      "type": "object",
       "description": "Describes the delta health policies for the cluster upgrade.",
       "required": [
         "maxPercentDeltaUnhealthyApplications",
@@ -1068,18 +1108,21 @@
       "properties": {
         "maxPercentDeltaUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentDeltaUnhealthyApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\n",
           "minimum": 0,
           "maximum": 100
@@ -1210,10 +1253,12 @@
       "properties": {
         "startPort": {
           "type": "integer",
+          "format": "int32",
           "description": "Starting port of a range of ports"
         },
         "endPort": {
           "type": "integer",
+          "format": "int32",
           "description": "End port of a range of ports"
         }
       },
@@ -1250,10 +1295,12 @@
         },
         "clientConnectionEndpointPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The TCP cluster management endpoint port."
         },
         "httpGatewayEndpointPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The HTTP cluster management endpoint port."
         },
         "durabilityLevel": {
@@ -1273,6 +1320,7 @@
         },
         "vmInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
           "minimum": 1,
           "maximum": 2147483647
@@ -1307,6 +1355,10 @@
         "name": {
           "type": "string",
           "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
         },
         "display": {
           "$ref": "#/definitions/AvailableOperationDisplay",
@@ -1373,6 +1425,9 @@
           "type": "string",
           "description": "Azure resource etag.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "The resource model definition.",
@@ -1416,6 +1471,7 @@
       "properties": {
         "maxPercentDeltaUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
           "default": 0,
           "minimum": 0,
@@ -1482,6 +1538,7 @@
       ]
     },
     "UpgradableVersionPathResult": {
+      "type": "object",
       "properties": {
         "supportedPath": {
           "type": "array",
@@ -1494,6 +1551,7 @@
       "description": "The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given"
     },
     "UpgradableVersionsDescription": {
+      "type": "object",
       "required": [
         "targetVersion"
       ],
@@ -1551,6 +1609,39 @@
       "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
       "additionalProperties": {
         "$ref": "#/definitions/ServiceTypeHealthPolicy"
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
       }
     }
   },

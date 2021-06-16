@@ -34,42 +34,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ServiceFabric/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Service Fabric resource provider API",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}": {
       "get": {
         "tags": [
@@ -205,6 +169,9 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -403,6 +370,9 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -653,6 +623,9 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -912,6 +885,9 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -1330,6 +1306,7 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1337,6 +1314,7 @@
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1344,6 +1322,7 @@
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1510,6 +1489,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "names": {
@@ -1645,6 +1625,9 @@
           "type": "string",
           "description": "Azure resource etag.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "The resource model definition for proxy-only resource.",
@@ -1777,14 +1760,17 @@
         },
         "primaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
         },
         "secondaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
         },
         "defaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
         }
       }
@@ -2059,11 +2045,13 @@
         },
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2095,11 +2083,13 @@
       "properties": {
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2131,6 +2121,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2151,6 +2142,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2201,6 +2193,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "lowKey": {
@@ -2243,6 +2236,39 @@
         }
       },
       "description": "The error details."
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
     }
   },
   "parameters": {
