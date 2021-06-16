@@ -7,12 +7,16 @@
     "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
     "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
     "recoveryPointId": "26083826328862",
-    "api-version": "2018-12-20-preview",
+    "api-version": "2018-12-20",
     "parameters": {
       "properties": {
         "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
         "audience": "https://RecoveryServices/IaasCoord/aadmgmt/ase",
-        "servicePrincipalObjectId": "5ecd8123-cf74-4037-83e9-9246b227b351"
+        "servicePrincipalObjectId": "5ecd8123-cf74-4037-83e9-9246b227b351",
+        "identityDetails": {
+          "isSystemAssignedIdentity": false,
+          "managedIdentityArmUrl": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/asmaskartestmsi"
+        }
       }
     }
   },
@@ -40,7 +44,12 @@
           "coordinatorServiceStampUri": "https://sea-bvtd2-coord1-t56tl.ext.trafficmanager.net",
           "protectionServiceStampId": "253c2223-fefd-483d-912f-55fb46ce0eab",
           "protectionServiceStampUri": "https://sea-bvtd2-prot1-t56tl.ext.trafficmanager.net",
-          "tokenExtendedInformation": "<IaaSVMRecoveryPointMetadataBase xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" i:type=\"IaaSVMRecoveryPointMetadata_V2015_09\" xmlns=\"http://windowscloudbackup.com/CloudCommon/V2011_09\"><MetadataVersion>V2015_09</MetadataVersion><ContainerType i:nil=\"true\" /><InstantRpGCId>1a2311d9-66f5-47d3-a9fb-7a37da63934b;BackUpOperationJobId;e1ebcf24-81a5-434e-b64b-cc81be65ae16</InstantRpGCId><IsBlockBlobEnabled>false</IsBlockBlobEnabled><IsManagedVirtualMachine>false</IsManagedVirtualMachine><OriginalSAOption>true</OriginalSAOption><OsType>Windows</OsType><ReadMetadaFromConfigBlob i:nil=\"true\" /><RecoveryPointConsistencyType>CrashConsistent</RecoveryPointConsistencyType><RpDiskDetails i:nil=\"true\" /><SourceIaaSVMRPKeyAndSecret i:nil=\"true\" /><SourceIaaSVMStorageType>NormalStorage</SourceIaaSVMStorageType><VMSizeDescription>Standard_D2s_v3</VMSizeDescription></IaaSVMRecoveryPointMetadataBase>"
+          "tokenExtendedInformation": "<IaaSVMRecoveryPointMetadataBase xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" i:type=\"IaaSVMRecoveryPointMetadata_V2015_09\" xmlns=\"http://windowscloudbackup.com/CloudCommon/V2011_09\"><MetadataVersion>V2015_09</MetadataVersion><ContainerType i:nil=\"true\" /><InstantRpGCId>1a2311d9-66f5-47d3-a9fb-7a37da63934b;BackUpOperationJobId;e1ebcf24-81a5-434e-b64b-cc81be65ae16</InstantRpGCId><IsBlockBlobEnabled>false</IsBlockBlobEnabled><IsManagedVirtualMachine>false</IsManagedVirtualMachine><OriginalSAOption>true</OriginalSAOption><OsType>Windows</OsType><ReadMetadaFromConfigBlob i:nil=\"true\" /><RecoveryPointConsistencyType>CrashConsistent</RecoveryPointConsistencyType><RpDiskDetails i:nil=\"true\" /><SourceIaaSVMRPKeyAndSecret i:nil=\"true\" /><SourceIaaSVMStorageType>NormalStorage</SourceIaaSVMStorageType><VMSizeDescription>Standard_D2s_v3</VMSizeDescription></IaaSVMRecoveryPointMetadataBase>",
+          "identityInfo": {
+            "isSystemAssignedIdentity": false,
+            "managedIdentityArmUrl": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/asmaskartestmsi",
+            "managedIdentityUrl": "https://control-westus.identity.azure-int.net/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.RecoveryServicesBVTD/vaults/asmaskarTestUmsi25106/credentials/v2/systemassigned?arpid=6ba6cefe-fb2a-4dc2-82e2-d77302c4d6cc"
+          }
         }
       }
     },
