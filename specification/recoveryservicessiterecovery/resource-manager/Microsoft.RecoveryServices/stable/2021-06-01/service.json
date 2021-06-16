@@ -4098,6 +4098,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/updateAppliance": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Updates appliance for replication protected Item.",
+        "description": "The operation to update appliance of an ASR replication protected item.",
+        "operationId": "ReplicationProtectedItems_UpdateAppliance",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applianceUpdateInput",
+            "in": "body",
+            "description": "Appliance update protection input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateApplianceForReplicationProtectedItemInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates appliance for replication protected Item.": {
+            "$ref": "./examples/ReplicationProtectedItems_UpdateAppliance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicationProtectedItemName}/updateMobilityService": {
       "post": {
         "tags": [
@@ -10452,6 +10529,18 @@
             "$ref": "#/definitions/HealthError"
           },
           "readOnly": true
+        },
+        "forwardProtectedItemCount": {
+          "format": "int32",
+          "description": "The count of protected items which are protected in forward direction.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "reverseProtectedItemCount": {
+          "format": "int32",
+          "description": "The count of protected items which are protected in reverse direction.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -14096,6 +14185,81 @@
       },
       "x-ms-discriminator-value": "InMageRcm"
     },
+    "InMageRcmDiscoveredProtectedVmDetails": {
+      "description": "InMageRcm discovered protected VM details.",
+      "type": "object",
+      "properties": {
+        "vCenterId": {
+          "description": "The VCenter Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterFqdn": {
+          "description": "The VCenter fqdn.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datastores": {
+          "description": "The list of datastores.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "description": "The list of IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "vmwareToolsStatus": {
+          "description": "The VMware tools status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerStatus": {
+          "description": "The VM power status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmFqdn": {
+          "description": "The VM fqdn.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "The VM's OS name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "format": "date-time",
+          "description": "The SDS created timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "format": "date-time",
+          "description": "The SDS updated timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "description": "A value indicating whether the VM is deleted.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "lastDiscoveryTimeInUtc": {
+          "format": "date-time",
+          "description": "The last time when SDS information discovered in SRS.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "InMageRcmDiskInput": {
       "description": "InMageRcm disk input.",
       "required": [
@@ -14390,6 +14554,10 @@
           "type": "string",
           "readOnly": true
         },
+        "sourceAgentIdentityDetails": {
+          "$ref": "#/definitions/IdentityProviderDetails",
+          "description": "The source agent identity details."
+        },
         "processServers": {
           "description": "The list of process servers.",
           "type": "array",
@@ -14457,6 +14625,81 @@
       },
       "x-ms-discriminator-value": "InMageRcm"
     },
+    "InMageRcmFailbackDiscoveredProtectedVmDetails": {
+      "description": "InMageRcmFailback discovered VM details.",
+      "type": "object",
+      "properties": {
+        "vCenterId": {
+          "description": "The VCenter Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterFqdn": {
+          "description": "The VCenter fqdn.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datastores": {
+          "description": "The list of datastores.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "description": "The list of IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "vmwareToolsStatus": {
+          "description": "The VMware tools status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerStatus": {
+          "description": "The VM power status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmFqdn": {
+          "description": "The VM fqdn.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "The VM's OS name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "format": "date-time",
+          "description": "The SDS created timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "format": "date-time",
+          "description": "The SDS updated timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "description": "A value indicating whether the VM is deleted.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "lastDiscoveryTimeInUtc": {
+          "format": "date-time",
+          "description": "The last time when SDS information discovered in SRS.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "InMageRcmFailbackEventDetails": {
       "description": "Event details for InMageRcmFailback provider.",
       "type": "object",
@@ -14468,6 +14711,26 @@
       "properties": {
         "protectedItemName": {
           "description": "The protected item name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmName": {
+          "description": "The protected item name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "applianceName": {
+          "description": "The appliance name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverType": {
+          "description": "The server type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentDisplayName": {
+          "description": "The component display name.",
           "type": "string",
           "readOnly": true
         }
@@ -14872,6 +15135,25 @@
           "items": {
             "$ref": "#/definitions/InMageRcmFailbackNicDetails"
           }
+        },
+        "discoveredVmDetails": {
+          "$ref": "#/definitions/InMageRcmFailbackDiscoveredProtectedVmDetails",
+          "description": "The discovered VM information."
+        },
+        "lastUsedPolicyId": {
+          "description": "The policy Id used by the forward replication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUsedPolicyFriendlyName": {
+          "description": "The policy friendly name used by the forward replication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAgentRegistrationSuccessfulAfterFailover": {
+          "description": "A value indicating whether agent registration was successful after failover.",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "InMageRcmFailback"
@@ -15670,6 +15952,11 @@
           "type": "string",
           "readOnly": true
         },
+        "isAgentRegistrationSuccessfulAfterFailover": {
+          "description": "A value indicating whether agent registration was successful after failover.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "mobilityAgentDetails": {
           "$ref": "#/definitions/InMageRcmMobilityAgentDetails",
           "description": "The mobility agent information."
@@ -15694,6 +15981,10 @@
           "items": {
             "$ref": "#/definitions/InMageRcmNicDetails"
           }
+        },
+        "discoveredVmDetails": {
+          "$ref": "#/definitions/InMageRcmDiscoveredProtectedVmDetails",
+          "description": "The discovered VM details."
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
@@ -15830,6 +16121,22 @@
         },
         "recoveryPointId": {
           "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmUpdateApplianceForReplicationProtectedItemInput": {
+      "description": "InMageRcm provider specific input to update appliance for replication protected item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateApplianceForReplicationProtectedItemProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "runAsAccountId": {
+          "description": "The run as account Id.",
           "type": "string"
         }
       },
@@ -17811,6 +18118,14 @@
           "type": "string",
           "readOnly": true
         },
+        "ipAddresses": {
+          "description": "The list of IP addresses for communicating with the RCM component.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "version": {
           "description": "The version.",
           "type": "string",
@@ -17992,6 +18307,12 @@
           },
           "readOnly": true
         },
+        "protectedItemCount": {
+          "format": "int32",
+          "description": "The protected item count.",
+          "type": "integer",
+          "readOnly": true
+        },
         "historicHealth": {
           "description": "The historic health of the process server based on the health in last 24 hours.",
           "enum": [
@@ -18101,6 +18422,14 @@
         },
         "recoveryPlanName": {
           "description": "The recovery plan filter.",
+          "type": "string"
+        },
+        "sourceFabricLocation": {
+          "description": "The source fabric location filter.",
+          "type": "string"
+        },
+        "fabricObjectId": {
+          "description": "The fabric object Id filter.",
           "type": "string"
         },
         "vCenterName": {
@@ -18445,6 +18774,11 @@
         },
         "fqdn": {
           "description": "The RCM proxy Fqdn.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientAuthenticationType": {
+          "description": "The client authentication type.",
           "type": "string",
           "readOnly": true
         },
@@ -20152,6 +20486,31 @@
             "$ref": "#/definitions/HealthError"
           },
           "readOnly": true
+        },
+        "protectedItemCount": {
+          "format": "int32",
+          "description": "The protected item count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "accessibleDatastores": {
+          "description": "The list of accessible datastores fetched from discovery.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "vcenterId": {
+          "description": "The Vcenter Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastDiscoveryInUtc": {
+          "format": "date-time",
+          "description": "The last time when SDS information discovered in SRS.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -21129,6 +21488,48 @@
       },
       "discriminator": "instanceType"
     },
+    "UpdateApplianceForReplicationProtectedItemInput": {
+      "description": "Update appliance for replication protected item input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateApplianceForReplicationProtectedItemInputProperties",
+          "description": "Update appliance replication protected item properties."
+        }
+      }
+    },
+    "UpdateApplianceForReplicationProtectedItemInputProperties": {
+      "description": "Update appliance for protected item input properties.",
+      "required": [
+        "targetApplianceId",
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "targetApplianceId": {
+          "description": "The target appliance Id.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/UpdateApplianceForReplicationProtectedItemProviderSpecificInput",
+          "description": "The provider specific input to update replication protected item."
+        }
+      }
+    },
+    "UpdateApplianceForReplicationProtectedItemProviderSpecificInput": {
+      "description": "Update replication protected item provider specific input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "UpdateMigrationItemInput": {
       "description": "Update migration item input.",
       "type": "object",
@@ -21476,13 +21877,14 @@
     },
     "VaultSettingCreationInputProperties": {
       "description": "Input to create vault setting.",
-      "required": [
-        "migrationSolutionId"
-      ],
       "type": "object",
       "properties": {
         "migrationSolutionId": {
           "description": "The migration solution Id.",
+          "type": "string"
+        },
+        "vmwareToAzureProviderType": {
+          "description": "VMware to Azure provider type.",
           "type": "string"
         }
       }
@@ -21493,6 +21895,10 @@
       "properties": {
         "migrationSolutionId": {
           "description": "The migration solution ARM Id.",
+          "type": "string"
+        },
+        "vmwareToAzureProviderType": {
+          "description": "VMware to Azure provider type.",
           "type": "string"
         }
       }
