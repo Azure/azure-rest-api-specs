@@ -222,6 +222,7 @@
     },
     "AlertSeverity": {
       "type": "string",
+      "readOnly": true,
       "description": "Alert Severity",
       "enum": [
         "Informational",
@@ -236,6 +237,7 @@
     },
     "AlertStatus": {
       "type": "string",
+      "readOnly": false,
       "description": "Alert Status",
       "enum": [
         "New",
@@ -318,7 +320,6 @@
           }
         },
         "severity": {
-          "readOnly": true,
           "type": "string",
           "example": "Medium",
           "$ref": "#/definitions/AlertSeverity",
