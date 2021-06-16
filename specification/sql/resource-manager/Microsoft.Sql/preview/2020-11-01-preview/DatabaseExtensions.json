@@ -88,7 +88,7 @@
             "description": "The database import request parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseExtensionsDefinition"
+              "$ref": "#/definitions/DatabaseExtensions"
             }
           },
           {
@@ -106,7 +106,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsMissingOperationMode - Missing operationMode parameter for database extension.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsInvalidOperationMode - Invalid operationMode parameter for database extension.\n\n * 400 DatabaseExtensionsInvalidStorageKeyType - The storage key type must by 'StorageAccessKey'.\n\n * 400 DatabaseExtensionsMissingStorageUri - Storage URI cannot be empty.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 ImportExportJobError - The ImportExport operation has failed.\n\n * 400 BlockedByOutboundFirewall - The outbound firewall rules blocked the request.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
           },
           "202": {
             "description": "Import/Export operation is in progress."
@@ -167,7 +167,8 @@
     }
   },
   "definitions": {
-    "DatabaseExtensionsDefinition": {
+    "DatabaseExtensionsProperties": {
+      "description": "Contains the database information after successful export.",
       "required": [
         "operationMode",
         "storageKeyType",
@@ -218,27 +219,22 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "administratorLogin": {
-          "description": "Administrator login name.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "administratorLoginPassword": {
-          "description": "Administrator login password.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "authenticationType": {
-          "description": "Authentication type.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
+        }
+      }
+    },
+    "DatabaseExtensions": {
+      "description": "An export managed database operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseExtensionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },

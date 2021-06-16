@@ -11,7 +11,7 @@ az:
     package-name: azure-mgmt-[[ServiceName]]
 az-output-folder: $(azure-cli-extension-folder)/src/[[ServiceName]]
 python-sdk-output-folder: "$(az-output-folder)/azext_[[ServiceName]]/vendored_sdks/[[ServiceName]]"
-# add additinal configuration here specific for Azure CLI
+# add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
 

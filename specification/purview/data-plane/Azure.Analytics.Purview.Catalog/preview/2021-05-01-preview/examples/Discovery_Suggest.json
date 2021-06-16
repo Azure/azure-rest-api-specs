@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "suggestRequest": {
+      "keywords": "copyfile",
+      "filter": {
+        "and": [
+          {
+            "entityType": "azure_blob_path",
+            "includeSubTypes": false
+          }
+        ]
+      },
+      "limit": 10
+    },
+    "api-version": "2021-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@search.text": "<em>copyfile.csv</em>",
+            "@search.score": 9.81402,
+            "description": "a copied file",
+            "id": "af7a01b0-1b14-4ab6-83a5-12cb11a717ed",
+            "name": "copyfile.csv",
+            "owner": "$superuser",
+            "qualifiedName": "https://adctestaccount.blob.core.windows.net/adcresource/copyfile.csv",
+            "entityType": "azure_blob_path",
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "classification": [
+              "MICROSOFT.GOVERNMENT.US.PASSPORT_NUMBER"
+            ],
+            "contact": [
+              {
+                "id": "8a597ffc-6993-4772-ac25-86b7251e1234",
+                "info": "Expert for this entity",
+                "contactType": "Expert"
+              }
+            ],
+            "label": [
+              "Microsoft.Label.9FBDE396_1A24_4C79_8EDF_9254A0F35055"
+            ],
+            "term": [
+              {
+                "name": "Test Term",
+                "glossaryName": "Glossary"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
