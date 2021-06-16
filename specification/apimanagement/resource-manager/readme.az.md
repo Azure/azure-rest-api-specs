@@ -16,25 +16,4 @@ cli:
             group: "*"
             op: "*"
           hidden: true
-        - where:
-            group: "ApiManagementService"
-            op: "*"
-          hidden: false
-        - where:
-            group: "ApiManagementService"
-            op: "GetDomainOwnershipIdentifier"
-          hidden: true
-        - where:
-            group: "ApiManagementService"
-            op: "GetSsoToken"
-          hidden: true
-directive:
-  - where:
-      group: apim api-management-service
-    set:
-      group: apim
-  - where:
-      command: apply-network-configuration-update
-    set:
-      command: apply-network-updates
 ```
