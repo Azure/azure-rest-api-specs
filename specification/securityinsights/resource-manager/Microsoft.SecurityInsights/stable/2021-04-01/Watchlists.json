@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2021-03-01-preview"
+    "version": "2021-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -44,14 +44,14 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets all watchlists, without watchlist items.",
+        "description": "Get all watchlists, without watchlist items.",
         "operationId": "Watchlists_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -61,6 +61,9 @@
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -73,7 +76,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -92,14 +95,14 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
+        "description": "Get a watchlist, without its watchlist items.",
         "operationId": "Watchlists_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -124,7 +127,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -145,7 +148,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -170,31 +173,31 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist.": {
+          "Create or update a watchlist.": {
             "$ref": "./examples/watchlists/CreateWatchlist.json"
           },
-          "Creates or updates a watchlist and bulk creates watchlist items.": {
+          "Create or update a watchlist and bulk creates watchlist items.": {
             "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
           }
         },
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates or updates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its items, we should call this endpoint with rawContent and contentType properties.",
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
         "operationId": "Watchlists_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -228,7 +231,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -244,14 +247,14 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Gets all watchlist Items.",
+        "description": "Get all watchlist Items.",
         "operationId": "WatchlistItems_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -264,6 +267,9 @@
           },
           {
             "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -276,7 +282,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -295,14 +301,14 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
+        "description": "Get a watchlist item.",
         "operationId": "WatchlistItems_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -330,14 +336,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a watchlist Item.": {
+          "Delete a watchlist item.": {
             "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
           }
         },
@@ -351,7 +357,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -379,28 +385,28 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist item.": {
+          "Create or update a watchlist item.": {
             "$ref": "./examples/watchlists/CreateWatchlistItem.json"
           }
         },
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Creates or updates a watchlist item.",
+        "description": "Create or update a watchlist item.",
         "operationId": "WatchlistItems_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -437,7 +443,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -447,6 +453,7 @@
   "definitions": {
     "WatchlistList": {
       "description": "List all the watchlists.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of watchlists.",
@@ -561,12 +568,12 @@
           "type": "string"
         },
         "numberOfLinesToSkip": {
-          "description": "The number of lines in a csv/tsv content to skip before the header",
+          "description": "The number of lines in a csv content to skip before the header",
           "type": "integer",
           "format": "int32"
         },
         "rawContent": {
-          "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
+          "description": "The raw content that represents to watchlist items to create. Example : This line will be skipped\nheader1,header2\nvalue1,value2",
           "type": "string"
         },
         "itemsSearchKey": {
@@ -574,17 +581,12 @@
           "type": "string"
         },
         "contentType": {
-          "description": "The content type of the raw content. Example : text/csv or text/tsv ",
+          "description": "The content type of the raw content. For now, only text/csv is valid",
           "type": "string"
         },
         "uploadStatus": {
-          "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
+          "description": "The status of the Watchlist upload : New, InProgress or Complete. **Note** : When a Watchlist upload status is InProgress, the Watchlist cannot be deleted",
           "type": "string"
-        },
-        "watchlistItemsCount": {
-          "description": "The number of Watchlist Items in the Watchlist",
-          "type": "integer",
-          "format": "int32"
         }
       },
       "required": [
@@ -597,9 +599,10 @@
     },
     "WatchlistItemList": {
       "description": "List all the watchlist items.",
+      "type": "object",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of watchlist item.",
+          "description": "URL to fetch the next set of watchlist items.",
           "readOnly": true,
           "type": "string"
         },
@@ -621,7 +624,7 @@
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
-      "description": "Represents a Watchlist item in Azure Security Insights.",
+      "description": "Represents a Watchlist Item in Azure Security Insights.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WatchlistItemProperties",
@@ -709,11 +712,21 @@
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The error object of the CloudError response"
+        }
+      },
+      "description": "An error response for a resource management request."
     }
   },
   "parameters": {
     "WatchlistAlias": {
-      "description": "Watchlist Alias",
+      "description": "The watchlist alias",
       "in": "path",
       "name": "watchlistAlias",
       "required": true,
@@ -741,12 +754,28 @@
       "x-ms-parameter-location": "method"
     },
     "WatchlistItemId": {
-      "description": "Watchlist Item Id (GUID)",
+      "description": "The watchlist item id (GUID)",
       "in": "path",
       "name": "watchlistItemId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ODataSkipToken": {
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+      "in": "query",
+      "name": "$skipToken",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionId": {
+      "description": "Azure subscription ID",
+      "in": "path",
+      "name": "subscriptionId",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "required": true,
+      "type": "string"
     }
   }
 }
