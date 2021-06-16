@@ -20,7 +20,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "This method gets all the operations.",
+        "description": "This method gets all the operations that are exposed for customer.",
         "operationId": "ListOperations",
         "consumes": [
           "application/json"
@@ -111,7 +111,7 @@
         },
         "x-ms-examples": {
           "ListAddressesAtSubscriptionLevel": {
-            "$ref": "./examples/AddressesGetAtSubscriptionLevel.json"
+            "$ref": "./examples/ListAddressesAtSubscriptionLevel.json"
           }
         }
       }
@@ -403,7 +403,7 @@
         },
         "x-ms-examples": {
           "ListOrderItemsAtSubscriptionLevel": {
-            "$ref": "./examples/OrderItemGetBySubscription.json"
+            "$ref": "./examples/ListOrderItemsAtSubscriptionLevel.json"
           }
         }
       }
@@ -465,7 +465,7 @@
         },
         "x-ms-examples": {
           "ListAddressesAtResourceGroupLevel": {
-            "$ref": "./examples/AddressesGetAtResourceGrouplevel.json"
+            "$ref": "./examples/ListAddressesAtResourceGroupLevel.json"
           }
         }
       }
@@ -513,7 +513,7 @@
         },
         "x-ms-examples": {
           "GetAddressByName": {
-            "$ref": "./examples/AddressGetByName.json"
+            "$ref": "./examples/GetAddressByName.json"
           }
         }
       },
@@ -572,7 +572,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CreateAddress": {
-            "$ref": "./examples/AddressCreate.json"
+            "$ref": "./examples/CreateAddress.json"
           }
         }
       },
@@ -622,7 +622,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DeleteAddressByName": {
-            "$ref": "./examples/AddressDelete.json"
+            "$ref": "./examples/DeleteAddressByName.json"
           }
         }
       },
@@ -688,7 +688,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "UpdateAddress": {
-            "$ref": "./examples/AddressPatch.json"
+            "$ref": "./examples/UpdateAddress.json"
           }
         }
       }
@@ -830,6 +830,13 @@
             "type": "string"
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "$skipToken",
             "in": "query",
             "description": "$skipToken is supported on Get list of order items, which provides the next page in the list of order items.",
@@ -856,7 +863,7 @@
         },
         "x-ms-examples": {
           "ListOrderItemsAtResourceGroupLevel": {
-            "$ref": "./examples/OrderItemGetByRG.json"
+            "$ref": "./examples/ListOrderItemsAtResourceGroupLevel.json"
           }
         }
       }
@@ -886,6 +893,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -904,7 +918,7 @@
         },
         "x-ms-examples": {
           "GetOrderItemByName": {
-            "$ref": "./examples/OrderItemGet.json"
+            "$ref": "./examples/GetOrderItemByName.json"
           }
         }
       },
@@ -963,7 +977,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CreateOrderItem": {
-            "$ref": "./examples/OrderItemCreate.json"
+            "$ref": "./examples/CreateOrderItem.json"
           }
         }
       },
@@ -995,7 +1009,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Order Item Deleted"
+            "description": "Order item Deleted"
           },
           "202": {
             "description": "Accepted delete request for an order item"
@@ -1013,7 +1027,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DeleteOrderItemByName": {
-            "$ref": "./examples/OrderItemDelete.json"
+            "$ref": "./examples/DeleteOrderItemByName.json"
           }
         }
       },
@@ -1064,7 +1078,7 @@
             "description": "Accepted request for order item update."
           },
           "200": {
-            "description": "Order item resource object",
+            "description": "Order item resource object.",
             "schema": {
               "$ref": "#/definitions/OrderItemResource"
             }
@@ -1079,7 +1093,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "UpdateOrderItem": {
-            "$ref": "./examples/OrderItemUpdate.json"
+            "$ref": "./examples/UpdateOrderItem.json"
           }
         }
       }
@@ -1136,7 +1150,7 @@
         },
         "x-ms-examples": {
           "CancelOrderItem": {
-            "$ref": "./examples/OrderItemCancel.json"
+            "$ref": "./examples/CancelOrderItem.json"
           }
         }
       }
@@ -1194,26 +1208,15 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ReturnOrderItem": {
-            "$ref": "./examples/OrderItemReturn.json"
+            "$ref": "./examples/ReturnOrderItem.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AdditionalErrorInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "info": {
-          "type": "object"
-        }
-      }
-    },
     "AddressDetails": {
-      "description": "Address details for an order.",
+      "description": "Address details for an order item.",
       "required": [
         "forwardAddress"
       ],
@@ -1464,18 +1467,7 @@
         },
         "hierarchyInformation": {
           "$ref": "#/definitions/HierarchyInformation",
-          "description": "Hierarchy information of the product system.",
-          "readOnly": true
-        }
-      }
-    },
-    "BillingModel": {
-      "description": "Model to represent the billing cycle",
-      "type": "object",
-      "properties": {
-        "model": {
-          "description": "String to represent the billing model",
-          "type": "string",
+          "description": "Hierarchy information of a product.",
           "readOnly": true
         }
       }
@@ -1565,9 +1557,8 @@
           "readOnly": true
         },
         "dimensions": {
-          "description": "Dimensions of the configuration",
-          "type": "object",
           "$ref": "#/definitions/Dimensions",
+          "description": "Dimensions of the configuration",
           "readOnly": true
         }
       }
@@ -1639,6 +1630,7 @@
         },
         "emailList": {
           "description": "List of Email-ids to be notified about job progress.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -1684,7 +1676,8 @@
           "description": "Represents Metering type (eg one-time or recurrent)",
           "enum": [
             "OneTime",
-            "Recurring"
+            "Recurring",
+            "Adhoc"
           ],
           "type": "string",
           "readOnly": true,
@@ -1699,6 +1692,10 @@
               {
                 "value": "Recurring",
                 "description": "Recurring billing."
+              },
+              {
+                "value": "Adhoc",
+                "description": "Adhoc billing."
               }
             ]
           }
@@ -1788,31 +1785,30 @@
       }
     },
     "Dimensions": {
-      "description": "Dimensions of a configuration",
+      "description": "Dimensions of a configuration.",
       "type": "object",
       "properties": {
         "length": {
-          "description": "Length of the device",
+          "description": "Length of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
         },
         "height": {
-          "description": "Height of the device",
+          "description": "Height of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
         },
         "width": {
-          "description": "Width of the device",
+          "description": "Width of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
         },
         "lengthHeightUnit": {
-          "description": "Unit for the dimensions of length, height and width",
+          "description": "Unit for the dimensions of length, height and width.",
           "enum": [
-            "Invalid ",
             "IN",
             "CM"
           ],
@@ -1823,36 +1819,31 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Invalid",
-                "description": "Invalid"
-              },
-              {
                 "value": "IN",
-                "description": "Inch, applicable for West US"
+                "description": "Inch, applicable for West US."
               },
               {
                 "value": "CM",
-                "description": "Centimeter"
+                "description": "Centimeter."
               }
             ]
           }
         },
         "weight": {
-          "description": "Weight of the device",
+          "description": "Weight of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
         },
         "depth": {
-          "description": "Depth of the device",
+          "description": "Depth of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
         },
         "weightUnit": {
-          "description": "Unit for the dimensions of weight",
+          "description": "Unit for the dimensions of weight.",
           "enum": [
-            "Invalid ",
             "LBS",
             "KGS"
           ],
@@ -1863,16 +1854,12 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Invalid",
-                "description": "Invalid"
-              },
-              {
                 "value": "LBS",
-                "description": "Pounds"
+                "description": "Pounds."
               },
               {
                 "value": "KGS",
-                "description": "Kilograms"
+                "description": "Kilograms."
               }
             ]
           }
@@ -1919,12 +1906,13 @@
                 "description": "Double encryption is enabled"
               }
             ]
-          }
+          },
+          "default": "Disabled"
         }
       }
     },
     "FilterableProperty": {
-      "description": "Class defining the list of filter values on a filter type as part of configuration request.",
+      "description": "Different types of filters supported and its values.",
       "required": [
         "type",
         "supportedValues"
@@ -2108,11 +2096,11 @@
             "values": [
               {
                 "value": "Pav2",
-                "description": "Pav2 billing type."
+                "description": "PaV2 billing."
               },
               {
                 "value": "Purchase",
-                "description": "Purchase billing type."
+                "description": "Purchase billing."
               }
             ]
           }
@@ -2160,12 +2148,8 @@
         "stageName": {
           "description": "Name of the stage.",
           "enum": [
-            "DevicePrepared",
             "Shipped",
-            "Delivered",
-            "PickedUp",
-            "AtAzureDC",
-            "DataCopy"
+            "Delivered"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2173,28 +2157,12 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "DevicePrepared",
-                "description": "Notification at device prepared stage."
-              },
-              {
                 "value": "Shipped",
-                "description": "Notification at device dispatched stage."
+                "description": "Notification at order item shipped from microsoft datacenter."
               },
               {
                 "value": "Delivered",
-                "description": "Notification at device delivered stage."
-              },
-              {
-                "value": "PickedUp",
-                "description": "Notification at device picked up from user stage."
-              },
-              {
-                "value": "AtAzureDC",
-                "description": "Notification at device received at Azure datacenter stage."
-              },
-              {
-                "value": "DataCopy",
-                "description": "Notification at data copy started stage."
+                "description": "Notification at order item delivered to customer."
               }
             ]
           }
@@ -2381,7 +2349,7 @@
           }
         },
         "deletionStatus": {
-          "description": "Describes whether the orderItem is deletable or not.",
+          "description": "Describes whether the order item is deletable or not.",
           "enum": [
             "Allowed",
             "NotAllowed"
@@ -2463,7 +2431,7 @@
         },
         "addressDetails": {
           "$ref": "#/definitions/AddressDetails",
-          "description": "Represents shipping and return address for order"
+          "description": "Represents shipping and return address for order item"
         },
         "startTime": {
           "format": "date-time",
@@ -2472,7 +2440,7 @@
           "readOnly": true
         },
         "orderId": {
-          "description": "Id of the order to which order items belongs to",
+          "description": "Id of the order to which order item belongs to",
           "type": "string"
         }
       }
@@ -2502,7 +2470,7 @@
       }
     },
     "OrderResourceList": {
-      "description": "List of orders",
+      "description": "List of orders.",
       "type": "object",
       "properties": {
         "value": {
@@ -2521,11 +2489,11 @@
       }
     },
     "StageDetails": {
-      "description": "Resource stage details",
+      "description": "Resource stage details.",
       "type": "object",
       "properties": {
         "stageStatus": {
-          "description": "Stage status",
+          "description": "Stage status.",
           "enum": [
             "None",
             "InProgress",
@@ -2570,25 +2538,18 @@
         "stageName": {
           "description": "Stage name",
           "enum": [
-            "DeviceOrdered",
-            "DevicePrepared",
-            "PickedUp",
-            "AtAzureDC",
-            "DataCopy",
-            "Completed",
-            "CompletedWithErrors",
-            "Cancelled",
-            "Aborted",
-            "CompletedWithWarnings",
-            "ReadyToDispatchFromAzureDC",
-            "ReadyToReceiveAtAzureDC",
             "Placed",
             "InReview",
             "Confirmed",
             "ReadyToShip",
             "Shipped",
             "Delivered",
-            "InUse"
+            "InUse",
+            "ReturnInitiated",
+            "ReturnPickedUp",
+            "ReturnedToMicrosoft",
+            "ReturnCompleted",
+            "Cancelled"
           ],
           "type": "string",
           "readOnly": true,
@@ -2596,54 +2557,6 @@
             "name": "StageName",
             "modelAsString": true,
             "values": [
-              {
-                "value": "DeviceOrdered",
-                "description": "An order has been created."
-              },
-              {
-                "value": "DevicePrepared",
-                "description": "A device has been prepared for the order."
-              },
-              {
-                "value": "PickedUp",
-                "description": "Device has been picked up from user and in transit to Azure datacenter."
-              },
-              {
-                "value": "AtAzureDC",
-                "description": "Device has been received at Azure datacenter from the user."
-              },
-              {
-                "value": "DataCopy",
-                "description": "Data copy from the device at Azure datacenter."
-              },
-              {
-                "value": "Completed",
-                "description": "Order has completed."
-              },
-              {
-                "value": "CompletedWithErrors",
-                "description": "Order has completed with errors."
-              },
-              {
-                "value": "Cancelled",
-                "description": "Order has been cancelled."
-              },
-              {
-                "value": "Aborted",
-                "description": "Order has been aborted."
-              },
-              {
-                "value": "CompletedWithWarnings",
-                "description": "Order has completed with warnings."
-              },
-              {
-                "value": "ReadyToDispatchFromAzureDC",
-                "description": "Device is ready to be handed to customer from Azure DC."
-              },
-              {
-                "value": "ReadyToReceiveAtAzureDC",
-                "description": "Device can be dropped off at Azure DC."
-              },
               {
                 "value": "Placed",
                 "description": "Currently in draft mode and can still be cancelled"
@@ -2671,6 +2584,26 @@
               {
                 "value": "InUse",
                 "description": "Order is in use at customer site"
+              },
+              {
+                "value": "ReturnInitiated",
+                "description": "Return has been initiated by customer."
+              },
+              {
+                "value": "ReturnPickedUp",
+                "description": "Order is in transit from customer to microsoft."
+              },
+              {
+                "value": "ReturnedToMicrosoft",
+                "description": "Order has been received back to microsoft."
+              },
+              {
+                "value": "ReturnCompleted",
+                "description": "Return has now completed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
               }
             ]
           }
@@ -2730,6 +2663,9 @@
     },
     "Pav2MeterDetails": {
       "description": "Billing type PAV2 meter details",
+      "required": [
+        "billingType"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2796,7 +2732,7 @@
         },
         "hierarchyInformation": {
           "$ref": "#/definitions/HierarchyInformation",
-          "description": " Hierarchy of the product which uniquely identifies the product"
+          "description": "Hierarchy of the product which uniquely identifies the product"
         },
         "count": {
           "format": "int32",
@@ -2975,6 +2911,9 @@
     },
     "PurchaseMeterDetails": {
       "description": "Billing type Purchase meter details",
+      "required": [
+        "billingType"
+      ],
       "type": "object",
       "allOf": [
         {
