@@ -658,11 +658,6 @@ directive:
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: R4009
     from: privateLinkScopes_API.json
-    where: $.definitions.PrivateLinkResource.properties
-    reason: 'This is a read only resource as defined in the Network RP private endpoint spec.'
-  - suppress: R4009
-    from: privateLinkScopes_API.json
-    where: $.definitions.PrivateEndpointConnection.properties
     reason: 'Contract is defined in the Network RP private endpoint spec, can be updated by internal calls from Network RP. '
   - suppress: R3018
     from: privateLinkScopes_API.json
