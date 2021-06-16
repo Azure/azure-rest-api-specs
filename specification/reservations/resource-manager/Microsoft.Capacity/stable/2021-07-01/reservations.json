@@ -106,7 +106,6 @@
   "definitions": {
     "ErrorResponseCode": {
       "type": "string",
-      "description": "Possible error codes returned in response",
       "enum": [
         "NotSpecified",
         "InternalServerError",
@@ -132,7 +131,7 @@
         "Forbidden",
         "BillingScopeIdCannotBeChanged",
         "AppliedScopesNotAssociatedWithCommerceAccount",
-        "AppliedScopesSameAsExisting",
+        "PatchValuesSameAsExisting",
         "RoleAssignmentCreationFailed",
         "ReservationOrderCreationFailed",
         "ReservationOrderNotEnabled",
@@ -163,7 +162,11 @@
         "FulfillmentTransientError",
         "FulfillmentError",
         "CalculatePriceFailed"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ErrorResponseCode",
+        "modelAsString": true
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -207,13 +210,12 @@
         "PostgreSql",
         "DedicatedHost",
         "SapHana",
-        "SqlAzureHybridBenefit",
-        "AVS",
-        "DataFactory",
-        "NetAppStorage",
-        "AzureFiles",
-        "SqlEdge"
-      ]
+        "SqlAzureHybridBenefit"
+      ],
+      "x-ms-enum": {
+        "name": "ReservedResourceType",
+        "modelAsString": true
+      }
     },
     "Location": {
       "type": "string",
@@ -284,9 +286,12 @@
       "description": "Represent the term of Reservation.",
       "enum": [
         "P1Y",
-        "P3Y",
-        "P5Y"
-      ]
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationTerm",
+        "modelAsString": true
+      }
     },
     "ReservationsListResult": {
       "description": "The list of reservations and summary of roll out count of reservations in each state.",
@@ -296,7 +301,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReservationResponse"
+            "$ref": "#/definitions/ReservationsListResponse"
           }
         },
         "nextLink": {
@@ -311,56 +316,61 @@
         }
       }
     },
-    "ReservationResponse": {
+    "ReservationsListResponse": {
       "description": "The definition of the reservation.",
+      "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "The id of the reservation.",
+        "location": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The Azure Region where the reserved resource lives."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation"
         },
         "name": {
-          "description": "The name of the reservation.",
           "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the reservation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the reservation.",
-          "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Name of the reservation"
         },
         "sku": {
           "description": "The sku information associated to this reservation ",
-          "type": "object",
-          "$ref": "#/definitions/ReservationSkuProperty"
+          "$ref": "#/definitions/SkuName"
         },
         "properties": {
           "description": "The properties associated to this reservation ",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationProperties"
+          "$ref": "#/definitions/ReservationsProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
         }
       }
     },
-    "ReservationSkuProperty": {
-      "description": "The property of reservation sku object.",
+    "SkuName": {
+      "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the reservation sku.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
-    "ReservationProperties": {
+    "ReservationsProperties": {
       "type": "object",
       "description": "The properties of the reservations",
       "properties": {
+        "reservedResourceType": {
+          "description": "The type of the resource that is being reserved.",
+          "$ref": "#/definitions/ReservedResourceType"
+        },
+        "instanceFlexibility": {
+          "description": "Allows reservation discount to be applied across skus within the same Autofit group. Not all skus support instance size flexibility.",
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
         "displayName": {
           "type": "string",
           "description": "Friendly name for user to easily identify the reservation"
@@ -373,24 +383,18 @@
           "description": "The applied scope type",
           "$ref": "#/definitions/AppliedScopeType"
         },
-        "archived": {
-          "description": "Specifies whether the reservation is archived.",
-          "type": "boolean",
-          "readOnly": true
+        "quantity": {
+          "description": "Quantity of the SKUs that are part of the Reservation.",
+          "$ref": "#/definitions/ReservationQuantity"
         },
-        "displayProvisioningState": {
-          "description": "Represent the current display state of the Reservation.",
-          "$ref": "#/definitions/DisplayProvisioningState"
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of the reservation."
         },
         "effectiveDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "DateTime of the Reservation starting when this version is effective from."
-        },
-        "expiryDate": {
-          "type": "string",
-          "format": "date",
-          "description": "This is the date when the Reservation will expire."
         },
         "lastUpdatedDateTime": {
           "type": "string",
@@ -398,84 +402,38 @@
           "description": "DateTime of the last time the Reservation was updated.",
           "readOnly": true
         },
-        "managementGroupDisplayName": {
-          "type": "string",
-          "description": "The management group display name."
-        },
-        "provisioningState": {
-          "description": "Represent the current state of the Reservation.",
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "provisioningSubState": {
-          "type": "string",
-          "description": "The sub state of the reservation."
-        },
-        "purchaseDate": {
+        "expiryDate": {
           "type": "string",
           "format": "date",
-          "description": "Date when the Reservation was purchased."
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Quantity of the SKUs that are part of the Reservation."
-        },
-        "renew": {
-          "description": "Specifies whether the reservation will auto-renew.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "renewSource": {
-          "type": "string",
-          "description": "Reservation Id of the reservation from which this reservation is renewed."
-        },
-        "reservedResourceType": {
-          "description": "The type of the resource that is being reserved.",
-          "$ref": "#/definitions/ReservedResourceType"
-        },
-        "reviewDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Date when the reservation needs to be reviewed."
+          "description": "This is the date when the Reservation will expire."
         },
         "skuDescription": {
           "type": "string",
-          "description": "Description of the SKU which is displayed in browse UX."
+          "description": "Description of the SKU in english."
         },
-        "subscriptionName": {
+        "extendedStatusInfo": {
+          "description": "The message giving detailed information about the status code.",
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "billingPlan": {
+          "description": "The billing plan options available for this SKU.",
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "renew": {
+          "description": "Whether or not it will automatically purchase a new reservation on the expiration date time.",
+          "$ref": "#/definitions/Renew"
+        },
+        "renewSource": {
           "type": "string",
-          "description": "Subscription name, which is set when appliedScope is Single."
+          "description": "Reservation Id of the reservation from which this reservation is renewed. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
+        },
+        "renewDestination": {
+          "type": "string",
+          "description": "Reservation Id of the reservation which is purchased because of renew. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
         },
         "term": {
           "description": "Represent the term of Reservation.",
           "$ref": "#/definitions/ReservationTerm"
-        },
-        "userFriendlyAppliedScopeType": {
-          "description": "The applied scope type",
-          "$ref": "#/definitions/UserFriendlyAppliedScopeType"
-        },
-        "userFriendlyRenewState": {
-          "description": "The renew state of the reservation",
-          "$ref": "#/definitions/UserFriendlyRenewState"
-        },
-        "utilization": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Reservation utilization",
-          "properties": {
-            "trend": {
-              "description": "The number of days trend for a reservation",
-              "readOnly": true,
-              "type": "string"
-            },
-            "aggregates": {
-              "description": "The array of aggregates of a reservation's utilization",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ReservationUtilizationAggregates"
-              }
-            }
-          }
         }
       }
     },
@@ -551,26 +509,13 @@
         }
       }
     },
-    "Error": {
-      "type": "object",
-      "description": "Information about the error response.",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ExtendedErrorInfo"
-        }
-      }
-    },
     "ExtendedErrorInfo": {
       "type": "object",
-      "description": "Additional information about the error",
       "properties": {
         "code": {
-          "description": "Error code.",
           "$ref": "#/definitions/ErrorResponseCode"
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
           "type": "string"
         }
       }
@@ -595,30 +540,17 @@
         }
       }
     },
-    "ReservationList": {
-      "type": "object",
-      "description": "The list of reservations",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The array of reservations.",
-          "items": {
-            "$ref": "#/definitions/ReservationResponse"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Url to get the next page of reservations."
-        }
-      }
-    },
     "AppliedScopeType": {
       "type": "string",
       "description": "Type of the Applied Scope.",
       "enum": [
         "Single",
         "Shared"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true
+      }
     },
     "AppliedScopes": {
       "type": "array",
