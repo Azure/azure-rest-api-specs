@@ -2,31 +2,27 @@
   "parameters": {
     "serviceName": "apimService1",
     "resourceGroupName": "rg1",
-    "api-version": "2021-01-01-preview",
+    "api-version": "2021-04-01-preview",
     "subscriptionId": "subid",
     "eventGridFilterId": "testegfilter",
     "parameters": {
       "properties": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/eventGridFilters/testegfilter",
-        "name": "apimService1/testegfilter",
-        "type": "Microsoft.ApiManagement/service/EventGridFilters",
-        "properties": {
-          "filter": {
-            "subjectBeginsWith": "<subjectBeginsWith>",
-            "subjectEndsWith": "<subjectEndsWith>",
-            "includedEventTypes": [
-              "Microsoft.ApiManagement.APICreated"
-            ]
-          },
-          "subscriberIdentityInfo": {
-            "clientPrincipalId": "<clientPrincipleId>",
-            "clientObjectId": "<clientObjectId>",
-            "clientTenantId": "<clientTenantId>",
-            "clientApplicationId": "<clientApplicationId>",
-            "clientAuthorizationSource": "<clientAuthorizationSource>"
-          },
-          "provisioningState": "<provisioning state>"
-        }
+        "filter": {
+          "subjectBeginsWith": "<subjectBeginsWith>",
+          "subjectEndsWith": "<subjectEndsWith>",
+          "includedEventTypes": [
+            "Microsoft.ApiManagement.ProductCreated",
+            "Microsoft.ApiManagement.APICreated"
+          ]
+        },
+        "subscriberIdentityInfo": {
+          "clientPrincipalId": "<clientPrincipleId>",
+          "clientObjectId": "<clientObjectId>",
+          "clientTenantId": "<clientTenantId>",
+          "clientApplicationId": "<clientApplicationId>",
+          "clientAuthorizationSource": "<clientAuthorizationSource>"
+        },
+        "provisioningState": "<provisioning state>"
       }
     }
   },
@@ -37,16 +33,22 @@
         "type": "Microsoft.ApiManagement/service/eventGridFilters",
         "name": "testegfilter",
         "properties": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/eventGridFilters/testegfilter",
           "filter": {
             "subjectBeginsWith": "<subjectBeginsWith>",
             "subjectEndsWith": "<subjectEndsWith>",
             "includedEventTypes": [
+              "Microsoft.ApiManagement.ProductCreated",
               "Microsoft.ApiManagement.APICreated"
             ]
           },
-          "subscriberIdentityInfo": null,
-          "provisioningState": null
+          "subscriberIdentityInfo": {
+            "clientPrincipalId": null,
+            "clientObjectId": null,
+            "clientTenantId": null,
+            "clientApplicationId": null,
+            "clientAuthorizationSource": null
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }

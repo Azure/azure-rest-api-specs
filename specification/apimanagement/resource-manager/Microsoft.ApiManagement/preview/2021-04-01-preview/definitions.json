@@ -6501,9 +6501,14 @@
           "description": "Collection of eventGrid filter.",
           "readOnly": true
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link, if any.",
+          "description": "Next page link if any.",
           "readOnly": true
         }
       },
@@ -6556,17 +6561,104 @@
         "includedEventTypes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/EventGridEventTypeContract"
           },
           "description": "included Event Types of this eventGridFilter."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventGridFilterContractProperties"
-        }
-      ],
       "description": "EventGridFilter description details."
+    },
+    "EventGridEventTypeContract": {
+      "type": "string",
+      "description": "Types of EventGridEvent.",
+      "enum": [
+        "All",
+        "MicrosoftApiManagementUserCreated",
+        "MicrosoftApiManagementUserUpdated",
+        "MicrosoftApiManagementUserDeleted",
+        "MicrosoftApiManagementSubscriptionCreated",
+        "MicrosoftApiManagementSubscriptionUpdated",
+        "MicrosoftApiManagementSubscriptionDeleted",
+        "MicrosoftApiManagementAPICreated",
+        "MicrosoftApiManagementAPIUpdated",
+        "MicrosoftApiManagementAPIDeleted",
+        "MicrosoftApiManagementAPIReleaseCreated",
+        "MicrosoftApiManagementAPIReleaseUpdated",
+        "MicrosoftApiManagementAPIReleaseDeleted",
+        "MicrosoftApiManagementProductCreated",
+        "MicrosoftApiManagementProductUpdated",
+        "MicrosoftApiManagementProductDeleted"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "eventGridEventType",
+        "values": [
+          {
+            "value": "All",
+            "description": "All types of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementUserCreated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementUserUpdated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementUserDeleted",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementSubscriptionCreated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementSubscriptionUpdated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementSubscriptionDeleted",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPICreated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPIUpdated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPIDeleted",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPIReleaseCreated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPIReleaseUpdated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementAPIReleaseDeleted",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementProductCreated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementProductUpdated",
+            "description": "Type of eventGrid events"
+          },
+          {
+            "value": "MicrosoftApiManagementProductDeleted",
+            "description": "Type of eventGrid events"
+          }
+        ]
+      }
     },
     "SubscriberIdentityInfo": {
       "type": "object",
@@ -6591,12 +6683,7 @@
           "type": "string",
           "description": "client Authorization Source of this eventGridFilter."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventGridFilterContractProperties"
-        }
-      ]
+      }
     }
   },
   "parameters": {}

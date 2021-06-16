@@ -2,16 +2,18 @@
   "parameters": {
     "serviceName": "apimService1",
     "resourceGroupName": "rg1",
-    "api-version": "2021-01-01-preview",
+    "api-version": "2021-04-01-preview",
     "subscriptionId": "subid",
     "eventGridFilterId": "testegfilter",
     "If-Match": "*",
     "parameters": {
       "properties": {
-        "includedEventTypes": [
-          "Microsoft.ApiManagement.APICreated",
-          "Microsoft.ApiManagement.APIDeleted"
-        ]
+        "filter": {
+          "includedEventTypes": [
+            "Microsoft.ApiManagement.ProductCreated",
+            "Microsoft.ApiManagement.APICreated"
+          ]
+        }
       }
     }
   },
@@ -22,17 +24,22 @@
         "type": "Microsoft.ApiManagement/service/eventGridFilters",
         "name": "testegfilter",
         "properties": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/eventGridFilters/testegfilter",
           "filter": {
             "subjectBeginsWith": "<subjectBeginsWith>",
             "subjectEndsWith": "<subjectEndsWith>",
             "includedEventTypes": [
-              "Microsoft.ApiManagement.APICreated",
-              "Microsoft.ApiManagement.APIDeleted"
+              "Microsoft.ApiManagement.ProductCreated",
+              "Microsoft.ApiManagement.APICreated"
             ]
           },
-          "subscriberIdentityInfo": null,
-          "provisioningState": null
+          "subscriberIdentityInfo": {
+            "clientPrincipalId": null,
+            "clientObjectId": null,
+            "clientTenantId": null,
+            "clientApplicationId": null,
+            "clientAuthorizationSource": null
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }
