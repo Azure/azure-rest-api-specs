@@ -420,17 +420,23 @@
       "type": "object",
       "description": "IoT alert properties",
       "properties": {
-        "severity": {
-          "type": "string",
-          "example": "Medium",
-          "description": "The severity of the alert",
-          "$ref": "#/definitions/AlertSeverity"
-        },
-        "status": {
-          "type": "string",
-          "example": "New",
-          "description": "The status of the alert",
-          "$ref": "#/definitions/AlertStatus"
+        "properties": {
+          "type": "object",
+          "description": "IoT alert properties",
+          "properties": {
+            "severity": {
+              "type": "string",
+              "example": "Medium",
+              "description": "The severity of the alert",
+              "$ref": "#/definitions/AlertSeverity"
+            },
+            "status": {
+              "type": "string",
+              "example": "New",
+              "description": "The status of the alert",
+              "$ref": "#/definitions/AlertStatus"
+            }
+          }
         }
       }
     }
