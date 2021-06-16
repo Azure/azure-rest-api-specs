@@ -45,6 +45,23 @@ input-file:
   - Microsoft.KeyVault/preview/7.3-preview/securitydomain.json
   - Microsoft.KeyVault/preview/7.3-preview/storage.json
 ```
+
+### Tag: package-7.2
+
+These settings apply only when `--tag=package-7.2` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.2'
+input-file:
+- Microsoft.KeyVault/stable/7.2/certificates.json
+- Microsoft.KeyVault/stable/7.2/common.json
+- Microsoft.KeyVault/stable/7.2/keys.json
+- Microsoft.KeyVault/stable/7.2/rbac.json
+- Microsoft.KeyVault/stable/7.2/secrets.json
+- Microsoft.KeyVault/stable/7.2/storage.json
+- Microsoft.KeyVault/stable/7.2/backuprestore.json
+- Microsoft.KeyVault/stable/7.2/securitydomain.json
+```
+
 ### Tag: package-7.2-preview
 
 These settings apply only when `--tag=package-7.2-preview` is specified on the command line.

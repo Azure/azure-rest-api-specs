@@ -79,7 +79,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-powershell
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -89,8 +89,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js portal/resource-manager
 ```
 
 ## Go
@@ -117,7 +115,5 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

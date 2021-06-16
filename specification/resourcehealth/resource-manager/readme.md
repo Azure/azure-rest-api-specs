@@ -89,8 +89,6 @@ swagger-to-sdk:
     after_scripts:
     - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js resourcehealth/resource-manager
 ```
 
 ## Go
@@ -109,6 +107,7 @@ namespace: com.microsoft.azure.management.resourcehealth
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resourcehealth
+service-name: ResourceHealth
 ```
 
 ### Java multi-api
@@ -172,7 +171,5 @@ generate-interface: true
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
