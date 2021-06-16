@@ -256,6 +256,7 @@
         },
         "entities": {
           "description": "A list of entities related to the alert",
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "object"
@@ -270,6 +271,7 @@
         },
         "extendedProperties": {
           "type": "object",
+          "readOnly": true,
           "description": "A bag of fields which extends the alert information",
           "example": {
             "CommandLine": "docker run --privileged",
@@ -280,7 +282,6 @@
           }
         },
         "severity": {
-          "readOnly": true,
           "type": "string",
           "example": "Medium",
           "description": "The severity of the alert",
