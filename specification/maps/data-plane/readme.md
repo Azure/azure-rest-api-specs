@@ -37,6 +37,17 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: timezone.json
     reason: It will break existing clients if we change the name
+  - suppress: AvoidNestedProperties
+    reason: One of the object properties is actually called "property", so it has to be left as is
+  - suppress: LROStatusCodesReturnTypeSchema
+    from: featurestate.json
+    reason: The API already returns 200 with no content
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: This will be enabled once again once https://github.com/Azure/azure-rest-api-specs/pull/14694 is merged
+  - suppress: AvoidAnonymousTypes
+    reason: This will be enabled once again once https://github.com/Azure/azure-rest-api-specs/pull/14694 is merged
+  - suppress: XmsEnumValidation
+    reason: This will be enabled once again once https://github.com/Azure/azure-rest-api-specs/pull/14694 is merged
 
 ```
 
