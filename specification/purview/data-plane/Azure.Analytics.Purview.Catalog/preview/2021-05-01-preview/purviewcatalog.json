@@ -2193,6 +2193,45 @@
         }
       }
     },
+    "/browse": {
+      "post": {
+        "tags": [
+          "Discovery"
+        ],
+        "description": "Browse entities by path or entity type.",
+        "operationId": "Discovery_Browse",
+        "x-ms-examples": {
+          "Discovery_Browse_Path": {
+            "$ref": "./examples/Discovery_Browse_Path.json"
+          },
+          "Discovery_Browse_EntityType": {
+            "$ref": "./examples/Discovery_Browse_EntityType.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "browseRequest",
+            "description": "An object specifying the browse criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowseRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful get the entities to browse.",
+            "schema": {
+              "$ref": "#/definitions/BrowseResult"
+            }
+          }
+        }
+      }
+    },
     "/search/autocomplete": {
       "post": {
         "tags": [
@@ -5367,6 +5406,24 @@
       "title": "SuggestResult",
       "description": "The result item of the search suggest."
     },
+    "BrowseResult": {
+      "type": "object",
+      "properties": {
+        "@search.count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of browse results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BrowseResultValue"
+          }
+        }
+      },
+      "title": "BrowseResult",
+      "description": "The result item of the browse request."
+    },
     "SuggestResultValue": {
       "type": "object",
       "properties": {
@@ -5441,6 +5498,67 @@
       },
       "title": "SuggestResultValue",
       "description": "The value item of the search suggest."
+    },
+    "BrowseResultValue": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "description": "The type name of the record."
+        },
+        "id": {
+          "type": "string",
+          "description": "The GUID of the record."
+        },
+        "isLeaf": {
+          "type": "boolean",
+          "description": "If the record is a leaf entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the record."
+        },
+        "owner": {
+          "type": "array",
+          "description": "The owners of the record.",
+          "items": {
+            "$ref": "#/definitions/BrowseResultOwner"
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "The path of the record."
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The qualified name of the record."
+        }
+      },
+      "title": "BrowseResultValue",
+      "description": "The value item of the browse result."
+    },
+    "BrowseResultOwner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The GUID of the owner."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the owner."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The mail of the owner."
+        },
+        "contactType": {
+          "type": "string",
+          "description": "The contact type of the owner. The value will be Owner."
+        }
+      },
+      "title": "BrowseResultOwner",
+      "description": "The value item of the browse owner."
     },
     "SearchResult": {
       "type": "object",
@@ -5829,6 +5947,31 @@
       },
       "title": "SearchRequest",
       "description": "The search query of advanced search request."
+    },
+    "BrowseRequest": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "description": "The entity type to browse as the root level entry point."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to browse the next level child entities."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of browse items we hope to return."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The offset. The default value is 0."
+        }
+      },
+      "title": "BrowseRequest",
+      "description": "The criteria of browse request."
     },
     "SuggestRequest": {
       "type": "object",
