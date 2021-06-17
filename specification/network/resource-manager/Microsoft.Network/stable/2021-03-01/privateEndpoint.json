@@ -721,6 +721,13 @@
             "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
           },
           "description": "Application security groups in which the private endpoint IP configuration is included."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointIPConfiguration"
+          },
+          "description": "A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints."
         }
       },
       "description": "Properties of the private endpoint."
@@ -979,6 +986,49 @@
         }
       },
       "description": "A collective group of information about the record set information."
+    },
+    "PrivateEndpointIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointIPConfigurationProperties",
+          "description": "Properties of private endpoint IP configurations."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "description": "An IP Configuration of the private endpoint."
+    },
+    "PrivateEndpointIPConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The ID of a group obtained from the remote resource that this private endpoint should connect to."
+        },
+        "memberName": {
+          "type": "string",
+          "description": "The member name of a group obtained from the remote resource that this private endpoint should connect to."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "A private ip address obtained from the private endpoint's subnet."
+        }
+      },
+      "description": "Properties of an IP Configuration of the private endpoint."
     }
   }
 }
