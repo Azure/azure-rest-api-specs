@@ -1664,6 +1664,114 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/listPrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns a list of database principals of the given Kusto Pool and database.",
+        "operationId": "Databases_ListPrincipals",
+        "x-ms-examples": {
+          "KustoPoolDatabaseListPrincipals": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of database principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/addPrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_AddPrincipals",
+        "x-ms-examples": {
+          "KustoPoolDatabaseAddPrincipals": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalsAdd.json"
+          }
+        },
+        "description": "Add Database principals permissions.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "databasePrincipalsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListRequest"
+            },
+            "description": "List of database principals to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully added the list of database principals. Returns the updated list of principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
       "post": {
         "tags": [
@@ -2682,6 +2790,79 @@
         }
       },
       "description": "A class representing database principal property."
+    },
+    "DatabasePrincipal": {
+      "type": "object",
+      "required": [
+        "name",
+        "role",
+        "type"
+      ],
+      "properties": {
+        "role": {
+          "description": "Database principal role.",
+          "type": "string",
+          "enum": [
+            "Admin",
+            "Ingestor",
+            "Monitor",
+            "User",
+            "UnrestrictedViewer",
+            "Viewer"
+          ],
+          "x-ms-enum": {
+            "name": "DatabasePrincipalRole",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Database principal name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Database principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "DatabasePrincipalType",
+            "modelAsString": true
+          }
+        },
+        "fqn": {
+          "description": "Database principal fully qualified name.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Database principal email if exists.",
+          "type": "string"
+        },
+        "appId": {
+          "description": "Application id - relevant only for application principal type.",
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        }
+      },
+      "description": "A class representing database principal entity."
+    },
+    "DatabasePrincipalListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabasePrincipal"
+          },
+          "description": "The list of Kusto database principals."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
     },
     "KustoPoolCheckNameRequest": {
       "type": "object",
