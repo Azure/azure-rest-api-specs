@@ -33,16 +33,6 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
-### Suppression
-
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: timezone.json
-    reason: It will break existing clients if we change the name
-
-```
-
 
 ### Tag: 2.0-preview
 
@@ -70,7 +60,7 @@ swagger-to-sdk:
   #track1 doesn't support features needed for typescript
   #manually generate for now with track2
   #- repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 ## Python
 

@@ -37,9 +37,9 @@ credential-scopes: https://atlas.microsoft.com/.default
 
 ``` yaml
 directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: timezone.json
-    reason: It will break existing clients if we change the name
+  - suppress: LROStatusCodesReturnTypeSchema
+    from: featurestate.json
+    reason: The API already returns 200 with no content
 
 ```
 
@@ -70,7 +70,7 @@ swagger-to-sdk:
   #track1 doesn't support features needed for typescript
   #manually generate for now with track2
   #- repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 ## Python
 
