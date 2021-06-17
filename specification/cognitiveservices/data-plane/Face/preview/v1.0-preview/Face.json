@@ -2492,7 +2492,7 @@
           "200": {
             "description": "A successful call returns the operation's status.",
             "schema": {
-              "$ref": "#/definitions/AsyncStatus"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -2582,6 +2582,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/PersonCreationResponse"
             }
@@ -2665,7 +2671,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2766,6 +2778,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
@@ -2864,7 +2882,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3029,7 +3053,13 @@
             "description": "Success"
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3076,7 +3106,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3149,7 +3185,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3670,6 +3712,12 @@
         "responses": {
           "202": {
             "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of person creation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
@@ -4813,6 +4861,26 @@
       "minimum": 0,
       "maximum": 1
     },
+    "NameAndUserDataContractForCreation": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
     "NameAndUserDataContract": {
       "type": "object",
       "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
@@ -4839,7 +4907,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NameAndUserDataContract"
+          "$ref": "#/definitions/NameAndUserDataContractForCreation"
         }
       ]
     },
@@ -5014,48 +5082,6 @@
         }
       }
     },
-    "OperationStatus": {
-      "type": "object",
-      "required": [
-        "status",
-        "createdTime"
-      ],
-      "description": "Operation status object. Operation refers to the asynchronous backend task including taking a snapshot and applying a snapshot.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field \"message\" to check the failure reason.",
-          "x-ms-enum": {
-            "name": "OperationStatusType",
-            "modelAsString": false
-          },
-          "enum": [
-            "notstarted",
-            "running",
-            "succeeded",
-            "failed"
-          ]
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the time when the operation (take or apply a snapshot) is requested. E.g. 2018-12-25T11:41:02.2331413Z."
-        },
-        "lastActionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last time the operation (take or apply a snapshot) is actively migrating data. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z."
-        },
-        "resourceLocation": {
-          "type": "string",
-          "description": "When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field."
-        },
-        "message": {
-          "type": "string",
-          "description": "Show failure message when operation fails (omitted when operation succeeds)."
-        }
-      }
-    },
     "PersistedFaceResponse": {
       "type": "object",
       "properties": {
@@ -5075,31 +5101,46 @@
         "succeeded",
         "failed"
       ],
-      "type": "string"
+      "type": "string",
+      "description": "Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field \"message\" to check the failure reason.",
+      "x-ms-enum": {
+        "name": "OperationStatusType",
+        "modelAsString": false
+      }
     },
-    "AsyncStatus": {
+    "OperationStatus": {
       "type": "object",
+      "required": [
+        "status",
+        "createdTime"
+      ],
+      "description": "Operation status object. Operation refers to an asynchronous backend task.",
       "properties": {
         "status": {
           "$ref": "#/definitions/AsyncOperationStatus"
         },
         "createdTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the time when the operation is requested. E.g. 2018-12-25T11:41:02.2331413Z."
         },
         "lastActionTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the last time the operation is actively running. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z."
         },
         "finishedTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A combined UTC date and time string that describes the time when the operation finished. E.g. 2018-12-25T11:41:02.2331413Z."
         },
         "resourceLocation": {
-          "type": "string"
+          "type": "string",
+          "description": "When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Show failure message when operation fails (omitted when operation succeeds)."
         }
       }
     },
