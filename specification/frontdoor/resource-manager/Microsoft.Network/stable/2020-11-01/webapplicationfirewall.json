@@ -782,13 +782,19 @@
         "supportedSkus": {
           "description": "Map of objects for sku to related properties like state, etc.",
           "type": "object",
-          "propertyNames": {
-            "$ref": "#/definitions/Sku"
+          "properties": {
+            "Classic_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            },
+            "Standard_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            },
+            "Premium_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            }
           },
           "readOnly": true,
-          "additionalProperties": {
-            "$ref": "#/definitions/RuleSetDataBag"
-          }
+          "additionalProperties": false
         },
         "ruleGroups": {
           "type": "array",
