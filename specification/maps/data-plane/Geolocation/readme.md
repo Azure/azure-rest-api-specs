@@ -50,7 +50,7 @@ These settings apply only when `--tag=1.0-preview` is specified on the command l
 
 ``` yaml $(tag) == '1.0-preview'
 input-file:
-  - preview/2.0/geolocation.json
+  - preview/1.0/geolocation.json
 ```
 
 # Code Generation

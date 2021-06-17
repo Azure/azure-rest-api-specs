@@ -50,7 +50,7 @@ These settings apply only when `--tag=2.0-preview` is specified on the command l
 
 ``` yaml $(tag) == '2.0-preview'
 input-file:
-  - preview/2.0/conversion.json
+  - preview/2.0/dwgconversion.json
 ```
 
 # Code Generation
