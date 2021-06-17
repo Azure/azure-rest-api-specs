@@ -333,7 +333,8 @@
             "openapi",
             "openapi+json",
             "openapi-link",
-            "openapi+json-link"
+            "openapi+json-link",
+            "graphql-link"
           ],
           "x-ms-enum": {
             "name": "ContentFormat",
@@ -378,6 +379,10 @@
               {
                 "value": "openapi+json-link",
                 "description": "The OpenAPI 3.0 JSON document is hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "graphql-link",
+                "description": "The GraphQL API endpoint hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -398,11 +403,12 @@
         },
         "apiType": {
           "type": "string",
-          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API.",
+          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API \n * `graphql` creates GraphQL API.",
           "enum": [
             "http",
             "soap",
-            "websocket"
+            "websocket",
+            "graphql"
           ],
           "x-ms-client-name": "SoapApiType",
           "x-ms-enum": {
@@ -416,13 +422,18 @@
               },
               {
                 "value": "soap",
-                "description": "Imports the Soap API having a SOAP front end.",
+                "description": "Imports the SOAP API having a SOAP front end.",
                 "name": "SoapPassThrough"
               },
               {
                 "value": "websocket",
-                "description": "Imports the Soap API having a Websocket front end.",
+                "description": "Imports the API having a Websocket front end.",
                 "name": "WebSocket"
+              },
+              {
+                "value": "graphql",
+                "description": "Imports the API having a GraphQL front end.",
+                "name": "GraphQL"
               }
             ]
           }
@@ -455,7 +466,8 @@
           "enum": [
             "http",
             "soap",
-            "websocket"
+            "websocket",
+            "graphql"
           ],
           "x-ms-client-name": "ApiType",
           "x-ms-enum": {
