@@ -468,6 +468,17 @@
             }
           }
         },
+        "publishDates": {
+          "type": "object",
+          "properties": {
+            "PublicProd": { "$ref": "#/definitions/PublishDates" },
+            "Fairfax": { "$ref": "#/definitions/PublishDates" }
+          },
+          "plannedDeprecationDate": {
+            "type": "string",
+            "pattern": "^[0-9]{2}\/[0-9]{4}$"
+          }
+        }
         "preview": {
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
@@ -525,6 +536,21 @@
         "$ref": "#/definitions/SecurityAssessmentMetadata"
       },
       "x-ms-parameter-location": "method"
+    },
+    "PublishDates": {
+      "properties": {
+        "GA": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        },
+        "Public": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        }
+      },
+      "required": [
+        "Public"
+      ]
     }
   }
 }
