@@ -2274,7 +2274,7 @@
           "Lineage"
         ],
         "description": "Get lineage info of the entity specified by GUID.",
-        "operationId": "GetLineageGraph",
+        "operationId": "Lineage_GetLineageGraph",
         "x-ms-examples": {
           "GetLineageGraph": {
             "$ref": "./examples/GetLineageGraph.json"
@@ -2316,7 +2316,7 @@
           "Lineage"
         ],
         "description": "Return immediate next page lineage info about entity with pagination",
-        "operationId": "NextPageLineage",
+        "operationId": "Lineage_NextPageLineage",
         "x-ms-examples": {
           "NextPageLineage": {
             "$ref": "./examples/NextPageLineage.json"
@@ -4633,64 +4633,6 @@
       "title": "AtlasTypeDef",
       "description": "The definitions of type."
     },
-    "TypeStatistics": {
-      "type": "object",
-      "properties": {
-        "typeStatistics": {
-          "type": "object",
-          "description": "An map with type and corresponding statistics.",
-          "additionalProperties": {
-            "$ref": "#/definitions/TypeStatisticsExtraProperties"
-          }
-        }
-      },
-      "title": "TypeStatistics",
-      "description": "The types and corresponding statistics."
-    },
-    "TypeStatisticsExtraProperties": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The entity count of this type."
-        }
-      },
-      "title": "TypeStatisticsExtraProperties",
-      "description": "The additional properties for types and corresponding statistics."
-    },
-    "AtlasUserSavedSearch": {
-      "type": "object",
-      "title": "AtlasUserSavedSearch",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AtlasBaseModelObject"
-        },
-        {
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The name of the saved search."
-            },
-            "ownerName": {
-              "type": "string",
-              "description": "The owner name of the saved search."
-            },
-            "searchParameters": {
-              "$ref": "#/definitions/SearchParameters"
-            },
-            "searchType": {
-              "$ref": "#/definitions/SavedSearchType"
-            },
-            "uiParameters": {
-              "type": "string",
-              "description": "The UI parameters."
-            }
-          }
-        }
-      ],
-      "description": "User saved search."
-    },
     "Cardinality": {
       "type": "string",
       "title": "Cardinality",
@@ -4721,19 +4663,6 @@
       },
       "title": "ClassificationAssociateRequest",
       "description": "The request for classification association."
-    },
-    "Condition": {
-      "type": "string",
-      "title": "Condition",
-      "description": "The enum for condition.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "Condition",
-        "modelAsString": true
-      }
     },
     "DateFormat": {
       "type": "object",
@@ -4804,54 +4733,6 @@
       },
       "title": "EntityMutationResponse",
       "description": "The mutation response of entity."
-    },
-    "EntityOperation": {
-      "type": "string",
-      "title": "EntityOperation",
-      "description": "The enum of entity operation.",
-      "enum": [
-        "CREATE",
-        "UPDATE",
-        "PARTIAL_UPDATE",
-        "DELETE"
-      ],
-      "x-ms-enum": {
-        "name": "EntityOperation",
-        "modelAsString": true
-      }
-    },
-    "FilterCriteria": {
-      "type": "object",
-      "properties": {
-        "attributeName": {
-          "type": "string",
-          "description": "The name of the attribute."
-        },
-        "attributeValue": {
-          "type": "string",
-          "description": "The value of the attribute."
-        },
-        "condition": {
-          "$ref": "#/definitions/Condition"
-        },
-        "criterion": {
-          "type": "array",
-          "description": "An array of filter criteria.",
-          "items": {
-            "$ref": "#/definitions/FilterCriteria"
-          }
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator"
-        }
-      },
-      "title": "FilterCriteria",
-      "description": "The filter criteria with attributes and condition."
-    },
-    "Format": {
-      "type": "object",
-      "title": "Format",
-      "description": "The format object."
     },
     "LineageDirection": {
       "type": "string",
@@ -4974,32 +4855,6 @@
       "title": "termGuid",
       "description": "The globally unique identifier for glossary term."
     },
-    "Operator": {
-      "type": "string",
-      "title": "Operator",
-      "description": "Supported search operations\nLogical comparison operators can only be used with numbers or dates\nIN, LIKE, startsWith, endsWith, CONTAINS can only be used with strings or text",
-      "enum": [
-        "LT",
-        "GT",
-        "LTE",
-        "GTE",
-        "EQ",
-        "NEQ",
-        "IN",
-        "LIKE",
-        "STARTS_WITH",
-        "ENDS_WITH",
-        "CONTAINS",
-        "CONTAINS_ANY",
-        "CONTAINS_ALL",
-        "IS_NULL",
-        "NOT_NULL"
-      ],
-      "x-ms-enum": {
-        "name": "Operator",
-        "modelAsString": true
-      }
-    },
     "PList": {
       "type": "object",
       "properties": {
@@ -5037,30 +4892,6 @@
       "title": "PList",
       "description": "Paginated-list, for returning search results."
     },
-    "Relation": {
-      "type": "string",
-      "title": "Relation",
-      "description": "The enum of relations.",
-      "enum": [
-        "SEE_ALSO",
-        "SYNONYMS",
-        "ANTONYMS",
-        "PREFERRED_TO_TERMS",
-        "PREFERRED_TERMS",
-        "REPLACEMENT_TERMS",
-        "REPLACED_BY",
-        "TRANSLATION_TERMS",
-        "TRANSLATED_TERMS",
-        "ISA",
-        "CLASSIFIES",
-        "VALID_VALUES",
-        "VALID_VALUES_FOR"
-      ],
-      "x-ms-enum": {
-        "name": "Relation",
-        "modelAsString": true
-      }
-    },
     "RelationshipCategory": {
       "type": "string",
       "title": "RelationshipCategory",
@@ -5093,119 +4924,6 @@
         "name": "RoundingMode",
         "modelAsString": true
       }
-    },
-    "SavedSearchType": {
-      "type": "string",
-      "title": "SavedSearchType",
-      "description": "The enum of saved search type.",
-      "enum": [
-        "BASIC",
-        "ADVANCED"
-      ],
-      "x-ms-enum": {
-        "name": "SavedSearchType",
-        "modelAsString": true
-      }
-    },
-    "SearchFilter": {
-      "type": "object",
-      "properties": {
-        "getCount": {
-          "type": "boolean",
-          "description": "Determines if get the count."
-        },
-        "maxRows": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum of rows."
-        },
-        "params": {
-          "type": "object",
-          "description": "The parameters of the search filter.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "sortBy": {
-          "type": "string",
-          "description": "The sorted by field."
-        },
-        "sortType": {
-          "$ref": "#/definitions/SortType"
-        },
-        "startIndex": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The start index of the search."
-        }
-      },
-      "title": "SearchFilter",
-      "description": "Generic filter, to specify search criteria using name/value pairs."
-    },
-    "SearchParameters": {
-      "type": "object",
-      "properties": {
-        "attributes": {
-          "type": "array",
-          "description": "Attribute values included in the results",
-          "items": {
-            "type": "string"
-          }
-        },
-        "classification": {
-          "type": "string",
-          "description": "The classification to search."
-        },
-        "entityFilters": {
-          "$ref": "#/definitions/FilterCriteria"
-        },
-        "excludeDeletedEntities": {
-          "type": "boolean",
-          "description": "Determines if exclude deleted entities."
-        },
-        "includeClassificationAttributes": {
-          "type": "boolean",
-          "description": "Determines if include classification attributes."
-        },
-        "includeSubClassifications": {
-          "type": "boolean",
-          "description": "Determines if include sub classifications."
-        },
-        "includeSubTypes": {
-          "type": "boolean",
-          "description": "Determines if include sub types."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The limit of the search result."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset of the search."
-        },
-        "query": {
-          "type": "string",
-          "description": "The search query."
-        },
-        "tagFilters": {
-          "$ref": "#/definitions/FilterCriteria"
-        },
-        "termName": {
-          "type": "string",
-          "description": "The name of the term for search."
-        },
-        "typeName": {
-          "type": "string",
-          "description": "The name of the type for search."
-        }
-      },
-      "title": "SearchParameters",
-      "description": "The parameters used for search."
     },
     "SortType": {
       "type": "string",
@@ -5322,77 +5040,6 @@
         "modelAsString": true
       }
     },
-    "AzureCatalogUser": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "User ID of the Azure catalog user."
-        }
-      },
-      "title": "AzureCatalogUser",
-      "description": "Azure catalog user."
-    },
-    "CatalogCreationRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        },
-        "catalogId": {
-          "type": "string",
-          "description": "ID of the catalog."
-        },
-        "creatorUserId": {
-          "type": "string",
-          "description": "User ID or the creator."
-        },
-        "eventHubConnectionString": {
-          "type": "string",
-          "description": "The connection string of the Event Hubs."
-        }
-      },
-      "title": "CatalogCreationRequest",
-      "description": "Request for catalog creation."
-    },
-    "CatalogDeletionRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        }
-      },
-      "title": "CatalogDeletionRequest",
-      "description": "Request for catalog deletion."
-    },
-    "DataScanPermissionCheckRequest": {
-      "type": "object",
-      "properties": {
-        "catalogName": {
-          "type": "string",
-          "description": "Name of the catalog."
-        },
-        "userId": {
-          "type": "string",
-          "description": "User ID of the catalog."
-        }
-      },
-      "title": "DataScanPermissionCheckRequest",
-      "description": "Request for data scan permission check."
-    },
-    "DataScanPermissionCheckResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "string",
-          "description": "The result of the response."
-        }
-      },
-      "title": "DataScanPermissionCheckResponse",
-      "description": "Response for data scan permission check."
-    },
     "SuggestResult": {
       "type": "object",
       "properties": {
@@ -5478,14 +5125,14 @@
           "type": "array",
           "description": "The terms assigned to the record.",
           "items": {
-            "$ref": "#/definitions/termSearchResultValue"
+            "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
           "description": "The contacts of the record.",
           "items": {
-            "$ref": "#/definitions/contactSearchResultValue"
+            "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
@@ -5722,14 +5369,14 @@
           "type": "array",
           "description": "The terms assigned to the record.",
           "items": {
-            "$ref": "#/definitions/termSearchResultValue"
+            "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
           "description": "The contacts of the record.",
           "items": {
-            "$ref": "#/definitions/contactSearchResultValue"
+            "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
@@ -5780,7 +5427,7 @@
       },
       "title": "SearchHighlights"
     },
-    "termSearchResultValue": {
+    "TermSearchResultValue": {
       "type": "object",
       "properties": {
         "name": {
@@ -5799,7 +5446,7 @@
       "title": "Context",
       "description": "The context."
     },
-    "contactSearchResultValue": {
+    "ContactSearchResultValue": {
       "type": "object",
       "properties": {
         "id": {
@@ -5865,43 +5512,6 @@
       },
       "title": "AutoCompleteResultValue",
       "description": "The value item of the autocomplete suggest."
-    },
-    "Context": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The value of the context."
-        }
-      },
-      "title": "Context",
-      "description": "The context."
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "errorMessage": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "title": "Error",
-      "description": "The error response."
-    },
-    "AtlasError": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message"
-        }
-      },
-      "title": "AtlasError",
-      "description": "The atlas error response."
     },
     "SearchRequest": {
       "type": "object",
@@ -5993,161 +5603,6 @@
       "title": "SuggestRequest",
       "description": "The query of suggest request."
     },
-    "HookNotificationType": {
-      "type": "string",
-      "enum": [
-        "TYPE_CREATE",
-        "TYPE_UPDATE",
-        "ENTITY_CREATE",
-        "ENTITY_PARTIAL_UPDATE",
-        "ENTITY_FULL_UPDATE",
-        "ENTITY_DELETE",
-        "ENTITY_CREATE_V2",
-        "ENTITY_PARTIAL_UPDATE_V2",
-        "ENTITY_FULL_UPDATE_V2",
-        "ENTITY_DELETE_V2"
-      ],
-      "x-ms-enum": {
-        "name": "HookNotificationType",
-        "modelAsString": true
-      },
-      "title": "HookNotificationType",
-      "description": "Enum of hook notification type. Different behavior will be invoked by the value."
-    },
-    "HookNotification": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        }
-      },
-      "title": "HookNotification",
-      "description": "The base class for hook notification."
-    },
-    "EntityCreateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityCreateRequestV2",
-      "description": "The class for hook notification for type ENTITY_CREATE_V2."
-    },
-    "EntityUpdateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityUpdateRequestV2",
-      "description": "The class for hook notification for type ENTITY_FULL_UPDATE_V2."
-    },
-    "EntityPartialUpdateRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entityId": {
-          "$ref": "#/definitions/AtlasObjectId"
-        },
-        "entity": {
-          "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-        }
-      },
-      "title": "EntityPartialUpdateRequestV2",
-      "description": "The class for hook notification for type ENTITY_PARTIAL_UPDATE_V2."
-    },
-    "EntityDeleteRequestV2": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HookNotificationType"
-        },
-        "user": {
-          "type": "string",
-          "default": "UNKNOWN",
-          "description": "The user of the notification. Default to be \"UNKNOWN\"."
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AtlasObjectId"
-          }
-        }
-      },
-      "title": "EntityDeleteRequestV2",
-      "description": "The class for hook notification for type ENTITY_DELETE_V2."
-    },
-    "RoleAssignmentEntry": {
-      "type": "object",
-      "title": "RoleAssignmentEntry",
-      "description": "A role assignment.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The object ID of the AAD user."
-        },
-        "role": {
-          "type": "string",
-          "description": "The name of the role."
-        }
-      }
-    },
-    "UpdateRoleAssignmentRequest": {
-      "type": "object",
-      "title": "UpdateRoleAssignmentRequest",
-      "description": "The request for role assignment update operations.",
-      "properties": {
-        "roleAssignmentList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentEntry"
-          }
-        }
-      }
-    },
-    "ListRoleAssignmentResponse": {
-      "type": "object",
-      "title": "ListRoleAssignmentResponse",
-      "description": "The response of listing role assignments.",
-      "properties": {
-        "roleAssignmentList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentEntry"
-          }
-        }
-      }
-    },
     "ImportCSVOperation": {
       "type": "object",
       "title": "Status of import csv operation",
@@ -6223,172 +5678,6 @@
       "type": "string",
       "title": "lastModifiedTS",
       "description": "ETag for concurrency control."
-    },
-    "xml_ns0_PList": {
-      "type": "object",
-      "title": "PList",
-      "xml": {
-        "name": "PList",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "list": {
-              "type": "array",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "An array of objects.",
-              "items": {
-                "type": "object",
-                "properties": {}
-              }
-            },
-            "pageSize": {
-              "type": "integer",
-              "format": "int32",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The size of the page."
-            },
-            "sortBy": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The sorted by field."
-            },
-            "sortType": {
-              "$ref": "#/definitions/xml_ns0_sortType"
-            },
-            "startIndex": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start index of the page."
-            },
-            "totalCount": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The total count of items."
-            }
-          }
-        }
-      ],
-      "description": "Paginated-list, for returning search results."
-    },
-    "xml_ns0_searchFilter": {
-      "type": "object",
-      "title": "searchFilter",
-      "xml": {
-        "name": "searchFilter",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "getCount": {
-              "type": "boolean",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "Determines if get the count."
-            },
-            "maxRows": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The maximum of rows."
-            },
-            "params": {
-              "type": "object",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The parameter of the search.",
-              "properties": {}
-            },
-            "sortBy": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The sorted by field."
-            },
-            "sortType": {
-              "$ref": "#/definitions/xml_ns0_sortType"
-            },
-            "startIndex": {
-              "type": "integer",
-              "format": "int64",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start index of the search."
-            }
-          }
-        }
-      ],
-      "description": "Generic filter, to specify search criteria using name/value pairs."
-    },
-    "xml_ns0_sortType": {
-      "type": "string",
-      "title": "sortType",
-      "description": "to specify whether the result should be sorted? If yes, whether asc or desc.",
-      "enum": [
-        "NONE",
-        "ASC",
-        "DESC"
-      ],
-      "x-ms-enum": {
-        "name": "xml_ns0_sortType",
-        "modelAsString": true
-      }
-    },
-    "xml_ns0_timeBoundary": {
-      "type": "object",
-      "title": "timeBoundary",
-      "xml": {
-        "name": "timeBoundary",
-        "namespace": ""
-      },
-      "allOf": [
-        {
-          "properties": {
-            "endTime": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The end of the time boundary."
-            },
-            "startTime": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The start of the time boundary."
-            },
-            "timeZone": {
-              "type": "string",
-              "xml": {
-                "namespace": ""
-              },
-              "description": "The timezone of the time boundary."
-            }
-          }
-        }
-      ],
-      "description": "Captures time-boundary details"
     }
   },
   "parameters": {
