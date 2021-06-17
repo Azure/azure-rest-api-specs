@@ -28,23 +28,23 @@ openapi-type: data-plane
 ```
 
 ``` yaml $(package-spark)
-tag: package-spark-2019-11-01-preview
+tag: package-spark-2020-12-01
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-2019-06-01-preview
+tag: package-artifacts-2020-12-01
 ```
 
 ``` yaml $(package-access-control)
-tag: package-access-control-2020-08-01-preview
+tag: package-access-control-2020-12-01
 ```
 
 ``` yaml $(package-vnet)
-tag: package-vnet-2019-06-01-preview
+tag: package-vnet-2020-12-01
 ```
 
 ``` yaml $(package-monitoring)
-tag: package-monitoring-2019-11-01-preview
+tag: package-monitoring-2020-12-01
 ```
 
 ### Tag: package-spark-2019-11-01-preview
