@@ -103,4 +103,53 @@ input-file:
 - preview/2019-02-02/blob.json
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: preview/2020-10-02/blob.json
+    reason: These parameters are predfined by storage specifications 
+```
+
+``` yaml
+directive:
+  - suppress: XmsPathsMustOverloadPaths
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: XmsClientNameParameter
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: ValidFormats
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: ParameterDescriptionRequired
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: XmsExamplesRequired
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: XmsParameterLocation
+    from: preview/2020-10-02/blob.json
+```
+
+``` yaml
+directive:
+  - suppress: XmsClientNameProperty
+    from: preview/2020-10-02/blob.json
+```
 ---
