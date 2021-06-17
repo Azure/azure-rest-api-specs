@@ -42,7 +42,17 @@ description: Monitor Management Client
 openapi-type: arm
 tag: package-2020-03
 ```
+### Tag: package-2021-05-01-preview-only
 
+These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
+- Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
+```
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
@@ -67,7 +77,7 @@ These settings apply only when `--tag=package-2020-10-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2020-10-only'
 input-file:
-  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
 ### Tag: package-2020-05-preview-only
