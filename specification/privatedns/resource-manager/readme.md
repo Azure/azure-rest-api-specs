@@ -26,7 +26,7 @@ These are the global settings for the Private DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2020-06
 ```
 
 ### Tag: package-2018-09
@@ -38,11 +38,6 @@ input-file:
   - Microsoft.Network/stable/2018-09-01/privatedns.json
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2020-01
-```
-
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
@@ -50,11 +45,6 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
   - Microsoft.Network/stable/2020-01-01/privatedns.json
-```
-
-``` yaml
-openapi-type: arm
-tag: package-2020-06
 ```
 
 ### Tag: package-2020-06
@@ -83,8 +73,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js privatedns/resource-manager
 ```
 
 ## C#
@@ -209,7 +197,5 @@ directive:
     reason: Common types warning.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

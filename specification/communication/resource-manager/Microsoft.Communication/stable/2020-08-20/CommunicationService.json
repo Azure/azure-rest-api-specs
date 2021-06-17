@@ -173,52 +173,6 @@
         }
       }
     },
-    "/providers/Microsoft.Communication/locations/{location}/operationStatuses/{operationId}": {
-      "get": {
-        "description": "Gets the current status of an async operation.",
-        "operationId": "OperationStatuses_Get",
-        "summary": "Get Operation Status",
-        "tags": [
-          "OperationStatus"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationIdParameter"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested operation status",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get OperationStatus": {
-            "$ref": "./examples/getOperationStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/communicationServices": {
       "get": {
         "description": "Handles requests to list all resources in a subscription.",
@@ -703,58 +657,6 @@
         }
       }
     },
-    "OperationStatus": {
-      "description": "The current status of an async operation",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Fully qualified ID for the operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Moving"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": true
-          }
-        },
-        "startTime": {
-          "description": "The start time of the operation",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "endTime": {
-          "description": "The end time of the operation",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "percentComplete": {
-          "description": "Percent of the operation that is complete",
-          "type": "number",
-          "readOnly": true,
-          "minimum": 0,
-          "maximum": 100
-        },
-        "error": {
-          "description": "Operation Error message",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "CommunicationServiceResourceList": {
       "description": "Object that includes an array of CommunicationServices and a possible link for next set.",
       "type": "object",
@@ -935,22 +837,6 @@
       "pattern": "^[-\\w]+$",
       "minLength": 1,
       "maxLength": 63,
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationParameter": {
-      "name": "location",
-      "in": "path",
-      "description": "The Azure region",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "description": "The ID of an ongoing async operation",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -4,10 +4,10 @@
 
 > see https://aka.ms/autorest
 
-The current release is `release_1_0`. A preview release release_1_0 is also available
+The current release is `release_1_0`. A preview release release_1_1_preview.1 is also available
 
 ``` yaml
-tag: release_1_0
+tag: release_1_1_preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -26,6 +26,14 @@ These settings apply only when `--tag=release_1_0_preview` is specified on the c
 ``` yaml $(tag) == 'release_1_0_preview'
 input-file: 
   - preview/v1.0/Personalizer.json
+```
+
+### Release 1.1-Preview
+These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview.1'
+input-file: 
+  - preview/v1.1-preview.1/Personalizer.json
 ```
 
 ## Swagger to SDK

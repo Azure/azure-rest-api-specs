@@ -63,6 +63,15 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-preview'
+input-file:
+- Microsoft.Search/preview/2021-04-01-preview/search.json
+```
+
 ### Tag: package-2020-08-preview
 
 These settings apply only when `--tag=package-2020-08-preview` is specified on the command line.
@@ -103,8 +112,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_search']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js search/resource-manager
 ```
 
 
@@ -201,9 +208,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
