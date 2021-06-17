@@ -2791,6 +2791,30 @@
       },
       "description": "A class representing database principal property."
     },
+    "DatabasePrincipalListRequest": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabasePrincipal"
+          },
+          "description": "The list of Kusto database principals."
+        }
+      },
+      "description": "The list Kusto database principals operation request."
+    },
+    "DatabasePrincipalListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabasePrincipal"
+          },
+          "description": "The list of Kusto database principals."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
+    },
     "DatabasePrincipal": {
       "type": "object",
       "required": [
@@ -2851,18 +2875,6 @@
         }
       },
       "description": "A class representing database principal entity."
-    },
-    "DatabasePrincipalListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabasePrincipal"
-          },
-          "description": "The list of Kusto database principals."
-        }
-      },
-      "description": "The list Kusto database principals operation response."
     },
     "KustoPoolCheckNameRequest": {
       "type": "object",
