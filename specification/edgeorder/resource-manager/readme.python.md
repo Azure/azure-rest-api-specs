@@ -10,7 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-edgeorder
 no-namespace-folders: true
-package-version: 1.0.0
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
