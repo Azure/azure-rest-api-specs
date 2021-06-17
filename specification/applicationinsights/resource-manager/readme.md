@@ -375,7 +375,6 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 - Microsoft.Insights/stable/2020-02-02/components_API.json
 - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-- Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
 
 ### Tag: package-2019-10-17-preview
