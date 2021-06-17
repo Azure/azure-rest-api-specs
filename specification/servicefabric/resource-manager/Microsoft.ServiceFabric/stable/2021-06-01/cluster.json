@@ -1321,8 +1321,8 @@
         "vmInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
-          "minimum": 1,
+          "description": "VMInstanceCount should be 1 to n, where n indicates the number of VM instances corresponding to this nodeType. VMInstanceCount = 0 can be done only in these scenarios: NodeType is a secondary nodeType. Durability = Bronze or Durability >= Bronze and InfrastructureServiceManager = true. If VMInstanceCount = 0, implies the VMs for this nodeType will not be used for the initial cluster size computation.",
+          "minimum": 0,
           "maximum": 2147483647
         },
         "reverseProxyEndpointPort": {
