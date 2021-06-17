@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-04-01-preview",
+    "version": "2021-06-01-preview",
     "title": "WebPubSubManagementClient",
     "description": "REST API for Azure WebPubSub Service"
   },
@@ -1040,6 +1040,24 @@
         "modelAsString": true
       }
     },
+    "DiagnosticConfiguration": {
+      "description": "Diagnostic configuration of a Microsoft.SignalRService resource. Used together with Azure monitor DiagnosticSettings.",
+      "type": "object",
+      "properties": {
+        "enableConnectivityLogs": {
+          "description": "Indicate whether or not enable Connectivity logs.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
+          "type": "string"
+        },
+        "enableMessagingLogs": {
+          "description": "Indicate whether or not enable Messaging logs.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
+          "type": "string"
+        },
+        "enableLiveTrace": {
+          "description": "Indicate whether or not enable Live Trace. \r\nAvailable values: Enabled, Disabled. \r\nCase insensitive. \r\nLive Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues.",
+          "type": "string"
+        }
+      }
+    },
     "Dimension": {
       "description": "Specifications of the Dimension of metrics.",
       "type": "object",
@@ -1101,19 +1119,6 @@
           "$ref": "#/definitions/UpstreamAuthSettings",
           "description": "Gets or sets the auth settings for an event handler. If not set, no auth is used."
         }
-      }
-    },
-    "FeatureFlags": {
-      "description": "FeatureFlags is the supported features of Azure SignalR service.\n - EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.\n ",
-      "enum": [
-        "EnableConnectivityLogs",
-        "EnableMessagingLogs",
-        "EnableLiveTrace"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeatureFlags",
-        "modelAsString": true
       }
     },
     "KeyType": {
@@ -1903,33 +1908,6 @@
         }
       }
     },
-    "WebPubSubFeature": {
-      "description": "Feature of a resource, which controls the runtime behavior.",
-      "required": [
-        "flag",
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "flag": {
-          "$ref": "#/definitions/FeatureFlags",
-          "description": "FeatureFlags is the supported features of Azure SignalR service.\n - EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.\n "
-        },
-        "value": {
-          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
-          "maxLength": 128,
-          "minLength": 1,
-          "type": "string"
-        },
-        "properties": {
-          "description": "Optional properties related to this feature.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "WebPubSubKeys": {
       "description": "A class represents the access keys of the resource.",
       "type": "object",
@@ -1937,22 +1915,38 @@
         "primaryKey": {
           "description": "The primary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryKey": {
           "description": "The secondary access key.",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "primaryConnectionString": {
           "description": "Connection string constructed via the primaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "secondaryConnectionString": {
           "description": "Connection string constructed via the secondaryKey",
           "type": "string",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -2034,12 +2028,9 @@
           "$ref": "#/definitions/WebPubSubTlsSettings",
           "description": "TLS settings."
         },
-        "features": {
-          "description": "List of the featureFlags.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, its globally default value will be used\r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WebPubSubFeature"
-          }
+        "diagnosticConfiguration": {
+          "$ref": "#/definitions/DiagnosticConfiguration",
+          "description": "Diagnostic configuration of a Microsoft.SignalRService resource. Used together with Azure monitor DiagnosticSettings."
         },
         "eventHandler": {
           "$ref": "#/definitions/EventHandlerSettings",
@@ -2053,6 +2044,16 @@
           "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
           "default": "Enabled",
           "type": "string"
+        },
+        "disableLocalAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable local auth with AccessKey\r\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "default": false,
+          "type": "boolean"
+        },
+        "disableAadAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
