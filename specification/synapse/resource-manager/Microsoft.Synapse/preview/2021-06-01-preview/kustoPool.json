@@ -578,6 +578,109 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listFollowerDatabases": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Returns a list of databases that are owned by this Kusto Pool and were followed by another Kusto Pool.",
+        "operationId": "KustoPools_ListFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterListFollowerDatabases": {
+            "$ref": "./examples/KustoPoolFollowerDatabasesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of followed databases.",
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/detachFollowerDatabases": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Detaches all followers of a database owned by this Kusto Pool.",
+        "operationId": "KustoPools_DetachFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterDetachFollowerDatabases": {
+            "$ref": "./examples/KustoPoolFollowerDatabasesDetach.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "followerDatabaseToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseDefinition"
+            },
+            "description": "The follower databases properties to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases": {
       "get": {
         "tags": [
@@ -2289,6 +2392,41 @@
         "name": "blobStorageEventType",
         "modelAsString": true
       }
+    },
+    "FollowerDatabaseListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FollowerDatabaseDefinition"
+          },
+          "description": "The list of follower database result."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
+    },
+    "FollowerDatabaseDefinition": {
+      "type": "object",
+      "required": [
+        "clusterResourceId",
+        "attachedDatabaseConfigurationName"
+      ],
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource id of the cluster that follows a database owned by this cluster."
+        },
+        "attachedDatabaseConfigurationName": {
+          "type": "string",
+          "description": "Resource name of the attached database configuration in the follower cluster."
+        },
+        "databaseName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The database name owned by this cluster that was followed. * in case following all databases."
+        }
+      },
+      "description": "A class representing follower database request."
     },
     "LanguageExtensionName": {
       "description": "Language extension that can run within KQL query.",
