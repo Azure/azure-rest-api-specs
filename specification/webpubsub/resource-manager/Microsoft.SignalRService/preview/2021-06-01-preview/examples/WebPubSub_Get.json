@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-04-01-preview",
+    "api-version": "2021-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "myWebPubSubService"
@@ -49,28 +49,11 @@
           "tls": {
             "clientCertEnabled": true
           },
-          "features": [
-            {
-              "flag": "ServiceMode",
-              "value": "Serverless",
-              "properties": {}
-            },
-            {
-              "flag": "EnableConnectivityLogs",
-              "value": "True",
-              "properties": {}
-            },
-            {
-              "flag": "EnableMessagingLogs",
-              "value": "False",
-              "properties": {}
-            },
-            {
-              "flag": "EnableLiveTrace",
-              "value": "False",
-              "properties": {}
-            }
-          ],
+          "diagnosticConfiguration": {
+            "enableConnectivityLogs": "Disabled",
+            "enableMessagingLogs": "Disabled",
+            "enableLiveTrace": "Disabled"
+          },
           "eventHandler": {
             "items": {
               "hub1": [
@@ -114,7 +97,9 @@
               }
             ]
           },
-          "publicNetworkAccess": "Enabled"
+          "publicNetworkAccess": "Enabled",
+          "disableLocalAuth": false,
+          "disableAadAuth": false
         },
         "identity": {
           "type": "SystemAssigned",
