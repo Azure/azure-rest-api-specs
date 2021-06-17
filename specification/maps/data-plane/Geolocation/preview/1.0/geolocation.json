@@ -1,0 +1,140 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Geolocation Service",
+    "version": "1.0",
+    "description": "Azure Maps Geolocation REST APIs"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    },
+    {
+      "SubscriptionKeyInHeader": []
+    },
+    {
+      "SubscriptionKeyInQuery": []
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    },
+    "SubscriptionKeyInHeader": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "header"
+    },
+    "SubscriptionKeyInQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "responses": {},
+  "parameters": {
+    "GeolocationApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "paths": {
+    "/geolocation/ip/{format}": {
+      "get": {
+        "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from. \n\n\n__Note:__ This service returns results from IANA and does not necessarily reflect the views of Microsoft  Corporation.",
+        "operationId": "Geolocation_GetIPToLocationPreview",
+        "x-ms-examples": {
+          "GetLocationByIpAddress": {
+            "$ref": "./examples/GetLocationByIpAddress.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/GeolocationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "ip",
+            "in": "query",
+            "description": "The IP address. Both IPv4 and IPv6 are allowed.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IpAddressToLocationResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpAddressToLocationResult": {
+      "description": "This object is returned from a successful call to IP Address to country/region API",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "countryRegion": {
+          "$ref": "#/definitions/CountryRegion"
+        },
+        "ipAddress": {
+          "description": "The IP Address of the request.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CountryRegion": {
+      "description": "The object containing the country/region information.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "isoCode": {
+          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region as assigned by IANA and regional internet authorities. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

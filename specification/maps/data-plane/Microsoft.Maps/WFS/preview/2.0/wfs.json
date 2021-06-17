@@ -9,7 +9,7 @@
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+        "$ref": "#/parameters/GeographicResourceLocation"
       }
     ]
   },
@@ -18,20 +18,8 @@
   ],
   "consumes": [],
   "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    },
-    {
-      "SubscriptionKeyInHeader": []
-    },
-    {
-      "SubscriptionKeyInQuery": []
-    }
+    "application/json",
+    "application/xml"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -40,37 +28,130 @@
       "flow": "implicit",
       "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
       }
     },
-    "SubscriptionKeyInHeader": {
+    "apiKeyQuery": {
       "type": "apiKey",
-      "name": "subscription-key",
-      "in": "header"
-    },
-    "SubscriptionKeyInQuery": {
-      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
       "in": "query"
     }
   },
-  "responses": {},
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
   "parameters": {
-    "WFSApiVersionV2": {
+    "GeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Creator resource in the United States"
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Creator resource in Europe"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API.",
+      "description": "Version number of Azure Maps API. Current version is 2.0",
       "type": "string",
       "in": "query",
       "required": true,
       "default": "2.0",
       "x-ms-parameter-location": "client"
     },
+    "Datasetid": {
+      "name": "datasetid",
+      "type": "string",
+      "in": "path",
+      "description": "The identifier for the dataset to query from.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
     "LimitWfs": {
       "name": "limit",
       "in": "query",
-      "type": "integer",
+      "type": "number",
       "minimum": 1,
       "maximum": 50,
+      "default": 10,
       "description": "The optional limit parameter limits the number of features that are presented in the response document.\nOnly features that are on the first level of the collection in the response document are counted. Nested objects contained within the explicitly requested features shall not be counted.\n* Minimum = 1 * Maximum = 50 * Default = 10",
       "x-ms-parameter-location": "method"
     },
@@ -86,6 +167,7 @@
       "in": "query",
       "type": "string",
       "description": "Only features that have a geometry that intersects the supplied bounding box are selected.\n* Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2\nThe coordinate reference system of the values is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`.\nFor WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).",
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "CollectionId": {
@@ -106,8 +188,9 @@
     }
   },
   "paths": {
-    "/wfs/datasets/{datasetId}/": {
+    "/wfs/datasets/{datasetid}/": {
       "get": {
+        "x-publish": true,
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Landing Page API provides links to the API definition, the Conformance statements  and the metadata about the feature data in this dataset.",
         "operationId": "WFS_GetLandingPage",
         "x-ms-examples": {
@@ -117,32 +200,48 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           }
         ],
         "responses": {
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/LandingPageResponse"
+              "$ref": "#/definitions/Root"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/conformance": {
+    "/wfs/datasets/{datasetid}/conformance": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.",
-        "operationId": "WFS_GetConformance",
+        "x-publish": true,
+        "operationId": "WFS_GetRequirementsClasses",
         "x-ms-examples": {
           "GetConformance": {
             "$ref": "./examples/GetConformance.json"
@@ -150,32 +249,48 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           }
         ],
         "responses": {
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/ConformanceResponse"
+              "$ref": "#/definitions/ReqClasses"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections": {
+    "/wfs/datasets/{datasetid}/collections": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Collections Description API provides descriptions of all the collections in a given dataset.",
-        "operationId": "WFS_GetCollections",
+        "operationId": "WFS_CollectionsDescription",
+        "x-publish": true,
         "x-ms-examples": {
           "GetCollections": {
             "$ref": "./examples/GetCollections.json"
@@ -183,32 +298,48 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           }
         ],
         "responses": {
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionsResponse"
+              "$ref": "#/definitions/Content"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}": {
+    "/wfs/datasets/{datasetid}/collections/{collectionId}": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n  \nThe Collection Description API provides the description of a given collection. It includes the links to the operations that can be performed on the collection.",
-        "operationId": "WFS_GetCollection",
+        "operationId": "WFS_CollectionDescription",
+        "x-publish": true,
         "x-ms-examples": {
           "GetCollection": {
             "$ref": "./examples/GetCollection.json"
@@ -216,13 +347,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -235,16 +369,29 @@
               "$ref": "#/definitions/CollectionInfo"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/definition": {
+    "/wfs/datasets/{datasetid}/collections/{collectionId}/definition": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n \nThe Collection Definition API provides the detailed data model of a given collection.",
-        "operationId": "WFS_GetCollectionDefinition",
+        "operationId": "WFS_CollectionDefinition",
+        "x-publish": true,
         "x-ms-examples": {
           "GetCollectionDefinition": {
             "$ref": "./examples/GetCollectionDefinition.json"
@@ -252,13 +399,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -268,33 +418,49 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionDefinitionResponse"
+              "$ref": "#/definitions/CollectionDefinition"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/items": {
+    "/wfs/datasets/{datasetid}/collections/{collectionId}/items": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Features API returns the list of features in the given collection.",
         "operationId": "WFS_GetFeatures",
+        "x-publish": true,
         "x-ms-examples": {
-          "GetFeatures": {
-            "$ref": "./examples/GetFeatures.json"
+          "Getitems": {
+            "$ref": "./examples/GetItems.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -313,30 +479,46 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/ExtendedGeoJsonFeatureCollection"
+              "$ref": "#/definitions/FeatureCollectionGeoJSON"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
-    "/wfs/datasets/{datasetId}/collections/{collectionId}/items/{featureId}": {
+    "/wfs/datasets/{datasetid}/collections/{collectionId}/items/{featureId}": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Feature API returns the feature identified by the provided id in the given collection.",
+        "x-publish": true,
         "operationId": "WFS_GetFeature",
         "x-ms-examples": {
           "GetFeature": {
-            "$ref": "./examples/GetFeature.json"
+            "$ref": "./examples/GetItem.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -349,28 +531,44 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FeatureResponse"
+              "$ref": "#/definitions/Feature"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       },
       "delete": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Delete Feature API deletes the feature identified by the provided id in the given collection. At this point this API supports only facility features. Deleting a facility feature deletes all the child features of that facility recursively.",
+        "x-publish": true,
         "operationId": "WFS_DeleteFeature",
         "x-ms-examples": {
-          "DeleteFeature": {
-            "$ref": "./examples/DeleteFeature.json"
+          "GetFeature": {
+            "$ref": "./examples/DeleteItem.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/WFSApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Datasetid"
           },
           {
             "$ref": "#/parameters/CollectionId"
@@ -383,40 +581,100 @@
           "204": {
             "description": "Feature Deleted."
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     }
   },
   "definitions": {
-    "LandingPageResponse": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "Exception": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Root": {
       "type": "object",
       "required": [
         "links"
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/Link"
           }
         }
       }
     },
-    "ConformanceResponse": {
+    "ReqClasses": {
       "type": "object",
       "required": [
         "conformsTo"
       ],
       "properties": {
         "conformsTo": {
-          "description": "List of requirements classes that the server conforms to.",
           "type": "array",
           "items": {
             "type": "string"
@@ -430,7 +688,7 @@
         }
       }
     },
-    "WfsEndpointLink": {
+    "Link": {
       "description": "Links to other WFS endpoints",
       "type": "object",
       "required": [
@@ -438,31 +696,26 @@
       ],
       "properties": {
         "href": {
-          "description": "The link target.",
           "type": "string"
         },
         "rel": {
-          "description": "The relation type.",
           "type": "string",
           "example": "prev"
         },
         "type": {
-          "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
           "type": "string",
           "example": "application/geo+json"
         },
         "hreflang": {
-          "description": "A hint indicating what the language of the result of dereferencing the link should be.",
           "type": "string",
           "example": "en"
         },
         "title": {
-          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier (e.g., a menu entry) in the language indicated by the Content-Language header field (if present).",
           "type": "string"
         }
       }
     },
-    "CollectionsResponse": {
+    "Content": {
       "type": "object",
       "required": [
         "links",
@@ -470,13 +723,12 @@
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/Link"
           },
           "example": [
             {
@@ -500,11 +752,56 @@
           ]
         },
         "collections": {
-          "description": "All the collections in a given dataset.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionInfo"
           }
+        }
+      }
+    },
+    "Version": {
+      "type": "object",
+      "required": [
+        "version",
+        "revisionTimestamp",
+        "links"
+      ],
+      "properties": {
+        "version": {
+          "description": "version number of the dataset",
+          "type": "string",
+          "example": "1.0.0"
+        },
+        "revisionTimestamp": {
+          "description": "timestamp of the revision",
+          "type": "string",
+          "example": "2020-01-02T03:04:05"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "example": [
+            {
+              "href": "http://data.example.org/collections.json",
+              "rel": "self",
+              "type": "application/json",
+              "title": "this document"
+            },
+            {
+              "href": "http://data.example.org/collections.html",
+              "rel": "alternate",
+              "type": "text/html",
+              "title": "this document as HTML"
+            },
+            {
+              "href": "http://schemas.example.org/1.0/foobar.xsd",
+              "rel": "describedBy",
+              "type": "application/xml",
+              "title": "XML schema for Acme Corporation data"
+            }
+          ]
         }
       }
     },
@@ -526,7 +823,7 @@
           "example": "Buildings"
         },
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "description": {
           "description": "a description of the features in the collection",
@@ -534,10 +831,9 @@
           "example": "Buildings in the city of Bonn."
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/Link"
           },
           "example": [
             {
@@ -556,7 +852,7 @@
         }
       }
     },
-    "CollectionDefinitionResponse": {
+    "CollectionDefinition": {
       "description": "collection of GeoJSON features",
       "type": "object",
       "required": [
@@ -586,7 +882,7 @@
           "example": "Feature Class buildings"
         },
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "geometryType": {
           "description": "type of geometry returned",
@@ -599,48 +895,7 @@
             "Polygon",
             "MultiPolygon",
             "GeometryCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJsonGeometryType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Point",
-                "description": "`GeoJSON Point` geometry.",
-                "name": "GeoJsonPoint"
-              },
-              {
-                "value": "MultiPoint",
-                "description": "`GeoJSON MultiPoint` geometry.",
-                "name": "GeoJsonMultiPoint"
-              },
-              {
-                "value": "LineString",
-                "description": "`GeoJSON LineString` geometry.",
-                "name": "GeoJsonLineString"
-              },
-              {
-                "value": "MultiLineString",
-                "description": "`GeoJSON MultiLineString` geometry.",
-                "name": "GeoJsonMultiLineString"
-              },
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry.",
-                "name": "GeoJsonPolygon"
-              },
-              {
-                "value": "MultiPolygon",
-                "description": "`GeoJSON MultiPolygon` geometry.",
-                "name": "GeoJsonMultiPolygon"
-              },
-              {
-                "value": "GeometryCollection",
-                "description": "`GeoJSON GeometryCollection` geometry.",
-                "name": "GeoJsonGeometryCollection"
-              }
-            ]
-          }
+          ]
         },
         "featureTypes": {
           "description": "type of features returned",
@@ -650,7 +905,6 @@
           }
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "description": "attributes of the collection used",
           "type": "array",
           "items": {
@@ -658,10 +912,9 @@
           }
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/Link"
           }
         }
       }
@@ -689,58 +942,91 @@
         }
       }
     },
-    "ExtendedGeoJsonFeatureCollection": {
-      "description": "A valid `GeoJSON FeatureCollection` object type extended with numberReturned and links array. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "x-ms-discriminator-value": "FeatureCollection",
+    "FeatureCollectionGeoJSON": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
-        },
-        {
-          "$ref": "#/definitions/ExtendedGeoJsonFeatureCollectionData"
-        }
-      ]
-    },
-    "ExtendedGeoJsonFeatureCollectionData": {
-      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
       "properties": {
+        "type": {
+          "type": "string"
+        },
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "numberReturned": {
-          "description": "Number of returned features.",
           "type": "integer"
         },
-        "links": {
-          "description": "Links to other WFS endpoints.",
+        "features": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/FeatureGeoJSON"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
           }
         }
       }
     },
-    "FeatureResponse": {
+    "Feature": {
       "type": "object",
       "required": [
         "feature"
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+          "$ref": "#/definitions/Ontology"
         },
         "feature": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
+          "$ref": "#/definitions/FeatureGeoJSON"
         },
         "links": {
-          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
+            "$ref": "#/definitions/Link"
           }
         }
       }
+    },
+    "FeatureGeoJSON": {
+      "description": "GeoJSON Feature",
+      "type": "object",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "description": "feature",
+          "type": "string"
+        },
+        "geometry": {
+          "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
+          "type": "object"
+        },
+        "properties": {
+          "description": "Additional properties of the feature.",
+          "type": "object"
+        },
+        "id": {
+          "description": "Identifier for the feature.",
+          "type": "string"
+        },
+        "featureType": {
+          "description": "The type of the feature. The value depends on the data model the current feature is part of. Some data models may have an empty value.",
+          "type": "string"
+        }
+      }
+    },
+    "Ontology": {
+      "type": "string",
+      "description": "The ontology version of this dataset. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
+      "readOnly": true
     }
   }
 }

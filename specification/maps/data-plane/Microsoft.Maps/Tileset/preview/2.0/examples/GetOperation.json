@@ -2,6 +2,7 @@
   "parameters": {
     "geography": "us",
     "api-version": "2.0",
+    "subscription-key": "[subscription-key]",
     "operationId": "8b1288fa-1958-4a2b-b68e-13a7i5af7d7c"
   },
   "responses": {
@@ -13,6 +14,15 @@
       },
       "headers": {
         "Resource-Location": "https://us.atlas.microsoft.com/tilesets/3e36b996-f6d1-b068-0fcb-dd6b014c3447?api-version=2.0"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
       }
     }
   }

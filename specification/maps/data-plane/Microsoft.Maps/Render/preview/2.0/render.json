@@ -5,33 +5,14 @@
     "version": "2.0",
     "description": "Azure Maps Render REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
   "consumes": [],
   "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    },
-    {
-      "SubscriptionKeyInHeader": []
-    },
-    {
-      "SubscriptionKeyInQuery": []
-    }
+    "application/json",
+    "application/xml"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -40,25 +21,82 @@
       "flow": "implicit",
       "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
       }
     },
-    "SubscriptionKeyInHeader": {
+    "apiKeyQuery": {
       "type": "apiKey",
-      "name": "subscription-key",
-      "in": "header"
-    },
-    "SubscriptionKeyInQuery": {
-      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
       "in": "query"
     }
   },
-  "responses": {},
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
   "parameters": {
-    "RenderApiVersionV2": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API.",
+      "description": "Version number of Azure Maps API. Current version is 2.0",
       "type": "string",
       "in": "query",
       "required": true,
@@ -141,6 +179,26 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "xTileIndex": {
+      "name": "x",
+      "x-ms-client-name": "xTileIndex",
+      "in": "query",
+      "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "yTileIndex": {
+      "name": "y",
+      "x-ms-client-name": "yTileIndex",
+      "in": "query",
+      "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
     "MapTileV2Zoom": {
       "name": "zoom",
       "in": "query",
@@ -148,6 +206,35 @@
       "required": true,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Language": {
+      "name": "language",
+      "in": "query",
+      "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Text": {
+      "name": "text",
+      "in": "query",
+      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "x-ms-parameter-location": "method"
+    },
+    "View": {
+      "name": "view",
+      "in": "query",
+      "description": "The View parameter specifies which set of geopolitically disputed content is returned via Azure Maps services, including  borders and labels displayed on the map. The View parameter (also referred to as “user region parameter”) will show the  correct maps for that country/region. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly  for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   },
@@ -163,10 +250,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RenderApiVersionV2"
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TilesetId_rv2"
@@ -175,22 +265,25 @@
             "$ref": "#/parameters/MapTileV2Zoom"
           },
           {
-            "$ref": "../1.0/render.json#/parameters/xTileIndex"
+            "$ref": "#/parameters/xTileIndex"
           },
           {
-            "$ref": "../1.0/render.json#/parameters/yTileIndex"
+            "$ref": "#/parameters/yTileIndex"
           },
           {
             "name": "timeStamp",
             "in": "query",
             "description": "The desired date and time of the requested tile. This parameter must be specified in the standard date-time format (e.g. 2019-11-14T16:03:00-08:00), as defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). This parameter is only supported when tilesetId parameter is set to one of the values below.\n  \n* microsoft.weather.infrared.main: We provide tiles up to 3 hours in the past. Tiles are available in 10-minute intervals. We round the timeStamp value to the nearest 10-minute time frame.\n* microsoft.weather.radar.main: We provide tiles up to 1.5 hours in the past and up to 2 hours in the future. Tiles are available in 5-minute intervals. We round the timeStamp value to the nearest 5-minute time frame.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "tileSize",
             "in": "query",
             "description": "The size of the returned map tile in pixels.",
+            "required": false,
             "type": "string",
+            "default": "256",
             "enum": [
               "256",
               "512"
@@ -211,39 +304,83 @@
             }
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/Language"
+            "$ref": "#/parameters/Language"
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/View"
+            "$ref": "#/parameters/View"
           }
         ],
         "produces": [
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/pbf",
-          "application/vnd.mapbox-vector-tile"
+          "application/json"
         ],
         "responses": {
           "200": {
-            "description": "The tile returned from a successful API call.",
+            "description": "OK",
             "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
+              "$ref": "#/definitions/MapTileResultv2"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "MapTileResultv2": {
+      "description": "The tile returned from a successful API call.",
+      "type": "string",
+      "format": "binary",
+      "readOnly": true
     }
   }
 }

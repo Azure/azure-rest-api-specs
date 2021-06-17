@@ -5,33 +5,14 @@
     "version": "1.0",
     "description": "Azure Maps Route REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
   "consumes": [],
   "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    },
-    {
-      "SubscriptionKeyInHeader": []
-    },
-    {
-      "SubscriptionKeyInQuery": []
-    }
+    "application/json",
+    "application/xml"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -40,35 +21,158 @@
       "flow": "implicit",
       "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
       }
     },
-    "SubscriptionKeyInHeader": {
+    "apiKeyQuery": {
       "type": "apiKey",
-      "name": "subscription-key",
-      "in": "header"
-    },
-    "SubscriptionKeyInQuery": {
-      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
       "in": "query"
     }
   },
-  "responses": {},
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    },
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    }
+  },
   "parameters": {
-    "RouteApiVersion": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API.",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
       "type": "string",
       "in": "query",
       "required": true,
       "default": "1.0",
       "x-ms-parameter-location": "client"
     },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `json` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TextFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "TextFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "VehicleLoadType": {
       "name": "vehicleLoadType",
       "in": "query",
       "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. vehicleLoadType can be specified multiple times. This parameter is currently only considered for travelMode=truck.",
+      "required": false,
       "type": "string",
       "enum": [
         "USHazmatClass1",
@@ -144,7 +248,9 @@
       "name": "routeType",
       "in": "query",
       "description": "The type of route requested.",
+      "required": false,
       "type": "string",
+      "default": "fastest",
       "enum": [
         "fastest",
         "shortest",
@@ -175,18 +281,20 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "WindingnessLevel": {
+    "Windingness": {
       "name": "windingness",
       "in": "query",
       "description": "Level of turns for thrilling route. This parameter can only be used in conjunction with `routeType`=thrilling.",
+      "required": false,
       "type": "string",
+      "default": "normal",
       "enum": [
         "low",
         "normal",
         "high"
       ],
       "x-ms-enum": {
-        "name": "WindingnessLevel",
+        "name": "Windingness",
         "modelAsString": true,
         "values": [
           {
@@ -205,18 +313,20 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "HillinessDegree": {
+    "Hilliness": {
       "name": "hilliness",
       "in": "query",
       "description": "Degree of hilliness for thrilling route. This parameter can only be used in conjunction with `routeType`=thrilling.",
+      "required": false,
       "type": "string",
+      "default": "normal",
       "enum": [
         "low",
         "normal",
         "high"
       ],
       "x-ms-enum": {
-        "name": "HillinessDegree",
+        "name": "Hilliness",
         "modelAsString": true,
         "values": [
           {
@@ -239,7 +349,9 @@
       "name": "travelMode",
       "in": "query",
       "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas. In **calculateReachableRange** requests, the values bicycle and pedestrian must not be used.",
+      "required": false,
       "type": "string",
+      "default": "car",
       "enum": [
         "car",
         "truck",
@@ -290,57 +402,54 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "RouteAvoidList": {
+    "Avoid": {
       "name": "avoid",
       "in": "query",
       "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
-      "type": "array",
-      "collectionFormat": "multi",
-      "items": {
-        "type": "string",
-        "enum": [
-          "tollRoads",
-          "motorways",
-          "ferries",
-          "unpavedRoads",
-          "carpools",
-          "alreadyUsedRoads",
-          "borderCrossings"
-        ],
-        "x-ms-enum": {
-          "name": "RouteAvoidType",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "tollRoads",
-              "description": "Avoids toll roads."
-            },
-            {
-              "value": "motorways",
-              "description": "Avoids motorways"
-            },
-            {
-              "value": "ferries",
-              "description": "Avoids ferries"
-            },
-            {
-              "value": "unpavedRoads",
-              "description": "Avoids unpaved roads"
-            },
-            {
-              "value": "carpools",
-              "description": "Avoids routes that require the use of carpool (HOV/High Occupancy Vehicle) lanes."
-            },
-            {
-              "value": "alreadyUsedRoads",
-              "description": "Avoids using the same road multiple times. Most useful in conjunction with `routeType`=thrilling."
-            },
-            {
-              "value": "borderCrossings",
-              "description": "Avoids border crossings in route calculation."
-            }
-          ]
-        }
+      "required": false,
+      "type": "string",
+      "enum": [
+        "tollRoads",
+        "motorways",
+        "ferries",
+        "unpavedRoads",
+        "carpools",
+        "alreadyUsedRoads",
+        "borderCrossings"
+      ],
+      "x-ms-enum": {
+        "name": "Avoid",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "tollRoads",
+            "description": "Avoids toll roads."
+          },
+          {
+            "value": "motorways",
+            "description": "Avoids motorways"
+          },
+          {
+            "value": "ferries",
+            "description": "Avoids ferries"
+          },
+          {
+            "value": "unpavedRoads",
+            "description": "Avoids unpaved roads"
+          },
+          {
+            "value": "carpools",
+            "description": "Avoids routes that require the use of carpool (HOV/High Occupancy Vehicle) lanes."
+          },
+          {
+            "value": "alreadyUsedRoads",
+            "description": "Avoids using the same road multiple times. Most useful in conjunction with `routeType`=thrilling."
+          },
+          {
+            "value": "borderCrossings",
+            "description": "Avoids border crossings in route calculation."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -348,11 +457,13 @@
       "name": "vehicleEngineType",
       "in": "query",
       "description": "Engine type of the vehicle. When a detailed Consumption Model is specified, it must be consistent with the value of **vehicleEngineType**.",
+      "required": false,
       "type": "string",
       "enum": [
         "combustion",
         "electric"
       ],
+      "default": "combustion",
       "x-ms-enum": {
         "name": "VehicleEngineType",
         "modelAsString": true,
@@ -373,6 +484,7 @@
       "name": "constantSpeedConsumptionInLitersPerHundredkm",
       "in": "query",
       "description": "\n\nSpecifies the speed-dependent component of consumption.\n\nProvided as an unordered list of colon-delimited speed & consumption-rate pairs. The list defines points on a consumption curve. Consumption rates for speeds not in the list are found as follows:\n\n * by linear interpolation, if the given speed lies in between two speeds in the list\n\n * by linear extrapolation otherwise, assuming a constant (ΔConsumption/ΔSpeed) determined by the nearest two points in the list\n\nThe list must contain between 1 and 25 points (inclusive), and may not contain duplicate points for the same speed. If it only contains a single point, then the consumption rate of that point is used without further processing.\n\nConsumption specified for the largest speed must be greater than or equal to that of the penultimate largest speed. This ensures that extrapolation does not lead to negative consumption rates.\n\nSimilarly, consumption values specified for the two smallest speeds in the list cannot lead to a negative consumption rate for any smaller speed.\n\nThe valid range for the consumption values(expressed in l/100km) is between 0.01 and 100000.0.\n\nSensible Values : 50,6.3:130,11.5\n\n**Note** : This parameter is required for **The Combustion Consumption Model**.",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -381,6 +493,7 @@
       "name": "currentFuelInLiters",
       "in": "query",
       "description": "Specifies the current supply of fuel in liters.\n\nSensible Values : 55",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -389,6 +502,7 @@
       "name": "auxiliaryPowerInLitersPerHour",
       "in": "query",
       "description": "Specifies the amount of fuel consumed for sustaining auxiliary systems of the vehicle, in liters per hour.\n\nIt can be used to specify consumption due to devices and systems such as AC systems, radio, heating, etc.\n\nSensible Values : 0.2",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -397,6 +511,7 @@
       "name": "fuelEnergyDensityInMJoulesPerLiter",
       "in": "query",
       "description": "Specifies the amount of chemical energy stored in one liter of fuel in megajoules (MJ). It is used in conjunction with the ***Efficiency** parameters for conversions between saved or consumed energy and fuel. For example, energy density is 34.2 MJ/l for gasoline, and 35.8 MJ/l for Diesel fuel.\n\nThis parameter is required if any ***Efficiency** parameter is set.\n\nSensible Values : 34.2",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -405,6 +520,7 @@
       "name": "accelerationEfficiency",
       "in": "query",
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to kinetic energy when the vehicle accelerates _(i.e. KineticEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **decelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**decelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.33, for **Electric Model** : 0.66",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -413,6 +529,7 @@
       "name": "decelerationEfficiency",
       "in": "query",
       "description": "Specifies the efficiency of converting kinetic energy to saved (not consumed) fuel when the vehicle decelerates _(i.e. ChemicalEnergySaved/KineticEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **accelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**accelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.83, for **Electric Model** : 0.91",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -421,6 +538,7 @@
       "name": "uphillEfficiency",
       "in": "query",
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to potential energy when the vehicle gains elevation _(i.e. PotentialEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **downhillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**downhillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.27, for **Electric Model** : 0.74",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -429,6 +547,7 @@
       "name": "downhillEfficiency",
       "in": "query",
       "description": "Specifies the efficiency of converting potential energy to saved (not consumed) fuel when the vehicle loses elevation _(i.e. ChemicalEnergySaved/PotentialEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **uphillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**uphillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.51, for **Electric Model** : 0.73",
+      "required": false,
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
@@ -437,6 +556,7 @@
       "name": "constantSpeedConsumptionInkWhPerHundredkm",
       "in": "query",
       "description": "Specifies the speed-dependent component of consumption.\n\nProvided as an unordered list of speed/consumption-rate pairs. The list defines points on a consumption curve. Consumption rates for speeds not in the list are found as follows:\n\n* by linear interpolation, if the given speed lies in between two speeds in the list\n\n* by linear extrapolation otherwise, assuming a constant (ΔConsumption/ΔSpeed) determined by the nearest two points in the list\n\nThe list must contain between 1 and 25 points (inclusive), and may not contain duplicate points for the same speed. If it only contains a single point, then the consumption rate of that point is used without further processing.\n\nConsumption specified for the largest speed must be greater than or equal to that of the penultimate largest speed. This ensures that extrapolation does not lead to negative consumption rates.\n\nSimilarly, consumption values specified for the two smallest speeds in the list cannot lead to a negative consumption rate for any smaller  speed.\n\nThe valid range for the consumption values(expressed in kWh/100km) is between 0.01 and 100000.0.\n\nSensible Values : 50,8.2:130,21.3\n\nThis parameter is required for **Electric consumption model**.",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -444,6 +564,7 @@
       "name": "currentChargeInkWh",
       "in": "query",
       "description": "Specifies the current electric energy supply in kilowatt hours (kWh).\n\nThis parameter co-exists with **maxChargeInkWh** parameter.\n\nThe range of values allowed are 0.0 to **maxChargeInkWh**.\n\nSensible Values : 43",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -451,6 +572,7 @@
       "name": "maxChargeInkWh",
       "in": "query",
       "description": "Specifies the maximum electric energy supply in kilowatt hours (kWh) that may be stored in the vehicle's battery.\n\nThis parameter co-exists with **currentChargeInkWh** parameter.\n\nMinimum value has to be greater than or equal to **currentChargeInkWh**.\n\nSensible Values : 85",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -458,6 +580,7 @@
       "name": "auxiliaryPowerInkW",
       "in": "query",
       "description": "Specifies the amount of power consumed for sustaining auxiliary systems, in kilowatts (kW).\n\nIt can be used to specify consumption due to devices and systems such as AC systems, radio, heating, etc.\n\nSensible Values : 1.7",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -465,59 +588,75 @@
       "name": "vehicleWeight",
       "in": "query",
       "description": "Weight of the vehicle in kilograms.",
+      "required": false,
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleWeight": {
       "name": "vehicleWeight",
       "in": "query",
       "description": "Weight of the vehicle in kilograms.\n\n* It is mandatory if any of the *Efficiency parameters are set.\n\n* It must be strictly positive when used in the context of the Consumption Model. Weight restrictions are considered.\n\n* If no detailed **Consumption Model** is specified and the value of **vehicleWeight** is non-zero, then weight restrictions are considered.\n\n* In all other cases, this parameter is ignored.\n\nSensible Values : for **Combustion Model** : 1600, for **Electric Model** : 1900",
+      "required": false,
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleMaxSpeed": {
       "name": "vehicleMaxSpeed",
       "in": "query",
       "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour.",
+      "required": false,
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleLength": {
       "name": "vehicleLength",
       "in": "query",
       "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered.",
+      "required": false,
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleHeight": {
       "name": "vehicleHeight",
       "in": "query",
       "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered.",
+      "required": false,
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleWidth": {
       "name": "vehicleWidth",
       "in": "query",
       "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered.",
+      "required": false,
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleAxleWeight": {
       "name": "vehicleAxleWeight",
       "in": "query",
       "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
+      "required": false,
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleCommercial": {
       "name": "vehicleCommercial",
       "in": "query",
       "description": "Vehicle is used for commercial purposes and thus may not be allowed to drive  on some roads.",
+      "required": false,
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "DepartAt": {
@@ -526,6 +665,7 @@
       "description": "The date and time of departure from the origin point. Departure times apart from now must be specified as a dateTime. When a time zone offset is not specified, it will be assumed to be that of the origin point. The departAt value must be in the future in the date-time format (1996-12-19T16:39:57-08:00).",
       "type": "string",
       "format": "date-time",
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "ArriveAt": {
@@ -534,13 +674,16 @@
       "description": "The date and time of arrival at the destination point. It must be specified as a dateTime. When a time zone offset is not specified it will be assumed to be that of the destination point. The arriveAt value must be in the future. The arriveAt parameter cannot be used in conjunction with departAt, minDeviationDistance or minDeviationTime.",
       "type": "string",
       "format": "date-time",
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "SectionType": {
       "name": "sectionType",
       "in": "query",
       "description": "Specifies which of the section types is reported in the route response. <br><br>For example if sectionType = pedestrian the sections which are suited for pedestrians only are returned. Multiple types can be used. The default sectionType refers to the travelMode input. By default travelMode is set to car",
+      "required": false,
       "type": "string",
+      "default": "travelMode",
       "enum": [
         "carTrain",
         "country",
@@ -605,14 +748,18 @@
       "name": "computeBestOrder",
       "in": "query",
       "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route length. Yields best results when used in conjunction with routeType _shortest_. Notice that origin and destination are excluded from the optimized waypoint indices. To include origin and destination in the response, please increase all the indices by 1 to account for the origin, and then add the destination as the final index. Possible values are true or false. True computes a better order if possible, but is not allowed to be used in conjunction with maxAlternatives value greater than 0 or in conjunction with circle waypoints. False will use the locations in the given order and not allowed to be used in conjunction with routeRepresentation _none_.",
+      "required": false,
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "RouteRepresentation": {
       "name": "routeRepresentation",
       "in": "query",
       "description": "Specifies the representation of the set of routes provided as response. This parameter value can only be used in conjunction with computeBestOrder=true.",
+      "required": false,
       "type": "string",
+      "default": "polyline",
       "enum": [
         "polyline",
         "summaryOnly",
@@ -642,7 +789,9 @@
       "name": "computeTravelTimeFor",
       "in": "query",
       "description": "Specifies whether to return additional travel times using different types of traffic information (none, historic, live) as well as the default best-estimate travel time.",
+      "required": false,
       "type": "string",
+      "default": "none",
       "enum": [
         "none",
         "all"
@@ -667,6 +816,7 @@
       "name": "vehicleHeading",
       "in": "query",
       "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+      "required": false,
       "type": "integer",
       "minimum": 0,
       "maximum": 359,
@@ -676,6 +826,7 @@
       "name": "report",
       "in": "query",
       "description": "Specifies which data should be reported for diagnosis purposes. The only possible value is _effectiveSettings_. Reports the effective parameters or data used when calling the API. In the case of defaulted parameters the default will be reflected where the parameter was not specified by the caller.",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -683,14 +834,18 @@
       "name": "traffic",
       "in": "query",
       "description": "Possible values: \n  * true - Do consider all available traffic information during routing\n  * false - Ignore current traffic data during routing. Note that although the current traffic data is ignored \n  during routing, the effect of historic traffic on effective road speeds is still incorporated.",
+      "required": false,
       "type": "boolean",
+      "default": true,
       "x-ms-parameter-location": "method"
     },
     "AlternativeRouteType": {
       "name": "alternativeType",
       "in": "query",
       "description": "Controls the optimality, with respect to the given planning criteria, of the calculated alternatives compared to the reference route.",
+      "required": false,
       "type": "string",
+      "default": "anyRoute",
       "enum": [
         "anyRoute",
         "betterRoute"
@@ -715,6 +870,7 @@
       "name": "instructionsType",
       "in": "query",
       "description": "If specified, guidance instructions will be returned. Note that the instructionsType parameter cannot be used in conjunction with routeRepresentation=none",
+      "required": false,
       "type": "string",
       "enum": [
         "coded",
@@ -740,27 +896,12 @@
         ]
       },
       "x-ms-parameter-location": "method"
-    },
-    "MatrixId": {
-      "name": "format",
-      "description": "Matrix id received after the Matrix Route request was accepted successfully.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "BatchId": {
-      "name": "format",
-      "description": "Batch id for querying the operation.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
     "/route/matrix/{format}": {
       "post": {
+        "x-publish": true,
         "description": "\n\n**Applies to**: S1 pricing tier.\n\nThe Matrix Routing service allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) or synchronous (sync) POST request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **700** and for sync request it's **100** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 100, you might want to make synchronous request. The maximum size of a matrix for this API is **100** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 10x10, 6x8, 9x8 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix/sync/json?api-version=1.0&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the response data or error information is available. If `waitForResults` parameter in the request is set to true, user will get a 200 response if the request is finished under 120 seconds.\n\n\nThe maximum size of a matrix for this API is **700** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x10, 10x10, 28x25. 10x70 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **14** days. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix/json?api-version=1.0&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to download the results of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the download URL obtained in Step 3 to download the results\n\n### Download Sync Results\nWhen you make a POST request for Route Matrix Sync API, the service returns 200 response code for successful request and a response array. The response body will contain the data and there will be no possibility to retrieve the results later.\n\n### Download Async Results\nWhen a request issues a `202 Accepted` response, the request is being processed using our async pipeline. You will be given a URL to check the progress of your  async request in the location header of the response. This status URI looks like the following:\n```\n  GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}\n```\n\nThe URL provided by the location header will return the following responses when a `GET` request is issued.\n\n  > HTTP `202 Accepted` - Matrix request was accepted but is still being processed. Please try again in some time.\n\n  > HTTP `200 OK` - Matrix request successfully processed. The response body contains all of the results.",
         "operationId": "Route_PostRouteMatrix",
         "x-ms-long-running-operation": true,
@@ -768,25 +909,30 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "PostRouteMatrix": {
-            "$ref": "./examples/PostRouteMatrix.json"
+          "MatrixRoute": {
+            "$ref": "./examples/PostMatrixRouteCalculate.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RouteApiVersion"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
           },
           {
             "name": "waitForResults",
             "in": "query",
             "description": "Boolean to indicate whether to execute the request synchronously. If set to true, user will get a 200 response if the request is finished under 120 seconds. Otherwise, user will get a 202 response right away. Please refer to the API description for more details on 202 response. **Supported only for async request**.",
-            "type": "boolean"
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "#/parameters/ComputeTravelTimeFor"
@@ -819,16 +965,16 @@
             "$ref": "#/parameters/VehicleWeightMatrix"
           },
           {
-            "$ref": "#/parameters/WindingnessLevel"
+            "$ref": "#/parameters/Windingness"
           },
           {
-            "$ref": "#/parameters/HillinessDegree"
+            "$ref": "#/parameters/Hilliness"
           },
           {
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/RouteAvoidList"
+            "$ref": "#/parameters/Avoid"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -840,12 +986,12 @@
             "$ref": "#/parameters/VehicleLoadType"
           },
           {
-            "name": "postRouteMatrixRequestBody",
+            "name": "routeMatrixBody",
             "description": "The matrix of origin and destination coordinates to compute the route distance, travel time and other summary for each cell of the matrix based on the input parameters. The minimum and the maximum cell count supported are 1 and **700** for async and **100** for sync respectively. For example, it can be 35 origins and 20 destinations or 25 origins and 25 destinations for async API.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostRouteMatrixRequestBody"
+              "$ref": "#/definitions/RouteMatrixRequestBody"
             }
           }
         ],
@@ -857,54 +1003,32 @@
             }
           },
           "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202Async"
+            "$ref": "#/responses/202Async"
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
-        }
-      },
-      "get": {
-        "description": "If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to download the results of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the download URL obtained in Step 3 to download the results\n\n### Download Sync Results\nWhen you make a POST request for Route Matrix Sync API, the service returns 200 response code for successful request and a response array. The response body will contain the data and there will be no possibility to retrieve the results later.\n\n### Download Async Results\nWhen a request issues a `202 Accepted` response, the request is being processed using our async pipeline. You will be given a URL to check the progress of your  async request in the location header of the response. This status URI looks like the following:\n```\n  GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}\n```\n\nThe URL provided by the location header will return the following responses when a `GET` request is issued.\n\n  > HTTP `202 Accepted` - Matrix request was accepted but is still being processed. Please try again in some time.\n\n  > HTTP `200 OK` - Matrix request successfully processed. The response body contains all of the results.",
-        "operationId": "Route_GetRouteMatrix",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
         },
-        "x-ms-examples": {
-          "GetRouteMatrix": {
-            "$ref": "./examples/GetRouteMatrix.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/RouteApiVersion"
-          },
-          {
-            "$ref": "#/parameters/MatrixId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Matrix request successfully processed. The response body contains all of the results.",
-            "schema": {
-              "$ref": "#/definitions/RouteMatrixResponse"
-            }
-          },
-          "202": {
-            "description": "OK"
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/route/directions/{format}": {
       "get": {
+        "x-publish": true,
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
         "operationId": "Route_GetRouteDirections",
         "x-ms-examples": {
@@ -914,13 +1038,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RouteApiVersion"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/TextFormat"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
           },
           {
             "name": "query",
@@ -933,9 +1060,11 @@
             "name": "maxAlternatives",
             "in": "query",
             "description": "Number of desired alternative routes to be calculated. Default: 0, minimum: 0 and maximum: 5",
+            "required": false,
             "type": "integer",
             "minimum": 0,
-            "maximum": 5
+            "maximum": 5,
+            "default": 0
           },
           {
             "$ref": "#/parameters/AlternativeRouteType"
@@ -944,7 +1073,9 @@
             "name": "minDeviationDistance",
             "in": "query",
             "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of meters. Can only be used when reconstructing a route. The minDeviationDistance parameter cannot be used in conjunction with arriveAt",
-            "type": "integer"
+            "required": false,
+            "type": "integer",
+            "default": 0
           },
           {
             "$ref": "#/parameters/ArriveAt"
@@ -956,7 +1087,9 @@
             "name": "minDeviationTime",
             "in": "query",
             "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of seconds. Can only be used when reconstructing a route. The minDeviationTime parameter cannot be used in conjunction with arriveAt. Default value is 0. Setting )minDeviationTime_ to a value greater than zero has the following consequences:\n  - The origin point of the _calculateRoute_ Request must be on\n    (or very near) the input reference route.\n    - If this is not the case, an error is returned.\n    - However, the origin point does not need to be at the beginning\n      of the input reference route (it can be thought of as the current\n      vehicle position on the reference route).\n  - The reference route, returned as the first route in the _calculateRoute_\n    Response, will start at the origin point specified in the _calculateRoute_\n    Request. The initial part of the input reference route up until the origin\n    point will be excluded from the Response.\n  - The values of _minDeviationDistance_ and _minDeviationTime_ determine\n    how far alternative routes will be guaranteed to follow the reference\n    route from the origin point onwards.\n  - The route must use _departAt_.\n  - The _vehicleHeading_ is ignored.",
-            "type": "integer"
+            "required": false,
+            "type": "integer",
+            "default": 0
           },
           {
             "$ref": "#/parameters/RouteInstructionsType"
@@ -965,6 +1098,7 @@
             "name": "language",
             "in": "query",
             "description": "The language parameter determines the language of the guidance messages. Proper nouns (the names of streets, plazas, etc.) are returned in the specified  language, or if that is not available, they are returned in an available language  that is close to it. Allowed values are (a subset of) the IETF language tags. The currently supported  languages are listed in the [Supported languages  section](https://docs.microsoft.com/azure/azure-maps/supported-languages).\n\nDefault value: en-GB",
+            "required": false,
             "type": "string"
           },
           {
@@ -1007,16 +1141,16 @@
             "$ref": "#/parameters/VehicleCommercial"
           },
           {
-            "$ref": "#/parameters/WindingnessLevel"
+            "$ref": "#/parameters/Windingness"
           },
           {
-            "$ref": "#/parameters/HillinessDegree"
+            "$ref": "#/parameters/Hilliness"
           },
           {
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/RouteAvoidList"
+            "$ref": "#/parameters/Avoid"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -1074,12 +1208,25 @@
               "$ref": "#/definitions/RouteDirectionsResponse"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       },
       "post": {
+        "x-publish": true,
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of a vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
         "operationId": "Route_PostRouteDirections",
         "x-ms-examples": {
@@ -1089,13 +1236,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RouteApiVersion"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/TextFormat"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
           },
           {
             "name": "query",
@@ -1108,9 +1258,11 @@
             "name": "maxAlternatives",
             "in": "query",
             "description": "Number of desired alternative routes to be calculated. Default: 0, minimum: 0 and maximum: 5",
+            "required": false,
             "type": "integer",
             "minimum": 0,
-            "maximum": 5
+            "maximum": 5,
+            "default": 0
           },
           {
             "$ref": "#/parameters/AlternativeRouteType"
@@ -1119,13 +1271,17 @@
             "name": "minDeviationDistance",
             "in": "query",
             "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of meters. Can only be used when reconstructing a route. The minDeviationDistance parameter cannot be used in conjunction with arriveAt",
-            "type": "integer"
+            "required": false,
+            "type": "integer",
+            "default": 0
           },
           {
             "name": "minDeviationTime",
             "in": "query",
             "description": "All alternative routes returned will follow the reference route (see section POST Requests) from the origin point of the calculateRoute request for at least this number of seconds. Can only be used when reconstructing a route. The minDeviationTime parameter cannot be used in conjunction with arriveAt. Default value is 0. Setting )minDeviationTime_ to a value greater than zero has the following consequences:\n  - The origin point of the _calculateRoute_ Request must be on\n    (or very near) the input reference route.\n    - If this is not the case, an error is returned.\n    - However, the origin point does not need to be at the beginning\n      of the input reference route (it can be thought of as the current\n      vehicle position on the reference route).\n  - The reference route, returned as the first route in the _calculateRoute_\n    Response, will start at the origin point specified in the _calculateRoute_\n    Request. The initial part of the input reference route up until the origin\n    point will be excluded from the Response.\n  - The values of _minDeviationDistance_ and _minDeviationTime_ determine\n    how far alternative routes will be guaranteed to follow the reference\n    route from the origin point onwards.\n  - The route must use _departAt_.\n  - The _vehicleHeading_ is ignored.",
-            "type": "integer"
+            "required": false,
+            "type": "integer",
+            "default": 0
           },
           {
             "$ref": "#/parameters/RouteInstructionsType"
@@ -1134,6 +1290,7 @@
             "name": "language",
             "in": "query",
             "description": "The language parameter determines the language of the guidance messages. It does not affect proper nouns (the names of streets, plazas, etc.) It has no effect when instructionsType=coded. Allowed values are (a subset of) the IETF language tags described",
+            "required": false,
             "type": "string"
           },
           {
@@ -1182,16 +1339,16 @@
             "$ref": "#/parameters/VehicleCommercial"
           },
           {
-            "$ref": "#/parameters/WindingnessLevel"
+            "$ref": "#/parameters/Windingness"
           },
           {
-            "$ref": "#/parameters/HillinessDegree"
+            "$ref": "#/parameters/Hilliness"
           },
           {
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/RouteAvoidList"
+            "$ref": "#/parameters/Avoid"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -1242,12 +1399,12 @@
             "$ref": "#/parameters/AuxiliaryPowerInkW"
           },
           {
-            "name": "postRouteDirectionsRequestBody",
+            "name": "routeDirectionsRequestBody",
             "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route.  The provided sequence of coordinates is used as input for route reconstruction. The alternative routes  are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points  are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate  locations (waypoints) are not supported when using supportingPoints.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the  following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If  this is not the case, an error is returned. However, the origin point does not need to be at the beginning of  the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin  point specified in the calculateRoute request. The initial part of the input reference route up until the  origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be  guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostRouteDirectionsRequestBody"
+              "$ref": "#/definitions/RouteDirectionsRequestBody"
             }
           }
         ],
@@ -1258,14 +1415,27 @@
               "$ref": "#/definitions/RouteDirectionsResponse"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
     "/route/range/{format}": {
       "get": {
+        "x-publish": true,
         "description": "__Route Range (Isochrone) API__\n\n\n**Applies to**: S1 pricing tier.\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
         "operationId": "Route_GetRouteRange",
         "x-ms-examples": {
@@ -1275,13 +1445,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RouteApiVersion"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/TextFormat"
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
           },
           {
             "name": "query",
@@ -1294,6 +1467,7 @@
             "name": "fuelBudgetInLiters",
             "in": "query",
             "description": "Fuel budget in liters that determines maximal range which can be travelled using the specified Combustion Consumption Model.<br> When fuelBudgetInLiters is used, it is mandatory to specify a detailed  Combustion Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
+            "required": false,
             "type": "number",
             "format": "float"
           },
@@ -1301,6 +1475,7 @@
             "name": "energyBudgetInkWh",
             "in": "query",
             "description": "Electric energy budget in kilowatt hours (kWh) that determines maximal range which can be travelled using the specified Electric Consumption Model.<br> When energyBudgetInkWh is used, it is mandatory to specify a detailed Electric Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
+            "required": false,
             "type": "number",
             "format": "float"
           },
@@ -1308,6 +1483,7 @@
             "name": "timeBudgetInSec",
             "in": "query",
             "description": "Time budget in seconds that determines maximal range which can be travelled using driving time. The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
+            "required": false,
             "type": "number",
             "format": "float"
           },
@@ -1315,6 +1491,7 @@
             "name": "distanceBudgetInMeters",
             "in": "query",
             "description": "Distance budget in meters that determines maximal range which can be travelled using driving distance.  The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
+            "required": false,
             "type": "number",
             "format": "float"
           },
@@ -1328,16 +1505,16 @@
             "$ref": "#/parameters/Traffic"
           },
           {
-            "$ref": "#/parameters/RouteAvoidList"
+            "$ref": "#/parameters/Avoid"
           },
           {
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/HillinessDegree"
+            "$ref": "#/parameters/Hilliness"
           },
           {
-            "$ref": "#/parameters/WindingnessLevel"
+            "$ref": "#/parameters/Windingness"
           },
           {
             "$ref": "#/parameters/VehicleAxleWeight"
@@ -1407,17 +1584,30 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetRouteRangeResponse"
+              "$ref": "#/definitions/RouteRangeResponse"
             }
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
         }
       }
     },
     "/route/directions/batch/{format}": {
       "post": {
+        "x-publish": true,
         "description": "**Route Directions Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\n\nThe Route Directions Batch API sends batches of queries to [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) using just a single API call. You can call Route Directions Batch API to run either asynchronously (async) or synchronously (sync). The async API allows caller to batch up to **700** queries and sync API up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions/batch/sync/json?api-version=1.0&subscription-key={subscription-key}\n```\n### Submit Asynchronous Batch Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex route requests\n- It allows the retrieval of results in a separate call (multiple downloads are possible).\n- The asynchronous API is optimized for reliability and is not expected to run into a timeout.\n- The number of batch items is limited to **700** for this API.\n\nWhen you make a request by using async request, by default the service returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the response data or error information is available.\nThe asynchronous responses are stored for **14** days. The redirect URL returns a 404 response if used after the expiration period.\n\nPlease note that asynchronous batch request is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Route Directions Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n    This status URI looks like following:\n\n``` GET https://atlas.microsoft.com/batch/{batch-id}?api-version=1.0 ```\nNote:- Please remember to add AUTH information (subscription-key/azure_auth - See [Security](#security)) to the _status URI_ before running it. <br>\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n### POST Body for Batch Request\nTo send the _route directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 3 _route directions_ queries:\n\n\n```json\n{\n    \"batchItems\": [\n        { \"query\": \"?query=47.620659,-122.348934:47.610101,-122.342015&travelMode=bicycle&routeType=eco&traffic=false\" },\n        { \"query\": \"?query=40.759856,-73.985108:40.771136,-73.973506&travelMode=pedestrian&routeType=shortest\" },\n        { \"query\": \"?query=48.923159,-122.557362:32.621279,-116.840362\" }\n    ]\n}\n```\n\nA _route directions_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _route directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#uri-parameters). The string values in the _route directions_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.\n\n\nThe async API allows caller to batch up to **700** queries and sync API up to **100** queries, and the batch should contain at least **1** query.\n\n\n### Download Asynchronous Batch Results\nTo download the async batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\nHere's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n\n\n### Batch Response Model\nThe returned data content is similar for async and sync requests. When downloading the results of an async batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 1,\n        \"totalRequests\": 2\n    },\n    \"batchItems\": [\n        {\n            \"statusCode\": 200,\n            \"response\": {\n                \"routes\": [\n                    {\n                        \"summary\": {\n                            \"lengthInMeters\": 1758,\n                            \"travelTimeInSeconds\": 387,\n                            \"trafficDelayInSeconds\": 0,\n                            \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                            \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                        },\n                        \"legs\": [\n                            {\n                                \"summary\": {\n                                    \"lengthInMeters\": 1758,\n                                    \"travelTimeInSeconds\": 387,\n                                    \"trafficDelayInSeconds\": 0,\n                                    \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                                    \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                                },\n                                \"points\": [\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.34892\n                                    },\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.3485\n                                    },\n                                    {\n                                        \"latitude\": 47.62095,\n                                        \"longitude\": -122.3476\n                                    }\n                                ]\n                            }\n                        ],\n                        \"sections\": [\n                            {\n                                \"startPointIndex\": 0,\n                                \"endPointIndex\": 40,\n                                \"sectionType\": \"TRAVEL_MODE\",\n                                \"travelMode\": \"bicycle\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"statusCode\": 400,\n            \"response\":\n            {\n                \"error\":\n                {\n                    \"code\": \"400 BadRequest\",\n                    \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n                }\n            }\n        }\n    ]\n}\n```",
         "operationId": "Route_PostRouteDirectionsBatch",
         "x-ms-long-running-operation": true,
@@ -1431,98 +1621,24 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RouteApiVersion"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "name": "postRouteDirectionsBatchRequestBody",
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "routeDirectionsBatchRequestBody",
             "in": "body",
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202Batch"
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      },
-      "get": {
-        "description": "### Download Asynchronous Batch Results\nTo download the async batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\nHere's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n\n\n### Batch Response Model\nThe returned data content is similar for async and sync requests. When downloading the results of an async batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 1,\n        \"totalRequests\": 2\n    },\n    \"batchItems\": [\n        {\n            \"statusCode\": 200,\n            \"response\": {\n                \"routes\": [\n                    {\n                        \"summary\": {\n                            \"lengthInMeters\": 1758,\n                            \"travelTimeInSeconds\": 387,\n                            \"trafficDelayInSeconds\": 0,\n                            \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                            \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                        },\n                        \"legs\": [\n                            {\n                                \"summary\": {\n                                    \"lengthInMeters\": 1758,\n                                    \"travelTimeInSeconds\": 387,\n                                    \"trafficDelayInSeconds\": 0,\n                                    \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                                    \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                                },\n                                \"points\": [\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.34892\n                                    },\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.3485\n                                    },\n                                    {\n                                        \"latitude\": 47.62095,\n                                        \"longitude\": -122.3476\n                                    }\n                                ]\n                            }\n                        ],\n                        \"sections\": [\n                            {\n                                \"startPointIndex\": 0,\n                                \"endPointIndex\": 40,\n                                \"sectionType\": \"TRAVEL_MODE\",\n                                \"travelMode\": \"bicycle\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"statusCode\": 400,\n            \"response\":\n            {\n                \"error\":\n                {\n                    \"code\": \"400 BadRequest\",\n                    \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n                }\n            }\n        }\n    ]\n}\n```",
-        "operationId": "Route_GetRouteDirectionsBatch",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-examples": {
-          "A Get Route Directions Batch API call containing 3 Route Directions API queries": {
-            "$ref": "./examples/GetRouteDirectionsBatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/RouteApiVersion"
-          },
-          {
-            "$ref": "#/parameters/BatchId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Batch request successfully processed. The response body contains all the batch results.",
-            "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
-            }
-          },
-          "202": {
-            "description": "Batch request was accepted but is still being processed. Please try again in some time."
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/route/directions/batch/sync/{format}": {
-      "post": {
-        "description": "**Route Directions Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\n\nThe Route Directions Batch API sends batches of queries to [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) using just a single API call. You can call Route Directions Batch API to run either asynchronously (async) or synchronously (sync). The async API allows caller to batch up to **700** queries and sync API up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\n",
-        "operationId": "Route_PostRouteDirectionsBatchSync",
-        "x-ms-examples": {
-          "A Route Directions Batch Synchronous API call containing 3 Route Directions API queries": {
-            "$ref": "./examples/PostRouteDirectionsBatchSync.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/RouteApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "name": "postRouteDirectionsBatchRequestBody",
-            "in": "body",
-            "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
+              "$ref": "#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1530,27 +1646,337 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
+              "$ref": "#/definitions/BatchResponse"
             }
           },
-          "408": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
+          "202": {
+            "$ref": "#/responses/202Async"
           },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     }
   },
   "definitions": {
-    "PostRouteDirectionsRequestBody": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "Redirect": {
+      "type": "object",
+      "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
+    },
+    "BatchResponse": {
+      "description": "This object is returned from a successful Batch service call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "batchItems": {
+          "description": "Array containing the batch results",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MultiPoint": {
+      "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiPoint\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `MultiPoint` geometry.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSONPosition"
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJSONPosition"
+      }
+    },
+    "GeoJSONPosition": {
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "Point": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "$ref": "#/definitions/GeoJSONPosition"
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "MultiPolygon": {
+      "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the object. Value should always be equal to \"MultiPolygon\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/GeoJSONLinearRing"
+                }
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONGeometryCollection": {
+      "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the object. Value should always be equal to \"GeometryCollection\".",
+          "type": "string"
+        },
+        "geometries": {
+          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSONGeometry"
+          }
+        }
+      },
+      "required": [
+        "geometries"
+      ]
+    },
+    "BatchRequestBody": {
+      "description": "This type represents the request body for the Batch service.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries/requests to process",
+          "type": "array",
+          "items": {
+            "description": "Batch Query object",
+            "type": "object",
+            "properties": {
+              "query": {
+                "description": "Partial query string",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "RouteDirectionsRequestBody": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
       "properties": {
         "supportingPoints": {
           "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometryCollection"
+          "allOf": [
+            {
+              "$ref": "#/definitions/GeoJSONGeometryCollection"
+            },
+            {
+              "properties": {
+                "geometries": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Point"
+                  }
+                }
+              }
+            }
+          ]
         },
         "avoidVignette": {
           "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which all toll roads with vignettes are to be avoided, e.g. \"AUS,CHE\". Toll roads with vignettes in countries not in the list are unaffected. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
@@ -1568,7 +1994,7 @@
         },
         "avoidAreas": {
           "description": "A GeoJSON MultiPolygon representing list of areas to avoid. Only rectangle polygons are supported. The maximum size of a rectangle is about 160x160 km. Maximum number of avoided areas is **10**. It cannot cross the 180th meridian. It must be between -80 and +80 degrees of latitude.",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPolygon"
+          "$ref": "#/definitions/MultiPolygon"
         }
       }
     },
@@ -1688,7 +2114,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
+            "$ref": "#/definitions/Coordinate"
           }
         }
       }
@@ -1882,7 +2308,7 @@
           "readOnly": true
         },
         "point": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
+          "$ref": "#/definitions/Coordinate"
         },
         "pointIndex": {
           "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
@@ -2270,7 +2696,7 @@
         }
       }
     },
-    "GetRouteRangeResponse": {
+    "RouteRangeResponse": {
       "description": "This object is returned from a successful Route Reachable Range call",
       "type": "object",
       "properties": {
@@ -2293,14 +2719,14 @@
       "properties": {
         "center": {
           "description": "Center point of the reachable range",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
+          "$ref": "#/definitions/Coordinate"
         },
         "boundary": {
           "description": "Polygon boundary of the reachable range represented as a list of points.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
+            "$ref": "#/definitions/Coordinate"
           }
         }
       }
@@ -2403,58 +2829,15 @@
         }
       }
     },
-    "PostRouteMatrixRequestBody": {
+    "RouteMatrixRequestBody": {
       "description": "An object with a matrix of coordinates.",
       "type": "object",
       "properties": {
         "origins": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+          "$ref": "#/definitions/MultiPoint"
         },
         "destinations": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
-        }
-      }
-    },
-    "RouteDirectionsBatchResponse": {
-      "description": "This object is returned from a successful Route Directions Batch service call.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
-        }
-      ],
-      "properties": {
-        "batchItems": {
-          "description": "Array containing the batch results.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RouteDirectionsBatchItem"
-          }
-        }
-      }
-    },
-    "RouteDirectionsBatchItem": {
-      "description": "An item returned from Route Directions Batch service call.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
-        }
-      ],
-      "properties": {
-        "response": {
-          "description": "The result of the query. RouteDirectionsResponse if the query completed successfully, ErrorResponse otherwise.",
-          "type": "object",
-          "readOnly": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RouteDirectionsResponse"
-            },
-            {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            }
-          ]
+          "$ref": "#/definitions/MultiPoint"
         }
       }
     }

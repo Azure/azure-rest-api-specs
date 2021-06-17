@@ -1,15 +1,15 @@
 {
   "parameters": {
-    "geography": "us",
     "format": "json",
     "api-version": "1.0",
     "deviceId": "unique_device_name_under_account",
     "lat": 48.36,
     "lon": -124.63,
     "searchBuffer": 50,
-    "usertime": "2017-07-21T17:32:28Z",
+    "usertime": "2018-09-10T10:00:00",
     "isAsync": true,
     "mode": "EnterAndExit",
+    "subscription-key": "[subscription-key]",
     "searchGeofenceRequestBody": {
       "type": "FeatureCollection",
       "features": [
@@ -127,6 +127,56 @@
         "expiredGeofenceGeometryId": [],
         "invalidPeriodGeofenceGeometryId": [],
         "isEventPublished": true
+      }
+    },
+    "400": {
+      "headers": {
+        "X-Correlation-ID": "80575fa1-2c1e-4738-834a-fcf45b58dd7c"
+      },
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Lat and/or lon parameters are invalid.",
+          "innererror": {
+            "code": "InvalidLatLon"
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
       }
     }
   }
