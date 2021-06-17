@@ -42,7 +42,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisiningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
             "in": "query",
             "required": false,
             "type": "string"
@@ -294,6 +294,7 @@
       }
     },
     "ReservationsListResult": {
+      "type": "object",
       "description": "The list of reservations and summary of roll out count of reservations in each state.",
       "properties": {
         "value": {
@@ -629,6 +630,7 @@
       }
     },
     "ErrorDetails": {
+      "type": "object",
       "description": "The details of the error.",
       "properties": {
         "code": {
