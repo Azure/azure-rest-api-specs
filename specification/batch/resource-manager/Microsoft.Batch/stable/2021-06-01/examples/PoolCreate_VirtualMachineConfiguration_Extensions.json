@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2021-01-01",
+    "api-version": "2021-06-01",
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
@@ -18,10 +18,10 @@
           "virtualMachineConfiguration": {
             "imageReference": {
               "publisher": "Canonical",
-              "offer": "UbuntuServer",
-              "sku": "16.04.0-LTS"
+              "offer": "0001-com-ubuntu-server-focal",
+              "sku": "20_04-lts"
             },
-            "nodeAgentSkuId": "batch.node.ubuntu 16.04",
+            "nodeAgentSkuId": "batch.node.ubuntu 20.04",
             "extensions": [
               {
                 "name": "batchextension1",
@@ -77,10 +77,10 @@
             "virtualMachineConfiguration": {
               "imageReference": {
                 "publisher": "Canonical",
-                "offer": "UbuntuServer",
-                "sku": "16.04.0-LTS"
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts"
               },
-              "nodeAgentSkuId": "batch.node.ubuntu 16.04",
+              "nodeAgentSkuId": "batch.node.ubuntu 20.04",
               "extensions": [
                 {
                   "name": "batchextension1",
