@@ -40,7 +40,38 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2020-03
+tag: package-2021-04
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2019-06-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
 ### Tag: package-2021-05-01-preview-only
 
@@ -690,6 +721,58 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+```
+
+``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
+directive:
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["Resource"]
+  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+```
+
+``` yaml !$(python) && !$(go) && !$(java)
+directive:
+- from: activityLogAlerts_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: guestDiagnosticSettings_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: guestDiagnosticSettingsAssociation_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: privateLinkScopes_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: autoscale_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: alertRules_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: alertRulesIncidents_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: actionGroups_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: metricAlert_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01
