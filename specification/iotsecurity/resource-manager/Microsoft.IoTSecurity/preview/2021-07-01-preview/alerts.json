@@ -129,6 +129,52 @@
             }
           }
         }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update IoT Alert": {
+            "$ref": "./examples/Alerts/PatchAlert.json"
+          }
+        },
+        "tags": [
+          "IoT Security Alerts"
+        ],
+        "operationId": "IotAlerts_Patch",
+        "description": "Update an existing alert",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AlertId"
+          },
+          {
+            "$ref": "#/parameters/AlertPatchModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT alert",
+            "schema": {
+              "$ref": "#/definitions/AlertModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -173,6 +219,46 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AlertSeverity": {
+      "type": "string",
+      "readOnly": false,
+      "description": "Alert Severity",
+      "enum": [
+        "Informational",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "alertSeverity",
+        "modelAsString": true
+      }
+    },
+    "AlertStatus": {
+      "type": "string",
+      "readOnly": false,
+      "description": "Alert Status",
+      "enum": [
+        "New",
+        "InProgress",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "alertStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "New"
+          },
+          {
+            "value": "InProgress"
+          },
+          {
+            "value": "Closed"
+          }
+        ]
+      }
     },
     "AlertPropertiesModel": {
       "type": "object",
@@ -234,34 +320,10 @@
           }
         },
         "severity": {
-          "readOnly": true,
           "type": "string",
           "example": "Medium",
-          "description": "The severity of the alert",
-          "enum": [
-            "Informational",
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "alertSeverity",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Informational"
-              },
-              {
-                "value": "Low"
-              },
-              {
-                "value": "Medium"
-              },
-              {
-                "value": "High"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
         },
         "intent": {
           "readOnly": true,
@@ -346,6 +408,36 @@
           "type": "string",
           "example": "IoT Hub",
           "description": "The name of a component inside the product which generated the alert"
+        },
+        "status": {
+          "type": "string",
+          "example": "New",
+          "description": "The status of the alert",
+          "$ref": "#/definitions/AlertStatus"
+        }
+      }
+    },
+    "AlertPatchPropertiesModel": {
+      "type": "object",
+      "description": "IoT alert properties",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "IoT alert properties",
+          "properties": {
+            "severity": {
+              "type": "string",
+              "example": "Medium",
+              "description": "The severity of the alert",
+              "$ref": "#/definitions/AlertSeverity"
+            },
+            "status": {
+              "type": "string",
+              "example": "New",
+              "description": "The status of the alert",
+              "$ref": "#/definitions/AlertStatus"
+            }
+          }
         }
       }
     }
@@ -365,6 +457,16 @@
       "required": true,
       "description": "Alert Id",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertPatchModel": {
+      "name": "alertPatchModel",
+      "in": "body",
+      "required": true,
+      "description": "IoT alert",
+      "schema": {
+        "$ref": "#/definitions/AlertPatchPropertiesModel"
+      },
       "x-ms-parameter-location": "method"
     }
   }
