@@ -1243,8 +1243,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Catalogs_CreateOrUpdate": {
-            "$ref": "./examples/Catalogs_Put.json"
+          "Catalogs_CreateOrUpdateGitHub": {
+            "$ref": "./examples/Catalogs_CreateGitHub.json"
+          },
+          "Catalogs_CreateOrUpdateAdo": {
+            "$ref": "./examples/Catalogs_CreateAdo.json"
           }
         }
       },
@@ -1287,12 +1290,22 @@
               "$ref": "#/definitions/Catalog"
             }
           },
+          "201": {
+            "description": "The request will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Catalogs_Update": {
@@ -2520,6 +2533,17 @@
       "description": "Details of a specific deployment of an environment.",
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "Deployment properties."
+        }
+      }
+    },
+    "DeploymentProperties": {
+      "description": "Properties of a deployment.",
+      "type": "object",
+      "properties": {
         "provisioningState": {
           "description": "Current provisioning state of the deployment.",
           "$ref": "#/definitions/ProvisioningState",
@@ -2565,7 +2589,12 @@
         "gitHub": {
           "description": "Properties for a GitHub catalog type.",
           "type": "object",
-          "$ref": "#/definitions/GitHubCatalog"
+          "$ref": "#/definitions/GitCatalog"
+        },
+        "adoGit": {
+          "description": "Properties for an Azure DevOps catalog type.",
+          "type": "object",
+          "$ref": "#/definitions/GitCatalog"
         }
       }
     },
@@ -2608,20 +2637,20 @@
         }
       }
     },
-    "GitHubCatalog": {
-      "description": "Properties for a GitHub repository catalog.",
+    "GitCatalog": {
+      "description": "Properties for a Git repository catalog.",
       "type": "object",
       "properties": {
         "uri": {
-          "description": "GitHub URI.",
+          "description": "Git URI.",
           "type": "string"
         },
         "branch": {
-          "description": "GitHub branch.",
+          "description": "Git branch.",
           "type": "string"
         },
         "secretIdentifier": {
-          "description": "A reference to the Key Vault secret containing a security token to authenticate to a non-public GitHub repository.",
+          "description": "A reference to the Key Vault secret containing a security token to authenticate to a Git repository.",
           "type": "string"
         },
         "path": {
