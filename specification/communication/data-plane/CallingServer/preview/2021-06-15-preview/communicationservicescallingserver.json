@@ -980,6 +980,9 @@
     },
     "PlayAudioResult": {
       "description": "The response payload for play audio operation.",
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
         "operationId": {
@@ -1001,20 +1004,24 @@
     },
     "ResultInfo": {
       "description": "Result info class to be used to report result status for actions/operations.",
+      "required": [
+        "code",
+        "subcode"
+      ],
       "type": "object",
       "properties": {
         "code": {
           "format": "int32",
-          "description": "Gets or sets the result code\r\nFor synchronous failures, this maps one-to-one with HTTP responses. For asynchronous failures or messages, it is contextual.",
+          "description": "The result code associated with the operation.",
           "type": "integer"
         },
         "subcode": {
           "format": "int32",
-          "description": "Gets or sets the result subcode.\r\nThe subcode further classifies a failure. For example.",
+          "description": "The subcode that further classifies the result.",
           "type": "integer"
         },
         "message": {
-          "description": "Gets or sets the message\r\nThe message is a detail explanation of subcode.",
+          "description": "The message is a detail explanation of subcode.",
           "type": "string"
         }
       }
@@ -1031,6 +1038,9 @@
     },
     "CancelAllMediaOperationsResult": {
       "description": "The response payload of the cancel all media operations.",
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
         "operationId": {
@@ -1116,6 +1126,9 @@
     },
     "CallRecordingProperties": {
       "description": "The response payload of get call recording properties operation.",
+      "required": [
+        "recordingState"
+      ],
       "type": "object",
       "properties": {
         "recordingState": {
@@ -1186,6 +1199,9 @@
     },
     "CallConnectionStateChangedEvent": {
       "description": "The call connection state changed event.",
+      "required": [
+        "callConnectionState"
+      ],
       "type": "object",
       "properties": {
         "serverCallId": {
@@ -1203,6 +1219,10 @@
     },
     "CallRecordingStateChangeEvent": {
       "description": "The call recording state change event.",
+      "required": [
+        "state",
+        "startDateTime"
+      ],
       "type": "object",
       "properties": {
         "recordingId": {
@@ -1224,6 +1244,9 @@
       }
     },
     "AddParticipantResultEvent": {
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
         "resultInfo": {
@@ -1258,6 +1281,9 @@
     },
     "CallParticipant": {
       "description": "A participant in a call.",
+      "required": [
+        "isMuted"
+      ],
       "type": "object",
       "properties": {
         "identifier": {
@@ -1276,6 +1302,9 @@
     },
     "PlayAudioResultEvent": {
       "description": "The play audio result event.",
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
         "resultInfo": {
@@ -1293,6 +1322,9 @@
     },
     "ToneReceivedEvent": {
       "description": "The subscribe to tone event",
+      "required": [
+        "toneInfo"
+      ],
       "type": "object",
       "properties": {
         "toneInfo": {
@@ -1306,7 +1338,7 @@
       }
     },
     "ToneValue": {
-      "description": "Gets or sets the tone detected.",
+      "description": "The tone value.",
       "enum": [
         "tone0",
         "tone1",
@@ -1333,12 +1365,16 @@
       }
     },
     "ToneInfo": {
-      "description": "Gets or sets the tone info",
+      "description": "The information about the tone.",
+      "required": [
+        "sequenceId",
+        "tone"
+      ],
       "type": "object",
       "properties": {
         "sequenceId": {
           "format": "int32",
-          "description": "Gets or sets the sequence id. This id can be used to determine if the same tone \r\nwas played multiple times or if any tones were missed.",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
           "type": "integer"
         },
         "tone": {
