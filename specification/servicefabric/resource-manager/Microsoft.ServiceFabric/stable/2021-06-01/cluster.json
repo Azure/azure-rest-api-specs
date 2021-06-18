@@ -986,6 +986,12 @@
         "vmImage": {
           "type": "string",
           "description": "The VM image VMSS has been configured with. Generic names such as Windows or Linux can be used."
+        },
+        "sfZonalUpgradeMode": {
+          "$ref": "#/definitions/SfZonalUpgradeMode"
+        },
+        "vmssZonalUpgradeMode": {
+          "$ref": "#/definitions/VmssZonalUpgradeMode"
         }
       },
       "description": "Describes the cluster resource properties."
@@ -1329,6 +1335,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The endpoint used by reverse proxy."
+        },
+        "isStateless": {
+          "type": "boolean",
+          "description": "Indicates if the node type can only host Stateless workloads."
+        },
+        "multipleAvailabilityZones": {
+          "type": "boolean",
+          "description": "Indicates if the node type is enabled to support multiple zones."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1427,9 +1441,7 @@
           "readOnly": true
         },
         "systemData": {
-          "type": "object",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "The resource model definition.",
@@ -1572,6 +1584,45 @@
         "Manual"
       ]
     },
+    "SfZonalUpgradeMode": {
+      "type": "string",
+      "enum": [
+        "Parallel",
+        "Hierarchical"
+      ],
+      "x-ms-enum": {
+        "name": "sfZonalUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Parallel",
+            "description": "VMs under the node type are grouped into UDs and ignore the zone info in five UDs. This setting causes UDs across all zones to be upgraded at the same time. This deployment mode is faster for upgrades, we don't recommend it because it goes against the SDP guidelines, which state that the updates should be applied to one zone at a time."
+          },
+          {
+            "value": "Hierarchical",
+            "description": "If this value is omitted or set to Hierarchical, VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone. This update process is safer for the cluster and the user application."
+          }
+        ]
+      },
+      "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster."
+    },
+    "VmssZonalUpgradeMode": {
+      "type": "string",
+      "enum": [
+        "Parallel"
+      ],
+      "x-ms-enum": {
+        "name": "vmssZonalUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Parallel",
+            "description": "Updates will happen in all Availability Zones at once for the virtual machine scale sets."
+          }
+        ]
+      },
+      "description": "This property is mandatory if a node type with multiple Availability Zones is added. This property defines the upgrade mode for the virtual machine scale set updates that happen in all Availability Zones at once. Currently, this property can only be set to parallel."
+    },
     "ErrorModel": {
       "properties": {
         "error": {
@@ -1611,6 +1662,39 @@
       "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
       "additionalProperties": {
         "$ref": "#/definitions/ServiceTypeHealthPolicy"
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
       }
     }
   },
