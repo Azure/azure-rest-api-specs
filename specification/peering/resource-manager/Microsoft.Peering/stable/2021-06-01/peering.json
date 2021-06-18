@@ -1409,6 +1409,241 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}": {
+      "get": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Gets an existing connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Connection Monitor Test": {
+            "$ref": "./examples/GetConnectionMonitorTest.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Creates or updates a connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTest",
+            "in": "body",
+            "description": "The properties needed to create a connection monitor test",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Connection Monitor Test": {
+            "$ref": "./examples/CreateOrUpdateConnectionMonitorTest.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Deletes an existing connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Connection Monitor Test": {
+            "$ref": "./examples/DeleteConnectionMonitorTest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests": {
+      "get": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Lists all connection monitor tests under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_ListByPeeringService",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Connection Monitor Tests associated with the peering service": {
+            "$ref": "./examples/ListConnectionMonitorTestsByPeeringService.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceCountries": {
       "get": {
         "tags": [
@@ -2082,6 +2317,39 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor": {
+      "post": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Initialize Peering Service for Connection Monitor functionality",
+        "operationId": "PeeringServices_InitializeConnectionMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initialize Peering Service for Connection Monitor functionality": {
+            "$ref": "./examples/InitializeConnectionMonitor.json"
+          }
         }
       }
     }
@@ -3291,6 +3559,91 @@
         }
       }
     },
+    "ConnectionMonitorTest": {
+      "description": "The Connection Monitor Test class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionMonitorTestProperties",
+          "description": "The properties that define a Connection Monitor Test.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionMonitorTestProperties": {
+      "description": "The properties that define a Connection Monitor Test.",
+      "type": "object",
+      "properties": {
+        "sourceAgent": {
+          "description": "The Connection Monitor test source agent",
+          "type": "string"
+        },
+        "destination": {
+          "description": "The Connection Monitor test destination",
+          "type": "string"
+        },
+        "destinationPort": {
+          "format": "int32",
+          "description": "The Connection Monitor test destination port",
+          "type": "integer"
+        },
+        "testFrequencyInSec": {
+          "format": "int32",
+          "description": "The Connection Monitor test frequency in seconds",
+          "type": "integer"
+        },
+        "isTestSuccessful": {
+          "description": "The flag that indicates if the Connection Monitor test is successful or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "path": {
+          "description": "The path representing the Connection Monitor test.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ConnectionMonitorTestListResult": {
+      "description": "The paginated list of [T].",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of [T].",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTest"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of [T].",
+          "type": "string"
+        }
+      }
+    },
     "PeeringServiceCountryListResult": {
       "description": "The paginated list of peering service countries.",
       "type": "object",
@@ -3640,6 +3993,34 @@
         "providerBackupPeeringLocation": {
           "description": "The backup peering (Microsoft/service provider) location to be used for customer traffic.",
           "type": "string"
+        },
+        "logAnalyticsWorkspaceProperties": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceProperties",
+          "description": "The Log Analytics Workspace Properties"
+        }
+      }
+    },
+    "LogAnalyticsWorkspaceProperties": {
+      "description": "The properties that define a Log Analytics Workspace.",
+      "type": "object",
+      "properties": {
+        "workspaceID": {
+          "description": "The Workspace ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "The Workspace Key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectedAgents": {
+          "description": "The list of connected agents.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
