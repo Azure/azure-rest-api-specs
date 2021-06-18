@@ -994,6 +994,9 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1086,6 +1089,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1281,6 +1287,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1371,6 +1380,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1461,6 +1473,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1549,6 +1564,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -1660,6 +1678,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -1779,6 +1800,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -1903,6 +1927,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -2024,6 +2051,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -2151,6 +2181,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -2270,6 +2303,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -2377,6 +2413,9 @@
       },
       "parameters": [
         {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+        {
           "name": "restype",
           "description": "restype",
           "in": "query",
@@ -2483,6 +2522,9 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -2501,629 +2543,6 @@
           "type": "string",
           "enum": [
             "properties"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?resource=directory&Create": {
-      "put": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Create",
-        "description": "Create a directory. By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The file or directory was created.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "resource",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "directory"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?DirectoryRename": {
-      "put": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Rename",
-        "description": "Rename a directory. By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations). To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Continuation"
-          },
-          {
-            "$ref": "#/parameters/PathRenameMode"
-          },
-          {
-            "$ref": "#/parameters/FileRenameSource"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/SourceLeaseId"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The directory was renamed.",
-            "headers": {
-              "x-ms-continuation": {
-                "x-ms-client-name": "marker",
-                "type": "string",
-                "description": "When renaming a directory, the number of paths that are renamed with each invocation is limited. If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
-    },
-    "/{filesystem}/{path}?DirectoryDelete": {
-      "delete": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Delete",
-        "description": "Deletes the directory",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/RecursiveDirectoryDelete"
-          },
-          {
-            "$ref": "#/parameters/Continuation"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The directory was deleted.",
-            "headers": {
-              "x-ms-continuation": {
-                "x-ms-client-name": "marker",
-                "type": "string",
-                "description": "When renaming a directory, the number of paths that are renamed with each invocation is limited. If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
-    },
-    "/{filesystem}/{path}?action=setAccessControl&directory": {
-      "patch": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_SetAccessControl",
-        "description": "Set the owner, group, permissions, or access control list for a directory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/Owner"
-          },
-          {
-            "$ref": "#/parameters/Group"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixAcl"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Set directory access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "setAccessControl"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?action=getAccessControl&directory": {
-      "head": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_GetAccessControl",
-        "description": "Get the owner, group, permissions, or access control list for a directory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Upn"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get directory access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-owner": {
-                "description": "The owner of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-group": {
-                "description": "The owning group of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-permissions": {
-                "description": "The POSIX access permissions for the file owner, the file owning group, and others. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-acl": {
-                "description": "The POSIX access control list for the file or directory.  Included in the response only if the action is \"getAccessControl\" and Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "getAccessControl"
           ]
         }
       ]
@@ -4207,388 +3626,15 @@
             }
           }
         }
-      }
-    },
-    "/{filesystem}/{path}?action=setAccessControl&blob": {
-      "patch": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_SetAccessControl",
-        "description": "Set the owner, group, permissions, or access control list for a blob.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/Owner"
-          },
-          {
-            "$ref": "#/parameters/Group"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixAcl"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Set blob access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
       },
       "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "setAccessControl"
-          ]
-        }
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    }
       ]
-    },
-    "/{filesystem}/{path}?action=getAccessControl&blob": {
-      "head": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_GetAccessControl",
-        "description": "Get the owner, group, permissions, or access control list for a blob.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Upn"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get blob access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-owner": {
-                "description": "The owner of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-group": {
-                "description": "The owning group of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-permissions": {
-                "description": "The POSIX access permissions for the file owner, the file owning group, and others. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-acl": {
-                "description": "The POSIX access control list for the file or directory.  Included in the response only if the action is \"getAccessControl\" and Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "getAccessControl"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?FileRename": {
-      "put": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_Rename",
-        "description": "Rename a blob/file.  By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/PathRenameMode"
-          },
-          {
-            "$ref": "#/parameters/FileRenameSource"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/SourceLeaseId"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The file was renamed.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified.  Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
     },
     "/{containerName}/{blob}?PageBlob": {
       "put": {
@@ -4762,6 +3808,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -4943,6 +3995,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5133,6 +4191,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5335,6 +4399,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5412,6 +4482,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -5499,6 +4575,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -5622,6 +4704,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -5779,6 +4867,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -5858,6 +4952,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -5992,6 +5092,12 @@
         }
       },
       "parameters": [
+	  	  {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6099,6 +5205,12 @@
         }
       },
       "parameters": [
+		    {
+          "$ref": "#/parameters/ContainerName"
+        },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6214,6 +5326,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6334,6 +5452,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6457,6 +5581,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6577,6 +5707,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6722,6 +5858,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -6887,7 +6029,14 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    }
+		  ]
     },
     "/{containerName}/{blob}?comp=copy&sync": {
       "put": {
@@ -7044,6 +6193,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "x-ms-requires-sync",
           "in": "header",
@@ -7120,6 +6275,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -7235,6 +6396,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -7332,6 +6499,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "restype",
           "description": "restype",
@@ -7471,6 +6644,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -7612,6 +6791,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -7895,6 +7080,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8064,6 +7255,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8225,6 +7422,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8420,6 +7623,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8550,6 +7759,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8670,6 +7885,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8790,6 +8011,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -8901,6 +8128,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -9020,6 +8253,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -9187,6 +8426,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -9364,6 +8609,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -9468,6 +8719,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -9975,6 +9232,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
@@ -10136,6 +9399,12 @@
         }
       },
       "parameters": [
+		    {
+		      "$ref": "#/parameters/ContainerName"
+		    },
+		    {
+		      "$ref": "#/parameters/Blob"
+		    },
         {
           "name": "comp",
           "description": "comp",
