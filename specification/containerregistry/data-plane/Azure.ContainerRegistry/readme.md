@@ -124,4 +124,22 @@ directive:
       - $.definitions.Annotations.properties["org.opencontainers.image.ref.name"]
       - $.definitions.Annotations.properties["org.opencontainers.image.title"]
       - $.definitions.Annotations.properties["org.opencontainers.image.description"]
+  - suppress: RequiredReadOnlyProperties
+    reason: These are used in output types to mark readonly properties as non-optional. It should be allowed: https://github.com/Azure/azure-openapi-validator/issues/243
+    from: containerregistry.json
+    where:
+      - $.definitions.RepositoryAttributes.properties["registry"]
+      - $.definitions.RepositoryAttributes.properties["imageName"]
+      - $.definitions.RepositoryAttributes.properties["createdTime"]
+      - $.definitions.RepositoryAttributes.properties["lastUpdateTime"]
+      - $.definitions.RepositoryAttributes.properties["manifestCount"]
+      - $.definitions.RepositoryAttributes.properties["tagCount"]
+      - $.definitions.TagAttributes.properties["registry"]
+      - $.definitions.TagAttributes.properties["imageName"]
+      - $.definitions.TagAttributes.properties["tag"]
+      - $.definitions.TagAttributesBase.properties["name"]
+      - $.definitions.TagAttributesBase.properties["digest"]
+      - $.definitions.TagAttributesBase.properties["createdTime"]
+      - $.definitions.TagAttributesBase.properties["lastUpdateTime"]
+      - $.definitions.ManifestAttributes_manifest_references.properties["digest"]
 ```
