@@ -1072,6 +1072,23 @@
       "type": "object",
       "description": "Eligible authorization tuple containing principle Id (of user/service principal/security group), role definition id, and the just-in-time access setting."
     },
+    "EligibleApprover": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of the user or security group that will approve JIT activation requests for the eligible authorization."
+        },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Display name of the principal Id."
+        }
+      },
+      "required": [
+        "principalId"
+      ],
+      "type": "object",
+      "description": "A principal Id and user-friendly display name representing an eligible authorization approver."
+    },
     "JustInTimeAccessPolicy": {
       "properties": {
         "multiFactorAuthProvider": {
@@ -1084,12 +1101,21 @@
           "x-ms-enum": {
             "name": "MultiFactorAuthProvider",
             "modelAsString": true
-          }
+          },
+          "default": "None"
         },
         "maximumActivationDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Maximum access duration in ISO 8601 format.  The default value is \"PT8H\"."
+          "description": "Maximum access duration in ISO 8601 format.",
+          "default": "PT8H"
+        },
+        "managedByTenantApprovers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EligibleApprover"
+          },
+          "description": "The list of managedByTenant approvers for the eligible authorization."
         }
       },
       "required": [

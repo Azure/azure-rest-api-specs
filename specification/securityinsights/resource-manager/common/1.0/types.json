@@ -36,7 +36,21 @@
       "x-ms-external": true
     },
     "ResourceWithEtag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "An azure resource object with an Etag property",
+      "properties": {
+        "etag": {
+          "description": "Etag of the azure resource",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "An azure resource object",
       "properties": {
         "id": {
           "description": "Azure resource Id",
@@ -53,10 +67,6 @@
           "readOnly": true,
           "type": "string"
         },
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        },
         "systemData": {
           "readOnly": true,
           "type": "object",
@@ -68,16 +78,6 @@
     }
   },
   "parameters": {
-    "ApiVersion": {
-      "description": "API version for the operation",
-      "enum": [
-        "2021-03-01-preview"
-      ],
-      "in": "query",
-      "name": "api-version",
-      "required": true,
-      "type": "string"
-    },
     "WorkspaceName": {
       "description": "The name of the workspace.",
       "in": "path",
