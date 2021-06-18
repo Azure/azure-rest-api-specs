@@ -9971,6 +9971,16 @@
       ],
       "description": "Describes a data disk."
     },
+    "CapacityReservationProfile": {
+      "type": "object",
+      "properties": {
+        "capacityReservationGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Describes the parameter of capacity Reservation resource id that can be used for allocating the virtual machine. <br><br> NOTE:Please refer https://aka.ms/CapacityReservation for more details."
+        }
+      },
+      "description": "The parameters of a Capacity Reservation Profile."
+    },
     "StorageProfile": {
       "properties": {
         "imageReference": {
@@ -12455,6 +12465,10 @@
         "userData": {
           "type": "string",
           "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies the capacity reservation related details of a scale set. <br><br>Minimum api-version: 2021-07-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
