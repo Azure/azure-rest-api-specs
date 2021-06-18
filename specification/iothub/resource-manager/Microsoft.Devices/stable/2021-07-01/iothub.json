@@ -2058,6 +2058,10 @@
         "certificate": {
           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
           "type": "string"
+        },
+        "isVerified": {
+          "description": "True indicates that the certificate will be created in verified state and proof of possession will not be required.",
+          "type": "boolean"          
         }
       }
     },
@@ -2269,6 +2273,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+          }
+        },
+        "disableLocalAuth": {
+          "description": "If true, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication.",
+          "type": "boolean"
+        },
+        "disableDeviceSAS": {
+          "description": "If true, all device(including Edge devices but excluding modules) scoped SAS keys cannot be used for authentication.",
+          "type": "boolean"
+        },
+        "disableModuleSAS": {
+          "description": "If true, all module scoped SAS keys cannot be used for authentication.",
+          "type": "boolean"
+        },
+        "restrictOutboundNetworkAccess": {
+          "description": "If true, egress from IotHub will be restricted to only the allowed FQDNs that are configured via allowedFqdnList.",
+          "type": "boolean"
+        },
+        "allowedFqdnList": {
+          "description": "List of allowed FQDNs(Fully Qualified Domain Name) for egress from Iot Hub.",
+          "type": "array",
+          "items": {
+            "description": "FQDN to be allowed for egress. Example: my-eventhub.servicebus.windows.net",
+            "type": "string"
           }
         },
         "publicNetworkAccess": {
