@@ -1,0 +1,241 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-04-05-preview",
+    "title": "verifiablecredentials",
+    "x-ms-code-generation-settings": {
+      "name": "verifiablecredentialsClient"
+    }
+  },
+  "host": "beta.did.msidentity.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "bearer_auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "bearer_auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/{tenantId}/api/portable/v1.0/admin/issuers/{issuerId}": {
+      "put": {
+        "tags": [
+          "Issuers"
+        ],
+        "operationId": "AdminService_UpdateIssuer",
+        "x-ms-examples": {
+          "AdminPut": {
+            "$ref": "./examples/AdminServiceIssuerPut.json"
+          }
+        },
+        "description": "Operation to modify an existing issuer object.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssuerIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssuerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to update issuer object.",
+            "schema": {
+              "$ref": "#/definitions/SuccessFulUpdate"
+            }
+          },
+          "default": {
+            "description": "Error. Request for Verifiable Credentials Admin Service has failed.",
+            "schema": {
+              "$ref": "#/definitions/AdminErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "KeyVaultMetadata": {
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource group"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "resourceUrl": {
+          "type": "string",
+          "description": "Resource Url"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription identifier"
+        }
+      }
+    },
+    "DidModel": {
+      "properties": {
+        "did": {
+          "type": "string",
+          "description": "Decentralized Identifier"
+        },
+        "linkedDomainUrl": {
+          "type": "string",
+          "description": "Linked Domain Url"
+        },
+        "encryptionKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Encryption keys"
+        },
+        "recoveryKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Recovery key"
+        },
+        "signingKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Signing key"
+        },
+        "updateKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Update key"
+        }
+      }
+    },
+    "SuccessFulUpdate": {
+      "description": "Successful update",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Issuer identifier"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant identifier"
+        },
+        "issuerName": {
+          "type": "string",
+          "description": "Issuer name"
+        },
+        "keyVaultUrl": {
+          "type": "string",
+          "description": "Key Vault Url"
+        },
+        "status": {
+          "type": "string",
+          "description": "Object status"
+        },
+        "keyVaultMetadata": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/KeyVaultMetadata"
+          },
+          "description": "Key vault resource metadata"
+        },
+        "didModel": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/DidModel"
+          },
+          "description": "Decentralized Identifier Model"
+        }
+      }
+    },
+    "AdminErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/AdminErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "AdminErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdminErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TenantIdParameter": {
+      "name": "tenantId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Tenant identifier GUID.",
+      "x-ms-parameter-location": "client"
+    },
+    "IssuerIdParameter": {
+      "name": "issuerId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Issuer identifier GUID.",
+      "x-ms-parameter-location": "method"
+    },
+    "IssuerNameParameter": {
+      "name": "issuer",
+      "in": "body",
+      "description": "New name for Issuer Object.",
+      "schema": {
+        "type": "object",
+        "required": [
+          "issuerName"
+        ],
+        "properties": {
+          "issuerName": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
