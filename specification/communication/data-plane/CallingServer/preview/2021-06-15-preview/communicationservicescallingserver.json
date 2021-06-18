@@ -1012,16 +1012,16 @@
       "properties": {
         "code": {
           "format": "int32",
-          "description": "Gets or sets the result code\r\nFor synchronous failures, this maps one-to-one with HTTP responses. For asynchronous failures or messages, it is contextual.",
+          "description": "The result code associated with the operation.",
           "type": "integer"
         },
         "subcode": {
           "format": "int32",
-          "description": "Gets or sets the result subcode.\r\nThe subcode further classifies a failure. For example.",
+          "description": "The subcode that further classifies the result.",
           "type": "integer"
         },
         "message": {
-          "description": "Gets or sets the message\r\nThe message is a detail explanation of subcode.",
+          "description": "The message is a detail explanation of subcode.",
           "type": "string"
         }
       }
@@ -1338,7 +1338,7 @@
       }
     },
     "ToneValue": {
-      "description": "Gets or sets the tone detected.",
+      "description": "The tone value.",
       "enum": [
         "tone0",
         "tone1",
@@ -1365,7 +1365,7 @@
       }
     },
     "ToneInfo": {
-      "description": "Gets or sets the tone info",
+      "description": "The information about the tone.",
       "required": [
         "sequenceId",
         "tone"
@@ -1374,7 +1374,7 @@
       "properties": {
         "sequenceId": {
           "format": "int32",
-          "description": "Gets or sets the sequence id. This id can be used to determine if the same tone \r\nwas played multiple times or if any tones were missed.",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
           "type": "integer"
         },
         "tone": {
