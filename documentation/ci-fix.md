@@ -49,18 +49,30 @@ Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/st
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## Breaking Change Check
+There are two kind of breaking change checks: same version breaking change check and cross version breaking change check. Both are using the 'oad' tool to compare the difference between two swaggers.
+- The same version breaking change check is for checking the existing swagger, it compares the changed swaggers to the swaggers before the change and ensure the change don't break the current version.
+- The cross version breaking change check is to find a last version swagger as a base swagger , compare the base swagger and the current swagger. Make sure the change don't break the following older versions:
+1. last stable version swagger which exists less than 3 year.
+2. last public preview version when there is no last stable version swagger which exists less than 3 years.  
+3. last public preview version which exists over than 1 year.
 
+### adding label on PR automatically
+The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
+For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter , a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guildance on how to fix.
+
+### run locally
 run oad locally (the breaking change is reported by oad tool):
 ```
-npm install -g oad
+npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path> 
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/master/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
-Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for detailed description of all oad rules and how-to-fix guidance.
+Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for detailed description of all oad rules.
 
-## Linter Validation
+## Linter Diff Validation
 
+The lint diff validation is to run linter against the currect spec and the spec before currect PR , the final result is the differece set between the result running against current specs and the result running aginst the specs before current PR.
 ### Run linter locally:
 
 #### Prerequisites:
@@ -75,7 +87,6 @@ autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-v
 autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
 
-### Document
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
