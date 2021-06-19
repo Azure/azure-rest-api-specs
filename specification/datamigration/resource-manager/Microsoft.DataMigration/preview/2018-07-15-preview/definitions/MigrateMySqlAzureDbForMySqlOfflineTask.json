@@ -41,6 +41,11 @@
           "description": "Setting to set the source server read only",
           "default": false
         },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Parameter to specify when the migration started"
+        },
         "optionalAgentSettings": {
           "type": "object",
           "description": "Optional parameters for fine tuning the data transfer rate during migration",
@@ -158,6 +163,12 @@
             "$ref": "./Common.json#/definitions/ReportableException"
           },
           "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -243,6 +254,12 @@
           },
           "readOnly": true
         },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
+        },
         "objectSummary": {
           "type": "string",
           "description": "Summary of object results in the migration",
@@ -310,6 +327,12 @@
           "type": "string",
           "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
           "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -359,6 +382,23 @@
           }
         }
       }
+    },
+    "DatabaseSummaryResult": {
+      "type": "object",
+      "description": "Summary of database results in the migration",
+      "properties": {
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the database in megabytes",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+        }
+      ]
     }
   }
 }
