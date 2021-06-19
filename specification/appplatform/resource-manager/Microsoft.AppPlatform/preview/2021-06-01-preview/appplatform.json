@@ -3887,46 +3887,88 @@
     "UserSourceInfo": {
       "description": "Source information for a deployment",
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "description": "Type of the source uploaded",
-          "enum": [
-            "Jar",
-            "NetCoreZip",
-            "Source",
-            "Container"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UserSourceType",
-            "modelAsString": true
-          }
-        },
-        "relativePath": {
-          "description": "Relative path of the storage which stores the source",
-          "type": "string"
-        },
-        "netCoreMainEntryPath": {
-          "description": "The path to the .NET executable relative to zip root",
           "type": "string"
         },
         "version": {
           "description": "Version of the source",
           "type": "string"
-        },
+        }
+      },
+      "discriminator": "type"
+    },
+    "UploadedUserSourceInfo": {
+      "description": "Source with uploaded location",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
+      "properties": {
+        "relativePath": {
+          "description": "Relative path of the storage which stores the source",
+          "type": "string"
+        }
+      }
+    },
+    "JarUploadedUserSourceInfo": {
+      "description": "Uploaded Jar binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "runtimeVersion": {
+          "description": "Runtime version of the Jar file",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Jar"
+    },
+    "SourceUploadedUserSourceInfo": {
+      "description": "Uploaded Java source code binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
         "artifactSelector": {
           "description": "Selector for the artifact to be used for the deployment for multi-module projects. This should be\r\nthe relative path to the target module/project.",
           "type": "string"
-        },
-        "customContainer": {
-          "$ref": "#/definitions/CustomContainer",
-          "description": "Custom container payload"
         }
-      }
+      },
+      "x-ms-discriminator-value": "Source"
+    },
+    "netCoreZipUploadedUserSourceInfo": {
+      "description": "Uploaded Jar binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "netCoreZip"
     },
     "CustomContainer": {
       "description": "Custom container payload",
       "type": "object",
+      "x-ms-discriminator-value": "Container",
       "properties": {
         "server": {
           "type": "string",
