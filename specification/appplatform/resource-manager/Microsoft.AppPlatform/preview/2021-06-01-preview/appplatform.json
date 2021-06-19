@@ -3965,10 +3965,31 @@
       },
       "x-ms-discriminator-value": "netCoreZip"
     },
+    "buildResultUserSourceInfo": {
+      "description": "Reference to a build result",
+      "type": "object",
+      "x-ms-discriminator-value": "BuildResult",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
+      "properties": {
+        "buildResultId": {
+          "description": "Resource id of an existing succeeded build result under the same Spring instance.",
+          "type": "string"
+        }
+      }
+    },
     "CustomContainer": {
       "description": "Custom container payload",
       "type": "object",
       "x-ms-discriminator-value": "Container",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
       "properties": {
         "server": {
           "type": "string",
