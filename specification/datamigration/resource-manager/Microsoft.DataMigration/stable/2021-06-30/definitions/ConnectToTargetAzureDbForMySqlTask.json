@@ -28,7 +28,11 @@
         "targetConnectionInfo": {
           "description": "Connection information for target Azure Database for MySQL server",
           "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
-        }
+        },
+        "isOfflineMigration": {
+          "type": "boolean",
+          "description": "Flag for whether or not the migration is offline",
+          "default": false
       },
       "required": [
         "sourceConnectionInfo",
