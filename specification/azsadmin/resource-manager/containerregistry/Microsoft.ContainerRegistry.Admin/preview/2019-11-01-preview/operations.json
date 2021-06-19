@@ -53,6 +53,7 @@
   "definitions": {
     "Operation": {
       "description": "Describes the supported REST operation.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.",
@@ -72,6 +73,7 @@
     },
     "Display": {
       "description": "Contains the localized display information for this particular operation / action.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
@@ -97,6 +99,7 @@
     },
     "OperationList": {
       "description": "Pageable list of supported operations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of operations",
