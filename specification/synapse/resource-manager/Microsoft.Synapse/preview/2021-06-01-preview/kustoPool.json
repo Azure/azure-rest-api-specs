@@ -1772,6 +1772,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/removePrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_RemovePrincipals",
+        "x-ms-examples": {
+          "KustoPoolDatabaseRemovePrincipals": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalsRemove.json"
+          }
+        },
+        "description": "Remove Database principals permissions.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "databasePrincipalsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListRequest"
+            },
+            "description": "List of database principals to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully removed the list of database principals. Returns the updated list of principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
     "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
       "post": {
         "tags": [
