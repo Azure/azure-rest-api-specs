@@ -55,6 +55,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-examples": {
@@ -87,6 +93,12 @@
             "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -127,6 +139,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -158,6 +176,12 @@
             "description": "An Azure Monitor PrivateLinkScope definition.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -205,6 +229,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-examples": {
@@ -247,6 +277,12 @@
             "description": "Updating the Azure Monitor PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -293,6 +329,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         }
       }
@@ -326,6 +368,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -365,6 +413,12 @@
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -408,6 +462,12 @@
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -462,6 +522,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -507,6 +573,12 @@
           },
           "204": {
             "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -543,6 +615,12 @@
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -589,6 +667,12 @@
             "description": "Successfully retrieved a scoped resource in a private link scope.",
             "schema": {
               "$ref": "#/definitions/ScopedResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -649,6 +733,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -694,6 +784,12 @@
           },
           "204": {
             "description": "Scoped resource does not exist."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -730,6 +826,12 @@
             "description": "Successfully retrieved scoped resources in a private link scope.",
             "schema": {
               "$ref": "#/definitions/ScopedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseResource"
             }
           }
         },
@@ -1120,6 +1222,15 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
+    "ErrorResponseResource": {
+      "description": "The error response resource.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -1159,7 +1270,7 @@
         }
       },
       "description": "The resource management error response.",
-      "type": "object",
+      "type": "object"
     },
     "ErrorAdditionalInfo": {
       "properties": {
@@ -1175,7 +1286,7 @@
         }
       },
       "description": "The resource management error additional info.",
-      "type": "object",
+      "type": "object"
     }
   },
   "parameters": {
