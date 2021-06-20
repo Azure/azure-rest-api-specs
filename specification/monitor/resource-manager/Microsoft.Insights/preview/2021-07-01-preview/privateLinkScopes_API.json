@@ -780,6 +780,7 @@
       }
     },
     "PrivateLinkScopesResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -823,6 +824,7 @@
       "description": "An azure resource object"
     },
     "TagsResource": {
+      "type": "object",
       "properties": {
         "tags": {
           "additionalProperties": {
@@ -834,6 +836,7 @@
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
     },
     "AzureMonitorPrivateLinkScope": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -853,6 +856,7 @@
     },
     "AzureMonitorPrivateLinkScopeProperties": {
       "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -871,6 +875,7 @@
     },
     "AzureMonitorPrivateLinkScopeListResult": {
       "description": "Describes the list of Azure Monitor PrivateLinkScope resources.",
+      "type": "object",
       "required": [
         "value"
       ],
@@ -1151,7 +1156,8 @@
           "description": "The error additional info."
         }
       },
-      "description": "The resource management error response."
+      "description": "The resource management error response.",
+      "type": "object",
     },
     "ErrorAdditionalInfo": {
       "properties": {
@@ -1166,7 +1172,8 @@
           "description": "The additional info."
         }
       },
-      "description": "The resource management error additional info."
+      "description": "The resource management error additional info.",
+      "type": "object",
     }
   },
   "parameters": {
