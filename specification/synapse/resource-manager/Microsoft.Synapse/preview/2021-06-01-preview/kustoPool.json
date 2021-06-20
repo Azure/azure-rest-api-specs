@@ -1165,6 +1165,70 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnectionValidation": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_dataConnectionValidation",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionValidation": {
+            "$ref": "./examples/KustoPoolDataConnectionValidation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Checks that the data connection parameters are valid.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidation"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnections": {
       "get": {
         "tags": [
@@ -2577,6 +2641,42 @@
         }
       },
       "description": "A class that contains database statistics information."
+    },
+    "DataConnectionValidationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectionValidationResult"
+          },
+          "description": "The list of Kusto data connection validation errors."
+        }
+      },
+      "description": "The list Kusto data connection validation result."
+    },
+    "DataConnectionValidationResult": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "A message which indicates a problem in data connection validation."
+        }
+      },
+      "description": "The result returned from a data connection validation request."
+    },
+    "DataConnectionValidation": {
+      "type": "object",
+      "properties": {
+        "dataConnectionName": {
+          "type": "string",
+          "description": "The name of the data connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnection",
+          "description": "The data connection properties to validate."
+        }
+      },
+      "description": "Class representing an data connection validation."
     },
     "DataConnectionListResult": {
       "type": "object",
