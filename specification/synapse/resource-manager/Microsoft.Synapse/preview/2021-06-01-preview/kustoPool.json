@@ -2642,42 +2642,6 @@
       },
       "description": "A class that contains database statistics information."
     },
-    "DataConnectionValidationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataConnectionValidationResult"
-          },
-          "description": "The list of Kusto data connection validation errors."
-        }
-      },
-      "description": "The list Kusto data connection validation result."
-    },
-    "DataConnectionValidationResult": {
-      "type": "object",
-      "properties": {
-        "errorMessage": {
-          "type": "string",
-          "description": "A message which indicates a problem in data connection validation."
-        }
-      },
-      "description": "The result returned from a data connection validation request."
-    },
-    "DataConnectionValidation": {
-      "type": "object",
-      "properties": {
-        "dataConnectionName": {
-          "type": "string",
-          "description": "The name of the data connection."
-        },
-        "properties": {
-          "$ref": "#/definitions/DataConnection",
-          "description": "The data connection properties to validate."
-        }
-      },
-      "description": "Class representing an data connection validation."
-    },
     "DataConnectionListResult": {
       "type": "object",
       "properties": {
@@ -3007,6 +2971,43 @@
         "name": "blobStorageEventType",
         "modelAsString": true
       }
+    },
+    "DataConnectionValidationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectionValidationResult"
+          },
+          "description": "The list of Kusto data connection validation errors."
+        }
+      },
+      "description": "The list Kusto data connection validation result."
+    },
+    "DataConnectionValidationResult": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "A message which indicates a problem in data connection validation."
+        }
+      },
+      "description": "The result returned from a data connection validation request."
+    },
+    "DataConnectionValidation": {
+      "type": "object",
+      "properties": {
+        "dataConnectionName": {
+          "type": "string",
+          "description": "The name of the data connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnection",
+          "description": "The data connection properties to validate."
+        }
+      },
+      "description": "Class representing an data connection validation."
     },
     "FollowerDatabaseListResult": {
       "type": "object",
