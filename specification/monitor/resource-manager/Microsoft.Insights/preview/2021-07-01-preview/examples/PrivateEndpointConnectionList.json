@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "MyResourceGroup",
     "scopeName": "MyPrivateLinkScope",
-    "api-version": "2019-10-17-preview"
+    "api-version": "2021-07-01-preview"
   },
   "responses": {
     "200": {
@@ -22,7 +22,9 @@
                 "status": "Approved",
                 "description": "Auto-approved",
                 "actionsRequired": "None"
-              }
+              },
+              "queryOnlyPrivateLinkResources": false,
+              "ingestOnlyToPrivateLinkResources": true
             }
           },
           {
@@ -38,7 +40,9 @@
                 "status": "Pending",
                 "description": "Please approve my connection.",
                 "actionsRequired": "None"
-              }
+              },
+              "queryOnlyPrivateLinkResources": false,
+              "ingestOnlyToPrivateLinkResources": true
             }
           }
         ]

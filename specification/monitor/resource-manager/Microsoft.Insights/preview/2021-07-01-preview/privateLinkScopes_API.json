@@ -6,7 +6,7 @@
       "name": "MonitorManagementClient"
     },
     "description": "Azure Monitor API reference for Private Links Scopes management.",
-    "version": "2019-10-17-preview"
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -809,6 +809,11 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System data",
+          "readOnly": true
         }
       },
       "required": [
@@ -953,6 +958,14 @@
           "description": "State of the private endpoint connection.",
           "type": "string",
           "readOnly": true
+        },
+        "queryOnlyPrivateLinkResources": {
+          "description": "Restrict queries from this private endpoint only to scoped resources in the scope.",
+          "type": "boolean"
+        },
+        "ingestOnlyToPrivateLinkResources": {
+          "description": "Restrict data ingested from this private endpoint only to scoped resources in the scope.",
+          "type": "boolean"
         }
       }
     },
@@ -1052,6 +1065,11 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System data.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/ScopedResourceProperties",
           "description": "Resource properties.",
