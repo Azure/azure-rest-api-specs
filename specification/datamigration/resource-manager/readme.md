@@ -40,7 +40,43 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.DataMigration/stable/2021-06-30/datamigration.json
+- Microsoft.DataMigration/stable/2021-06-30/datamigration.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/Commands.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/Common.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToSourceMySqlTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToSourcePostgreSqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetAzureDbForMySqlTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetSqlMiSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/GetUserTablesMySqlTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/GetUserTablesSqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSchemaSqlServerSqlDbTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateMySqlAzureDbForMySqlOfflineTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSqlServerSqlDbSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSqlServerSqlMiSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrateSsisTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MigrationValidation.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/MongoDbTasks.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/GetTdeCertificatesSqlTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/OracleAzureDbPostgreSqlSyncTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/Projects.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ServiceFeatureOCITask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/Services.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ServiceTasks.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/Tasks.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/TasksCommon.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateSyncMigrationInputSqlServerTask.json
+- Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
 ```
 ### Tag: package-2018-04-19
 
