@@ -2336,6 +2336,7 @@
       "description": "Class representing an update to a Kusto kusto pool."
     },
     "AttachedDatabaseConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2348,6 +2349,7 @@
       "description": "The list attached database configurations operation response."
     },
     "AttachedDatabaseConfiguration": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -2357,6 +2359,12 @@
           "x-ms-client-flatten": true,
           "description": "The properties of the attached database configuration.",
           "$ref": "#/definitions/AttachedDatabaseConfigurationProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2367,6 +2375,7 @@
       "description": "Class representing an attached database configuration."
     },
     "AttachedDatabaseConfigurationProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
