@@ -8,110 +8,134 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
-        "name": "apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/OGF-Z3-06162021-Premium",
+        "name": "OGF-Z3-06162021-Premium",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-          "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
+          "owner": "v-aswmoh",
+          "ReleaseName": "Z3"
         },
-        "location": "West US",
-        "etag": "AAAAAAACXok=",
+        "location": "East US",
+        "etag": "AAAAAAAWN/4=",
         "properties": {
-          "publisherEmail": "apim@autorestsdk.com",
-          "publisherName": "autorestsdk",
+          "publisherEmail": "string",
+          "publisherName": "Test Premium",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2019-12-18T06:26:20.3348609Z",
-          "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net",
-          "portalUrl": "https://apimService1.portal.azure-api.net",
-          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
-          "managementApiUrl": "https://apimService1.management.azure-api.net",
-          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+          "gatewayUrl": "https://ogf-z3-06162021-premium.azure-api.net",
+          "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus-01.regional.azure-api.net",
+          "portalUrl": "https://ogf-z3-06162021-premium.portal.azure-api.net",
+          "developerPortalUrl": "https://ogf-z3-06162021-premium.developer.azure-api.net",
+          "managementApiUrl": "https://ogf-z3-06162021-premium.management.azure-api.net",
+          "scmUrl": "https://ogf-z3-06162021-premium.scm.azure-api.net",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
-              "hostName": "apimService1.azure-api.net",
+              "hostName": "ogf-z3-06162021-premium.azure-api.net",
               "negotiateClientCertificate": false,
               "defaultSslBinding": false,
-              "certificateSource": "Managed"
+              "certificateSource": "BuiltIn"
             },
             {
               "type": "Proxy",
-              "hostName": "gateway1.msitesting.net",
-              "negotiateClientCertificate": false,
+              "hostName": "gateway.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
+              "negotiateClientCertificate": true,
               "certificate": {
-                "expiry": "2036-01-01T07:00:00+00:00",
-                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
-                "subject": "CN=*.msitesting.net"
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US"
               },
               "defaultSslBinding": true,
               "certificateSource": "Custom"
             },
             {
-              "type": "Management",
-              "hostName": "mgmt.msitesting.net",
+              "type": "DeveloperPortal",
+              "hostName": "developer.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2036-01-01T07:00:00+00:00",
-                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
-                "subject": "CN=*.msitesting.net"
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US"
               },
               "defaultSslBinding": false,
               "certificateSource": "Custom"
             },
             {
-              "type": "Portal",
-              "hostName": "portal1.msitesting.net",
+              "type": "Management",
+              "hostName": "mgmt.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2036-01-01T07:00:00+00:00",
-                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
-                "subject": "CN=*.msitesting.net"
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US"
               },
               "defaultSslBinding": false,
               "certificateSource": "Custom"
             }
           ],
           "publicIPAddresses": [
-            "13.91.32.113"
+            "13.92.130.49"
           ],
           "additionalLocations": [
             {
-              "location": "East US",
+              "location": "East US 2",
               "sku": {
                 "name": "Premium",
                 "capacity": 1
               },
+              "zones": [],
               "publicIPAddresses": [
-                "23.101.138.153"
+                "40.70.24.106"
               ],
-              "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
-              "disableGateway": true
+              "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus2-01.regional.azure-api.net",
+              "disableGateway": false
             }
           ],
           "customProperties": {
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "false"
           },
           "virtualNetworkType": "None",
+          "certificates": [],
           "disableGateway": false,
           "apiVersionConstraint": {
-            "minApiVersion": "2019-01-01"
-          }
+            "minApiVersion": "2019-12-01"
+          },
+          "publicNetworkAccess": "Enabled"
         },
         "sku": {
           "name": "Premium",
           "capacity": 1
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "306205e7-b21a-41bf-92e2-3e28af30041e",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ogf-identity": {
+              "principalId": "713784d2-ee37-412a-95f0-3768f397f82d",
+              "clientId": "8d9791f2-0cdf-41f4-9e66-cdc39b496789"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2021-06-16T09:40:00.7106733Z",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-06-20T06:33:09.6159006Z"
         }
       }
     }
