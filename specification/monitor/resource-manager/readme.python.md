@@ -61,7 +61,6 @@ output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monit
 clear-output-folder: false
 perform-load: false
 ```
-
 ### Tag: package-2021-05-01-preview-only and python
 
 These settings apply only when `--tag=package-2021-05-01-preview-only --python` is specified on the command line.
