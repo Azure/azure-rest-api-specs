@@ -86,9 +86,11 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesMySqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlAzureDbForMySqlOfflineTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
