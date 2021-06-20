@@ -749,6 +749,9 @@
             "$ref": "#/parameters/kustoPoolNameParameter"
           },
           {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -790,6 +793,9 @@
           },
           {
             "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -855,6 +861,9 @@
           },
           {
             "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -3336,6 +3345,14 @@
       "name": "operationId",
       "in": "path",
       "description": "The Guid of the operation ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachedDatabaseConfigurationNameParameter": {
+      "name": "attachedDatabaseConfigurationName",
+      "in": "path",
+      "description": "The name of the attached database configuration.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
