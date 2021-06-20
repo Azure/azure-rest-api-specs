@@ -2806,6 +2806,8 @@
                 "description": "Tracking URL for long running operation.",
                 "type": "string"
               }
+			}
+		  }
         },
         "x-ms-examples": {
           "Create Master site": {
@@ -2933,70 +2935,13 @@
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
                 "type": "string"
+			  }
+			}
           }
         },
         "x-ms-examples": {
           "Patch Master site": {
             "$ref": "./examples/MasterSite_Patch.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/errorSummary": {
-      "post": {
-        "tags": [
-          "MasterSitesError"
-        ],
-        "summary": "Method to get error summary on a master site.",
-        "operationId": "MasterSites_GetErrorSummary",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "applianceName",
-            "in": "query",
-            "description": "Appliance name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteErrorSummary"
-            }
           }
         },
         "deprecated": false
