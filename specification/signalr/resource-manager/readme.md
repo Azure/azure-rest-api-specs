@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-04-01-preview
+tag: package-2021-06-01-preview
 ```
 
 ### Suppression
