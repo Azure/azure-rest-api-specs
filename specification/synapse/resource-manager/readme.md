@@ -28,12 +28,33 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-04-preview
+tag: package-2021-05
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
 ```
 
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Synapse/stable/2021-05-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-05-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-05-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-05-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-05-01/keys.json
+  - Microsoft.Synapse/stable/2021-05-01/library.json
+  - Microsoft.Synapse/stable/2021-05-01/operations.json
+  - Microsoft.Synapse/stable/2021-05-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-05-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-05-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-05-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-05-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-05-01/workspace.json
+```
 ### Tag: package-2021-04-preview
 
 These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
@@ -277,5 +298,3 @@ batch:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
