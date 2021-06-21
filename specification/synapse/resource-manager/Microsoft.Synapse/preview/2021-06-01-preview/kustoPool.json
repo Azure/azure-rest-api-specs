@@ -420,6 +420,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/skus": {
+      "get": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_ListSkusByResource",
+        "x-ms-examples": {
+          "KustoClustersListResourceSkus": {
+            "$ref": "./examples/KustoPoolsListResourceSkus.json"
+          }
+        },
+        "description": "Returns the SKUs available for the provided resource.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ListResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listLanguageExtensions": {
       "post": {
         "tags": [
@@ -2440,6 +2488,64 @@
       },
       "description": "Azure SKU definition."
     },
+    "AzureResourceSku": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Namespace and Type."
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU details."
+        },
+        "capacity": {
+          "$ref": "#/definitions/AzureCapacity",
+          "description": "The number of instances of the cluster."
+        }
+      },
+      "description": "Azure resource SKU definition."
+    },
+    "AzureCapacity": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum",
+        "default",
+        "scaleType"
+      ],
+      "properties": {
+        "scaleType": {
+          "description": "Scale type.",
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "AzureScaleType",
+            "modelAsString": true
+          }
+        },
+        "minimum": {
+          "description": "Minimum allowed capacity.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximum": {
+          "description": "Maximum allowed capacity.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "The default capacity that would be used.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Azure capacity definition."
+    },
     "KustoPoolProperties": {
       "type": "object",
       "properties": {
@@ -3684,6 +3790,19 @@
         }
       },
       "description": "The result returned from a check name availability request."
+    },
+    "ListResourceSkusResult": {
+      "description": "List of available SKUs for a Kusto Pool.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureResourceSku"
+          },
+          "description": "The collection of available SKUs for an existing resource."
+        }
+      }
     }
   },
   "parameters": {
