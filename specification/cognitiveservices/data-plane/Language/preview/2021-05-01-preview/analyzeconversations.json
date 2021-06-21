@@ -156,7 +156,42 @@
       ],
       "properties": {
         "projectParameters": {
-          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/Q"
+          "type": "object",
+          "$ref": "#/definitions/LUISV2ProjectParameters"
+        }
+      }
+    },
+    "LUISV2ProjectParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
+        },
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
+        },
+        "timezoneOffset": {
+          "type": "number",
+          "description": "The timezone offset for the location of the request."
+        },
+        "spellCheck": {
+          "type": "boolean",
+          "description": "Enable spell checking."
+        },
+        "bing-spell-check-subscription-key": {
+          "description": "The subscription key to use when enabling Bing spell check",
+          "type": "string"
         }
       }
     },
@@ -170,7 +205,52 @@
       ],
       "properties": {
         "projectParameters": {
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
+          "type": "object",
+          "$ref": "#/definitions/LUISV3ProjectParameters"
+        }
+      },
+      "additionalProperties": true
+    },
+    "LUISV3ProjectParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v3.0.",
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query to predict.",
+          "type": "string"
+        },
+        "options": {
+          "description": "The custom options defined for this request.",
+          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequestOptions"
+        },
+        "externalEntities": {
+          "description": "The externally predicted entities for this request.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/ExternalEntity"
+          }
+        },
+        "dynamicLists": {
+          "description": "The dynamically created list entities for this request.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/DynamicList"
+          }
+        },
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
         }
       }
     },
