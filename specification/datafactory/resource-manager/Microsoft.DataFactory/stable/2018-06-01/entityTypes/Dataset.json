@@ -646,18 +646,8 @@
           "description": "The location of the avro storage."
         },
         "avroCompressionCodec": {
-          "type": "string",
-          "enum": [
-            "none",
-            "deflate",
-            "snappy",
-            "xz",
-            "bzip2"
-          ],
-          "x-ms-enum": {
-            "name": "avroCompressionCodec",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "The data avroCompressionCodec. Type: string (or Expression with resultType string)."
         },
         "avroCompressionLevel": {
           "type": "integer",
@@ -668,6 +658,20 @@
       "required": [
         "location"
       ]
+    },
+    "AvroCompressionCodec": {
+      "type": "string",
+      "enum": [
+        "none",
+        "deflate",
+        "snappy",
+        "xz",
+        "bzip2"
+      ],
+      "x-ms-enum": {
+        "name": "avroCompressionCodec",
+        "modelAsString": true
+      }
     },
     "ExcelDataset": {
       "x-ms-discriminator-value": "Excel",
@@ -943,22 +947,26 @@
           "description": "The location of the ORC data storage."
         },
         "orcCompressionCodec": {
-          "type": "string",
-          "enum": [
-            "none",
-            "zlib",
-            "snappy",
-            "lzo"
-          ],
-          "x-ms-enum": {
-            "name": "orcCompressionCodec",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "The data orcCompressionCodec. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "location"
       ]
+    },
+    "OrcCompressionCodec": {
+      "type": "string",
+      "enum": [
+        "none",
+        "zlib",
+        "snappy",
+        "lzo"
+      ],
+      "x-ms-enum": {
+        "name": "orcCompressionCodec",
+        "modelAsString": true
+      }
     },
     "BinaryDataset": {
       "x-ms-discriminator-value": "Binary",
