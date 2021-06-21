@@ -87,7 +87,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at management group scope": {
@@ -153,7 +154,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at subscription scope": {
@@ -237,7 +239,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at resource group scope": {
@@ -306,7 +309,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at resource scope": {
@@ -393,7 +397,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at subscription level policy set definition scope": {
@@ -465,7 +470,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at subscription level policy definition scope": {
@@ -537,7 +543,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at subscription level policy assignment scope": {
@@ -612,7 +619,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyEvents_NextLink"
         },
         "x-ms-examples": {
           "Query at resource group level policy assignment scope": {
@@ -620,6 +628,49 @@
           },
           "Query at resource group level policy assignment scope with next link": {
             "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScopeNextLink.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{nextLink}?Next paging op for policy events": {
+      "post": {
+        "operationId": "PolicyEvents_NextLink",
+        "description": "Subsequent post calls to the next link",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          },
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest at resource group level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyEvents_QueryManagementGroupScopeNextLinkSkipToken.json"
           }
         }
       }

@@ -58,6 +58,17 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js logz/resource-manager
   - repo: azure-cli-extensions
 ```
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Logz/preview/2020-10-01-preview/logz.json
+    where:
+      - $.definitions.VMExtensionPayload.properties.apiKey
+    reason: Secrets are OK to return in a POST response.
+```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
