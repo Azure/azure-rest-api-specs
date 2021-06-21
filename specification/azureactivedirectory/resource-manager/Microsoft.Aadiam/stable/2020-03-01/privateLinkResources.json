@@ -64,10 +64,16 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, and policy name": {
             "$ref": "./examples/AzureADPrivateLinkResourceListGet.json"
           }
         }
@@ -103,10 +109,16 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, policy name, and group name": {
             "$ref": "./examples/AzureADPrivateLinkResourceGet.json"
           }
         }
@@ -116,6 +128,7 @@
   "definitions": {
     "ErrorResponse": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -125,6 +138,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -147,7 +161,6 @@
       }
     },
     "PrivateLinkResourceListResult": {
-      "description": "A list of private link resources",
       "type": "object",
       "properties": {
         "value": {
@@ -156,12 +169,9 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
         }
-      }
+      },
+      "description": "A list of private link resources"
     },
     "PrivateLinkResource": {
       "description": "A private link resource",
