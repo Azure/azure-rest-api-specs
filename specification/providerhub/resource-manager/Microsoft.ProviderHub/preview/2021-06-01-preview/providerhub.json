@@ -4853,6 +4853,31 @@
         }
       }
     },
+    "ResourceManagementEntity": {
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "homeTenantId": {
+          "type": "string",
+          "description": "The home tenant id."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The operation status."
+        }
+      }
+    },
     "ResourceManagementAction": {
       "type": "object",
       "properties": {
