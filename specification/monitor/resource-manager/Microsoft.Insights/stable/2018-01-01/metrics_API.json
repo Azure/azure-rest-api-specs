@@ -33,7 +33,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/metrics": {
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
           "Metrics"
@@ -100,6 +100,9 @@
           },
           "Get Metric for metadata": {
             "$ref": "./examples/GetMetricMetadata.json"
+          },
+          "Get Metric with error": {
+            "$ref": "./examples/GetMetricError.json"
           }
         }
       }
@@ -146,6 +149,7 @@
       }
     },
     "MetricValue": {
+      "type": "object",
       "required": [
         "timeStamp"
       ],
@@ -184,6 +188,7 @@
       "description": "Represents a metric value."
     },
     "MetadataValue": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
@@ -195,20 +200,6 @@
         }
       },
       "description": "Represents a metric metadata value."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     },
     "Response": {
       "type": "object",
@@ -273,9 +264,13 @@
           "type": "string",
           "description": "'Success' or the error details on query failures for this metric."
         },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "the unit of the metric."
+          "description": "The unit of the metric."
         },
         "timeseries": {
           "type": "array",
@@ -289,7 +284,6 @@
         "id",
         "type",
         "name",
-        "displayDescription",
         "unit",
         "timeseries"
       ],
@@ -314,6 +308,20 @@
         }
       },
       "description": "A time series result type. The discriminator value is always TimeSeries in this case."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
