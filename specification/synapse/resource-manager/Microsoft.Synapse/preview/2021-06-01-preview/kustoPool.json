@@ -51,6 +51,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/kustoSkus": {
+      "get": {
+        "description": "Lists eligible SKUs for Kusto Pool resource.",
+        "x-ms-examples": {
+          "KustoClustersListSkus": {
+            "$ref": "./examples/KustoPoolsListSkus.json"
+          }
+        },
+        "operationId": "KustoPool_ListSkus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SkuDescriptionList"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools": {
       "get": {
         "operationId": "KustoPools_ListByWorkspace",
@@ -2446,6 +2482,85 @@
         }
       },
       "description": "The list Kusto pools operation response."
+    },
+    "SkuDescriptionList": {
+      "description": "The list of the EngagementFabric SKU descriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "SKU descriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "The Kusto SKU description of given resource type",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "size": {
+          "description": "The size of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "The set of locations that the SKU is available",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "Locations and zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfoItem"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "The restrictions because of which SKU cannot be used",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuLocationInfoItem": {
+      "description": "The locations and zones info for SKU.",
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "description": "The available location of the SKU.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "The available zone of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "AzureSku": {
       "type": "object",
