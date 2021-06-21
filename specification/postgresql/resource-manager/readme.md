@@ -28,25 +28,25 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-flexibleserver-2021-06
 ```
 
-### Tag: package-2021-06-01
+### Tag: package-flexibleserver-2021-06
 
-These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06-01'
+``` yaml $(tag) == 'package-flexibleserver-2021-06'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
 ```
 
-### Tag: package-2021-06-01-preview
+### Tag: package-flexibleserver-2021-06-preview
 
-These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06-01-preview'
+``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
@@ -206,12 +206,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```
 
