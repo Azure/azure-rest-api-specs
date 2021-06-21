@@ -5,12 +5,14 @@
     "restorePointCollectionName": "rpcName",
     "restorePointName": "rpName",
     "api-version": "2021-03-01",
-    "properties": {
-      "excludeDisks": [
-        {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm8768_disk2_fe6ffde4f69b491ca33fb984d5bcd89f"
-        }
-      ]
+    "parameters": {
+      "properties": {
+        "excludeDisks": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/disk123"
+          }
+        ]
+      }
     }
   },
   "responses": {
@@ -21,7 +23,7 @@
         "properties": {
           "excludeDisks": [
             {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm8768_disk2_fe6ffde4f69b491ca33fb984d5bcd89f"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/disk123"
             }
           ],
           "sourceMetadata": {
@@ -32,27 +34,27 @@
             "storageProfile": {
               "osDisk": {
                 "osType": "Windows",
-                "name": "testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f",
+                "name": "osDisk123",
                 "caching": "ReadWrite",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS",
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/osDisk123"
                 },
                 "diskRestorePoint": {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/osDisk123_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
                 }
               },
               "dataDisks": [
                 {
                   "lun": 1,
-                  "name": "testingexcludedisk_DataDisk_1",
+                  "name": "dataDisk123",
                   "caching": "None",
                   "managedDisk": {
                     "storageAccountType": "Standard_LRS",
-                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/disks/testingexcludedisk_DataDisk_1"
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/disks/dataDisk123"
                   },
                   "diskRestorePoint": {
-                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/dataDisk123_68785190-1acb-4d5e-a8ae-705b45f3dca5"
                   }
                 }
               ]
@@ -73,7 +75,7 @@
                 "enabled": true
               }
             },
-            "location": "West US"
+            "location": "westus"
           },
           "provisioningState": "Succeeded",
           "consistencyMode": "ApplicationConsistent",
