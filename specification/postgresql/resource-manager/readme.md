@@ -51,6 +51,8 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
 ```
 
 ### Tag: package-2021-04-10-privatepreview
@@ -264,6 +266,8 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
