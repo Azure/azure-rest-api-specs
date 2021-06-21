@@ -49,12 +49,12 @@ Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/st
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## Breaking Change Check
-There are two kind of breaking change checks: same version breaking change check and cross version breaking change check. Both are using the 'oad' tool to compare the difference between two swaggers.
-- The same version breaking change check is for checking the existing swagger, it compares the changed swaggers to the swaggers before the change and ensure the change don't break the current version.
-- The cross version breaking change check is to find a last version swagger as a base swagger , compare the base swagger and the current swagger. Make sure the change don't break the following older versions:
-1. last stable version swagger which exists less than 3 year.
-2. last public preview version when there is no last stable version swagger which exists less than 3 years.  
-3. last public preview version which exists over than 1 year.
+There are two kind of breaking change checks: same version breaking change check and cross version breaking change check. Both uses the OAD (OpenAPI Diff) tool to identify breaking changes between swaggers.
+- The same version breaking change check compares the existing version swaggers with updated swaggers of the same version, so that to identify if there are any updates break the version.
+- TThe cross version breaking change check usually applies to new API version scenario. It uses swaggers of the latest public version as the baseline, comparing swaggers of new version with the baseline, so that to identify if there are any updates lead to breaking experience cross versions:
+1. The latest stable version which released within 3 years.
+2. When there is no stable version released within 3 years, then the latest preview version which released within 1 years.  
+3. The latest public preview version which released over than 1 year.
 
 ### adding label on PR automatically
 The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
