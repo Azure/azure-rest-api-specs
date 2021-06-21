@@ -4009,15 +4009,13 @@
       "properties": {
         "subject": {
           "description": "Subject name in the certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "expirationDate": {
           "description": "Certificate expiration date.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4042,15 +4040,18 @@
       "properties": {
         "version": {
           "description": "Certificate version.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "certificateAuthority": {
           "description": "Certificate issuing authority.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "certificateUrl": {
           "description": "Complete Url to the certificate",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
@@ -4060,8 +4061,14 @@
           "description": "The list of SANs.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4640,22 +4647,9 @@
           "description": "Version of the secret to be used",
           "type": "string"
         },
-        "certificateAuthority": {
-          "description": "Certificate issuing authority.",
-          "type": "string",
-          "readOnly": true
-        },
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
-        },
-        "subjectAlternativeNames": {
-          "description": "The list of SANs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
