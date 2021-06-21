@@ -700,6 +700,14 @@ directive:
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: MissingTypeObject
+    from: metrics_API.json
+    where: $.definitions.LocalizableString
+    reason: 'LocalizableString exists in other swaggers my team can not modify'
+  - suppress: MissingTypeObject
+    from: metricDefinitions_API.json
+    where: $.definitions.LocalizableString
+    reason: 'LocalizableString exists in other swaggers my team can not modify'
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: activityLogAlerts_API.json
