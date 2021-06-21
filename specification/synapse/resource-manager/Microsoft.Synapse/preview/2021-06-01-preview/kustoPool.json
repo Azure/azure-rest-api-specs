@@ -1514,6 +1514,60 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers//Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/checkPrincipalAssignmentNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the principal assignment name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "principalAssignmentName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentCheckNameRequest"
+            },
+            "description": "The name of the principal assignment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/principalAssignments": {
       "get": {
         "tags": [
@@ -3202,6 +3256,31 @@
         }
       },
       "description": "A class representing cluster principal property."
+    },
+    "ClusterPrincipalAssignmentCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Principal Assignment resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/principalAssignments"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalAssignmentType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools/principalAssignments."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "A principal assignment check name availability request."
     },
     "DatabasePrincipalAssignmentListResult": {
       "type": "object",
