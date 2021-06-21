@@ -180,7 +180,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sparkJob.json
 ```
 
-### Tag: package-artifacts-2019-06-01-preview
+### Tag: package-artifacts-2021-06-01-preview
 
 These settings apply only when `--tag=package-artifacts-2021-06-01-preview` is specified on the command line.
 
@@ -295,4 +295,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
