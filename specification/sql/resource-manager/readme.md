@@ -1316,6 +1316,8 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -1382,4 +1384,6 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

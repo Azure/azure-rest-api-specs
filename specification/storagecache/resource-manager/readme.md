@@ -93,6 +93,8 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js storagecache/resource-manager
 ```
 
 ## Python
@@ -119,4 +121,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

@@ -127,11 +127,15 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js migrate/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

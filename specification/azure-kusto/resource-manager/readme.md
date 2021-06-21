@@ -194,6 +194,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azure-kusto/resource-manager
 ```
 
 ## C#
@@ -214,7 +216,9 @@ csharp:
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Suppression
 

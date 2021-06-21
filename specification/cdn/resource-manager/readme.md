@@ -160,6 +160,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cdn/resource-manager
 ```
 
 
@@ -187,5 +189,7 @@ See configuration in [readme.node.md](./readme.node.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

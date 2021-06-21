@@ -103,6 +103,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurestack/resource-manager
 ```
 
 ## C#
@@ -163,4 +165,6 @@ generate-interface: true
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

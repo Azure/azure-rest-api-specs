@@ -70,6 +70,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js migrateprojects/resource-manager
 ```
 
 ## Go
@@ -99,5 +101,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-09-01-preview/$(namespace)
 ```
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

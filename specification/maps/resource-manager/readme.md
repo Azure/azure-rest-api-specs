@@ -85,6 +85,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js maps/resource-manager
 ```
 
 ## C#
@@ -254,3 +256,6 @@ directive:
     reason: standard property being applied to all azure resources.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

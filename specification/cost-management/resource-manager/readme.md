@@ -226,6 +226,8 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_costmanagement']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cost-management/resource-manager
 ```
 
 ## C#
@@ -349,5 +351,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

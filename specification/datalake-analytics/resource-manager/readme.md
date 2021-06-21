@@ -82,6 +82,8 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datalake-analytics/resource-manager
 ```
 
 
@@ -169,5 +171,7 @@ generate-interface: true
 
 
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

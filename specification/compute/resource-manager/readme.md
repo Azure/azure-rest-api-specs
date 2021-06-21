@@ -834,6 +834,8 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js compute/resource-manager
 ```
 
 ## Go
@@ -855,4 +857,6 @@ input-file:
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
