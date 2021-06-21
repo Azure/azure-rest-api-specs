@@ -4734,6 +4734,9 @@
           },
           "Create a scale set with userData.": {
             "$ref": "./examples/CreateOrUpdateAScaleSetWithUserData.json"
+          },
+          "Create a scale set with spot restore policy": {
+            "$ref": "./examples/CreateAScaleSetWithSpotRestorePolicy.json"
           }
         }
       },
@@ -11256,6 +11259,20 @@
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
     },
+    "SpotRestorePolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enables the Spot-Try-Restore feature where evicted VMSS SPOT instances will be tried to be restored opportunistically based on capacity availability and pricing constraints"
+        },
+        "restoreTimeout": {
+          "type": "string",
+          "description": "Timeout value expressed as an ISO 8601 time duration after which the platform will not try to restore the VMSS SPOT instances"
+        }
+      },
+      "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. <br><br> With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -12565,6 +12582,10 @@
         "orchestrationMode": {
           "$ref": "#/definitions/OrchestrationMode",
           "description": "Specifies the orchestration mode for the virtual machine scale set."
+        },
+        "spotRestorePolicy": {
+          "$ref": "#/definitions/SpotRestorePolicy",
+          "description": "Specifies the Spot Restore properties for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
