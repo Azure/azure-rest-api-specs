@@ -51,7 +51,7 @@ Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azur
 ## Breaking Change Check
 There are two kind of breaking change checks: same version breaking change check and cross version breaking change check. Both uses the OAD (OpenAPI Diff) tool to identify breaking changes between swaggers.
 - The same version breaking change check compares the existing version swaggers with updated swaggers of the same version, so that to identify if there are any updates break the version.
-- TThe cross version breaking change check usually applies to new API version scenario. It uses swaggers of the latest public version as the baseline, comparing swaggers of new version with the baseline, so that to identify if there are any updates lead to breaking experience cross versions:
+- The cross version breaking change check usually applies to new API version scenario. It uses swaggers of the latest public version as the baseline, comparing swaggers of new version with the baseline, so that to identify if there are any updates lead to breaking experience cross versions:
 1. The latest stable version which released within 3 years.
 2. When there is no stable version released within 3 years, then the latest preview version which released within 1 years.  
 3. The latest public preview version which released over than 1 year.
