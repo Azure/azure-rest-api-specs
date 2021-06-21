@@ -798,15 +798,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## C#
-
-``` yaml $(csharp)
-directive:
-    - from: subscriptions.json
-      where: $.paths["/providers/Microsoft.Resources/operations"].get
-      transform: delete $
-```
-
 # Validation
 
 Since this RP has no unique default package, iterate over all of them for validation:
