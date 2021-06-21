@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-03-01",
+    "version": "2021-05-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -3100,7 +3100,10 @@
             "Cancelling",
             "SucceededWithErrors",
             "WaitingForCustomerAction",
-            "SucceededWithWarnings"
+            "SucceededWithWarnings",
+            "WaitingForCustomerActionForKek",
+            "WaitingForCustomerActionForCleanUp",
+            "CustomerActionPerformedForCleanUp"
           ],
           "type": "string",
           "readOnly": true,
@@ -3143,6 +3146,18 @@
               {
                 "value": "SucceededWithWarnings",
                 "description": "Stage has succeeded with warnings."
+              },
+              {
+                "value": "WaitingForCustomerActionForKek",
+                "description": "Stage is waiting for customer action for kek action items."
+              },
+              {
+                "value": "WaitingForCustomerActionForCleanUp",
+                "description": "Stage is waiting for customer action for clean up."
+              },
+              {
+                "value": "CustomerActionPerformedForCleanUp",
+                "description": "Stage has performed customer action for clean up."
               }
             ]
           }
