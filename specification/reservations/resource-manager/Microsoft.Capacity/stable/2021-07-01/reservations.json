@@ -899,7 +899,8 @@
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "id": {
           "type": "string",
@@ -1126,7 +1127,8 @@
           "description": "The Azure Region where the reserved resource lives."
         },
         "etag": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "id": {
           "type": "string",
@@ -1565,6 +1567,7 @@
           "description": "List of the quantities in the new reservations to create.",
           "items": {
             "type": "integer",
+            "format": "int32",
             "minItems": 2,
             "maxItems": 2
           }
@@ -1747,13 +1750,24 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the operation",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay"
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
         },
         "origin": {
+          "description": "Origin of the operation",
           "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -1773,6 +1787,11 @@
           "type": "string"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Additional details about an operation.",
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "ReservationList": {
       "type": "object",
