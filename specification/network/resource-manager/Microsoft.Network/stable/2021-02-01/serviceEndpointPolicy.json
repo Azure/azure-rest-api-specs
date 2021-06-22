@@ -646,6 +646,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
         }
       },
       "allOf": [
@@ -697,6 +701,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the service endpoint policy resource."
+        },
+        "serviceAlias": {
+          "type": "string",
+          "description": "The alias indicating if the policy belongs to a service"
         }
       },
       "description": "Service Endpoint Policy resource."
