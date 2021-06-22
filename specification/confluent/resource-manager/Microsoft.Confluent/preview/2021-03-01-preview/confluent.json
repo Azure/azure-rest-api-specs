@@ -463,6 +463,63 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidate": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Organization Validate proxy resource",
+        "operationId": "Validations_ValidateOrganization",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validations_ValidateOrganizations": {
+            "$ref": "./examples/Validations_ValidateOrganizations.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -697,6 +754,13 @@
     "OfferDetail": {
       "description": "Confluent Offer detail",
       "type": "object",
+      "required": [
+        "publisherId",
+        "id",
+        "planId",
+        "planName",
+        "termUnit"
+      ],
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
@@ -732,6 +796,9 @@
     "UserDetail": {
       "description": "Subscriber detail",
       "type": "object",
+      "required": [
+        "emailAddress"
+      ],
       "properties": {
         "firstName": {
           "description": "First name",
@@ -753,6 +820,10 @@
     "OrganizationResourceProperties": {
       "description": "Organization resource property",
       "type": "object",
+      "required": [
+        "offerDetail",
+        "userDetail"
+      ],
       "properties": {
         "createdTime": {
           "format": "date-time",
@@ -789,6 +860,9 @@
       "description": "Organization resource.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "description": "The ARM id of the resource.",

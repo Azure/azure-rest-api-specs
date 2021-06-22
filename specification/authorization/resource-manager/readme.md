@@ -82,6 +82,12 @@ directive:
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
+  - suppress: AddedPropertyInResponse
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: AddingOptionalProperty
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
 ```
 
 ### Tag: package-2021-03-01-preview-only
@@ -346,8 +352,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js authorization/resource-manager
 ```
 
 ## Go
@@ -358,7 +362,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

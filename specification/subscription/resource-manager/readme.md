@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: R2059
@@ -129,15 +129,16 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js subscription/resource-manager
 ```
 
+## Pyhton
+
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 
@@ -203,7 +204,5 @@ description: The subscription client
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

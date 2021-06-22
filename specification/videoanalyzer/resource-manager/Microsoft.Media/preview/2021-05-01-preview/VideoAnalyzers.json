@@ -1,0 +1,1010 @@
+{
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Video Analyzer",
+    "description": "Azure Video Analyzer resource provider API definition.",
+    "version": "2021-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "definitions": {
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The service provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The operation description."
+        }
+      },
+      "type": "object",
+      "description": "Operation details."
+    },
+    "MetricDimension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The metric dimension name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the dimension.",
+          "readOnly": true
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether to export metric to shoebox.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "type": "object",
+      "description": "A metric dimension."
+    },
+    "MetricSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The metric name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The metric display name.",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The metric display description.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Bytes",
+            "Count",
+            "Milliseconds"
+          ],
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "values": [
+              {
+                "value": "Bytes",
+                "description": "The number of bytes."
+              },
+              {
+                "value": "Count",
+                "description": "The count."
+              },
+              {
+                "value": "Milliseconds",
+                "description": "The number of milliseconds."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric unit",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "aggregationType": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "values": [
+              {
+                "value": "Average",
+                "description": "The average."
+              },
+              {
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
+              },
+              {
+                "value": "Total",
+                "description": "The sum."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric aggregation type",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "values": [
+              {
+                "value": "Average",
+                "description": "The average."
+              },
+              {
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
+              },
+              {
+                "value": "Total",
+                "description": "The sum."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric lock aggregation type",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported aggregation types."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "The metric dimensions.",
+          "readOnly": true
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Indicates whether regional MDM account is enabled.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account.",
+          "readOnly": true
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace.",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The supported time grain types.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "A metric emitted by service."
+    },
+    "Properties": {
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "The service specifications.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Metric properties."
+    },
+    "ServiceSpecification": {
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "description": "List of log specifications.",
+          "readOnly": true
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "description": "List of metric specifications.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The service metric specifications."
+    },
+    "LogSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The diagnostic log category name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The diagnostic log category display name.",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "The time range for requests in each blob.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "A diagnostic log emitted by service."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The operation display name."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "Operation properties format."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane.",
+          "x-nullable": true
+        },
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "values": [
+              {
+                "value": "Internal",
+                "description": "An internal action."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Indicates the action type.",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "description": "An operation.",
+      "required": [
+        "name"
+      ]
+    },
+    "StorageAccount": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the storage account resource. Video Analyzer relies on tables, queues, and blobs. The primary storage account must be a Standard Storage account (either Microsoft.ClassicStorage or Microsoft.Storage)."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "A managed identity that Video Analyzer will use to access the storage account."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the storage account mapping.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The details about the associated storage account."
+    },
+    "SyncStorageKeysInput": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the storage account resource."
+        }
+      },
+      "type": "object",
+      "description": "The input to the sync storage keys request."
+    },
+    "VideoAnalyzerPropertiesUpdate": {
+      "properties": {
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "description": "The storage accounts for this resource."
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "description": "The list of endpoints associated with this resource.",
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "The account encryption properties."
+        }
+      },
+      "type": "object",
+      "description": "Properties of the Video Analyzer account."
+    },
+    "VideoAnalyzerProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoAnalyzerPropertiesUpdate"
+        }
+      ],
+      "required": [
+        "encryption",
+        "storageAccounts"
+      ]
+    },
+    "VideoAnalyzer": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VideoAnalyzerProperties",
+          "description": "The properties of the Video Analyzer account.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data of the Video Analyzer account.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/VideoAnalyzerIdentity",
+          "description": "The set of managed identities associated with the Video Analyzer resource."
+        }
+      },
+      "type": "object",
+      "description": "A Video Analyzer account."
+    },
+    "VideoAnalyzerUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/VideoAnalyzerPropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/VideoAnalyzerIdentity",
+          "description": "The identities associated to the Video Analyzer resource."
+        }
+      },
+      "type": "object",
+      "description": "The update operation for a Video Analyzer account."
+    },
+    "Endpoint": {
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "The URL of the endpoint."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the endpoint.",
+          "enum": [
+            "ClientApi"
+          ],
+          "x-ms-enum": {
+            "name": "VideoAnalyzerEndpointType",
+            "values": [
+              {
+                "value": "ClientApi",
+                "description": "The client API endpoint."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "The endpoint details."
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client ID.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity used by the Video Analyzer resource."
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The User Assigned Managed Identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "VideoAnalyzerIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The User Assigned Managed Identities."
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "The managed identity for the Video Analyzer resource."
+    },
+    "ResourceIdentity": {
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned managed identity's resource identifier to use when accessing a resource."
+        }
+      },
+      "type": "object",
+      "description": "The user assigned managed identity to use when accessing a resource.",
+      "required": [
+        "userAssignedIdentity"
+      ]
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "description": "The URL of the Key Vault key used to encrypt the account. The key may either be versioned (for example https://vault/keys/mykey/version1) or reference a key without a version (for example https://vault/keys/mykey)."
+        },
+        "currentKeyIdentifier": {
+          "type": "string",
+          "description": "The current key used to encrypt Video Analyzer account, including the key version.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The details for accessing the encryption keys in Key Vault.",
+      "required": [
+        "keyIdentifier"
+      ]
+    },
+    "AccountEncryption": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemKey",
+            "CustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "AccountEncryptionKeyType",
+            "values": [
+              {
+                "value": "SystemKey",
+                "description": "The Account Key is encrypted with a System Key."
+              },
+              {
+                "value": "CustomerKey",
+                "description": "The Account Key is encrypted with a Customer Key."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of key used to encrypt the Account Key."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "The properties of the key used to encrypt the account."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Key Vault identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the Key Vault mapping.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Defines how the Video Analyzer account is (optionally) encrypted.",
+      "required": [
+        "type"
+      ]
+    },
+    "OperationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "A collection of Operation items."
+        }
+      },
+      "type": "object",
+      "description": "A collection of Operation items."
+    },
+    "VideoAnalyzerCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoAnalyzer"
+          },
+          "description": "A collection of VideoAnalyzer items."
+        }
+      },
+      "type": "object",
+      "description": "A collection of VideoAnalyzer items."
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Media/operations": {
+      "get": {
+        "summary": "List Operations",
+        "description": "Lists all the Media operations.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "examples/operations-list-all.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers": {
+      "get": {
+        "summary": "List Video Analyzer accounts",
+        "description": "Lists the Video Analyzer accounts in the specified resource group.",
+        "operationId": "VideoAnalyzers_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List all Video Analyzer accounts": {
+            "$ref": "examples/video-analyzer-accounts-list-all-accounts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}": {
+      "get": {
+        "summary": "Get a Video Analyzer account",
+        "description": "Get the details of the specified Video Analyzer account",
+        "operationId": "VideoAnalyzers_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a Video Analyzer account by name": {
+            "$ref": "examples/video-analyzer-accounts-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or update a Video Analyzer account",
+        "description": "Create or update an instance of a Video Analyzer account",
+        "operationId": "VideoAnalyzers_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Create a Video Analyzer account": {
+            "$ref": "examples/video-analyzer-accounts-create-or-update.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Video Analyzer account.",
+        "description": "Delete the specified Video Analyzer account",
+        "operationId": "VideoAnalyzers_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a Video Analyzer account": {
+            "$ref": "examples/video-analyzer-accounts-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a Video Analyzer account",
+        "description": "Updates an existing instance of Video Analyzer account",
+        "operationId": "VideoAnalyzers_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerUpdate"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update a Video Analyzer accounts": {
+            "$ref": "examples/video-analyzer-accounts-update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/syncStorageKeys": {
+      "post": {
+        "summary": "Synchronizes Storage Account Keys",
+        "description": "Synchronizes storage account keys for a storage account associated with the Video Analyzer account.",
+        "operationId": "VideoAnalyzers_SyncStorageKeys",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncStorageKeysInput"
+            },
+            "description": "The request parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Synchronizes Storage Account Keys": {
+            "$ref": "examples/video-analyzer-accounts-sync-storage-keys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "summary": "Check Name Availability",
+        "description": "Checks whether the Video Analyzer resource name is available.",
+        "operationId": "Locations_CheckNameAvailability",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the location."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Check Name Availability": {
+            "$ref": "examples/accounts-check-name-availability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/videoAnalyzers": {
+      "get": {
+        "summary": "List Video Analyzer accounts",
+        "description": "Lists the Video Analyzer accounts in the specific subscription.",
+        "operationId": "VideoAnalyzers_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List all Video Analyzer accounts by subscription": {
+            "$ref": "examples/video-analyzer-accounts-subscription-list-all-accounts.json"
+          }
+        }
+      }
+    }
+  }
+}

@@ -64,8 +64,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js blueprint/resource-manager
 ```
 
 
@@ -134,7 +132,5 @@ directive:
     reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
