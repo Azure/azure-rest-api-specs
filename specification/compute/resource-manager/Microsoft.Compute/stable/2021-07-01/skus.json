@@ -50,14 +50,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/IncludeExtendedLocationsParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation. Only **location** filter is supported currently."
+          },
+          {
+            "$ref": "#/parameters/IncludeExtendedLocationsParameter"
           }
         ],
         "responses": {
@@ -359,6 +359,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "name": {
                 "type": "array",
