@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2021-03
+tag: package-preview-2021-06
 ```
 
 ### Validations
@@ -39,6 +39,17 @@ azure-validator: true
 semantic-validator: true
 model-validator: true
 message-format: json
+```
+
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
 ```
 ### Tag: package-preview-2021-03
 
@@ -165,8 +176,6 @@ directive:
     from: resourcegraph.json
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
-
-
 
 ## cli
 
