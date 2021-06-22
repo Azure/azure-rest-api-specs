@@ -182,7 +182,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
@@ -226,6 +225,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 - Microsoft.Security/stable/2021-01-01/alerts.json
+- Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
