@@ -2837,7 +2837,7 @@
         "tags": [
           "SecurityPolicies"
         ],
-        "description": "Updates an existing Secret within a profile.",
+        "description": "Updates an existing security policy within a profile.",
         "operationId": "SecurityPolicies_Patch",
         "x-ms-examples": {
           "SecurityPolicies_Patch": {
@@ -2928,7 +2928,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "Name of the Secret under the profile.",
+            "description": "Name of the security policy under the profile.",
             "required": true,
             "type": "string"
           },
@@ -4007,6 +4007,9 @@
     "Certificate": {
       "description": "Certificate used for https",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/SecretType"
+        },
         "subject": {
           "description": "Subject name in the certificate.",
           "type": "string",
@@ -4031,25 +4034,20 @@
       "description": "Customer Certificate used for https",
       "allOf": [
         {
-          "$ref": "#/definitions/Certificate"
+          "$ref": "#/definitions/Certificate",
         }
       ],
-      "required": [
-        "certificateUrl"
-      ],
       "properties": {
-        "version": {
+        "secretSource": {
+          "description": "Resource reference to the KV certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certifcateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference",
+        },
+        "secretVersion": {
           "description": "Certificate version.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "certificateAuthority": {
           "description": "Certificate issuing authority.",
-          "type": "string",
-          "readOnly": true
-        },
-        "certificateUrl": {
-          "description": "Complete Url to the certificate",
           "type": "string",
           "readOnly": true
         },
@@ -4080,22 +4078,13 @@
         "secretType"
       ],
       "properties": {
-        "secretSource": {
-          "description": "The secret source.",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
-        },
         "secretType": {
           "description": "The secret type.",
-          "enum": [
-            "UrlSigningKey",
-            "ManagedCertificate",
-            "CustomerCertificate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ValidateSecretType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecretType"
+        },
+        "secretSource": {
+          "description": "Resource reference to the KV secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Secret version, if customer is using a specific version.",
@@ -4572,18 +4561,21 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the Secret to create.",
-          "enum": [
-            "UrlSigningKey",
-            "CustomerCertificate",
-            "ManagedCertificate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SecretType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecretType"
         }
+      }
+    },
+    "SecretType": {
+      "description": "The type of the secret resource.",
+      "enum": [
+        "UrlSigningKey",
+        "CustomerCertificate",
+        "ManagedCertificate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SecretType",
+        "modelAsString": true
       }
     },
     "UrlSigningKeyParameters": {
@@ -4605,7 +4597,7 @@
           "type": "string"
         },
         "secretSource": {
-          "description": "Resource reference to the KV secret",
+          "description":  "Resource reference to the KV secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
@@ -4639,7 +4631,7 @@
       ],
       "properties": {
         "secretSource": {
-          "description": "Resource reference to the KV secret",
+          "description": "Resource reference to the KV certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certifcateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
