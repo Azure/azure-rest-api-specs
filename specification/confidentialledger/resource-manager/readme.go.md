@@ -26,12 +26,6 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-12-01-preview/$(namespace)
 ```
 
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2021-05-13-preview
-```
-
 ### Tag: package-2021-05-13-preview and go
 
 These settings apply only when `--tag=package-2021-05-13-preview --go` is specified on the command line.
