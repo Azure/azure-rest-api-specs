@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-06-preview'
 input-file:
-- Microsoft.EventHub/preview/2021-06-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2021-06-preview/namespaces-preview.json
 ```
 
 ### Tag: package-2018-01-preview
