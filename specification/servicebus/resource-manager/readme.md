@@ -48,6 +48,16 @@ input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2021-06-01-preview/namespace-preview.json
+```
+
+
 
 ### Tag: package-2018-01-preview
 
