@@ -602,7 +602,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach": {
       "post": {
         "operationId": "Containers_Attach",
         "x-ms-examples": {
@@ -1145,7 +1145,10 @@
         },
         "httpHeaders": {
           "description": "The HTTP headers.",
-          "$ref": "#/definitions/HttpHeaders"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpHeader"
+          }
         }
       },
       "required": [
@@ -1443,11 +1446,8 @@
           }
         },
         "workspaceResourceId": {
-          "type": "object",
           "description": "The workspace resource id for log analytics",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1801,8 +1801,8 @@
         }
       }
     },
-    "HttpHeaders": {
-      "description": "The HTTP headers.",
+    "HttpHeader": {
+      "description": "The HTTP header.",
       "type": "object",
       "properties": {
         "name": {
