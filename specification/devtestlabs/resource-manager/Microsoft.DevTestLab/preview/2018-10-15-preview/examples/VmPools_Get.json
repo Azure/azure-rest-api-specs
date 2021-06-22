@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2018-10-15-preview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{vmPoolName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "vmScalesetComputeId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/publicIpAddresses/{ipName}",
+          "userName": "{userName}",
+          "galleryImageReference": {
+            "offer": "0001-com-ubuntu-server-groovy",
+            "publisher": "canonical",
+            "sku": "20_10",
+            "osType": "Linux",
+            "version": "latest"
+          },
+          "instanceCount": 10,
+          "storageType": "{standard}",
+          "labSubnetName": "{virtualNetworkSubnetName}",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+          "uniqueIdentifier": "{uniqueIdentifier}",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts/{bastionHostName}",
+        "name": "{vmPoolName}",
+        "type": "Microsoft.DevTestLab/labs/vmPools",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}
