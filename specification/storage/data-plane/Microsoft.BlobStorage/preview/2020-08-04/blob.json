@@ -3387,9 +3387,9 @@
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
                 "enum": [
+                  "Mutable",
                   "Unlocked",
-                  "Locked",
-                  "Mutable"
+                  "Locked"
                 ],
                 "x-ms-enum": {
                   "name": "BlobImmutabilityPolicyMode",
@@ -4035,9 +4035,9 @@
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
                 "enum": [
+                  "Mutable",
                   "Unlocked",
-                  "Locked",
-                  "Mutable"
+                  "Locked"
                 ],
                 "x-ms-enum": {
                   "name": "BlobImmutabilityPolicyMode",
@@ -5637,9 +5637,9 @@
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
                 "enum": [
+                  "Mutable",
                   "Unlocked",
-                  "Locked",
-                  "Mutable"
+                  "Locked"
                 ],
                 "x-ms-enum": {
                   "name": "BlobImmutabilityPolicyMode",
@@ -10465,9 +10465,9 @@
         "ImmutabilityPolicyMode": {
           "type": "string",
           "enum": [
+            "Mutable",
             "Unlocked",
-            "Locked",
-            "Mutable"
+            "Locked"
           ],
           "x-ms-enum": {
              "name": "BlobImmutabilityPolicyMode",
@@ -10820,47 +10820,40 @@
       "xml": {
         "name": "DelimitedTextConfiguration"
       },
-      "description": "delimited text configuration",
+      "description": "Groups the settings used for interpreting the blob data if the blob is delimited text formatted.",
       "type": "object",
-      "required": [
-        "ColumnSeparator",
-        "FieldQuote",
-        "RecordSeparator",
-        "EscapeChar",
-        "HeadersPresent"
-      ],
       "properties": {
         "ColumnSeparator": {
           "type": "string",
-          "description": "column separator",
+          "description": "The string used to separate columns.",
           "xml": {
             "name": "ColumnSeparator"
           }
         },
         "FieldQuote": {
           "type": "string",
-          "description": "field quote",
+          "description": "The string used to quote a specific field.",
           "xml": {
             "name": "FieldQuote"
           }
         },
         "RecordSeparator": {
           "type": "string",
-          "description": "record separator",
+          "description": "The string used to separate records.",
           "xml": {
             "name": "RecordSeparator"
           }
         },
         "EscapeChar": {
           "type": "string",
-          "description": "escape char",
+          "description": "The string used as an escape character.",
           "xml": {
             "name": "EscapeChar"
           }
         },
         "HeadersPresent": {
           "type": "boolean",
-          "description": "has headers",
+          "description": "Represents whether the data has headers.",
           "xml": {
             "name": "HasHeaders"
           }
@@ -10873,13 +10866,10 @@
       },
       "description": "json text configuration",
       "type": "object",
-      "required": [
-        "RecordSeparator"
-      ],
       "properties": {
         "RecordSeparator": {
           "type": "string",
-          "description": "record separator",
+          "description": "The string used to separate records.",
           "xml": {
             "name": "RecordSeparator"
           }
@@ -10890,7 +10880,7 @@
       "xml": {
         "name": "ArrowConfiguration"
       },
-      "description": "arrow configuration",
+      "description": "Groups the settings used for formatting the response if the response should be Arrow formatted.",
       "type": "object",
       "required": [
         "Schema"
@@ -10919,7 +10909,7 @@
       "xml": {
         "name": "Field"
       },
-      "description": "field of an arrow schema",
+      "description": "Groups settings regarding specific field of an arrow schema",
       "type": "object",
       "required": [
         "Type"
@@ -11385,7 +11375,7 @@
       }
     },
     "QueryRequest": {
-      "description": "the quick query body",
+      "description": "Groups the set of query request settings.",
       "type": "object",
       "required": [
         "QueryType",
@@ -11394,7 +11384,7 @@
       "properties": {
         "QueryType": {
           "type": "string",
-          "description": "the query type",
+          "description": "Required. The type of the provided query expression.",
           "xml": {
             "name": "QueryType"
           },
@@ -11404,7 +11394,7 @@
         },
         "Expression": {
           "type": "string",
-          "description": "a query statement",
+          "description": "The query expression in SQL. The maximum size of the query expression is 256KiB.",
           "xml": {
             "name": "Expression"
           }

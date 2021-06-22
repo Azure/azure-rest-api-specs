@@ -2386,6 +2386,12 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ListFilesInclude"
+                    },
+                    {
+                        "$ref": "#/parameters/ListFilesExtendedInfo"
                     }
                 ],
                 "responses": {
@@ -4333,6 +4339,9 @@
                     },
                     {
                         "$ref": "#/parameters/LeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/CopySourceAuthorization"
                     }
                 ],
                 "responses": {
@@ -5012,6 +5021,18 @@
             "properties": {
                 "Name": {
                     "type": "string"
+                },
+                "FileId": {
+                    "type": "string"
+                },
+                "Properties": {
+                    "$ref": "#/definitions/FileProperty"
+                },
+                "Attributes": {
+                    "type": "string"
+                },
+                "PermissionKey": {
+                    "type": "string"
                 }
             }
         },
@@ -5029,8 +5050,17 @@
                 "Name": {
                     "type": "string"
                 },
+                "FileId": {
+                    "type": "string"
+                },
                 "Properties": {
                     "$ref": "#/definitions/FileProperty"
+                },
+                "Attributes": {
+                    "type": "string"
+                },
+                "PermissionKey": {
+                    "type": "string"
                 }
             }
         },
@@ -5045,6 +5075,30 @@
                     "description": "Content length of the file. This value may not be up-to-date since an SMB client may have modified the file locally. The value of Content-Length may not reflect that fact until the handle is closed or the op-lock is broken. To retrieve current property values, call Get File Properties.",
                     "type": "integer",
                     "format": "int64"
+                },
+                "CreationTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "LastAccessTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "LastWriteTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "ChangeTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "Last-Modified": {
+                    "type": "string",
+                    "format": "date-time-rfc1123"
+                },
+                "Etag": {
+                    "type": "string",
+                    "format": "etag"
                 }
             }
         },
@@ -5199,6 +5253,9 @@
                     "$ref": "#/definitions/FilesAndDirectoriesListSegment"
                 },
                 "NextMarker": {
+                    "type": "string"
+                },
+                "DirectoryId": {
                     "type": "string"
                 }
             }
@@ -5719,6 +5776,15 @@
             "x-ms-parameter-location": "method",
             "description": "Specifies the URL of the source file or blob, up to 2 KB in length. To copy a file to another file within the same storage account, you may use Shared Key to authenticate the source file. If you are copying a file from another storage account, or if you are copying a blob from the same storage account or another storage account, then you must authenticate the source file or blob using a shared access signature. If the source is a public blob, no authentication is required to perform the copy operation. A file in a share snapshot can also be specified as a copy source."
         },
+        "CopySourceAuthorization": {
+            "name": "x-ms-copy-source-authorization",
+            "x-ms-client-name": "copySourceAuthorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source."
+        },
         "FileCopyPermissionCopyMode": {
             "name": "x-ms-file-permission-copy-mode",
             "x-ms-client-name": "filePermissionCopyMode",
@@ -6047,6 +6113,36 @@
             "type": "string",
             "x-ms-parameter-location": "method",
             "description": "Specifies the current lease ID on the resource."
+        },
+        "ListFilesInclude": {
+            "name": "include",
+            "in": "query",
+            "description": "Include this parameter to specify one or more datasets to include in the response.",
+            "required": false,
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "Timestamps",
+                    "Etag",
+                    "Attributes",
+                    "PermissionKey"
+                ],
+                "x-ms-enum": {
+                    "name": "ListFilesIncludeType",
+                    "modelAsString": false
+                }
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "ListFilesExtendedInfo": {
+            "name": "x-ms-file-extended-info",
+            "x-ms-client-name": "includeExtendedInfo",
+            "x-ms-parameter-location": "method",
+            "in": "header",
+            "type": "boolean",
+            "required": false
         },
         "ListSharesInclude": {
             "name": "include",
