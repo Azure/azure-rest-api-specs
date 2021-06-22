@@ -44,11 +44,6 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
         }
       }
     },
@@ -63,6 +58,10 @@
         "properties": {
           "description": "Custom file properties",
           "$ref": "#/definitions/ProjectFileProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "allOf": [

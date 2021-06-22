@@ -26,8 +26,7 @@
           "$ref": "#/definitions/ODataError"
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/SystemData",
           "readOnly": true
         }
       }
@@ -200,6 +199,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "ARM tracked top level resource.",
       "properties": {
         "tags": {
@@ -221,6 +221,10 @@
             "create"
           ],
           "description": "Resource location."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "required": [
