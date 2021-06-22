@@ -109,7 +109,7 @@
         "tags": [
           "AttestationProviders"
         ],
-        "operationId": "AttestationProviders_Create",
+        "operationId": "AttestationProviders_CreateOrUpdate",
         "description": "Creates a new Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
@@ -730,10 +730,12 @@
       "description": "Status of attestation service.",
       "properties": {
         "trustModel": {
+          "readOnly": true,
           "type": "string",
           "description": "Trust model for the attestation provider."
         },
         "status": {
+          "readOnly": true,
           "type": "string",
           "description": "Status of attestation service.",
           "enum": [
@@ -747,10 +749,16 @@
           }
         },
         "attestUri": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets the uri of attestation service"
         },
         "publicNetworkAccess": {
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         },
