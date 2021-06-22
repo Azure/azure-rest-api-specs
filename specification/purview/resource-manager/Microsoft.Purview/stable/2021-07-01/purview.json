@@ -1441,7 +1441,7 @@
       }
     },
     "CollectionAdminUpdate": {
-      "description": "Collection admininstrator update.",
+      "description": "Collection administrator update.",
       "type": "object",
       "properties": {
         "objectId": {
@@ -1905,13 +1905,12 @@
     }
   },
   "parameters": {
-    "accountName": {
-      "name": "accountName",
+    "subscriptionId": {
+      "name": "subscriptionId",
       "in": "path",
-      "description": "The name of the account.",
+      "description": "The subscription identifier",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "api-version": {
       "name": "api-version",
@@ -1920,17 +1919,18 @@
       "required": true,
       "type": "string"
     },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
       "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
