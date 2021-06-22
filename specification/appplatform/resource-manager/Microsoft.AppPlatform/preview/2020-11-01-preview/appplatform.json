@@ -3443,8 +3443,7 @@
         },
         "temporaryDisk": {
           "$ref": "#/definitions/TemporaryDisk",
-          "description": "Temporary disk settings",
-          "default": "/tmp"
+          "description": "Temporary disk settings"
         },
         "persistentDisk": {
           "$ref": "#/definitions/PersistentDisk",
@@ -3470,7 +3469,8 @@
         },
         "mountPath": {
           "description": "Mount path of the temporary disk",
-          "type": "string"
+          "type": "string",
+          "default": "/tmp"
         }
       }
     },
@@ -4258,6 +4258,10 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
         }
       }
     },
