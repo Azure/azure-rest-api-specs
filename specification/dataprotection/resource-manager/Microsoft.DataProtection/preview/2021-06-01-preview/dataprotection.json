@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-02-01-preview",
+    "version": "2021-06-01-preview",
     "title": "DataProtectionBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -2324,6 +2324,21 @@
       "type": "object",
       "x-ms-discriminator-value": "AdhocBasedTriggerContext"
     },
+    "AuthCredentials": {
+      "description": "Base class for different types of authentication credentials.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
     "AzureBackupDiscreteRecoveryPoint": {
       "allOf": [
         {
@@ -2979,6 +2994,10 @@
           "description": "Specifies the provisioning state of the resource i.e. provisioning/updating/Succeeded/Failed",
           "type": "string",
           "readOnly": true
+        },
+        "datasourceAuthCredentials": {
+          "$ref": "#/definitions/AuthCredentials",
+          "description": "Credentials to use to authenticate with data source provider."
         },
         "objectType": {
           "type": "string"
@@ -4041,6 +4060,10 @@
         "datasourceSetInfo": {
           "$ref": "#/definitions/DatasourceSet",
           "description": "Information of target DS Set"
+        },
+        "datasourceAuthCredentials": {
+          "$ref": "#/definitions/AuthCredentials",
+          "description": "Credentials to use to authenticate with data source provider."
         }
       },
       "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
@@ -4401,6 +4424,10 @@
         "datasourceSetInfo": {
           "$ref": "#/definitions/DatasourceSet",
           "description": "Information of target DS Set"
+        },
+        "datasourceAuthCredentials": {
+          "$ref": "#/definitions/AuthCredentials",
+          "description": "Credentials to use to authenticate with data source provider."
         }
       },
       "required": [
@@ -4624,6 +4651,50 @@
       "title": "ScheduleBasedTriggerContext",
       "type": "object",
       "x-ms-discriminator-value": "ScheduleBasedTriggerContext"
+    },
+    "SecretStoreBasedAuthCredentials": {
+      "description": "Secret store based authentication credentials.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        }
+      ],
+      "properties": {
+        "secretStoreResource": {
+          "$ref": "#/definitions/SecretStoreResource",
+          "description": "Secret store resource"
+        }
+      },
+      "x-ms-discriminator-value": "SecretStoreBasedAuthCredentials"
+    },
+    "SecretStoreResource": {
+      "description": "Class representing a secret store resource.",
+      "required": [
+        "secretStoreType"
+      ],
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Uri to get to the resource",
+          "type": "string"
+        },
+        "secretStoreType": {
+          "description": "Gets or sets the type of secret store",
+          "enum": [
+            "Invalid",
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecretStoreType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "SourceLifeCycle": {
       "description": "Source LifeCycle",
