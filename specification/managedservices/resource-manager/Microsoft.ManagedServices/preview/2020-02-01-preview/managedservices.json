@@ -578,7 +578,7 @@
           "$ref": "#/definitions/RegistrationDefinitionProperties"
         },
         "plan": {
-          "description": "The plan details for the managed services marketplace plan.",
+          "description": "The details for the Managed Services offer’s plan in Azure Marketplace.",
           "$ref": "#/definitions/Plan"
         },
         "id": {
@@ -589,7 +589,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the Azure resource."
+          "description": "The type of the Azure resource (Microsoft.ManagedServices/registrationDefinitions)."
         },
         "name": {
           "readOnly": true,
@@ -612,14 +612,14 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
-          "description": "The list of permanent access that the principal(s) from the managedBy tenant will be receiving."
+          "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
         },
         "eligibleAuthorizations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
-          "description": "The list of just-in-time access that the principal(s) from the managedBy tenant will be receiving."
+          "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
         },
         "registrationDefinitionName": {
           "type": "string",
@@ -697,7 +697,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the Azure resource."
+          "description": "The type of the Azure resource (Microsoft.ManagedServices/registrationAssignments)."
         },
         "name": {
           "readOnly": true,
@@ -752,14 +752,14 @@
                   "items": {
                     "$ref": "#/definitions/Authorization"
                   },
-                  "description": "The list of permanent access that the principal(s) from the managedBy tenant will be receiving."
+                  "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
                 },
                 "eligibleAuthorizations": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/EligibleAuthorization"
                   },
-                  "description": "The list of just-in-time access that the principal(s) from the managedBy tenant will be receiving."
+                  "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
                 },
                 "registrationDefinitionName": {
                   "type": "string",
@@ -789,11 +789,11 @@
                 },
                 "manageeTenantId": {
                   "type": "string",
-                  "description": "The identifier of the home tenant."
+                  "description": "The identifier of the managed tenant."
                 },
                 "manageeTenantName": {
                   "type": "string",
-                  "description": "The name of the home tenant."
+                  "description": "The name of the managed tenant."
                 },
                 "managedByTenantId": {
                   "type": "string",
@@ -807,7 +807,7 @@
               "description": "The properties of the registration definition associated with the registration assignment."
             },
             "plan": {
-              "description": "The details for the managed services marketplace plan.",
+              "description": "The details for the Managed Services offer’s plan in Azure Marketplace.",
               "$ref": "#/definitions/Plan"
             },
             "id": {
@@ -818,7 +818,7 @@
             "type": {
               "readOnly": true,
               "type": "string",
-              "description": "The type of the Azure resource."
+              "description": "The type of the Azure resource (Microsoft.ManagedServices/registrationDefinitions)."
             },
             "name": {
               "readOnly": true,
@@ -861,7 +861,7 @@
           "$ref": "#/definitions/MarketplaceRegistrationDefinitionProperties"
         },
         "plan": {
-          "description": "The details for the managed services marketplace plan.",
+          "description": "The details for the Managed Services offer’s plan in Azure Marketplace.",
           "$ref": "#/definitions/Plan"
         },
         "id": {
@@ -872,7 +872,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the Azure resource."
+          "description": "The type of the Azure resource (Microsoft.ManagedServices/marketplaceRegistrationDefinitions)."
         },
         "name": {
           "readOnly": true,
@@ -894,14 +894,14 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
-          "description": "The list of permanent access that the principal(s) from the managedBy tenant will be receiving."
+          "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
         },
         "eligibleAuthorizations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
-          "description": "The list of just-in-time access that the principal(s) from the managedBy tenant will be receiving."
+          "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
         },
         "offerDisplayName": {
           "type": "string",
@@ -945,19 +945,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The marketplace plan name."
+          "description": "Azure Marketplace plan name."
         },
         "publisher": {
           "type": "string",
-          "description": "The marketplace publisher ID."
+          "description": "Azure Marketplace publisher ID."
         },
         "product": {
           "type": "string",
-          "description": "The marketplace product code."
+          "description": "Azure Marketplace product code."
         },
         "version": {
           "type": "string",
-          "description": "The marketplace plan's version."
+          "description": "Azure Marketplace plan's version."
         }
       },
       "required": [
@@ -967,7 +967,7 @@
         "version"
       ],
       "type": "object",
-      "description": "The marketplace plan details for the managed services offer."
+      "description": "The details for the Managed Services offer’s plan in Azure Marketplace."
     },
     "Operation": {
       "properties": {
@@ -1028,7 +1028,7 @@
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The identifier of the RBAC role that defines all the permissions that the principal will have on the projected scope."
+          "description": "The identifier of the Azure built-in role that defines the permissions that the principal will have on the projected scope."
         },
         "delegatedRoleDefinitionIds": {
           "type": "array",
@@ -1044,7 +1044,7 @@
         "roleDefinitionId"
       ],
       "type": "object",
-      "description": "Defines the permanent access that the principal from the managedBy tenant will be receiving."
+      "description": "The user ID and permanent role for a principal in the managedBy tenant."
     },
     "EligibleAuthorization": {
       "properties": {
@@ -1058,7 +1058,7 @@
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The identifier of the RBAC role that defines all the permissions that the principal will have on the projected scope."
+          "description": "The identifier of the Azure built-in role that defines the permissions that the principal will have on the projected scope."
         },
         "justInTimeAccessPolicy": {
           "description": "The just-in-time access policy setting.",
@@ -1070,7 +1070,7 @@
         "roleDefinitionId"
       ],
       "type": "object",
-      "description": "Defines the just-in-time access that the principal from the managedBy tenant will be receiving"
+      "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
     },
     "EligibleApprover": {
       "properties": {
@@ -1147,7 +1147,7 @@
         "message"
       ],
       "type": "object",
-      "description": "The error response indicating why incoming request was not able to be processed."
+      "description": "The error response indicating why the incoming request wasn’t able to be processed"
     },
     "ErrorResponse": {
       "description": "Error response.",
@@ -1176,7 +1176,7 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string",
-      "description": "The market place identifier. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
+      "description": "The Azure Marketplace identifier. Expected formats: {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
     },
     "ApiVersionParameter": {
       "name": "api-version",
