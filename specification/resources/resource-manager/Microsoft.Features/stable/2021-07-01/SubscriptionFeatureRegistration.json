@@ -156,57 +156,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/featureProviders/{providerNamespace}/subscriptionFeatureRegistrations/{featureName}/{actionName}": {
-      "post": {
-        "description": "Action on a feature registration.",
-        "operationId": "SubscriptionFeatureRegistrations_Action",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderNamespaceParameter"
-          },
-          {
-            "$ref": "#/parameters/FeatureNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ActionNameParameter"
-          },
-          {
-            "name": "SubscriptionFeatureRegistrationType",
-            "description": "Subscription Feature Registration Type details.",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/SubscriptionFeatureRegistration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The feature registration is updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionFeatureRegistration"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "./features.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Action on a feature registration": {
-            "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationPOST.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Features/featureProviders/{providerNamespace}/subscriptionFeatureRegistrations": {
       "get": {
         "description": "Returns subscription feature registrations for given subscription and provider namespace.",
