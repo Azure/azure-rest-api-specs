@@ -7711,6 +7711,10 @@
           "type": "boolean",
           "default": false,
           "description": "A value indicating to turn orientation detection on or not. Default is false."
+        },
+        "lineEnding": {
+          "$ref": "#/definitions/OcrSkillLineEnding",
+          "description": "Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\"."
         }
       },
       "externalDocs": {
@@ -8732,6 +8736,42 @@
         ]
       },
       "description": "The language codes supported for input by OcrSkill."
+    },
+    "OcrSkillLineEnding": {
+      "type": "string",
+      "enum": [
+        "space",
+        "carriageReturn",
+        "lineFeed",
+        "carriageReturnLineFeed"
+      ],
+      "x-ms-enum": {
+        "name": "LineEnding",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "space",
+            "name": "Space",
+            "description": "Lines are separated by a single space character."
+          },
+          {
+            "value": "carriageReturn",
+            "name": "CarriageReturn",
+            "description": "Lines are separated by a carriage return and a line feed ('\\r\\n') character."
+          },
+          {
+            "value": "lineFeed",
+            "name": "LineFeed",
+            "description": "Lines are separated by a single line feed ('\\n') character."
+          },
+          {
+            "value": "carriageReturnLineFeed",
+            "name": "CarriageReturnLineFeed",
+            "description": "Lines are separated by a carriage return and a line feed ('\\r\\n') character."
+          }
+        ]
+      },
+      "description": "Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\"."
     },
     "SplitSkillLanguage": {
       "type": "string",
