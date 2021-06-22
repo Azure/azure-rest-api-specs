@@ -7,11 +7,12 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
+no-namespace-folders: true
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python-mode) == 'update' && $(track2)
-namespace: azure.mgmt.rdbms.postgresql_flexibleservers
+no-namespace-folders: true
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 ```
