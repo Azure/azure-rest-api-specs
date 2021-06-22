@@ -59,7 +59,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,7 +98,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -143,7 +143,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -181,7 +181,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -233,7 +233,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -282,7 +282,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -333,7 +333,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -373,7 +373,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -418,7 +418,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -467,7 +467,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,7 +526,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -577,7 +577,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -620,7 +620,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -672,7 +672,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -737,7 +737,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -788,7 +788,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -831,7 +831,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseResource"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -878,7 +878,7 @@
         "error": {
           "type": "object",
           "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ErrorResponseCommon",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "x-nullable": true
         }
       }
@@ -1223,73 +1223,6 @@
       },
       "x-ms-azure-resource": true,
       "description": "An azure resource object",
-      "type": "object"
-    },
-    "ErrorResponseResource": {
-      "description": "The error response resource.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponseCommon": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      ],
-      "properties": {
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseCommon"
-          },
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
-        }
-      },
-      "description": "The resource management error response.",
-      "type": "object"
-    },
-    "ErrorAdditionalInfo": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info.",
       "type": "object"
     }
   },
