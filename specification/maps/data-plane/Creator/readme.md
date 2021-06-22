@@ -1,14 +1,14 @@
-# Azure Geolocation
+# Azure Maps
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Geolocation Client
+This is the AutoRest configuration file for Creator Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Geolocation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,25 +22,32 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Geolocation Client.
+These are the global settings for Creator Client.
 
 ``` yaml
-title: GeolocationClient
+title: CreatorClient
 openapi-type: data-plane
-tag: 1.0-preview
+tag: 2.0-preview
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 1.0-preview
+### Tag: 2.0-preview
 
-These settings apply only when `--tag=1.0-preview` is specified on the command line.
+These settings apply only when `--tag=2.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '1.0-preview'
+``` yaml $(tag) == '2.0-preview'
 input-file:
-  - preview/1.0/geolocation.json
+  - preview/2.0/alias.json
+  - preview/2.0/data.json
+  - preview/2.0/dataset.json
+  - preview/2.0/dwgconversion.json
+  - preview/2.0/featureset.json
+  - preview/2.0/spatial.json
+  - preview/2.0/tileset.json
+  - preview/2.0/wfs.json
 ```
 
 # Code Generation

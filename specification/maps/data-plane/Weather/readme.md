@@ -1,14 +1,14 @@
-# Azure Maps
+# Azure Weather
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Maps Weather Client
+This is the AutoRest configuration file for Weather Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Weather, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,10 +22,10 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Maps Weather Client.
+These are the global settings for Weather Client.
 
 ``` yaml
-title: MapsWeatherClient
+title: WeatherClient
 openapi-type: data-plane
 tag: 1.0-preview
 add-credentials: true

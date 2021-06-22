@@ -1,14 +1,14 @@
-# Azure Maps
+# Azure Render
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Maps Render Client
+This is the AutoRest configuration file for Render Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Render, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,10 +22,10 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Maps Render Client.
+These are the global settings for Render Client.
 
 ``` yaml
-title: MapsRenderClient
+title: RenderClient
 openapi-type: data-plane
 tag: 2.0-preview
 add-credentials: true
