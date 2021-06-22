@@ -1,4 +1,4 @@
-# Azure Maps
+# Azure Creator
 
 > see https://aka.ms/autorest
 
@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Creator Client
 
 ## Getting Started
 
-To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Creator, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -44,7 +44,7 @@ input-file:
   - preview/2.0/data.json
   - preview/2.0/dataset.json
   - preview/2.0/dwgconversion.json
-  - preview/2.0/featureset.json
+  - preview/2.0/featurestate.json
   - preview/2.0/spatial.json
   - preview/2.0/tileset.json
   - preview/2.0/wfs.json
