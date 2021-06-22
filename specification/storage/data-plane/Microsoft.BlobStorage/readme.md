@@ -119,37 +119,7 @@ directive:
 
 ``` yaml
 directive:
-  - suppress: XmsClientNameParameter
-    from: preview/2020-10-02/blob.json
-```
-
-``` yaml
-directive:
-  - suppress: ValidFormats
-    from: preview/2020-10-02/blob.json
-```
-
-``` yaml
-directive:
-  - suppress: ParameterDescriptionRequired
-    from: preview/2020-10-02/blob.json
-```
-
-``` yaml
-directive:
   - suppress: XmsExamplesRequired
-    from: preview/2020-10-02/blob.json
-```
-
-``` yaml
-directive:
-  - suppress: XmsParameterLocation
-    from: preview/2020-10-02/blob.json
-```
-
-``` yaml
-directive:
-  - suppress: XmsClientNameProperty
     from: preview/2020-10-02/blob.json
 ```
 ---
