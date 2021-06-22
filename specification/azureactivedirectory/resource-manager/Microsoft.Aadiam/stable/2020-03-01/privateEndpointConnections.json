@@ -146,7 +146,7 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "x-ms-examples": {
           "AadiamDeletePrivateEndpointConnections": {
-            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsDelete.json"
           }
         },
         "description": "Deletes the specified private endpoint connection associated with the given policy.",
@@ -187,13 +187,13 @@
         "operationId": "PrivateEndpointConnections_Get",
         "x-ms-examples": {
           "AadiamGetPrivateEndpointConnections": {
-            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsGet.json"
           }
         },
         "description": "Gets the specified private endpoint connection associated with the given policy.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyNameParameter"
@@ -282,7 +282,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Private endpoint connection resource.",
