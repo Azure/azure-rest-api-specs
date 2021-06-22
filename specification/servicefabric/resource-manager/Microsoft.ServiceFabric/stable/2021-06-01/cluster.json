@@ -992,6 +992,35 @@
         },
         "vmssZonalUpgradeMode": {
           "$ref": "#/definitions/VmssZonalUpgradeMode"
+        },
+        "infrastructureServiceManager": {
+          "type": "boolean",
+          "description": "Indicates if infrastructure service manager is enabled."
+        },
+        "upgradeWave": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **upgradeMode** is set to 'Automatic'."
+        },
+        "upgradePauseStartTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the start date and time to pause automatic runtime version upgrades on the cluster for an specific period of time on the cluster (UTC)."
+        },
+        "upgradePauseEndTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the end date and time to pause automatic runtime version upgrades on the cluster for an specific period of time on the cluster (UTC)."
+        },
+        "waveUpgradePaused": {
+          "type": "boolean",
+          "description": "Boolean to pause automatic runtime version upgrades to the cluster."
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          },
+          "description": "Indicates a list of notification channels for cluster events."
         }
       },
       "description": "Describes the cluster resource properties."
@@ -1066,6 +1095,41 @@
         },
         "upgradeMode": {
           "$ref": "#/definitions/UpgradeMode"
+        },
+        "sfZonalUpgradeMode": {
+          "$ref": "#/definitions/SfZonalUpgradeMode"
+        },
+        "vmssZonalUpgradeMode": {
+          "$ref": "#/definitions/VmssZonalUpgradeMode"
+        },
+        "infrastructureServiceManager": {
+          "type": "boolean",
+          "description": "Indicates if infrastructure service manager is enabled."
+        },
+        "upgradeWave": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **upgradeMode** is set to 'Automatic'."
+        },
+        "upgradePauseStartTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start timestamp to pause runtime version upgrades on the cluster (UTC)."
+        },
+        "upgradePauseEndTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of pause runtime version upgrades on the cluster (UTC)."
+        },
+        "waveUpgradePaused": {
+          "type": "boolean",
+          "description": "Boolean to pause automatic runtime version upgrades to the cluster."
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          },
+          "description": "Indicates a list of notification channels for cluster events."
         }
       },
       "description": "Describes the cluster resource properties that can be updated during PATCH operation."
@@ -1138,6 +1202,33 @@
           "description": "Defines the application delta health policy map used to evaluate the health of an application or one of its child entities when upgrading the cluster."
         }
       }
+    },
+    "ClusterUpgradeCadence": {
+      "type": "string",
+      "enum": [
+        "Wave0",
+        "Wave1",
+        "Wave2"
+      ],
+      "x-ms-enum": {
+        "name": "clusterUpgradeCadence",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Wave0",
+            "description": "Cluster upgrade starts immediately after a new version is rolled out. Recommended for Test/Dev clusters."
+          },
+          {
+            "value": "Wave1",
+            "description": "Cluster upgrade starts 7 days after a new version is rolled out. Recommended for Pre-prod clusters."
+          },
+          {
+            "value": "Wave2",
+            "description": "Cluster upgrade starts 14 days after a new version is rolled out. Recommended for Production clusters."
+          }
+        ]
+      },
+      "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
     },
     "ClusterUpgradePolicy": {
       "required": [
@@ -1346,6 +1437,107 @@
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
+    },
+    "Notification": {
+      "type": "object",
+      "required": [
+        "isEnabled",
+        "notificationCategory",
+        "notificationLevel",
+        "notificationTargets"
+      ],
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if the notification is enabled."
+        },
+        "notificationCategory": {
+          "type": "string",
+          "description": "The category of notification.",
+          "enum": [
+            "WaveProgress"
+          ],
+          "x-ms-enum": {
+            "name": "notificationCategory",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "WaveProgress",
+                "description": "Notification will be regarding wave progress."
+              }
+            ]
+          }
+        },
+        "notificationLevel": {
+          "type": "string",
+          "description": "The level of notification.",
+          "enum": [
+            "Critical",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "notificationLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Critical",
+                "description": "Receive only critical notifications."
+              },
+              {
+                "value": "All",
+                "description": "Receive all notifications."
+              }
+            ]
+          }
+        },
+        "notificationTargets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationTarget"
+          },
+          "description": "List of targets that subscribe to the notification."
+        }
+      },
+      "description": "Describes the notification channel for cluster events."
+    },
+    "NotificationTarget": {
+      "type": "object",
+      "required": [
+        "notificationChannel",
+        "receivers"
+      ],
+      "properties": {
+        "notificationChannel": {
+          "type": "string",
+          "description": "The notification channel indicates the type of receivers subscribed to the notification, either user or subscription.",
+          "enum": [
+            "EmailUser",
+            "EmailSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "notificationChannel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EmailUser",
+                "description": "For email user receivers. In this case, the parameter receivers should be a list of email addresses that will receive the notifications."
+              },
+              {
+                "value": "EmailSubscription",
+                "description": "For subscription receivers. In this case, the parameter receivers should be a list of roles of the subscription for the cluster (eg. Owner, AccountAdmin, etc) that will receive the notifications."
+              }
+            ]
+          }
+        },
+        "receivers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of targets that subscribe to the notification."
+        }
+      },
+      "description": "Describes the notification target properties."
     },
     "OperationListResult": {
       "properties": {
@@ -1578,11 +1770,26 @@
     },
     "UpgradeMode": {
       "type": "string",
-      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n",
+      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.",
       "enum": [
         "Automatic",
         "Manual"
-      ]
+      ],
+      "default": "Automatic",
+      "x-ms-enum": {
+        "name": "UpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Automatic",
+            "description": "The cluster will be automatically upgraded to the latest Service Fabric runtime version, **upgradeWave** will determine when the upgrade starts after the new version becomes available."
+          },
+          {
+            "value": "Manual",
+            "description": "The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource."
+          }
+        ]
+      }
     },
     "SfZonalUpgradeMode": {
       "type": "string",
@@ -1609,7 +1816,8 @@
     "VmssZonalUpgradeMode": {
       "type": "string",
       "enum": [
-        "Parallel"
+        "Parallel",
+        "Hierarchical"
       ],
       "x-ms-enum": {
         "name": "vmssZonalUpgradeMode",
@@ -1618,10 +1826,14 @@
           {
             "value": "Parallel",
             "description": "Updates will happen in all Availability Zones at once for the virtual machine scale sets."
+          },
+          {
+            "value": "Hierarchical",
+            "description": "VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone."
           }
         ]
       },
-      "description": "This property is mandatory if a node type with multiple Availability Zones is added. This property defines the upgrade mode for the virtual machine scale set updates that happen in all Availability Zones at once. Currently, this property can only be set to parallel."
+      "description": "This property defines the upgrade mode for the virtual machine scale set, it is mandatory if a node type with multiple Availability Zones is added."
     },
     "ErrorModel": {
       "properties": {

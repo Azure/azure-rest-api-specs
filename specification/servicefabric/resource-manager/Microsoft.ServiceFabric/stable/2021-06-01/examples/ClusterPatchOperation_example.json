@@ -45,7 +45,10 @@
         ],
         "reliabilityLevel": "Bronze",
         "upgradeMode": "Automatic",
-        "eventStoreServiceEnabled": true
+        "eventStoreServiceEnabled": true,
+        "upgradeWave": "Wave",
+        "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+        "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z"
       }
     }
   },
@@ -161,7 +164,10 @@
               "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
               "environment": "Windows"
             }
-          ]
+          ],
+          "upgradeWave": "Wave2",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z"
         }
       }
     },
@@ -275,6 +281,53 @@
               "codeVersion": "6.1.480.9494",
               "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
               "environment": "Windows"
+            }
+          ],
+          "upgradeWave": "Wave2",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+          "notifications": [
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "Critical",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            },
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "All",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
             }
           ]
         }
