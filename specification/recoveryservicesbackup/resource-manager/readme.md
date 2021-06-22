@@ -285,3 +285,15 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml $(directive)
+directive:
+  - suppress: ImplementPrivateEndpointAPIs
+    from: Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+    reason: Existing API version. Private Endpoint are not supposed to be implemented for this API version dedicated for CRR, that uses API version based routing.
+  - suppress: ImplementPrivateEndpointAPIs
+    from: Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+    reason: Existing API version. Private Endpoint are not supposed to be implemented for this API version dedicated for CRR, that uses API version based routing.
+```
