@@ -12,8 +12,32 @@
       "language": "en",
       "parameters": {
         "${luis-target-app}": {
-          "projectType": "luis",
-          "apiVersion": "v2.0"
+          "projectType": "luis_v2",
+          "apiVersion": "v2.0",
+          "projectParameters": {
+            "query": "test query"
+          },
+          "callingOptions": {
+            "verbose": true,
+            "log": false,
+            "show-all-intents": true,
+            "spellCheck": false
+          }
+        },
+        "${luis-target-app-v3}": {
+          "projectType": "luis_v3",
+          "apiVersion": "v3.0",
+          "projectParameters": {
+            "query": "test query",
+            "options": {
+              "preferExternalEntities": true
+            }
+          },
+          "callingOptions": {
+            "verbose": true,
+            "log": true,
+            "show-all-intents": true
+          }
         }
       }
     }

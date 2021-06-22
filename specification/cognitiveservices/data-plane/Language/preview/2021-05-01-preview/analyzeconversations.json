@@ -156,7 +156,51 @@
       ],
       "properties": {
         "projectParameters": {
-          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/Q"
+          "type": "object",
+          "$ref": "#/definitions/LUISV2ProjectParameters"
+        },
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/LUISV2CallingOptions"
+        }
+      }
+    },
+    "LUISV2CallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available V2 projects.",
+      "properties": {
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
+        },
+        "timezoneOffset": {
+          "type": "number",
+          "description": "The timezone offset for the location of the request."
+        },
+        "spellCheck": {
+          "type": "boolean",
+          "description": "Enable spell checking."
+        },
+        "bing-spell-check-subscription-key": {
+          "description": "The subscription key to use when enabling Bing spell check",
+          "type": "string"
+        }
+      }
+    },
+    "LUISV2ProjectParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
         }
       }
     },
@@ -170,7 +214,30 @@
       ],
       "properties": {
         "projectParameters": {
+          "type": "object",
           "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
+        },
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/LUISV3CallingOptions"
+        }
+      },
+      "additionalProperties": true
+    },
+    "LUISV3CallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available V3 projects.",
+      "properties": {
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
         }
       }
     },
