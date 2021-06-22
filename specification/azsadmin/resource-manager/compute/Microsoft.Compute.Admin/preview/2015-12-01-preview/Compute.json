@@ -38,6 +38,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
           }
         },
         "x-ms-pageable": {
@@ -94,8 +100,9 @@
           "type": "string"
         },
         "isDataAction": {
-          "description": "Gets or sets a value indicating whether the operation is a data action or not.",
-          "type": "boolean"
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
         },
         "display": {
           "description": "Contains the localized display information for this particular operation or action.",
@@ -137,6 +144,37 @@
         "nextLink": {
           "description": "URI to the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

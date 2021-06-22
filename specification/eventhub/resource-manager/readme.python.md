@@ -8,6 +8,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: azure-mgmt-eventhub
+  package-version: 0.1.0
   clear-output-folder: true
   no-namespace-folders: true
 ```
@@ -18,6 +19,7 @@ These settings apply only when `--track2` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-eventhub
+package-version: 1.0.0b1
 no-namespace-folders: true
 modelerfour:
   lenient-model-deduplication: true

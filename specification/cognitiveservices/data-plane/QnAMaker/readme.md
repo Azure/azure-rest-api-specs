@@ -74,7 +74,7 @@ These settings apply only when `--tag=release_5_0_preview.2` is specified on the
 input-file: preview/v5.0-preview.2/QnAMaker.json
 ```
 
-``` yaml
+``` yaml $(multiapi)
 batch:
   - tag: release_4_0
   - tag: runtime_release_4_0

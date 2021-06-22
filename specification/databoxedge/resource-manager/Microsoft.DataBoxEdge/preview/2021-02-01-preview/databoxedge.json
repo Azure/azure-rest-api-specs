@@ -5127,6 +5127,15 @@
             }
           },
           "readOnly": true
+        },
+        "capabilities": {
+          "description": "The capability info of the SKU.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true
         }
       }
     },
@@ -7666,6 +7675,22 @@
             "name": "SkuTier",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SkuCapability": {
+      "description": "The metadata to describe the capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "An invariant to describe the feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "An invariant if the feature is measured by quantity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
