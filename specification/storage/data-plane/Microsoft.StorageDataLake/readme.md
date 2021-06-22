@@ -36,32 +36,32 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-- stable/2020-06-12/DatalakeStorage.json
+- stable/2020-06-12/DataLakeStorage.json
 ```
 
 ### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: stable/2020-06-12/DatalakeStorage.json
+    from: stable/2020-06-12/DataLakeStorage.json
     reason: These parameters are predfined by storage specifications 
 ```
 
 ``` yaml
 directive:
   - suppress: XmsPathsMustOverloadPaths
-    from: stable/2020-06-12/DatalakeStorage.json
+    from: stable/2020-06-12/DataLakeStorage.json
 ```
 
 ``` yaml
 directive:
   - suppress: XmsExamplesRequired
-    from: stable/2020-06-12/DatalakeStorage.json
+    from: stable/2020-06-12/DataLakeStorage.json
 ```
 
 ``` yaml
 directive:
   - suppress: OperationIdNounConflictingModelNames
-    from: stable/2020-06-12/DatalakeStorage.json
+    from: stable/2020-06-12/DataLakeStorage.json
 ```
 ---
