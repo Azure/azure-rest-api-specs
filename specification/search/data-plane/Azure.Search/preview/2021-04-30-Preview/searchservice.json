@@ -5653,6 +5653,46 @@
       ],
       "description": "Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed."
     },
+    "SearchIndexerDataIdentity": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "Identifies the concrete type of the identity."
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for data identities."
+    },
+    "SearchIndexerDataNoneIdentity": {
+      "description": "Clears the identity property of a datasource.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataNoneIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataChangeDetectionPolicy"
+        }
+      ]
+    },
+    "SearchIndexerDataUserAssignedIdentity": {
+      "description": "Specifies the identity for a datasource to use.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataUserAssignedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataChangeDetectionPolicy"
+        }
+      ],
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
+        }
+      },
+      "required": [
+        "userAssignedIdentity"
+      ]
+    },
     "DataChangeDetectionPolicy": {
       "discriminator": "@odata.type",
       "properties": {
@@ -5797,6 +5837,11 @@
         "container": {
           "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
