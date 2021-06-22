@@ -15,10 +15,13 @@
           "projectType": "luis_v2",
           "apiVersion": "v2.0",
           "projectParameters": {
-            "query": "test query",
+            "query": "test query"
+          },
+          "callingOptions": {
             "verbose": true,
             "log": false,
-            "show-all-intents": true
+            "show-all-intents": true,
+            "spellCheck": false
           }
         },
         "${luis-target-app-v3}": {
@@ -28,8 +31,12 @@
             "query": "test query",
             "options": {
               "preferExternalEntities": true
-            },
-            "verbose": true
+            }
+          },
+          "callingOptions": {
+            "verbose": true,
+            "log": true,
+            "show-all-intents": true
           }
         }
       }

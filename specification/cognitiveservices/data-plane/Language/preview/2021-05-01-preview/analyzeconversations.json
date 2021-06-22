@@ -158,17 +158,16 @@
         "projectParameters": {
           "type": "object",
           "$ref": "#/definitions/LUISV2ProjectParameters"
+        },
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/LUISV2CallingOptions"
         }
       }
     },
-    "LUISV2ProjectParameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
+    "LUISV2CallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available V2 projects.",
       "properties": {
-        "query": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "The utterance to predict."
-        },
         "verbose": {
           "description": "Enable verbose response.",
           "type": "boolean"
@@ -195,6 +194,16 @@
         }
       }
     },
+    "LUISV2ProjectParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
+        }
+      }
+    },
     "LUISV3Parameters": {
       "description": "This is a set of request parameters for LUIS Generally Available projects and API version v3.0.",
       "x-ms-discriminator-value": "luis_v3",
@@ -206,40 +215,18 @@
       "properties": {
         "projectParameters": {
           "type": "object",
-          "$ref": "#/definitions/LUISV3ProjectParameters"
+          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
+        },
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/LUISV3CallingOptions"
         }
       },
       "additionalProperties": true
     },
-    "LUISV3ProjectParameters": {
-      "description": "This is the project parameter setting for LUIS Generally Available projects and API version v3.0.",
-      "required": [
-        "query"
-      ],
-      "type": "object",
+    "LUISV3CallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available V3 projects.",
       "properties": {
-        "query": {
-          "description": "The query to predict.",
-          "type": "string"
-        },
-        "options": {
-          "description": "The custom options defined for this request.",
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequestOptions"
-        },
-        "externalEntities": {
-          "description": "The externally predicted entities for this request.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/ExternalEntity"
-          }
-        },
-        "dynamicLists": {
-          "description": "The dynamically created list entities for this request.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/DynamicList"
-          }
-        },
         "verbose": {
           "description": "Enable verbose response.",
           "type": "boolean"
