@@ -232,6 +232,18 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
+### Tag: package-2021-06-22
+
+These settings apply only when `--tag=package-2021-06-22` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-22'
+input-file:
+- Microsoft.Automation/stable/2021-06-22/account.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2021-06-22/operations.json
+```
+
 ---
 ## Suppression
 ``` yaml

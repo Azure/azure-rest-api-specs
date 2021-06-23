@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "udtest",
+    "automationAccountName": "testaccount",
+    "hybridRunbookWorkerGroupName": "TestWorkerGroup",
+    "api-version": "2020-01-13-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/udtest/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestWorkerGroup",
+            "name": "TestWorkerGroup",
+            "hybridRunbookWorkers": [
+              {
+                "name": "TestMachine",
+                "ip": "134.1.1.1",
+                "registrationTime": "2017-03-24T12:43:43.053855-07:00"
+              }
+            ],
+            "credential": {
+              "name": "myRunAsCredentialName"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
