@@ -2482,7 +2482,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The Id of the frontdoor."
-        }
+        },
+		"originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "exclusiveMinimum": false
+        }        
       }
     },
     "ProfileListResult": {
