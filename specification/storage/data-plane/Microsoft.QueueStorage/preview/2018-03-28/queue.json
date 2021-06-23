@@ -140,6 +140,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -149,6 +150,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -217,6 +219,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -226,6 +229,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -309,6 +313,7 @@
       "parameters": [
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -446,7 +451,11 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/QueueName"
+        }
+      ]
     },
     "/{queueName}?comp=metadata": {
       "get": {
@@ -568,7 +577,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/QueueName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -691,7 +704,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/QueueName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -815,7 +832,11 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/QueueName"
+        }
+      ]
     },
     "/{queueName}/messages?visibilitytimeout={visibilityTimeout}&messagettl={messageTimeToLive}": {
       "post": {
@@ -882,7 +903,11 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/QueueName"
+        }
+      ]
     },
     "/{queueName}/messages?peekonly=true": {
       "get": {
@@ -945,7 +970,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/QueueName"
+        },
+        {
           "name": "peekonly",
+          "description": "Peek message(s).",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1028,7 +1057,14 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/QueueName"
+        },
+        {
+          "$ref": "#/parameters/MessageId"
+        }
+      ]
     },
     "/{queueName}/messages/{messageid}?popreceipt={popReceipt}": {
       "delete": {
@@ -1086,7 +1122,14 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/QueueName"
+        },
+        {
+          "$ref": "#/parameters/MessageId"
+        }
+      ]
     }
   },
   "definitions": {
@@ -1328,7 +1371,7 @@
       }
     },
     "Metrics": {
-      "description": "",
+      "description": "a summary of request statistics grouped by API in hour or minute aggregates for queues",
       "required": [
         "Enabled"
       ],
@@ -1650,6 +1693,7 @@
   "parameters": {
     "Url": {
       "name": "url",
+      "x-ms-parameter-location": "client",
       "description": "The URL of the service account, queue or message that is the target of the desired operation.",
       "required": true,
       "type": "string",
@@ -1658,6 +1702,7 @@
     },
     "ApiVersionParameter": {
       "name": "x-ms-version",
+      "x-ms-parameter-location": "client",
       "x-ms-client-name": "version",
       "in": "header",
       "required": true,
@@ -1706,19 +1751,19 @@
       "description": "The length of the request."
     },
     "ListQueuesInclude": {
-      "name": "include", 
-      "in": "query", 
-      "required": false, 
+      "name": "include",
+      "in": "query",
+      "required": false,
       "type": "array",
       "collectionFormat": "csv",
       "items": {
-      "type": "string", 
-      "enum": [ 
-        "metadata" 
-      ], 
-      "x-ms-enum": { 
-        "name": "ListQueuesIncludeType", 
-        "modelAsString": false 
+      "type": "string",
+      "enum": [
+        "metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ListQueuesIncludeType",
+        "modelAsString": false
         }
       },
       "x-ms-parameter-location": "method",
