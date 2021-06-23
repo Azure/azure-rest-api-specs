@@ -403,6 +403,55 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationDefinitions"
+        ],
+        "operationId": "ApplicationDefinitions_Update",
+        "description": "Updates the managed application definition.",
+        "x-ms-examples": {
+          "Update managed application definition": {
+            "$ref": "./examples/updateApplicationDefinition.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinitionPatchable"
+            },
+            "description": "Parameters supplied to the update a managed application definition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the managed application definition, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions": {
@@ -873,152 +922,9 @@
       }
     }
   },
-  "x-ms-paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}?disambiguation_dummy": {
-      "get": {
-        "tags": [
-          "ApplicationDefinitions"
-        ],
-        "operationId": "ApplicationDefinitions_GetById",
-        "description": "Gets the managed application definition.",
-        "x-ms-examples": {
-          "Get managed application definition": {
-            "$ref": "./examples/getApplicationDefinition.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns the managed application definition.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ApplicationDefinitions"
-        ],
-        "operationId": "ApplicationDefinitions_DeleteById",
-        "description": "Deletes the managed application definition.",
-        "x-ms-examples": {
-          "Get managed application definition": {
-            "$ref": "./examples/deleteApplicationDefinition.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "NoContent"
-          },
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted - Returns this status until the asynchronous operation has completed."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "put": {
-        "tags": [
-          "ApplicationDefinitions"
-        ],
-        "operationId": "ApplicationDefinitions_CreateOrUpdateById",
-        "description": "Creates a new managed application definition.",
-        "x-ms-examples": {
-          "Create or update managed application definition": {
-            "$ref": "./examples/createOrUpdateApplicationDefinition.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApplicationDefinition"
-            },
-            "description": "Parameters supplied to the create or update a managed application definition."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about the managed application definition, including provisioning status.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationDefinition"
-            }
-          },
-          "201": {
-            "description": "Created - Returns information about the managed application definition, including provisioning status.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    }
-  },
   "definitions": {
     "Application": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1051,6 +957,7 @@
       "description": "Information about managed application."
     },
     "ApplicationPatchable": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1079,6 +986,7 @@
       "description": "Information about managed application."
     },
     "ApplicationDefinition": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1097,6 +1005,7 @@
       "description": "Information about managed application definition."
     },
     "ApplicationProperties": {
+      "type": "object",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
@@ -1179,6 +1088,7 @@
       "description": "The managed application properties."
     },
     "ApplicationPropertiesPatchable": {
+      "type": "object",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
@@ -1206,6 +1116,7 @@
       "description": "The managed application properties."
     },
     "ApplicationDefinitionProperties": {
+      "type": "object",
       "properties": {
         "lockLevel": {
           "$ref": "#/definitions/ApplicationLockLevel",
@@ -1282,7 +1193,21 @@
       ],
       "description": "The managed application definition properties."
     },
+    "ApplicationDefinitionPatchable": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application definition tags"
+        }
+      },
+      "description": "Information about an application definition request."
+    },
     "Plan": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1314,6 +1239,7 @@
       "description": "Plan for the managed application."
     },
     "PlanPatchable": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1339,6 +1265,7 @@
       "description": "Plan for the managed application."
     },
     "GenericResource": {
+      "type": "object",
       "properties": {
         "managedBy": {
           "type": "string",
@@ -1357,6 +1284,7 @@
       "description": "Resource information."
     },
     "Sku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1390,6 +1318,7 @@
       "description": "SKU for the resource."
     },
     "Identity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1426,6 +1355,7 @@
       "description": "Identity for the resource."
     },
     "userAssignedResourceIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1441,6 +1371,7 @@
       "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
     },
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1477,6 +1408,7 @@
       "x-ms-azure-resource": true
     },
     "ApplicationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1493,6 +1425,7 @@
       "description": "List of managed applications."
     },
     "ApplicationDefinitionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1586,6 +1519,7 @@
       }
     },
     "ApplicationArtifact": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/ApplicationArtifactName",
@@ -1608,6 +1542,7 @@
       "description": "Managed application artifact."
     },
     "ApplicationDefinitionArtifact": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/ApplicationDefinitionArtifactName",
@@ -1630,6 +1565,7 @@
       "description": "Application definition artifact."
     },
     "ApplicationNotificationPolicy": {
+      "type": "object",
       "properties": {
         "notificationEndpoints": {
           "type": "array",
@@ -1645,6 +1581,7 @@
       "description": "Managed application notification policy."
     },
     "ApplicationNotificationEndpoint": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
@@ -1657,6 +1594,7 @@
       "description": "Managed application notification endpoint."
     },
     "ApplicationPackageLockingPolicyDefinition": {
+      "type": "object",
       "properties": {
         "allowedActions": {
           "type": "array",
@@ -1669,6 +1607,7 @@
       "description": "Managed application locking policy."
     },
     "ApplicationDeploymentPolicy": {
+      "type": "object",
       "properties": {
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
@@ -1681,6 +1620,7 @@
       "description": "Managed application deployment policy."
     },
     "ApplicationManagementPolicy": {
+      "type": "object",
       "properties": {
         "mode": {
           "$ref": "#/definitions/ApplicationManagementMode",
@@ -1690,6 +1630,7 @@
       "description": "Managed application management policy."
     },
     "ApplicationPolicy": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1707,6 +1648,7 @@
       "description": "Managed application policy."
     },
     "ApplicationAuthorization": {
+      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1724,6 +1666,7 @@
       "description": "The managed application provider authorization."
     },
     "ApplicationPackageContact": {
+      "type": "object",
       "properties": {
         "contactName": {
           "type": "string",
@@ -1745,6 +1688,7 @@
       "description": "The application package contact information."
     },
     "ApplicationPackageSupportUrls": {
+      "type": "object",
       "properties": {
         "publicAzure": {
           "type": "string",
@@ -1758,6 +1702,7 @@
       "description": "The appliance package support URLs."
     },
     "ApplicationBillingDetailsDefinition": {
+      "type": "object",
       "properties": {
         "resourceUsageId": {
           "type": "string",
@@ -1767,6 +1712,7 @@
       "description": "Managed application billing details definition."
     },
     "ApplicationJitAccessPolicy": {
+      "type": "object",
       "properties": {
         "jitAccessEnabled": {
           "type": "boolean",
@@ -1794,6 +1740,7 @@
       "description": "Managed application Jit access policy."
     },
     "JitRequestDefinition": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1809,6 +1756,7 @@
       "description": "Information about JIT request definition."
     },
     "JitRequestPatchable": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1821,6 +1769,7 @@
       "description": "Information about JIT request."
     },
     "JitRequestDefinitionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1837,6 +1786,7 @@
       "description": "List of JIT requests."
     },
     "JitRequestProperties": {
+      "type": "object",
       "properties": {
         "applicationResourceId": {
           "type": "string",
@@ -1887,6 +1837,7 @@
       "description": "Information about JIT request properties"
     },
     "JitAuthorizationPolicies": {
+      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1904,6 +1855,7 @@
       "description": "The JIT authorization policies."
     },
     "JitSchedulingPolicy": {
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/JitSchedulingType",
@@ -1941,6 +1893,7 @@
       }
     },
     "JitApproverDefinition": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1969,6 +1922,7 @@
       "description": "JIT approver definition."
     },
     "ApplicationClientDetails": {
+      "type": "object",
       "readOnly": true,
       "properties": {
         "oid": {
@@ -2031,6 +1985,7 @@
           "type": "boolean"
         },
         "display": {
+          "type": "object",
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
