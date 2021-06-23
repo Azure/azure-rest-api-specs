@@ -760,22 +760,8 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "description": "Principal Id of user assigned identity",
-                "type": "string",
-                "x-ms-client-name": "PrincipalId",
-                "readOnly": true
-              },
-              "clientId": {
-                "description": "Client Id of user assigned identity",
-                "type": "string",
-                "x-ms-client-name": "ClientId",
-                "readOnly": true
-              }
-            }
+          "items": {
+            "$ref": "#/definitions/KeyVaultProperties"
           },
           "description": "Properties for User Assigned Identities"
         }
@@ -811,6 +797,24 @@
         }
       },
       "description": "Properties to configure Encryption"
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "PrincipalId",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "ClientId",
+          "readOnly": true
+        }
+      },
+      "description": "Properties to configure User Assigned Identities"
     },
     "KeyVaultProperties": {
       "properties": {
