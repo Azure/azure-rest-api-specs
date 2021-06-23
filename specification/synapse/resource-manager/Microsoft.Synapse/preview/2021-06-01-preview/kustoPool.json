@@ -55,7 +55,7 @@
       "get": {
         "description": "Lists eligible SKUs for Kusto Pool resource.",
         "x-ms-examples": {
-          "KustoClustersListSkus": {
+          "KustoPoolsListSkus": {
             "$ref": "./examples/KustoPoolsListSkus.json"
           }
         },
@@ -463,7 +463,7 @@
         ],
         "operationId": "KustoPools_ListSkusByResource",
         "x-ms-examples": {
-          "KustoClustersListResourceSkus": {
+          "KustoPoolsListResourceSkus": {
             "$ref": "./examples/KustoPoolsListResourceSkus.json"
           }
         },
@@ -670,7 +670,7 @@
         "description": "Returns a list of databases that are owned by this Kusto Pool and were followed by another Kusto Pool.",
         "operationId": "KustoPools_ListFollowerDatabases",
         "x-ms-examples": {
-          "KustoClusterListFollowerDatabases": {
+          "KustoPoolListFollowerDatabases": {
             "$ref": "./examples/KustoPoolFollowerDatabasesList.json"
           }
         },
@@ -718,7 +718,7 @@
         "description": "Detaches all followers of a database owned by this Kusto Pool.",
         "operationId": "KustoPools_DetachFollowerDatabases",
         "x-ms-examples": {
-          "KustoClusterDetachFollowerDatabases": {
+          "KustoPoolDetachFollowerDatabases": {
             "$ref": "./examples/KustoPoolFollowerDatabasesDetach.json"
           }
         },
@@ -2319,7 +2319,7 @@
       "description": "The list Kusto pools operation response."
     },
     "SkuDescriptionList": {
-      "description": "The list of the EngagementFabric SKU descriptions",
+      "description": "The list of the SKU descriptions",
       "type": "object",
       "properties": {
         "value": {
@@ -2558,18 +2558,6 @@
           "$ref": "#/definitions/LanguageExtensionsList",
           "readOnly": true,
           "description": "List of the Kusto Pool's language extensions."
-        },
-        "engineType": {
-          "type": "string",
-          "description": "The engine type",
-          "enum": [
-            "V2",
-            "V3"
-          ],
-          "x-ms-enum": {
-            "name": "EngineType",
-            "modelAsString": true
-          }
         },
         "workspaceUID": {
           "type": "string",
