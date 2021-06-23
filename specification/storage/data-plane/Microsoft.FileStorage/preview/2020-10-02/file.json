@@ -131,6 +131,7 @@
             },
             "parameters": [{
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -140,6 +141,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -213,6 +215,7 @@
             },
             "parameters": [{
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
@@ -256,7 +259,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the share, in quotes."
                             },
                             "Last-Modified": {
@@ -326,7 +328,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -525,8 +526,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
                 "name": "restype",
+                "description": "restype",
                 "in": "query",
                 "required": true,
                 "type": "string",
@@ -568,7 +574,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                           "Last-Modified": {
@@ -619,7 +624,11 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -645,6 +654,7 @@
                 },
                 {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -684,7 +694,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                           "Last-Modified": {
@@ -730,7 +739,11 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -756,6 +769,7 @@
                 },
                 {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -798,7 +812,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                           "Last-Modified": {
@@ -849,7 +862,11 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -875,6 +892,7 @@
                 },
                 {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -914,7 +932,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -965,7 +982,11 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -991,6 +1012,7 @@
                 },
                 {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1033,7 +1055,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                           "Last-Modified": {
@@ -1089,7 +1110,11 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1115,6 +1140,7 @@
                 },
                 {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1152,7 +1178,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the share snapshot, in quotes. A share snapshot cannot be modified, so the ETag of a given share snapshot never changes. However, if new metadata was supplied with the Snapshot Share request then the ETag of the share snapshot differs from that of the base share. If no metadata was specified with the request, the ETag of the share snapshot is identical to that of the base share at the time the share snapshot was taken."
                             },
                             "Last-Modified": {
@@ -1191,8 +1216,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1202,6 +1232,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1328,8 +1359,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1339,6 +1375,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1380,7 +1417,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1419,8 +1455,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1430,6 +1471,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1465,7 +1507,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1504,8 +1545,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1515,6 +1561,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1547,7 +1594,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1614,7 +1660,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1653,8 +1698,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1664,6 +1714,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1696,7 +1747,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1738,8 +1788,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1749,6 +1804,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1788,7 +1844,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -1832,8 +1887,13 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1843,6 +1903,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -1890,7 +1951,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the directory, in quotes."
                             },
                             "Last-Modified": {
@@ -2000,7 +2060,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Last-Modified": {
@@ -2130,15 +2189,21 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
                 "name": "restype",
+                "description": "restype",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "directory"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}?restype=directory&comp=properties": {
             "put": {
@@ -2175,7 +2240,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "x-ms-request-id": {
@@ -2259,7 +2323,14 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
+                  "$ref": "#/parameters/DirectoryPath"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2269,6 +2340,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2301,7 +2373,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the directory, in quotes."
                             },
                             "x-ms-request-id": {
@@ -2342,7 +2413,14 @@
             },
             "parameters": [
                 {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
+                  "$ref": "#/parameters/DirectoryPath"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2352,6 +2430,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2439,8 +2518,16 @@
                     "nextLinkName": "NextMarker"
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
+                  "$ref": "#/parameters/DirectoryPath"
+                },
+                {
                     "name": "restype",
+                    "description": "restype",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2450,6 +2537,7 @@
                 },
                 {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2528,8 +2616,16 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
+                  "$ref": "#/parameters/DirectoryPath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -2616,16 +2712,24 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "forceclosehandles"
                 ]
-            }
-        ]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}": {
             "put": {
@@ -2699,7 +2803,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "Last-Modified": {
@@ -2833,7 +2936,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Content-MD5": {
@@ -3043,7 +3145,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Content-MD5": {
@@ -3292,7 +3393,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
                             },
                             "Content-MD5": {
@@ -3525,7 +3625,15 @@
                 }
             },
             "parameters": [
-
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              }
             ]
         },
         "/{shareName}/{directory}/{fileName}?comp=properties": {
@@ -3594,7 +3702,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "Last-Modified": {
@@ -3676,15 +3783,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "properties"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=metadata": {
             "put": {
@@ -3713,7 +3832,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "x-ms-request-id": {
@@ -3752,15 +3870,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "metadata"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=lease&acquire": {
             "put": {
@@ -3792,7 +3922,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
                             },
                             "Last-Modified": {
@@ -3843,7 +3972,17 @@
             },
             "parameters": [
                 {
+                    "$ref": "#/parameters/ShareName"
+                },
+                {
+                    "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                    "$ref": "#/parameters/FilePath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -3896,7 +4035,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
                             },
                             "Last-Modified": {
@@ -3942,7 +4080,17 @@
             },
             "parameters": [
                 {
+                    "$ref": "#/parameters/ShareName"
+                },
+                {
+                    "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                    "$ref": "#/parameters/FilePath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -3998,7 +4146,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
                             },
                             "Last-Modified": {
@@ -4049,7 +4196,17 @@
             },
             "parameters": [
                 {
+                    "$ref": "#/parameters/ShareName"
+                },
+                {
+                    "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                    "$ref": "#/parameters/FilePath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -4102,7 +4259,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
                             },
                             "Last-Modified": {
@@ -4153,7 +4309,17 @@
             },
             "parameters": [
                 {
+                    "$ref": "#/parameters/ShareName"
+                },
+                {
+                    "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                    "$ref": "#/parameters/FilePath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -4240,7 +4406,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "Last-Modified": {
@@ -4289,15 +4454,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "range"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=range&fromURL": {
             "put": {
@@ -4350,7 +4527,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "Last-Modified": {
@@ -4399,15 +4575,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "range"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=rangelist": {
             "get": {
@@ -4451,7 +4639,6 @@
                             },
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "The ETag contains a value which represents the version of the file, in quotes."
                             },
                             "x-ms-content-length": {
@@ -4494,15 +4681,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "rangelist"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=copy": {
             "put": {
@@ -4558,7 +4757,6 @@
                         "headers": {
                             "ETag": {
                                 "type": "string",
-                                "format": "etag",
                                 "description": "If the copy is completed, contains the ETag of the destination file. If the copy is not complete, contains the ETag of the empty file created at the start of the copy."
                             },
                             "Last-Modified": {
@@ -4618,7 +4816,15 @@
                 }
             },
             "parameters": [
-
+                {
+                  "$ref": "#/parameters/ShareName"
+                },
+                {
+                  "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                  "$ref": "#/parameters/FilePath"
+                }
             ]
         },
         "/{shareName}/{directory}/{fileName}?comp=copy&copyid={CopyId}": {
@@ -4680,15 +4886,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "copy"
                 ]
-            }]
+              }
+            ]
         },
         "/{shareName}/{directory}/{fileName}?comp=listhandles": {
             "get":{
@@ -4756,8 +4974,19 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+                {
+                    "$ref": "#/parameters/ShareName"
+                },
+                {
+                    "$ref": "#/parameters/DirectoryPath"
+                },
+                {
+                    "$ref": "#/parameters/FilePath"
+                },
+                {
                     "name": "comp",
+                    "description": "comp",
                     "in": "query",
                     "required": true,
                     "type": "string",
@@ -4841,16 +5070,27 @@
                     }
                 }
             },
-            "parameters": [{
+            "parameters": [
+              {
+                "$ref": "#/parameters/ShareName"
+              },
+              {
+                "$ref": "#/parameters/DirectoryPath"
+              },
+              {
+                "$ref": "#/parameters/FilePath"
+              },
+              {
                 "name": "comp",
+                "description": "comp",
                 "in": "query",
                 "required": true,
                 "type": "string",
                 "enum": [
                     "forceclosehandles"
                 ]
-            }
-        ]
+              }
+            ]
         }
     },
     "definitions": {
@@ -5097,8 +5337,7 @@
                     "format": "date-time-rfc1123"
                 },
                 "Etag": {
-                    "type": "string",
-                    "format": "etag"
+                    "type": "string"
                 }
             }
         },
@@ -5521,8 +5760,7 @@
                     "format": "date-time-rfc1123"
                 },
                 "Etag": {
-                    "type": "string",
-                    "format": "etag"
+                    "type": "string"
                 },
                 "Quota": {
                     "type": "integer"
@@ -5710,6 +5948,7 @@
         "ApiVersionParameter": {
             "name": "x-ms-version",
             "x-ms-client-name": "version",
+            "x-ms-parameter-location": "client",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
             "required": true,
@@ -5756,7 +5995,8 @@
             "enum": [
                 "abort"
             ],
-            "x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method",
+            "description": "Abort."
         },
         "CopyId": {
             "name": "copyid",
@@ -5871,6 +6111,32 @@
             "description": "Specifies the name of the preivously-deleted share.",
             "in": "header",
             "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "DirectoryPath": {
+            "name": "directory",
+            "in": "path",
+            "description": "The path of the target directory.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": false
+        },
+        "FilePath": {
+            "name": "fileName",
+            "in": "path",
+            "description": "The path of the target file.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": false
+        },
+        "ShareName": {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the target share.",
+            "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
         },
@@ -6031,6 +6297,7 @@
         },
         "FileRangeWriteFromUrl": {
             "name": "x-ms-write",
+            "x-ms-parameter-location": "client",
             "x-ms-client-name": "fileRangeWriteFromUrl",
             "in": "header",
             "description": "Only update is supported: - Update: Writes the bytes downloaded from the source url into the specified range.",
@@ -6142,7 +6409,8 @@
             "x-ms-parameter-location": "method",
             "in": "header",
             "type": "boolean",
-            "required": false
+            "required": false,
+            "description": "Include extended information."
         },
         "ListSharesInclude": {
             "name": "include",
@@ -6257,6 +6525,7 @@
         },
         "Url": {
             "name": "url",
+            "x-ms-parameter-location": "client",
             "in": "path",
             "description": "The URL of the service account, share, directory or file that is the target of the desired operation.",
             "required": true,
