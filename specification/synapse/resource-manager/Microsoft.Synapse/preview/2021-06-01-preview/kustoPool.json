@@ -2538,6 +2538,27 @@
           "readOnly": true,
           "description": "The reason for the Kusto Pool's current state."
         },
+        "optimizedAutoscale": {
+          "type": "object",
+          "$ref": "#/definitions/OptimizedAutoscale",
+          "description": "Optimized auto scale definition."
+        },
+        "enableStreamingIngest": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the streaming ingest is enabled."
+        },
+        "enablePurge": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the purge operations are enabled."
+        },
+        "languageExtensions": {
+          "type": "object",
+          "$ref": "#/definitions/LanguageExtensionsList",
+          "readOnly": true,
+          "description": "List of the Kusto Pool's language extensions."
+        },
         "engineType": {
           "type": "string",
           "description": "The engine type",
@@ -2622,6 +2643,37 @@
         }
       ],
       "description": "Class representing an update to a Kusto kusto pool."
+    },
+    "OptimizedAutoscale": {
+      "type": "object",
+      "required": [
+        "version",
+        "isEnabled",
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the template defined, for instance 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "isEnabled": {
+          "description": "A boolean value that indicate if the optimized autoscale feature is enabled or not.",
+          "type": "boolean"
+        },
+        "minimum": {
+          "description": "Minimum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximum": {
+          "description": "Maximum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "A class that contains the optimized auto scale definition."
     },
     "AttachedDatabaseConfigurationListResult": {
       "type": "object",
