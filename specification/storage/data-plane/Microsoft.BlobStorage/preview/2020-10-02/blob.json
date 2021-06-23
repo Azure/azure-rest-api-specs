@@ -6165,7 +6165,7 @@
         }
       ]
     },
-    "/{containerName}/{blob}?comp=copy&copyid={copyId}": {
+    "/{containerName}/{blob}?comp=copy&copyid": {
       "put": {
         "tags": [
           "blob"
@@ -6173,6 +6173,9 @@
         "operationId": "Blob_AbortCopyFromURL",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
         "parameters": [
+          {
+            "$ref": "#/parameters/CopyId"
+          },
           {
             "$ref": "#/parameters/Timeout"
           },
@@ -6227,14 +6230,11 @@
         }
       },
       "parameters": [
-		    {
+        {
 		      "$ref": "#/parameters/ContainerName"
 		    },
 		    {
 		      "$ref": "#/parameters/Blob"
-		    },
-        {
-		      "$ref": "#/parameters/CopyId"
 		    },
         {
           "name": "comp",
@@ -11288,7 +11288,8 @@
       "description": "the acls for the container"
     },
     "CopyId": {
-      "name": "copyId",
+      "name": "copyid",
+      "x-ms-client-name": "copyId",
       "in": "query",
       "required": true,
       "type": "string",

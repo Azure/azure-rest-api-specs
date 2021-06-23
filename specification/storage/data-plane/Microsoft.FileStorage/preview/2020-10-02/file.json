@@ -4830,7 +4830,7 @@
                 }
             ]
         },
-        "/{shareName}/{directory}/{fileName}?comp=copy&copyid={CopyId}": {
+        "/{shareName}/{directory}/{fileName}?comp=copy&copyid": {
             "put": {
                 "tags": [
                     "file"
@@ -4908,8 +4908,7 @@
                 "enum": [
                     "copy"
                 ]
-              }
-            ]
+            }]
         },
         "/{shareName}/{directory}/{fileName}?comp=listhandles": {
             "get":{
@@ -6002,7 +6001,8 @@
             "description": "Abort."
         },
         "CopyId": {
-            "name": "CopyId",
+            "name": "copyid",
+            "x-ms-client-name": "copyId",
             "in": "query",
             "required": true,
             "type": "string",
