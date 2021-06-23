@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "testaccount",
+    "hybridRunbookWorkerGroupName": "TestHybridGroup",
+    "hybridRunbookWorkerId": "c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+    "api-version": "2021-06-22"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup/hybridRunbookWorkers/c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+        "name": "c010ad12-ef14-4a2a-aa9e-ef22c4745ddd",
+        "type": "Microsoft.Automation/AutomationAccounts/HybridRunbookWorkerGroups/HybridRunbookWorkers",
+        "properties": {
+          "ip": "10.0.0.0",
+          "registeredDateTime": "2018-04-24T16:30:55+00:00",
+          "lastSeenDateTime": "2018-04-24T16:30:55+00:00",
+          "vmResourceId": "/subscriptions/vmsubid/resourceGroups/vmrg/providers/Microsoft.Compute/virtualMachines/vmname",
+          "workerName": "vmname",
+          "workerType": "HybridV2"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        }
+      }
+    }
+  }
+}

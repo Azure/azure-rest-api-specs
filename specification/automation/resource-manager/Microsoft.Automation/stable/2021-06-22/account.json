@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2020-01-13-preview",
+    "version": "2021-06-22",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -84,7 +84,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -142,7 +142,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -185,7 +185,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -228,7 +228,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -270,7 +270,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -310,7 +310,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -365,7 +365,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -413,7 +413,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -458,7 +458,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -479,6 +479,10 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
         }
       },
       "allOf": [
@@ -544,6 +548,14 @@
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Indicates whether requests using non-AAD authentication are blocked"
+        },
+        "automationHybridServiceUrl": {
+          "type": "string",
+          "description": "URL of automation hybrid service which is used for hybrid worker on-boarding."
         }
       },
       "description": "Definition of the account property."
@@ -803,6 +815,10 @@
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Indicates whether requests using non-AAD authentication are blocked"
         }
       },
       "description": "The parameters supplied to the update account properties."
