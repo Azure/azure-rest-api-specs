@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacity/{capacityName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacities/{capacityName}": {
       "get": {
         "x-ms-examples": {
           "Returns container registry capacity properties.": {
@@ -27,7 +27,7 @@
           "ContainerRegistryCapacity"
         ],
         "description": "Returns container registry capacity property.",
-        "operationId": "Capacity_Get",
+        "operationId": "ContainerRegistryCapacity_Get",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
@@ -58,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacity": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacities": {
       "get": {
         "x-ms-examples": {
           "Returns container registry capacity properties.": {
@@ -69,7 +69,7 @@
           "ContainerRegistryCapacities"
         ],
         "description": "Returns a list of container registry capacity properties.",
-        "operationId": "Capacity_List",
+        "operationId": "ContainerRegistryCapacity_List",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"

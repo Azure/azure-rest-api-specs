@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configuration/{configurationName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configurations/{configurationName}": {
       "put": {
         "x-ms-examples": {
           "Returns container registry overall configuration properties.": {
@@ -27,7 +27,7 @@
           "ContainerRegistryConfiguration"
         ],
         "description": "Configure container registry overall configuration properties.",
-        "operationId": "Configuration_Put",
+        "operationId": "ContainerRegistryConfiguration_Put",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
@@ -70,7 +70,7 @@
           "ContainerRegistryConfiguration"
         ],
         "description": "Delete an existing container registry configuration",
-        "operationId": "Configuration_Delete",
+        "operationId": "ContainerRegistryConfiguration_Delete",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
@@ -110,7 +110,7 @@
           "ContainerRegistryConfiguration"
         ],
         "description": "Returns the specified configuration details.",
-        "operationId": "Configuration_Get",
+        "operationId": "ContainerRegistryConfiguration_Get",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
@@ -141,7 +141,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configuration": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configurations": {
       "get": {
         "x-ms-examples": {
           "Returns a list of configuration at the given location.": {
@@ -152,7 +152,7 @@
           "ContainerRegistryConfiguration"
         ],
         "description": "Returns a list of configuration at the given location.",
-        "operationId": "Configuration_List",
+        "operationId": "ContainerRegistryConfiguration_List",
         "parameters": [
           {
             "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
