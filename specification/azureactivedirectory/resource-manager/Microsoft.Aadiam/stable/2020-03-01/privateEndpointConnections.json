@@ -48,16 +48,16 @@
         "description": "Lists all Private Endpoint Connections for the given policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -93,13 +93,13 @@
         "description": "Updates the specified private endpoint connection associated with the given policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyNameParameter"
@@ -152,7 +152,7 @@
         "description": "Deletes the specified private endpoint connection associated with the given policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyNameParameter"
@@ -161,10 +161,10 @@
             "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -193,7 +193,7 @@
         "description": "Gets the specified private endpoint connection associated with the given policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/policyNameParameter"
@@ -202,10 +202,10 @@
             "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -282,7 +282,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/trackedResource"
         }
       ],
       "description": "Private endpoint connection resource.",
@@ -412,6 +412,55 @@
       "type": "string",
       "description": "The name of the private link policy in Azure AD.",
       "x-ms-parameter-location": "method"
-    }
+    },
+    "trackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "description": "Definition of resource."
+    },
+    "resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    },
   }
 }
