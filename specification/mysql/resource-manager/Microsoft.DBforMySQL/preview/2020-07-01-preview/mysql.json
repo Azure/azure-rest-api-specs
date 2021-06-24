@@ -1473,7 +1473,7 @@
         "tags": [
           "GetPrivateDnsZoneSuffix"
         ],
-        "operationId": "getprivatednszonesuffix_Execute",
+        "operationId": "GetPrivateDnsZoneSuffix_Execute",
         "x-ms-examples": {
           "GetPrivateDnsZoneSuffix": {
             "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
@@ -1482,7 +1482,12 @@
         "description": "Get private DNS zone suffix in the cloud",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "name": "subscriptionId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the target subscription.",
+            "minLength": 1
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
