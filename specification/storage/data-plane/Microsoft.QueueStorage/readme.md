@@ -45,16 +45,8 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: preview/2018-03-28/queue.json
     reason: These parameters are predfined by storage specifications 
-```
-
-``` yaml
-directive:
   - suppress: XmsPathsMustOverloadPaths
     from: preview/2018-03-28/queue.json
-```
-
-``` yaml
-directive:
   - suppress: XmsExamplesRequired
     from: preview/2018-03-28/queue.json
 ```

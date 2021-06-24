@@ -45,22 +45,10 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: stable/2020-06-12/DataLakeStorage.json
     reason: These parameters are predfined by storage specifications 
-```
-
-``` yaml
-directive:
   - suppress: XmsPathsMustOverloadPaths
     from: stable/2020-06-12/DataLakeStorage.json
-```
-
-``` yaml
-directive:
   - suppress: XmsExamplesRequired
     from: stable/2020-06-12/DataLakeStorage.json
-```
-
-``` yaml
-directive:
   - suppress: OperationIdNounConflictingModelNames
     from: stable/2020-06-12/DataLakeStorage.json
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
