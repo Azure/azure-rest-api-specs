@@ -496,7 +496,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStore_QueryApprovedPlans",
-        "description": "Get the list of approved plans for an offer regarding a specific subscription",
+        "description": "Get map of plans and related approved subscriptions.",
         "parameters": [
           {
             "in": "body",
@@ -508,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of approved plan ids.",
+            "description": "Map of plan ids and their related approved subscriptions.",
             "schema": {
               "$ref": "#/definitions/QueryApprovedPlansResponse"
             }
@@ -2195,10 +2195,6 @@
         "offerId": {
           "description": "Offer id",
           "type": "string"
-        },
-        "subscriptionId": {
-          "description": "Subscription id",
-          "type": "string"
         }
       }
     },
@@ -2207,24 +2203,44 @@
       "type": "object",
       "properties": {
         "details": {
-          "$ref": "#/definitions/QueryApprovedPlansDetails",
-          "description": "Query approved plans details"
+          "$ref": "#/definitions/QueryApprovedPlansResponseDetails"
         }
+      }
+    },
+    "QueryApprovedPlansResponseDetails": {
+      "description": "Query approved plans response details",
+      "type": "object",
+      "properties": {
+        "allPlans": {
+          "description": "This object indicates the case of all current and future plans are approved",
+          "$ref": "#/definitions/QueryApprovedPlansDetails"
+        },
+        "partialPlans": {
+          "$ref": "#/definitions/PartialPlansObject",
+          "description": "This object indicates the case of partials (or just current) plans are approved"
+         }
+      }
+    },
+    "PartialPlansObject": {
+      "description": "This object indicates the case of partials (or just current) plans are approved",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/QueryApprovedPlansDetails"
       }
     },
     "QueryApprovedPlansDetails": {
       "description": "Query approved plans response",
       "type": "object",
       "properties": {
-        "planIds": {
-          "description": "Approved plan ids list. In case of all plans are approved, allPlans flag is true and list is empty",
+        "subscriptionIds": {
+          "description": "approved subscription ids list. In case all subscriptions are approved for a plan, allSubscriptions flag is true and list is empty ( else flag is set to false)",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "allPlans": {
-          "description": "Indicates whether all plans are approved",
+        "allSubscriptions": {
+          "description": "Indicates whether all subscriptions are approved for this plan",
           "type": "boolean"
         }
       }

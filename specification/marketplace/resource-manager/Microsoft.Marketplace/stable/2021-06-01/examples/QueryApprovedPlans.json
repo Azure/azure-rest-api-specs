@@ -4,8 +4,7 @@
     "api-version": "2021-06-01",
     "payload": {
       "properties": {
-        "offerId": "marketplacetestthirdparty.md-test-third-party-2",
-        "subscriptionId": "b340914e-353d-453a-85fb-8f9b65b51f91"
+        "offerId": "marketplacetestthirdparty.md-test-third-party-2"
       }
     }
   },
@@ -13,11 +12,20 @@
     "200": {
       "body": {
         "details": {
-          "planIds": [
-            "0001",
-            "0002"
-          ],
-          "allPlans": false
+          "allPlans": null,
+          "partialPlans": {
+            "0001": {
+              "subscriptionIds": [
+                "85e3e079-c718-4e4c-abbe-f72fceba8305",
+                "7752d461-4bf1-4185-8b56-8a3f11486ac6"
+              ],
+              "allSubscriptions": false
+            },
+            "0002": {
+              "subscriptionIds": [],
+              "allSubscriptions": true
+            }
+          }
         }
       }
     }
