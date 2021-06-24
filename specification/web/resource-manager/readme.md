@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2021-01
+tag: package-2021-01-15
 ```
 
 ### Suppression
@@ -55,6 +55,141 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
+### Tag: package-2021-01-15
+
+These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-15'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-01-15/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-01-15/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-15/Certificates.json
+  - Microsoft.Web/stable/2021-01-15/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-15/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-15/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-15/Global.json
+  - Microsoft.Web/stable/2021-01-15/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/Provider.json
+  - Microsoft.Web/stable/2021-01-15/Recommendations.json
+  - Microsoft.Web/stable/2021-01-15/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-15/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-15/StaticSites.json
+  - Microsoft.Web/stable/2021-01-15/WebApps.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+```
 
 ### Tag: package-2021-01
 
@@ -154,6 +289,7 @@ directive:
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` or `--tag=package-2020-12-only` is specified on the command line.
