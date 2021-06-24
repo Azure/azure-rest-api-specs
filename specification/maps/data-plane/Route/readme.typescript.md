@@ -23,41 +23,4 @@ directive:
         "type": "object"
       };
     reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
-  - from: search.json
-    where: $.definitions.SearchInsideGeometryRequestBody.properties.geometry
-    transform: >
-      $ = {
-        "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
-        "type": "object"
-      };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
-  - from: spatial.json
-    where: $.parameters.SearchGeofenceRequestBody.schema
-    transform: >
-      $ = {
-        "type": "object"
-      };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
-  - from: spatial.json
-    where: $.parameters.ClosestPointRequestBody.schema
-    transform: >
-      $ = {
-        "type": "object"
-      };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
-  - from: spatial.json
-    where: $.parameters.PointInPolygonRequestBody.schema
-    transform: >
-      $ = {
-        "type": "object"
-      };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
-  - from: spatial.json
-    where: $.definitions.BufferRequestBody.properties.geometries
-    transform: >
-      $ = {
-        "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-        "type": "object"
-      };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
 ```
