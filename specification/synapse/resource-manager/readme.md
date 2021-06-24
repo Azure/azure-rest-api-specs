@@ -54,6 +54,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-05-01/sqlPool.json
   - Microsoft.Synapse/stable/2021-05-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-05-01/workspace.json
+  - Microsoft.Synapse/stable/2021-05-01/sparkConfiguration.json
 ```
 ### Tag: package-2021-04-preview
 
@@ -74,6 +75,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-04-01-preview/sqlPool.json
   - Microsoft.Synapse/preview/2021-04-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-04-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/sparkConfiguration.json
 ```
 
 ### Tag: package-kusto-pool-2021-04-preview
@@ -106,6 +108,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-03-01/sqlPool.json
   - Microsoft.Synapse/stable/2021-03-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-03-01/workspace.json
+  - Microsoft.Synapse/stable/2021-03-01/sparkConfiguration.json
 ```
 
 ### Tag: package-2019-06-01-preview
@@ -158,6 +161,7 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
 - Microsoft.Synapse/stable/2020-12-01/keys.json
 - Microsoft.Synapse/stable/2020-12-01/library.json
+- Microsoft.Synapse/stable/2020-12-01/sparkConfiguration.json
 ```
 
 ## Suppressions
