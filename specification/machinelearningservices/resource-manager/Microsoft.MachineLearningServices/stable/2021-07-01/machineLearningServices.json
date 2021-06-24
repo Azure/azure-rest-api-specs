@@ -1781,6 +1781,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "ExternalFQND"
+        ],
+        "summary": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.",
+        "operationId": "Workspaces_ListExternalFqdnEndpoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalFQDNResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resync Workspace Keys": {
+            "$ref": "./examples/ExternalFQDN/get.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -4800,6 +4845,54 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AKSProperties"
+        }
+      }
+    },
+    "FQDNEndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "FQDNEndpoint": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string"
+        },
+        "endpointDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpointDetail"
+          }
+        }
+      }
+    },
+    "FQDNEndpoints": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoint"
+          }
+        }
+      }
+    },
+    "ExternalFQDNResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoints"
+          }
         }
       }
     }
