@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/DiagnosticOperations/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}": {
       "get": {
         "tags": [
-          "DiagnosticOperations"
+          "diagnosticOperations"
         ],
         "operationId": "DiagnosticOperations_Read",
         "description": "Gets status of a Diagnostic operation issued for Disk Inspection.",
@@ -69,15 +69,24 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scehduled disk inspection request.": {
+            "$ref": "./examples/GetDiagnosticOperation.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/Diagnostics/runDiskInspection": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/runDiskInspection": {
       "post": {
         "tags": [
-          "Diagnostics"
+          "diagnostics"
         ],
         "operationId": "DiskInspection_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Creates a request for executing disk Inspection.",
         "consumes": [
           "application/json"
@@ -115,6 +124,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a request for disk inspection.": {
+            "$ref": "./examples/RunDiskInspection.json"
+          }
         }
       }
     }
@@ -123,16 +137,21 @@
     "RunDiskInspectionInput": {
       "properties": {
         "resourceGroup": {
+          "description": "Resource Group name.",
           "type": "string"
         },
         "virtualMachineName": {
+          "description": "Virtual machine name.",
           "type": "string"
         },
         "manifest": {
+          "description": "Name of manifest in order to trigger Disk Inspection.",
           "type": "string"
         },
         "uploadSasUri": {
-          "type": "string"
+          "description": "SAS uri to the blob where results will be uploaded.",
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -145,10 +164,10 @@
     },
     "RunDiskInspectionAsyncOperationResult": {
       "properties": {
-        "Result": {
+        "result": {
           "type": "string"
         },
-        "ResultStatus": {
+        "resultStatus": {
           "type": "string",
           "enum": [
             "Success",
@@ -158,10 +177,10 @@
             "modelAsString": true
           }
         },
-        "ErrorDetail": {
+        "errorDetail": {
           "$ref": "#/definitions/ErrorDetail"
         },
-        "CreatedUTC": {
+        "createdUTC": {
           "type": "string",
           "format": "date-time",
           "description": "The time when the disk inspection was completed."
