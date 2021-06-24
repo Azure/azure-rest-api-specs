@@ -8,22 +8,46 @@
   "responses": {
     "200": {
       "body": {
-        "name": "contosotv",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosotv",
-        "type": "Microsoft.Media/mediaservices",
         "location": "South Central US",
         "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "key1": "value3"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
         },
         "properties": {
-          "mediaServiceId": "6ac94f91-283c-4492-85a7-57976928c17d",
+          "encryption": {
+            "type": "customerKey",
+            "keyVaultProperties": {
+              "keyIdentifier": "https://keyvault.vault.azure.net/keys/key1",
+              "currentKeyIdentifier": "https://keyvault.vault.azure.net/keys/key1/ver1"
+            },
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
+              "useSystemAssignedIdentity": false
+            }
+          },
           "storageAccounts": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Storage/storageAccounts/contosotvstore",
-              "type": "Primary"
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Storage/storageAccounts/contososportsstore",
+              "type": "Primary",
+              "identity": {
+                "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
+                "useSystemAssignedIdentity": false
+              }
             }
-          ]
+          ],
+          "storageAuthentication": "ManagedIdentity"
         }
       }
     }

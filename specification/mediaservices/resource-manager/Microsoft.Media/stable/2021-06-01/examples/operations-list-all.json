@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
-    "api-version": "2020-05-01"
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
@@ -72,12 +72,48 @@
             }
           },
           {
+            "name": "Microsoft.Media/mediaservices/regenerateKey/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "Regenerate Key",
+              "description": "Regenerate a Media Services ACS key"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/listKeys/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "List Keys",
+              "description": "List the ACS keys for the Media Services account"
+            }
+          },
+          {
             "name": "Microsoft.Media/mediaservices/syncStorageKeys/action",
             "display": {
               "provider": "Microsoft Media Services",
               "resource": "Media Services Account",
               "operation": "Synchronize Storage Keys",
               "description": "Synchronize the Storage Keys for an attached Azure Storage account"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/listEdgePolicies/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "List policies for an edge device.",
+              "description": "List policies for an edge device."
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/PrivateEndpointConnectionsApproval/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "Approve Private Endpoint Connections",
+              "description": "Approve Private Endpoint Connections"
             }
           },
           {
@@ -105,6 +141,33 @@
               "resource": "Event Grid Filter",
               "operation": "Delete Event Grid Filter",
               "description": "Delete any Event Grid Filter"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/accountfilters/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Account Filter",
+              "operation": "Read Account Filter",
+              "description": "Read any Account Filter"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/accountfilters/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Account Filter",
+              "operation": "Create or Update Account Filter",
+              "description": "Create or Update any Account Filter"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/accountfilters/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Account Filter",
+              "operation": "Delete Account Filter",
+              "description": "Delete any Account Filter"
             }
           },
           {
@@ -150,6 +213,42 @@
               "resource": "Asset",
               "operation": "Get Asset Encryption Key",
               "description": "Get Asset Encryption Key"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/assets/listStreamingLocators/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Asset",
+              "operation": "List Streaming Locators for Asset",
+              "description": "List Streaming Locators for Asset"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/assets/assetfilters/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Asset Filter",
+              "operation": "Read Asset Filter",
+              "description": "Read any Asset Filter"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/assets/assetfilters/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Asset Filter",
+              "operation": "Create or Update Asset Filter",
+              "description": "Create or Update any Asset Filter"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/assets/assetfilters/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Asset Filter",
+              "operation": "Delete Asset Filter",
+              "description": "Delete any Asset Filter"
             }
           },
           {
@@ -324,6 +423,87 @@
             }
           },
           {
+            "name": "Microsoft.Media/mediaservices/privateLinkResources/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateLinkResource",
+              "operation": "Read Private Link Resource",
+              "description": "Read any Private Link Resource"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnectionProxies/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnectionProxy",
+              "operation": "Read Private Endpoint Connection Proxy",
+              "description": "Read any Private Endpoint Connection Proxy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnectionProxies/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnectionProxy",
+              "operation": "Create Private Endpoint Connection Proxy",
+              "description": "Create Private Endpoint Connection Proxy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnectionProxies/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnectionProxy",
+              "operation": "Delete Private Endpoint Connection Proxy",
+              "description": "Delete Private Endpoint Connection Proxy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnectionProxies/validate/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnectionProxy",
+              "operation": "Validate Private Endpoint Connection Proxy",
+              "description": "Validate Private Endpoint Connection Proxy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnections/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnection",
+              "operation": "Read Private Endpoint Connection",
+              "description": "Read any Private Endpoint Connection"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnections/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnection",
+              "operation": "Create Private Endpoint Connection",
+              "description": "Create Private Endpoint Connection"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnections/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "PrivateEndpointConnection",
+              "operation": "Delete Private Endpoint Connection",
+              "description": "Delete Private Endpoint Connection"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/privateEndpointConnectionOperations/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Private Endpoint Connection Operation",
+              "operation": "Read Private Endpoint Connection Operation",
+              "description": "Read any Private Endpoint Connection Operation"
+            }
+          },
+          {
             "name": "Microsoft.Media/mediaservices/streamingEndpoints/read",
             "display": {
               "provider": "Microsoft Media Services",
@@ -421,6 +601,9 @@
                         "displayName": "Output Format",
                         "toBeExportedForShoebox": true
                       }
+                    ],
+                    "supportedAggregationTypes": [
+                      "Total"
                     ]
                   },
                   {
@@ -435,6 +618,11 @@
                         "displayName": "Output Format",
                         "toBeExportedForShoebox": true
                       }
+                    ],
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Minimum",
+                      "Maximum"
                     ]
                   },
                   {
@@ -442,7 +630,7 @@
                     "displayName": "Requests",
                     "displayDescription": "Requests to a Streaming Endpoint.",
                     "unit": "Count",
-                    "aggregationType": "Count",
+                    "aggregationType": "Total",
                     "dimensions": [
                       {
                         "name": "OutputFormat",
@@ -459,6 +647,36 @@
                         "displayName": "Error Code",
                         "toBeExportedForShoebox": false
                       }
+                    ],
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ]
+                  },
+                  {
+                    "name": "EgressBandwidth",
+                    "displayName": "Egress bandwidth",
+                    "displayDescription": "Egress bandwidth in bits per second.",
+                    "unit": "BitsPerSecond",
+                    "aggregationType": "Average",
+                    "lockAggregationType": "Total",
+                    "dimensions": [],
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Minimum",
+                      "Maximum"
+                    ]
+                  },
+                  {
+                    "name": "CPU",
+                    "displayName": "CPU usage",
+                    "displayDescription": "CPU usage for premium streaming endpoints. This data is not available for standard streaming endpoints.",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "dimensions": [],
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Minimum",
+                      "Maximum"
                     ]
                   }
                 ]
@@ -520,6 +738,120 @@
             }
           },
           {
+            "name": "Microsoft.Media/mediaservices/liveEvents/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Event",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/liveEvents/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Event",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/liveEvents/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Event",
+              "operation": "Get a list of Media Services Live Event Metrics definitions.",
+              "description": "Get a list of Media Services Live Event Metrics definitions."
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "IngestBitrate",
+                    "displayName": "Live Event ingest bitrate",
+                    "displayDescription": "The incoming bitrate ingested for a live event, in bits per second.",
+                    "unit": "BitsPerSecond",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "TrackName",
+                        "displayName": "Track name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MicrosoftMediaLiveEvent",
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Minimum",
+                      "Maximum"
+                    ]
+                  },
+                  {
+                    "name": "IngestLastTimestamp",
+                    "displayName": "Live Event ingest last timestamp",
+                    "displayDescription": "Last timestamp ingested for a live event.",
+                    "unit": "Milliseconds",
+                    "aggregationType": "Maximum",
+                    "dimensions": [
+                      {
+                        "name": "TrackName",
+                        "displayName": "Track name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MicrosoftMediaLiveEvent",
+                    "supportedAggregationTypes": [
+                      "Maximum"
+                    ]
+                  },
+                  {
+                    "name": "IngestDriftValue",
+                    "displayName": "Live Event ingest drift value",
+                    "displayDescription": "Drift between the timestamp of the ingested content and the system clock, measured in seconds per minute. A non zero value indicates that the ingested content is arriving slower than system clock time.",
+                    "unit": "Seconds",
+                    "aggregationType": "Maximum",
+                    "dimensions": [
+                      {
+                        "name": "TrackName",
+                        "displayName": "Track name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MicrosoftMediaLiveEvent",
+                    "supportedAggregationTypes": [
+                      "Maximum"
+                    ]
+                  },
+                  {
+                    "name": "LiveOutputLastTimestamp",
+                    "displayName": "Last output timestamp",
+                    "displayDescription": "Timestamp of the last fragment uploaded to storage for a live event output.",
+                    "unit": "Milliseconds",
+                    "aggregationType": "Maximum",
+                    "dimensions": [
+                      {
+                        "name": "TrackName",
+                        "displayName": "Track name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MicrosoftMediaLiveEvent",
+                    "supportedAggregationTypes": [
+                      "Maximum"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
             "name": "Microsoft.Media/mediaservices/liveEvents/liveOutputs/read",
             "display": {
               "provider": "Microsoft Media Services",
@@ -571,6 +903,480 @@
               "resource": "Live Output Operation",
               "operation": "Read Live Output Operation",
               "description": "Read any Live Output Operation"
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/providers/Microsoft.Insights/logDefinitions/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "The log definition of mediaservices",
+              "operation": "Read mediaservices log definitions",
+              "description": "Gets the available logs for a Media Services Account"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "KeyDeliveryRequests",
+                    "displayName": "Key Delivery Requests",
+                    "blobDuration": "PT1H"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Service",
+              "operation": "Get list of Media Services Metric definitions.",
+              "description": "Get list of Media Services Metric definitions."
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "AssetQuota",
+                    "displayName": "Asset quota",
+                    "displayDescription": "How many assets are allowed for current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "AssetCount",
+                    "displayName": "Asset count",
+                    "displayDescription": "How many assets are already created in current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "AssetQuotaUsedPercentage",
+                    "displayName": "Asset quota used percentage",
+                    "displayDescription": "Asset used percentage in current media service account",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "ContentKeyPolicyQuota",
+                    "displayName": "Content Key Policy quota",
+                    "displayDescription": "How many content key polices are allowed for current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "ContentKeyPolicyCount",
+                    "displayName": "Content Key Policy count",
+                    "displayDescription": "How many content key policies are already created in current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "ContentKeyPolicyQuotaUsedPercentage",
+                    "displayName": "Content Key Policy quota used percentage",
+                    "displayDescription": "Content Key Policy used percentage in current media service account",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "StreamingPolicyQuota",
+                    "displayName": "Streaming Policy quota",
+                    "displayDescription": "How many streaming policies are allowed for current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "StreamingPolicyCount",
+                    "displayName": "Streaming Policy count",
+                    "displayDescription": "How many streaming policies are already created in current media service account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "StreamingPolicyQuotaUsedPercentage",
+                    "displayName": "Streaming Policy quota used percentage",
+                    "displayDescription": "Streaming Policy used percentage in current media service account",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "MediaServiceQuotaAndUsage",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "ChannelsAndLiveEventsCount",
+                    "displayName": "Live event count",
+                    "displayDescription": "The total number of live events in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  },
+                  {
+                    "name": "RunningChannelsAndLiveEventsCount",
+                    "displayName": "Running live event count",
+                    "displayDescription": "The total number of running live events in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  },
+                  {
+                    "name": "MaxChannelsAndLiveEventsCount",
+                    "displayName": "Max live event quota",
+                    "displayDescription": "The maximum number of live events allowed in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  },
+                  {
+                    "name": "MaxRunningChannelsAndLiveEventsCount",
+                    "displayName": "Max running live event quota",
+                    "displayDescription": "The maximum number of running live events allowed in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Analyzer Account",
+              "operation": "Read a Video Analyzer Account",
+              "description": "Read a Video Analyzer Account"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Analyzer Account",
+              "operation": "Write a Video Analyzer Account",
+              "description": "Write a Video Analyzer Account"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Analyzer Account",
+              "operation": "Delete a Video Analyzer Account",
+              "description": "Delete a Video Analyzer Account"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Read Video",
+              "description": "Read any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Create or Update Video",
+              "description": "Create or Update any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Delete Video",
+              "description": "Delete any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/listStreamingToken/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Generates a streaming token which can be used for video playback",
+              "description": "Generates a streaming token which can be used for video playback"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Read Access Policy",
+              "description": "Read any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Create or Update Access Policy",
+              "description": "Create or Update any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Delete Access Policy",
+              "description": "Delete any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Read Edge Module",
+              "description": "Read any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Create or Update Edge Module",
+              "description": "Create or Update any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Delete Edge Module",
+              "description": "Delete any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/listProvisioningToken/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Creates a new provisioning token",
+              "description": "Creates a new provisioning token. A provisioning token allows for a single instance of Azure Video analyzer IoT edge module to be initialized and authorized to the cloud account. The provisioning token itself is short lived and it is only used for the initial handshake between IoT edge module and the cloud. After the initial handshake, the IoT edge module will agree on a set of authentication keys which will be auto-rotated as long as the module is able to periodically connect to the cloud. A new provisioning token can be generated for the same IoT edge module in case the module state lost or reset"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Read Pipeline Topology",
+              "description": "Read any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Create or Update Pipeline Topology",
+              "description": "Create or Update any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Delete Pipeline Topology",
+              "description": "Delete any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Read Live Pipeline",
+              "description": "Read any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Create or Update Live Pipeline",
+              "description": "Create or Update any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Delete Live Pipeline",
+              "description": "Delete any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/activate/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Activate Live Pipeline",
+              "description": "Activate any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/deactivate/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Deactivate Live Pipeline",
+              "description": "Deactivate any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/operationsStatus/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline operation status Resource",
+              "operation": "Read Live Pipeline operation status",
+              "description": "Read any Live Pipeline operation status"
             }
           },
           {

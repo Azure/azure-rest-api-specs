@@ -27,19 +27,6 @@
     }
   },
   "definitions": {
-    "Provider": {
-      "description": "A resource provider.",
-      "properties": {
-        "providerName": {
-          "description": "The provider name.",
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "required": [
-        "providerName"
-      ]
-    },
     "OperationDisplay": {
       "properties": {
         "provider": {
@@ -333,17 +320,6 @@
         "name"
       ]
     },
-    "Location": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "required": [
-        "name"
-      ]
-    },
     "EntityNameAvailabilityCheckOutput": {
       "properties": {
         "nameAvailable": {
@@ -392,6 +368,15 @@
             "modelAsString": true
           },
           "description": "The type of the storage account."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The storage account identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the storage account mapping.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -455,6 +440,29 @@
         "keyDelivery": {
           "$ref": "#/definitions/KeyDelivery",
           "description": "The Key Delivery properties for Media Services account."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Public network access is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Public network access is disabled."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Whether or not public network access is allowed for resources under the Media Services account.",
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -464,7 +472,7 @@
       "description": "A Media Services account.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -478,7 +486,7 @@
           "description": "The Managed Identity for the Media Services account."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
@@ -571,41 +579,57 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedIdentityType",
-            "values": [
-              {
-                "value": "SystemAssigned",
-                "description": "A system-assigned managed identity."
-              },
-              {
-                "value": "None",
-                "description": "No managed identity."
-              }
-            ],
-            "modelAsString": true
-          },
           "description": "The identity type."
         },
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "description": "The Principal ID of the identity.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "description": "The Tenant ID of the identity.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The user assigned managed identities."
         }
       },
       "type": "object",
       "required": [
         "type"
       ]
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The principal ID.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The User Assigned Managed Identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
     },
     "KeyVaultProperties": {
       "properties": {
@@ -620,6 +644,22 @@
         }
       },
       "type": "object"
+    },
+    "ResourceIdentity": {
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned managed identity's ARM ID to use when accessing a resource."
+        },
+        "useSystemAssignedIdentity": {
+          "type": "boolean",
+          "description": "Indicates whether to use System Assigned Managed Identity. Mutual exclusive with User Assigned Managed Identity."
+        }
+      },
+      "type": "object",
+      "required": [
+        "useSystemAssignedIdentity"
+      ]
     },
     "AccountEncryption": {
       "properties": {
@@ -648,6 +688,15 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "The properties of the key used to encrypt the account."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Key Vault identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the Key Vault mapping.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -706,10 +755,6 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "A collection of Operation items."
-        },
-        "@odata.nextLink": {
-          "type": "string",
-          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
         }
       },
       "type": "object",
@@ -763,7 +808,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -772,9 +817,6 @@
             "$ref": "#/parameters/ApiVersion"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
-        },
         "x-ms-examples": {
           "List Operations": {
             "$ref": "examples/operations-list-all.json"
@@ -797,7 +839,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -837,7 +879,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -885,7 +927,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -936,7 +978,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -961,6 +1003,9 @@
         "x-ms-examples": {
           "Delete a Media Services account": {
             "$ref": "examples/accounts-delete.json"
+          },
+          "Deleting already deleted Media services account": {
+            "$ref": "examples/accounts-delete-no-content.json"
           }
         }
       },
@@ -978,7 +1023,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1028,7 +1073,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1081,7 +1126,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1134,7 +1179,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1178,7 +1223,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1228,7 +1273,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1272,7 +1317,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1320,7 +1365,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1374,7 +1419,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1424,7 +1469,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1474,7 +1519,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../2020-05-01/Common.json#/definitions/ApiError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
