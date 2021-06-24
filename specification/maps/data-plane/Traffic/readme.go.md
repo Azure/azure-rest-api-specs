@@ -22,5 +22,5 @@ These settings apply only when `--tag=1.0-preview --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == '1.0-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/maps/2.0/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/maps/1.0/$(namespace)
 ```

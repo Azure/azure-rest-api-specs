@@ -64,12 +64,17 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
+
   #track1 doesn't support data-plane for go
   #manually generate for now with track2
   #- repo: azure-sdk-for-go
+
   #track1 doesn't support features needed for typescript
   #manually generate for now with track2
   #- repo: azure-sdk-for-js
+
+  #should be azure-sdk-for-net-track2, but SDK has not yet onboarded
+  #manually generate for now with track2
   - repo: azure-sdk-for-net
 ```
 ## Python
