@@ -105,9 +105,6 @@
               "$ref": "#/definitions/LiveEvent"
             }
           },
-          "404": {
-            "description": "NotFound"
-          },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
@@ -573,9 +570,6 @@
               "$ref": "#/definitions/LiveOutput"
             }
           },
-          "404": {
-            "description": "NotFound"
-          },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
@@ -781,9 +775,6 @@
             "schema": {
               "$ref": "#/definitions/StreamingEndpoint"
             }
-          },
-          "404": {
-            "description": "NotFound"
           },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
@@ -1122,6 +1113,7 @@
     }
   },
   "definitions": {
+    "type": "object",
     "Hls": {
       "properties": {
         "fragmentsPerTsSegment": {
@@ -1161,6 +1153,7 @@
       }
     },
     "LiveOutputProperties": {
+      "type": "object",
       "required": [
         "assetName",
         "archiveWindowLength"
@@ -1242,6 +1235,7 @@
       "description": "The JSON object that contains the properties required to create a live output."
     },
     "LiveOutput": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1262,6 +1256,7 @@
       "description": "The Live Output."
     },
     "LiveOutputListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1284,6 +1279,7 @@
       "title": "LiveOutputListResult"
     },
     "LiveEventEndpoint": {
+      "type": "object",
       "properties": {
         "protocol": {
           "type": "string",
@@ -1297,6 +1293,7 @@
       "description": "The live event endpoint."
     },
     "LiveEventInputAccessControl": {
+      "type": "object",
       "properties": {
         "ip": {
           "type": "object",
@@ -1307,6 +1304,7 @@
       "description": "The IP access control for live event input."
     },
     "LiveEventInput": {
+      "type": "object",
       "required": [
         "streamingProtocol"
       ],
@@ -1357,6 +1355,7 @@
       "description": "The live event input."
     },
     "IPRange": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1375,6 +1374,7 @@
       "description": "The IP address range in the CIDR scheme."
     },
     "IPAccessControl": {
+      "type": "object",
       "properties": {
         "allow": {
           "type": "array",
@@ -1387,6 +1387,7 @@
       "description": "The IP access control."
     },
     "LiveEventPreviewAccessControl": {
+      "type": "object",
       "properties": {
         "ip": {
           "type": "object",
@@ -1397,6 +1398,7 @@
       "description": "The IP access control for the live event preview endpoint."
     },
     "LiveEventPreview": {
+      "type": "object",
       "properties": {
         "endpoints": {
           "type": "array",
@@ -1426,6 +1428,7 @@
       "description": "Live event preview settings."
     },
     "LiveEventEncoding": {
+      "type": "object",
       "properties": {
         "encodingType": {
           "type": "string",
@@ -1504,6 +1507,7 @@
       "description": "Specifies the live event type and optional encoding settings for encoding live events."
     },
     "LiveEventInputTrackSelection": {
+      "type": "object",
       "properties": {
         "property": {
           "type": "string",
@@ -1521,6 +1525,7 @@
       "description": "A track selection condition. This property is reserved for future use, any value set on this property will be ignored."
     },
     "LiveEventOutputTranscriptionTrack": {
+      "type": "object",
       "required": [
         "trackName"
       ],
@@ -1533,6 +1538,7 @@
       "description": "Describes a transcription track in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored."
     },
     "LiveEventTranscription": {
+      "type": "object",
       "properties": {
         "language": {
           "type": "string",
@@ -1554,6 +1560,7 @@
       "description": "Describes the transcription tracks in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored."
     },
     "CrossSiteAccessPolicies": {
+      "type": "object",
       "properties": {
         "clientAccessPolicy": {
           "type": "string",
@@ -1567,6 +1574,7 @@
       "description": "The client access policy."
     },
     "LiveEventActionInput": {
+      "type": "object",
       "properties": {
         "removeOutputsOnStop": {
           "type": "boolean",
@@ -1576,6 +1584,7 @@
       "description": "The LiveEvent action input parameter definition."
     },
     "LiveEventProperties": {
+      "type": "object",
       "required": [
         "input"
       ],
@@ -1713,6 +1722,7 @@
       "description": "The live event properties."
     },
     "LiveEvent": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1733,6 +1743,7 @@
       "description": "The live event."
     },
     "LiveEventListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1755,6 +1766,7 @@
       "title": "LiveEventListResult"
     },
     "AkamaiSignatureHeaderAuthenticationKey": {
+      "type": "object",
       "properties": {
         "identifier": {
           "type": "string",
@@ -1773,6 +1785,7 @@
       "description": "Akamai Signature Header authentication key."
     },
     "AkamaiAccessControl": {
+      "type": "object",
       "properties": {
         "akamaiSignatureHeaderAuthenticationKeyList": {
           "type": "array",
@@ -1785,6 +1798,7 @@
       "description": "Akamai access control"
     },
     "StreamingEndpointAccessControl": {
+      "type": "object",
       "properties": {
         "akamai": {
           "type": "object",
@@ -1800,6 +1814,7 @@
       "description": "Streaming endpoint access control definition."
     },
     "StreamingEntityScaleUnit": {
+      "type": "object",
       "properties": {
         "scaleUnit": {
           "type": "integer",
@@ -1810,6 +1825,7 @@
       "description": "scale units definition"
     },
     "StreamingEndpointProperties": {
+      "type": "object",
       "required": [
         "scaleUnits"
       ],
@@ -1937,6 +1953,7 @@
       "description": "The streaming endpoint properties."
     },
     "StreamingEndpoint": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1957,6 +1974,7 @@
       "description": "The streaming endpoint."
     },
     "StreamingEndpointListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
