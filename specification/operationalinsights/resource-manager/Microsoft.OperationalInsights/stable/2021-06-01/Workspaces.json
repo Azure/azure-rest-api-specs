@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Log Analytics",
     "description": "Azure Log Analytics API reference",
-    "version": "2020-10-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -422,7 +422,17 @@
         "capacityReservationLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
+          "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected.",
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            1000,
+            2000,
+            5000
+          ]
         },
         "lastSkuUpdate": {
           "type": "string",
