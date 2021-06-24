@@ -64,12 +64,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -109,12 +103,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -128,7 +116,6 @@
   "definitions": {
     "ErrorResponse": {
       "description": "Error response.",
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -138,7 +125,6 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
-      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -169,6 +155,10 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
       "description": "A list of private link resources"
