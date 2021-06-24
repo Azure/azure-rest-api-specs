@@ -1467,6 +1467,58 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.DBForPostgreSql/getPrivateDnsZoneSuffix": {
+      "post": {
+        "tags": [
+          "GetPrivateDnsZoneSuffix"
+        ],
+        "operationId": "GetPrivateDnsZoneSuffix_Execute",
+        "x-ms-examples": {
+          "GetPrivateDnsZoneSuffix": {
+            "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
+          }
+        },
+        "description": "Get private DNS zone suffix in the cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PostgreSQL",
+                "PostgreSQLCitus",
+                "MySQL",
+                "MariaDb",
+                "Oracle"
+              ]
+            },
+            "description": "The required parameters for getting private DNS zone suffix based on server type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateDnsZoneSuffix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2505,6 +2557,10 @@
           "description": "Reason for name being unavailable."
         }
       },
+      "description": "Represents a resource name availability."
+    },
+    "PrivateDnsZoneSuffix": {
+      "type": "string",
       "description": "Represents a resource name availability."
     },
     "CloudError": {
