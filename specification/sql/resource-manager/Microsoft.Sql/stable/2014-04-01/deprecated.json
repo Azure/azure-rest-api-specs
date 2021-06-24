@@ -63,13 +63,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Extensions_Get",
+        "description": "Gets a database extension. This API is deprecated and should not be used.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to import into"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the extension to get",
+            "enum": [
+              "import"
+            ],
+            "x-ms-enum": {
+              "name": "ExtensionName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions": {
       "get": {
         "tags": [
           "ImportExport"
         ],
         "operationId": "Extensions_ListByDatabase",
-        "description": "Gets database extensions.",
+        "description": "Gets database extensions. This API is deprecated and should not be used.",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"

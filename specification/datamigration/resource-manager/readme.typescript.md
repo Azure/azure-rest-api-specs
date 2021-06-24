@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datamigration"
   output-folder: "$(typescript-sdks-folder)/sdk/datamigration/arm-datamigration"
+  clear-output-folder: true
   generate-metadata: true
 ```

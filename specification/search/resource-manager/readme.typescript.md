@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-search"
   output-folder: "$(typescript-sdks-folder)/sdk/search/arm-search"
+  clear-output-folder: true
   generate-metadata: true
 ```

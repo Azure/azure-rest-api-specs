@@ -1,0 +1,727 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-05-05-preview",
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "APIs for Azure Smart Groups CRUD operations."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups": {
+      "get": {
+        "operationId": "SmartGroups_GetAll",
+        "summary": "Get all Smart Groups within a specified subscription",
+        "description": "List all the Smart Groups within a specified subscription. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/monitorCondition"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/smartGroupState"
+          },
+          {
+            "$ref": "#/parameters/timeRange"
+          },
+          {
+            "$ref": "#/parameters/pageCount"
+          },
+          {
+            "$ref": "#/parameters/smartGroupsSortBy"
+          },
+          {
+            "$ref": "#/parameters/sortOrder"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of all smartGroups.",
+            "schema": {
+              "$ref": "#/definitions/smartGroupsList",
+              "description": "List of smart groups in value property."
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List": {
+            "$ref": "./examples/SmartGroups_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}": {
+      "get": {
+        "operationId": "SmartGroups_GetById",
+        "summary": "Get information related to a specific Smart Group.",
+        "description": "Get information related to a specific Smart Group.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/smartGroupId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the group with the specified smart group Id.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/smartGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get": {
+            "$ref": "./examples/SmartGroups_GetById.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState": {
+      "post": {
+        "operationId": "SmartGroups_ChangeState",
+        "description": "Change the state of a Smart Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/smartGroupId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/newState"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Smart Group state updated.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/smartGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "changestate": {
+            "$ref": "./examples/SmartGroups_ChangeState.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history": {
+      "get": {
+        "operationId": "SmartGroups_GetHistory",
+        "description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/smartGroupId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the list of changes of smart group.",
+            "schema": {
+              "$ref": "#/definitions/smartGroupModification"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/SmartGroups_History.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "client API version",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "2019-05-05-preview"
+      ],
+      "x-ms-enum": {
+        "name": "api-version",
+        "modelAsString": true
+      }
+    },
+    "targetResourceGroup": {
+      "description": "Filter by target resource group name. Default value is select all.",
+      "name": "targetResourceGroup",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "targetResource": {
+      "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
+      "name": "targetResource",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "targetResourceType": {
+      "description": "Filter by target resource type. Default value is select all.",
+      "name": "targetResourceType",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "monitorService": {
+      "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
+      "name": "monitorService",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Application Insights",
+        "ActivityLog Administrative",
+        "ActivityLog Security",
+        "ActivityLog Recommendation",
+        "ActivityLog Policy",
+        "ActivityLog Autoscale",
+        "Log Analytics",
+        "Nagios",
+        "Platform",
+        "SCOM",
+        "ServiceHealth",
+        "SmartDetector",
+        "VM Insights",
+        "Zabbix"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorService",
+        "modelAsString": true
+      }
+    },
+    "severity": {
+      "description": "Filter by severity.  Default value is select all.",
+      "name": "severity",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Sev0",
+        "Sev1",
+        "Sev2",
+        "Sev3",
+        "Sev4"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true
+      }
+    },
+    "smartGroupId": {
+      "description": "Smart group unique id. ",
+      "name": "smartGroupId",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "newState": {
+      "description": "New state of the alert.",
+      "name": "newState",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true
+      }
+    },
+    "smartGroupState": {
+      "description": "Filter by state of the smart group. Default value is to select all.",
+      "name": "smartGroupState",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true
+      }
+    },
+    "monitorCondition": {
+      "description": "Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all.",
+      "name": "monitorCondition",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Fired",
+        "Resolved"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorCondition",
+        "modelAsString": true
+      }
+    },
+    "timeRange": {
+      "description": "Filter by time range by below listed values. Default value is 1 day.",
+      "name": "timeRange",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "1h",
+        "1d",
+        "7d",
+        "30d"
+      ],
+      "x-ms-enum": {
+        "name": "TimeRange",
+        "modelAsString": true
+      }
+    },
+    "pageCount": {
+      "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
+      "name": "pageCount",
+      "type": "integer",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "smartGroupsSortBy": {
+      "description": "Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'.",
+      "name": "sortBy",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "alertsCount",
+        "state",
+        "severity",
+        "startDateTime",
+        "lastModifiedDateTime"
+      ],
+      "x-ms-enum": {
+        "name": "SmartGroupsSortByFields",
+        "modelAsString": true
+      }
+    },
+    "sortOrder": {
+      "description": "Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others.",
+      "name": "sortOrder",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    }
+  },
+  "definitions": {
+    "errorResponse": {
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/errorResponseBody"
+        }
+      }
+    },
+    "errorResponseBody": {
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/errorResponseBody"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        }
+      }
+    },
+    "smartGroupModification": {
+      "description": "Alert Modification details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/smartGroupModificationProperties"
+        }
+      }
+    },
+    "smartGroupModificationProperties": {
+      "description": "Properties of the smartGroup modification item.",
+      "properties": {
+        "smartGroupId": {
+          "type": "string",
+          "description": "Unique Id of the smartGroup for which the history is being retrieved",
+          "readOnly": true
+        },
+        "modifications": {
+          "type": "array",
+          "description": "Modification details",
+          "items": {
+            "$ref": "#/definitions/smartGroupModificationItem"
+          }
+        },
+        "nextLink": {
+          "description": "URL to fetch the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "smartGroupModificationItem": {
+      "description": "smartGroup modification item.",
+      "properties": {
+        "modificationEvent": {
+          "type": "string",
+          "description": "Reason for the modification",
+          "enum": [
+            "SmartGroupCreated",
+            "StateChange",
+            "AlertAdded",
+            "AlertRemoved"
+          ],
+          "x-ms-enum": {
+            "name": "SmartGroupModificationEvent"
+          }
+        },
+        "oldValue": {
+          "type": "string",
+          "description": "Old value"
+        },
+        "newValue": {
+          "type": "string",
+          "description": "New value"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "Modified date and time"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified user details (Principal client name)"
+        },
+        "comments": {
+          "type": "string",
+          "description": "Modification comments"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the modification"
+        }
+      }
+    },
+    "smartGroupsList": {
+      "description": "List the alerts.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alerts.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of alerts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/smartGroup"
+          }
+        }
+      }
+    },
+    "smartGroup": {
+      "description": "Set of related alerts grouped together smartly by AMS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/smartGroupProperties"
+        }
+      }
+    },
+    "smartGroupProperties": {
+      "type": "object",
+      "description": "Properties of smart group.",
+      "properties": {
+        "alertsCount": {
+          "type": "integer",
+          "description": "Total number of alerts in smart group"
+        },
+        "smartGroupState": {
+          "type": "string",
+          "description": "Smart group state",
+          "readOnly": true,
+          "enum": [
+            "New",
+            "Acknowledged",
+            "Closed"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.",
+          "readOnly": true,
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3",
+            "Sev4"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of smart group. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated time of smart group. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "lastModifiedUserName": {
+          "type": "string",
+          "description": "Last modified by user name.",
+          "readOnly": true
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of target resources in the smart group"
+        },
+        "resourceTypes": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of target resource types in the smart group"
+        },
+        "resourceGroups": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of target resource groups in the smart group"
+        },
+        "monitorServices": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of monitorServices in the smart group"
+        },
+        "monitorConditions": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of monitorConditions in the smart group"
+        },
+        "alertStates": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of alertStates in the smart group"
+        },
+        "alertSeverities": {
+          "items": {
+            "$ref": "#/definitions/smartGroupAggregatedProperty"
+          },
+          "type": "array",
+          "description": "Summary of alertSeverities in the smart group"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts."
+        }
+      }
+    },
+    "smartGroupAggregatedProperty": {
+      "type": "object",
+      "description": "Aggregated property of each type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the type."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of items of type."
+        }
+      }
+    }
+  }
+}

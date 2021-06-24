@@ -181,7 +181,7 @@
         "operationId": "Environments_Update",
         "x-ms-examples": {
           "EnvironmentsUpdate": {
-            "$ref": "./examples/EnvironmentsPatchSkuCapacity.json"
+            "$ref": "./examples/EnvironmentsPatchTags.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -211,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchronous, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
+            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchronously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -1228,6 +1228,7 @@
           "enum": [
             "S1",
             "S2",
+            "P1",
             "L1"
           ],
           "x-ms-enum": {
@@ -1248,6 +1249,20 @@
         "capacity"
       ],
       "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+    },
+    "WarmStoreConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "dataRetention": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying the number of days the environment's events will be available for query from the warm store."
+        }
+      },
+      "required": [
+        "dataRetention"
+      ],
+      "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
     },
     "LongTermStorageConfigurationInput": {
       "type": "object",
@@ -1532,7 +1547,7 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
-          "description": "The list of event properties which will be used to partition data in the environment."
+          "description": "The list of event properties which will be used to partition data in the environment. Currently, only a single partition key property is supported."
         }
       },
       "required": [
@@ -1552,6 +1567,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationInput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1614,6 +1634,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationOutput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1650,13 +1675,6 @@
             "name": "StorageLimitExceededBehavior",
             "modelAsString": true
           }
-        },
-        "partitionKeyProperties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesIdProperty"
-          },
-          "description": "The list of event properties which will be used to partition data in the environment."
         }
       }
     },
@@ -1668,12 +1686,10 @@
           "$ref": "#/definitions/LongTermStorageConfigurationMutableProperties",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
-        "timeSeriesIdProperties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesIdProperty"
-          },
-          "description": "The list of event properties which will be used to partition data in the environment."
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       }
     },
@@ -1705,6 +1721,10 @@
         "ingress": {
           "$ref": "#/definitions/IngressEnvironmentStatus",
           "description": "An object that represents the status of ingress on an environment."
+        },
+        "warmStorage": {
+          "$ref": "#/definitions/WarmStorageEnvironmentStatus",
+          "description": "An object that represents the status of warm storage on an environment."
         }
       }
     },
@@ -1749,6 +1769,64 @@
         }
       }
     },
+    "WarmStorageEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of warm storage on an environment.",
+      "properties": {
+        "propertiesUsage": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsage",
+          "description": "An object that contains the status of warm storage properties usage."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsage": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the status of warm storage properties usage.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of warm storage properties usage. It can be \"Ok\", \"Error\", \"Unknown\".",
+          "enum": [
+            "Ok",
+            "Error",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "WarmStoragePropertiesState",
+            "modelAsString": true
+          }
+        },
+        "stateDetails": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsageStateDetails",
+          "description": "An object that contains the details about warm storage properties usage state."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsageStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details about warm storage properties usage state.",
+      "properties": {
+        "currentCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maxCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU.",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
     "EventSourceCreateOrUpdateParameters": {
       "discriminator": "kind",
       "properties": {
@@ -1763,6 +1841,10 @@
             "name": "Kind",
             "modelAsString": true
           }
+        },
+        "localTimestamp": {
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
         }
       },
       "required": [
@@ -1826,6 +1908,7 @@
     },
     "EventHubEventSourceUpdateParameters": {
       "type": "object",
+      "x-ms-discriminator-value": "Microsoft.EventHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1841,6 +1924,7 @@
       "description": "Parameters supplied to the Update Event Source operation to update an EventHub event source."
     },
     "IoTHubEventSourceUpdateParameters": {
+      "x-ms-discriminator-value": "Microsoft.IoTHub",
       "type": "object",
       "properties": {
         "properties": {
@@ -1910,7 +1994,7 @@
       "description": "An event source that receives its data from an Azure EventHub."
     },
     "IoTHubEventSourceResource": {
-      "x-ms-discriminator-value": "Microsoft.IotHub",
+      "x-ms-discriminator-value": "Microsoft.IoTHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2075,9 +2159,7 @@
           "description": "An enum that represents the format of the local timestamp property that needs to be set.",
           "type": "string",
           "enum": [
-            "Embedded",
-            "Iana",
-            "TimeSpan"
+            "Embedded"
           ],
           "x-ms-enum": {
             "name": "LocalTimestampFormat",

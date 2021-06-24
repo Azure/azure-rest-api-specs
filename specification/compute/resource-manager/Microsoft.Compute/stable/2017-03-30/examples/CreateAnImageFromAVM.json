@@ -14,6 +14,31 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceVirtualMachine": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          },
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "osState": "Generalized",
+              "managedDisk": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022"
+              },
+              "caching": "ReadWrite"
+            },
+            "dataDisks": []
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    },
     "201": {
       "body": {
         "properties": {

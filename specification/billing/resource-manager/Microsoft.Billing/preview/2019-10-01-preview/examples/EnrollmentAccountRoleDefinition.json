@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "enrollmentAccountName": "{enrollmentAccountName}",
+    "billingRoleDefinitionName": "{billingRoleDefinitionName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/7898901/enrollmentAccounts/225314/billingRoleDefinitions/c15c22c0-9faf-424c-9b7e-bd91c06a240b",
+        "name": "c15c22c0-9faf-424c-9b7e-bd91c06a240b",
+        "properties": {
+          "description": "The account owner role gives the user read/write permissions to an Enrollment Account.",
+          "permissions": [
+            {
+              "actions": [
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/write",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/write"
+              ]
+            }
+          ],
+          "roleName": "Enrollment account owner"
+        },
+        "type": "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingRoleDefinitions"
+      }
+    }
+  }
+}

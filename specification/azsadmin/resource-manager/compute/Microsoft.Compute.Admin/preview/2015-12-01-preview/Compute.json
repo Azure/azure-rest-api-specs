@@ -4,7 +4,7 @@
     "version": "2015-12-01-preview",
     "title": "Compute Admin Client"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -37,6 +37,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -93,6 +99,11 @@
           "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "display": {
           "description": "Contains the localized display information for this particular operation or action.",
           "$ref": "#/definitions/Display"
@@ -133,6 +144,37 @@
         "nextLink": {
           "description": "URI to the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

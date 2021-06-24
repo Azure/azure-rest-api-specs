@@ -73,7 +73,9 @@
         "description": "Gets the properties of the specified machine learning workspace.",
         "operationId": "Workspaces_Get",
         "x-ms-examples": {
-          "Get Workspace": { "$ref": "./examples/getWorkspace.json" }
+          "Get Workspace": {
+            "$ref": "./examples/getWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -110,8 +112,11 @@
         ],
         "description": "Creates or updates a workspace with the specified parameters.",
         "operationId": "Workspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Workspace": { "$ref": "./examples/createWorkspace.json" }
+          "Create Workspace": {
+            "$ref": "./examples/createWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -149,6 +154,12 @@
               "$ref": "#/definitions/Workspace"
             }
           },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -164,8 +175,11 @@
         "description": "Deletes a machine learning workspace.",
         "operationId": "Workspaces_Delete",
         "x-ms-examples": {
-          "Delete Workspace": { "$ref": "./examples/deleteWorkspace.json" }
+          "Delete Workspace": {
+            "$ref": "./examples/deleteWorkspace.json"
+          }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -183,6 +197,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -202,7 +219,9 @@
         "description": "Updates a machine learning workspace with the specified parameters.",
         "operationId": "Workspaces_Update",
         "x-ms-examples": {
-          "Update Workspace": { "$ref": "./examples/updateWorkspace.json" }
+          "Update Workspace": {
+            "$ref": "./examples/updateWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -251,7 +270,9 @@
         "description": "Lists all the available machine learning workspaces under the specified resource group.",
         "operationId": "Workspaces_ListByResourceGroup",
         "x-ms-examples": {
-          "Get Workspaces by Resource Group": { "$ref": "./examples/getWorkspacesByResourceGroup.json" }
+          "Get Workspaces by Resource Group": {
+            "$ref": "./examples/getWorkspacesByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -294,7 +315,9 @@
         "description": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ListKeys",
         "x-ms-examples": {
-          "List Workspace Keys": { "$ref": "./examples/listWorkspaceKeys.json" }
+          "List Workspace Keys": {
+            "$ref": "./examples/listWorkspaceKeys.json"
+          }
         },
         "parameters": [
           {
@@ -334,7 +357,9 @@
         "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ResyncKeys",
         "x-ms-examples": {
-          "Resync Workspace Keys": { "$ref": "./examples/resyncWorkspaceKeys.json" }
+          "Resync Workspace Keys": {
+            "$ref": "./examples/resyncWorkspaceKeys.json"
+          }
         },
         "parameters": [
           {
@@ -373,6 +398,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandChildrenParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -442,6 +470,100 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas": {
+      "post": {
+        "tags": [
+          "Quota"
+        ],
+        "operationId": "Quotas_Update",
+        "description": "Update quota for each VM family in workspace.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for update quota is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaUpdateParameters"
+            },
+            "description": "Quota update parameters."
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkspaceQuotasResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "update quotas": {
+            "$ref": "./examples/updateQuota.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "operationId": "Quotas_List",
+        "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspace quotas by VMFamily": {
+            "$ref": "./examples/ListWorkspaceQuotasByVMFamily.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -450,7 +572,9 @@
         "description": "Lists all the available machine learning workspaces under the specified subscription.",
         "operationId": "Workspaces_ListBySubscription",
         "x-ms-examples": {
-          "Get Workspaces by subscription": { "$ref": "./examples/getWorkspacesBySubscription.json" }
+          "Get Workspaces by subscription": {
+            "$ref": "./examples/getWorkspacesBySubscription.json"
+          }
         },
         "parameters": [
           {
@@ -494,7 +618,9 @@
         "operationId": "MachineLearningCompute_ListByWorkspace",
         "description": "Gets computes in specified workspace.",
         "x-ms-examples": {
-          "Get Computes": { "$ref": "./examples/getComputes.json" }
+          "Get Computes": {
+            "$ref": "./examples/getComputes.json"
+          }
         },
         "parameters": [
           {
@@ -538,8 +664,12 @@
         "operationId": "MachineLearningCompute_Get",
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
-          "Get a AKS Compute": { "$ref": "./examples/getAKSCompute.json" },
-          "Get a AML Compute": { "$ref": "./examples/getAmlCompute.json" }
+          "Get a AKS Compute": {
+            "$ref": "./examples/getAKSCompute.json"
+          },
+          "Get a AML Compute": {
+            "$ref": "./examples/getAmlCompute.json"
+          }
         },
         "parameters": [
           {
@@ -582,11 +712,21 @@
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a AML Compute": { "$ref": "./examples/createBasicAmlCompute.json" },
-          "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
-          "Create a DataFactory Compute": { "$ref": "./examples/createBasicDataFactoryCompute.json" },
-          "Update a AML Compute": { "$ref": "./examples/updateAmlCompute.json" },
-          "Update a AKS Compute": { "$ref": "./examples/updateAKSCompute.json" }
+          "Create a AML Compute": {
+            "$ref": "./examples/createBasicAmlCompute.json"
+          },
+          "Create AKS Compute": {
+            "$ref": "./examples/createBasicAKSCompute.json"
+          },
+          "Create a DataFactory Compute": {
+            "$ref": "./examples/createBasicDataFactoryCompute.json"
+          },
+          "Update a AML Compute": {
+            "$ref": "./examples/updateAmlCompute.json"
+          },
+          "Update a AKS Compute": {
+            "$ref": "./examples/updateAKSCompute.json"
+          }
         },
         "parameters": [
           {
@@ -644,7 +784,9 @@
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a AmlCompute Compute": { "$ref": "./examples/patchAmlCompute.json" }
+          "Update a AmlCompute Compute": {
+            "$ref": "./examples/patchAmlCompute.json"
+          }
         },
         "parameters": [
           {
@@ -696,7 +838,9 @@
         "description": "Deletes specified Machine Learning compute.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete Compute": { "$ref": "./examples/deleteCompute.json" }
+          "Delete Compute": {
+            "$ref": "./examples/deleteCompute.json"
+          }
         },
         "parameters": [
           {
@@ -798,7 +942,9 @@
         "operationId": "MachineLearningCompute_ListKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
-          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
+          "List AKS Compute Keys": {
+            "$ref": "./examples/listKeysAKSCompute.json"
+          }
         },
         "parameters": [
           {
@@ -889,6 +1035,14 @@
       "description": "Version of Azure Machine Learning resource provider API.",
       "required": true
     },
+    "ExpandChildrenParameter": {
+      "in": "query",
+      "name": "expandChildren",
+      "type": "string",
+      "description": "Specifies if detailed usages of child resources are required.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "PaginationParameter": {
       "in": "query",
       "name": "$skiptoken",
@@ -930,7 +1084,7 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-}
+    }
   },
   "definitions": {
     "Operation": {
@@ -1101,7 +1255,7 @@
       "description": "The Usage Names."
     },
     "Usage": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1255,6 +1409,189 @@
         }
       }
     },
+    "QuotaBaseProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties for Quota update or retrieval."
+    },
+    "QuotaUpdateParameters": {
+      "properties": {
+        "value": {
+          "description": "The list for update quota.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaBaseProperties"
+          }
+        }
+      },
+      "description": "Quota update parameters."
+    },
+    "UpdateWorkspaceQuotasResult": {
+      "properties": {
+        "value": {
+          "description": "The list of workspace quota update result.",
+          "items": {
+            "$ref": "#/definitions/UpdateWorkspaceQuotas"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The result of update workspace quota."
+    },
+    "UpdateWorkspaceQuotas": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": false,
+          "title": "Update Workspace Quota Status.",
+          "description": "Status of update workspace quota.",
+          "enum": [
+            "Undefined",
+            "Success",
+            "Failure",
+            "InvalidQuotaBelowClusterMinimum",
+            "InvalidQuotaExceedsSubscriptionLimit",
+            "InvalidVMFamilyName"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties for update Quota response."
+    },
+    "ResourceName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Resource Name."
+    },
+    "ResourceQuota": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Name of the resource.",
+          "readOnly": true
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The quota assigned to a resource."
+    },
+    "ListWorkspaceQuotas": {
+      "properties": {
+        "value": {
+          "description": "The list of Workspace Quotas by VM Family",
+          "items": {
+            "$ref": "#/definitions/ResourceQuota"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota information by VM Family. Call ListNext() with this to fetch the next page of Workspace Quota information.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The List WorkspaceQuotasByVMFamily operation response."
+    },
     "Identity": {
       "properties": {
         "principalId": {
@@ -1297,7 +1634,6 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "readOnly": true,
           "description": "The identity of the resource."
         },
         "location": {
@@ -1410,7 +1746,7 @@
         },
         {
           "type": "object",
-          "properties":{
+          "properties": {
             "properties": {
               "description": "Compute properties",
               "$ref": "#/definitions/Compute"
@@ -1576,9 +1912,9 @@
                   "$ref": "#/definitions/UserAccountCredentials"
                 },
                 "subnet": {
-                    "title": "Subnet.",
-                    "description": "Virtual network subnet resource ID the compute nodes belong to.",
-                    "$ref": "#/definitions/ResourceId"
+                  "title": "Subnet.",
+                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                  "$ref": "#/definitions/ResourceId"
                 },
                 "remoteLoginPortPublicAccess": {
                   "type": "string",
@@ -1622,7 +1958,7 @@
                   "description": "Collection of errors encountered by various compute nodes during node setup.",
                   "type": "array",
                   "items": {
-                      "$ref": "#/definitions/MachineLearningServiceError"
+                    "$ref": "#/definitions/MachineLearningServiceError"
                   }
                 },
                 "currentNodeCount": {

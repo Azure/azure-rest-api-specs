@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2018-06-17-preview",
+    "subscriptionId": "6b643656-33eb-422f-aee8-3ac145d124af",
+    "resourceGroupName": "my-resource-group",
+    "resourceName": "my-template-resource",
+    "workbookTemplateProperties": {
+      "name": "display-name-of-template",
+      "location": "west us",
+      "type": "microsoft.insights/workbooktemplates",
+      "properties": {
+        "priority": 1,
+        "author": "Contoso",
+        "galleries": [
+          {
+            "name": "Simple Template",
+            "category": "Failures",
+            "type": "tsg",
+            "resourceType": "microsoft.insights/components",
+            "order": 100
+          }
+        ],
+        "templateData": {}
+      },
+      "tags": null
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testtemplate2",
+        "location": "westeurope",
+        "tags": null,
+        "type": "microsoft.insights/workbooktemplates",
+        "id": "/subscriptions/50359d91-7b9d-4823-85af-eb298a61ba95/resourceGroups/testrg/providers/microsoft.insights/workbooktemplates/testtemplate2",
+        "properties": {
+          "priority": 1,
+          "author": "Contoso",
+          "templateData": {},
+          "galleries": [
+            {
+              "name": "Simple Template",
+              "category": "Failures",
+              "order": 100,
+              "type": "tsg",
+              "resourceType": "microsoft.insights/components"
+            }
+          ],
+          "localized": null
+        }
+      }
+    }
+  }
+}

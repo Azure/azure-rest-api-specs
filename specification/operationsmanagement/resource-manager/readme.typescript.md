@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-operations"
   output-folder: "$(typescript-sdks-folder)/sdk/operationsmanagement/arm-operations"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -5,7 +5,7 @@
     "title": "ComputeDiskAdminManagementClient",
     "description": "The Admin Compute Disk Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -45,6 +45,12 @@
             "$ref": "Disks.json#/parameters/SourceSharePathParameter"
           },
           {
+            "$ref": "Disks.json#/parameters/SourceScaleUnitParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/SourceVolumeLabelParameter"
+          },
+          {
             "$ref": "Disks.json#/parameters/DiskCountParameter"
           },
           {
@@ -59,6 +65,12 @@
             "description": "OK -- The list of disks has been returned.",
             "schema": {
               "$ref": "Disks.json#/definitions/DiskList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -98,6 +110,12 @@
             "description": "OK -- The disk has been returned.",
             "schema": {
               "$ref": "Disks.json#/definitions/Disk"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -239,6 +257,37 @@
         "name": "AccountType",
         "modelAsString": true
       }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -267,8 +316,24 @@
       "x-ms-parameter-location": "method"
     },
     "SourceSharePathParameter": {
-      "description": "The source share which the resource belongs to.",
+      "description": "The share which the resource belongs to.",
       "name": "sharePath",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceScaleUnitParameter": {
+      "description": "The scale unit which the resource belongs to.",
+      "name": "scaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceVolumeLabelParameter": {
+      "description": "The volume label of the volume which the resource belongs to.",
+      "name": "volumeLabel",
       "in": "query",
       "required": false,
       "type": "string",

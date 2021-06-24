@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-advisor"
   output-folder: "$(typescript-sdks-folder)/sdk/advisor/arm-advisor"
+  clear-output-folder: true
   generate-metadata: true
 ```

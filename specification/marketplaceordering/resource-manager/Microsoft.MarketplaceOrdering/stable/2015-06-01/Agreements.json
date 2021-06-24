@@ -69,6 +69,12 @@
             "schema": {
               "$ref": "#/definitions/AgreementTerms"
             }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -186,7 +192,7 @@
           "200": {
             "description": "OK. The request was successfully processed and the terms were accepted.",
             "schema": {
-              "$ref": "#/definitions/AgreementTerms"
+              "$ref": "#/definitions/OldAgreementTerms"
             }
           },
           "default": {
@@ -228,7 +234,7 @@
           "200": {
             "description": "OK. The request was successfully processed and the terms were rejected.",
             "schema": {
-              "$ref": "#/definitions/AgreementTerms"
+              "$ref": "#/definitions/OldAgreementTerms"
             }
           },
           "default": {
@@ -270,7 +276,13 @@
           "200": {
             "description": "Terms returned successfully",
             "schema": {
-              "$ref": "#/definitions/AgreementTerms"
+              "$ref": "#/definitions/OldAgreementTerms"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -297,10 +309,13 @@
           "200": {
             "description": "Terms returned successfully",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AgreementTerms"
-              }
+              "$ref": "#/definitions/AgreementTermsList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -363,6 +378,19 @@
     }
   },
   "definitions": {
+    "AgreementTermsList": {
+      "type": "object",
+      "description": "Represents the list of AgreementTerms objects",
+      "properties": {
+        "value": {
+          "description": "The value of the array.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgreementTerms"
+          }
+        }
+      }
+    },
     "AgreementTerms": {
       "properties": {
         "properties": {
@@ -416,19 +444,76 @@
       },
       "description": "Agreement Terms definition"
     },
+    "OldAgreementTerms": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OldAgreementProperties",
+          "description": "Represents the properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Terms properties for provided Publisher/Offer/Plan tuple"
+    },
+    "OldAgreementProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier of the agreement."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher identifier string of image being deployed."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Offer identifier string of image being deployed."
+        },
+        "signDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if state is cancelled."
+        },
+        "cancelDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were cancelled. This is empty if state is active."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Canceled"
+          ],
+          "description": "Whether the agreement is active or cancelled",
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Old Agreement Terms definition"
+    },
     "ErrorResponse": {
       "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
-        "error": {
+        "Error": {
+          "type": "object",
           "description": "The details of the error.",
           "properties": {
-            "code": {
+            "Code": {
               "description": "Error code.",
               "type": "string",
               "readOnly": true
             },
-            "message": {
+            "Message": {
               "description": "Error message indicating why the operation failed.",
               "type": "string",
               "readOnly": true
@@ -458,6 +543,10 @@
             },
             "operation": {
               "description": "Operation type: Get Agreement, Sign Agreement, Cancel Agreement etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation",
               "type": "string"
             }
           }

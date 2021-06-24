@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-iotspaces"
   output-folder: "$(typescript-sdks-folder)/sdk/iotspaces/arm-iotspaces"
+  clear-output-folder: true
   generate-metadata: true
 ```

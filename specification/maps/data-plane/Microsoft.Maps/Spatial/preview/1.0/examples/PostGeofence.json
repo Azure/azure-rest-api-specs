@@ -1,0 +1,183 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "deviceId": "unique_device_name_under_account",
+    "lat": 48.36,
+    "lon": -124.63,
+    "searchBuffer": 50,
+    "usertime": "2018-09-10T10:00:00",
+    "isAsync": true,
+    "mode": "EnterAndExit",
+    "subscription-key": "[subscription-key]",
+    "searchGeofenceRequestBody": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -122.13241226662022,
+                  47.61701140091722
+                ],
+                [
+                  -122.12810106940353,
+                  47.6169969269402
+                ],
+                [
+                  -122.12824948956276,
+                  47.61907683751349
+                ],
+                [
+                  -122.12833297981392,
+                  47.621929787055336
+                ],
+                [
+                  -122.12971398040168,
+                  47.62184100705295
+                ],
+                [
+                  -122.1318413862121,
+                  47.62195364373008
+                ],
+                [
+                  -122.13231034769727,
+                  47.61716332618121
+                ],
+                [
+                  -122.13241226662022,
+                  47.61701140091722
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "geometryId": "2",
+            "name": "Crossroad Mall"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -122.1534220563239,
+                  47.60981818546625
+                ],
+                [
+                  -122.153451623509,
+                  47.60628733146004
+                ],
+                [
+                  -122.14971782206638,
+                  47.606250040787046
+                ],
+                [
+                  -122.14817354810637,
+                  47.606391046012305
+                ],
+                [
+                  -122.1482735128807,
+                  47.60983316796356
+                ],
+                [
+                  -122.15225500989803,
+                  47.60982613678752
+                ],
+                [
+                  -122.1534220563239,
+                  47.60981818546625
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "geometryId": "1",
+            "name": "Sammamish High school"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "geometries": [
+          {
+            "deviceId": "unique_device_name_under_account",
+            "geometryId": "2",
+            "distance": -999,
+            "nearestLat": 47.621954,
+            "nearestLon": -122.131841
+          },
+          {
+            "deviceId": "unique_device_name_under_account",
+            "geometryId": "1",
+            "distance": 999,
+            "nearestLat": 47.609833,
+            "nearestLon": -122.148274
+          }
+        ],
+        "expiredGeofenceGeometryId": [],
+        "invalidPeriodGeofenceGeometryId": [],
+        "isEventPublished": true
+      }
+    },
+    "400": {
+      "headers": {
+        "X-Correlation-ID": "80575fa1-2c1e-4738-834a-fcf45b58dd7c"
+      },
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Lat and/or lon parameters are invalid.",
+          "innererror": {
+            "code": "InvalidLatLon"
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

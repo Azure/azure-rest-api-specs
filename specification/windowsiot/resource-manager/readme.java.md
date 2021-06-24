@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.windowsiot.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/windowsiot/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/windowsiot/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -41,7 +41,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.windowsiot.v2018_02_16_preview
-  output-folder: $(azure-libraries-for-java-folder)/windowsiot/resource-manager/v2018_02_16_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/windowsiot/mgmt-v2018_02_16_preview
 regenerate-manager: true
 generate-interface: true
 ```

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "MyResourceGroup",
+    "profileName": "MyProfile",
+    "parameters": {
+      "properties": {
+        "enabledState": "Enabled"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        }
+      }
+    }
+  }
+}

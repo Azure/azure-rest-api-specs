@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "resourceGroupName": "resourceGroupName",
+    "expressRouteGatewayName": "expressRouteGatewayName",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "connectionName",
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+            "properties": {
+              "provisioningState": "Provisioned",
+              "expressRouteCircuitPeering": {
+                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+              },
+              "authorizationKey": "authorizationKey",
+              "routingWeight": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

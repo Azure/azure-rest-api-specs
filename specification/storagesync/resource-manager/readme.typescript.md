@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-storagesync"
   output-folder: "$(typescript-sdks-folder)/sdk/storagesync/arm-storagesync"
+  clear-output-folder: true
   generate-metadata: true
 ```

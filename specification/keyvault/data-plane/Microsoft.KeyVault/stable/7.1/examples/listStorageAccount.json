@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "api-version": "7.1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "https://myvault.vault.azure.net/storage/listStorage01",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc1",
+            "attributes": {
+              "enabled": true,
+              "created": 1490738386,
+              "updated": 1490738386,
+              "recoveryLevel": "Recoverable+Purgeable"
+            },
+            "tags": {
+              "tag1": "val1",
+              "tag2": "val2"
+            }
+          },
+          {
+            "id": "https://myvault.vault.azure.net/storage/listStorage02",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc2",
+            "attributes": {
+              "enabled": true,
+              "created": 1490738386,
+              "updated": 1490738386,
+              "recoveryLevel": "Recoverable+Purgeable"
+            },
+            "tags": {
+              "tag3": "val3",
+              "tag4": "val4"
+            }
+          }
+        ],
+        "nextLink": "https://{BaseUri}/storage?api-version=7.1&%24skiptoken=<token>"
+      }
+    }
+  }
+}

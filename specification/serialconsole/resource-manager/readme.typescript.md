@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-serialconsole"
   output-folder: "$(typescript-sdks-folder)/sdk/serialconsole/arm-serialconsole"
+  clear-output-folder: true
   generate-metadata: true
 ```

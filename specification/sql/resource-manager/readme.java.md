@@ -33,7 +33,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-pure-2014-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sql.v2014_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2014_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sql/mgmt-v2014_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -46,7 +46,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-pure-2015-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sql.v2015_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2015_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sql/mgmt-v2015_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -59,7 +59,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-pure-2017-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sql.v2017_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2017_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sql/mgmt-v2017_03_01_preview
 regenerate-manager: true
 generate-interface: true
 directive: 
@@ -79,7 +79,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-pure-2017-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sql.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sql/mgmt-v2017_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -92,7 +92,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-pure-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sql.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sql/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

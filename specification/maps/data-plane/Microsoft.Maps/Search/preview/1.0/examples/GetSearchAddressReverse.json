@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "query": "37.337,-121.89",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "queryTime": 5,
+          "numResults": 1
+        },
+        "addresses": [
+          {
+            "address": {
+              "buildingNumber": "31",
+              "streetNumber": "31",
+              "routeNumbers": [],
+              "street": "N 2nd St",
+              "streetName": "N 2nd St",
+              "streetNameAndNumber": "31 N 2nd St",
+              "countryCode": "US",
+              "countrySubdivision": "CA",
+              "countrySubdivisionName": "California",
+              "municipality": "San Jose",
+              "postalCode": "95113",
+              "country": "United States of America",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "31 N 2nd St, San Jose CA 95113",
+              "extendedPostalCode": "951131217"
+            },
+            "position": "37.337090,-121.889820"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

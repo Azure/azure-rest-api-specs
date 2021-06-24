@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "portal"
   output-folder: "$(typescript-sdks-folder)/packages/portal"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

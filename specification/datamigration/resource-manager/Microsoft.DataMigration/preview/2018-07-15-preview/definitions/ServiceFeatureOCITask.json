@@ -71,15 +71,8 @@
       "description": "Output for the service task to check for OCI drivers.",
       "properties": {
         "installedDriver": {
-          "type": "object",
           "description": "Information about the installed driver if found and valid.",
-          "readOnly": true,
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OracleOCIDriverInfo"
-            }
-          }
+          "$ref": "#/definitions/OracleOCIDriverInfo"
         },
         "validationErrors": {
           "description": "Validation errors",

@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -78,6 +84,12 @@
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -115,6 +127,12 @@
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -177,6 +195,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -213,6 +237,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -244,13 +274,16 @@
         ],
         "responses": {
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DomainService"
-            }
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -302,6 +335,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -310,242 +349,6 @@
             "$ref": "./examples/UpdateDomainService.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/replicaSets": {
-      "get": {
-        "tags": [
-          "ReplicaSets"
-        ],
-        "operationId": "ReplicaSets_ListByResourceGroup",
-        "summary": "List ReplicaSets in Resource Group",
-        "description": "The List ReplicaSets in Resource Group operation lists all the domain services available under the given resource group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "HTTP 200 (OK) if the operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSetListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List ReplicaSet": {
-            "$ref": "./examples/ListReplicaSetsByDomainService.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/replicaSets/{replicaSetName}": {
-      "put": {
-        "tags": [
-          "ReplicaSets"
-        ],
-        "operationId": "ReplicaSets_CreateOrUpdate",
-        "summary": "Create or Update ReplicaSet (PUT Resource)",
-        "description": "The Create ReplicaSet operation creates a new domain service with the specified parameters.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicaSetNameParameter"
-          },
-          {
-            "name": "replicaSet",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            },
-            "description": "Properties supplied to the Create ReplicaSet operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "HTTP 200 (OK) if the operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          },
-          "201": {
-            "description": "HTTP 201 (Created) if the operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create ReplicaSet": {
-            "$ref": "./examples/CreateReplicaSet.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "ReplicaSets"
-        ],
-        "operationId": "ReplicaSets_Get",
-        "summary": "Get ReplicaSet",
-        "description": "The Get ReplicaSet operation retrieves a json representation of the ReplicaSet.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicaSetNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "HTTP 200 (OK) if the operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get ReplicaSet": {
-            "$ref": "./examples/GetReplicaSet.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ReplicaSets"
-        ],
-        "operationId": "ReplicaSets_Delete",
-        "summary": "Delete ReplicaSet (DELETE Resource)",
-        "description": "The Delete ReplicaSet operation deletes an existing ReplicaSet.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicaSetNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          },
-          "204": {
-            "description": "HTTP 204 (Not Content) if resource does not exist."
-          }
-        },
-        "x-ms-examples": {
-          "Delete ReplicaSet": {
-            "$ref": "./examples/DeleteReplicaSet.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "ReplicaSets"
-        ],
-        "operationId": "ReplicaSets_Update",
-        "summary": "Update ReplicaSet (PATCH Resource)",
-        "description": "The Update ReplicaSet operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicaSetNameParameter"
-          },
-          {
-            "name": "replicaSet",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            },
-            "description": "Properties supplied to the Update a ReplicaSet operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "HTTP 200 (OK) if the operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaSet"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update ReplicaSet": {
-            "$ref": "./examples/UpdateReplicaSet.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
@@ -622,49 +425,28 @@
       },
       "description": "The response from the List Domain Services operation."
     },
-    "ReplicaSet": {
-      "description": "Replica Set.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReplicaSetProperties",
-          "description": "ReplicaSet properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ReplicaSetListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReplicaSet"
-          },
-          "description": "the list of ReplicaSet."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The continuation token for the next page of results.",
-          "readOnly": true
-        }
-      },
-      "description": "The response from the List ReplicaSets operation."
-    },
     "DomainServiceProperties": {
       "description": "Properties of the Domain Service.",
       "properties": {
+        "version": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Data Model Version"
+        },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "Azure Active Directory tenant id"
+          "description": "Azure Active Directory Tenant Id"
         },
         "domainName": {
           "type": "string",
           "description": "The name of the Azure domain that the user would like to deploy Domain Services to."
+        },
+        "deploymentId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deployment Id"
         },
         "vnetSiteId": {
           "readOnly": true,
@@ -679,10 +461,26 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "resourceForestSettings": {
+          "$ref": "#/definitions/ResourceForestSettings",
+          "description": "Resource Forest Settings"
+        },
+        "domainConfigurationType": {
+          "type": "string",
+          "description": "Domain Configuration Type"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku Type"
+        },
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -707,9 +505,10 @@
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
         },
-        "domainSecuritySettings": {
-          "$ref": "#/definitions/DomainSecuritySettings",
-          "description": "DomainSecurity Settings"
+        "migrationProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
         },
         "filteredSync": {
           "type": "string",
@@ -744,68 +543,6 @@
         }
       }
     },
-    "ReplicaSetProperties": {
-      "description": "Properties of the ReplicaSet.",
-      "properties": {
-        "replicaSetId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "ReplicaSet Id"
-        },
-        "subnetId": {
-          "type": "string",
-          "description": "The name of the virtual network that ReplicaSets will be deployed on. /virtualNetwork/vnetName/subnets/subnetName."
-        },
-        "healthLastEvaluated": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Last domain evaluation run DateTime"
-        },
-        "healthMonitors": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthMonitor",
-            "description": "Domain Health Monitors"
-          },
-          "description": "List of Domain Health Monitors"
-        },
-        "healthAlerts": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthAlert",
-            "description": "Domain Health Alerts"
-          },
-          "description": "List of Domain Health Alerts"
-        },
-        "domainControllerIpAddress": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Domain Controller IP Address"
-          },
-          "description": "List of Domain Controller IP Address"
-        },
-        "serviceStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Status of Domain Service instance"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the current deployment or provisioning state, which only appears in the response."
-        },
-        "externalAccessIpAddress": {
-          "readOnly": true,
-          "type": "string",
-          "description": "External access ip address."
-        }
-      }
-    },
     "LdapsSettings": {
       "description": "Secure LDAP Settings",
       "properties": {
@@ -815,6 +552,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
           "x-ms-enum": {
             "name": "Ldaps",
@@ -851,6 +589,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
           "x-ms-enum": {
             "name": "ExternalAccess",
@@ -963,6 +702,82 @@
         }
       }
     },
+    "ResourceForestSettings": {
+      "description": "Settings for Resource Forest",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForestTrust"
+          },
+          "description": "List of settings for Resource Forest"
+        },
+        "resourceForest": {
+          "type": "string",
+          "description": "Resource Forest"
+        }
+      }
+    },
+    "ForestTrust": {
+      "description": "Forest Trust Setting",
+      "properties": {
+        "trustedDomainFqdn": {
+          "type": "string",
+          "description": "Trusted Domain FQDN"
+        },
+        "trustDirection": {
+          "type": "string",
+          "description": "Trust Direction"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "remoteDnsIps": {
+          "type": "string",
+          "description": "Remote Dns ips"
+        },
+        "trustPassword": {
+          "type": "string",
+          "description": "Trust Password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
+        }
+      }
+    },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
       "properties": {
@@ -972,6 +787,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "NtlmV1",
@@ -984,6 +800,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "TlsV1",
@@ -996,9 +813,36 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncOnPremPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncOnPremPasswords",
             "modelAsString": true
           }
         }
@@ -1061,6 +905,64 @@
           "type": "string"
         }
       }
+    },
+    "DefaultErrorResponse": {
+      "description": "Domain Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "description": "Error details.",
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -1095,14 +997,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the domain service.",
-      "x-ms-parameter-location": "method"
-    },
-    "ReplicaSetNameParameter": {
-      "name": "replicaSetName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the replica set.",
       "x-ms-parameter-location": "method"
     }
   }

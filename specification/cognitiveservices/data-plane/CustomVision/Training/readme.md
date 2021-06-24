@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Training SDK.
 
-The current release is `release_3_0`.
+The current release is `release_3_4_preview`.
 
 ``` yaml
 
-tag: release_3_0
+tag: release_3_4_preview
 openapi-type: data-plane
 ```
 # Releases
@@ -39,6 +39,37 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/v3.0/Training.json
+```
+
+### Release 3.1
+These settings apply only when `--tag=release_3_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1'
+input-file: stable/v3.1/Training.json
+```
+
+### Release 3.2
+These settings apply only when `--tag=release_3_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_2'
+input-file: stable/v3.2/Training.json
+add-credentials: true
+```
+
+### Release 3.3
+These settings apply only when `--tag=release_3_3` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_3'
+input-file: stable/v3.3/Training.json
+add-credentials: true
+```
+
+### Release 3.4-preview
+These settings apply only when `--tag=release_3_4_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_4_preview'
+input-file: preview/v3.4-preview/Training.json
+add-credentials: true
 ```
 
 # Validation
@@ -146,6 +177,10 @@ input-file:
   - $(this-folder)/stable/v2.1/Training.json
   - $(this-folder)/stable/v2.2/Training.json
   - $(this-folder)/stable/v3.0/Training.json
+  - $(this-folder)/stable/v3.1/Training.json
+  - $(this-folder)/stable/v3.2/Training.json
+  - $(this-folder)/stable/v3.3/Training.json
+  - $(this-folder)/preview/v3.4-preview/Training.json
 
 ```
 
