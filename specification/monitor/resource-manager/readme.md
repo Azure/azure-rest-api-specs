@@ -712,6 +712,10 @@ directive:
     where: $.paths
     from: activityLogAlerts_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scheduledQueryRule_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
@@ -754,10 +758,6 @@ directive:
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: scheduledQueryRule_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
