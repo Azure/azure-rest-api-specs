@@ -112,7 +112,7 @@
             "description": "Custom domain to be validated.",
             "required": true,
             "schema": {
-              "$ref": "./cdn.json#/definitions/ValidateCustomDomainInput"
+              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityInput"
             }
           },
           {
@@ -126,7 +126,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "./cdn.json#/definitions/ValidateCustomDomainOutput"
+              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityOutput"
             }
           },
           "default": {
@@ -2837,7 +2837,7 @@
         "tags": [
           "SecurityPolicies"
         ],
-        "description": "Updates an existing Secret within a profile.",
+        "description": "Updates an existing security policy within a profile.",
         "operationId": "SecurityPolicies_Patch",
         "x-ms-examples": {
           "SecurityPolicies_Patch": {
@@ -2928,7 +2928,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "Name of the Secret under the profile.",
+            "description": "Name of the security policy under the profile.",
             "required": true,
             "type": "string"
           },
@@ -4007,17 +4007,18 @@
     "Certificate": {
       "description": "Certificate used for https",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/SecretType"
+        },
         "subject": {
           "description": "Subject name in the certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "expirationDate": {
           "description": "Certificate expiration date.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4033,24 +4034,22 @@
       "description": "Customer Certificate used for https",
       "allOf": [
         {
-          "$ref": "#/definitions/Certificate"
+          "$ref": "#/definitions/Certificate",
         }
       ],
-      "required": [
-        "certificateUrl"
-      ],
       "properties": {
-        "version": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference",
+        },
+        "secretVersion": {
           "description": "Certificate version.",
           "type": "string"
         },
         "certificateAuthority": {
           "description": "Certificate issuing authority.",
-          "type": "string"
-        },
-        "certificateUrl": {
-          "description": "Complete Url to the certificate",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
@@ -4060,8 +4059,14 @@
           "description": "The list of SANs.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4073,22 +4078,17 @@
         "secretType"
       ],
       "properties": {
-        "secretSource": {
-          "description": "The secret source.",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
-        },
         "secretType": {
           "description": "The secret type.",
-          "enum": [
-            "UrlSigningKey",
-            "ManagedCertificate",
-            "CustomerCertificate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ValidateSecretType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecretType"
+        },
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Secret version, if customer is using a specific version.",
+          "type": "string"
         }
       }
     },
@@ -4554,18 +4554,21 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of the Secret to create.",
-          "enum": [
-            "UrlSigningKey",
-            "CustomerCertificate",
-            "ManagedCertificate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SecretType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecretType"
         }
+      }
+    },
+    "SecretType": {
+      "description": "The type of the secret resource.",
+      "enum": [
+        "UrlSigningKey",
+        "CustomerCertificate",
+        "ManagedCertificate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SecretType",
+        "modelAsString": true
       }
     },
     "UrlSigningKeyParameters": {
@@ -4587,7 +4590,7 @@
           "type": "string"
         },
         "secretSource": {
-          "description": "Resource reference to the KV secret",
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
@@ -4621,7 +4624,7 @@
       ],
       "properties": {
         "secretSource": {
-          "description": "Resource reference to the KV secret",
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
@@ -4629,20 +4632,9 @@
           "description": "Version of the secret to be used",
           "type": "string"
         },
-        "certificateAuthority": {
-          "description": "Certificate issuing authority.",
-          "type": "string"
-        },
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
-        },
-        "subjectAlternativeNames": {
-          "description": "The list of SANs.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
