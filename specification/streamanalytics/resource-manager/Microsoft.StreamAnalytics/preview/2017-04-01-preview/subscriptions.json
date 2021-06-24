@@ -120,6 +120,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/compileQuery": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CompileQuery",
+        "description": "Compile the Stream Analytics query.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Compile the Stream Analytics query": {
+            "$ref": "./examples/Subscription_CompileQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "streamingJob",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+            },
+            "description": "A streaming job object. This object defines the input, output, and transformation for the query compilation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Stream Analytics query was compiled successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryCompilationResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -226,6 +278,84 @@
             "description": "The query testing operation failed due to an unknown error ."
           }
         ]
+      }
+    },
+    "QueryCompilationResult": {
+      "description": "The result of the query compilation request.",
+      "properties": {
+        "errors": {
+          "description": "The errors produced by the compiler.",
+          "$ref": "#/definitions/QueryCompilationErrors"
+        },
+        "warnings": {
+          "description": "Warning messages produced by the compiler.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A warning produced by the compiler.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "inputs": {
+          "description": "All input names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An input used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "outputs": {
+          "description": "All output names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An output used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "functions": {
+          "description": "All function names used by the query.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A function used by the query.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "QueryCompilationErrors": {
+      "description": "The errors produced by the compiler.",
+      "properties": {
+        "message": {
+          "description": "The content of the error message.",
+          "type": "string"
+        },
+        "startLine": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer"
+        },
+        "startColumn": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer"
+        },
+        "endLine": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer"
+        },
+        "endColumn": {
+          "description": "Describes the error location in the original query. Not set if isGlobal is true.",
+          "type": "integer"
+        },
+        "isGlobal": {
+          "description": "Whether the error is not for a specific part but for the entire query.",
+          "type": "boolean"
+        }
       }
     },
     "SubResource": {
