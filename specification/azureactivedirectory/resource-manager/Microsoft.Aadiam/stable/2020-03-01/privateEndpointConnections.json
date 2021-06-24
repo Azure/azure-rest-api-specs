@@ -282,7 +282,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/trackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Private endpoint connection resource.",
@@ -358,6 +358,55 @@
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
       }
+    },
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "description": "Definition of resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -412,55 +461,6 @@
       "type": "string",
       "description": "The name of the private link policy in Azure AD.",
       "x-ms-parameter-location": "method"
-    },
-    "trackedResource": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/resource"
-        }
-      ],
-      "required": [
-        "location"
-      ],
-      "description": "Definition of resource."
-    },
-    "resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "description": "The resource definition.",
-      "x-ms-azure-resource": true
-    },
+    }
   }
 }
