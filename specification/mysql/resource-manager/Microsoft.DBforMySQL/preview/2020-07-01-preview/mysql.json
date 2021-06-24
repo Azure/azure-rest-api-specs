@@ -1482,12 +1482,7 @@
         "description": "Get private DNS zone suffix in the cloud",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the target subscription.",
-            "minLength": 1
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -2627,6 +2622,14 @@
       "type": "string",
       "description": "The name of the server key.",
       "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
     }
   }
 }
