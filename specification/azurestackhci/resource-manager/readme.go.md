@@ -24,7 +24,7 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-preview-2021-01' && $(go)
 namespace: azurestackhci
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-01-01-preview/$(namespace)
 ```
 
 ### Tag: package-2020-10 and go
