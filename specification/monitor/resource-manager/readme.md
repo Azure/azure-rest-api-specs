@@ -739,7 +739,7 @@ directive:
   reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
 ```
 
-``` yaml !$(python) && !$(go) && !$(java)
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
 directive:
 - from: activityLogAlerts_API.json
   where: $.parameters
