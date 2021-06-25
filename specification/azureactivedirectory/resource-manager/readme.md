@@ -95,6 +95,12 @@ directive:
     where: $.definitions.privateLinkPolicy
   - suppress: R3020
   - suppress: R3023
+  - suppress: R4010
+    from: privateLinkResources.json
+  - suppress: R4037
+    from: privateLinkResources.json
+  - suppress: R4037
+    from: privateLinkForAzureAD.json
 ```
 
 ---
