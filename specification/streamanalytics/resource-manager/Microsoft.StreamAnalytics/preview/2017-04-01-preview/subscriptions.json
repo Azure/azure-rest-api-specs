@@ -224,6 +224,110 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testInput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestInput",
+        "description": "Test the Stream Analytics input.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics input": {
+            "$ref": "./examples/Subscription_TestInput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "testInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./inputs.json#/definitions/Input"
+            },
+            "description": "Defines the necessary parameters for testing the Stream Analytics input."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to test the Stream Analytics input was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/TestDatasourceResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testOutput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestOutput",
+        "description": "Test the Stream Analytics output.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics output": {
+            "$ref": "./examples/Subscription_TestOutput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "testOutput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./outputs.json#/definitions/Output"
+            },
+            "description": "Defines the necessary parameters for testing the Stream Analytics output."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to test the Stream Analytics output was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/TestDatasourceResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -531,6 +635,43 @@
           {
             "value": "ErrorConnectingToInput",
             "description": "The sample input operation failed to connect to the input."
+          }
+        ]
+      }
+    },
+    "TestDatasourceResult": {
+      "description": "The result of the test input or output request.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the sample output request.",
+          "$ref": "#/definitions/TestDatasourceResultStatus"
+        }
+      }
+    },
+    "TestDatasourceResultStatus": {
+      "description": "The status of the test input or output request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "TestSucceeded",
+        "TestFailed"
+      ],
+      "x-ms-enum": {
+        "name": "TestDatasourceResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TestSucceeded",
+            "description": "The test datasource operation suceeded."
+          },
+          {
+            "value": "TestFailed",
+            "description": "The test datasource operation failed."
           }
         ]
       }
