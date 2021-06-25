@@ -5021,6 +5021,16 @@
         }
       }
     },
+    "HttpProxyConfiguration": {
+      "description": "HTTP Proxy configuration for the VM.",
+      "type": "object",
+      "properties": {
+        "httpsProxy": {
+          "description": "Gets or sets httpsProxy url.",
+          "type": "string"
+        }
+      }
+    },
     "GuestAgentList": {
       "description": "List of GuestAgent.",
       "properties": {
@@ -5072,6 +5082,10 @@
         "credentials": {
           "description": "Username / Password Credentials to provision guest agent.",
           "$ref": "#/definitions/GuestCredential"
+        },
+        "httpProxyConfig": {
+          "description": "HTTP Proxy configuration for the VM.",
+          "$ref": "#/definitions/HttpProxyConfiguration"
         },
         "provisioningAction": {
           "description": "Gets or sets the guest agent provisioning action.",
