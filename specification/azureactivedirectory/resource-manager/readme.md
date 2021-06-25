@@ -66,6 +66,8 @@ These settings apply only when `--tag=package-preview-2020-03` is specified on t
 input-file:
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2017-04-01
