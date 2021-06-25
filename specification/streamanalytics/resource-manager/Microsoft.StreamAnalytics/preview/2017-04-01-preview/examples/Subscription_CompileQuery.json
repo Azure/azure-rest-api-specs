@@ -19,19 +19,29 @@
             "properties": {
               "type": "Stream",
               "datasource": {
-                "type": "Raw",
+                "type": "Microsoft.Storage/Blob",
                 "properties": {
-                  "payloadUri": "http://myinput.com"
+                  "storageAccounts": [
+                    {
+                      "accountName": "someAccountName",
+                      "accountKey": "someAccountKey=="
+                    }
+                  ],
+                  "container": "state",
+                  "pathPattern": "{date}/{time}",
+                  "dateFormat": "yyyy/MM/dd",
+                  "timeFormat": "HH",
+                  "sourcePartitionCount": 16
                 }
               },
               "serialization": {
-                "type": "Json",
+                "type": "Csv",
                 "properties": {
+                  "fieldDelimiter": ",",
                   "encoding": "UTF8"
                 }
               }
-            },
-            "name": "inputtest"
+            }
           }
         ],
         "transformation": {

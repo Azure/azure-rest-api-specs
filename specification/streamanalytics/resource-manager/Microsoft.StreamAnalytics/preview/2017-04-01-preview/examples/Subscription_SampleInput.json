@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "location": "West US",
+    "sampleInput": {
+      "eventStartTime": "2020-12-05T14:30:00Z",
+      "eventEndTime": "2020-12-05T14:30:00Z",
+      "input": {
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName",
+                  "accountKey": "someAccountKey=="
+                }
+              ],
+              "container": "state",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH",
+              "sourcePartitionCount": 16
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "serialization": {
+        "type": "Json"
+      },
+      "numberOfEents": 1000,
+      "maxTimeToReadInSeconds": 30,
+      "partitionCount": 4,
+      "compatibilityLevel": "1.2",
+      "eventsUrl": "http://myoutput.com"
+    }
+  },
+  "responses": {
+    "202": {
+      "status": "ReadAllEventsInRange",
+      "diagnostics": [
+        ""
+      ],
+      "eventsDownloadUrl": "http://myoutput.com",
+      "lastArrivalTime": "2020-12-05T14:35:00Z"
+    }
+  }
+}

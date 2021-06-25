@@ -172,6 +172,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/sampleInput": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_SampleInput",
+        "description": "Sample the Stream Analytics input data.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Sample the Stream Analytics input data": {
+            "$ref": "./examples/Subscription_SampleInput.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sampleInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SampleInput"
+            },
+            "description": "Defines the necessary parameters for sampling the Stream Analytics input data."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to sample the Stream Analytics input was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/SampleInputResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -334,28 +386,153 @@
       "properties": {
         "message": {
           "description": "The content of the error message.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startLine": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "startColumn": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "endLine": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "endColumn": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "isGlobal": {
           "description": "Whether the error is not for a specific part but for the entire query.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         }
+      }
+    },
+    "SampleInput": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "input": {
+          "description": "The stream analytics input to sample.",
+          "$ref": "./inputs.json#/definitions/Input"
+        },
+        "eventStartTime": {
+          "description": "The start time for the data to sample. This is in DateTime format.",
+          "type": "string"
+        },
+        "eventEndTime": {
+          "description": "The end time for the data to sample. This is of DateTime format.",
+          "type": "string"
+        },
+        "serialization": {
+          "description": "The serialization format for the sampled output data saved to the storage (not for the input format).",
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "The serialization format.",
+              "type": "string"
+            }
+          }
+        },
+        "numberOfEvents": {
+          "description": "The max number of events to read. Defaults to 1000.",
+          "type": "integer"
+        },
+        "maxTimeToReadInSeconds": {
+          "description": "The max time service should wait to read events in seconds. Defaults to 30. If this time is reached, service will stop reading and provide with whatever data has been read. However, this does not apply when no data is read, which waits for a maximum of 90 seconds.",
+          "type": "integer"
+        },
+        "partitionCount": {
+          "description": "When the caller already knows the input partition count, passing in this value accelerates the operation so server would not go get the partition count.",
+          "type": "integer"
+        },
+        "compatibilityLevel": {
+          "description": "Defaults to the default ASA job compatibility level. Today it is 1.2",
+          "type": "string"
+        },
+        "eventsUrl": {
+          "description": "The SAS URI of the storage blob for service to write the sampled events to. If this parameter is not provided, service will write eents to he system account and share a temporary SAS URI to it.",
+          "type": "string"
+        },
+        "dataLocale": {
+          "description": "Defaults to en-US.",
+          "type": "string"
+        }
+      }
+    },
+    "SampleInputResult": {
+      "description": "The result of the sample input request.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the sample input request.",
+          "$ref": "#/definitions/SampleInputResultStatus"
+        },
+        "diagnostics": {
+          "description": "Diagnostics messages. E.g. message indicating some partitions from the input have no data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A diagnostics message.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "eventsDownloadUrl": {
+          "description": "A SAS URL to download the sampled input data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "A SAS URL to download the sampled input data.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "lastArrivalTime": {
+          "description": "The timestamp for the last event in the data. It is in DateTime format.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SampleInputResultStatus": {
+      "description": "The status of the sample input request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "ReadAllEventsInRange",
+        "NoEventsFoundInRange",
+        "ErrorConnectingToInput"
+      ],
+      "x-ms-enum": {
+        "name": "SampleInputResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ReadAllEventsInRange",
+            "description": "The sample input operation successfully read all the events in the range."
+          },
+          {
+            "value": "NoEventsFoundInRange",
+            "description": "The sample input operation found no events in the range."
+          },
+          {
+            "value": "ErrorConnectingToInput",
+            "description": "The sample input operation failed to connect to the input."
+          }
+        ]
       }
     },
     "SubResource": {
