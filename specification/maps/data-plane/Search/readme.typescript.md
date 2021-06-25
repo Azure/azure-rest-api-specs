@@ -23,4 +23,10 @@ directive:
         "type": "object"
       };
     reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
+  - remove-operation: Search_GetSearchFuzzyBatch
+    reason: This operation is created for Java SDK that has no LRO poller implementation
+  - remove-operation: Search_GetSearchAddressBatch
+    reason: This operation is created for Java SDK that has no LRO poller implementation
+  - remove-operation: Search_GetSearchAddressReverseBatch
+    reason: This operation is created for Java SDK that has no LRO poller implementation
 ```

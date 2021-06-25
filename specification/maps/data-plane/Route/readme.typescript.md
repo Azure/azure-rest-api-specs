@@ -23,4 +23,8 @@ directive:
         "type": "object"
       };
     reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
+  - remove-operation: Route_GetRouteMatrix
+    reason: This operation is created for Java SDK that has no LRO poller implementation
+  - remove-operation: Route_GetRouteDirectionsBatch
+    reason: This operation is created for Java SDK that has no LRO poller implementation
 ```
