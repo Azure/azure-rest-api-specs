@@ -15174,6 +15174,27 @@
             "$ref": "#/definitions/InMageRcmFailbackNicDetails"
           }
         },
+		"lastPlannedFailoverStartTime": {
+          "format": "date-time",
+          "description": "The last planned failover start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastPlannedFailoverStatus": {
+          "description": "The last planned failover status.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PlannedFailoverStatus",
+            "modelAsString": true
+          }
+        },
         "discoveredVmDetails": {
           "$ref": "#/definitions/InMageRcmFailbackDiscoveredProtectedVmDetails",
           "description": "The discovered VM information."
