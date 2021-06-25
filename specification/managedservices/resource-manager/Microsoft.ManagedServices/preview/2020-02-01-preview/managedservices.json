@@ -612,14 +612,14 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
-          "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
+          "description": "The collection of authorization objects describing what access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
         },
         "eligibleAuthorizations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
-          "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
+          "description": "The collection of eligible authorization objects describing what just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
         },
         "registrationDefinitionName": {
           "type": "string",
@@ -752,14 +752,14 @@
                   "items": {
                     "$ref": "#/definitions/Authorization"
                   },
-                  "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
+                  "description": "The collection of authorization objects describing what access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
                 },
                 "eligibleAuthorizations": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/EligibleAuthorization"
                   },
-                  "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
+                  "description": "The collection of eligible authorization objects describing what just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
                 },
                 "registrationDefinitionName": {
                   "type": "string",
@@ -894,14 +894,14 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
-          "description": "The collection of principals in the managedBy tenant with permanent access to the managed tenant."
+          "description": "The collection of authorization objects describing what access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
         },
         "eligibleAuthorizations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
-          "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
+          "description": "The collection of eligible authorization objects describing what just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delgated resource in the managed tenant."
         },
         "offerDisplayName": {
           "type": "string",
@@ -1024,11 +1024,11 @@
         },
         "principalIdDisplayName": {
           "type": "string",
-          "description": "The display name of the principal."
+          "description": "The display name of the Azure Active Directory principal."
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The identifier of the Azure built-in role that defines the permissions that the principal will have on the projected scope."
+          "description": "The identifier of the Azure built-in role that defines the permissions that the Azure Active Directory principal will have on the projected scope."
         },
         "delegatedRoleDefinitionIds": {
           "type": "array",
@@ -1044,7 +1044,7 @@
         "roleDefinitionId"
       ],
       "type": "object",
-      "description": "The user ID and permanent role for a principal in the managedBy tenant."
+      "description": "The Azure Active Directory principal identifier and Azure built-in role that describes the access the principal will receive on the delgated resource in the managed tenant."
     },
     "EligibleAuthorization": {
       "properties": {
@@ -1054,11 +1054,11 @@
         },
         "principalIdDisplayName": {
           "type": "string",
-          "description": "The display name of the principal."
+          "description": "The display name of the Azure Active Directory principal."
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The identifier of the Azure built-in role that defines the permissions that the principal will have on the projected scope."
+          "description": "The identifier of the Azure built-in role that defines the permissions that the Azure Active Directory principal will have on the projected scope."
         },
         "justInTimeAccessPolicy": {
           "description": "The just-in-time access policy setting.",
@@ -1070,7 +1070,7 @@
         "roleDefinitionId"
       ],
       "type": "object",
-      "description": "The user ID, role, and just-in-time access policy for a principal in the managedBy tenant."
+      "description": "The Azure Active Directory principal identifier, Azure built-in role, and just-in-time access policy that describes the just-in-time access the principal will receive on the delgated resource in the managed tenant."
     },
     "EligibleApprover": {
       "properties": {
@@ -1080,14 +1080,14 @@
         },
         "principalIdDisplayName": {
           "type": "string",
-          "description": "The display name of the principal."
+          "description": "The display name of the Azure Active Directory principal."
         }
       },
       "required": [
         "principalId"
       ],
       "type": "object",
-      "description": "Defines the principal that will need to approve any just-in-time access requests by the principal defined in the EligibleAuthorization."
+      "description": "Defines the Azure Active Directory principal that can approve any just-in-time access requests by the principal defined in the EligibleAuthorization."
     },
     "JustInTimeAccessPolicy": {
       "properties": {
