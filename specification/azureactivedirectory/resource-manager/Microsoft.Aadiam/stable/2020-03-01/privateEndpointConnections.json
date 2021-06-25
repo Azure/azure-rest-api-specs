@@ -272,11 +272,6 @@
           "description": "Resource properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
       "description": "Private endpoint connection resource.",
       "x-ms-azure-resource": true
     },
@@ -350,55 +345,6 @@
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
       }
-    },
-    "TrackedResource": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "location"
-      ],
-      "description": "Definition of resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "description": "The resource definition.",
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
