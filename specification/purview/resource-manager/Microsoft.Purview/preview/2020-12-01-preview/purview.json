@@ -358,55 +358,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/addRootCollectionAdmin": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "Add the administrator for root collection.",
-        "description": "Add the administrator for root collection associated with this account.",
-        "operationId": "Accounts_AddRootCollectionAdmin",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "collectionAdminUpdate",
-            "in": "body",
-            "description": "The collection admin update payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollectionAdminUpdate"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "An error response received from the provider.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Accounts_AddRootCollectionAdmin": {
-            "$ref": "./examples/Accounts_AddRootCollectionAdmin.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Purview/getDefaultAccount": {
       "get": {
         "tags": [
@@ -1440,16 +1391,6 @@
         }
       }
     },
-    "CollectionAdminUpdate": {
-      "description": "Collection administrator update.",
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "description": "Gets or sets the object identifier of the admin.",
-          "type": "string"
-        }
-      }
-    },
     "DefaultAccountPayload": {
       "description": "Payload to get and set the default account in the given scope",
       "type": "object",
@@ -1905,10 +1846,25 @@
     }
   },
   "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
     "accountName": {
       "name": "accountName",
       "in": "path",
       "description": "The name of the account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1919,21 +1875,6 @@
       "description": "The api version to use.",
       "required": true,
       "type": "string"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
