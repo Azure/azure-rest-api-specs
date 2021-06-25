@@ -32,32 +32,48 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2018-03
+### Tag: blob-package-2020-10
 
-These settings apply only when `--tag=package-2018-03` is specified on the command line.
+These settings apply only when `--tag=blob-package-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-03'
+``` yaml $(tag) == 'blob-package-2020-10'
 input-file:
-- preview/2018-03-28/queue.json
+- Microsoft.BlobStorage/preview/2020-10-02/blob.json
+```
+
+### Tag: datalake-package-2020-06
+
+These settings apply only when `--tag=datalake-package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'datalake-package-2020-06'
+input-file:
+- Microsoft.StorageDatalake/stable/2020-06-12/DataLakeStorage.json
+```
+
+### Tag: file-package-2020-10
+
+These settings apply only when `--tag=file-package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'file-package-2020-10'
+input-file:
+- Microsoft.FileStorage/preview/2020-10-02/file.json
+```
+
+### Tag: queue-package-2018-03
+
+These settings apply only when `--tag=queue-package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'queue-package-2018-03'
+input-file:
+- Microsoft.QueueStorage/preview/2018-03-28/queue.json
 ```
 
 ### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: preview/2018-03-28/queue.json
     reason: These parameters are predfined by storage specifications 
-```
-
-``` yaml
-directive:
   - suppress: XmsPathsMustOverloadPaths
-    from: preview/2018-03-28/queue.json
-```
-
-``` yaml
-directive:
   - suppress: XmsExamplesRequired
-    from: preview/2018-03-28/queue.json
 ```
 ---
