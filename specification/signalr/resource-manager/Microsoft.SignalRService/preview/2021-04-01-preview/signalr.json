@@ -1903,10 +1903,7 @@
         },
         "tls": {
           "$ref": "#/definitions/SignalRTlsSettings",
-          "description": "TLS settings.",
-          "default": {
-            "clientCertEnabled": true
-          }
+          "description": "TLS settings."
         },
         "features": {
           "description": "List of the featureFlags.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, its globally default value will be used\r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
@@ -2025,6 +2022,9 @@
           "description": "Request client certificate during TLS handshake if enabled",
           "type": "boolean"
         }
+      },
+      "default": {
+        "clientCertEnabled": true
       }
     },
     "SignalRUsage": {
