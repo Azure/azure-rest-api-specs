@@ -295,5 +295,5 @@ directive:
     reason: Existing API version. Private Endpoint are not supposed to be implemented for this API version dedicated for CRR, that uses API version based routing.
   - suppress: ImplementPrivateEndpointAPIs
     from: Microsoft.RecoveryServices/stable/2021-06-01/bms.json
-    reason: Existing API version. Private Endpoint are not supposed to be implemented for this API version dedicated for CRR, that uses API version based routing.
+    reason: Addition of new API version is specific to MSI support for our service, to ensure sign off we commit we will take a fix for Private endpoint in Ni.
 ```
