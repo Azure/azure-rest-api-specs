@@ -28,15 +28,55 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2021-01
+tag: package-preview-2021-06
 ```
 
 
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimanagement.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimapis.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimbackends.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimcaches.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimgroups.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimissues.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimloggers.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimpolicysnippets.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimproducts.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimproperties.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimquotas.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimregions.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimtags.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimtenant.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/apimusers.json
+  - Microsoft.ApiManagement/preview/2021-06-25.6/definitions.json
+```
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+``` yaml $(tag) == 'package-preview-2021-01'
 input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimapis.json
@@ -78,6 +118,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/definitions.json
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
@@ -515,8 +556,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
 
 ## Suppression
 
