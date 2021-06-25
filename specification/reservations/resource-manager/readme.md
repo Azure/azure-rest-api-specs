@@ -38,11 +38,6 @@ input-file:
   - Microsoft.Capacity/stable/2021-07-01/reservations.json
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2020-10-25
-```
-
 ### Tag: package-2020-10-25
 
 These settings apply only when `--tag=package-2020-10-25` is specified on the command line.
