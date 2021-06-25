@@ -4320,7 +4320,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation. Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to Capacity Reservation Group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4369,7 +4369,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation.Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to Capacity Reservation Group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4399,7 +4399,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityreservations/{capacityReservationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}": {
       "put": {
         "tags": [
           "CapacityReservations"
@@ -4655,7 +4655,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityreservations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations": {
       "get": {
         "tags": [
           "CapacityReservation"
@@ -8960,6 +8960,7 @@
           "items": {
             "$ref": "#/definitions/CapacityReservationInstanceViewWithName"
           },
+          "readOnly": true,
           "description": "List of instance view of the Capacity Reservations under the Capacity Reservation group."
         }
       }
@@ -9063,7 +9064,7 @@
           "description": "The resource status information."
         }
       },
-      "description": "The instance view of a dedicated host."
+      "description": "The instance view of a Capacity Reservation."
     },
     "CapacityReservationUtilization": {
       "type": "object",
