@@ -47,7 +47,7 @@ These settings apply only when `--tag=datalake-package-2020-06` is specified on 
 
 ``` yaml $(tag) == 'datalake-package-2020-06'
 input-file:
-- Microsoft.StorageDatalake/stable/2020-06-12/DataLakeStorage.json
+- Microsoft.StorageDataLake/stable/2020-06-12/DataLakeStorage.json
 ```
 
 ### Tag: file-package-2020-10
