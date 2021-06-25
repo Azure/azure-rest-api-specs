@@ -82,7 +82,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         }
@@ -134,7 +134,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         }
@@ -168,7 +168,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         }
@@ -217,7 +217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         }
@@ -253,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         },
@@ -301,7 +301,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         }
@@ -337,7 +337,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/restError"
+              "$ref": "#/definitions/RestError"
             }
           }
         },
@@ -658,7 +658,7 @@
         }
       }
     },
-    "restError": {
+    "RestError": {
       "type": "object",
       "description": "Error information returned by the API",
       "properties": {
@@ -683,10 +683,10 @@
     "PatchRequest": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/PatchDocument"
+        "$ref": "#/definitions/JsonPatchDocument"
       }
     },
-    "PatchDocument": {
+    "JsonPatchDocument": {
       "description": "A JSONPatch document as defined by RFC 6902",
       "required": [
         "op",
@@ -703,7 +703,10 @@
             "move",
             "copy",
             "test"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "JsonPatchOperation"
+          }
         },
         "path": {
           "type": "string",
