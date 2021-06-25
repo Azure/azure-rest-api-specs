@@ -12,10 +12,18 @@ directive:
   reason: Necessary to match Unicode characters in the Go regexp engine.
 ```
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(package-resources) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resources/armresources
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ### Go multi-api
