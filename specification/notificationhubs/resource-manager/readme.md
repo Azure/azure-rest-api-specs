@@ -85,7 +85,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -114,45 +114,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python) && !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.notificationhubs
-  package-name: azure-mgmt-notificationhubs
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(track2)
-python-mode: create
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.notificationhubs
-package-name: azure-mgmt-notificationhubs
-package-version: 7.0.0b1
-clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
-```
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
