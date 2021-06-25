@@ -746,6 +746,9 @@
           },
           "Get an ComputeInstance": {
             "$ref": "./examples/Compute/get/ComputeInstance.json"
+          },
+          "Get a Kubernetes Compute": {
+            "$ref": "./examples/Compute/get/KubernetesCompute.json"
           }
         },
         "parameters": [
@@ -798,7 +801,7 @@
           "Create an ComputeInstance Compute": {
             "$ref": "./examples/Compute/createOrUpdate/ComputeInstance.json"
           },
-          "Create AKS Compute": {
+          "Create an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/BasicAKSCompute.json"
           },
           "Create a DataFactory Compute": {
@@ -807,8 +810,11 @@
           "Update a AML Compute": {
             "$ref": "./examples/Compute/createOrUpdate/AmlCompute.json"
           },
-          "Update a AKS Compute": {
+          "Update an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/AKSCompute.json"
+          },
+          "Attach a Kubernetes Compute": {
+            "$ref": "./examples/Compute/createOrUpdate/KubernetesCompute.json"
           }
         },
         "parameters": [
@@ -1466,7 +1472,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Workspaces_PrepareNotebook",
+        "operationId": "Notebooks_Prepare",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -1555,7 +1561,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Workspaces_ListNotebookKeys",
+        "operationId": "Notebooks_ListKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
             "$ref": "./examples/Notebook/listKeys.json"
@@ -2087,11 +2093,6 @@
         },
         "tenantId": {
           "description": "The tenant id associated with this workspace.",
-          "type": "string",
-          "readOnly": true
-        },
-        "storageHnsEnabled": {
-          "description": "If the storage associated with the workspace has HNS enabled.",
           "type": "string",
           "readOnly": true
         },
@@ -3127,6 +3128,62 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
+    "Kubernetes": {
+      "description": "A Machine Learning compute based on Kubernetes Compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "Kubernetes properties",
+              "properties": {
+                "relayConnectionString": {
+                  "description": "Relay connection string.",
+                  "type": "string"
+                },
+                "serviceBusConnectionString": {
+                  "description": "ServiceBus connection string.",
+                  "type": "string"
+                },
+                "extensionPrincipalId": {
+                  "description": "Extension principal-id.",
+                  "type": "string"
+                },
+                "extensionInstanceReleaseTrain": {
+                  "description": "Extension instance release train.",
+                  "type": "string"
+                },
+                "vcName": {
+                  "description": "VC name.",
+                  "type": "string"
+                },
+                "namespace": {
+                  "description": "namespace",
+                  "type": "string",
+                  "default": "default"
+                },
+                "defaultInstanceType": {
+                  "description": "Default instance type",
+                  "type": "string"
+                },
+                "instanceTypes": {
+                  "description": "Instance Type Schema",
+                  "type": "object",
+                  "additionalProperties":{
+                      "$ref": "#/definitions/InstanceTypeSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Kubernetes"
+    },
     "AmlComputeProperties": {
       "type": "object",
       "description": "AML Compute properties",
@@ -3972,6 +4029,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
+        "Kubernetes",
         "AmlCompute",
         "ComputeInstance",
         "DataFactory",
@@ -4752,7 +4810,7 @@
         }
       }
     },
-    "AKSProperties": {
+    "AksProperties": {
       "type": "object",
       "description": "AKS properties",
       "properties": {
@@ -4799,12 +4857,55 @@
         }
       }
     },
+    "InstanceTypeSchema": {
+      "type": "object",
+      "description": "Instance type schema.",
+      "properties": {
+          "nodeSelector": {
+            "type": "object",
+            "description": "NodeSelector",
+            "additionalProperties": {
+              "type": "string" 
+            }
+          },
+          "resources": {
+            "type": "object",
+            "description": "Resource of an instance type",
+            "properties": {
+              "requests": {
+                "$ref": "#/definitions/InstanceResourceSchema"
+              },
+              "limits": {
+                "$ref": "#/definitions/InstanceResourceSchema"
+              }
+            }
+          }
+        }
+    },
+    "InstanceResourceSchema": {
+      "type": "object",
+      "description": "Instance resource schema.",
+      "properties":{
+        "cpu": {
+          "type": "string",
+          "description": "CPU count"
+        },
+        "memeory": {
+          "type": "string",
+          "description": "amount of memory"
+        },
+        "nvidia.com/gpu": {
+          "type": "string",
+          "description": "GPU count"
+        }
+      }
+    },
     "SynapseSparkPoolProperties": {
       "type": "object",
       "description": "Properties specific to Synapse Spark pools.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AKSProperties"
+          "$ref": "#/definitions/AksProperties"
         }
       }
     }
