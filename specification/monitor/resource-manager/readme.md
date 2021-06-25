@@ -756,6 +756,10 @@ directive:
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: autoscale_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
