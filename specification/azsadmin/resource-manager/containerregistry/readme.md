@@ -35,7 +35,6 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 input-file:
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/capacity.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/configuration.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/containerregistry.json"	
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/operations.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/quotas.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/registries.json"
@@ -74,7 +73,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/capacity.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/configuration.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/containerregistry.json  
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/operations.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/quotas.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/registries.json

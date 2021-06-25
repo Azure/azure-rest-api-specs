@@ -31,7 +31,6 @@ tag: package-2019-11-01
 input-file:
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/capacity.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/configuration.json
-  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/containerregistry.json  
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/operations.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/quotas.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01-preview/registries.json
