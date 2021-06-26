@@ -178,10 +178,6 @@
       "description": "SparkConfiguration Artifact information",
       "title": "Information about a SparkConfiguration created at the workspace level.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the SparkConfiguration."
-        },
         "description": {
           "type": "string",
           "description": "Description about the SparkConfiguration."
@@ -190,11 +186,21 @@
           "type": "string",
           "description": "SparkConfiguration configs."
         },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Annotations for SparkConfiguration."
+        },
         "notes": {
           "type": "string",
           "description": "additional Notes."
         }
-      }
+      },
+      "required": [
+        "configs"
+      ]
     },
     "SubResource": {
       "description": "Azure Synapse nested resource, which belongs to a workspace.",
