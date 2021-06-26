@@ -1472,7 +1472,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Notebooks_Prepare",
+        "operationId": "Workspaces_PrepareNotebook",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -1561,7 +1561,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Notebooks_ListKeys",
+        "operationId": "Workspaces_ListNotebookKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
             "$ref": "./examples/Notebook/listKeys.json"
@@ -2093,6 +2093,11 @@
         },
         "tenantId": {
           "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageHnsEnabled": {
+          "description": "If the storage associated with the workspace has HNS enabled.",
           "type": "string",
           "readOnly": true
         },
