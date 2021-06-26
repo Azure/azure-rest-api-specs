@@ -74,8 +74,14 @@
           }
         },
         "x-ms-examples": {
-          "Successful query": {
-            "$ref": "./examples/SuccessfulAnalyzeConversations.json"
+          "Arbitration result": {
+            "$ref": "./examples/conversational_lu/Workflow_SuccessfulAnalyzeConversations.json"
+          },
+          "LUIS Deepstack project result": {
+            "$ref": "./examples/conversational_lu/LUIS_DS_SuccessfulAnalyzeConversations.json"
+          },
+          "Workflow direct target": {
+            "$ref": "./examples/conversational_lu/Workflow_direct_target_SuccessfulAnalyzeConversations.json"
           }
         }
       }
@@ -122,11 +128,11 @@
       "type": "object",
       "description": "This is the parameter set of either the conversation application itself or one of the target projects.",
       "required": [
-        "projectType"
+        "targetType"
       ],
-      "discriminator": "projectType",
+      "discriminator": "targetType",
       "properties": {
-        "projectType": {
+        "targetType": {
           "type": "string",
           "description": "The type of the project. It could be one of the following values.",
           "enum": [
@@ -136,7 +142,7 @@
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "projectType",
+            "name": "targetType",
             "modelAsString": true
           }
         },
@@ -250,8 +256,28 @@
         }
       ],
       "properties": {
+        "projectParameters": {
+          "type": "object",
+          "$ref": "#/definitions/DeepstackProjectParameters"
+        },
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/DeepstackCallingOptions"
+        }
+      }
+    },
+    "DeepstackProjectParameters": {
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query send to a LUIS Deepstack target project."
+        }
+      }
+    },
+    "DeepstackCallingOptions":{
+      "properties": {
         "language": {
-          "description": "The detected language of the input query.",
+          "description": "The language of the query.",
           "type": "string"
         },
         "verbose": {
@@ -290,43 +316,72 @@
           "type": "string",
           "description": "The conversation utterance given by the caller."
         },
+        "detectedLanguage": {
+          "type": "string",
+          "description": "The system detected language for the query."
+        },
         "prediction": {
           "description": "The prediction result of a conversation project.",
-          "$ref": "#/definitions/AnalyzePrediction"
+          "$ref": "#/definitions/BasePrediction"
         }
       }
     },
-    "AnalyzePrediction": {
+    "BasePrediction": {
+      "description": "This is the base class of prediction",
       "required": [
-        "topIntent",
+        "projectType"
+      ],
+      "discriminator": "projectType",
+      "properties": {
+        "projectType": {
+          "type": "string",
+          "description": "The type of the project: either conversation or workflow. Use 'conversation' For LUIS deepstack projects, and workflow for Arbitration projects.",
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "x-ms-enum": {
+            "name": "projectType",
+            "modelAsString": true
+          }
+        },
+        "topIntent": {
+          "type": "string",
+          "description": "The intent with the highest score."
+        }
+      }
+    },
+    "WorkflowPrediction": {
+      "description": "This represents the prediction result of an Workflow project.",
+      "x-ms-discriminator-value": "workflow",
+      "required": [
         "intents"
       ],
-      "description": "Represents the prediction section in the response body.",
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
       "properties": {
-        "topIntent": {
-          "description": "The name of the top scoring intent.",
-          "type": "string"
-        },
         "intents": {
           "description": "A dictionary that contains all intents. Each key is an intent name and the value is its confidence score and project type. The top intent's value also contains the actual response from the target project.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/BaseIntent"
+            "$ref": "#/definitions/TargetIntentResult"
           }
         }
       }
     },
-    "BaseIntent": {
+    "TargetIntentResult": {
       "type": "object",
       "description": "This is the base class of an intent prediction",
-      "discriminator": "projectType",
+      "discriminator": "targetType",
       "required": [
         "confidenceScore",
-        "projectType"
+        "targetType"
       ],
       "properties": {
-        "projectType": {
+        "targetType": {
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
           "enum": [
@@ -336,7 +391,7 @@
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "projectType",
+            "name": "targetType",
             "modelAsString": true
           }
         },
@@ -353,12 +408,12 @@
         }
       }
     },
-    "DeepstackIntent": {
+    "DSTargetIntentResult": {
       "description": "A wrap up of LUIS Deepstack response.",
       "x-ms-discriminator-value": "luis_deepstack",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
@@ -392,11 +447,17 @@
       }
     },
     "DeepstackPrediction": {
+      "description": "Represents the prediction section of a LUIS Deepstack project.",
+      "x-ms-discriminator-value": "conversation",
       "required": [
         "classifications",
         "entities"
       ],
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
       "properties": {
         "classifications": {
           "description": "The classification results.",
@@ -469,12 +530,12 @@
         }
       }
     },
-    "LUISIntentV2": {
+    "LUISV2TargetIntentResult": {
       "description": "It is a wrap up of LUIS Generally Available v2.0 response.",
       "x-ms-discriminator-value": "luis_v2",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
@@ -486,12 +547,12 @@
         }
       }
     },
-    "LUISIntentV3": {
+    "LUISV3TargetIntentResult": {
       "description": "It is a wrap up a LUIS Generally Available v3.0 response.",
       "x-ms-discriminator-value": "luis_v3",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
@@ -503,12 +564,12 @@
         }
       }
     },
-    "QuestionAnsweringIntent": {
+    "QuestionAnsweringTargetIntentResult": {
       "description": "It is a wrap up a Question Answering KB response.",
       "x-ms-discriminator-value": "question_answering",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {

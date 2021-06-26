@@ -9,10 +9,10 @@
     "ConversationAnalysisInput": {
       "query": "How do I integrate QnA Maker and LUIS?",
       "directTarget": "${luis-target-app}",
-      "language": "en",
+      "language": "en-us",
       "parameters": {
         "${luis-target-app}": {
-          "projectType": "luis_v2",
+          "targetType": "luis_v2",
           "apiVersion": "v2.0",
           "projectParameters": {
             "query": "test query"
@@ -25,7 +25,7 @@
           }
         },
         "${luis-target-app-v3}": {
-          "projectType": "luis_v3",
+          "targetType": "luis_v3",
           "apiVersion": "v3.0",
           "projectParameters": {
             "query": "test query",
@@ -48,10 +48,11 @@
       "body": {
         "query": "How do I integrate QnA Maker and LUIS?",
         "prediction": {
+          "projectType": "workflow",
           "topIntent": "qnaTargetApp1",
           "intents": {
             "qnaTargetApp1": {
-              "projectType": "question_answering",
+              "targetType": "question_answering",
               "apiVersion": "v1.0-private_preview",
               "confidenceScore": 0.913329,
               "result": {
@@ -103,11 +104,65 @@
               }
             },
             "mcluApp1": {
-              "projectType": "luis_deepstack",
-              "confidenceScore": 0.083329
+              "targetType": "luis_deepstack",
+              "confidenceScore": 0.083329,
+              "result": {
+                "query": "How do I integrate QnA Maker and LUIS?",
+                "detectedLanguage": "en-Us",
+                "prediction": {
+                  "topIntent": "PlayMusic",
+                  "projectType": "conversation",
+                  "classifications": [
+                    {
+                      "category": "PlayMusic",
+                      "confidenceScore": 0.99998415
+                    },
+                    {
+                      "category": "SearchCreativeWork",
+                      "confidenceScore": 8.943313E-06
+                    },
+                    {
+                      "category": "BookRestaurant",
+                      "confidenceScore": 4.1524872E-06
+                    },
+                    {
+                      "category": "GetWeather",
+                      "confidenceScore": 1.1409703E-06
+                    },
+                    {
+                      "category": "AddToPlaylist",
+                      "confidenceScore": 1.0632801E-06
+                    },
+                    {
+                      "category": "SearchScreeningEvent",
+                      "confidenceScore": 3.2717122E-07
+                    },
+                    {
+                      "category": "RateBook",
+                      "confidenceScore": 1.926987E-07
+                    }
+                  ],
+                  "entities": [
+                    {
+                      "category": "music_item",
+                      "text": "song",
+                      "offset": 7,
+                      "length": 4,
+                      "confidenceScore": 0.9959329
+                    },
+                    {
+                      "category": "artist",
+                      "text": "Chong Tang",
+                      "offset": 17,
+                      "length": 10,
+                      "confidenceScore": 0.99691725
+                    }
+                  ]
+                }
+              }
             },
             "luisApp1": {
-              "projectType": "luis",
+              "targetType": "luis",
               "confidenceScore": 0.001
             }
           }

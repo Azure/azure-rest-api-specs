@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2021-05-01-preview",
+    "projectName": "{project-name}",
+    "deploymentName": "{deployment-name}",
+    "ConversationAnalysisInput": {
+      "query": "Play a song",
+      "directTarget": "luis-ds-target-app",
+      "language": "en-us",
+      "parameters": {
+        "luis-ds-target-app": {
+          "targetType": "luis_deepstack",
+          "apiVersion": "v1.0-preview",
+          "projectParameters": {
+            "query": "Play a song"
+          },
+          "callingOptions": {
+            "verbose": true,
+            "isLoggingEnabled": false,
+            "language": "en-us"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "query": "Play a song",
+        "prediction": {
+          "projectType": "workflow",
+          "topIntent": "luis-ds-target-app",
+          "intents": {
+            "luis-ds-target-app": {
+              "targetType": "luis_deepstack",
+              "apiVersion": "v1.0-preview",
+              "confidenceScore": 1.0,
+              "result": {
+                "query": "Play a song",
+                "detectedLanguage": "en-Us",
+                "prediction": {
+                  "topIntent": "PlayMusic",
+                  "projectType": "conversation",
+                  "classifications": [
+                    {
+                      "category": "PlayMusic",
+                      "confidenceScore": 0.99998415
+                    },
+                    {
+                      "category": "SearchCreativeWork",
+                      "confidenceScore": 8.943313E-06
+                    },
+                    {
+                      "category": "BookRestaurant",
+                      "confidenceScore": 4.1524872E-06
+                    },
+                    {
+                      "category": "GetWeather",
+                      "confidenceScore": 1.1409703E-06
+                    },
+                    {
+                      "category": "AddToPlaylist",
+                      "confidenceScore": 1.0632801E-06
+                    },
+                    {
+                      "category": "SearchScreeningEvent",
+                      "confidenceScore": 3.2717122E-07
+                    },
+                    {
+                      "category": "RateBook",
+                      "confidenceScore": 1.926987E-07
+                    }
+                  ],
+                  "entities": [
+                    {
+                      "category": "music_item",
+                      "text": "song",
+                      "offset": 7,
+                      "length": 4,
+                      "confidenceScore": 0.9959329
+                    },
+                    {
+                      "category": "artist",
+                      "text": "Chong Tang",
+                      "offset": 17,
+                      "length": 10,
+                      "confidenceScore": 0.99691725
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
