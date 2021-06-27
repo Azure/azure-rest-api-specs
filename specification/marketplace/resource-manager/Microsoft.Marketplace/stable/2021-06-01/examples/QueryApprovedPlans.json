@@ -4,7 +4,12 @@
     "api-version": "2021-06-01",
     "payload": {
       "properties": {
-        "offerId": "marketplacetestthirdparty.md-test-third-party-2"
+        "offerId": "marketplacetestthirdparty.md-test-third-party-2",
+        "planIds": [
+          "testPlanA",
+          "testPlanB",
+          "testPlanC"
+        ]
       }
     }
   },
@@ -12,19 +17,20 @@
     "200": {
       "body": {
         "details": {
-          "allPlans": null,
-          "partialPlans": {
-            "0001": {
-              "subscriptionIds": [
-                "85e3e079-c718-4e4c-abbe-f72fceba8305",
-                "7752d461-4bf1-4185-8b56-8a3f11486ac6"
-              ],
-              "allSubscriptions": false
-            },
-            "0002": {
-              "subscriptionIds": [],
-              "allSubscriptions": true
-            }
+          "testPlanA": {
+            "subscriptionIds": [
+              "85e3e079-c718-4e4c-abbe-f72fceba8305",
+              "7752d461-4bf1-4185-8b56-8a3f11486ac6"
+            ],
+            "allSubscriptions": false
+          },
+          "testPlanB": {
+            "subscriptionIds": [],
+            "allSubscriptions": true
+          },
+          "testPlanC": {
+            "subscriptionIds": [],
+            "allSubscriptions": false
           }
         }
       }

@@ -2195,6 +2195,13 @@
         "offerId": {
           "description": "Offer id",
           "type": "string"
+        },
+        "planIds": {
+          "description": "Offer plan ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2208,21 +2215,7 @@
       }
     },
     "QueryApprovedPlansResponseDetails": {
-      "description": "Query approved plans response details",
-      "type": "object",
-      "properties": {
-        "allPlans": {
-          "description": "This object indicates the case of all current and future plans are approved",
-          "$ref": "#/definitions/QueryApprovedPlansDetails"
-        },
-        "partialPlans": {
-          "$ref": "#/definitions/PartialPlansObject",
-          "description": "This object indicates the case of partials (or just current) plans are approved"
-        }
-      }
-    },
-    "PartialPlansObject": {
-      "description": "This object indicates the case of partials (or just current) plans are approved",
+      "description": "A map indicating for each plan which subscriptions are approved.Map key is plan id.",
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/QueryApprovedPlansDetails"
@@ -2233,7 +2226,7 @@
       "type": "object",
       "properties": {
         "subscriptionIds": {
-          "description": "approved subscription ids list. In case all subscriptions are approved for a plan, allSubscriptions flag is true and list is empty ( else flag is set to false)",
+          "description": "Approved subscription ids list. In case all subscriptions are approved for a plan, allSubscriptions flag is true and list is empty ( else flag is set to false). In case both subscriptions list is empty and allSubscriptions flag is false, the plan is not approved for any subscription.",
           "type": "array",
           "items": {
             "type": "string"
