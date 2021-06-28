@@ -1401,7 +1401,8 @@
         },
         "ntpServer": {
           "description": "NTP server IP Address or FQDN for the cache to use. The default is time.windows.com.",
-          "type": "string"
+          "type": "string",
+          "default": "time.windows.com"
         }
       }
     },
@@ -1425,7 +1426,47 @@
           "items": {
             "$ref": "#/definitions/NfsAccessPolicy"
           },
-          "type": "array"
+          "type": "array",
+          "default": [
+            {
+              "name": "default",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            },
+            {
+              "name": "policyNoSquash",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            },
+            {
+              "name": "policySquash",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": true,
+                  "anonymousUID": "-2",
+                  "anonymousGID": "-2"
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -2125,7 +2166,8 @@
         },
         "nfsAccessPolicy": {
           "description": "Name of the access policy applied to this junction.",
-          "type": "string"
+          "type": "string",
+          "default": "default"
         }
       }
     },
