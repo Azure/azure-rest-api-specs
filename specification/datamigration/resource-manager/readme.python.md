@@ -22,3 +22,11 @@ output-folder: $(python-sdks-folder)/datamigration/azure-mgmt-datamigration/azur
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/datamigration/azure-mgmt-datamigration
 ```
+
+``` yaml $(python) && $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.MigrateSchemaSqlServerSqlDbTaskOutput
+    transform: >
+        $['required'] = ['resultType'];  
+```
