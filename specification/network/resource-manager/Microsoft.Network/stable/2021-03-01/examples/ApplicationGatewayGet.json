@@ -94,6 +94,17 @@
                 "provisioningState": "Succeeded",
                 "backendAddresses": []
               }
+            },
+            {
+              "name": "appgwpool1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "backendAddresses": [
+                  "10.0.0.1",
+                  "10.0.0.2"
+                ]
+              }
             }
           ],
           "backendHttpSettingsCollection": [
@@ -185,6 +196,9 @@
                 "defaultRewriteRuleSet": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
                 },
+                "defaultLoadDistributionPolicy": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
+                },
                 "pathRules": [
                   {
                     "name": "apiPaths",
@@ -203,6 +217,9 @@
                       },
                       "rewriteRuleSet": {
                         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                      },
+                      "loadDistributionPolicy": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
                       }
                     }
                   }
@@ -229,6 +246,9 @@
                 },
                 "rewriteRuleSet": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                },
+                "loadDistributionPolicy": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
                 }
               }
             },
@@ -325,7 +345,34 @@
               }
             }
           ],
-          "privateEndpointConnections": []
+          "privateEndpointConnections": [],
+          "loadDistributionPolicies": [
+            {
+              "name": "ldp1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1",
+              "properties": {
+                "loadDistributionAlgorithm": "RoundRobin",
+                "loadDistributionTargets": [
+                  {
+                    "weightPerServer": 40,
+                    "backendAddressPool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                    }
+                  },
+                  {
+                    "weightPerServer": 60,
+                    "backendAddressPool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "globalConfiguration": {
+            "enableRequestBuffering": true,
+            "enableResponseBuffering": true
+          }
         }
       }
     }
