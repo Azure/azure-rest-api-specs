@@ -1124,34 +1124,6 @@
       },
       "description": "HTTP Live Streaming (HLS) packing setting for the live output."
     },
-    "IdentityType": {
-      "description": "The type of identity used to do the modification operation.",
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "User",
-        "ManagedIdentity",
-        "Application"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "values": [
-          {
-            "value": "User",
-            "description": "An AAD user. The createdByType and lastModifiedBy property will be a user principal name (email address)."
-          },
-          {
-            "value": "ManagedIdentity",
-            "description": "An AAD application. The createdByType and lastModifiedBy property will be the Application Id."
-          },
-          {
-            "value": "Application",
-            "description": "A Managed Identity. The createdByType and lastModifiedBy property will be the ManagedIdentity resource Id."
-          }
-        ],
-        "modelAsString": true
-      }
-    },
     "LiveOutputProperties": {
       "type": "object",
       "required": [
