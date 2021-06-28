@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.IoTSecurity/sites": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites": {
       "get": {
         "x-ms-examples": {
           "List IoT sites": {
@@ -51,7 +51,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SiteScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
           }
         ],
         "responses": {
@@ -70,7 +73,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/sites/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}": {
       "get": {
         "x-ms-examples": {
           "Get IoT site": {
@@ -87,7 +90,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SiteScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -121,10 +130,16 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SiteScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
           },
           {
             "$ref": "#/parameters/SiteModel"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -164,7 +179,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SiteScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -243,15 +264,6 @@
     }
   },
   "parameters": {
-    "SiteScope": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
     "SiteModel": {
       "name": "siteModel",
       "in": "body",
@@ -260,6 +272,14 @@
       "schema": {
         "$ref": "#/definitions/SiteModel"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "SiteName": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "description": "IoT Site Name",
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

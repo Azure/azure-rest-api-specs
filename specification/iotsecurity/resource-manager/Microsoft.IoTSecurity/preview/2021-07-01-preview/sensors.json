@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.IoTSecurity/sensors": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors": {
       "get": {
         "x-ms-examples": {
           "List IoT sensors": {
@@ -51,7 +51,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -70,7 +76,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}": {
       "get": {
         "x-ms-examples": {
           "Get IoT sensor": {
@@ -87,10 +93,16 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
           },
           {
             "$ref": "#/parameters/SensorName"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -124,13 +136,19 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
           },
           {
             "$ref": "#/parameters/SensorName"
           },
           {
             "$ref": "#/parameters/SensorModel"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           }
         ],
         "responses": {
@@ -170,7 +188,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           },
           {
             "$ref": "#/parameters/SensorName"
@@ -192,7 +216,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}/downloadActivation": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/downloadActivation": {
       "post": {
         "x-ms-examples": {
           "Download activation file": {
@@ -212,7 +236,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           },
           {
             "$ref": "#/parameters/SensorName"
@@ -235,7 +265,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}/downloadResetPassword": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/downloadResetPassword": {
       "post": {
         "x-ms-examples": {
           "Download file for reset password of the sensor": {
@@ -255,7 +285,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           },
           {
             "$ref": "#/parameters/SensorName"
@@ -288,7 +324,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}/triggerTiPackageUpdate": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/triggerTiPackageUpdate": {
       "post": {
         "x-ms-examples": {
           "Trigger threat intelligence package update": {
@@ -305,7 +341,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SensorScope"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           },
           {
             "$ref": "#/parameters/SensorName"
@@ -497,15 +539,6 @@
     }
   },
   "parameters": {
-    "SensorScope": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
     "SensorName": {
       "name": "sensorName",
       "in": "path",
@@ -522,6 +555,14 @@
       "schema": {
         "$ref": "#/definitions/SensorModel"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "SiteName": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "IoT Site Name",
       "x-ms-parameter-location": "method"
     }
   }
