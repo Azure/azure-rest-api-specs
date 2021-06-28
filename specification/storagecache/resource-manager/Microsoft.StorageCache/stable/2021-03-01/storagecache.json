@@ -1426,47 +1426,7 @@
           "items": {
             "$ref": "#/definitions/NfsAccessPolicy"
           },
-          "type": "array",
-          "default": [
-            {
-              "name": "default",
-              "accessRules": [
-                {
-                  "scope": "default",
-                  "access": "rw",
-                  "suid": false,
-                  "submountAccess": true,
-                  "rootSquash": false
-                }
-              ]
-            },
-            {
-              "name": "policyNoSquash",
-              "accessRules": [
-                {
-                  "scope": "default",
-                  "access": "rw",
-                  "suid": false,
-                  "submountAccess": true,
-                  "rootSquash": false
-                }
-              ]
-            },
-            {
-              "name": "policySquash",
-              "accessRules": [
-                {
-                  "scope": "default",
-                  "access": "rw",
-                  "suid": false,
-                  "submountAccess": true,
-                  "rootSquash": true,
-                  "anonymousUID": "-2",
-                  "anonymousGID": "-2"
-                }
-              ]
-            }
-          ]
+          "type": "array"
         }
       }
     },
