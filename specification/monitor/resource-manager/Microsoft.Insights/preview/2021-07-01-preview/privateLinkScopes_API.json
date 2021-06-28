@@ -458,7 +458,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           },
           "default": {
@@ -506,7 +506,7 @@
             "description": "The private endpoint connection object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           }
         ],
@@ -514,7 +514,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           },
           "202": {
@@ -611,7 +611,7 @@
           "200": {
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -620,9 +620,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Gets list of private endpoint connections on a private link scope.": {
@@ -971,7 +968,7 @@
           "description": "List of private endpoint connections.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
           }
         }
       }
@@ -996,12 +993,12 @@
         }
       }
     },
-    "ScopePrivateEndpointConnectionProperties": {
+    "AzureMonitorPrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnectionProperties"
+          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/AzureMonitorPrivateEndpointConnectionProperties"
         }
       ],
       "properties": {
@@ -1015,11 +1012,11 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
+    "AzureMonitorPrivateEndpointConnection": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScopePrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/AzureMonitorPrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         }
@@ -1031,14 +1028,14 @@
       ],
       "description": "The Private Endpoint Connection resource."
     },
-    "PrivateEndpointConnectionListResult": {
+    "AzureMonitorPrivateEndpointConnectionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
           }
         }
       },
