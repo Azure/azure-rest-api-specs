@@ -4,13 +4,9 @@ These settings apply only when `--go` is specified on the command line.
 
 ```yaml $(go)
 go:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: hpcworkbench
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/hpcworkbench/armhpcworkbench
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2021-03-01-preview

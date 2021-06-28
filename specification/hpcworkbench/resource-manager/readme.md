@@ -27,7 +27,25 @@ These are the global settings for the hpcworkbench.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2021-04-01
+tag: package-2021-03-01-preview
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.HpcWorkbench/preview/2021-03-01-preview/hpcworkbench.json
+```
+
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+  - Microsoft.HpcWorkbench/preview/2021-04-01/hpcworkbench.json
 ```
 
 ### Tag: package-2021-04-01
@@ -36,7 +54,7 @@ These settings apply only when `--tag=package-2021-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-04-01'
 input-file:
-  - Microsoft.HpcWorkbench/preview/2021-04-01/hpcworkbench.json
+  - Microsoft.HpcWorkbench/stable/2021-04-01/hpcworkbench.json
 ```
 
 ---
@@ -52,12 +70,10 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js hpcworkbench/resource-manager
-  - repo: azure-cli-extensions
 ```
 ## Az
 
