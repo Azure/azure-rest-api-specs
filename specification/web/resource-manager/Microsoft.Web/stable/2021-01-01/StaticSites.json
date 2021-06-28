@@ -2688,32 +2688,6 @@
     }
   },
   "definitions": {
-    "ArmPlan": {
-      "description": "The plan object in Azure Resource Manager, represents a marketplace plan.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "publisher": {
-          "description": "The publisher.",
-          "type": "string"
-        },
-        "product": {
-          "description": "The product.",
-          "type": "string"
-        },
-        "promotionCode": {
-          "description": "The promotion code.",
-          "type": "string"
-        },
-        "version": {
-          "description": "Version of product.",
-          "type": "string"
-        }
-      }
-    },
     "RemotePrivateEndpointConnection": {
       "description": "A remote private endpoint connection",
       "type": "object",
@@ -2749,63 +2723,33 @@
         }
       }
     },
-    "ResponseMessageEnvelope[RemotePrivateEndpointConnection]": {
-      "description": "Message envelope that contains the common Azure resource manager properties and the resource provider specific content.",
+    "RemotePrivateEndpointConnectionWrapper": {
+      "description": "Wrapper for a remote private endpoint connection",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this\nvalue for GET requests only.\nFor example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "description": "Name of resource.",
-          "type": "string"
+          "description": "Name of a remote private endpoint connection",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Type of resource e.g \"Microsoft.Web/sites\".",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "Geographical region resource belongs to e.g. SouthCentralUS, SouthEastAsia.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tags associated with resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "plan": {
-          "$ref": "#/definitions/ArmPlan",
-          "description": "Azure resource manager plan."
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Resource specific properties."
-        },
-        "sku": {
-          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
-          "description": "SKU description of the resource."
-        },
-        "status": {
-          "description": "Azure-AsyncOperation Status info.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
-          "description": "Azure-AsyncOperation Error info."
-        },
-        "identity": {
-          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity",
-          "description": "MSI resource"
-        },
-        "zones": {
-          "description": "Logical Availability Zones the service is hosted in",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/RemotePrivateEndpointConnection"
         }
       }
     },
@@ -2846,7 +2790,7 @@
           "description": "Private endpoint connections",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResponseMessageEnvelope[RemotePrivateEndpointConnection]"
+            "$ref": "#/definitions/RemotePrivateEndpointConnectionWrapper"
           },
           "readOnly": true
         },
@@ -2859,7 +2803,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "StagingEnvironmentPolicy",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "allowConfigFileUpdates": {
@@ -2877,8 +2821,7 @@
         },
         "keyVaultReferenceIdentity": {
           "description": "Identity to use for Key Vault Reference authentication.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "userProvidedFunctionApps": {
           "description": "User provided function apps registered with the static site",
@@ -2892,6 +2835,19 @@
           "description": "The provider that submitted the last deployment to the primary environment of the static site.",
           "type": "string",
           "readOnly": true
+        },
+        "enterpriseGradeCdnStatus": {
+          "description": "State indicating the status of the enterprise grade CDN serving traffic to the static web app.",
+          "enum": [
+            "Enabled",
+            "Enabling",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnterpriseGradeCdnStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3103,7 +3059,8 @@
                 "Adding",
                 "Ready",
                 "Failed",
-                "Deleting"
+                "Deleting",
+                "Unhealthy"
               ],
               "type": "string",
               "readOnly": true,

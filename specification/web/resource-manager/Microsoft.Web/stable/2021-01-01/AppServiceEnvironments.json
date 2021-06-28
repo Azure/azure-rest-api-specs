@@ -2263,6 +2263,20 @@
               },
               "readOnly": true
             },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
             "allowNewPrivateEndpointConnections": {
               "description": "Property to enable and disable new private endpoint connection creation on ASE",
               "type": "boolean"
@@ -2506,10 +2520,6 @@
         "sku": {
           "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
           "description": "Name and tier of the SKU."
-        },
-        "capacity": {
-          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the SKU."
         }
       }
     },

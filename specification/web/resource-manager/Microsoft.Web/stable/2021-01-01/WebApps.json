@@ -1153,7 +1153,7 @@
         ],
         "summary": "Gets the Authentication/Authorization settings of an app.",
         "description": "Description for Gets the Authentication/Authorization settings of an app.",
-        "operationId": "WebApps_GetAuthSettings",
+        "operationId": "WebApps_ListSiteAuthSettings",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -2345,6 +2345,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/connectionstrings/{connectionStringName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the connection string of an app.",
+        "description": "Description for Updates the connection string of an app.",
+        "operationId": "WebApps_CreateOrUpdateSiteConnectionString",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionStringName",
+            "in": "path",
+            "description": "Name of the connection string to be added or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connStringValueTypePair",
+            "in": "body",
+            "description": "The value type pair of the connectionstring.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnStringValueTypePair"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnStringValueTypePair"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/snapshots": {
       "get": {
         "tags": [
@@ -2571,6 +2629,97 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containers": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a hardcoded list of containers {prod,scm} in ARM format",
+        "description": "Description for Get a hardcoded list of containers {prod,scm} in ARM format",
+        "operationId": "WebApps_ListContainers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containers/{containerName}/restart": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_RestartContainer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "This can be either scm or prod",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -5050,6 +5199,111 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/containers": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a hardcoded list of containers {prod,scm} in ARM format",
+        "description": "Description for Get a hardcoded list of containers {prod,scm} in ARM format",
+        "operationId": "WebApps_ListContainers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/containers/{containerName}/restart": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_RestartInstanceContainer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "This can be either scm or prod",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "tags": [
@@ -5566,6 +5820,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_StopInstanceProcess",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated."
+          },
+          "404": {
+            "description": "Process with the specified ID is not running."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/threads": {
       "get": {
         "tags": [
@@ -5915,6 +6225,97 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/migrationJobs/default": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Call to fetch the provisioning state after PUT request",
+        "description": "Description for Call to fetch the provisioning state after PUT request",
+        "operationId": "WebApps_GetMigrateAppStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateAppResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Serves as a wrapper for the call to the POST API from migration team",
+        "description": "Description for Serves as a wrapper for the call to the POST API from migration team",
+        "operationId": "WebApps_MigrateApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Migrate app request objectt.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateAppRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkConfig/virtualNetwork": {
       "get": {
         "tags": [
@@ -6036,6 +6437,55 @@
           },
           "404": {
             "description": "Virtual network does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionWithCheck",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -7586,6 +8036,55 @@
           },
           "404": {
             "description": "Process with the specified ID is not running, or a module with the specified baseAddress was not found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_StopProcess",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated."
+          },
+          "404": {
+            "description": "Process with the specified ID is not running."
           },
           "default": {
             "description": "App Service error response.",
@@ -9598,7 +10097,7 @@
         ],
         "summary": "Gets the Authentication/Authorization settings of an app.",
         "description": "Description for Gets the Authentication/Authorization settings of an app.",
-        "operationId": "WebApps_GetAuthSettingsSlot",
+        "operationId": "WebApps_ListSiteAuthSettingsSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -10863,6 +11362,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web/connectionstrings/{connectionStringName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the connection string of an app.",
+        "description": "Description for Updates the connection string of an app.",
+        "operationId": "WebApps_CreateOrUpdateSiteConnectionStringSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionStringName",
+            "in": "path",
+            "description": "Name of the connection string to be added or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connStringValueTypePair",
+            "in": "body",
+            "description": "The value type pair of the connectionstring.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnStringValueTypePair"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the connection settings for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnStringValueTypePair"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web/snapshots": {
       "get": {
         "tags": [
@@ -11124,6 +11688,111 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containers": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a hardcoded list of containers {prod,scm} in ARM format",
+        "description": "Description for Get a hardcoded list of containers {prod,scm} in ARM format",
+        "operationId": "WebApps_ListContainersSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containers/{containerName}/restart": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_RestartContainerSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "This can be either scm or prod",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -13946,6 +14615,125 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/containers": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a hardcoded list of containers {prod,scm} in ARM format",
+        "description": "Description for Get a hardcoded list of containers {prod,scm} in ARM format",
+        "operationId": "WebApps_ListContainersSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/containers/{containerName}/restart": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Restart a container(scm or main site), or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_RestartInstanceContainerSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "This can be either scm or prod",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "tags": [
@@ -14525,6 +15313,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_StopInstanceProcessSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated."
+          },
+          "404": {
+            "description": "Process with the specified ID is not running."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/threads": {
       "get": {
         "tags": [
@@ -14846,6 +15697,62 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "WebApps"
@@ -14884,6 +15791,62 @@
           },
           "404": {
             "description": "Virtual network does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionWithCheckSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -16634,6 +17597,62 @@
           },
           "404": {
             "description": "Process with the specified ID is not running, or a module with the specified baseAddress was not found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "description": "Description for Terminate a process by its ID for a web site, or a deployment slot, or specific scaled-out instance in a web site.",
+        "operationId": "WebApps_StopProcessSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated."
+          },
+          "404": {
+            "description": "Process with the specified ID is not running."
           },
           "default": {
             "description": "App Service error response.",
@@ -19317,6 +20336,304 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflows": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the workflows for a web site, or a deployment slot.",
+        "description": "Description for List the workflows for a web site, or a deployment slot.",
+        "operationId": "WebApps_ListInstanceWorkflowsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelopeCollection"
+            }
+          },
+          "404": {
+            "description": "Workflow with an ID of {workflowName} is not running."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the workflows": {
+            "$ref": "./examples/ListWorkflows.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflows/{workflowName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow information by its ID for web site, or a deployment slot.",
+        "description": "Description for Get workflow information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_GetInstanceWorkflowSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Workflow with a name of {workflowName} does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a workflow": {
+            "$ref": "./examples/GetWorkflow.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Create a workflow for web site, or a deployment slot.",
+        "description": "Description for Create a workflow for web site, or a deployment slot.",
+        "operationId": "WebApps_CreateInstanceWorkflowSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Workflow created.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PUT a workflow": {
+            "$ref": "./examples/PutWorkflow.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a workflow for web site, or a deployment slot.",
+        "description": "Description for Delete a workflow for web site, or a deployment slot.",
+        "operationId": "WebApps_DeleteInstanceWorkflowSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow deleted.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Workflow does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowsconfiguration/connections": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
+        "description": "Description for Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_ListInstanceWorkflowsConfigurationConnectionsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Error retrieving connections."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the ListInstanceWorkflowsConfigurationConnections": {
+            "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsdiffs": {
       "post": {
         "tags": [
@@ -20911,10 +22228,274 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the workflows for a web site, or a deployment slot.",
+        "description": "Description for List the workflows for a web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflows",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelopeCollection"
+            }
+          },
+          "404": {
+            "description": "Workflow with an ID of {workflowName} is not running."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the workflows": {
+            "$ref": "./examples/ListWorkflows.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow information by its ID for web site, or a deployment slot.",
+        "description": "Description for Get workflow information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_GetWorkflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Workflow with a name of {workflowName} does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a workflow": {
+            "$ref": "./examples/GetWorkflow.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Create a workflow for web site, or a deployment slot.",
+        "description": "Description for Create a workflow for web site, or a deployment slot.",
+        "operationId": "WebApps_CreateWorkflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Workflow created.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PUT a workflow": {
+            "$ref": "./examples/PutWorkflow.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a workflow for web site, or a deployment slot.",
+        "description": "Description for Delete a workflow for web site, or a deployment slot.",
+        "operationId": "WebApps_DeleteWorkflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow deleted.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Workflow does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowsconfiguration/connections": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
+        "description": "Description for Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflowsConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Error retrieving connections."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the ListInstanceWorkflowsConfigurationConnections": {
+            "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "AllowedAudiencesValidation": {
+      "description": "The configuration settings of the Allowed Audiences validation flow.",
       "type": "object",
       "allOf": [
         {
@@ -20926,6 +22507,38 @@
           "description": "AllowedAudiencesValidation resource specific properties",
           "properties": {
             "allowedAudiences": {
+              "description": "The configuration settings of the allowed list of audiences from which to validate the JWT token.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AllowedPrincipals": {
+      "description": "The configuration settings of the Azure Active Directory allowed principals.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AllowedPrincipals resource specific properties",
+          "properties": {
+            "groups": {
+              "description": "The list of the allowed groups.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "identities": {
+              "description": "The list of the allowed identities.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -20993,6 +22606,16 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "ConfigReferenceSource",
+                "modelAsString": false
+              }
+            },
+            "location": {
+              "enum": [
+                "ApplicationSetting"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ConfigReferenceLocation",
                 "modelAsString": false
               }
             },
@@ -21199,15 +22822,16 @@
         "properties": {
           "description": "AzureActiveDirectoryLogin resource specific properties",
           "properties": {
-            "disableWWWAuthenticate": {
-              "type": "boolean"
-            },
             "loginParameters": {
               "description": "Login parameters to send to the OpenID Connect authorization endpoint when\na user logs in. Each parameter must be in the form \"key=value\".",
               "type": "array",
               "items": {
                 "type": "string"
               }
+            },
+            "disableWWWAuthenticate": {
+              "description": "<code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -21241,6 +22865,14 @@
             "clientSecretCertificateThumbprint": {
               "description": "An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret. It is also optional.",
               "type": "string"
+            },
+            "clientSecretCertificateSubjectAlternativeName": {
+              "description": "An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
+              "type": "string"
+            },
+            "clientSecretCertificateIssuer": {
+              "description": "An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -21269,6 +22901,10 @@
               "items": {
                 "type": "string"
               }
+            },
+            "defaultAuthorizationPolicy": {
+              "$ref": "#/definitions/DefaultAuthorizationPolicy",
+              "description": "The configuration settings of the default authorization policy."
             }
           },
           "x-ms-client-flatten": true
@@ -21437,9 +23073,10 @@
               "x-ms-client-name": "BackupId"
             },
             "storageAccountUrl": {
-              "description": "SAS URL for the storage account container which contains this backup.",
+              "description": "SAS URL for the storage account container which contains this backup. It is populated only in POST calls.",
               "type": "string",
-              "readOnly": true
+              "readOnly": true,
+              "nullable": true
             },
             "blobName": {
               "description": "Name of the blob which contains data for this backup.",
@@ -21490,12 +23127,13 @@
               "readOnly": true
             },
             "databases": {
-              "description": "List of databases included in the backup.",
+              "description": "List of databases included in the backup. It is populated only in POST calls.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DatabaseBackupSetting"
               },
-              "readOnly": true
+              "readOnly": true,
+              "nullable": true
             },
             "scheduled": {
               "description": "True if this backup has been created due to a schedule being triggered.",
@@ -22273,6 +23911,34 @@
         }
       }
     },
+    "DefaultAuthorizationPolicy": {
+      "description": "The configuration settings of the Azure Active Directory default authorization policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DefaultAuthorizationPolicy resource specific properties",
+          "properties": {
+            "allowedPrincipals": {
+              "$ref": "#/definitions/AllowedPrincipals",
+              "description": "The configuration settings of the Azure Active Directory allowed principals."
+            },
+            "allowedApplications": {
+              "description": "The configuration settings of the Azure Active Directory allowed applications.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "DeletedAppRestoreRequest": {
       "description": "Details about restoring a deleted app.",
       "type": "object",
@@ -22698,6 +24364,10 @@
         "generateWorkflowFile": {
           "description": "Workflow option to determine whether the workflow file should be generated and written to the repository.",
           "type": "boolean"
+        },
+        "workflowSettings": {
+          "$ref": "./CommonDefinitions.json#/definitions/GitHubActionWorkflowRequest",
+          "description": "The settings required to pull the workflow file from Fusion server.\nCodeConfiguration, ContainerConfiguration, and IsLinux should not be present if this property is present."
         }
       }
     },
@@ -22719,8 +24389,7 @@
         },
         "password": {
           "description": "The password used to upload the image to the container registry.",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         }
       }
     },
@@ -23424,6 +25093,53 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MigrateAppRequest": {
+      "description": "Options for app content migration.",
+      "type": "object",
+      "properties": {
+        "storageAccountSasUri": {
+          "description": "Sas Uri for the Storage Account",
+          "type": "string"
+        },
+        "sasKey": {
+          "description": "SasKey to access the zip file from Container",
+          "type": "string"
+        },
+        "migrateArmId": {
+          "description": "Migrate armId to fetch the resourceName and fabricName",
+          "type": "string"
+        },
+        "webAppArmId": {
+          "description": "WebApp armId in SDS",
+          "type": "string"
+        }
+      }
+    },
+    "MigrateAppResponse": {
+      "description": "Response for a migration of app content request.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "When server starts the migration process, it will return an operation ID identifying that particular migration operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "Message to help understand the Provisioning state",
+          "type": "string"
         }
       }
     },
@@ -25340,12 +27056,12 @@
               "description": "Checks if Customer provided storage account is required",
               "type": "boolean"
             },
-            "keyVaultReferenceIdentity": {
-              "description": "Identity to use for Key Vault Reference authentication.",
-              "type": "string"
-            },
             "virtualNetworkSubnetId": {
               "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.\nThis must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+              "type": "string"
+            },
+            "keyVaultReferenceIdentity": {
+              "description": "Identity to use for Key Vault Reference authentication.",
               "type": "string"
             }
           },
@@ -26178,6 +27894,10 @@
               "description": "Link to the console to web app instance",
               "type": "string"
             },
+            "machineName": {
+              "description": "Machine name",
+              "type": "string"
+            },
             "containers": {
               "type": "object",
               "additionalProperties": {
@@ -26186,6 +27906,86 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkflowEnvelope": {
+      "description": "Workflow properties definition.",
+      "type": "object",
+      "properties": {
+        "files": {
+          "description": "Gets or sets the filess.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "flowState": {
+          "description": "Gets or sets the state of the workflow.",
+          "enum": [
+            "NotSpecified",
+            "Completed",
+            "Enabled",
+            "Disabled",
+            "Deleted",
+            "Suspended"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkflowState",
+            "modelAsString": false
+          }
+        },
+        "health": {
+          "$ref": "#/definitions/WorkflowHealth",
+          "description": "Gets or sets workflow health."
+        }
+      }
+    },
+    "WorkflowEnvelopeCollection": {
+      "description": "Collection of Kudu workflow information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowEnvelope"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkflowHealth": {
+      "description": "Represents the workflow health.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Gets or sets the workflow health state.",
+          "enum": [
+            "NotSpecified",
+            "Healthy",
+            "Unhealthy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkflowHealthState",
+            "modelAsString": false
+          }
+        },
+        "error": {
+          "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
+          "description": "Gets or sets the workflow error."
         }
       }
     }

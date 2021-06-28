@@ -1527,6 +1527,131 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Static Web App Detector Responses",
+        "description": "Description for List Static Web App Detector Responses",
+        "operationId": "Diagnostics_ListStaticWebAppDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Static Web App Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Static Web App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListStaticWebAppDetectorResponses.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Static Web App Detector Response",
+        "description": "Description for Get Static Web App Detector Response",
+        "operationId": "Diagnostics_GetStaticWebAppDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Static Web App Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Static Web App Detector Responses": {
+            "$ref": "./examples/Diagnostics_GetStaticWebAppDetectorResponse.json"
+          }
+        }
+      }
     }
   },
   "definitions": {

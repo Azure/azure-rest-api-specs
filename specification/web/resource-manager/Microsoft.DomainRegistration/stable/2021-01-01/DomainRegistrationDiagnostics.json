@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-01-01",
-    "title": "CertificateOrdersDiagnostics API Client"
+    "title": "DomainRegistrationDiagnostics API Client"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -15,22 +15,22 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/detectors": {
       "get": {
         "tags": [
-          "CertificateOrdersDiagnostics"
+          "DomainRegistrationDiagnostics"
         ],
-        "summary": "Microsoft.CertificateRegistration to get the list of detectors for this RP.",
-        "description": "Description for Microsoft.CertificateRegistration to get the list of detectors for this RP.",
-        "operationId": "CertificateOrdersDiagnostics_ListAppServiceCertificateOrderDetectorResponse",
+        "summary": "Microsoft.DomainRegistration to get the list of detectors for this RP.",
+        "description": "Description for Microsoft.DomainRegistration to get the list of detectors for this RP.",
+        "operationId": "DomainRegistrationDiagnostics_ListAppServiceDomainRegistrationDetectorResponse",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "certificateOrderName",
+            "name": "domainName",
             "in": "path",
-            "description": "The certificate order name for which the response is needed.",
+            "description": "The domain name for which the response is needed.",
             "required": true,
             "type": "string"
           },
@@ -55,32 +55,27 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List app service certificate detector response": {
-            "$ref": "./examples/Diagnostics_ListAppServiceCertificateOrderDetectorResponse.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors/{detectorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/detectors/{detectorName}": {
       "get": {
         "tags": [
-          "CertificateOrdersDiagnostics"
+          "DomainRegistrationDiagnostics"
         ],
-        "summary": "Microsoft.CertificateRegistration call to get a detector response from App Lens.",
-        "description": "Description for Microsoft.CertificateRegistration call to get a detector response from App Lens.",
-        "operationId": "CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse",
+        "summary": "Microsoft.DomainRegistration call to get a detector response from App Lens.",
+        "description": "Description for Microsoft.DomainRegistration call to get a detector response from App Lens.",
+        "operationId": "DomainRegistrationDiagnostics_GetAppServiceDomainRegistrationDetectorResponse",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "certificateOrderName",
+            "name": "domainName",
             "in": "path",
-            "description": "The certificate order name for which the response is needed.",
+            "description": "The domain name for which the response is needed.",
             "required": true,
             "type": "string"
           },
@@ -131,11 +126,6 @@
             "schema": {
               "$ref": "../../../Microsoft.Web/stable/2021-01-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get app service certificate order detector response": {
-            "$ref": "./examples/Diagnostics_GetAppServiceCertificateOrderDetectorResponse.json"
           }
         }
       }

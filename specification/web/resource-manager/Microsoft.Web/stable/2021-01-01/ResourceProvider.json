@@ -216,6 +216,48 @@
         }
       }
     },
+    "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}/generateGitHubActionWorkflow": {
+      "post": {
+        "summary": "Generates the GitHub Action workflow",
+        "description": "Description for Generates the GitHub Action workflow",
+        "operationId": "GenerateGitHubActionWorkflow",
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestMessage",
+            "in": "body",
+            "description": "GitHub Action information",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/GitHubActionWorkflowRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/billingMeters": {
       "get": {
         "summary": "Gets a list of meters for a given location.",
@@ -897,7 +939,7 @@
           "type": "string"
         },
         "capacity": {
-          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
+          "$ref": "#/definitions/SkuCapacity",
           "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
@@ -1083,6 +1125,36 @@
         }
       }
     },
+    "SkuCapacity": {
+      "description": "Description of the App Service plan scale options.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "Minimum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "Maximum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "description": "Default number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Available scale configurations for an App Service plan.",
+          "type": "string"
+        },
+        "elasticMaximum": {
+          "format": "int32",
+          "description": "Maximum number of Elastic workers for this App Service plan SKU.",
+          "type": "integer"
+        }
+      }
+    },
     "SkuInfos": {
       "description": "Collection of SKU information.",
       "type": "object",
@@ -1183,6 +1255,10 @@
         },
         "hostingEnvironment": {
           "description": "Name of App Service Environment where app or App Service plan should be created.",
+          "type": "string"
+        },
+        "kubeEnvironment": {
+          "description": "Name of Kube Environment where app or app service plan should be created.",
           "type": "string"
         },
         "isXenon": {

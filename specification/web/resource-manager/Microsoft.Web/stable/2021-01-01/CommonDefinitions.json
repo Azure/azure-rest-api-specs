@@ -151,6 +151,10 @@
           "description": "Dedicated Host Count",
           "type": "integer",
           "readOnly": true
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this App Service Environment is zone-redundant.",
+          "type": "boolean"
         }
       }
     },
@@ -211,6 +215,10 @@
             "perSiteScaling": {
               "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
               "default": false,
+              "type": "boolean"
+            },
+            "elasticScaleEnabled": {
+              "description": "ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku",
               "type": "boolean"
             },
             "maximumElasticWorkerCount": {
@@ -299,6 +307,11 @@
             "kubeEnvironmentProfile": {
               "$ref": "#/definitions/KubeEnvironmentProfile",
               "description": "Specification for the Kubernetes Environment to use for the App Service plan."
+            },
+            "zoneRedundant": {
+              "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
+              "default": false,
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -445,7 +458,8 @@
           "description": "Type of storage.",
           "enum": [
             "AzureFiles",
-            "AzureBlob"
+            "AzureBlob",
+            "FileShare"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -463,8 +477,7 @@
         },
         "accessKey": {
           "description": "Access key for the storage account.",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "mountPath": {
           "description": "Path to mount the storage within the site's runtime environment.",
@@ -484,6 +497,10 @@
             "name": "AzureStorageState",
             "modelAsString": false
           }
+        },
+        "endpoint": {
+          "description": "Endpoint (IP or DNS name) of a customer-owned file server",
+          "type": "string"
         }
       }
     },
@@ -788,10 +805,7 @@
           "description": "Raw row values",
           "type": "array",
           "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           }
         }
       }
@@ -1100,6 +1114,17 @@
             "$ref": "#/definitions/ErrorEntity"
           }
         },
+        "details": {
+          "description": "Details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        },
+        "target": {
+          "description": "The error target.",
+          "type": "string"
+        },
         "code": {
           "description": "Basic error code.",
           "type": "string"
@@ -1135,6 +1160,43 @@
           "description": "Type of extended location.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "GitHubActionWorkflowRequest": {
+      "description": "The GitHub action workflow request.",
+      "type": "object",
+      "properties": {
+        "appType": {
+          "description": "The app type. This would be either 'WebApp' or 'FunctionApp'.",
+          "type": "string"
+        },
+        "publishType": {
+          "description": "The publish type. This would either 'code' or 'container'.",
+          "type": "string"
+        },
+        "os": {
+          "description": "The os. This would be either 'windows' or 'linux'.",
+          "type": "string"
+        },
+        "variables": {
+          "description": "The variables. These are name/value pairs which replace the placeholders in the workflow file templates.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "runtimeStack": {
+          "description": "The runtime stack. This would be one of 'dotnet', 'java', 'python', etc. if the PublishType is set to code.",
+          "type": "string"
+        },
+        "workflowApiVersion": {
+          "description": "The version of the fusion workflow API to call.",
+          "type": "string"
+        },
+        "useCanaryFusionServer": {
+          "description": "The flag indicting whether to call the canary fusion server.",
+          "type": "boolean"
         }
       }
     },
@@ -2377,12 +2439,12 @@
               "description": "Checks if Customer provided storage account is required",
               "type": "boolean"
             },
-            "keyVaultReferenceIdentity": {
-              "description": "Identity to use for Key Vault Reference authentication.",
-              "type": "string"
-            },
             "virtualNetworkSubnetId": {
               "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.\nThis must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+              "type": "string"
+            },
+            "keyVaultReferenceIdentity": {
+              "description": "Identity to use for Key Vault Reference authentication.",
               "type": "string"
             }
           },
@@ -2461,14 +2523,6 @@
         "httpLoggingEnabled": {
           "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
           "type": "boolean"
-        },
-        "acrUseManagedIdentityCreds": {
-          "description": "Flag to use Managed Identity Creds for ACR pull",
-          "type": "boolean"
-        },
-        "acrUserManagedIdentityID": {
-          "description": "If using user managed identity, the user managed identity ClientId",
-          "type": "string"
         },
         "logsDirectorySizeLimit": {
           "format": "int32",
@@ -2637,6 +2691,10 @@
           "description": "The number of private ports assigned to this app. These will be assigned dynamically on runtime.",
           "type": "integer"
         },
+        "publicNetworkAccess": {
+          "description": "Property to allow or block all public trafic.",
+          "type": "string"
+        },
         "cors": {
           "$ref": "#/definitions/CorsSettings",
           "description": "Cross-Origin Resource Sharing (CORS) settings."
@@ -2776,10 +2834,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/AzureStorageInfoValue"
           }
-        },
-        "publicNetworkAccess": {
-          "description": "Property to allow or block all public traffic.",
-          "type": "string"
         }
       }
     },
@@ -2826,36 +2880,6 @@
         }
       }
     },
-    "SkuCapacity": {
-      "description": "Description of the App Service plan scale options.",
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "description": "Minimum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "description": "Maximum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "elasticMaximum": {
-          "format": "int32",
-          "description": "Maximum number of Elastic workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "default": {
-          "format": "int32",
-          "description": "Default number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "scaleType": {
-          "description": "Available scale configurations for an App Service plan.",
-          "type": "string"
-        }
-      }
-    },
     "SkuDescription": {
       "description": "Description of a SKU for a scalable resource.",
       "type": "object",
@@ -2880,10 +2904,6 @@
           "format": "int32",
           "description": "Current number of instances assigned to the resource.",
           "type": "integer"
-        },
-        "skuCapacity": {
-          "$ref": "#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
           "description": "Locations of the SKU.",
