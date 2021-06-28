@@ -129,11 +129,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-10-17-preview-only'
 namespace: $(python-base-namespace).v2019_10_17
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_10_17
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: package-2019-06-01-only and python

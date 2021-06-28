@@ -76,11 +76,6 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 ### Tag: package-2021-05-01-preview-only
 
@@ -164,11 +159,6 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: package-2019-11
@@ -198,11 +188,6 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: package-2019-10-17-preview-only
@@ -212,11 +197,6 @@ These settings apply only when `--tag=package-2019-10-17-preview-only` is specif
 ``` yaml $(tag) == 'package-2019-10-17-preview-only'
 input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: package-2019-07-only
@@ -813,6 +793,38 @@ directive:
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: metricAlert_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-07-01-preview-only'
+directive:
+- from: privateLinkScopes_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2020-03'
+directive:
+- from: privateLinkScopes_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2019-11'
+directive:
+- from: privateLinkScopes_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2019-10-17-preview-only'
+directive:
+- from: privateLinkScopes_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
