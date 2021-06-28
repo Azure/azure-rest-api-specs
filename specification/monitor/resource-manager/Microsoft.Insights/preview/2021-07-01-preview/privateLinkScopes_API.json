@@ -1002,37 +1002,38 @@
     "PrivateLinkResourceListResult": {
       "description": "A list of private link resources",
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
-          "description": "Array of results.",
           "type": "array",
+          "description": "Array of results.",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
     "PrivateLinkResource": {
       "description": "A private link resource",
       "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "The private link resource properties.",
-          "readOnly": true
-        }
-      }
+      ]
     },
     "PrivateLinkResourceProperties": {
       "description": "Properties of a private link resource.",
@@ -1050,15 +1051,6 @@
             "type": "string"
           },
           "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Required DNS zone names of the the private link resource."
-          }
         }
       }
     },
