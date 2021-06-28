@@ -1019,39 +1019,33 @@
       }
     },
     "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
           "type": "array",
+          "description": "Array of private endpoint connections",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
+          }
         }
-      }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
     },
     "ScopedResourceListResult": {
       "description": "A list of scoped resources in a private link scope.",
@@ -1077,7 +1071,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
