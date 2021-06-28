@@ -40,6 +40,15 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2021-06-21-preview
+
+These settings apply only when `--tag=package-2021-06-21-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-21-preview'
+input-file:
+  - preview/2021-06-21-preview/CommunicationTurn.json
+```
+
 ---
 
 # Code Generation

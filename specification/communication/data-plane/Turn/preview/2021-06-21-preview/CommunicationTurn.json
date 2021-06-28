@@ -3,56 +3,73 @@
   "info": {
     "title": "CommunicationNetworkingClient",
     "description": "Azure Communication Networking Service",
-    "version": "2021-02-22-preview1"
+    "version": "2021-06-21-preview"
   },
   "paths": {
-    "/turn/{id}/:issueCredentials": {
+    "/networktraversal/:issueRelayConfiguration": {
       "post": {
         "tags": [
           "Turn"
         ],
-        "summary": "Issue TURN credentials for an existing identity.",
-        "operationId": "CommunicationIdentity_IssueTurnCredentials",
+        "summary": "Issue a configuration for an STUN/TURN server for an existing identity.",
+        "operationId": "CommunicationNetworkTraversal_IssueRelayConfiguration",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "Identifier of the existing identity to issue credentials for.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationRelayConfigurationRequest"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CommunicationRelayConfiguration"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
-            "$ref": "./examples/IssueTurnCredentials.json"
+          "Issue Relay Configuration": {
+            "$ref": "./examples/IssueRelayConfiguration.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "CommunicationTurnServer": {
-      "description": "An instance of a TURN server with credentials.",
+    "CommunicationRelayConfigurationRequest": {
+      "description": "Request for a CommunicationRelayConfiguration.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "An existing ACS identity.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationIceServer": {
+      "description": "An instance of a STUN/TURN server with credentials to be used for ICE negotiation.",
       "required": [
         "credential",
         "urls",
@@ -61,7 +78,7 @@
       "type": "object",
       "properties": {
         "urls": {
-          "description": "List of TURN server URLs.",
+          "description": "List of STUN/TURN server URLs.",
           "type": "array",
           "items": {
             "type": "string"
@@ -78,10 +95,10 @@
       }
     },
     "CommunicationRelayConfiguration": {
-      "description": "A relay configuration containing the TURN URLs and credentials.",
+      "description": "A relay configuration containing the STUN/TURN URLs and credentials.",
       "required": [
         "expiresOn",
-        "turnServers"
+        "iceServers"
       ],
       "type": "object",
       "properties": {
@@ -90,11 +107,11 @@
           "description": "The date for which the username and credentials are not longer valid.",
           "type": "string"
         },
-        "turnServers": {
-          "description": "An array representing the credentials and the TURN server URL.",
+        "iceServers": {
+          "description": "An array representing the credentials and the STUN/TURN server URLs for use in ICE negotiations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CommunicationTurnServer"
+            "$ref": "#/definitions/CommunicationIceServer"
           }
         }
       }
@@ -107,7 +124,7 @@
       "description": "Version of API to invoke.",
       "required": true,
       "enum": [
-        "2021-02-22-preview1"
+        "2021-06-21-preview"
       ],
       "type": "string"
     }
