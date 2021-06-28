@@ -2053,6 +2053,10 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Rewrite rule set resource of URL path map path rule."
         },
+        "loadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Load Distribution Policy resource of URL path map path rule."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -2242,6 +2246,10 @@
         "redirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of the application gateway."
+        },
+        "loadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Load Distribution Policy resource of the application gateway."
         },
         "provisioningState": {
           "readOnly": true,
@@ -2928,6 +2936,17 @@
         "forceFirewallPolicyAssociation": {
           "type": "boolean",
           "description": "If true, associates a firewall policy with an application gateway regardless whether the policy differs from the WAF Config."
+        },
+        "loadDistributionPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayLoadDistributionPolicy"
+          },
+          "description": "Load distribution policies of the application gateway resource."
+        },
+        "globalConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayGlobalConfiguration",
+          "description": "Global Configuration."
         }
       },
       "description": "Properties of the application gateway."
@@ -2996,6 +3015,10 @@
         "defaultRedirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Default redirect configuration resource of URL path map."
+        },
+        "defaultLoadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Default Load Distribution Policy resource of URL path map."
         },
         "pathRules": {
           "type": "array",
@@ -3531,6 +3554,105 @@
         "name": "ApplicationGatewayProtocol",
         "modelAsString": true
       }
+    },
+    "ApplicationGatewayLoadDistributionPolicyPropertiesFormat": {
+      "properties": {
+        "loadDistributionTargets": {
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionTarget",
+          "description": "Load Distribution Targets resource of an application gateway."
+        },
+        "loadDistributionAlgorithm": {
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionAlgorithmEnum",
+          "description": "Load Distribution Targets resource of an application gateway."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Load Distribution Policy resource."
+        }
+      },
+      "description": "Properties of Load Distribution Policy of an application gateway."
+    },
+    "ApplicationGatewayLoadDistributionPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionPolicyPropertiesFormat",
+          "description": "Properties of the application gateway load distribution policy."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the load distribution policy that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Load Distribution Policy of an application gateway."
+    },
+    "ApplicationGatewayLoadDistributionTargetPropertiesFormat": {
+      "properties": {
+        "weightPerServer": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 100,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "description": "Weight per server. Range between 1 and 100."
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend address pool resource of the application gateway."
+        }
+      }
+    },
+    "ApplicationGatewayLoadDistributionTarget": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionTargetPropertiesFormat",
+          "description": "Properties of the application gateway load distribution target."
+        }
+      }
+    },
+    "ApplicationGatewayLoadDistributionAlgorithmEnum": {
+      "type": "string",
+      "description": "Load Distribution Algorithm enums.",
+      "enum": [
+        "RoundRobin",
+        "LeastConnections",
+        "IpHash"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayLoadDistributionAlgorithm",
+        "modelAsString": true
+      }
+    },
+    "ApplicationGatewayGlobalConfiguration": {
+      "properties": {
+        "enableRequestBuffering": {
+          "type": "boolean",
+          "description": "Enable request buffering."
+        },
+        "enableResponseBuffering": {
+          "type": "boolean",
+          "description": "Enable response buffering."
+        }
+      },
+      "description": "Application Gateway global configuration."
     }
   }
 }
