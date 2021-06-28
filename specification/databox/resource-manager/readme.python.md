@@ -20,10 +20,9 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-
-```yaml $(python) && $(multiapi) && $(track2)
-clear-output-folder: true
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-2021-05
   - tag: package-2021-03
   - tag: package-2020-11
   - tag: package-2020-04
@@ -36,6 +35,15 @@ batch:
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/
 clear-output-folder: false
 perform-load: false
+```
+### Tag: package-2021-05 and python
+
+These settings apply only when `--tag=package-2021-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-05' && $(python) && $(track2)
+namespace: azure.mgmt.databox.v2021_05_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2021_05_01
 ```
 
 ### Tag: package-2021-03 and python
