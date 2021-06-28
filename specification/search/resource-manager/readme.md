@@ -133,7 +133,7 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Go
+## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
