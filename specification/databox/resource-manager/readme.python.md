@@ -41,11 +41,6 @@ perform-load: false
 These settings apply only when `--tag=package-2021-05 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-05' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.databox.v2021_05_01
-  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2021_05_01
-```
 ``` yaml $(tag) == 'package-2021-05' && $(python) && $(track2)
 namespace: azure.mgmt.databox.v2021_05_01
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2021_05_01
