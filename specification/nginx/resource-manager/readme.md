@@ -2,13 +2,13 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Datadog.
+This is the AutoRest configuration file for Nginx.
 
 
 
 ---
 ## Getting Started
-To build the SDK for Datadog, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Nginx, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -37,5 +37,5 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2021-05-01-preview/swagger.json
+- NGINX.NGINXPLUS/preview/2021-05-01-preview/swagger.json
 ```
