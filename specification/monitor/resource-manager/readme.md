@@ -798,14 +798,6 @@ directive:
   reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-07-01-preview-only'
-directive:
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-```
-
 ``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2020-03'
 directive:
 - from: privateLinkScopes_API.json
