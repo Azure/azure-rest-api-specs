@@ -1064,20 +1064,12 @@
     "PrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProperties"
+        }
+      ],
       "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "description": "State of the private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        },
         "queryOnlyPrivateLinkResources": {
           "description": "Restrict queries from this private endpoint only to scoped resources in the scope.",
           "type": "boolean"
@@ -1085,39 +1077,6 @@
         "ingestOnlyToPrivateLinkResources": {
           "description": "Restrict data ingested from this private endpoint only to scoped resources in the scope.",
           "type": "boolean"
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "description": "Private endpoint which the connection belongs to.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "description": "State of the private endpoint connection.",
-      "type": "object",
-      "required": [
-        "status",
-        "description"
-      ],
-      "properties": {
-        "status": {
-          "description": "The private link service connection status.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The private link service connection description.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "The actions required for private link service connection.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
