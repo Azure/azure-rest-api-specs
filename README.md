@@ -2,23 +2,16 @@
 
 ## Description
 
-This repository is the canonical source for REST API specifications for Microsoft Azure.
+This repository is the canonical source for REST API specifications for Microsoft Azure. 
 
 ## Getting started
-If you're a Microsoft employee looking for information about all of the repositories and steps for Azure SDK Libraries Releases, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). To get access to the wiki, you need to request access to the [Azure SDK Release Partners](https://aka.ms/azsdk/join/azuresdkpartners) security group. This is a MyAccess group and requests to join will need to be approved by your manager.
+If you're a Microsoft employee looking for information about all of the repositories and steps in the pipeline, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that wiki repo.  If any trouble with access, please submit a support request using this [form](https://aka.ms/swaggerfeedback). 
 
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 
 
-<!--Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.-->
-
-### Terminology
-
-- **Offerings**, **Skus**, and **Features** - These are distinct entities represented in Eco Manager and Service Tree.  While the Offering/Sku/Feature entities and hierarchy represent the externally marketed product, **service/components** entities in service tree represent corresponding engineering entities that together power these external products.  Refer to [Product Taxonomy](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/40783/Service-Tree-Product-Taxonomy) for details. 
-
-- **Resource Provider** - When a service onboard new functionality onto ARM, it is required to complete [Resource Provider Registration](https://armwiki.azurewebsites.net/rp_onboarding/ResourceProviderRegistration.html).  For existing **Resource Provider to Service Mapping**, refer to [Match resource provider to service](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers#match-resource-provider-to-service)*
-
+Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.
 
 ## Directory Structure
 
