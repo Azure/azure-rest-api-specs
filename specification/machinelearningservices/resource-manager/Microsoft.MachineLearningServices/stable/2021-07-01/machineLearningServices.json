@@ -3143,52 +3143,57 @@
           "type": "object",
           "properties": {
             "properties": {
-              "type": "object",
-              "description": "Kubernetes properties",
-              "properties": {
-                "relayConnectionString": {
-                  "description": "Relay connection string.",
-                  "type": "string"
-                },
-                "serviceBusConnectionString": {
-                  "description": "ServiceBus connection string.",
-                  "type": "string"
-                },
-                "extensionPrincipalId": {
-                  "description": "Extension principal-id.",
-                  "type": "string"
-                },
-                "extensionInstanceReleaseTrain": {
-                  "description": "Extension instance release train.",
-                  "type": "string"
-                },
-                "vcName": {
-                  "description": "VC name.",
-                  "type": "string"
-                },
-                "namespace": {
-                  "description": "namespace",
-                  "type": "string",
-                  "default": "default"
-                },
-                "defaultInstanceType": {
-                  "description": "Default instance type",
-                  "type": "string"
-                },
-                "instanceTypes": {
-                  "description": "Instance Type Schema",
-                  "type": "object",
-                  "additionalProperties":{
-                      "$ref": "#/definitions/InstanceTypeSchema"
-                  }
-                }
-              }
+              "$ref": "#/definitions/KubernetesProperties"
             }
           }
         }
       ],
       "x-ms-discriminator-value": "Kubernetes"
     },
+
+    "KubernetesProperties": {
+      "type": "object",
+      "description": "Kubernetes properties",
+      "properties": {
+        "relayConnectionString": {
+          "description": "Relay connection string.",
+          "type": "string"
+        },
+        "serviceBusConnectionString": {
+          "description": "ServiceBus connection string.",
+          "type": "string"
+        },
+        "extensionPrincipalId": {
+          "description": "Extension principal-id.",
+          "type": "string"
+        },
+        "extensionInstanceReleaseTrain": {
+          "description": "Extension instance release train.",
+          "type": "string"
+        },
+        "vcName": {
+          "description": "VC name.",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace",
+          "type": "string",
+          "default": "default"
+        },
+        "defaultInstanceType": {
+          "description": "Default instance type",
+          "type": "string"
+        },
+        "instanceTypes": {
+          "description": "Instance Type Schema",
+          "type": "object",
+          "additionalProperties":{
+              "$ref": "#/definitions/InstanceTypeSchema"
+          }
+        }
+      }
+    },
+
     "AmlComputeProperties": {
       "type": "object",
       "description": "AML Compute properties",
@@ -4916,3 +4921,4 @@
     }
   }
 }
+
