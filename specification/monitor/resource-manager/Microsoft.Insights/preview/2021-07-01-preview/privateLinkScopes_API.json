@@ -1002,38 +1002,37 @@
     "PrivateLinkResourceListResult": {
       "description": "A list of private link resources",
       "type": "object",
-      "required": [
-        "value"
-      ],
       "properties": {
         "value": {
-          "type": "array",
           "description": "Array of results.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "PrivateLinkResource": {
       "description": "A private link resource",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "The private link resource properties.",
+          "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "description": "Properties of a private link resource.",
@@ -1051,6 +1050,14 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Required DNS zone names of the the private link resource."
         }
       }
     },
@@ -1119,7 +1126,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1173,7 +1180,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1203,28 +1210,6 @@
           "readOnly": true
         }
       }
-    },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object",
-      "type": "object"
     }
   },
   "parameters": {
