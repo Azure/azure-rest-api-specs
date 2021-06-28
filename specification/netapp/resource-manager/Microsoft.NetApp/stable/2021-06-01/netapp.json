@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2021-04-01",
+    "version": "2021-06-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -3351,30 +3351,7 @@
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
-          "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Standard service level"
-              },
-              {
-                "value": "Premium",
-                "description": "Premium service level"
-              },
-              {
-                "value": "Ultra",
-                "description": "Ultra service level"
-              }
-            ]
-          },
+          "$ref": "#/definitions/serviceLevel",
           "example": "Ultra",
           "default": "Premium"
         },
@@ -3621,30 +3598,7 @@
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
-          "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Standard service level"
-              },
-              {
-                "value": "Premium",
-                "description": "Premium service level"
-              },
-              {
-                "value": "Ultra",
-                "description": "Ultra service level"
-              }
-            ]
-          },
+          "$ref": "#/definitions/serviceLevel",
           "example": "Ultra",
           "default": "Premium"
         },
@@ -3834,6 +3788,59 @@
           "maxLength": 4,
           "x-nullable": true,
           "example": "0770"
+        },
+        "cloneProgress": {
+          "description": "When a volume is being restored from another volume's snapshot, will show the percentage completion of this cloning process. When this value is empty/null there is no cloning process currently happening on this volume. This value will update every 5 minutes during cloning.",
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "avsDataStore": {
+          "title": "avsDataStore",
+          "type": "string",
+          "description": "Specifies whether the volume is enabled for Azure VMware Solution (AVS) datastore purpose",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "avsDataStore",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "avsDataStore is enabled"
+              },
+              {
+                "value": "Disabled",
+                "description": "avsDataStore is disabled"
+              }
+            ]
+          },
+          "example": "Enabled",
+          "default": "Disabled"
+        },
+        "isDefaultQuotaEnabled": {
+          "type": "boolean",
+          "description": "Specifies if default quota is enabled for the volume.",
+          "example": false,
+          "default": false
+        },
+        "defaultUserQuotaInKiBs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Default user quota for volume in KiBs. Minimum 4 KiBs.",
+          "example": 4,
+          "default": 4
+        },
+        "defaultGroupQuotaInKiBs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Default group quota for volume in KiBs.  Minimum 4 KiBs.",
+          "example": 4,
+          "default": 4
         }
       }
     },
@@ -4091,30 +4098,7 @@
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
-          "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Standard service level"
-              },
-              {
-                "value": "Premium",
-                "description": "Premium service level"
-              },
-              {
-                "value": "Ultra",
-                "description": "Ultra service level"
-              }
-            ]
-          },
+          "$ref": "#/definitions/serviceLevel",
           "example": "Ultra",
           "default": "Premium"
         },
@@ -4165,6 +4149,26 @@
               "$ref": "#/definitions/volumeSnapshotProperties"
             }
           }
+        },
+        "isDefaultQuotaEnabled": {
+          "type": "boolean",
+          "description": "Specifies if default quota is enabled for the volume.",
+          "example": false,
+          "default": false
+        },
+        "defaultUserQuotaInKiBs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Default user quota for volume in KiBs. Minimum 4 KiBs.",
+          "example": 4,
+          "default": 4
+        },
+        "defaultGroupQuotaInKiBs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Default group quota for volume in KiBs. Minimum 4 KiBs.",
+          "example": 4,
+          "default": 4
         }
       }
     },
@@ -4852,13 +4856,9 @@
           "description": "Monthly backups count to keep",
           "format": "int32"
         },
-        "yearlyBackupsToKeep": {
-          "type": "integer",
-          "description": "Yearly backups count to keep",
-          "format": "int32"
-        },
         "volumesAssigned": {
           "type": "integer",
+          "readOnly": true,
           "description": "Volumes using current backup policy",
           "format": "int32"
         },
@@ -4868,6 +4868,7 @@
         },
         "volumeBackups": {
           "description": "A list of volumes assigned to this policy",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/volumeBackups"
@@ -5234,6 +5235,39 @@
         }
       },
       "description": "An error response from the service."
+    },
+    "serviceLevel": {
+      "title": "serviceLevel",
+      "type": "string",
+      "description": "The service level of the file system",
+      "enum": [
+        "Standard",
+        "Premium",
+        "Ultra",
+        "StandardZRS"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Standard",
+            "description": "Standard service level"
+          },
+          {
+            "value": "Premium",
+            "description": "Premium service level"
+          },
+          {
+            "value": "Ultra",
+            "description": "Ultra service level"
+          },
+          {
+            "value": "StandardZRS",
+            "description": "Zone redundant storage service level"
+          }
+        ]
+      }
     }
   },
   "parameters": {
