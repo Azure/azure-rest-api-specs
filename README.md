@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository is the canonical source for REST API specifications for Microsoft Azure. test
+This repository is the canonical source for REST API specifications for Microsoft Azure. 
 
 ## Getting started
 If you're a Microsoft employee looking for information about all of the repositories and steps in the pipeline, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that wiki repo.  If any trouble with access, please submit a support request using this [form](https://aka.ms/swaggerfeedback). 
