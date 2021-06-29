@@ -12,11 +12,10 @@
         "maintenanceAlerts": [
           {
             "message": "hostpool under maintenance",
-            "duration": 10,
-            "beforeKickOff": false
+            "daysBeforeKickoff": 5
           }
         ],
-        "logOffDelaySeconds": 10,
+        "logOffDelayMinutes": 10,
         "logOffMessage": "logging off for hostpool update",
         "scheduledTime": {
           "dateTime": "2008-09-22T14:01:54.9571247Z",
@@ -26,6 +25,26 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "warnings": [
+          {
+            "faultType": "ServiceError",
+            "faultCode": "code1",
+            "faultText": "text1",
+            "faultContext": "context1"
+          }
+        ],
+        "errors": [
+          {
+            "faultType": "ServiceError",
+            "faultCode": "code1",
+            "faultText": "text1",
+            "faultContext": "context1"
+          }
+        ]
+      }
+    },
     "202": {}
   }
 }

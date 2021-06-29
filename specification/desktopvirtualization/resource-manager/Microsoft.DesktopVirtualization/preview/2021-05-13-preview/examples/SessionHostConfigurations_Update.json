@@ -6,9 +6,10 @@
     "api-version": "2021-05-13-preview",
     "sessionHostConfiguration": {
       "properties": {
-        "vMSizeId": "Standard_D2s_v3",
+        "vmSizeId": "Standard_D2s_v3",
         "diskType": "Standard_LRS",
         "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+        "vmCustomConfigurationParameterUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
         "imageInfo": {
           "type": "Gallery",
           "marketPlaceInfo": {
@@ -45,7 +46,7 @@
       "body": {
         "name": "default",
         "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/updateStatuses/current",
-        "type": "Microsoft.DesktopVirtualization/hostPools/updateStatuses",
+        "type": "Microsoft.DesktopVirtualization/hostPools/SessionHostConfiguration",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -56,9 +57,11 @@
         },
         "properties": {
           "version": "2008-09-22T14:01:54.9571247Z",
-          "vMSizeId": "Standard_D2s_v3",
+          "provisioningState": "Updating",
+          "vmSizeId": "Standard_D2s_v3",
           "diskType": "Standard_LRS",
           "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+          "vmCustomConfigurationParameterUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
           "imageInfo": {
             "type": "Gallery",
             "marketPlaceInfo": {
@@ -88,6 +91,11 @@
             }
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.DesktopVirtualization/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
       }
     }
   }

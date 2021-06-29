@@ -1642,7 +1642,7 @@
           },
           {
             "name": "sessionHostConfiguration",
-            "description": "Object containing HostPool definitions.",
+            "description": "Object containing SessionHostConfiguration definitions.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1669,6 +1669,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -1739,21 +1743,24 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "name": "hostPool",
+            "name": "sessionHostConfiguration",
             "description": "Object containing HostPool definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/HostPoolPatch"
+              "$ref": "#/definitions/SessionHostConfiguration"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated SessionHostConfiguration.",
+            "description": "Update SessionHostConfiguration success.",
             "schema": {
               "$ref": "#/definitions/SessionHostConfiguration"
             }
+          },
+          "202": {
+            "description": "Updating SessionHostConfiguration."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -1761,6 +1768,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1815,7 +1826,7 @@
           "HostPoolUpdate"
         ],
         "operationId": "HostPoolPost_Update",
-        "description": "Initiate update of a hostpool.",
+        "description": "Initiates a hostpool update or schedule an update for the future. When validateOnly is true this will only run validations and return warnings and errors.",
         "x-ms-examples": {
           "HostPools_Update_Post": {
             "$ref": "./examples/HostPools_Update_Post.json"
@@ -1845,6 +1856,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "On static validation errors for validateOnly equals true.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateValidationResponse"
+            }
+          },
           "202": {
             "description": "Successfully initiated hostpool update."
           },
@@ -1996,6 +2013,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/locations/{location}/operationResults/{operationResultId}": {
+      "get": {
+        "tags": [
+          "OperationResult"
+        ],
+        "operationId": "OperationResults_Get",
+        "description": "Operation status of an async operation.",
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationResultIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed."
+          },
+          "202": {
+            "description": "Async operation in progress."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/default": {
       "get": {
         "tags": [
@@ -2029,68 +2091,12 @@
               "$ref": "#/definitions/HostPoolUpdateValidationResponse"
             }
           },
-          "202": {
-            "description": "Async operation in progress."
-          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateOperationResults/default": {
-      "get": {
-        "tags": [
-          "HostPoolUpdate"
-        ],
-        "operationId": "UpdateOperationResults_Get",
-        "description": "Operation status of a validate hostpool update.",
-        "x-ms-examples": {
-          "UpdateOperationResults_Get": {
-            "$ref": "./examples/UpdateOperationResults_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
-            "schema": {
-              "$ref": "#/definitions/HostPoolUpdateFullProperties"
-            }
-          },
-          "202": {
-            "description": "Async operation in progress."
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -2317,6 +2323,13 @@
             "schema": {
               "$ref": "#/definitions/SessionHostPatch"
             }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to update assign, unassign or reassign personal desktop."
           }
         ],
         "responses": {
@@ -4221,13 +4234,29 @@
       "description": "Session host configurations of HostPool.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Session Host Configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
         "version": {
           "type": "string",
           "format": "date-time",
           "description": "The time when session host configuration was last modified and something was changed.",
           "readOnly": true
         },
-        "vMSizeId": {
+        "vmSizeId": {
           "type": "string",
           "description": "The id of the size of a virtual machine connected to a hostpool."
         },
@@ -4265,7 +4294,11 @@
         },
         "vmCustomConfigurationUri": {
           "type": "string",
-          "description": "The uri to the storage blob containing scripts to be run on the virtual machine after provisioning."
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "vmCustomConfigurationParameterUri": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the parameter file to be run on the virtual machine after provisioning."
         },
         "imageInfo": {
           "$ref": "#/definitions/ImageInfoProperties",
@@ -4452,10 +4485,10 @@
             "$ref": "#/definitions/MaintenanceAlertsProperties"
           }
         },
-        "logOffDelaySeconds": {
+        "logOffDelayMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Grace period before logging off users in seconds."
+          "description": "Grace period before logging off users in minutes."
         },
         "logOffMessage": {
           "type": "string",
@@ -4469,20 +4502,16 @@
     },
     "MaintenanceAlertsProperties": {
       "type": "object",
-      "description": "Properties for host pool update maintenance alerts.",
+      "description": "Customer admins can opt to create additional alerts called maintenance alerts which will be sent out prior to the host pool update kick off. These alerts will enable the customer admins to inform their end users that their host pool update will be kicking off in between 1-5 days based on daysBeforeKickoff.",
       "properties": {
         "message": {
           "type": "string",
-          "description": "The path to the legacy object to migrate."
+          "description": "The alert message."
         },
-        "duration": {
+        "daysBeforeKickoff": {
           "type": "integer",
           "format": "int32",
-          "description": "The time maintenance notification will be sent relative to before/after the update kickoff in minutes."
-        },
-        "beforeKickOff": {
-          "type": "boolean",
-          "description": "Whether to send maintenance alert after or before hostpool update. False by default."
+          "description": "The number of days before the scheduled update in which the maintenance alert will be sent."
         }
       }
     },
@@ -4782,7 +4811,25 @@
       "properties": {
         "faultType": {
           "type": "string",
-          "description": "Hostpool update fault type. Either ServiceError or UserError."
+          "description": "Hostpool update fault type.",
+          "enum": [
+            "ServiceError",
+            "UserError"
+          ],
+          "x-ms-enum": {
+            "name": "faultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ServiceError",
+                "description": "Fault caused by service error."
+              },
+              {
+                "value": "UserError",
+                "description": "Fault caused by user error."
+              }
+            ]
+          }
         },
         "faultCode": {
           "type": "string",
@@ -6829,6 +6876,26 @@
       "description": "The name of the scaling plan.",
       "maxLength": 24,
       "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationResultIdParameter": {
+      "name": "operationResultId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Guid of the operation result.",
+      "maxLength": 36,
+      "minLength": 36,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The location of the operation result.",
+      "maxLength": 24,
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

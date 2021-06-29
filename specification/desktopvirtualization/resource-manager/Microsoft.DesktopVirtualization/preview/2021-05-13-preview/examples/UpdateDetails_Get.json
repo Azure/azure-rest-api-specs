@@ -49,11 +49,10 @@
             "maintenanceAlerts": [
               {
                 "message": "hostpool under maintenance",
-                "duration": 10,
-                "beforeKickOff": false
+                "daysBeforeKickoff": 5
               }
             ],
-            "logOffDelaySeconds": 10,
+            "logOffDelayMinutes": 10,
             "logOffMessage": "logging off for hostpool update",
             "scheduledTime": {
               "dateTime": "2008-09-22T14:01:54.9571247Z",
@@ -61,9 +60,10 @@
             }
           },
           "sessionHostConfiguration": {
-            "vMSizeId": "Standard_D2s_v3",
+            "vmSizeId": "Standard_D2s_v3",
             "diskType": "Standard_LRS",
             "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+            "vmCustomConfigurationParameterUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
             "imageInfo": {
               "type": "Gallery",
               "marketPlaceInfo": {
