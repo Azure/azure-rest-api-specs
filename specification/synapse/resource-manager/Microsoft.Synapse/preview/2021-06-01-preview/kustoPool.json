@@ -87,6 +87,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the kusto pool name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kustoPoolName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolCheckNameRequest"
+            },
+            "description": "The name of the cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools": {
       "get": {
         "operationId": "KustoPools_ListByWorkspace",
@@ -2241,54 +2289,6 @@
           },
           "204": {
             "description": "NoContent -- principalAssignments does not exist in the subscription."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
-      "post": {
-        "tags": [
-          "KustoPools"
-        ],
-        "operationId": "KustoPools_CheckNameAvailability",
-        "x-ms-examples": {
-          "KustoPoolsCheckNameAvailability": {
-            "$ref": "./examples/KustoPoolsCheckNameAvailability.json"
-          }
-        },
-        "description": "Checks that the kusto pool name is valid and is not already in use.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "kustoPoolName",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KustoPoolCheckNameRequest"
-            },
-            "description": "The name of the cluster."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Operation to check the kusto resource name availability was successful.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameResult"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
