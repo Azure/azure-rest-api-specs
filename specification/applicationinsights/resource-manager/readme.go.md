@@ -47,6 +47,7 @@ input-file:
 override-info:
   title: ApplicationInsightsManagementClient
 ```
+
 ### Tag: package-2020-02-02 and go
 
 These settings apply only when `--tag=package-2020-02-02 --go` is specified on he command line.
