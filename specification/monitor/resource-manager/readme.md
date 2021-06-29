@@ -735,7 +735,15 @@ directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
   transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+  reason: Missing kind, etag
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
+directive:
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ``` yaml !$(python) && !$(go) && !$(java)
