@@ -1,6 +1,7 @@
 scope: ResourceGroup
 variables:
-  resourceName: "mysignalRService"
+  resourceName: ""
+  resourceGroupPrefix: "apiTest-"
 testScenarios:
   - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
     steps:
@@ -10,7 +11,7 @@ testScenarios:
         exampleFile: ../examples/SignalR_CheckNameAvailability.json
       - step: SignalR_CreateOrUpdate
         exampleFile: ../examples/SignalR_CreateOrUpdate.json
-      # - step: SignalR_ListKey
-      #   exampleFile: ../examples/SignalR_ListKeys.json
+      - step: SignalR_ListKey
+        exampleFile: ../examples/SignalR_ListKeys.json
       - step: SignalR_Delete
         exampleFile: ../examples/SignalR_Delete.json
