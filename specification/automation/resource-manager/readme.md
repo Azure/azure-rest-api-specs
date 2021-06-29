@@ -269,6 +269,15 @@ directive:
   - suppress: LongRunningResponseStatusCode
     from: runbook.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/publish"].post["x-ms-long-running-operation"]
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorkerGroup.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorker.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: operations.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
 ---
