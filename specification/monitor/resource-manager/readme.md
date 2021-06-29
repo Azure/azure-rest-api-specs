@@ -744,10 +744,6 @@ directive:
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
-```
-
-``` yaml !$(python) && !$(go) && !$(java)
-directive:
 - from: activityLogAlerts_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
