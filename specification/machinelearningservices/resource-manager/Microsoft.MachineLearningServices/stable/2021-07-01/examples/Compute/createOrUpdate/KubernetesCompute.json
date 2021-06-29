@@ -10,9 +10,27 @@
       "properties": {
         "description": "some compute",
         "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-        "computeType": "AKS",
+        "computeType": "Kubernetes",
         "properties": {
-          "agentCount": 4
+          "namespace": "default",
+          "defaultInstanceType": "defaultInstanceType",
+          "instanceTypes": {
+                "defaultInstanceType": {
+                    "nodeSelector": null,
+                    "resources": {
+                        "requests": {
+                            "cpu": "1",
+                            "memory": "4Gi",
+                            "nvidia.com/gpu": null
+                        },
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "4Gi",
+                            "nvidia.com/gpu": null
+                        }
+                    }
+                }
+            }
         }
       }
     }
@@ -28,12 +46,12 @@
           "description": "some compute",
           "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
           "computeType": "Kubernetes",
-          "provisioningState": "Updating",
+          "provisioningState": "Creating",
           "properties": {
             "relayConnectionString": null,
             "serviceBusConnectionString": null,
             "extensionPrincipalId": null,
-            "extensionInstanceReleaseTrain": "preview",
+            "extensionInstanceReleaseTrain": "stable",
             "vcName": null,
             "namespace": "default",
             "defaultInstanceType": "defaultInstanceType",
@@ -68,12 +86,12 @@
           "description": "some compute",
           "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
           "computeType": "Kubernetes",
-          "provisioningState": "Updating",
+          "provisioningState": "Creating",
           "properties": {
             "relayConnectionString": null,
             "serviceBusConnectionString": null,
             "extensionPrincipalId": null,
-            "extensionInstanceReleaseTrain": "preview",
+            "extensionInstanceReleaseTrain": "stable",
             "vcName": null,
             "namespace": "default",
             "defaultInstanceType": "defaultInstanceType",
