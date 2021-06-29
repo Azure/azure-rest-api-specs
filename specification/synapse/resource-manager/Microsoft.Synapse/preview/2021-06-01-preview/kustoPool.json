@@ -55,7 +55,7 @@
       "get": {
         "description": "Lists eligible SKUs for Kusto Pool resource.",
         "x-ms-examples": {
-          "KustoClustersListSkus": {
+          "KustoPoolsListSkus": {
             "$ref": "./examples/KustoPoolsListSkus.json"
           }
         },
@@ -463,7 +463,7 @@
         ],
         "operationId": "KustoPools_ListSkusByResource",
         "x-ms-examples": {
-          "KustoClustersListResourceSkus": {
+          "KustoPoolsListResourceSkus": {
             "$ref": "./examples/KustoPoolsListResourceSkus.json"
           }
         },
@@ -670,7 +670,7 @@
         "description": "Returns a list of databases that are owned by this Kusto Pool and were followed by another Kusto Pool.",
         "operationId": "KustoPools_ListFollowerDatabases",
         "x-ms-examples": {
-          "KustoClusterListFollowerDatabases": {
+          "KustoPoolListFollowerDatabases": {
             "$ref": "./examples/KustoPoolFollowerDatabasesList.json"
           }
         },
@@ -718,7 +718,7 @@
         "description": "Detaches all followers of a database owned by this Kusto Pool.",
         "operationId": "KustoPools_DetachFollowerDatabases",
         "x-ms-examples": {
-          "KustoClusterDetachFollowerDatabases": {
+          "KustoPoolDetachFollowerDatabases": {
             "$ref": "./examples/KustoPoolFollowerDatabasesDetach.json"
           }
         },
@@ -2319,7 +2319,7 @@
       "description": "The list Kusto pools operation response."
     },
     "SkuDescriptionList": {
-      "description": "The list of the EngagementFabric SKU descriptions",
+      "description": "The list of the SKU descriptions",
       "type": "object",
       "properties": {
         "value": {
@@ -2538,17 +2538,26 @@
           "readOnly": true,
           "description": "The reason for the Kusto Pool's current state."
         },
-        "engineType": {
-          "type": "string",
-          "description": "The engine type",
-          "enum": [
-            "V2",
-            "V3"
-          ],
-          "x-ms-enum": {
-            "name": "EngineType",
-            "modelAsString": true
-          }
+        "optimizedAutoscale": {
+          "type": "object",
+          "$ref": "#/definitions/OptimizedAutoscale",
+          "description": "Optimized auto scale definition."
+        },
+        "enableStreamingIngest": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the streaming ingest is enabled."
+        },
+        "enablePurge": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the purge operations are enabled."
+        },
+        "languageExtensions": {
+          "type": "object",
+          "$ref": "#/definitions/LanguageExtensionsList",
+          "readOnly": true,
+          "description": "List of the Kusto Pool's language extensions."
         },
         "workspaceUID": {
           "type": "string",
@@ -2622,6 +2631,37 @@
         }
       ],
       "description": "Class representing an update to a Kusto kusto pool."
+    },
+    "OptimizedAutoscale": {
+      "type": "object",
+      "required": [
+        "version",
+        "isEnabled",
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the template defined, for instance 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "isEnabled": {
+          "description": "A boolean value that indicate if the optimized autoscale feature is enabled or not.",
+          "type": "boolean"
+        },
+        "minimum": {
+          "description": "Minimum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximum": {
+          "description": "Maximum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "A class that contains the optimized auto scale definition."
     },
     "AttachedDatabaseConfigurationListResult": {
       "type": "object",
