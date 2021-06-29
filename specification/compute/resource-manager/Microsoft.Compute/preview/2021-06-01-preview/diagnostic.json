@@ -71,13 +71,13 @@
           }
         },
         "x-ms-examples": {
-          "Gets the status of a scehduled disk inspection request.": {
+          "Gets the status of a scheduled disk inspection request.": {
             "$ref": "./examples/GetDiagnosticOperation.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/runDiskInspection": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/run": {
       "post": {
         "tags": [
           "diagnostics"
@@ -131,9 +131,109 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "operationId": "Diagnostics_List",
+        "description": "Lists all available Compute diagnostics for a subscription in a location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticsList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scheduled disk inspection request.": {
+            "$ref": "./examples/GetDiagnostics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection": {
+      "get": {
+        "tags": [
+          "diagnostics_DiskInspection"
+        ],
+        "operationId": "DiskInspection_Get",
+        "description": "Gets a specific Comptue diagnostic for a subscription in a location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticBase"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a scheduled disk inspection request.": {
+            "$ref": "./examples/GetDiskInspection.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ComputeDiagnosticsList": {
+      "description": "Lists all available Compute diagnostics for a subscription in a location.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeDiagnosticBase"
+          }
+        }
+      }
+    },
+    "ComputeDiagnosticBase": {
+      "description": "Contains metadata of a diagnostic type",
+      "properties": {
+        "id": {
+          "description": "Identifier for the type of diagnostic",
+          "type": "string"
+        },
+        "name": {
+          "description": "Friendly name for the type of diagnostic",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DiagnosticProperties"
+        }
+      }
+    },
+    "DiagnosticProperties": {
+      "description": "Contains additional properties of a diagnostic",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes what are the supported resource types for a diagnostic",
+          "x-ms-examples": [ "VMs" ]
+        }
+      }
+    },
     "RunDiskInspectionInput": {
       "properties": {
         "resourceGroup": {
