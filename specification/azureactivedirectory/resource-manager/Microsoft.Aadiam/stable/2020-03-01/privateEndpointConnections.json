@@ -39,9 +39,9 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "operationId": "PrivateEndpointConnections_ListByNamespace",
+        "operationId": "PrivateEndpointConnections_ListByPolicyName",
         "x-ms-examples": {
-          "AadiamPrivateEndpointConnections": {
+          "AadiamListPrivateEndpointConnections": {
             "$ref": "./examples/AzureADPrivateEndpointConnectionsList.json"
           }
         },
@@ -216,6 +216,52 @@
             }
           }
         }
+      },
+      "patch": {
+        "description": "Updates an existing Private Endpoint Connection's tags. To update other fields use the Put method.",
+        "operationId": "PrivateEndpointConnections_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "name": "PrivateLinkConnectionTags",
+            "description": "Updated tag information to set into the PrivateLinkConnection instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating the AzureAD PrivateLinkConnection's tags was successful. PrivateLinkConnection tags are updated and returned with the rest of the PrivateLinkConnection's object properties.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AadiamUpdatePrivateEndpointConnections": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsUpdate.json"
+          }
+        }
       }
     }
   },
@@ -350,6 +396,17 @@
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
       }
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkConnection instance."
     },
     "TrackedResource": {
       "properties": {
