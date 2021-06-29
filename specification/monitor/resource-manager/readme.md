@@ -22,11 +22,6 @@ To see additional help and options, run:
 
 ### Basic Information
 
-There are the global settings for the Azure Monitor Control Service (AMCS) extension.
-``` yaml $(AMCS)
-tag: package-2021-04-only
-```
-
 These are the global settings for the MonitorClient API.
 
 ``` yaml !$(python) || !$(track2)
@@ -700,9 +695,21 @@ directive:
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: MissingTypeObject
+    from: metrics_API.json
+    where: $.definitions.LocalizableString
+    reason: 'LocalizableString exists in other swaggers my team can not modify'
+  - suppress: MissingTypeObject
+    from: metricDefinitions_API.json
+    where: $.definitions.LocalizableString
+    reason: 'LocalizableString exists in other swaggers my team can not modify'
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: activityLogAlerts_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scheduledQueryRule_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
@@ -728,7 +735,15 @@ directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
   transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+  reason: Missing kind, etag
+```
+
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
+directive:
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ``` yaml !$(python) && !$(go) && !$(java)
@@ -746,10 +761,6 @@ directive:
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: scheduledQueryRule_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
