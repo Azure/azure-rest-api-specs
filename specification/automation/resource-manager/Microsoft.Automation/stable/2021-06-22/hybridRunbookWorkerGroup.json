@@ -347,6 +347,19 @@
     },
     "HybridRunbookWorkerGroup": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
         "hybridRunbookWorkers": {
           "type": "array",
           "items": {
@@ -375,11 +388,6 @@
           "description": "Resource system metadata."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
-        }
-      ],
       "description": "Definition of hybrid runbook worker group."
     },
     "HybridRunbookWorkerGroupsListResult": {
