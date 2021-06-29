@@ -9616,7 +9616,7 @@
         },
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
-          "description": "Specifies the VM Size Properties for customizing VM sizes."
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01."
         }
       },
       "description": "Specifies the hardware settings for the virtual machine."
@@ -9627,12 +9627,12 @@
         "vCPUsAvailable": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicates the number of vCPUs available for the VM. <br><br> When this property is not specified in the request body, default behavior is to set it to the default number of vCPUs available for that VM size."
+          "description": "Specifies the number of vCPUs available for the VM. <br><br> When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list) ."
         },
         "vCPUsPerCore": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicates the vCPU to physical core ratio. Default value is set to the vCPUsPerCore available for the VM Size. <br><br> Setting this property to 1 also means that hyper-threading is disabled."
+          "description": "Specifies the vCPU to physical core ratio. <br><br> When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list) <br><br> Setting this property to 1 also means that hyper-threading is disabled."
         }
       },
       "description": "Specifies VM Size Property settings on the virtual machine."
