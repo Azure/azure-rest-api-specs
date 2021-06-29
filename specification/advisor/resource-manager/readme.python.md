@@ -7,17 +7,18 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.reservations
-package-name: azure-mgmt-reservations
-package-version: 1.0.0b1
+namespace: azure.mgmt.advisor
+package-name: azure-mgmt-advisor
+package-version: 9.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
+output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
+output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
 ```
