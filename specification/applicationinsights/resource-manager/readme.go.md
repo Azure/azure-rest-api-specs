@@ -56,3 +56,25 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2020-02-02' && $(go)
 output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2020-02-02/$(namespace)
 ```
+
+### Tag: schema-2020-02-02-preview
+
+These settings apply only when `--tag=schema-2020-02-02` is specified on the
+command line.
+
+This section contains the input swagger files that are used when generating
+resource manager schemas for version 2020-02-02. Note that many of our
+pre-existing APIs are note currently compatible with ARM schemas, upon any
+updates applied to our services we will bring them up to compliance.
+
+``` yaml $(tag) == 'schema-2020-02-02'
+input-file:
+ - ./Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+ - ./Microsoft.Insights/stable/2020-02-02/components_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
+
+override-info:
+  title: ApplicationInsightsManagementClient
+```
