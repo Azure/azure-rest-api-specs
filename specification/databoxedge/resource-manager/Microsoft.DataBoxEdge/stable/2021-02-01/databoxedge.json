@@ -753,7 +753,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "DiagnosticSettings"
         ],
@@ -787,8 +787,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to update the proactive log collection settings."
+          "200": {
+            "description": "Successfully updated the proactive log collection settings."
           },
           "204": {
             "description": "Updated the proactive log collection settings."
@@ -853,7 +853,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "DiagnosticSettings"
         ],
@@ -890,8 +890,8 @@
           "202": {
             "description": "Accepted the request to update the diagnostic remote support settings."
           },
-          "204": {
-            "description": "Updated the diagnostic remote support settings."
+          "200": {
+            "description": "Successfully updated the diagnostic remote support settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4387,6 +4387,7 @@
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionAlgorithm": {
@@ -5683,6 +5684,7 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
+          "x-ms-secret": true,
           "type": "string"
         },
         "expiryTimeInUTC": {
@@ -7553,7 +7555,15 @@
       "properties": {
         "userConsent": {
           "description": "Proactive diagnostic collection consent flag",
-          "type": "boolean"
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProactiveDiagnosticsConsent",
+            "modelAsString": true
+          }
         }
       }
     },
