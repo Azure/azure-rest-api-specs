@@ -461,7 +461,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           },
           "default": {
@@ -509,7 +509,7 @@
             "description": "The private endpoint connection object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           }
         ],
@@ -517,7 +517,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
             }
           },
           "202": {
@@ -989,7 +989,7 @@
           "description": "List of private endpoint connections.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
           }
         }
       }
@@ -1014,7 +1014,7 @@
         }
       }
     },
-    "PrivateEndpointConnectionProperties": {
+    "AzureMonitorPrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
       "type": "object",
       "allOf": [
@@ -1033,11 +1033,11 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
+    "AzureMonitorPrivateEndpointConnection": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/AzureMonitorPrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         }
@@ -1056,7 +1056,7 @@
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/AzureMonitorPrivateEndpointConnection"
           }
         }
       },
