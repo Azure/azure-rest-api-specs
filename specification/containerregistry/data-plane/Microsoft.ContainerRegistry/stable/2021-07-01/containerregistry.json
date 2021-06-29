@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Container Registry",
     "description": "Metadata API definition for the Azure Container Registry runtime",
-    "version": "2021-07-01"
+    "version": "2019-08-15-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{url}",
@@ -33,36 +33,12 @@
   ],
   "tags": [
     {
-      "name": "v2",
-      "description": "Root API"
+      "name": "ContainerRegistry",
+      "description": "Registry Operations"
     },
     {
-      "name": "Manifest",
-      "description": "Everything about manifests"
-    },
-    {
-      "name": "Tag",
-      "description": "Everything about tags"
-    },
-    {
-      "name": "Layer",
-      "description": "Everything about layers"
-    },
-    {
-      "name": "Repository",
-      "description": "Everything about repository"
-    },
-    {
-      "name": "AcrRepository",
-      "description": "ACR APIs related to repositories"
-    },
-    {
-      "name": "AcrManifest",
-      "description": "ACR APIs related to manifests"
-    },
-    {
-      "name": "AcrTag",
-      "description": "ACR APIs related to tags"
+      "name": "ContainerRegistryBlob",
+      "description": "Blob Operations"
     }
   ],
   "schemes": [
@@ -75,10 +51,10 @@
     "/v2/": {
       "get": {
         "tags": [
-          "v2"
+          "Registry"
         ],
         "description": "Tells whether this Docker Registry instance supports Docker Registry HTTP API v2",
-        "operationId": "V2Support_Check",
+        "operationId": "ContainerRegistry_CheckDockerV2Support",
         "x-ms-examples": {
           "Check Docker Registry V2 Support": {
             "$ref": "./examples/GetDockerRegistryV2Support.json"
@@ -100,7 +76,7 @@
     "/v2/{name}/manifests/{reference}": {
       "get": {
         "tags": [
-          "Manifest"
+          "Repository"
         ],
         "description": "Get the manifest identified by `name` and `reference` where `reference` can be a tag or digest.",
         "x-ms-examples": {
@@ -108,7 +84,7 @@
             "$ref": "./examples/GetManifest.json"
           }
         },
-        "operationId": "Manifests_Get",
+        "operationId": "ContainerRegistry_GetManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -128,7 +104,7 @@
           "200": {
             "description": "Returns the requested manifest file in a larger combined group",
             "schema": {
-              "$ref": "#/definitions/ManifestWrapper"
+              "$ref": "#/definitions/Manifest"
             }
           },
           "default": {
@@ -141,7 +117,7 @@
       },
       "put": {
         "tags": [
-          "Manifest"
+          "Repository"
         ],
         "x-ms-long-running-operation": false,
         "description": "Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.",
@@ -153,7 +129,7 @@
         "consumes": [
           "application/vnd.docker.distribution.manifest.v2+json"
         ],
-        "operationId": "Manifests_Create",
+        "operationId": "ContainerRegistry_CreateManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -195,7 +171,7 @@
       },
       "delete": {
         "tags": [
-          "Manifest"
+          "Repository"
         ],
         "description": "Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.",
         "x-ms-examples": {
@@ -203,18 +179,21 @@
             "$ref": "./examples/DeleteManifest.json"
           }
         },
-        "operationId": "Manifests_Delete",
+        "operationId": "ContainerRegistry_DeleteManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ImageReference"
+            "$ref": "#/parameters/DigestReference"
           }
         ],
         "responses": {
           "202": {
             "description": "The manifest has been deleted"
+          },
+          "404": {
+            "description": "The manifest was not found"
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -231,7 +210,7 @@
           "application/octet-stream"
         ],
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "parameters": [
           {
@@ -247,7 +226,7 @@
           }
         },
         "description": "Retrieve the blob from the registry identified by digest.",
-        "operationId": "Blob_Get",
+        "operationId": "ContainerRegistryBlob_GetBlob",
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
@@ -287,10 +266,10 @@
       },
       "head": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "description": "Same as GET, except only the headers are returned.",
-        "operationId": "Blob_Check",
+        "operationId": "ContainerRegistryBlob_CheckBlobExists",
         "x-ms-examples": {
           "Head for a Blob Chunk": {
             "$ref": "./examples/CheckBlob.json"
@@ -350,9 +329,9 @@
           "application/octet-stream"
         ],
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
-        "operationId": "Blob_Delete",
+        "operationId": "ContainerRegistryBlob_DeleteBlob",
         "x-ms-examples": {
           "Delete a blob": {
             "$ref": "./examples/DeleteBlob.json"
@@ -385,10 +364,10 @@
     "/v2/{name}/blobs/uploads/": {
       "post": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "description": "Mount a blob identified by the `mount` parameter from another repository.",
-        "operationId": "Blob_Mount",
+        "operationId": "ContainerRegistryBlob_MountBlob",
         "x-ms-examples": {
           "Mount a blob from repository": {
             "$ref": "./examples/MountBlob.json"
@@ -435,7 +414,7 @@
     "/{nextBlobUuidLink}": {
       "get": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "parameters": [
           {
@@ -443,7 +422,7 @@
           }
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "Blob_GetStatus",
+        "operationId": "ContainerRegistryBlob_GetUploadStatus",
         "x-ms-examples": {
           "Get blob status": {
             "$ref": "./examples/GetBlobStatus.json"
@@ -479,10 +458,10 @@
           }
         ],
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "description": "Upload a stream of data without completing the upload.",
-        "operationId": "Blob_Upload",
+        "operationId": "ContainerRegistryBlob_UploadChunk",
         "x-ms-examples": {
           "Upload Blob": {
             "$ref": "./examples/UploadBlob.json"
@@ -527,13 +506,13 @@
       },
       "put": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "consumes": [
           "application/octet-stream"
         ],
         "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
-        "operationId": "Blob_EndUpload",
+        "operationId": "ContainerRegistryBlob_CompleteUpload",
         "x-ms-examples": {
           "End a blob upload": {
             "$ref": "./examples/EndBlobUpload.json"
@@ -578,7 +557,7 @@
       },
       "delete": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "parameters": [
           {
@@ -586,7 +565,7 @@
           }
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
-        "operationId": "Blob_CancelUpload",
+        "operationId": "ContainerRegistryBlob_CancelUpload",
         "x-ms-examples": {
           "End a blob upload": {
             "$ref": "./examples/CancelBlobUpload.json"
@@ -608,10 +587,14 @@
     "/acr/v1/_catalog": {
       "get": {
         "tags": [
-          "AcrRepository"
+          "Registry"
         ],
         "description": "List repositories",
-        "operationId": "Repository_GetList",
+        "operationId": "ContainerRegistry_GetRepositories",
+        "x-ms-pageable": {
+          "itemName": "repositories",
+          "nextLinkName": "link"
+        },
         "x-ms-examples": {
           "Get repositories in a registry": {
             "$ref": "./examples/GetRepositoryList.json"
@@ -650,11 +633,10 @@
     "/acr/v1/{name}": {
       "get": {
         "tags": [
-          "AcrRepository",
-          "AcrMetadata"
+          "Registry"
         ],
         "description": "Get repository attributes",
-        "operationId": "Repository_GetAttributes",
+        "operationId": "ContainerRegistry_GetProperties",
         "x-ms-examples": {
           "Get details of repository": {
             "$ref": "./examples/GetRepositoryAttributes.json"
@@ -682,10 +664,10 @@
       },
       "delete": {
         "tags": [
-          "AcrRepository"
+          "Registry"
         ],
         "description": "Delete the repository identified by `name`",
-        "operationId": "Repository_Delete",
+        "operationId": "ContainerRegistry_DeleteRepository",
         "x-ms-examples": {
           "Delete a repository": {
             "$ref": "./examples/DeleteAcrRepository.json"
@@ -698,10 +680,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The repository is deleted",
-            "schema": {
-              "$ref": "#/definitions/DeletedRepository"
-            }
+            "description": "The repository is deleted"
+          },
+          "404": {
+            "description": "The repository was not found"
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -713,11 +695,10 @@
       },
       "patch": {
         "tags": [
-          "AcrRepository",
-          "AcrMetadata"
+          "Registry"
         ],
         "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-        "operationId": "Repository_UpdateAttributes",
+        "operationId": "ContainerRegistry_UpdateProperties",
         "x-ms-examples": {
           "Update repository attributes": {
             "$ref": "./examples/UpdateRepositoryAttributes.json"
@@ -736,7 +717,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The attributes are updated"
+            "description": "The attributes are updated",
+            "schema": {
+              "$ref": "#/definitions/RepositoryAttributes"
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -750,15 +734,18 @@
     "/acr/v1/{name}/_tags": {
       "get": {
         "tags": [
-          "AcrTag",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "List tags of a repository",
-        "operationId": "Tag_GetList",
+        "operationId": "ContainerRegistry_GetTags",
         "x-ms-examples": {
           "Get tags of a repository": {
             "$ref": "./examples/GetTagList.json"
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "tags",
+          "nextLinkName": "link"
         },
         "parameters": [
           {
@@ -779,6 +766,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "Link": {
+                "description": "next paginated result",
+                "type": "string"
+              }
+            },
             "description": "Tag details of a repository",
             "schema": {
               "$ref": "#/definitions/TagList"
@@ -796,11 +789,10 @@
     "/acr/v1/{name}/_tags/{reference}": {
       "get": {
         "tags": [
-          "AcrTag",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "Get tag attributes by tag",
-        "operationId": "Tag_GetAttributes",
+        "operationId": "ContainerRegistry_GetTagProperties",
         "x-ms-examples": {
           "Get tag attributes": {
             "$ref": "./examples/GetTagAttributes.json"
@@ -831,11 +823,10 @@
       },
       "patch": {
         "tags": [
-          "AcrTag",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "Update tag attributes",
-        "operationId": "Tag_UpdateAttributes",
+        "operationId": "ContainerRegistry_UpdateTagAttributes",
         "consumes": [
           "application/json"
         ],
@@ -857,7 +848,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The attributes are updated"
+            "description": "The attributes are updated",
+            "schema": {
+              "$ref": "#/definitions/TagAttributes"
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -869,11 +863,10 @@
       },
       "delete": {
         "tags": [
-          "AcrTag",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "Delete tag",
-        "operationId": "Tag_Delete",
+        "operationId": "ContainerRegistry_DeleteTag",
         "consumes": [
           "application/json"
         ],
@@ -894,6 +887,9 @@
           "202": {
             "description": "The tag is deleted"
           },
+          "404": {
+            "description": "The tag was not found"
+          },
           "default": {
             "description": "ACR error response describing why the operation failed.",
             "schema": {
@@ -906,15 +902,18 @@
     "/acr/v1/{name}/_manifests": {
       "get": {
         "tags": [
-          "AcrManifest",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "List manifests of a repository",
-        "operationId": "Manifests_GetList",
+        "operationId": "ContainerRegistry_GetManifests",
         "x-ms-examples": {
           "Get list of available manifests": {
             "$ref": "./examples/GetManifestList.json"
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "manifests",
+          "nextLinkName": "link"
         },
         "parameters": [
           {
@@ -932,6 +931,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "Link": {
+                "description": "next paginated result",
+                "type": "string"
+              }
+            },
             "description": "Returns a list of manifests",
             "schema": {
               "$ref": "#/definitions/AcrManifests"
@@ -946,14 +951,13 @@
         }
       }
     },
-    "/acr/v1/{name}/_manifests/{reference}": {
+    "/acr/v1/{name}/_manifests/{digest}": {
       "get": {
         "tags": [
-          "AcrManifest",
-          "AcrMetadata"
+          "Repository"
         ],
         "description": "Get manifest attributes",
-        "operationId": "Manifests_GetAttributes",
+        "operationId": "ContainerRegistry_GetManifestProperties",
         "x-ms-examples": {
           "Get manifest attributes": {
             "$ref": "./examples/GetManifestAttributes.json"
@@ -964,7 +968,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ImageReference"
+            "$ref": "#/parameters/Digest"
           }
         ],
         "responses": {
@@ -984,11 +988,10 @@
       },
       "patch": {
         "tags": [
-          "AcrManifest",
-          "AcrMetadata"
+          "Repository"
         ],
-        "description": "Update attributes of a manifest",
-        "operationId": "Manifests_UpdateAttributes",
+        "description": "Update properties of a manifest",
+        "operationId": "ContainerRegistry_UpdateManifestProperties",
         "consumes": [
           "application/json"
         ],
@@ -1002,7 +1005,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ImageReference"
+            "$ref": "#/parameters/Digest"
           },
           {
             "$ref": "#/parameters/ManifestAttributeValue"
@@ -1010,7 +1013,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The attributes are updated"
+            "description": "The attributes are updated",
+            "schema": {
+              "$ref": "#/definitions/ManifestAttributes"
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -1028,7 +1034,7 @@
           "RefreshToken"
         ],
         "description": "Exchange AAD tokens for an ACR refresh Token",
-        "operationId": "RefreshTokens_GetFromExchange",
+        "operationId": "Authentication_ExchangeAadAccessTokenForAcrRefreshToken",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -1040,18 +1046,12 @@
             "$ref": "#/parameters/Service"
           },
           {
-            "$ref": "#/parameters/Tenant"
-          },
-          {
-            "$ref": "#/parameters/RefreshToken"
-          },
-          {
             "$ref": "#/parameters/AccessToken"
           }
         ],
         "responses": {
           "200": {
-            "description": "Refresh token acquired",
+            "description": "ACR refresh token acquired",
             "schema": {
               "$ref": "#/definitions/RefreshToken"
             }
@@ -1078,21 +1078,11 @@
           "AccessToken"
         ],
         "description": "Exchange ACR Refresh token for an ACR Access Token",
-        "operationId": "AccessTokens_Get",
+        "operationId": "Authentication_ExchangeAcrRefreshTokenForAcrAccessToken",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
         "parameters": [
-          {
-            "name": "grant_type",
-            "in": "formData",
-            "description": "Grant type is expected to be refresh_token",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "refresh_token"
-            ]
-          },
           {
             "$ref": "#/parameters/Service"
           },
@@ -1105,15 +1095,32 @@
           },
           {
             "name": "refresh_token",
+            "x-ms-client-name": "acrRefreshToken",
             "in": "formData",
             "required": true,
             "description": "Must be a valid ACR refresh token",
             "type": "string"
+          },
+          {
+            "name": "grant_type",
+            "in": "formData",
+            "description": "Grant type is expected to be refresh_token",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "refresh_token",
+              "password"
+            ],
+            "x-ms-enum": {
+              "name": "TokenGrantType"
+            },
+            "x-accessibility": "internal",
+            "x-ms-client-default": "refresh_token"
           }
         ],
         "responses": {
           "200": {
-            "description": "Access token acquired",
+            "description": "ACR access token acquired",
             "schema": {
               "$ref": "#/definitions/AccessToken"
             }
@@ -1131,55 +1138,6 @@
             "$ref": "./examples/PostAccessToken.json"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "AcrToken",
-          "AccessToken",
-          "userLogin"
-        ],
-        "description": "Exchange Username, Password and Scope an ACR Access Token",
-        "operationId": "AccessTokens_GetFromLogin",
-        "parameters": [
-          {
-            "name": "service",
-            "in": "query",
-            "required": true,
-            "description": "Indicates the name of your Azure container registry.",
-            "type": "string"
-          },
-          {
-            "name": "scope",
-            "in": "query",
-            "required": true,
-            "description": "Expected to be a valid scope, and can be specified more than once for multiple scope requests. You can obtain this from the Www-Authenticate response header from the challenge.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Access token acquired",
-            "schema": {
-              "$ref": "#/definitions/AccessToken"
-            }
-          },
-          "default": {
-            "description": "ACR error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        },
-        "security": [
-          {
-            "registry_auth": []
-          }
-        ],
-        "x-ms-examples": {
-          "Get Access Token with username and password": {
-            "$ref": "./examples/GetAccessToken.json"
-          }
-        }
       }
     }
   },
@@ -1187,10 +1145,10 @@
     "/v2/{name}/blobs/uploads/?mode=resumable": {
       "post": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "description": "Initiate a resumable blob upload with an empty request body.",
-        "operationId": "Blob_StartUpload",
+        "operationId": "ContainerRegistryBlob_StartUpload",
         "x-ms-examples": {
           "Start a blob upload": {
             "$ref": "./examples/StartBlobUpload.json"
@@ -1234,10 +1192,10 @@
           "application/octet-stream"
         ],
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "description": "Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.",
-        "operationId": "Blob_GetChunk",
+        "operationId": "ContainerRegistryBlob_GetChunk",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -1284,7 +1242,7 @@
       },
       "head": {
         "tags": [
-          "Layer"
+          "ContainerRegistryBlob"
         ],
         "parameters": [
           {
@@ -1298,7 +1256,7 @@
           }
         ],
         "description": "Same as GET, except only the headers are returned.",
-        "operationId": "Blob_CheckChunk",
+        "operationId": "ContainerRegistryBlob_CheckChunkExists",
         "x-ms-examples": {
           "Get headers without blob Chunk": {
             "$ref": "./examples/CheckBlobChunk.json"
@@ -1331,36 +1289,59 @@
   },
   "definitions": {
     "RepositoryAttributes": {
+      "required": [
+        "registry",
+        "imageName",
+        "createdTime",
+        "lastUpdateTime",
+        "manifestCount",
+        "tagCount",
+        "changeableAttributes"
+      ],
+      "x-ms-client-name": "ContainerRepositoryProperties",
       "type": "object",
-      "description": "Repository attributes",
+      "description": "Properties of this repository.",
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry name"
+          "readOnly": true,
+          "description": "Registry login server.",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "readOnly": true,
+          "description": "Image name",
+          "x-ms-client-name": "name"
         },
         "createdTime": {
           "type": "string",
-          "description": "Image created time"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Image created time",
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
-          "description": "Image last update time"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Image last update time",
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "manifestCount": {
           "type": "integer",
+          "readOnly": true,
           "description": "Number of the manifests"
         },
         "tagCount": {
           "type": "integer",
+          "readOnly": true,
           "description": "Number of the tags"
         },
         "changeableAttributes": {
-          "description": "Changeable attributes",
-          "$ref": "#/definitions/RepositoryChangeableAttributes"
+          "description": "Writeable properties of the resource",
+          "$ref": "#/definitions/RepositoryChangeableAttributes",
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -1380,22 +1361,35 @@
       }
     },
     "TagList": {
+      "required": [
+        "registry",
+        "imageName",
+        "tags"
+      ],
       "description": "List of tag details",
+      "x-accessibility": "internal",
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry name"
+          "description": "Registry login server.",
+          "x-ms-client-name": "RegistryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "description": "Image name",
+          "x-ms-client-name": "repository"
         },
         "tags": {
           "type": "array",
           "description": "List of tag attribute details",
+          "x-ms-client-name": "TagAttributeBases",
+          "x-accessibility": "internal",
           "items": {
             "$ref": "#/definitions/TagAttributesBase"
           }
+        },
+        "link": {
+          "type": "string"
         }
       },
       "example": {
@@ -1432,19 +1426,30 @@
       }
     },
     "TagAttributes": {
+      "required": [
+        "registry",
+        "imageName",
+        "tag"
+      ],
+      "x-ms-client-name": "ArtifactTagProperties",
       "description": "Tag attributes",
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry name"
+          "readOnly": true,
+          "description": "Registry login server.",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "readOnly": true,
+          "description": "Image name",
+          "x-ms-client-name": "repositoryName"
         },
         "tag": {
-          "x-ms-client-name": "attributes",
+          "x-ms-client-flatten": true,
           "description": "List of tag attribute details",
+          "readOnly": true,
           "$ref": "#/definitions/TagAttributesBase"
         }
       },
@@ -1467,31 +1472,44 @@
       }
     },
     "TagAttributesBase": {
+      "required": [
+        "name",
+        "digest",
+        "createdTime",
+        "lastUpdateTime",
+        "changeableAttributes"
+      ],
       "description": "Tag attribute details",
+      "x-accessibility": "internal",
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Tag name"
         },
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Tag digest"
         },
         "createdTime": {
           "type": "string",
-          "description": "Tag created time"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Tag created time",
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
-          "description": "Tag last update time"
-        },
-        "signed": {
-          "type": "boolean",
-          "description": "Is signed"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Tag last update time",
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "changeableAttributes": {
           "$ref": "#/definitions/TagChangeableAttributes",
-          "description": "Tag Changeable attributes"
+          "description": "Writeable properties of the resource",
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -1508,27 +1526,247 @@
         "lastUpdateTime": "2018-08-10T17:28:44.1082945Z"
       }
     },
+    "TagOrderBy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "timedesc",
+        "timeasc"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactTagOrderBy",
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not provide an orderby value in the request."
+          },
+          {
+            "value": "timedesc",
+            "name": "LastUpdatedOnDescending",
+            "description": "Order tags by LastUpdatedOn field, from most recently updated to least recently updated."
+          },
+          {
+            "value": "timeasc",
+            "name": "LastUpdatedOnAscending",
+            "description": "Order tags by LastUpdatedOn field, from least recently updated to most recently updated."
+          }
+        ]
+      },
+      "x-accessibility": "public"
+    },
+    "ArtifactArchitecture": {
+      "type": "string",
+      "enum": [
+        "386",
+        "amd64",
+        "arm",
+        "arm64",
+        "mips",
+        "mipsle",
+        "mips64",
+        "mips64le",
+        "ppc64",
+        "ppc641e",
+        "riscv64",
+        "s390x",
+        "wasm"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "386",
+            "name": "I386",
+            "description": ""
+          },
+          {
+            "value": "amd64",
+            "name": "Amd64",
+            "description": ""
+          },
+          {
+            "value": "arm",
+            "name": "Arm",
+            "description": ""
+          },
+          {
+            "value": "arm64",
+            "name": "Arm64",
+            "description": ""
+          },
+          {
+            "value": "mips",
+            "name": "Mips",
+            "description": ""
+          },
+          {
+            "value": "mipsle",
+            "name": "MipsLe",
+            "description": ""
+          },
+          {
+            "value": "mips64",
+            "name": "Mips64",
+            "description": ""
+          },
+          {
+            "value": "mips64le",
+            "name": "Mips64Le",
+            "description": ""
+          },
+          {
+            "value": "ppc64",
+            "name": "Ppc64",
+            "description": ""
+          },
+          {
+            "value": "ppc64le",
+            "name": "Ppc64Le",
+            "description": ""
+          },
+          {
+            "value": "riscv64",
+            "name": "RiscV64",
+            "description": ""
+          },
+          {
+            "value": "s390x",
+            "name": "S390x",
+            "description": ""
+          },
+          {
+            "value": "wasm",
+            "name": "Wasm",
+            "description": ""
+          }
+        ]
+      },
+      "x-accessibility": "public"
+    },
+    "ArtifactOperatingSystem": {
+      "type": "string",
+      "enum": [
+        "aix",
+        "android",
+        "darwin",
+        "dragonfly",
+        "freebsd",
+        "illumos",
+        "ios",
+        "js",
+        "linux",
+        "netbsd",
+        "openbsd",
+        "plan9",
+        "solaris",
+        "windows"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactOperatingSystem",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "aix",
+            "name": "Aix",
+            "description": ""
+          },
+          {
+            "value": "android",
+            "name": "Android",
+            "description": ""
+          },
+          {
+            "value": "darwin",
+            "name": "Darwin",
+            "description": ""
+          },
+          {
+            "value": "dragonfly",
+            "name": "Dragonfly",
+            "description": ""
+          },
+          {
+            "value": "freebsd",
+            "name": "FreeBsd",
+            "description": ""
+          },
+          {
+            "value": "illumos",
+            "name": "Illumos",
+            "description": ""
+          },
+          {
+            "value": "ios",
+            "name": "iOS",
+            "description": ""
+          },
+          {
+            "value": "js",
+            "name": "JS",
+            "description": ""
+          },
+          {
+            "value": "linux",
+            "name": "Linux",
+            "description": ""
+          },
+          {
+            "value": "netbsd",
+            "name": "NetBsd",
+            "description": ""
+          },
+          {
+            "value": "openbsd",
+            "name": "OpenBsd",
+            "description": ""
+          },
+          {
+            "value": "plan9",
+            "name": "Plan9",
+            "description": ""
+          },
+          {
+            "value": "solaris",
+            "name": "Solaris",
+            "description": ""
+          },
+          {
+            "value": "windows",
+            "name": "Windows",
+            "description": ""
+          }
+        ]
+      },
+      "x-accessibility": "public"
+    },
     "AcrManifests": {
       "description": "Manifest attributes",
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry name"
+          "description": "Registry login server.",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
           "type": "string",
-          "description": "Image name"
+          "description": "Image name",
+          "x-ms-client-name": "repository"
         },
         "manifests": {
-          "x-ms-client-name": "ManifestsAttributes",
           "type": "array",
           "description": "List of manifests",
           "items": {
             "$ref": "#/definitions/ManifestAttributesBase",
             "description": "Manifest details"
           }
+        },
+        "link": {
+          "type": "string"
         }
       },
+      "x-accessibility": "internal",
       "example": {
         "registry": "registry",
         "imageName": "imageName",
@@ -1581,18 +1819,27 @@
       }
     },
     "ManifestAttributes": {
+      "required": [
+        "manifest"
+      ],
+      "x-ms-client-name": "ArtifactManifestProperties",
       "description": "Manifest attributes details",
       "properties": {
         "registry": {
-          "description": "Registry name",
-          "type": "string"
+          "description": "Registry login server.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
-          "description": "Image name",
-          "type": "string"
+          "description": "Repository name",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "repositoryName"
         },
         "manifest": {
-          "x-ms-client-name": "attributes",
+          "x-ms-client-flatten": true,
+          "readOnly": true,
           "description": "Manifest attributes",
           "$ref": "#/definitions/ManifestAttributesBase"
         }
@@ -1622,44 +1869,67 @@
       }
     },
     "ManifestAttributesBase": {
+      "required": [
+        "digest",
+        "createdTime",
+        "lastUpdateTime"
+      ],
       "type": "object",
       "description": "Manifest details",
+      "x-accessibility": "internal",
       "properties": {
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Manifest"
         },
         "imageSize": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Image size"
+          "description": "Image size",
+          "x-ms-client-name": "size"
         },
         "createdTime": {
           "type": "string",
-          "description": "Created time"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Created time",
+          "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
-          "description": "Last update time"
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Last update time",
+          "x-ms-client-name": "lastUpdatedOn"
         },
         "architecture": {
-          "type": "string",
-          "description": "CPU architecture"
+          "$ref": "#/definitions/ArtifactArchitecture",
+          "description": "CPU architecture",
+          "readOnly": true,
+          "x-nullable": true
         },
         "os": {
-          "type": "string",
-          "description": "Operating system"
+          "$ref": "#/definitions/ArtifactOperatingSystem",
+          "description": "Operating system",
+          "x-ms-client-name": "operatingSystem",
+          "readOnly": true,
+          "x-nullable": true
         },
-        "mediaType": {
-          "type": "string",
-          "description": "Media type"
-        },
-        "configMediaType": {
-          "type": "string",
-          "description": "Config blob media type"
+        "references": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.",
+          "x-ms-client-name": "relatedArtifacts",
+          "items": {
+            "$ref": "#/definitions/ManifestAttributes_manifest_references",
+            "description": "Manifest attributes details"
+          }
         },
         "tags": {
           "type": "array",
+          "readOnly": true,
           "description": "List of tags",
           "items": {
             "type": "string",
@@ -1668,7 +1938,8 @@
         },
         "changeableAttributes": {
           "$ref": "#/definitions/ManifestChangeableAttributes",
-          "description": "Changeable attributes"
+          "description": "Writeable properties of the resource",
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -1699,7 +1970,40 @@
           "description": "The refresh token to be used for generating access tokens",
           "type": "string"
         }
-      }
+      },
+      "x-accessibility": "internal",
+      "x-ms-client-name": "AcrRefreshToken"
+    },
+    "ManifestOrderBy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "timedesc",
+        "timeasc"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactManifestOrderBy",
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not provide an orderby value in the request."
+          },
+          {
+            "value": "timedesc",
+            "name": "LastUpdatedOnDescending",
+            "description": "Order manifests by LastUpdatedOn field, from most recently updated to least recently updated."
+          },
+          {
+            "value": "timeasc",
+            "name": "LastUpdatedOnAscending",
+            "description": "Order manifest by LastUpdatedOn field, from least recently updated to most recently updated."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Sort options for ordering manifests in a collection.",
+      "x-accessibility": "public"
     },
     "AccessToken": {
       "type": "object",
@@ -1708,7 +2012,9 @@
           "description": "The access token for performing authenticated requests",
           "type": "string"
         }
-      }
+      },
+      "x-accessibility": "internal",
+      "x-ms-client-name": "AcrAccessToken"
     },
     "AcrErrors": {
       "description": "Acr error response describing why the operation failed",
@@ -1724,6 +2030,7 @@
     },
     "RepositoryTags": {
       "description": "Result of the request to list tags of the image",
+      "x-accessibility": "internal",
       "properties": {
         "name": {
           "type": "string",
@@ -1748,6 +2055,7 @@
     },
     "ImageSignature": {
       "description": "Signature of a signed manifest",
+      "x-accessibility": "internal",
       "properties": {
         "header": {
           "description": "A JSON web signature",
@@ -1779,6 +2087,7 @@
     },
     "JWK": {
       "description": "A JSON web signature",
+      "x-accessibility": "internal",
       "properties": {
         "jwk": {
           "$ref": "#/definitions/JWKHeader"
@@ -1791,6 +2100,7 @@
     },
     "JWKHeader": {
       "description": "JSON web key parameter",
+      "x-accessibility": "internal",
       "properties": {
         "crv": {
           "type": "string",
@@ -1816,6 +2126,7 @@
     },
     "History": {
       "description": "A list of unstructured historical data for v1 compatibility",
+      "x-accessibility": "internal",
       "properties": {
         "v1Compatibility": {
           "type": "string",
@@ -1831,13 +2142,16 @@
       "properties": {
         "repositories": {
           "type": "array",
-          "x-ms-client-name": "Names",
           "description": "Repository names",
           "items": {
             "type": "string"
           }
+        },
+        "link": {
+          "type": "string"
         }
       },
+      "x-accessibility": "internal",
       "example": {
         "repositories": [
           "production/alpine",
@@ -1846,21 +2160,26 @@
       }
     },
     "DeletedRepository": {
+      "x-ms-client-name": "DeleteRepositoryResult",
       "description": "Deleted repository",
       "properties": {
         "manifestsDeleted": {
           "type": "array",
+          "readOnly": true,
           "description": "SHA of the deleted image",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "deletedManifests"
         },
         "tagsDeleted": {
           "type": "array",
+          "readOnly": true,
           "description": "Tag of the deleted image",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "deletedTags"
         }
       }
     },
@@ -1883,6 +2202,7 @@
     },
     "FsLayer": {
       "description": "Image layer information",
+      "x-accessibility": "internal",
       "properties": {
         "blobSum": {
           "type": "string",
@@ -1895,6 +2215,7 @@
     },
     "Descriptor": {
       "description": "Docker V2 image layer descriptor including config and layers",
+      "x-accessibility": "internal",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -1928,22 +2249,29 @@
       }
     },
     "TagChangeableAttributes": {
+      "description": "Changeable attributes",
+      "x-ms-client-name": "TagWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       },
       "example": {
@@ -1966,19 +2294,27 @@
       }
     },
     "ManifestAttributes_manifest_references": {
+      "required": [
+        "digest"
+      ],
+      "x-ms-client-name": "ArtifactManifestPlatform",
       "description": "Manifest attributes details",
       "properties": {
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Manifest digest"
         },
         "architecture": {
-          "type": "string",
+          "$ref": "#/definitions/ArtifactArchitecture",
+          "readOnly": true,
           "description": "CPU architecture"
         },
         "os": {
-          "type": "string",
-          "description": "Operating system"
+          "$ref": "#/definitions/ArtifactOperatingSystem",
+          "readOnly": true,
+          "description": "Operating system",
+          "x-ms-client-name": "operatingSystem"
         }
       },
       "example": {
@@ -2021,22 +2357,28 @@
     },
     "ManifestChangeableAttributes": {
       "description": "Changeable attributes",
+      "x-ms-client-name": "ManifestWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         },
         "quarantineState": {
           "type": "string",
@@ -2060,22 +2402,28 @@
     },
     "RepositoryChangeableAttributes": {
       "description": "Changeable attributes for Repository",
+      "x-ms-client-name": "RepositoryWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         },
         "teleportEnabled": {
           "type": "boolean",
@@ -2092,6 +2440,7 @@
     },
     "Manifest": {
       "description": "Returns the requested manifest file",
+      "x-accessibility": "internal",
       "properties": {
         "schemaVersion": {
           "type": "integer",
@@ -2101,6 +2450,7 @@
     },
     "ManifestWrapper": {
       "description": "Returns the requested manifest file",
+      "x-accessibility": "internal",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2171,6 +2521,7 @@
     "ManifestList": {
       "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.list.v2+json",
       "description": "Returns the requested Docker multi-arch-manifest file",
+      "x-accessibility": "internal",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2191,6 +2542,7 @@
       ]
     },
     "ManifestListAttributes": {
+      "x-accessibility": "internal",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2212,6 +2564,7 @@
     },
     "Platform": {
       "description": "The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH",
+      "x-accessibility": "internal",
       "properties": {
         "architecture": {
           "type": "string",
@@ -2247,6 +2600,7 @@
     },
     "V2Manifest": {
       "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.v2+json",
+      "x-accessibility": "internal",
       "description": "Returns the requested Docker V2 Manifest file",
       "properties": {
         "mediaType": {
@@ -2289,6 +2643,7 @@
     },
     "OCIManifest": {
       "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
+      "x-accessibility": "internal",
       "description": "Returns the requested OCI Manifest file",
       "properties": {
         "config": {
@@ -2314,6 +2669,7 @@
     },
     "OCIIndex": {
       "x-ms-discriminator-value": "application/vnd.oci.image.index.v1+json",
+      "x-accessibility": "internal",
       "description": "Returns the requested OCI index file",
       "properties": {
         "manifests": {
@@ -2336,6 +2692,7 @@
     "V1Manifest": {
       "description": "Returns the requested V1 manifest file",
       "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
+      "x-accessibility": "internal",
       "properties": {
         "architecture": {
           "type": "string",
@@ -2379,6 +2736,7 @@
     },
     "Annotations": {
       "description": "Additional information provided through arbitrary metadata.",
+      "x-accessibility": "internal",
       "type": "object",
       "x-nullable": true,
       "additionalProperties": {
@@ -2492,6 +2850,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "DigestReference": {
+      "name": "reference",
+      "in": "path",
+      "description": "Digest of a BLOB",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "BlobQueryDigest": {
       "name": "digest",
       "in": "query",
@@ -2564,16 +2930,15 @@
     },
     "Grant_type": {
       "name": "grant_type",
-      "description": "Can take a value of access_token_refresh_token, or access_token, or refresh_token",
+      "description": "Can take a value of access_token",
       "type": "string",
       "in": "formData",
       "required": true,
       "enum": [
-        "access_token_refresh_token",
-        "access_token",
-        "refresh_token"
+        "access_token"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-accessibility": "internal"
     },
     "Service": {
       "name": "service",
@@ -2609,8 +2974,9 @@
     },
     "AccessToken": {
       "name": "access_token",
+      "x-ms-client-name": "aadAccessToken",
       "in": "formData",
-      "required": false,
+      "required": true,
       "description": "AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.",
       "type": "string",
       "x-ms-parameter-location": "method"
