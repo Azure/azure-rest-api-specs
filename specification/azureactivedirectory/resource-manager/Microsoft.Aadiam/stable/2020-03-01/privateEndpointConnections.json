@@ -84,7 +84,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "operationId": "PrivateEndpointConnections_Put",
+        "operationId": "PrivateEndpointConnections_Create",
         "x-ms-examples": {
           "AadiamPutPrivateEndpointConnection": {
             "$ref": "./examples/AzureADPrivateEndpointConnectionsCreate.json"
@@ -163,6 +163,9 @@
         ],
         "responses": {
           "200": {
+            "description": "The private endpoint connection does not exist."
+          },
+          "204": {
             "description": "The private endpoint connection does not exist."
           },
           "default": {
@@ -309,7 +312,8 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
-        }
+        },
+        "nextLink": "string"
       },
       "description": "A list of private link resources"
     },
