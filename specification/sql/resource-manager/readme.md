@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-preview-2021-05` is specified on t
 input-file:
   - Microsoft.Sql/preview/2021-05-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2021-05-01-preview/BlobAuditing.json
+  - Microsoft.Sql/preview/2021-05-01-preview/ConnectionPolicies.json
   - Microsoft.Sql/preview/2021-05-01-preview/DataWarehouseUserActivities.json
   - Microsoft.Sql/preview/2021-05-01-preview/DatabaseAdvisors.json
   - Microsoft.Sql/preview/2021-05-01-preview/DatabaseAutomaticTuning.json
