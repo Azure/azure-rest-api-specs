@@ -1668,6 +1668,122 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_GrantAccess",
+        "description": "Grants access to a diskRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Grants access to a diskRestorePoint.": {
+            "$ref": "./examples/BeginGetAccessDiskRestorePoint.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_RevokeAccess",
+        "description": "Revokes access to a diskRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Revokes access to a diskRestorePoint.": {
+            "$ref": "./examples/EndGetAccessDiskRestorePoint.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
