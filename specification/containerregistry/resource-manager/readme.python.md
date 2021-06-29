@@ -27,6 +27,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-2021-06-preview
   - tag: package-2020-11-preview
   - tag: package-2019-12-preview
   - tag: package-2019-06-preview
@@ -42,6 +43,7 @@ batch:
 ```yaml $(python) && $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2021-06-preview-only
   - tag: package-2020-11-preview-only
   - tag: package-2019-12-preview-only
   - tag: package-2019-06-preview-only
@@ -60,6 +62,33 @@ output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregis
 clear-output-folder: false
 perform-load: false
 ```
+
+### Tag: package-2021-06-preview-only and python
+
+These settings apply only when `--tag=package-2021-06-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-06-preview-only' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2021_06_01_preview
+  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_06_01_preview
+namespace: azure.mgmt.containerregistry.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_06_01_preview
+```
+
+### Tag: package-2021-06-preview and python
+
+These settings apply only when `--tag=package-2021-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-06-preview' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2021_06_01_preview
+  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_06_01_preview
+namespace: azure.mgmt.containerregistry.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_06_01_preview
+```
+
 ### Tag: package-2020-11-preview-only and python
 
 These settings apply only when `--tag=package-2020-11-preview-only --python` is specified on the command line.
