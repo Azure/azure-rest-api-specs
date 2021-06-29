@@ -39,6 +39,15 @@ input-file:
   - Microsoft.Elastic/preview/2020-07-01-preview/elastic.json
 ```
 
+### Tag: package-2020-07-01
+
+These settings apply only when `--tag=package-2020-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-01'
+input-file:
+  - Microsoft.Elastic/stable/2020-07-01/elastic.json
+```
+
 ---
 
 # Code Generation
@@ -68,6 +77,13 @@ directive:
     where:
       - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/stable/2020-07-01/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+
 ```
 
 ## Go
