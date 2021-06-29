@@ -504,6 +504,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPoolChildResource"
+        ],
+        "operationId": "KustoPoolChildResource_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolDatabasesCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolDatabasesCheckNameAvailability.json"
+          },
+          "KustoPoolAttachedDatabaseConfigurationCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the Kusto Pool child resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseCheckNameRequest"
+            },
+            "description": "The name of the Kusto Pool child resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listLanguageExtensions": {
       "post": {
         "tags": [
@@ -3638,6 +3695,32 @@
         "type"
       ],
       "description": "The object sent for a kusto pool check name availability request."
+    },
+    "DatabaseCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/databases",
+            "Microsoft.Synapse/workspaces/kustoPools/attachedDatabaseConfigurations"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.Synapse/workspaces/kustoPools/databases."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a database check name availability request."
     },
     "DataConnectionCheckNameRequest": {
       "type": "object",
