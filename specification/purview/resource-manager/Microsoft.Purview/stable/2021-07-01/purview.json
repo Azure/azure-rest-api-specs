@@ -774,6 +774,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -1905,20 +1906,6 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -1934,6 +1921,20 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
