@@ -346,6 +346,9 @@
         ],
         "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
         "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -364,7 +367,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -841,6 +844,24 @@
     }
   },
   "definitions": {
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results (if there are any).",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private link resources"
+    },
     "OperationStatus": {
       "description": "The status of operation.",
       "type": "object",
