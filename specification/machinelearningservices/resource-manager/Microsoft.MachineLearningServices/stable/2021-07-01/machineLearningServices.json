@@ -4870,6 +4870,7 @@
     "InstanceTypeSchema": {
       "type": "object",
       "description": "Instance type schema.",
+      "additionalProperties": false,
       "properties": {
           "nodeSelector": {
             "type": "object",
@@ -4880,7 +4881,8 @@
           },
           "resources": {
             "type": "object",
-            "description": "Resource of an instance type",
+            "additionalProperties": false,
+            "description": "Resource requests/limits for this instance type",
             "properties": {
               "requests": {
                 "$ref": "#/definitions/InstanceResourceSchema"
@@ -4894,19 +4896,19 @@
     },
     "InstanceResourceSchema": {
       "type": "object",
-      "description": "Instance resource schema.",
+      "description": "Resource requests/limits for this instance type",
       "properties":{
         "cpu": {
           "type": "string",
-          "description": "CPU count"
+          "description": "Number of vCPUs requested for this instance type"
         },
         "memory": {
           "type": "string",
-          "description": "amount of memory"
+          "description": "Memory size requested for this instance type"
         },
         "nvidia.com/gpu": {
           "type": "string",
-          "description": "GPU count"
+          "description": "Number of Nvidia GPU cards requested for this instance_type"
         }
       }
     },
