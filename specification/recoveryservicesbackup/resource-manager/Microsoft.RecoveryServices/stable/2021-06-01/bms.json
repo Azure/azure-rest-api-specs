@@ -6171,7 +6171,7 @@
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
     },
-    "IdentityInfo": {
+     "IdentityInfo": {
       "description": "Encapsulates Managed Identity related information",
       "type": "object",
       "properties": {
@@ -6184,11 +6184,19 @@
           "type": "boolean"
         },
         "managedIdentityArmUrl": {
-          "description": "Managed identity ARM URL\r\nOptional: Might not be required in the case of system assigned managed identity",
+          "description": "Managed Identity ARM URL\r\nOptional: Might not be required in the case of system assigned managed identity",
           "type": "string"
         },
         "managedIdentityUrl": {
           "description": "Managed Identity URL\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Managed Identity Tenant ID\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "Managed Identity Principal ID\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
           "type": "string"
         }
       }
