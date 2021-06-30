@@ -1593,7 +1593,7 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/EnableStatusEnum",
           "readOnly": true,
-          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+          "description": "Whether or not public network access is allowed for this server. Value is 'Disabled' when server has VNet integration."
         },
         "delegatedSubnetResourceId": {
           "type": "string",
@@ -1613,13 +1613,15 @@
           "type": "string",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityMode",
             "modelAsString": true
           },
-          "description": "Whether or not high availability is enabled or not for a server."
+          "description": "High availability mode for a server."
         },
         "state": {
           "type": "string",
@@ -1771,13 +1773,6 @@
             "update",
             "read"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "The properties of a server."
@@ -1797,6 +1792,13 @@
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",

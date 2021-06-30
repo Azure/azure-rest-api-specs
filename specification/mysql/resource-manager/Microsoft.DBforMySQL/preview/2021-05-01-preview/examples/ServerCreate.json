@@ -12,6 +12,7 @@
       "properties": {
         "administratorLogin": "cloudsa",
         "administratorLoginPassword": "your_password",
+        "availabilityZone": "1",
         "version": "5.7",
         "createMode": "Default",
         "storage": {
@@ -24,7 +25,8 @@
           "geoRedundantBackup": "Disabled"
         },
         "highAvailability": {
-          "mode": "SameZone"
+          "mode": "ZoneRedundant",
+          "standbyAvailabilityZone": "3"
         }
       },
       "location": "southeastasia",
@@ -69,9 +71,9 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "SameZone",
+            "mode": "ZoneRedundant",
             "state": "Healthy",
-            "standbyAvailabilityZone": "1"
+            "standbyAvailabilityZone": "3"
           }
         },
         "location": "Southeast Asia",
@@ -118,9 +120,9 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "SameZone",
+            "mode": "ZoneRedundant",
             "state": "Healthy",
-            "standbyAvailabilityZone": "1"
+            "standbyAvailabilityZone": "3"
           }
         },
         "location": "Southeast Asia",
