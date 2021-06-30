@@ -3,78 +3,32 @@
     "api-version": "2017-04-01-preview",
     "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
     "location": "West US",
-    "streamingJob": {
-      "properties": {
-        "sku": {
-          "name": "Standard"
-        },
-        "eventsOutOfOrderPolicy": "Drop",
-        "outputErrorPolicy": "Drop",
-        "eventsOutOfOrderMaxDelayInSeconds": 0,
-        "eventsLateArrivalMaxDelayInSeconds": 5,
-        "dataLocale": "en-US",
-        "compatibilityLevel": "1.0",
-        "inputs": [
-          {
-            "properties": {
-              "type": "Stream",
-              "datasource": {
-                "type": "Microsoft.Storage/Blob",
-                "properties": {
-                  "storageAccounts": [
-                    {
-                      "accountName": "someAccountName",
-                      "accountKey": "someAccountKey=="
-                    }
-                  ],
-                  "container": "state",
-                  "pathPattern": "{date}/{time}",
-                  "dateFormat": "yyyy/MM/dd",
-                  "timeFormat": "HH",
-                  "sourcePartitionCount": 16
-                }
-              },
-              "serialization": {
-                "type": "Csv",
-                "properties": {
-                  "fieldDelimiter": ",",
-                  "encoding": "UTF8"
-                }
-              }
+    "compileQuery": {
+      "query": "SELECT\r\n    *\r\nINTO\r\n    [output1]\r\nFROM\r\n    [input1]",
+      "inputs": [
+        {
+          "name": "input1",
+          "type": "Stream"
+        }
+      ],
+      "functions": [
+        {
+          "name": "function1",
+          "type": "Scalar",
+          "bindingType": "Microsoft.StreamAnalytics/JavascriptUdf",
+          "inputs": [
+            {
+              "dataType": "any",
+              "isConfigurationParameter": null
             }
+          ],
+          "output": {
+            "dataType": "bigint"
           }
-        ],
-        "transformation": {
-          "properties": {
-            "streamingUnits": 1,
-            "query": "Select Id, Name from inputtest"
-          },
-          "name": "transformationtest"
-        },
-        "outputs": [
-          {
-            "properties": {
-              "datasource": {
-                "type": "Raw",
-                "properties": {
-                  "payloadUri": "http://myoutput.com"
-                }
-              },
-              "serialization": {
-                "type": "Json"
-              }
-            },
-            "name": "outputtest"
-          }
-        ],
-        "functions": []
-      },
-      "location": "West US",
-      "tags": {
-        "key1": "value1",
-        "randomKey": "randomValue",
-        "key3": "value3"
-      }
+        }
+      ],
+      "jobType": "Cloud",
+      "compatibilityLevel": "1.2"
     }
   },
   "responses": {

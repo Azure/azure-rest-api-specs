@@ -84,13 +84,13 @@
         },
         "parameters": [
           {
-            "name": "streamingJob",
+            "name": "testQuery",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+              "$ref": "#/definitions/TestQuery"
             },
-            "description": "A streaming job object. This object defines the input, output, and transformation for the query testing."
+            "description": "The query testing object that defines the input, output, and transformation for the query testing."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
@@ -139,13 +139,13 @@
         },
         "parameters": [
           {
-            "name": "streamingJob",
+            "name": "compileQuery",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+              "$ref": "#/definitions/CompileQuery"
             },
-            "description": "A streaming job object. This object defines the input, output, and transformation for the query compilation."
+            "description": "The query compilation object which defines the input, output, and transformation for the query compilation."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
@@ -374,6 +374,36 @@
         }
       }
     },
+    "TestQuery": {
+      "description": "The request object for query testing.",
+      "type": "object",
+      "properties": {
+        "diagnostics": {
+          "description": "Diagnostics information related to query testing.",
+          "type": "object",
+          "properties": {
+            "writeUri": {
+              "description": "The SAS URI to the container or directory.",
+              "type": "string"
+            },
+            "path": {
+              "description": "The path to the subdirectory.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "writeUri"
+          ]
+        },
+        "streamingJob": {
+          "description": "Stream analytics job object which defines the input, output, and transformation for the query testing.",
+          "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+        }
+      },
+      "required": [
+        "streamingJob"
+      ]
+    },
     "QueryTestingResult": {
       "description": "The result of the query testing request.",
       "allOf": [
@@ -435,6 +465,107 @@
           }
         ]
       }
+    },
+    "CompileQuery": {
+      "description": "The query compilation object which defines the input, output, and transformation for the query compilation.",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query to compile.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The inputs for the query compilation.",
+          "type": "array",
+          "items": {
+            "description": "An input for the query compilation.",
+            "$ref": "#/definitions/QueryInput"
+          }
+        },
+        "functions": {
+          "description": "The functions for the query compilation.",
+          "type": "array",
+          "items": {
+            "description": "A function for the query compilation.",
+            "$ref": "#/definitions/QueryFunction"
+          }
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Describes the type of the job. Valid values are `Cloud` and 'Edge'.",
+          "enum": [
+            "Cloud",
+            "Edge"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
+        },
+        "compatibilityLevel": {
+          "description": "The query to compile.",
+          "$ref": "./streamingjobs.json#/definitions/CompatibilityLevel"
+        }
+      },
+      "required": [
+        "query",
+        "jobType"
+      ]
+    },
+    "QueryInput": {
+      "description": "An input for the query compilation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the input.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the input, can be Stream or Reference.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "QueryFunction": {
+      "description": "A function for the query compilation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the function.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the function.",
+          "type": "string"
+        },
+        "bindingType": {
+          "description": "The type of the function binding.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The inputs for the function.",
+          "type": "array",
+          "items": {
+            "description": "An input for the function.",
+            "$ref": "./functions.json#/definitions/FunctionInput"
+          }
+        },
+        "output": {
+          "description": "An output for the function.",
+          "$ref": "./functions.json#/definitions/FunctionOutput"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "bindingType",
+        "inputs",
+        "output"
+      ]
     },
     "QueryCompilationResult": {
       "description": "The result of the query compilation request.",
