@@ -780,6 +780,7 @@
       }
     },
     "PrivateLinkScopesResource": {
+      "type":"object",
       "properties": {
         "id": {
           "type": "string",
@@ -823,17 +824,20 @@
       "description": "An azure resource object"
     },
     "TagsResource": {
+      "type": "object",
       "properties": {
         "tags": {
           "additionalProperties": {
             "type": "string"
           },
+          "type": "object",
           "description": "Resource tags"
         }
       },
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
     },
     "AzureMonitorPrivateLinkScope": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -853,6 +857,7 @@
     },
     "AzureMonitorPrivateLinkScopeProperties": {
       "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
