@@ -988,6 +988,18 @@
         "tier": {
           "description": "The Sku tier.",
           "type": "string"
+        },
+        "family": {
+          "description": "The sku family",
+          "type": "string"
+        },
+        "size": {
+          "description": "The sku size",
+          "type": "string"
+        },
+        "capacity": {
+          "description": "The sku capacity",
+          "type": "string"
         }
       }
     },
@@ -1328,6 +1340,60 @@
               }
             }
           }
+        },
+        "moveDetails": {
+          "description": "Move Details of the Azure Resource",
+          "type": "object",
+          "properties": {
+            "operationId": {
+              "description": "OperationId of the Resource Move Operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "startTimeUtc": {
+              "description": "Start Time of the Resource Move Operation",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "completionTimeUtc": {
+              "description": "End Time of the Resource Move Operation",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "sourceResourceId": {
+              "description": "Source Resource of the Resource Move Operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "targetResourceId": {
+              "description": "Target Resource of the Resource Move Operation",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "moveState": {
+          "description": "The State of the Resource after the move operation",
+          "type": "string",
+          "readOnly": "true",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "PrepareFailed",
+            "CommitFailed",
+            "PrepareTimedout",
+            "CommitTimedout",
+            "MoveSucceeded",
+            "Failure",
+            "CriticalFailure",
+            "PartialSuccess"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceMoveState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1399,6 +1465,21 @@
         },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnection"
+        },
+        "name": {
+          "description": "The name of the private Endpoint Connection",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type, which will be of the format, Microsoft.RecoveryServices/vaults/privateEndpointConnections",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the private Endpoint connection",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1643,6 +1724,11 @@
         },
         "target": {
           "description": "The error target.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "innerError": {
+          "description": "Service specific error for debugging",
           "readOnly": true,
           "type": "string"
         }
