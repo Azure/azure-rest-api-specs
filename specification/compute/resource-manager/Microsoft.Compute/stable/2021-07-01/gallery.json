@@ -1761,6 +1761,9 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/SharingProfile"
+        },
+        "softDeletePolicy": {
+          "$ref": "#/definitions/SoftDeletePolicy"
         }
       },
       "description": "Describes the properties of a Shared Image Gallery."
@@ -1823,6 +1826,15 @@
           "description": "A list of subscription/tenant ids the gallery is aimed to be shared to."
         }
       }
+    },
+    "SoftDeletePolicy": {
+      "properties": {
+        "isSoftDeleteEnabled": {
+          "type": "boolean",
+          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time"
+        }
+      },
+      "description": "Contains information about the soft deletion policy of the gallery"
     },
     "GalleryApplication": {
       "properties": {
