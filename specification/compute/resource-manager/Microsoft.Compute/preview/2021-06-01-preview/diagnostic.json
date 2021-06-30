@@ -139,6 +139,9 @@
         ],
         "operationId": "Diagnostics_List",
         "description": "Lists all available Compute diagnostics for a subscription in a location.",
+        "x-ms-pageable": {
+          "nextLinkName":  null
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -207,6 +210,7 @@
     },
     "ComputeDiagnosticBase": {
       "description": "Contains metadata of a diagnostic type",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Identifier for the type of diagnostic",
@@ -216,6 +220,10 @@
           "description": "Friendly name for the type of diagnostic",
           "type": "string"
         },
+        "type": {
+          "description": "Type of the diagnostic",
+          "type": "string"
+        }
         "properties": {
           "$ref": "#/definitions/DiagnosticProperties"
         }
@@ -230,18 +238,14 @@
             "type": "string"
           },
           "description": "Describes what are the supported resource types for a diagnostic",
-          "x-ms-examples": [ "VMs" ]
+          "x-ms-examples": [ "Microsoft.Compute/virtualMachines" ]
         }
       }
     },
     "RunDiskInspectionInput": {
       "properties": {
-        "resourceGroup": {
-          "description": "Resource Group name.",
-          "type": "string"
-        },
-        "virtualMachineName": {
-          "description": "Virtual machine name.",
+        "resourceId": {
+          "description": "Qualified name of the resource.",
           "type": "string"
         },
         "manifest": {
@@ -255,8 +259,7 @@
         }
       },
       "required": [
-        "resourceGroup",
-        "virtualMachineName",
+        "resourceId",
         "manifest",
         "uploadSasUri"
       ],
