@@ -624,6 +624,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "Gets list of private endpoint connections on a private link scope.": {
             "$ref": "./examples/PrivateEndpointConnectionList.json"
@@ -1156,6 +1159,11 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "List of private endpoint connection associated with the specified storage account"
