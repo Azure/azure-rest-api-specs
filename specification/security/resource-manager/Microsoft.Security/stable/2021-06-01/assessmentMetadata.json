@@ -520,27 +520,42 @@
         "severity",
         "assessmentType"
       ]
-    }
-  },
-  "SecurityAssessmentMetadataPropertiesResponse": {
-    "allof": [{ "$ref": "#/definitions/SecurityAssessmentMetadataProperties" }],
-    "properties": {
+    },
+    "SecurityAssessmentMetadataPropertiesResponse": {
+      "allof": [ { "$ref": "#/definitions/SecurityAssessmentMetadataProperties" } ],
+      "properties": {
         "publishDates": {
-            "type": "object",
-            "properties": {
-              "PublicProd": { "$ref": "#/definitions/PublishDates" },
-              "Fairfax": { "$ref": "#/definitions/PublishDates" },
-              "MoonCake": { "$ref": "#/definitions/PublishDates" },
-              "USSec": { "$ref": "#/definitions/PublishDates" },
-              "USNat": { "$ref": "#/definitions/PublishDates" }
-            }
+          "type": "object",
+          "properties": {
+            "PublicProd": { "$ref": "#/definitions/PublishDates" },
+            "Fairfax": { "$ref": "#/definitions/PublishDates" },
+            "MoonCake": { "$ref": "#/definitions/PublishDates" },
+            "USSec": { "$ref": "#/definitions/PublishDates" },
+            "USNat": { "$ref": "#/definitions/PublishDates" }
+          }
         },
         "plannedDeprecationDate": {
           "type": "string",
           "pattern": "^[0-9]{2}\/[0-9]{4}$"
         }
+      }
+    },
+    "PublishDates": {
+      "properties": {
+        "GA": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        },
+        "Public": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        }
+      },
+      "required": [
+        "Public"
+      ]
     }
-	},
+  },
   "parameters": {
     "AssessmentsMetadataName": {
       "name": "assessmentMetadataName",
@@ -570,20 +585,5 @@
       },
       "x-ms-parameter-location": "method"
     }
-  },
-  "PublishDates": {
-    "properties": {
-      "GA": {
-        "type": "string",
-        "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-      },
-      "Public": {
-        "type": "string",
-        "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-      }
-    },
-    "required": [
-      "Public"
-    ]
-	}
+  }
 }
