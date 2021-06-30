@@ -17,7 +17,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 
 directive:
-  - from: scheduledQueryRule_API.json
+  - from: scheduledQueryRule_API.json # this is to resolve the duplicated schema issue in this swagger
     where: "$.definitions.Resource"
     transform: >
       $["x-ms-client-name"] = "TrackedEntityResource";
