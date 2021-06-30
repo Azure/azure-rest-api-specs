@@ -68,6 +68,7 @@ To see additional help and options, run:
 These are the global settings for the API.
 
 ``` yaml
+title: Azure Migrate V2
 openapi-type: arm
 tag: package-2019-10
 ```
