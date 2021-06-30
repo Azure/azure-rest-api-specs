@@ -22,11 +22,6 @@ To see additional help and options, run:
 
 ### Basic Information
 
-There are the global settings for the Azure Monitor Control Service (AMCS) extension.
-``` yaml $(AMCS)
-tag: package-2021-04-only
-```
-
 These are the global settings for the MonitorClient API.
 
 ``` yaml !$(python) || !$(track2)
@@ -712,6 +707,10 @@ directive:
     where: $.paths
     from: activityLogAlerts_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scheduledQueryRule_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
@@ -722,6 +721,9 @@ directive:
     reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
   - suppress: DefaultErrorResponseSchema
     from: activityLogAlerts_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: metricNamespaces_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: DefaultErrorResponseSchema
     from: metrics_API.json
@@ -736,11 +738,15 @@ directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
   transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+  reason: Missing kind, etag
 ```
 
-``` yaml !$(python) && !$(go) && !$(java)
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
 directive:
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: activityLogAlerts_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
@@ -754,10 +760,6 @@ directive:
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: scheduledQueryRule_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
