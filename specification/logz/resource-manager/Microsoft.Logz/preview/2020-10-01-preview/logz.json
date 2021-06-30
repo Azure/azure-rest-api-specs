@@ -1351,6 +1351,368 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/accounts/{subAccountName}/vmHostPayload": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "Returns the payload that needs to be passed as a request for installing Logz.io agent on a VM.",
+        "operationId": "SubAccount_VMHostPayload",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMExtensionPayload"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubAccount_VMHosts_Payload": {
+            "$ref": "./examples/SubAccount_VMHosts_Payload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/accounts/{subAccountName}/vmHostUpdate": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "Sending request to update the collection when Logz.io agent has been installed on a VM for a given monitor.",
+        "operationId": "SubAccount_ListVmHostUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body to update the collection for agent installed in the given monitor.",
+            "schema": {
+              "$ref": "#/definitions/VMHostUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SubAccount_VMHosts_Update": {
+            "$ref": "./examples/SubAccount_VMHosts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/accounts/{subAccountName}/listVMHosts": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "List the compute resources currently being monitored by the Logz sub account resource.",
+        "operationId": "SubAccount_ListVMHosts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SubAccount_VMHosts_List": {
+            "$ref": "./examples/SubAccount_VMHosts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/vmHostPayload": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "Returns the payload that needs to be passed in the request body for installing Logz.io agent on a VM.",
+        "operationId": "Monitor_VMHostPayload",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMExtensionPayload"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MainAccount_VMHosts_Payload": {
+            "$ref": "./examples/MainAccount_VMHosts_Payload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/vmHostUpdate": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "Sending request to update the collection when Logz.io agent has been installed on a VM for a given monitor.",
+        "operationId": "Monitor_ListVmHostUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body to update the collection for agent installed in the given monitor.",
+            "schema": {
+              "$ref": "#/definitions/VMHostUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MainAccount_VMHosts_Update": {
+            "$ref": "./examples/MainAccount_VMHosts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/listVMHosts": {
+      "post": {
+        "tags": [
+          "VM_Host"
+        ],
+        "summary": "List the compute resources currently being monitored by the Logz main account resource.",
+        "operationId": "Monitor_ListVMHosts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MainAccount_VMHosts_List": {
+            "$ref": "./examples/MainAccount_VMHosts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/listUserRoles": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List the user's roles configured on Logz.io side for the account corresponding to the monitor resource.",
+        "operationId": "Monitors_ListUserRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserRoleListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MainAccount_VMHosts_Update": {
+            "$ref": "./examples/MainAccount_listUserRoles.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1472,6 +1834,7 @@
         "Deleted",
         "NotSpecified"
       ],
+      "description": "Flag specifying if the resource provisioning state as tracked by ARM.",
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1517,6 +1880,10 @@
         },
         "enterpriseAppId": {
           "description": "The Id of the Enterprise App used for Single sign on.",
+          "type": "string"
+        },
+        "singleSignOnUrl": {
+          "description": "The login URL specific to this Logz Organization.",
           "type": "string"
         }
       }
@@ -1789,6 +2156,9 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "$ref": "#/definitions/LogRules"
         },
@@ -1913,6 +2283,131 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogzSingleSignOnResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "VMExtensionPayload": {
+      "description": "Response of payload to be passed while installing VM agent.",
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "description": "API Key corresponding to the resource.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "region": {
+          "description": "Logz.io region where the resource has been created.",
+          "type": "string"
+        }
+      }
+    },
+    "VMHostUpdateState": {
+      "description": "Various states of the updating vm extension on resource",
+      "enum": [
+        "Install",
+        "Delete"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "VMHostUpdateStates"
+      }
+    },
+    "VMResources": {
+      "description": "VM Resource Ids",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Request of a list vm host update operation.",
+          "type": "string"
+        },
+        "agentVersion": {
+          "description": "Version of the Logz agent installed on the VM.",
+          "type": "string"
+        }
+      }
+    },
+    "VMHostUpdateRequest": {
+      "description": "Request of a list VM Host Update Operation.",
+      "type": "object",
+      "properties": {
+        "vmResourceIds": {
+          "description": "Request of a list vm host update operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMResources"
+          }
+        },
+        "state": {
+          "description": "Specifies the state of the operation - install/ delete.",
+          "$ref": "#/definitions/VMHostUpdateState"
+        }
+      }
+    },
+    "VMResourcesListResponse": {
+      "description": "Response of a list VM Host Update Operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Response of a list vm host update operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMResources"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "UserRoleRequest": {
+      "description": "Request for checking user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email of the user used by Logz for contacting them if needed",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      }
+    },
+    "UserRole": {
+      "description": "User roles on configured in Logz.io account.",
+      "enum": [
+        "None",
+        "User",
+        "Admin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UserRole"
+      }
+    },
+    "UserRoleResponse": {
+      "description": "Response for checking user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/UserRole"
+        }
+      }
+    },
+    "UserRoleListResponse": {
+      "description": "Response for list of user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of user roles for Logz.io account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRoleResponse"
           }
         },
         "nextLink": {
