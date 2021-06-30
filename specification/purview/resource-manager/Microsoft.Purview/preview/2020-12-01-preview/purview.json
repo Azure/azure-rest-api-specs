@@ -566,6 +566,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "summary": "Gets private endpoint connections.",
+        "description": "Get private endpoint connections for account",
+        "operationId": "PrivateEndpointConnections_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skip token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByAccount": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByAccount.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -672,6 +725,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -727,59 +781,6 @@
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
             "$ref": "./examples/PrivateEndpointConnections_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnection"
-        ],
-        "summary": "Gets private endpoint connections.",
-        "description": "Get private endpoint connections for account",
-        "operationId": "PrivateEndpointConnections_ListByAccount",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "The skip token.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the provider.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_ListByAccount": {
-            "$ref": "./examples/PrivateEndpointConnections_ListByAccount.json"
           }
         }
       }
@@ -1846,6 +1847,20 @@
     }
   },
   "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
     "accountName": {
       "name": "accountName",
       "in": "path",
@@ -1861,20 +1876,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
