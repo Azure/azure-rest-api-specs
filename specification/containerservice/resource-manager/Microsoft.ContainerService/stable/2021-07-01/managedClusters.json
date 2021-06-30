@@ -4897,6 +4897,28 @@
           "readOnly": true
         }
       }
+    },
+    "ManagedClusterSecurityProfile": {
+      "properties": {
+        "azureDefender": {
+          "$ref": "#/definitions/ManagedClusterSecurityProfileAzureDefender",
+          "description": "Azure Defender settings for the Security Profile."
+        }
+      },
+      "description": "Security Profile for the container service cluster."
+    },
+    "ManagedClusterSecurityProfileAzureDefender": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable Azure Defender"
+        },
+        "logAnalyticsWorkspaceResourceId": {
+          "type": "string",
+          "description": "Resource Id of the Log Analytics workspace for Azure Defender to be associated with. This field is required and must be valid workspace resource id in case the Azure Defender settings are enabled and must be empty or not exists in case it is disabled"
+        }
+      },
+      "description": "Azure Defender settings for the Security Profile."
     }
   },
   "parameters": {
@@ -4959,28 +4981,6 @@
       "type": "string",
       "description": "server fqdn type for credentials to be returned",
       "x-ms-parameter-location": "method"
-    },
-    "ManagedClusterSecurityProfile": {
-      "properties": {
-        "azureDefender": {
-          "$ref": "#/definitions/ManagedClusterSecurityProfileAzureDefender",
-          "description": "Azure Defender settings for the Security Profile."
-        }
-      },
-      "description": "Security Profile for the container service cluster."
-    },
-    "ManagedClusterSecurityProfileAzureDefender": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether to enable Azure Defender"
-        },
-        "logAnalyticsWorkspaceResourceId": {
-          "type": "string",
-          "description": "Resource Id of the Log Analytics workspace for Azure Defender to be associated with. This field is required and must be valid workspace resource id in case the Azure Defender settings are enabled and must be empty or not exists in case it is disabled"
-        }
-      },
-      "description": "Azure Defender settings for the Security Profile."
     }
   }
 }
