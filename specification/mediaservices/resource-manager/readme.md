@@ -26,8 +26,26 @@ These are the global settings for the MediaServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-2021-06
 opt-in-extensible-enums: true
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Media/stable/2021-06-01/Accounts.json
+  - Microsoft.Media/stable/2021-06-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-06-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-06-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-06-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-06-01/streamingservice.json
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: location is a required property for our patch calls
 ```
 
 ### Tag: package-2021-05
@@ -236,4 +254,3 @@ directive:
     where: $.definitions.JobProperties
     reason: Output not required for job update
 ```
-
