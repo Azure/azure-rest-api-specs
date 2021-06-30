@@ -2,11 +2,25 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: insights
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/monitor/armmonitor
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+
+directive:
+  - from: scheduledQueryRule_API.json # this is to resolve the duplicated schema issue in this swagger
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "TrackedEntityResource";
 ```
 
 ### Go multi-api
