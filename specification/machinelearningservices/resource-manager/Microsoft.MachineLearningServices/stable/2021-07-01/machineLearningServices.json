@@ -746,6 +746,9 @@
           },
           "Get an ComputeInstance": {
             "$ref": "./examples/Compute/get/ComputeInstance.json"
+          },
+          "Get a Kubernetes Compute": {
+            "$ref": "./examples/Compute/get/KubernetesCompute.json"
           }
         },
         "parameters": [
@@ -798,7 +801,7 @@
           "Create an ComputeInstance Compute": {
             "$ref": "./examples/Compute/createOrUpdate/ComputeInstance.json"
           },
-          "Create AKS Compute": {
+          "Create an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/BasicAKSCompute.json"
           },
           "Create a DataFactory Compute": {
@@ -807,8 +810,11 @@
           "Update a AML Compute": {
             "$ref": "./examples/Compute/createOrUpdate/AmlCompute.json"
           },
-          "Update a AKS Compute": {
+          "Update an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/AKSCompute.json"
+          },
+          "Attach a Kubernetes Compute": {
+            "$ref": "./examples/Compute/createOrUpdate/KubernetesCompute.json"
           }
         },
         "parameters": [
@@ -3127,6 +3133,67 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
+    "Kubernetes": {
+      "description": "A Machine Learning compute based on Kubernetes Compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/KubernetesProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Kubernetes"
+    },
+
+    "KubernetesProperties": {
+      "type": "object",
+      "description": "Kubernetes properties",
+      "properties": {
+        "relayConnectionString": {
+          "description": "Relay connection string.",
+          "type": "string"
+        },
+        "serviceBusConnectionString": {
+          "description": "ServiceBus connection string.",
+          "type": "string"
+        },
+        "extensionPrincipalId": {
+          "description": "Extension principal-id.",
+          "type": "string"
+        },
+        "extensionInstanceReleaseTrain": {
+          "description": "Extension instance release train.",
+          "type": "string"
+        },
+        "vcName": {
+          "description": "VC name.",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace",
+          "type": "string",
+          "default": "default"
+        },
+        "defaultInstanceType": {
+          "description": "Default instance type",
+          "type": "string"
+        },
+        "instanceTypes": {
+          "description": "Instance Type Schema",
+          "type": "object",
+          "additionalProperties":{
+              "$ref": "#/definitions/InstanceTypeSchema"
+          }
+        }
+      }
+    },
+
     "AmlComputeProperties": {
       "type": "object",
       "description": "AML Compute properties",
@@ -3972,6 +4039,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
+        "Kubernetes",
         "AmlCompute",
         "ComputeInstance",
         "DataFactory",
@@ -4752,7 +4820,7 @@
         }
       }
     },
-    "AKSProperties": {
+    "SynapseAKSProperties": {
       "type": "object",
       "description": "AKS properties",
       "properties": {
@@ -4799,14 +4867,60 @@
         }
       }
     },
+    "InstanceTypeSchema": {
+      "type": "object",
+      "description": "Instance type schema.",
+      "additionalProperties": false,
+      "properties": {
+          "nodeSelector": {
+            "type": "object",
+            "description": "NodeSelector",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "resources": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Resource requests/limits for this instance type",
+            "properties": {
+              "requests": {
+                "$ref": "#/definitions/InstanceResourceSchema"
+              },
+              "limits": {
+                "$ref": "#/definitions/InstanceResourceSchema"
+              }
+            }
+          }
+        }
+    },
+    "InstanceResourceSchema": {
+      "type": "object",
+      "description": "Resource requests/limits for this instance type",
+      "properties":{
+        "cpu": {
+          "type": "string",
+          "description": "Number of vCPUs requested for this instance type"
+        },
+        "memory": {
+          "type": "string",
+          "description": "Memory size requested for this instance type"
+        },
+        "nvidia.com/gpu": {
+          "type": "string",
+          "description": "Number of Nvidia GPU cards requested for this instance_type"
+        }
+      }
+    },
     "SynapseSparkPoolProperties": {
       "type": "object",
       "description": "Properties specific to Synapse Spark pools.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AKSProperties"
+          "$ref": "#/definitions/SynapseAKSProperties"
         }
       }
     }
   }
 }
+
