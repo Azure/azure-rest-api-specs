@@ -4078,7 +4078,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_CreateOrUpdate",
-        "description": "Create or update a capacity reservation group. <br><br> NOTE: Please refer https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to create or update a capacity reservation group. Please refer to https://aka.ms/CapacityReservation for more details.<br><br> NOTE: When updating a capacity reservation group, only tags may be modified.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4141,7 +4141,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_Update",
-        "description": "Update an capacity reservation group.",
+        "description": "The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4193,7 +4193,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_Delete",
-        "description": "Delete a capacity reservation group.<br><br> NOTE: capacity reservation group can only be deleted if all the capacity reservations under the reservation group and associated resources are disassociated from the reservation group first. Please refer https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4236,7 +4236,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_Get",
-        "description": "Retrieves information about a capacity reservation group.",
+        "description": "The operation that retrieves information about a capacity reservation group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4257,12 +4257,12 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.",
             "enum": [
               "instanceView"
             ],
             "x-ms-enum": {
-              "name": "CapacityReservationInstanceViewTypes",
+              "name": "CapacityReservationGroupInstanceViewTypes",
               "modelAsString": false
             }
           },
@@ -4320,7 +4320,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation Group in the response.",
+            "description": "The expand expression to apply on the operation. Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4369,7 +4369,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation Group in the response.",
+            "description": "The expand expression to apply on the operation.Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4405,7 +4405,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_CreateOrUpdate",
-        "description": "Create or update a capacity reservation.",
+        "description": "The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4476,7 +4476,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Update",
-        "description": "Update an capacity reservation .",
+        "description": "The operation to update a capacity reservation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4536,7 +4536,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Delete",
-        "description": "Delete a capacity reservation.<br><br> NOTE: Deleting a capacity reservation allowed only when all the associated resources are disassociated from the reservation first. Please refer https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to delete a capacity reservation. This operation is allowed only if when all the associated resources are disassociated from the capacity reservation. Please refer https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4590,7 +4590,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Get",
-        "description": "Retrieves information about a capacity reservation.",
+        "description": "The operation that retrieves information about the capacity reservation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4618,7 +4618,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservation.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.",
             "enum": [
               "instanceView"
             ],
@@ -8990,7 +8990,7 @@
           "description": "The capacity reservation group instance view, which has the list of instance view of the capacity reservations under the capacity reservation group."
         }
       },
-      "description": "capacity reservation Group Properties."
+      "description": "capacity reservation group Properties."
     },
     "CapacityReservationGroup": {
       "type": "object",
@@ -9027,7 +9027,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the capacity reservation group that the capacity reservation should be assigned to. Only tags can be updated."
+      "description": "Specifies information about the capacity reservation group. Only tags can be updated."
     },
     "CapacityReservationGroupListResult": {
       "type": "object",
@@ -9041,13 +9041,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of capacity reservation Groups. Call ListNext() with this URI to fetch the next page of capacity reservation Groups."
+          "description": "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
         }
       },
       "required": [
         "value"
       ],
-      "description": "The List capacity reservation Group with resource group response."
+      "description": "The List capacity reservation group with resource group response."
     },
     "CapacityReservationInstanceView": {
       "type": "object",
@@ -9064,7 +9064,7 @@
           "description": "The resource status information."
         }
       },
-      "description": "The instance view of a capacity reservation."
+      "description": "The instance view of a capacity reservationthat provides as snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations."
     },
     "CapacityReservationUtilization": {
       "type": "object",
@@ -9078,7 +9078,7 @@
           "description": "A list of references to all virtual machines allocated in the Capacity reservation."
         }
       },
-      "description": "capacity reservation utilized capacity."
+      "description": "Represents the capacity reservation utilization in terms of resources allocated."
     },
     "CapacityReservationInstanceViewWithName": {
       "type": "object",
@@ -9110,7 +9110,7 @@
             "$ref": "#/definitions/SubResourceReadOnly"
           },
           "readOnly": true,
-          "description": "A list of references to all virtual machines associated in the capacity reservation."
+          "description": "A list of references to all virtual machines associated with the capacity reservation."
         },
         "provisioningTime": {
           "readOnly": true,
@@ -9140,14 +9140,14 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the capacity reservation. Currently skus with the sku capability called 'CapacityReservationSupported' set as true are only supported for creating the capacity reservation."
+          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         },
         "zones": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Availability Zone to use for this capacity reservation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."
+          "description": "Availability Zone to use for this capacity reservation. The zone has to be single value and can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."
         }
       },
       "allOf": [
@@ -9169,7 +9169,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the capacity reservation. Currently skus with the sku capability called 'CapacityReservationSupported' set as true are only supported for creating the capacity reservation."
+          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         }
       },
       "allOf": [
@@ -9177,7 +9177,7 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the capacity reservation. Only tags, sku.capacity can be updated."
+      "description": "Specifies information about the capacity reservation. Only tags and sku.capacity can be updated."
     },
     "CapacityReservationListResult": {
       "type": "object",
@@ -10854,7 +10854,7 @@
       "properties": {
         "capacityReservationGroup": {
           "$ref": "#/definitions/SubResource",
-          "description": "Describes the parameter of capacity reservation resource id that can be used for allocating the virtual machine. <br><br> NOTE:Please refer https://aka.ms/CapacityReservation for more details."
+          "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
         }
       },
       "description": "The parameters of a capacity reservation Profile."
@@ -11853,7 +11853,7 @@
         },
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
-          "description": "Specifies the capacity reservation related details of a virtual machine. <br><br>Minimum api-version: 2021-07-01."
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-07-01.""
         },
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
