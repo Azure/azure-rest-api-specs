@@ -133,6 +133,19 @@ clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-features-2021-07 and python
+
+These settings apply only when `--tag=package-features-2021-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-features-2021-07'
+namespace: azure.mgmt.resource.features.v2021_07_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
+python:
+  namespace: azure.mgmt.resource.features.v2021_07_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
+```
+
 ### Tag: package-features-2015-12 and python
 
 These settings apply only when `--tag=package-features-2015-12 --python` is specified on the command line.

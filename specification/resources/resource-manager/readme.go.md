@@ -32,6 +32,7 @@ azure-arm: true
 batch:
   - tag: package-templatespecs-2019-06-preview
   - tag: package-features-2015-12
+  - tag: package-features-2021-07
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - tag: package-policy-2020-09
@@ -90,6 +91,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-resources-2019-07' && $(go)
 namespace: features
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-07-01/$(namespace)
+```
+
+### Tag: package-features-2021-07 and go
+
+These settings apply only when `--tag=package-features-2021-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-features-2021-07' && $(go)
+namespace: features
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-07-01/$(namespace)
 ```
 
 ### Tag: package-features-2015-12 and go
