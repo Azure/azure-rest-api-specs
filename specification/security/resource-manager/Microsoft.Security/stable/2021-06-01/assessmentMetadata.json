@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2021-06-01"
+    "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -55,7 +55,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -130,7 +130,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -260,7 +260,7 @@
     }
   },
   "definitions": {
-    "SecurityAssessmentMetadataList": {
+    "SecurityAssessmentMetadataResponseList": {
       "type": "object",
       "description": "List of security assessment metadata",
       "properties": {
@@ -268,7 +268,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAssessmentMetadata"
+            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
           }
         },
         "nextLink": {
@@ -285,6 +285,21 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "type": "object",
+      "description": "Security assessment metadata",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
         }
       },
       "allOf": [
@@ -344,15 +359,6 @@
                 },
                 {
                   "value": "IoT"
-                },
-                {
-                  "value": "Container"
-                },
-                {
-                  "value": "AppServices"
-                },
-                {
-                  "value": "Unknown"
                 }
               ]
             }
@@ -477,17 +483,6 @@
             }
           }
         },
-        "publishDates": {
-          "type": "object",
-          "properties": {
-            "PublicProd": { "$ref": "#/definitions/PublishDates" },
-            "Fairfax": { "$ref": "#/definitions/PublishDates" }
-          },
-          "plannedDeprecationDate": {
-            "type": "string",
-            "pattern": "^[0-9]{2}\/[0-9]{4}$"
-          }
-        }
         "preview": {
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
@@ -527,6 +522,25 @@
       ]
     }
   },
+  "SecurityAssessmentMetadataPropertiesResponse": {
+    "allof": [{ "$ref": "#/definitions/SecurityAssessmentMetadataProperties" }],
+    "properties": {
+        "publishDates": {
+            "type": "object",
+            "properties": {
+              "PublicProd": { "$ref": "#/definitions/PublishDates" },
+              "Fairfax": { "$ref": "#/definitions/PublishDates" },
+              "MoonCake": { "$ref": "#/definitions/PublishDates" },
+              "USSec": { "$ref": "#/definitions/PublishDates" },
+              "USNat": { "$ref": "#/definitions/PublishDates" }
+            }
+        },
+        "plannedDeprecationDate": {
+          "type": "string",
+          "pattern": "^[0-9]{2}\/[0-9]{4}$"
+        }
+    }
+	},
   "parameters": {
     "AssessmentsMetadataName": {
       "name": "assessmentMetadataName",
@@ -542,24 +556,34 @@
       "required": true,
       "description": "AssessmentMetadata object",
       "schema": {
-        "$ref": "#/definitions/SecurityAssessmentMetadata"
+        "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
       },
       "x-ms-parameter-location": "method"
     },
-    "PublishDates": {
-      "properties": {
-        "GA": {
-          "type": "string",
-          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-        },
-        "Public": {
-          "type": "string",
-          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-        }
+    "SecurityAssessmentMetadataResponse": {
+      "name": "assessmentMetadata",
+      "in": "body",
+      "required": true,
+      "description": "AssessmentMetadata object",
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
       },
-      "required": [
-        "Public"
-      ]
+      "x-ms-parameter-location": "method"
     }
-  }
+  },
+  "PublishDates": {
+    "properties": {
+      "GA": {
+        "type": "string",
+        "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+      },
+      "Public": {
+        "type": "string",
+        "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+      }
+    },
+    "required": [
+      "Public"
+    ]
+	}
 }
