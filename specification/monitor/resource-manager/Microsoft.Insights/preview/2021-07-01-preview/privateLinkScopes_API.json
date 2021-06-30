@@ -1051,47 +1051,47 @@
         }
       }
     },
-    "PrivateEndpoint": {
+    "PrivateEndpointProperty": {
+      "description": "Private endpoint which the connection belongs to.",
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM identifier for Private Endpoint"
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
         }
-      },
-      "description": "The Private Endpoint resource."
+      }
     },
     "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true,
-          "description": "Resource properties."
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
       "properties": {
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The resource of private end point."
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
         },
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource."
+          "description": "State of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
         },
         "queryOnlyPrivateLinkResources": {
           "description": "Restrict queries from this private endpoint only to scoped resources in the scope.",
@@ -1107,23 +1107,28 @@
       ],
       "description": "Properties of the PrivateEndpointConnectProperties."
     },
-    "PrivateLinkServiceConnectionState": {
+    "PrivateLinkServiceConnectionStateProperty": {
+      "description": "State of the private endpoint connection.",
       "type": "object",
+      "required": [
+        "status",
+        "description"
+      ],
       "properties": {
         "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+          "description": "The private link service connection status.",
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
+          "description": "The private link service connection description.",
+          "type": "string"
         },
         "actionsRequired": {
+          "description": "The actions required for private link service connection.",
           "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+          "readOnly": true
         }
-      },
-      "description": "A collection of information about the state of the connection between service consumer and provider."
+      }
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -1155,6 +1160,7 @@
       }
     },
     "PrivateLinkResource": {
+      "description": "A private link resource",
       "type": "object",
       "properties": {
         "properties": {
@@ -1165,10 +1171,9 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
-      ],
-      "description": "A private link resource"
+      ]
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -1197,35 +1202,42 @@
       "description": "Properties of a private link resource."
     },
     "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of results.",
           "type": "array",
-          "description": "Array of private endpoint connections",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
-      },
-      "description": "List of private endpoint connection associated with the specified storage account"
+      }
     },
     "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of results.",
           "type": "array",
-          "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
-          "description": "URL to get the next set of results (if there are any).",
           "readOnly": true
         }
-      },
-      "description": "A list of private link resources"
+      }
     }
   },
   "parameters": {
