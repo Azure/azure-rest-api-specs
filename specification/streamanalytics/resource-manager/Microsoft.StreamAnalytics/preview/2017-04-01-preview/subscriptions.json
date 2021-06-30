@@ -247,7 +247,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./inputs.json#/definitions/Input"
+              "$ref": "#/definitions/TestInput"
             },
             "description": "Defines the necessary parameters for testing the Stream Analytics input."
           },
@@ -299,7 +299,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./outputs.json#/definitions/Output"
+              "$ref": "#/definitions/TestOutput"
             },
             "description": "Defines the necessary parameters for testing the Stream Analytics output."
           },
@@ -521,7 +521,7 @@
       }
     },
     "SampleInput": {
-      "description": "",
+      "description": "The stream analytics input to sample.",
       "type": "object",
       "properties": {
         "input": {
@@ -563,7 +563,7 @@
           "type": "string"
         },
         "eventsUrl": {
-          "description": "The SAS URI of the storage blob for service to write the sampled events to. If this parameter is not provided, service will write eents to he system account and share a temporary SAS URI to it.",
+          "description": "The SAS URI of the storage blob for service to write the sampled events to. If this parameter is not provided, service will write events to he system account and share a temporary SAS URI to it.",
           "type": "string"
         },
         "dataLocale": {
@@ -639,6 +639,26 @@
         ]
       }
     },
+    "TestInput": {
+      "description": "A stream analytics input object.",
+      "type": "object",
+      "properties": {
+        "input": {
+          "description": "The stream analytics input to test.",
+          "$ref": "./inputs.json#/definitions/Input"
+        }
+      }
+    },
+    "TestOutput": {
+      "description": "A stream analytics output object.",
+      "type": "object",
+      "properties": {
+        "output": {
+          "description": "The stream analytics output to test.",
+          "$ref": "./outputs.json#/definitions/Output"
+        }
+      }
+    },
     "TestDatasourceResult": {
       "description": "The result of the test input or output request.",
       "allOf": [
@@ -667,7 +687,7 @@
         "values": [
           {
             "value": "TestSucceeded",
-            "description": "The test datasource operation suceeded."
+            "description": "The test datasource operation succeeded."
           },
           {
             "value": "TestFailed",
