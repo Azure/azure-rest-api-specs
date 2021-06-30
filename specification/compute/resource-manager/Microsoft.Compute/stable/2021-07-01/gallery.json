@@ -1831,10 +1831,10 @@
       "properties": {
         "isSoftDeleteEnabled": {
           "type": "boolean",
-          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time"
+          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time."
         }
       },
-      "description": "Contains information about the soft deletion policy of the gallery"
+      "description": "Contains information about the soft deletion policy of the gallery."
     },
     "GalleryApplication": {
       "properties": {
@@ -2120,6 +2120,18 @@
         "purchasePlan": {
           "$ref": "#/definitions/ImagePurchasePlan"
         },
+        "architecture": {
+          "type": "string",
+          "description": "Optional. This property allows user to specify the targeted architecture for the VMImage.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString":  true
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2343,7 +2355,7 @@
         },
         "replicationMode": {
           "type": "string",
-          "description": "Specifies the mode to be used for replication. This property is not updatable.",
+          "description": "Optional parameter which specifies the mode to be used for replication. This property is not updatable.",
           "enum": [
             "Full",
             "Shallow"
