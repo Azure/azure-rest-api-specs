@@ -8,7 +8,7 @@ go:
   clear-output-folder: true
 
 directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum to avoid the generator generates the code by hard-coding the single entried enum value
   - from: compute.json
     where: $..enum
     transform: >-
@@ -26,15 +26,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 
 directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
-    where: $..enum
-    transform: >-
-      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DummyOrchestrationServiceName');
-      }
-      return $;
-      
+  # we do not need to hack to add a dummy enum entry in track 2      
   - from: disk.json
     where: "$.definitions.PurchasePlan"
     transform: >
