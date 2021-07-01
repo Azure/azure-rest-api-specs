@@ -140,7 +140,7 @@
         "operationId": "Diagnostics_List",
         "description": "Lists all available Compute diagnostics for a subscription in a location.",
         "x-ms-pageable": {
-          "nextLinkName":  null
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -205,6 +205,9 @@
           "items": {
             "$ref": "#/definitions/ComputeDiagnosticBase"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
