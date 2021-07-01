@@ -2006,7 +2006,8 @@
         },
         "containerRegistry": {
           "description": "ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "storageAccount": {
           "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created",
@@ -2397,7 +2398,7 @@
     },
     "VirtualMachineSizeListResult": {
       "properties": {
-        "amlCompute": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
@@ -4629,6 +4630,7 @@
     },
     "NotebookPreparationError": {
       "type": "object",
+      "x-nullable": true,
       "properties": {
         "errorMessage": {
           "type": "string"
