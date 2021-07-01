@@ -3845,7 +3845,7 @@
           "readOnly": true,
           "properties": {
             "error": {
-              "$ref": "#/definitions/CloudError",
+              "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningError",
               "description": "Pod identity assignment error (if any)."
             }
           }
@@ -3857,6 +3857,41 @@
         "identity"
       ],
       "description": "Details about the pod identity assigned to the Managed Cluster."
+    },
+    "ManagedClusterPodIdentityProvisioningError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningErrorBody",
+          "description": "Details about the error."
+        }
+      },
+      "description": "An error response from the pod identity provisioning."
+    },
+    "ManagedClusterPodIdentityProvisioningErrorBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the pod identity provisioning."
     },
     "ManagedClusterPodIdentityException": {
       "properties": {
