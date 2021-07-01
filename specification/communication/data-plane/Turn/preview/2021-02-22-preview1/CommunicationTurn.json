@@ -38,7 +38,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CommunicationTurnCredentialsResponse"
+              "$ref": "#/definitions/CommunicationRelayConfiguration"
             }
           }
         },
@@ -77,8 +77,8 @@
         }
       }
     },
-    "CommunicationTurnCredentialsResponse": {
-      "description": "A TURN credentials response.",
+    "CommunicationRelayConfiguration": {
+      "description": "A relay configuration containing the TURN URLs and credentials.",
       "required": [
         "expiresOn",
         "turnServers"
@@ -106,6 +106,9 @@
       "name": "api-version",
       "description": "Version of API to invoke.",
       "required": true,
+      "enum": [
+        "2021-02-22-preview1"
+      ],
       "type": "string"
     }
   },
