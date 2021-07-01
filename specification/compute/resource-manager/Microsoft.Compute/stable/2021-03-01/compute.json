@@ -7538,6 +7538,10 @@
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "Gets the security profile."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the VM from which the restore point was created."
         }
       },
       "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
@@ -7657,6 +7661,28 @@
     },
     "RestorePoint": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
+    "RestorePointProperties": {
+      "type": "object",
+      "properties": {
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        },
         "sourceMetadata": {
           "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
@@ -7685,21 +7711,9 @@
           "$ref": "#/definitions/RestorePointProvisioningDetails",
           "readOnly": true,
           "description": "Gets the provisioning details set by the server during Create restore point operation."
-        },
-        "excludeDisks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiEntityReference"
-          },
-          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Restore Point details."
+      "description": "The restore point properties."
     },
     "ComputeOperationListResult": {
       "properties": {
