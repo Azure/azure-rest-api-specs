@@ -659,41 +659,11 @@
           "description": "The stream analytics input to sample.",
           "$ref": "./inputs.json#/definitions/Input"
         },
-        "eventStartTime": {
-          "description": "The start time for the data to sample. This is in DateTime format.",
-          "type": "string"
-        },
-        "eventEndTime": {
-          "description": "The end time for the data to sample. This is of DateTime format.",
-          "type": "string"
-        },
-        "serialization": {
-          "description": "The serialization format for the sampled output data saved to the storage (not for the input format).",
-          "type": "object",
-          "properties": {
-            "type": {
-              "description": "The serialization format.",
-              "type": "string"
-            }
-          }
-        },
-        "numberOfEvents": {
-          "description": "The max number of events to read. Defaults to 1000.",
-          "type": "integer"
-        },
-        "maxTimeToReadInSeconds": {
-          "description": "The max time service should wait to read events in seconds. Defaults to 30. If this time is reached, service will stop reading and provide with whatever data has been read. However, this does not apply when no data is read, which waits for a maximum of 90 seconds.",
-          "type": "integer"
-        },
-        "partitionCount": {
-          "description": "When the caller already knows the input partition count, passing in this value accelerates the operation so server would not go get the partition count.",
-          "type": "integer"
-        },
         "compatibilityLevel": {
           "description": "Defaults to the default ASA job compatibility level. Today it is 1.2",
           "type": "string"
         },
-        "eventsUrl": {
+        "eventsUri": {
           "description": "The SAS URI of the storage blob for service to write the sampled events to. If this parameter is not provided, service will write events to he system account and share a temporary SAS URI to it.",
           "type": "string"
         },
@@ -771,24 +741,30 @@
       }
     },
     "TestInput": {
-      "description": "A stream analytics input object.",
+      "description": "A stream analytics input.",
       "type": "object",
       "properties": {
         "input": {
           "description": "The stream analytics input to test.",
           "$ref": "./inputs.json#/definitions/Input"
         }
-      }
+      },
+      "required": [
+        "input"
+      ]
     },
     "TestOutput": {
-      "description": "A stream analytics output object.",
+      "description": "A stream analytics output.",
       "type": "object",
       "properties": {
         "output": {
           "description": "The stream analytics output to test.",
           "$ref": "./outputs.json#/definitions/Output"
         }
-      }
+      },
+      "required": [
+        "output"
+      ]
     },
     "TestDatasourceResult": {
       "description": "The result of the test input or output request.",
