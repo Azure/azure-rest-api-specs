@@ -7,13 +7,10 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 azure-arm: false
 package-name: "@azure/maps-search"
 license-header: MICROSOFT_MIT_NO_VERSION
-output-folder: "$(typescript-sdks-folder)/sdk/maps/maps-search/src/generated"
-source-code-folder-path: "."
-clear-output-folder: true
+output-folder: "$(typescript-sdks-folder)/sdk/maps/maps-search"
+source-code-folder-path: ""
+clear-output-folder: false
 generate-metadata: false
-v3: true
-use-extension:
-  "@autorest/typescript": "6.0.0-alpha.20210514.1"
 directive:
   - from: search.json
     where: $.definitions.SearchInsideGeometryRequestBody.properties.geometry
@@ -22,7 +19,7 @@ directive:
         "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
         "type": "object"
       };
-    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly
+    reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly -> https://github.com/Azure/autorest.typescript/issues/1040
   - remove-operation: Search_GetSearchFuzzyBatch
     reason: This operation is created for Java SDK that has no LRO poller implementation
   - remove-operation: Search_GetSearchAddressBatch
