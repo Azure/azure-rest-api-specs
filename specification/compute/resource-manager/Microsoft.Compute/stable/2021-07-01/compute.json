@@ -4078,7 +4078,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_CreateOrUpdate",
-        "description": "The operation to create or update a capacity reservation group. Please refer to https://aka.ms/CapacityReservation for more details.<br><br> NOTE: When updating a capacity reservation group, only tags may be modified.",
+        "description": "The operation to create or update a capacity reservation group. Please refer to https://aka.ms/CapacityReservation for more details. When updating a capacity reservation group, only tags may be modified.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4320,7 +4320,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4343,6 +4343,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List capacity reservation groups in resource group.": {
+            "$ref": "./examples/compute/ListCapacityReservationGroupsInResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -4369,7 +4374,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.Based on the Expand param(s) specified we return Virtual Machine or Scaleset VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
             "enum": [
               "virtualMachineScaleSetVMs/$ref",
               "virtualMachines/$ref"
@@ -4392,6 +4397,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List capacity reservation groups in subscription.": {
+            "$ref": "./examples/compute/ListCapacityReservationGroupsInSubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -4536,7 +4546,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Delete",
-        "description": "The operation to delete a capacity reservation. This operation is allowed only if when all the associated resources are disassociated from the capacity reservation. Please refer https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to delete a capacity reservation. This operation is allowed only if when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4696,6 +4706,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List capacity reservations in reservation group.": {
+            "$ref": "./examples/compute/ListCapacityReservationsInReservationGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -8974,7 +8989,7 @@
             "$ref": "#/definitions/SubResourceReadOnly"
           },
           "readOnly": true,
-          "description": "A list of references to all capacity reservations in the capacity reservation group."
+          "description": "A list of all capacity reservation resource ids that belong to capacity reservation group."
         },
         "virtualMachinesAssociated": {
           "type": "array",
@@ -8987,7 +9002,7 @@
         "instanceView": {
           "$ref": "#/definitions/CapacityReservationGroupInstanceView",
           "readOnly": true,
-          "description": "The capacity reservation group instance view, which has the list of instance view of the capacity reservations under the capacity reservation group."
+          "description": "The capacity reservation group instance view which has the list of instance views for all the capacity reservations that belong to the capacity reservation group."
         }
       },
       "description": "capacity reservation group Properties."
@@ -9012,7 +9027,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the capacity reservation group that the capacity reservations should be assigned to. <br><br> Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added to another capacity reservation group."
+      "description": "Specifies information about the capacity reservation group that the capacity reservations should be assigned to. <br><br> Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added or moved to another capacity reservation group."
     },
     "CapacityReservationGroupUpdate": {
       "type": "object",
@@ -9075,7 +9090,7 @@
             "$ref": "#/definitions/SubResourceReadOnly"
           },
           "readOnly": true,
-          "description": "A list of references to all virtual machines allocated in the Capacity reservation."
+          "description": "A list of all virtual machines resource ids allocated against the capacity reservation."
         }
       },
       "description": "Represents the capacity reservation utilization in terms of resources allocated."
@@ -9102,7 +9117,7 @@
         "reservationId": {
           "readOnly": true,
           "type": "string",
-          "description": "A unique id generated and assigned to the capacity reservation by the platform. <br><br> Does not change throughout the lifetime of the capacity reservation."
+          "description": "A unique id generated and assigned to the capacity reservation by the platform which does not change throughout the lifetime of the resource."
         },
         "virtualMachinesAssociated": {
           "type": "array",
@@ -9110,13 +9125,13 @@
             "$ref": "#/definitions/SubResourceReadOnly"
           },
           "readOnly": true,
-          "description": "A list of references to all virtual machines associated with the capacity reservation."
+          "description": "A list of all virtual machine resource ids that are associated with the capacity reservation."
         },
         "provisioningTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The date when the capacity reservation was last time updated."
+          "description": "The date time when the capacity reservation was last updated."
         },
         "provisioningState": {
           "readOnly": true,
