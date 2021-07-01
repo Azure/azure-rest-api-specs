@@ -4,14 +4,15 @@
     "resourceGroupName": "myResourceGroup",
     "restorePointCollectionName": "rpcName",
     "restorePointName": "rpName",
-    "vmName": "myVM",
     "api-version": "2021-03-01",
     "parameters": {
-      "excludeDisks": [
-        {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm8768_disk2_fe6ffde4f69b491ca33fb984d5bcd89f"
-        }
-      ]
+      "properties": {
+        "excludeDisks": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/disk123"
+          }
+        ]
+      }
     }
   },
   "responses": {
@@ -19,69 +20,72 @@
       "body": {
         "name": "rpName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName",
-        "sourceMetadata": {
-          "vmId": "76d6541e-80bd-4dc1-932b-3cae4cfb80e7",
-          "hardwareProfile": {
-            "vmSize": "Standard_B1s"
-          },
-          "storageProfile": {
-            "osDisk": {
-              "osType": "Windows",
-              "name": "testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f",
-              "caching": "ReadWrite",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS",
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f"
-              },
-              "diskRestorePoint": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
-              }
+        "properties": {
+          "excludeDisks": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/disk123"
+            }
+          ],
+          "sourceMetadata": {
+            "vmId": "76d6541e-80bd-4dc1-932b-3cae4cfb80e7",
+            "hardwareProfile": {
+              "vmSize": "Standard_B1s"
             },
-            "dataDisks": [
-              {
-                "lun": 1,
-                "name": "testingexcludedisk_DataDisk_1",
-                "caching": "None",
+            "storageProfile": {
+              "osDisk": {
+                "osType": "Windows",
+                "name": "osDisk123",
+                "caching": "ReadWrite",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS",
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/disks/testingexcludedisk_DataDisk_1"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/osDisk123"
                 },
                 "diskRestorePoint": {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/osDisk123_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
                 }
-              }
-            ]
-          },
-          "osProfile": {
-            "computerName": "computerName",
-            "adminUsername": "admin",
-            "windowsConfiguration": {
-              "provisionVMAgent": true,
-              "enableAutomaticUpdates": true
+              },
+              "dataDisks": [
+                {
+                  "lun": 1,
+                  "name": "dataDisk123",
+                  "caching": "None",
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS",
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/disks/dataDisk123"
+                  },
+                  "diskRestorePoint": {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/dataDisk123_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                  }
+                }
+              ]
             },
-            "secrets": [],
-            "allowExtensionOperations": true,
-            "requireGuestProvisionSignal": true
+            "osProfile": {
+              "computerName": "computerName",
+              "adminUsername": "admin",
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              },
+              "secrets": [],
+              "allowExtensionOperations": true,
+              "requireGuestProvisionSignal": true
+            },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "enabled": true
+              }
+            },
+            "location": "westus"
           },
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true
-            }
+          "provisioningState": "Succeeded",
+          "consistencyMode": "ApplicationConsistent",
+          "provisioningDetails": {
+            "creationTime": "2021-01-27T20:35:05.8401519+00:00",
+            "totalUsedSizeInBytes": 10835349504,
+            "statusCode": 0,
+            "statusMessage": "{\"jobMessage\":\"\",\"messageStr\":\"1/27/2021 8:35:56 PM , snapshotCreator=guestExtension, hostStatusCodePreSnapshot=200, Plugin enable Succeeded (command: Snapshot) Snapshot command completed \",\"snapshotConsistency\":2}"
           }
-        },
-        "provisioningState": "Succeeded",
-        "consistencyMode": "ApplicationConsistent",
-        "provisioningDetails": {
-          "creationTime": "2021-01-27T20:35:05.8401519+00:00",
-          "totalUsedSizeInBytes": 10835349504,
-          "statusCode": 0,
-          "statusMessage": "{\"jobMessage\":\"\",\"messageStr\":\"1/27/2021 8:35:56 PM , snapshotCreator=guestExtension, hostStatusCodePreSnapshot=200, Plugin enable Succeeded (command: Snapshot) Snapshot command completed \",\"snapshotConsistency\":2}"
-        },
-        "excludeDisks": [
-          {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm8768_disk2_fe6ffde4f69b491ca33fb984d5bcd89f"
-          }
-        ]
+        }
       }
     }
   }
