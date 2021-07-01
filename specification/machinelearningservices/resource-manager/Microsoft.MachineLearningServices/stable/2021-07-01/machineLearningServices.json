@@ -3150,7 +3150,6 @@
       ],
       "x-ms-discriminator-value": "Kubernetes"
     },
-
     "KubernetesProperties": {
       "type": "object",
       "description": "Kubernetes properties",
@@ -3187,13 +3186,12 @@
         "instanceTypes": {
           "description": "Instance Type Schema",
           "type": "object",
-          "additionalProperties":{
-              "$ref": "#/definitions/InstanceTypeSchema"
+          "additionalProperties": {
+            "$ref": "#/definitions/InstanceTypeSchema"
           }
         }
       }
     },
-
     "AmlComputeProperties": {
       "type": "object",
       "description": "AML Compute properties",
@@ -4871,31 +4869,31 @@
       "type": "object",
       "description": "Instance type schema.",
       "properties": {
-          "nodeSelector": {
-            "type": "object",
-            "description": "NodeSelector",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "resources": {
-            "type": "object",
-            "description": "Resource requests/limits for this instance type",
-            "properties": {
-              "requests": {
-                "$ref": "#/definitions/InstanceResourceSchema"
-              },
-              "limits": {
-                "$ref": "#/definitions/InstanceResourceSchema"
-              }
+        "nodeSelector": {
+          "type": "object",
+          "description": "NodeSelector",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "object",
+          "description": "Resource requests/limits for this instance type",
+          "properties": {
+            "requests": {
+              "$ref": "#/definitions/InstanceResourceSchema"
+            },
+            "limits": {
+              "$ref": "#/definitions/InstanceResourceSchema"
             }
           }
         }
+      }
     },
     "InstanceResourceSchema": {
       "type": "object",
       "description": "Resource requests/limits for this instance type",
-      "properties":{
+      "properties": {
         "cpu": {
           "type": "string",
           "description": "Number of vCPUs requested for this instance type"
@@ -4921,4 +4919,3 @@
     }
   }
 }
-
