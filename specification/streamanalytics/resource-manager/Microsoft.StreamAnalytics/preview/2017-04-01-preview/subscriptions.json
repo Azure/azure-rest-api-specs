@@ -62,6 +62,12 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotasListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -329,6 +335,7 @@
   "definitions": {
     "SubscriptionQuotasListResult": {
       "description": "Result of the GetQuotas operation. It contains a list of quotas for the subscription in a particular region.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of quotas for the subscription in a particular region.",
@@ -402,6 +409,7 @@
     },
     "QueryTestingResult": {
       "description": "The result of the query testing request.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/Error"
@@ -565,6 +573,7 @@
     },
     "QueryCompilationResult": {
       "description": "The result of the query compilation request.",
+      "type": "object",
       "properties": {
         "errors": {
           "description": "The errors produced by the compiler.",
@@ -614,6 +623,7 @@
     },
     "QueryCompilationErrors": {
       "description": "The errors produced by the compiler.",
+      "type": "object",
       "properties": {
         "message": {
           "description": "The content of the error message.",
@@ -623,21 +633,25 @@
         "startLine": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "startColumn": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "endLine": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "endColumn": {
           "description": "Describes the error location in the original query. Not set if isGlobal is true.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "isGlobal": {
@@ -671,6 +685,7 @@
     },
     "SampleInputResult": {
       "description": "The result of the sample input request.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/Error"
@@ -693,13 +708,8 @@
         },
         "eventsDownloadUrl": {
           "description": "A SAS URL to download the sampled input data.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "description": "A SAS URL to download the sampled input data.",
-            "type": "string",
-            "readOnly": true
-          }
+          "type": "string",
+          "readOnly": true
         },
         "lastArrivalTime": {
           "description": "The timestamp for the last event in the data. It is in DateTime format.",
@@ -764,6 +774,7 @@
     },
     "TestDatasourceResult": {
       "description": "The result of the test input or output request.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/Error"
@@ -801,6 +812,7 @@
     },
     "SubResource": {
       "description": "The base sub-resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
