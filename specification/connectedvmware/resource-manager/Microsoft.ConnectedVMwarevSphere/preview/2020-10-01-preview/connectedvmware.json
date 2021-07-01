@@ -3589,6 +3589,16 @@
         }
       }
     },
+    "PlacementProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "resourcePoolId": {
+          "type": "string",
+          "description": "Gets or sets the ARM Id of the resourcePool resource on which this virtual machine will deploy."
+        }
+      }
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -3618,6 +3628,10 @@
         "vCenterId": {
           "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
           "type": "string"
+        },
+        "placementProfile": {
+          "description": "Placement properties.",
+          "$ref": "#/definitions/PlacementProfile"
         },
         "osProfile": {
           "description": "OS properties.",
