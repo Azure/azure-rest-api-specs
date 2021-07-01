@@ -26,7 +26,16 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-09.12.0
+tag: package-2021-06.14.0
+```
+
+### Tag: package-2021-06.14.0
+
+These settings apply only when `--tag=package-2021-06.14.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06.14.0'
+input-file:
+- Microsoft.Batch/stable/2021-06-01.14.0/BatchService.json
 ```
 
 ### Tag: package-2020-09.12.0
@@ -116,120 +125,137 @@ Note that this setting should be removed once [this GitHub bug](https://github.c
 
 ``` yaml
 directive:
+  - suppress: R1001
+    where:
+      - $.paths["/jobschedules/{jobScheduleId}/jobs"].get.operationId
+    reason: Breaking change.
+
+  - suppress: R1003
+    where:
+      - $.paths["/jobs/{jobId}/addtaskcollection"].post.operationId
+    reason: Breaking change.
+
+  - suppress: R1006
+    where:
+      - $.paths["/jobs/{jobId}"].put.operationId
+      - $.paths["/jobs/{jobId}/tasks/{taskId}"].put.operationId
+      - $.paths["/jobschedules/{jobScheduleId}"].put.operationId
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].put.operationId
+    reason: Breaking change.
+
+  - suppress: R1007
+    where:
+      - $.paths["/jobs/{jobId}"].patch.operationId
+      - $.paths["/jobschedules/{jobScheduleId}"].patch.operationId
+      - $.paths["/pools/{poolId}"].patch.operationId
+    reason: Breaking change.
+
+  - suppress: R2001
+    where:
+      - $.definitions.NodeFile.properties.properties
+    reason: Breaking change.
+
+  - suppress: R2004
+    where:
+      - $.paths["/jobs/{jobId}/tasks/{taskId}/files/{filePath}"].get.produces[1]
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/files/{filePath}"].get.produces[1]
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/rdp"].get.produces[1]
+    reason: This is not an ARM API.
+
+  - suppress: R2007
+    where:
+      - $.paths["/jobschedules/{jobScheduleId}"].delete
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
+      - $.paths["/jobschedules/{jobScheduleId}/terminate"].post
+      - $.paths["/jobs/{jobId}"].delete
+      - $.paths["/jobs/{jobId}/disable"].post
+      - $.paths["/jobs/{jobId}/enable"].post
+      - $.paths["/jobs/{jobId}/terminate"].post
+      - $.paths["/pools/{poolId}"].delete
+      - $.paths["/pools/{poolId}/resize"].post
+      - $.paths["/pools/{poolId}/stopresize"].post
+      - $.paths["/pools/{poolId}/removenodes"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/reboot"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/reimage"].post
+    reason: Service does not return 200, nor supply location header.
+
+  - suppress: R2017
+    where:
+      - $.paths["/jobschedules/{jobScheduleId}"].put
+      - $.paths["/jobs/{jobId}"].put
+      - $.paths["/jobs/{jobId}/tasks/{taskId}"].put
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].put
+    reason: Matching service response.
+
+  - suppress: R2029
+    where:
+     - $.paths["/applications/{applicationId}"].get
+     - $.paths["/jobs/{jobId}/tasks/{taskId}/subtasksinfo"].get
+    reason: Not pageable.
+
+  - suppress: R2054
+    reason: The security definition already matches the required structure exactly.
+
+  # Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
   - suppress: R2063
-    from: BatchService.json
     reason: Bug in linter
-```
 
-Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/69) is fixed.
-
-``` yaml
-directive:
+  # Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/69) is fixed.
   - suppress: R2064
-    from: BatchService.json
     reason: This is a data plane swagger specification, LRO's do not apply
-```
 
-``` yaml
-directive:
+  - suppress: R2066
+    where:
+      - $.paths["/certificates"].post.operationId
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].post.operationId
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete"].post.operationId
+      - $.paths["/jobs"].post.operationId
+      - $.paths["/jobschedules"].post.operationId
+      - $.paths["/jobs/{jobId}/tasks"].post.operationId
+      - $.paths["/jobs/{jobId}/addtaskcollection"].post.operationId
+      - $.paths["/pools"].post.operationId
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/users"].post.operationId
+    reason: This is fine as long as the OperationIds are all unique (as they presently are), and fixing it would likely involve a breaking change.
+
   - suppress: R3016
-    from: BatchService.json
     where: $..["odata.nextLink"]
     reason: The casing of this property is not incorrect.
-```
 
-``` yaml
-directive:
   - suppress: R3016
-    from: BatchService.json
-    where: $..["publicFQDN"]
+    where:
+      - $..["publicFQDN"]
+      - $.definitions.ImageInformation.properties.nodeAgentSKUId
+      - $.definitions.JobStatistics.properties.kernelCPUTime
+      - $.definitions.JobStatistics.properties.userCPUTime
+      - $.definitions.JobScheduleStatistics.properties.kernelCPUTime
+      - $.definitions.JobScheduleStatistics.properties.userCPUTime
+      - $.definitions.PoolEndpointConfiguration.properties.inboundNATPools
+      - $.definitions.ResourceStatistics.properties.avgCPUPercentage
+      - $.definitions.TaskStatistics.properties.userCPUTime
+      - $.definitions.TaskStatistics.properties.kernelCPUTime
+      - $.definitions.VirtualMachineConfiguration.properties.nodeAgentSKUId
     reason: The suggested casing of this property is worse than the casing that we're using
-```
 
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.JobScheduleStatistics.properties.kernelCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
+  - suppress: R3018
+    reason: This would be a big breaking change, and there are too many existing instances (over 100) to enumerate here.
 
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.TaskStatistics.properties.userCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
+  - suppress: R3023
+    reason: This is not an ARM API.
 
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.TaskStatistics.properties.kernelCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
+  - suppress: R4007
+    reason: We essentially are following the error schema, and this would be a big breaking change.
 
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.JobScheduleStatistics.properties.userCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.JobStatistics.properties.kernelCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.JobStatistics.properties.userCPUTime
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.ResourceStatistics.properties.avgCPUPercentage
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.PoolEndpointConfiguration.properties.inboundNATPools
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-directive:
-  - suppress: R3016
-    from: BatchService.json
-    where: $.definitions.VirtualMachineConfiguration.properties.nodeAgentSKUId
-    reason: The suggested casing of this property is worse than the casing that we're using
-```
-
-``` yaml
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ImageInformation.properties.nodeAgentSKUId
-    from: BatchService.json
-    reason: Changing the casing of this property would be a breaking change
-```
-
-``` yaml
-  - suppress: AvoidNestedProperties
-    where: $.definitions.NodeFile.properties.properties
-    from: BatchService.json
-    reason: Switching to x-ms-client-flatten would be a breaking change to the SDKs
+  - suppress: R4011
+    where:
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete.responses
+      - $.paths["/jobs/{jobId}/tasks/{taskId}/files/{filePath}"].delete.responses
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/files/{filePath}"].delete.responses
+      - $.paths["/jobschedules/{jobScheduleId}"].delete.responses
+      - $.paths["/jobs/{jobId}"].delete.responses
+      - $.paths["/pools/{poolId}"].delete.responses
+      - $.paths["/jobs/{jobId}/tasks/{taskId}"].delete.responses
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].delete.responses
+    reason: These delete operations have the required responses. Looks like a bug with the validator.
 ```
 
 ### Tag: package-2017-05.5.0
@@ -279,7 +305,7 @@ input-file:
 
 ---
 
-# Code Generation
+## Code Generation
 
 ## Swagger to SDK
 
@@ -293,7 +319,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
 ```
 
-## C#
+## C\#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -358,8 +384,6 @@ nodejs:
   clear-output-folder: true
 ```
 
-## Java
-
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
@@ -379,7 +403,7 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+``` yaml $(tag) == 'all-api-versions' /*autogenerated*/
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
