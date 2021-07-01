@@ -6496,12 +6496,18 @@
     "ConnectivityCheckRequest": {
       "description": "A request to perform the connectivity check operation on a API Management service.",
       "type": "object",
-      "required": ["source", "destination", "preferredIPVersion"],
+      "required": [
+        "source",
+        "destination",
+        "preferredIPVersion"
+      ],
       "properties": {
         "source": {
           "description": "Definitions about the connectivity check origin.",
           "type": "object",
-          "required": ["region"],
+          "required": [
+            "region"
+          ],
           "properties": {
             "region": {
               "description": "The API Management service region from where to start the connectivity check operation.",
@@ -6518,7 +6524,10 @@
         "destination": {
           "description": "The connectivity check operation destination.",
           "type": "object",
-          "required": ["address", "port"],
+          "required": [
+            "address",
+            "port"
+          ],
           "properties": {
             "address": {
               "description": "Destination address. Can either be an IP address or a FQDN.",
@@ -6535,7 +6544,10 @@
         "preferredIPVersion": {
           "description": "The IP version to be used. Can either be IPv4 or IPv6.",
           "type": "string",
-          "enum": ["IPv4", "IPv6"],
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
           "x-ms-enum": {
             "name": "PreferredIPVersion",
             "modelAsString": true
