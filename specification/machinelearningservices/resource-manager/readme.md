@@ -57,7 +57,6 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 input-file:
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
-  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/services.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceSkus.json
 ```
