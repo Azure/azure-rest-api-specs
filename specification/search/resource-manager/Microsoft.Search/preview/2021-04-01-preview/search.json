@@ -1676,6 +1676,35 @@
             }
           },
           "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+        },
+        "groupId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The group id for the private endpoint."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "name": "Succeeded",
+                "description": "Indicates that the private endpoint has succeeded provisioning."
+              },
+              {
+                "value": "Succeeded",
+                "name": "Succeeded",
+                "description": "Indicates that the private endpoint has failed provisioning."
+              }
+            ]
+          },
+          "description": "A specific data exfiltration scenario that is disabled for the service."
         }
       },
       "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
