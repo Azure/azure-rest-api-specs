@@ -6492,6 +6492,209 @@
           "description": "Last updated date and time."
         }
       }
+    },
+    "ConnectivityCheckRequest": {
+      "description": "A request to perform the connectivity check operation on a API Management service.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Definitions about the connectivity check origin.",
+          "type": "object",
+          "properties": {
+            "region": {
+              "description": "The API Management service region from where to start the connectivity check operation.",
+              "type": "string",
+              "example": "westus"
+            },
+            "instance": {
+              "description": "The particular VMSS instance from which to fire the request.",
+              "type": "integer",
+              "default": null
+            }
+          }
+        },
+        "destination": {
+          "description": "The connectivity check operation destination.",
+          "type": "object",
+          "properties": {
+            "address": {
+              "description": "Destination address. Can either be an IP address or a FQDN.",
+              "type": "string",
+              "example": "microsoft.com"
+            },
+            "port": {
+              "description": "Destination port.",
+              "type": "integer"
+            }
+          }
+        },
+        "preferredIPVersion": {
+          "description": "The IP version to be used. Can either be IPv4 or IPv6.",
+          "type": "string",
+          "enum": ["IPv4", "IPv6"]
+        }
+      }
+    },
+    "ConnectivityCheckResponse": {
+      "description": "Information on the connectivity status.",
+      "properties": {
+        "hops": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of hops between the source and the destination.",
+          "items": {
+            "$ref": "#/definitions/ConnectivityHop"
+          }
+        },
+        "connectionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Connected",
+            "Disconnected",
+            "Degraded"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          },
+          "description": "The connection status."
+        },
+        "avgLatencyInMs": {
+          "description": "Average latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "minLatencyInMs": {
+          "description": "Minimum latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "maxLatencyInMs": {
+          "description": "Maximum latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "probesSent": {
+          "description": "Total number of probes sent.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "probesFailed": {
+          "description": "Number of failed probes.",
+          "readOnly": true,
+          "type": "integer"
+        }
+      }
+    },
+    "ConnectivityHop": {
+      "description": "Information about a hop between the source and the destination.",
+      "properties": {
+        "type": {
+          "description": "The type of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "address": {
+          "description": "The IP address of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The ID of the resource corresponding to this hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextHopIds": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of next hop identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "issues": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of issues.",
+          "items": {
+            "$ref": "#/definitions/ConnectivityIssue"
+          }
+        }
+      }
+    },
+    "ConnectivityIssue": {
+      "description": "Information about an issue encountered in the process of checking for connectivity.",
+      "properties": {
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Local",
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          },
+          "description": "The origin of the issue."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Error",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          },
+          "description": "The severity of the issue."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "AgentStopped",
+            "GuestFirewall",
+            "DnsResolution",
+            "SocketBind",
+            "NetworkSecurityRule",
+            "UserDefinedRoute",
+            "PortThrottled",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": true
+          },
+          "description": "The type of issue."
+        },
+        "context": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Provides additional context on the issue.",
+          "items": {
+            "$ref": "#/definitions/IssueContext"
+          }
+        }
+      }
+    },
+    "IssueContext": {
+      "description": "A key-value pair that provides additional context on the issue.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   },
   "parameters": {}
