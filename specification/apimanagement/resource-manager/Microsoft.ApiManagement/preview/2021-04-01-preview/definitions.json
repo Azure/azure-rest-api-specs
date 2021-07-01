@@ -6510,7 +6510,8 @@
             },
             "instance": {
               "description": "The particular VMSS instance from which to fire the request.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int64"
             }
           }
         },
@@ -6526,19 +6527,25 @@
             },
             "port": {
               "description": "Destination port.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int64"
             }
           }
         },
         "preferredIPVersion": {
           "description": "The IP version to be used. Can either be IPv4 or IPv6.",
           "type": "string",
-          "enum": ["IPv4", "IPv6"]
+          "enum": ["IPv4", "IPv6"],
+          "x-ms-enum": {
+            "name": "PreferredIPVersion",
+            "modelAsString": true
+          }
         }
       }
     },
     "ConnectivityCheckResponse": {
       "description": "Information on the connectivity status.",
+      "type": "object",
       "properties": {
         "hops": {
           "readOnly": true,
@@ -6566,32 +6573,38 @@
         "avgLatencyInMs": {
           "description": "Average latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "minLatencyInMs": {
           "description": "Minimum latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "maxLatencyInMs": {
           "description": "Maximum latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "probesSent": {
           "description": "Total number of probes sent.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "probesFailed": {
           "description": "Number of failed probes.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
     "ConnectivityHop": {
       "description": "Information about a hop between the source and the destination.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the hop.",
@@ -6633,6 +6646,7 @@
     },
     "ConnectivityIssue": {
       "description": "Information about an issue encountered in the process of checking for connectivity.",
+      "type": "object",
       "properties": {
         "origin": {
           "readOnly": true,
