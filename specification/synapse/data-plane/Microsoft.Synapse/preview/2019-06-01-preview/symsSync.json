@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/symssync/register": {
+      "put": {
+        "tags": [
+          "symssync"
+        ],
+        "operationId": "SymsSync_Register",
+        "description": "Register files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/SymsSync_Register.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegisterBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request Accepted Response.",
+            "schema": {
+              "type" : "object",
+              "properties" : {
+                "RequestId" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/symssync/update": {
+      "put": {
+        "tags": [
+          "symssync"
+        ],
+        "operationId": "SymsSync_Update",
+        "description": "Update files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/SymsSync_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateBody"
+          }
+        ],
+        "responses": {
+           "201": {
+            "description": "Request Accepted Response.",
+            "schema": {
+              "type" : "object",
+              "properties" : {
+                "RequestId" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/symssync/delete": {
+      "put": {
+        "tags": [
+          "symssync"
+        ],
+        "operationId": "SymsSync_Delete",
+        "description": "Register files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/SymsSync_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeleteBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request Accepted Response.",
+            "schema": {
+              "type" : "object",
+              "properties" : {
+                "RequestId" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "RegisterBody": {
+      "name": "registerBody",
+      "in": "body",
+      "required": true,
+      "schema" : {
+        "type" : "object",
+        "properties" : {
+          "InputFolder" : {
+            "type" : "string"
+          },
+          "DatabaseName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description": "The register request body."
+    },
+    "UpdateBody": {
+      "name": "updateBody",
+      "in": "body",
+      "required": true,
+      "schema" : {
+        "type" : "object",
+        "properties" : {
+          "InputFolder" : {
+            "type" : "string"
+          },
+          "DatabaseName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description": "The update request body."
+    },
+    "DeleteBody": {
+      "name": "deleteBody",
+      "in": "body",
+      "required": true,
+      "schema" : {
+        "type" : "object",
+        "properties" : {
+          "DatabaseName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description": "The delete request body."
+    }
+  }
+}

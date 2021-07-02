@@ -77,6 +77,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SqlScript.json
 - Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Trigger.json
 - Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
+- Microsoft.Synapse/preview/2019-06-01-preview/symsSync.json
 ```
 
 ### Tag: package-access-control-2020-02-01-preview
