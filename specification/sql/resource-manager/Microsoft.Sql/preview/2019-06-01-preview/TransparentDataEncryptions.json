@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-02-01-preview",
+    "version": "2019-06-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,28 +16,28 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption/{tdeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}": {
       "get": {
         "tags": [
-          "ManagedDatabaseTransparentDataEncryption"
+          "TransparentDataEncryptions"
         ],
-        "description": "Gets a managed database's transparent data encryption.",
-        "operationId": "ManagedDatabaseTransparentDataEncryption_Get",
+        "description": "Gets a logical database's transparent data encryption.",
+        "operationId": "TransparentDataEncryptions_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
+            "name": "serverName",
             "in": "path",
-            "description": "The name of the managed instance.",
+            "description": "The name of the server.",
             "required": true,
             "type": "string"
           },
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the managed database for which the transparent data encryption is defined.",
+            "description": "The name of the logical database for which the transparent data encryption is defined.",
             "required": true,
             "type": "string"
           },
@@ -64,9 +64,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the managed database transparent data encryption.",
+            "description": "Successfully retrieved the Logical database transparent data encryption.",
             "schema": {
-              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+              "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryption"
             }
           },
           "default": {
@@ -75,31 +75,31 @@
         },
         "x-ms-examples": {
           "Get a database's transparent data encryption": {
-            "$ref": "./examples/ManagedTransparentDataEncryptionGet.json"
+            "$ref": "./examples/TransparentDataEncryptionGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedDatabaseTransparentDataEncryption"
+          "TransparentDataEncryptions"
         ],
-        "description": "Updates a database's transparent data encryption configuration.",
-        "operationId": "ManagedDatabaseTransparentDataEncryption_CreateOrUpdate",
+        "description": "Updates a logical database's transparent data encryption configuration.",
+        "operationId": "TransparentDataEncryptions_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
+            "name": "serverName",
             "in": "path",
-            "description": "The name of the managed instance.",
+            "description": "The name of the server.",
             "required": true,
             "type": "string"
           },
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the managed database for which the security alert policy is defined.",
+            "description": "The name of the logical database for which the security alert policy is defined.",
             "required": true,
             "type": "string"
           },
@@ -123,7 +123,7 @@
             "description": "The database transparent data encryption.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+              "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryption"
             }
           },
           {
@@ -137,7 +137,7 @@
           "200": {
             "description": "Successfully updated the database Transparent Data Encryption state.",
             "schema": {
-              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+              "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryption"
             }
           },
           "default": {
@@ -146,39 +146,42 @@
           "201": {
             "description": "Successfully created the database transparent data encryption state.",
             "schema": {
-              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+              "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryption"
             }
+          },
+          "202": {
+            "description": "Creating or updating the database transparent data encryption configuration is in progress."
           }
         },
         "x-ms-examples": {
           "Update a database's Transparent Data Encryption state with minimal parameters": {
-            "$ref": "./examples/ManagedTransparentDataEncryptionUpdate.json"
+            "$ref": "./examples/TransparentDataEncryptionUpdate.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption": {
       "get": {
         "tags": [
-          "ManagedDatabaseTransparentDataEncryption"
+          "TransparentDataEncryptions"
         ],
-        "description": "Gets a list of managed database's transparent data encryptions.",
-        "operationId": "ManagedDatabaseTransparentDataEncryption_ListByDatabase",
+        "description": "Gets a list of the logical database's transparent data encryption.",
+        "operationId": "TransparentDataEncryptions_ListByDatabase",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
+            "name": "serverName",
             "in": "path",
-            "description": "The name of the managed instance.",
+            "description": "The name of the server.",
             "required": true,
             "type": "string"
           },
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the managed database for which the transparent data encryption is defined.",
+            "description": "The name of the logical database for which the transparent data encryption is defined.",
             "required": true,
             "type": "string"
           },
@@ -191,9 +194,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of managed database transparent data encryptions.",
+            "description": "Successfully retrieved the list of Logical database transparent data encryption.",
             "schema": {
-              "$ref": "#/definitions/ManagedTransparentDataEncryptionListResult"
+              "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryptionListResult"
             }
           },
           "default": {
@@ -204,15 +207,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get a list of the database's transparent data encryptions": {
-            "$ref": "./examples/ManagedTransparentDataEncryptionList.json"
+          "Get a list of the database's transparent data encryption": {
+            "$ref": "./examples/TransparentDataEncryptionList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ManagedTransparentDataEncryptionProperties": {
+    "TransparentDataEncryptionProperties": {
       "description": "Properties of a transparent data encryption.",
       "required": [
         "state"
@@ -233,8 +236,8 @@
         }
       }
     },
-    "ManagedTransparentDataEncryption": {
-      "description": "A managed database transparent data encryption state.",
+    "LogicalDatabaseTransparentDataEncryption": {
+      "description": "A logical database transparent data encryption state.",
       "type": "object",
       "allOf": [
         {
@@ -243,21 +246,21 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagedTransparentDataEncryptionProperties",
+          "$ref": "#/definitions/TransparentDataEncryptionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ManagedTransparentDataEncryptionListResult": {
-      "description": "A list of managed transparent data encryptions",
+    "LogicalDatabaseTransparentDataEncryptionListResult": {
+      "description": "A list of transparent data encryptions",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedTransparentDataEncryption"
+            "$ref": "#/definitions/LogicalDatabaseTransparentDataEncryption"
           },
           "readOnly": true
         },
