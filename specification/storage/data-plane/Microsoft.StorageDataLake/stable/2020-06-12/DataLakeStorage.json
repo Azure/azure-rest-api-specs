@@ -151,7 +151,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the FileSystem.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -220,7 +219,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the filesystem.  Changes to filesystem properties affect the entity tag, but operations on files and directories do not.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -273,7 +271,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the filesystem.  Changes to filesystem properties affect the entity tag, but operations on files and directories do not.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -371,6 +368,9 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
           "$ref": "#/parameters/FileSystemResource"
         },
         {
@@ -424,7 +424,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the filesystem.  Changes to filesystem properties affect the entity tag, but operations on files and directories do not.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -468,6 +467,9 @@
         }
       },
       "parameters": [
+        {
+          "$ref": "#/parameters/FileSystem"
+        },
         {
           "$ref": "#/parameters/FileSystemResource"
         },
@@ -573,7 +575,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -583,6 +589,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -650,10 +657,10 @@
             "$ref": "#/parameters/ContentDisposition"
           },
           {
-           "$ref": "#/parameters/ContentType"
+            "$ref": "#/parameters/ContentType"
           },
           {
-           "$ref": "#/parameters/RenameSource"
+            "$ref": "#/parameters/RenameSource"
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
@@ -706,7 +713,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -792,7 +798,7 @@
           {
             "name": "continuation",
             "in": "query",
-            "description": "Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAcessControlRecursive operation.",
+            "description": "Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAccessControlRecursive operation.",
             "required": false,
             "type": "string"
           },
@@ -877,7 +883,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1041,7 +1046,7 @@
             "$ref": "#/parameters/IfNoneMatch"
           },
           {
-           "$ref": "#/parameters/IfModifiedSince"
+            "$ref": "#/parameters/IfModifiedSince"
           },
           {
             "$ref": "#/parameters/IfUnmodifiedSince"
@@ -1058,7 +1063,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1095,7 +1099,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1127,7 +1130,6 @@
             "headers": {
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1253,7 +1255,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1354,7 +1355,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1508,7 +1508,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -1666,6 +1665,12 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "$ref": "#/parameters/ClientRequestId"
         },
         {
@@ -1732,7 +1737,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "An HTTP entity tag associated with the file or directory."
               },
               "Last-Modified": {
@@ -1784,7 +1788,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "action",
+          "description": "action",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1800,7 +1811,7 @@
           "directory"
         ],
         "operationId": "Path_SetAccessControlRecursive",
-        "description": "Set the access control list for a path and subpaths.",
+        "description": "Set the access control list for a path and sub-paths.",
         "parameters": [
           {
             "$ref": "#/parameters/Timeout"
@@ -1894,7 +1905,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "action",
+          "description": "action",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1978,7 +1996,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Last-Modified": {
@@ -2036,7 +2053,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "action",
+          "description": "action",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2108,7 +2132,6 @@
               },
               "ETag": {
                 "description": "An HTTP entity tag associated with the file or directory.",
-                "format": "etag",
                 "type": "string"
               },
               "Content-MD5": {
@@ -2155,7 +2178,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "action",
+          "description": "action",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2195,7 +2225,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -2241,7 +2270,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2319,7 +2355,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/FileSystem"
+        },
+        {
+          "$ref": "#/parameters/Path"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2335,26 +2378,29 @@
       "name": "url",
       "description": "The URL of the service account, container, or blob that is the target of the desired operation.",
       "required": true,
+      "x-ms-parameter-location": "client",
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
     "FileSystemResource": {
-	  "name": "resource",
-	  "in": "query",
-	  "description": "The value must be \"filesystem\" for all filesystem operations.",
-	  "required": true,
-	  "type": "string",
-	  "enum": [
-		"filesystem"
-	  ],
-	  "x-ms-enum": {
-		"name": "FileSystemResourceType",
-		"modelAsString": false
-	  }
-	},
+      "name": "resource",
+      "in": "query",
+      "x-ms-parameter-location": "client",
+      "description": "The value must be \"filesystem\" for all filesystem operations.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "filesystem"
+      ],
+      "x-ms-enum": {
+        "name": "FileSystemResourceType",
+        "modelAsString": false
+      }
+    },
     "ApiVersionParameter": {
       "name": "x-ms-version",
+      "x-ms-parameter-location": "client",
       "x-ms-client-name": "version",
       "in": "header",
       "required": true,
@@ -2407,7 +2453,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "modified-access-conditions"
@@ -2433,7 +2478,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "modified-access-conditions"
@@ -2455,7 +2499,6 @@
     },
     "RecursiveOptional": {
       "name": "recursive",
-      "x-ms-client-name": "recursive",
       "x-ms-parameter-location": "method",
       "in": "query",
       "description": "Required",
@@ -2464,7 +2507,6 @@
     },
     "RecursiveRequired": {
       "name": "recursive",
-      "x-ms-client-name": "recursive",
       "x-ms-parameter-location": "method",
       "in": "query",
       "description": "Required",
@@ -2473,7 +2515,6 @@
     },
     "Continuation": {
       "name": "continuation",
-      "x-ms-client-name": "continuation",
       "x-ms-parameter-location": "method",
       "in": "query",
       "description": "Optional.  When deleting a directory, the number of paths that are deleted with each invocation is limited.  If the number of paths to be deleted exceeds this limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the delete operation to continue deleting the directory.",
@@ -2491,7 +2532,7 @@
         "set",
         "modify",
         "remove"
-       ],
+      ],
       "x-ms-enum": {
         "name": "PathSetAccessControlRecursiveMode",
         "modelAsString": false
@@ -2499,7 +2540,6 @@
     },
     "ForceFlag": {
       "name": "forceFlag",
-      "x-ms-client-name": "forceFlag",
       "x-ms-parameter-location": "method",
       "in": "query",
       "description": "Optional. Valid for \"SetAccessControlRecursive\" operation. If set to false, the operation will terminate quickly on encountering user errors (4XX). If true, the operation will ignore user errors and proceed with the operation on other sub-entities of the directory. Continuation token will only be returned when forceFlag is true in case of user errors. If not set the default value is false for this.",
@@ -2578,7 +2618,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "source-modified-access-conditions"
@@ -2604,7 +2643,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "source-modified-access-conditions"
@@ -2635,6 +2673,7 @@
     },
     "FileSystem": {
       "name": "filesystem",
+      "x-ms-parameter-location": "client",
       "x-ms-client-name": "fileSystem",
       "in": "path",
       "description": "The filesystem identifier.",
@@ -2646,6 +2685,7 @@
     },
     "Path": {
       "name": "path",
+      "x-ms-parameter-location": "client",
       "in": "path",
       "description": "The file or directory path.",
       "required": true,
@@ -2854,7 +2894,7 @@
       "type": "integer",
       "format": "int64",
       "x-ms-parameter-location": "method"
-     },
+    },
     "PathExpiryOptions": {
       "name": "x-ms-expiry-option",
       "x-ms-client-name": "ExpiryOptions",
@@ -3177,8 +3217,7 @@
           "format": "date-time-rfc1123"
         },
         "Etag": {
-          "type": "string",
-          "format": "etag"
+          "type": "string"
         },
         "Content-Length": {
           "type": "integer",

@@ -18,13 +18,6 @@
       }
     ]
   },
-  "securityDefinitions": {
-    "blob_shared_key": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
-    }
-  },
   "schemes": [
     "https"
   ],
@@ -150,6 +143,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -159,6 +153,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -232,6 +227,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -241,6 +237,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -324,6 +321,7 @@
       "parameters": [
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -400,6 +398,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -409,6 +408,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -510,6 +510,7 @@
       "parameters": [
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -519,6 +520,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -596,6 +598,7 @@
       "parameters": [
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -678,6 +681,7 @@
       "parameters": [
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -723,7 +727,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -798,7 +801,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -990,7 +992,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1033,7 +1039,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1079,7 +1084,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1089,6 +1098,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1138,7 +1148,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1223,7 +1232,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1269,7 +1277,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1279,6 +1291,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1299,7 +1312,7 @@
           {
             "$ref": "#/parameters/Timeout"
           },
-                    {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1354,7 +1367,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1364,6 +1381,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1439,7 +1457,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1449,6 +1471,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1525,7 +1548,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1535,6 +1562,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1580,7 +1608,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1631,7 +1658,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1641,6 +1672,7 @@
         },
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1699,7 +1731,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1745,7 +1776,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1755,6 +1790,7 @@
         },
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1813,7 +1849,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1864,7 +1899,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1874,6 +1913,7 @@
         },
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1932,7 +1972,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -1983,7 +2022,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -1993,6 +2036,7 @@
         },
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2054,7 +2098,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -2105,7 +2148,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2115,6 +2162,7 @@
         },
         {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2222,7 +2270,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2232,6 +2284,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2326,7 +2379,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2336,6 +2393,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2431,7 +2489,11 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -2441,634 +2503,12 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
           "enum": [
             "properties"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?resource=directory&Create": {
-      "put": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Create",
-        "description": "Create a directory. By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The file or directory was created.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "resource",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "directory"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?DirectoryRename": {
-      "put": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Rename",
-        "description": "Rename a directory. By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations). To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Continuation"
-          },
-          {
-            "$ref": "#/parameters/PathRenameMode"
-          },
-          {
-            "$ref": "#/parameters/FileRenameSource"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/SourceLeaseId"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The directory was renamed.",
-            "headers": {
-              "x-ms-continuation": {
-                "x-ms-client-name": "marker",
-                "type": "string",
-                "description": "When renaming a directory, the number of paths that are renamed with each invocation is limited. If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
-    },
-    "/{filesystem}/{path}?DirectoryDelete": {
-      "delete": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_Delete",
-        "description": "Deletes the directory",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/RecursiveDirectoryDelete"
-          },
-          {
-            "$ref": "#/parameters/Continuation"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The directory was deleted.",
-            "headers": {
-              "x-ms-continuation": {
-                "x-ms-client-name": "marker",
-                "type": "string",
-                "description": "When renaming a directory, the number of paths that are renamed with each invocation is limited. If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
-    },
-    "/{filesystem}/{path}?action=setAccessControl&directory": {
-      "patch": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_SetAccessControl",
-        "description": "Set the owner, group, permissions, or access control list for a directory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/Owner"
-          },
-          {
-            "$ref": "#/parameters/Group"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixAcl"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Set directory access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "setAccessControl"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?action=getAccessControl&directory": {
-      "head": {
-        "tags": [
-          "directory"
-        ],
-        "operationId": "Directory_GetAccessControl",
-        "description": "Get the owner, group, permissions, or access control list for a directory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Upn"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get directory access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-owner": {
-                "description": "The owner of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-group": {
-                "description": "The owning group of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-permissions": {
-                "description": "The POSIX access permissions for the file owner, the file owning group, and others. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-acl": {
-                "description": "The POSIX access control list for the file or directory.  Included in the response only if the action is \"getAccessControl\" and Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "getAccessControl"
           ]
         }
       ]
@@ -3173,7 +2613,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-MD5": {
@@ -3447,7 +2886,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-MD5": {
@@ -3892,7 +3330,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-MD5": {
@@ -4152,388 +3589,15 @@
             }
           }
         }
-      }
-    },
-    "/{filesystem}/{path}?action=setAccessControl&blob": {
-      "patch": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_SetAccessControl",
-        "description": "Set the owner, group, permissions, or access control list for a blob.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/Owner"
-          },
-          {
-            "$ref": "#/parameters/Group"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixAcl"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Set blob access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
       },
       "parameters": [
         {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "setAccessControl"
-          ]
-        }
-      ]
-    },
-    "/{filesystem}/{path}?action=getAccessControl&blob": {
-      "head": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_GetAccessControl",
-        "description": "Get the owner, group, permissions, or access control list for a blob.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/Upn"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get blob access control response.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              },
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-owner": {
-                "description": "The owner of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-group": {
-                "description": "The owning group of the file or directory. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-permissions": {
-                "description": "The POSIX access permissions for the file owner, the file owning group, and others. Included in the response if Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-acl": {
-                "description": "The POSIX access control list for the file or directory.  Included in the response only if the action is \"getAccessControl\" and Hierarchical Namespace is enabled for the account.",
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
+          "$ref": "#/parameters/ContainerName"
+        },
         {
-          "name": "action",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "getAccessControl"
-          ]
+          "$ref": "#/parameters/Blob"
         }
       ]
-    },
-    "/{filesystem}/{path}?FileRename": {
-      "put": {
-        "tags": [
-          "blob"
-        ],
-        "operationId": "Blob_Rename",
-        "description": "Rename a blob/file.  By default, the destination is overwritten and if the destination already exists and has a lease the lease is broken.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).  To fail if the destination already exists, use a conditional request with If-None-Match: \"*\".",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/PathRenameMode"
-          },
-          {
-            "$ref": "#/parameters/FileRenameSource"
-          },
-          {
-            "$ref": "#/parameters/DirectoryProperties"
-          },
-          {
-            "$ref": "#/parameters/PosixPermissions"
-          },
-          {
-            "$ref": "#/parameters/PosixUmask"
-          },
-          {
-            "$ref": "#/parameters/XMsCacheControl"
-          },
-          {
-            "$ref": "#/parameters/XMsContentType"
-          },
-          {
-            "$ref": "#/parameters/XMsContentEncoding"
-          },
-          {
-            "$ref": "#/parameters/XMsContentLanguage"
-          },
-          {
-            "$ref": "#/parameters/XMsContentDisposition"
-          },
-          {
-            "$ref": "#/parameters/LeaseIdOptional"
-          },
-          {
-            "$ref": "#/parameters/SourceLeaseId"
-          },
-          {
-            "$ref": "#/parameters/IfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/IfMatch"
-          },
-          {
-            "$ref": "#/parameters/IfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfModifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/SourceIfMatch"
-          },
-          {
-            "$ref": "#/parameters/SourceIfNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The file was renamed.",
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "format": "etag",
-                "description": "An HTTP entity tag associated with the file or directory."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "The data and time the file or directory was last modified.  Write operations on the file or directory update the last modified time."
-              },
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The size of the resource in bytes."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "The version of the REST protocol used to process the request."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/DataLakeStorageError"
-            }
-          }
-        }
-      }
     },
     "/{containerName}/{blob}?PageBlob": {
       "put": {
@@ -4637,7 +3701,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -4707,6 +3770,12 @@
         }
       },
       "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -4818,7 +3887,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -4888,6 +3956,12 @@
         }
       },
       "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5008,7 +4082,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -5078,6 +4151,12 @@
         }
       },
       "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5213,7 +4292,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -5283,6 +4361,12 @@
         }
       },
       "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
         {
           "name": "x-ms-blob-type",
           "x-ms-client-name": "blobType",
@@ -5361,7 +4445,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5401,7 +4492,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -5447,7 +4537,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5517,7 +4614,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -5569,7 +4665,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5725,7 +4828,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5803,7 +4913,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5870,7 +4987,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -5936,7 +5052,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -5991,7 +5114,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6002,7 +5124,7 @@
               "x-ms-lease-id": {
                 "x-ms-client-name": "LeaseId",
                 "type": "string",
-                "description": "Uniquely identifies a blobs's lease"
+                "description": "Uniquely identifies a blobs' lease"
               },
               "x-ms-client-request-id": {
                 "x-ms-client-name": "ClientRequestId",
@@ -6042,7 +5164,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6110,7 +5239,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6156,7 +5284,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6224,7 +5359,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6235,7 +5369,7 @@
               "x-ms-lease-id": {
                 "x-ms-client-name": "LeaseId",
                 "type": "string",
-                "description": "Uniquely identifies a blobs's lease"
+                "description": "Uniquely identifies a blobs' lease"
               },
               "x-ms-client-request-id": {
                 "x-ms-client-name": "ClientRequestId",
@@ -6275,7 +5409,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6346,7 +5487,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6367,7 +5507,7 @@
               "x-ms-lease-id": {
                 "x-ms-client-name": "LeaseId",
                 "type": "string",
-                "description": "Uniquely identifies a blobs's lease"
+                "description": "Uniquely identifies a blobs' lease"
               },
               "x-ms-version": {
                 "x-ms-client-name": "Version",
@@ -6397,7 +5537,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6465,7 +5612,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6516,7 +5662,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6604,7 +5757,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6660,7 +5812,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -6754,7 +5913,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6823,7 +5981,14 @@
           }
         }
       },
-      "parameters": []
+      "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        }
+      ]
     },
     "/{containerName}/{blob}?comp=copy&sync": {
       "put": {
@@ -6906,7 +6071,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -6984,7 +6148,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "x-ms-requires-sync",
+          "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
           "in": "header",
           "required": true,
           "type": "string",
@@ -6994,7 +6165,7 @@
         }
       ]
     },
-    "/{containerName}/{blob}?comp=copy&copyid={CopyId}": {
+    "/{containerName}/{blob}?comp=copy&copyid": {
       "put": {
         "tags": [
           "blob"
@@ -7060,7 +6231,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7070,6 +6248,7 @@
         },
         {
           "name": "x-ms-copy-action",
+          "description": "Copy action.",
           "x-ms-client-name": "copyActionAbortConstant",
           "in": "header",
           "required": true,
@@ -7174,7 +6353,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7270,7 +6456,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "restype",
+          "description": "restype",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7280,6 +6473,7 @@
         },
         {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7407,7 +6601,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7461,7 +6662,7 @@
           {
             "$ref": "#/parameters/LeaseIdOptional"
           },
-           {
+          {
             "$ref": "#/parameters/SourceIfModifiedSince"
           },
           {
@@ -7550,7 +6751,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7633,6 +6841,7 @@
           },
           {
             "name": "blocks",
+            "description": "Blob Blocks.",
             "in": "body",
             "required": true,
             "schema": {
@@ -7664,7 +6873,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -7778,7 +6986,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-Type": {
@@ -7832,7 +7039,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -7923,7 +7137,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8000,7 +7213,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8098,7 +7318,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8160,7 +7379,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8285,7 +7511,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8357,7 +7582,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8436,7 +7668,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "x-ms-blob-content-length": {
@@ -8486,7 +7717,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8555,7 +7793,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "x-ms-blob-content-length": {
@@ -8605,7 +7842,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8672,7 +7916,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8724,7 +7967,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8782,7 +8032,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8834,7 +8083,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -8886,7 +8142,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -8952,7 +8207,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -9037,7 +8299,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -9118,7 +8379,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -9221,7 +8489,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -9297,7 +8564,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -9349,7 +8623,6 @@
             "headers": {
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Last-Modified": {
@@ -9400,7 +8673,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -9490,7 +8770,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-MD5": {
@@ -9701,7 +8980,6 @@
               },
               "ETag": {
                 "type": "string",
-                "format": "etag",
                 "description": "The ETag contains a value that you can use to perform operations conditionally. If the request version is 2011-08-18 or newer, the ETag value will be in quotes."
               },
               "Content-MD5": {
@@ -9906,7 +9184,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -9981,7 +9266,7 @@
               "x-ms-error-code": {
                 "x-ms-client-name": "ErrorCode",
                 "type": "string"
-                }
+              }
             },
             "schema": {
               "$ref": "#/definitions/StorageError"
@@ -10066,7 +9351,14 @@
       },
       "parameters": [
         {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "$ref": "#/parameters/Blob"
+        },
+        {
           "name": "comp",
+          "description": "comp",
           "in": "query",
           "required": true,
           "type": "string",
@@ -10209,25 +9501,6 @@
         }
       }
     },
-    "DataLakeStorageError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "x-ms-client-name": "DataLakeStorageErrorDetails",
-          "description": "The service error response object.",
-          "properties": {
-            "Code": {
-              "description": "The service error code.",
-              "type": "string"
-            },
-            "Message": {
-              "description": "The service error message.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
     "AccessPolicy": {
       "type": "object",
       "description": "An Access policy",
@@ -10347,8 +9620,7 @@
           "format": "date-time-rfc1123"
         },
         "Etag": {
-          "type": "string",
-          "format": "etag"
+          "type": "string"
         },
         "Content-Length": {
           "type": "integer",
@@ -10488,12 +9760,11 @@
             "Locked"
           ],
           "x-ms-enum": {
-             "name": "BlobImmutabilityPolicyMode",
-             "modelAsString": false
+            "name": "BlobImmutabilityPolicyMode",
+            "modelAsString": false
           }
         },
         "LegalHold": {
-          "x-ms-client-name": "LegalHold",
           "type": "boolean"
         }
       }
@@ -10792,8 +10063,7 @@
           "format": "date-time-rfc1123"
         },
         "Etag": {
-          "type": "string",
-          "format": "etag"
+          "type": "string"
         },
         "LeaseStatus": {
           "$ref": "#/definitions/LeaseStatus"
@@ -10894,7 +10164,7 @@
         }
       }
     },
-    "ArrowConfiguration" : {
+    "ArrowConfiguration": {
       "xml": {
         "name": "ArrowConfiguration"
       },
@@ -11154,7 +10424,7 @@
       "required": [
         "Name",
         "ContainerName",
-        "TagValue"
+        "Tags"
       ],
       "properties": {
         "Name": {
@@ -11437,7 +10707,7 @@
     "QueryFormat": {
       "type": "object",
       "required": [
-        "QueryType"
+        "Type"
       ],
       "properties": {
         "Type": {
@@ -11630,6 +10900,7 @@
     "Url": {
       "name": "url",
       "description": "The URL of the service account, container, or blob that is the target of the desired operation.",
+      "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
@@ -11637,6 +10908,7 @@
     },
     "ApiVersionParameter": {
       "name": "x-ms-version",
+      "x-ms-parameter-location": "client",
       "x-ms-client-name": "version",
       "in": "header",
       "required": true,
@@ -11656,22 +10928,6 @@
       "maxLength": 1024,
       "x-ms-parameter-location": "method",
       "description": "The blob name."
-    },
-    "Filesystem": {
-      "name": "filesystem",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The filesystem name."
-    },
-    "Path": {
-      "name": "path",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The namespace path to a file or directory."
     },
     "BlobCacheControl": {
       "name": "x-ms-blob-cache-control",
@@ -11728,7 +10984,7 @@
         "modelAsString": true
       }
     },
-    "BlobTagsBody" : {
+    "BlobTagsBody": {
       "name": "Tags",
       "in": "body",
       "schema": {
@@ -12022,15 +11278,6 @@
       "x-ms-parameter-location": "method",
       "description": "Initial data"
     },
-    "Continuation": {
-      "name": "continuation",
-      "x-ms-client-name": "marker",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "When renaming a directory, the number of paths that are renamed with each invocation is limited.  If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory."
-    },
     "ContainerAcl": {
       "name": "containerAcl",
       "in": "body",
@@ -12101,7 +11348,6 @@
       "in": "header",
       "required": true,
       "type": "string",
-      "format": "url",
       "x-ms-parameter-location": "method",
       "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature."
     },
@@ -12147,15 +11393,6 @@
       "x-ms-parameter-location": "method",
       "in": "query",
       "required": true
-    },
-    "DirectoryProperties": {
-      "name": "x-ms-properties",
-      "description": "Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
-      "x-ms-client-name": "directoryProperties",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     },
     "EncryptionKey": {
       "name": "x-ms-encryption-key",
@@ -12254,15 +11491,6 @@
       },
       "description": "Optional.  Version 2019-07-07 and newer.  If true, prevents any request from specifying a different encryption scope than the scope set on the container."
     },
-    "FileRenameSource": {
-      "name": "x-ms-rename-source",
-      "x-ms-client-name": "renameSource",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The file or directory to be renamed. The value must have the following format: \"/{filesysystem}/{path}\".  If \"x-ms-properties\" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved."
-    },
     "FilterBlobsWhere": {
       "name": "where",
       "in": "query",
@@ -12295,7 +11523,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "modified-access-conditions"
@@ -12321,7 +11548,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "modified-access-conditions"
@@ -12420,6 +11646,7 @@
       "description": "Specifies the immutability policy mode to set on the blob."
     },
     "KeyInfo": {
+      "description": "Key information",
       "name": "KeyInfo",
       "in": "body",
       "x-ms-parameter-location": "method",
@@ -12463,7 +11690,7 @@
       "type": "array",
       "collectionFormat": "csv",
       "items": {
-        "type" : "string",
+        "type": "string",
         "enum": [
           "metadata",
           "deleted"
@@ -12533,33 +11760,6 @@
       "x-ms-parameter-location": "method",
       "description": "Specified if a legal hold should be set on the blob."
     },
-    "Owner": {
-      "name": "x-ms-owner",
-      "x-ms-client-name": "owner",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "description": "Optional. The owner of the blob or directory.",
-      "x-ms-parameter-location": "method"
-    },
-    "Group": {
-      "name": "x-ms-group",
-      "x-ms-client-name": "group",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "description": "Optional. The owning group of the blob or directory.",
-      "x-ms-parameter-location": "method"
-    },
-    "Upn": {
-      "name": "upn",
-      "x-ms-client-name": "upn",
-      "in": "query",
-      "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
     "Marker": {
       "name": "marker",
       "in": "query",
@@ -12615,49 +11815,6 @@
       "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed).",
       "x-ms-header-collection-prefix": "x-ms-or-"
     },
-    "PathRenameMode": {
-      "name": "mode",
-      "x-ms-client-name": "pathRenameMode",
-      "description": "Determines the behavior of the rename operation",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "legacy",
-        "posix"
-      ],
-      "x-ms-enum": {
-        "name": "PathRenameMode",
-        "modelAsString": false
-      }
-    },
-    "PosixPermissions": {
-      "name": "x-ms-permissions",
-      "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read, write, or execute permission.  The sticky bit is also supported.  Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported.",
-      "x-ms-client-name": "posixPermissions",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PosixAcl": {
-      "name": "x-ms-acl",
-      "description": "Sets POSIX access control rights on files and directories. The value is a comma-separated list of access control entries. Each access control entry (ACE) consists of a scope, a type, a user or group identifier, and permissions in the format \"[scope:][type]:[id]:[permissions]\".",
-      "x-ms-client-name": "posixAcl",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PosixUmask": {
-      "name": "x-ms-umask",
-      "x-ms-client-name": "posixUmask",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Only valid if Hierarchical Namespace is enabled for the account. This umask restricts permission settings for file and directory, and will only be applied when default Acl does not exist in parent directory. If the umask bit has set, it means that the corresponding permission will be disabled. Otherwise the corresponding permission will be determined by the permission. A 4-digit octal notation (e.g. 0022) is supported here. If no umask was specified, a default umask - 0027 will be used."
-    },
     "Prefix": {
       "name": "prefix",
       "in": "query",
@@ -12680,7 +11837,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "url",
       "x-ms-parameter-location": "method",
       "description": "Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot."
     },
@@ -12705,6 +11861,7 @@
     "QueryRequest": {
       "name": "queryRequest",
       "in": "body",
+      "x-ms-parameter-location": "client",
       "schema": {
         "$ref": "#/definitions/QueryRequest"
       },
@@ -12727,15 +11884,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The range of bytes to which the source range would be written. The range should be 512 aligned and range-end is required."
-    },
-    "RecursiveDirectoryDelete": {
-      "name": "recursive",
-      "x-ms-client-name": "recursiveDirectoryDelete",
-      "in": "query",
-      "required": true,
-      "type": "boolean",
-      "x-ms-parameter-location": "method",
-      "description": "If \"true\", all paths beneath the directory will be deleted. If \"false\" and the directory is non-empty, an error occurs."
     },
     "SequenceNumberAction": {
       "name": "x-ms-sequence-number-action",
@@ -12834,7 +11982,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "source-modified-access-conditions"
@@ -12860,7 +12007,6 @@
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "etag",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "source-modified-access-conditions"
@@ -12907,7 +12053,6 @@
       "in": "header",
       "required": true,
       "type": "string",
-      "format": "url",
       "x-ms-parameter-location": "method",
       "description": "Specify a URL to the copy source."
     },
@@ -12929,66 +12074,6 @@
       "minimum": 0,
       "x-ms-parameter-location": "method",
       "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>"
-    },
-    "XMsCacheControl": {
-      "name": "x-ms-cache-control",
-      "x-ms-client-name": "cacheControl",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "directory-http-headers"
-      },
-      "description": "Cache control for given resource"
-    },
-    "XMsContentType": {
-      "name": "x-ms-content-type",
-      "x-ms-client-name": "contentType",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "directory-http-headers"
-      },
-      "description": "Content type for given resource"
-    },
-    "XMsContentEncoding": {
-      "name": "x-ms-content-encoding",
-      "x-ms-client-name": "contentEncoding",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "directory-http-headers"
-      },
-      "description": "Content encoding for given resource"
-    },
-    "XMsContentLanguage": {
-      "name": "x-ms-content-language",
-      "x-ms-client-name": "contentLanguage",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "directory-http-headers"
-      },
-      "description": "Content language for given resource"
-    },
-    "XMsContentDisposition": {
-      "name": "x-ms-content-disposition",
-      "x-ms-client-name": "contentDisposition",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "directory-http-headers"
-      },
-      "description": "Content disposition for given resource"
     }
   }
 }
