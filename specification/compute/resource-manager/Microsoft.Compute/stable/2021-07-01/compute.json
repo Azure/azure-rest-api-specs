@@ -3131,6 +3131,9 @@
           },
           "Create a VM with UserData": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithUserData.json"
+          },
+          "Create a VM with HibernationEnabled": {
+            "$ref": "./examples/compute/CreateOrUpdateAVmWithHibernationEnabled.json"
           }
         }
       },
@@ -3186,6 +3189,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/compute/UpdateVMForceDetachDataDisk.json"
+          },
+          "Update a VM with HibernationEnabled": {
+            "$ref": "./examples/compute/CreateOrUpdateAVmWithHibernationEnabled.json"
           }
         }
       },
@@ -3411,6 +3417,14 @@
             "required": true,
             "type": "string",
             "description": "The name of the virtual machine."
+          },
+          {
+            "name": "hibernate",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "description": "Optional parameter to hibernate a virtual machine. (Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -10030,6 +10044,10 @@
         "ultraSSDEnabled": {
           "type": "boolean",
           "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+        },
+        "hibernationEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables hibernation capability on the VM."
         }
       },
       "description": "Enables or disables a capability on the virtual machine or virtual machine scale set."
