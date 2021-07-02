@@ -2215,9 +2215,9 @@
       }
     },
     "QueryApprovedPlansResponseDetails": {
-      "description": "A map indicating for each plan which subscriptions are approved.Map key is plan id.",
-      "type": "object",
-      "additionalProperties": {
+      "description": "A list indicating for each plan which subscriptions are approved. Plan Id is unique",
+      "type": "array",
+      "items": {
         "$ref": "#/definitions/QueryApprovedPlansDetails"
       }
     },
@@ -2225,6 +2225,10 @@
       "description": "Query approved plans response",
       "type": "object",
       "properties": {
+        "planId": {
+          "description": "Plan id",
+          "type": "string"
+        },
         "subscriptionIds": {
           "description": "Approved subscription ids list. In case all subscriptions are approved for a plan, allSubscriptions flag is true and list is empty ( else flag is set to false). In case both subscriptions list is empty and allSubscriptions flag is false, the plan is not approved for any subscription.",
           "type": "array",
