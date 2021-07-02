@@ -9978,6 +9978,10 @@
         "diskEncryptionSetId": {
           "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
+        },
+        "customTargetDiskName": {
+          "description": "The custom target Azure disk name.",
+          "type": "string"
         }
       }
     },
@@ -11779,6 +11783,10 @@
         "diskEncryptionSetId": {
           "description": "The disk encryption set ARM Id.",
           "type": "string"
+        },
+        "targetDiskName": {
+          "description": "The name for the target managed disk.",
+          "type": "string"
         }
       }
     },
@@ -12211,6 +12219,13 @@
           "x-ms-enum": {
             "name": "SqlServerLicenseType",
             "modelAsString": true
+          }
+        },
+        "vmDisks": {
+          "description": "The list of disk update properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDiskInput"
           }
         }
       },
@@ -13803,6 +13818,13 @@
           "x-ms-enum": {
             "name": "SqlServerLicenseType",
             "modelAsString": true
+          }
+        },
+        "vmDisks": {
+          "description": "The list of disk update properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDiskInput"
           }
         }
       },
@@ -21675,6 +21697,23 @@
       },
       "discriminator": "instanceType"
     },
+    "UpdateDiskInput": {
+      "description": "Disk input for update.",
+      "required": [
+        "diskId"
+      ],
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string"
+        },
+        "targetDiskName": {
+          "description": "The target disk name.",
+          "type": "string"
+        }
+      }
+    },
     "UpdateMigrationItemInput": {
       "description": "Update migration item input.",
       "type": "object",
@@ -22358,6 +22397,10 @@
           "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
           "type": "boolean",
           "default": false
+        },
+        "targetNicName": {
+          "description": "Target NIC name.",
+          "type": "string"
         }
       }
     },
@@ -22419,6 +22462,10 @@
         "tfoReuseExistingNic": {
           "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
           "type": "boolean"
+        },
+        "targetNicName": {
+          "description": "Target NIC name.",
+          "type": "string"
         }
       }
     },
@@ -22460,11 +22507,7 @@
     "VMwareCbtContainerMappingInput": {
       "description": "VMwareCbt container mapping input.",
       "required": [
-        "keyVaultId",
-        "keyVaultUri",
         "storageAccountId",
-        "storageAccountSasSecretName",
-        "serviceBusConnectionStringSecretName",
         "targetLocation"
       ],
       "type": "object",
@@ -22474,24 +22517,8 @@
         }
       ],
       "properties": {
-        "keyVaultId": {
-          "description": "The target key vault ARM Id.",
-          "type": "string"
-        },
-        "keyVaultUri": {
-          "description": "The target key vault URL.",
-          "type": "string"
-        },
         "storageAccountId": {
           "description": "The storage account ARM Id.",
-          "type": "string"
-        },
-        "storageAccountSasSecretName": {
-          "description": "The secret name of the storage account.",
-          "type": "string"
-        },
-        "serviceBusConnectionStringSecretName": {
-          "description": "The secret name of the service bus connection string.",
           "type": "string"
         },
         "targetLocation": {
@@ -23158,28 +23185,8 @@
         }
       ],
       "properties": {
-        "keyVaultId": {
-          "description": "The target key vault ARM Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "keyVaultUri": {
-          "description": "The target key vault URI.",
-          "type": "string",
-          "readOnly": true
-        },
         "storageAccountId": {
           "description": "The storage account ARM Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "storageAccountSasSecretName": {
-          "description": "The secret name of the storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serviceBusConnectionStringSecretName": {
-          "description": "The secret name of the service bus connection string.",
           "type": "string",
           "readOnly": true
         },
