@@ -9,7 +9,36 @@
     ],
     "Referer": [
       "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01?api-version=2020-12-01-preview"
-    ]
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "533"
+    ],
+    "orderItemUpdateParameter": {
+      "properties": {
+        "forwardAddress": {
+          "contactDetails": {
+            "contactName": "Updated contact name",
+            "phone": "2222200000",
+            "emailList": [
+              "testemail@microsoft.com"
+            ]
+          }
+        },
+        "preferences": {
+          "transportPreferences": {
+            "preferredShipmentType": "CustomerManaged"
+          }
+        }
+      },
+      "tags": {
+        "pigeon": "bird",
+        "tiger": "animal",
+        "ant": "insect"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -17,29 +46,29 @@
         "properties": {
           "orderItemDetails": {
             "productDetails": {
+              "displayInfo": {
+                "productFamilyDisplayName": "Azure Stack Edge",
+                "configurationDisplayName": "Azure Stack Edge Pro - 1 GPU"
+              },
               "hierarchyInformation": {
                 "productFamilyName": "azurestackedge",
-                "productLineName": "azure stack edge_pl",
-                "productName": "azure stack edge pro - fpga",
-                "configurationName": "azure stack edge pro - fpga 1 gpu"
+                "productLineName": "azurestackedge",
+                "productName": "azurestackedgegpu",
+                "configurationName": "azurestackedgegpu"
               },
-              "count": 0,
-              "deviceDetails": []
+              "count": 0
             },
             "orderItemType": "Purchase",
             "currentStage": {
-              "stageStatus": "InProgress",
-              "stageName": "InReview",
-              "startTime": "2021-03-24T15:17:13.1376775+05:30"
+              "stageStatus": "Succeeded",
+              "stageName": "Placed",
+              "startTime": "2021-06-07T13:14:40.0815406+05:30"
             },
             "orderItemStageHistory": [
               {
-                "stageStatus": "None",
-                "stageName": "InReview"
-              },
-              {
-                "stageStatus": "None",
-                "stageName": "Placed"
+                "stageStatus": "Succeeded",
+                "stageName": "Placed",
+                "startTime": "2021-06-07T13:14:40.0815406+05:30"
               },
               {
                 "stageStatus": "None",
@@ -47,18 +76,30 @@
               },
               {
                 "stageStatus": "None",
-                "stageName": "ReadyForDispatch"
+                "stageName": "ReadyToShip"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Shipped"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Delivered"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "InUse"
               }
             ],
             "preferences": {
               "transportPreferences": {
-                "preferredShipmentType": "MicrosoftManaged"
+                "preferredShipmentType": "CustomerManaged"
               }
             },
             "notificationEmailList": [],
             "cancellationStatus": "Cancellable",
-            "deletionStatus": "Allowed",
-            "returnStatus": "Returnable"
+            "deletionStatus": "NotAllowed",
+            "returnStatus": "NotReturnable"
           },
           "addressDetails": {
             "forwardAddress": {
@@ -74,27 +115,28 @@
                 "addressType": "Residential"
               },
               "contactDetails": {
-                "contactName": "164 TOWNSEND ST",
-                "phone": "32131311",
+                "contactName": "Updated contact name",
+                "phone": "2222200000",
                 "emailList": [
-                  "ssemmail@microsoft.com",
-                  "vishwamdir@microsoft.com"
+                  "testemail@microsoft.com"
                 ]
               }
             }
           },
-          "startTime": "2021-03-24T15:17:13.1376775+05:30",
+          "startTime": "2021-06-07T13:14:37.4649597+05:30",
           "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
         },
         "location": "westus",
         "tags": {
-          "mango": "fruit",
-          "carrot": "vegetable"
+          "pigeon": "bird",
+          "tiger": "animal",
+          "ant": "insect"
         },
         "name": "TestOrderItemName01",
         "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01",
         "type": "Microsoft.EdgeOrder/orderItems"
       }
-    }
+    },
+    "202": {}
   }
 }
