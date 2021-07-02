@@ -60,6 +60,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnetworkstatus.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnotifications.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimoutbounddependency.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalrevisions.json
