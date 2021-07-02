@@ -2,24 +2,24 @@
   "parameters": {
     "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
     "resourceGroupName": "TestRG",
-    "addressName": "TestAddressName2",
+    "addressName": "TestMSAddressName",
     "api-version": "2020-12-01-preview",
     "User-Agent": [
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/addresses/TestAddressName2?api-version=2020-12-01-preview"
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/addresses/TestMSAddressName?api-version=2020-12-01-preview"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "611"
+      "492"
     ],
-    "addressUpdateParameter": {
+    "addressResource": {
       "properties": {
         "shippingAddress": {
-          "streetAddress1": "16 TOWNSEND STT",
+          "streetAddress1": "16 TOWNSEND ST",
           "streetAddress2": "UNIT 1",
           "city": "San Francisco",
           "stateOrProvince": "CA",
@@ -30,19 +30,14 @@
         },
         "contactDetails": {
           "contactName": "Petr Cech",
-          "phone": "123344335",
+          "phone": "1234567890",
           "phoneExtension": "",
           "emailList": [
-            "ssemcr@microsoft.com"
+            "testemail@microsoft.com"
           ]
         }
       },
-      "tags": {
-        "Name": "Smile-Updated",
-        "Work": "Engineering",
-        "Hobby": "Web Series Added",
-        "WhatElse": "Web Series Added"
-      }
+      "location": "westus"
     }
   },
   "responses": {
@@ -50,35 +45,28 @@
       "body": {
         "properties": {
           "shippingAddress": {
-            "streetAddress1": "16 TOWNSEND STT",
+            "streetAddress1": "16 TOWNSEND ST",
             "streetAddress2": "UNIT 1",
-            "streetAddress3": "",
             "city": "San Francisco",
             "stateOrProvince": "CA",
             "country": "US",
             "postalCode": "94107",
-            "zipExtendedCode": "",
             "companyName": "Microsoft",
             "addressType": "None"
           },
           "contactDetails": {
             "contactName": "Petr Cech",
-            "phone": "123344335",
+            "phone": "1234567890",
             "phoneExtension": "",
             "emailList": [
-              "ssemcr@microsoft.com"
+              "testemail@microsoft.com"
             ]
           }
         },
         "location": "westus",
-        "tags": {
-          "name": "Smile-Updated",
-          "work": "Engineering",
-          "hobby": "Web Series Added",
-          "whatElse": "Web Series Added"
-        },
-        "name": "TestAddressName2",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/addresses/TestAddressName2",
+        "tags": {},
+        "name": "TestMSAddressName",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/addresses/TestMSAddressName",
         "type": "Microsoft.EdgeOrder/addresses"
       }
     },
