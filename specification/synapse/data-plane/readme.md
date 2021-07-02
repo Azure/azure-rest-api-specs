@@ -194,6 +194,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/LinkedService.json
