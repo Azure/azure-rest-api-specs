@@ -11866,10 +11866,6 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-        "capacityReservation": {
-          "$ref": "#/definitions/CapacityReservationProfile",
-          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01."
-        },
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
@@ -11957,7 +11953,11 @@
         "userData": {
           "type": "string",
           "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
-        }
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01."
+        },
       },
       "description": "Describes the properties of a Virtual Machine."
     },
