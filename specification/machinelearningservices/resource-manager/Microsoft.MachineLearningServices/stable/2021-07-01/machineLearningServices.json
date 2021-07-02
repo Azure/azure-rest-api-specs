@@ -4904,28 +4904,28 @@
       "type": "object",
       "description": "Instance type schema.",
       "properties": {
-          "nodeSelector": {
-            "type": "object",
-            "description": "NodeSelector",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "resources": {
-            "type": "object",
-            "description": "Resource requests/limits for this instance type",
-            "properties": {
-              "requests": {
-                "description": "Resource requests for this instance type",
-                "$ref": "#/definitions/InstanceResourceSchema"
-              },
-              "limits": {
-                "description": "Resource limits for this instance type",
-                "$ref": "#/definitions/InstanceResourceSchema"
-              }
+        "nodeSelector": {
+          "type": "object",
+          "description": "Node Selector",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "object",
+          "description": "Resource requests/limits for this instance type",
+          "properties": {
+            "requests": {
+              "description": "Resource requests for this instance type",
+              "$ref": "#/definitions/InstanceResourceSchema"
+            },
+            "limits": {
+              "description": "Resource limits for this instance type",
+              "$ref": "#/definitions/InstanceResourceSchema"
             }
           }
         }
+      }
     },
     "InstanceResourceSchema": {
       "type": "object",
