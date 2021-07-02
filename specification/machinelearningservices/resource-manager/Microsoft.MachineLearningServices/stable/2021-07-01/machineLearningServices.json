@@ -1913,6 +1913,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "description": "Display name of operation",
           "properties": {
             "provider": {
@@ -1936,6 +1937,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "An array of operations supported by the resource provider.",
       "properties": {
         "value": {
@@ -2117,6 +2119,7 @@
       }
     },
     "WorkspaceUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
       "properties": {
         "tags": {
@@ -2142,6 +2145,7 @@
       }
     },
     "WorkspacePropertiesUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating the properties of a machine learning workspace.",
       "properties": {
         "description": {
@@ -2167,6 +2171,7 @@
       }
     },
     "UsageName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2232,6 +2237,7 @@
       "description": "Describes AML Resource Usage."
     },
     "ListUsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2250,6 +2256,7 @@
       "description": "The List Usages operation response."
     },
     "VirtualMachineSize": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2319,6 +2326,7 @@
       "description": "Describes the properties of a VM size."
     },
     "EstimatedVMPrices": {
+      "type": "object",
       "properties": {
         "billingCurrency": {
           "type": "string",
@@ -2361,6 +2369,7 @@
       "description": "The estimated price info for using a VM."
     },
     "EstimatedVMPrice": {
+      "type": "object",
       "properties": {
         "retailPrice": {
           "type": "number",
@@ -2404,6 +2413,7 @@
       "description": "The estimated price info for using a VM of a particular OS type, tier, etc."
     },
     "VirtualMachineSizeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2416,6 +2426,7 @@
       "description": "The List Virtual Machine size operation response."
     },
     "WorkspaceListResult": {
+      "type": "object",
       "description": "The result of a request to list machine learning workspaces.",
       "properties": {
         "value": {
@@ -2432,6 +2443,7 @@
       }
     },
     "QuotaBaseProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2462,6 +2474,7 @@
       "description": "The properties for Quota update or retrieval."
     },
     "QuotaUpdateParameters": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list for update quota.",
@@ -2520,6 +2533,7 @@
       "description": "Parameters to diagnose a workspace",
       "properties": {
         "value": {
+          "description": "Value of Parameters",
           "$ref": "#/definitions/DiagnoseRequestProperties"
         }
       }
@@ -2622,6 +2636,7 @@
       }
     },
     "UpdateWorkspaceQuotasResult": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of workspace quota update result.",
@@ -2640,6 +2655,7 @@
       "description": "The result of update workspace quota."
     },
     "UpdateWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2693,6 +2709,7 @@
       "description": "The properties for update Quota response."
     },
     "ResourceName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2708,6 +2725,7 @@
       "description": "The Resource Name."
     },
     "ResourceQuota": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2752,6 +2770,7 @@
       "description": "The quota assigned to a resource."
     },
     "ListWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of Workspace Quotas by VM Family",
@@ -2770,6 +2789,7 @@
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
     "Identity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2810,6 +2830,7 @@
       }
     },
     "UserAssignedIdentity": {
+      "type": "object",
       "description": "User Assigned Identity",
       "properties": {
         "principalId": {
@@ -2830,6 +2851,7 @@
       }
     },
     "ResourceId": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -3172,6 +3194,8 @@
       "description": "Kubernetes Compute Schema",
       "properties": {
         "properties": {
+          "description": "Properties of Kubernetes",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/KubernetesProperties"
         }
       }
@@ -3354,9 +3378,10 @@
         },
         {
           "type": "object",
-          "description": "Properties of AmlCompute",
+          "description": "Properties(top level) of AmlCompute",
           "properties": {
             "properties": {
+              "description": "Properties of AmlCompute",
               "$ref": "#/definitions/AmlComputeProperties"
             }
           }
@@ -3467,6 +3492,7 @@
           "description": "Properties(top level) of ComputeInstance",
           "properties": {
             "properties": {
+              "description": "Properties of ComputeInstance",
               "$ref": "#/definitions/ComputeInstanceProperties"
             }
           }
@@ -3561,7 +3587,7 @@
     },
     "DatabricksProperties": {
       "type": "object",
-      "description": "Propertiey of Databricks",
+      "description": "Properties of Databricks",
       "properties": {
         "databricksAccessToken": {
           "description": "Databricks access token",
@@ -3725,6 +3751,7 @@
       }
     },
     "UserAccountCredentials": {
+      "type": "object",
       "properties": {
         "adminUserName": {
           "type": "string",
@@ -3786,6 +3813,7 @@
       ]
     },
     "NodeStateCounts": {
+      "type": "object",
       "properties": {
         "idleNodeCount": {
           "readOnly": true,
@@ -3843,14 +3871,18 @@
       "description": "Desired scale settings for the amlCompute."
     },
     "ClusterUpdateProperties": {
+      "type": "object",
       "properties": {
         "properties": {
+          "description": "Properties of ClusterUpdate",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScaleSettingsInformation"
         }
       },
       "description": "The properties of a amlCompute that need to be updated."
     },
     "ClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3906,6 +3938,7 @@
       }
     },
     "AmlComputeNodeInformation": {
+      "type": "object",
       "description": "Compute node information related to a AmlCompute.",
       "properties": {
         "nodeId": {
@@ -4113,6 +4146,7 @@
       "description": "List of private endpoint connection associated with the specified workspace"
     },
     "PrivateEndpointConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -4952,6 +4986,7 @@
       "description": "Properties specific to Synapse Spark pools.",
       "properties": {
         "properties": {
+          "description": "AKS Properties",
           "$ref": "#/definitions/SynapseAKSProperties"
         }
       }
