@@ -194,7 +194,6 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/LinkedService.json
@@ -205,6 +204,14 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Trigger.json
 ```
 
+### Tag: package-vnet-2021-06-01-preview
+
+These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-vnet-2021-06-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
+```
 
 ## Suppression
 ``` yaml
