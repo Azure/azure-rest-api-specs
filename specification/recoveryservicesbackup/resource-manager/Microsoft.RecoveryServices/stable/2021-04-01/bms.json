@@ -21,10 +21,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
       "get": {
         "tags": [
-          "BackupResourceStorageConfigs"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Fetches resource storage config.",
-        "operationId": "BackupResourceStorageConfigs_Get",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Get",
         "produces": [
           "application/json"
         ],
@@ -64,10 +64,10 @@
       },
       "put": {
         "tags": [
-          "BackupResourceStorageConfigs"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Update",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Update",
         "produces": [
           "application/json"
         ],
@@ -116,10 +116,10 @@
       },
       "patch": {
         "tags": [
-          "BackupResourceStorageConfigs"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_patch",
+        "operationId": "BackupResourceStorageConfigsNonCRR_patch",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4062,73 +4062,6 @@
     }
   },
   "definitions": {
-    "BackupResourceConfigResource": {
-      "description": "The resource storage details.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupResourceConfig",
-          "description": "BackupResourceConfigResource properties"
-        }
-      }
-    },
-    "BackupResourceConfig": {
-      "description": "The resource storage details.",
-      "type": "object",
-      "properties": {
-        "storageModelType": {
-          "description": "Storage type",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant",
-            "ZoneRedundant",
-            "ReadAccessGeoZoneRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageType": {
-          "description": "Storage type.",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant",
-            "ZoneRedundant",
-            "ReadAccessGeoZoneRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageTypeState": {
-          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
-          "enum": [
-            "Invalid",
-            "Locked",
-            "Unlocked"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageTypeState",
-            "modelAsString": true
-          }
-        },
-        "crossRegionRestoreFlag": {
-          "description": "Opt in details of Cross Region Restore feature.",
-          "type": "boolean"
-        }
-      }
-    },
     "BackupResourceEncryptionConfig": {
       "type": "object",
       "properties": {
@@ -6095,6 +6028,73 @@
       },
       "x-ms-discriminator-value": "DpmJob"
     },
+    "BackupResourceConfigResource": {
+      "description": "The resource storage details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceConfig",
+          "description": "BackupResourceConfigResource properties"
+        }
+      }
+    },
+    "BackupResourceConfig": {
+      "description": "The resource storage details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "crossRegionRestoreFlag": {
+          "description": "Opt in details of Cross Region Restore feature.",
+          "type": "boolean"
+        }
+      }
+    },
     "DpmJobExtendedInfo": {
       "description": "Additional information on the DPM workload-specific job.",
       "type": "object",
@@ -7613,14 +7613,6 @@
         "isRehydrate": {
           "description": "Flag to identify that deferred deleted DS is to be moved into Pause state",
           "type": "boolean"
-        },
-        "policyName": {
-          "description": "Name of the policy used for protection.",
-          "type": "string"
-        },
-        "isArchiveEnabled": {
-          "description": "Flag to identify whether datasource is protected in archive",
-          "type": "boolean"
         }
       },
       "discriminator": "protectedItemType"
@@ -8570,10 +8562,6 @@
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
           }
-        },
-        "isSoftDeleteFeatureStateEditable": {
-          "description": "whether softDeleteFeatureState can be updated or not",
-          "type": "boolean"
         }
       }
     },
@@ -9447,10 +9435,6 @@
         "registrationStatus": {
           "description": "Container registration status",
           "type": "string"
-        },
-        "protectedItemsCount": {
-          "description": "Number of protected items",
-          "type": "integer"
         }
       }
     },
@@ -10584,10 +10568,6 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
-        },
-        "virtualMachineVersion": {
-          "description": "Version of the virtual machine",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaaSVMProtectableItem"
@@ -11116,10 +11096,6 @@
             "name": "ContainerType",
             "modelAsString": true
           }
-        },
-        "protectableObjectType": {
-          "description": "Type of the protectable object associated with this container.",
-          "type": "string"
         }
       },
       "discriminator": "containerType"
