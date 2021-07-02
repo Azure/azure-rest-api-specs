@@ -1473,6 +1473,8 @@
           "ProxyOperations"
         ],
         "operationId": "Workspaces_PrepareNotebook",
+        "description": "Prepare a notebook.",
+        "summary": "Prepare and initialize a Notebook instance.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -1521,6 +1523,8 @@
           "ProxyOperations"
         ],
         "operationId": "Workspaces_ListStorageAccountKeys",
+        "description": "List storage account keys of a workspace.",
+        "summary": "List storage account keys",
         "x-ms-examples": {
           "List Workspace Keys": {
             "$ref": "./examples/Workspace/listStorageAccountKeys.json"
@@ -1562,6 +1566,8 @@
           "ProxyOperations"
         ],
         "operationId": "Workspaces_ListNotebookKeys",
+        "description": "List keys of a notebook.",
+        "summary": "List storage account keys",
         "x-ms-examples": {
           "List Workspace Keys": {
             "$ref": "./examples/Notebook/listKeys.json"
@@ -1975,6 +1981,7 @@
           "description": "The sku of the workspace."
         },
         "systemData": {
+          "description": "System data",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
@@ -2472,6 +2479,7 @@
     },
     "DiagnoseRequestProperties": {
       "type": "object",
+      "description": "Properties of a diagnose request",
       "properties": {
         "udr": {
           "description": "Setting for diagnosing user defined routing",
@@ -2509,6 +2517,7 @@
     },
     "DiagnoseWorkspaceParameters": {
       "type": "object",
+      "description": "Parameters to diagnose a workspace",
       "properties": {
         "value": {
           "$ref": "#/definitions/DiagnoseRequestProperties"
@@ -2517,6 +2526,7 @@
     },
     "DiagnoseResult": {
       "type": "object",
+      "description": "Result of Diagnose",
       "properties": {
         "code": {
           "description": "Code for workspace setup error",
@@ -2545,54 +2555,64 @@
     },
     "DiagnoseResponseResult": {
       "type": "object",
+      "description": "Result of DiagnoseResponse",
       "properties": {
         "value": {
           "type": "object",
+          "description": "Value of DiagnoseResponse",
           "properties": {
             "UDR": {
               "type": "array",
+              "description": "UDR value",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "NSG": {
               "type": "array",
+              "description": "NSG value",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "ResourceLock": {
               "type": "array",
+              "description": "Resource Lock",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "DNSResolution": {
               "type": "array",
+              "description": "DNS Resolution",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "StorageAccount": {
               "type": "array",
+              "description": "Storage Account",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "KeyVault": {
               "type": "array",
+              "description": "The KeyVault",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "ContainerRegistry": {
               "type": "array",
+              "description": "Container Registry",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
             "Others": {
               "type": "array",
+              "description": "Other items",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
@@ -2976,6 +2996,7 @@
           "description": "The sku of the workspace."
         },
         "systemData": {
+          "description": "System data",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
@@ -3141,15 +3162,19 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/KubernetesProperties"
-            }
-          }
+          "$ref": "#/definitions/KubernetesSchema"
         }
       ],
       "x-ms-discriminator-value": "Kubernetes"
+    },
+    "KubernetesSchema": {
+      "type": "object",
+      "description": "Kubernetes Compute Schema",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesProperties"
+        }
+      }
     },
     "KubernetesProperties": {
       "type": "object",
@@ -3805,6 +3830,7 @@
       "description": "Counts of various compute node states on the amlCompute."
     },
     "ScaleSettingsInformation": {
+      "type": "object",
       "properties": {
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
@@ -3864,6 +3890,7 @@
     },
     "AmlComputeNodesResult": {
       "type": "object",
+      "description": "Result of AmlCompute Nodes",
       "properties": {
         "nodes": {
           "readOnly": true,
@@ -3967,6 +3994,7 @@
     },
     "AksComputeSecretsProperties": {
       "type": "object",
+      "description": "Properties of AksComputeSecrets",
       "properties": {
         "userKubeConfig": {
           "type": "string",
@@ -4014,6 +4042,7 @@
     },
     "DatabricksComputeSecretsProperties": {
       "type": "object",
+      "description": "Properties of Databricks Compute Secrets",
       "properties": {
         "databricksAccessToken": {
           "description": "access token for databricks account.",
@@ -4068,6 +4097,7 @@
       }
     },
     "PrivateEndpointConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4106,6 +4136,7 @@
           "description": "The sku of the workspace."
         },
         "systemData": {
+          "description": "System data",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
@@ -4237,6 +4268,7 @@
           "description": "The sku of the workspace."
         },
         "systemData": {
+          "description": "System data",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
@@ -4873,7 +4905,7 @@
       "properties": {
         "nodeSelector": {
           "type": "object",
-          "description": "NodeSelector",
+          "description": "Node Selector",
           "additionalProperties": {
             "type": "string"
           }
@@ -4883,9 +4915,11 @@
           "description": "Resource requests/limits for this instance type",
           "properties": {
             "requests": {
+              "description": "Resource requests for this instance type",
               "$ref": "#/definitions/InstanceResourceSchema"
             },
             "limits": {
+              "description": "Resource limits for this instance type",
               "$ref": "#/definitions/InstanceResourceSchema"
             }
           }
