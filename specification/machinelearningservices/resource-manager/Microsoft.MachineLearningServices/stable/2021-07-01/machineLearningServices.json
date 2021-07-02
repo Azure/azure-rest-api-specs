@@ -2013,7 +2013,8 @@
         },
         "containerRegistry": {
           "description": "ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "storageAccount": {
           "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created",
@@ -2109,7 +2110,7 @@
           "readOnly": true
         },
         "mlFlowTrackingUri": {
-          "description": "The URI associated with this workspace that MLflow must point at to set up tracking.",
+          "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
           "type": "string",
           "readOnly": true
         }
@@ -2404,7 +2405,7 @@
     },
     "VirtualMachineSizeListResult": {
       "properties": {
-        "amlCompute": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
@@ -3166,7 +3167,6 @@
       ],
       "x-ms-discriminator-value": "Kubernetes"
     },
-
     "KubernetesSchema": {
       "type": "object",
       "description": "Kubernetes Compute Schema",
@@ -3176,7 +3176,6 @@
         }
       }
     },
-
     "KubernetesProperties": {
       "type": "object",
       "description": "Kubernetes properties",
@@ -3213,13 +3212,12 @@
         "instanceTypes": {
           "description": "Instance Type Schema",
           "type": "object",
-          "additionalProperties":{
-              "$ref": "#/definitions/InstanceTypeSchema"
+          "additionalProperties": {
+            "$ref": "#/definitions/InstanceTypeSchema"
           }
         }
       }
     },
-
     "AmlComputeProperties": {
       "type": "object",
       "description": "AML Compute properties",
@@ -4664,6 +4662,7 @@
     },
     "NotebookPreparationError": {
       "type": "object",
+      "x-nullable": true,
       "properties": {
         "errorMessage": {
           "type": "string"
@@ -4926,11 +4925,12 @@
             }
           }
         }
+      }
     },
     "InstanceResourceSchema": {
       "type": "object",
       "description": "Resource requests/limits for this instance type",
-      "properties":{
+      "properties": {
         "cpu": {
           "type": "string",
           "description": "Number of vCPUs requested for this instance type"
@@ -4956,4 +4956,3 @@
     }
   }
 }
-
