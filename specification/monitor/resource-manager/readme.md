@@ -715,6 +715,9 @@ directive:
     where: $.definitions.Dimension.properties.operator
     from: scheduledQueryRule_API.json
     reason: 'The discrepancy in the enum values is with an enum which is defined for a different service of a different team'
+  - suppress: R3016
+    where: $.definitions.Action.properties["odata.type"]
+    reason: 'This is an old field in a stable api version which is not camel cased'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
