@@ -4971,19 +4971,8 @@
     "InstanceResourceSchema": {
       "type": "object",
       "description": "Resource requests/limits for this instance type",
-      "properties": {
-        "cpu": {
-          "type": "string",
-          "description": "Number of vCPUs requested for this instance type"
-        },
-        "memory": {
-          "type": "string",
-          "description": "Memory size requested for this instance type"
-        },
-        "nvidia.com/gpu": {
-          "type": "string",
-          "description": "Number of Nvidia GPU cards requested for this instance_type"
-        }
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "SynapseSparkPoolProperties": {
