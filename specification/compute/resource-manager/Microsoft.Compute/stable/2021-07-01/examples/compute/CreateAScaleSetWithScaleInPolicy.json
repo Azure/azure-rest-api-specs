@@ -60,7 +60,7 @@
           "mode": "Manual"
         },
 		"scaleInPolicy": {
-          "rules": ["OldestVM"],
+		  "rules": ["OldestVM"],
 		  "forceDeletion": true
 		}
       }
@@ -134,10 +134,10 @@
           "upgradePolicy": {
             "mode": "Manual"
           },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT30M"
-          },
+		  "scaleInPolicy": {
+			"rules": ["OldestVM"],
+		    "forceDeletion": true
+		  },
           "provisioningState": "Creating"
         },
         "location": "westus",
@@ -212,10 +212,10 @@
           "upgradePolicy": {
             "mode": "Manual"
           },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT30M"
-          },
+		  "scaleInPolicy": {
+			"rules": ["OldestVM"],
+		    "forceDeletion": true
+		  },
           "provisioningState": "Creating"
         },
         "location": "westus",
