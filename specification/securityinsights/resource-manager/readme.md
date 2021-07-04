@@ -136,6 +136,7 @@ These settings apply only when `--tag=package-2019-01-preview` is specified on t
 ```yaml $(tag) == 'package-2019-01-preview'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
