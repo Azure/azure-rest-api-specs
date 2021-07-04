@@ -4938,10 +4938,10 @@
       "properties": {
         "azureDefender": {
           "$ref": "#/definitions/ManagedClusterSecurityProfileAzureDefender",
-          "description": "Azure Defender settings for the Security Profile."
+          "description": "Azure Defender settings for the security profile."
         }
       },
-      "description": "Security Profile for the container service cluster."
+      "description": "Security profile for the container service cluster."
     },
     "ManagedClusterSecurityProfileAzureDefender": {
       "type": "object",
@@ -4952,10 +4952,10 @@
         },
         "logAnalyticsWorkspaceResourceId": {
           "type": "string",
-          "description": "Resource Id of the Log Analytics workspace for Azure Defender to be associated with. This field is required and must be valid workspace resource id in case the Azure Defender settings are enabled and must be empty or not exists in case it is disabled"
+          "description": "Resource ID of the Log Analytics workspace to be associated with Azure Defender.  When Azure Defender is enabled, this field is required and must be a valid workspace resource ID. When Azure Defender is disabled, leave the field empty."
         }
       },
-      "description": "Azure Defender settings for the Security Profile."
+      "description": "Azure Defender settings for the security profile."
     }
   },
   "parameters": {
