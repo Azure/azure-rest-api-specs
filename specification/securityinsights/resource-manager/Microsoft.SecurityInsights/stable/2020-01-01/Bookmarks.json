@@ -422,38 +422,20 @@
     }
   },
   "parameters": {
-    "Action": {
-      "description": "The action",
+    "Bookmark": {
+      "description": "The bookmark",
       "in": "body",
-      "name": "action",
+      "name": "bookmark",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ActionRequest"
+        "$ref": "#/definitions/Bookmark"
       },
       "x-ms-parameter-location": "method"
     },
-    "ActionId": {
-      "description": "Action ID",
+    "BookmarkId": {
+      "description": "Bookmark ID",
       "in": "path",
-      "name": "actionId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AlertRule": {
-      "description": "The alert rule",
-      "in": "body",
-      "name": "alertRule",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AlertRule"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "AlertRuleTemplateId": {
-      "description": "Alert rule template ID",
-      "in": "path",
-      "name": "alertRuleTemplateId",
+      "name": "bookmarkId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -469,14 +451,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "RuleId": {
-      "description": "Alert rule ID",
-      "in": "path",
-      "name": "ruleId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "SubscriptionId": {
       "description": "Azure subscription ID",
       "in": "path",
@@ -484,6 +458,16 @@
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "required": true,
       "type": "string"
+    },
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
