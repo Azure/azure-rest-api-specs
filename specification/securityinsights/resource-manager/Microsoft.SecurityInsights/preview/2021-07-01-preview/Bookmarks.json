@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -253,7 +253,7 @@
       "description": "List all the bookmarks.",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of cases.",
+          "description": "URL to fetch the next set of bookmarks.",
           "readOnly": true,
           "type": "string"
         },
@@ -334,7 +334,12 @@
           "$ref": "#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
           "type": "object"
-        }
+        },
+        "entityMappings": {
+            "$ref": "#/definitions/EntityMappingsList",
+            "description": "Describes the entity mappings of the bookmark",
+            "type": "array"
+          }
       },
       "required": [
         "displayName",
@@ -398,6 +403,7 @@
           "type": "string"
         }
       },
+      "type": "object",
       "x-ms-azure-resource": true
     },
     "UserInfo": {
@@ -421,6 +427,44 @@
         }
       },
       "type": "object"
+    },
+    "EntityMappingsList": {
+        "description": "Describes the entity mappings of the bookmark",
+        "items": {
+            "$ref": "#/definitions/EntityMappings"
+          },
+        "type": "array"
+    },
+    "EntityMappings": {
+        "description": "Describes the entity mappings of a single entity",
+        "properties": {
+            "entityType": {
+                "description": "The entity type",
+                "type": "string"
+            },
+            "fieldMappings": {
+                "description": "Array of fields mapping for that entity type",
+                "items": {
+                  "$ref": "#/definitions/EntityFieldMapping"
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    },
+    "EntityFieldMapping": {
+        "description": "Map identifiers of a single entity",
+        "properties": {
+            "identifier": {
+                "description": "Alert V3 identifier",
+                "type": "string"
+            },
+            "value": {
+                "description": "The value of the identifier",
+                "type": "string"
+            }
+        },
+        "type": "object"
     },
     "IncidentInfo": {
       "description": "Describes related incident information for the bookmark",
@@ -482,7 +526,7 @@
     "ApiVersion": {
       "description": "API version for the operation",
       "enum": [
-        "2019-01-01-preview"
+        "2021-07-01-preview"
       ],
       "in": "query",
       "name": "api-version",
