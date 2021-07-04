@@ -422,6 +422,28 @@
     }
   },
   "definitions": {
+    "AttackTactic": {
+      "description": "The severity for alerts created by this alert rule.",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl",
+        "Impact"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AttackTactic"
+      }
+    },
     "ClientInfo": {
       "description": "Information on the client (user or application) that made some action",
       "properties": {
@@ -858,10 +880,6 @@
       ],
       "type": "object"
     },
-    "Label": {
-      "description": "Label that will be used to tag and filter on.",
-      "type": "string"
-    },
     "OfficeConsent": {
       "allOf": [
         {
@@ -1043,7 +1061,7 @@
         "modelAsString": true,
         "name": "SettingKind"
       }
-    }, 
+    },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
       "properties": {
