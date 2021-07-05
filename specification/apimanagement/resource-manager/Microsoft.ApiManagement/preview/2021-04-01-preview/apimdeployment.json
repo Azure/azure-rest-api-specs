@@ -128,15 +128,21 @@
         "description": "Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.",
         "x-ms-examples": {
           "ApiManagementRestoreService": {
-            "$ref": "./examples/ApiManagementRestoreService.json"
+            "$ref": "./examples/ApiManagementRestoreWithAccessKey.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -145,13 +151,7 @@
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceBackupRestoreParameters"
             },
-            "description": "Parameters supplied to the Restore API Management service from backup operation."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "description": "Parameters supplied to the ApiManagementService_Restore operation."
           }
         ],
         "responses": {
@@ -186,15 +186,21 @@
         "description": "Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.",
         "x-ms-examples": {
           "ApiManagementCreateBackup": {
-            "$ref": "./examples/ApiManagementCreateBackup.json"
+            "$ref": "./examples/ApiManagementBackupWithAccessKey.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -204,12 +210,6 @@
               "$ref": "#/definitions/ApiManagementServiceBackupRestoreParameters"
             },
             "description": "Parameters supplied to the ApiManagementService_Backup operation."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1092,24 +1092,55 @@
       "properties": {
         "storageAccount": {
           "type": "string",
-          "description": "Azure Cloud Storage account (used to place/retrieve the backup) name."
-        },
-        "accessKey": {
-          "type": "string",
-          "description": "Azure Cloud Storage account (used to place/retrieve the backup) access key."
+          "description": "The name of the Azure storage account (used to place/retrieve the backup)."
         },
         "containerName": {
           "type": "string",
-          "description": "Azure Cloud Storage blob container name used to place/retrieve the backup."
+          "description": "The name of the blob container (used to place/retrieve the backup)."
         },
         "backupName": {
           "type": "string",
-          "description": "The name of the backup file to create."
+          "description": "The name of the backup file to create/retrieve."
+        },
+        "accessType": {
+          "type": "string",
+          "description": "The type of access to be used for the storage account.",
+          "default": "AccessKey",
+          "enum": [
+            "AccessKey",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AccessKey",
+                "description": "Use access key."
+              },
+              {
+                "value": "SystemAssignedManagedIdentity",
+                "description": "Use system assigned managed identity."
+              },
+              {
+                "value": "UserAssignedManagedIdentity",
+                "description": "Use user assigned managed identity."
+              }
+            ]
+          }
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Storage account access key. Required only if `accessType` is set to `AccessKey`."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Client ID of user assigned managed identity. Required only if `accessType` is set to `UserAssignedManagedIdentity`."
         }
       },
       "required": [
         "storageAccount",
-        "accessKey",
         "containerName",
         "backupName"
       ],
