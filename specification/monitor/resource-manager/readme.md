@@ -728,6 +728,12 @@ directive:
   - suppress: R3016
     where: $.definitions.Action.properties["odata.type"]
     reason: 'This is an old field in a stable api version which is not camel cased'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.properties.autoMitigate
+    reason: 'This field was wrongly supported in requests using 2020-05-01-preview, but it is about to be deprecated and replaced by api version 2021-02-01-preview where this field is properly defined'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.properties.isWorkspaceAlertsStorageConfigured
+    reason: 'This field was wrongly supported in requests using 2020-05-01-preview, but it is about to be deprecated and replaced by api version 2021-02-01-preview where this field is properly defined'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
