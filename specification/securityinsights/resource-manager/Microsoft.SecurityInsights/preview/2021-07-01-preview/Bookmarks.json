@@ -48,7 +48,7 @@
         "operationId": "Bookmarks_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -57,10 +57,10 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -96,7 +96,7 @@
         "operationId": "Bookmarks_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -105,10 +105,10 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -124,7 +124,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -142,7 +142,7 @@
         "operationId": "Bookmarks_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -151,10 +151,10 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -179,7 +179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -197,7 +197,7 @@
         "operationId": "Bookmarks_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -206,10 +206,10 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -225,7 +225,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -236,7 +236,7 @@
     "Bookmark": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+            "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a bookmark in Azure Security Insights.",
@@ -347,64 +347,9 @@
       ],
       "type": "object"
     },
-    "CloudError": {
-      "description": "Error response structure.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error data",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "message": {
-          "description": "A message describing the error, intended to be suitable for display in a user interface.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
-    },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
-    },
-    "ResourceWithEtag": {
-      "description": "An azure resource object with an Etag property",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-azure-resource": true
     },
     "UserInfo": {
       "description": "User information that made some action",
@@ -523,16 +468,6 @@
     }
   },
   "parameters": {
-    "ApiVersion": {
-      "description": "API version for the operation",
-      "enum": [
-        "2021-07-01-preview"
-      ],
-      "in": "query",
-      "name": "api-version",
-      "required": true,
-      "type": "string"
-    },
     "Bookmark": {
       "description": "The bookmark",
       "in": "body",
@@ -547,14 +482,6 @@
       "description": "Bookmark ID",
       "in": "path",
       "name": "bookmarkId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationalInsightsResourceProvider": {
-      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-      "in": "path",
-      "name": "operationalInsightsResourceProvider",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -577,16 +504,6 @@
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "required": true,
       "type": "string"
-    },
-    "WorkspaceName": {
-      "description": "The name of the workspace.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "workspaceName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }
