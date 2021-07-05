@@ -48,19 +48,19 @@
         "operationId": "AutomationRules_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
             }
           }
         },
@@ -96,19 +96,19 @@
         "operationId": "AutomationRules_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -124,7 +124,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
             }
           }
         }
@@ -142,19 +142,19 @@
         "operationId": "AutomationRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -179,7 +179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
             }
           }
         }
@@ -197,19 +197,19 @@
         "operationId": "AutomationRules_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -225,7 +225,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
             }
           }
         }
@@ -233,16 +233,6 @@
     }
   },
   "parameters": {
-    "ApiVersion": {
-      "description": "API version for the operation",
-      "enum": [
-        "2019-01-01-preview"
-      ],
-      "in": "query",
-      "name": "api-version",
-      "required": true,
-      "type": "string"
-    },
     "AutomationRule": {
       "description": "The automation rule",
       "in": "body",
@@ -260,42 +250,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "OperationalInsightsResourceProvider": {
-      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-      "in": "path",
-      "name": "operationalInsightsResourceProvider",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupName": {
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "resourceGroupName",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WorkspaceName": {
-      "description": "The name of the workspace.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "workspaceName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
     "AutomationRule": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an automation rule.",
