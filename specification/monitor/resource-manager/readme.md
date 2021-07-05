@@ -630,6 +630,16 @@ input-file:
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 ```
 
+### Tag: package-2014-04-01-only
+
+These settings apply only when `--tag=package-2014-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04-01-only'
+input-file:
+- Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+- Microsoft.Insights/stable/2014-04-01/autoscale_API.json
+```
+
 ---
 
 # Code Generation
@@ -731,6 +741,15 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OperationsAPIImplementation
+    from: subscriptionDiagnosticsSettings_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: autoscale_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+
 ```
 
 ``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
