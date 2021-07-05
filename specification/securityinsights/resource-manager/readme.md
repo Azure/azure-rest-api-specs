@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2021-07-preview-only` is specified
 ```yaml $(tag) == 'package-2021-07-preview-only'
 input-file:
 - Microsoft.SecurityInsights/preview/2021-07-01-preview/Bookmarks.json
+- Microsoft.SecurityInsights/preview/2021-07-01-preview/operations.json
 ```
 
 ---
