@@ -385,9 +385,6 @@
           "ApiManagementServiceGetService": {
             "$ref": "./examples/ApiManagementServiceGetService.json"
           },
-          "ApiManagementServiceGetServiceHavingMsi": {
-            "$ref": "./examples/ApiManagementServiceGetServiceHavingMsi.json"
-          },
           "ApiManagementServiceGetMultiRegionInternalVnet": {
             "$ref": "./examples/ApiManagementServiceGetMultiRegionInternalVnet.json"
           }
@@ -1270,6 +1267,18 @@
           "type": "string",
           "description": "Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the region. Supported only for Developer and Premium SKU being deployed in Virtual Network."
         },
+        "publicNetworkAccess": {
+          "description": "Whether or not public endpoint access is allowed for this API Management service.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
           "description": "Virtual network configuration of the API Management service."
@@ -1428,6 +1437,11 @@
         "identity": {
           "$ref": "#/definitions/ApiManagementServiceIdentity",
           "description": "Managed service identity of the Api Management service."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         },
         "location": {
           "type": "string",
