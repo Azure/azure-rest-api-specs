@@ -1,0 +1,3856 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SynapseManagementClient",
+    "version": "2021-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Synapse/kustooperations": {
+      "get": {
+        "tags": [
+          "KustoOperations"
+        ],
+        "operationId": "KustoOperations_List",
+        "x-ms-examples": {
+          "KustoOperationsList": {
+            "$ref": "./examples/KustoOperationsList.json"
+          }
+        },
+        "description": "Lists available operations for the Kusto sub-resources inside Microsoft.Synapse provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for Kusto Pool resource.",
+        "x-ms-examples": {
+          "KustoPoolsListSkus": {
+            "$ref": "./examples/KustoPoolsListSkus.json"
+          }
+        },
+        "operationId": "KustoPool_ListSkus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SkuDescriptionList"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the kusto pool name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kustoPoolName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolCheckNameRequest"
+            },
+            "description": "The name of the cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools": {
+      "get": {
+        "operationId": "KustoPools_ListByWorkspace",
+        "summary": "List Kusto pools",
+        "description": "List all Kusto pools",
+        "tags": [
+          "KustoPools"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/KustoPoolListResult"
+            },
+            "description": "List of Kusto pools under the Workspace."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "List Kusto pools in a workspace": {
+            "$ref": "./examples/KustoPoolsListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}": {
+      "get": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_Get",
+        "x-ms-examples": {
+          "kustoPoolsGet": {
+            "$ref": "./examples/KustoPoolsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_CreateOrUpdate",
+        "x-ms-examples": {
+          "kustoPoolsCreateOrUpdate": {
+            "$ref": "./examples/KustoPoolsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            },
+            "description": "The Kusto pool parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new Kusto Pool to be created, but to prevent updating an existing Kusto Pool. Other values will result in a 412 Pre-condition Failed response."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_Update",
+        "x-ms-examples": {
+          "kustoPoolsUpdate": {
+            "$ref": "./examples/KustoPoolsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Update a Kusto Kusto Pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolUpdate"
+            },
+            "description": "The Kusto pool parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_Delete",
+        "x-ms-examples": {
+          "kustoPoolsDelete": {
+            "$ref": "./examples/KustoPoolsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Kusto Pool deleted successfully."
+          },
+          "202": {
+            "description": "Accepted Kusto Pool deletion request."
+          },
+          "204": {
+            "description": "NoContent -- Kusto Pool does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/stop": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_Stop",
+        "x-ms-examples": {
+          "kustoPoolsStop": {
+            "$ref": "./examples/KustoPoolsStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Stops a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/start": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "kustoPools_Start",
+        "x-ms-examples": {
+          "kustoPoolsStop": {
+            "$ref": "./examples/KustoPoolsStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Starts a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/skus": {
+      "get": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_ListSkusByResource",
+        "x-ms-examples": {
+          "KustoPoolsListResourceSkus": {
+            "$ref": "./examples/KustoPoolsListResourceSkus.json"
+          }
+        },
+        "description": "Returns the SKUs available for the provided resource.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ListResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Databases",
+          "AttachedDatabaseConfigurations"
+        ],
+        "operationId": "KustoPoolChildResource_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolDatabasesCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolDatabasesCheckNameAvailability.json"
+          },
+          "KustoPoolAttachedDatabaseConfigurationCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the Kusto Pool child resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseCheckNameRequest"
+            },
+            "description": "The name of the Kusto Pool child resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Returns a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_ListLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolListLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of language extensions.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/addLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Add a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_AddLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolAddLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsAdd.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/removeLanguageExtensions": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Remove a list of language extensions that can run within KQL queries.",
+        "operationId": "KustoPools_RemoveLanguageExtensions",
+        "x-ms-examples": {
+          "KustoPoolRemoveLanguageExtensions": {
+            "$ref": "./examples/KustoPoolLanguageExtensionsRemove.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/listFollowerDatabases": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Returns a list of databases that are owned by this Kusto Pool and were followed by another Kusto Pool.",
+        "operationId": "KustoPools_ListFollowerDatabases",
+        "x-ms-examples": {
+          "KustoPoolListFollowerDatabases": {
+            "$ref": "./examples/KustoPoolFollowerDatabasesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of followed databases.",
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/detachFollowerDatabases": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "description": "Detaches all followers of a database owned by this Kusto Pool.",
+        "operationId": "KustoPools_DetachFollowerDatabases",
+        "x-ms-examples": {
+          "KustoPoolDetachFollowerDatabases": {
+            "$ref": "./examples/KustoPoolFollowerDatabasesDetach.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "followerDatabaseToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseDefinition"
+            },
+            "description": "The follower databases properties to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/attachedDatabaseConfigurations": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns the list of attached database configurations of the given Kusto Pool.",
+        "operationId": "AttachedDatabaseConfigurations_ListByKustoPool",
+        "x-ms-examples": {
+          "KustoPoolAttachedDatabaseConfigurationsListByKustoPool": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationsListByKustoPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of attached database configurations.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/attachedDatabaseConfigurations/{attachedDatabaseConfigurationName}": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_Get",
+        "x-ms-examples": {
+          "KustoPoolAttachedDatabaseConfigurationsGet": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified attached database configuration.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Creates or updates an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoPoolAttachedDatabaseConfigurationsCreateOrUpdate": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            },
+            "description": "The database parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted the create database request.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Deletes the attached database configuration with the given name.",
+        "operationId": "AttachedDatabaseConfigurations_Delete",
+        "x-ms-examples": {
+          "KustoPoolAttachedDatabaseConfigurationsDelete": {
+            "$ref": "./examples/KustoPoolAttachedDatabaseConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns the list of databases of the given Kusto pool.",
+        "operationId": "Databases_ListByKustoPool",
+        "x-ms-examples": {
+          "KustoDatabasesListByKustoPool": {
+            "$ref": "./examples/KustoDatabasesListByKustoPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of databases.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns a database.",
+        "operationId": "Databases_Get",
+        "x-ms-examples": {
+          "KustoPoolDatabasesGet": {
+            "$ref": "./examples/KustoPoolDatabasesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Creates or updates a database.",
+        "operationId": "Databases_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoPoolDatabasesCreateOrUpdate": {
+            "$ref": "./examples/KustoPoolDatabasesCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The database parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Updates a database.",
+        "operationId": "Databases_Update",
+        "x-ms-examples": {
+          "KustoPoolDatabasesUpdate": {
+            "$ref": "./examples/KustoPoolDatabasesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The database parameters supplied to the Update operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Deletes the database with the given name.",
+        "operationId": "Databases_Delete",
+        "x-ms-examples": {
+          "KustoPoolDatabasesDelete": {
+            "$ref": "./examples/KustoPoolDatabasesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
+          "202": {
+            "description": "Accepted database delete request."
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolDataConnectionsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the data connection name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionCheckNameRequest"
+            },
+            "description": "The name of the data connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the Kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnectionValidation": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_dataConnectionValidation",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionValidation": {
+            "$ref": "./examples/KustoPoolDataConnectionValidation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Checks that the data connection parameters are valid.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidation"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnections": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns the list of data connections of the given Kusto pool database.",
+        "operationId": "DataConnections_ListByDatabase",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsListByDatabase": {
+            "$ref": "./examples/KustoPoolDataConnectionsListByDatabase.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of data connections.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns a data connection.",
+        "operationId": "DataConnections_Get",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsGet": {
+            "$ref": "./examples/KustoPoolDataConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Creates or updates a data connection.",
+        "operationId": "DataConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsCreateOrUpdate.json": {
+            "$ref": "./examples/KustoPoolDataConnectionsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Updates a data connection.",
+        "operationId": "DataConnections_Update",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsUpdate": {
+            "$ref": "./examples/KustoPoolDataConnectionsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the Update operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Deletes the data connection with the given name.",
+        "operationId": "DataConnections_Delete",
+        "x-ms-examples": {
+          "KustoPoolDataConnectionsDelete": {
+            "$ref": "./examples/KustoPoolDataConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the data connection."
+          },
+          "202": {
+            "description": "Accepted data connection deletion request."
+          },
+          "204": {
+            "description": "The specified data connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/checkPrincipalAssignmentNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the principal assignment name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "principalAssignmentName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentCheckNameRequest"
+            },
+            "description": "The name of the principal assignment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/principalAssignments": {
+      "get": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_List",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsList": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsList.json"
+          }
+        },
+        "description": "Lists all Kusto pool principalAssignments.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/principalAssignments/{principalAssignmentName}": {
+      "get": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_Get",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsGet": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto pool principal assignment object.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsCreateOrUpdate": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            },
+            "description": "The Kusto pool principalAssignment's parameters supplied for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the PrincipalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the principalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_Delete",
+        "x-ms-examples": {
+          "KustoPoolPrincipalAssignmentsDelete": {
+            "$ref": "./examples/KustoPoolPrincipalAssignmentsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- principalAssignments deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete principalAssignments request."
+          },
+          "204": {
+            "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/checkPrincipalAssignmentNameAvailability": {
+      "post": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoPoolDatabasePrincipalAssignmentsCheckNameAvailability": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalAssignmentsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the database principal assignment is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "principalAssignmentName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignmentCheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/principalAssignments": {
+      "get": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_List",
+        "x-ms-examples": {
+          "KustoPoolDatabasePrincipalAssignmentsList": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalAssignmentsList.json"
+          }
+        },
+        "description": "Lists all Kusto pool database principalAssignments.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/principalAssignments/{principalAssignmentName}": {
+      "get": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_Get",
+        "x-ms-examples": {
+          "KustoPoolDatabasePrincipalAssignmentsGet": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalAssignmentsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool database principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto pool database principal assignment object.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoPoolDatabasePrincipalAssignmentsCreateOrUpdate": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalAssignmentsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates a Kusto pool database principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            },
+            "description": "The Kusto principalAssignments parameters supplied for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the PrincipalAssignments.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the principalAssignments.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_Delete",
+        "x-ms-examples": {
+          "KustoPoolDatabasePrincipalAssignmentsDelete": {
+            "$ref": "./examples/KustoPoolDatabasePrincipalAssignmentsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- principalAssignments deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete principalAssignments request."
+          },
+          "204": {
+            "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete.",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "KustoPoolListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KustoPool"
+          },
+          "description": "The list of Kusto pools."
+        }
+      },
+      "description": "The list Kusto pools operation response."
+    },
+    "SkuDescriptionList": {
+      "description": "The list of the SKU descriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "SKU descriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "The Kusto SKU description of given resource type",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "size": {
+          "description": "The size of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "The set of locations that the SKU is available",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "Locations and zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfoItem"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "The restrictions because of which SKU cannot be used",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuLocationInfoItem": {
+      "description": "The locations and zones info for SKU.",
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "description": "The available location of the SKU.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "The available zone of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureSku": {
+      "type": "object",
+      "required": [
+        "name",
+        "size"
+      ],
+      "properties": {
+        "name": {
+          "description": "SKU name.",
+          "type": "string",
+          "enum": [
+            "Compute optimized",
+            "Storage optimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "description": "The number of instances of the cluster.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "description": "SKU size.",
+          "type": "string",
+          "enum": [
+            "Extra small",
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "SkuSize",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Azure SKU definition."
+    },
+    "AzureResourceSku": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Namespace and Type."
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU details."
+        },
+        "capacity": {
+          "$ref": "#/definitions/AzureCapacity",
+          "description": "The number of instances of the cluster."
+        }
+      },
+      "description": "Azure resource SKU definition."
+    },
+    "AzureCapacity": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum",
+        "default",
+        "scaleType"
+      ],
+      "properties": {
+        "scaleType": {
+          "description": "Scale type.",
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "AzureScaleType",
+            "modelAsString": true
+          }
+        },
+        "minimum": {
+          "description": "Minimum allowed capacity.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximum": {
+          "description": "Maximum allowed capacity.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "The default capacity that would be used.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Azure capacity definition."
+    },
+    "KustoPoolProperties": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of the resource.",
+          "enum": [
+            "Creating",
+            "Unavailable",
+            "Running",
+            "Deleting",
+            "Deleted",
+            "Stopping",
+            "Stopped",
+            "Starting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "uri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kusto Pool URI."
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kusto Pool data ingestion URI."
+        },
+        "stateReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for the Kusto Pool's current state."
+        },
+        "optimizedAutoscale": {
+          "type": "object",
+          "$ref": "#/definitions/OptimizedAutoscale",
+          "description": "Optimized auto scale definition."
+        },
+        "enableStreamingIngest": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the streaming ingest is enabled."
+        },
+        "enablePurge": {
+          "type": "boolean",
+          "default": false,
+          "description": "A boolean value that indicates if the purge operations are enabled."
+        },
+        "languageExtensions": {
+          "type": "object",
+          "$ref": "#/definitions/LanguageExtensionsList",
+          "readOnly": true,
+          "description": "List of the Kusto Pool's language extensions."
+        },
+        "workspaceUID": {
+          "type": "string",
+          "description": "The workspace unique identifier."
+        }
+      },
+      "description": "Class representing the Kusto pool properties."
+    },
+    "KustoPool": {
+      "type": "object",
+      "required": [
+        "sku"
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU of the kusto pool."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KustoPoolProperties",
+          "description": "The kusto pool properties."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Class representing a Kusto kusto pool."
+    },
+    "KustoPoolUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU of the kusto pool."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The kusto pool properties.",
+          "$ref": "#/definitions/KustoPoolProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Class representing an update to a Kusto kusto pool."
+    },
+    "OptimizedAutoscale": {
+      "type": "object",
+      "required": [
+        "version",
+        "isEnabled",
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the template defined, for instance 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "isEnabled": {
+          "description": "A boolean value that indicate if the optimized autoscale feature is enabled or not.",
+          "type": "boolean"
+        },
+        "minimum": {
+          "description": "Minimum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximum": {
+          "description": "Maximum allowed instances count.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "A class that contains the optimized auto scale definition."
+    },
+    "AttachedDatabaseConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachedDatabaseConfiguration"
+          },
+          "description": "The list of attached database configurations."
+        }
+      },
+      "description": "The list attached database configurations operation response."
+    },
+    "AttachedDatabaseConfiguration": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the attached database configuration.",
+          "$ref": "#/definitions/AttachedDatabaseConfigurationProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing an attached database configuration."
+    },
+    "AttachedDatabaseConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database which you would like to attach, use * if you want to follow all current and future databases."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the kusto pool where the databases you would like to attach reside."
+        },
+        "attachedDatabaseNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of databases from the clusterResourceId which are currently attached to the kusto pool."
+        },
+        "defaultPrincipalsModificationKind": {
+          "type": "string",
+          "enum": [
+            "Union",
+            "Replace",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultPrincipalsModificationKind",
+            "modelAsString": true
+          },
+          "description": "The default principals modification kind"
+        },
+        "tableLevelSharingProperties": {
+          "type": "object",
+          "$ref": "#/definitions/TableLevelSharingProperties",
+          "description": "Table level sharing specifications"
+        }
+      },
+      "description": "Class representing the an attached database configuration properties of kind specific.",
+      "required": [
+        "databaseName",
+        "clusterResourceId",
+        "defaultPrincipalsModificationKind"
+      ]
+    },
+    "TableLevelSharingProperties": {
+      "type": "object",
+      "properties": {
+        "tablesToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of tables to include in the follower database"
+        },
+        "tablesToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of tables to exclude from the follower database"
+        },
+        "externalTablesToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of external tables to include in the follower database"
+        },
+        "externalTablesToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of external tables exclude from the follower database"
+        },
+        "materializedViewsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of materialized views to include in the follower database"
+        },
+        "materializedViewsToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of materialized views exclude from the follower database"
+        }
+      },
+      "description": "Tables that will be included and excluded in the follower database"
+    },
+    "DatabaseListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          },
+          "description": "The list of Kusto databases."
+        }
+      },
+      "description": "The list Kusto databases operation response."
+    },
+    "Database": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "kind": {
+          "description": "Kind of the database",
+          "enum": [
+            "ReadWrite",
+            "ReadOnlyFollowing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Kusto database.",
+      "discriminator": "kind"
+    },
+    "ReadWriteDatabase": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The database properties.",
+          "$ref": "#/definitions/ReadWriteDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Database"
+        }
+      ],
+      "description": "Class representing a read write database.",
+      "x-ms-discriminator-value": "ReadWrite"
+    },
+    "ReadWriteDatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "softDeletePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
+        },
+        "hotCachePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept in cache for fast queries in TimeSpan."
+        },
+        "statistics": {
+          "$ref": "#/definitions/DatabaseStatistics",
+          "description": "The statistics of the database."
+        },
+        "isFollowed": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the database is followed."
+        }
+      },
+      "description": "Class representing the Kusto database properties."
+    },
+    "DatabaseStatistics": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "size": {
+          "type": "number",
+          "description": "The database size - the total size of compressed data and index in bytes."
+        }
+      },
+      "description": "A class that contains database statistics information."
+    },
+    "DataConnectionValidationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectionValidationResult"
+          },
+          "description": "The list of Kusto data connection validation errors."
+        }
+      },
+      "description": "The list Kusto data connection validation result."
+    },
+    "DataConnectionValidationResult": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "A message which indicates a problem in data connection validation."
+        }
+      },
+      "description": "The result returned from a data connection validation request."
+    },
+    "DataConnectionValidation": {
+      "type": "object",
+      "properties": {
+        "dataConnectionName": {
+          "type": "string",
+          "description": "The name of the data connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnection",
+          "description": "The data connection properties to validate."
+        }
+      },
+      "description": "Class representing an data connection validation."
+    },
+    "DataConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnection"
+          },
+          "description": "The list of Kusto data connections."
+        }
+      },
+      "description": "The list Kusto data connections operation response."
+    },
+    "DataConnection": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "kind": {
+          "description": "Kind of the endpoint for the data connection",
+          "enum": [
+            "EventHub",
+            "EventGrid",
+            "IotHub"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataConnectionKind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a data connection.",
+      "discriminator": "kind"
+    },
+    "EventHubDataConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The Event Hub data connection properties to validate.",
+          "$ref": "#/definitions/EventHubConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an event hub data connection.",
+      "x-ms-discriminator-value": "EventHub"
+    },
+    "IotHubDataConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The Iot Hub data connection properties.",
+          "$ref": "#/definitions/IotHubConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an iot hub data connection.",
+      "x-ms-discriminator-value": "IotHub"
+    },
+    "EventGridDataConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the Event Grid data connection.",
+          "$ref": "#/definitions/EventGridConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an Event Grid data connection.",
+      "x-ms-discriminator-value": "EventGrid"
+    },
+    "EventHubConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "eventHubResourceId": {
+          "type": "string",
+          "description": "The resource ID of the event hub to be used to create a data connection."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventHubDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "eventSystemProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "System properties of the event hub"
+        },
+        "compression": {
+          "$ref": "#/definitions/Compression",
+          "description": "The event hub messages compression type"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "required": [
+        "eventHubResourceId",
+        "consumerGroup"
+      ],
+      "description": "Class representing the Kusto event hub connection properties."
+    },
+    "IotHubConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "iotHubResourceId": {
+          "type": "string",
+          "description": "The resource ID of the Iot hub to be used to create a data connection."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The iot hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/IotHubDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "eventSystemProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "System properties of the iot hub"
+        },
+        "sharedAccessPolicyName": {
+          "type": "string",
+          "description": "The name of the share access policy"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "required": [
+        "iotHubResourceId",
+        "consumerGroup",
+        "sharedAccessPolicyName"
+      ],
+      "description": "Class representing the Kusto Iot hub connection properties."
+    },
+    "EventGridConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "The resource ID of the storage account where the data resides."
+        },
+        "eventHubResourceId": {
+          "type": "string",
+          "description": "The resource ID where the event grid is configured to send events."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventGridDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "ignoreFirstRecord": {
+          "type": "boolean",
+          "description": "A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file"
+        },
+        "blobStorageEventType": {
+          "$ref": "#/definitions/BlobStorageEventType",
+          "description": "The name of blob storage event type to process."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "eventHubResourceId",
+        "consumerGroup"
+      ],
+      "description": "Class representing the Kusto event grid connection properties."
+    },
+    "EventHubDataFormat": {
+      "description": "The data format of the message. Optionally the data format can be added to each message.",
+      "type": "string",
+      "enum": [
+        "MULTIJSON",
+        "JSON",
+        "CSV",
+        "TSV",
+        "SCSV",
+        "SOHSV",
+        "PSV",
+        "TXT",
+        "RAW",
+        "SINGLEJSON",
+        "AVRO",
+        "TSVE",
+        "PARQUET",
+        "ORC",
+        "APACHEAVRO",
+        "W3CLOGFILE"
+      ],
+      "x-ms-enum": {
+        "name": "eventHubDataFormat",
+        "modelAsString": true
+      }
+    },
+    "IotHubDataFormat": {
+      "description": "The data format of the message. Optionally the data format can be added to each message.",
+      "type": "string",
+      "enum": [
+        "MULTIJSON",
+        "JSON",
+        "CSV",
+        "TSV",
+        "SCSV",
+        "SOHSV",
+        "PSV",
+        "TXT",
+        "RAW",
+        "SINGLEJSON",
+        "AVRO",
+        "TSVE",
+        "PARQUET",
+        "ORC",
+        "APACHEAVRO",
+        "W3CLOGFILE"
+      ],
+      "x-ms-enum": {
+        "name": "iotHubDataFormat",
+        "modelAsString": true
+      }
+    },
+    "EventGridDataFormat": {
+      "description": "The data format of the message. Optionally the data format can be added to each message.",
+      "type": "string",
+      "enum": [
+        "MULTIJSON",
+        "JSON",
+        "CSV",
+        "TSV",
+        "SCSV",
+        "SOHSV",
+        "PSV",
+        "TXT",
+        "RAW",
+        "SINGLEJSON",
+        "AVRO",
+        "TSVE",
+        "PARQUET",
+        "ORC",
+        "APACHEAVRO",
+        "W3CLOGFILE"
+      ],
+      "x-ms-enum": {
+        "name": "eventGridDataFormat",
+        "modelAsString": true
+      }
+    },
+    "BlobStorageEventType": {
+      "description": "The name of blob storage event type to process.",
+      "type": "string",
+      "enum": [
+        "Microsoft.Storage.BlobCreated",
+        "Microsoft.Storage.BlobRenamed"
+      ],
+      "x-ms-enum": {
+        "name": "blobStorageEventType",
+        "modelAsString": true
+      }
+    },
+    "FollowerDatabaseListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FollowerDatabaseDefinition"
+          },
+          "description": "The list of follower database result."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
+    },
+    "FollowerDatabaseDefinition": {
+      "type": "object",
+      "required": [
+        "clusterResourceId",
+        "attachedDatabaseConfigurationName"
+      ],
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource id of the cluster that follows a database owned by this cluster."
+        },
+        "attachedDatabaseConfigurationName": {
+          "type": "string",
+          "description": "Resource name of the attached database configuration in the follower cluster."
+        },
+        "databaseName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The database name owned by this cluster that was followed. * in case following all databases."
+        }
+      },
+      "description": "A class representing follower database request."
+    },
+    "LanguageExtensionName": {
+      "description": "Language extension that can run within KQL query.",
+      "type": "string",
+      "enum": [
+        "PYTHON",
+        "R"
+      ],
+      "x-ms-enum": {
+        "name": "languageExtensionName",
+        "modelAsString": true
+      }
+    },
+    "LanguageExtension": {
+      "type": "object",
+      "description": "The language extension object.",
+      "properties": {
+        "languageExtensionName": {
+          "$ref": "#/definitions/LanguageExtensionName",
+          "description": "The language extension name."
+        }
+      }
+    },
+    "LanguageExtensionsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageExtension"
+          },
+          "description": "The list of language extensions."
+        }
+      },
+      "description": "The list of language extension objects."
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioned state of the resource.",
+      "enum": [
+        "Running",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Moving",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Compression": {
+      "description": "The compression type",
+      "type": "string",
+      "enum": [
+        "None",
+        "GZip"
+      ],
+      "x-ms-enum": {
+        "name": "compression",
+        "modelAsString": true
+      }
+    },
+    "ClusterPrincipalAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterPrincipalAssignment"
+          },
+          "description": "The list of Kusto cluster principal assignments."
+        }
+      },
+      "description": "The list Kusto cluster principal assignments operation response."
+    },
+    "ClusterPrincipalAssignment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterPrincipalProperties",
+          "description": "The cluster principal."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a cluster principal assignment."
+    },
+    "ClusterPrincipalProperties": {
+      "type": "object",
+      "required": [
+        "principalId",
+        "role",
+        "principalType"
+      ],
+      "properties": {
+        "principalId": {
+          "description": "The principal ID assigned to the cluster principal. It can be a user email, application ID, or security group name.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Cluster principal role.",
+          "type": "string",
+          "enum": [
+            "AllDatabasesAdmin",
+            "AllDatabasesViewer"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterPrincipalRole",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the principal"
+        },
+        "principalType": {
+          "description": "Principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "A class representing cluster principal property."
+    },
+    "ClusterPrincipalAssignmentCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Principal Assignment resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/principalAssignments"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalAssignmentType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools/principalAssignments."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "A principal assignment check name availability request."
+    },
+    "DatabasePrincipalAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabasePrincipalAssignment"
+          },
+          "description": "The list of Kusto database principal assignments."
+        }
+      },
+      "description": "The list Kusto database principal assignments operation response."
+    },
+    "DatabasePrincipalAssignment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabasePrincipalProperties",
+          "description": "The database principal."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a database principal assignment."
+    },
+    "DatabasePrincipalProperties": {
+      "type": "object",
+      "required": [
+        "principalId",
+        "role",
+        "principalType"
+      ],
+      "properties": {
+        "principalId": {
+          "description": "The principal ID assigned to the database principal. It can be a user email, application ID, or security group name.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Database principal role.",
+          "type": "string",
+          "enum": [
+            "Admin",
+            "Ingestor",
+            "Monitor",
+            "User",
+            "UnrestrictedViewer",
+            "Viewer"
+          ],
+          "x-ms-enum": {
+            "name": "DatabasePrincipalRole",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the principal"
+        },
+        "principalType": {
+          "description": "Principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "A class representing database principal property."
+    },
+    "DatabasePrincipalAssignmentCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Principal Assignment resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/databases/principalAssignments"
+          ],
+          "x-ms-enum": {
+            "name": "DatabasePrincipalAssignmentType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools/databases/principalAssignments."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "A principal assignment check name availability request."
+    },
+    "KustoPoolCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Kusto Pool name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools"
+          ],
+          "x-ms-enum": {
+            "name": "KustoPoolType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The object sent for a kusto pool check name availability request."
+    },
+    "DatabaseCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/databases",
+            "Microsoft.Synapse/workspaces/kustoPools/attachedDatabaseConfigurations"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.Synapse/workspaces/kustoPools/databases."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a database check name availability request."
+    },
+    "DataConnectionCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Data Connection name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools/databases/dataConnections"
+          ],
+          "x-ms-enum": {
+            "name": "DataConnectionType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools/databases/dataConnections."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "A data connection check name availability request."
+    },
+    "CheckNameResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Specifies a Boolean value that indicates if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name that was checked."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
+        }
+      },
+      "description": "The result returned from a check name availability request."
+    },
+    "ListResourceSkusResult": {
+      "description": "List of available SKUs for a Kusto Pool.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureResourceSku"
+          },
+          "description": "The collection of available SKUs for an existing resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "kustoPoolNameParameter": {
+      "name": "kustoPoolName",
+      "in": "path",
+      "description": "The name of the Kusto pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The Guid of the operation ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachedDatabaseConfigurationNameParameter": {
+      "name": "attachedDatabaseConfigurationName",
+      "in": "path",
+      "description": "The name of the attached database configuration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database in the Kusto pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectionNameParameter": {
+      "name": "dataConnectionName",
+      "in": "path",
+      "description": "The name of the data connection.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrincipalAssignmentNameParameter": {
+      "name": "principalAssignmentName",
+      "in": "path",
+      "description": "The name of the Kusto principalAssignment.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
