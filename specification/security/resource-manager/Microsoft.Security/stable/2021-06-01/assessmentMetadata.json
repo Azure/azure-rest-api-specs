@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -117,7 +117,7 @@
           "Assessments Metadata"
         ],
         "description": "Get metadata information on all assessment types in a specific subscription",
-        "operationId": "AssessmentsMetadataSubscription_List",
+        "operationId": "AssessmentsMetadata_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -156,7 +156,7 @@
           "Assessments Metadata"
         ],
         "description": "Get metadata information on an assessment type in a specific subscription",
-        "operationId": "AssessmentsMetadataSubscription_Get",
+        "operationId": "AssessmentsMetadata_GetInSubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -193,7 +193,7 @@
           "Assessments Metadata"
         ],
         "description": "Create metadata information on an assessment type in a specific subscription",
-        "operationId": "AssessmentsMetadataSubscription_Create",
+        "operationId": "AssessmentsMetadata_CreateInSubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -233,7 +233,7 @@
           "Assessments Metadata"
         ],
         "description": "Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription",
-        "operationId": "AssessmentsMetadataSubscription_Delete",
+        "operationId": "AssessmentsMetadata_DeleteInSubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -493,7 +493,8 @@
           "enum": [
             "BuiltIn",
             "CustomPolicy",
-            "CustomerManaged"
+            "CustomerManaged",
+            "VerifiedPartner"
           ],
           "x-ms-enum": {
             "name": "assessmentType",
@@ -510,15 +511,45 @@
               {
                 "value": "CustomerManaged",
                 "description": "User assessments pushed directly by the user or other third party to Azure Security Center"
+              },
+              {
+                "value": "VerifiedPartner",
+                "description": "An assessment that was created by a verified 3rd party if the user connected it to ASC"
               }
             ]
           }
+        },
+        "partnerData": {
+          "$ref": "#/definitions/SecurityAssessmentMetadataPartnerData"
         }
       },
       "required": [
         "displayName",
         "severity",
         "assessmentType"
+      ]
+    },
+    "SecurityAssessmentMetadataPartnerData": {
+      "type": "object",
+      "description": "Describes the partner that created the assessment",
+      "properties": {
+        "partnerName": {
+          "type": "string",
+          "description": "Name of the company of the partner"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product of the partner that created the assessment"
+        },
+        "secret": {
+          "type": "string",
+          "description": "Secret to authenticate the partner and verify it created the assessment - write only",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "partnerName",
+        "secret"
       ]
     },
     "SecurityAssessmentMetadataPropertiesResponse": {
@@ -571,17 +602,7 @@
       "required": true,
       "description": "AssessmentMetadata object",
       "schema": {
-        "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityAssessmentMetadataResponse": {
-      "name": "assessmentMetadata",
-      "in": "body",
-      "required": true,
-      "description": "AssessmentMetadata object",
-      "schema": {
-        "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
+        "$ref": "#/definitions/SecurityAssessmentMetadata"
       },
       "x-ms-parameter-location": "method"
     }
