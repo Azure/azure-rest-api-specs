@@ -721,6 +721,13 @@ directive:
     where: $.paths
     from: scheduledQueryRule_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: R4005
+    where: $.definitions.Dimension.properties.operator
+    from: scheduledQueryRule_API.json
+    reason: 'The discrepancy in the enum values is with an enum which is defined for a different service of a different team'
+  - suppress: R3016
+    where: $.definitions.Action.properties["odata.type"]
+    reason: 'This is an old field in a stable api version which is not camel cased'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
