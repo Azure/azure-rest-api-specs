@@ -236,7 +236,7 @@
     "Bookmark": {
       "allOf": [
         {
-            "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a bookmark in Azure Security Insights.",
@@ -336,10 +336,10 @@
           "type": "object"
         },
         "entityMappings": {
-            "$ref": "#/definitions/EntityMappingsList",
-            "description": "Describes the entity mappings of the bookmark",
-            "type": "array"
-          }
+          "$ref": "#/definitions/EntityMappingsList",
+          "description": "Describes the entity mappings of the bookmark",
+          "type": "array"
+        }
       },
       "required": [
         "displayName",
@@ -374,42 +374,42 @@
       "type": "object"
     },
     "EntityMappingsList": {
-        "description": "Describes the entity mappings of the bookmark",
-        "items": {
-            "$ref": "#/definitions/EntityMappings"
-          },
-        "type": "array"
+      "description": "Describes the entity mappings of the bookmark",
+      "items": {
+        "$ref": "#/definitions/EntityMappings"
+      },
+      "type": "array"
     },
     "EntityMappings": {
-        "description": "Describes the entity mappings of a single entity",
-        "properties": {
-            "entityType": {
-                "description": "The entity type",
-                "type": "string"
-            },
-            "fieldMappings": {
-                "description": "Array of fields mapping for that entity type",
-                "items": {
-                  "$ref": "#/definitions/EntityFieldMapping"
-                },
-                "type": "array"
-            }
+      "description": "Describes the entity mappings of a single entity",
+      "properties": {
+        "entityType": {
+          "description": "The entity type",
+          "type": "string"
         },
-        "type": "object"
+        "fieldMappings": {
+          "description": "Array of fields mapping for that entity type",
+          "items": {
+            "$ref": "#/definitions/EntityFieldMapping"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "EntityFieldMapping": {
-        "description": "Map identifiers of a single entity",
-        "properties": {
-            "identifier": {
-                "description": "Alert V3 identifier",
-                "type": "string"
-            },
-            "value": {
-                "description": "The value of the identifier",
-                "type": "string"
-            }
+      "description": "Map identifiers of a single entity",
+      "properties": {
+        "identifier": {
+          "description": "Alert V3 identifier",
+          "type": "string"
         },
-        "type": "object"
+        "value": {
+          "description": "The value of the identifier",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "IncidentInfo": {
       "description": "Describes related incident information for the bookmark",

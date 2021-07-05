@@ -17,13 +17,17 @@
         ],
         "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
         "queryResult": "Security Event query result",
-        "entityMappings": [{
+        "entityMappings": [
+          {
             "entityType": "Account",
-            "fieldMappings": [{
-              "identifier": "Fullname",
-              "value": "johndoe@microsoft.com"
-          }]
-        }]
+            "fieldMappings": [
+              {
+                "identifier": "Fullname",
+                "value": "johndoe@microsoft.com"
+              }
+            ]
+          }
+        ]
       }
     }
   },
