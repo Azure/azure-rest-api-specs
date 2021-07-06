@@ -504,62 +504,6 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of Stream Analytics operations supported by the Microsoft.StreamAnalytics resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Stream Analytics REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the operation being performed on this particular object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Contains the localized display information for this particular operation / action.",
-          "readOnly": true,
-          "properties": {
-            "provider": {
-              "description": "The localized friendly form of the resource provider name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "The localized friendly form of the resource type related to this action/operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "The localized friendly name for the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "The localized friendly description for the operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
     "StreamingJob": {
       "description": "A streaming job object, containing all information associated with the named streaming job.",
       "type": "object",
