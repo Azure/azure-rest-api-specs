@@ -3172,43 +3172,16 @@
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
     },
-    "IdentityDetails": {
-      "type": "object",
-      "properties": {
-        "isSystemAssignedIdentity": {
-          "type": "boolean"
-        },
-        "managedIdentityId": {
-          "type": "string"
-        }
-      }
-    },
     "IdentityInfo": {
       "description": "Encapsulates Managed Identity related information",
       "type": "object",
       "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string"
-        },
         "isSystemAssignedIdentity": {
           "description": "To differentiate if the managed identity is system assigned or user assigned",
           "type": "boolean"
         },
-        "managedIdentityId": {
-          "description": "Managed Identity Id\r\nOptional: Might not be required in the case of system assigned managed identity",
-          "type": "string"
-        },
-        "managedIdentityUrl": {
-          "description": "Managed Identity URL\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "Managed Identity Tenant ID\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
-          "type": "string"
-        },
-        "principalId": {
-          "description": "Managed Identity Principal ID\r\nOptional: Will be required only in CRR flow, and not in non-CRR flow",
+        "managedIdentityResourceId": {
+          "description": "Managed Identity Resource Id\r\nOptional: Might not be required in the case of system assigned managed identity",
           "type": "string"
         }
       }
