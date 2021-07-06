@@ -1,0 +1,738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2020-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+      "get": {
+        "x-ms-examples": {
+          "Get all data connectors.": {
+            "$ref": "./examples/dataConnectors/GetDataConnectors.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Gets all data connectors.",
+        "operationId": "DataConnectors_List",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
+          },
+          "Get a TI data connector.": {
+            "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
+          },
+          "Get a MCAS data connector.": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
+          },
+          "Get a ASC data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
+          },
+          "Get an AAD data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+          },
+          "Get an AwsCloudTrail data connector.": {
+            "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
+          },
+          "Get an AATP data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
+          },
+          "Get a MDATP data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Gets a data connector.",
+        "operationId": "DataConnectors_Get",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Creates or updates the data connector.",
+        "operationId": "DataConnectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          },
+          {
+            "$ref": "#/parameters/DataConnector"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Delete the data connector.",
+        "operationId": "DataConnectors_Delete",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AADDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents AAD (Azure Active Directory) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AADDataConnectorProperties",
+          "description": "AAD (Azure Active Directory) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "AADDataConnectorProperties": {
+      "description": "AAD (Azure Active Directory) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "AATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPDataConnectorProperties",
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPDataConnectorProperties": {
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "ASCDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents ASC (Azure Security Center) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ASCDataConnectorProperties",
+          "description": "ASC (Azure Security Center) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSecurityCenter"
+    },
+    "ASCDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "ASC (Azure Security Center) data connector properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AlertsDataTypeOfDataConnector": {
+      "description": "Alerts data type for data connectors.",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AwsCloudTrailDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties",
+          "description": "Amazon Web Services CloudTrail data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
+    },
+    "AwsCloudTrailDataConnectorDataTypes": {
+      "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AwsCloudTrailDataConnectorProperties": {
+      "description": "Amazon Web Services CloudTrail data connector properties.",
+      "properties": {
+        "awsRoleArn": {
+          "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "DataConnector": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Data connector.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "The data connector kind"
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorKind": {
+      "description": "The kind of the data connector",
+      "enum": [
+        "AzureActiveDirectory",
+        "AzureSecurityCenter",
+        "MicrosoftCloudAppSecurity",
+        "ThreatIntelligence",
+        "Office365",
+        "AmazonWebServicesCloudTrail",
+        "AzureAdvancedThreatProtection",
+        "MicrosoftDefenderAdvancedThreatProtection"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorKind",
+        "values": [
+          {
+            "value": "AzureActiveDirectory"
+          },
+          {
+            "value": "AzureSecurityCenter"
+          },
+          {
+            "value": "MicrosoftCloudAppSecurity"
+          },
+          {
+            "value": "ThreatIntelligence"
+          },
+          {
+            "value": "Office365"
+          },
+          {
+            "value": "AmazonWebServicesCloudTrail"
+          },
+          {
+            "value": "AzureAdvancedThreatProtection"
+          },
+          {
+            "value": "MicrosoftDefenderAdvancedThreatProtection"
+          }
+        ]
+      }
+    },
+    "DataConnectorList": {
+      "description": "List all the data connectors.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of data connectors.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of data connectors.",
+          "items": {
+            "$ref": "#/definitions/DataConnector"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataConnectorDataTypeCommon": {
+      "description": "Common field for data type in data connectors.",
+      "properties": {
+        "state": {
+          "description": "Describe whether this data type connection is enabled or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DataTypeState"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorTenantId": {
+      "description": "Properties data connector on tenant level.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorWithAlertsProperties": {
+      "description": "Data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MCASDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASDataConnectorProperties",
+          "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASDataConnectorDataTypes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }
+      ],
+      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection."
+        },
+        "discoveryLogs": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Discovery log data type connection."
+        }
+      },
+      "type": "object"
+    },
+    "MCASDataConnectorProperties": {
+      "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/MCASDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MDATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPDataConnectorProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPDataConnectorProperties": {
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "TIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents threat intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TIDataConnectorProperties",
+          "description": "TI (Threat Intelligence) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "TIDataConnectorDataTypes": {
+      "description": "The available data types for TI (Threat Intelligence) data connector.",
+      "properties": {
+        "indicators": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for indicators connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TIDataConnectorProperties": {
+      "description": "TI (Threat Intelligence) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/TIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "OfficeDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents office data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeDataConnectorProperties",
+          "description": "Office data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Office365"
+    },
+    "OfficeDataConnectorDataTypes": {
+      "description": "The available data types for office data connector.",
+      "properties": {
+        "exchange": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Exchange data type connection.",
+          "type": "object"
+        },
+        "sharePoint": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "SharePoint data type connection.",
+          "type": "object"
+        },
+        "teams": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Teams data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "OfficeDataConnectorProperties": {
+      "description": "Office data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/OfficeDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "DataConnector": {
+      "description": "The data connector",
+      "in": "body",
+      "name": "dataConnector",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnector"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectorId": {
+      "description": "Connector ID",
+      "in": "path",
+      "name": "dataConnectorId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
