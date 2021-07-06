@@ -7,7 +7,7 @@
 
 ## Background
 
-In some cases, we need to do some more complex operations before creating a resource. For example, some Azure resource name is global unique, so we need to generate an unique name before create resource. some Azure resource creation relays on some external dependency such as storage account, keyVault certificate. ARMTemplate can meet this requirement.
+In some cases, we need to do some more complex operations before creating a resource. For example, some Azure resource name is global unique, so we need to generate an unique name before create resource. some Azure resource creation relays on some external dependency such as storage account, keyVault certificate.
 
 ## Examples
 
