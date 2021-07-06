@@ -589,6 +589,11 @@
               "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSources.json"
+          }
         }
       },
       "patch": {
@@ -1296,7 +1301,7 @@
       "properties": {
         "sourceName": {
           "type": "string",
-          "description": "File name. Supported file types are \".tsv\", \".pdf\", \".txt\", \".docx\", \".xlsx\".",
+          "description": "Name of the Source.",
           "maxLength": 200,
           "minLength": 1
         },
@@ -1337,7 +1342,7 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "sourceContentStructureType"
+        "name": "contentStructureType"
       }
     }
   },
