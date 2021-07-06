@@ -141,6 +141,7 @@ These settings apply only when `--tag=package-2019-01-preview` is specified on t
 ```yaml $(tag) == 'package-2019-01-preview'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
@@ -153,6 +154,10 @@ directive:
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.AutomationRule
+    reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
     where: $.definitions.AutomationRule
     reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
