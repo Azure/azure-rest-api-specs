@@ -439,7 +439,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RelationList"
+              "$ref": "SecurityInsights.json#/definitions/RelationList"
             }
           },
           "default": {
@@ -508,6 +508,16 @@
     }
   },
   "parameters": {
+    "EntityExpandRequestBody": {
+      "description": "The parameters required to execute an expand operation on the given entity.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityExpandParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "EntityId": {
       "description": "entity ID",
       "in": "path",
@@ -523,6 +533,27 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EntityTimelineParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKindParam": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityItemQueryKind",
+        "values": [
+          {
+            "description": "insight",
+            "value": "Insight"
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -711,6 +742,26 @@
       },
       "type": "object"
     },
+    "EntityExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given entity.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "EntityExpandResponse": {
       "description": "The entity expansion result operation response.",
       "properties": {
@@ -777,6 +828,26 @@
           }
         }
       }
+    },
+    "EntityList": {
+      "description": "List of all the entities.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of entities.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entities.",
+          "items": {
+            "$ref": "SecurityInsights.json#/definitions/Entity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "EntityTimelineItem": {
       "description": "Entity timeline Item.",
@@ -866,6 +937,70 @@
         "endTime"
       ]
     },
+    "EntityQueryItem": {
+      "description": "An abstract Query item for entity",
+      "type": "object",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryKind"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "Query Template ARM ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Query Template ARM Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "ARM Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityQueryItemProperties": {
+      "description": "An properties abstract Query item for entity",
+      "type": "object",
+      "properties": {
+        "dataTypes": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "properties": {
+              "dataType": {
+                "description": "Data type name",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "inputEntityType": {
+          "description": "The type of the entity",
+          "$ref": "SecurityInsights.json#/definitions/EntityInnerType"
+        },
+        "requiredInputFieldsSets": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
+        }
+      }
+    },
     "InsightsTableResult": {
       "type": "object",
       "description": "Query results for table insights query.",
@@ -899,6 +1034,160 @@
           }
         }
       }
+    },
+    "InsightQueryItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/InsightQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "InsightQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The insight display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The insight description."
+        },
+        "baseQuery": {
+          "type": "string",
+          "description": "The base query of the insight."
+        },
+        "tableQuery": {
+          "type": "object",
+          "description": "The insight table query.",
+          "properties": {
+            "columnsDefinitions": {
+              "type": "array",
+              "description": "List of insight column definitions.",
+              "items": {
+                "properties": {
+                  "header": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "description": "Insights Column type.",
+                    "enum": [
+                      "Number",
+                      "String",
+                      "Date",
+                      "Entity"
+                    ],
+                    "x-ms-enum": {
+                      "modelAsString": true,
+                      "name": "outputType"
+                    }
+                  },
+                  "supportDeepLink": {
+                    "type": "boolean",
+                    "description": "Is query supports deep-link."
+                  }
+                }
+              }
+            },
+            "queriesDefinitions": {
+              "type": "array",
+              "description": "List of insight queries definitions.",
+              "items": {
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "summarize": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "linkColumnsDefinitions": {
+                    "type": "array",
+                    "description": "Insight column header.",
+                    "items": {
+                      "properties": {
+                        "projectedName": {
+                          "type": "string",
+                          "description": "Insight Link Definition Projected Name."
+                        },
+                        "Query": {
+                          "type": "string",
+                          "description": "Insight Link Definition Query."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "chartQuery": {
+          "type": "object",
+          "description": "The insight chart query."
+        },
+        "additionalQuery": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The insight query."
+            },
+            "text": {
+              "type": "string",
+              "description": "The insight text."
+            }
+          }
+        },
+        "defaultTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "The padding for the start time of the query."
+            },
+            "afterRange": {
+              "type": "string",
+              "description": "The padding for the end time of the query."
+            }
+          }
+        },
+        "referenceTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "Additional query time for looking back."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
     },
     "GetInsightsResultsMetadata": {
       "description": "Get Insights result metadata.",
@@ -945,6 +1234,18 @@
         "errorMessage"
       ],
       "type": "object"
+    },
+    "GetQueriesResponse": {
+      "description": "Retrieve queries for entity result operation response.",
+      "properties": {
+        "value": {
+          "description": "The query result values.",
+          "items": {
+            "$ref": "#/definitions/EntityQueryItem"
+          },
+          "type": "array"
+        }
+      }
     },
     "SecurityAlertTimelineItem": {
       "allOf": [
