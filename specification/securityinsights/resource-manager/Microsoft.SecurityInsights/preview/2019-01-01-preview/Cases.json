@@ -758,10 +758,12 @@
           "description": "The comment message",
           "type": "string"
         },
-        "UserInfo\",": null,
-        "description": "Describes the user that created the comment",
-        "readOnly": true,
-        "type": "object"
+        "userInfo": {
+          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "description": "Describes the user that created the comment",
+          "readOnly": true,
+          "type": "object"
+        }
       },
       "required": [
         "message"
