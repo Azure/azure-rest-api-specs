@@ -40,17 +40,17 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RegisterBody"
+            "$ref": "#/definitions/RegisterBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type" : "object",
-              "properties" : {
-                "RequestId" : {
-                  "type" : "string"
+              "type": "object",
+              "properties": {
+                "RequestId": {
+                  "type": "string"
                 }
               }
             }
@@ -81,17 +81,17 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateBody"
+            "$ref": "#/definitions/UpdateBody"
           }
         ],
         "responses": {
-           "201": {
+          "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type" : "object",
-              "properties" : {
-                "RequestId" : {
-                  "type" : "string"
+              "type": "object",
+              "properties": {
+                "RequestId": {
+                  "type": "string"
                 }
               }
             }
@@ -122,17 +122,17 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DeleteBody"
+            "$ref": "#/definitions/DeleteBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type" : "object",
-              "properties" : {
-                "RequestId" : {
-                  "type" : "string"
+              "type": "object",
+              "properties": {
+                "RequestId": {
+                  "type": "string"
                 }
               }
             }
@@ -147,7 +147,56 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "RegisterBody": {
+      "name": "registerBody",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "InputFolder": {
+            "type": "string"
+          },
+          "DatabaseName": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The register request body."
+    },
+    "UpdateBody": {
+      "name": "updateBody",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "InputFolder": {
+            "type": "string"
+          },
+          "DatabaseName": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The update request body."
+    },
+    "DeleteBody": {
+      "name": "deleteBody",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "DatabaseName": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The delete request body."
+    }
+  },
   "parameters": {
     "ApiVersionParameter": {
       "name": "api-version",
@@ -164,54 +213,6 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
-    },
-    "RegisterBody": {
-      "name": "registerBody",
-      "in": "body",
-      "required": true,
-      "schema" : {
-        "type" : "object",
-        "properties" : {
-          "InputFolder" : {
-            "type" : "string"
-          },
-          "DatabaseName" : {
-            "type" : "string"
-          }
-        }
-      },
-      "description": "The register request body."
-    },
-    "UpdateBody": {
-      "name": "updateBody",
-      "in": "body",
-      "required": true,
-      "schema" : {
-        "type" : "object",
-        "properties" : {
-          "InputFolder" : {
-            "type" : "string"
-          },
-          "DatabaseName" : {
-            "type" : "string"
-          }
-        }
-      },
-      "description": "The update request body."
-    },
-    "DeleteBody": {
-      "name": "deleteBody",
-      "in": "body",
-      "required": true,
-      "schema" : {
-        "type" : "object",
-        "properties" : {
-          "DatabaseName" : {
-            "type" : "string"
-          }
-        }
-      },
-      "description": "The delete request body."
     }
   }
 }
