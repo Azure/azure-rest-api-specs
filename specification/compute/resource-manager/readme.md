@@ -37,6 +37,19 @@ openapi-type: arm
 tag: package-2021-03-01
 
 directive:
+  - from: swagger-document
+    where: $.paths..head.responses['204']
+    transform: >
+      $.schema = {};
+      $.schema["$ref"] = "#/definitions/ResourceGroupsCheckExistenceResponse";
+  - from: swagger-document
+    where: $.definitions
+    transform: >
+      $.ResourceGroupsCheckExistenceResponse = {};
+      $.ResourceGroupsCheckExistenceResponse.type = 'object';
+      $.ResourceGroupsCheckExistenceResponse.properties = {};
+      $.ResourceGroupsCheckExistenceResponse.properties.body = {};
+      $.ResourceGroupsCheckExistenceResponse.properties.body.type = 'boolean';
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
