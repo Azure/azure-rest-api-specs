@@ -5664,14 +5664,14 @@
       "required": [
         "@odata.type"
       ],
-      "description": "Base type for data identities."
+      "description": "Abstract base type for data identities."
     },
     "SearchIndexerDataNoneIdentity": {
       "description": "Clears the identity property of a datasource.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataNoneIdentity",
       "allOf": [
         {
-          "$ref": "#/definitions/DataChangeDetectionPolicy"
+          "$ref": "#/definitions/SearchIndexerDataIdentity"
         }
       ]
     },
@@ -5680,7 +5680,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataUserAssignedIdentity",
       "allOf": [
         {
-          "$ref": "#/definitions/DataChangeDetectionPolicy"
+          "$ref": "#/definitions/SearchIndexerDataIdentity"
         }
       ],
       "properties": {
