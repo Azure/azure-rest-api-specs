@@ -59,7 +59,11 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-01'
 input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+
 directive:
   - suppress: R2059
     from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
