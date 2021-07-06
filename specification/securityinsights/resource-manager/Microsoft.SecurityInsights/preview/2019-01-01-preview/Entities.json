@@ -608,7 +608,7 @@
       "description": "The entity expansion result operation response.",
       "properties": {
         "metaData": {
-          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "$ref": "SecurityInsights.json#/definitions/ExpansionResultsMetadata",
           "description": "The metadata from the expansion operation results."
         },
         "value": {
@@ -744,45 +744,6 @@
         "startTime",
         "endTime"
       ]
-    },
-    "ExpansionResultAggregation": {
-      "description": "Information of a specific aggregation in the expansion result.",
-      "properties": {
-        "aggregationType": {
-          "description": "The common type of the aggregation. (for e.g. entity field name)",
-          "type": "string"
-        },
-        "count": {
-          "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.",
-          "type": "integer"
-        },
-        "displayName": {
-          "description": "The display name of the aggregation by type.",
-          "type": "string"
-        },
-        "entityKind": {
-          "$ref": "#/definitions/EntityInnerKind",
-          "description": "The kind of the aggregated entity."
-        }
-      },
-      "required": [
-        "entityKind",
-        "count"
-      ],
-      "type": "object"
-    },
-    "ExpansionResultsMetadata": {
-      "description": "Expansion result metadata.",
-      "properties": {
-        "aggregations": {
-          "description": "Information of the aggregated nodes in the expansion result.",
-          "items": {
-            "$ref": "#/definitions/ExpansionResultAggregation"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
     },
     "InsightsTableResult": {
       "type": "object",

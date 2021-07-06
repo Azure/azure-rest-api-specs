@@ -263,23 +263,23 @@
             "$ref": "#/parameters/BookmarkId"
           },
           {
-            "$ref": "#/parameters/ODataFilter"
+            "$ref": "SecurityInsights.json#/parameters/ODataFilter"
           },
           {
-            "$ref": "#/parameters/ODataOrderBy"
+            "$ref": "SecurityInsights.json#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "#/parameters/ODataTop"
+            "$ref": "SecurityInsights.json#/parameters/ODataTop"
           },
           {
-            "$ref": "#/parameters/ODataSkipToken"
+            "$ref": "SecurityInsights.json#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RelationList"
+              "$ref": "SecurityInsights.json#/definitions/RelationList"
             }
           },
           "default": {
@@ -430,7 +430,7 @@
             "$ref": "SecurityInsights.json#/parameters/RelationName"
           },
           {
-            "$ref": "#/parameters/Relation"
+            "$ref": "SecurityInsights.json#/parameters/Relation"
           }
         ],
         "responses": {
@@ -542,6 +542,55 @@
       },
       "type": "object"
     },
+    "BookmarkExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "SecurityInsights.json#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "SecurityInsights.json#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of expansion result connected entities",
+              "items": {
+                "$ref": "SecurityInsights.json#/definitions/ConnectedEntity"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "BookmarkExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "BookmarkList": {
       "description": "List all the bookmarks.",
       "properties": {
@@ -582,7 +631,7 @@
         "labels": {
           "description": "List of labels relevant to this bookmark",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "SecurityInsights.json#/definitions/Label"
           },
           "type": "array"
         },

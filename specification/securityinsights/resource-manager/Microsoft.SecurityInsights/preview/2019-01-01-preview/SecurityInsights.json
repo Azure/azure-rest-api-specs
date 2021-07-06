@@ -3417,55 +3417,6 @@
       },
       "type": "object"
     },
-    "BookmarkExpandParameters": {
-      "description": "The parameters required to execute an expand operation on the given bookmark.",
-      "properties": {
-        "endTime": {
-          "description": "The end date filter, so the only expansion results returned are before this date.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "expansionId": {
-          "description": "The Id of the expansion to perform.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "startTime": {
-          "description": "The start date filter, so the only expansion results returned are after this date.",
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "BookmarkExpandResponse": {
-      "description": "The entity expansion result operation response.",
-      "properties": {
-        "metaData": {
-          "$ref": "#/definitions/ExpansionResultsMetadata",
-          "description": "The metadata from the expansion operation results."
-        },
-        "value": {
-          "description": "The expansion result values.",
-          "properties": {
-            "entities": {
-              "description": "Array of the expansion result entities.",
-              "items": {
-                "$ref": "#/definitions/Entity"
-              },
-              "type": "array"
-            },
-            "edges": {
-              "description": "Array of expansion result connected entities",
-              "items": {
-                "$ref": "#/definitions/ConnectedEntity"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
-        }
-      }
-    },
     "CasesAggregation": {
       "allOf": [
         {
@@ -4432,6 +4383,45 @@
       "required": [
         "value"
       ]
+    },
+    "ExpansionResultAggregation": {
+      "description": "Information of a specific aggregation in the expansion result.",
+      "properties": {
+        "aggregationType": {
+          "description": "The common type of the aggregation. (for e.g. entity field name)",
+          "type": "string"
+        },
+        "count": {
+          "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.",
+          "type": "integer"
+        },
+        "displayName": {
+          "description": "The display name of the aggregation by type.",
+          "type": "string"
+        },
+        "entityKind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ],
+      "type": "object"
+    },
+    "ExpansionResultsMetadata": {
+      "description": "Expansion result metadata.",
+      "properties": {
+        "aggregations": {
+          "description": "Information of the aggregated nodes in the expansion result.",
+          "items": {
+            "$ref": "#/definitions/ExpansionResultAggregation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "ExpansionEntityQueriesProperties": {
       "description": "Describes expansion entity query properties",
