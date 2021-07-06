@@ -156,6 +156,7 @@
       }
     },
     "SparkConfigurationResource": {
+      "type": "object",
       "description": "SparkConfiguration response details",
       "allOf": [
         {
@@ -183,8 +184,11 @@
           "description": "Description about the SparkConfiguration."
         },
         "configs": {
-          "type": "string",
-          "description": "SparkConfiguration configs."
+          "type": "object",
+          "description": "SparkConfiguration configs.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "annotations": {
           "type": "array",
