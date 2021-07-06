@@ -141,7 +141,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
-  - Microsoft.Synapse/preview/2020-12-01/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkConfiguration.json
 ```
 
 ### Tag: package-monitoring-2020-12-01
