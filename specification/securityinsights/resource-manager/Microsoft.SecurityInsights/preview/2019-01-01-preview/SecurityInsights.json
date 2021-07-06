@@ -4478,90 +4478,6 @@
         }
       }
     },
-    "TimelineResultsMetadata": {
-      "description": "Expansion result metadata.",
-      "properties": {
-        "totalCount": {
-          "description": "the total items found for the timeline request",
-          "type": "integer",
-          "format": "int32"
-        },
-        "aggregations": {
-          "description": "timeline aggregation per kind",
-          "items": {
-            "$ref": "#/definitions/TimelineAggregation"
-          },
-          "type": "array"
-        },
-        "errors": {
-          "description": "information about the failure queries",
-          "items": {
-            "$ref": "#/definitions/TimelineError"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "totalCount",
-        "aggregations"
-      ],
-      "type": "object"
-    },
-    "TimelineError": {
-      "description": "Timeline Query Errors.",
-      "properties": {
-        "kind": {
-          "description": "the query kind",
-          "$ref": "#/definitions/EntityTimelineKind"
-        },
-        "queryId": {
-          "description": "the query id",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "the error message",
-          "type": "string"
-        }
-      },
-      "required": [
-        "kind",
-        "errorMessage"
-      ],
-      "type": "object"
-    },
-    "TimelineAggregation": {
-      "description": "timeline aggregation information per kind",
-      "properties": {
-        "count": {
-          "description": "the total items found for a kind",
-          "type": "integer",
-          "format": "int32"
-        },
-        "kind": {
-          "description": "the query kind",
-          "$ref": "#/definitions/EntityTimelineKind"
-        }
-      },
-      "required": [
-        "kind",
-        "count"
-      ],
-      "type": "object"
-    },
-    "EntityTimelineItem": {
-      "description": "Entity timeline Item.",
-      "discriminator": "kind",
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityTimelineKind",
-          "description": "The entity query kind type."
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
     "FileEntity": {
       "allOf": [
         {
@@ -4838,173 +4754,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Insight"
-    },
-    "ActivityTimelineItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityTimelineItem"
-        }
-      ],
-      "description": "Represents Activity timeline item.",
-      "properties": {
-        "queryId": {
-          "type": "string",
-          "description": "The activity query id."
-        },
-        "bucketStartTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The grouping bucket start time."
-        },
-        "bucketEndTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The grouping bucket end time."
-        },
-        "firstActivityTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The time of the first activity in the grouping bucket."
-        },
-        "lastActivityTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The time of the last activity in the grouping bucket."
-        },
-        "content": {
-          "type": "string",
-          "description": "The activity timeline content."
-        },
-        "title": {
-          "type": "string",
-          "description": "The activity timeline title."
-        }
-      },
-      "required": [
-        "queryId",
-        "bucketStartTimeUTC",
-        "bucketEndTimeUTC",
-        "firstActivityTimeUTC",
-        "lastActivityTimeUTC",
-        "content",
-        "title"
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "Activity"
-    },
-    "SecurityAlertTimelineItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityTimelineItem"
-        }
-      ],
-      "description": "Represents security alert timeline item.",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "The alert azure resource id."
-        },
-        "productName": {
-          "type": "string",
-          "description": "The alert product name."
-        },
-        "description": {
-          "type": "string",
-          "description": "The alert description."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The alert name."
-        },
-        "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The alert severity."
-        },
-        "endTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The alert end time."
-        },
-        "startTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The alert start time."
-        },
-        "timeGenerated": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The alert generated time."
-        },
-        "alertType": {
-          "type": "string",
-          "description": "The name of the alert type."
-        }
-      },
-      "required": [
-        "azureResourceId",
-        "displayName",
-        "severity",
-        "endTimeUtc",
-        "startTimeUtc",
-        "timeGenerated",
-        "alertType"
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "SecurityAlert"
-    },
-    "BookmarkTimelineItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityTimelineItem"
-        }
-      ],
-      "description": "Represents bookmark timeline item.",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "The bookmark azure resource id."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The bookmark display name."
-        },
-        "notes": {
-          "type": "string",
-          "description": "The notes of the bookmark"
-        },
-        "endTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The bookmark end time."
-        },
-        "startTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "description": "TThe bookmark start time."
-        },
-        "eventTime": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The bookmark event time."
-        },
-        "createdBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
-          "description": "Describes a user that created the bookmark",
-          "type": "object"
-        },
-        "labels": {
-          "description": "List of labels relevant to this bookmark",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "azureResourceId"
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "Bookmark"
     },
     "FusionAlertRule": {
       "allOf": [
@@ -5412,7 +5161,7 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the bookmark",
           "type": "object"
         },
@@ -5450,7 +5199,7 @@
           "type": "string"
         },
         "updatedBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
@@ -8904,12 +8653,12 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist",
           "type": "object"
         },
         "updatedBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the watchlist",
           "type": "object"
         },
@@ -9041,12 +8790,12 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist item",
           "type": "object"
         },
         "updatedBy": {
-          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the watchlist item",
           "type": "object"
         },
@@ -9227,16 +8976,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EntityExpandParameters"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "BookmarkExpandRequestBody": {
-      "description": "The parameters required to execute an expand operation on the given bookmark.",
-      "in": "body",
-      "name": "parameters",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/BookmarkExpandParameters"
       },
       "x-ms-parameter-location": "method"
     },
