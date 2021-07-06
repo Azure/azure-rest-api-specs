@@ -21,6 +21,9 @@ directive:
     where: "$.definitions.Resource"
     transform: >
       $["x-ms-client-name"] = "TrackedEntityResource";
+      
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Go multi-api
