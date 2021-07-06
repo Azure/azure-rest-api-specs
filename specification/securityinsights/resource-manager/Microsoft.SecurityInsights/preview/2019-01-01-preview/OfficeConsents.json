@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents": {
       "get": {
         "x-ms-examples": {
-          "Get all automation rules.": {
-            "$ref": "./examples/automationRules/GetAllAutomationRules.json"
+          "Get all office consents.": {
+            "$ref": "./examples/officeConsents/GetOfficeConsents.json"
           }
         },
         "tags": [
-          "Automation Rules"
+          "Office Consents"
         ],
-        "description": "Gets all automation rules.",
-        "operationId": "AutomationRules_List",
+        "description": "Gets all office365 consents.",
+        "operationId": "OfficeConsents_List",
         "parameters": [
           {
             "$ref": "SecurityInsights.json#/parameters/ApiVersion"
@@ -67,7 +67,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutomationRulesList"
+              "$ref": "#/definitions/OfficeConsentList"
             }
           },
           "default": {
@@ -82,18 +82,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents/{consentId}": {
       "get": {
         "x-ms-examples": {
-          "Get an automation rule.": {
-            "$ref": "./examples/automationRules/GetAutomationRule.json"
+          "Get an office consent.": {
+            "$ref": "./examples/officeConsents/GetOfficeConsentsById.json"
           }
         },
         "tags": [
-          "Automation Rules"
+          "Office Consents"
         ],
-        "description": "Gets the automation rule.",
-        "operationId": "AutomationRules_Get",
+        "description": "Gets an office365 consent.",
+        "operationId": "OfficeConsents_Get",
         "parameters": [
           {
             "$ref": "SecurityInsights.json#/parameters/ApiVersion"
@@ -111,69 +111,14 @@
             "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/AutomationRuleId"
+            "$ref": "#/parameters/ConsentId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutomationRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Creates or updates an automation rule.": {
-            "$ref": "./examples/automationRules/CreateAutomationRule.json"
-          }
-        },
-        "tags": [
-          "Automation Rules"
-        ],
-        "description": "Creates or updates the automation rule.",
-        "operationId": "AutomationRules_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/AutomationRuleId"
-          },
-          {
-            "$ref": "#/parameters/AutomationRule"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AutomationRule"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/AutomationRule"
+              "$ref": "#/definitions/OfficeConsent"
             }
           },
           "default": {
@@ -186,15 +131,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete an automation rule.": {
-            "$ref": "./examples/automationRules/DeleteAutomationRule.json"
+          "Delete an office consent.": {
+            "$ref": "./examples/officeConsents/DeleteOfficeConsents.json"
           }
         },
         "tags": [
-          "Automation Rule"
+          "Office Consents"
         ],
-        "description": "Delete the automation rule.",
-        "operationId": "AutomationRules_Delete",
+        "description": "Delete the office365 consent.",
+        "operationId": "OfficeConsents_Delete",
         "parameters": [
           {
             "$ref": "SecurityInsights.json#/parameters/ApiVersion"
@@ -212,7 +157,7 @@
             "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/AutomationRuleId"
+            "$ref": "#/parameters/ConsentId"
           }
         ],
         "responses": {
@@ -913,6 +858,211 @@
         "triggersWhen"
       ],
       "type": "object"
+    },
+    "ClientInfo": {
+      "description": "Information on the client (user or application) that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the client.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the client.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the client.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the client.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentClassification": {
+      "description": "The reason the incident was closed",
+      "enum": [
+        "Undetermined",
+        "TruePositive",
+        "BenignPositive",
+        "FalsePositive"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentClassification",
+        "values": [
+          {
+            "description": "Incident classification was undetermined",
+            "value": "Undetermined"
+          },
+          {
+            "description": "Incident was true positive",
+            "value": "TruePositive"
+          },
+          {
+            "description": "Incident was benign positive",
+            "value": "BenignPositive"
+          },
+          {
+            "description": "Incident was false positive",
+            "value": "FalsePositive"
+          }
+        ]
+      }
+    },
+    "IncidentClassificationReason": {
+      "description": "The classification reason the incident was closed with",
+      "enum": [
+        "SuspiciousActivity",
+        "SuspiciousButExpected",
+        "IncorrectAlertLogic",
+        "InaccurateData"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentClassificationReason",
+        "values": [
+          {
+            "description": "Classification reason was suspicious activity",
+            "value": "SuspiciousActivity"
+          },
+          {
+            "description": "Classification reason was suspicious but expected",
+            "value": "SuspiciousButExpected"
+          },
+          {
+            "description": "Classification reason was incorrect alert logic",
+            "value": "IncorrectAlertLogic"
+          },
+          {
+            "description": "Classification reason was inaccurate data",
+            "value": "InaccurateData"
+          }
+        ]
+      }
+    },
+    "IncidentLabel": {
+      "description": "Represents an incident label",
+      "properties": {
+        "labelName": {
+          "description": "The name of the label",
+          "type": "string"
+        },
+        "labelType": {
+          "description": "The type of the label",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentLabelType",
+            "values": [
+              {
+                "description": "Label manually created by a user",
+                "value": "User"
+              },
+              {
+                "description": "Label automatically created by the system",
+                "value": "System"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "labelName"
+      ],
+      "type": "object"
+    },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentSeverity": {
+      "description": "The severity of the incident",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentSeverity",
+        "values": [
+          {
+            "description": "High severity",
+            "value": "High"
+          },
+          {
+            "description": "Medium severity",
+            "value": "Medium"
+          },
+          {
+            "description": "Low severity",
+            "value": "Low"
+          },
+          {
+            "description": "Informational severity",
+            "value": "Informational"
+          }
+        ]
+      }
+    },
+    "IncidentStatus": {
+      "description": "The status of the incident",
+      "enum": [
+        "New",
+        "Active",
+        "Closed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentStatus",
+        "values": [
+          {
+            "description": "An active incident which isn't being handled currently",
+            "value": "New"
+          },
+          {
+            "description": "An active incident which is being handled",
+            "value": "Active"
+          },
+          {
+            "description": "A non-active incident",
+            "value": "Closed"
+          }
+        ]
+      }
     }
   }
 }
