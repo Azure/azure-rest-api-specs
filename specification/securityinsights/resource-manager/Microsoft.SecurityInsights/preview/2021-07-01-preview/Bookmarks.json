@@ -230,6 +230,279 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all bookmark relations.": {
+            "$ref": "./examples/bookmarks/relations/GetAllBookmarkRelations.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets all bookmark relations.",
+        "operationId": "BookmarkRelations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/Relation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an bookmark": {
+            "$ref": "./examples/bookmarks/expand/PostExpandBookmark.json"
+          }
+        },
+        "description": "Expand an bookmark",
+        "operationId": "Bookmark_Expand",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/BookmarkExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Bookmark"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/GetBookmarkRelationByName.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets a bookmark relation.",
+        "operationId": "BookmarkRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/CreateBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Creates the bookmark relation.",
+        "operationId": "BookmarkRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/Relation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/DeleteBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Delete the bookmark relation.",
+        "operationId": "BookmarkRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -338,7 +611,7 @@
         "entityMappings": {
           "$ref": "#/definitions/EntityMappingsList",
           "description": "Describes the entity mappings of the bookmark",
-          "type": "array"
+          "type": "object"
         }
       },
       "required": [
@@ -465,6 +738,434 @@
         }
       },
       "type": "object"
+    },
+    "ExpansionResultsMetadata": {
+      "description": "Expansion result metadata.",
+      "properties": {
+        "aggregations": {
+          "description": "Information of the aggregated nodes in the expansion result.",
+          "items": {
+            "$ref": "#/definitions/ExpansionResultAggregation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ConnectedEntity": {
+      "description": "Expansion result connected entities",
+      "properties": {
+        "targetEntityId": {
+          "description": "Entity Id of the connected entity",
+          "type": "string"
+        },
+        "additionalData": {
+          "description": "key-value pairs for a connected entity mapping",
+          "type": "object"
+        }
+      }
+    },
+    "BookmarkExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "BookmarkExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of expansion result connected entities",
+              "items": {
+                "$ref": "#/definitions/ConnectedEntity"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "RelationsModelInput": {
+      "type": "object",
+      "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "sourceRelationNode": {
+          "type": "object",
+          "description": "Relation source node",
+          "$ref": "#/definitions/RelationNode"
+        },
+        "targetRelationNode": {
+          "type": "object",
+          "description": "Relation target node",
+          "$ref": "#/definitions/RelationNode"
+        }
+      }
+    },
+    "RelationNode": {
+      "type": "object",
+      "description": "Relation node",
+      "properties": {
+        "relationNodeId": {
+          "type": "string",
+          "description": "Relation Node Id"
+        },
+        "relationNodeKind": {
+          "type": "string",
+          "description": "The type of relation node",
+          "readOnly": true,
+          "enum": [
+            "Case",
+            "Bookmark"
+          ],
+          "x-ms-enum": {
+            "name": "RelationNodeKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Case",
+                "description": "Case node part of the relation"
+              },
+              {
+                "value": "Bookmark",
+                "description": "Bookmark node part of the relation"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag for relation node"
+        },
+        "relationAdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional set of properties"
+        }
+      }
+    },
+    "RelationBase": {
+      "type": "object",
+      "description": "Represents a relation",
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of relation node",
+              "readOnly": true,
+              "enum": [
+                "CasesToBookmarks"
+              ],
+              "x-ms-enum": {
+                "name": "RelationTypes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "CasesToBookmarks",
+                    "description": "Relations between cases and bookmarks"
+                  }
+                ]
+              }
+            },
+            "etag": {
+              "type": "string",
+              "description": "ETag for relation"
+            }
+          }
+        }
+      ]
+    },
+    "Relation": {
+      "type": "object",
+      "description": "Represents a relation between two resources",
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelationProperties",
+          "description": "Relation properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RelationList": {
+      "description": "List of relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Relation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "RelationProperties": {
+      "description": "Relation property bag.",
+      "properties": {
+        "relatedResourceId": {
+          "description": "The resource ID of the related resource",
+          "type": "string"
+        },
+        "relatedResourceName": {
+          "description": "The name of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceType": {
+          "description": "The resource type of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceKind": {
+          "description": "The resource kind of the related resource",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "relatedResourceId"
+      ],
+      "type": "object"
+    },
+    "EntityInnerKind": {
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "IoTDevice",
+        "SecurityAlert",
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityKind",
+        "values": [
+          {
+            "description": "Entity represents account in the system.",
+            "value": "Account"
+          },
+          {
+            "description": "Entity represents host in the system.",
+            "value": "Host"
+          },
+          {
+            "description": "Entity represents file in the system.",
+            "value": "File"
+          },
+          {
+            "description": "Entity represents azure resource in the system.",
+            "value": "AzureResource"
+          },
+          {
+            "description": "Entity represents cloud application in the system.",
+            "value": "CloudApplication"
+          },
+          {
+            "description": "Entity represents dns resolution in the system.",
+            "value": "DnsResolution"
+          },
+          {
+            "description": "Entity represents file hash in the system.",
+            "value": "FileHash"
+          },
+          {
+            "description": "Entity represents ip in the system.",
+            "value": "Ip"
+          },
+          {
+            "description": "Entity represents malware in the system.",
+            "value": "Malware"
+          },
+          {
+            "description": "Entity represents process in the system.",
+            "value": "Process"
+          },
+          {
+            "description": "Entity represents registry key in the system.",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "Entity represents registry value in the system.",
+            "value": "RegistryValue"
+          },
+          {
+            "description": "Entity represents security group in the system.",
+            "value": "SecurityGroup"
+          },
+          {
+            "description": "Entity represents url in the system.",
+            "value": "Url"
+          },
+          {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
+            "description": "Entity represents security alert in the system.",
+            "value": "SecurityAlert"
+          },
+          {
+            "description": "Entity represents bookmark in the system.",
+            "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
+          }
+        ]
+      }
+    },
+    "ExpansionResultAggregation": {
+      "description": "Information of a specific aggregation in the expansion result.",
+      "properties": {
+        "aggregationType": {
+          "description": "The common type of the aggregation. (for e.g. entity field name)",
+          "type": "string"
+        },
+        "count": {
+          "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.",
+          "type": "integer"
+        },
+        "displayName": {
+          "description": "The display name of the aggregation by type.",
+          "type": "string"
+        },
+        "entityKind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ],
+      "type": "object"
+    },
+    "Entity": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/EntityKind"
+        }
+      ],
+      "description": "Specific entity.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityKind": {
+      "description": "Describes an entity with kind.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
     }
   },
   "parameters": {
@@ -484,6 +1185,77 @@
       "name": "bookmarkId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataFilter": {
+      "description": "Filters the results, based on a Boolean condition. Optional.",
+      "in": "query",
+      "name": "$filter",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataOrderBy": {
+      "description": "Sorts the results. Optional.",
+      "in": "query",
+      "name": "$orderby",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataSkipToken": {
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+      "in": "query",
+      "name": "$skipToken",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataTop": {
+      "description": "Returns only the first n results. Optional.",
+      "format": "int32",
+      "in": "query",
+      "name": "$top",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "Relation": {
+      "name": "relation",
+      "in": "body",
+      "description": "The relation model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Relation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BookmarkExpandRequestBody": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BookmarkExpandParameters"
+      },
       "x-ms-parameter-location": "method"
     }
   }
