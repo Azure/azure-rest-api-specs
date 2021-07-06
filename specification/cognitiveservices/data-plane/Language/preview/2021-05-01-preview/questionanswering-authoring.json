@@ -493,12 +493,8 @@
         "responses": {
           "200": {
             "description": "All the synonyms of a project.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/SynonymAssets"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/SynonymAssets"
             }
           },
           "default": {
@@ -523,18 +519,11 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/definitions/SynonymAssets"
           }
         ],
-        "requestBody": {
-          "description": "All the synonyms of a project.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/SynonymAssets"
-              }
-            }
-          }
-        },
         "responses": {
           "204": {
             "description": "Synonyms update successfully."
@@ -578,12 +567,8 @@
         "responses": {
           "200": {
             "description": "All the sources of a project.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/QnaSources"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/QnaSources"
             }
           },
           "default": {
@@ -608,18 +593,11 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/definitions/UpdateSourcesParameters"
           }
         ],
-        "requestBody": {
-          "description": "Update request for the sources of a project.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/UpdateSourcesParameters"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
@@ -713,12 +691,8 @@
         "responses": {
           "200": {
             "description": "All the QnAs of a project.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/QnaAssets"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/QnaAssets"
             }
           },
           "default": {
@@ -742,18 +716,11 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/definitions/UpdateQnaParameters"
           }
         ],
-        "requestBody": {
-          "description": "Update request for the QnAs of a project.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/UpdateQnaParameters"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
