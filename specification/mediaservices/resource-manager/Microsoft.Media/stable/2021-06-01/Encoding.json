@@ -1351,6 +1351,10 @@
         }
       ],
       "properties": {
+        "configurations": {
+          "$ref": "#/definitions/PresetConfigurations",
+          "description": "Optional configuration settings for encoder. Configurations is only supported for ContentAwareEncoding and H265ContentAwareEncoding BuiltInStandardEncoderPreset."
+        },
         "presetName": {
           "type": "string",
           "enum": [
@@ -1763,7 +1767,7 @@
     "Transform": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1773,7 +1777,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
@@ -1808,7 +1812,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of files. Required for JobInputHttp. Maximum of 4000 characters each."
+          "description": "List of files. Required for JobInputHttp. Maximum of 4000 characters each. Query strings will not be returned in service responses to prevent sensitive data exposure."
         },
         "start": {
           "$ref": "#/definitions/ClipTime",
@@ -1935,7 +1939,7 @@
       "properties": {
         "baseUri": {
           "type": "string",
-          "description": "Base URI for HTTPS job input. It will be concatenated with provided file names. If no base uri is given, then the provided file list is assumed to be fully qualified uris. Maximum length of 4000 characters."
+          "description": "Base URI for HTTPS job input. It will be concatenated with provided file names. If no base uri is given, then the provided file list is assumed to be fully qualified uris. Maximum length of 4000 characters. The query strings will not be returned in service responses to prevent sensitive data exposure."
         }
       },
       "type": "object",
@@ -1952,6 +1956,10 @@
           "$ref": "#/definitions/JobError",
           "description": "If the JobOutput is in the Error state, it contains the details of the error.",
           "readOnly": true
+        },
+        "presetOverride": {
+          "$ref": "#/definitions/Preset",
+          "description": "A preset used to override the preset in the corresponding transform output."
         },
         "state": {
           "type": "string",
@@ -2368,7 +2376,7 @@
     "Job": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2378,13 +2386,98 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
       },
       "type": "object",
       "description": "A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid."
+    },
+    "PresetConfigurations": {
+      "description": "An object of optional configuration settings for encoder.",
+      "properties": {
+        "complexity": {
+          "description": "Allows you to configure the encoder settings to control the balance between speed and quality. Example: set Complexity as Speed for faster encoding but less compression efficiency.",
+          "enum": [
+            "Speed",
+            "Balanced",
+            "Quality"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Complexity",
+            "values": [
+              {
+                "description": "Configures the encoder to use settings optimized for faster encoding. Quality is sacrificed to decrease encoding time.",
+                "value": "Speed"
+              },
+              {
+                "description": "Configures the encoder to use settings that achieve a balance between speed and quality.",
+                "value": "Balanced"
+              },
+              {
+                "description": "Configures the encoder to use settings optimized to produce higher quality output at the expense of slower overall encode time.",
+                "value": "Quality"
+              }
+            ]
+          }
+        },
+        "interleaveOutput": {
+          "description": "Sets the interleave mode of the output to control how audio and video are stored in the container format. Example: set InterleavedOutput as NonInterleavedOutput to produce audio-only and video-only outputs in separate MP4 files.",
+          "enum": [
+            "NonInterleavedOutput",
+            "InterleavedOutput"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InterleaveOutput",
+            "values": [
+              {
+                "description": "The output is video-only or audio-only.",
+                "value": "NonInterleavedOutput"
+              },
+              {
+                "description": "The output includes both audio and video.",
+                "value": "InterleavedOutput"
+              }
+            ]
+          }
+        },
+        "keyFrameIntervalInSeconds": {
+          "description": "The key frame interval in seconds. Example: set KeyFrameIntervalInSeconds as 2 to reduce the playback buffering for some players.",
+          "format": "float",
+          "type": "number"
+        },
+        "maxBitrateBps": {
+          "description": "The maximum bitrate in bits per second (threshold for the top video layer). Example: set MaxBitrateBps as 6000000 to avoid producing very high bitrate outputs for contents with high complexity.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxHeight": {
+          "description": "The maximum height of output video layers. Example: set MaxHeight as 720 to produce output layers up to 720P even if the input is 4K.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxLayers": {
+          "description": "The maximum number of output video layers. Example: set MaxLayers as 4 to make sure at most 4 output layers are produced to control the overall cost of the encoding job.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minBitrateBps": {
+          "description": "The minimum bitrate in bits per second (threshold for the bottom video layer). Example: set MinBitrateBps as 200000 to have a bottom layer that covers users with low network bandwidth.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minHeight": {
+          "description": "The minimum height of output video layers. Example: set MinHeight as 360 to avoid output layers of smaller resolutions like 180P.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
     },
     "TransformCollection": {
       "properties": {
