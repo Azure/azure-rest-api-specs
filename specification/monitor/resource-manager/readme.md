@@ -759,7 +759,7 @@ directive:
 
 ```
 
-``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2)) || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
@@ -767,7 +767,7 @@ directive:
   reason: Missing kind, etag
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
+``` yaml !$(python) && (!$(go) && !$(track2)) && !$(java) && $(tag) == 'package-2021-04'
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
