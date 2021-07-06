@@ -759,7 +759,7 @@ directive:
 
 ```
 
-``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2)) || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
