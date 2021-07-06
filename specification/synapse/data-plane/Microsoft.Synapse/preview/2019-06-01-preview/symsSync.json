@@ -40,7 +40,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/RegisterBody"
+            "in": "body",
+            "name": "registerBody",
+            "required": true,
+            "description": "The register body",
+            "schema": {
+              "$ref": "#/definitions/registerObject"
+            }
           }
         ],
         "responses": {
@@ -81,7 +87,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/UpdateBody"
+            "in": "body",
+            "name": "updateBody",
+            "required": true,
+            "description": "The update body",
+            "schema": {
+              "$ref": "#/definitions/updateObject"
+            }
           }
         ],
         "responses": {
@@ -122,7 +134,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/DeleteBody"
+            "in": "body",
+            "name": "deleteBody",
+            "required": true,
+            "description": "The delete body",
+            "schema": {
+              "$ref": "#/definitions/deleteObject"
+            }
           }
         ],
         "responses": {
@@ -148,53 +166,51 @@
     }
   },
   "definitions": {
-    "RegisterBody": {
-      "name": "registerBody",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "InputFolder": {
-            "type": "string"
-          },
-          "DatabaseName": {
-            "type": "string"
-          }
+    "registerObject": {
+      "type": "object",
+      "required": [
+        "InputFolder",
+        "DatabaseName"
+      ],
+      "properties": {
+        "InputFolder": {
+          "type": "string",
+          "example": "xyz"
+        },
+        "DatabaseName": {
+          "type": "string",
+          "example": "xyz"
         }
-      },
-      "description": "The register request body."
+      }
     },
-    "UpdateBody": {
-      "name": "updateBody",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "InputFolder": {
-            "type": "string"
-          },
-          "DatabaseName": {
-            "type": "string"
-          }
+    "updateObject": {
+      "type": "object",
+      "required": [
+        "InputFolder",
+        "DatabaseName"
+      ],
+      "properties": {
+        "InputFolder": {
+          "type": "string",
+          "example": "xyz"
+        },
+        "DatabaseName": {
+          "type": "string",
+          "example": "xyz"
         }
-      },
-      "description": "The update request body."
+      }
     },
-    "DeleteBody": {
-      "name": "deleteBody",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "DatabaseName": {
-            "type": "string"
-          }
+    "deleteObject": {
+      "type": "object",
+      "required": [
+        "DatabaseName"
+      ],
+      "properties": {
+        "DatabaseName": {
+          "type": "string",
+          "example": "xyz"
         }
-      },
-      "description": "The delete request body."
+      }
     }
   },
   "parameters": {
