@@ -5384,6 +5384,9 @@
           "Create a scale set with userData.": {
             "$ref": "./examples/CreateOrUpdateAScaleSetWithUserData.json"
           },
+          "Create or update a scale set with capacity reservation.": {
+            "$ref": "./examples/CreateOrUpdateAScaleSetWithCapacityReservation.json"
+          },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/CreateAScaleSetWithSpotRestorePolicy.json"
           }
@@ -10872,7 +10875,7 @@
       "properties": {
         "capacityReservationGroup": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
+          "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
         }
       },
       "description": "The parameters of a capacity reservation Profile."
@@ -13376,6 +13379,10 @@
         "userData": {
           "type": "string",
           "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies the capacity reservation related details of a scale set. <br><br>Minimum api-version: 2021-04-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
