@@ -576,8 +576,13 @@
       "type": "object",
       "properties": {
         "errors": {
-          "description": "The errors produced by the compiler.",
-          "$ref": "#/definitions/QueryCompilationErrors"
+          "description": "Error messages produced by the compiler.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "An error produced by the compiler.",
+            "$ref": "#/definitions/QueryCompilationError"
+          }
         },
         "warnings": {
           "description": "Warning messages produced by the compiler.",
@@ -621,8 +626,8 @@
         }
       }
     },
-    "QueryCompilationErrors": {
-      "description": "The errors produced by the compiler.",
+    "QueryCompilationError": {
+      "description": "An error produced by the compiler.",
       "type": "object",
       "properties": {
         "message": {
