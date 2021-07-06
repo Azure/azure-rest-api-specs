@@ -605,11 +605,11 @@
       ]
     },
     "IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse": {
-      "description": "Integration runtime outbound network dependencies endpoints.",
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of endpoints.",
+          "description": "List of outbound network dependency endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
@@ -618,15 +618,15 @@
       }
     },
     "IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint": {
-      "description": "Integration runtime outbound network dependency endpoints of one category.",
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints for one category.",
       "type": "object",
       "properties": {
         "category": {
-          "description": "Endpoint category.",
+          "description": "The category of outbound network dependency.",
           "type": "string"
         },
         "endpoints": {
-          "description": "Endpoints of one category.",
+          "description": "The endpoints for outbound network dependency.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
@@ -635,15 +635,15 @@
       }
     },
     "IntegrationRuntimeOutboundNetworkDependenciesEndpoint": {
-      "description": "Integration runtime outbound network dependency endpoint.",
+      "description": "The endpoint for outbound network dependency.",
       "type": "object",
       "properties": {
         "domainName": {
-          "description": "Domain name.",
+          "description": "The domain name of endpoint.",
           "type": "string"
         },
         "endpointDetails": {
-          "description": "Details of the endpoint.",
+          "description": "The details of endpoint.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
@@ -652,11 +652,11 @@
       }
     },
     "IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails": {
-      "description": "Integration runtime outbound network dependency endpoint details.",
+      "description": "The details of Azure-SSIS integration runtime outbound network dependency endpoint.",
       "type": "object",
       "properties": {
         "port": {
-          "description": "port of the endpoint.",
+          "description": "the port of endpoint.",
           "type": "integer"
         }
       }
