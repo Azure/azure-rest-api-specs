@@ -767,7 +767,7 @@ directive:
   reason: Missing kind, etag
 ```
 
-``` yaml !$(python) && (!$(go) && !$(track2)) && !$(java) && $(tag) == 'package-2021-04'
+``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
