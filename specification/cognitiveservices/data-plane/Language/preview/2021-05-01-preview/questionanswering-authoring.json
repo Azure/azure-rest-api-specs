@@ -42,6 +42,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "projects"
+        },
         "responses": {
           "200": {
             "description": "The metadata of all projects.",
@@ -567,6 +571,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "synonyms"
+        },
         "responses": {
           "200": {
             "description": "All the sources of a project.",
@@ -672,7 +680,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetSourcesJobStatus.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesJobStatus.json"
           }
         }
       }
@@ -698,6 +706,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "qnas"
+        },
         "responses": {
           "200": {
             "description": "All the QnAs of a project.",
@@ -802,7 +814,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulGetQnasJobStatus.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnasJobStatus.json"
           }
         }
       }
@@ -1328,6 +1340,18 @@
           "default": "Unstructured"
         }
       }
+    },
+    "QnaSourceType": {
+      "type": "string",
+      "description": "Supported source types.",
+      "x-ms-enum": {
+        "name": "sourceType",
+        "modelAsString": true
+      },
+      "enum": [
+        "File",
+        "Url"
+      ]
     },
     "SourceContentStructureType": {
       "type": "string",
