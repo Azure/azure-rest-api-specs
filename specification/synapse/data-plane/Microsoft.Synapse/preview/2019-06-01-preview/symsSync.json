@@ -53,12 +53,7 @@
           "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "RequestId": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/acceptedResponse"
             }
           },
           "default": {
@@ -100,12 +95,7 @@
           "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "RequestId": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/acceptedResponse"
             }
           },
           "default": {
@@ -147,12 +137,7 @@
           "201": {
             "description": "Request Accepted Response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "RequestId": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/acceptedResponse"
             }
           },
           "default": {
@@ -166,18 +151,26 @@
     }
   },
   "definitions": {
+    "acceptedResponse": {
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        }
+      }
+    },
     "registerObject": {
       "type": "object",
       "required": [
-        "InputFolder",
-        "DatabaseName"
+        "inputFolder",
+        "databaseName"
       ],
       "properties": {
-        "InputFolder": {
+        "inputFolder": {
           "type": "string",
           "example": "xyz"
         },
-        "DatabaseName": {
+        "databaseName": {
           "type": "string",
           "example": "xyz"
         }
@@ -186,15 +179,15 @@
     "updateObject": {
       "type": "object",
       "required": [
-        "InputFolder",
-        "DatabaseName"
+        "inputFolder",
+        "databaseName"
       ],
       "properties": {
-        "InputFolder": {
+        "inputFolder": {
           "type": "string",
           "example": "xyz"
         },
-        "DatabaseName": {
+        "databaseName": {
           "type": "string",
           "example": "xyz"
         }
@@ -203,10 +196,10 @@
     "deleteObject": {
       "type": "object",
       "required": [
-        "DatabaseName"
+        "databaseName"
       ],
       "properties": {
-        "DatabaseName": {
+        "databaseName": {
           "type": "string",
           "example": "xyz"
         }
