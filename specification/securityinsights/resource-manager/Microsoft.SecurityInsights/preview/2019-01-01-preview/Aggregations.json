@@ -70,7 +70,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Aggregations"
+              "$ref": "SecurityInsights.json#/definitions/Aggregations"
             }
           },
           "default": {
@@ -94,41 +94,5 @@
     }
   },
   "definitions": {
-    "Aggregations": {
-      "allOf": [
-        {
-          "$ref": "SecurityInsights.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/AggregationsKind"
-        }
-      ],
-      "description": "The aggregation.",
-      "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
-    },
-    "AggregationsKind": {
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the setting",
-          "enum": [
-            "CasesAggregation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "AggregationsKind"
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "type": "object"
-    }
   }
 }
