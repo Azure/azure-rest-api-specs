@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2021-04
+tag: package-2021-06
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -46,6 +46,16 @@ semantic-validator: true
 message-format: json
 ```
 
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-06-01/bms.json
+  - Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+```
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
@@ -70,11 +80,12 @@ input-file:
 
 These settings apply only when `--tag=package-2021-02-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02-10'
+``` yaml $(tag) == 'package-2021-02-10'
 input-file:
 - Microsoft.RecoveryServices/stable/2021-02-10/bms.json
 - Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
+
 ### Tag: package-2021-02-preview
 
 These settings apply only when `--tag=package-2021-02-preview` is specified on the command line.
@@ -275,3 +286,14 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## Suppression
+
+``` yaml $(directive)
+directive:
+  - suppress: ImplementPrivateEndpointAPIs
+    from: Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+    reason: Existing API version. Private Endpoint are not supposed to be implemented for this API version dedicated for CRR, that uses API version based routing.
+  - suppress: ImplementPrivateEndpointAPIs
+    from: Microsoft.RecoveryServices/stable/2021-06-01/bms.json
+    reason: Addition of new API version is specific to MSI support for our service, to ensure sign off we commit we will take a fix for Private endpoint in Ni.
+```
