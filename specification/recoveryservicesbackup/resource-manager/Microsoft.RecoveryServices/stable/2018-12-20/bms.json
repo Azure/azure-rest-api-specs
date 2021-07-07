@@ -3157,9 +3157,27 @@
           "items": {
             "type": "string"
           }
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed Identity information required to access customer storage account."
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
+    },
+    "IdentityInfo": {
+      "description": "Encapsulates Managed Identity related information",
+      "type": "object",
+      "properties": {
+        "isSystemAssignedIdentity": {
+          "description": "To differentiate if the managed identity is system assigned or user assigned",
+          "type": "boolean"
+        },
+        "managedIdentityResourceId": {
+          "description": "Managed Identity Resource Id\r\nOptional: Might not be required in the case of system assigned managed identity",
+          "type": "string"
+        }
+      }
     },
     "InstantItemRecoveryTarget": {
       "description": "Target details for file / folder restore.",
