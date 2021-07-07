@@ -508,6 +508,9 @@
           },
           "Put an application with maximum parameters": {
             "$ref": "./examples/ApplicationPutOperation_example_max.json"
+          },
+          "Put an application with recreate option": {
+            "$ref": "./examples/ApplicationPutOperation_recreate_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -617,6 +620,63 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/upgrade": {
+      "post": {
+        "tags": [
+          "ApplicationManualUpgrade"
+        ],
+        "operationId": "ApplicationManualUpgrades_Upgrade",
+        "summary": "Resume manual upgrade for a Service Fabric application resource.",
+        "description": "Resume manual upgrade for a Service Fabric application resource with the specified upgrade domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Resume application upgrade description with the target upgrade domain.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeApplicationUpgradeDescription"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Post resume application upgrade": {
+            "$ref": "./examples/ApplicationManualUpgradePostOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
           },
           "default": {
             "description": "The detailed error response.",
@@ -1203,6 +1263,14 @@
         },
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss."
+        },
+        "targetUpgradeDomain": {
+          "type": "string",
+          "description": "The next upgrade domain to be updated during a manual upgrade."
         }
       }
     },
@@ -1561,6 +1629,15 @@
       },
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
+    },
+    "ResumeApplicationUpgradeDescription": {
+      "description": "Describes the net upgrade domain to be updated during a manual application upgrade.",
+      "properties": {
+        "upgradeDomainName": {
+          "type": "string",
+          "description": "the next UD to be updated during a manual upgrade."
+        }
+      }
     },
     "RollingUpgradeMode": {
       "type": "string",
