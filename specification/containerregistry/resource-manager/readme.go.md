@@ -10,7 +10,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: containerregistry
