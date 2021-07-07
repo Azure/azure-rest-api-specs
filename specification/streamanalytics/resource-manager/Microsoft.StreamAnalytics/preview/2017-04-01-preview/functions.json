@@ -120,6 +120,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -183,6 +189,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -220,6 +232,12 @@
           },
           "204": {
             "description": "The function does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -266,6 +284,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -308,6 +332,12 @@
             "description": "Successfully listed the functions under the specified streaming job.",
             "schema": {
               "$ref": "#/definitions/FunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -366,12 +396,18 @@
           },
           "202": {
             "description": "The test request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/functions/{functionName}/RetrieveDefaultDefinition": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/functions/{functionName}/retrieveDefaultDefinition": {
       "post": {
         "tags": [
           "Functions"
@@ -415,6 +451,12 @@
             "schema": {
               "$ref": "#/definitions/Function"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -423,6 +465,7 @@
   "definitions": {
     "Function": {
       "description": "A function object, containing all information associated with the named function. All functions are contained under a streaming job.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -437,6 +480,7 @@
     },
     "FunctionProperties": {
       "description": "The properties that are associated with a function.",
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -458,6 +502,7 @@
       ]
     },
     "FunctionConfiguration": {
+      "type": "object",
       "properties": {
         "inputs": {
           "type": "array",
@@ -475,6 +520,7 @@
     },
     "ScalarFunctionProperties": {
       "description": "The properties that are associated with a scalar function.",
+      "type": "object",
       "x-ms-discriminator-value": "Scalar",
       "allOf": [
         {
@@ -484,6 +530,7 @@
     },
     "FunctionInput": {
       "description": "Describes one input parameter of a function.",
+      "type": "object",
       "properties": {
         "dataType": {
           "type": "string",
@@ -497,6 +544,7 @@
     },
     "FunctionOutput": {
       "description": "Describes the output of a function.",
+      "type": "object",
       "properties": {
         "dataType": {
           "type": "string",
@@ -506,6 +554,7 @@
     },
     "FunctionBinding": {
       "description": "The physical binding of the function. For example, in the Azure Machine Learning web service’s case, this describes the endpoint.",
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -519,6 +568,7 @@
     },
     "AzureMachineLearningStudioFunctionBinding": {
       "description": "The binding to an Azure Machine Learning Studio.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
         {
@@ -535,6 +585,7 @@
     },
     "AzureMachineLearningStudioFunctionBindingProperties": {
       "description": "The binding properties associated with an Azure Machine learning Studio.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "type": "string",
@@ -564,6 +615,7 @@
     },
     "AzureMachineLearningStudioInputs": {
       "description": "The inputs for the Azure Machine Learning Studio endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -580,6 +632,7 @@
     },
     "AzureMachineLearningStudioInputColumn": {
       "description": "Describes an input column for the Azure Machine Learning Studio endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -598,6 +651,7 @@
     },
     "AzureMachineLearningStudioOutputColumn": {
       "description": "Describes an output column for the Azure Machine Learning Studio endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -611,6 +665,7 @@
     },
     "JavaScriptFunctionBinding": {
       "description": "The binding to a JavaScript function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/JavascriptUdf",
       "allOf": [
         {
@@ -627,6 +682,7 @@
     },
     "JavaScriptFunctionBindingProperties": {
       "description": "The binding properties associated with a JavaScript function.",
+      "type": "object",
       "properties": {
         "script": {
           "type": "string",
@@ -636,6 +692,7 @@
     },
     "CSharpFunctionBinding": {
       "description": "The binding to a CSharp function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/CLRUdf",
       "allOf": [
         {
@@ -652,6 +709,7 @@
     },
     "CSharpFunctionBindingProperties": {
       "description": "The binding properties associated with a CSharp function.",
+      "type": "object",
       "properties": {
         "script": {
           "type": "string",
@@ -673,6 +731,7 @@
     },
     "FunctionRetrieveDefaultDefinitionParameters": {
       "description": "Parameters used to specify the type of function to retrieve the default definition for.",
+      "type": "object",
       "discriminator": "bindingType",
       "properties": {
         "bindingType": {
@@ -686,6 +745,7 @@
     },
     "AzureMachineLearningStudioFunctionRetrieveDefaultDefinitionParameters": {
       "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning Studio function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
         {
@@ -702,6 +762,7 @@
     },
     "AzureMachineLearningStudioFunctionBindingRetrievalProperties": {
       "description": "The binding retrieval properties associated with an Azure Machine learning Studio.",
+      "type": "object",
       "properties": {
         "executeEndpoint": {
           "type": "string",
@@ -715,6 +776,7 @@
     },
     "AzureMachineLearningServiceFunctionRetrieveDefaultDefinitionParameters": {
       "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning web service function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
       "allOf": [
         {
@@ -731,6 +793,7 @@
     },
     "AzureMachineLearningServiceFunctionBindingRetrievalProperties": {
       "description": "The binding retrieval properties associated with an Azure Machine learning web service.",
+      "type": "object",
       "properties": {
         "executeEndpoint": {
           "type": "string",
@@ -744,6 +807,7 @@
     },
     "JavaScriptFunctionRetrieveDefaultDefinitionParameters": {
       "description": "The parameters needed to retrieve the default function definition for a JavaScript function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/JavascriptUdf",
       "allOf": [
         {
@@ -760,6 +824,7 @@
     },
     "JavaScriptFunctionBindingRetrievalProperties": {
       "description": "The binding retrieval properties associated with a JavaScript function.",
+      "type": "object",
       "properties": {
         "script": {
           "type": "string",
@@ -773,6 +838,7 @@
     },
     "CSharpFunctionRetrieveDefaultDefinitionParameters": {
       "description": "The parameters needed to retrieve the default function definition for a CSharp function.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/CLRUdf",
       "allOf": [
         {
@@ -789,6 +855,7 @@
     },
     "CSharpFunctionBindingRetrievalProperties": {
       "description": "The binding retrieval properties associated with a CSharp function.",
+      "type": "object",
       "properties": {
         "script": {
           "type": "string",
@@ -802,6 +869,7 @@
     },
     "AzureMachineLearningServiceFunctionBinding": {
       "description": "The binding to an Azure Machine Learning web service.",
+      "type": "object",
       "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
       "allOf": [
         {
@@ -818,6 +886,7 @@
     },
     "AzureMachineLearningServiceFunctionBindingProperties": {
       "description": "The binding properties associated with an Azure Machine learning web service.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "type": "string",
@@ -855,6 +924,7 @@
     },
     "AzureMachineLearningServiceInputs": {
       "description": "The inputs for the Azure Machine Learning web service endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -871,6 +941,7 @@
     },
     "AzureMachineLearningServiceInputColumn": {
       "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -889,6 +960,7 @@
     },
     "AzureMachineLearningServiceOutputColumn": {
       "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -906,6 +978,7 @@
       }
     },
     "FunctionListResult": {
+      "description": "Object containing a list of functions under a streaming job.",
       "properties": {
         "value": {
           "type": "array",
@@ -920,8 +993,7 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      },
-      "description": "Object containing a list of functions under a streaming job."
+      }
     },
     "UdfType": {
       "type": "string",
@@ -936,6 +1008,7 @@
     },
     "SubResource": {
       "description": "The base sub-resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -956,6 +1029,7 @@
     },
     "AggregateFunctionProperties": {
       "description": "The properties that are associated with an aggregate function.",
+      "type": "object",
       "x-ms-discriminator-value": "Aggregate",
       "allOf": [
         {

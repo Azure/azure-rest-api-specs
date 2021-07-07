@@ -43,6 +43,17 @@ package-name: "@azure/arm-postgresql-flexible"
 output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexible/"
 ```
 
+### Tag: package-2021-03-31-privatepreview and TypeScript
+
+These settings apply only when `--tag=package-2021-03-31-privatepreview --typescript` is specified on the command line.
+Please also specify `--typescript-sdks-folder=<path to the root directory of your azure-sdk-for-typescript clone>`.
+
+``` yaml $(tag) == 'package-2021-03-31-privatepreview' && $(typescript)
+title: PostgreSQLManagementFlexibleServerClient
+package-name: "@azure/arm-postgresql-flexible"
+output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql-flexible/"
+```
+
 ### Tag: package-2020-01-01 and TypeScript
 
 These settings apply only when `--tag=package-2020-01-01 --typescript` is specified on the command line.
