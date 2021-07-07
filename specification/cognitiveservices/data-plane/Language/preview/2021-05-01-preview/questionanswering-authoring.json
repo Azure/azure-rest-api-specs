@@ -1386,10 +1386,6 @@
       "in": "query",
       "description": "Knowledgebase Import or Export format.",
       "default": "json",
-      "x-ms-enum": {
-        "name": "format",
-        "modelAsString": true
-      },
       "enum": [
         "json",
         "tsv",
@@ -1397,6 +1393,32 @@
         "allDataExcel",
         "allDataTsv"
       ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "value": "tsv",
+            "description": "Export or Import QnA assets in Tsv format."
+          },
+          {
+            "value": "excel",
+            "description": "Export or Import QnA assets in Excel format."
+          },
+          {
+            "value": "allDataExcel",
+            "description": "Export or Import Knowledgebase replica including all assets and metadata in Excel format."
+          },
+          {
+            "value": "allDataTsv",
+            "description": "Export or Import Knowledgebase replica including all assets and metadata in Tsv format."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "SourceFilterParameter": {
