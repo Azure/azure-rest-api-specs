@@ -371,13 +371,13 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "#/definitions/ClientInfo",
+          "$ref": "SecurityInsights.json#/definitions/ClientInfo",
           "description": "Describes the client that created the automation rule",
           "readOnly": true,
           "type": "object"
         },
         "lastModifiedBy": {
-          "$ref": "#/definitions/ClientInfo",
+          "$ref": "SecurityInsights.json#/definitions/ClientInfo",
           "description": "Describes the client that last updated the automation rule",
           "readOnly": true,
           "type": "object"
@@ -453,7 +453,7 @@
           "description": "The configuration of the modify properties automation rule action",
           "properties": {
             "classification": {
-              "$ref": "#/definitions/IncidentClassification",
+              "$ref": "SecurityInsights.json#/definitions/IncidentClassification",
               "description": "The reason the incident was closed"
             },
             "classificationComment": {
@@ -461,27 +461,27 @@
               "type": "string"
             },
             "classificationReason": {
-              "$ref": "#/definitions/IncidentClassificationReason",
+              "$ref": "SecurityInsights.json#/definitions/IncidentClassificationReason",
               "description": "The classification reason to close the incident with"
             },
             "labels": {
               "description": "List of labels to add to the incident",
               "items": {
-                "$ref": "#/definitions/IncidentLabel"
+                "$ref": "SecurityInsights.json#/definitions/IncidentLabel"
               },
               "type": "array"
             },
             "owner": {
-              "$ref": "#/definitions/IncidentOwnerInfo",
+              "$ref": "SecurityInsights.json#/definitions/IncidentOwnerInfo",
               "description": "Describes a user that the incident is assigned to",
               "type": "object"
             },
             "severity": {
-              "$ref": "#/definitions/IncidentSeverity",
+              "$ref": "SecurityInsights.json#/definitions/IncidentSeverity",
               "description": "The severity of the incident"
             },
             "status": {
-              "$ref": "#/definitions/IncidentStatus",
+              "$ref": "SecurityInsights.json#/definitions/IncidentStatus",
               "description": "The status of the incident"
             }
           },
@@ -913,211 +913,6 @@
         "triggersWhen"
       ],
       "type": "object"
-    },
-    "ClientInfo": {
-      "description": "Information on the client (user or application) that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the client.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the client.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the client.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the client.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "IncidentClassification": {
-      "description": "The reason the incident was closed",
-      "enum": [
-        "Undetermined",
-        "TruePositive",
-        "BenignPositive",
-        "FalsePositive"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "IncidentClassification",
-        "values": [
-          {
-            "description": "Incident classification was undetermined",
-            "value": "Undetermined"
-          },
-          {
-            "description": "Incident was true positive",
-            "value": "TruePositive"
-          },
-          {
-            "description": "Incident was benign positive",
-            "value": "BenignPositive"
-          },
-          {
-            "description": "Incident was false positive",
-            "value": "FalsePositive"
-          }
-        ]
-      }
-    },
-    "IncidentClassificationReason": {
-      "description": "The classification reason the incident was closed with",
-      "enum": [
-        "SuspiciousActivity",
-        "SuspiciousButExpected",
-        "IncorrectAlertLogic",
-        "InaccurateData"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "IncidentClassificationReason",
-        "values": [
-          {
-            "description": "Classification reason was suspicious activity",
-            "value": "SuspiciousActivity"
-          },
-          {
-            "description": "Classification reason was suspicious but expected",
-            "value": "SuspiciousButExpected"
-          },
-          {
-            "description": "Classification reason was incorrect alert logic",
-            "value": "IncorrectAlertLogic"
-          },
-          {
-            "description": "Classification reason was inaccurate data",
-            "value": "InaccurateData"
-          }
-        ]
-      }
-    },
-    "IncidentLabel": {
-      "description": "Represents an incident label",
-      "properties": {
-        "labelName": {
-          "description": "The name of the label",
-          "type": "string"
-        },
-        "labelType": {
-          "description": "The type of the label",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentLabelType",
-            "values": [
-              {
-                "description": "Label manually created by a user",
-                "value": "User"
-              },
-              {
-                "description": "Label automatically created by the system",
-                "value": "System"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "labelName"
-      ],
-      "type": "object"
-    },
-    "IncidentOwnerInfo": {
-      "description": "Information on the user an incident is assigned to",
-      "properties": {
-        "email": {
-          "description": "The email of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "assignedTo": {
-          "description": "The name of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user the incident is assigned to.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the user the incident is assigned to.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "IncidentSeverity": {
-      "description": "The severity of the incident",
-      "enum": [
-        "High",
-        "Medium",
-        "Low",
-        "Informational"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "IncidentSeverity",
-        "values": [
-          {
-            "description": "High severity",
-            "value": "High"
-          },
-          {
-            "description": "Medium severity",
-            "value": "Medium"
-          },
-          {
-            "description": "Low severity",
-            "value": "Low"
-          },
-          {
-            "description": "Informational severity",
-            "value": "Informational"
-          }
-        ]
-      }
-    },
-    "IncidentStatus": {
-      "description": "The status of the incident",
-      "enum": [
-        "New",
-        "Active",
-        "Closed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "IncidentStatus",
-        "values": [
-          {
-            "description": "An active incident which isn't being handled currently",
-            "value": "New"
-          },
-          {
-            "description": "An active incident which is being handled",
-            "value": "Active"
-          },
-          {
-            "description": "A non-active incident",
-            "value": "Closed"
-          }
-        ]
-      }
     }
   }
 }
