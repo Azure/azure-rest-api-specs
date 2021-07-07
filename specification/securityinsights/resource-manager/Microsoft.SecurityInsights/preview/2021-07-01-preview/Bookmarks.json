@@ -763,7 +763,8 @@
           "description": "key-value pairs for a connected entity mapping",
           "type": "object"
         }
-      }
+      },
+      "type": "object"
     },
     "BookmarkExpandParameters": {
       "description": "The parameters required to execute an expand operation on the given bookmark.",
@@ -783,7 +784,8 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "BookmarkExpandResponse": {
       "description": "The entity expansion result operation response.",
@@ -812,7 +814,8 @@
           },
           "type": "object"
         }
-      }
+      },
+      "type": "object"
     },
     "RelationsModelInput": {
       "type": "object",
@@ -902,33 +905,37 @@
           "$ref": "../../../common/1.0/types.json#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "type": "string",
-              "description": "The type of relation node",
-              "readOnly": true,
-              "enum": [
-                "CasesToBookmarks"
-              ],
-              "x-ms-enum": {
-                "name": "RelationTypes",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "CasesToBookmarks",
-                    "description": "Relations between cases and bookmarks"
-                  }
-                ]
-              }
-            },
-            "etag": {
-              "type": "string",
-              "description": "ETag for relation"
-            }
-          }
+          "$ref": "#/definitions/RelationBaseNode"
         }
       ]
+    },
+    "RelationBaseNode": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "The type of relation node",
+            "readOnly": true,
+            "enum": [
+              "CasesToBookmarks"
+            ],
+            "x-ms-enum": {
+              "name": "RelationTypes",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "CasesToBookmarks",
+                  "description": "Relations between cases and bookmarks"
+                }
+              ]
+            }
+          },
+          "etag": {
+            "type": "string",
+            "description": "ETag for relation"
+          }
+        }
+      }
     },
     "Relation": {
       "type": "object",
@@ -1121,7 +1128,8 @@
         },
         "count": {
           "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "displayName": {
           "description": "The display name of the aggregation by type.",
