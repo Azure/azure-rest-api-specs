@@ -40,7 +40,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "connectionPolicyName",
+              "name": "ConnectionPolicyName",
               "modelAsString": true
             }
           },
@@ -91,7 +91,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "connectionPolicyName",
+              "name": "ConnectionPolicyName",
               "modelAsString": true
             }
           },
@@ -186,7 +186,16 @@
       "properties": {
         "connectionType": {
           "description": "The server connection type.",
-          "type": "string"
+          "enum": [
+            "Default",
+            "Redirect",
+            "Proxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerConnectionType",
+            "modelAsString": false
+          }
         }
       }
     },
