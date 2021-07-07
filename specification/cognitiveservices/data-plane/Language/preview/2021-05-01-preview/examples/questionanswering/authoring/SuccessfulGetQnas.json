@@ -4,28 +4,14 @@
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
     "api-version": "2021-05-01-preview",
-    "projectName": "proj1",
-    "body": {
-      "assets": {
-        "synonyms": [
-          {
-            "alterations": [
-              "wa",
-              "washington",
-              "washington state"
-            ]
-          },
-          {
-            "alterations": [
-              "U.S",
-              "usa",
-              "united states of america"
-            ]
-          }
-        ],
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
         "qnas": [
           {
-            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
             "id": 1,
             "answer": "ans1",
             "source": "source1",
@@ -51,27 +37,20 @@
                   "displayText": "prompt 1.2"
                 }
               ]
-            }
+            },
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z"
           },
           {
-            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
             "id": 2,
             "answer": "ans2",
             "source": "source2",
             "questions": [
               "question 2.1",
               "question 2.2"
-            ]
+            ],
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z"
           }
         ]
-      }
-    }
-  },
-  "responses": {
-    "202": {
-      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
-      "headers": {
-        "Operation-Location": "job1"
       }
     }
   }
