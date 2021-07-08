@@ -27,7 +27,7 @@ These are the global settings for the elastic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-07-01-preview
+tag: package-2020-07-01
 ```
 
 ### Tag: package-2020-07-01-preview
