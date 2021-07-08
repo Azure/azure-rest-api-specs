@@ -104,4 +104,11 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## Java
 
+``` yaml $(java)
+modelerfour:
+  naming:
+    override:
+      vm: Vm
+```
