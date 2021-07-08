@@ -82,7 +82,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthzPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           },
           "404": {
@@ -130,7 +130,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthzPolicyViewModelPagedResults"
+              "$ref": "#/definitions/MetadataPolicyViewModelPagedResults"
             }
           }
         },
@@ -171,7 +171,7 @@
             "description": "Policy object to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthzPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           }
         ],
@@ -179,7 +179,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthzPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           }
         },
@@ -214,7 +214,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthzPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           },
           "404": {
@@ -407,7 +407,7 @@
         }
       }
     },
-    "AuthzPolicyProperties": {
+    "MetadataPolicyProperties": {
       "type": "object",
       "properties": {
         "description": {
@@ -433,7 +433,7 @@
         }
       }
     },
-    "AuthzPolicyViewModel": {
+    "MetadataPolicyViewModel": {
       "type": "object",
       "properties": {
         "name": {
@@ -447,7 +447,7 @@
           "type": "integer"
         },
         "properties": {
-          "$ref": "#/definitions/AuthzPolicyProperties"
+          "$ref": "#/definitions/MetadataPolicyProperties"
         }
       }
     },
@@ -471,7 +471,7 @@
         }
       }
     },
-    "AuthzPolicyViewModelPagedResults": {
+    "MetadataPolicyViewModelPagedResults": {
       "required": [
         "values"
       ],
@@ -480,7 +480,7 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthzPolicyViewModel"
+            "$ref": "#/definitions/MetadataPolicyViewModel"
           }
         },
         "nextLink": {
@@ -606,7 +606,7 @@
       }
     ]
   },
-  "basePath": "/policystore",
+  "basePath": "/policyStore",
   "security": [
     {
       "azure_auth": [
