@@ -216,13 +216,20 @@
       }
     },
     "PromotionList": {
-      "type": "array",
       "description": "The list of promotions.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "$ref": "#/definitions/PromotionResponse",
-          "description": "Promotion properties."
+      "properties": {
+        "value": {
+          "description": "The list of promotions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PromotionResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
