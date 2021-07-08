@@ -2217,6 +2217,18 @@
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether requests from Public Network are allowed.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PublicNetworkAccess"
+          }
         }
       }
     },
