@@ -326,6 +326,7 @@ directive:
 - suppress: R3010
   reason: Will fix in next version
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
