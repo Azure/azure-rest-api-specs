@@ -3,7 +3,7 @@
     "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
     "region": "westus2",
     "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
-    "metric": "Data Disk Max Burst IOPS",
+    "metricnames": "Data Disk Max Burst IOPS",
     "metricnamespace": "microsoft.compute/virtualmachines",
     "$filter": "LUN eq '0' and Microsoft.ResourceId eq '*'",
     "rollupBy": "LUN",
@@ -367,8 +367,10 @@
     },
     "default": {
       "body": {
-        "code": "BadRequest",
-        "message": "Missing required region params"
+        "error": {
+          "code": "BadRequest",
+          "message": "Missing required region params"
+        }
       }
     }
   }
