@@ -3662,58 +3662,57 @@
     },
     "SynapseSpark": {
       "description": "A SynapseSpark compute.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "autoScaleProperties": {
+              "description": "Auto scale properties.",
+              "$ref": "#/definitions/AutoScaleProperties"
+            },
+            "autoPauseProperties": {
+              "description": "Auto pause properties.",
+              "$ref": "#/definitions/AutoPauseProperties"
+            },
+            "sparkVersion": {
+              "description": "Spark version.",
+              "type": "string"
+            },
+            "nodeCount": {
+              "description": "The number of compute nodes currently assigned to the compute.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "nodeSize": {
+              "description": "Node size.",
+              "type": "string"
+            },
+            "nodeSizeFamily": {
+              "description": "Node size family.",
+              "type": "string"
+            },
+            "subscriptionId": {
+              "description": "Azure subscription identifier.",
+              "type": "string"
+            },
+            "resourceGroup": {
+              "description": "Name of the resource group in which workspace is located.",
+              "type": "string"
+            },
+            "workspaceName": {
+              "description": "Name of Azure Machine Learning workspace.",
+              "type": "string"
+            },
+            "poolName": {
+              "description": "Pool name.",
+              "type": "string"
+            }
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Compute"
-        },
-        {
-          "type": "object",
-          "description": "Properties specific to Synapse Spark pools.",
-          "properties": {
-            "properties": {
-              "autoScaleProperties": {
-                "description": "Auto scale properties.",
-                "$ref": "#/definitions/AutoScaleProperties"
-              },
-              "autoPauseProperties": {
-                "description": "Auto pause properties.",
-                "$ref": "#/definitions/AutoPauseProperties"
-              },
-              "sparkVersion": {
-                "description": "Spark version.",
-                "type": "string"
-              },
-              "nodeCount": {
-                "description": "The number of compute nodes currently assigned to the compute.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "nodeSize": {
-                "description": "Node size.",
-                "type": "string"
-              },
-              "nodeSizeFamily": {
-                "description": "Node size family.",
-                "type": "string"
-              },
-              "subscriptionId": {
-                "description": "Azure subscription identifier.",
-                "type": "string"
-              },
-              "resourceGroup": {
-                "description": "Name of the resource group in which workspace is located.",
-                "type": "string"
-              },
-              "workspaceName": {
-                "description": "Name of Azure Machine Learning workspace.",
-                "type": "string"
-              },
-              "poolName": {
-                "description": "Pool name.",
-                "type": "string"
-              }
-            }
-          }
         }
       ],
       "x-ms-discriminator-value": "SynapseSpark"
