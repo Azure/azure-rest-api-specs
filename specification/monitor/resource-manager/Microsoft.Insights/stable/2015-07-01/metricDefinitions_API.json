@@ -149,6 +149,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -165,6 +166,7 @@
       "description": "The localizable string class."
     },
     "TableInfoEntry": {
+      "type": "object",
       "description": "Info about a storage table with metric data",
       "properties": {
         "tableName": {
@@ -193,7 +195,8 @@
       }
     },
     "MetricAvailabilityLocation": {
-      "description": "todo",
+      "type": "object",
+      "description": "Info about where the metric data is stored",
       "properties": {
         "tableEndpoint": {
           "type": "string",
@@ -213,6 +216,7 @@
       }
     },
     "MetricAvailability": {
+      "type": "object",
       "properties": {
         "timeGrain": {
           "type": "string",
@@ -225,10 +229,8 @@
           "description": "the retention period for the metric at the specified timegrain.  Expressed as a duration 'PT1M', 'P1D', etc."
         },
         "location": {
+          "description": "Info about where the metric data is stored",
           "$ref": "#/definitions/MetricAvailabilityLocation"
-        },
-        "blobLocation": {
-          "type": "string"
         }
       },
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
@@ -267,6 +269,8 @@
       }
     },
     "MetricDefinition": {
+      "type": "object",
+      "description": "Metric definition class specifies the metadata for a metric.",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -319,25 +323,11 @@
         "id": {
           "type": "string",
           "description": "the resource identifier of the metric definition."
-        },
-        "properties": {
-          "description": "List of properties of this metric",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dimensions": {
-          "description": "List of dimensions exposed on this metric",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
-      },
-      "description": "Metric definition class specifies the metadata for a metric."
+      }
     },
     "MetricDefinitionCollection": {
+      "type": "object",
       "properties": {
         "id": {
           "description": "Resource Id for these metric definitions.",
