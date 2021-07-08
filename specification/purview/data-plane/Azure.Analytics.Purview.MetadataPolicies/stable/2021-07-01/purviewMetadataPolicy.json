@@ -1,0 +1,617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Metadata Policies Service REST API Document",
+    "version": "2021-07-01"
+  },
+  "paths": {
+    "/roles": {
+      "get": {
+        "tags": [
+          "MetadataRoles"
+        ],
+        "description": "Lists roles for Purview Account",
+        "operationId": "MetadataRoles_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category",
+            "description": "The role categorySystem.String.",
+            "type": "string",
+            "enum": [
+              "PurviewMetadataRole"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "The skipTokenSystem.String.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoleViewModelPagedResults"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataRoles_List": {
+            "$ref": "./examples/MetadataRoles_List.json"
+          }
+        }
+      }
+    },
+    "/collections/{collectionName}/metadataPolicy": {
+      "get": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "Gets a metadata policy for collection",
+        "operationId": "MetadataPolicy_GetByCollection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionName",
+            "description": "The name of an existing collection for which one policy needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthzPolicyViewModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_GetByCollection": {
+            "$ref": "./examples/MetadataPolicy_GetByCollection.json"
+          }
+        }
+      }
+    },
+    "/metadataPolicies": {
+      "get": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "List metadata policies",
+        "operationId": "MetadataPolicy_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Continuation token for the next page.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthzPolicyViewModelPagedResults"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_ListAll": {
+            "$ref": "./examples/MetadataPolicy_ListAll.json"
+          }
+        }
+      }
+    },
+    "/metadataPolicies/{policyId}": {
+      "put": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "Updates a metadata policy",
+        "operationId": "MetadataPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "Unique policy id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Policy object to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthzPolicyViewModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthzPolicyViewModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_Update": {
+            "$ref": "./examples/MetadataPolicy_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "Gets a metadata policy",
+        "operationId": "MetadataPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "Id of an existing policy that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthzPolicyViewModel"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_Get": {
+            "$ref": "./examples/MetadataPolicy_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttributeMatcher": {
+      "type": "object",
+      "properties": {
+        "attributeName": {
+          "type": "string"
+        },
+        "attributeValueIncludes": {
+          "type": "string"
+        },
+        "attributeValueIncludedIn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeValueExcludes": {
+          "type": "string"
+        },
+        "attributeValueExcludedIn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matcherId": {
+          "type": "string"
+        },
+        "matcherConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DNFCondition": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AttributeMatcher"
+            }
+          }
+        }
+      }
+    },
+    "CNFCondition": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AttributeMatcher"
+            }
+          }
+        }
+      }
+    },
+    "DecisionRule": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "policyset",
+            "policy",
+            "attributerule",
+            "decisionrule"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "effect": {
+          "enum": [
+            "NotApplicable",
+            "Deny",
+            "Permit",
+            "Indeterminate"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DNFCondition"
+        },
+        "cnfCondition": {
+          "$ref": "#/definitions/CNFCondition"
+        }
+      }
+    },
+    "AttributeRule": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "policyset",
+            "policy",
+            "attributerule",
+            "decisionrule"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DNFCondition"
+        },
+        "cnfCondition": {
+          "$ref": "#/definitions/CNFCondition"
+        }
+      }
+    },
+    "CollectionReference": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthzPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "decisionRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DecisionRule"
+          }
+        },
+        "attributeRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeRule"
+          }
+        },
+        "collection": {
+          "$ref": "#/definitions/CollectionReference"
+        },
+        "parentCollectionName": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthzPolicyViewModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthzPolicyProperties"
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "AuthzPolicyViewModelPagedResults": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthzPolicyViewModel"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "RolePropertiesModel": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "roleType": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cnfCondition": {
+          "$ref": "#/definitions/CNFCondition"
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DNFCondition"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "RoleViewModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RolePropertiesModel"
+        }
+      }
+    },
+    "RoleViewModelPagedResults": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleViewModel"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "basePath": "/policystore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
