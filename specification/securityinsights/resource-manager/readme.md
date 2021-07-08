@@ -30,15 +30,19 @@ tag: package-2020-01
 ```
 
 
-### Tag: package-2021-04-01-only
+### Tag: package-2021-04
 
-These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04-01-only'
+```yaml $(tag) == 'package-2021-04-01'
 input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
 - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
 - Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
+- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
