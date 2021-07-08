@@ -2916,6 +2916,13 @@
           "items": {
             "$ref": "#/definitions/RoutingStorageContainerProperties"
           }
+        },
+        "cosmosDBSqlCollections": {
+          "description": "The list of Cosmos DB collection endpoints that IoT hub routes messages to, based on the routing rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingCosmosDBSqlApiProperties"
+          }
         }
       }
     },
@@ -3161,6 +3168,71 @@
       "required": [
         "name",
         "containerName"
+      ]
+    },
+    "RoutingCosmosDBSqlApiProperties": {
+      "description": "The properties related to Cosmos DB collection endpoint types.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the Cosmos DB collection endpoint.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The url of the Cosmos DB collection endpoint.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The primary key of the Cosmos DB collection endpoint.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "The secondary key of the Cosmos DB collection endpoint.",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The name of the database where the collection endpoint lives.",
+          "type": "string"
+        },
+        "collectionName": {
+          "description": "The name of the collection that will be used as the endpoint.",
+          "type": "string"
+        },
+        "authenticationType": {
+          "description": "Method used to authenticate against the Cosmos DB collection endpoint.",
+          "enum": [
+            "keyBased",
+            "identityBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "authenticationType",
+            "modelAsString": true
+          }
+        },
+        "identity": {
+          "description": "Managed identity properties of routing Cosmos DB collection endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "name": {
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types. The name need not be the same as the actual queue name.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-._]{1,64}$"
+        },
+        "subscriptionId": {
+          "description": "The subscription identifier of the Cosmos DB collection endpoint.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The name of the resource group of the Cosmos DB collection endpoint.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "uri",
+        "databaseName",
+        "collectionName"
       ]
     },
     "RouteProperties": {
