@@ -1120,7 +1120,8 @@
             "SoftDeleting",
             "SoftDeleted",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
@@ -1142,15 +1143,6 @@
             "name": "publicNetworkAccess",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
         }
       }
     },
@@ -1176,6 +1168,64 @@
           "type": "string",
           "x-ms-enum": {
             "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
             "modelAsString": true
           }
         }
@@ -1246,64 +1296,6 @@
           "description": "Gets the managed storage account resource identifier.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdBy": {
-          "description": "The identity that created the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of the last modification the resource (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "The identity that last modified the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "lastModifiedByType",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1867,6 +1859,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "tags": {
           "description": "Tags on the azure resource.",
           "type": "object",
@@ -1906,13 +1907,12 @@
     }
   },
   "parameters": {
-    "resourceGroupName": {
-      "name": "resourceGroupName",
+    "subscriptionId": {
+      "name": "subscriptionId",
       "in": "path",
-      "description": "The resource group name.",
+      "description": "The subscription identifier",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "accountName": {
       "name": "accountName",
@@ -1922,12 +1922,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "subscriptionId": {
-      "name": "subscriptionId",
+    "resourceGroupName": {
+      "name": "resourceGroupName",
       "in": "path",
-      "description": "The subscription identifier",
+      "description": "The resource group name.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "api-version": {
       "name": "api-version",
