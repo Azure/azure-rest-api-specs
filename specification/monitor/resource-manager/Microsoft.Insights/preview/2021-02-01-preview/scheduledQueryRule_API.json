@@ -309,25 +309,29 @@
     }
   },
   "definitions": {
-    "Action": {
+    "Actions": {
       "type": "object",
       "description": "Actions to invoke when the alert fires.",
       "properties": {
-        "actionGroupId": {
-          "type": "string",
-          "description": "Action Group resource Id to invoke when the alert fires."
+        "actionGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Action Group resource Ids to invoke when the alert fires."
         },
-        "webHookProperties": {
+        "customProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string",
-            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
           },
-          "description": "The properties of a webhook object."
+          "description": "The properties of an alert payload."
         }
       }
     },
     "ScheduledQueryRuleProperties": {
+      "type": "object",
       "properties": {
         "createdWithApiVersion": {
           "type": "string",
@@ -405,9 +409,9 @@
           "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
         },
         "actions": {
-          "type": "array",
+          "type": "object",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/Actions"
           },
           "description": "Actions to invoke when the alert fires."
         },
@@ -481,6 +485,7 @@
       "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -495,6 +500,7 @@
       "description": "The scheduled query rule resource for patch operations."
     },
     "ScheduledQueryRuleResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

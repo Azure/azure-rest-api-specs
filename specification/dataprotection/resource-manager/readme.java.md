@@ -17,6 +17,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dataprotection
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-06-preview
   - tag: package-2021-02-preview
   - tag: package-2021-01
 ```
@@ -43,6 +44,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.dataprotection.v2021_02_01_preview
   output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2021_02_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-06-preview and java
+
+These settings apply only when `--tag=package-2021-06-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.dataprotection.v2021_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2021_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
