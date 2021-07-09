@@ -2372,7 +2372,9 @@
           "description": "Whether to enable auto-scaler"
         },
         "scaleDownMode": {
-          "$ref": "#/definitions/ScaleDownMode"
+          "$ref": "#/definitions/ScaleDownMode",
+          "title": "The scale down mode to use when scaling the Agent Pool.",
+          "description": "This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete."
         },
         "type": {
           "$ref": "#/definitions/AgentPoolType"
@@ -4192,21 +4194,24 @@
         "Delete",
         "Deallocate"
       ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/virtual-machines/states-billing"
+      },
       "x-ms-enum": {
         "name": "ScaleDownMode",
         "modelAsString": true,
         "values": [
           {
             "value": "Delete",
-            "description": "Delete mode wil create new instances during scale up and remove instances during scale down."
+            "description": "Create new instances during scale up and remove instances during scale down."
           },
           {
             "value": "Deallocate",
-            "description": "Deallocate mode will attempt to start deallocated instances (if they exist) during scale up and deallocate instances during scale down."
+            "description": "Attempt to start deallocated instances (if they exist) during scale up and deallocate instances during scale down."
           }
         ]
       },
-      "description": "Determines the actions taken in regards to VMs during scaling up and down. This also effects the cluster autoscaler behavior."
+      "description": "Describes how VMs are added to or removed from Agent Pools"
     },
     "ProximityPlacementGroupID": {
       "type": "string",
