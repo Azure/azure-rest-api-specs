@@ -1218,6 +1218,10 @@
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode",
           "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored."
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss."
         }
       }
     },
