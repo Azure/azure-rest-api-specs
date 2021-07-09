@@ -18,8 +18,35 @@
           "modifiedOn": "2021-04-01T22:00:00.0000000+00:00",
           "description": "some compute",
           "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-          "computeType": "AKS",
-          "provisioningState": "Succeeded"
+          "computeType": "Kubernetes",
+          "provisioningState": "Succeeded",
+          "isAttachedCompute": true,
+          "properties": {
+            "relayConnectionString": null,
+            "serviceBusConnectionString": null,
+            "extensionPrincipalId": null,
+            "extensionInstanceReleaseTrain": "stable",
+            "vcName": null,
+            "namespace": "default",
+            "defaultInstanceType": "defaultInstanceType",
+            "instanceTypes": {
+              "defaultInstanceType": {
+                "nodeSelector": null,
+                "resources": {
+                  "requests": {
+                    "cpu": "1",
+                    "memory": "4Gi",
+                    "nvidia.com/gpu": null
+                  },
+                  "limits": {
+                    "cpu": "1",
+                    "memory": "4Gi",
+                    "nvidia.com/gpu": null
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
