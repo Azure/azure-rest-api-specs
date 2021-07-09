@@ -978,6 +978,14 @@
             "description": "A rules engine configuration.",
             "$ref": "#/definitions/RulesEngine"
           }
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for frontdoor.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1990,7 +1998,9 @@
         "Enabled",
         "Disabling",
         "Disabled",
-        "Deleting"
+        "Deleting",
+        "Migrating",
+        "Migrated"
       ],
       "type": "string",
       "x-ms-enum": {
