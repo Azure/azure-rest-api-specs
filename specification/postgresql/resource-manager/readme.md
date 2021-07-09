@@ -28,8 +28,33 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-flexibleserver-2021-06
 ```
+
+### Tag: package-flexibleserver-2021-06
+
+These settings apply only when `--tag=package-flexibleserver-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-06'
+input-file:
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
+```
+
+### Tag: package-flexibleserver-2021-06-preview
+
+These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+```
+
 ### Tag: package-2021-04-10-privatepreview
 
 These settings apply only when `--tag=package-2021-04-10-privatepreview` is specified on the command line.
@@ -181,12 +206,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```
 
@@ -216,6 +239,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
 
 
 ## Multi-API/Profile support for AutoRest v3 generators
@@ -235,6 +262,10 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
@@ -242,6 +273,9 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json

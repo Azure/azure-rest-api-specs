@@ -1,0 +1,51 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ArtifactsClient",
+    "version": "2021-06-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "SparkConfiguration": {
+      "type": "object",
+      "description": "SparkConfiguration Artifact information",
+      "title": "Information about a SparkConfiguration created at the workspace level.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description about the SparkConfiguration."
+        },
+        "configs": {
+          "type": "object",
+          "description": "SparkConfiguration configs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Annotations for SparkConfiguration."
+        },
+        "notes": {
+          "type": "string",
+          "description": "additional Notes."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation."
+        }
+      },
+      "required": [
+        "configs"
+      ]
+    }
+  }
+}
