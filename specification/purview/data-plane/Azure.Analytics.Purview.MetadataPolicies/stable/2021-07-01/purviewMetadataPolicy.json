@@ -42,10 +42,10 @@
               "$ref": "#/definitions/RoleViewModelPagedResults"
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
             "schema": {
-              "$ref": "#/definitions/ErrorModel"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -85,16 +85,10 @@
               "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           },
-          "404": {
-            "description": "Not Found",
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
             "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -131,6 +125,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetadataPolicyViewModelPagedResults"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -180,6 +180,12 @@
             "schema": {
               "$ref": "#/definitions/MetadataPolicyViewModel"
             }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
           }
         },
         "x-ms-examples": {
@@ -216,16 +222,10 @@
               "$ref": "#/definitions/MetadataPolicyViewModel"
             }
           },
-          "404": {
-            "description": "Not Found",
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
             "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -457,6 +457,14 @@
           "items": {
             "$ref": "#/definitions/ErrorModel"
           }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
         }
       }
     },
