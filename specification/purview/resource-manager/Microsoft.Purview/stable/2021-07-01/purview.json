@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-12-01-preview",
+    "version": "2021-07-01",
     "title": "PurviewManagementClient",
     "description": "Creates a Microsoft.Purview management client."
   },
@@ -354,6 +354,55 @@
         "x-ms-examples": {
           "Accounts_ListKeys": {
             "$ref": "./examples/Accounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/addRootCollectionAdmin": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Add the administrator for root collection.",
+        "description": "Add the administrator for root collection associated with this account.",
+        "operationId": "Accounts_AddRootCollectionAdmin",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "collectionAdminUpdate",
+            "in": "body",
+            "description": "The collection admin update payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionAdminUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_AddRootCollectionAdmin": {
+            "$ref": "./examples/Accounts_AddRootCollectionAdmin.json"
           }
         }
       }
@@ -1094,15 +1143,6 @@
             "name": "publicNetworkAccess",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
         }
       }
     },
@@ -1128,6 +1168,64 @@
           "type": "string",
           "x-ms-enum": {
             "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
             "modelAsString": true
           }
         }
@@ -1198,64 +1296,6 @@
           "description": "Gets the managed storage account resource identifier.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdBy": {
-          "description": "The identity that created the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of the last modification the resource (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "The identity that last modified the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "lastModifiedByType",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1389,6 +1429,16 @@
         },
         "atlasKafkaSecondaryEndpoint": {
           "description": "Gets or sets the secondary connection string.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionAdminUpdate": {
+      "description": "Collection administrator update.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "Gets or sets the object identifier of the admin.",
           "type": "string"
         }
       }
@@ -1809,6 +1859,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "tags": {
           "description": "Tags on the azure resource.",
           "type": "object",
@@ -1848,10 +1907,10 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
       "required": true,
       "type": "string"
     },
@@ -1871,10 +1930,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
       "required": true,
       "type": "string"
     }
