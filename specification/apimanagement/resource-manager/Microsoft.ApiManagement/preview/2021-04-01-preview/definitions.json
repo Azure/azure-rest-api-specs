@@ -6561,7 +6561,8 @@
       "required": [
         "privateLinkServiceConnectionState"
       ],
-      "description": "Properties of the PrivateEndpointConnectProperties."
+      "description": "Properties of the PrivateEndpointConnectProperties.",
+      "type": "object"
     },
     "ArmIdWrapper": {
       "description": "A wrapper for an ARM resource id",
@@ -6595,17 +6596,23 @@
       "description": "A request to approve or reject a private endpoint connection",
       "type": "object",
       "properties": {
-        "privateEndpointConnectionName": {
-          "description": "Private Endpoint Connection Name.",
+        "Id": {
+          "description": "Private Endpoint Connection Resource Id.",
           "type": "string"
         },
-        "status": {
-          "description": "Status of a private endpoint connection.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of this private endpoint connection request.",
-          "type": "string"
+        "properties": {
+          "type": "object",
+          "description": "The connection state of the private endpoint connection.",
+          "properties": {
+            "status": {
+              "description": "Status of a private endpoint connection.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of this private endpoint connection request.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -6614,13 +6621,16 @@
       "type": "object",
       "properties": {
         "privateEndpointConnectionName": {
+          "readOnly": true,
           "description": "Private Endpoint Connection Name.",
           "type": "string"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
+          "readOnly": true,
           "type": "string"
         },
         "properties": {
@@ -6638,17 +6648,29 @@
           "readOnly": true,
           "description": "The provisioning state of the private endpoint connection resource."
         },
-        "privateEndpointId": {
+        "privateEndpoint": {
           "type": "string",
-          "description": "The Arm Resource Id of a private endpoint."
+          "description": "The Arm Resource Id of a private endpoint.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
-        "status": {
-          "description": "Status of a private endpoint connection.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of this private endpoint connection request.",
-          "type": "string"
+        "privateLinkServiceConnectionState": {
+          "type": "object",
+          "description": "The connection state of the private endpoint connection.",
+          "properties": {
+            "status": {
+              "description": "Status of a private endpoint connection.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of this private endpoint connection request.",
+              "type": "string"
+            }
+          }
         }
       }
     },

@@ -6,9 +6,11 @@
     "subscriptionId": "subid",
     "privateEndpointConnectionName": "privateEndpointConnectionName",
     "privateEndpointConnectionRequest": {
-      "privateEndpointConnectionName": "connectionName",
-      "status": "Approved",
-      "description": "The Private Endpoint Connection is approved."
+      "Id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/connectionName",
+      "properties": { 
+        "status": "Approved",
+        "description": "The Private Endpoint Connection is approved."
+      }
     }
   },
   "responses": {
@@ -24,9 +26,13 @@
         "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
         "properties": {
           "provisioningState": "Succeeded",
-          "privateEndpointId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName",
-          "status": "Succeeded",
-          "description": "The request has been approved."
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Succeeded",
+            "description": "The request has been approved."
+          }
         }
       }
     }
