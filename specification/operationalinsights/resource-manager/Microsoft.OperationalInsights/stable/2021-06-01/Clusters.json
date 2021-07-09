@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Log Analytics",
     "description": "Azure Log Analytics API reference",
-    "version": "2020-10-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -632,6 +632,17 @@
           "description": "Minimum CapacityReservation value in GB.",
           "type": "integer",
           "format": "int64"
+        },
+        "capacityReservationLevel": {
+          "readOnly": true,
+          "description": "The capacity reservation level for this cluster",
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            1000,
+            2000,
+            5000
+          ]
         }
       }
     }
