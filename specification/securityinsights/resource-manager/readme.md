@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-2021-04-01-only` is specified on t
 input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
 - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
-- Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
 - Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+- Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
 
 directive:
   - suppress: R4017
