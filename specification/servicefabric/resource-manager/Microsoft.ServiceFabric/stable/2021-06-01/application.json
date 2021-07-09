@@ -508,6 +508,9 @@
           },
           "Put an application with maximum parameters": {
             "$ref": "./examples/ApplicationPutOperation_example_max.json"
+          },
+          "Put an application with recreate option": {
+            "$ref": "./examples/ApplicationPutOperation_recreate_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1203,6 +1206,10 @@
         },
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss."
         }
       }
     },
