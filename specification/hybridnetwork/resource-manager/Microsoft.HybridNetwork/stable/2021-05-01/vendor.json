@@ -229,7 +229,7 @@
           "VendorSkus"
         ],
         "operationId": "VendorSkus_Delete",
-        "description": "Deletes the specified sku.",
+        "description": "Deletes the specified sku. This operation can take up to 2 hours to complete. This is expected service behavior.",
         "parameters": [
           {
             "name": "vendorName",
@@ -332,7 +332,7 @@
           "VendorSkus"
         ],
         "operationId": "VendorSkus_CreateOrUpdate",
-        "description": "Creates or updates a sku",
+        "description": "Creates or updates a sku. This operation can take up to 2 hours to complete. This is expected service behavior.",
         "parameters": [
           {
             "name": "vendorName",
@@ -581,6 +581,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
             "description": "The name of the vendor."
           },
           {
@@ -636,6 +637,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
             "description": "The name of the vendor."
           },
           {
