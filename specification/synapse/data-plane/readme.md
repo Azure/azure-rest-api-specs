@@ -77,7 +77,6 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SqlScript.json
 - Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Trigger.json
 - Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
-- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SparkConfiguration.json
 ```
 
 ### Tag: package-access-control-2020-02-01-preview
@@ -141,7 +140,6 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkConfiguration.json
 ```
 
 ### Tag: package-monitoring-2020-12-01
