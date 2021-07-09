@@ -202,6 +202,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SqlScript.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Trigger.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
 ```
 
 ### Tag: package-vnet-2021-06-01-preview
