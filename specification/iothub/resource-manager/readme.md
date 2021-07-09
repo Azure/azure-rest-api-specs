@@ -32,9 +32,9 @@ tag: package-preview-2021-07
 
 ### Tag: package-preview-2021-07
 
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-07-15` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07'
+```yaml $(tag) == 'package-preview-2021-07-15'
 input-file:
   - Microsoft.Devices/preview/2021-07-15-preview/iothub.json
 ```
@@ -45,6 +45,15 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.Devices/stable/2021-07-01/iothub.json
+```
+
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.Devices/preview/2021-07-01-preview/iothub.json
 ```
 
 ### Tag: package-2021-03
