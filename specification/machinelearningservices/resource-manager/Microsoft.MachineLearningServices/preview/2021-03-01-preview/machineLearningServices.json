@@ -1448,7 +1448,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Notebooks_Prepare",
+        "operationId": "Workspaces_PrepareNotebook",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -1537,7 +1537,7 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "Notebooks_ListKeys",
+        "operationId": "Workspaces_ListNotebookKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
             "$ref": "./examples/Notebook/listKeys.json"
@@ -1658,7 +1658,7 @@
             "description": "The object for creating or updating a new workspace connection",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionDto"
+              "$ref": "#/definitions/WorkspaceConnection"
             }
           }
         ],
@@ -1982,7 +1982,8 @@
         },
         "containerRegistry": {
           "description": "ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "storageAccount": {
           "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created",
@@ -2363,7 +2364,7 @@
     },
     "VirtualMachineSizeListResult": {
       "properties": {
-        "amlCompute": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
@@ -4384,6 +4385,7 @@
     },
     "NotebookPreparationError": {
       "type": "object",
+      "x-nullable": true,
       "properties": {
         "errorMessage": {
           "type": "string"
@@ -4455,22 +4457,6 @@
           "type": "string",
           "description": "Resource type of workspace connection.",
           "readOnly": true
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties of workspace connection.",
-          "$ref": "#/definitions/WorkspaceConnectionProps",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WorkspaceConnectionDto": {
-      "type": "object",
-      "description": "object used for creating workspace connection.",
-      "properties": {
-        "name": {
-          "description": "Friendly name of the workspace connection",
-          "type": "string"
         },
         "properties": {
           "type": "object",
