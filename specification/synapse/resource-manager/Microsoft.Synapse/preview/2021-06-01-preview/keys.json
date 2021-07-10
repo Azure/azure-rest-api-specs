@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys": {
+      "get": {
+        "operationId": "Keys_ListByWorkspace",
+        "description": "Returns a list of keys in a workspace",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/KeyInfoListResult"
+            },
+            "description": "The list of workspace keys."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a Workspace Key.\n\n * 500 InternalServerError- Some error occurred while creating Workspace Key."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List keys in workspace": {
+            "$ref": "./examples/ListKeysInWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys/{keyName}": {
+      "get": {
+        "operationId": "Keys_Get",
+        "description": "Gets a workspace key",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Key"
+            },
+            "description": "Workspace Key details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while trying to get details for Workspace Keys."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a workspace key": {
+            "$ref": "./examples/GetKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Keys_CreateOrUpdate",
+        "description": "Creates or updates a workspace key",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyNameParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Key"
+            },
+            "in": "body",
+            "name": "keyProperties",
+            "required": true,
+            "description": "Key put request properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Key"
+            },
+            "description": "Workspace Key resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a Workspace Key.\n\n * 500 InternalServerError- Some error occurred while creating Workspace Key."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update a workspace key": {
+            "$ref": "./examples/CreateOrUpdateKey.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Keys_Delete",
+        "description": "Deletes a workspace key",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "204": {
+            "description": "Keys resource not found."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while deleting Workspace Key."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete a workspace key": {
+            "$ref": "./examples/DeleteKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "KeyInfoListResult": {
+      "description": "List of keys",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of keys",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          }
+        }
+      }
+    },
+    "Key": {
+      "description": "A workspace key",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Keys resource properties",
+          "$ref": "#/definitions/KeyProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "KeyProperties": {
+      "description": "Key properties",
+      "type": "object",
+      "properties": {
+        "isActiveCMK": {
+          "type": "boolean",
+          "description": "Used to activate the workspace after a customer managed key is provided."
+        },
+        "keyVaultUrl": {
+          "type": "string",
+          "description": "The Key Vault Url of the workspace key."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "keyNameParameter": {
+      "name": "keyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace key",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
