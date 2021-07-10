@@ -454,6 +454,10 @@
         "properties": {
           "description": "The properties of a SCOM instance resource",
           "$ref": "#/definitions/MonitoringInstanceProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
         }
       }
     },
@@ -483,6 +487,10 @@
             "$ref": "#/definitions/ManagementServerProperties"
           }
         },
+        "databaseInstance": {
+          "description": "Database instance on which SCOM Operational and Warehouse database will be stored",
+          "$ref": "#/definitions/DatabaseInstanceProperties"
+        },
         "domainController": {
           "description": "Domain controller details",
           "$ref": "#/definitions/DomainControllerProperties"
@@ -492,7 +500,7 @@
           "$ref": "#/definitions/DomainUserCredentials"
         },
         "actionAccountCredentials": {
-          "description": "Domain User Action account",
+          "description": "Domain User for Action account",
           "$ref": "#/definitions/DomainUserCredentials"
         },
         "dasAccountCredentials": {
@@ -500,11 +508,11 @@
           "$ref": "#/definitions/DomainUserCredentials"
         },
         "dataReaderAccountCredentials": {
-          "description": "Domain User data reader account",
+          "description": "Domain User for data reader account",
           "$ref": "#/definitions/DomainUserCredentials"
         },
         "dataWriterAccountCredentials": {
-          "description": "Domain User data writer account",
+          "description": "Domain User for data writer account",
           "$ref": "#/definitions/DomainUserCredentials"
         },
         "azureHybridBenefit": {
@@ -523,6 +531,11 @@
       "properties": {
         "fqdn": {
           "description": "Management server Fully Qualified Domain Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverRoles": {
+          "description": "Represent whether the Server is a Management Server and/or Web Console Server",
           "type": "string",
           "readOnly": true
         },
@@ -556,7 +569,31 @@
         "password": {
           "description": "Domain user password ",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
+        }
+      }
+    },
+    "DatabaseInstanceProperties": {
+      "description": "The properties of database instance",
+      "type": "object",
+      "properties": {
+        "databaseInstanceId": {
+          "description": "Resource Id of existing database instance",
+          "type": "string"
+        },
+        "operationalDatabaseId": {
+          "description": "Resource Id of operational database on database instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "dwDatabaseId": {
+          "description": "Resource Id of warehouse database on database instance",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

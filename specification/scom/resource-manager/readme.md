@@ -37,10 +37,6 @@ These settings apply only when `--tag=package-2021-06-30-preview` is specified o
 ```yaml $(tag) == 'package-2021-06-30-preview'
 input-file:
   - Microsoft.SCOM/preview/2021-06-30-preview/scom.json
-directive:
-- suppress: R4009
-  from: scom.json
-  reason: System type defined in Tracked resource
 ```
 
 ---
