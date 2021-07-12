@@ -76,6 +76,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-node
 ```
 

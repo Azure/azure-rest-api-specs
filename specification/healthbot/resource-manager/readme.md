@@ -89,6 +89,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-go
     after_scripts:

@@ -131,6 +131,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-trenton
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
