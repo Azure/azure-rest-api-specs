@@ -1,5 +1,5 @@
 ## Python
-  
+ 
 These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(track2)
