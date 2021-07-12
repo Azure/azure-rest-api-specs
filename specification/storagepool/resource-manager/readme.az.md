@@ -26,10 +26,6 @@ cli:
             - id
       - where:
           group: DiskPools
-          op: ListOutboundNetworkDependenciesEndpoints
-        hidden: true
-      - where:
-          group: DiskPools
           parameter: additionalCapabilities
         alias:
           - additional_capabilities
