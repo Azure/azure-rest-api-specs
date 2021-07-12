@@ -12,8 +12,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
 package-version: 1.0.0b1
 no-namespace-folders: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
@@ -48,12 +46,7 @@ namespace: azure.mgmt.rdbms.mysql
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
 
-### Tag: package-2020-07-01-preview and python
-
-These settings apply only when `--tag=package-2020-07-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-07-01-preview' && $(python)
-namespace: azure.mgmt.rdbms.mysql_flexibleservers
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
+``` yaml $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
