@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for the Batch API.
 
 ``` yaml
+title: BatchServiceClient
 openapi-type: data-plane
 tag: package-2021-06.14.0
 ```
@@ -371,30 +372,29 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
-Please also specify `--node-sdks-folder=<path to root folder of your azure-batch-sdk-for-java clone>`.
+Please also specify `--java-sdks-folder=<path to root folder of your azure-sdk-for-java repo>`.
 
-``` yaml $(java)
-nodejs:
+``` yaml $(java) && $(openapi-type) == 'management-plane'
+java:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: com.microsoft.azure.batch.protocol
-  output-folder: $(node-sdks-folder)/src/main/java
+  namespace: com.microsoft.azure.batch
+  output-folder: $(java-sdks-folder)/sdk/batch/azure-resourcemanager-batch
   payload-flattening-threshold: 1
   generate-license-txt: true
   clear-output-folder: true
 ```
 
 These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+Please also specify `--java-sdks-folder=<path to root folder of your azure-sdk-for-java repo>`.
 
-``` yaml $(java)
+``` yaml $(java) && $(openapi-type) == 'data-plane'
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.batch
+  namespace: com.microsoft.azure.batch.protocol
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-batch
+  output-folder: $(java-sdks-folder)/sdk/batch/microsoft-azure-batch
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
