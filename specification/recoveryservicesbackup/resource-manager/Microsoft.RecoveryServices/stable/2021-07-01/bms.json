@@ -4724,6 +4724,10 @@
         }
       ],
       "properties": {
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
         "duration": {
           "format": "duration",
           "description": "Time elapsed during the execution of this job.",
@@ -4762,6 +4766,58 @@
         }
       },
       "x-ms-discriminator-value": "AzureIaaSVMJob"
+    },
+    "AzureIaaSVMJobV2": {
+      "description": "Azure IaaS VM workload-specific job object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "actionsInfo": {
+          "description": "Gets or sets the state/actions applicable on this job like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "duration": {
+          "format": "duration",
+          "description": "Time elapsed during the execution of this job.",
+          "type": "string"
+        },
+        "errorDetails": {
+          "description": "Error details on execution of this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMErrorInfo"
+          }
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
+          "description": "Additional information for this job."
+        }
+      },
+      "x-ms-discriminator-value": "AzureIaaSVMJobV2"
     },
     "AzureIaaSVMJobExtendedInfo": {
       "description": "Azure IaaS VM workload-specific additional information for job.",
@@ -5572,7 +5628,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "recoveryPointMoveReadinessInfo": {
@@ -6539,7 +6595,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "isManagedVirtualMachine": {
@@ -7989,6 +8045,46 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "RecoveryPointTierInformationV2": {
+      "description": "RecoveryPoint Tier Information V2",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointTierInformation"
+        }
+      ],
+      "properties": {
+        "type": {
+          "description": "Recovery point tier type.",
+          "enum": [
+            "Invalid",
+            "InstantRP",
+            "HardenedRP",
+            "ArchivedRP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Recovery point tier status.",
+          "enum": [
+            "Invalid",
+            "Valid",
+            "Disabled",
+            "Deleted",
+            "Rehydrated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierStatus",
+            "modelAsString": true
           }
         }
       }
