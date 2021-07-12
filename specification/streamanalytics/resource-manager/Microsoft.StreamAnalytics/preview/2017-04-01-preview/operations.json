@@ -56,6 +56,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -67,6 +73,7 @@
   "definitions": {
     "OperationListResult": {
       "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of Stream Analytics operations supported by the Microsoft.StreamAnalytics resource provider.",
@@ -94,6 +101,7 @@
         },
         "display": {
           "description": "Contains the localized display information for this particular operation / action.",
+          "type": "object",
           "readOnly": true,
           "properties": {
             "provider": {
