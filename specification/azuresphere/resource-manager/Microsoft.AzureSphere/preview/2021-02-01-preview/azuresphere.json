@@ -178,6 +178,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/uploadImage": {
+      "post": {
+        "operationId": "Catalogs_uploadImage",
+        "summary": "Uploads an image in a catalog.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Image to be uploaded",
+            "schema": {
+              "$ref": "#/definitions/UploadImageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response to the action call to upload an image.",
+            "schema": {
+              "$ref": "#/definitions/UploadImageResponse"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "Catalogs"
+        ],
+        "x-ms-examples": {
+          "Uploads an image using in base64 encoding.": {
+            "$ref": "./examples/PostUploadImage.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}": {
       "get": {
         "operationId": "Catalogs_Get",
@@ -423,7 +485,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete a catalog.": {
@@ -884,7 +946,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete a product.": {
@@ -1449,7 +1511,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete a device group.": {
@@ -1621,6 +1683,17 @@
               "$ref": "#/definitions/Image"
             }
           },
+          "201": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Resource creation accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmPutAcceptedResponse"
+            }
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -1636,6 +1709,10 @@
           "Uploads a new image.": {
             "$ref": "./examples/PutImage.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2737,6 +2814,29 @@
         }
       ]
     },
+    "UploadImageRequest": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "Base64 representation of the image"
+        }
+      },
+      "description": "Request to the action call to upload an image.",
+      "required": [
+        "image"
+      ]
+    },
+    "UploadImageResponse": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "Response to the action call to upload an image."
+    },
     "Catalog": {
       "type": "object",
       "properties": {
@@ -3105,6 +3205,22 @@
       },
       "description": "Azure Sphere page of elements."
     },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Suceeded",
+        "Failed",
+        "Cancelled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
     "AzureSpherePage_DeviceProperties": {
       "type": "object",
       "properties": {
@@ -3293,22 +3409,6 @@
         }
       },
       "description": "Azure Sphere page of elements."
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "enum": [
-        "Suceeded",
-        "Failed",
-        "Cancelled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
-      }
     },
     "ProxyResource_DeviceProperties": {
       "type": "object",
@@ -3705,6 +3805,27 @@
       "type": "object",
       "description": "An Azure Sphere catalog patch request",
       "properties": {}
+    },
+    "ArmPutAcceptedResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        }
+      },
+      "description": "Resource creation accepted."
     }
   },
   "parameters": {
