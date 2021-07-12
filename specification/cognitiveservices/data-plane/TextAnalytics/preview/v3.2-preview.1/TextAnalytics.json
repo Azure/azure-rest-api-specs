@@ -806,6 +806,10 @@
               "default": "latest",
               "type": "string"
             },
+            "loggingOptOut": {
+              "default": true,
+              "type": "boolean"
+            },
             "stringIndexType": {
                 "$ref": "#/definitions/StringIndexType"
             },
@@ -1223,6 +1227,20 @@
                   },
                   {
                     "$ref": "#/definitions/SentimentTaskResult"
+                  }
+                ]
+              }
+            },
+            "extractiveSummarizationTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
                   }
                 ]
               }
@@ -2201,6 +2219,14 @@
       "properties": {
         "results": {
           "$ref": "#/definitions/SentimentResponse"
+        }
+      }
+    },
+    "ExtractiveSummarizationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
         }
       }
     },
