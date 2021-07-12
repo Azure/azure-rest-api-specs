@@ -811,16 +811,19 @@
               "type": "boolean"
             },
             "stringIndexType": {
-                "$ref": "#/definitions/StringIndexType"
+              "$ref": "#/definitions/StringIndexType"
             },
             "sentenceCount": {
-                "default": 3,
-                "type": "integer"
+              "default": 3,
+              "type": "integer"
             },
             "sortBy": {
-                "default": "offset",
-                "enum": ["offset", "rank"],
-                "type": "string"
+              "default": "offset",
+              "enum": [
+                "offset",
+                "rank"
+              ],
+              "type": "string"
             }
           }
         }
@@ -1055,31 +1058,31 @@
     "ExtractedSummarySentence": {
       "type": "object",
       "required": [
-          "text",
-          "rankScore",
-          "offset",
-          "length"
-        ],
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "The extracted sentence text."
-          },
-          "rankScore": {
-            "type": "number",
-            "format": "double",
-            "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
-          },
-          "offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
-          },
-          "length": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The length of the sentence."
-          }
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
       }
     },
     "SentimentResponse": {
