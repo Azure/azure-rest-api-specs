@@ -66,11 +66,11 @@ tag: package-templatespecs-2021-03-preview
 
 
 
-### Tag: package-policy-2020-05
+### Tag: package-privatelinks-2020-05
 
-These settings apply only when `--tag=package-policy-2020-05` is specified on the command line.
+These settings apply only when `--tag=package-privatelinks-2020-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-policy-2020-05'
+``` yaml $(tag) == 'package-privatelinks-2020-05'
 input-file:
 - Microsoft.Authorization/stable/2020-05-01/privateLinks.json
 ```
