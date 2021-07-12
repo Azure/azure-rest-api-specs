@@ -425,7 +425,8 @@
           "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
-      "description": "The properties of the key."
+      "description": "The properties of the key.",
+      "type": "object"
     },
     "KeyAttributes": {
       "properties": {
@@ -474,7 +475,8 @@
           "x-nullable": false
         }
       },
-      "description": "The object attributes managed by the Azure Key Vault service."
+      "description": "The object attributes managed by the Azure Key Vault service.",
+      "type": "object"
     },
     "KeyCreateParameters": {
       "properties": {
@@ -494,7 +496,8 @@
       "required": [
         "properties"
       ],
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "Key": {
       "properties": {
@@ -512,7 +515,8 @@
           "$ref": "./keyvault.json#/definitions/Resource"
         }
       ],
-      "description": "The key resource."
+      "description": "The key resource.",
+      "type": "object"
     },
     "KeyListResult": {
       "properties": {
@@ -528,7 +532,8 @@
           "description": "The URL to get the next page of keys."
         }
       },
-      "description": "The page of keys."
+      "description": "The page of keys.",
+      "type": "object"
     },
     "RotationPolicy": {
       "properties": {
@@ -543,7 +548,8 @@
           },
           "description": "The lifetimeActions for key rotation action."
         }
-      }
+      },
+      "type": "object"
     },
     "KeyRotationPolicyAttributes": {
       "properties": {
@@ -563,7 +569,8 @@
           "type": "string",
           "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
         }
-      }
+      },
+      "type": "object"
     },
     "LifetimeAction": {
       "properties": {
@@ -587,7 +594,8 @@
           "type": "string",
           "description": "The time duration before key expiring to rotate the key. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
         }
-      }
+      },
+      "type": "object"
     },
     "Action": {
       "properties": {
@@ -603,7 +611,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "type": "object"
     }
   },
   "parameters": {
