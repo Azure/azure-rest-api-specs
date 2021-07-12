@@ -145,6 +145,21 @@ input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
 ```
 
+### Tag: package-policy-2021-06
+
+These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2021-06'
+input-file:
+- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2020-03
 
 These settings apply only when `--tag=package-policy-2020-03` is specified on the command line.
