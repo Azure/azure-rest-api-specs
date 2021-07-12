@@ -229,6 +229,31 @@ directive:
     reason:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
+```
+
+### Tag: package-2021-06-01-preview-only
+
+These settings apply only when `--tag=package-2021-06-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview-only'
+input-file:
+- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
+```
+
 ### Tag: package-2021-04-01
 
 These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
@@ -854,30 +879,6 @@ input-file:
 - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
-### Tag: package-2021-06-01-preview
-
-These settings apply only when `--tag=2021-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06-01-preview'
-input-file:
-- Microsoft.Compute/stable/2021-03-01/compute.json
-- Microsoft.Compute/stable/2021-03-01/runCommands.json
-- Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
-- Microsoft.Compute/stable/2020-09-30/gallery.json
-- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
-- Microsoft.Compute/stable/2021-03-01/cloudService.json
-- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
-```
-
-### Tag: package-2021-06-01-preview-only
-
-These settings apply only when `--tag=package-2021-06-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06-01-preview-only'
-input-file:
-- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
-```
 
 ---
 # Code Generation
