@@ -2554,39 +2554,62 @@
     },
     "DiagnoseRequestProperties": {
       "type": "object",
-      "description": "Properties of a diagnose request",
       "properties": {
         "udr": {
           "description": "Setting for diagnosing user defined routing",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "nsg": {
           "description": "Setting for diagnosing network security group",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "resourceLock": {
           "description": "Setting for diagnosing resource lock",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "dnsResolution": {
           "description": "Setting for diagnosing dns resolution",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "storageAccount": {
           "description": "Setting for diagnosing dependent storage account",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "keyVault": {
           "description": "Setting for diagnosing dependent key vault",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "containerRegistry": {
           "description": "Setting for diagnosing dependent container registry",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "others": {
           "description": "Setting for diagnosing unclassified category of problems",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4785,13 +4808,13 @@
         },
         "notebookPreparationError": {
           "$ref": "#/definitions/NotebookPreparationError",
-          "description": "The error that occurs when preparing notebook."
+          "description": "The error that occurs when preparing notebook.",
+          "x-nullable": true
         }
       }
     },
     "NotebookPreparationError": {
       "type": "object",
-      "x-nullable": true,
       "properties": {
         "errorMessage": {
           "type": "string"
