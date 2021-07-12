@@ -49,7 +49,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-js-track2
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['iotcentrals']
 ```

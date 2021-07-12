@@ -71,7 +71,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```

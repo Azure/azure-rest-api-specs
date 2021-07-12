@@ -164,7 +164,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-typescript
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
