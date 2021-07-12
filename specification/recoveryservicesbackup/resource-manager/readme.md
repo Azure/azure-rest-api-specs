@@ -48,7 +48,7 @@ message-format: json
 
 ### Tag: package-2021-07
 
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-07'
 input-file:
