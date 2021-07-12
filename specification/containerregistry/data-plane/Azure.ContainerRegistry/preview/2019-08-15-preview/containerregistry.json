@@ -1305,7 +1305,7 @@
         "registry": {
           "type": "string",
           "readOnly": true,
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1371,7 +1371,7 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "RegistryLoginServer"
         },
         "imageName": {
@@ -1437,7 +1437,7 @@
         "registry": {
           "type": "string",
           "readOnly": true,
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1528,6 +1528,7 @@
     },
     "TagOrderBy": {
       "type": "string",
+      "description" : "Sort options for ordering tags in a collection.",
       "enum": [
         "none",
         "timedesc",
@@ -1535,7 +1536,6 @@
       ],
       "x-ms-enum": {
         "name": "ArtifactTagOrderBy",
-        "description" : "Sort options for ordering tags in a collection.",
         "values": [
           {
             "value": "none",
@@ -1557,6 +1557,7 @@
       "x-accessibility": "public"
     },
     "ArtifactArchitecture": {
+      "description" : "The artifact platform's architecture.",
       "type": "string",
       "enum": [
         "386",
@@ -1575,7 +1576,6 @@
       ],
       "x-ms-enum": {
         "name": "ArtifactArchitecture",
-        "description" : "The artifact platform's architecture.",
         "modelAsString": true,
         "values": [
           {
@@ -1748,7 +1748,7 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1828,7 +1828,7 @@
       "description": "Manifest attributes details",
       "properties": {
         "registry": {
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "readOnly": true,
           "type": "string",
           "x-ms-client-name": "registryLoginServer"
