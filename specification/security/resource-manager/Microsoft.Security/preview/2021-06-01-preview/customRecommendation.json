@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
+      "get": {
+        "description": "Get a single custom recommendation by name for the provided subscriptionId. ",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "x-ms-examples": {
+          "Get a single custom recommendation": {
+            "$ref": "./examples/CustomRecommendations/customRecommendationGet_example.json"
+          }
+        },
+        "operationId": "CustomRecommendations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a custom recommendation for the provided subscription.  Please note that providing an existing customRecommendationName will update/replace an existing record.",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "operationId": "CustomRecommendations_Put",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a custom recommendation by name for a provided subscriptionId",
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "x-ms-examples": {
+          "Delete a custom recommendation by name": {
+            "$ref": "./examples/CustomRecommendations/customRecommendationDelete_example.json"
+          }
+        },
+        "operationId": "CustomRecommendations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Custom Recommendation was deleted"
+          },
+          "204": {
+            "description": "No Content - Custom Recommendation does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations": {
+      "get": {
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "x-ms-examples": {
+          "List all recommendations for the provided subscription ID": {
+            "$ref": "./examples/CustomRecommendations/customRecommendationList_example.json"
+          }
+        },
+        "operationId": "CustomRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomRecommendationList": {
+      "type": "object",
+      "description": "A list of all custom recommendations",
+      "properties": {
+        "value": {
+          "description": "Collection of custom recommendation objects",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecommendation"
+          }
+        }
+      }
+    },
+    "CustomRecommendation": {
+      "type": "object",
+      "description": "Custom Recommendation",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes custom recommendation properties.",
+          "$ref": "#/definitions/CustomRecommendationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CustomRecommendationProperties": {
+      "type": "object",
+      "description": "describes custom recommendation properties",
+      "properties": {
+        "description": {
+          "description": "A description providing additional information on the custom recommendation.",
+          "type": "string"
+        },
+        "isEnabled": {
+          "description": "A flag that indicates whether this recommendation is enabled or disabled.",
+          "type": "boolean",
+          "default": true
+        },
+        "supportedClouds": {
+          "description": "Relevant cloud for the custom recommendation.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AWS",
+              "GCP"
+            ],
+            "x-ms-enum": {
+              "name": "SupportedCloud",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "GCP",
+                  "description": "Google Cloud Services Platform"
+                },
+                {
+                  "value": "AWS",
+                  "description": "Amazon Web Services"
+                }
+              ]
+            }
+          }
+        },
+        "queryMasked": {
+          "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CustomRecommendationName": {
+      "name": "customRecommendationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the customRecommendation object",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomRecommendationBody": {
+      "name": "customRecommendationBody",
+      "in": "body",
+      "description": "Custom recommendation body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CustomRecommendationProperties"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
