@@ -4147,22 +4147,12 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "description": "Specify the write behavior when copying data into sql server.",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Upsert",
-            "StoredProcedure"
-          ],
-          "x-ms-enum": {
-            "name": "SqlWriteBehaviorType",
-            "modelAsString": true
-          }
+          "type": "object"
         },
-        "upsertOption": {
+        "upsertSettings": {
           "description": "SQL upsert settings.",
           "type": "object",
-          "$ref": "#/definitions/SqlUpsetOptionSettings"
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4245,22 +4235,12 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "description": "Specify the write behavior when copying data into azure sql.",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Upsert",
-            "StoredProcedure"
-          ],
-          "x-ms-enum": {
-            "name": "AzureSqlWriteBehaviorType",
-            "modelAsString": true
-          }
+          "type": "object"
         },
-        "upsertOption": {
+        "upsertSettings": {
           "description": "SQL upsert settings.",
           "type": "object",
-          "$ref": "#/definitions/SqlUpsetOptionSettings"
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4305,22 +4285,12 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "description": "Specify the write behavior when copying data into azure sql managed instance.",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Upsert",
-            "StoredProcedure"
-          ],
-          "x-ms-enum": {
-            "name": "SqlMIWriteBehaviorType",
-            "modelAsString": true
-          }
+          "type": "object"
         },
-        "upsertOption": {
+        "upsertSettings": {
           "description": "SQL upsert settings.",
           "type": "object",
-          "$ref": "#/definitions/SqlUpsetOptionSettings"
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4362,21 +4332,12 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "description": "Specify the write behavior when copying data into azure sql dw.",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "SqlDWWriteBehaviorType",
-            "modelAsString": true
-          }
+          "type": "object"
         },
-        "upsertOption": {
-          "description": "SQL upsert settings.",
+        "upsertSettings": {
+          "description": "SQL DW upsert settings.",
           "type": "object",
-          "$ref": "#/definitions/SqlDWUpsetOptionSettings"
+          "$ref": "#/definitions/SqlDWUpsertSettings"
         }
       }
     },
@@ -4451,7 +4412,7 @@
         }
       }
     },
-    "SqlUpsetOptionSettings": {
+    "SqlUpsertSettings": {
       "description": "Sql upsert option settings",
       "type": "object",
       "properties": {
@@ -4464,16 +4425,12 @@
           "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
         },
         "keys": {
-          "description": "Key column names for unique row identification",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          }
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
         }
       }
     },
-    "SqlDWUpsetOptionSettings": {
+    "SqlDWUpsertSettings": {
       "description": "Sql DW upsert option settings",
       "type": "object",
       "properties": {
@@ -4482,13 +4439,34 @@
           "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
         },
         "keys": {
-          "description": "Key column names for unique row identification",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          }
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
         }
+      }
+    },
+    "SqlWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert",
+        "StoredProcedure"
+      ],
+      "x-ms-enum": {
+        "name": "SqlWriteBehaviorEnum",
+        "modelAsString": true
+      }
+    },
+    "SqlDWWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql dw.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "SqlDWWriteBehaviorEnum",
+        "modelAsString": true
       }
     },
     "SnowflakeSink": {
