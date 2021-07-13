@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-03-01-preview5",
+    "chatThreadId": "19:f2167429acf6482880c6b7790a9086c1@thread.v2",
+    "addChatParticipantsRequest": {
+      "participants": [
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+            "communicationUser": {
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a"
+            }
+          },
+          "displayName": "Alex",
+          "shareHistoryTime": "2020-06-06T05:55:41Z"
+        },
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
+            "communicationUser": {
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+            }
+          },
+          "displayName": "Peter",
+          "shareHistoryTime": "2020-06-06T05:55:41Z"
+        },
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10c",
+            "communicationUser": {
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10c"
+            }
+          },
+          "displayName": "Rama",
+          "shareHistoryTime": "2020-06-06T05:55:41Z"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "invalidParticipants": [
+          {
+            "target": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10c",
+            "code": "403",
+            "message": "Permissions check failed"
+          },
+          {
+            "target": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10a",
+            "code": "404",
+            "message": "Not found"
+          }
+        ]
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Rate limit exceeded."
+        }
+      }
+    },
+    "503": {
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The server is currently unable to handle the request."
+        }
+      }
+    }
+  }
+}

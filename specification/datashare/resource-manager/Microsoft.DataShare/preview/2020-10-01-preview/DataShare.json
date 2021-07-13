@@ -589,8 +589,11 @@
           "DataSets_SqlDBTable_Create": {
             "$ref": "./examples/DataSets_SqlDBTable_Create.json"
           },
-          "DataSets_StorageAccount_Create": {
-            "$ref": "./examples/DataSets_StorageAccount_Create.json"
+          "DataSets_ADLSGen2StorageAccount_Create": {
+            "$ref": "./examples/DataSets_ADLSGen2StorageAccount_Create.json"
+          },
+          "DataSets_BlobStorageAccount_Create": {
+            "$ref": "./examples/DataSets_BlobStorageAccount_Create.json"
           },
           "DataSets_SynapseWorkspaceSqlPoolTable_Create": {
             "$ref": "./examples/DataSets_SynapseWorkspaceSqlPoolTable_Create.json"
@@ -864,8 +867,11 @@
           "DataSetMappings_SqlDWDataSetToAdlsGen2File_Create": {
             "$ref": "./examples/DataSetMappings_SqlDWDataSetToAdlsGen2File_Create.json"
           },
-          "DataSetMappings_StorageAccount_Create": {
-            "$ref": "./examples/DataSetMappings_StorageAccount_Create.json"
+          "DataSetMappings_ADLSGen2StorageAccount_Create": {
+            "$ref": "./examples/DataSetMappings_ADLSGen2StorageAccount_Create.json"
+          },
+          "DataSetMappings_BlobStorageAccount_Create": {
+            "$ref": "./examples/DataSetMappings_BlobStorageAccount_Create.json"
           },
           "DataSetMappings_SynapseWorkspaceSqlPoolTable_Create": {
             "$ref": "./examples/DataSetMappings_SynapseWorkspaceSqlPoolTable_Create.json"
@@ -3805,6 +3811,167 @@
         }
       }
     },
+    "ADLSGen2StorageAccountDataSet": {
+      "description": "An ADLSGen2 storage account data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2StorageAccountDataSetProperties",
+          "description": "ADLSGen2 storage account data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2StorageAccount"
+    },
+    "ADLSGen2StorageAccountDataSetMapping": {
+      "description": "ADLSGen2 storage account data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2StorageAccountDataSetMappingProperties",
+          "description": "ADLSGen2 Storage account data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2StorageAccount"
+    },
+    "ADLSGen2StorageAccountDataSetMappingProperties": {
+      "description": "Properties of the ADLSGen2 storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "containerName",
+        "folder",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "folder": {
+          "description": "Gets or sets the path to folder within the container.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mountPath": {
+          "description": "Gets or sets the mount path",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the sink storage account",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2StorageAccountDataSetProperties": {
+      "description": "Properties of the ADLSGen2 storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "paths"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the ADLSGen2 storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of ADLSGen2 storage account paths.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ADLSGen2StorageAccountPath"
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the ADLSGen2 storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2StorageAccountPath": {
+      "description": "Defines a single ADLS Gen2 storage account path.",
+      "required": [
+        "containerName"
+      ],
+      "type": "object",
+      "properties": {
+        "consumerPath": {
+          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Gets or sets the container name to share.",
+          "type": "string"
+        },
+        "providerPath": {
+          "description": "Gets or sets the path to file/folder within the container.",
+          "type": "string"
+        }
+      }
+    },
     "BlobContainerDataSet": {
       "description": "An Azure storage blob container data set.",
       "required": [
@@ -4248,6 +4415,167 @@
         }
       }
     },
+    "BlobStorageAccountDataSet": {
+      "description": "An Azure blob storage account data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobStorageAccountDataSetProperties",
+          "description": "Storage account data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobStorageAccount"
+    },
+    "BlobStorageAccountDataSetMapping": {
+      "description": "A blob storage account data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobStorageAccountDataSetMappingProperties",
+          "description": "Blob Storage account data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobStorageAccount"
+    },
+    "BlobStorageAccountDataSetMappingProperties": {
+      "description": "Properties of the blob storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "containerName",
+        "folder",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "folder": {
+          "description": "Gets or sets the path to folder within the container.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mountPath": {
+          "description": "Gets or sets the mount path on the consumer side where the dataset is to be mapped.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the sink storage account",
+          "type": "string"
+        }
+      }
+    },
+    "BlobStorageAccountDataSetProperties": {
+      "description": "Properties of the blob storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "paths"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of storage account paths.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobStorageAccountPath"
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobStorageAccountPath": {
+      "description": "Defines a single blob storage account path.",
+      "required": [
+        "containerName"
+      ],
+      "type": "object",
+      "properties": {
+        "consumerPath": {
+          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Gets or sets the container name to share.",
+          "type": "string"
+        },
+        "providerPath": {
+          "description": "Gets or sets the path to file/folder within the container.",
+          "type": "string"
+        }
+      }
+    },
     "ConsumerInvitation": {
       "description": "A consumer Invitation data transfer object.",
       "required": [
@@ -4457,12 +4785,13 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
-            "StorageAccount",
+            "AdlsGen2StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable",
-            "SynapseWorkspaceSqlPoolTable"
+            "SynapseWorkspaceSqlPoolTable",
+            "BlobStorageAccount"
           ],
           "type": "string",
           "readOnly": true,
@@ -4496,12 +4825,13 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
-            "StorageAccount",
+            "AdlsGen2StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable",
-            "SynapseWorkspaceSqlPoolTable"
+            "SynapseWorkspaceSqlPoolTable",
+            "BlobStorageAccount"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4554,12 +4884,13 @@
             "AdlsGen2FileSystem",
             "AdlsGen2Folder",
             "AdlsGen2File",
-            "StorageAccount",
+            "AdlsGen2StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable",
-            "SynapseWorkspaceSqlPoolTable"
+            "SynapseWorkspaceSqlPoolTable",
+            "BlobStorageAccount"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6353,158 +6684,6 @@
         }
       }
     },
-    "StorageAccountDataSet": {
-      "description": "An Azure storage account data set.",
-      "required": [
-        "properties",
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSet"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageAccountDataSetProperties",
-          "description": "Storage account data set properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "StorageAccount"
-    },
-    "StorageAccountDataSetMapping": {
-      "description": "A storage account data set mapping.",
-      "required": [
-        "properties",
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSetMapping"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageAccountDataSetMappingProperties",
-          "description": "Storage account data set mapping properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "StorageAccount"
-    },
-    "StorageAccountDataSetMappingProperties": {
-      "description": "Properties of the storage account data set.",
-      "required": [
-        "storageAccountResourceId",
-        "containerName",
-        "dataSetId"
-      ],
-      "type": "object",
-      "properties": {
-        "containerName": {
-          "description": "Container that has the file path.",
-          "type": "string"
-        },
-        "dataSetId": {
-          "description": "The id of the source data set.",
-          "type": "string"
-        },
-        "dataSetMappingStatus": {
-          "description": "Gets the status of the data set mapping.",
-          "enum": [
-            "Ok",
-            "Broken"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "dataSetMappingStatus",
-            "modelAsString": true
-          }
-        },
-        "location": {
-          "description": "Location of the sink storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the data set mapping.",
-          "enum": [
-            "Succeeded",
-            "Creating",
-            "Deleting",
-            "Moving",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "storageAccountResourceId": {
-          "description": "Resource id of the sink storage account",
-          "type": "string"
-        }
-      }
-    },
-    "StorageAccountDataSetProperties": {
-      "description": "Properties of the storage account data set.",
-      "required": [
-        "storageAccountResourceId",
-        "paths"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "description": "Unique id for identifying a data set resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Location of the storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "paths": {
-          "description": "A list of storage account paths.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccountPath"
-          }
-        },
-        "storageAccountResourceId": {
-          "description": "Resource id of the storage account.",
-          "type": "string"
-        }
-      }
-    },
-    "StorageAccountPath": {
-      "description": "Defines a single storage account path.",
-      "required": [
-        "containerName"
-      ],
-      "type": "object",
-      "properties": {
-        "consumerPath": {
-          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
-          "type": "string"
-        },
-        "containerName": {
-          "description": "Gets or sets the container name to share.",
-          "type": "string"
-        },
-        "providerPath": {
-          "description": "Gets or sets the path to file/folder within the container.",
-          "type": "string"
-        }
-      }
-    },
     "SynapseWorkspaceSqlPoolTableDataSet": {
       "description": "A Synapse Workspace Sql Pool Table data set.",
       "required": [
@@ -6632,12 +6811,13 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
-            "StorageAccount",
+            "AdlsGen2StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable",
-            "SynapseWorkspaceSqlPoolTable"
+            "SynapseWorkspaceSqlPoolTable",
+            "BlobStorageAccount"
           ],
           "type": "string",
           "readOnly": true,

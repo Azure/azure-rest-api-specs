@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/activeConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConfigurations": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -49,21 +49,16 @@
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/ListTopParameter"
-        },
-        {
-          "$ref": "#/parameters/ListSkipTokenParameter"
-        },
-        {
-          "name": "region",
-          "in": "query",
-          "description": "Location name",
+          "name": "parameters",
+          "in": "body",
           "required": false,
-          "type": "string",
-          "x-ms-parameter-location": "method"
+          "schema": {
+            "$ref": "#/definitions/ActiveConfigurationParameter"
+          },
+          "description": "Effective Virtual Networks Parameter."
         }
       ],
-      "get": {
+      "post": {
         "tags": [
           "NetworkManagerActiveConfigurations"
         ],
@@ -87,9 +82,6 @@
           "List Active Configurations": {
             "$ref": "./examples/NetworkManagerActiveConfigurationList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -105,13 +97,13 @@
         "region": {
           "type": "string",
           "description": "Deployment region."
+        },
+        "committedConfiguration": {
+          "type": "object",
+          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConfiguration",
+          "description": "Configuration such as connectivity configuration or security rule collection."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConfiguration"
-        }
-      ],
       "description": "Active Configuration."
     },
     "ActiveConfigurationListResult": {
@@ -123,12 +115,29 @@
           },
           "description": "Gets a page of active configurations."
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "Result of the request to list active configurations. It contains a list of active configurations and a URL link to get the next set of results."
+    },
+    "ActiveConfigurationParameter": {
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "region Name."
+          },
+          "description": "List of regions."
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "Effective Virtual Networks Parameter."
     }
   },
   "parameters": {
@@ -146,25 +155,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the network manager.",
-      "x-ms-parameter-location": "method"
-    },
-    "ListTopParameter": {
-      "name": "$top",
-      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "minimum": 1,
-      "maximum": 20,
-      "x-ms-parameter-location": "method"
-    },
-    "ListSkipTokenParameter": {
-      "name": "$skipToken",
-      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
-      "in": "query",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

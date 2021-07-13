@@ -424,12 +424,6 @@
           "format": "int32",
           "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
         },
-        "maxCapacityReservationLevel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum capacity reservation level available for this workspace, when CapacityReservation sku is selected.",
-          "readOnly": true
-        },
         "lastSkuUpdate": {
           "type": "string",
           "description": "The last time when the sku was updated.",
@@ -568,7 +562,6 @@
           "description": "List of linked private link scope resources."
         },
         "features": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceFeatures",
           "description": "Workspace features."
         }
@@ -576,7 +569,33 @@
       "description": "Workspace properties."
     },
     "WorkspaceFeatures": {
-      "properties": {},
+      "properties": {
+        "enableDataExport": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate if data should be exported."
+        },
+        "immediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that describes if we want to remove the data after 30 days."
+        },
+        "enableLogAccessUsingOnlyResourcePermissions": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate which permission to use - resource or workspace or both."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Disable Non-AAD based Auth."
+        }
+      },
       "additionalProperties": true,
       "description": "Workspace features."
     },

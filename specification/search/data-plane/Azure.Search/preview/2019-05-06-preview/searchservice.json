@@ -6822,6 +6822,10 @@
           "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
+        "knowledgeStore": {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
+          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -6880,6 +6884,138 @@
       "required": [
         "key"
       ]
+    },
+    "SearchIndexerKnowledgeStore": {
+      "properties": {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the storage account projections will be stored in."
+        },
+        "projections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjection",
+            "x-nullable": false
+          },
+          "description": "A list of additional projections to perform during indexing."
+        }
+      },
+      "required": [
+        "storageConnectionString",
+        "projections"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/knowledge-store-projection-overview"
+      },
+      "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+    },
+    "SearchIndexerKnowledgeStoreProjection": {
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreTableProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Table storage."
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreObjectProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Blob storage."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreFileProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure File storage."
+        }
+      },
+      "description": "Container object for various projection selectors."
+    },
+    "SearchIndexerKnowledgeStoreProjectionSelector": {
+      "properties": {
+        "referenceKeyName": {
+          "type": "string",
+          "description": "Name of reference key to different projection."
+        },
+        "generatedKeyName": {
+          "type": "string",
+          "description": "Name of generated key to store projection under."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source data to project."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "Source context for complex projections."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Nested inputs for complex projections."
+        }
+      },
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreBlobProjectionSelector": {
+      "properties": {
+        "storageContainer": {
+          "type": "string",
+          "description": "Blob container to store projections in."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "required": [
+        "storageContainer"
+      ],
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreTableProjectionSelector": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Name of the Azure table to store projected data in."
+        }
+      },
+      "required": [
+        "generatedKeyName",
+        "tableName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Tables."
+    },
+    "SearchIndexerKnowledgeStoreObjectProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Blob."
+    },
+    "SearchIndexerKnowledgeStoreFileProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Files."
     },
     "SearchIndexerSkill": {
       "discriminator": "@odata.type",
@@ -7000,6 +7136,11 @@
           "format": "int32",
           "x-nullable": true,
           "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -7072,6 +7213,18 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
+      "properties": {
+        "defaultCountryHint": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
       },
@@ -8501,8 +8654,7 @@
         "indexersCount",
         "dataSourcesCount",
         "storageSize",
-        "synonymMaps",
-        "skillsetCount"
+        "synonymMaps"
       ],
       "description": "Represents service-level resource counters and quotas."
     },
