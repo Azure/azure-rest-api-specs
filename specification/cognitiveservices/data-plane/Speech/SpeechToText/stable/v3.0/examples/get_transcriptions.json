@@ -3,7 +3,7 @@
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "$skip": 0,
-    "$top": 10
+    "$top": 2
   },
   "responses": {
     "200": {
@@ -12,10 +12,6 @@
         "values": [
           {
             "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683",
-            "contentUrls": [
-              "https://contoso.com/",
-              "https://contoso2.com/"
-            ],
             "model": {
               "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b"
             },
@@ -33,9 +29,37 @@
               "profanityFilterMode": "Masked",
               "duration": "PT42S"
             },
-            "lastActionDateTime": "2019-01-07T12:36:07Z",
+            "lastActionDateTime": "2019-01-07T11:36:07Z",
             "status": "Succeeded",
-            "createdDateTime": "2019-01-07T12:34:12Z",
+            "createdDateTime": "2019-01-07T11:34:12Z",
+            "locale": "en-US",
+            "displayName": "Transcription using adapted model en-US",
+            "customProperties": {
+              "key": "value"
+            }
+          },
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683",
+            "model": {
+              "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b"
+            },
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683/files"
+            },
+            "properties": {
+              "diarizationEnabled": false,
+              "wordLevelTimestampsEnabled": false,
+              "channels": [
+                0,
+                1
+              ],
+              "punctuationMode": "DictatedAndAutomatic",
+              "profanityFilterMode": "Masked",
+              "duration": "PT42S"
+            },
+            "lastActionDateTime": "2019-01-07T11:36:07Z",
+            "status": "Succeeded",
+            "createdDateTime": "2019-01-07T11:34:12Z",
             "locale": "en-US",
             "displayName": "Transcription using adapted model en-US",
             "customProperties": {
@@ -43,7 +67,7 @@
             }
           }
         ],
-        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions?skip=0&top=10"
+        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions?skip=$skip=2&$top=2"
       }
     },
     "400": {

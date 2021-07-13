@@ -15,7 +15,7 @@
         "tags": [
           "Custom Speech datasets for model adaptation:"
         ],
-        "summary": "Gets a list of supported locales for data imports.",
+        "summary": "Gets a list of supported locales for datasets.",
         "operationId": "GetSupportedLocalesForDatasets",
         "produces": [
           "application/json"
@@ -530,27 +530,27 @@
           {
             "in": "formData",
             "name": "displayName",
-            "description": "The name of this data import (required).",
+            "description": "The name of this dataset (required).",
             "required": true,
             "type": "string"
           },
           {
             "in": "formData",
             "name": "description",
-            "description": "Optional description of this data import.",
+            "description": "Optional description of this dataset.",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "locale",
-            "description": "The locale of this data import (required).",
+            "description": "The locale of this dataset (required).",
             "required": true,
             "type": "string"
           },
           {
             "in": "formData",
             "name": "kind",
-            "description": "The kind of the data import (required). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\".",
+            "description": "The kind of the dataset (required). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\".",
             "required": true,
             "type": "string"
           },
@@ -563,7 +563,7 @@
           {
             "in": "formData",
             "name": "data",
-            "description": "For acoustic data imports, a zip file containing the audio data and a text file containing the transcriptions for the audio data. For language data imports, a text file containing the language or pronunciation data. Required in both cases.",
+            "description": "For acoustic datasets, a zip file containing the audio data and a text file containing the transcriptions for the audio data. For language datasets, a text file containing the language or pronunciation data. Required in both cases.",
             "type": "file"
           },
           {
@@ -4994,8 +4994,11 @@
           }
         ],
         "x-ms-examples": {
-          "Create a transcription": {
-            "$ref": "./examples/create_transcription.json"
+          "Create a transcription for URIs": {
+            "$ref": "./examples/create_uri_transcription.json"
+          },
+          "Create a transcription from blob container": {
+            "$ref": "./examples/create_container_transcription.json"
           }
         }
       }
@@ -6151,6 +6154,12 @@
               }
             },
             "x-ms-error-response": true
+          },
+          "503": {
+            "description": "In case the service is temporarily not available.",
+            "schema": {
+              "$ref": "#/definitions/ServiceHealth"
+            }
           }
         },
         "security": [
@@ -6493,7 +6502,7 @@
           "type": "boolean"
         },
         "timeToLive": {
-          "description": "How long the endpoint will be kept in the system. Once the endpoint reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "description": "How long the endpoint will be kept in the system. Once the endpoint reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion. The longest supported duration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
         "email": {
@@ -6595,7 +6604,8 @@
             "NotAllowed",
             "Unauthorized",
             "UnsupportedMediaType",
-            "TooManyRequests"
+            "TooManyRequests",
+            "UnprocessableEntity"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6984,6 +6994,7 @@
             "InvalidLogStartTime",
             "InvalidLogEndTime",
             "InvalidTopForLogs",
+            "InvalidSkipTokenForLogs",
             "DeleteNotAllowed",
             "Forbidden",
             "DeployNotAllowed",
@@ -6993,7 +7004,8 @@
             "InvalidSasValidityDuration",
             "InaccessibleCustomerStorage",
             "UnsupportedClassBasedAdaptation",
-            "InvalidWebHookEventKind"
+            "InvalidWebHookEventKind",
+            "InvalidTimeToLive"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7678,7 +7690,7 @@
           }
         },
         "destinationContainerUrl": {
-          "description": "The requested destination container.",
+          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a {timeToLive}, the metadata of a transcription\r\nwill be deleted normally, but the stored data in the destination container will remain untouched, because no delete\r\npermissions are required for this container.<br />\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of {destinationContainerUrl}, where blobs can be cleaned up.",
           "type": "string"
         },
         "punctuationMode": {
@@ -7712,7 +7724,7 @@
           }
         },
         "timeToLive": {
-          "description": "How long the transcription will be kept in the system. Once the transcription reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "description": "How long the transcription will be kept in the system. Once the transcription reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion. The longest supported duration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
         "email": {
@@ -7757,6 +7769,10 @@
       ],
       "type": "object",
       "properties": {
+        "webUrl": {
+          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
+          "type": "string"
+        },
         "links": {
           "$ref": "#/definitions/WebHookLinks"
         },
@@ -7774,10 +7790,6 @@
         },
         "description": {
           "description": "The description of the object.",
-          "type": "string"
-        },
-        "webUrl": {
-          "description": "The registered URL that will be used to send the POST requests for the registered events to.",
           "type": "string"
         },
         "events": {
