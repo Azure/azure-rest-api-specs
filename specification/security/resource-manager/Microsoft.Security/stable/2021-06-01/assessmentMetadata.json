@@ -295,7 +295,7 @@
     },
     "SecurityAssessmentMetadataResponse": {
       "type": "object",
-      "description": "Security assessment metadata",
+      "description": "Security assessment metadata response",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -553,7 +553,8 @@
       ]
     },
     "SecurityAssessmentMetadataPropertiesResponse": {
-      "allof": [ { "$ref": "#/definitions/SecurityAssessmentMetadataProperties" } ],
+      "type": "object",
+      "description": "Describes properties of an assessment metadata response.",
       "properties": {
         "publishDates": {
           "type": "object",
@@ -569,7 +570,8 @@
           "type": "string",
           "pattern": "^[0-9]{2}\/[0-9]{4}$"
         }
-      }
+      },
+      "allof": [ { "$ref": "#/definitions/SecurityAssessmentMetadataProperties" } ]
     },
     "PublishDates": {
       "properties": {
