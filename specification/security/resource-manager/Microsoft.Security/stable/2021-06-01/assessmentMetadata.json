@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2020-01-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -55,7 +55,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -130,7 +130,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAssessmentMetadata"
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
             }
           },
           "default": {
@@ -260,7 +260,7 @@
     }
   },
   "definitions": {
-    "SecurityAssessmentMetadataList": {
+    "SecurityAssessmentMetadataResponseList": {
       "type": "object",
       "description": "List of security assessment metadata",
       "properties": {
@@ -268,7 +268,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAssessmentMetadata"
+            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
           }
         },
         "nextLink": {
@@ -285,6 +285,21 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "type": "object",
+      "description": "Security assessment metadata response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
         }
       },
       "allOf": [
@@ -535,6 +550,46 @@
       "required": [
         "partnerName",
         "secret"
+      ]
+    },
+    "SecurityAssessmentMetadataPropertiesResponse": {
+      "type": "object",
+      "description": "Describes properties of an assessment metadata response.",
+      "properties": {
+        "publishDates": {
+          "type": "object",
+          "properties": {
+            "PublicProd": { "$ref": "#/definitions/PublishDates" },
+            "Fairfax": { "$ref": "#/definitions/PublishDates" },
+            "MoonCake": { "$ref": "#/definitions/PublishDates" },
+            "USSec": { "$ref": "#/definitions/PublishDates" },
+            "USNat": { "$ref": "#/definitions/PublishDates" }
+          }
+        },
+        "plannedDeprecationDate": {
+          "type": "string",
+          "pattern": "^[0-9]{2}\/[0-9]{4}$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      ]
+    },
+    "PublishDates": {
+      "properties": {
+        "GA": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        },
+        "Public": {
+          "type": "string",
+          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+        }
+      },
+      "required": [
+        "Public"
       ]
     }
   },
