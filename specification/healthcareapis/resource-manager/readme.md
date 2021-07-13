@@ -28,7 +28,7 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-2021-01
 azure-arm: true
 ```
 
