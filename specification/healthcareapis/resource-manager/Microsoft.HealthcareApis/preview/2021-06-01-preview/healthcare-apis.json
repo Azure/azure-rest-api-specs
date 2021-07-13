@@ -1610,7 +1610,7 @@
           "202": {
             "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
             "schema": {
-                "$ref": "#/definitions/IotFhirDestination"
+              "$ref": "#/definitions/IotFhirDestination"
             }
           },
           "default": {
@@ -1657,13 +1657,13 @@
           "200": {
             "description": "Resource deleted.",
             "schema": {
-                "$ref": "#/definitions/IotFhirDestination"
+              "$ref": "#/definitions/IotFhirDestination"
             }
           },
           "202": {
             "description": "Delete request accepted; the operation will complete asynchronously.",
             "schema": {
-                "$ref": "#/definitions/IotFhirDestination"
+              "$ref": "#/definitions/IotFhirDestination"
             }
           },
           "204": {
@@ -2024,1309 +2024,1309 @@
       }
     }
   },
-    "definitions": {
-        "ServicesProperties": {
-            "description": "The properties of a service instance.",
-            "type": "object",
-            "properties": {
-                "provisioningState": {
-                    "description": "The provisioning state.",
-                    "enum": [
-                        "Deleting",
-                        "Succeeded",
-                        "Creating",
-                        "Accepted",
-                        "Verifying",
-                        "Updating",
-                        "Failed",
-                        "Canceled",
-                        "Deprovisioned"
-                    ],
-                    "type": "string",
-                    "readOnly": true,
-                    "x-ms-enum": {
-                        "name": "provisioningState",
-                        "modelAsString": true
-                    }
-                },
-                "accessPolicies": {
-                    "$ref": "#/definitions/ServiceAccessPoliciesInfo",
-                    "description": "The access policies of the service instance."
-                },
-                "cosmosDbConfiguration": {
-                    "$ref": "#/definitions/ServiceCosmosDbConfigurationInfo",
-                    "description": "The settings for the Cosmos DB database backing the service."
-                },
-                "authenticationConfiguration": {
-                    "$ref": "#/definitions/ServiceAuthenticationConfigurationInfo",
-                    "description": "The authentication configuration for the service instance."
-                },
-                "corsConfiguration": {
-                    "$ref": "#/definitions/ServiceCorsConfigurationInfo",
-                    "description": "The settings for the CORS configuration of the service instance."
-                },
-                "exportConfiguration": {
-                    "$ref": "#/definitions/ServiceExportConfigurationInfo",
-                    "description": "The settings for the export operation of the service instance."
-                },
-                "privateEndpointConnections": {
-                    "description": "The list of private endpoint connections that are set up for this resource.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-                    }
-                },
-                "publicNetworkAccess": {
-                    "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
-                    "enum": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "PublicNetworkAccess",
-                        "modelAsString": true
-                    }
-                },
-                "acrConfiguration": {
-                    "$ref": "#/definitions/ServiceAcrConfigurationInfo",
-                    "description": "The azure container registry settings used for convert data operation of the service instance."
-                }
-            }
-        },
-        "ServiceAccessPoliciesInfo": {
-            "description": "The access policies of the service instance.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/ServiceAccessPolicyEntry"
-            }
-        },
-        "ServiceAccessPolicyEntry": {
-            "description": "An access policy entry.",
-            "properties": {
-                "objectId": {
-                    "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
-                    "type": "string",
-                    "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
-                }
-            },
-            "required": [
-                "objectId"
-            ]
-        },
-        "ServiceCosmosDbConfigurationInfo": {
-            "description": "The settings for the Cosmos DB database backing the service.",
-            "type": "object",
-            "properties": {
-                "offerThroughput": {
-                    "type": "integer",
-                    "description": "The provisioned throughput for the backing database.",
-                    "readOnly": false,
-                    "minimum": 400,
-                    "maximum": 10000
-                },
-                "keyVaultKeyUri": {
-                    "type": "string",
-                    "description": "The URI of the customer-managed key for the backing database.",
-                    "readOnly": false
-                }
-            }
-        },
-        "ServiceAuthenticationConfigurationInfo": {
-            "description": "Authentication configuration information",
-            "type": "object",
-            "properties": {
-                "authority": {
-                    "type": "string",
-                    "description": "The authority url for the service",
-                    "readOnly": false
-                },
-                "audience": {
-                    "type": "string",
-                    "description": "The audience url for the service",
-                    "readOnly": false
-                },
-                "smartProxyEnabled": {
-                    "type": "boolean",
-                    "description": "If the SMART on FHIR proxy is enabled",
-                    "readOnly": false
-                }
-            }
-        },
-        "ServiceCorsConfigurationInfo": {
-            "description": "The settings for the CORS configuration of the service instance.",
-            "type": "object",
-            "properties": {
-                "origins": {
-                    "type": "array",
-                    "description": "The origins to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/ServiceCorsConfigurationOriginEntry"
-                    }
-                },
-                "headers": {
-                    "type": "array",
-                    "description": "The headers to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/ServiceCorsConfigurationHeaderEntry"
-                    }
-                },
-                "methods": {
-                    "type": "array",
-                    "description": "The methods to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/ServiceCorsConfigurationMethodEntry"
-                    }
-                },
-                "maxAge": {
-                    "type": "integer",
-                    "description": "The max age to be allowed via CORS.",
-                    "readOnly": false,
-                    "minimum": 0,
-                    "maximum": 99999
-                },
-                "allowCredentials": {
-                    "type": "boolean",
-                    "description": "If credentials are allowed via CORS.",
-                    "readOnly": false
-                }
-            }
-        },
-        "ServiceExportConfigurationInfo": {
-            "description": "Export operation configuration information",
-            "type": "object",
-            "properties": {
-                "storageAccountName": {
-                    "type": "string",
-                    "description": "The name of the default export storage account.",
-                    "readOnly": false
-                }
-            }
-        },
-        "ServiceAcrConfigurationInfo": {
-            "description": "Azure container registry configuration information",
-            "type": "object",
-            "properties": {
-                "loginServers": {
-                    "type": "array",
-                    "description": "The list of the ACR login servers.",
-                    "readOnly": false,
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "ServiceCorsConfigurationOriginEntry": {
-            "description": "An origin for CORS.",
-            "type": "string",
-            "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
-        },
-        "ServiceCorsConfigurationHeaderEntry": {
-            "description": "A header for CORS.",
-            "type": "string"
-        },
-        "ServiceCorsConfigurationMethodEntry": {
-            "description": "A method for CORS.",
-            "type": "string"
-        },
-        "ServicesDescription": {
-            "description": "The description of the service.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": false,
-                    "description": "The common properties of a service.",
-                    "$ref": "#/definitions/ServicesProperties"
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ServicesResource"
-                }
-            ]
-        },
-        "ServicesPatchDescription": {
-            "description": "The description of the service.",
-            "type": "object",
-            "properties": {
-                "tags": {
-                    "description": "Instance tags",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "properties": {
-                    "$ref": "#/definitions/ServicesPropertiesUpdateParameters",
-                    "description": "The properties for updating a service instance.",
-                    "x-ms-client-flatten": true
-                }
-            }
-        },
-        "ServicesResource": {
-            "description": "The common properties of a service.",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource identifier."
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource name.",
-                    "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource type."
-                },
-                "kind": {
-                    "readOnly": false,
-                    "type": "string",
-                    "description": "The kind of the service.",
-                    "enum": [
-                        "fhir",
-                        "fhir-Stu3",
-                        "fhir-R4"
-                    ],
-                    "x-ms-enum": {
-                        "name": "kind",
-                        "modelAsString": false
-                    }
-                },
-                "location": {
-                    "type": "string",
-                    "description": "The resource location.",
-                    "x-ms-mutability": [
-                        "create",
-                        "read"
-                    ]
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "The resource tags."
-                },
-                "etag": {
-                    "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
-                    "type": "string"
-                },
-                "identity": {
-                    "type": "object",
-                    "description": "Setting indicating whether the service has a managed identity associated with it.",
-                    "properties": {
-                        "principalId": {
-                            "readOnly": true,
-                            "type": "string",
-                            "description": "The principal ID of the resource identity."
-                        },
-                        "tenantId": {
-                            "readOnly": true,
-                            "type": "string",
-                            "description": "The tenant ID of the resource."
-                        },
-                        "type": {
-                            "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
-                            "type": "string",
-                            "enum": [
-                                "SystemAssigned",
-                                "None"
-                            ],
-                            "x-ms-enum": {
-                                "name": "ManagedServiceIdentityType",
-                                "modelAsString": true
-                            }
-                        }
-                    }
-                }
-            },
-            "x-ms-azure-resource": true,
-            "required": [
-                "location",
-                "kind"
-            ]
-        },
-        "ServicesDescriptionListResult": {
-            "description": "A list of service description objects with a next link.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of service description objects.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "A list of service description objects.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ServicesDescription"
-                    }
-                }
-            }
-        },
-        "ServicesPropertiesUpdateParameters": {
-            "description": "The properties for updating a service instance.",
-            "type": "object",
-            "properties": {
-                "publicNetworkAccess": {
-                    "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
-                    "enum": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "PublicNetworkAccess",
-                        "modelAsString": true
-                    }
-                }
-            }
-        },
-        "CheckNameAvailabilityParameters": {
-            "description": "Input values.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The name of the service instance to check.",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The fully qualified resource type which includes provider namespace.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name",
-                "type"
-            ]
-        },
-        "ServicesNameAvailabilityInfo": {
-            "description": "The properties indicating whether a given service name is available.",
-            "type": "object",
-            "properties": {
-                "nameAvailable": {
-                    "description": "The value which indicates whether the provided name is available.",
-                    "type": "boolean",
-                    "readOnly": true
-                },
-                "reason": {
-                    "description": "The reason for unavailability.",
-                    "enum": [
-                        "Invalid",
-                        "AlreadyExists"
-                    ],
-                    "type": "string",
-                    "readOnly": true,
-                    "x-ms-enum": {
-                        "name": "ServiceNameUnavailabilityReason",
-                        "modelAsString": false
-                    }
-                },
-                "message": {
-                    "description": "The detailed reason message.",
-                    "type": "string"
-                }
-            }
-        },
-        "PrivateEndpointConnectionDescription": {
-            "properties": {
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-                }
-            ],
-            "description": "The Private Endpoint Connection resource."
-        },
-        "PrivateLinkResourceDescription": {
-            "properties": {
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
-                }
-            ],
-            "description": "The Private Endpoint Connection resource."
-        },
-        "PrivateEndpointConnectionListResultDescription": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "description": "Array of private endpoint connections",
-                    "items": {
-                        "$ref": "#/definitions/PrivateEndpointConnectionDescription"
-                    }
-                }
-            },
-            "description": "List of private endpoint connection associated with the specified storage account"
-        },
-        "PrivateLinkResourceListResultDescription": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "description": "Array of private link resources",
-                    "items": {
-                        "$ref": "#/definitions/PrivateLinkResourceDescription"
-                    }
-                }
-            },
-            "description": "A list of private link resources"
-        },
-        "Error": {
-            "description": "Error details.",
-            "type": "object",
-            "properties": {
-                "error": {
-                    "description": "Error details",
-                    "$ref": "#/definitions/ErrorDetailsInternal"
-                }
-            }
-        },
-        "ErrorDetails": {
-            "description": "Error details.",
-            "type": "object",
-            "properties": {
-                "error": {
-                    "description": "Error details",
-                    "$ref": "#/definitions/ErrorDetailsInternal"
-                }
-            }
-        },
-        "ErrorDetailsInternal": {
-            "description": "Error details.",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "The error code.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "message": {
-                    "description": "The error message.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "target": {
-                    "description": "The target of the particular error.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "ListOperations": {
-            "description": "Available operations of the service",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "Collection of available operation details",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "readOnly": true,
-                    "items": {
-                        "$ref": "#/definitions/OperationDetail"
-                    }
-                },
-                "nextLink": {
-                    "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-                    "type": "string"
-                }
-            }
-        },
-        "OperationDetail": {
-            "description": "Service REST API operation.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Name of the operation",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "isDataAction": {
-                    "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
-                    "type": "boolean",
-                    "readOnly": true
-                },
-                "display": {
-                    "$ref": "#/definitions/OperationDisplay",
-                    "description": "Display of the operation"
-                },
-                "origin": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Default value is 'user,system'."
-                },
-                "actionType": {
-                    "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-                    "type": "string",
-                    "readOnly": true,
-                    "enum": [
-                        "Internal"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ActionType",
-                        "modelAsString": true
-                    }
-                }
-            }
-        },
-        "OperationDisplay": {
-            "description": "The object that represents the operation.",
-            "type": "object",
-            "properties": {
-                "provider": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Service provider: Microsoft.HealthcareApis"
-                },
-                "resource": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Type: Services"
-                },
-                "operation": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Name of the operation"
-                },
-                "description": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Friendly description for the operation,"
-                }
-            }
-        },
-        "OperationResultsDescription": {
-            "description": "The properties indicating the operation result of an operation on a service.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "The ID of the operation returned.",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "name": {
-                    "description": "The name of the operation result.",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "status": {
-                    "description": "The status of the operation being performed.",
-                    "enum": [
-                        "Canceled",
-                        "Succeeded",
-                        "Failed",
-                        "Requested",
-                        "Running"
-                    ],
-                    "readOnly": true,
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "OperationResultStatus",
-                        "modelAsString": true
-                    }
-                },
-                "startTime": {
-                    "description": "The time that the operation was started.",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "properties": {
-                    "x-ms-client-flatten": false,
-                    "description": "Additional properties of the operation result."
-                }
-            }
-        },
-        "ProvisioningState": {
-            "description": "The provisioning state.",
-            "enum": [
-                "Deleting",
-                "Succeeded",
-                "Creating",
-                "Accepted",
-                "Verifying",
-                "Updating",
-                "Failed",
-                "Canceled",
-                "Deprovisioned"
-            ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": true
-            }
-        },
-        "ResourceTags": {
-            "type": "object",
-            "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
-            "properties": {
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "x-ms-mutability": [
-                        "read",
-                        "create",
-                        "update"
-                    ],
-                    "description": "Resource tags."
-                }
-            }
-        },
-        "ResourceCore": {
-            "type" : "object",
-            "description": "The common properties for any resource, tracked or proxy.",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource identifier."
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource name.",
-                    "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource type."
-                },
-                "etag": {
-                    "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
-                    "type": "string"
-                }
-            },
-            "x-ms-azure-resource": true
-        },
-        "LocationBasedResource": {
-            "type" : "object",
-            "description": "The common properties for any location based resource, tracked or proxy.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceCore"
-                }
-            ],
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "The resource location.",
-                    "x-ms-mutability": [
-                        "create",
-                        "read"
-                    ]
-                }
-            },
-            "x-ms-azure-resource": true
-        },
-        "TaggedResource": {
-            "type" : "object",
-            "description": "The common properties of tracked resources in the service.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceTags"
-                },
-                {
-                    "$ref": "#/definitions/LocationBasedResource"
-                }
-            ],
-            "x-ms-azure-resource": true
-        },
-        "ServiceManagedIdentity": {
-            "description": "The managed identity of a service.",
-            "properties": {
-                "identity": {
-                    "type": "object",
-                    "description": "Setting indicating whether the service has a managed identity associated with it.",
-                    "properties": {
-                        "type": {
-                            "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
-                            "type": "string",
-                            "enum": [
-                                "SystemAssigned",
-                                "None"
-                            ],
-                            "x-ms-enum": {
-                                "name": "ManagedServiceIdentityType",
-                                "modelAsString": true
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "Workspace": {
-            "type": "object",
-            "description": "Workspace resource.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/TaggedResource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": false,
-                    "description": "Workspaces resource specific properties.",
-                    "type": "object",
-                    "x-ms-azure-resource": true,
-                    "properties": {
-                        "provisioningState": {
-                            "description": "The provisioning state.",
-                            "$ref": "#/definitions/ProvisioningState"
-                        }
-                    }
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            }
-        },
-        "WorkspacePatchResource": {
-            "type": "object",
-            "description": "Workspace patch properties",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceTags"
-                }
-            ]
-        },
-        "WorkspaceList": {
-            "description": "Collection of workspace object with a next link",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "Collection of resources.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Workspace"
-                    }
-                }
-            }
-        },
-        "DicomService": {
-            "type": "object",
-            "description": "The description of Dicom Service",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/TaggedResource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "description": "Dicom Service configuration.",
-                    "$ref": "#/definitions/DicomServiceProperties",
-                    "x-ms-client-flatten": true
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            }
-        },
-        "DicomServicePatchResource": {
-            "type": "object",
-            "description": "Dicom Service patch properties",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceTags"
-                }
-            ]
-        },
-        "DicomServiceCollection": {
-            "description": "The collection of Dicom Services.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of Dicom Services.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of Dicom Services.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/DicomService"
-                    }
-                }
-            }
-        },
-        "DicomServiceProperties": {
-            "description": "Dicom Service properties.",
-            "type": "object",
-            "properties": {
-                "provisioningState": {
-                    "description": "The provisioning state.",
-                    "$ref": "#/definitions/ProvisioningState"
-                },
-                "authenticationConfiguration": {
-                    "description": "Dicom Service authentication configuration.",
-                    "$ref": "#/definitions/DicomServiceAuthenticationConfiguration"
-                },
-                "serviceUrl": {
-                    "description": "The url of the Dicom Services.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "DicomServiceAuthenticationConfiguration": {
-            "description": "Authentication configuration information",
-            "type": "object",
-            "properties": {
-                "authority": {
-                    "type": "string",
-                    "description": "The authority url for the service",
-                    "readOnly": true
-                },
-                "audiences": {
-                    "type": "array",
-                    "description": "The audiences for the service",
-                    "items": {
-                        "$ref": "#/definitions/DicomAudience"
-                    },
-                    "readOnly": true
-                }
-            }
-        },
-        "DicomAudience": {
-            "description": "The audience for Dicom Service",
-            "type": "string",
-            "readOnly": true
-        },
-        "IotConnector": {
-            "type": "object",
-            "description": "IoT Connector definition.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/TaggedResource"
-                },
-                {
-                    "$ref": "#/definitions/ServiceManagedIdentity"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "description": "IoT Connector configuration.",
-                    "$ref": "#/definitions/IotConnectorProperties",
-                    "x-ms-client-flatten": true
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            }
-        },
-        "IotConnectorPatchResource": {
-            "type": "object",
-            "description": "Iot Connector patch properties",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceTags"
-                },
-                {
-                    "$ref": "#/definitions/ServiceManagedIdentity"
-                }
-            ]
-        },
-        "IotConnectorCollection": {
-            "description": "A collection of IoT Connectors.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of IoT Connectors.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of IoT Connectors.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/IotConnector"
-                    }
-                }
-            }
-        },
-        "IotConnectorProperties": {
-            "description": "IoT Connector properties.",
-            "type": "object",
-            "properties": {
-                "provisioningState": {
-                    "description": "The provisioning state.",
-                    "$ref": "#/definitions/ProvisioningState"
-                },
-                "ingestionEndpointConfiguration": {
-                    "description": "Source configuration.",
-                    "$ref": "#/definitions/IotEventHubIngestionEndpointConfiguration"
-                },
-                "deviceMapping": {
-                    "description": "Device Mappings.",
-                    "$ref": "#/definitions/IotMappingProperties"
-                }
-            }
-        },
-        "IotEventHubIngestionEndpointConfiguration": {
-            "type": "object",
-            "properties": {
-                "eventHubName": {
-                    "type": "string",
-                    "description": "Event Hub name to connect to."
-                },
-                "consumerGroup": {
-                    "type": "string",
-                    "description": "Consumer group of the event hub to connected to."
-                },
-                "fullyQualifiedEventHubNamespace": {
-                    "type": "string",
-                    "description": "Fully qualified namespace of the Event Hub to connect to."
-                }
-            },
-            "description": "Event Hub ingestion endpoint configuration"
-        },
-        "IotMappingProperties": {
-            "description": "The mapping content.",
-            "type": "object",
-            "properties": {
-                "content": {
-                    "description": "The mapping.",
-                    "type": "object"
-                }
-            }
-        },
-        "IotIdentityResolutionType": {
-            "description": "The type of IoT identity resolution to use with the destination.",
-            "enum": [
-                "Create",
-                "Lookup"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-                "name": "IotIdentityResolutionType",
-                "modelAsString": true
-            }
-        },
-        "IotDestinationProperties": {
-            "type": "object",
-            "description": "Common IoT Connector destination properties.",
-            "properties": {
-                "provisioningState": {
-                    "description": "The provisioning state.",
-                    "$ref": "#/definitions/ProvisioningState",
-                    "x-ms-client-flatten": true
-                }
-
-            }
-        },
-        "IotFhirDestinationProperties": {
-            "required": [
-                "resourceIdentityResolutionType",
-                "fhirServiceResourceId",
-                "fhirMapping"
-            ],
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/IotDestinationProperties"
-                }
-            ],
-            "description": "IoT Connector destination properties for an Azure FHIR service.",
-            "properties": {
-                "resourceIdentityResolutionType": {
-                    "description": "Determines how resource identity is resolved on the destination.",
-                    "$ref": "#/definitions/IotIdentityResolutionType"
-                },
-                "fhirServiceResourceId": {
-                    "type": "string",
-                    "description": "Fully qualified resource id of the FHIR service to connect to."
-                },
-                "fhirMapping": {
-                    "description": "FHIR Mappings",
-                    "$ref": "#/definitions/IotMappingProperties"
-                }
-            }
-        },
-        "IotFhirDestination": {
-            "required": [
-                "properties"
-            ],
-            "type": "object",
-            "description": "IoT Connector FHIR destination definition.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/LocationBasedResource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "description": "IoT FHIR Destination settings.",
-                    "$ref": "#/definitions/IotFhirDestinationProperties",
-                    "x-ms-client-flatten": true
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            }
-        },
-        "IotFhirDestinationCollection": {
-            "description": "A collection of IoT Connector FHIR destinations.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of IoT FHIR destinations.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of IoT Connector FHIR destinations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/IotFhirDestination"
-                    }
-                }
-            }
-        },
-        "FhirServiceCollection": {
-            "description": "A collection of Fhir services.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of Fhir Services.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of Fhir Services.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FhirService"
-                    }
-                }
-            }
-        },
-        "FhirService": {
-            "type": "object",
-            "description": "The description of Fhir Service",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/TaggedResource"
-                },
-                {
-                    "$ref": "#/definitions/ServiceManagedIdentity"
-                }
-            ],
-            "properties": {
-                "kind": {
-                    "readOnly": false,
-                    "type": "string",
-                    "description": "The kind of the service.",
-                    "enum": [
-                        "fhir-Stu3",
-                        "fhir-R4"
-                    ],
-                    "x-ms-enum": {
-                        "name": "fhirServiceKind",
-                        "modelAsString": false
-                    }
-                },
-                "properties": {
-                    "description": "Fhir Service configuration.",
-                    "$ref": "#/definitions/FhirServiceProperties",
-                    "x-ms-client-flatten": true
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-                }
-            }
-        },
-        "FhirServicePatchResource": {
-            "type": "object",
-            "description": "FhirService patch properties",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/ResourceTags"
-                },
-                {
-                    "$ref": "#/definitions/ServiceManagedIdentity"
-                }
-            ]
-        },
-        "FhirServiceProperties": {
-            "description": "Fhir Service properties.",
-            "type": "object",
-            "properties": {
-                "provisioningState": {
-                    "description": "The provisioning state.",
-                    "$ref": "#/definitions/ProvisioningState"
-                },
-                "accessPolicies": {
-                    "description": "Fhir Service access policies.",
-                    "$ref": "#/definitions/FhirServiceAccessPolicies"
-                },
-                "acrConfiguration": {
-                    "description": "Fhir Service ACR configuration.",
-                    "$ref":  "#/definitions/FhirServiceAcrConfiguration"
-                },
-                "authenticationConfiguration": {
-                    "description": "Fhir Service authentication configuration.",
-                    "$ref": "#/definitions/FhirServiceAuthenticationConfiguration"
-                },
-                "corsConfiguration": {
-                    "description": "Fhir Service Cors configuration.",
-                    "$ref": "#/definitions/FhirServiceCorsConfiguration"
-                },
-                "exportConfiguration": {
-                    "description": "Fhir Service export configuration.",
-                    "$ref": "#/definitions/FhirServiceExportConfiguration"
-                }
-            }
-        },
-        "FhirServiceAccessPolicies": {
-            "description": "The access policies of the service instance.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
-            }
-        },
-        "FhirServiceAccessPolicyEntry": {
-            "type" : "object",
-            "description": "An access policy entry.",
-            "properties": {
-                "objectId": {
-                    "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
-                    "type": "string",
-                    "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
-                }
-            },
-            "required": [
-                "objectId"
-            ]
-        },
-        "FhirServiceAcrConfiguration": {
-            "description": "Azure container registry configuration information",
-            "type": "object",
-            "properties": {
-                "loginServers": {
-                    "type": "array",
-                    "description": "The list of the ACR login servers.",
-                    "readOnly": false,
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "FhirServiceAuthenticationConfiguration": {
-            "description": "Authentication configuration information",
-            "type": "object",
-            "properties": {
-                "authority": {
-                    "type": "string",
-                    "description": "The authority url for the service",
-                    "readOnly": false
-                },
-                "audience": {
-                    "type": "string",
-                    "description": "The audience url for the service",
-                    "readOnly": false
-                },
-                "smartProxyEnabled": {
-                    "type": "boolean",
-                    "description": "If the SMART on FHIR proxy is enabled",
-                    "readOnly": false
-                }
-            }
-        },
-        "FhirServiceCorsConfiguration": {
-            "description": "The settings for the CORS configuration of the service instance.",
-            "type": "object",
-            "properties": {
-                "origins": {
-                    "type": "array",
-                    "description": "The origins to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/CorsConfigurationOriginEntry"
-                    }
-                },
-                "headers": {
-                    "type": "array",
-                    "description": "The headers to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/CorsConfigurationHeaderEntry"
-                    }
-                },
-                "methods": {
-                    "type": "array",
-                    "description": "The methods to be allowed via CORS.",
-                    "readOnly": false,
-                    "items": {
-                        "$ref": "#/definitions/CorsConfigurationMethodEntry"
-                    }
-                },
-                "maxAge": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "The max age to be allowed via CORS.",
-                    "readOnly": false,
-                    "minimum": 0,
-                    "maximum": 99999
-                },
-                "allowCredentials": {
-                    "type": "boolean",
-                    "description": "If credentials are allowed via CORS.",
-                    "readOnly": false
-                }
-            }
-        },
-        "CorsConfigurationOriginEntry": {
-            "description": "An origin for CORS.",
-            "type": "string",
-            "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
-        },
-        "CorsConfigurationHeaderEntry": {
-            "description": "A header for CORS.",
-            "type": "string"
-        },
-        "CorsConfigurationMethodEntry": {
-            "description": "A method for CORS.",
-            "type": "string"
-        },
-        "FhirServiceExportConfiguration": {
-            "description": "Export operation configuration information",
-            "type": "object",
-            "properties": {
-                "storageAccountName": {
-                    "type": "string",
-                    "description": "The name of the default export storage account.",
-                    "readOnly": false
-                }
-            }
+  "definitions": {
+    "ServicesProperties": {
+      "description": "The properties of a service instance.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Creating",
+            "Accepted",
+            "Verifying",
+            "Updating",
+            "Failed",
+            "Canceled",
+            "Deprovisioned"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "accessPolicies": {
+          "$ref": "#/definitions/ServiceAccessPoliciesInfo",
+          "description": "The access policies of the service instance."
+        },
+        "cosmosDbConfiguration": {
+          "$ref": "#/definitions/ServiceCosmosDbConfigurationInfo",
+          "description": "The settings for the Cosmos DB database backing the service."
+        },
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/ServiceAuthenticationConfigurationInfo",
+          "description": "The authentication configuration for the service instance."
+        },
+        "corsConfiguration": {
+          "$ref": "#/definitions/ServiceCorsConfigurationInfo",
+          "description": "The settings for the CORS configuration of the service instance."
+        },
+        "exportConfiguration": {
+          "$ref": "#/definitions/ServiceExportConfigurationInfo",
+          "description": "The settings for the export operation of the service instance."
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "acrConfiguration": {
+          "$ref": "#/definitions/ServiceAcrConfigurationInfo",
+          "description": "The azure container registry settings used for convert data operation of the service instance."
         }
+      }
     },
+    "ServiceAccessPoliciesInfo": {
+      "description": "The access policies of the service instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceAccessPolicyEntry"
+      }
+    },
+    "ServiceAccessPolicyEntry": {
+      "description": "An access policy entry.",
+      "properties": {
+        "objectId": {
+          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
+          "type": "string",
+          "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
+    },
+    "ServiceCosmosDbConfigurationInfo": {
+      "description": "The settings for the Cosmos DB database backing the service.",
+      "type": "object",
+      "properties": {
+        "offerThroughput": {
+          "type": "integer",
+          "description": "The provisioned throughput for the backing database.",
+          "readOnly": false,
+          "minimum": 400,
+          "maximum": 10000
+        },
+        "keyVaultKeyUri": {
+          "type": "string",
+          "description": "The URI of the customer-managed key for the backing database.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceAuthenticationConfigurationInfo": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceCorsConfigurationInfo": {
+      "description": "The settings for the CORS configuration of the service instance.",
+      "type": "object",
+      "properties": {
+        "origins": {
+          "type": "array",
+          "description": "The origins to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationOriginEntry"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "The headers to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationHeaderEntry"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationMethodEntry"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "description": "The max age to be allowed via CORS.",
+          "readOnly": false,
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "allowCredentials": {
+          "type": "boolean",
+          "description": "If credentials are allowed via CORS.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceExportConfigurationInfo": {
+      "description": "Export operation configuration information",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceAcrConfigurationInfo": {
+      "description": "Azure container registry configuration information",
+      "type": "object",
+      "properties": {
+        "loginServers": {
+          "type": "array",
+          "description": "The list of the ACR login servers.",
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServiceCorsConfigurationOriginEntry": {
+      "description": "An origin for CORS.",
+      "type": "string",
+      "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
+    },
+    "ServiceCorsConfigurationHeaderEntry": {
+      "description": "A header for CORS.",
+      "type": "string"
+    },
+    "ServiceCorsConfigurationMethodEntry": {
+      "description": "A method for CORS.",
+      "type": "string"
+    },
+    "ServicesDescription": {
+      "description": "The description of the service.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "The common properties of a service.",
+          "$ref": "#/definitions/ServicesProperties"
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicesResource"
+        }
+      ]
+    },
+    "ServicesPatchDescription": {
+      "description": "The description of the service.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Instance tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServicesPropertiesUpdateParameters",
+          "description": "The properties for updating a service instance.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServicesResource": {
+      "description": "The common properties of a service.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "kind": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind of the service.",
+          "enum": [
+            "fhir",
+            "fhir-Stu3",
+            "fhir-R4"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": false
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "etag": {
+          "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
+          "type": "string"
+        },
+        "identity": {
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of the resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of the resource."
+            },
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "kind"
+      ]
+    },
+    "ServicesDescriptionListResult": {
+      "description": "A list of service description objects with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of service description objects.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of service description objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicesDescription"
+          }
+        }
+      }
+    },
+    "ServicesPropertiesUpdateParameters": {
+      "description": "The properties for updating a service instance.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the service instance to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The fully qualified resource type which includes provider namespace.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ServicesNameAvailabilityInfo": {
+      "description": "The properties indicating whether a given service name is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value which indicates whether the provided name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for unavailability.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServiceNameUnavailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionDescription": {
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateLinkResourceDescription": {
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionListResultDescription": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+          }
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
+    },
+    "PrivateLinkResourceListResultDescription": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResourceDescription"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "Error": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ListOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Service REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Default value is 'user,system'."
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Service provider: Microsoft.HealthcareApis"
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Type: Services"
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "OperationResultsDescription": {
+      "description": "The properties indicating the operation result of an operation on a service.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the operation returned.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the operation result.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation being performed.",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "Requested",
+            "Running"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The time that the operation was started.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Additional properties of the operation result."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state.",
+      "enum": [
+        "Deleting",
+        "Succeeded",
+        "Creating",
+        "Accepted",
+        "Verifying",
+        "Updating",
+        "Failed",
+        "Canceled",
+        "Deprovisioned"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceTags": {
+      "type": "object",
+      "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ResourceCore": {
+      "type": "object",
+      "description": "The common properties for any resource, tracked or proxy.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "LocationBasedResource": {
+      "type": "object",
+      "description": "The common properties for any location based resource, tracked or proxy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCore"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TaggedResource": {
+      "type": "object",
+      "description": "The common properties of tracked resources in the service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/LocationBasedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ServiceManagedIdentity": {
+      "description": "The managed identity of a service.",
+      "properties": {
+        "identity": {
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Workspace resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Workspaces resource specific properties.",
+          "type": "object",
+          "x-ms-azure-resource": true,
+          "properties": {
+            "provisioningState": {
+              "description": "The provisioning state.",
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "WorkspacePatchResource": {
+      "type": "object",
+      "description": "Workspace patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        }
+      ]
+    },
+    "WorkspaceList": {
+      "description": "Collection of workspace object with a next link",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "DicomService": {
+      "type": "object",
+      "description": "The description of Dicom Service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dicom Service configuration.",
+          "$ref": "#/definitions/DicomServiceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "DicomServicePatchResource": {
+      "type": "object",
+      "description": "Dicom Service patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        }
+      ]
+    },
+    "DicomServiceCollection": {
+      "description": "The collection of Dicom Services.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Dicom Services.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Dicom Services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DicomService"
+          }
+        }
+      }
+    },
+    "DicomServiceProperties": {
+      "description": "Dicom Service properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "authenticationConfiguration": {
+          "description": "Dicom Service authentication configuration.",
+          "$ref": "#/definitions/DicomServiceAuthenticationConfiguration"
+        },
+        "serviceUrl": {
+          "description": "The url of the Dicom Services.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DicomServiceAuthenticationConfiguration": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": true
+        },
+        "audiences": {
+          "type": "array",
+          "description": "The audiences for the service",
+          "items": {
+            "$ref": "#/definitions/DicomAudience"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DicomAudience": {
+      "description": "The audience for Dicom Service",
+      "type": "string",
+      "readOnly": true
+    },
+    "IotConnector": {
+      "type": "object",
+      "description": "IoT Connector definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "IoT Connector configuration.",
+          "$ref": "#/definitions/IotConnectorProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "IotConnectorPatchResource": {
+      "type": "object",
+      "description": "Iot Connector patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "IotConnectorCollection": {
+      "description": "A collection of IoT Connectors.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Connectors.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of IoT Connectors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotConnector"
+          }
+        }
+      }
+    },
+    "IotConnectorProperties": {
+      "description": "IoT Connector properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "ingestionEndpointConfiguration": {
+          "description": "Source configuration.",
+          "$ref": "#/definitions/IotEventHubIngestionEndpointConfiguration"
+        },
+        "deviceMapping": {
+          "description": "Device Mappings.",
+          "$ref": "#/definitions/IotMappingProperties"
+        }
+      }
+    },
+    "IotEventHubIngestionEndpointConfiguration": {
+      "type": "object",
+      "properties": {
+        "eventHubName": {
+          "type": "string",
+          "description": "Event Hub name to connect to."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Consumer group of the event hub to connected to."
+        },
+        "fullyQualifiedEventHubNamespace": {
+          "type": "string",
+          "description": "Fully qualified namespace of the Event Hub to connect to."
+        }
+      },
+      "description": "Event Hub ingestion endpoint configuration"
+    },
+    "IotMappingProperties": {
+      "description": "The mapping content.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "The mapping.",
+          "type": "object"
+        }
+      }
+    },
+    "IotIdentityResolutionType": {
+      "description": "The type of IoT identity resolution to use with the destination.",
+      "enum": [
+        "Create",
+        "Lookup"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IotIdentityResolutionType",
+        "modelAsString": true
+      }
+    },
+    "IotDestinationProperties": {
+      "type": "object",
+      "description": "Common IoT Connector destination properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState",
+          "x-ms-client-flatten": true
+        }
+
+      }
+    },
+    "IotFhirDestinationProperties": {
+      "required": [
+        "resourceIdentityResolutionType",
+        "fhirServiceResourceId",
+        "fhirMapping"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotDestinationProperties"
+        }
+      ],
+      "description": "IoT Connector destination properties for an Azure FHIR service.",
+      "properties": {
+        "resourceIdentityResolutionType": {
+          "description": "Determines how resource identity is resolved on the destination.",
+          "$ref": "#/definitions/IotIdentityResolutionType"
+        },
+        "fhirServiceResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of the FHIR service to connect to."
+        },
+        "fhirMapping": {
+          "description": "FHIR Mappings",
+          "$ref": "#/definitions/IotMappingProperties"
+        }
+      }
+    },
+    "IotFhirDestination": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "description": "IoT Connector FHIR destination definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocationBasedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "IoT FHIR Destination settings.",
+          "$ref": "#/definitions/IotFhirDestinationProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "IotFhirDestinationCollection": {
+      "description": "A collection of IoT Connector FHIR destinations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT FHIR destinations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of IoT Connector FHIR destinations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotFhirDestination"
+          }
+        }
+      }
+    },
+    "FhirServiceCollection": {
+      "description": "A collection of Fhir services.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Fhir Services.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Fhir Services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FhirService"
+          }
+        }
+      }
+    },
+    "FhirService": {
+      "type": "object",
+      "description": "The description of Fhir Service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind of the service.",
+          "enum": [
+            "fhir-Stu3",
+            "fhir-R4"
+          ],
+          "x-ms-enum": {
+            "name": "fhirServiceKind",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "description": "Fhir Service configuration.",
+          "$ref": "#/definitions/FhirServiceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "FhirServicePatchResource": {
+      "type": "object",
+      "description": "FhirService patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "FhirServiceProperties": {
+      "description": "Fhir Service properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "accessPolicies": {
+          "description": "Fhir Service access policies.",
+          "$ref": "#/definitions/FhirServiceAccessPolicies"
+        },
+        "acrConfiguration": {
+          "description": "Fhir Service ACR configuration.",
+          "$ref": "#/definitions/FhirServiceAcrConfiguration"
+        },
+        "authenticationConfiguration": {
+          "description": "Fhir Service authentication configuration.",
+          "$ref": "#/definitions/FhirServiceAuthenticationConfiguration"
+        },
+        "corsConfiguration": {
+          "description": "Fhir Service Cors configuration.",
+          "$ref": "#/definitions/FhirServiceCorsConfiguration"
+        },
+        "exportConfiguration": {
+          "description": "Fhir Service export configuration.",
+          "$ref": "#/definitions/FhirServiceExportConfiguration"
+        }
+      }
+    },
+    "FhirServiceAccessPolicies": {
+      "description": "The access policies of the service instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
+      }
+    },
+    "FhirServiceAccessPolicyEntry": {
+      "type": "object",
+      "description": "An access policy entry.",
+      "properties": {
+        "objectId": {
+          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
+          "type": "string",
+          "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
+    },
+    "FhirServiceAcrConfiguration": {
+      "description": "Azure container registry configuration information",
+      "type": "object",
+      "properties": {
+        "loginServers": {
+          "type": "array",
+          "description": "The list of the ACR login servers.",
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FhirServiceAuthenticationConfiguration": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
+          "readOnly": false
+        }
+      }
+    },
+    "FhirServiceCorsConfiguration": {
+      "description": "The settings for the CORS configuration of the service instance.",
+      "type": "object",
+      "properties": {
+        "origins": {
+          "type": "array",
+          "description": "The origins to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationOriginEntry"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "The headers to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationHeaderEntry"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationMethodEntry"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max age to be allowed via CORS.",
+          "readOnly": false,
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "allowCredentials": {
+          "type": "boolean",
+          "description": "If credentials are allowed via CORS.",
+          "readOnly": false
+        }
+      }
+    },
+    "CorsConfigurationOriginEntry": {
+      "description": "An origin for CORS.",
+      "type": "string",
+      "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
+    },
+    "CorsConfigurationHeaderEntry": {
+      "description": "A header for CORS.",
+      "type": "string"
+    },
+    "CorsConfigurationMethodEntry": {
+      "description": "A method for CORS.",
+      "type": "string"
+    },
+    "FhirServiceExportConfiguration": {
+      "description": "Export operation configuration information",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    }
+  },
   "parameters": {
     "subscriptionId": {
       "name": "subscriptionId",
