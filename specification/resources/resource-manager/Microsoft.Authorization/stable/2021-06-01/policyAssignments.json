@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2020-09-01",
+    "version": "2021-06-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -99,8 +99,11 @@
           "Create or update a policy assignment with multiple non-compliance messages": {
             "$ref": "./examples/createPolicyAssignmentNonComplianceMessages.json"
           },
-          "Create or update a policy assignment with a managed identity": {
+          "Create or update a policy assignment with a system assigned identity": {
             "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
+          },
+          "Create or update a policy assignment with a user assigned identity": {
+            "$ref": "./examples/createPolicyAssignmentWithUserAssignedIdentity.json"
           },
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
@@ -161,8 +164,11 @@
           "Retrieve a policy assignment": {
             "$ref": "./examples/getPolicyAssignment.json"
           },
-          "Retrieve a policy assignment with a managed identity": {
+          "Retrieve a policy assignment with a system assigned identity": {
             "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
+          },
+          "Retrieve a policy assignment with a user assigned identity": {
+            "$ref": "./examples/getPolicyAssignmentWithUserAssignedIdentity.json"
           }
         },
         "parameters": [
@@ -743,18 +749,19 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal ID of the resource identity."
+          "description": "The principal ID of the resource identity.  This property will only be provided for a system assigned identity"
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant ID of the resource identity."
+          "description": "The tenant ID of the resource identity.  This property will only be provided for a system assigned identity"
         },
         "type": {
           "type": "string",
-          "description": "The identity type. This is the only required field when adding a system assigned identity to a resource.",
+          "description": "The identity type. This is the only required field when adding a system or user assigned identity to a resource.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
             "None"
           ],
           "x-ms-enum": {
@@ -766,14 +773,38 @@
                 "description": "Indicates that a system assigned identity is associated with the resource."
               },
               {
+                "value": "UserAssigned",
+                "description": "Indicates that a system assigned identity is associated with the resource."
+              },
+              {
                 "value": "None",
                 "description": "Indicates that no identity is associated with the resource or that the existing identity should be removed."
               }
             ]
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The user identity associated with the policy. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
-      "description": "Identity for the resource."
+      "description": "Identity for the resource.  Policy assignments support a maximum of one identity.  That is either a system assigned identity or a single user assigned identity."
     }
   },
   "parameters": {
