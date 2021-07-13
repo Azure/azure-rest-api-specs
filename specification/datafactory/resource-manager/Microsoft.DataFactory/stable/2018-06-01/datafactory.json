@@ -5015,6 +5015,20 @@
         }
       }
     },
+    "GitHubClientSecret": {
+      "description": "Client secret information for factory's bring your own app repository configuration.",
+      "type": "object",
+      "properties": {
+        "byoaSecretAkvUrl": {
+          "description": "Bring your own app client secret AKV URL.",
+          "type": "string"
+        },
+        "byoaSecretName": {
+          "description": "Bring your own app client secret name in AKV.",
+          "type": "string"
+        }
+      }
+    },
     "FactoryRepoUpdate": {
       "description": "Factory's git repo information.",
       "properties": {
@@ -5038,6 +5052,10 @@
         "gitHubClientId": {
           "description": "GitHub application client ID.",
           "type": "string"
+        },
+        "gitHubClientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
         },
         "gitHubAccessTokenBaseUrl": {
           "description": "GitHub access token base URL.",
