@@ -48,9 +48,17 @@ These are the global settings for the Marketplace Agreements API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-06-01
+tag: package-2021-01-01
 ```
 
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.MarketplaceOrdering/stable/2021-01-01/Agreements.json
+```
 
 ### Tag: package-2015-06-01
 
@@ -74,7 +82,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -82,8 +90,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace_ordering']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js marketplaceordering/resource-manager
 ```
 
 
@@ -104,40 +110,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.marketplaceordering
-  package-name: azure-mgmt-marketplaceordering
-  clear-output-folder: true
-  package-version: 0.1.0
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
-```
-
-Workaround invalid date-time returned by the server.
-
-``` yaml $(python)
-directive:
-  - from: swagger-document
-    where: $.definitions.AgreementProperties.properties.retrieveDatetime
-    transform: delete $.format
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Node.js
 
@@ -197,7 +170,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

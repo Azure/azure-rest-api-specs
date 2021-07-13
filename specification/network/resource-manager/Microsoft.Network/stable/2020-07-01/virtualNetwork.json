@@ -1496,11 +1496,29 @@
         },
         "privateEndpointNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private end point in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private end point in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateEndpointNetworkPolicies",
+            "modelAsString": true
+          }
         },
         "privateLinkServiceNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private link service in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private link service in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateLinkServiceNetworkPolicies",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the subnet."
@@ -1550,11 +1568,7 @@
         },
         "remoteAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the address space peered with the remote virtual network."
-        },
-        "remoteVirtualNetworkAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the current address space of the remote virtual network."
+          "description": "The reference to the remote virtual network address space."
         },
         "remoteBgpCommunities": {
           "$ref": "#/definitions/VirtualNetworkBgpCommunities",
@@ -1574,29 +1588,15 @@
             "modelAsString": true
           }
         },
-        "peeringSyncLevel": {
-          "type": "string",
-          "description": "The peering sync status of the virtual network peering.",
-          "enum": [
-            "FullySynced",
-            "RemoteUnsynced",
-            "LocalUnsynced",
-            "LocalAndRemoteUnsynced"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkPeeringLevel",
-            "modelAsString": true
-          }
-        },
-        "syncRemoteAddressSpace": {
-          "type": "boolean",
-          "default": false,
-          "description": "Provided when user wants to sync the peering with address space on the remote virtual network after the address space is updated."
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resourceGuid property of the Virtual Network peering resource."
         }
       },
       "description": "Properties of the virtual network peering."
@@ -1616,6 +1616,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1640,6 +1644,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1872,6 +1880,10 @@
             "type": "string"
           },
           "description": "Contains other available private IP addresses if the asked for address is taken."
+        },
+        "isPlatformReserved": {
+          "type": "boolean",
+          "description": "Private IP address platform reserved."
         }
       },
       "description": "Response for CheckIPAddressAvailability API service call."

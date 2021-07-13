@@ -25,21 +25,37 @@ To see additional help and options, run:
 These are the global settings for the Azure Maintenance API.
 
 ``` yaml
-title: MaintenanceClient
-description: Maintenance Client
 openapi-type: arm
-tag: package-preview-2020-07
+tag: package-2021-05
 ```
 
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Maintenance/stable/2021-05-01/Maintenance.json
+```
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.Maintenance/preview/2021-04-01-preview/Maintenance.json
+```
 
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
   - Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
 ```
+
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -69,13 +85,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js maintenance/resource-manager
 ```
 
 ## C#
@@ -89,7 +103,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Maintenance
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Maintenance/Management.Maintenance/Generated
+  output-folder: $(csharp-sdks-folder)/maintenance/Microsoft.Azure.Management.Maintenance/src/Generated/
   clear-output-folder: true
 ```
 
@@ -105,7 +119,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

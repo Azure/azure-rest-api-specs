@@ -123,14 +123,19 @@ input-file:
 - Microsoft.DBforMySQL/preview/2020-07-01-preview/mysql.json
 ```
 
+### Tag: package-flexibleserver-2021-05-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2021-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-05-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2021-05-01-preview/mysql.json
+```
+
 ## Suppression
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: ServerSecurityAlertPolicies.json
-    reason: The name of the provider is Microsoft.DBforMySQL
-  - suppress: PathResourceProviderNamePascalCase
-    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json
@@ -155,8 +160,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js mysql/resource-manager
 ```
 
 
@@ -186,7 +189,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -94,7 +94,6 @@ These settings apply only when `--tag=package-2019-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2019-05-01'
 input-file:
     - "Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json"
@@ -113,6 +112,7 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json"
     - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json"
 ```
@@ -189,6 +189,7 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json
 
 ```
 

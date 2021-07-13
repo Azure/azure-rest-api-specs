@@ -35,11 +35,66 @@
   },
   "paths": {},
   "definitions": {
+    "AccessInformationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessInformationContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged AccessInformation list representation."
+    },
     "AccessInformationContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessInformationContractProperties",
+          "description": "AccessInformation entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Tenant Settings."
+    },
+    "AccessInformationContractProperties": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether direct access is enabled."
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
+    },
+    "AccessInformationSecretsContract": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier."
+          "description": "Access Information type ('access' or 'gitAccess')"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
         },
         "primaryKey": {
           "type": "string",
@@ -55,6 +110,37 @@
         }
       },
       "description": "Tenant access information contract of the API Management service."
+    },
+    "AccessInformationCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessInformationCreateParameterProperties",
+          "description": "Tenant access information update parameter properties."
+        }
+      },
+      "description": "Tenant access information update parameters."
+    },
+    "AccessInformationCreateParameterProperties": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether direct access is enabled."
+        }
+      },
+      "description": "Tenant access information update parameters of the API Management service"
     },
     "AccessInformationUpdateParameters": {
       "properties": {
@@ -75,6 +161,51 @@
       },
       "description": "Tenant access information update parameters of the API Management service"
     },
+    "TenantSettingsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantSettingsContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged AccessInformation list representation."
+    },
+    "TenantSettingsContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantSettingsContractProperties",
+          "description": "TenantSettings entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Tenant Settings."
+    },
+    "TenantSettingsContractProperties": {
+      "properties": {
+        "settings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tenant settings"
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
+    },
     "ApiCollection": {
       "properties": {
         "value": {
@@ -84,6 +215,11 @@
           },
           "description": "Page values.",
           "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -207,11 +343,11 @@
               },
               {
                 "value": "swagger-json",
-                "description": "The contents are inline and Content Type is a OpenApi 2.0 Document."
+                "description": "The contents are inline and Content Type is a OpenAPI 2.0 JSON Document."
               },
               {
                 "value": "swagger-link-json",
-                "description": "The Open Api 2.0 document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 2.0 JSON document is hosted on a publicly accessible internet address."
               },
               {
                 "value": "wsdl",
@@ -223,19 +359,19 @@
               },
               {
                 "value": "openapi",
-                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in YAML format."
+                "description": "The contents are inline and Content Type is a OpenAPI 3.0 YAML Document."
               },
               {
                 "value": "openapi+json",
-                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in JSON format."
+                "description": "The contents are inline and Content Type is a OpenAPI 3.0 JSON Document."
               },
               {
                 "value": "openapi-link",
-                "description": "The Open Api 3.0 document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 3.0 YAML document is hosted on a publicly accessible internet address."
               },
               {
                 "value": "openapi+json-link",
-                "description": "The Open Api 3.0 Json document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 3.0 JSON document is hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -421,6 +557,11 @@
           "description": "Page values.",
           "readOnly": true
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any.",
@@ -478,6 +619,11 @@
           },
           "description": "Page values.",
           "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -669,6 +815,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -708,7 +859,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -735,7 +886,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -813,7 +964,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -1254,6 +1405,11 @@
           },
           "description": "Backend values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -1320,13 +1476,21 @@
     },
     "BackendCredentialsContract": {
       "properties": {
+        "certificateIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Client Certificate Ids."
+        },
         "certificate": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "maxItems": 32,
-          "description": "List of Client Certificate Thumbprint."
+          "description": "List of Client Certificate Thumbprints. Will be ignored if certificatesIds are provided."
         },
         "query": {
           "type": "object",
@@ -1417,8 +1581,12 @@
     },
     "BackendServiceFabricClusterProperties": {
       "properties": {
+        "clientCertificateId": {
+          "description": "The client certificate id for the management endpoint.",
+          "type": "string"
+        },
         "clientCertificatethumbprint": {
-          "description": "The client certificate thumbprint for the management endpoint.",
+          "description": "The client certificate thumbprint for the management endpoint. Will be ignored if certificatesIds are provided",
           "type": "string"
         },
         "maxPartitionResolutionRetries": {
@@ -1449,8 +1617,7 @@
         }
       },
       "required": [
-        "managementEndpoints",
-        "clientCertificatethumbprint"
+        "managementEndpoints"
       ],
       "description": "Properties of the Service Fabric Type Backend."
     },
@@ -1559,6 +1726,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -1653,6 +1825,11 @@
             "$ref": "#/definitions/CertificateContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -1813,6 +1990,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -1965,6 +2147,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -2110,6 +2297,11 @@
             "$ref": "#/definitions/GroupContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -2452,6 +2644,11 @@
           },
           "description": "Identity Provider configuration values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -2499,6 +2696,11 @@
           },
           "description": "Issue Attachment values.",
           "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -2555,6 +2757,11 @@
           "description": "Issue values.",
           "readOnly": true
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any.",
@@ -2572,6 +2779,11 @@
           },
           "description": "Issue Comment values.",
           "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -2747,7 +2959,7 @@
       "properties": {
         "secretIdentifier": {
           "type": "string",
-          "description": "Key vault secret identifier for fetching secret."
+          "description": "Key vault secret identifier for fetching secret. Providing a versioned secret will prevent auto-refresh. This requires Api Management service to be configured with aka.ms/apimmsi"
         },
         "identityClientId": {
           "type": "string",
@@ -2949,6 +3161,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -3030,6 +3247,11 @@
             "$ref": "#/definitions/OpenidConnectProviderContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -3131,6 +3353,11 @@
           },
           "description": "Page values.",
           "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -3434,6 +3661,11 @@
           },
           "description": "Policy Contract value."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -3525,6 +3757,7 @@
         },
         "scope": {
           "type": "integer",
+          "format": "int64",
           "description": "Binary OR value of the Snippet scope.",
           "readOnly": true
         }
@@ -3584,6 +3817,69 @@
         }
       },
       "description": "Delegation settings contract properties."
+    },
+    "PortalSettingsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalSettingsContract"
+          },
+          "description": "Descriptions of APIM policies."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        }
+      },
+      "description": "Descriptions of APIM policies."
+    },
+    "PortalSettingsContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalSettingsContractProperties",
+          "description": "Portal Settings contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Portal Settings for the Developer Portal."
+    },
+    "PortalSettingsContractProperties": {
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A delegation Url."
+        },
+        "validationKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+        },
+        "subscriptions": {
+          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
+          "description": "Subscriptions delegation settings."
+        },
+        "userRegistration": {
+          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
+          "description": "User registration delegation settings."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Redirect Anonymous users to the Sign-In page."
+        },
+        "termsOfService": {
+          "type": "object",
+          "$ref": "#/definitions/TermsOfServiceProperties",
+          "description": "Terms of service contract properties."
+        }
+      },
+      "description": "Sign-in settings contract properties."
     },
     "PortalSigninSettingProperties": {
       "properties": {
@@ -3647,6 +3943,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -3693,7 +3994,7 @@
         "description": {
           "type": "string",
           "description": "Product description. May include HTML formatting tags.",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 1000
         },
         "terms": {
@@ -3785,6 +4086,11 @@
             "$ref": "#/definitions/NamedValueContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -4035,6 +4341,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -4093,6 +4404,11 @@
             "$ref": "#/definitions/RecipientUserContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -4540,6 +4856,11 @@
           "description": "Api Schema Contract value.",
           "readOnly": true
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any.",
@@ -4601,6 +4922,11 @@
             "$ref": "#/definitions/SubscriptionContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -4882,6 +5208,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -4955,6 +5286,11 @@
           },
           "description": "Page values."
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
@@ -5015,6 +5351,11 @@
             "$ref": "#/definitions/TagResourceContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -5139,6 +5480,11 @@
             "$ref": "#/definitions/UserContract"
           },
           "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
         },
         "nextLink": {
           "type": "string",
@@ -5529,6 +5875,11 @@
           "description": "Page values.",
           "readOnly": true
         },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any.",
@@ -5725,6 +6076,48 @@
       },
       "description": "Gateway hostname configuration details."
     },
+    "GatewayCertificateAuthorityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCertificateAuthorityContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Gateway certificate authority list representation."
+    },
+    "GatewayCertificateAuthorityContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayCertificateAuthorityContractProperties",
+          "description": "Gateway certificate authority details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Gateway certificate authority details."
+    },
+    "GatewayCertificateAuthorityContractProperties": {
+      "properties": {
+        "isTrusted": {
+          "type": "boolean",
+          "description": "Determines whether certificate authority is trusted."
+        }
+      },
+      "description": "Gateway certificate authority details."
+    },
     "AssociationContract": {
       "properties": {
         "properties": {
@@ -5899,6 +6292,103 @@
           "type": "string",
           "format": "date-time",
           "description": "UTC Timestamp when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
+        }
+      }
+    },
+    "PortalRevisionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalRevisionContract"
+          },
+          "description": "Collection of portal revisions.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of portal revisions."
+    },
+    "PortalRevisionContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalRevisionContractProperties",
+          "description": "Properties of the portal revisions."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Portal revisions contract details."
+    },
+    "PortalRevisionContractProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Portal revision description.",
+          "maxLength": 2000
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Portal revision publishing status details.",
+          "maxLength": 2000,
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Portal revision publishing status",
+          "enum": [
+            "pending",
+            "publishing",
+            "completed",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "portalRevisionStatus",
+            "values": [
+              {
+                "value": "pending",
+                "description": "Portal revision publishing is pending"
+              },
+              {
+                "value": "publishing",
+                "description": "Portal revision is publishing"
+              },
+              {
+                "value": "completed",
+                "description": "Portal revision publishing completed"
+              },
+              {
+                "value": "failed",
+                "description": "Portal revision publishing failed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "isCurrent": {
+          "type": "boolean",
+          "description": "Indicates if the Portal Revision is public."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Portal revision creation date and time."
+        },
+        "updatedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Last updated date and time."
         }
       }
     }

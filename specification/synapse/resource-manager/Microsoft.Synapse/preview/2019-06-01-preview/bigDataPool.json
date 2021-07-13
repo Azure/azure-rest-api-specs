@@ -418,7 +418,16 @@
         },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
-          "description": "Whether session level library/package management is enabled or not."
+          "description": "Whether session level packages enabled."
+        },
+        "cacheSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cache size"
+        },
+        "dynamicExecutorAllocation": {
+          "$ref": "#/definitions/DynamicExecutorAllocation",
+          "description": "Dynamic Executor Allocation"
         },
         "sparkEventsFolder": {
           "type": "string",
@@ -480,6 +489,12 @@
             "name": "NodeSizeFamily",
             "modelAsString": true
           }
+        },
+        "lastSucceededTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the Big Data pool was updated successfully.",
+          "readOnly": true
         }
       }
     },
@@ -520,6 +535,16 @@
         }
       }
     },
+    "DynamicExecutorAllocation": {
+      "type": "object",
+      "description": "Dynamic Executor Allocation Properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        }
+      }
+    },
     "LibraryInfo": {
       "type": "object",
       "description": "Library/package information of a Big Data pool powered by Apache Spark",
@@ -540,11 +565,22 @@
         "uploadedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The last update time of the library."
+          "description": "The last update time of the library.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "Type of the library."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
         }
       }
     },

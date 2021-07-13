@@ -125,7 +125,55 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/restartHosts/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_GetAsyncOperationStatus",
+        "description": "Gets the async operation status.",
+        "x-ms-examples": {
+          "Gets the async operation status of restarting host.": {
+            "$ref": "./examples/GetRestartHostsAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/AsyncOperationResult"
+            }
+          }
+        }
       }
     }
   },
@@ -135,6 +183,14 @@
       "properties": {
         "name": {
           "description": "The host name",
+          "type": "string"
+        },
+        "fqdn": {
+          "description": "The Fully Qualified Domain Name of host",
+          "type": "string"
+        },
+        "effectiveDiskEncryptionKeyUrl": {
+          "description": "The effective disk encryption key URL used by the host",
           "type": "string"
         }
       },
@@ -200,6 +256,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -150,6 +150,142 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_GetAzureAsyncOperationStatus",
+        "description": "Get the async operation status.",
+        "x-ms-examples": {
+          "Gets the azure async operation status.": {
+            "$ref": "./examples/HDI_Locations_GetAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_CheckNameAvailability",
+        "description": "Check the cluster name is available or not.",
+        "x-ms-examples": {
+          "Get the subscription usages for specific location": {
+            "$ref": "./examples/HDI_Locations_CheckClusterNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityCheckRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityCheckResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/validateCreateRequest": {
+      "post": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_ValidateClusterCreateRequest",
+        "description": "Validate the cluster create request spec is valid or not.",
+        "x-ms-examples": {
+          "Get the subscription usages for specific location": {
+            "$ref": "./examples/HDI_Locations_ValidateClusterCreateRequest.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterCreateRequestValidationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCreateValidationResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -165,7 +301,7 @@
           "description": "The display name"
         },
         "isDefault": {
-          "type": "string",
+          "type": "boolean",
           "description": "Whether or not the version is the default version."
         },
         "componentVersions": {
@@ -252,12 +388,27 @@
             "type": "string"
           }
         },
-        "vmsizes": {
+        "OsType": {
+          "description": "The list of OS types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "VMSizes": {
           "description": "The list of virtual machine sizes.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "ESPApplied": {
+          "description": "Whether apply for ESP cluster. 'true' means only for ESP, 'false' means only for non-ESP, null or empty string or others mean for both.",
+          "type": "string"
+        },
+        "ComputeIsolationSupported": {
+          "description": "Whether support compute isolation. 'true' means only for ComputeIsolationEnabled, 'false' means only for regular cluster.",
+          "type": "string"
         }
       },
       "readOnly": true
@@ -322,14 +473,14 @@
             "$ref": "#/definitions/RegionsCapability"
           }
         },
-        "vmSizes": {
+        "vmsizes": {
           "description": "The virtual machine sizes.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/VmSizesCapability"
           }
         },
-        "vmSize_filters": {
+        "vmsize_filters": {
           "description": "The virtual machine size compatibility filters.",
           "type": "array",
           "items": {
@@ -361,7 +512,8 @@
           "description": "The localized name of the used resource.",
           "type": "string"
         }
-      }
+      },
+      "readOnly": true
     },
     "Usage": {
       "description": "The details about the usage of a particular limited resource.",
@@ -372,17 +524,20 @@
         },
         "currentValue": {
           "description": "The current usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "limit": {
           "description": "The maximum allowed usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "name": {
           "description": "The details about the localizable name of the used resource.",
           "$ref": "#/definitions/LocalizedName"
         }
-      }
+      },
+      "readOnly": true
     },
     "UsagesListResult": {
       "description": "The response for the operation to get regional usages for a subscription.",
@@ -394,7 +549,8 @@
             "$ref": "#/definitions/Usage"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "BillingResponseListResult": {
       "type": "object",
@@ -407,6 +563,13 @@
             "type": "string"
           }
         },
+        "vmSizesWithEncryptionAtHost": {
+          "description": "The vm sizes which enable encryption at host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "vmSizeFilters": {
           "description": "The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.",
           "type": "array",
@@ -414,12 +577,71 @@
             "$ref": "#/definitions/VmSizeCompatibilityFilterV2"
           }
         },
+        "vmSizeProperties": {
+          "description": "The vm size properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeProperty"
+          },
+          "readOnly": true
+        },
         "billingResources": {
           "description": "The billing and managed disk billing resources for a region.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BillingResources"
           }
+        }
+      }
+    },
+    "VmSizeProperty": {
+      "type": "object",
+      "description": "The vm size property",
+      "properties": {
+        "name": {
+          "description": "The vm size name.",
+          "type": "string"
+        },
+        "cores": {
+          "description": "The number of cores that the vm size has.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "dataDiskStorageTier": {
+          "description": "The data disk storage tier of the vm size.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of the vm size.",
+          "type": "string"
+        },
+        "maxDataDiskCount": {
+          "description": "The max data disk count of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "memoryInMb": {
+          "description": "The memory whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "supportedByVirtualMachines": {
+          "description": "This indicates this vm size is supported by virtual machines or not",
+          "type": "boolean"
+        },
+        "supportedByWebWorkerRoles": {
+          "description": "The indicates this vm size is supported by web worker roles or not",
+          "type": "boolean"
+        },
+        "virtualMachineResourceDiskSizeInMb": {
+          "description": "The virtual machine resource disk size whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "webWorkerResourceDiskSizeInMb": {
+          "description": "The web worker resource disk size whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -432,7 +654,9 @@
           "type": "string",
           "enum": [
             "Exclude",
-            "Include"
+            "Include",
+            "Recommend",
+            "Default"
           ],
           "x-ms-enum": {
             "name": "FilterMode",
@@ -558,6 +782,157 @@
           }
         }
       }
+    },
+    "NameAvailabilityCheckRequestParameters": {
+      "type": "object",
+      "description": "The request spec of checking name availability.",
+      "properties": {
+        "name": {
+          "description": "The resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailabilityCheckResult": {
+      "type": "object",
+      "description": "The response spec of checking name availability.",
+      "properties": {
+        "nameAvailable": {
+          "description": "This indicates whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason of the result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The related message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterCreateRequestValidationParameters": {
+      "description": "The cluster create request specification.",
+      "allOf": [
+        {
+          "$ref": "./cluster.json#/definitions/ClusterCreateParametersExtended"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "The cluster name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id.",
+          "type": "string"
+        },
+        "fetchAaddsResource": {
+          "description": "This indicates whether fetch Aadds resource or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ClusterCreateValidationResult": {
+      "type": "object",
+      "description": "The response of cluster create request validation.",
+      "properties": {
+        "validationErrors": {
+          "description": "The validation errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationErrorInfo"
+          }
+        },
+        "validationWarnings": {
+          "description": "The validation warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationErrorInfo"
+          }
+        },
+        "estimatedCreationDuration": {
+          "description": "The estimated creation duration.",
+          "type": "string",
+          "format": "duration"
+        },
+        "aaddsResourcesDetails": {
+          "description": "The Azure active directory domain service resource details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AaddsResourceDetails"
+          }
+        }
+      }
+    },
+    "ValidationErrorInfo": {
+      "type": "object",
+      "description": "The validation error information.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "errorResource": {
+          "description": "The error resource.",
+          "type": "string"
+        },
+        "messageArguments": {
+          "description": "The message arguments",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AaddsResourceDetails": {
+      "type": "object",
+      "description": "The Azure active directory domain service resource details.",
+      "properties": {
+        "domainName": {
+          "description": "The Azure active directory domain service name.",
+          "type": "string"
+        },
+        "initialSyncComplete": {
+          "description": "This indicates whether initial sync complete or not.",
+          "type": "boolean"
+        },
+        "ldapsEnabled": {
+          "description": "This indicates whether enable ldaps or not.",
+          "type": "boolean"
+        },
+        "ldapsPublicCertificateInBase64": {
+          "description": "The base 64 format string of public ldap certificate.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The resource id of azure active directory domain service.",
+          "type": "string"
+        },
+        "subnetId": {
+          "description": "The subnet resource id.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of azure active directory domain service .",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -582,6 +957,24 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
+    },
+    "ValidationLevelParameter": {
+      "name": "validation-level",
+      "in": "query",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "default": -1,
+      "description": "The validation level.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

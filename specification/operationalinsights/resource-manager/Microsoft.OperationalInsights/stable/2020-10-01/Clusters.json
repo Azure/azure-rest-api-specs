@@ -48,13 +48,13 @@
         "description": "Gets Log Analytics clusters in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -67,7 +67,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -90,10 +90,10 @@
         "description": "Gets the Log Analytics clusters in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -129,13 +129,13 @@
         "description": "Create or update a Log Analytics cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "clusterName",
@@ -176,7 +176,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -195,7 +195,7 @@
         "description": "Deletes a cluster instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -205,13 +205,16 @@
             "description": "Name of the Log Analytics Cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted response definition."
+          },
           "200": {
             "description": "OK response definition."
           },
@@ -221,7 +224,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -240,13 +243,13 @@
         "description": "Gets a Log Analytics cluster instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "clusterName",
@@ -266,7 +269,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -284,7 +287,7 @@
         "description": "Updates a Log Analytics cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -303,10 +306,10 @@
             "description": "The parameters required to patch a Log Analytics cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -319,7 +322,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -366,40 +369,46 @@
           "description": "Sets whether the cluster will support availability zones. This can be set as true only in regions where Azure Data Explorer support Availability Zones. This Property can not be modified after cluster creation. Default value is 'true' if region supports Availability Zones."
         },
         "billingType": {
-          "type": "string",
-          "readOnly": false,
-          "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
-          "enum": [
-            "Cluster",
-            "Workspaces"
-          ],
-          "x-ms-enum": {
-            "name": "BillingType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
         },
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time the cluster was updated.",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The cluster creation time",
+          "readOnly": true
+        },
+        "associatedWorkspaces": {
+          "description": "The list of Log Analytics workspaces associated with the cluster",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociatedWorkspace"
+          }
+        },
+        "capacityReservationProperties": {
+          "$ref": "#/definitions/CapacityReservationProperties",
+          "description": "Additional properties for capacity reservation"
         }
       },
       "description": "Cluster properties."
-    },
-    "ClusterErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
     },
     "ClusterPatchProperties": {
       "properties": {
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
+        },
+        "billingType": {
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
         }
       },
       "description": "Log Analytics cluster patch properties."
@@ -453,7 +462,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The top level Log Analytics cluster resource container."
@@ -489,14 +498,24 @@
           "description": "The version of the key associated with the Log Analytics cluster.",
           "type": "string"
         },
-        "rsaKeySize": {
-          "description": "Selected key minimum required key size.",
+        "keyRsaSize": {
+          "description": "Selected key minimum required size.",
           "type": "integer",
-          "format": "int32",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "format": "int32"
         }
+      }
+    },
+    "billingType": {
+      "type": "string",
+      "readOnly": false,
+      "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
+      "enum": [
+        "Cluster",
+        "Workspaces"
+      ],
+      "x-ms-enum": {
+        "name": "BillingType",
+        "modelAsString": true
       }
     },
     "ClusterSku": {
@@ -534,7 +553,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.",
+          "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
@@ -571,6 +590,48 @@
           "readOnly": true,
           "description": "The client id of user assigned identity.",
           "type": "string"
+        }
+      }
+    },
+    "AssociatedWorkspace": {
+      "type": "object",
+      "description": "The list of Log Analytics workspaces associated with the cluster.",
+      "properties": {
+        "workspaceId": {
+          "readOnly": true,
+          "description": "The id of the assigned workspace.",
+          "type": "string"
+        },
+        "workspaceName": {
+          "readOnly": true,
+          "description": "The name id the assigned workspace.",
+          "type": "string"
+        },
+        "resourceId": {
+          "readOnly": true,
+          "description": "The ResourceId id the assigned workspace.",
+          "type": "string"
+        },
+        "associateDate": {
+          "readOnly": true,
+          "description": "The time of workspace association.",
+          "type": "string"
+        }
+      }
+    },
+    "CapacityReservationProperties": {
+      "description": "The Capacity Reservation properties.",
+      "properties": {
+        "lastSkuUpdate": {
+          "readOnly": true,
+          "description": "The last time Sku was updated.",
+          "type": "string"
+        },
+        "minCapacity": {
+          "readOnly": true,
+          "description": "Minimum CapacityReservation value in GB.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     }

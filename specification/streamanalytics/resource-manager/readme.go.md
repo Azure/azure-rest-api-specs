@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: streamanalytics
   clear-output-folder: true
 ```
@@ -13,6 +13,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-pure-2016-03
   - tag: package-2020-03-preview
 ```
 
@@ -25,15 +26,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2016-03-01/$(namespace)
 ```
 
-### Tag: package-pure-2017-04-preview and go
-
-These settings apply only when `--tag=package-pure-2017-04-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-pure-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-04-01-preview/$(namespace)
-```
-
 ### Tag: package-2020-03-preview and go
 
 These settings apply only when `--tag=package-2020-03-preview --go` is specified on the command line.
@@ -41,3 +33,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2020-03-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-03-01-preview/$(namespace)
+```

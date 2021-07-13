@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "customDomainName": "domain1",
+    "customDomainUpdateProperties": {
+      "properties": {
+        "tlsSettings": {
+          "certificateType": "CustomerCertificate",
+          "minimumTlsVersion": "TLS12"
+        },
+        "azureDnsZone": {
+          "id": ""
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/domains/domain1",
+        "name": "domain1",
+        "type": "Microsoft.Cdn/Profiles/CustomDomains",
+        "properties": {
+          "hostName": "www.contoso.com",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "minimumTlsVersion": "TLS12",
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "azureDnsZone": {
+            "id": ""
+          },
+          "validationProperties": {
+            "validationToken": "8c9912db-c615-4eeb-8465",
+            "expirationDate": "2009-06-15T13:45:43.0000000Z"
+          },
+          "domainValidationState": "Approved",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/domains/domain1",
+        "name": "domain1",
+        "type": "Microsoft.Cdn/Profiles/CustomDomains",
+        "properties": {
+          "hostName": "www.contoso.com",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "minimumTlsVersion": "TLS12",
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "azureDnsZone": {
+            "id": ""
+          },
+          "validationProperties": {
+            "validationToken": "8c9912db-c615-4eeb-8465",
+            "expirationDate": "2009-06-15T13:45:43.0000000Z"
+          },
+          "domainValidationState": "Approved",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}

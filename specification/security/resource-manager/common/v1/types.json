@@ -9,11 +9,11 @@
     "CloudError": {
       "x-ms-external": true,
       "type": "object",
-      "description": "Error response structure.",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
           "x-ms-client-flatten": true,
-          "description": "Error data",
+          "description": "The error object.",
           "$ref": "#/definitions/CloudErrorBody"
         }
       }
@@ -21,19 +21,55 @@
     "CloudErrorBody": {
       "x-ms-external": true,
       "type": "object",
-      "description": "Error details.",
+      "description": "The error detail.",
       "properties": {
         "code": {
           "readOnly": true,
           "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+          "description": "The error code."
         },
         "message": {
           "readOnly": true,
           "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "Resource": {
       "type": "object",
@@ -297,6 +333,36 @@
           "readOnly": true,
           "type": "string",
           "description": "Azure resource Id"
+        }
+      }
+    },
+    "ExternalSecuritySolutionKind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CEF"
+              },
+              {
+                "value": "ATA"
+              },
+              {
+                "value": "AAD"
+              }
+            ]
+          }
         }
       }
     }

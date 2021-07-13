@@ -17,18 +17,17 @@
         "summary": "Gets the configuration profile for the Microsoft.ChangeAnalysis resource provider. The profile name should be always set to 'default'.",
         "operationId": "ConfigurationProfile_Get",
         "produces": [
-          "application/json",
-          "default"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -41,7 +40,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -61,18 +60,17 @@
           "application/json"
         ],
         "produces": [
-          "application/json",
-          "default"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -93,7 +91,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -116,18 +114,17 @@
           "application/json"
         ],
         "produces": [
-          "application/json",
-          "default"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -148,7 +145,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -168,17 +165,17 @@
         "summary": "Deletes existing configuration profile. The profile name should be always set to 'default'",
         "operationId": "ConfigurationProfile_Delete",
         "produces": [
-          "default"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -191,7 +188,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -210,12 +207,11 @@
         "summary": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their descriptions.",
         "operationId": "Operations_List",
         "produces": [
-          "application/json",
-          "default"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "query",
@@ -234,7 +230,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -371,7 +367,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ExtendedProxyResource"
         }
       ],
       "properties": {
@@ -383,24 +379,15 @@
         }
       }
     },
-    "ProxyResource": {
+    "ExtendedProxyResource": {
       "description": "An Azure resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "systemData": {
           "$ref": "#/definitions/SystemData"
         }
@@ -458,19 +445,6 @@
           "type": "string"
         }
       }
-    },
-    "Error": {
-      "description": "Unexpected Microsoft.ChangeAnalysis Resource Provider Error.",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -482,20 +456,6 @@
       "type": "string",
       "pattern": "^(?!.*-$)[^-][a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The Microsoft Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The resource provider API version.",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {

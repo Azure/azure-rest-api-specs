@@ -50,6 +50,20 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```
 
+### Tag: package-pure-2020-03
+
+These settings apply only when `--tag=package-pure-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-pure-2020-03'
+input-file:
+- Microsoft.StreamAnalytics/stable/2020-03-01/streamingjobs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/inputs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/outputs.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/transformations.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/functions.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/subscriptions.json
+```
+
 ### Tag: package-pure-2020-03-preview
 
 These settings apply only when `--tag=package-pure-2020-03-preview` is specified on the command line.
@@ -105,7 +119,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -114,8 +127,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stream_analytics']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js streamanalytics/resource-manager
 ```
 
 ## C#
@@ -135,6 +146,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -229,7 +244,5 @@ directive:
     reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

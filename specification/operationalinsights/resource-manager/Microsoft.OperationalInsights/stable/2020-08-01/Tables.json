@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -127,7 +127,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -183,8 +183,6 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "minimum": 30,
-          "maximum": 730,
           "description": "The data table data retention in days, between 30 and 730. Setting this property to null will default to the workspace retention."
         }
       },
@@ -216,16 +214,6 @@
         }
       },
       "description": "The list tables operation response."
-    },
-    "ErrorContract": {
-      "title": "Error details.",
-      "description": "Contains details when the response code indicates an error.",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
     }
   },
   "parameters": {

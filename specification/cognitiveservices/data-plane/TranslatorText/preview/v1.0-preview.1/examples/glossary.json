@@ -14,8 +14,7 @@
           "code": "RequestRateTooHigh",
           "message": "User's request rate is too high",
           "innerError": {
-            "code": 429000,
-            "error": "RateTooHigh",
+            "code": "RateTooHigh",
             "message": "Request rate is too high"
           }
         }
@@ -28,8 +27,7 @@
           "code": "InternalServerError",
           "message": "Internal Server Error",
           "innerError": {
-            "code": 500000,
-            "error": "Internal Server Error",
+            "code": "InternalServerError",
             "message": "Unexpected internal server error has occurred"
           }
         }
@@ -42,8 +40,7 @@
           "code": "ServiceUnavailable",
           "message": "Service is temporary unavailable",
           "innerError": {
-            "code": 503000,
-            "error": "ServiceTemporaryUnavailable",
+            "code": "ServiceTemporaryUnavailable",
             "message": "Service is currently unavailable.  Please try again later"
           }
         }
@@ -51,6 +48,7 @@
     },
     "200": {
       "headers": {
+        "retry-after": "30",
         "ETag": "686897696a7c876b7e"
       },
       "body": {
@@ -63,9 +61,11 @@
             "contentTypes": [
               "application/xliff+xml"
             ],
+            "defaultVersion": "1.2",
             "versions": [
-              "1.2",
-              "2.0"
+              "1.0",
+              "1.1",
+              "1.2"
             ]
           },
           {
@@ -74,7 +74,13 @@
               ".tmx"
             ],
             "contentTypes": [],
-            "versions": []
+            "versions": [
+              "1.0",
+              "1.1",
+              "1.2",
+              "1.3",
+              "1.4"
+            ]
           }
         ]
       }

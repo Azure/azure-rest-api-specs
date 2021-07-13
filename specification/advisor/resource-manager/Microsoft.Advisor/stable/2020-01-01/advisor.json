@@ -46,6 +46,13 @@
             "description": "Client sent unknown metadata name",
             "schema": {
               "$ref": "#/definitions/ARMErrorResponseBody"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -73,6 +80,12 @@
             "description": "OK. Successfully retrieved metadata entities",
             "schema": {
               "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -330,6 +343,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -369,6 +388,12 @@
           },
           "204": {
             "description": "NoContent. Recommendation generation has been completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -405,7 +430,8 @@
             "in": "query",
             "description": "The number of recommendations per page if a paged version of this API is being used.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$skipToken",
@@ -420,6 +446,12 @@
             "description": "OK. Successfully obtained cached recommendations.",
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -451,6 +483,12 @@
             "description": "OK. Successfully retrieved operation list.",
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -491,6 +529,12 @@
             "description": "OK. Successfully got recommendation detail.",
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -540,6 +584,19 @@
             "description": "OK. Successfully got suppression detail.",
             "schema": {
               "$ref": "#/definitions/SuppressionContract"
+            }
+          },
+          "404": {
+            "description": "Suppression name is not specified or Suppression Id not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -597,6 +654,19 @@
             "schema": {
               "$ref": "#/definitions/SuppressionContract"
             }
+          },
+          "404": {
+            "description": "Recommendation to be suppressed is not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -641,6 +711,12 @@
         "responses": {
           "204": {
             "description": "NoContent. The recommendation has been activated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -686,6 +762,12 @@
             "description": "OK. Successfully got all suppressions in a subscription.",
             "schema": {
               "$ref": "#/definitions/SuppressionContractListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -1057,6 +1139,46 @@
         "resourceMetadata": {
           "$ref": "#/definitions/ResourceMetadata",
           "description": "Metadata of resource that was assessed"
+        },
+        "description": {
+          "description": "The detailed description of recommendation.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of recommendation.",
+          "type": "string"
+        },
+        "learnMoreLink": {
+          "description": "The link to learn more about recommendation and generation logic.",
+          "type": "string"
+        },
+        "potentialBenefits": {
+          "description": "The potential benefit of implementing recommendation.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of recommended actions to implement recommendation.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        },
+        "remediation": {
+          "description": "The automated way to apply recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "exposedMetadataProperties": {
+          "description": "The recommendation metadata properties exposed to customer to provide additional information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -1105,6 +1227,21 @@
         },
         "source": {
           "description": "Source from which recommendation is generated",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to view resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "singular": {
+          "description": "The singular user friendly name of resource type. eg: virtual machine",
+          "type": "string"
+        },
+        "plural": {
+          "description": "The plural user friendly name of resource type. eg: virtual machines",
           "type": "string"
         }
       }
@@ -1188,6 +1325,12 @@
         },
         "ttl": {
           "description": "The duration for which the suppression is valid.",
+          "type": "string"
+        },
+        "expirationTimeStamp": {
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Gets or sets the expiration time stamp.",
           "type": "string"
         }
       }

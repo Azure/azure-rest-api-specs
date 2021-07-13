@@ -173,10 +173,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The tags for the resource were updated successfully.",
+            "description": "The tags/properties for the resource were updated successfully.",
             "schema": {
               "$ref": "#/definitions/ServicesDescription"
             }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted; the operation will complete asynchronously."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -818,6 +821,7 @@
       "properties": {
         "offerThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
           "minimum": 400,
@@ -881,6 +885,7 @@
         },
         "maxAge": {
           "type": "integer",
+          "format": "int32",
           "description": "The max age to be allowed via CORS.",
           "readOnly": false,
           "minimum": 0,
@@ -1113,6 +1118,10 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
         },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
         "origin": {
           "readOnly": true,
           "type": "string",
@@ -1121,6 +1130,10 @@
         "display": {
           "description": "The information displayed about the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -1149,6 +1162,11 @@
           "description": "Friendly description for the operation,"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     },
     "ServicesPropertiesUpdateParameters": {
       "description": "The properties for updating a service instance.",

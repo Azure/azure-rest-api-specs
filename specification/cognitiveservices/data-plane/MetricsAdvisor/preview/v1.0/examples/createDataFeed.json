@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "body": {
+      "dataSourceParameter": {
+        "connectionString": "Server=PlaceholderSqlServer,1433;Initial Catalog=PlaceholderDatabase;User ID=PlaceholderUserName;Password=PlaceholderPassword;",
+        "query": "select * from your_table where timestamp = @StartTime"
+      },
+      "dataFeedName": "Sample - cost/revenue - city/category",
+      "dataFeedDescription": "This is a sample data feed.",
+      "granularityName": "Daily",
+      "metrics": [
+        {
+          "metricName": "cost",
+          "metricDisplayName": "cost"
+        },
+        {
+          "metricName": "revenue",
+          "metricDisplayName": "revenue"
+        }
+      ],
+      "dimension": [
+        {
+          "dimensionName": "category",
+          "dimensionDisplayName": "category"
+        },
+        {
+          "dimensionName": "city",
+          "dimensionDisplayName": "city"
+        }
+      ],
+      "timestampColumn": "timestamp",
+      "dataStartFrom": "2020-01-01T00:00:00.000Z",
+      "dataSourceType": "SqlServer",
+      "startOffsetInSeconds": 86400,
+      "maxConcurrency": 5,
+      "minRetryIntervalInSeconds": 3600,
+      "stopRetryAfterInSeconds": 604800,
+      "needRollup": "NeedRollup",
+      "rollUpMethod": "Sum",
+      "allUpIdentification": "__SUM__",
+      "fillMissingPointType": "SmartFilling",
+      "viewMode": "Private",
+      "authenticationType": "Basic"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": ""
+      }
+    }
+  }
+}

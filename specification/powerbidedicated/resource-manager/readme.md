@@ -26,9 +26,19 @@ These are the global settings for the PowerBIDedicated API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10-01
+tag: package-2021-01-01
 ```
 
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.PowerBIdedicated/stable/2021-01-01/powerbidedicated.json
+- Microsoft.PowerBIdedicated/stable/2021-01-01/autoScaleVCores.json
+```
 
 ### Tag: package-2017-10-01
 
@@ -54,10 +64,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js powerbidedicated/resource-manager
 ```
 
 ## C#
@@ -97,6 +105,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbidedicated
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2017-10-01
+  - tag: package-2021-01-01
 ```
 
 ### Tag: package-2017-10-01 and java
@@ -112,13 +121,24 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2021-01-01 and java
+
+These settings apply only when `--tag=package-2021-01-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-01-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.powerbidedicated.v2020_12_28
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbidedicated/mgmt-v2020_12_28
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

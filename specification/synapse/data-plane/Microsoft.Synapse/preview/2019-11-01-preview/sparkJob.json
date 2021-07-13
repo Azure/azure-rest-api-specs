@@ -115,7 +115,7 @@
             "description": "Livy compatible batch job request payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sparkBatchJobOptions"
+              "$ref": "#/definitions/SparkBatchJobOptions"
             }
           }
         ],
@@ -711,14 +711,16 @@
         },
         "appId": {
           "type": "string",
-          "description": "The application id of this session"
+          "description": "The application id of this session",
+          "x-nullable": true
         },
         "appInfo": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The detailed application info."
+          "description": "The detailed application info.",
+          "x-nullable": true
         },
         "state": {
           "type": "string",
@@ -731,7 +733,8 @@
           "items": {
             "type": "string"
           },
-          "description": "The log lines."
+          "description": "The log lines.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -744,38 +747,45 @@
         "notStartedAt": {
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"not_started\" livy state was first seen."
+          "description": "the time that at which \"not_started\" livy state was first seen.",
+          "x-nullable": true
         },
         "startingAt": {
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"starting\" livy state was first seen."
+          "description": "the time that at which \"starting\" livy state was first seen.",
+          "x-nullable": true
         },
         "runningAt": {
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"running\" livy state was first seen."
+          "description": "the time that at which \"running\" livy state was first seen.",
+          "x-nullable": true
         },
         "deadAt": {
           "format": "date-time",
           "type": "string",
-          "description": "time that at which \"dead\" livy state was first seen."
+          "description": "time that at which \"dead\" livy state was first seen.",
+          "x-nullable": true
         },
         "successAt": {
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"success\" livy state was first seen."
+          "description": "the time that at which \"success\" livy state was first seen.",
+          "x-nullable": true
         },
         "killedAt": {
           "x-ms-client-name": "terminatedAt",
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"killed\" livy state was first seen."
+          "description": "the time that at which \"killed\" livy state was first seen.",
+          "x-nullable": true
         },
         "recoveringAt": {
           "format": "date-time",
           "type": "string",
-          "description": "the time that at which \"recovering\" livy state was first seen."
+          "description": "the time that at which \"recovering\" livy state was first seen.",
+          "x-nullable": true
         },
         "currentState": {
           "type": "string",
@@ -791,19 +801,23 @@
       "properties": {
         "submittedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "scheduledAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "endedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "cancellationRequestedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "currentState": {
           "enum": [
@@ -824,23 +838,28 @@
       "properties": {
         "preparationStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "resourceAcquisitionStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "submissionStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "monitoringStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "cleanupStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "currentState": {
           "enum": [
@@ -961,7 +980,7 @@
         }
       }
     },
-    "sparkBatchJobOptions": {
+    "SparkBatchJobOptions": {
       "type": "object",
       "properties": {
         "tags": {
@@ -1150,13 +1169,15 @@
           "type": "integer"
         },
         "appId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "appInfo": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-nullable": true
         },
         "state": {
           "type": "string"
@@ -1167,7 +1188,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -1179,40 +1201,49 @@
       "properties": {
         "notStartedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "startingAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "idleAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "deadAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "shuttingDownAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "killedAt": {
           "x-ms-client-name": "terminatedAt",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "recoveringAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "busyAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "errorAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "currentState": {
           "type": "string"
@@ -1345,7 +1376,8 @@
           "type": "string"
         },
         "output": {
-          "$ref": "#/definitions/SparkStatementOutput"
+          "$ref": "#/definitions/SparkStatementOutput",
+          "x-nullable": true
         }
       },
       "required": [
@@ -1367,15 +1399,18 @@
         },
         "ename": {
           "x-ms-client-name": "errorName",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "evalue": {
           "x-ms-client-name": "errorValue",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "traceback": {
           "uniqueItems": false,
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -1400,7 +1435,25 @@
           ],
           "x-ms-enum": {
             "name": "SparkStatementLanguageType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Spark",
+                "value": "spark"
+              },
+              {
+                "name": "PySpark",
+                "value": "pyspark"
+              },
+              {
+                "name": "DotNetSpark",
+                "value": "dotnetspark"
+              },
+              {
+                "name": "Sql",
+                "value": "sql"
+              }
+            ]
           },
           "type": "string"
         }
@@ -1410,7 +1463,9 @@
       "type": "object",
       "properties": {
         "msg": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "message",
+          "description": "The msg property from the Livy API. The value is always \"canceled\"."
         }
       }
     }

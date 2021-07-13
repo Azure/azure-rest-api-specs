@@ -97,6 +97,59 @@
         }
       }
     },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
     "ResourceIdentity": {
       "description": "Azure Active Directory identity configuration for a resource.",
       "type": "object",
@@ -110,7 +163,9 @@
         "type": {
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {

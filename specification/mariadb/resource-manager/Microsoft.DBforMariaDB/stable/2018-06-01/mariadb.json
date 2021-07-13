@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -241,7 +241,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -283,7 +283,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
@@ -365,7 +365,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas": {
       "get": {
         "tags": [
           "Replicas"
@@ -410,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -564,7 +564,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -609,7 +609,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -754,7 +754,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -796,7 +796,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -950,7 +950,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -995,7 +995,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -1096,7 +1096,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -1141,7 +1141,65 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "ConfigurationsUpdate"
+        ],
+        "operationId": "ServerParameters_ListUpdateConfigurations",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsUpdateByServer.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -1186,7 +1244,94 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/recoverableServers": {
+      "get": {
+        "tags": [
+          "RecoverableServers"
+        ],
+        "operationId": "RecoverableServers_Get",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/RecoverableServersGet.json"
+          }
+        },
+        "description": "Gets a recoverable MariaDB Server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoverableServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/performanceTiers": {
+      "get": {
+        "tags": [
+          "ServerBasedPerformanceTier"
+        ],
+        "operationId": "ServerBasedPerformanceTier_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersListByServer.json"
+          }
+        },
+        "description": "List all the performance tiers for a MariaDB server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -1228,7 +1373,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -1273,7 +1418,7 @@
         }
       }
     },
-    "/providers/Microsoft.DBForMariaDB/operations": {
+    "/providers/Microsoft.DBforMariaDB/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1312,8 +1457,8 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
-        "5.6",
-        "5.7"
+        "10.2",
+        "10.3"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -1330,6 +1475,20 @@
       "x-ms-enum": {
         "name": "SslEnforcementEnum",
         "modelAsString": false
+      }
+    },
+    "MinimalTlsVersion": {
+      "type": "string",
+      "description": "Enforce a minimal Tls version for the server.",
+      "enum": [
+        "TLS1_0",
+        "TLS1_1",
+        "TLS1_2",
+        "TLSEnforcementDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersionEnum",
+        "modelAsString": true
       }
     },
     "PublicNetworkAccess": {
@@ -1453,6 +1612,10 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
         "userVisibleState": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
@@ -1561,6 +1724,10 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
@@ -1601,7 +1768,8 @@
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1781,6 +1949,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "minimalTlsVersion": {
+              "$ref": "#/definitions/MinimalTlsVersion",
+              "description": "Enforce a minimal Tls version for the server."
             },
             "publicNetworkAccess": {
               "$ref": "#/definitions/PublicNetworkAccess",
@@ -2219,6 +2391,36 @@
           "type": "string",
           "description": "ID of the performance tier."
         },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Backup retention in days for the performance tier edition"
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum Backup retention in days for the performance tier edition"
+        },
+        "maxStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "maxLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
         "serviceLevelObjectives": {
           "type": "array",
           "items": {
@@ -2282,6 +2484,59 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "RecoverableServerProperties": {
+      "description": "The recoverable server's properties.",
+      "type": "object",
+      "properties": {
+        "lastAvailableBackupDateTime": {
+          "type": "string",
+          "description": "The last available backup date time.",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "type": "string",
+          "description": "The service level objective",
+          "readOnly": true
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the performance tier.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCore associated with the service level objective",
+          "readOnly": true
+        },
+        "hardwareGeneration": {
+          "type": "string",
+          "description": "Hardware generation associated with the service level objective",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The MariaDB version",
+          "readOnly": true
+        }
+      }
+    },
+    "RecoverableServerResource": {
+      "description": "A recoverable server resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "parameters": {

@@ -69,6 +69,28 @@
               "type": "string"
             }
           }
+        },
+        "policy": {
+          "$ref": "#/definitions/PipelinePolicy"
+        }
+      }
+    },
+    "PipelinePolicy": {
+      "description": "Pipeline Policy.",
+      "type": "object",
+      "properties": {
+        "elapsedTimeMetric": {
+          "$ref": "#/definitions/PipelineElapsedTimeMetricPolicy"
+        }
+      }
+    },
+    "PipelineElapsedTimeMetricPolicy": {
+      "description": "Pipeline ElapsedTime Metric Policy.",
+      "type": "object",
+      "properties": {
+        "duration": {
+          "description": "TimeSpan value, after which an Azure Monitoring Metric is fired.",
+          "type": "object"
         }
       }
     },
@@ -236,6 +258,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -399,7 +425,7 @@
       }
     },
     "AmazonS3ReadSettings": {
-      "description": "Azure data lake store read settings.",
+      "description": "Amazon S3 read settings.",
       "type": "object",
       "allOf": [
         {
@@ -567,6 +593,108 @@
         "useTempFileRename": {
           "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "AmazonS3CompatibleReadSettings": {
+      "description": "Amazon S3 Compatible read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 Compatible object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageReadSettings": {
+      "description": "Oracle Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Oracle Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -809,6 +937,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
@@ -1166,17 +1298,21 @@
       ],
       "properties": {
         "filePattern": {
-          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
-          "type": "string",
-          "enum": [
-            "setOfObjects",
-            "arrayOfObjects"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWriteFilePattern",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive."
         }
+      }
+    },
+    "JsonWriteFilePattern": {
+      "description": "All available filePatterns.",
+      "type": "string",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWriteFilePattern",
+        "modelAsString": true
       }
     },
     "AvroSource": {
@@ -1532,6 +1668,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -2046,17 +2186,8 @@
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "SapHanaDynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "SapHanaPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"SapHanaDynamicRange\". ",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP HANA source partitioning.",
@@ -2139,20 +2270,8 @@
           "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP table read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PartitionOnInt",
-            "PartitionOnCalendarYear",
-            "PartitionOnCalendarMonth",
-            "PartitionOnCalendarDate",
-            "PartitionOnTime"
-          ],
-          "x-ms-enum": {
-            "name": "SapTablePartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP table read in parallel. Possible values include: \"None\", \"PartitionOnInt\", \"PartitionOnCalendarYear\", \"PartitionOnCalendarMonth\", \"PartitionOnCalendarDate\", \"PartitionOnTime\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP table source partitioning.",
@@ -2284,8 +2403,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2322,8 +2441,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2360,8 +2479,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2398,8 +2517,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2429,8 +2548,8 @@
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2454,19 +2573,6 @@
           "type": "object",
           "description": "The minimum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         }
-      }
-    },
-    "SqlPartitionOption": {
-      "description": "The partition mechanism that will be used for Sql read in parallel.",
-      "type": "string",
-      "enum": [
-        "None",
-        "PhysicalPartitionsOfTable",
-        "DynamicRange"
-      ],
-      "x-ms-enum": {
-        "name": "SqlPartitionOption",
-        "modelAsString": true
       }
     },
     "FileSystemSource": {
@@ -2598,17 +2704,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Oracle read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "OraclePartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for Oracle read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Oracle source partitioning.",
@@ -2663,17 +2760,8 @@
           "description": "Teradata query. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for teradata read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "Hash",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "TeradataPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for teradata read in parallel. Possible values include: \"None\", \"Hash\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for teradata source partitioning.",
@@ -3438,17 +3526,8 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Netezza read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "DataSlice",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "NetezzaPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for Netezza read in parallel. Possible values include: \"None\", \"DataSlice\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Netezza source partitioning.",
@@ -3801,6 +3880,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -3964,6 +4047,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -4533,6 +4623,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -4775,6 +4872,36 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "MongoDbAtlasSink": {
+      "description": "A copy activity MongoDB Atlas sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MongoDbV2Sink": {
+      "description": "A copy activity MongoDB sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5623,6 +5750,10 @@
         "retentionTimeInDays": {
           "type": "object",
           "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
+        },
+        "autoUserSpecification": {
+          "type": "object",
+          "description": "Elevation level and scope for the user, default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
       "required": [
@@ -5890,24 +6021,28 @@
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
-          "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
+          "description": "Web activity authentication (Basic/ClientCertificate/MSI/ServicePrincipal)",
           "type": "string"
         },
         "pfx": {
-          "description": "Base64-encoded contents of a PFX file.",
+          "description": "Base64-encoded contents of a PFX file or Certificate when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
-          "type": "string"
+          "description": "Web activity authentication user name for basic authentication or ClientID when used for ServicePrincipal. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "password": {
-          "description": "Password for the PFX file or basic authentication.",
+          "description": "Password for the PFX file or basic authentication / Secret when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "userTenant": {
+          "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
@@ -6294,12 +6429,24 @@
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
           "type": "object"
         },
+        "mlPipelineEndpointId": {
+          "description": "ID of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "experimentName": {
           "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineParameters": {
           "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "dataPathAssignments": {
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -6310,13 +6457,18 @@
           "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
-      },
-      "required": [
-        "mlPipelineId"
-      ]
+      }
     },
     "AzureMLPipelineParameters": {
       "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
+    "AzureDataPathAssignments": {
+      "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request.",
       "type": "object",
       "additionalProperties": {
         "type": "object",
@@ -6921,23 +7073,26 @@
           "type": "object",
           "properties": {
             "computeType": {
-              "description": "Compute type of the cluster which will execute data flow job.",
-              "type": "string",
-              "enum": [
-                "General",
-                "MemoryOptimized",
-                "ComputeOptimized"
-              ],
-              "x-ms-enum": {
-                "name": "DataFlowComputeType",
-                "modelAsString": true
-              }
+              "description": "Compute type of the cluster which will execute data flow job. Possible values include: 'General', 'MemoryOptimized', 'ComputeOptimized'. Type: string (or Expression with resultType string)",
+              "type": "object"
             },
             "coreCount": {
-              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
-              "type": "integer"
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272. Type: integer (or Expression with resultType integer)",
+              "type": "object"
             }
           }
+        },
+        "traceLevel": {
+          "description": "Trace level setting used for data flow monitoring output. Supported values are: 'coarse', 'fine', and 'none'. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
+        "continueOnError": {
+          "description": "Continue on error setting used for data flow execution. Enables processing to continue if a sink fails. Type: boolean (or Expression with resultType boolean)",
+          "type": "object"
+        },
+        "runConcurrently": {
+          "description": "Concurrent run setting used for data flow execution. Allows sinks with the same save order to be processed concurrently. Type: boolean (or Expression with resultType boolean)",
+          "type": "object"
         }
       },
       "required": [
@@ -6960,6 +7115,101 @@
         "httpRequestTimeout": {
           "type": "object",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "SqlPartitionOption": {
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapHanaPartitionOption": {
+      "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "SapHanaDynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SapHanaPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapTablePartitionOption": {
+      "description": "The partition mechanism that will be used for SAP table read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PartitionOnInt",
+        "PartitionOnCalendarYear",
+        "PartitionOnCalendarMonth",
+        "PartitionOnCalendarDate",
+        "PartitionOnTime"
+      ],
+      "x-ms-enum": {
+        "name": "SapTablePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "OraclePartitionOption": {
+      "description": "The partition mechanism that will be used for Oracle read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "OraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "TeradataPartitionOption": {
+      "description": "The partition mechanism that will be used for teradata read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Hash",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "TeradataPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "NetezzaPartitionOption": {
+      "description": "The partition mechanism that will be used for Netezza read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "DataSlice",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "NetezzaPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "MetadataItem": {
+      "description": "Specify the name and value of custom metadata item.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Metadata item key name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Metadata item value. Type: string (or Expression with resultType string)."
         }
       }
     }

@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: R2059
@@ -77,7 +77,6 @@ These settings apply only when `--tag=package-2019-03-preview` is specified on t
 input-file:
 - Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-- Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-03-01-preview/operations.json
 - Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
@@ -130,15 +129,16 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js subscription/resource-manager
 ```
 
+## Pyhton
+
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 
@@ -204,7 +204,5 @@ description: The subscription client
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

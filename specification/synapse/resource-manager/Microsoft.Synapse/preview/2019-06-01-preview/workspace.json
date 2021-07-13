@@ -753,6 +753,9 @@
             },
             "description": "OK"
           },
+          "201": {
+            "description": "Created"
+          },
           "default": {
             "schema": {
               "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
@@ -763,6 +766,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or update managed identity sql control settings": {
             "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
@@ -1043,12 +1050,55 @@
         }
       }
     },
-    "BabylonConfiguration": {
-      "description": "Babylon Configuration",
+    "WorkspaceRepositoryConfiguration": {
+      "description": "Git integration settings",
       "type": "object",
       "properties": {
-        "babylonResourceId": {
-          "description": "Babylon Resource ID",
+        "type": {
+          "description": "Type of workspace repositoryID configuration. Example WorkspaceVSTSConfiguration, WorkspaceGitHubConfiguration",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "Account name",
+          "type": "string"
+        },
+        "projectName": {
+          "description": "VSTS project name",
+          "type": "string"
+        },
+        "repositoryName": {
+          "description": "Repository name",
+          "type": "string"
+        },
+        "collaborationBranch": {
+          "description": "Collaboration branch",
+          "type": "string"
+        },
+        "rootFolder": {
+          "description": "Root folder to use in the repository",
+          "type": "string"
+        },
+        "lastCommitId": {
+          "description": "The last commit ID",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The VSTS tenant ID",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "PurviewConfiguration": {
+      "description": "Purview Configuration",
+      "type": "object",
+      "properties": {
+        "purviewResourceId": {
+          "description": "Purview Resource ID",
           "type": "string"
         }
       }
@@ -1159,9 +1209,18 @@
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         },
-        "babylonConfiguration": {
-          "description": "Babylon Configuration",
-          "$ref": "#/definitions/BabylonConfiguration"
+        "workspaceRepositoryConfiguration": {
+          "description": "Git integration settings",
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
+        },
+        "purviewConfiguration": {
+          "description": "Purview Configuration",
+          "$ref": "#/definitions/PurviewConfiguration"
+        },
+        "adlaResourceId": {
+          "description": "The ADLA resource ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1199,14 +1258,22 @@
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         },
-        "babylonConfiguration": {
-          "description": "Babylon Configuration",
-          "$ref": "#/definitions/BabylonConfiguration"
+        "workspaceRepositoryConfiguration": {
+          "description": "Git integration settings",
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
+        },
+        "purviewConfiguration": {
+          "description": "Purview Configuration",
+          "$ref": "#/definitions/PurviewConfiguration"
         },
         "provisioningState": {
           "description": "Resource provisioning state",
           "type": "string",
           "readOnly": true
+        },
+        "encryption": {
+          "description": "The encryption details of the workspace",
+          "$ref": "#/definitions/EncryptionDetails"
         }
       }
     },
