@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/multiCloudConnector": {
+      "get": {
+        "x-ms-examples": {
+          "List all security multi cloud connectors of a specified subscription": {
+            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "MultiCloudConnector"
+        ],
+        "description": "Lists all the security multi cloud connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security multi cloud connectors for the specified subscription.",
+        "operationId": "MultiCloudConnector_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultiCloudConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/multiCloudConnector": {
+      "get": {
+        "x-ms-examples": {
+          "List all security multi cloud connectors of a specified resource group": {
+            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorsResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "MultiCloudConnector"
+        ],
+        "description": "Lists all the security multi cloud connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security multi cloud connectors for the specified resource group.",
+        "operationId": "MultiCloudConnector_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultiCloudConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/multiCloudConnector/{multiCloudConnectorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Retrieve a security multi cloud connector": {
+            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "MultiCloudConnector"
+        ],
+        "description": "Retrieves information about the model of a security multi cloud connectors.",
+        "operationId": "MultiCloudConnector_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MultiCloudConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultiCloudConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a security multi cloud connector": {
+            "$ref": "./examples/MultiCloudConnectors/PutMultiCloudConnectors_example.json"
+          }
+        },
+        "tags": [
+          "MultiCloudConnector"
+        ],
+        "description": "Creates or updates a multi cloud connector. If a security multi cloud connector is already created and a subsequent request is issued for the same multi cloud connector id, then it will be updated.",
+        "operationId": "MultiCloudConnector_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MultiCloudConnectorName"
+          },
+          {
+            "$ref": "#/parameters/MultiCloudConnectorInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultiCloudConnector"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MultiCloudConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security multi cloud connector": {
+            "$ref": "./examples/MultiCloudConnectors/DeleteMultiCloudConnector_example.json"
+          }
+        },
+        "tags": [
+          "MultiCloudConnector"
+        ],
+        "operationId": "MultiCloudConnector_Delete",
+        "description": "Deletes a security multi cloud connector.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MultiCloudConnectorName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MultiCloudConnectorList": {
+      "description": "List of security multi cloud connectors response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of security multi cloud connectors under the given scope.",
+          "items": {
+            "$ref": "#/definitions/MultiCloudConnector"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "MultiCloudConnector": {
+      "type": "object",
+      "description": "The security multi cloud connector resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security multi cloud connector data",
+          "$ref": "#/definitions/MultiCloudConnectorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MultiCloudConnectorProperties": {
+      "type": "object",
+      "description": "A set of properties that defines the multi cloud connector configuration.",
+      "properties": {
+        "hierarchyId": {
+          "type": "string",
+          "description": "The multi cloud resource identifier (account id in case of AWS connector)."
+        },
+        "multiCloudName": {
+          "type": "string",
+          "description": "The multi cloud resource's cloud name.",
+          "enum": [
+            "Azure",
+            "AWS",
+            "GCP"
+          ],
+          "x-ms-enum": {
+            "name": "cloudType",
+            "modelAsString": true
+          }
+        },
+        "offerings": {
+          "type": "array",
+          "description": "A collection of offerings for the security multi cloud connector.",
+          "items": {
+            "$ref": "#/definitions/multiCloudOffering"
+          }
+        }
+      }
+    },
+    "multiCloudOffering": {
+      "type": "object",
+      "description": "The security offering details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The offering name.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The offering description.",
+          "readOnly": true
+        },
+        "OfferingConfigurations": {
+          "type": "array",
+          "description": "A collection of offering configurations for the multi cloud offering.",
+          "items": {
+            "$ref": "#/definitions/multiCloudOfferingConfiguration"
+          }
+        }
+      }
+    },
+    "multiCloudOfferingConfiguration": {
+      "type": "object",
+      "description": "The configuration of the offering",
+      "discriminator": "multiCloudName",
+      "required": [
+        "multiCloudName"
+      ],
+      "properties": {
+        "policies": {
+          "type": "array",
+          "description": "The list of the required policies on the multi cloud roles for the offering.",
+          "items": {
+            "type": "string",
+            "description": "multi cloud role"
+          },
+          "readOnly": true
+        },
+        "CloudRoleName": {
+          "type": "string",
+          "description": "The multi cloud role name for the offering"
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional data regarding the connector for the partners",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MultiCloudConnectorName": {
+      "name": "multiCloudConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security multi cloud connector name.",
+      "x-ms-parameter-location": "method"
+    },
+    "MultiCloudConnectorInBody": {
+      "name": "MultiCloudConnector",
+      "in": "body",
+      "required": true,
+      "description": "The security multi cloud connector resource",
+      "schema": {
+        "$ref": "#/definitions/MultiCloudConnector"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

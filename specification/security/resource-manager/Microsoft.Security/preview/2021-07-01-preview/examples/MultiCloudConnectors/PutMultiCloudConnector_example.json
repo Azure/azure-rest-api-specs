@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01-preview",
+    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5",
+    "MultiCloudConnectorName": "exampleMultiCloudConnector",
+    "resourceGroupName": "exampleResourceGroup",
+    "MultiCloudConnector": {
+      "location": "Central US",
+      "etag": "etag value (must be supplied for update)",
+      "tags": {},
+      "properties": {
+        "hierarchyId": "exampleHierarchyId",
+        "multiCloudName": "AWS",
+        "offerings": [
+          {
+            "name": "monitoring",
+            "offeringConfigurations": [
+              {
+                "cloudRoleName": "arn:aws:iam::9843847875458:role/ASCMonitor"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/multiCloudConnector/exampleMultiCloudConnector",
+        "name": "exampleMultiCloudConnector",
+        "type": "Microsoft.Security/multiCloudConnector",
+        "location": "Central US",
+        "etag": "new etag value",
+        "tags": {},
+        "properties": {
+          "hierarchyId": "exampleHierarchyId",
+          "multiCloudName": "AWS",
+          "offerings": [
+            {
+              "name": "monitoring",
+              "description": "Monitor your resources",
+              "offeringConfigurations": [
+                {
+                  "policies": [
+                    "readS3",
+                    "write"
+                  ],
+                  "cloudRoleName": "arn:aws:iam::9843847875458:role/ASCMonitor",
+                  "additionalData": {
+                    "ARCResourceId": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/myTestRg/providers/Microsoft.Kubernetes/connectedClusters/myARCResource"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/multiCloudConnector/exampleMultiCloudConnector",
+        "name": "exampleMultiCloudConnector",
+        "type": "Microsoft.Security/multiCloudConnector",
+        "location": "Central US",
+        "etag": "new etag value",
+        "tags": {},
+        "properties": {
+          "hierarchyId": "exampleHierarchyId",
+          "multiCloudName": "AWS",
+          "offerings": [
+            {
+              "name": "monitoring",
+              "description": "Monitor your resources",
+              "offeringConfigurations": [
+                {
+                  "policies": [
+                    "readS3",
+                    "write"
+                  ],
+                  "cloudRoleName": "arn:aws:iam::9843847875458:role/ASCMonitor",
+                  "additionalData": {
+                    "ARCResourceId": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/myTestRg/providers/Microsoft.Kubernetes/connectedClusters/myARCResource"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
