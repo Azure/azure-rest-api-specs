@@ -1088,14 +1088,26 @@
           "description": "Version of the guest configuration."
         },
         "contentUri": {
-          "readOnly": true,
           "type": "string",
           "description": "Uri of the storage where guest configuration package is uploaded."
         },
         "contentHash": {
-          "readOnly": true,
           "type": "string",
           "description": "Combined hash of the guest configuration package and configuration parameters."
+        },
+        "assignmentType": {
+          "type": "string",
+          "description": "Specifies the assignment type and execution of the configuration. Possible values are Audit, DeployAndAutoCorrect, ApplyAndAutoCorrect and ApplyAndMonitor.",
+          "x-ms-enum": {
+            "name": "assignmentType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Audit",
+            "DeployAndAutoCorrect",
+            "ApplyAndAutoCorrect",
+            "ApplyAndMonitor"
+          ]
         },
         "configurationParameter": {
           "type": "array",

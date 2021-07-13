@@ -52,7 +52,27 @@
           },
           "createdDateTime": "2020-02-20T00:10:29.2858439Z",
           "workspaceId": "5555555555555555",
-          "workspaceUrl": "adb-5555555555555555.19.azuredatabricks.net"
+          "workspaceUrl": "adb-5555555555555555.19.azuredatabricks.net",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subscriptionId/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace/privateEndpointConnections/myWorkspace.23456789-1111-1111-1111-111111111111",
+              "name": "myWorkspace.23456789-1111-1111-1111-111111111111",
+              "type": "Microsoft.Databricks/workspaces/privateEndpointConnections",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subscriptionId/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-Approved",
+                  "actionRequired": "None"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "publicNetworkAccess": "Disabled",
+          "requiredNsgRules": "NoAzureDatabricksRules"
         }
       }
     }
