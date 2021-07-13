@@ -1,4 +1,4 @@
-## Go
+## Java
 
 These settings apply only when `--java` is specified on the command line.
 
@@ -10,12 +10,7 @@ directive:
     set:
       type: object
       description: 'Describes an Azure resource with location'
-      properties:
-        location:
-          readOnly: true
-          type: string
-          description: 'Location where the resource is stored'
-    reason: discriminator property is required to be defined in the type
+    reason: discriminator property is required to be defined in the model
   - from: externalSecuritySolutions.json
     where: $.definitions.ExternalSecuritySolution.properties
     set:

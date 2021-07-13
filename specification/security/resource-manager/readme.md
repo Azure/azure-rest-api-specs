@@ -515,29 +515,4 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## Java
 
-``` yaml $(java)
-directive:
-  - from: externalSecuritySolutions.json
-    where: $.definitions.ExternalSecuritySolution.allOf[1]
-    set:
-      type: object
-      description: 'Describes an Azure resource with location'
-      properties:
-        location:
-          readOnly: true
-          type: string
-          description: 'Location where the resource is stored'
-  - from: externalSecuritySolutions.json
-    where: $.definitions.ExternalSecuritySolution.properties
-    set:
-      kind:
-        type: object
-        description: 'Describes an Azure resource with kind'
-        enum:
-          - CEF
-          - ATA
-          - AAD
-        x-ms-enum:
-          name: ExternalSecuritySolutionKind
-          modelAsString: true
-```
+See configuration in [readme.java.md](./readme.java.md)
