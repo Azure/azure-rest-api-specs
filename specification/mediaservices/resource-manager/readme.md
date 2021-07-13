@@ -40,6 +40,7 @@ input-file:
   - Microsoft.Media/stable/2021-06-01/AccountFilters.json
   - Microsoft.Media/stable/2021-06-01/AssetsAndAssetFilters.json
   - Microsoft.Media/stable/2021-06-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-06-01/Encoding.json
   - Microsoft.Media/stable/2021-06-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2021-06-01/streamingservice.json
 directive:
