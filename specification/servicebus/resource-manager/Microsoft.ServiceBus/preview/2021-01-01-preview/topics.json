@@ -318,9 +318,14 @@
           "description": "ISO 8601 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "maxSizeInMegabytes": {
-          "format": "int32",
+          "format": "int64",
           "type": "integer",
           "description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024."
+        },
+        "maxMessageSizeInKilobytes" : {
+          "format": "int64",
+          "type" : "integer",
+          "description" : "An optional value (in KB) to indicate the maximum message payload that can be accepted by the topic."
         },
         "requiresDuplicateDetection": {
           "type": "boolean",
