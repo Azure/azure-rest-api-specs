@@ -354,7 +354,7 @@
       }
     },
     "metadataContentId": {
-      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name",
+      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a template, both will have the same contentId.",
       "type": "string"
     },
     "metadataParentId": {
@@ -369,66 +369,66 @@
       "type": "string",
       "description": "The kind of content the metadata is for.",
       "enum": [
-        "dataConnector",
-        "dataType",
-        "workbook",
-        "workbookTemplate",
-        "playbook",
-        "playbookTemplate",
-        "analyticRuleTemplate",
-        "analyticRule",
-        "huntingQuery",
-        "investigationQuery",
-        "parser",
-        "watchlist",
-        "watchlistTemplate",
-        "solution"
+        "DataConnector",
+        "DataType",
+        "Workbook",
+        "WorkbookTemplate",
+        "Playbook",
+        "PlaybookTemplate",
+        "AnalyticsRuleTemplate",
+        "AnalyticsRule",
+        "HuntingQuery",
+        "InvestigationQuery",
+        "Parser",
+        "Watchlist",
+        "WatchlistTemplate",
+        "Solution"
       ],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "kind",
         "values": [
           {
-            "value": "dataConnector"
+            "value": "DataConnector"
           },
           {
-            "value": "dataType"
+            "value": "DataType"
           },
           {
-            "value": "workbook"
+            "value": "Workbook"
           },
           {
-            "value": "workbookTemplate"
+            "value": "WorkbookTemplate"
           },
           {
-            "value": "playbook"
+            "value": "Playbook"
           },
           {
-            "value": "playbookTemplate"
+            "value": "PlaybookTemplate"
           },
           {
-            "value": "analyticRuleTemplate"
+            "value": "AnalyticsRuleTemplate"
           },
           {
-            "value": "analyticRule"
+            "value": "AnalyticsRule"
           },
           {
-            "value": "huntingQuery"
+            "value": "HuntingQuery"
           },
           {
-            "value": "investigationQuery"
+            "value": "InvestigationQuery"
           },
           {
-            "value": "parser"
+            "value": "Parser"
           },
           {
-            "value": "watchlist"
+            "value": "Watchlist"
           },
           {
-            "value": "watchlistTemplate"
+            "value": "WatchlistTemplate"
           },
           {
-            "value": "solution"
+            "value": "Solution"
           }
         ]
       }
@@ -444,26 +444,26 @@
           "description": "Source type of the content",
           "type": "string",
           "enum": [
-            "localWorkspace",
-            "community",
-            "solution",
-            "sourceRepository"
+            "LocalWorkspace",
+            "Community",
+            "Solution",
+            "SourceRepository"
           ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "sourceKind",
             "values": [
               {
-                "value": "localWorkspace"
+                "value": "LocalWorkspace"
               },
               {
-                "value": "community"
+                "value": "Community"
               },
               {
-                "value": "solution"
+                "value": "Solution"
               },
               {
-                "value": "sourceRepository"
+                "value": "SourceRepository"
               }
             ]
           }
@@ -507,22 +507,22 @@
           "description": "Type of support for content item",
           "type": "string",
           "enum": [
-            "microsoft",
-            "developer",
-            "community"
+            "Microsoft",
+            "Partner",
+            "Community"
           ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "supportTier",
             "values": [
               {
-                "value": "microsoft"
+                "value": "Microsoft"
               },
               {
-                "value": "developer"
+                "value": "Partner"
               },
               {
-                "value": "community"
+                "value": "Community"
               }
             ]
           }
@@ -594,7 +594,6 @@
     "metadataProperties": {
       "description": "Metadata property bag.",
       "required": [
-        "contentId",
         "parentId",
         "kind"
       ],
