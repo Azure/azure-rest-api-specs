@@ -312,13 +312,21 @@
           "type": "string",
           "enum": [
             "Default",
-            "MigratedToAzure"
+            "MigratedToAzure",
+            "Evaluation",
+            "Purchased"
           ],
           "description": "The kind of onboarding for the subscription",
           "x-ms-enum": {
             "name": "OnboardingKind",
             "modelAsString": true
           }
+        },
+        "evaluationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the evaluation period, if such exist",
+          "readOnly": true
         }
       },
       "required": [
