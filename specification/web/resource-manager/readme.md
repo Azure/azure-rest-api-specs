@@ -211,6 +211,9 @@ directive:
 - where: $.definitions.TriggeredJobRun.properties.job_name
   suppress: R3016
   reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_id
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
 ```
 
 ### Tag: package-2021-01
