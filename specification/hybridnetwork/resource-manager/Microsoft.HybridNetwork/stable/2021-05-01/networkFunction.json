@@ -40,7 +40,7 @@
           "NetworkFunctions"
         ],
         "operationId": "NetworkFunctions_Delete",
-        "description": "Deletes the specified network function resource.",
+        "description": "Deletes the specified network function resource. This operation can take up to 1 hour to complete. This is expected service behavior.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -135,7 +135,7 @@
           "NetworkFunctions"
         ],
         "operationId": "NetworkFunctions_CreateOrUpdate",
-        "description": "Creates or updates a network function resource.",
+        "description": "Creates or updates a network function resource. This operation can take up to 6 hours to complete. This is expected service behavior.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -364,11 +364,11 @@
         },
         "device": {
           "$ref": "./common.json#/definitions/SubResource",
-          "description": "The reference to the device resource."
+          "description": "The reference to the device resource. Once set, it cannot be updated."
         },
         "skuName": {
           "type": "string",
-          "description": "The sku name for the network function."
+          "description": "The sku name for the network function. Once set, it cannot be updated."
         },
         "skuType": {
           "readOnly": true,
@@ -377,7 +377,7 @@
         },
         "vendorName": {
           "type": "string",
-          "description": "The vendor name for the network function."
+          "description": "The vendor name for the network function. Once set, it cannot be updated."
         },
         "serviceKey": {
           "type": "string",
