@@ -11,4 +11,5 @@ az-output-folder: $(azure-cli-extension-folder)/src/dnc
 python-sdk-output-folder: "$(az-output-folder)/azext_dnc/vendored_sdks/dnc"
 # add additinal configuration here specific for Azure CLI
 # refer to the faq.md for more details
+extension-mode: preview
 ```

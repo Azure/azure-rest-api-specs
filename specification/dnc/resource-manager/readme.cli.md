@@ -24,5 +24,13 @@ cli:
       - where:
             group: .*
             op: PutDetails
-        name: create                          
+        name: create
+      - where:
+            group: .*
+            op: ListByResourceGroup
+        hidden: true
+      - where:
+            group: .*
+            op: ListBySubscription
+        hidden: true                                  
 ```
