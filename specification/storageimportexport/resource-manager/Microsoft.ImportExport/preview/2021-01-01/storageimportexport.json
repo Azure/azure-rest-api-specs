@@ -654,15 +654,18 @@
         },
         "backupDriveManifest": {
           "type": "boolean",
-          "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs."
+          "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs.",
+          "default": false
         },
         "state": {
           "type": "string",
-          "description": "Current state of the job."
+          "description": "Current state of the job.",
+          "default": "Creating"
         },
         "cancelRequested": {
           "type": "boolean",
-          "description": "Indicates whether a request has been submitted to cancel the job."
+          "description": "Indicates whether a request has been submitted to cancel the job.",
+          "default": false
         },
         "percentComplete": {
           "type": "integer",
@@ -761,7 +764,8 @@
           "properties": {
             "cancelRequested": {
               "type": "boolean",
-              "description": "If specified, the value must be true. The service will attempt to cancel the job. "
+              "description": "If specified, the value must be true. The service will attempt to cancel the job. ",
+              "default": false
             },
             "state": {
               "type": "string",
@@ -785,7 +789,8 @@
             },
             "backupDriveManifest": {
               "type": "boolean",
-              "description": "Indicates whether the manifest files on the drives should be copied to block blobs."
+              "description": "Indicates whether the manifest files on the drives should be copied to block blobs.",
+              "default": false
             },
             "driveList": {
               "description": "List of drives that comprise the job.",
@@ -1163,6 +1168,7 @@
             "CompletedMoreInfo",
             "ShippedBack"
           ],
+          "default": "Specified",
           "x-ms-enum": {
             "name": "DriveState",
             "modelAsString": true

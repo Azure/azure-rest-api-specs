@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "2020week10",
+    "api-version": "2021-06-01-preview",
+    "properties": {
+      "properties": {
+        "specification": {
+          "expeditedRollout": {
+            "enabled": true
+          },
+          "canary": {
+            "skipRegions": [
+              "eastus2euap"
+            ]
+          },
+          "restOfTheWorldGroupTwo": {
+            "waitDuration": "PT4H"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "description": "Default rollout started successfully.",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/operationStauses/11111111-f7ef-471a-a2f4-d0ebbf494f77",
+        "retry-after": "5000"
+      },
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+        "name": "Microsoft.Contoso/2020week10",
+        "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+        "properties": {
+          "provisioningState": "RolloutInProgress",
+          "specification": {
+            "canary": {
+              "regions": [
+                "brazilus",
+                "eastus2euap",
+                "centraluseuap"
+              ],
+              "skipRegions": [
+                "brazilus"
+              ]
+            },
+            "lowTraffic": {
+              "regions": [
+                "southeastasia"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "mediumTraffic": {
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "highTraffic": {
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "restOfTheWorldGroupOne": {
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "restOfTheWorldGroupTwo": {
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            }
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap"
+            ],
+            "nextTrafficRegion": "LowTraffic",
+            "nextTrafficRegionScheduledTime": "2020-03-03T22:00:00Z"
+          }
+        }
+      }
+    },
+    "200": {
+      "description": "Default rollout updated successfully.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+        "name": "Microsoft.Contoso/2020week10",
+        "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+        "properties": {
+          "provisioningState": "RolloutInProgress",
+          "specification": {
+            "canary": {
+              "regions": [
+                "brazilus",
+                "eastus2euap",
+                "centraluseuap"
+              ]
+            },
+            "lowTraffic": {
+              "regions": [
+                "southeastasia"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "mediumTraffic": {
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "highTraffic": {
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "restOfTheWorldGroupOne": {
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "restOfTheWorldGroupTwo": {
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            }
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap",
+              "allcompletedregions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
