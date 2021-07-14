@@ -1284,7 +1284,6 @@
               "Daily",
               "Hourly",
               "Minutely",
-              "Secondly",
               "Custom"
             ],
             "x-ms-enum": {
@@ -4116,9 +4115,6 @@
       }
     },
     "AzureSQLConnectionStringParam": {
-      "required": [
-        "connectionString"
-      ],
       "type": "object",
       "properties": {
         "connectionString": {
@@ -4193,9 +4189,6 @@
       "x-ms-discriminator-value": "AzureSQLConnectionString"
     },
     "DataLakeGen2SharedKeyParam": {
-      "required": [
-        "accountKey"
-      ],
       "type": "object",
       "properties": {
         "accountKey": {
@@ -4224,7 +4217,6 @@
     "ServicePrincipalParam": {
       "required": [
         "clientId",
-        "clientSecret",
         "tenantId"
       ],
       "type": "object",
@@ -4263,7 +4255,6 @@
     "ServicePrincipalInKVParam": {
       "required": [
         "keyVaultClientId",
-        "keyVaultClientSecret",
         "keyVaultEndpoint",
         "servicePrincipalIdNameInKV",
         "servicePrincipalSecretNameInKV",
@@ -4611,7 +4602,6 @@
             "Daily",
             "Hourly",
             "Minutely",
-            "Secondly",
             "Custom"
           ],
           "type": "string",
