@@ -2,9 +2,9 @@
   "parameters": {
     "api-version": "2021-07-01-preview",
     "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5",
-    "MultiCloudConnectorName": "exampleMultiCloudConnector",
+    "multiCloudConnectorName": "exampleMultiCloudConnector",
     "resourceGroupName": "exampleResourceGroup",
-    "MultiCloudConnector": {
+    "multiCloudConnector": {
       "location": "Central US",
       "etag": "etag value (must be supplied for update)",
       "tags": {},
@@ -14,11 +14,9 @@
         "offerings": [
           {
             "offeringType": "monitoringAWS",
-            "nativeCloudConnection": [
-              {
-                "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
-              }
-            ]
+            "nativeCloudConnection": {
+              "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
+            }
           }
         ]
       }
@@ -40,15 +38,13 @@
             {
               "offeringType": "monitoringAWS",
               "description": "Monitor your resources",
-              "nativeCloudConnection": [
-                {
-                  "policies": [
-                    "readS3",
-                    "write"
-                  ],
-                  "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
-                }
-              ]
+              "nativeCloudConnection": {
+                "policies": [
+                  "readS3",
+                  "write"
+                ],
+                "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
+              }
             }
           ]
         }
@@ -69,15 +65,13 @@
             {
               "offeringType": "monitoringAWS",
               "description": "Monitor your resources",
-              "nativeCloudConnection": [
-                {
-                  "policies": [
-                    "readS3",
-                    "write"
-                  ],
-                  "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
-                }
-              ]
+              "nativeCloudConnection": {
+                "policies": [
+                  "readS3",
+                  "write"
+                ],
+                "cloudRoleArn": "arn:aws:iam::9843847875458:role/ASCMonitor"
+              }
             }
           ]
         }
