@@ -68,6 +68,10 @@ directive:
     from: ingestionSettings.json
     where: $.definitions.IngestionConnectionString.properties.value
     reason: Secrets are OK to return in a POST response.
+  - suppress: LongRunningResponseStatusCode
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate"].post["x-ms-long-running-operation"]'
+    from: alerts.json
+    reason: Cannot be technically avoided.
 ```
 
 ### Basic Information
@@ -85,15 +89,15 @@ tag: package-preview-2021-06
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.Security/preview/2021-06-01-preview/customRecommendation.json
 ```
+
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
