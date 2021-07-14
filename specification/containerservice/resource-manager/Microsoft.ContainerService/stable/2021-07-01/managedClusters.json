@@ -2377,6 +2377,11 @@
           "type": "boolean",
           "description": "Whether to enable auto-scaler"
         },
+        "scaleDownMode": {
+          "$ref": "#/definitions/ScaleDownMode",
+          "title": "The scale down mode to use when scaling the Agent Pool.",
+          "description": "This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete."
+        },
         "type": {
           "$ref": "#/definitions/AgentPoolType"
         },
@@ -4241,6 +4246,28 @@
       "default": -1,
       "title": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand.",
       "description": "Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)"
+    },
+    "ScaleDownMode": {
+      "type": "string",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleDownMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Delete",
+            "description": "Create new instances during scale up and remove instances during scale down."
+          },
+          {
+            "value": "Deallocate",
+            "description": "Attempt to start deallocated instances (if they exist) during scale up and deallocate instances during scale down."
+          }
+        ]
+      },
+      "description": "Describes how VMs are added to or removed from Agent Pools. See [billing states](https://docs.microsoft.com/azure/virtual-machines/states-billing)."
     },
     "ProximityPlacementGroupID": {
       "type": "string",
