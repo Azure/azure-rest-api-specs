@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/multiCloudConnector": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityConnector": {
       "get": {
         "x-ms-examples": {
-          "List all security multi cloud connectors of a specified subscription": {
-            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorsSubscription_example.json"
+          "List all security connectors of a specified subscription": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsSubscription_example.json"
           }
         },
         "tags": [
-          "MultiCloudConnector"
+          "SecurityConnector"
         ],
-        "description": "Lists all the security multi cloud connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security multi cloud connectors for the specified subscription.",
-        "operationId": "MultiCloudConnector_List",
+        "description": "Lists all the security connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security connectors for the specified subscription.",
+        "operationId": "SecurityConnector_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MultiCloudConnectorList"
+              "$ref": "#/definitions/securityConnectorList"
             }
           },
           "default": {
@@ -73,18 +73,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/multiCloudConnector": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnector": {
       "get": {
         "x-ms-examples": {
-          "List all security multi cloud connectors of a specified resource group": {
-            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorsResourceGroup_example.json"
+          "List all security connectors of a specified resource group": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsResourceGroup_example.json"
           }
         },
         "tags": [
-          "MultiCloudConnector"
+          "SecurityConnector"
         ],
-        "description": "Lists all the security multi cloud connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security multi cloud connectors for the specified resource group.",
-        "operationId": "MultiCloudConnector_ListByResourceGroup",
+        "description": "Lists all the security connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security connectors for the specified resource group.",
+        "operationId": "SecurityConnector_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MultiCloudConnectorList"
+              "$ref": "#/definitions/securityConnectorList"
             }
           },
           "default": {
@@ -115,18 +115,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/multiCloudConnector/{multiCloudConnectorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnector/{securityConnectorName}": {
       "get": {
         "x-ms-examples": {
-          "Retrieve a security multi cloud connector": {
-            "$ref": "./examples/MultiCloudConnectors/GetMultiCloudConnectorResourceGroup_example.json"
+          "Retrieve a security connector": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorResourceGroup_example.json"
           }
         },
         "tags": [
-          "MultiCloudConnector"
+          "SecurityConnector"
         ],
-        "description": "Retrieves information about the model of a security multi cloud connectors.",
-        "operationId": "MultiCloudConnector_Get",
+        "description": "Retrieves information about the model of a security connectors.",
+        "operationId": "SecurityConnector_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -138,14 +138,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/MultiCloudConnectorName"
+            "$ref": "#/parameters/securityConnectorName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MultiCloudConnector"
+              "$ref": "#/definitions/securityConnector"
             }
           },
           "default": {
@@ -158,15 +158,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update a security multi cloud connector": {
-            "$ref": "./examples/MultiCloudConnectors/PutMultiCloudConnector_example.json"
+          "Create or update a security connector": {
+            "$ref": "./examples/SecurityConnectors/PutSecurityConnector_example.json"
           }
         },
         "tags": [
-          "MultiCloudConnector"
+          "SecurityConnector"
         ],
-        "description": "Creates or updates a multi cloud connector. If a security multi cloud connector is already created and a subsequent request is issued for the same multi cloud connector id, then it will be updated.",
-        "operationId": "MultiCloudConnector_CreateOrUpdate",
+        "description": "Creates or updates a security connector. If a security connector is already created and a subsequent request is issued for the same security connector id, then it will be updated.",
+        "operationId": "SecurityConnector_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -178,23 +178,23 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/MultiCloudConnectorName"
+            "$ref": "#/parameters/securityConnectorName"
           },
           {
-            "$ref": "#/parameters/MultiCloudConnectorInBody"
+            "$ref": "#/parameters/securityConnectorInBody"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MultiCloudConnector"
+              "$ref": "#/definitions/securityConnector"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/MultiCloudConnector"
+              "$ref": "#/definitions/securityConnector"
             }
           },
           "default": {
@@ -207,15 +207,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a security multi cloud connector": {
-            "$ref": "./examples/MultiCloudConnectors/DeleteMultiCloudConnector_example.json"
+          "Delete a security connector": {
+            "$ref": "./examples/SecurityConnectors/DeleteSecurityConnector_example.json"
           }
         },
         "tags": [
-          "MultiCloudConnector"
+          "SecurityConnector"
         ],
-        "operationId": "MultiCloudConnector_Delete",
-        "description": "Deletes a security multi cloud connector.",
+        "operationId": "SecurityConnector_Delete",
+        "description": "Deletes a security connector.",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -227,7 +227,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/MultiCloudConnectorName"
+            "$ref": "#/parameters/securityConnectorName"
           }
         ],
         "responses": {
@@ -245,17 +245,17 @@
     }
   },
   "definitions": {
-    "MultiCloudConnectorList": {
-      "description": "List of security multi cloud connectors response.",
+    "securityConnectorList": {
+      "description": "List of security connectors response.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of security multi cloud connectors under the given scope.",
+          "description": "The list of security connectors under the given scope.",
           "items": {
-            "$ref": "#/definitions/MultiCloudConnector"
+            "$ref": "#/definitions/securityConnector"
           }
         },
         "nextLink": {
@@ -265,14 +265,14 @@
         }
       }
     },
-    "MultiCloudConnector": {
+    "securityConnector": {
       "type": "object",
-      "description": "The security multi cloud connector resource.",
+      "description": "The security connector resource.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Security multi cloud connector data",
-          "$ref": "#/definitions/MultiCloudConnectorProperties"
+          "description": "Security connector data",
+          "$ref": "#/definitions/securityConnectorProperties"
         }
       },
       "allOf": [
@@ -281,9 +281,9 @@
         }
       ]
     },
-    "MultiCloudConnectorProperties": {
+    "securityConnectorProperties": {
       "type": "object",
-      "description": "A set of properties that defines the multi cloud connector configuration.",
+      "description": "A set of properties that defines the security connector configuration.",
       "properties": {
         "hierarchyId": {
           "type": "string",
@@ -304,7 +304,7 @@
         },
         "offerings": {
           "type": "array",
-          "description": "A collection of offerings for the security multi cloud connector.",
+          "description": "A collection of offerings for the security connector.",
           "items": {
             "$ref": "#/definitions/multiCloudOffering"
           }
@@ -375,21 +375,21 @@
     }
   },
   "parameters": {
-    "MultiCloudConnectorName": {
-      "name": "multiCloudConnectorName",
+    "securityConnectorName": {
+      "name": "securityConnectorName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The security multi cloud connector name.",
+      "description": "The security connector name.",
       "x-ms-parameter-location": "method"
     },
-    "MultiCloudConnectorInBody": {
-      "name": "MultiCloudConnector",
+    "securityConnectorInBody": {
+      "name": "securityConnector",
       "in": "body",
       "required": true,
-      "description": "The security multi cloud connector resource",
+      "description": "The security connector resource",
       "schema": {
-        "$ref": "#/definitions/MultiCloudConnector"
+        "$ref": "#/definitions/securityConnector"
       },
       "x-ms-parameter-location": "method"
     }
