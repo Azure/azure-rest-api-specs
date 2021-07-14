@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2021-05-31-privatepreview",
+    "subscriptionId": "a5015e1c-867f-4533-8541-85cd470d0cfb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/avladuwestus2rg/providers/Microsoft.ConnectedOpenStack/HeatStacks/testheatstack5",
+            "name": "testheatstack5",
+            "type": "microsoft.connectedopenstack/heatstacks",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/63f31eb8-348f-44d5-83d6-e733cd5b0f65/resourcegroups/westus2rg/providers/microsoft.extendedlocation/customlocations/mytestlocation",
+              "type": "CustomLocation"
+            },
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "heatStackName": "testheatstack6",
+              "identityId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/avladuwestus2rg/providers/Microsoft.ConnectedOpenStack/OpenStackIdentities/testidentity1",
+              "heatStackConfig": {
+                "disableRollback": false,
+                "templateBase64": "aGVhdF90ZW1wbGF0ZV92ZXJzaW9uOiAyMDE2LTEwLTE0DQoNCnJlc291cmNlczoNCiAgaGVhdF9zZXJ2ZXJfcG9ydDoNCiAgICB0eXBlOiBPUzo6TmV1dHJvbjo6UG9ydA0KICAgIHByb3BlcnRpZXM6DQogICAgICBuZXR3b3JrOiAiZGVtby1uZXQiDQogICAgICBmaXhlZF9pcHM6DQogICAgICAgIC0gc3VibmV0X2lkOiA4NzY3N2YzYy04MzY2LTRkOWUtYTZlNi00MmYwODk4YmJjNGMNCiAgaGVhdF9zZXJ2ZXI6DQogICAgdHlwZTogT1M6Ok5vdmE6OlNlcnZlcg0KICAgIHByb3BlcnRpZXM6DQogICAgICBuYW1lOiBoZWF0X3NlcnZlcg0KICAgICAgZmxhdm9yOiBtMS50aW55DQogICAgICBpbWFnZTogY2lycm9zDQogICAgICBuZXR3b3JrczoNCiAgICAgICAgLSBwb3J0OiB7IGdldF9yZXNvdXJjZTogaGVhdF9zZXJ2ZXJfcG9ydH0NCiAgaGVhdF9zZXJ2ZXJfcHVibGljX2lwOg0KICAgIHR5cGU6IE9TOjpOZXV0cm9uOjpGbG9hdGluZ0lQDQogICAgcHJvcGVydGllczoNCiAgICAgIGZsb2F0aW5nX25ldHdvcms6ICJwdWJsaWMxIg0KICBoZWF0X3NlcnZlcl9pcF9hc3NvYzoNCiAgICB0eXBlOiBPUzo6TmV1dHJvbjo6RmxvYXRpbmdJUEFzc29jaWF0aW9uDQogICAgcHJvcGVydGllczoNCiAgICAgIGZsb2F0aW5naXBfaWQ6IHsgZ2V0X3Jlc291cmNlOiBoZWF0X3NlcnZlcl9wdWJsaWNfaXAgfQ0KICAgICAgcG9ydF9pZDogeyBnZXRfcmVzb3VyY2U6IGhlYXRfc2VydmVyX3BvcnQgfQ0KDQpvdXRwdXRzOg0KICBoZWF0X3NlcnZlcl9wdWJsaWNfaXA6DQogICAgZGVzY3JpcHRpb246IElQIEFkZHJlc3Mgb2YgdGhlIGRlcGxveWVkIGhlYXRfc2VydmVyIGluc3RhbmNlDQogICAgdmFsdWU6IHsgZ2V0X2F0dHI6IFsgaGVhdF9zZXJ2ZXJfcHVibGljX2lwLCBmbG9hdGluZ19pcF9hZGRyZXNzIF19DQogICAgDQo=",
+                "timeoutMins": 1
+              },
+              "heatResources": [
+                {
+                  "resourceName": "heat_server_port",
+                  "resourceType": "OS::Neutron::Port",
+                  "resourceUuid": "07c3a168-db91-41fe-a797-93c30e3b12c3",
+                  "resourceStatus": "CREATE_COMPLETE"
+                },
+                {
+                  "resourceName": "heat_server",
+                  "resourceType": "OS::Nova::Server",
+                  "resourceUuid": "6b5a1e58-7b97-4a60-b5a3-3c360863897d",
+                  "resourceStatus": "CREATE_COMPLETE"
+                },
+                {
+                  "resourceName": "heat_server_ip_assoc",
+                  "resourceType": "OS::Neutron::FloatingIPAssociation",
+                  "resourceUuid": "81",
+                  "resourceStatus": "CREATE_COMPLETE"
+                },
+                {
+                  "resourceName": "heat_server_public_ip",
+                  "resourceType": "OS::Neutron::FloatingIP",
+                  "resourceUuid": "392f1136-6f09-4b98-a509-7cda99489799",
+                  "resourceStatus": "CREATE_COMPLETE"
+                }
+              ],
+              "openStackUuid": "5c358c30-43e4-4f25-b07e-a4813925fed0",
+              "heatOutput": "[{\"description\":\"IP Address of the deployed heat_server instance\",\"output_key\":\"heat_server_public_ip\",\"output_value\":\"10.0.2.170\"}]",
+              "openStackStatus": "CREATE_COMPLETE"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
