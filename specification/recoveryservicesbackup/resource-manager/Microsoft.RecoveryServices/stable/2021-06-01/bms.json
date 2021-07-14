@@ -5362,7 +5362,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+            "$ref": "#/definitions/RecoveryPointTierInformation"
           }
         },
         "recoveryPointMoveReadinessInfo": {
@@ -6329,7 +6329,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+            "$ref": "#/definitions/RecoveryPointTierInformation"
           }
         },
         "isManagedVirtualMachine": {
@@ -7771,46 +7771,6 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "RecoveryPointTierInformationV2": {
-      "description": "RecoveryPoint Tier Information V2",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RecoveryPointTierInformation"
-        }
-      ],
-      "properties": {
-        "type": {
-          "description": "Recovery point tier type.",
-          "enum": [
-            "Invalid",
-            "InstantRP",
-            "HardenedRP",
-            "ArchivedRP"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryPointTierType",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Recovery point tier status.",
-          "enum": [
-            "Invalid",
-            "Valid",
-            "Disabled",
-            "Deleted",
-            "Rehydrated"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryPointTierStatus",
-            "modelAsString": true
           }
         }
       }
