@@ -298,7 +298,7 @@
             "GCP"
           ],
           "x-ms-enum": {
-            "name": "cloudType",
+            "name": "multiCloudName",
             "modelAsString": true
           }
         },
@@ -314,52 +314,61 @@
     "multiCloudOffering": {
       "type": "object",
       "description": "The security offering details",
+      "discriminator": "offeringType",
+      "required": [
+        "offeringType"
+      ],
       "properties": {
-        "name": {
+        "offeringType": {
           "type": "string",
-          "description": "The offering name.",
-          "readOnly": true
+          "description": "The type of the security offering.",
+          "enum": [
+            "monitoringAWS"
+          ],
+          "x-ms-enum": {
+            "name": "offeringType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "monitoringAWS"
+              }
+            ]
+          }
         },
         "description": {
           "type": "string",
           "description": "The offering description.",
           "readOnly": true
-        },
-        "OfferingConfigurations": {
-          "type": "array",
-          "description": "A collection of offering configurations for the multi cloud offering.",
-          "items": {
-            "$ref": "#/definitions/multiCloudOfferingConfiguration"
-          }
         }
       }
     },
-    "multiCloudOfferingConfiguration": {
+    "monitoringAWSOffering": {
       "type": "object",
-      "description": "The configuration of the offering",
-      "discriminator": "multiCloudName",
-      "required": [
-        "multiCloudName"
+      "description": "The monitoring for AWS offering configurations",
+      "x-ms-discriminator-value": "monitoringAWS",
+      "allOf": [
+        {
+          "$ref": "#/definitions/multiCloudOffering"
+        }
       ],
       "properties": {
-        "policies": {
-          "type": "array",
-          "description": "The list of the required policies on the multi cloud roles for the offering.",
-          "items": {
-            "type": "string",
-            "description": "multi cloud role"
-          },
-          "readOnly": true
-        },
-        "CloudRoleName": {
-          "type": "string",
-          "description": "The multi cloud role name for the offering"
-        },
-        "additionalData": {
-          "type": "object",
-          "description": "Additional data regarding the connector for the partners",
-          "additionalProperties": {
-            "type": "string"
+        "nativeCloudConnection" : {
+          "type": "object", 
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }, 
+            "policies": {
+              "type": "array",
+              "description": "The list of the required policies on the multi cloud roles for the offering.",
+              "items": {
+                "type": "string",
+                "description": "multi cloud role"
+              },
+              "readOnly": true
+            }
           }
         }
       }
