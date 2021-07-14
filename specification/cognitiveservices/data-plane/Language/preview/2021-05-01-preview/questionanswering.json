@@ -29,11 +29,11 @@
   "paths": {
     "/:query-knowledgebases": {
       "post": {
-        "summary": "Answers the specified question using your knowledgebase.",
-        "operationId": "QuestionAnsweringKnowledgebase_Query",
+        "summary": "Answers the specified question using your knowledge base.",
+        "operationId": "QuestionAnsweringKnowledgeBase_Query",
         "parameters": [
           {
-            "$ref": "#/parameters/KnowledgebaseQueryParameters"
+            "$ref": "#/parameters/KnowledgeBaseQueryOptions"
           },
           {
             "$ref": "common.json#/parameters/ProjectNameQueryParameter"
@@ -53,9 +53,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful response to get answers from knowledgebases.",
+            "description": "A successful response to get answers from knowledge base.",
             "schema": {
-              "$ref": "#/definitions/KnowledgebaseAnswers"
+              "$ref": "#/definitions/KnowledgeBaseAnswers"
             }
           },
           "default": {
@@ -78,7 +78,7 @@
         "operationId": "QuestionAnsweringText_Query",
         "parameters": [
           {
-            "$ref": "#/parameters/TextQueryParameters"
+            "$ref": "#/parameters/TextQueryOptions"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -113,14 +113,14 @@
     }
   },
   "definitions": {
-    "KnowledgebaseQueryParameters": {
+    "KnowledgeBaseQueryOptions": {
       "type": "object",
-      "description": "The question parameters to answer using a knowledgebase.",
+      "description": "The question parameters to answer using a knowledge base.",
       "additionalProperties": false,
       "properties": {
         "qnaId": {
           "type": "integer",
-          "description": "Exact QnA ID to fetch from the knowledgebase, this field takes priority over question.",
+          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question.",
           "format": "int32"
         },
         "question": {
@@ -145,7 +145,7 @@
         },
         "context": {
           "description": "Context object with previous QnA's information.",
-          "$ref": "#/definitions/KnowledgebaseAnswerRequestContext"
+          "$ref": "#/definitions/KnowledgeBaseAnswerRequestContext"
         },
         "rankerType": {
           "type": "string",
@@ -160,7 +160,7 @@
           ]
         },
         "strictFilters": {
-          "description": "Filter QnAs based on give metadata list and knowledgebase source names.",
+          "description": "Filter QnAs based on give metadata list and knowledge base source names.",
           "$ref": "#/definitions/StrictFilters"
         },
         "answerSpanRequest": {
@@ -198,7 +198,7 @@
         }
       }
     },
-    "KnowledgebaseAnswerRequestContext": {
+    "KnowledgeBaseAnswerRequestContext": {
       "type": "object",
       "description": "Context object with previous QnA's information.",
       "additionalProperties": false,
@@ -217,7 +217,7 @@
         }
       }
     },
-    "KnowledgebaseAnswers": {
+    "KnowledgeBaseAnswers": {
       "type": "object",
       "description": "Represents List of Question Answers.",
       "additionalProperties": false,
@@ -226,14 +226,14 @@
           "type": "array",
           "description": "Represents Answer Result list.",
           "items": {
-            "$ref": "#/definitions/KnowledgebaseAnswer"
+            "$ref": "#/definitions/KnowledgeBaseAnswer"
           }
         }
       }
     },
-    "KnowledgebaseAnswer": {
+    "KnowledgeBaseAnswer": {
       "type": "object",
-      "description": "Represents Knowledgebase Answer.",
+      "description": "Represents knowledge base answer.",
       "additionalProperties": false,
       "properties": {
         "questions": {
@@ -272,7 +272,7 @@
         },
         "dialog": {
           "type": "object",
-          "$ref": "#/definitions/KnowledgebaseAnswerDialog"
+          "$ref": "#/definitions/KnowledgeBaseAnswerDialog"
         },
         "answerSpan": {
           "type": "object",
@@ -281,7 +281,7 @@
         }
       }
     },
-    "KnowledgebaseAnswerDialog": {
+    "KnowledgeBaseAnswerDialog": {
       "type": "object",
       "description": "Dialog associated with Answer.",
       "properties": {
@@ -294,12 +294,12 @@
           "description": "List of 0 to 20 prompts associated with the answer.",
           "maxItems": 20,
           "items": {
-            "$ref": "#/definitions/KnowledgebaseAnswerPrompt"
+            "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
           }
         }
       }
     },
-    "KnowledgebaseAnswerPrompt": {
+    "KnowledgeBaseAnswerPrompt": {
       "type": "object",
       "description": "Prompt for an answer.",
       "properties": {
@@ -322,7 +322,7 @@
     },
     "StrictFilters": {
       "type": "object",
-      "description": "filters over knowledgebase.",
+      "description": "filters over knowledge base.",
       "additionalProperties": false,
       "properties": {
         "metadataFilter": {
@@ -335,7 +335,7 @@
         },
         "compoundOperation": {
           "type": "string",
-          "$ref": "#/definitions/CompoundOperationType",
+          "$ref": "#/definitions/CompoundOperationKind",
           "default": "AND"
         }
       }
@@ -355,16 +355,16 @@
         },
         "compoundOperation": {
           "type": "string",
-          "$ref": "#/definitions/CompoundOperationType",
+          "$ref": "#/definitions/CompoundOperationKind",
           "default": "AND"
         }
       }
     },
-    "CompoundOperationType": {
+    "CompoundOperationKind": {
       "type": "string",
       "description": "(Optional) Set to 'OR' for joining metadata using 'OR' operation.",
       "x-ms-enum": {
-        "name": "CompoundOperationType",
+        "name": "CompoundOperationKind",
         "modelAsString": true
       },
       "enum": [
@@ -374,7 +374,7 @@
     },
     "SourceFilter": {
       "type": "array",
-      "description": "Find QnAs that are associated with the given list of sources in knowledgebase.",
+      "description": "Find QnAs that are associated with the given list of sources in knowledge base.",
       "items": {
         "type": "string"
       }
@@ -407,7 +407,7 @@
         }
       }
     },
-    "TextQueryParameters": {
+    "TextQueryOptions": {
       "type": "object",
       "description": "The question and text record parameters to answer.",
       "required": [
@@ -424,7 +424,7 @@
           "type": "array",
           "description": "Text records to be searched for given question.",
           "items": {
-            "$ref": "#/definitions/TextInput"
+            "$ref": "#/definitions/TextRecord"
           }
         },
         "language": {
@@ -486,7 +486,7 @@
         }
       }
     },
-    "TextInput": {
+    "TextRecord": {
       "type": "object",
       "description": "Represent input text record to be queried.",
       "additionalProperties": false,
@@ -507,23 +507,23 @@
     }
   },
   "parameters": {
-    "KnowledgebaseQueryParameters": {
-      "name": "knowledgebaseQueryParameters",
+    "KnowledgeBaseQueryOptions": {
+      "name": "knowledgeBaseQueryOptions",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/KnowledgebaseQueryParameters"
+        "$ref": "#/definitions/KnowledgeBaseQueryOptions"
       },
       "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
     },
-    "TextQueryParameters": {
-      "name": "textQueryParameters",
+    "TextQueryOptions": {
+      "name": "textQueryOptions",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/TextQueryParameters"
+        "$ref": "#/definitions/TextQueryOptions"
       },
       "x-nullable": true,
       "description": "Post body of the request.",

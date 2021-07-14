@@ -118,7 +118,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectParameters"
+              "$ref": "#/definitions/CreateProjectOptions"
             }
           },
           {
@@ -208,7 +208,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/ExportJobParameters"
+              "$ref": "#/definitions/ExportJobOptions"
             }
           },
           {
@@ -303,7 +303,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/ImportJobParameters"
+              "$ref": "#/definitions/ImportJobOptions"
             }
           },
           {
@@ -472,7 +472,7 @@
         }
       }
     },
-    "/language/query-knowledgebases/projects/{projectName}/synonyms": {
+    "/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "summary": "Gets all the synonyms of a project.",
         "operationId": "QuestionAnsweringProjects_GetSynonyms",
@@ -554,7 +554,7 @@
         }
       }
     },
-    "/language/query-knowledgebases/projects/{projectName}/sources": {
+    "/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "summary": "Gets all the sources of a project.",
         "operationId": "QuestionAnsweringProjects_GetSources",
@@ -612,7 +612,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSourcesParameters"
+              "$ref": "#/definitions/UpdateSourcesOptions"
             }
           }
         ],
@@ -645,7 +645,7 @@
         }
       }
     },
-    "/language/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+    "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update sources job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
@@ -687,7 +687,7 @@
         }
       }
     },
-    "/language/query-knowledgebases/projects/{projectName}/qnas": {
+    "/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "summary": "Gets all the QnAs of a project.",
         "operationId": "QuestionAnsweringProjects_GetQnas",
@@ -748,7 +748,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateQnaParameters"
+              "$ref": "#/definitions/UpdateQnaOptions"
             }
           }
         ],
@@ -781,7 +781,7 @@
         }
       }
     },
-    "/language/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+    "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update QnAs job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
@@ -856,7 +856,7 @@
         },
         "defaultAnswer": {
           "type": "string",
-          "description": "Default Answer response when no good match is found in the Knowledgebase."
+          "description": "Default Answer response when no good match is found in the knowledge base."
         },
         "multilingualResource": {
           "type": "boolean",
@@ -879,7 +879,7 @@
         }
       }
     },
-    "CreateProjectParameters": {
+    "CreateProjectOptions": {
       "type": "object",
       "description": "Parameters needed to create the project.",
       "additionalProperties": false,
@@ -901,7 +901,7 @@
         },
         "defaultAnswer": {
           "type": "string",
-          "description": "Default Answer response when no good match is found in the Knowledgebase."
+          "description": "Default Answer response when no good match is found in the knowledge base."
         },
         "multilingualResource": {
           "type": "boolean",
@@ -909,7 +909,7 @@
         }
       }
     },
-    "ExportJobParameters": {
+    "ExportJobOptions": {
       "type": "object",
       "description": "Parameters required for export project job.",
       "additionalProperties": false,
@@ -919,13 +919,13 @@
         }
       }
     },
-    "ImportJobParameters": {
+    "ImportJobOptions": {
       "type": "object",
       "description": "Project assets the needs to be imported.",
       "additionalProperties": false,
       "properties": {
         "projectMetadata": {
-          "$ref": "#/definitions/CreateProjectParameters"
+          "$ref": "#/definitions/CreateProjectOptions"
         },
         "assets": {
           "$ref": "#/definitions/Assets"
@@ -936,14 +936,14 @@
       "type": "array",
       "description": "Collection of asset types.",
       "items": {
-        "$ref": "#/definitions/AssetType"
+        "$ref": "#/definitions/AssetKind"
       }
     },
-    "AssetType": {
+    "AssetKind": {
       "type": "string",
       "description": "Asset types for the project.",
       "x-ms-enum": {
-        "name": "assetType",
+        "name": "assetKind",
         "modelAsString": true
       },
       "enum": [
@@ -1221,7 +1221,7 @@
         }
       }
     },
-    "UpdateOperationType": {
+    "UpdateOperationKind": {
       "type": "string",
       "description": "Update operation type for assets.",
       "enum": [
@@ -1231,10 +1231,10 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "updateOperationType"
+        "name": "updateOperationKind"
       }
     },
-    "UpdateSourcesParameters": {
+    "UpdateSourcesOptions": {
       "type": "array",
       "description": "A list of sources to be updated.",
       "additionalProperties": false,
@@ -1242,7 +1242,7 @@
         "$ref": "#/definitions/UpdateSourceRecord"
       }
     },
-    "UpdateQnaParameters": {
+    "UpdateQnaOptions": {
       "type": "array",
       "description": "A list of QnAs to be updated.",
       "additionalProperties": false,
@@ -1261,7 +1261,7 @@
       "properties": {
         "op": {
           "type": "string",
-          "$ref": "#/definitions/UpdateOperationType"
+          "$ref": "#/definitions/UpdateOperationKind"
         },
         "value": {
           "$ref": "#/definitions/QnaRecord"
@@ -1279,7 +1279,7 @@
       "properties": {
         "op": {
           "type": "string",
-          "$ref": "#/definitions/UpdateOperationType"
+          "$ref": "#/definitions/UpdateOperationKind"
         },
         "value": {
           "$ref": "#/definitions/QnaSourceMetadata"
@@ -1321,7 +1321,7 @@
       "additionalProperties": false,
       "required": [
         "sourceUri",
-        "sourceType"
+        "sourceKind"
       ],
       "properties": {
         "sourceName": {
@@ -1335,23 +1335,23 @@
           "description": "URI location for the file or url.",
           "format": "uri"
         },
-        "sourceType": {
+        "sourceKind": {
           "type": "string",
-          "$ref": "#/definitions/QnaSourceType",
-          "default": "Url"
+          "$ref": "#/definitions/QnaSourceKind",
+          "default": "url"
         },
-        "contentStructureType": {
+        "contentStructureKind": {
           "type": "string",
-          "$ref": "#/definitions/SourceContentStructureType",
+          "$ref": "#/definitions/SourceContentStructureKind",
           "default": "Unstructured"
         }
       }
     },
-    "QnaSourceType": {
+    "QnaSourceKind": {
       "type": "string",
       "description": "Supported source types.",
       "x-ms-enum": {
-        "name": "sourceType",
+        "name": "sourceKind",
         "modelAsString": true
       },
       "enum": [
@@ -1359,7 +1359,7 @@
         "url"
       ]
     },
-    "SourceContentStructureType": {
+    "SourceContentStructureKind": {
       "type": "string",
       "description": "Content structure type for sources.",
       "enum": [
@@ -1367,7 +1367,7 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "sourceContentStructureType"
+        "name": "sourceContentStructureKind"
       }
     }
   },
@@ -1384,7 +1384,7 @@
       "name": "format",
       "type": "string",
       "in": "query",
-      "description": "Knowledgebase Import or Export format.",
+      "description": "Knowledge base Import or Export format.",
       "default": "json",
       "enum": [
         "json",
@@ -1411,11 +1411,11 @@
           },
           {
             "value": "allDataExcel",
-            "description": "Export or Import Knowledgebase replica including all assets and metadata in Excel format."
+            "description": "Export or Import knowledge base replica including all assets and metadata in Excel format."
           },
           {
             "value": "allDataTsv",
-            "description": "Export or Import Knowledgebase replica including all assets and metadata in Tsv format."
+            "description": "Export or Import knowledge base replica including all assets and metadata in Tsv format."
           }
         ]
       },
