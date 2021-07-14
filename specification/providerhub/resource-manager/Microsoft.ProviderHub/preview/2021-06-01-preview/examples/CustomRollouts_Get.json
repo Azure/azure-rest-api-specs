@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "canaryTesting99",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Successfully retrieved the rollout details.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
+        "name": "Microsoft.Contoso/canaryTesting99",
+        "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+        "properties": {
+          "provisioningState": "Completed",
+          "specification": {
+            "canary": {
+              "regions": [
+                "eastus2euap",
+                "centraluseuap"
+              ]
+            },
+            "providerRegistration": {
+              "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
+              "name": "Microsoft.Contoso",
+              "type": "Microsoft.ProviderHub/providerRegistrations",
+              "properties": {
+                "providerHubMetadata": {
+                  "providerAuthentication": {
+                    "allowedAudiences": [
+                      "https://management.core.windows.net/"
+                    ]
+                  }
+                },
+                "provisioningState": "Succeeded",
+                "providerAuthorizations": [
+                  {
+                    "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+                    "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+                  }
+                ],
+                "namespace": "microsoft.contoso",
+                "providerVersion": "2.0",
+                "providerType": "Internal, Hidden",
+                "management": {
+                  "manifestOwners": [
+                    "SPARTA-PlatformServiceAdministrator"
+                  ],
+                  "incidentRoutingService": "",
+                  "incidentRoutingTeam": "",
+                  "incidentContactEmail": "helpme@contoso.com",
+                  "resourceAccessPolicy": "NotSpecified"
+                },
+                "capabilities": [
+                  {
+                    "quotaId": "CSP_2015-05-01",
+                    "effect": "Allow"
+                  },
+                  {
+                    "quotaId": "CSP_MG_2017-12-01",
+                    "effect": "Allow"
+                  }
+                ],
+                "metadata": null
+              }
+            },
+            "resourceTypeRegistrations": [
+              {
+                "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
+                "name": "Microsoft.Contoso/employees",
+                "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
+                "properties": {
+                  "routingType": "Default",
+                  "regionality": "Regional",
+                  "endpoints": [
+                    {
+                      "apiVersions": [
+                        "2018-11-01-preview",
+                        "2020-01-01-preview",
+                        "2019-01-01"
+                      ],
+                      "locations": [
+                        "East Asia",
+                        "East US",
+                        "North Europe",
+                        "Southeast Asia",
+                        "East US 2 EUAP",
+                        "Central US EUAP",
+                        "West Europe",
+                        "West US",
+                        "West Central US",
+                        "West US 2"
+                      ],
+                      "requiredFeatures": [
+                        "Microsoft.Contoso/RPaaSSampleApp"
+                      ]
+                    }
+                  ],
+                  "swaggerSpecifications": [
+                    {
+                      "apiVersions": [
+                        "2018-11-01-preview",
+                        "2020-01-01-preview",
+                        "2019-01-01"
+                      ],
+                      "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
+                    }
+                  ],
+                  "enableAsyncOperation": false,
+                  "provisioningState": "Succeeded",
+                  "enableThirdPartyS2S": false
+                }
+              }
+            ]
+          },
+          "status": {
+            "completedRegions": [
+              "eastus2euap",
+              "centraluseuap"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
