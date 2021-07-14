@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of custom rollouts for given subscription id.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
+            "name": "Microsoft.Contoso/canaryTesting99",
+            "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "specification": {
+                "canary": {
+                  "regions": [
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                }
+              },
+              "status": {
+                "completedRegions": [
+                  "eastus2euap",
+                  "centraluseuap"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilustesting",
+            "name": "Microsoft.Contoso/brazilustesting",
+            "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+            "properties": {
+              "provisioningState": "Failed",
+              "specification": {
+                "canary": {
+                  "regions": [
+                    "brazilus"
+                  ]
+                }
+              },
+              "status": {
+                "failedOrSkippedRegions": {
+                  "brazilus": {
+                    "code": "RolloutTimedout",
+                    "message": "Failed to rollout to specified region."
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

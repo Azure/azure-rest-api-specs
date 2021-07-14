@@ -30,6 +30,19 @@ openapi-subtype: rpaas
 tag: package-2020-11-20
 ```
 
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+  - Microsoft.ProviderHub/preview/2021-06-01-preview/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
+```
+
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
