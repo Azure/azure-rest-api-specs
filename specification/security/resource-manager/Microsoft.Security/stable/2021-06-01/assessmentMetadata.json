@@ -559,12 +559,18 @@
         "publishDates": {
           "type": "object",
           "properties": {
-            "PublicProd": { "$ref": "#/definitions/PublishDates" },
-            "Fairfax": { "$ref": "#/definitions/PublishDates" },
-            "MoonCake": { "$ref": "#/definitions/PublishDates" },
-            "USSec": { "$ref": "#/definitions/PublishDates" },
-            "USNat": { "$ref": "#/definitions/PublishDates" }
-          }
+            "GA": {
+              "type": "string",
+              "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+            },
+            "public": {
+              "type": "string",
+              "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
+            }
+          },
+          "required": [
+            "Public"
+          ]
         },
         "plannedDeprecationDate": {
           "type": "string",
@@ -575,21 +581,6 @@
         {
           "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
         }
-      ]
-    },
-    "PublishDates": {
-      "properties": {
-        "GA": {
-          "type": "string",
-          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-        },
-        "Public": {
-          "type": "string",
-          "pattern": "^([0-9]{2}\/){2}[0-9]{4}$"
-        }
-      },
-      "required": [
-        "Public"
       ]
     }
   },

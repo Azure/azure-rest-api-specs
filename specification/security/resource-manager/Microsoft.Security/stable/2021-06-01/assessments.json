@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2020-01-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -264,6 +264,9 @@
         {
           "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
         }
+      ],
+      "required": [
+        "status"
       ]
     },
     "SecurityAssessmentPropertiesResponse": {
@@ -278,6 +281,9 @@
         {
           "$ref": "#/definitions/SecurityAssessmentPropertiesBase"
         }
+      ],
+      "required": [
+        "status"
       ]
     },
     "SecurityAssessmentPropertiesBase": {
@@ -310,8 +316,7 @@
         }
       },
       "required": [
-        "resourceDetails",
-        "status"
+        "resourceDetails"
       ]
     },
     "SecurityAssessmentPartnerData": {
