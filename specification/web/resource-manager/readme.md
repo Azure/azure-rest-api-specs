@@ -93,7 +93,7 @@ directive:
 - where: $.definitions.VnetGateway
   suppress: R4015
   reason: Does not have list operation
-- where: $.definitions.VnetInfo
+- where: $.definitions.VnetInfoResource
   suppress: R4015
   reason: Does not have list operation
 - suppress: R4009
@@ -190,6 +190,27 @@ directive:
   reason: Will fix in next version
 - suppress: R3010
   reason: Will fix in next version
+- where: $.definitions.TriggeredJobRun.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.start_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.end_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.output_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.error_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
 ```
 
 ### Tag: package-2021-01
