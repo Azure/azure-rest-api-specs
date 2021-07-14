@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage the vendor network function deployment in the Microsoft.HybridNetwork resource provider.",
-    "version": "2020-01-01-preview"
+    "version": "2021-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -578,6 +578,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorNetworkFunctionPropertiesFormat",
           "description": "Network function details."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -680,12 +685,22 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleInstanceProperties",
           "description": "The role instance properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "description": "The role instance sub resource."
     },
     "RoleInstanceProperties": {
       "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the RoleInstance resource."
+        },
         "operationalState": {
           "type": "string",
           "description": "The operational state of the role instance.",

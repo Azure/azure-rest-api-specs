@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridNetworkManagementClient",
     "description": "The resources in this swagger specification will be used by vendors to on-board offerings and manage network functions.",
-    "version": "2020-01-01-preview"
+    "version": "2021-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -695,6 +695,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorPropertiesFormat",
           "description": "Vendor properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -728,6 +733,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorSkuPropertiesFormat",
           "description": "Vendor sku details."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -759,6 +769,19 @@
           ],
           "x-ms-enum": {
             "name": "SkuDeploymentMode",
+            "modelAsString": true
+          }
+        },
+        "networkFunctionType": {
+          "type": "string",
+          "description": "The network function type.",
+          "enum": [
+            "Unknown",
+            "VirtualNetworkFunction",
+            "ContainerizedNetworkFunction"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFunctionType",
             "modelAsString": true
           }
         },
@@ -1054,6 +1077,27 @@
           "type": "string",
           "readOnly": true,
           "description": "The type of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PreviewSubscriptionProperties",
+          "description": "The Preview Subscription properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "PreviewSubscriptionProperties": {
+      "description": "PreviewSubscription properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the PreviewSubscription resource."
         }
       }
     },
