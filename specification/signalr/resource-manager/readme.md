@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-04-01-preview
+tag: package-2021-06-01-preview
 ```
 
 ### Suppression
@@ -54,6 +54,16 @@ directive:
     where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
     reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+```
+
+
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-06-01-preview/signalr.json
 ```
 
 ### Tag: package-2021-04-01-preview
@@ -113,7 +123,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
