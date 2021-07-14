@@ -787,7 +787,7 @@ directive:
     from: autoscale_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-
+    
 ```
 
 ``` yaml ($(go) && !$(track2)) || $(csharp) || $(validation) || $(typescript)
@@ -796,6 +796,18 @@ directive:
   where: $.definitions
   transform: delete $["Resource"]
   reason: Missing kind, etag
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ErrorResponse"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["AzureResource"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ActionGroup"]
+  reason: Incompatible values (2020-10-01)
 ```
 
 ``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07')
