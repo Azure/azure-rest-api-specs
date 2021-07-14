@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
       "get": {
-        "description": "Get a single custom recommendation by name for the provided subscriptionId. ",
+        "description": "Get a single custom recommendation by name for the provided subscriptionId and resourceGroupName.",
         "tags": [
-          "CustomRecommendations"
+          "customRecommendations"
         ],
         "x-ms-examples": {
           "Get a single custom recommendation": {
-            "$ref": "./examples/CustomRecommendations/customRecommendationGet_example.json"
+            "$ref": "./examples/customRecommendations/customRecommendationGetBySub_example.json"
           }
         },
-        "operationId": "CustomRecommendations_Get",
+        "operationId": "customRecommendations_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -54,14 +54,17 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/CustomRecommendationName"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomRecommendation"
+              "$ref": "#/definitions/customRecommendation"
             }
           },
           "default": {
@@ -75,9 +78,9 @@
       "put": {
         "description": "Create or update a custom recommendation for the provided subscription.  Please note that providing an existing customRecommendationName will update/replace an existing record.",
         "tags": [
-          "CustomRecommendations"
+          "customRecommendations"
         ],
-        "operationId": "CustomRecommendations_Put",
+        "operationId": "customRecommendations_Put",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -86,23 +89,26 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/CustomRecommendationName"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/CustomRecommendationBody"
+            "$ref": "#/parameters/customRecommendationName"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CustomRecommendation"
+              "$ref": "#/definitions/customRecommendation"
             }
           },
           "200": {
             "description": "OK - Updated",
             "schema": {
-              "$ref": "#/definitions/CustomRecommendation"
+              "$ref": "#/definitions/customRecommendation"
             }
           },
           "default": {
@@ -116,14 +122,14 @@
       "delete": {
         "description": "Delete a custom recommendation by name for a provided subscriptionId",
         "tags": [
-          "CustomRecommendations"
+          "customRecommendations"
         ],
         "x-ms-examples": {
           "Delete a custom recommendation by name": {
-            "$ref": "./examples/CustomRecommendations/customRecommendationDelete_example.json"
+            "$ref": "./examples/customRecommendations/customRecommendationDelete_example.json"
           }
         },
-        "operationId": "CustomRecommendations_Delete",
+        "operationId": "customRecommendations_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -132,7 +138,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/CustomRecommendationName"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationName"
           }
         ],
         "responses": {
@@ -154,14 +163,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customRecommendations": {
       "get": {
         "tags": [
-          "CustomRecommendations"
+          "customRecommendations"
         ],
         "x-ms-examples": {
           "List all recommendations for the provided subscription ID": {
-            "$ref": "./examples/CustomRecommendations/customRecommendationList_example.json"
+            "$ref": "./examples/customRecommendations/customRecommendationList_example.json"
           }
         },
-        "operationId": "CustomRecommendations_List",
+        "operationId": "customRecommendations_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -174,7 +183,45 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomRecommendationList"
+              "$ref": "#/definitions/customRecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/customRecommendations": {
+      "get": {
+        "tags": [
+          "customRecommendations"
+        ],
+        "x-ms-examples": {
+          "List all recommendations for the provided subscription ID and resource group": {
+            "$ref": "./examples/customRecommendations/customRecommendationList_example.json"
+          }
+        },
+        "operationId": "customRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/customRecommendationList"
             }
           },
           "default": {
@@ -188,7 +235,7 @@
     }
   },
   "definitions": {
-    "CustomRecommendationList": {
+    "customRecommendationList": {
       "type": "object",
       "description": "A list of all custom recommendations",
       "properties": {
@@ -197,19 +244,19 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomRecommendation"
+            "$ref": "#/definitions/customRecommendation"
           }
         }
       }
     },
-    "CustomRecommendation": {
+    "customRecommendation": {
       "type": "object",
       "description": "Custom Recommendation",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "describes custom recommendation properties.",
-          "$ref": "#/definitions/CustomRecommendationProperties"
+          "$ref": "#/definitions/customRecommendationProperties"
         }
       },
       "allOf": [
@@ -218,53 +265,125 @@
         }
       ]
     },
-    "CustomRecommendationProperties": {
+    "customRecommendationProperties": {
       "type": "object",
-      "description": "describes custom recommendation properties",
+      "description": "describes the custom recommendation properties",
       "properties": {
-        "description": {
-          "description": "A description providing additional information on the custom recommendation.",
-          "type": "string"
-        },
         "isEnabled": {
           "description": "A flag that indicates whether this recommendation is enabled or disabled.",
           "type": "boolean",
-          "default": true
+          "default": false
         },
-        "supportedClouds": {
+        "supportedCloud": {
           "description": "Relevant cloud for the custom recommendation.",
+          "type": "string",
+          "enum": [
+            "AWS",
+            "GCP"
+          ]
+        },
+        "queryInfo": {
+          "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
+          "type": "object",
+          "$ref": "#/definitions/queryInfoProperties"
+        },
+        "assessmentMetadata": {
+          "description": "describes metadata related to the assessments generated by this custom recommendation",
+          "type": "object",
+          "$ref": "#/definitions/assessmentMetadataProperties"
+        }
+      }
+    },
+    "queryInfoProperties": {
+      "type": "object",
+      "description": "describes the information on how to run a kusto query",
+      "properties": {
+        "resourceTypeTableName": {
+          "description": "The Kusto table name that represents the resource type to run the resource on.",
+          "type": "string"
+        },
+        "assessmentQuery": {
+          "description": "The KQL assessment query",
+          "type": "string"
+        },
+        "shouldMaskQuery": {
+          "description": "Is the query masked/was masking enabled.",
+          "type": "boolean",
+          "default": false
+        },
+        "sdkNameThatResourceDataIsBasedOn": {
+          "description": "SDK name that the resource data is based on.",
+          "type": "string"
+        },
+        "supportedMajorVersionThatResourceDataIsBasedOn": {
+          "description": "The minimum major version of the SDK that the resource data is based on.",
+          "type": "integer"
+        },
+        "letStatements": {
+          "description": "Collection of lets statements for the KQL query",
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "AWS",
-              "GCP"
-            ],
-            "x-ms-enum": {
-              "name": "SupportedCloud",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "GCP",
-                  "description": "Google Cloud Services Platform"
-                },
-                {
-                  "value": "AWS",
-                  "description": "Amazon Web Services"
-                }
-              ]
-            }
+            "type": "object",
+            "$ref": "#/definitions/letStatementProperties"
           }
+        }
+      }
+    },
+    "letStatementProperties": {
+      "type": "object",
+      "description": "Describes information for how to run the query.",
+      "properties": {
+        "letAlias": {
+          "description": "Alias for the let statement",
+          "type": "string"
         },
-        "queryMasked": {
-          "description": "Base 64 encoded KQL Syntax query representing the recommendation results required",
+        "letResourceTypeTableName": {
+          "description": "Kusto table name referencing the resource type to run the let statement on",
+          "type": "string"
+        },
+        "letStatement": {
+          "description": "let statement to run as a query",
+          "type": "string"
+        },
+        "shouldMaskLetStatement": {
+          "description": "Is the let statement masked/was masking enabled",
+          "type": "boolean"
+        },
+        "sdkNameThatResourceDataIsBasedOn": {
+          "description": "The name of the SDK that the resource data is based on",
+          "type": "string"
+        },
+        "supportedMajorVersionThatResourceDataIsBasedOn": {
+          "description": "The supported major version that the resourcedata is based on",
+          "type": "integer"
+        }
+      }
+    },
+    "assessmentMetadataProperties": {
+      "description": "describes required metadata info on generating assessments for assessment automation",
+      "type": "object",
+      "properties": {
+        "severity": {
+          "description": "Severity of the assessment generated by the assessment automation",
+          "type": "string"
+        },
+        "assessmentKey": {
+          "description": "Assessment key to use when generating assessments of this type",
+          "type": "string"
+        },
+        "nameOfDiscoveredResourceTypeToCreateAssessmentFor": {
+          "description": "Name of the type of discovery record or resource for which a unique ID should be generated",
+          "type": "string"
+        },
+        "assessmentDescription": {
+          "description": "Description of the assessment",
           "type": "string"
         }
       }
     }
   },
   "parameters": {
-    "CustomRecommendationName": {
+    "customRecommendationName": {
       "name": "customRecommendationName",
       "in": "path",
       "required": true,
@@ -272,13 +391,13 @@
       "description": "Name of the customRecommendation object",
       "x-ms-parameter-location": "method"
     },
-    "CustomRecommendationBody": {
+    "customRecommendationBody": {
       "name": "customRecommendationBody",
       "in": "body",
       "description": "Custom recommendation body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/CustomRecommendationProperties"
+        "$ref": "#/definitions/customRecommendationProperties"
       },
       "x-ms-parameter-location": "method"
     }

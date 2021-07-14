@@ -8,34 +8,70 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customRecommendation/myCustomRecommendationExample",
+            "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/resourcegroups/TestResourceGroup/providers/Microsoft.Security/customRecommendation/myCustomRecommendationExample",
             "name": "myCustomRecommendationExample",
             "type": "Microsoft.Security/customRecommendation",
             "properties": {
-              "description": "A custom recommendation I created for GCP assessments.",
-              "isEnabled": false,
-              "supportedClouds" : [
-                "GCP",
-                "AWS"
-              ],
-              "queryMasked": "TXlBc3Nlc3NtZW50VGFibGUKfCB3aGVyZSAic2V2ZXJpdHkiID09IDQKfCBzdW1tYXJpemUgY291bnQgKCkgYnkgImtleXdvcmRzIg=="
+              "isEnabled": true,
+              "supportedCloud": "AWS",
+              "queryInfo": {
+                "resourceTypeTableName": "SecurityGroup",
+                "assessmentQuery": " | extend Record = parse_json(Record) | evaluate bag_unpack(Record) | mv-expand IpPermissions | extend IpPermissions = parse_json(IpPermissions) | evaluate bag_unpack(IpPermissions) | mv-apply Ipv4Ranges on (extend Ipv4Ranges = parse_json(Ipv4Ranges) | summarize Ipv4RangesList = make_set(pack_array(Ipv4Ranges.CidrIp))) | mv-apply Ipv6Ranges on (extend Ipv6Ranges = parse_json(Ipv6Ranges) | summarize Ipv6RangesList = make_set(pack_array(Ipv6Ranges.CidrIpv6))) | extend HealthStatus = iff((array_index_of(Ipv4RangesList, '0.0.0.0/0') != -1 or array_index_of(IpRanges, '0.0.0.0/0') != -1 or array_index_of(Ipv6RangesList, '::/0') != -1) and ((FromPort <= 22 and ToPort >= 22) or (FromPort == -1 and ToPort == -1)), 'UNHEALTHY', 'HEALTHY')",
+                "shouldMaskQuery": false,
+                "sdkNameThatResourceDataIsBasedOn": "AWSSDK.EC2",
+                "supportedMajorVersionThatResourceDataIsBasedOn": 3,
+                "letStatements": [
+                  {
+                    "letAlias": "UnhealthyAccounts",
+                    "letResourceTypeTableName": "AwsAccount",
+                    "letStatement": "| extend ConnectorId = tostring(RecordProviderInfo.ConnectorId) | join  kind = leftanti HealthyTrails on ConnectorId | extend HealthStatus = 'UNHEALTHY'",
+                    "shouldMaskLetStatement": false,
+                    "sdkNameThatResourceDataIsBasedOn": "Microsoft.Security",
+                    "supportedMajorVersionThatResourceDataIsBasedOn": 1
+                  }
+                ]
+              },
+              "assessmentMetadata": {
+                "severity": "High",
+                "assessmentKey": "e1f4bba6-5f43-4dc5-ab15-f2a9f5807fea",
+                "nameOfDiscoveredResourceTypeToCreateAssessmentFor": "SecurityGroup",
+                "assessmentDescription": "Built-in assessment automation for CIS 4.1 - Ensure no security groups allow ingress from 0.0.0.0/0 to port 22"
+              }
             }
           },
           {
-            "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customRecommendation/myCustomRecommendationExample2",
-            "name": "myCustomRecommendationExample2",
+            "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/resourcegroups/TestResourceGroup/providers/Microsoft.Security/customRecommendation/myCustomRecommendationExample",
+            "name": "myCustomRecommendationExample",
             "type": "Microsoft.Security/customRecommendation",
             "properties": {
-              "description": "A custom recommendation I created for GCP assessments again.",
-              "isEnabled": false,
-              "supportedClouds" : [
-                "AWS"
-              ],
-              "queryMasked": "TXlBc3Nlc3NtZW50VGFibGUKfCB3aGVyZSAic2V2ZXJpdHkiID09IDQKfCBzdW1tYXJpemUgY291bnQgKCkgYnkgImtleXdvcmRzIg=="
+              "isEnabled": true,
+              "supportedCloud": "AWS",
+              "queryInfo": {
+                "resourceTypeTableName": "SecurityGroup",
+                "assessmentQuery": " | extend Record = parse_json(Record) | evaluate bag_unpack(Record) | mv-expand IpPermissions | extend IpPermissions = parse_json(IpPermissions) | evaluate bag_unpack(IpPermissions) | mv-apply Ipv4Ranges on (extend Ipv4Ranges = parse_json(Ipv4Ranges) | summarize Ipv4RangesList = make_set(pack_array(Ipv4Ranges.CidrIp))) | mv-apply Ipv6Ranges on (extend Ipv6Ranges = parse_json(Ipv6Ranges) | summarize Ipv6RangesList = make_set(pack_array(Ipv6Ranges.CidrIpv6))) | extend HealthStatus = iff((array_index_of(Ipv4RangesList, '0.0.0.0/0') != -1 or array_index_of(IpRanges, '0.0.0.0/0') != -1 or array_index_of(Ipv6RangesList, '::/0') != -1) and ((FromPort <= 22 and ToPort >= 22) or (FromPort == -1 and ToPort == -1)), 'UNHEALTHY', 'HEALTHY')",
+                "shouldMaskQuery": false,
+                "sdkNameThatResourceDataIsBasedOn": "AWSSDK.EC2",
+                "supportedMajorVersionThatResourceDataIsBasedOn": 3,
+                "letStatements": [
+                  {
+                    "letAlias": "UnhealthyAccounts",
+                    "letResourceTypeTableName": "AwsAccount",
+                    "letStatement": "| extend ConnectorId = tostring(RecordProviderInfo.ConnectorId) | join  kind = leftanti HealthyTrails on ConnectorId | extend HealthStatus = 'UNHEALTHY'",
+                    "shouldMaskLetStatement": false,
+                    "sdkNameThatResourceDataIsBasedOn": "Microsoft.Security",
+                    "supportedMajorVersionThatResourceDataIsBasedOn": 1
+                  }
+                ]
+              },
+              "assessmentMetadata": {
+                "severity": "High",
+                "assessmentKey": "e1f4bba6-5f43-4dc5-ab15-f2a9f5807fea",
+                "nameOfDiscoveredResourceTypeToCreateAssessmentFor": "SecurityGroup",
+                "assessmentDescription": "Built-in assessment automation for CIS 4.1 - Ensure no security groups allow ingress from 0.0.0.0/0 to port 22"
+              }
             }
           }
         ]
-
       }
     }
   }
