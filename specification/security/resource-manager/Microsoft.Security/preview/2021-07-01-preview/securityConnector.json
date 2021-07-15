@@ -320,17 +320,17 @@
       ],
       "properties": {
         "offeringType": {
-          "type": "object",
+          "type": "string",
           "description": "The type of the security offering.",
           "enum": [
-            "monitoringAWS"
+            "MonitoringAWS"
           ],
           "x-ms-enum": {
-            "name": "offeringType",
+            "name": "OfferingType",
             "modelAsString": true,
             "values": [
               {
-                "value": "monitoringAWS"
+                "value": "MonitoringAWS"
               }
             ]
           }
@@ -345,7 +345,7 @@
     "MonitoringAWSOffering": {
       "type": "object",
       "description": "The monitoring for AWS offering configurations",
-      "x-ms-discriminator-value": "monitoringAWS",
+      "x-ms-discriminator-value": "MonitoringAWS",
       "allOf": [
         {
           "$ref": "#/definitions/MultiCloudOffering"
