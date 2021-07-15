@@ -5889,6 +5889,11 @@
           "readOnly": false,
           "description": "Peer IP."
         },
+        "hubVirtualNetworkConnection": {
+          "description": "The reference to the HubVirtualNetworkConnection resource.",
+          "readOnly": false,
+          "$ref": "./network.json#/definitions/SubResource"
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "readOnly": true,
@@ -7803,6 +7808,14 @@
           "description": "List of all Static Routes.",
           "items": {
             "$ref": "#/definitions/StaticRoute"
+          }
+        },
+        "bgpConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The list of references to HubBgpConnection objects.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
           }
         }
       }
