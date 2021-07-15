@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-preview-2021-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-07'
 input-file:
-  - Microsoft.Security/preview/2021-07-01-preview/softwareInventories.json
+  - Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 ```
 ### Tag: package-composite-v1
 
@@ -100,6 +100,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -143,6 +144,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -188,6 +190,7 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json

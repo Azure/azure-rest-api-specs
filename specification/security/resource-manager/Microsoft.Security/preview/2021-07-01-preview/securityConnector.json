@@ -45,7 +45,7 @@
           "SecurityConnector"
         ],
         "description": "Lists all the security connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security connectors for the specified subscription.",
-        "operationId": "SecurityConnector_List",
+        "operationId": "SecurityConnectors_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/securityConnectorList"
+              "$ref": "#/definitions/SecurityConnectorList"
             }
           },
           "default": {
@@ -84,7 +84,7 @@
           "SecurityConnector"
         ],
         "description": "Lists all the security connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security connectors for the specified resource group.",
-        "operationId": "SecurityConnector_ListByResourceGroup",
+        "operationId": "SecurityConnectors_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/securityConnectorList"
+              "$ref": "#/definitions/SecurityConnectorList"
             }
           },
           "default": {
@@ -125,8 +125,8 @@
         "tags": [
           "SecurityConnector"
         ],
-        "description": "Retrieves information about the model of a security connectors.",
-        "operationId": "SecurityConnector_Get",
+        "description": "Retrieves details of a specific security connector",
+        "operationId": "SecurityConnectors_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -166,7 +166,7 @@
           "SecurityConnector"
         ],
         "description": "Creates or updates a security connector. If a security connector is already created and a subsequent request is issued for the same security connector id, then it will be updated.",
-        "operationId": "SecurityConnector_CreateOrUpdate",
+        "operationId": "SecurityConnectors_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -188,13 +188,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/securityConnector"
+              "$ref": "#/definitions/SecurityConnector"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/securityConnector"
+              "$ref": "#/definitions/SecurityConnector"
             }
           },
           "default": {
@@ -214,7 +214,7 @@
         "tags": [
           "SecurityConnector"
         ],
-        "operationId": "SecurityConnector_Delete",
+        "operationId": "SecurityConnectors_Delete",
         "description": "Deletes a security connector.",
         "parameters": [
           {
@@ -245,7 +245,7 @@
     }
   },
   "definitions": {
-    "securityConnectorList": {
+    "SecurityConnectorList": {
       "description": "List of security connectors response.",
       "required": [
         "value"
@@ -255,7 +255,7 @@
           "type": "array",
           "description": "The list of security connectors under the given scope.",
           "items": {
-            "$ref": "#/definitions/securityConnector"
+            "$ref": "#/definitions/SecurityConnector"
           }
         },
         "nextLink": {
@@ -265,14 +265,14 @@
         }
       }
     },
-    "securityConnector": {
+    "SecurityConnector": {
       "type": "object",
       "description": "The security connector resource.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Security connector data",
-          "$ref": "#/definitions/securityConnectorProperties"
+          "$ref": "#/definitions/SecurityConnectorProperties"
         }
       },
       "allOf": [
@@ -281,7 +281,7 @@
         }
       ]
     },
-    "securityConnectorProperties": {
+    "SecurityConnectorProperties": {
       "type": "object",
       "description": "A set of properties that defines the security connector configuration.",
       "properties": {
@@ -306,12 +306,12 @@
           "type": "array",
           "description": "A collection of offerings for the security connector.",
           "items": {
-            "$ref": "#/definitions/multiCloudOffering"
+            "$ref": "#/definitions/MultiCloudOffering"
           }
         }
       }
     },
-    "multiCloudOffering": {
+    "MultiCloudOffering": {
       "type": "object",
       "description": "The security offering details",
       "discriminator": "offeringType",
@@ -320,7 +320,7 @@
       ],
       "properties": {
         "offeringType": {
-          "type": "string",
+          "type": "object",
           "description": "The type of the security offering.",
           "enum": [
             "monitoringAWS"
@@ -342,13 +342,13 @@
         }
       }
     },
-    "monitoringAWSOffering": {
+    "MonitoringAWSOffering": {
       "type": "object",
       "description": "The monitoring for AWS offering configurations",
       "x-ms-discriminator-value": "monitoringAWS",
       "allOf": [
         {
-          "$ref": "#/definitions/multiCloudOffering"
+          "$ref": "#/definitions/MultiCloudOffering"
         }
       ],
       "properties": {
@@ -362,7 +362,7 @@
             }, 
             "policies": {
               "type": "array",
-              "description": "The list of the required policies on the multi cloud roles for the offering.",
+              "description": "The read-only list of the required policies of the multi cloud roles for the offering.",
               "items": {
                 "type": "string",
                 "description": "multi cloud role"
@@ -389,7 +389,7 @@
       "required": true,
       "description": "The security connector resource",
       "schema": {
-        "$ref": "#/definitions/securityConnector"
+        "$ref": "#/definitions/SecurityConnector"
       },
       "x-ms-parameter-location": "method"
     }
