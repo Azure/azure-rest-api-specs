@@ -174,7 +174,7 @@
           "200": {
             "description": "Private Endpoint Connection Request was completed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PrivateEndpointConnectionRequestResponse"
+              "$ref": "./definitions.json#/definitions/RemotePrivateEndpointConnectionWrapper"
             }
           },
           "default": {
@@ -224,6 +224,9 @@
           },
           "201": {
             "description": "Request to delete API was accepted. Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",

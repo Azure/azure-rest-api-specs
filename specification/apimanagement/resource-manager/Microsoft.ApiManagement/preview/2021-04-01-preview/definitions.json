@@ -6535,6 +6535,7 @@
       }
     },
     "PrivateEndpointConnectionProperties": {
+      "type": "object",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/ArmIdWrapper",
@@ -6561,8 +6562,7 @@
       "required": [
         "privateLinkServiceConnectionState"
       ],
-      "description": "Properties of the PrivateEndpointConnectProperties.",
-      "type": "object"
+      "description": "Properties of the PrivateEndpointConnectProperties."
     },
     "ArmIdWrapper": {
       "description": "A wrapper for an ARM resource id",
@@ -6613,29 +6613,6 @@
               "type": "string"
             }
           }
-        }
-      }
-    },
-    "PrivateEndpointConnectionRequestResponse": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateEndpointConnectionName": {
-          "readOnly": true,
-          "description": "Private Endpoint Connection Name.",
-          "type": "string"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionRequestProperty",
-          "description": "Private Endpoint Connection Request Property."
         }
       }
     },
