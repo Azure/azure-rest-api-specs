@@ -299,7 +299,7 @@
             "GCP"
           ],
           "x-ms-enum": {
-            "name": "multiCloudName",
+            "name": "MultiCloudName",
             "modelAsString": true
           }
         },
@@ -324,14 +324,14 @@
           "type": "string",
           "description": "The type of the security offering.",
           "enum": [
-            "MonitoringAWS"
+            "CSPMMonitorAWS"
           ],
           "x-ms-enum": {
             "name": "OfferingType",
             "modelAsString": true,
             "values": [
               {
-                "value": "MonitoringAWS"
+                "value": "CSPMMonitorAWS"
               }
             ]
           }
@@ -343,10 +343,10 @@
         }
       }
     },
-    "MonitoringAWSOffering": {
+    "CSPMMonitorAWSOffering": {
       "type": "object",
-      "description": "The monitoring for AWS offering configurations",
-      "x-ms-discriminator-value": "MonitoringAWS",
+      "description": "The CSPM monitoring for AWS offering configurations",
+      "x-ms-discriminator-value": "CSPMMonitorAWS",
       "allOf": [
         {
           "$ref": "#/definitions/MultiCloudOffering"
