@@ -68,10 +68,6 @@ directive:
     from: ingestionSettings.json
     where: $.definitions.IngestionConnectionString.properties.value
     reason: Secrets are OK to return in a POST response.
-  - suppress: LongRunningResponseStatusCode
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate"].post["x-ms-long-running-operation"]'
-    from: alerts.json
-    reason: This validation error cannot be removed due to technical constraints on your service side.
 ```
 
 ### Basic Information
