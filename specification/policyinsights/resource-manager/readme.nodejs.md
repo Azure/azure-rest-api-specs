@@ -13,7 +13,7 @@ nodejs:
   generate-readme-md: true
 ```
 
-``` yaml $(nodejs)
+``` yaml $(typescript)
 directive:
   - from: policyStates.json
     where: $
