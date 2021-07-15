@@ -522,3 +522,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
