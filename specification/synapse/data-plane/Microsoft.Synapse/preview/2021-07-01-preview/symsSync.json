@@ -51,15 +51,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Request Accepted Response.",
+            "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/acceptedResponse"
+              "$ref": "#/definitions/metadataRequestAcceptedResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorContract"
             }
           }
         }
@@ -93,15 +93,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Request Accepted Response.",
+            "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/acceptedResponse"
+              "$ref": "#/definitions/metadataRequestAcceptedResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorContract"
             }
           }
         }
@@ -113,7 +113,7 @@
           "symssync"
         ],
         "operationId": "SymsSync_Delete",
-        "description": "Register files in Syms",
+        "description": "Remove files in Syms",
         "x-ms-examples": {
           "Register files in Syms": {
             "$ref": "./examples/SymsSync_Delete.json"
@@ -129,21 +129,21 @@
             "required": true,
             "description": "The delete body",
             "schema": {
-              "$ref": "#/definitions/deleteObject"
+              "$ref": "#/definitions/metadataDeleteObject"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Request Accepted Response.",
+            "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/acceptedResponse"
+              "$ref": "#/definitions/metadataRequestAcceptedResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorContract"
             }
           }
         }
@@ -176,7 +176,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorContract"
             }
           }
         }
@@ -184,7 +184,60 @@
     }
   },
   "definitions": {
-    "acceptedResponse": {
+    "ErrorContract": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "metadataRequestAcceptedResponse": {
       "type": "object",
       "properties": {
         "requestId": {
@@ -209,11 +262,13 @@
       "properties": {
         "inputFolder": {
           "type": "string",
-          "example": "xyz"
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
         },
         "databaseName": {
           "type": "string",
-          "example": "xyz"
+          "example": "testdatabase",
+          "description": "The database name to be created."
         }
       }
     },
@@ -226,15 +281,17 @@
       "properties": {
         "inputFolder": {
           "type": "string",
-          "example": "xyz"
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
         },
         "databaseName": {
           "type": "string",
-          "example": "xyz"
+          "example": "testdatabase",
+          "description": "The database name to be created."
         }
       }
     },
-    "deleteObject": {
+    "metadataDeleteObject": {
       "type": "object",
       "required": [
         "databaseName"
@@ -242,7 +299,8 @@
       "properties": {
         "databaseName": {
           "type": "string",
-          "example": "xyz"
+          "example": "testdatabase",
+          "description": "The database name to be created."
         }
       }
     }
