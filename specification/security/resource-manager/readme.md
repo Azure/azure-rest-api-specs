@@ -68,6 +68,10 @@ directive:
     from: ingestionSettings.json
     where: $.definitions.IngestionConnectionString.properties.value
     reason: Secrets are OK to return in a POST response.
+  - suppress: LongRunningResponseStatusCode
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate"].post["x-ms-long-running-operation"]'
+    from: alerts.json
+    reason: This validation error cannot be removed due to technical constraints on your service side.
 ```
 
 ### Basic Information
@@ -85,15 +89,15 @@ tag: package-preview-2021-07
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2021-07
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07'
+``` yaml $(tag) == 'package-preview-2021-07'
 input-file:
   - Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 ```
+
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
