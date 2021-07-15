@@ -6043,11 +6043,12 @@
         "userTenant": {
           "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "WebActivityTypeProperties": {
       "description": "Web activity type properties.",
