@@ -82,7 +82,9 @@ input-file:
   - Microsoft.Web/stable/2021-02-01/ResourceProvider.json
   - Microsoft.Web/stable/2021-02-01/StaticSites.json
   - Microsoft.Web/stable/2021-02-01/WebApps.json
-=======
+```
+
+
 ### Tag: package-2021-01-15
 
 These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
