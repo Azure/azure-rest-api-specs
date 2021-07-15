@@ -1611,7 +1611,7 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Disable or enable local authentication methods." 
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication." 
         },
         "schemaTransformationVersion": {
           "type": "string",
@@ -2140,6 +2140,10 @@
           "x-ms-secret": true,
           "type": "string",
           "description": "The Slack verification token. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "scopes": {
+          "type": "string",
+          "description": "The Slack permission scopes."
         },
         "landingPageUrl": {
           "type": "string",
