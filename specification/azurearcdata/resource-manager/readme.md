@@ -27,7 +27,16 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2021-06-01
+tag: package-2021-08-01
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-01'
+input-file:
+  - Microsoft.AzureArcData/stable/2021-08-01/azurearcdata.json
 ```
 
 ### Tag: package-preview-2021-06-01
