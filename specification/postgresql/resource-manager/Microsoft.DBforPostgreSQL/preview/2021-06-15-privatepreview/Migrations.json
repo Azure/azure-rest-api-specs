@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -131,7 +131,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -183,7 +183,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -226,7 +226,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -271,7 +271,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -327,7 +327,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -389,12 +389,12 @@
         "secretParameters": {
           "$ref": "#/definitions/MigrationSecretParameters"
         },
+        "userAssignedIdentityResourceId": {
+          "type": "string" 
+        },
         "targetDBServerResourceId": {
           "type": "string",
           "readOnly": true
-        },
-        "targetDBServerSubnetResourceId": {
-          "type": "string"
         },
         "dBsToMigrate": {
           "maxItems": 8,
@@ -509,6 +509,9 @@
       "type": "object",
       "properties": {
         "resourceId": {
+          "type": "string"
+        },
+        "subnetResourceId": {
           "type": "string"
         }
       },
@@ -756,6 +759,16 @@
         }
       },
       "description": "Represents a migration name's availability."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {

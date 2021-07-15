@@ -52,7 +52,6 @@
             }
           },
           "targetDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
-          "targetDBServerSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default",
           "dBsToMigrate": [
             "db1",
             "db2",
@@ -60,7 +59,8 @@
             "db4"
           ],
           "migrationResourceGroup": {
-            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg"
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+            "subnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default"
           },
           "setupLogicalReplicationOnSourceDBIfNeeded": true,
           "overwriteDBsInTarget": false,
