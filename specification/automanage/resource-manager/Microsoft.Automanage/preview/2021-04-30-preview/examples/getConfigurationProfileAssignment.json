@@ -4,24 +4,28 @@
     "resourceGroupName": "myResourceGroupName",
     "vmName": "myVMName",
     "configurationProfileAssignmentName": "default",
-    "api-version": "2020-06-30-preview"
+    "api-version": "2021-04-30-preview"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.Automanage/configurationProfileAssignments/default",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/configurationProfileAssignments/default",
         "name": "default",
         "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
         "properties": {
-          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines",
-          "configurationProfile": "Azure virtual machine best practices – Production",
-          "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/accounts/automanageAccount",
-          "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
-          "compliance": {
-            "updateStatus": "Succeeded"
-          },
-          "provisioningState": "Succeeded"
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName",
+          "configurationProfile": "/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesDevTest",
+          "profileOverrides": null,
+          "status": "Compliant"
+        },
+        "systemData": {
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
         }
       }
     }
