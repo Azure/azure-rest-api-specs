@@ -12,3 +12,14 @@ nodejs:
   generate-package-json: true
   generate-readme-md: true
 ```
+
+``` yaml $(nodejs)
+directive:
+  - from: policyStates.json
+    where: $
+    transform: delete $["x-ms-paths"]
+
+  - from: policyEvents.json
+    where: $
+    transform: delete $["x-ms-paths"]
+```

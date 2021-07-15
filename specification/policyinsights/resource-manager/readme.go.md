@@ -65,3 +65,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-04/$(namespace)
 ```
 
+
+``` yaml $(go)
+directive:
+  - from: policyStates.json
+    where: $
+    transform: delete $["x-ms-paths"]
+
+  - from: policyEvents.json
+    where: $
+    transform: delete $["x-ms-paths"]
+```
