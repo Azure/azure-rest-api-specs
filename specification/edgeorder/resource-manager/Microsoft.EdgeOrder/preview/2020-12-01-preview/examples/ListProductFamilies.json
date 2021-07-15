@@ -12,7 +12,7 @@
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "174"
+      "181"
     ],
     "productFamiliesRequest": {
       "filterableProperties": {
@@ -20,8 +20,7 @@
           {
             "type": "ShipToCountries",
             "supportedValues": [
-              "US",
-              "UK"
+              "US"
             ]
           }
         ]
@@ -45,50 +44,59 @@
                               "properties": {
                                 "specifications": [
                                   {
-                                    "name": "Cores",
-                                    "value": "24"
+                                    "name": "Usable compute",
+                                    "value": "40 vCPU"
                                   },
                                   {
-                                    "name": "Memory",
-                                    "value": "128 GB"
+                                    "name": "Usable memory",
+                                    "value": "102 GB"
                                   },
                                   {
-                                    "name": "Storage",
-                                    "value": "~8 TB"
+                                    "name": "Usable storage",
+                                    "value": "4.2 TB"
                                   }
                                 ],
+                                "dimensions": {
+                                  "length": 50.0,
+                                  "height": 15.0,
+                                  "width": 5.0,
+                                  "lengthHeightUnit": "IN",
+                                  "weight": 50.0,
+                                  "depth": 2.0,
+                                  "weightUnit": "LBS"
+                                },
                                 "filterableProperties": [
                                   {
                                     "type": "ShipToCountries",
                                     "supportedValues": [
-                                      "US",
-                                      "UK"
-                                    ]
-                                  },
-                                  {
-                                    "type": "DoubleEncryptionStatus",
-                                    "supportedValues": [
-                                      "Disabled"
+                                      "US"
                                     ]
                                   }
                                 ],
-                                "displayName": "Azure Stack Edge Pro - R 3 GPU",
+                                "displayName": "Azure Stack Edge Pro - 1 GPU",
                                 "description": {
                                   "descriptionType": "Base",
-                                  "keywords": [],
+                                  "shortDescription": "",
+                                  "longDescription": "",
+                                  "keywords": [
+                                    "GPU"
+                                  ],
                                   "attributes": [],
                                   "links": []
                                 },
                                 "imageInformation": [],
+                                "costInformation": {
+                                  "billingMeterDetails": []
+                                },
                                 "availabilityInformation": {
                                   "availabilityStage": "Available",
                                   "disabledReason": "None"
                                 },
                                 "hierarchyInformation": {
                                   "productFamilyName": "azurestackedge",
-                                  "productLineName": "azure stack edge_pl",
-                                  "productName": "azure stack edge pro - r",
-                                  "configurationName": "azure stack edge pro - r 3 gpu"
+                                  "productLineName": "azurestackedge",
+                                  "productName": "azurestackedgegpu",
+                                  "configurationName": "edgep_base"
                                 }
                               }
                             }
@@ -97,69 +105,51 @@
                             {
                               "type": "ShipToCountries",
                               "supportedValues": [
-                                "US",
-                                "UK"
-                              ]
-                            },
-                            {
-                              "type": "DoubleEncryptionStatus",
-                              "supportedValues": [
-                                "Enabled"
+                                "US"
                               ]
                             }
                           ],
-                          "displayName": "Azure Stack Edge Pro - R",
+                          "displayName": "Azure Stack Edge Pro - GPU",
                           "description": {
                             "descriptionType": "Base",
-                            "shortDescription": "Rugged physical edge compute device",
-                            "longDescription": "Azure Stack Edge is an AI-enabled edge computing device with network data transfer capabilities. The device is powered with Intel Aria to provide accelerated AI inferencing at the edge. You can choose from the available configurations with one or two FPGAs basis your business need",
+                            "shortDescription": "Azure managed physical edge compute device",
+                            "longDescription": "Azure Stack Edge is an AI-enabled edge computing device with network data transfer capabilities. The device is powered with NVIDIA T4 GPUs to provide accelerated AI inferencing at the edge. You can choose from the available configurations with one or two GPUs basis your business need",
                             "keywords": [
-                              "Edge",
-                              "FPGA"
+                              "GPU"
                             ],
                             "attributes": [
-                              "1U device shipped by Microsoft",
-                              "Hardware accelerated ML using Intel ARIA FPGA"
+                              "1U rack mount device with network data transfer capabilities",
+                              "Hardware accelerated ML using Nvidia T4 GPU",
+                              "Azure Private Edge Zones enabled"
                             ],
                             "links": [
                               {
+                                "linkType": "Specification",
+                                "linkUrl": "https://aka.ms/ase-gpu-devicespecs"
+                              },
+                              {
+                                "linkType": "Generic",
+                                "linkUrl": "https://aka.ms/ase-gpu-billing"
+                              },
+                              {
                                 "linkType": "TermsAndConditions",
-                                "linkUrl": "https://aka.mx/tc"
+                                "linkUrl": "https://aka.ms/ase-gpu-product-terms"
                               },
                               {
                                 "linkType": "KnowMore",
-                                "linkUrl": "https://aka.mx/knowmore"
+                                "linkUrl": "https://aka.ms/ase-documentation"
                               }
                             ]
                           },
-                          "imageInformation": [
-                            {
-                              "imageType": "MainImage",
-                              "imageUrl": "https://xyz.com"
-                            },
-                            {
-                              "imageType": "BulletImage",
-                              "imageUrl": "https://abc.com"
-                            },
-                            {
-                              "imageType": "GenericImage",
-                              "imageUrl": "https://xyz.com/1"
-                            },
-                            {
-                              "imageType": "GenericImage",
-                              "imageUrl": "https://abc.com/1"
-                            }
-                          ],
-                          "costInformation": {},
+                          "imageInformation": [],
                           "availabilityInformation": {
-                            "availabilityStage": "ComingSoon",
-                            "disabledReason": "NotAvailable",
-                            "disabledReasonMessage": "Device is not available yet"
+                            "availabilityStage": "Available",
+                            "disabledReason": "None"
                           },
                           "hierarchyInformation": {
                             "productFamilyName": "azurestackedge",
-                            "productLineName": "azure stack edge_pl",
-                            "productName": "azure stack edge pro - r",
+                            "productLineName": "azurestackedge",
+                            "productName": "azurestackedgegpu",
                             "configurationName": ""
                           }
                         }
@@ -169,18 +159,11 @@
                       {
                         "type": "ShipToCountries",
                         "supportedValues": [
-                          "US",
-                          "UK"
-                        ]
-                      },
-                      {
-                        "type": "DoubleEncryptionStatus",
-                        "supportedValues": [
-                          "Enabled"
+                          "US"
                         ]
                       }
                     ],
-                    "displayName": "Azure Stack Edge_Pl",
+                    "displayName": "Azure Stack Edge",
                     "description": {
                       "descriptionType": "Base",
                       "keywords": [],
@@ -194,26 +177,11 @@
                     },
                     "hierarchyInformation": {
                       "productFamilyName": "azurestackedge",
-                      "productLineName": "azure stack edge_pl",
+                      "productLineName": "azurestackedge",
                       "productName": "",
                       "configurationName": ""
                     }
                   }
-                }
-              ],
-              "filterableProperties": [
-                {
-                  "type": "ShipToCountries",
-                  "supportedValues": [
-                    "US",
-                    "UK"
-                  ]
-                },
-                {
-                  "type": "DoubleEncryptionStatus",
-                  "supportedValues": [
-                    "Enabled"
-                  ]
                 }
               ],
               "displayName": "Azure Stack Edge",

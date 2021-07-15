@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2021-01
+tag: package-2021-01-15
 ```
 
 ### Suppression
@@ -55,6 +55,7 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2021-02-01
 
 These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
@@ -81,6 +82,34 @@ input-file:
   - Microsoft.Web/stable/2021-02-01/ResourceProvider.json
   - Microsoft.Web/stable/2021-02-01/StaticSites.json
   - Microsoft.Web/stable/2021-02-01/WebApps.json
+=======
+### Tag: package-2021-01-15
+
+These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-15'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-01-15/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-01-15/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-15/Certificates.json
+  - Microsoft.Web/stable/2021-01-15/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-15/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-15/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-15/Global.json
+  - Microsoft.Web/stable/2021-01-15/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/Provider.json
+  - Microsoft.Web/stable/2021-01-15/Recommendations.json
+  - Microsoft.Web/stable/2021-01-15/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-15/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-15/StaticSites.json
+  - Microsoft.Web/stable/2021-01-15/WebApps.json
+>>>>>>> 62ea9c01512148eecba069943e2abc639e5e9dc5
 directive:
   # suppress each RPC 3016 error
 - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -289,6 +318,7 @@ directive:
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` or `--tag=package-2020-12-only` is specified on the command line.
