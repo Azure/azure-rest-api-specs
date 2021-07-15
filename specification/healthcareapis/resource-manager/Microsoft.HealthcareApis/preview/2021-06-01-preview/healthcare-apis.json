@@ -2637,7 +2637,11 @@
         "Updating",
         "Failed",
         "Canceled",
-        "Deprovisioned"
+        "Deprovisioned",
+        "Moving",
+        "Suspended",
+        "Warned",
+        "SystemMaintenance"
       ],
       "type": "string",
       "readOnly": true,
@@ -3118,7 +3122,7 @@
           ],
           "x-ms-enum": {
             "name": "fhirServiceKind",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "properties": {
@@ -3157,7 +3161,7 @@
           "$ref": "#/definitions/FhirServiceAccessPolicies"
         },
         "acrConfiguration": {
-          "description": "Fhir Service ACR configuration.",
+          "description": "Fhir Service Azure container registry configuration.",
           "$ref": "#/definitions/FhirServiceAcrConfiguration"
         },
         "authenticationConfiguration": {
@@ -3201,7 +3205,7 @@
       "properties": {
         "loginServers": {
           "type": "array",
-          "description": "The list of the ACR login servers.",
+          "description": "The list of the Azure container registry login servers.",
           "readOnly": false,
           "items": {
             "type": "string"
