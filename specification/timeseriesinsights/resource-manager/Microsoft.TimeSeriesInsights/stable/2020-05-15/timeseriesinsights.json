@@ -1178,6 +1178,13 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "description": "A list of Azure Monitoring log definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -1212,9 +1219,12 @@
           "type": "string",
           "description": "Aggregation type could be Average."
         },
-        "fillGapWithZero": {
-          "type": "boolean",
-          "description": "The property to decide fill gap with zero or not."
+        "availabilities": {
+          "description": "Retention policies of a resource metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          }
         },
         "category": {
           "type": "string",
@@ -1223,6 +1233,20 @@
         "resourceIdDimensionNameOverride": {
           "type": "string",
           "description": "Account Resource Id."
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "The specification of an Azure Monitoring log.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Log name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Log display name.",
+          "type": "string"
         }
       }
     },
@@ -1237,6 +1261,18 @@
         "displayName": {
           "type": "string",
           "description": "Display name of dimension."
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
         }
       }
     },

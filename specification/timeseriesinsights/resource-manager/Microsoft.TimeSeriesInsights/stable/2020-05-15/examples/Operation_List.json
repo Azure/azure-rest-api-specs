@@ -7,6 +7,7 @@
       "body": {
         "value": [
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/register/action",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -16,6 +17,361 @@
             }
           },
           {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "The metrics definition of environments",
+              "operation": "Read environments metric definitions",
+              "description": "Gets the available metrics for environments"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "IngressReceivedMessages",
+                    "displayName": "Ingress Received Messages",
+                    "displayDescription": "Count of messages read from all Event hub or IoT hub event sources",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedInvalidMessages",
+                    "displayName": "Ingress Received Invalid Messages",
+                    "displayDescription": "Count of invalid messages read from all Event hub or IoT hub event sources",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedBytes",
+                    "displayName": "Ingress Received Bytes",
+                    "displayDescription": "Count of bytes read from all event sources",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressStoredBytes",
+                    "displayName": "Ingress Stored Bytes",
+                    "displayDescription": "Total size of events successfully processed and available for query",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressStoredEvents",
+                    "displayName": "Ingress Stored Events",
+                    "displayDescription": "Count of flattened events successfully processed and available for query",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedMessagesTimeLag",
+                    "displayName": "Ingress Received Messages Time Lag",
+                    "displayDescription": "Difference between the time that the message is enqueued in the event source and the time it is processed in Ingress",
+                    "unit": "Seconds",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedMessagesCountLag",
+                    "displayName": "Ingress Received Messages Count Lag",
+                    "displayDescription": "Difference between the sequence number of last enqueued message in the event source partition and sequence number of messages being processed in Ingress",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "WarmStorageMaxProperties",
+                    "displayName": "Warm Storage Max Properties",
+                    "displayDescription": "Maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU",
+                    "unit": "Count",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "WarmStorageUsedProperties",
+                    "displayName": "Warm Storage Used Properties ",
+                    "displayDescription": "Number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU",
+                    "unit": "Count",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "environments",
+              "operation": "Read diagnostic setting.",
+              "description": "Gets the diagnostic setting for the resource"
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "environments",
+              "operation": "Write diagnostic setting.",
+              "description": "Creates or updates the diagnostic setting for the resource"
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/providers/Microsoft.Insights/logDefinitions/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "environments",
+              "operation": "Read environments log definitions",
+              "description": "Gets the available logs for environments"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "Ingress",
+                    "displayName": "Ingress"
+                  },
+                  {
+                    "name": "Management",
+                    "displayName": "Management"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/eventsources/providers/Microsoft.Insights/logDefinitions/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Event Source",
+              "operation": "Read event source log definitions",
+              "description": "Gets the available logs for the event source"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "Ingress",
+                    "displayName": "Ingress"
+                  },
+                  {
+                    "name": "Management",
+                    "displayName": "Management"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/eventsources/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "The metrics definition of environments/eventsources",
+              "operation": "Read eventsources metric definitions",
+              "description": "Gets the available metrics for eventsources"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "IngressReceivedMessages",
+                    "displayName": "Ingress Received Messages",
+                    "displayDescription": "Count of messages read from the event source",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedInvalidMessages",
+                    "displayName": "Ingress Received Invalid Messages",
+                    "displayDescription": "Count of invalid messages read from the event source",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedBytes",
+                    "displayName": "Ingress Received Bytes",
+                    "displayDescription": "Count of bytes read from the event source",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressStoredBytes",
+                    "displayName": "Ingress Stored Bytes",
+                    "displayDescription": "Total size of events successfully processed and available for query",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressStoredEvents",
+                    "displayName": "Ingress Stored Events",
+                    "displayDescription": "Count of flattened events successfully processed and available for query",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedMessagesTimeLag",
+                    "displayName": "Ingress Received Messages Time Lag",
+                    "displayDescription": "Difference between the time that the message is enqueued in the event source and the time it is processed in Ingress",
+                    "unit": "Seconds",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "IngressReceivedMessagesCountLag",
+                    "displayName": "Ingress Received Messages Count Lag",
+                    "displayDescription": "Difference between the sequence number of last enqueued message in the event source partition and sequence number of messages being processed in Ingress",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "WarmStorageMaxProperties",
+                    "displayName": "Warm Storage Max Properties",
+                    "displayDescription": "Maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU",
+                    "unit": "Count",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "WarmStorageUsedProperties",
+                    "displayName": "Warm Storage Used Properties ",
+                    "displayDescription": "Number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU",
+                    "unit": "Count",
+                    "aggregationType": "Maximum",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/eventsources/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "environments/eventsources",
+              "operation": "Read diagnostic setting.",
+              "description": "Gets the diagnostic setting for the resource"
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/eventsources/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "environments/eventsources",
+              "operation": "Write diagnostic setting.",
+              "description": "Creates or updates the diagnostic setting for the resource"
+            }
+          },
+          {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/read",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -25,6 +381,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/write",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -34,6 +391,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/delete",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -43,6 +401,17 @@
             }
           },
           {
+            "origin": "user,system",
+            "name": "Microsoft.TimeSeriesInsights/environments/status/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Environment",
+              "operation": "Read Environment status",
+              "description": "Get the status of the environment, state of its associated operations like ingress."
+            }
+          },
+          {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/eventsources/read",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -52,6 +421,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/eventsources/write",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -61,6 +431,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/eventsources/delete",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -70,6 +441,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/referencedatasets/read",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -79,6 +451,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/referencedatasets/write",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -88,6 +461,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/referencedatasets/delete",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -97,6 +471,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/accesspolicies/read",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -106,6 +481,7 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/accesspolicies/write",
             "display": {
               "provider": "Microsoft Time Series Insights",
@@ -115,12 +491,93 @@
             }
           },
           {
+            "origin": "user,system",
             "name": "Microsoft.TimeSeriesInsights/environments/accesspolicies/delete",
             "display": {
               "provider": "Microsoft Time Series Insights",
               "resource": "Access Policy",
               "operation": "Delete Access Policy",
               "description": "Deletes the access policy."
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateEndpointConnectionProxies/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection proxy",
+              "operation": "Read private endpoint connection proxy",
+              "description": "Get the properties of a private endpoint connection proxy."
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateEndpointConnectionProxies/write",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection proxy",
+              "operation": "Create or Update private endpoint connection proxy",
+              "description": "Creates a new private endpoint connection proxy for an environment, or updates an existing connection proxy."
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateEndpointConnectionProxies/delete",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection proxy",
+              "operation": "Delete the private endpoint connection proxy",
+              "description": "Deletes the private endpoint connection proxy."
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateEndpointConnectionProxies/validate/action",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection proxy",
+              "operation": "Validate the private endpoint connection proxy.",
+              "description": "Validate the private endpoint connection proxy object before creation."
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateEndpointConnectionProxies/operationresults/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection proxy",
+              "operation": "Get private endpoint connection proxy operation status.",
+              "description": "Validate the private endpoint connection proxy operation status."
+            }
+          },
+          {
+            "origin": "user,system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateendpointConnections/read",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection.",
+              "operation": "Read private endpoint connection.",
+              "description": "Get the properties of a private endpoint connection."
+            }
+          },
+          {
+            "origin": "user,system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateendpointConnections/write",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection.",
+              "operation": "Create or Update private endpoint connection.",
+              "description": "Creates a new private endpoint connection for an environment, or updates an existing connection."
+            }
+          },
+          {
+            "origin": "user,system",
+            "name": "Microsoft.TimeSeriesInsights/environments/privateendpointConnections/delete",
+            "display": {
+              "provider": "Microsoft Time Series Insights",
+              "resource": "Private endpoint connection",
+              "operation": "Delete the private endpoint connection",
+              "description": "Deletes the private endpoint connection."
             }
           }
         ]
