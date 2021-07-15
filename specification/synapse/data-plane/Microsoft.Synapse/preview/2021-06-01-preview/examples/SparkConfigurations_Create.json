@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "sparkConfigurationName": "exampleSparkConfiguration",
+    "ifMatch": null,
+    "sparkConfiguration": {
+      "properties": {
+        "description": "A sample spark Configuration",
+        "configs": {
+          "test1": "test1value",
+          "test2": "test2value"
+        },
+        "annotations": [
+          "testAnnotation1",
+          "testAnnotation2"
+        ],
+        "notes": "testNotes"
+      }
+    },
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2019 00:37:38 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1194",
+        "x-ms-request-id": "ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0",
+        "x-ms-correlation-request-id": "ce95d6dd-c04d-4b02-b7ad-fe79c9b26df0"
+      }
+    },
+    "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:41 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264",
+        "x-ms-correlation-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/sparkconfigurations/exampleSparkConfiguration",
+        "name": "exampleSparkConfiguration",
+        "type": "Microsoft.Synapse/workspaces/sparkconfigurations",
+        "properties": {
+          "description": "A sample spark configuration",
+          "configs": {
+            "test1": "test1value",
+            "test2": "test2value"
+          },
+          "annotations": [
+            "testAnnotation1",
+            "testAnnotation2"
+          ],
+          "notes": "testNotes",
+          "createdBy": "test@microsoft.com",
+          "created": "1970-01-01T00:00:00Z"
+        },
+        "etag": "0a0069d4-0000-0000-0000-5b245bd50000"
+      }
+    }
+  }
+}
