@@ -226,6 +226,10 @@
           "description": "NetworkRuleSet properties",
           "x-ms-client-flatten": true,
           "properties": {
+            "trustedServiceAccessEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether Trusted Service Access is Enabled or not."
+            },
             "defaultAction": {
               "type": "string",
               "description": "Default Action for Network Rule Set",
@@ -251,6 +255,19 @@
                 "$ref": "#/definitions/NWRuleSetIpRules"
               },
               "description": "List of IpRules"
+            },
+            "publicNetworkAccess": {
+              "description": "This determines if traffic is allowed over public network. By default it is enabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicNetworkAccessFlag",
+                "modelAsString": true
+              },
+              "default": "Enabled"
             }
           }
         },
