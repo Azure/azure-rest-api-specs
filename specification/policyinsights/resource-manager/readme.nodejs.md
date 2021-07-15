@@ -12,14 +12,3 @@ nodejs:
   generate-package-json: true
   generate-readme-md: true
 ```
-
-``` yaml $(typescript)
-directive:
-  - from: policyStates.json
-    where: $
-    transform: delete $["x-ms-paths"]
-
-  - from: policyEvents.json
-    where: $
-    transform: delete $["x-ms-paths"]
-```
