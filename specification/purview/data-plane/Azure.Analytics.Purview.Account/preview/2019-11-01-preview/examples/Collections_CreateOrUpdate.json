@@ -3,10 +3,8 @@
     "collectionName": "myCollection1",
     "api-version": "2019-11-01-preview",
     "collection": {
-      "properties": {
-        "parentCollection": {
-          "name": "myParentCollection1"
-        }
+      "parentCollection": {
+        "referenceName": "myParentCollection1"
       }
     }
   },
@@ -20,22 +18,12 @@
       },
       "body": {
         "name": "mycollection1",
-        "properties": {
-          "displayName": "Finance",
-          "parentCollection": {
-            "referenceType": "CollectionReference",
-            "name": "myParentCollection1"
-          },
-          "parentNameChain": [
-            "accountName",
-            "myParentCollection1"
-          ],
-          "parentDisplayNameChain": [
-            "accountName",
-            "myParentCollection1"
-          ],
-          "collectionProvisioningState": "Succeeded"
-        }
+        "friendlyName": "Finance",
+        "parentCollection": {
+          "type": "CollectionReference",
+          "referenceName": "myParentCollection1"
+        },
+        "collectionProvisioningState": "Succeeded"
       }
     }
   }
