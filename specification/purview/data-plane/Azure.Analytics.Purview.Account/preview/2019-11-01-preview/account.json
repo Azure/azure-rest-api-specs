@@ -662,47 +662,6 @@
         }
       }
     },
-    "/features": {
-      "post": {
-        "tags": [
-          "ExposureControl"
-        ],
-        "description": "Gets details from a list of features.",
-        "operationId": "ExposureControl_Features_Post",
-        "parameters": [
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchSettingsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          },
-          "default": {
-            "description": "An error response received from the provider.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExposureControl_Features_Post": {
-            "$ref": "./examples/ExposureControl_Features_Post.json"
-          }
-        }
-      }
-    },
     "/resourceSetRuleConfigs/defaultResourceSetRuleConfig": {
       "get": {
         "tags": [
@@ -1344,7 +1303,7 @@
           "description": "Gets or sets the name.",
           "type": "string"
         },
-        "ruleJSON": {
+        "ruleJson": {
           "description": "Gets or sets the actual rule json as a string.",
           "type": "string"
         }
@@ -1606,33 +1565,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "BatchSettingsRequest": {
-      "description": "Exposure Control settings request model",
-      "type": "object",
-      "properties": {
-        "features": {
-          "description": "Features",
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Settings": {
-      "description": "Container for Exposure Control settings",
-      "type": "object",
-      "properties": {
-        "features": {
-          "description": "Features with enabled status",
-          "type": "object",
-          "additionalProperties": {
-            "type": "boolean"
-          }
         }
       }
     },
