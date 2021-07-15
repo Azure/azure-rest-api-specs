@@ -370,9 +370,35 @@
         "forwardDeadLetteredMessagesTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the Dead Letter message"
+        },
+        "isClientAffine": {
+          "type": "boolean",
+          "description": "Value that indicates whether the subscription has an affinity to the client id."
+        },
+        "clientAffineProperties": {
+          "$ref": "#/definitions/SBClientAffineProperties",
+          "description": "Properties specific to client affine subscriptions."
         }
       },
       "description": "Description of Subscription Resource."
+    },
+    "SBClientAffineProperties": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Indicates the Client ID of the application that created the client-affine subscription."
+        },
+        "isDurable": {
+          "type": "boolean",
+          "description": "For client-affine subscriptions, this value indicates whether the subscription is durable or not."
+        },
+        "isShared": {
+          "type": "boolean",
+          "description": "For client-affine subscriptions, this value indicates whether the subscription is shared or not."
+        }
+      },
+      "description": "Properties specific to client affine subscriptions."
     }
   },
   "parameters": {}
