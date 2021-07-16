@@ -6516,12 +6516,19 @@
     "RemotePrivateEndpointConnectionWrapper": {
       "description": "Remote Private Endpoint Connection resource.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "Private Endpoint connection resource id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Private Endpoint Connection Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Priavte Endpoint Connection Resource Type",
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionWrapperProperties",
           "x-ms-client-flatten": true,
