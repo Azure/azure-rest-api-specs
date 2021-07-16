@@ -2,19 +2,27 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-06-01",
-    "title": "powerbiprivatelinks",
-    "description": "Description of the new service",
+    "title": "Power BI Private Link Service Management Client",
+    "description": "Client to manage your Power BI Private Link Service resources and connection memebrs.",
     "x-ms-code-generation-settings": {
-      "name": "powerbiprivatelinksClient"
+      "name": "privatelinkservicesforpowerbiClient"
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -29,78 +37,1228 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/operations": {
+    "/providers/Microsoft.PowerBI/operations": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-examples": {
+          "List private link resources in a subscription": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ListAvailableOperations.json"
+          }
+        },
+        "operationId": "privateLinkServicesForPowerBI_ListAvailableOperations",
+        "description": "Indicates which operations can be performed by the Power BI Resource Provider.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "x-ms-examples": {
+          "List private link resources in a subscription": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ListBySubscriptionId.json"
+          }
+        },
+        "operationId": "privateLinkServicesForPowerBI_ListBySubscriptionId",
+        "description": "Gets all the private link resources for the given subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantResource"
+              }
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_GetPrivateLinkServiceResourceOperationResult",
+        "x-ms-examples": {
+          "Result of operation on private link resources": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateLinkServiceResourceOperationResult.json"
+          }
+        },
+        "description": "Gets operation result of Private Link Service Resources for Power BI.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationDetail"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_ListByResourceGroup",
+        "x-ms-examples": {
+          "List private link resources in a resource group": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ListByResourceGroup.json"
+          }
+        },
+        "description": "Gets all the private link resources for the given resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantResource"
+              }
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_ListByResourceName",
+        "x-ms-examples": {
+          "List private link resources in a Azure resource": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ListByAzureResource.json"
+          }
+        },
+        "description": "Gets all the private link resources for the given Azure resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantResource"
+              }
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateLinkService",
+        "x-ms-examples": {
+          "Creates or updates private link service resource": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_CreateOrUpdatePrivateLinkService.json"
+          }
+        },
+        "description": "Creates or updates a Private Link Service Resource for Power BI.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Tenant resource to be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/TenantResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantResource"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_DeletePrivateLinkService",
+        "x-ms-examples": {
+          "Deletes private link service resource": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateLinkService.json"
+          }
+        },
+        "description": "Deletes a Private Link Service Resource for Power BI.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateLinkResources": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_ListPrivateLinkResources",
+        "x-ms-examples": {
+          "Gets private link resources in a Azure resource": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ListPrivateLinkResources.json"
+          }
+        },
+        "description": "Gets Private Link Resources for Power BI by resource group and resource name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PrivateLinkResources"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}.{privateEndpointGuid}": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_GetPrivateEndpointConnectionProxy",
+        "x-ms-examples": {
+          "Gets private endpoint connection proxy": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnectionProxy.json"
+          }
+        },
+        "description": "Gets private endpoint connection proxy for Power BI by private endpoint name.",
+        "summary": "Synchronous API called by NRP to get private endpoint connection proxy for Power BI by private endpoint name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionProxy",
+        "x-ms-examples": {
+          "Creates or updates private endpoint connection proxy": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionProxy.json"
+          }
+        },
+        "description": "Creates or updates private endpoint connection proxy for Power BI by private endpoint name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The PrivateEndpointConnectionProxy to be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The Azure async operation id to poll on result."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_DeletePrivateEndpointConnectionProxy",
+        "x-ms-examples": {
+          "Deletes a private endpoint connection proxy": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateEndpointConnectionProxy.json"
+          }
+        },
+        "description": "Deletes a private endpoint connection proxy for Power BI by private endpoint name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The Azure async operation id to poll on result."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}.{privateEndpointGuid}/validate": {
+      "post": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_ValidatePrivateEndpointConnectionProxy",
+        "x-ms-examples": {
+          "Validates a private endpoint connection": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_ValidatePrivateEndpointConnectionProxy.json"
+          }
+        },
+        "description": "Validates a private endpoint connection before create or update.",
+        "summary": "Synchronous API called by NRP to validate a private endpoint before create or update.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The PrivateEndpointConnectionProxy to be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections/{privateEndpointName}.{privateEndpointGuid}": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_GetPrivateEndpointConnection",
+        "x-ms-examples": {
+          "Gets private endpoint connection": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnection.json"
+          }
+        },
+        "description": "Gets private endpoint connection for Power BI by private endpoint name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionStatus",
+        "x-ms-examples": {
+          "Updates status of private endpoint connection": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_UpdatePrivateEndpointConnectionStatus.json"
+          }
+        },
+        "description": "Updates the status of Private Endpoint Connection object. Used to approve or reject a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Private endpoint connection to update.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBI_DeletePrivateEndpointConnection",
+        "x-ms-examples": {
+          "Deletes private endpoint connection": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateEndpointConnection.json"
+          }
+        },
+        "description": "Deletes a private endpoint connection for Power BI by private endpoint name.",
+        "summary": "Asynchronous API to delete a private endpoint connection for Power BI by private endpoint name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The Azure async operation id to poll on result."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "AsyncOperationDetail": {
+      "title": "AsyncOperationDetail",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "id": {
           "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
+          "description": "The operation id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "status": {
+          "type": "string",
+          "description": "The operation status."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The operation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The operation end time."
+        },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "$ref": "#/definitions/Error",
+          "description": "The error."
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "TenantResource": {
+      "title": "TenantResource",
+      "type": "object",
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Specifies the resource identifier of the resource."
         },
-        "message": {
-          "description": "Description of the error.",
+        "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Specifies the name of the resource."
         },
-        "details": {
-          "description": "Internal error details.",
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Specifies the location of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantProperties",
+          "description": "Specifies the properties of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Specifies the tags of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TenantProperties": {
+      "title": "TenantProperties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Specifies the tenant id of the resource."
+        },
+        "privateEndpointConnections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "readOnly": true
+          "description": "Specifies the private endpoint connections of the resource."
+        }
+      }
+    },
+    "PrivateLinkConnectionDetail": {
+      "title": "PrivateLinkConnectionDetail",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the type of the connection detail."
+        },
+        "memberName": {
+          "type": "string",
+          "description": "Specifies the member name of the connection detail."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "Specifies the private ip address of the connection detail."
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "description": "Specifies the link id of the connection detail."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Specifies the group id of the connection detail."
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "title": "GroupConnectivityInformation",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Specifies the group id of the group connectivity information."
+        },
+        "memberName": {
+          "type": "string",
+          "description": "Specifies the member name of the group connectivity information."
+        },
+        "internalFqdn": {
+          "type": "string",
+          "description": "Specifies the internal FQDN of the group connectivity information."
+        },
+        "customerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the customer visible FQDNs of the group connectivity information."
+        },
+        "privateLinkServiceArmRegion": {
+          "type": "string",
+          "description": "Specifies the ARM region of the group connectivity information."
+        }
+      }
+    },
+    "ConnectionState": {
+      "title": "ConnectionState",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ConnectionStatus",
+          "description": "Specifies the connection status."
+        },
+        "description": {
+          "type": "string",
+          "description": "Specifies the connection status description."
+        },
+        "actionsRequired": {
+          "$ref": "#/definitions/ActionsRequired",
+          "description": "Specifies the actions required."
+        }
+      }
+    },
+    "PrivateLinkServiceProxy": {
+      "title": "PrivateLinkServiceProxy",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of the private link service proxy."
+        },
+        "groupConnectivityInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          },
+          "description": "Specifies the group connectivity information of the private link service proxy."
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Specifies the connection state of the private link service proxy."
+        },
+        "remotePrivateEndpointConnection": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Specifies the private endpoint connection of the private link service proxy."
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "title": "PrivateLinkServiceConnection",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the private link service connection."
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the group ids of the private link service connection."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "Specifies the request message of the private link service connection."
+        }
+      }
+    },
+    "RemotePrivateEndpoint": {
+      "title": "RemotePrivateEndpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of the private endpoint."
+        },
+        "manualPrivateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "description": "Specifies the private link service connections of the private endpoint."
+        },
+        "privateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "description": "Specifies the private link service connections of the private endpoint."
+        },
+        "privateLinkServiceProxies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          },
+          "description": "Specifies the private link service proxies of the private endpoint."
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConnectionDetail"
+          },
+          "description": "Specifies the connection details of the private endpoint."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyResource": {
+      "title": "PrivateEndpointConnectionProxyResource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Specifies the location of the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Specifies the etag of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProxy",
+          "description": "Specifies the private endpoint proxy resource."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "title": "PrivateEndpointConnectionProxy",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Specifies the location of the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Specifies the etag of the resource."
+        },
+        "remotePrivateEndpoint": {
+          "$ref": "#/definitions/RemotePrivateEndpoint",
+          "description": "Specifies the remote private endpoint of the resource."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "title": "PrivateEndpointConnection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Specifies the properties of the private endpoint connection."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "title": "PrivateEndpointConnectionProperties",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Specifies the private endpoint."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Specifies the connection state."
+        }
+      }
+    },
+    "ActionsRequired": {
+      "title": "ActionsRequired",
+      "type": "string",
+      "enum": [
+        "None",
+        "Recreate"
+      ]
+    },
+    "PrivateEndpoint": {
+      "title": "PrivateEndpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of private endpoint."
+        }
+      }
+    },
+    "PrivateLinkResources": {
+      "title": "PrivateLinkResources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "description": "Specifies the private link resource."
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "title": "PrivateLinkResource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of private link resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of private link resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of private link resource."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Specifies the group id of private link resource."
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the required memebrs of private link resource."
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "title": "RemotePrivateEndpointConnection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the id of private endpoint connection."
+        }
+      }
+    },
+    "ConnectionStatus": {
+      "title": "ConnectionStatus",
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ]
+    },
+    "OperationList": {
+      "title": "OperationList",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "Specifies the value of operation list."
+        }
+      }
+    },
+    "Operation": {
+      "title": "Operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Specifies the display of operation."
+        }
+      }
+    },
+    "Display": {
+      "title": "Display",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the \"name\" section."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
+        }
+      }
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Specifies the error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Specifies the error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Specifies the error target."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "Specifies the error details."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "ErrorDetail",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Specifies the error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Specifies the error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Specifies the error target."
         }
       }
     }
@@ -111,7 +1269,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -119,6 +1277,47 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
+      "x-ms-parameter-location": "client"
+    },
+    "AzureResourceNameParameter": {
+      "name": "azureResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure resource.",
+      "x-ms-parameter-location": "client"
+    },
+    "PrivateEndpointNameParameter": {
+      "name": "privateEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint.",
+      "x-ms-parameter-location": "client"
+    },
+    "PrivateEndpointGuidParameter": {
+      "name": "privateEndpointGuid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Guid of the private endpoint. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "x-ms-parameter-location": "client"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of Azure async operation.",
+      "x-ms-parameter-location": "client"
+    },
+    "ClientTenantIdHeaderParameter": {
+      "name": "x-ms-client-tenant-id",
+      "in": "header",
+      "description": "The client tenant id in header. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": false,
+      "type": "string",
+      "x-ms-client-name": "ClientTenantId",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
