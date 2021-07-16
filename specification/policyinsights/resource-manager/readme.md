@@ -81,22 +81,18 @@ directive:
 
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: policyEvents.json
-    where: $.paths
     reason: unnecessary check
 
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: policyStates.json
-    where: $.paths
     reason: unnecessary check
 
   - suppress: MISSING_REQUIRED_PARAMETER
     from: policyEvents.json
-    where: $.paths
     reason: unnecessary check
 
   - suppress: MISSING_REQUIRED_PARAMETER
     from: policyStates.json
-    where: $.paths
     reason: unnecessary check
 
 ```
