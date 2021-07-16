@@ -6505,13 +6505,9 @@
           "type": "object",
           "description": "The connection state of the private endpoint connection.",
           "properties": {
-            "status": {
-              "description": "Status of a private endpoint connection.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The description of this private endpoint connection request.",
-              "type": "string"
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
             }
           }
         }
