@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-05-01",
+    "subscriptionId": "subid",
+    "vendorName": "testVendor",
+    "vendorSkuName": "testSku"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "skuType": "SDWAN",
+        "value": [
+          {
+            "roleName": "testRole",
+            "userDataTemplate": {},
+            "userDataParameters": {},
+            "networkInterfaces": [
+              {
+                "networkInterfaceName": "nic1",
+                "macAddress": "",
+                "vmSwitchType": "Management",
+                "ipConfigurations": [
+                  {
+                    "ipAllocationMethod": "Dynamic",
+                    "ipAddress": "",
+                    "subnet": "",
+                    "gateway": "",
+                    "ipVersion": "IPv4",
+                    "dnsServers": null
+                  }
+                ]
+              },
+              {
+                "networkInterfaceName": "nic2",
+                "macAddress": "",
+                "vmSwitchType": "Wan",
+                "ipConfigurations": [
+                  {
+                    "ipAllocationMethod": "Dynamic",
+                    "ipAddress": "",
+                    "subnet": "",
+                    "gateway": "",
+                    "ipVersion": "IPv4",
+                    "dnsServers": null
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
