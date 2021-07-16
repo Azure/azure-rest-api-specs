@@ -237,12 +237,15 @@
           }
         }
       }
-    }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
         "operationId": "PerimeterAssociableResourceTypes_Get",
         "description": "Gets the list of resources that are onboarded with NSP. These resources can be asociated with a netwotk security perimeter",
         "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },        
           {
             "name": "location",
             "in": "path",
@@ -252,9 +255,6 @@
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -273,7 +273,7 @@
         },
         "x-ms-examples": {
           "Check Dns Name Availability": {
-            "$ref": "./examples/PerimeterAssociableResources.json"
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
           }
         }
       }
@@ -356,7 +356,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PerimeterAssociableResourceProperties.",
+          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
           "description": "Properties of the perimeter associable resource."
         },
         "name": {
@@ -421,7 +421,7 @@
         }
       },
       "description": "Properties of the perimeter associable resources."
-    },    
+    }
   },
   "parameters": {
     "ResourceGroupNameParameter": {
