@@ -3134,6 +3134,9 @@
           },
           "Create or update a VM with capacity reservation": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithCapacityReservation.json"
+          },
+          "Create a VM from a shared gallery image": {
+            "$ref": "./examples/compute/CreateAVmFromASharedGalleryImage.json"
           }
         }
       },
@@ -8474,6 +8477,18 @@
         "modelAsString": true
       }
     },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Specifies the Architecture Type",
+      "enum": [
+        "x64",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureTypes",
+        "modelAsString": true
+      }
+    },
     "InstanceViewStatus": {
       "properties": {
         "code": {
@@ -10176,6 +10191,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineImageFeature"
           }
+        },
+        "architecture": {
+          "$ref": "#/definitions/ArchitectureType"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -10555,6 +10573,10 @@
           "type": "string",
           "readOnly": true,
           "description": "Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'."
+        },
+        "sharedGalleryImageId": {
+          "type": "string",
+          "description": "Specified the shared gallery image unique id for vm deployment. This can be fetched from shared gallery image GET call."
         }
       },
       "allOf": [
