@@ -2130,18 +2130,6 @@
         "purchasePlan": {
           "$ref": "#/definitions/ImagePurchasePlan"
         },
-        "architecture": {
-          "type": "string",
-          "description": "Optional. This property allows user to specify the targeted architecture for the VMImage.",
-          "enum": [
-            "x64",
-            "Arm64"
-          ],
-          "x-ms-enum": {
-            "name": "Architecture",
-            "modelAsString": true
-          }
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2162,6 +2150,18 @@
             "$ref": "#/definitions/GalleryImageFeature"
           },
           "description": "A list of gallery image features."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "Optional. This property allows user to specify the targeted architecture for the VMImage.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
       "required": [
