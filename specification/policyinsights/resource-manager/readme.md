@@ -81,6 +81,19 @@ directive:
 
 ```
 
+``` yaml !$(python)
+directive:
+  - from: policyEvents.json
+    where: $
+    transform: delete $['x-ms-paths']
+    reason: other languages which still use track1 does not support remove '/' for 'next_link'
+
+  - from: policyStates.json
+    where: $
+    transform: delete $['x-ms-paths']
+    reason: other languages which still use track1 does not support remove '/' for 'next_link'
+```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -162,6 +175,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

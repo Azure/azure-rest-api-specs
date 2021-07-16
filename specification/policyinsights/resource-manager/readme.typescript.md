@@ -11,15 +11,3 @@ typescript:
   clear-output-folder: true
   generate-metadata: true
 ```
-
-
-``` yaml $(typescript)
-directive:
-  - from: policyStates.json
-    where: $
-    transform: delete $["x-ms-paths"]
-
-  - from: policyEvents.json
-    where: $
-    transform: delete $["x-ms-paths"]
-```
