@@ -482,6 +482,96 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryApprovedPlans": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_QueryApprovedPlans",
+        "description": "Get map of plans and related approved subscriptions.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryApprovedPlansPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Map of plan ids and their related approved subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/QueryApprovedPlansResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryApprovedPlans": {
+            "$ref": "./examples/QueryApprovedPlans.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/bulkCollectionsAction": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_BulkCollectionsAction",
+        "description": "Perform an action on bulk collections",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/BulkCollectionsPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collections id and name that the action was performed on",
+            "schema": {
+              "$ref": "#/definitions/BulkCollectionsResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkCollectionsAction": {
+            "$ref": "./examples/BulkCollectionsAction.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers": {
       "parameters": [
         {
@@ -2036,6 +2126,119 @@
           "items": {
             "$ref": "#/definitions/CollectionsDetails"
           }
+        }
+      }
+    },
+    "BulkCollectionsPayload": {
+      "description": "Bulk collections action properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BulkCollectionsDetails",
+          "description": "bulk collections properties details",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BulkCollectionsDetails": {
+      "description": "Bulk collection details",
+      "type": "object",
+      "properties": {
+        "collectionIds": {
+          "description": "collection ids list that the action is performed on",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "description": "Action to perform (For example: EnableCollections, DisableCollections)",
+          "type": "string"
+        }
+      }
+    },
+    "BulkCollectionsResponse": {
+      "description": "The bulk collections response. The response contains two lists that indicate for each collection whether the operation succeeded or failed",
+      "type": "object",
+      "properties": {
+        "succeeded": {
+          "description": "Succeeded collections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionsDetails"
+          }
+        },
+        "failed": {
+          "description": "Failed collections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionsDetails"
+          }
+        }
+      }
+    },
+    "QueryApprovedPlansPayload": {
+      "description": "Query approved plans payload",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryApprovedPlans",
+          "description": "Query approved plans details",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QueryApprovedPlans": {
+      "description": "Query approved plans details",
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "Offer id",
+          "type": "string"
+        },
+        "planIds": {
+          "description": "Offer plan ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryApprovedPlansResponse": {
+      "description": "Query approved plans response",
+      "type": "object",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/QueryApprovedPlansResponseDetails"
+        }
+      }
+    },
+    "QueryApprovedPlansResponseDetails": {
+      "description": "A list indicating for each plan which subscriptions are approved. Plan Id is unique",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/QueryApprovedPlansDetails"
+      }
+    },
+    "QueryApprovedPlansDetails": {
+      "description": "Query approved plans response",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Plan id",
+          "type": "string"
+        },
+        "subscriptionIds": {
+          "description": "Approved subscription ids list. In case all subscriptions are approved for a plan, allSubscriptions flag is true and list is empty ( else flag is set to false). In case both subscriptions list is empty and allSubscriptions flag is false, the plan is not approved for any subscription.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allSubscriptions": {
+          "description": "Indicates whether all subscriptions are approved for this plan",
+          "type": "boolean"
         }
       }
     },

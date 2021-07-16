@@ -250,7 +250,7 @@ Output file for generate script.
         "full": "To install something...",
         "lite": "dotnet something"
       },
-      "result": "success"
+      "result": "succeeded"
     }
   ]
 }
