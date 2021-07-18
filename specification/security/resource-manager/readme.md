@@ -85,15 +85,6 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-preview-2021-07
-
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-07'
-input-file:
-  - Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
-```
-
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
@@ -474,6 +465,18 @@ These settings apply only when `--tag=package-2021-05-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2021-07-preview-only
+
+These settings apply only when `--tag=package-2021-07-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2021-07-01-preview/securityConnector.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
