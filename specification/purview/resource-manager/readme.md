@@ -26,7 +26,7 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12-01-preview
+tag: package-2021-07-01
 ```
 
 
@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
 - Microsoft.Purview/preview/2020-12-01-preview/purview.json
+```
+
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01'
+input-file:
+- Microsoft.Purview/stable/2021-07-01/purview.json
 ```
 
 ---
