@@ -55,6 +55,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -73,7 +79,7 @@
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -87,6 +93,12 @@
             "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -106,7 +118,7 @@
         "operationId": "PrivateLinkScopes_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -127,6 +139,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -141,7 +159,7 @@
         "operationId": "PrivateLinkScopes_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -159,6 +177,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -172,7 +196,7 @@
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -205,6 +229,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -221,7 +251,7 @@
         "operationId": "PrivateLinkScopes_UpdateTags",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -247,6 +277,12 @@
             "description": "Updating the Azure Monitor PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -278,7 +314,7 @@
             "description": "The operation Id."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -292,6 +328,12 @@
             "description": "OK. Operation status.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -312,7 +354,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -326,6 +368,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -348,7 +396,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -364,7 +412,13 @@
           "200": {
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -387,7 +441,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -407,7 +461,13 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -428,7 +488,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -448,7 +508,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -456,11 +516,17 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -481,7 +547,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -506,6 +572,12 @@
           },
           "204": {
             "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -528,7 +600,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -542,6 +614,12 @@
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -567,7 +645,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -589,6 +667,12 @@
             "schema": {
               "$ref": "#/definitions/ScopedResource"
             }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -608,7 +692,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -647,6 +731,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -667,7 +757,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -692,6 +782,12 @@
           },
           "204": {
             "description": "Scoped resource does not exist."
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -714,7 +810,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -728,6 +824,12 @@
             "description": "Successfully retrieved scoped resources in a private link scope.",
             "schema": {
               "$ref": "#/definitions/ScopedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -774,48 +876,10 @@
         "error": {
           "type": "object",
           "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ErrorResponseCommon",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "x-nullable": true
         }
       }
-    },
-    "PrivateLinkScopesResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
     },
     "TagsResource": {
       "properties": {
@@ -838,12 +902,17 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateLinkScopesResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
         "properties"
       ],
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+        "description": "System data",
+        "readOnly": true
+      },
       "description": "An Azure Monitor PrivateLinkScope definition."
     },
     "AzureMonitorPrivateLinkScopeProperties": {
@@ -891,7 +960,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResource"
           },
           "readOnly": true
         },
@@ -899,109 +968,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "description": "State of the private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "description": "Private endpoint which the connection belongs to.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "description": "State of the private endpoint connection.",
-      "type": "object",
-      "required": [
-        "status",
-        "description"
-      ],
-      "properties": {
-        "status": {
-          "description": "The private link service connection status.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The private link service connection description.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "The actions required for private link service connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -1013,7 +979,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -1048,7 +1014,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1057,6 +1023,11 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
+      },
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+        "description": "System data",
+        "readOnly": true
       }
     },
     "ScopedResourceProperties": {
@@ -1074,81 +1045,16 @@
         }
       }
     },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
+    "DefaultErrorResponse": {
+      "title": "Default error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "The error object.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
       }
-    },
-    "ErrorResponseCommon": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      ],
-      "properties": {
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseCommon"
-          },
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
-        }
-      },
-      "description": "The resource management error response."
-    },
-    "ErrorAdditionalInfo": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     }
   },
   "parameters": {
@@ -1158,14 +1064,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Azure Monitor PrivateLinkScope resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
     "GroupNameParameter": {
