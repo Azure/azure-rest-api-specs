@@ -932,20 +932,22 @@
           }
         },
         "accessModeSettings": {
+          "type": "object",
           "$ref": "#/definitions/AccessModeSettings",
           "description": "Access mode settings"
         }
       }
     },
     "AccessModeSettings": {
-      "description": "Properties that define the scope private link mode settings.",
+      "type": "object",
+      "description": "Properties that define the scope private link mode settings. These apply to all private endpoint connections associated with the scope unless specified otherwise in the exclusions array.",
       "properties": {
         "queryOnlyPrivateLinkResources": {
-          "description": "Restrict queries from all associated private endpoints only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
+          "description": "Restrict queries from all associated private endpoint connections only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
           "type": "boolean"
         },
         "ingestOnlyToPrivateLinkResources": {
-          "description": "Restrict queries from all associated private endpoints only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
+          "description": "Restrict queries from all associated private endpoint connections only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
           "type": "boolean"
         },
         "exclusions": {
@@ -962,6 +964,7 @@
       ]
     },
     "AccessModeSettingsExclusion": {
+      "type": "object",
       "description": "Properties that define the scope private link mode settings exclusion item. This setting applies to a specific private endpoint connection and overrides the default settings for that private endpoint connection.",
       "properties": {
         "privateEndpointConnectionName": {
@@ -969,11 +972,11 @@
           "type": "boolean"
         },
         "queryOnlyPrivateLinkResources": {
-          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specificed on the parent settings level.",
+          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specified on the parent settings level.",
           "type": "boolean"
         },
         "ingestOnlyToPrivateLinkResources": {
-          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specificed on the parent settings level.",
+          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specified on the parent settings level.",
           "type": "boolean"
         }
       },
