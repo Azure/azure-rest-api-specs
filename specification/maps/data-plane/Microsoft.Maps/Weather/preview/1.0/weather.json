@@ -76,6 +76,13 @@
     }
   },
   "parameters": {
+    "Pollutants": {
+      "name":"Pollutants",
+      "in": "query",
+      "type": "string",
+      "required": false,
+      "description": "Boolean value that returns detailed information about each pollutant. By default is True."
+    },
     "ClientId": {
       "name": "x-ms-client-id",
       "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
@@ -702,7 +709,207 @@
           }
         }
       }
+    },
+    "/weather/airQuality/current/{format}": {
+      "get": {
+        "description": "**Get Current Air Quality**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for current air quality.",
+        "operationId": "Weather_GetCurrentAirQuality",
+        "x-ms-examples": {
+          "CurrentAirQuality": {
+            "$ref": "./examples/GetCurrentAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CurrentAirQualityResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/weather/airQuality/forecast/daily/{format}": {
+      "get": {
+        "description": "**Forecast daily Air Quality**\n\n**Applies to**: S1 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for upcoming few days air quality. The service can provide forecast air quality for future one to four days.",
+        "operationId": "Weather_GetForecastDailyAirQuality",
+        "x-ms-examples": {
+          "ForcastDailyAirQuality": {
+            "$ref": "./examples/GetDailyAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1 ~ 4.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyAirQualityForecastResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/weather/airQuality/forecast/hourly/{format}": {
+      "get": {
+        "description": "**Forecast hourly Air Quality**\n\n**Applies to**: S1 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for current air quality.",
+        "operationId": "Weather_GetForecastHourlyAirQuality",
+        "x-ms-examples": {
+          "ForcastHourlyAirQuality": {
+            "$ref": "./examples/GetHourlyAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HourlyAirQualityForecastResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
     }
+
+
+
   },
   "definitions": {
     "ODataErrorResponse": {
