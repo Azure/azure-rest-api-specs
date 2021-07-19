@@ -12,6 +12,17 @@ python:
   clear-output-folder: true
 ```
 
+### Tag: package-2.0-preview.1
+These settings apply only when `--tag=package-2.0-preview.1` is specified on the command line.
+
+```yaml $(tag) == 'package-2.0-preview.1'
+python:
+  namespace: Microsoft.Azure.IotCentral.Preview
+  package-name: iotcentral
+  package-version: 2.0-preview.1
+  output-folder: $(python-sdks-folder)/iotcentral/2.0-preview.1
+```
+
 ### Tag: package-2021-04-30-preview
 These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
 
