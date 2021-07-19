@@ -2159,8 +2159,8 @@
           "readOnly": true
         },
         "storageHnsEnabled": {
-          "description": "If the storage associated with the workspace has HNS enabled.",
-          "type": "string",
+          "description": "If the storage associated with the workspace has hierarchical namespace(HNS) enabled.",
+          "type": "boolean",
           "readOnly": true
         },
         "mlFlowTrackingUri": {
@@ -2655,64 +2655,54 @@
     },
     "DiagnoseResponseResult": {
       "type": "object",
-      "description": "Result of DiagnoseResponse",
       "properties": {
         "value": {
           "type": "object",
-          "description": "Value of DiagnoseResponse",
           "properties": {
-            "UDR": {
+            "userDefinedRouteResults": {
               "type": "array",
-              "description": "UDR value",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "NSG": {
+            "networkSecurityRuleResults": {
               "type": "array",
-              "description": "NSG value",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "ResourceLock": {
+            "resourceLockResults": {
               "type": "array",
-              "description": "Resource Lock",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "DNSResolution": {
+            "dnsResolutionResults": {
               "type": "array",
-              "description": "DNS Resolution",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "StorageAccount": {
+            "storageAccountResults": {
               "type": "array",
-              "description": "Storage Account",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "KeyVault": {
+            "keyVaultResults": {
               "type": "array",
-              "description": "The KeyVault",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "ContainerRegistry": {
+            "containerRegistryResults": {
               "type": "array",
-              "description": "Container Registry",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
             },
-            "Others": {
+            "otherResults": {
               "type": "array",
-              "description": "Other items",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
               }
@@ -5065,13 +5055,15 @@
     "FQDNEndpoints": {
       "type": "object",
       "properties": {
-        "category": {
-          "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpoint"
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FQDNEndpoint"
+            }
           }
         }
       }
