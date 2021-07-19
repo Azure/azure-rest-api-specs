@@ -38,9 +38,9 @@ These settings apply only when `--tag=package-2021-06-15-privatepreview` is spec
 ``` yaml $(tag) == 'package-2021-06-15-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
+- Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
@@ -56,7 +56,7 @@ input-file:
 
 ### Tag: package-flexibleserver-2021-06-preview
 
-These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.cd ..
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:

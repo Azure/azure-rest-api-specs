@@ -503,9 +503,6 @@
       "description": "Migration resource properties for patch."
     },
     "MigrationResourceGroup": {
-      "required": [
-        "resourceId"
-      ],
       "type": "object",
       "properties": {
         "resourceId": {
@@ -607,7 +604,7 @@
           "type": "integer"
         },
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ServerSku"
         }
       },
       "description": "Database server metadata."
@@ -688,7 +685,7 @@
       },
       "description": "Migration sub state details."
     },
-    "Sku": {
+    "ServerSku": {
       "type": "object",
       "properties": {
         "name": {
@@ -760,7 +757,7 @@
       },
       "description": "Represents a migration name's availability."
     },
-    "CloudError": {
+    "ServiceError": {
       "x-ms-external": true,
       "type": "object",
       "properties": {
