@@ -123,7 +123,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
-- Microsoft.Security/preview/2021-01-15-preview/antiMalwareSettings.json 
 
 # Needed when there is more than one input file
 override-info:
@@ -169,7 +168,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
-- Microsoft.Security/preview/2021-01-15-preview/antiMalwareSettings.json 
 
 # Needed when there is more than one input file
 override-info:
@@ -230,7 +228,6 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
-- Microsoft.Security/preview/2021-01-15-preview/antiMalwareSettings.json 
 
 # Needed when there is more than one input file
 override-info:
