@@ -346,6 +346,7 @@
   },
   "definitions": {
     "CreatedByType": {
+      "description": "The type of identity that created the resource.",
       "enum": [
         "User",
         "Application",
@@ -378,40 +379,40 @@
         }
       }
     },
-    "GrafanaResourceUpdateParameters": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "GrafanaResource": {
       "type": "object",
+      "description": "The grafana resource type.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
+          "description": "ARM id of the grafana resource",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Name of the grafana resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "The type of the grafana resource.",
           "type": "string",
           "readOnly": true
         },
         "sku": {
+          "description": "The Sku of the grafana resource.",
           "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
+          "description": "Properties specific to the grafana resource.",
           "$ref": "#/definitions/GrafanaResourceProperties"
         },
+        "identity": {
+          "description": "The managed identity of the grafana resource.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "systemData": {
+          "description": "The system meta data relating to this grafana resource.",
           "$ref": "#/definitions/SystemData"
         },
         "tags": {
@@ -441,21 +442,43 @@
     },
     "GrafanaResourceProperties": {
       "type": "object",
+      "description": "Properties specific to the grafana resource.",
       "properties": {
         "provisioningState": {
+          "description": "Provisioning state of the resource.",
           "$ref": "#/definitions/ProvisioningState"
         },
         "grafanaVersion": {
+          "description": "The Grafana software version.",
           "type": "string",
           "readOnly": true
         },
         "endpoint": {
+          "description": "The endpoint of the Grafana instance.",
           "type": "string",
           "readOnly": true
         },
         "outboundIPAddress": {
+          "description": "The outbound IP address.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "GrafanaResourceUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a grafana resource.",
+      "properties": {
+        "identity": {
+          "description": "The managed identity of the grafana resource.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the grafana resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -470,6 +493,44 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "LastModifiedByType"
+      }
+    },
+    "ManagedIdentity": {
+      "description": "The managed identity of a resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityTypes"
+        },
+        "principalId": {
+          "description": "The principal id of the system assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant id of the system assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "Dictionary of user assigned identities.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ManagedIdentityTypes": {
+      "description": "The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the resource.",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
       }
     },
     "OperationDisplay": {
@@ -590,6 +651,21 @@
           "type": "string"
         }
       }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -636,6 +712,7 @@
       "required": true,
       "type": "string",
       "minLength": 1,
+      "x-ms-parameter-location": "method",
       "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     }
   }
