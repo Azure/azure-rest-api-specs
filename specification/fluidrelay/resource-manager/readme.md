@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-03-01-preview
+tag: package-2021-03-12-preview
 ```
 
 ### Tag: package-2021-03-12-preview
@@ -51,7 +51,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
