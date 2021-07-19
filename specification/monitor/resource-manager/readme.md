@@ -40,7 +40,7 @@ tag: package-2021-07
 
 ### Tag: package-2021-07
 
-These settings apply only when `--tag=package-2021-07` is specified on the command line.
+These settings apply only when `--tag=package-2021-07` is specified on the command line
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
@@ -857,7 +857,7 @@ directive:
 ### Tag: profile-hybrid-2019-03-01
 
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
+Creating this tag to pick proper resources from the hybrid profile. 
 
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
