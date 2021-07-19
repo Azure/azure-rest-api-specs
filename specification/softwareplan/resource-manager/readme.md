@@ -26,7 +26,7 @@ These are the global settings for the softwareplan.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06-01-preview
+tag: package-2021-08-01
 ```
 
 ### Tag: package-2019-06-01-preview
