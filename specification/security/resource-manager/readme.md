@@ -182,15 +182,10 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-- Microsoft.Security/stable/2019-08-01/iotAlerts.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -230,6 +225,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 - Microsoft.Security/stable/2021-01-01/alerts.json
+- Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
@@ -486,8 +482,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
 ```
 
@@ -515,4 +513,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## Java
 
+See configuration in [readme.java.md](./readme.java.md)
