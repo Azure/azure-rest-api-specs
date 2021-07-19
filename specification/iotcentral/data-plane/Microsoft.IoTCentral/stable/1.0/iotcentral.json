@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure IoT Central",
     "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale.",
-    "version": "2.0-preview.1"
+    "version": "1.0"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{subdomain}.{baseDomain}",
@@ -27,57 +27,30 @@
     "application/json"
   ],
   "definitions": {
-    "ADGroupUser": {
-      "x-ms-discriminator-value": "adGroup",
-      "allOf": [
-        {
-          "$ref": "#/definitions/User"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tenantId": {
-              "description": "The AAD tenant ID of the AD Group.",
-              "type": "string"
-            },
-            "objectId": {
-              "description": "The AAD object ID of the AD Group.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "tenantId",
-            "objectId"
-          ]
-        }
-      ]
-    },
     "ApiToken": {
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Unique ID of the API token.",
-              "type": "string",
-              "readOnly": true
-            },
-            "token": {
-              "description": "Value of the API token.",
-              "type": "string",
-              "readOnly": true
-            },
-            "expiry": {
-              "description": "String-formatted date representing the time when the token expires.",
-              "type": "string",
-              "format": "date-time"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the API token.",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "description": "Value of the API token.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiry": {
+          "description": "String-formatted date representing the time when the token expires.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "ApiTokenCollection": {
       "type": "object",
@@ -111,14 +84,6 @@
       ],
       "discriminator": "type"
     },
-    "CloudPropertyJobData": {
-      "x-ms-discriminator-value": "cloudProperty",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobData"
-        }
-      ]
-    },
     "Collection": {
       "type": "object",
       "properties": {
@@ -136,14 +101,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "CommandJobData": {
-      "x-ms-discriminator-value": "command",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobData"
-        }
       ]
     },
     "Device": {
@@ -178,14 +135,6 @@
         "simulated": {
           "description": "Whether the device is simulated.",
           "type": "boolean"
-        },
-        "organizations": {
-          "description": "List of organization IDs that the device is a part of.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 1
         }
       }
     },
@@ -285,47 +234,6 @@
         "idScope"
       ]
     },
-    "DeviceGroup": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique ID of the device group.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Display name of the device group.",
-          "type": "string"
-        },
-        "organizations": {
-          "description": "List of organization IDs of the device group.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 1
-        }
-      }
-    },
-    "DeviceGroupCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection of device groups.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceGroup"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next page of device groups.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "DeviceProperties": {
       "description": "Property values associated with the device.",
       "type": "object",
@@ -405,323 +313,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/User"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "email": {
-              "description": "Email address of the user.",
-              "type": "string",
-              "format": "email"
-            }
-          },
-          "required": [
-            "email"
-          ]
         }
-      ]
-    },
-    "FileUpload": {
-      "type": "object",
-      "properties": {
-        "account": {
-          "description": "The storage account name where to upload the file to",
-          "type": "string"
-        },
-        "connectionString": {
-          "description": "The connection string used to configure the storage account",
-          "type": "string"
-        },
-        "container": {
-          "description": "The name of the container inside the storage account",
-          "type": "string"
-        },
-        "sasTtl": {
-          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires. Enter a value between 1 and 24 hours.​",
-          "type": "string"
-        },
-        "state": {
-          "description": "The state of the file upload configuration",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "pending",
-            "updating",
-            "deleting",
-            "succeeded",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "FileUploadState",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "pending",
-                "name": "Pending"
-              },
-              {
-                "value": "updating",
-                "name": "Updating"
-              },
-              {
-                "value": "deleting",
-                "name": "Deleting"
-              },
-              {
-                "value": "succeeded",
-                "name": "Succeeded"
-              },
-              {
-                "value": "falied",
-                "name": "Failed"
-              }
-            ]
-          }
-        },
-        "etag": {
-          "description": "ETag used to prevent conflict with multiple uploads",
-          "type": "string"
-        }
-      },
-      "required": [
-        "connectionString",
-        "container"
-      ]
-    },
-    "Job": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique ID of the job.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Display name of the job.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Detailed description of the job.",
-          "type": "string"
-        },
-        "group": {
-          "description": "The ID of the device group on which to execute the job.",
-          "type": "string"
-        },
-        "batch": {
-          "description": "The batching configuration for the job.",
-          "$ref": "#/definitions/JobBatch"
-        },
-        "cancellationThreshold": {
-          "description": "The cancellation threshold for the job.",
-          "$ref": "#/definitions/JobCancellationThreshold"
-        },
-        "data": {
-          "description": "The capabilities being updated by the job and the values with which they are being updated.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobData"
-          },
-          "minItems": 1
-        },
-        "status": {
-          "description": "Indicates whether the job is starting, running, etc.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "group",
-        "data"
-      ]
-    },
-    "JobBatch": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Whether batching is done on a specified number of devices or a percentage of the total devices.",
-          "type": "string",
-          "enum": [
-            "number",
-            "percentage"
-          ],
-          "x-ms-enum": {
-            "name": "JobBatchType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "number",
-                "name": "Number",
-                "description": "Job Batching based on number of devices."
-              },
-              {
-                "value": "percentage",
-                "name": "Percentage",
-                "description": "Job Batching based percentage of total applied devices."
-              }
-            ]
-          }
-        },
-        "value": {
-          "description": "The number or percentage of devices on which batching is done.",
-          "type": "number"
-        }
-      },
-      "required": [
-        "type",
-        "value"
-      ]
-    },
-    "JobCancellationThreshold": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Whether the cancellation threshold is per a specified number of devices or a percentage of the total devices.",
-          "type": "string",
-          "enum": [
-            "number",
-            "percentage"
-          ],
-          "x-ms-enum": {
-            "name": "JobCancellationThresholdType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "number",
-                "name": "Number",
-                "description": "Job cancellation threshold based on specified number of devices."
-              },
-              {
-                "value": "percentage",
-                "name": "Percentage",
-                "description": "Job cancellation threshold based on percentage of total devices."
-              }
-            ]
-          }
-        },
-        "value": {
-          "description": "The number or percentage of devices on which the cancellation threshold is applied.",
-          "type": "number"
-        },
-        "batch": {
-          "description": "Whether the cancellation threshold applies per-batch or to the overall job.",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "type",
-        "value"
-      ]
-    },
-    "JobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection of jobs.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Job"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next page of jobs.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "JobData": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of the job data.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The device template which defines the target capability for the job.",
-          "type": "string"
-        },
-        "path": {
-          "description": "The path to the target capability within the device template.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value used to update the target capability, if any."
-        }
-      },
-      "required": [
-        "type",
-        "target",
-        "path"
       ],
-      "discriminator": "type"
-    },
-    "JobDeviceStatus": {
-      "properties": {
-        "id": {
-          "description": "ID of the device whose job status is being provided.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Indicates whether the job is starting, running, etc. for the given device.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "JobDeviceStatusCollection": {
       "type": "object",
       "properties": {
-        "value": {
-          "description": "The collection of job device statuses.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobDeviceStatus"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next page of job device statuses.",
-          "type": "string"
+        "email": {
+          "description": "Email address of the user.",
+          "type": "string",
+          "format": "email"
         }
       },
       "required": [
-        "value"
-      ]
-    },
-    "Organization": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique ID of the organization.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Display name of the organization.",
-          "type": "string"
-        },
-        "parent": {
-          "description": "ID of the parent of the organization.",
-          "type": "string"
-        }
-      }
-    },
-    "OrganizationCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection of organizations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Organization"
-          }
-        }
-      },
-      "required": [
-        "value"
+        "email"
       ]
     },
     "Permission": {
@@ -738,14 +341,6 @@
       },
       "required": [
         "roles"
-      ]
-    },
-    "PropertyJobData": {
-      "x-ms-discriminator-value": "property",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobData"
-        }
       ]
     },
     "Role": {
@@ -767,10 +362,6 @@
       "properties": {
         "role": {
           "description": "ID of the role for this role assignment.",
-          "type": "string"
-        },
-        "organization": {
-          "description": "ID of the organization for this role assignment.",
           "type": "string"
         }
       },
@@ -802,24 +393,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/User"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tenantId": {
-              "description": "The AAD tenant ID of the service principal.",
-              "type": "string"
-            },
-            "objectId": {
-              "description": "The AAD object ID of the service principal.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "tenantId",
-            "objectId"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The AAD tenant ID of the service principal.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The AAD object ID of the service principal.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tenantId",
+        "objectId"
       ]
     },
     "SymmetricKey": {
@@ -844,19 +433,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "symmetricKey": {
-              "description": "The symmetric key credentials for this attestation.",
-              "$ref": "#/definitions/SymmetricKey"
-            }
-          },
-          "required": [
-            "symmetricKey"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "symmetricKey": {
+          "description": "The symmetric key credentials for this attestation.",
+          "$ref": "#/definitions/SymmetricKey"
+        }
+      },
+      "required": [
+        "symmetricKey"
       ]
     },
     "Tpm": {
@@ -876,45 +463,41 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tpm": {
-              "description": "The TPM credentials for this attestation.",
-              "$ref": "#/definitions/Tpm"
-            }
-          },
-          "required": [
-            "tpm"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "tpm": {
+          "description": "The TPM credentials for this attestation.",
+          "$ref": "#/definitions/Tpm"
+        }
+      },
+      "required": [
+        "tpm"
       ]
     },
     "User": {
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Unique ID of the user.",
-              "type": "string",
-              "readOnly": true
-            },
-            "type": {
-              "description": "Type of the user.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "discriminator": "type"
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the user.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
     },
     "UserCollection": {
       "type": "object",
@@ -949,19 +532,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "x509": {
-              "description": "The X.509 credentials for this attestation.",
-              "$ref": "#/definitions/X509"
-            }
-          },
-          "required": [
-            "x509"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "x509": {
+          "description": "The X.509 credentials for this attestation.",
+          "$ref": "#/definitions/X509"
+        }
+      },
+      "required": [
+        "x509"
       ]
     },
     "X509Certificate": {
@@ -1126,33 +707,6 @@
         "responses": {
           "204": {
             "description": "Success"
-          }
-        }
-      }
-    },
-    "/deviceGroups": {
-      "get": {
-        "operationId": "DeviceGroups_List",
-        "summary": "Get the list of device groups in an application.",
-        "x-ms-examples": {
-          "List device groups": {
-            "$ref": "./examples/devicegroups_list.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DeviceGroupCollection"
-            }
           }
         }
       }
@@ -1397,7 +951,7 @@
         "description": "Update an existing device by ID.",
         "x-ms-examples": {
           "Update device": {
-            "$ref": "./examples/devices_create.json"
+            "$ref": "./examples/devices_update.json"
           }
         },
         "consumes": [
@@ -2580,456 +2134,6 @@
         }
       }
     },
-    "/fileUploads": {
-      "get": {
-        "operationId": "FileUploads_Get",
-        "summary": "Get the file upload storage account configuration.",
-        "x-ms-examples": {
-          "Get file upload storage account configuration": {
-            "$ref": "./examples/fileUpload_get.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FileUpload"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "FileUploads_Create",
-        "summary": "Create the file upload storage account configuration.",
-        "x-ms-examples": {
-          "Create file upload storage account configuration": {
-            "$ref": "./examples/fileUpload_update.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "File upload storage account configuration body.",
-            "schema": {
-              "$ref": "#/definitions/FileUpload"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FileUpload"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "FileUploads_Update",
-        "summary": "Update the file upload storage account configuration",
-        "x-ms-examples": {
-          "Update file upload storage account configuration": {
-            "$ref": "./examples/fileUpload_update.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "File upload storage account configuration body.",
-            "schema": {
-              "type": "object"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FileUpload"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "FileUploads_Remove",
-        "summary": "Delete the file upload storage configuration.",
-        "x-ms-examples": {
-          "Remove file upload storage configuration": {
-            "$ref": "./examples/fileUpload_delete.json"
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/jobs": {
-      "get": {
-        "operationId": "Jobs_List",
-        "summary": "Get the list of jobs in an application",
-        "x-ms-examples": {
-          "List jobs": {
-            "$ref": "./examples/jobs_list.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JobCollection"
-            }
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}": {
-      "get": {
-        "operationId": "Jobs_Get",
-        "summary": "Get a job by ID",
-        "description": "Get details about a running or completed job by job ID.",
-        "x-ms-examples": {
-          "Get a job by Id": {
-            "$ref": "./examples/jobs_get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Jobs_Create",
-        "summary": "Execute a new job",
-        "description": "Create and execute a new job via its job definition.",
-        "x-ms-examples": {
-          "Execute a new job": {
-            "$ref": "./examples/jobs_create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Job definition.",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}/devices": {
-      "get": {
-        "operationId": "Jobs_GetDevices",
-        "summary": "Get device statuses",
-        "description": "Get the list of individual device statuses by job ID.",
-        "x-ms-examples": {
-          "Get device statuses": {
-            "$ref": "./examples/jobs_devices.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/JobDeviceStatusCollection"
-            }
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}/rerun/{rerunId}": {
-      "put": {
-        "operationId": "Jobs_Rerun",
-        "summary": "Rerun a job on failed devices",
-        "description": "Execute a rerun of an existing job on all failed devices.",
-        "x-ms-examples": {
-          "Rerun a job on failed devices": {
-            "$ref": "./examples/jobs_rerun.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          },
-          {
-            "in": "path",
-            "name": "rerunId",
-            "description": "Unique ID of the job rerun.",
-            "x-ms-parameter-location": "method",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}/resume": {
-      "post": {
-        "operationId": "Jobs_Resume",
-        "summary": "Resume a stopped job",
-        "description": "Resume execution of an existing stopped job.",
-        "x-ms-examples": {
-          "Resume a stopped job": {
-            "$ref": "./examples/jobs_resume.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}/stop": {
-      "post": {
-        "operationId": "Jobs_Stop",
-        "summary": "Stop a running job",
-        "description": "Stop execution of a job that is currently running.",
-        "x-ms-examples": {
-          "Stop a running job": {
-            "$ref": "./examples/jobs_stop.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/organizations": {
-      "get": {
-        "operationId": "Organizations_List",
-        "summary": "Get the list of organizations the user has access to in an application",
-        "x-ms-examples": {
-          "List organizations": {
-            "$ref": "./examples/organizations_list.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OrganizationCollection"
-            }
-          }
-        }
-      }
-    },
-    "/organizations/{organizationId}": {
-      "get": {
-        "operationId": "Organizations_Get",
-        "summary": "Get an organization by ID",
-        "x-ms-examples": {
-          "Get organization": {
-            "$ref": "./examples/organizations_get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Organization"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Organizations_Create",
-        "summary": "Create an organization in the application",
-        "x-ms-examples": {
-          "Add or update organization": {
-            "$ref": "./examples/organizations_create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Organization body.",
-            "schema": {
-              "$ref": "#/definitions/Organization"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Organization"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Organizations_Update",
-        "summary": "Update an organization in the application via patch",
-        "x-ms-examples": {
-          "Update organization": {
-            "$ref": "./examples/organizations_create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Organization patch body.",
-            "schema": {
-              "type": "object"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Organization"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Organizations_Remove",
-        "summary": "Delete an organization",
-        "x-ms-examples": {
-          "Delete organization": {
-            "$ref": "./examples/organizations_delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/Version"
-          },
-          {
-            "in": "path",
-            "name": "organizationId",
-            "description": "Unique ID of the organization.",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/roles": {
       "get": {
         "operationId": "Roles_List",
@@ -3293,15 +2397,7 @@
     "DeviceTemplateId": {
       "in": "path",
       "name": "deviceTemplateId",
-      "description": "Unique [Digital Twin Model Identifier](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md#digital-twin-model-identifier) of the device template.",
-      "x-ms-parameter-location": "method",
-      "type": "string",
-      "required": true
-    },
-    "JobId": {
-      "in": "path",
-      "name": "jobId",
-      "description": "Unique ID of the job.",
+      "description": "Digital Twin Model Identifier of the device template, [More Details](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md#digital-twin-model-identifier)",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
@@ -3336,7 +2432,7 @@
       "description": "The version of the API being called.",
       "x-ms-parameter-location": "client",
       "type": "string",
-      "default": "2.0-preview.1",
+      "default": "1.0",
       "required": true
     }
   },
