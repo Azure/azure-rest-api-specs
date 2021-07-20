@@ -40,6 +40,40 @@ We use `armTemplate output` to overwrite `resourceName` variable and following `
 
 After we have this armTemplate, we could define current test scenario file. We defined `resourceName` variable globally. `./generate_unique_string.json` is armTemplate.
 
+`SignalR_CreateOrUpdate.json`
+
+```json
+{
+  "parameters": {
+    "parameters": {
+      "tag": {
+        "key1": "tag1"
+      },
+      "properties":{
+        ...
+      }
+    },
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService123xx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        ...
+      }
+    },
+    "201": {
+      "body": {
+        ...
+      }
+    },
+    "202": {}
+  }
+}
+```
+
 > NOTE: the example file `../examples/SignalR_CreateOrUpdate` has the same parameter name `resourceName`. So it will be automatically overwrite in runner.
 
 ```yaml
