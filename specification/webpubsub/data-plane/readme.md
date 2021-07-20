@@ -61,8 +61,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
 ```
 
 ## C#
@@ -78,37 +76,6 @@ csharp:
   namespace: Azure.Messaging.WebPubSub
   output-folder: $(csharp-sdks-folder)/webpubsub/Azure.Messaging.WebPubSub/src/Generated
   clear-output-folder: true
-```
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: false
-fluent: true
-namespace: com.azure.messaging.webpubsub
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/webpubsub/data-plane
-```
-
-## TypeScript
-
-These settings apply only when `--typescript` is specified on the command line.
-Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
-
-``` yaml $(typescript)
-azure-arm: false
-package-name: "@azure/web-pubsub"
-license-header: MICROSOFT_MIT_NO_VERSION
-output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/web-pubsub"
-clear-output-folder: true
-generate-metadata: true
-v3: true
-use-extension:
-  "@autorest/typescript": "6.0.0-dev.20201105.2"
 ```
 
 ## Python
