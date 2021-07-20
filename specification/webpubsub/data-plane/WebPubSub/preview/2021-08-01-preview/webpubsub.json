@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Web PubSub Service REST API",
-    "version": "2021-05-01-preview"
+    "version": "2021-08-01-preview"
   },
   "paths": {
     "/api/health": {
@@ -24,6 +24,74 @@
         "responses": {
           "200": {
             "description": "The service is healthy"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:generateToken": {
+      "post": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Generate token for the client to connect Azure Web PubSub service.",
+        "operationId": "WebPubSub_GenerateClientToken",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "query",
+            "name": "userId",
+            "description": "User Id.",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "role",
+            "description": "Roles that the connection with the generated token will have.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minutesToExpire",
+            "description": "The expire time of the generated token.",
+            "type": "integer",
+            "format": "int32",
+            "default": 60
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "type": "string",
+            "default": "2021-05-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClientTokenResponse"
+            }
           },
           "default": {
             "description": "Error response",
@@ -904,6 +972,16 @@
             "description": "Error response",
             "x-ms-error-response": true
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClientTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
         }
       }
     }
