@@ -1639,23 +1639,9 @@
     },
     "OutboundEnvironmentEndpointCollection": {
       "description": "Collection of OutboundEnvironmentEndpoint",
-      "required": [
-        "value"
-      ],
       "type": "array",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
+      "items": {
+        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }
     }
   },
