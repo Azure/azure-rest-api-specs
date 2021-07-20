@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-05-01-preview
+tag: package-2021-08-01-preview
 ```
 
 ### Suppression
@@ -37,6 +37,16 @@ directive:
     reason: For this data plane API, it is not a long run operation and the status code indicates the results.
   - suppress: XmsExamplesRequired
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
+```
+
+### Tag: package-2021-08-01-preview
+
+These settings apply only when `--tag=package-2021-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-preview'
+input-file:
+- WebPubSub/preview/2021-08-01-preview/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
 ```
 
 ### Tag: package-2021-05-01-preview
