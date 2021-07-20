@@ -27,6 +27,50 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/availableScopes": {
+      "post": {
+        "summary": "Get Available Scopes for `Reservation`.",
+        "description": "Get Available Scopes for `Reservation`.\n",
+        "operationId": "Reservation_AvailableScopes",
+        "x-ms-examples": {
+          "AvailableScopes": {
+            "$ref": "./examples/GetAvailableScope.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, AvailableScopes"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Subscription`s created after the filter.",
+            "schema": {
+              "$ref": "#/definitions/AvailableScopeProperties"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/catalogs": {
       "get": {
         "summary": "Get the regions and skus that are available for RI purchase for the specified Azure subscription.",
@@ -587,6 +631,124 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/calculateExchange": {
+      "post": {
+        "summary": "Calculates the refund amounts and price of the new purchases.",
+        "description": "Calculates price for exchanging `Reservations` if there are no policy errors.\n",
+        "operationId": "CalculateExchange_Post",
+        "x-ms-examples": {
+          "CalculateExchange": {
+            "$ref": "./examples/CalculateExchange.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculateExchangeRequestParameter"
+          }
+        ],
+        "tags": [
+          "Exchange"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CalculateExchangeOperationResultResponse"
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/exchange": {
+      "post": {
+        "summary": "Exchange Reservation(s)",
+        "description": "Returns one or more `Reservations` in exchange for one or more `Reservation` purchases.\n",
+        "operationId": "Exchange_Post",
+        "x-ms-examples": {
+          "Exchange": {
+            "$ref": "./examples/Exchange.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExchangeRequestParameter"
+          }
+        ],
+        "tags": [
+          "Exchange"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ExchangeOperationResultResponse"
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/reservations": {
       "get": {
         "description": "List the reservations and the roll up counts of reservations group by provisioning states that the user has access to in the current tenant.",
@@ -659,6 +821,46 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/changeDirectory": {
+      "post": {
+        "summary": "Change directory of `ReservationOrder`.",
+        "description": "Change directory (tenant) of `ReservationOrder` and all `Reservation` under it to specified tenant id",
+        "operationId": "ReservationOrder_ChangeDirectory",
+        "x-ms-examples": {
+          "ChangeDirectory": {
+            "$ref": "./examples/ChangeDirectoryReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeDirectoryParameter"
+          }
+        ],
+        "tags": [
+          "ReservationOrder, ChangeDirectory"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Reservation`s created after the change directory operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
         }
       }
     }
@@ -842,6 +1044,129 @@
         "westus2",
         "westus3"
       ]
+    },
+    "AvailableScopeRequest": {
+      "type": "object",
+      "description": "Available scope",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableScopeRequestProperties"
+        }
+      }
+    },
+    "AvailableScopeRequestProperties": {
+      "type": "object",
+      "description": "Available scope request properties",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CalculateExchangeRequest": {
+      "type": "object",
+      "description": "Calculate exchange request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CalculateExchangeRequestProperties"
+        }
+      }
+    },
+    "ExchangeRequest": {
+      "type": "object",
+      "description": "Exchange request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExchangeRequestProperties"
+        }
+      }
+    },
+    "CalculateExchangeRequestProperties": {
+      "type": "object",
+      "description": "Calculate exchange request properties",
+      "properties": {
+        "reservationsToPurchase": {
+          "type": "array",
+          "description": "List of reservations that are being purchased in this exchange.",
+          "items": {
+            "$ref": "#/definitions/PurchaseRequest"
+          }
+        },
+        "reservationsToExchange": {
+          "type": "array",
+          "description": "List of reservations that are being returned in this exchange.",
+          "items": {
+            "$ref": "#/definitions/ReservationToReturn"
+          }
+        }
+      }
+    },
+    "ExchangeRequestProperties": {
+      "type": "object",
+      "description": "Exchange request properties",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "SessionId that was returned by CalculateExchange API."
+        }
+      }
+    },
+    "ReservationToReturn": {
+      "type": "object",
+      "description": "Reservation to return",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified identifier of the Reservation being returned"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned. Must be greater than zero."
+        }
+      }
+    },
+    "ReservationToReturnForExchange": {
+      "type": "object",
+      "description": "Reservation refund details",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the Reservation being returned."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "BillingInformation": {
+      "type": "object",
+      "description": "billing information",
+      "properties": {
+        "billingCurrencyTotalPaidAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyProratedAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyRemainingCommitmentAmount": {
+          "$ref": "#/definitions/Price"
+        }
+      }
     },
     "Catalog": {
       "type": "object",
@@ -1217,6 +1542,36 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
+    "AvailableScopeProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionScopeProperties"
+        }
+      }
+    },
+    "SubscriptionScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeProperties"
+          }
+        }
+      }
+    },
+    "ScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "valid": {
+          "type": "boolean"
+        }
+      }
+    },
     "InstanceFlexibility": {
       "type": "string",
       "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
@@ -1315,6 +1670,242 @@
       "properties": {
         "name": {
           "type": "string"
+        }
+      }
+    },
+    "CalculateExchangeOperationResultResponse": {
+      "type": "object",
+      "description": "CalculateExchange operation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "CalculateExchangeOperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculateExchangeResponseProperties"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultError"
+        }
+      }
+    },
+    "ExchangeOperationResultResponse": {
+      "type": "object",
+      "description": "Exchange operation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "PendingRefunds",
+            "PendingPurchases"
+          ],
+          "x-ms-enum": {
+            "name": "ExchangeOperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ExchangeResponseProperties"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultError"
+        }
+      }
+    },
+    "OperationResultError": {
+      "type": "object",
+      "description": "Required if status == failed or status == canceled.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Required if status == failed or status == cancelled. If status == failed, provide an invariant error code used for error troubleshooting, aggregation, and analysis."
+        },
+        "message": {
+          "type": "string",
+          "description": "Required if status == failed. Localized. If status == failed, provide an actionable error message indicating what error occurred, and what the user can do to address the issue."
+        }
+      }
+    },
+    "CalculateExchangeResponseProperties": {
+      "type": "object",
+      "description": "CalculateExchange response properties",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Exchange session identifier"
+        },
+        "netPayable": {
+          "$ref": "#/definitions/Price"
+        },
+        "refundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "purchasesTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "reservationsToPurchase": {
+          "type": "array",
+          "description": "Details of the reservations being purchased",
+          "items": {
+            "$ref": "#/definitions/ReservationToPurchaseCalculateExchange"
+          }
+        },
+        "reservationsToExchange": {
+          "type": "array",
+          "description": "Details of the reservations being returned",
+          "items": {
+            "$ref": "#/definitions/ReservationToExchange"
+          }
+        },
+        "policyResult": {
+          "$ref": "#/definitions/ExchangePolicyErrors"
+        }
+      }
+    },
+    "ExchangeResponseProperties": {
+      "type": "object",
+      "description": "Exchange response properties",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Exchange session identifier"
+        },
+        "netPayable": {
+          "$ref": "#/definitions/Price"
+        },
+        "refundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "purchasesTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "reservationsToPurchase": {
+          "type": "array",
+          "description": "Details of the reservations being purchased",
+          "items": {
+            "$ref": "#/definitions/ReservationToPurchaseExchange"
+          }
+        },
+        "reservationsToExchange": {
+          "type": "array",
+          "description": "Details of the reservations being returned",
+          "items": {
+            "$ref": "#/definitions/ReservationToReturnForExchange"
+          }
+        },
+        "policyResult": {
+          "$ref": "#/definitions/ExchangePolicyErrors"
+        }
+      }
+    },
+    "ExchangePolicyErrors": {
+      "type": "object",
+      "description": "Exchange policy errors",
+      "properties": {
+        "policyErrors": {
+          "type": "array",
+          "description": "Exchange Policy errors",
+          "items": {
+            "$ref": "#/definitions/ExchangePolicyError"
+          }
+        }
+      }
+    },
+    "ExchangePolicyError": {
+      "type": "object",
+      "description": "error details",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ReservationToExchange": {
+      "type": "object",
+      "description": "Reservation refund details",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the Reservation being returned."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation"
+        }
+      }
+    },
+    "ReservationToPurchaseCalculateExchange": {
+      "type": "object",
+      "description": "Reservation purchase details",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "ReservationToPurchaseExchange": {
+      "type": "object",
+      "description": "Reservation purchase details",
+      "properties": {
+        "reservationOrderId": {
+          "type": "string",
+          "description": "Fully qualified id of the ReservationOrder being purchased"
+        },
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the Reservation being purchased. This value is only guaranteed to be non-null if the purchase is successful."
+        },
+        "properties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
@@ -2023,9 +2614,75 @@
           }
         }
       }
+    },
+    "ChangeDirectoryRequest": {
+      "type": "object",
+      "properties": {
+        "destinationTenantId": {
+          "description": "Tenant id GUID that reservation order is to be transferred to",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeDirectoryResponse": {
+      "type": "object",
+      "description": "Change directory response",
+      "properties": {
+        "reservationOrder": {
+          "$ref": "#/definitions/ChangeDirectoryResult"
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChangeDirectoryResult"
+          }
+        }
+      }
+    },
+    "ChangeDirectoryResult": {
+      "type": "object",
+      "description": "Change directory result for reservation order or reservation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the reservation order or reservation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the reservation order or reservation"
+        },
+        "isSucceeded": {
+          "description": "True if change directory operation succeeded on this reservation order or reservation",
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error reason if operation failed. Null otherwise"
+        }
+      }
     }
   },
   "parameters": {
+    "CalculateExchangeRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Request containing purchases and refunds that need to be executed.",
+      "schema": {
+        "$ref": "#/definitions/CalculateExchangeRequest"
+      }
+    },
+    "ExchangeRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Request containing the refunds and purchases that need to be executed.",
+      "schema": {
+        "$ref": "#/definitions/ExchangeRequest"
+      }
+    },
     "PurchaseParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
@@ -2074,6 +2731,15 @@
         "$ref": "#/definitions/SplitRequest"
       }
     },
+    "ScopeParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AvailableScopeRequest"
+      }
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -2120,6 +2786,16 @@
       "required": true,
       "type": "string",
       "description": "Order Id of the reservation"
+    },
+    "ChangeDirectoryParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to change directory of reservation order",
+      "schema": {
+        "$ref": "#/definitions/ChangeDirectoryRequest"
+      }
     }
   }
 }
