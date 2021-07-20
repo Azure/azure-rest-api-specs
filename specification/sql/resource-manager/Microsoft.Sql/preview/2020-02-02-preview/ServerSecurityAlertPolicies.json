@@ -127,8 +127,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Update a server's threat detection policy with all parameters": {
+            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
+          },
           "Update a server's threat detection policy with minimal parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreate.json"
+            "$ref": "./examples/ServerSecurityAlertsCreateMin.json"
           }
         }
       }
@@ -196,6 +199,37 @@
             "modelAsString": false
           }
         },
+        "disabledAlerts": {
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "description": "Specifies that the alert is sent to the account administrators.",
+          "type": "boolean"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+          "type": "integer"
+        },
         "creationTime": {
           "format": "date-time",
           "description": "Specifies the UTC creation time of the policy.",
@@ -213,6 +247,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/SecurityAlertsPolicyProperties",
           "description": "Resource properties.",

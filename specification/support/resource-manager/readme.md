@@ -1,12 +1,13 @@
 # Support
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Support.
 
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Support, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,12 +15,13 @@ To build the SDK for Support, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-### Basic Information 
 These are the global settings for the Support API.
 
 ``` yaml
@@ -27,11 +29,20 @@ openapi-type: arm
 tag: package-2020-04
 ```
 
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.Support/preview/2021-06-01-preview/supportResourceIdDetails.json
+```
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.Support/stable/2020-04-01/support.json
 ```
@@ -46,8 +57,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -56,7 +67,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -65,11 +76,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_support']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js support/resource-manager
 ```
 
-## C# 
+## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
@@ -92,8 +101,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

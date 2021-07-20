@@ -2375,13 +2375,9 @@
           "readOnly": true,
           "description": "The IP address allocated by the gateway to which dns requests can be sent."
         },
-        "virtualNetworkExtendedLocationResourceId": {
+        "vNetExtendedLocationResourceId": {
           "type": "string",
-          "description": "MAS FIJI customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
-        },
-        "extendedLocation": {
-          "description": "The extended location of type local virtual network gateway.",
-          "$ref": "./network.json#/definitions/ExtendedLocation"
+          "description": "Customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
         }
       },
       "description": "VirtualNetworkGateway properties."
@@ -2761,6 +2757,10 @@
     },
     "VirtualNetworkGateway": {
       "properties": {
+        "extendedLocation": {
+          "$ref": "./network.json#/definitions/ExtendedLocation",
+          "description": "The extended location of type local virtual network gateway."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat",

@@ -226,9 +226,6 @@
         ],
         "operationId": "EffectiveVirtualNetworks_ListByNetworkGroup",
         "description": "Lists all effective virtual networks by specified network group.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -246,10 +243,13 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
           }
         ],
         "responses": {
@@ -356,12 +356,25 @@
     "groupMembersItem": {
       "type": "object",
       "properties": {
-        "resourceId": {
+        "vnetId": {
           "type": "string",
-          "description": "Resource Id."
+          "description": "Vnet Id."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Subnet Id."
         }
       },
       "description": "GroupMembers Item."
+    },
+    "QueryRequestOptions": {
+      "properties": {
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "Query Request Options"
     },
     "EffectiveVirtualNetworksListResult": {
       "properties": {
@@ -372,24 +385,9 @@
           },
           "description": "Gets a page of EffectiveVirtualNetwork"
         },
-        "totalRecords": {
-          "description": "Total Records.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "firstIndex": {
-          "description": "First Index.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "pageSize": {
-          "description": "Page Size.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "Result of the request to list Effective Virtual Network. It contains a list of groups and a URL link to get the next set of results."

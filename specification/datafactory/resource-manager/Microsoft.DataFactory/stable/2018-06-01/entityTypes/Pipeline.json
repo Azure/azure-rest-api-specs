@@ -258,6 +258,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -421,7 +425,7 @@
       }
     },
     "AmazonS3ReadSettings": {
-      "description": "Azure data lake store read settings.",
+      "description": "Amazon S3 read settings.",
       "type": "object",
       "allOf": [
         {
@@ -589,6 +593,108 @@
         "useTempFileRename": {
           "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "AmazonS3CompatibleReadSettings": {
+      "description": "Amazon S3 Compatible read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 Compatible object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageReadSettings": {
+      "description": "Oracle Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Oracle Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -831,6 +937,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
@@ -1188,17 +1298,21 @@
       ],
       "properties": {
         "filePattern": {
-          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
-          "type": "string",
-          "enum": [
-            "setOfObjects",
-            "arrayOfObjects"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWriteFilePattern",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive."
         }
+      }
+    },
+    "JsonWriteFilePattern": {
+      "description": "All available filePatterns.",
+      "type": "string",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWriteFilePattern",
+        "modelAsString": true
       }
     },
     "AvroSource": {
@@ -1554,6 +1668,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -3762,6 +3880,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -3925,6 +4047,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -4494,6 +4623,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -4736,6 +4872,36 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "MongoDbAtlasSink": {
+      "description": "A copy activity MongoDB Atlas sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MongoDbV2Sink": {
+      "description": "A copy activity MongoDB sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5877,11 +6043,12 @@
         "userTenant": {
           "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "WebActivityTypeProperties": {
       "description": "Web activity type properties.",
@@ -7031,6 +7198,20 @@
       "x-ms-enum": {
         "name": "NetezzaPartitionOption",
         "modelAsString": true
+      }
+    },
+    "MetadataItem": {
+      "description": "Specify the name and value of custom metadata item.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Metadata item key name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Metadata item value. Type: string (or Expression with resultType string)."
+        }
       }
     }
   }
