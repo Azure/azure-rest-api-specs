@@ -2,22 +2,9 @@
   "parameters": {
     "Endpoint": "{Endpoint}",
     "api-version": "2021-03-31-preview",
-    "farmerId": "FARMER123",
-    "harvestDataId": "HARVESTOP123",
+    "farmerId": "Farmer123",
+    "harvestDataId": "Harvest123",
     "harvestData": {
-      "source": "Manual",
-      "name": "Harvest data for North Farm",
-      "description": "some description",
-      "status": "Active",
-      "operationStartDateTime": "2021-02-25T16:57:04Z",
-      "operationEndDateTime": "2021-02-27T10:13:06Z",
-      "operationModifiedDateTime": "2021-02-28T10:14:12Z",
-      "operationBoundaryId": "HARVESTOPBOUNDARY1",
-      "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-      "area": {
-        "unit": "acre",
-        "value": 50
-      },
       "totalYield": {
         "unit": "kilos",
         "value": 1400
@@ -44,7 +31,7 @@
       },
       "harvestProductDetails": [
         {
-          "productName": "VAR1",
+          "productName": "Product123",
           "area": {
             "unit": "acre",
             "value": 30
@@ -55,7 +42,11 @@
           },
           "avgYield": {
             "unit": "kilosperacre",
-            "value": 30
+            "value": 10
+          },
+          "avgMoisture": {
+            "unit": "percent",
+            "value": 16.4
           },
           "totalWetMass": {
             "unit": "kilos",
@@ -64,132 +55,46 @@
           "avgWetMass": {
             "unit": "kilosperacre",
             "value": 10
-          },
-          "avgMoisture": {
-            "unit": "percent",
-            "value": 16.4
           }
         }
       ],
+      "area": {
+        "unit": "acre",
+        "value": 30
+      },
+      "source": "Manual",
+      "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+      "operationStartDateTime": "2021-02-25T16:57:04Z",
+      "operationEndDateTime": "2021-02-27T10:13:06Z",
+      "associatedBoundaryId": "AssociatedBoundary123",
+      "operationBoundaryId": "OperationBoundary123",
+      "status": "Active",
+      "name": "Test harvest data",
+      "description": "Test harvest data description",
       "properties": {
-        "Region": "Europe",
-        "CountyCode": 123
+        "Region": "Central US",
+        "RetailerId": 123
       }
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "farmerId": "FARMER123",
-        "id": "HARVESTOP123",
-        "source": "Manual",
-        "name": "Harvest data for North Farm",
-        "description": "some description",
-        "status": "Active",
-        "operationStartDateTime": "2021-02-25T16:57:04Z",
-        "operationEndDateTime": "2021-02-27T10:13:06Z",
-        "operationModifiedDateTime": "2021-02-28T10:12:12Z",
-        "operationBoundaryId": "HARVESTOPBOUNDARY1",
-        "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-        "area": {
-          "unit": "acre",
-          "value": 50
-        },
-        "totalYield": {
-          "unit": "kilos",
-          "value": 1400
-        },
-        "avgYield": {
-          "unit": "kilosperacre",
-          "value": 28
-        },
-        "totalWetMass": {
-          "unit": "kilos",
-          "value": 500
-        },
-        "avgWetMass": {
-          "unit": "kilosperacre",
-          "value": 10
-        },
-        "avgMoisture": {
-          "unit": "percent",
-          "value": 14.61
-        },
-        "avgSpeed": {
-          "unit": "kmsperhour",
-          "value": 7.2
-        },
-        "harvestProductDetails": [
-          {
-            "productName": "VAR1",
-            "area": {
-              "unit": "acre",
-              "value": 30
-            },
-            "totalYield": {
-              "unit": "kilos",
-              "value": 900
-            },
-            "avgYield": {
-              "unit": "kilosperacre",
-              "value": 30
-            },
-            "totalWetMass": {
-              "unit": "kilos",
-              "value": 300
-            },
-            "avgWetMass": {
-              "unit": "kilosperacre",
-              "value": 10
-            },
-            "avgMoisture": {
-              "unit": "percent",
-              "value": 16.4
-            }
-          }
-        ],
-        "properties": {
-          "Region": "Europe",
-          "CountyCode": 123
-        },
-        "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{harvestDataId}}&resourceTypes=HarvestData",
-        "createdDateTime": "2021-02-29T04:57:04Z",
-        "modifiedDateTime": "2021-03-08T18:22:07Z",
-        "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
-      }
-    },
     "201": {
       "body": {
-        "farmerId": "FARMER123",
-        "id": "HARVESTOP123",
-        "source": "Manual",
-        "name": "Harvest data for North Farm",
-        "description": "some description",
-        "status": "Active",
-        "operationStartDateTime": "2021-02-25T16:57:04Z",
-        "operationEndDateTime": "2021-02-27T10:13:06Z",
-        "operationModifiedDateTime": "2021-02-28T10:12:12Z",
-        "operationBoundaryId": "HARVESTOPBOUNDARY1",
-        "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-        "area": {
-          "unit": "acre",
-          "value": 50
-        },
         "totalYield": {
           "unit": "kilos",
-          "value": 1400
+          "value": 1400.0
         },
         "avgYield": {
           "unit": "kilosperacre",
-          "value": 28
+          "value": 28.0
         },
         "totalWetMass": {
           "unit": "kilos",
-          "value": 500
+          "value": 500.0
         },
         "avgWetMass": {
           "unit": "kilosperacre",
-          "value": 10
+          "value": 10.0
         },
         "avgMoisture": {
           "unit": "percent",
@@ -201,41 +106,134 @@
         },
         "harvestProductDetails": [
           {
-            "productName": "VAR1",
+            "productName": "Product123",
             "area": {
               "unit": "acre",
-              "value": 30
+              "value": 30.0
             },
             "totalYield": {
               "unit": "kilos",
-              "value": 900
+              "value": 900.0
             },
             "avgYield": {
               "unit": "kilosperacre",
-              "value": 30
-            },
-            "totalWetMass": {
-              "unit": "kilos",
-              "value": 300
-            },
-            "avgWetMass": {
-              "unit": "kilosperacre",
-              "value": 10
+              "value": 10.0
             },
             "avgMoisture": {
               "unit": "percent",
               "value": 16.4
+            },
+            "totalWetMass": {
+              "unit": "kilos",
+              "value": 300.0
+            },
+            "avgWetMass": {
+              "unit": "kilosperacre",
+              "value": 10.0
             }
           }
         ],
-        "properties": {
-          "Region": "Europe",
-          "CountyCode": 123
+        "area": {
+          "unit": "acre",
+          "value": 30.0
         },
-        "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{harvestDataId}}&resourceTypes=HarvestData",
-        "createdDateTime": "2021-02-29T04:57:04Z",
-        "modifiedDateTime": "2021-03-08T18:22:07Z",
-        "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
+        "source": "Manual",
+        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+        "operationStartDateTime": "2021-02-25T16:57:04Z",
+        "operationEndDateTime": "2021-02-27T10:13:06Z",
+        "associatedBoundaryId": "AssociatedBoundary123",
+        "operationBoundaryId": "OperationBoundary123",
+        "farmerId": "Farmer123",
+        "id": "Harvest123",
+        "eTag": "02002c9d-0000-0600-0000-60cdd6a40000",
+        "status": "Active",
+        "createdDateTime": "2021-06-19T11:36:04Z",
+        "modifiedDateTime": "2021-06-19T11:36:04Z",
+        "name": "Test harvest data",
+        "description": "Test harvest data description",
+        "properties": {
+          "Region": "Central US",
+          "RetailerId": 123
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "totalYield": {
+          "unit": "kilos",
+          "value": 1400.0
+        },
+        "avgYield": {
+          "unit": "kilosperacre",
+          "value": 28.0
+        },
+        "totalWetMass": {
+          "unit": "kilos",
+          "value": 500.0
+        },
+        "avgWetMass": {
+          "unit": "kilosperacre",
+          "value": 10.0
+        },
+        "avgMoisture": {
+          "unit": "percent",
+          "value": 14.61
+        },
+        "avgSpeed": {
+          "unit": "kmsperhour",
+          "value": 7.2
+        },
+        "harvestProductDetails": [
+          {
+            "productName": "Product123",
+            "area": {
+              "unit": "acre",
+              "value": 30.0
+            },
+            "totalYield": {
+              "unit": "kilos",
+              "value": 900.0
+            },
+            "avgYield": {
+              "unit": "kilosperacre",
+              "value": 10.0
+            },
+            "avgMoisture": {
+              "unit": "percent",
+              "value": 16.4
+            },
+            "totalWetMass": {
+              "unit": "kilos",
+              "value": 300.0
+            },
+            "avgWetMass": {
+              "unit": "kilosperacre",
+              "value": 10.0
+            }
+          }
+        ],
+        "area": {
+          "unit": "acre",
+          "value": 30.0
+        },
+        "source": "Manual",
+        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+        "operationStartDateTime": "2021-02-25T16:57:04Z",
+        "operationEndDateTime": "2021-02-27T10:13:06Z",
+        "associatedBoundaryId": "AssociatedBoundary123",
+        "operationBoundaryId": "OperationBoundary123",
+        "farmerId": "Farmer123",
+        "id": "Harvest123",
+        "eTag": "02002c9d-0000-0600-0000-60cdd6a40000",
+        "status": "Active",
+        "createdDateTime": "2021-06-19T11:36:04Z",
+        "modifiedDateTime": "2021-06-19T11:36:04Z",
+        "name": "Test harvest data",
+        "description": "Test harvest data description",
+        "properties": {
+          "Region": "Central US",
+          "RetailerId": 123
+        }
       }
     }
   }

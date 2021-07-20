@@ -1,41 +1,42 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "jobId": "JOB123",
+    "jobId": "Job123",
     "api-version": "2021-03-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "durationInSeconds": 12.4,
-        "id": "satellite-job",
-        "status": "Succeeded",
-        "message": "Satellite data is available for 73 days from provider in the requested date range. Successfully fetched data for 73 days.",
-        "createdDateTime": "2021-04-16T08:24:50Z",
-        "lastActionDateTime": "2021-04-16T08:24:50Z",
-        "startTime": "2021-04-16T08:24:50Z",
-        "endTime": "2021-04-16T08:24:50Z",
-        "name": "North Farm 2019 satellite imagery",
-        "description": "Test job",
-        "properties": {
-          "Region": "Asia"
-        },
-        "boundaryId": "BOUNDARY123",
-        "farmerId": "FARMER123",
+        "farmerId": "Farmer123",
+        "boundaryId": "Boundary123",
         "startDateTime": "2020-04-16T10:14:12Z",
         "endDateTime": "2021-04-16T10:14:12Z",
         "provider": "Microsoft",
         "source": "Sentinel_2_L2A",
         "data": {
-          "imageFormats": [
-            "Tif"
-          ],
           "imageNames": [
             "NDVI"
+          ],
+          "imageFormats": [
+            "TIF"
           ],
           "imageResolutions": [
             10.0
           ]
+        },
+        "id": "Job123",
+        "status": "Succeeded",
+        "durationInSeconds": 14.2833851,
+        "message": "Satellite data is available for 73 days from provider in the requested date range. Successfully fetched data for 73 days.",
+        "createdDateTime": "2021-06-19T15:30:50Z",
+        "lastActionDateTime": "2021-06-19T15:31:04Z",
+        "startTime": "2021-06-19T15:30:50Z",
+        "endTime": "2021-06-19T15:31:04Z",
+        "name": "Test satellite job",
+        "description": "Test satellite job details",
+        "properties": {
+          "region": "Central US",
+          "retailerId": 123
         }
       }
     }
