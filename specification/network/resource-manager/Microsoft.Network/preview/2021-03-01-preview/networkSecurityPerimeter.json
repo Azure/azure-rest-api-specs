@@ -237,6 +237,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
+      "get": {
+        "operationId": "PerimeterAssociableResourceTypes_Get",
+        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the where the association is present."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the list of resources that are onboarded with network security perimeter feature.",
+            "schema": {
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check Dns Name Availability": {
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -310,6 +350,77 @@
         }
       },
       "description": "Properties of network security perimeter."
+    },
+    "PerimeterAssociableResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
+          "description": "Properties of the perimeter associable resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the perimeter associable resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource."
+    },
+    "PerimeterAssociableResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerimeterAssociableResource"
+          },
+          "description": "Gets paged list of perimeter associable resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Paged list of perimeter associable resources."
+    },
+    "PerimeterAssociableResourceProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name for the properties of perimeter associable resources."
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type/provider name."
+        },
+        "publicDnsZones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Public DNS zone names of the resources."
+        }
+      },
+      "description": "Properties of the perimeter associable resources."
     }
   },
   "parameters": {
