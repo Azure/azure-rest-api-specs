@@ -12300,33 +12300,37 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-              "minLength": 1,
+          "$ref": "#/definitions/MultiPolygonCoordinates"
+        }
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
+    },
+    "MultiPolygonCoordinates": {
+      "description": "Schema of multi polygon coordinates.",
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
               "type": "array",
               "items": {
                 "type": "array",
                 "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "items": {
-                      "format": "double",
-                      "type": "number"
-                    }
-                  }
+                  "format": "double",
+                  "type": "number"
                 }
               }
             }
           }
         }
-      ],
-      "x-ms-discriminator-value": "MultiPolygon"
+      }
     },
     "Point": {
       "description": "Point geometry.",
@@ -12336,25 +12340,29 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system respectively.",
-              "maximum": 3,
-              "minimum": 2,
-              "type": "array",
-              "items": {
-                "format": "double",
-                "type": "number"
-              }
-            }
-          }
+          "$ref": "#/definitions/PointCoordinates"
         }
       ],
       "x-ms-discriminator-value": "Point"
+    },
+    "PointCoordinates": {
+      "description": "Schema of the coordinates of a point.",
+      "type": "object",
+      "required": [
+        "coordinates"
+      ],
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system respectively.",
+          "maximum": 3,
+          "minimum": 2,
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
     },
     "Polygon": {
       "description": "Polygon geometry.",
@@ -12364,30 +12372,34 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-              "minLength": 1,
+          "$ref": "#/definitions/PolygonCoordinates"
+        }
+      ],
+      "x-ms-discriminator-value": "Polygon"
+    },
+    "PolygonCoordinates": {
+      "description": "Schema of polygon coordinates.",
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
               "type": "array",
               "items": {
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "format": "double",
-                    "type": "number"
-                  }
-                }
+                "format": "double",
+                "type": "number"
               }
             }
           }
         }
-      ],
-      "x-ms-discriminator-value": "Polygon"
+      }
     }
   },
   "securityDefinitions": {
