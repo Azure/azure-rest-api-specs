@@ -39,5 +39,5 @@ These settings apply only when `--tag=package-2021-03-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-31-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2021-03-31-preview/agfood.json
+  - Microsoft.AgFoodPlatform/preview/2021-03-31-preview/agrifood.json
 ```
