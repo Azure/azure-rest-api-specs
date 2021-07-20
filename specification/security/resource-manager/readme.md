@@ -468,6 +468,19 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-06-only
+
+These settings apply only when `--tag=package-2021-06-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-06-only'
+input-file:
+- Microsoft.Security/stable/2021-06-01/settings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
