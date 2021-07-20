@@ -1,32 +1,34 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "jobId": "JOB123",
+    "jobId": "Job123",
     "api-version": "2021-03-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "durationInSeconds": 12.4,
-        "id": "weather-job",
-        "status": "Succeeded",
-        "message": "Weather data is available for startTime to endTime",
-        "createdDateTime": "2021-04-16T08:24:50Z",
-        "lastActionDateTime": "2021-04-16T08:24:50Z",
-        "startTime": "2021-04-16T08:24:50Z",
-        "endTime": "2021-04-16T08:24:50Z",
-        "farmerId": "test_farmer",
-        "boundaryId": "test_boundary",
-        "extensionId": "dtn.clearAg",
-        "extensionApiName": "dailyforecast",
+        "boundaryId": "Boundary123",
+        "farmerId": "Farmer123",
+        "extensionId": "DTN.ClearAg",
+        "extensionApiName": "dailyhistorical",
         "extensionApiInput": {
-          "start": 0,
-          "end": 5
+          "location": "47.922759,-97.089954",
+          "start": "1606262400",
+          "end": "1606780800"
         },
-        "name": "TestWeatherJob",
-        "description": "Daily Forecast data for 5 days",
+        "id": "Job123",
+        "status": "Succeeded",
+        "durationInSeconds": 2.9322843,
+        "message": "Weather data available from '11/25/2020 00:00:00' to '11/30/2020 00:00:00'.",
+        "createdDateTime": "2021-06-19T14:52:22Z",
+        "lastActionDateTime": "2021-06-19T14:52:25Z",
+        "startTime": "2021-06-19T14:52:22Z",
+        "endTime": "2021-06-19T14:52:25Z",
+        "name": "Test weather job",
+        "description": "Test weather job details",
         "properties": {
-          "region": "Asia"
+          "region": "Central US",
+          "retailerId": 123
         }
       }
     }

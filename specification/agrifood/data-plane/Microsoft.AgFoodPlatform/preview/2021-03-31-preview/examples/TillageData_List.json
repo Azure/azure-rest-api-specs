@@ -1,48 +1,48 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "api-version": "2021-03-31-preview"
+    "api-version": "2021-03-31-preview",
+    "farmerId": "Farmer123"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "farmerId": "FARMER123",
-            "id": "TILLAGEOP123",
-            "source": "Manual",
-            "name": "Planting data for North Farm",
-            "description": "some description",
-            "status": "Active",
-            "operationStartDateTime": "2021-02-25T16:57:04Z",
-            "operationEndDateTime": "2021-02-27T10:13:06Z",
-            "operationModifiedDateTime": "2021-02-28T10:14:12Z",
-            "operationBoundaryId": "PLANTINGOPBOUNDARY1",
-            "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-            "area": {
-              "unit": "acre",
-              "value": 30
-            },
-            "tillagePressure": {
-              "unit": "kg per sq cms",
-              "value": 950
-            },
             "tillageDepth": {
               "unit": "cms",
               "value": 9.5
             },
-            "properties": {
-              "Region": "Europe",
-              "CountyCode": 123
+            "tillagePressure": {
+              "unit": "kg per sq cms",
+              "value": 950.0
             },
-            "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{plantingDataId}}&resourceTypes=PlantingData",
-            "createdDateTime": "2021-02-29T04:57:04Z",
-            "modifiedDateTime": "2021-03-08T18:22:07Z",
-            "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
+            "area": {
+              "unit": "acre",
+              "value": 30.0
+            },
+            "source": "Manual",
+            "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+            "operationStartDateTime": "2021-02-25T16:57:04Z",
+            "operationEndDateTime": "2021-02-27T10:13:06Z",
+            "attachmentsLink": "https://bb-prod-wcus-1.farmbeats.azure.net/farmer/Farmer123/attachments?api-version=2021-03-31-preview&resourceIds=Tillage123&resourceTypes=TillageData",
+            "associatedBoundaryId": "AssociatedBoundary123",
+            "operationBoundaryId": "OperationBoundary123",
+            "farmerId": "Farmer123",
+            "id": "Tillage123",
+            "eTag": "02002e9d-0000-0600-0000-60cdddc00000",
+            "status": "Active",
+            "createdDateTime": "2021-06-19T12:06:24Z",
+            "modifiedDateTime": "2021-06-19T12:06:24Z",
+            "name": "Test tillage data",
+            "description": "Test tillage data description",
+            "properties": {
+              "Region": "Central US",
+              "RetailerId": 123
+            }
           }
         ],
-        "$skipToken": "string",
-        "nextLink": "https:/{{resourceName}}.farmbeats.azure.net/farmers/{{farmerId}}/plantingData?api-version={{apiVersion}}&$skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7ehK8eAKzdo1MNnwcAAAAAAA%3d%3d%23RT%3a1%23TRC%3a10%23ISV%3a2%23IEO%3a65551%23FPC%3aAQ2fBwAAAAAAD58HAAAAAAA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
+        "nextLink": "https://test.farmbeats.azure.net/planting-data?api-version=2021-03-31-preview&$skipToken=2d7dad55-cfa9-4760-b198-0df17ec2fb65"
       }
     }
   }

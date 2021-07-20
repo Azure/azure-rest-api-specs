@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "farmerId": "FARMER123",
+    "farmerId": "Farmer123",
     "api-version": "2021-03-31-preview"
   },
   "responses": {
@@ -9,55 +9,53 @@
       "body": {
         "value": [
           {
-            "farmerId": "FARMER123",
-            "id": "APPLICATION123",
-            "source": "Manual",
-            "name": "Application data for North Farm",
-            "description": "some description",
-            "status": "Active",
-            "operationStartDateTime": "2021-02-25T16:57:04Z",
-            "operationEndDateTime": "2021-02-27T10:13:06Z",
-            "operationModifiedDateTime": "2021-02-28T11:12:12Z",
-            "operationBoundaryId": "APPLICATIONOPBOUNDARY1",
-            "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-            "area": {
-              "unit": "acre",
-              "value": 60
-            },
-            "totalMaterial": {
-              "unit": "kilos",
-              "value": 9
-            },
+            "applicationProductDetails": [
+              {
+                "productName": "Product123",
+                "isCarrier": false,
+                "avgMaterial": {
+                  "unit": "kilosperacre",
+                  "value": 0.15
+                },
+                "totalMaterial": {
+                  "unit": "kilos",
+                  "value": 9.0
+                }
+              }
+            ],
             "avgMaterial": {
               "unit": "kilosperacre",
               "value": 0.15
             },
-            "applicationProductDetails": [
-              {
-                "productName": "POTASHVAR1",
-                "isCarrier": false,
-                "totalMaterial": {
-                  "unit": "kilos",
-                  "value": 4
-                },
-                "avgMaterial": {
-                  "unit": "kilosperacre",
-                  "value": 0.2
-                }
-              }
-            ],
-            "properties": {
-              "Region": "Europe",
-              "CountyCode": 123
+            "totalMaterial": {
+              "unit": "kilos",
+              "value": 9.0
             },
-            "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{applicationDataId}}&resourceTypes=ApplicationData",
-            "createdDateTime": "2021-02-29T04:57:04Z",
-            "modifiedDateTime": "2021-03-08T18:22:07Z",
-            "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
+            "area": {
+              "unit": "acre",
+              "value": 60.0
+            },
+            "source": "Manual",
+            "operationModifiedDateTime": "2021-02-25T16:57:04Z",
+            "operationStartDateTime": "2021-02-27T10:13:06Z",
+            "operationEndDateTime": "2021-02-28T11:12:12Z",
+            "attachmentsLink": "https://bb-prod-wcus-1.farmbeats.azure.net/farmer/Farmer123/attachments?api-version=2021-03-31-preview&resourceIds=Application123&resourceTypes=FarmOperationApplicationData",
+            "associatedBoundaryId": "AssociatedBoundary123",
+            "operationBoundaryId": "OperationBoundary123",
+            "farmerId": "Farmer123",
+            "id": "Application123",
+            "eTag": "0300c56c-0000-0600-0000-60cc93920000",
+            "status": "Active",
+            "createdDateTime": "2021-06-18T12:37:38Z",
+            "modifiedDateTime": "2021-06-18T12:37:38Z",
+            "name": "Test application data",
+            "description": "Test application data description",
+            "properties": {
+              "Region": "Central US",
+              "RetailerId": 123
+            }
           }
-        ],
-        "$skipToken": "string",
-        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/farmers/{{farmerId}}/seasonalFields/{{seasonalFieldId}}?api-version={{apiVersion}}&$skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
+        ]
       }
     }
   }

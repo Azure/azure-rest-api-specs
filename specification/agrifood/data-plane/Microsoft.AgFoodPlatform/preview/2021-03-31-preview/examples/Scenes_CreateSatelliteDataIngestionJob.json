@@ -1,20 +1,18 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "jobId": "JOB123",
+    "jobId": "Job123",
     "api-version": "2021-03-31-preview",
     "body": {
-      "boundaryId": "BOUNDARY123",
-      "farmerId": "FARMER123",
-      "startDateTime": "2020-04-16T10:14:12Z",
+      "boundaryId": "Boundary123",
       "endDateTime": "2021-04-16T10:14:12Z",
+      "farmerId": "Farmer123",
+      "startDateTime": "2020-04-16T10:14:12Z",
       "provider": "Microsoft",
       "source": "Sentinel_2_L2A",
-      "name": "North Farm 2019 satellite imagery",
-      "description": "Test job",
       "data": {
         "imageFormats": [
-          "Tif"
+          "TIF"
         ],
         "imageNames": [
           "NDVI"
@@ -23,28 +21,45 @@
           10.0
         ]
       },
+      "name": "Test satellite job",
+      "description": "Test satellite job details",
       "properties": {
-        "Region": "Asia"
+        "Region": "Central US",
+        "RetailerId": 123
       }
     }
   },
   "responses": {
     "202": {
       "body": {
-        "durationInSeconds": 12.4,
-        "id": "satellite-job",
-        "status": "Created",
-        "message": "Created job 'satellite-job' to fetch satellite data for boundary 'BOUNDARY123' for startDate '01/01/2019 00:00:00' and endDate '03/30/2019 00:00:00' (both inclusive)",
-        "createdDateTime": "2021-04-16T07:56:05Z",
-        "lastActionDateTime": "2021-04-16T07:56:05Z",
-        "startDateTime": "2021-04-16T07:56:05Z",
-        "endDateTime": "2021-04-16T07:56:05Z",
-        "farmerId": "FARMER123",
-        "boundaryId": "BOUNDARY123",
-        "name": "North Farm 2019 satellite imagery",
-        "description": "Test job",
+        "farmerId": "Farmer123",
+        "boundaryId": "Boundary123",
+        "startDateTime": "2020-04-16T10:14:12Z",
+        "endDateTime": "2021-04-16T10:14:12Z",
+        "provider": "Microsoft",
+        "source": "Sentinel_2_L2A",
+        "data": {
+          "imageNames": [
+            "NDVI"
+          ],
+          "imageFormats": [
+            "TIF"
+          ],
+          "imageResolutions": [
+            10.0
+          ]
+        },
+        "id": "Job123",
+        "status": "Waiting",
+        "message": "Created job 'Job123' to fetch satellite data for boundary 'Boundary123' from startDate '04/16/2020' to endDate '04/16/2021' (both inclusive).",
+        "createdDateTime": "2021-06-19T15:30:50Z",
+        "lastActionDateTime": "2021-06-19T15:30:50Z",
+        "startTime": "2021-06-19T15:30:50Z",
+        "name": "Test satellite job",
+        "description": "Test satellite job details",
         "properties": {
-          "Region": "Asia"
+          "region": "Central US",
+          "retailerId": 123
         }
       }
     }
