@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "machineDefinitionName": "{machineDefinitionName}",
+    "body": {
+      "properties": {
+        "imageId": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/image2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/machinedefinitions/{machineDefinitionName}",
+        "name": "{machineDefinitionName}",
+        "type": "Microsoft.Fidalgo/machinedefinitions",
+        "properties": {
+          "imageType": "Custom",
+          "imageId": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/exampleImage",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus"
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/machinedefinitions/{machineDefinitionName}",
+        "name": "{machineDefinitionName}",
+        "type": "Microsoft.Fidalgo/machinedefinitions",
+        "properties": {
+          "imageType": "Custom",
+          "imageId": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/exampleImage",
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus"
+      }
+    }
+  }
+}

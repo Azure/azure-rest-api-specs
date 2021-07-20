@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "projectName": "{projectName}",
+    "poolName": "{poolName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/projects/{projectName}/pools/{poolName}",
+        "name": "{poolName}",
+        "type": "Microsoft.Fidalgo/pools",
+        "properties": {
+          "sku": {
+            "name": "medium"
+          },
+          "machineDefinitionId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/machinedefinitions/{machineDefinitionName}",
+          "networkSettingsId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/networksettings/{networkSettingName}",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus"
+      }
+    }
+  }
+}
