@@ -64,13 +64,13 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-03-preview
 ```
 
-### Tag: package-policy-2020-09
+### Tag: package-policy-2021-06
 
 These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2021-06'
 input-file:
-- Microsoft.Authorization/stable/2021-06-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
 - Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
 - Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
