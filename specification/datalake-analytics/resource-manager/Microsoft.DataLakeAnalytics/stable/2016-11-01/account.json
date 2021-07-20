@@ -1885,6 +1885,16 @@
           },
           "description": "The list of hiveMetastores associated with this account."
         },
+        "hierarchicalQueue": {
+          "properties": {
+            "root": {
+              "readOnly": true,
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "description": "The hierarchical queue associated with this account."
+        },
         "hierarchicalQueueState": {
           "readOnly": true,
           "type": "string",
@@ -3147,6 +3157,7 @@
         },
         "suffix": {
           "type": "string",
+          "default": "azuredatalakestore.net",
           "description": "The optional suffix for the storage account."
         }
       },
