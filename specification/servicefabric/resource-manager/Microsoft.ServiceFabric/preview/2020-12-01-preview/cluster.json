@@ -1126,6 +1126,7 @@
       }
     },
     "ClusterUpgradePolicy": {
+      "type": "object",
       "required": [
         "healthCheckRetryTimeout",
         "healthCheckStableDuration",
@@ -1176,6 +1177,7 @@
       "description": "Describes the policy used when upgrading the cluster."
     },
     "ClusterVersionDetails": {
+      "type": "object",
       "properties": {
         "codeVersion": {
           "type": "string",
@@ -1193,6 +1195,7 @@
       "description": "The detail of the Service Fabric runtime version result"
     },
     "DiagnosticsStorageAccountConfig": {
+      "type": "object",
       "required": [
         "blobEndpoint",
         "protectedAccountKeyName",
@@ -1238,6 +1241,7 @@
       ]
     },
     "EndpointRangeDescription": {
+      "type": "object",
       "required": [
         "endPort",
         "startPort"
@@ -1257,6 +1261,7 @@
       "description": "Port range details"
     },
     "NodeTypeDescription": {
+      "type": "object",
       "required": [
         "clientConnectionEndpointPort",
         "httpGatewayEndpointPort",
@@ -1327,6 +1332,7 @@
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1344,6 +1350,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1380,6 +1387,7 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "required": [
         "location"
       ],
@@ -1427,6 +1435,7 @@
       "x-ms-azure-resource": true
     },
     "ServerCertificateCommonName": {
+      "type": "object",
       "description": "Describes the server certificate details using common name.",
       "required": [
         "certificateCommonName",
@@ -1444,6 +1453,7 @@
       }
     },
     "ServerCertificateCommonNames": {
+      "type": "object",
       "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster.",
       "properties": {
         "commonNames": {
@@ -1481,6 +1491,7 @@
       }
     },
     "SettingsParameterDescription": {
+      "type": "object",
       "required": [
         "name",
         "value"
@@ -1498,6 +1509,7 @@
       "description": "Describes a parameter in fabric settings of the cluster."
     },
     "SettingsSectionDescription": {
+      "type": "object",
       "required": [
         "name",
         "parameters"
@@ -1532,6 +1544,7 @@
       ]
     },
     "UpgradableVersionPathResult": {
+      "type": "object",
       "properties": {
         "supportedPath": {
           "type": "array",
@@ -1544,6 +1557,7 @@
       "description": "The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given"
     },
     "UpgradableVersionsDescription": {
+      "type": "object",
       "required": [
         "targetVersion"
       ],
@@ -1563,6 +1577,7 @@
       ]
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -1572,6 +1587,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
