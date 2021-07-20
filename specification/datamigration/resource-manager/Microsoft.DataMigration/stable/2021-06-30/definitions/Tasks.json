@@ -449,6 +449,30 @@
         }
       ]
     },
+    "GetUserTablesMySqlTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesMySql",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./GetUserTablesMySqlTask.json#/definitions/GetUserTablesMySqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./GetUserTablesMySqlTask.json#/definitions/GetUserTablesMySqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetSqlMITaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
       "type": "object",
@@ -653,6 +677,30 @@
           "type": "array",
           "items": {
             "$ref": "./MigrateMySqlAzureDbForMySqlSyncTask.json#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.MySql.AzureDbForMySql",
+      "type": "object",
+      "description": "Properties for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
           },
           "readOnly": true
         }
