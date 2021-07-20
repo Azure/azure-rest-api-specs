@@ -40,7 +40,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/PrivateDnsZone.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
