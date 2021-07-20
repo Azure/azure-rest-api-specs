@@ -1,15 +1,15 @@
-// Copyright (c) 2021 Microsoft Corporation
-//
-// This software is released under the MIT License.
-// https://opensource.org/licenses/MIT
-
 # Test scenario integrate with armTemplate
 
 ## Background
 
-In some cases, we need to do some more complex operations before creating a resource. For example, some Azure resource name is global unique, so we need to generate an unique name before create resource. some Azure resource creation relays on some external dependency such as storage account, keyVault certificate.
+In some cases, we need to do some more complex operations before creating a resource. For example,
+
+- Create Azure SignalR service with a global unique name. Using ARMTemplate to generate a random unique string.
+- Create VM with a storage account. Using ARMTemplate to provision storage account and passing the storage account resourceId as VM creation parameter.
 
 ## Examples
+
+Here is an example about `generate unique resource name for signalR service`
 
 #### Generate unique resource name
 
