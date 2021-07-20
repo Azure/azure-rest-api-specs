@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Alias Service",
+    "version": "2.0",
+    "description": "APIs for managing aliases in Azure Maps."
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "AliasApiVersionV2": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2.0",
+      "x-ms-parameter-location": "client"
+    },
+    "CreateCreatorDataItemId": {
+      "name": "creatorDataItemId",
+      "description": "The unique id that references a creator data item to be aliased.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "AssignCreatorDataItemId": {
+      "name": "creatorDataItemId",
+      "description": "The unique id that references a creator data item to be aliased.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AliasId": {
+      "name": "aliasId",
+      "description": "The unique id that references an existing alias.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/aliases": {
+      "post": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to create an alias. You can also assign the alias during the create request. An alias can reference an ID generated by a creator service, but cannot reference another alias ID.\n\n### Submit Create Request\n\nTo create your alias, you will use a `POST` request. If you would like to assign the alias during the creation, you will pass the `resourceId` query parameter.\n\n### Create Alias Response\n\nThe Create API returns a HTTP `201 Created` response with the alias resource in the body.\n\nA sample response from creating an alias:\n\n```json\n{\n  \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n  \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n  \"creatorDataItemId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n  \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n}\n```",
+        "operationId": "Alias_Create",
+        "x-ms-examples": {
+          "Create an alias that does not reference any resource": {
+            "$ref": "./examples/alias/Alias_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/AliasApiVersionV2"
+          },
+          {
+            "$ref": "#/parameters/CreateCreatorDataItemId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
+            "schema": {
+              "$ref": "#/definitions/AliasesCreateResponse"
+            },
+            "headers": {
+              "Access-Control-Expose-Headers": {
+                "type": "string",
+                "description": "The list of response headers that can be read by the client."
+              }
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all previously successfully created aliases.\n\n### Submit List Request\n\nTo list all your aliases, you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe List API returns the complete list of all aliases in `json` format. The response contains the following details for each alias resource:\n  > createdTimestamp - The timestamp that the alias was created. Format yyyy-MM-ddTHH:mm:ss.sssZ\n  > aliasId - The id for the alias.\n  > creatorDataItemId - The id for the creator data item that this alias references (could be null if the alias has not been assigned).\n  > lastUpdatedTimestamp - The last time the alias was assigned to a resource. Format yyyy-MM-ddTHH:mm:ss.sssZ\n\nA sample response returning 2 alias resources:\n\n```json\n{\n  \"aliases\": [\n    {\n      \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n      \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n      \"creatorDataItemId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n      \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n    },\n    {\n      \"createdTimestamp\": \"2020-02-18T19:53:33.123Z\",\n      \"aliasId\": \"1856dbfc-7a66-ee5a-bf8d-51dbfe1906f6\",\n      \"creatorDataItemId\": null,\n      \"lastUpdatedTimestamp\": \"2020-02-18T19:53:33.123Z\"\n    }\n  ]\n}\n```",
+        "operationId": "Alias_List",
+        "x-ms-examples": {
+          "List all the previously created aliases": {
+            "$ref": "./examples/alias/Alias_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/AliasApiVersionV2"
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "aliases",
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "List alias request completed successfully. The response body contains a list of all the previously created aliases.",
+            "schema": {
+              "$ref": "#/definitions/AliasListResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/aliases/{aliasId}": {
+      "put": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to assign an alias to reference a resource.\n\n### Submit Assign Request\n\nTo assign your alias to a resource, you will use a `PUT` request with the `aliasId` in the path and the `creatorDataItemId` passed as a query parameter.\n\n### Assign Alias Response\n\nThe Assign API returns a HTTP `200 OK` response with the updated alias resource in the body, if the alias was assigned successfully. A sample of the assign response is\n\n```json\n{\n  \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n  \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n  \"creatorDataItemId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n  \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n}\n```",
+        "operationId": "Alias_Assign",
+        "x-ms-examples": {
+          "Assign an alias to a resource": {
+            "$ref": "./examples/alias/Alias_Assign.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/AliasId"
+          },
+          {
+            "$ref": "#/parameters/AliasApiVersionV2"
+          },
+          {
+            "$ref": "#/parameters/AssignCreatorDataItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alias was assigned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AliasListItem"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "delete": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a previously created alias. You can also use this API to delete old/unused aliases to create space for new content.This API does not delete the references resource, only the alias referencing the resource.\n\n### Submit Delete Request\n\nTo delete your alias you will issue a `DELETE` request where the path will contain the `aliasId` of the alias to delete.\n\n### Delete Alias Response\n\nThe Delete API returns a HTTP `204 No Content` response with an empty body, if the alias was deleted successfully.",
+        "operationId": "Alias_Delete",
+        "x-ms-examples": {
+          "Delete previously created alias": {
+            "$ref": "./examples/alias/Alias_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/AliasId"
+          },
+          {
+            "$ref": "#/parameters/AliasApiVersionV2"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Alias delete request completed successfully. The content for `aliasId` was deleted on the server."
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch the details of a previously created alias.\n\n### Submit Get Details Request\n\nTo get the details of your alias, you will issue a `GET` request with the `aliasId` in the path.\n\n### Get Details Response\n\nThe Get Details API returns the previously created alias in `json` format. The response contains the following details for the alias resource:\n  > createdTimestamp - The timestamp that the alias was created.\n  > aliasId - The id for the alias.\n  > creatorDataItemId - The id for the creator data item that this alias references (could be null if the alias has not been assigned).\n  > lastUpdatedTimestamp - The last time the alias was assigned to a resource.\n\nHere's a sample response:\n```json\n{\n  \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n  \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n  \"creatorDataItemId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n  \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n}\n```",
+        "operationId": "Alias_GetDetails",
+        "x-ms-examples": {
+          "Get a previously created alias": {
+            "$ref": "./examples/alias/Alias_GetDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/AliasId"
+          },
+          {
+            "$ref": "#/parameters/AliasApiVersionV2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get alias request completed successfully. The response body contains the previously created alias.",
+            "schema": {
+              "$ref": "#/definitions/AliasListItem"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AliasesCreateResponse": {
+      "description": "The response model for the Alias Create API for the case when the alias was successfully created.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "The created timestamp for the alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aliasId": {
+          "description": "The id for the alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creatorDataItemId": {
+          "description": "The id for the creator data item that this alias references (could be null if the alias has not been assigned).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdatedTimestamp": {
+          "description": "The timestamp of the last time the alias was assigned.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AliasListResponse": {
+      "description": "The response model for the List API. Returns a list of all the previously created aliases.",
+      "type": "object",
+      "properties": {
+        "aliases": {
+          "description": "A list of all the previously created aliases.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AliasListItem"
+          }
+        },
+        "nextLink": {
+          "description": "If present, the location of the next page of data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AliasListItem": {
+      "description": "Detailed information for the alias.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "The created timestamp for the alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aliasId": {
+          "description": "The id for the alias.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creatorDataItemId": {
+          "description": "The id for the creator data item that this alias references (could be null if the alias has not been assigned).",
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "lastUpdatedTimestamp": {
+          "description": "The timestamp of the last time the alias was assigned.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

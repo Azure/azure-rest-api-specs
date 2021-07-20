@@ -1,0 +1,677 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Common Types",
+    "version": "1.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The Id for this long-running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "LroStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        },
+        "warning": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "BatchRequestBody": {
+      "description": "This type represents the request body for the Batch service.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "description": "Batch Query object",
+            "type": "object",
+            "properties": {
+              "query": {
+                "description": "Partial query string.",
+                "type": "string",
+                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
+              }
+            }
+          }
+        }
+      }
+    },
+    "BatchResponse": {
+      "description": "This object is returned from a successful Batch service call. Extend with 'batchItems' property.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "BatchItem": {
+      "description": "An item returned from Batch API. Extend with 'response' property.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP request status code.",
+          "type": "number",
+          "readOnly": true,
+          "example": 200
+        }
+      }
+    },
+    "CoordinatesPair": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "CoordinatesPairAbbreviated": {
+      "description": "A location represented as a latitude and longitude using short names 'lat' & 'lon'.",
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double"
+        },
+        "lon": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "GeoJsonPosition": {
+      "description": "A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "GeoJsonLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJsonPosition"
+      }
+    },
+    "GeoJsonObject": {
+      "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Feature and FeatureCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection",
+            "Feature",
+            "FeatureCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry.",
+                "name": "GeoJsonPoint"
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry.",
+                "name": "GeoJsonMultiPoint"
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry.",
+                "name": "GeoJsonLineString"
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry.",
+                "name": "GeoJsonMultiLineString"
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry.",
+                "name": "GeoJsonPolygon"
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry.",
+                "name": "GeoJsonMultiPolygon"
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry.",
+                "name": "GeoJsonGeometryCollection"
+              },
+              {
+                "value": "Feature",
+                "description": "`GeoJSON Feature` object.",
+                "name": "GeoJsonFeature"
+              },
+              {
+                "value": "FeatureCollection",
+                "description": "`GeoJSON FeatureCollection` object.",
+                "name": "GeoJsonFeatureCollection"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "GeoJsonGeometry": {
+      "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        }
+      ]
+    },
+    "GeoJsonPoint": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "x-ms-discriminator-value": "Point",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonPointData"
+        }
+      ]
+    },
+    "GeoJsonPointData": {
+      "description": "Data contained by a `GeoJson Point`.",
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "$ref": "#/definitions/GeoJsonPosition"
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiPoint": {
+      "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
+      "x-ms-discriminator-value": "MultiPoint",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonMultiPointData"
+        }
+      ]
+    },
+    "GeoJsonMultiPointData": {
+      "type": "object",
+      "description": "Data contained by a `GeoJson MultiPoint`.",
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `GeoJson MultiPoint` geometry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonPosition"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonLineString": {
+      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+      "x-ms-discriminator-value": "LineString",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonLineStringData"
+        }
+      ]
+    },
+    "GeoJsonLineStringData": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `GeoJson LineString` geometry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonPosition"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiLineString": {
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "x-ms-discriminator-value": "MultiLineString",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonMultiLineStringData"
+        }
+      ]
+    },
+    "GeoJsonMultiLineStringData": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `GeoJson MultiLineString` geometry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonLinearRing"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonPolygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "x-ms-discriminator-value": "Polygon",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonPolygonData"
+        }
+      ]
+    },
+    "GeoJsonPolygonData": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonLinearRing"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiPolygon": {
+      "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
+      "x-ms-discriminator-value": "MultiPolygon",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonMultiPolygonData"
+        }
+      ]
+    },
+    "GeoJsonMultiPolygonData": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJsonLinearRing"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonGeometryCollection": {
+      "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
+      "x-ms-discriminator-value": "GeometryCollection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonGeometryCollectionData"
+        }
+      ]
+    },
+    "GeoJsonGeometryCollectionData": {
+      "type": "object",
+      "properties": {
+        "geometries": {
+          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonGeometry"
+          }
+        }
+      },
+      "required": [
+        "geometries"
+      ]
+    },
+    "GeoJsonFeature": {
+      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "x-ms-discriminator-value": "Feature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonFeatureData"
+        }
+      ]
+    },
+    "GeoJsonFeatureData": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "type": "object"
+        },
+        "id": {
+          "description": "Identifier for the feature.",
+          "type": "string"
+        },
+        "featureType": {
+          "description": "The type of the feature. The value depends on the data model the current feature is part of. Some data models may have an empty value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "GeoJsonFeatureCollection": {
+      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+      "x-ms-discriminator-value": "FeatureCollection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonFeatureCollectionData"
+        }
+      ]
+    },
+    "GeoJsonFeatureCollectionData": {
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonFeature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ]
+    },
+    "Ontology": {
+      "type": "string",
+      "description": "The ontology version of this dataset.",
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "x-ms-parameter-location": "client"
+    },
+    "ResponseFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `json` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TextFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "TextFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Creator resource in the United States"
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Creator resource in Europe"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "responses": {
+    "200AsyncV2": {
+      "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Resource-Location": {
+          "type": "string",
+          "description": "If successful, a URI where details on the newly created resource can be found."
+        }
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    },
+    "202AsyncV2": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+      "headers": {
+        "Operation-Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    },
+    "408": {
+      "description": "Timeout: The request took longer to finish than the maximum amount of time defined in the api.",
+      "schema": {
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "409": {
+      "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
+      "schema": {
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "409StorageLimit": {
+      "description": "The [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits) is reached on the Azure Maps account. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.",
+      "schema": {
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "default": {
+      "description": "An unexpected error occurred.",
+      "schema": {
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+      },
+      "x-ms-error-response": true
+    }
+  }
+}

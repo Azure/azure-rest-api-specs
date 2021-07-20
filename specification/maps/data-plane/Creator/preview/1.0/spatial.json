@@ -1,0 +1,923 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Spatial Service",
+    "version": "1.0",
+    "description": "Azure Maps Spatial REST APIs"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "SpatialApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "GeofenceMode": {
+      "name": "mode",
+      "in": "query",
+      "description": "Mode of the geofencing async event mechanism.",
+      "type": "string",
+      "enum": [
+        "All",
+        "EnterAndExit"
+      ],
+      "x-ms-enum": {
+        "name": "GeofenceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "All",
+            "description": "Publish all the query results to Azure Maps account event subscription."
+          },
+          {
+            "value": "EnterAndExit",
+            "description": "Only publish result when user location is considered as crossing geofencing boarder."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SpatialUploadUdid": {
+      "name": "udid",
+      "in": "query",
+      "description": "The unique id returned from [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) after uploading a valid GeoJSON FeatureCollection object.  Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SpatialUploadDataFormat": {
+      "name": "dataFormat",
+      "description": "Data format of the content being uploaded. Currently, only `geojson` format is supported.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "geojson"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialUploadDataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SpatialLatitude": {
+      "name": "lat",
+      "x-ms-client-name": "Latitude",
+      "description": "The latitude of the location being passed.  Example: 48.36.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SpatialLongitude": {
+      "name": "lon",
+      "x-ms-client-name": "Longitude",
+      "description": "The longitude of the location being passed.  Example: -124.63.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SearchGeofenceRequestBody": {
+      "name": "searchGeofenceRequestBody",
+      "in": "body",
+      "description": "The geofencing GeoJSON data.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ClosestPointRequestBody": {
+      "name": "closestPointRequestBody",
+      "in": "body",
+      "description": "The FeatureCollection of Point geometries from which closest point to source point should be determined. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PointInPolygonRequestBody": {
+      "name": "pointInPolygonRequestBody",
+      "in": "body",
+      "description": "A FeatureCollection with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "required": true,
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/spatial/geofence/{format}": {
+      "get": {
+        "description": "**Search Geofence Get API**\n\n**Applies to:** S1 Pricing tier.\n\nThe Geofence Get API allows you to retrieve the proximity of a coordinate to a \ngeofence that has been uploaded to the Data service. You can use the \n[Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) to upload \na geofence or set of fences. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) \nfor more details on the geofence data format. To query the proximity of a coordinate, you supply the location of the object you are tracking as well\nas the ID for the fence or set of fences, and the response will contain information about\nthe distance from the outer edge of the geofence. A negative value signifies that the \ncoordinate is inside of the fence while a positive value means that it is outside of the\nfence.<br><br>This API can be used for a variety of scenarios that include things like asset \ntracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration). The isAsync parameter is used to enable integration with Event Grid (disabled by default).\nTo test this API, you can upload the sample data from Post Geofence API examples(Request Body) via Data Upload API and replace the [udid] from the sample request below with the udid returned by Data Upload API.\n\n\n### Geofencing InnerError code\n\nIn geofencing response error contract, `innererror` is  an object containing service specific information about the error. `code` is a property in `innererror` which can map to a specific geofencing error type. The table belows shows the code mapping between all the known client error type to the corresponding geofencing error `message`.\n\ninnererror.code | error.message\n---------------------------- | -------------------------------------- \nNullDeviceId  | Device Id should not be null.\nNullUdid\t  | Udid should not be null.\nUdidWrongFormat| Udid should be acquired from user data ingestion API.\nInvalidUserTime| Usertime is invalid.\nInvalidSearchBuffer| Searchbuffer is invalid.\nInvalidSearchRange| The value range of searchbuffer should be from 0 to 500 meters.\nInvalidLatLon| Lat and/or lon parameters are invalid.\nInvalidIsAsyncValue| The IsAsync parameter is invalid.\nInvalidModeValue| The mode parameter invalid.\nInvalidJson| Geofencing data is not a valid json file.\nNotSupportedGeoJson| Geofencing data can't be read as a Feature or FeatureCollections.\nInvalidGeoJson| Geofencing data is invalid.\nNoUserDataWithAccountOrSubscription| Can't find user geofencing data with provided account-id and/or subscription-id.\nNoUserDataWithUdid|\tCan't find user geofencing data with provided udid.",
+        "operationId": "Spatial_GetGeofence",
+        "x-ms-examples": {
+          "GetGeofence": {
+            "$ref": "./examples/spatial/Spatial_GetGeofence.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "udid",
+            "in": "query",
+            "description": "The unique id returned from [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) after uploading a valid GeoJSON FeatureCollection object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's  properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          },
+          {
+            "name": "z",
+            "in": "query",
+            "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion is used. Example: 200.",
+            "type": "number"
+          },
+          {
+            "name": "userTime",
+            "in": "query",
+            "format": "date-time",
+            "description": "The user request time. If not presented in the request, the default value is DateTime.Now.",
+            "type": "string"
+          },
+          {
+            "name": "searchBuffer",
+            "in": "query",
+            "description": "The radius of the buffer around the geofence in meters that defines how far to search inside and outside the border of the fence against the coordinate that was provided when calculating the result.  The minimum value is 0, and the maximum is 500.  The default value is 50.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "isAsync",
+            "in": "query",
+            "description": "If true, the request will use async event mechanism; if false, the request will be synchronized and do not trigger any event. The default value is false.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/GeofenceMode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK The X-Correlation-id header value is present in an async call's response and the Event Grid event data. It helps correlate the async call’s response with the corresponding Event Grid event.",
+            "headers": {
+              "X-Correlation-id": {
+                "description": "Value present in an async call's response and the Event Grid event data. It helps correlate the async call’s response with the corresponding Event Grid event.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/GeofenceResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "post": {
+        "description": "**Search Geofence Post API**\n**Applies to:** S1 Pricing tier.\nThe Geofence Post API allows you to retrieve the proximity of a coordinate to a  provided geofence or set of fences. With POST call, you do not have to upload the fence data in advance, instead you supply the location of the object you are tracking in query parameters as well as the fence or set of fences data in post request body. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) for more details on the geofence data format. The response will contain information about the distance from the outer edge of the geofence. A negative value signifies that the  coordinate is inside of the fence while a positive value means that it is outside of the fence.<br><br>This API can be used for a variety of scenarios that include things like asset  tracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration).  The isAsync parameter is used to enable integration with Event Grid (disabled by default).",
+        "operationId": "Spatial_PostGeofence",
+        "x-ms-examples": {
+          "PostGeofence": {
+            "$ref": "./examples/spatial/Spatial_PostGeofence.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          },
+          {
+            "name": "z",
+            "in": "query",
+            "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion geofencing is applied. Example: 200.",
+            "type": "number"
+          },
+          {
+            "name": "userTime",
+            "in": "query",
+            "format": "date-time",
+            "description": "The user request time. If not presented in the request, the default value is DateTime.UtcNow.",
+            "type": "string"
+          },
+          {
+            "name": "searchBuffer",
+            "in": "query",
+            "description": "The radius of the buffer around the geofence in meters that defines how far to search inside and outside the border of the fence against the coordinate that was provided when calculating the result.  The minimum value is 0, and the maximum is 500.  The default value is 50.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "isAsync",
+            "in": "query",
+            "description": "If true, the request will use async event mechanism; if false, the request will be synchronized and do not trigger any event. The default value is false.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/GeofenceMode"
+          },
+          {
+            "$ref": "#/parameters/SearchGeofenceRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK The X-Correlation-id header value is present in an async call's response and the Event Grid event data. It helps correlate the async call’s response with the corresponding Event Grid event.",
+            "headers": {
+              "X-Correlation-id": {
+                "description": "Value present in an async call's response and the Event Grid event data. It helps correlate the async call’s response with the corresponding Event Grid event.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/GeofenceResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/spatial/buffer/{format}": {
+      "post": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns a FeatureCollection where each Feature is a buffer around the corresponding indexed Feature of the input. The buffer could be either on the outside or the inside of the provided Feature, depending on the distance provided in the input. There must be either one distance provided per Feature in the FeatureCollection  input, or if only one distance is provided, then that distance is applied to every Feature in the collection. The positive (or negative) buffer of a geometry is defined as the Minkowski sum (or difference) of the geometry with a circle of radius equal to the absolute value of the buffer distance. The buffer API always returns a polygonal result. The negative or zero-distance buffer of lines and points is always an empty polygon. The input may contain a collection of Point, MultiPoint, Polygon, MultiPolygon, LineString and MultiLineString. GeometryCollection will be ignored if provided.",
+        "operationId": "Spatial_PostBuffer",
+        "x-ms-examples": {
+          "PostBuffer": {
+            "$ref": "./examples/spatial/Spatial_PostBuffer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "bufferRequestBody",
+            "in": "body",
+            "description": "The FeatureCollection and the list of distances (one per feature or one for all features).",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BufferRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BufferResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns a FeatureCollection where each Feature is a buffer around the corresponding indexed Feature of the input. The buffer could be either on the outside or the inside of the provided Feature, depending on the distance provided in the input. There must be either one distance provided per Feature in the FeatureCollection  input, or if only one distance is provided, then that distance is applied to every Feature in the collection. The positive (or negative) buffer of a geometry is defined as the Minkowski sum (or difference) of the geometry with a circle of radius equal to the absolute value of the buffer distance. The buffer API always returns a polygonal result. The negative or zero-distance buffer of lines and points is always an empty polygon. The input features are provided by a GeoJSON file which is uploaded via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and referenced by a unique udid. The GeoJSON file may contain a collection of Point, MultiPoint, Polygon, MultiPolygon, LineString and MultiLineString. GeometryCollection will be ignored if provided. \n\nTo test this API, you can upload the sample data from [Post Buffer API](https://docs.microsoft.com/en-us/rest/api/maps/spatial/postbuffer#examples) examples(Request Body without distances array) via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and replace the [udid] from the [sample request below](https://docs.microsoft.com/en-us/rest/api/maps/spatial/getbuffer#examples) with the udid returned by Data Upload API.",
+        "operationId": "Spatial_GetBuffer",
+        "x-ms-examples": {
+          "GetBuffer": {
+            "$ref": "./examples/spatial/Spatial_GetBuffer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SpatialUploadUdid"
+          },
+          {
+            "name": "distances",
+            "in": "query",
+            "description": "The list of distances (one per feature or one for all features), delimited by semicolons. For example, 12.34;-56.78. Positive distance will generate a buffer outside of the feature, whereas negative distance will generate a buffer inside of the feature. If the negative distance larger than the geometry itself, an empty polygon will be returned.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BufferResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/spatial/closestPoint/{format}": {
+      "post": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns the closest point between a base point and a given set of target points. The set of target points is provided by user data in post request body. The user data may only contain a collection of Point geometry. MultiPoint or other geometries will be ignored if provided. The algorithm does not take into account routing or traffic. The maximum number of points accepted is 100,000. Information returned includes closest point latitude, longitude, and distance in meters from the closest point.",
+        "operationId": "Spatial_PostClosestPoint",
+        "x-ms-examples": {
+          "PostClosestPoint": {
+            "$ref": "./examples/spatial/Spatial_PostClosestPoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          },
+          {
+            "name": "numberOfClosestPoints",
+            "in": "query",
+            "description": "The number of closest points expected from response. Default: 1, minimum: 1 and maximum: 50",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ClosestPointRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClosestPointResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns the closest point between a base point and a given set of points in the user uploaded data set identified by udid. The set of target points is provided by a GeoJSON file which is uploaded via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and referenced by a unique udid. The GeoJSON file may only contain a collection of Point geometry. MultiPoint or other geometries will be ignored if provided. The maximum number of points accepted is 100,000. The algorithm does not take into account routing or traffic. Information returned includes closest point latitude, longitude, and distance in meters from the closest point.\n\nTo test this API, you can upload the sample data from [Post Closest Point API](https://docs.microsoft.com/en-us/rest/api/maps/spatial/postclosestpoint#examples) examples(Request Body) via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and replace the [udid] from the [sample request below](https://docs.microsoft.com/en-us/rest/api/maps/spatial/getclosestpoint#examples) with the udid returned by Data Upload API.",
+        "operationId": "Spatial_GetClosestPoint",
+        "x-ms-examples": {
+          "GetClosestPoint": {
+            "$ref": "./examples/spatial/Spatial_GetClosestPoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SpatialUploadUdid"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          },
+          {
+            "name": "numberOfClosestPoints",
+            "in": "query",
+            "description": "The number of closest points expected from response. Default: 1, minimum: 1 and maximum: 50",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClosestPointResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/spatial/pointInPolygon/{format}": {
+      "post": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns a boolean value indicating whether a point is inside a set of polygons. The user data may contain Polygon and MultiPolygon geometries, other geometries will be ignored if provided. If the point is inside or on the boundary of one of these polygons, the value returned is true. In all other cases, the value returned is false. When the point is inside multiple polygons, the result will give intersecting geometries section to show all valid geometries (referenced by geometryId) in user data. The maximum number of vertices accepted to form a Polygon is 10,000.",
+        "operationId": "Spatial_PostPointInPolygon",
+        "x-ms-examples": {
+          "PostPointInPolygon": {
+            "$ref": "./examples/spatial/Spatial_PostPointInPolygon.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          },
+          {
+            "$ref": "#/parameters/PointInPolygonRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointInPolygonResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API returns a boolean value indicating whether a point is inside a set of polygons. The set of polygons is provided by a GeoJSON file which is uploaded via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and referenced by a unique udid. The GeoJSON file may contain Polygon and MultiPolygon geometries, other geometries will be ignored if provided. If the point is inside or on the boundary of one of these polygons, the value returned is true. In all other cases, the value returned is false. When the point is inside multiple polygons, the result will give intersecting geometries section to show all valid geometries(referenced by geometryId) in user data. The maximum number of vertices accepted to form a Polygon is 10,000.\n\n \nTo test this API, you can upload the sample data from [Post Point In Polygon API](https://docs.microsoft.com/en-us/rest/api/maps/spatial/postpointinpolygon#examples) examples(Request Body) via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and replace the [udid] from the [sample request below](https://docs.microsoft.com/en-us/rest/api/maps/spatial/getpointinpolygon#examples) with the udid returned by Data Upload API.",
+        "operationId": "Spatial_GetPointInPolygon",
+        "x-ms-examples": {
+          "GetPointInPolygon": {
+            "$ref": "./examples/spatial/Spatial_GetPointInPolygon.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SpatialUploadUdid"
+          },
+          {
+            "$ref": "#/parameters/SpatialLatitude"
+          },
+          {
+            "$ref": "#/parameters/SpatialLongitude"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointInPolygonResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/spatial/greatCircleDistance/{format}": {
+      "get": {
+        "description": "**Applies to**: S1 pricing tier.\n\nThis API will return the great-circle or shortest distance between two points on the surface of a sphere, measured along the surface of the sphere.  This differs from calculating a straight line through the sphere's interior. This method is helpful for estimating travel distances for airplanes by calculating the shortest distance between airports.",
+        "operationId": "Spatial_GetGreatCircleDistance",
+        "x-ms-examples": {
+          "GetGreatCircleDistance": {
+            "$ref": "./examples/spatial/Spatial_GetGreatCircleDistance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SpatialApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The Coordinates through which the distance is calculated, delimited by a colon. Two coordinates are required.  The first one is the source point coordinate and the last is the target point coordinate. For example, 47.622942,122.316456:57.673988,127.121513",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GreatCircleDistanceResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SpatialCoordinate": {
+      "description": "A location represented as a latitude and longitude",
+      "type": "object",
+      "properties": {
+        "lat": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "lon": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "GeofenceGeometry": {
+      "description": "The geofencing geometry.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "deviceId": {
+          "description": "ID of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "udId": {
+          "description": "The unique id returned from [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) after uploading a valid GeoJSON FeatureCollection object. Please refer to  [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's properties should  contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+          "type": "string",
+          "readOnly": true
+        },
+        "geometryId": {
+          "description": "The unique id identifies a geometry.",
+          "type": "string",
+          "readOnly": true
+        },
+        "distance": {
+          "description": "Distance from the coordinate to the closest border of the geofence. Positive means the  coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border, then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.",
+          "type": "number",
+          "readOnly": true
+        },
+        "nearestLat": {
+          "description": "Latitude of the nearest point of the geometry.",
+          "type": "number",
+          "readOnly": true
+        },
+        "nearestLon": {
+          "description": "Longitude of the nearest point of the geometry.",
+          "type": "number",
+          "readOnly": true
+        },
+        "nearestZ": {
+          "description": "Sea level in meter of the nearest point on the 2D extrusion geometry. This will only be presented in response when value is provided for 'zInMeter' in the request.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "GeofenceResponse": {
+      "description": "This object is returned from a geofence proximity call.",
+      "type": "object",
+      "properties": {
+        "geometries": {
+          "description": "Lists the fence geometries that contain the coordinate position or overlap the searchBuffer around the position.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GeofenceGeometry"
+          }
+        },
+        "expiredGeofenceGeometryId": {
+          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "invalidPeriodGeofenceGeometryId": {
+          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEventPublished": {
+          "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber. This will only be presented in response when 'isAsync' query parameter is set to true.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "BufferRequestBody": {
+      "description": "An object with a FeatureCollection and a list of distances.  All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
+      "type": "object",
+      "properties": {
+        "geometries": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+        },
+        "distances": {
+          "description": "List of the distances to compute the buffer for, one-to-one per Feature in the collection, or one for all Features in the collection.",
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "BufferResponse": {
+      "description": "This object is returned from a successful Spatial Buffer call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary of the call.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "udid": {
+              "description": "The udid for the user data if one exists",
+              "type": "string",
+              "readOnly": true
+            },
+            "information": {
+              "description": "The information about what happened during the call.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "result": {
+          "description": "The FeatureCollection of buffers for the input.",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+        }
+      }
+    },
+    "ClosestPointResponse": {
+      "description": "This object is returned from a successful Spatial Closest Point call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/ClosestPointSummary"
+        },
+        "result": {
+          "$ref": "#/definitions/ClosestPointResult"
+        }
+      }
+    },
+    "ClosestPointSummary": {
+      "description": "Closest Point Summary object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "sourcePoint": {
+          "$ref": "#/definitions/SpatialCoordinate"
+        },
+        "udid": {
+          "description": "A unique data id (udid) for the uploaded content",
+          "type": "string",
+          "readOnly": true
+        },
+        "information": {
+          "description": "Processing information",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClosestPointResult": {
+      "description": "Closest Point Result Array",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ClosestPointResultEntry"
+      }
+    },
+    "ClosestPointResultEntry": {
+      "description": "Closest Point Result Entry Object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "distanceInMeters": {
+          "description": "The distance in meters from the source point to the closest point",
+          "type": "number",
+          "readOnly": true
+        },
+        "position": {
+          "$ref": "#/definitions/SpatialCoordinate"
+        },
+        "geometryId": {
+          "description": "The unique id identifies a geometry",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PointInPolygonResponse": {
+      "description": "Returns true if point is within the polygon, false otherwise",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/PointInPolygonSummary"
+        },
+        "result": {
+          "$ref": "#/definitions/PointInPolygonResult"
+        }
+      }
+    },
+    "PointInPolygonSummary": {
+      "description": "Point In Polygon Summary object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "sourcePoint": {
+          "$ref": "#/definitions/SpatialCoordinate"
+        },
+        "udid": {
+          "description": "A unique data id (udid) for the uploaded content. Udid is not applicable for POST spatial operations(set to null)",
+          "type": "string",
+          "readOnly": true
+        },
+        "information": {
+          "description": "Processing information",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PointInPolygonResult": {
+      "description": "Point In Polygon Result Object",
+      "type": "object",
+      "properties": {
+        "pointInPolygons": {
+          "description": "Point In Polygons Property",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "intersectingGeometries": {
+          "description": "Geometries array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GeometryId"
+          }
+        }
+      }
+    },
+    "GeometryId": {
+      "description": "The Spatial geometry",
+      "type": "string",
+      "readOnly": true
+    },
+    "GreatCircleDistanceResponse": {
+      "description": "This object is returned from a successful Great Circle Distance call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "sourcePoint": {
+              "$ref": "#/definitions/SpatialCoordinate"
+            },
+            "targetPoint": {
+              "$ref": "#/definitions/SpatialCoordinate"
+            }
+          }
+        },
+        "result": {
+          "description": "Result Object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "distanceInMeters": {
+              "description": "The great circle distance in meters from the source point to the target point",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
