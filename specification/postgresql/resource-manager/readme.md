@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-2021-06-15-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Databases.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
