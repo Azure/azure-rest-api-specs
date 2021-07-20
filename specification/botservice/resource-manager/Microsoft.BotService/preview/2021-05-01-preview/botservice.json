@@ -6,15 +6,9 @@
     "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -29,9 +23,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}": {
       "put": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Creates a Bot Service. Bot Service is a resource group wide resource type.",
         "operationId": "Bots_Create",
         "x-ms-examples": {
@@ -84,9 +76,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Updates a Bot Service",
         "operationId": "Bots_Update",
         "x-ms-examples": {
@@ -140,9 +130,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Deletes a Bot Service from the resource group. ",
         "operationId": "Bots_Delete",
         "x-ms-examples": {
@@ -180,9 +168,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Returns a BotService specified by the parameters.",
         "operationId": "Bots_Get",
         "x-ms-examples": {
@@ -222,9 +208,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices": {
       "get": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Returns all the resources of a particular type belonging to a resource group",
         "operationId": "Bots_ListByResourceGroup",
         "x-ms-examples": {
@@ -264,9 +248,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/botServices": {
       "get": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Returns all the resources of a particular type belonging to a subscription.",
         "operationId": "Bots_List",
         "x-ms-examples": {
@@ -303,9 +285,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}": {
       "put": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Creates a Channel registration for a Bot Service",
         "operationId": "Channels_Create",
         "x-ms-examples": {
@@ -370,9 +350,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Updates a Channel registration for a Bot Service",
         "operationId": "Channels_Update",
         "x-ms-examples": {
@@ -438,9 +416,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Deletes a Channel registration from a Bot Service",
         "operationId": "Channels_Delete",
         "x-ms-examples": {
@@ -491,9 +467,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Returns a BotService Channel registration specified by the parameters.",
         "operationId": "Channels_Get",
         "x-ms-examples": {
@@ -552,9 +526,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/listChannelWithKeys": {
       "post": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Lists a Channel registration for a Bot Service including secrets",
         "operationId": "Channels_ListWithKeys",
         "x-ms-examples": {
@@ -597,9 +569,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels": {
       "get": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Returns all the Channel registrations of a particular BotService resource",
         "operationId": "Channels_ListByResourceGroup",
         "x-ms-examples": {
@@ -642,9 +612,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/regeneratekeys": {
       "post": {
-        "tags": [
-          "Channel"
-        ],
+        "tags": ["Channel"],
         "description": "Regenerates secret keys and returns them for the DirectLine Channel of a particular BotService resource",
         "operationId": "DirectLine_RegenerateKeys",
         "x-ms-examples": {
@@ -699,9 +667,7 @@
     },
     "/providers/Microsoft.BotService/checkNameAvailability": {
       "post": {
-        "tags": [
-          "Bot"
-        ],
+        "tags": ["Bot"],
         "description": "Check whether a bot name is available.",
         "operationId": "Bots_GetCheckNameAvailability",
         "x-ms-examples": {
@@ -741,9 +707,7 @@
     },
     "/providers/Microsoft.BotService/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Lists all the available BotService operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -778,9 +742,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listAuthServiceProviders": {
       "post": {
-        "tags": [
-          "ListServiceProviders"
-        ],
+        "tags": ["ListServiceProviders"],
         "description": "Lists the available Service Providers for creating Connection Settings",
         "operationId": "BotConnection_ListServiceProviders",
         "x-ms-examples": {
@@ -814,9 +776,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections/{connectionName}/listWithSecrets": {
       "post": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "x-ms-examples": {
           "Update Connection Setting": {
             "$ref": "./examples/GetConnection.json"
@@ -859,9 +819,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections/{connectionName}": {
       "put": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "description": "Register a new Auth Connection for a Bot Service",
         "operationId": "BotConnection_Create",
         "x-ms-examples": {
@@ -917,9 +875,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "description": "Updates a Connection Setting registration for a Bot Service",
         "operationId": "BotConnection_Update",
         "x-ms-examples": {
@@ -975,9 +931,7 @@
         }
       },
       "get": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "x-ms-examples": {
           "Update Connection Setting": {
             "$ref": "./examples/GetConnection.json"
@@ -1018,9 +972,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "description": "Deletes a Connection Setting registration for a Bot Service",
         "operationId": "BotConnection_Delete",
         "x-ms-examples": {
@@ -1063,9 +1015,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections": {
       "get": {
-        "tags": [
-          "BotConnection"
-        ],
+        "tags": ["BotConnection"],
         "description": "Returns all the Connection Settings registered to a particular BotService resource",
         "operationId": "BotConnection_ListByBotService",
         "x-ms-examples": {
@@ -1108,9 +1058,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/hostSettings": {
       "get": {
-        "tags": [
-          "BotHostSettings"
-        ],
+        "tags": ["BotHostSettings"],
         "description": "Get per subscription settings needed to host bot in compute resource such as Azure App Service",
         "operationId": "HostSettings_Get",
         "x-ms-examples": {
@@ -1144,9 +1092,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/operationresults/{operationResultId}": {
       "get": {
-        "tags": [
-          "OperationResults"
-        ],
+        "tags": ["OperationResults"],
         "description": "Get the operation result for a long running operation.",
         "operationId": "OperationResults_Get",
         "x-ms-examples": {
@@ -1188,9 +1134,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateEndpointConnections": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "operationId": "PrivateEndpointConnections_List",
         "description": "List all the private endpoint connections associated with the Bot.",
         "x-ms-examples": {
@@ -1234,9 +1178,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "operationId": "PrivateEndpointConnections_Get",
         "description": "Gets the specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
@@ -1278,9 +1220,7 @@
         }
       },
       "put": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "operationId": "PrivateEndpointConnections_Create",
         "description": "Update the state of specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
@@ -1331,9 +1271,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
@@ -1377,9 +1315,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources": {
       "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
+        "tags": ["PrivateLinkResources"],
         "operationId": "PrivateLinkResources_ListByBotResource",
         "description": "Gets the private link resources that need to be created for a Bot.",
         "x-ms-examples": {
@@ -1474,28 +1410,20 @@
           "readOnly": true,
           "type": "string",
           "description": "Gets the sku tier. This is based on the SKU name.",
-          "enum": [
-            "Free",
-            "Standard"
-          ],
+          "enum": ["Free", "Standard"],
           "x-ms-enum": {
             "name": "SkuTier",
             "modelAsString": true
           }
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "The SKU of the cognitive services account."
     },
     "SkuName": {
       "type": "string",
       "description": "The name of SKU.",
-      "enum": [
-        "F0",
-        "S1"
-      ],
+      "enum": ["F0", "S1"],
       "x-ms-enum": {
         "name": "SkuName",
         "modelAsString": true
@@ -1504,13 +1432,7 @@
     "Kind": {
       "type": "string",
       "description": "Indicates the type of bot service",
-      "enum": [
-        "sdk",
-        "designer",
-        "bot",
-        "function",
-        "azurebot"
-      ],
+      "enum": ["sdk", "designer", "bot", "function", "azurebot"],
       "x-ms-enum": {
         "name": "Kind",
         "modelAsString": true
@@ -1611,7 +1533,7 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication." 
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
         },
         "schemaTransformationVersion": {
           "type": "string",
@@ -1619,11 +1541,7 @@
         }
       },
       "description": "The parameters to provide for the Bot.",
-      "required": [
-        "displayName",
-        "endpoint",
-        "msaAppId"
-      ]
+      "required": ["displayName", "endpoint", "msaAppId"]
     },
     "BotResponseList": {
       "properties": {
@@ -1667,9 +1585,7 @@
           "description": "The channel name"
         }
       },
-      "required": [
-        "channelName"
-      ]
+      "required": ["channelName"]
     },
     "AlexaChannel": {
       "type": "object",
@@ -1709,10 +1625,7 @@
         }
       },
       "description": "The parameters to provide for the Alexa channel.",
-      "required": [
-        "alexaSkillId",
-        "isEnabled"
-      ]
+      "required": ["alexaSkillId", "isEnabled"]
     },
     "FacebookChannel": {
       "type": "object",
@@ -1765,10 +1678,7 @@
         }
       },
       "description": "The parameters to provide for the Facebook channel.",
-      "required": [
-        "appId",
-        "isEnabled"
-      ]
+      "required": ["appId", "isEnabled"]
     },
     "FacebookPage": {
       "properties": {
@@ -1783,9 +1693,7 @@
         }
       },
       "description": "A Facebook page for Facebook channel registration",
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "EmailChannel": {
       "type": "object",
@@ -1819,10 +1727,7 @@
         }
       },
       "description": "The parameters to provide for the Email channel.",
-      "required": [
-        "emailAddress",
-        "isEnabled"
-      ]
+      "required": ["emailAddress", "isEnabled"]
     },
     "MsTeamsChannel": {
       "type": "object",
@@ -1856,9 +1761,7 @@
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
-      "required": [
-        "isEnabled"
-      ]
+      "required": ["isEnabled"]
     },
     "SkypeChannel": {
       "type": "object",
@@ -1916,9 +1819,7 @@
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
-      "required": [
-        "isEnabled"
-      ]
+      "required": ["isEnabled"]
     },
     "KikChannel": {
       "type": "object",
@@ -1956,10 +1857,7 @@
         }
       },
       "description": "The parameters to provide for the Kik channel.",
-      "required": [
-        "userName",
-        "isEnabled"
-      ]
+      "required": ["userName", "isEnabled"]
     },
     "WebChatChannel": {
       "type": "object",
@@ -1981,9 +1879,7 @@
       "properties": {
         "webChatEmbedCode": {
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "readOnly": true,
           "description": "Web chat control embed code"
         },
@@ -2058,9 +1954,7 @@
         }
       },
       "description": "The parameters to provide for the Telegram channel.",
-      "required": [
-        "isEnabled"
-      ]
+      "required": ["isEnabled"]
     },
     "SmsChannel": {
       "type": "object",
@@ -2103,11 +1997,7 @@
         }
       },
       "description": "The parameters to provide for the Sms channel.",
-      "required": [
-        "phone",
-        "accountSID",
-        "isEnabled"
-      ]
+      "required": ["phone", "accountSID", "isEnabled"]
     },
     "SlackChannel": {
       "type": "object",
@@ -2176,9 +2066,7 @@
         }
       },
       "description": "The parameters to provide for the Slack channel.",
-      "required": [
-        "isEnabled"
-      ]
+      "required": ["isEnabled"]
     },
     "LineChannel": {
       "type": "object",
@@ -2217,16 +2105,12 @@
         }
       },
       "description": "The parameters to provide for the Line channel.",
-      "required": [
-        "lineRegistrations"
-      ]
+      "required": ["lineRegistrations"]
     },
     "LineRegistration": {
       "properties": {
         "generatedId": {
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "type": "string",
           "description": "Id generated for the line channel registration",
           "readOnly": true
@@ -2289,10 +2173,7 @@
         }
       },
       "description": "The parameters to provide for the DirectLine Speech channel.",
-      "required": [
-        "cognitiveServiceRegion",
-        "cognitiveServiceSubscriptionKey"
-      ]
+      "required": ["cognitiveServiceRegion", "cognitiveServiceSubscriptionKey"]
     },
     "ChannelResponseList": {
       "properties": {
@@ -2316,9 +2197,7 @@
         "siteId": {
           "type": "string",
           "description": "Site Id",
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "readOnly": true
         },
         "siteName": {
@@ -2328,17 +2207,13 @@
         "key": {
           "type": "string",
           "description": "Primary key. Value only returned through POST to the action Channel List API, otherwise empty.",
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "readOnly": true
         },
         "key2": {
           "type": "string",
           "description": "Secondary key. Value only returned through POST to the action Channel List API, otherwise empty.",
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "readOnly": true
         },
         "isEnabled": {
@@ -2350,19 +2225,13 @@
           "description": "Whether this site is enabled for preview versions of Webchat"
         }
       },
-      "required": [
-        "siteName",
-        "isEnabled",
-        "enablePreview"
-      ],
+      "required": ["siteName", "isEnabled", "enablePreview"],
       "description": "A site for the Webchat channel"
     },
     "DirectLineSite": {
       "properties": {
         "siteId": {
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "type": "string",
           "description": "Site Id",
           "readOnly": true
@@ -2372,17 +2241,13 @@
           "description": "Site name"
         },
         "key": {
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "type": "string",
           "description": "Primary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "readOnly": true
         },
         "key2": {
-          "x-ms-mutability": [
-            "read"
-          ],
+          "x-ms-mutability": ["read"],
           "type": "string",
           "description": "Secondary key. Value only returned through POST to the action Channel List API, otherwise empty.",
           "readOnly": true
@@ -2412,12 +2277,7 @@
         }
       },
       "description": "A site for the Direct Line channel",
-      "required": [
-        "isV1Enabled",
-        "isV3Enabled",
-        "isEnabled",
-        "siteName"
-      ]
+      "required": ["isV1Enabled", "isV3Enabled", "isEnabled", "siteName"]
     },
     "SiteInfo": {
       "properties": {
@@ -2428,10 +2288,7 @@
         "key": {
           "type": "string",
           "description": "Determines which key is to be regenerated",
-          "enum": [
-            "key1",
-            "key2"
-          ],
+          "enum": ["key1", "key2"],
           "x-ms-enum": {
             "name": "key",
             "modelAsString": false
@@ -2440,10 +2297,7 @@
       },
       "description": "Site information for WebChat or DirectLine Channels to identify which site to regenerate keys for.",
       "type": "object",
-      "required": [
-        "siteName",
-        "key"
-      ]
+      "required": ["siteName", "key"]
     },
     "ConnectionItemName": {
       "properties": {
@@ -2658,10 +2512,7 @@
         }
       },
       "description": "Bot Service error body.",
-      "required": [
-        "code",
-        "message"
-      ]
+      "required": ["code", "message"]
     },
     "OperationEntityListResult": {
       "description": "The list of bot service operation response.",
@@ -2806,13 +2657,7 @@
         },
         "status": {
           "description": "The status of the operation being performed.",
-          "enum": [
-            "Canceled",
-            "Succeeded",
-            "Failed",
-            "Requested",
-            "Running"
-          ],
+          "enum": ["Canceled", "Succeeded", "Failed", "Requested", "Running"],
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
@@ -2959,10 +2804,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": [
-        "WebChatChannel",
-        "DirectLineChannel"
-      ],
+      "enum": ["WebChatChannel", "DirectLineChannel"],
       "x-ms-enum": {
         "name": "regenerateKeysChannelName",
         "modelAsString": false,
