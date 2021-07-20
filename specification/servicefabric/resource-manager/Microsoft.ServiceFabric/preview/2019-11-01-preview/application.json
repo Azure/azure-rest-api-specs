@@ -1288,6 +1288,7 @@
         },
         "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
           "default": 0
         },
@@ -1354,6 +1355,7 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1361,6 +1363,7 @@
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1368,6 +1371,7 @@
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1536,6 +1540,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "names": {
@@ -1803,14 +1808,17 @@
         },
         "primaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
         },
         "secondaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
         },
         "defaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
         }
       }
@@ -2095,11 +2103,13 @@
         },
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2131,11 +2141,13 @@
       "properties": {
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2167,6 +2179,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2187,6 +2200,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2237,6 +2251,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "lowKey": {
