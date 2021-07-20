@@ -37,13 +37,10 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
   - Microsoft.ProviderHub/preview/2021-06-01-preview/providerhub.json
-<<<<<<< HEAD
 directive:
   - suppress: R4009
     from: providerhub.json
     reason: This version doesn't support systemData.
-=======
->>>>>>> f273962f0e3bfe7f97862739e3590c271f2e6331
 ```
 
 ### Tag: package-2021-05-01-preview
