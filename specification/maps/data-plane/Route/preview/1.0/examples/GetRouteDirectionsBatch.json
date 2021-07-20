@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "11111111-2222-3333-4444-555555555555",
+    "api-version": "1.0"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "batchItems": [
+          {
+            "statusCode": 400,
+            "response": {
+              "error": {
+                "code": "400 BadRequest",
+                "message": "maxAlternatives parameter value should be between 0 and 5 inclusive"
+              }
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "formatVersion": "0.0.12",
+              "routes": [
+                {
+                  "summary": {
+                    "lengthInMeters": 1754,
+                    "travelTimeInSeconds": 386,
+                    "trafficDelayInSeconds": 0,
+                    "departureTime": "2019-06-21T22:56:23+00:00",
+                    "arrivalTime": "2019-06-21T23:02:49+00:00"
+                  },
+                  "legs": [
+                    {
+                      "summary": {
+                        "lengthInMeters": 1754,
+                        "travelTimeInSeconds": 386,
+                        "trafficDelayInSeconds": 0,
+                        "departureTime": "2019-06-21T22:56:23+00:00",
+                        "arrivalTime": "2019-06-21T23:02:49+00:00"
+                      },
+                      "points": [
+                        {
+                          "latitude": 47.62094,
+                          "longitude": -122.34892
+                        },
+                        {
+                          "latitude": 47.62094,
+                          "longitude": -122.3485
+                        },
+                        {
+                          "latitude": 47.62095,
+                          "longitude": -122.3476
+                        },
+                        {
+                          "latitude": 47.60995,
+                          "longitude": -122.34174
+                        },
+                        {
+                          "latitude": 47.61011,
+                          "longitude": -122.342
+                        }
+                      ]
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "startPointIndex": 0,
+                      "endPointIndex": 44,
+                      "sectionType": "TRAVEL_MODE",
+                      "travelMode": "bicycle"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "formatVersion": "0.0.12",
+              "routes": [
+                {
+                  "summary": {
+                    "lengthInMeters": 1772,
+                    "travelTimeInSeconds": 1276,
+                    "trafficDelayInSeconds": 0,
+                    "departureTime": "2019-06-21T22:56:23+00:00",
+                    "arrivalTime": "2019-06-21T23:17:38+00:00"
+                  },
+                  "legs": [
+                    {
+                      "summary": {
+                        "lengthInMeters": 1772,
+                        "travelTimeInSeconds": 1276,
+                        "trafficDelayInSeconds": 0,
+                        "departureTime": "2019-06-21T22:56:23+00:00",
+                        "arrivalTime": "2019-06-21T23:17:38+00:00"
+                      },
+                      "points": [
+                        {
+                          "latitude": 40.75982,
+                          "longitude": -73.98493
+                        },
+                        {
+                          "latitude": 40.7601,
+                          "longitude": -73.98483
+                        },
+                        {
+                          "latitude": 40.75984,
+                          "longitude": -73.98417
+                        },
+                        {
+                          "latitude": 40.76047,
+                          "longitude": -73.9837
+                        },
+                        {
+                          "latitude": 40.77095,
+                          "longitude": -73.9736
+                        },
+                        {
+                          "latitude": 40.77114,
+                          "longitude": -73.97356
+                        }
+                      ]
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "startPointIndex": 0,
+                      "endPointIndex": 47,
+                      "sectionType": "TRAVEL_MODE",
+                      "travelMode": "pedestrian"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "summary": {
+          "successfulRequests": 2,
+          "totalRequests": 3
+        }
+      }
+    },
+    "202": {
+      "description": "Batch request was accepted but is still being processed. Please try again in some time."
+    }
+  }
+}
