@@ -250,6 +250,7 @@
         "kind": {
           "description": "The kind of the setting",
           "enum": [
+            "Anomalies",
             "EyesOn",
             "EntityAnalytics",
             "Ueba"
@@ -265,6 +266,34 @@
         "kind"
       ],
       "discriminator": "kind",
+      "type": "object"
+    },
+    "Anomalies": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AnomaliesSettingsProperties",
+          "description": "Anomalies properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Anomalies"
+    },
+    "AnomaliesSettingsProperties": {
+      "description": "Anomalies property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
       "type": "object"
     },
     "EyesOn": {
@@ -401,7 +430,7 @@
       "x-ms-parameter-location": "method"
     },
     "SettingsName": {
-      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
+      "description": "The setting name. Supports - Anomalies, EyesOn, EntityAnalytics, Ueba",
       "in": "path",
       "name": "settingsName",
       "required": true,
