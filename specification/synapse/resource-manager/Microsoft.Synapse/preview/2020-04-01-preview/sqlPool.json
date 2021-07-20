@@ -49,7 +49,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -110,7 +110,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -157,7 +157,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -213,7 +213,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -259,7 +259,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -305,7 +305,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -348,7 +348,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -436,7 +436,7 @@
       ],
       "properties": {
         "sku": {
-          "$ref": "../../../../common/v1/types.json#/definitions/Sku",
+          "$ref": "#/definitions/SkuV3",
           "description": "The sql pool SKU. The list of SKUs may vary by region and support offer."
         },
         "kind": {
@@ -456,12 +456,29 @@
         }
       }
     },
+    "SkuV3": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        }
+      }
+    },
     "SqlPoolUpdate": {
       "description": "A sql pool resource.",
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "../../../../common/v1/types.json#/definitions/Sku",
+          "$ref": "#/definitions/SkuV3",
           "description": "The name and tier of the SKU."
         },
         "properties": {
