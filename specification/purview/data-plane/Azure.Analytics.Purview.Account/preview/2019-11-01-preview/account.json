@@ -1,0 +1,1985 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "DataPlaneAccountClient",
+    "description": "Creates a Microsoft.Purview data plane account client."
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Get an account",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Updates an account",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "name": "accountUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataPlaneAccountUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        }
+      }
+    },
+    "/listkeys": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "List the authorization keys associated with this account.",
+        "operationId": "Accounts_ListKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListKeys": {
+            "$ref": "./examples/Accounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/regeneratekeys": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Regenerate the authorization keys associated with this data catalog.",
+        "operationId": "Accounts_RegenerateKeys",
+        "parameters": [
+          {
+            "name": "keyOptions",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessKeyOptions"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_RegenerateKeys": {
+            "$ref": "./examples/Accounts_RegenerateKeys.json"
+          }
+        }
+      }
+    },
+    "/businessRules/{businessRuleName}": {
+      "get": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "Get a business rule model.",
+        "operationId": "BusinessRules_Get",
+        "parameters": [
+          {
+            "name": "businessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BusinessRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessRules_Get": {
+            "$ref": "./examples/BusinessRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "Creates or updates a businessRule.",
+        "operationId": "BusinessRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "businessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "businessRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessRule"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BusinessRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessRules_CreateOrUpdate": {
+            "$ref": "./examples/BusinessRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "Deletes a BusinessRule resource.",
+        "operationId": "BusinessRules_Delete",
+        "parameters": [
+          {
+            "name": "businessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessRules_Delete": {
+            "$ref": "./examples/BusinessRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/businessRules": {
+      "get": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "List the businessRules in the account.",
+        "operationId": "BusinessRules_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "metadataOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BusinessRuleList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BusinessRules_ListByAccount": {
+            "$ref": "./examples/BusinessRules_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/businessRules/{businessRuleName}/enable": {
+      "post": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "Enables a BusinessRule.",
+        "operationId": "BusinessRules_Enable",
+        "parameters": [
+          {
+            "name": "businessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BusinessRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessRules_Enable": {
+            "$ref": "./examples/BusinessRules_Enable.json"
+          }
+        }
+      }
+    },
+    "/businessRules/{businessRuleName}/disable": {
+      "post": {
+        "tags": [
+          "BusinessRule"
+        ],
+        "description": "Disables a BusinessRule.",
+        "operationId": "BusinessRules_Disable",
+        "parameters": [
+          {
+            "name": "businessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BusinessRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BusinessRules_Disable": {
+            "$ref": "./examples/BusinessRules_Disable.json"
+          }
+        }
+      }
+    },
+    "/collections/{collectionName}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Get a collection",
+        "operationId": "Collections_Get",
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Collections_Get": {
+            "$ref": "./examples/Collections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates a collection entity.",
+        "operationId": "Collections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Collections_CreateOrUpdate": {
+            "$ref": "./examples/Collections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Deletes a Collection entity.",
+        "operationId": "Collections_Delete",
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Collections_Delete": {
+            "$ref": "./examples/Collections_Delete.json"
+          }
+        }
+      }
+    },
+    "/collections": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "List the collections in the account.",
+        "operationId": "Collections_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CollectionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Collections_ListByAccount": {
+            "$ref": "./examples/Collections_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/collections/{collectionName}/getChildCollectionNames": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Lists the child collections names in the collection.",
+        "operationId": "Collections_GetChildCollectionNames",
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CollectionNameResponseList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Collections_GetChildCollectionNames": {
+            "$ref": "./examples/Collections_GetChildCollectionNames.json"
+          }
+        }
+      }
+    },
+    "/collections/{collectionName}/getCollectionPath": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Gets the parent name and parent friendly name chains that represent the collection path.",
+        "operationId": "Collections_GetCollectionPath",
+        "parameters": [
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CollectionPathResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Collections_GetCollectionPath": {
+            "$ref": "./examples/Collections_GetCollectionPath.json"
+          }
+        }
+      }
+    },
+    "/resourceSetRuleConfigs/defaultResourceSetRuleConfig": {
+      "get": {
+        "tags": [
+          "ResourceSetRuleConfig"
+        ],
+        "description": "Get a resource set config service model.",
+        "operationId": "ResourceSetRuleConfigs_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceSetRuleConfig"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceSetRuleConfigs_Get": {
+            "$ref": "./examples/ResourceSetRuleConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceSetRuleConfig"
+        ],
+        "description": "Creates or updates an resource set config.",
+        "operationId": "ResourceSetRuleConfigs_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceSetRuleConfig",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceSetRuleConfig"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceSetRuleConfig"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceSetRuleConfigs_CreateOrUpdate": {
+            "$ref": "./examples/ResourceSetRuleConfigs_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceSetRuleConfig"
+        ],
+        "description": "Deletes a ResourceSetRuleConfig resource.",
+        "operationId": "ResourceSetRuleConfigs_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceSetRuleConfigs_Delete": {
+            "$ref": "./examples/ResourceSetRuleConfigs_Delete.json"
+          }
+        }
+      }
+    },
+    "/resourceSetRuleConfigs": {
+      "get": {
+        "tags": [
+          "ResourceSetRuleConfig"
+        ],
+        "description": "Get a resource set config service model.",
+        "operationId": "ResourceSetRuleConfigs_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceSetRuleConfigList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ResourceSetRuleConfigs_ListByAccount": {
+            "$ref": "./examples/ResourceSetRuleConfigs_ListByAccount.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "description": "Account resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity Info on the tracked resource"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "Gets or sets the properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/AccountSku",
+          "description": "Gets or sets the Sku."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountSku": {
+      "description": "The Sku",
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Gets or sets the sku name.",
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccountProperties": {
+      "description": "The account properties",
+      "type": "object",
+      "properties": {
+        "cloudConnectors": {
+          "$ref": "#/definitions/CloudConnectors",
+          "description": "Cloud connectors.\r\nExternal cloud identifier used as part of scanning configuration."
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the entity was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "Gets the creator of the entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByObjectId": {
+          "description": "Gets the creators of the entity's object id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpoints": {
+          "description": "The URIs that are the public endpoints of the account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountEndpoints"
+            }
+          ],
+          "readOnly": true
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "managedResourceGroupName": {
+          "description": "Gets or sets the managed resource group name",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedResources": {
+          "description": "Gets the resource identifiers of the managed resources.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedResources"
+            }
+          ],
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the private endpoint connections information.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the state of the provisioning.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Moving",
+            "Deleting",
+            "SoftDeleting",
+            "SoftDeleted",
+            "Failed",
+            "Succeeded",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Gets or sets the public network access.",
+          "default": "Enabled",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "publicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Identity": {
+      "description": "The Managed Identity of the resource",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Service principal object Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Identity Type",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CloudConnectors": {
+      "type": "object",
+      "properties": {
+        "awsExternalId": {
+          "description": "AWS external identifier.\r\nConfigured in AWS to allow use of the role arn used for scanning",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountEndpoints": {
+      "description": "The account endpoints",
+      "type": "object",
+      "properties": {
+        "catalog": {
+          "description": "Gets the catalog endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "guardian": {
+          "description": "Gets the guardian endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "scan": {
+          "description": "Gets the scan endpoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection class.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The connection identifier."
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedResources": {
+      "description": "The managed resources in customer subscription.",
+      "type": "object",
+      "properties": {
+        "eventHubNamespace": {
+          "description": "Gets the managed event hub namespace resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Gets the managed resource group resource identifier. This resource group will host resource dependencies for the account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageAccount": {
+          "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "A private endpoint connection properties class.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint information."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "The private link service connection state."
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "A private endpoint class.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The private endpoint identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The private link service connection state.",
+      "type": "object",
+      "properties": {
+        "actionsRequired": {
+          "description": "The required actions.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "Default error response model",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Gets or sets the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets or sets the target.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataPlaneAccountUpdateParameters": {
+      "description": "The account properties that can be updated through data plane.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "The friendly name for the azure resource.",
+          "type": "string"
+        }
+      }
+    },
+    "AccessKeys": {
+      "description": "The Account access keys.",
+      "type": "object",
+      "properties": {
+        "atlasKafkaPrimaryEndpoint": {
+          "description": "Gets or sets the primary connection string.",
+          "type": "string"
+        },
+        "atlasKafkaSecondaryEndpoint": {
+          "description": "Gets or sets the secondary connection string.",
+          "type": "string"
+        }
+      }
+    },
+    "AccessKeyOptions": {
+      "description": "A access key options used for regeneration.",
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "description": "The access key type.",
+          "enum": [
+            "PrimaryAtlasKafkaKey",
+            "SecondaryAtlasKafkaKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "keyType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BusinessRule": {
+      "description": "Filter resource",
+      "type": "object",
+      "properties": {
+        "businessRuleMetadata": {
+          "$ref": "#/definitions/BusinessRuleMetadata",
+          "description": "Gets or sets the properties."
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        },
+        "ruleJson": {
+          "description": "Gets or sets the actual rule json as a string.",
+          "type": "string"
+        }
+      }
+    },
+    "BusinessRuleMetadata": {
+      "description": "The business rule properties",
+      "type": "object",
+      "properties": {
+        "catalogId": {
+          "description": "Gets or sets the catalog id associated with the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "Gets or sets the creator of the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTimestamp": {
+          "format": "date-time",
+          "description": "Gets or sets the create timestamp of the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Gets or sets the description of the business rule.",
+          "type": "string"
+        },
+        "expirationTimestamp": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time stamp of the business rule.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the business rule.",
+          "type": "string"
+        },
+        "lastModifiedTimestamp": {
+          "format": "date-time",
+          "description": "Gets or sets the last modified timestamp of the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Gets or sets the modifier of the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the business rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rank": {
+          "format": "int32",
+          "description": "Gets or sets the rank of the business rule.",
+          "type": "integer"
+        },
+        "ruleStatus": {
+          "description": "Gets or sets the status of the business rule.",
+          "enum": [
+            "Unknown",
+            "Draft",
+            "Enabled",
+            "Disabled",
+            "Expired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ruleStatus",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "format": "int32",
+          "description": "Gets or sets the version of the business rule.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "BusinessRuleList": {
+      "description": "Paged list of business rules",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessRule"
+          }
+        }
+      }
+    },
+    "Collection": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "collectionProvisioningState": {
+          "description": "Gets the state of the provisioning.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Moving",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "collectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Gets or sets the description.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the collection.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parentCollection": {
+          "$ref": "#/definitions/CollectionReference",
+          "description": "Gets or sets the parent collection reference."
+        },
+        "systemData": {
+          "description": "Gets the system data that contains information about who and when created and updated the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionReference": {
+      "description": "Reference to a Collection.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Gets or sets the reference name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets the reference type property.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionList": {
+      "description": "Paged list of collections.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        }
+      }
+    },
+    "CollectionNameResponseList": {
+      "description": "Paged list of collections.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionNameResponse"
+          }
+        }
+      }
+    },
+    "CollectionNameResponse": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the collection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionPathResponse": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "parentFriendlyNameChain": {
+          "description": "The friendly names of ancestors starting from the default (root) collection and ending with the immediate parent.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parentNameChain": {
+          "description": "The names of ancestors starting from the default (root) collection and ending with the immediate parent.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSetRuleConfig": {
+      "description": "ResourceSetRuleConfig implementation class.",
+      "type": "object",
+      "properties": {
+        "advancedResourceSet": {
+          "$ref": "#/definitions/AdvancedResourceSet",
+          "description": "Gets or sets the advanced resource set property of the account."
+        },
+        "name": {
+          "description": "The name of the rule",
+          "type": "string",
+          "readOnly": true
+        },
+        "pathPatternConfig": {
+          "$ref": "#/definitions/PathPatternExtractorConfig",
+          "description": "The configuration rules for path pattern extraction."
+        }
+      }
+    },
+    "PathPatternExtractorConfig": {
+      "required": [
+        "enableDefaultPatterns",
+        "createdBy"
+      ],
+      "type": "object",
+      "properties": {
+        "acceptedPatterns": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "complexReplacers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplexReplacerConfig"
+          }
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "enableDefaultPatterns": {
+          "type": "boolean"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "normalizationRules": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NormalizationRule"
+          }
+        },
+        "regexReplacers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegexReplacer"
+          }
+        },
+        "rejectedPatterns": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "scopedRules": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopedRule"
+          }
+        },
+        "version": {
+          "format": "int32",
+          "default": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "AdvancedResourceSet": {
+      "description": "The resource set processing property of the account.",
+      "type": "object",
+      "properties": {
+        "modifiedAt": {
+          "format": "date-time",
+          "description": "Date at which ResourceSetProcessing property of the account is updated.",
+          "type": "string"
+        },
+        "resourceSetProcessing": {
+          "description": "The advanced resource property of the account.",
+          "enum": [
+            "Default",
+            "Advanced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "resourceSetProcessing",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Filter": {
+      "required": [
+        "name",
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "filterType": {
+          "default": "Pattern",
+          "enum": [
+            "Pattern",
+            "Regex"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "filterType",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "RegexReplacer": {
+      "required": [
+        "name",
+        "disabled"
+      ],
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "createdBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "disableRecursiveReplacerApplication": {
+          "type": "boolean"
+        },
+        "doNotReplaceRegex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "regex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "replaceWith": {
+          "type": "string"
+        }
+      }
+    },
+    "ComplexReplacerConfig": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "disableRecursiveReplacerApplication": {
+          "type": "boolean"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "typeName": {
+          "type": "string"
+        }
+      }
+    },
+    "NormalizationRule": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "dynamicReplacement": {
+          "type": "boolean"
+        },
+        "entityTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "regex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "replaceWith": {
+          "type": "string"
+        },
+        "version": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ScopedRule": {
+      "required": [
+        "bindingUrl",
+        "storeType"
+      ],
+      "type": "object",
+      "properties": {
+        "bindingUrl": {
+          "type": "string"
+        },
+        "rules": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        },
+        "storeType": {
+          "type": "string"
+        }
+      }
+    },
+    "FastRegex": {
+      "type": "object",
+      "properties": {
+        "maxDigits": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxLetters": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minDashes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minDigits": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minDigitsOrLetters": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minDots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minHex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minLetters": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minUnderscores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "options": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "regexStr": {
+          "type": "string"
+        }
+      }
+    },
+    "Rule": {
+      "required": [
+        "qualifiedName"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "isResourceSet": {
+          "default": true,
+          "type": "boolean"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSetRuleConfigList": {
+      "description": "Paged list of account resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSetRuleConfig"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}
