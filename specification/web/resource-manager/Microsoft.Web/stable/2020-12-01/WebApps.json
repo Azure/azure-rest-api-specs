@@ -20927,26 +20927,6 @@
         }
       }
     },
-    "AllowedPrincipals": {
-      "description": "The configuration settings of the Azure Active Directory allowed principals.",
-      "type": "object",
-      "properties": {
-        "groups": {
-          "description": "The list of the allowed groups.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identities": {
-          "description": "The list of the allowed identities.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ApiKVReference": {
       "description": "Description of site key vault references.",
       "type": "object",
@@ -21204,10 +21184,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "defaultAuthorizationPolicy": {
-          "$ref": "#/definitions/DefaultAuthorizationPolicy",
-          "description": "The configuration settings of the default authorization policy."
         }
       }
     },
@@ -22140,23 +22116,6 @@
         "connectionString": {
           "description": "Contains a connection string to a database which is being backed up or restored. If the restore should happen to a new database, the database name inside is the new one.",
           "type": "string"
-        }
-      }
-    },
-    "DefaultAuthorizationPolicy": {
-      "description": "The configuration settings of the Azure Active Directory default authorization policy.",
-      "type": "object",
-      "properties": {
-        "allowedPrincipals": {
-          "$ref": "#/definitions/AllowedPrincipals",
-          "description": "The configuration settings of the Azure Active Directory allowed principals."
-        },
-        "allowedApplications": {
-          "description": "The configuration settings of the Azure Active Directory allowed applications.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
