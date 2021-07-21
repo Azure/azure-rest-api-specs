@@ -30,7 +30,7 @@
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/elevate": {
       "post": {
         "summary": "Elevate role for reservation order.",
-        "description": "Elevate role for reservation order.",
+        "description": "Elevate role for a given reservation order.",
         "operationId": "ReservationOrder_Elevate",
         "x-ms-examples": {
           "Elevate": {
@@ -59,6 +59,44 @@
             "description": "Access denied",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/operations": {
+      "get": {
+        "summary": "Get operations.",
+        "description": "List all the operations.",
+        "operationId": "Operation_List",
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Operation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -158,6 +196,63 @@
       "x-ms-enum": {
         "name": "ErrorResponseCode",
         "modelAsString": true
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
       }
     }
   },
