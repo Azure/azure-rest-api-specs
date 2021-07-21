@@ -329,16 +329,25 @@
           "readOnly": true
         },
         "mdeIntegration": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "description": "Integration status with MDE",
-          "x-ms-enum": {
-            "name": "MdeIntegration",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "MDE integration configuration",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Disabled",
+                "Enabled"
+              ],
+              "description": "Integration status",
+              "x-ms-enum": {
+                "name": "MdeIntegration",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "status"
+          ]
         }
       },
       "required": [
