@@ -167,10 +167,12 @@
           "description": "The network manager connectivity configuration resource"
         },
         "securityAdminRule": {
+          "type": "object",
           "$ref": "#/definitions/AdminBaseRule",
           "description": "Security Admin Rule."
         },
         "securityUserRule": {
+          "type": "object",
           "$ref": "#/definitions/UserBaseRule",
           "description": "Security User Rule."
         },
@@ -208,6 +210,13 @@
         "ruleCollectionDescription": {
           "type": "string",
           "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for rule collection"
         },
         "kind": {
           "type": "string",
@@ -281,6 +290,13 @@
         "ruleCollectionDescription": {
           "type": "string",
           "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for rule collection"
         },
         "kind": {
           "type": "string",
