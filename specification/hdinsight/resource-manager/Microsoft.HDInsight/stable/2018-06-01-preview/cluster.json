@@ -1640,51 +1640,49 @@
       "allOf": [
         {
           "$ref": "#/definitions/RuntimeScriptAction"
-        },
-        {
-          "properties": {
-            "scriptExecutionId": {
-              "readOnly": true,
-              "type": "integer",
-              "format": "int64",
-              "description": "The execution id of the script action."
-            },
-            "startTime": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The start time of script action execution."
-            },
-            "endTime": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The end time of script action execution."
-            },
-            "status": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The current execution status of the script action."
-            },
-            "operation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The reason why the script action was executed."
-            },
-            "executionSummary": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScriptActionExecutionSummary"
-              },
-              "description": "The summary of script action execution result."
-            },
-            "debugInformation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The script action execution debug information."
-            }
-          }
         }
       ],
+      "properties": {
+        "scriptExecutionId": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The execution id of the script action."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start time of script action execution."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end time of script action execution."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current execution status of the script action."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason why the script action was executed."
+        },
+        "executionSummary": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptActionExecutionSummary"
+          },
+          "description": "The summary of script action execution result."
+        },
+        "debugInformation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The script action execution debug information."
+        }
+      },
       "description": "The execution details of a script action."
     },
     "ClusterListRuntimeScriptActionDetailResult": {
@@ -1733,28 +1731,32 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              },
-              "tenantId": {
-                "type": "string",
-                "description": "The tenant id of user assigned identity."
-              }
-            }
+            "$ref": "#/definitions/UserAssignedIdentity"
           },
           "description": "The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the cluster."
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "The User Assigned Identity",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      }
     },
     "ClusterListResult": {
       "properties": {
