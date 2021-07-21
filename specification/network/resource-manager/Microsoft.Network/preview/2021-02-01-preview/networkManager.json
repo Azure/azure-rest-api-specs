@@ -438,13 +438,48 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/inviteMultiTenantScope": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectToScope": {
+      "get": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "CrossTenantScopes_ListNetworkManagerConnection",
+        "description": "List all invitation involving this network manager.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of effective virtual networks.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantScopeRecordListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "MultiTenantScopes_Invite",
-        "description": "Issue an invitation to a scope of another tenant to be managed by this Network Manager.",
+        "operationId": "CrossTenantScopes_ConnectToNetworkManager",
+        "description": "Perform Network Manager side of the cross-tenant handshake.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -463,7 +498,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MultiTenantScopeRecord"
+              "$ref": "#/definitions/CrossTenantScope"
             },
             "description": "Multi Tenant Scope record."
           }
@@ -472,7 +507,7 @@
           "200": {
             "description": "OK - Returns a list of effective virtual networks.",
             "schema": {
-              "$ref": "#/definitions/MultiTenantScopeRecord"
+              "$ref": "#/definitions/CrossTenantScopeRecord"
             }
           },
           "default": {
@@ -484,18 +519,18 @@
         },
         "x-ms-examples": {
           "Invite secondary tenant scope to be managed by Network Manager": {
-            "$ref": "./examples/NetworkManagerMultiTenantScopeInvite.json"
+            "$ref": "./examples/NetworkManagerCrossTenantScopeInvite.json"
           }
         }
       }
     },
-    "{scope}/providers/Microsoft.Network/acceptMultiTenantScopeInvitation": {
+    "{scope}/providers/Microsoft.Network/connectToNetworkManager": {
       "post": {
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "MultiTenantScopes_AcceptInvite",
-        "description": "Accept an invitation as a scope of another tenant to be managed by this Network Manager.",
+        "operationId": "CrossTenantScopes_AcceptInvite",
+        "description": "Perform scope side of the cross-tenant handshake.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -508,7 +543,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MultiTenantScopeRecord"
+              "$ref": "#/definitions/CrossTenantNetworkManager"
             },
             "description": "Multi Tenant Scope record."
           }
@@ -517,7 +552,7 @@
           "200": {
             "description": "OK - Returns a list of effective virtual networks.",
             "schema": {
-              "$ref": "#/definitions/MultiTenantScopeRecord"
+              "$ref": "#/definitions/CrossTenantScopeRecord"
             }
           },
           "default": {
@@ -529,7 +564,88 @@
         },
         "x-ms-examples": {
           "Invite secondary tenant scope to be managed by Network Manager": {
-            "$ref": "./examples/NetworkManagerMultiTenantScopeInvite.json"
+            "$ref": "./examples/NetworkManagerCrossTenantScopeInvite.json"
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Network/declineNetworkManagerConnection": {
+      "post": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "CrossTenantScopes_DeclineNetworkManagerConnection",
+        "description": "Declines a pending invitation between scope and network manager.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossTenantNetworkManager"
+            },
+            "description": "Multi Tenant Scope record."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of effective virtual networks.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantScopeRecord"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invite secondary tenant scope to be managed by Network Manager": {
+            "$ref": "./examples/NetworkManagerCrossTenantScopeInvite.json"
+          }
+        }
+      },
+      "{scope}/providers/Microsoft.Network/networkManagerConnections": {
+        "get": {
+          "tags": [
+            "NetworkManagers"
+          ],
+          "operationId": "CrossTenantScopes_ListInvites",
+          "description": "List all invites involving this scope, with provisioning status.",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ScopeParameter"
+            },
+            {
+              "$ref": "./network.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns a list of effective virtual networks.",
+              "schema": {
+                "$ref": "#/definitions/CrossTenantScopeRecordListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./network.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Invite secondary tenant scope to be managed by Network Manager": {
+              "$ref": "./examples/NetworkManagerCrossTenantScopeInvite.json"
+            }
           }
         }
       }
@@ -790,7 +906,29 @@
       },
       "description": "Effective Virtual Networks Parameter."
     },
-    "MultiTenantScopeRecord": {
+    "CrossTenantScope": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Secondary tenant id."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope in secondary tenant."
+        }
+      },
+      "description": "Record for the multi-tenant scope handshake."
+    },
+    "CrossTenantNetworkManager": {
+      "properties": {
+        "networkManagerId": {
+          "type": "string",
+          "description": "Network Manager Id."
+        },
+      },
+      "description": "Record for the multi-tenant scope handshake."
+    },
+    "CrossTenantScopeRecord": {
       "properties": {
         "networkManagerId": {
           "type": "string",
@@ -811,7 +949,23 @@
         }
       },
       "description": "Record for the multi-tenant scope handshake."
-    }    
+    },
+    "CrossTenantScopeRecordListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CrossTenantScopeRecord"
+          },
+          "description": "Gets a page of CrossTenantScopeRecords"
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "A list of Network Manager CrossTenantScopeRecord"
+    },    
   },
   "parameters": {
     "ResourceGroupNameParameter": {
