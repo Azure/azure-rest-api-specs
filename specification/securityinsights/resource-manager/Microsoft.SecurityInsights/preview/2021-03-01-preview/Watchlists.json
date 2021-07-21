@@ -519,12 +519,12 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist",
           "type": "object"
         },
         "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that updated the watchlist",
           "type": "object"
         },
@@ -661,12 +661,12 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist item",
           "type": "object"
         },
         "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that updated the watchlist item",
           "type": "object"
         },
@@ -682,28 +682,6 @@
       "required": [
         "itemsKeyValue"
       ],
-      "type": "object"
-    },
-    "UserInfo": {
-      "description": "User information that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user.",
-          "format": "uuid",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
       "type": "object"
     },
     "Label": {
