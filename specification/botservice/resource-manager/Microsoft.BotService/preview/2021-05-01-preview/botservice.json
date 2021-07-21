@@ -1554,9 +1554,30 @@
           "readOnly": true,
           "description": "The bot's endpoint version"
         },
+        "msaAppType": {
+          "type": "string",
+          "description": "Microsoft App Type for the bot",
+          "enum": [
+            "UserAssignedMSI",
+            "SingleTenant",
+            "MultiTenant"
+          ],
+          "x-ms-enum": {
+            "name": "msaAppType",
+            "modelAsString": true
+          }
+        },
         "msaAppId": {
           "type": "string",
           "description": "Microsoft App Id for the bot"
+        },
+        "msaAppTenantId": {
+          "type": "string",
+          "description": "Microsoft App Tenant Id for the bot"
+        },
+        "msaAppMSIResourceId": {
+          "type": "string",
+          "description": "Microsoft App Managed Identity Resource Id for the bot"
         },
         "configuredChannels": {
           "type": "array",
