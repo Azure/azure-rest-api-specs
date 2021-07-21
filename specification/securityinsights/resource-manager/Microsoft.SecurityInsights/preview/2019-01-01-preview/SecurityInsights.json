@@ -2973,7 +2973,7 @@
     "ActionRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Action for alert rule.",
@@ -3076,7 +3076,7 @@
     "AlertRule": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/AlertRuleKind"
@@ -3654,7 +3654,7 @@
     "DataConnector": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/DataConnectorKind"
@@ -4322,7 +4322,7 @@
     "EntityQuery": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/EntityQueryKind"
@@ -4951,7 +4951,7 @@
     "Incident": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident in Azure Security Insights.",
@@ -5122,7 +5122,7 @@
     "IncidentComment": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident comment",
@@ -6934,7 +6934,7 @@
       "description": "Represents a relation between two resources",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "properties": {
@@ -6975,49 +6975,7 @@
     },
     "Resource": {
       "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-azure-resource": true
-    },
-    "ResourceWithEtag": {
-      "description": "An azure resource object with an Etag property",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        }
-      },
+      "$ref": "../../../common/1.0/types.json#/definitions/Resource",
       "type": "object",
       "x-ms-azure-resource": true
     },
@@ -7721,7 +7679,7 @@
     "Settings": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/SettingsKind"
@@ -8424,7 +8382,7 @@
     "Watchlist": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a Watchlist in Azure Security Insights.",
@@ -8569,7 +8527,7 @@
     "WatchlistItem": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a Watchlist item in Azure Security Insights.",

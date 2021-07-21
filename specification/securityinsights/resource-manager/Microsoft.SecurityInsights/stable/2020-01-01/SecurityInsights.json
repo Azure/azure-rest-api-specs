@@ -481,7 +481,7 @@
     "Incident": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident in Azure Security Insights.",
@@ -990,58 +990,10 @@
         "value"
       ]
     },
-    "Resource": {
-      "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-azure-resource": true
-    },
-    "ResourceWithEtag": {
-      "description": "An azure resource object with an Etag property",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-azure-resource": true
-    },
     "Settings": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "The Settings.",
