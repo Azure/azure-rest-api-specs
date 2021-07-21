@@ -15,10 +15,10 @@ clear-output-folder: true
 
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight/azure/mgmt/securityinsight
+output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight/azure/mgmt/securityinsight
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight
+output-folder: $(python-sdks-folder)/securityinsight/azure-mgmt-securityinsight
 ```
