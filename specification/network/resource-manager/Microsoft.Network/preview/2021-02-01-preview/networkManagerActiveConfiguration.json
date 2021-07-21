@@ -97,13 +97,13 @@
         "region": {
           "type": "string",
           "description": "Deployment region."
-        },
-        "committedConfiguration": {
-          "type": "object",
-          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConfiguration",
-          "description": "Configuration such as connectivity configuration or security rule collection."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConfiguration"
+        }
+      ],
       "description": "Active Configuration."
     },
     "ActiveConfigurationListResult": {
