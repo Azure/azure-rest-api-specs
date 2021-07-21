@@ -1,0 +1,183 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Azure Reservation API",
+      "description": "This API describe Azure Reservation",
+      "version": "2021-07-21-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/elevate": {
+        "post": {
+          "summary": "Elevate role for reservation order.",
+          "description": "Elevate role for reservation order.",
+          "operationId": "ReservationOrder_Elevate",
+          "x-ms-examples": {
+            "Elevate": {
+              "$ref": "./examples/ElevateReservationOrder.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ReservationOrderIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "tags": [
+            "ReservationOrder, Elevate"
+          ],
+          "responses": {
+            "200": {
+              "description": "Access granted to reservation order",
+              "schema": {
+                "$ref": "#/definitions/ElevateResponse"
+              }
+            },
+            "403": {
+              "description": "Access denied",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "ElevateResponse": {
+        "type": "object",
+        "description": "Elevate response",
+        "properties": {
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        }
+      },
+      "ExtendedErrorInfo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/definitions/ErrorResponseCode"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponseCode": {
+        "type": "string",
+        "enum": [
+          "NotSpecified",
+          "InternalServerError",
+          "ServerTimeout",
+          "AuthorizationFailed",
+          "BadRequest",
+          "ClientCertificateThumbprintNotSet",
+          "InvalidRequestContent",
+          "OperationFailed",
+          "HttpMethodNotSupported",
+          "InvalidRequestUri",
+          "MissingTenantId",
+          "InvalidTenantId",
+          "InvalidReservationOrderId",
+          "InvalidReservationId",
+          "ReservationIdNotInReservationOrder",
+          "ReservationOrderNotFound",
+          "InvalidSubscriptionId",
+          "InvalidAccessToken",
+          "InvalidLocationId",
+          "UnauthenticatedRequestsThrottled",
+          "InvalidHealthCheckType",
+          "Forbidden",
+          "BillingScopeIdCannotBeChanged",
+          "AppliedScopesNotAssociatedWithCommerceAccount",
+          "PatchValuesSameAsExisting",
+          "RoleAssignmentCreationFailed",
+          "ReservationOrderCreationFailed",
+          "ReservationOrderNotEnabled",
+          "CapacityUpdateScopesFailed",
+          "UnsupportedReservationTerm",
+          "ReservationOrderIdAlreadyExists",
+          "RiskCheckFailed",
+          "CreateQuoteFailed",
+          "ActivateQuoteFailed",
+          "NonsupportedAccountId",
+          "PaymentInstrumentNotFound",
+          "MissingAppliedScopesForSingle",
+          "NoValidReservationsToReRate",
+          "ReRateOnlyAllowedForEA",
+          "OperationCannotBePerformedInCurrentState",
+          "InvalidSingleAppliedScopesCount",
+          "InvalidFulfillmentRequestParameters",
+          "NotSupportedCountry",
+          "InvalidRefundQuantity",
+          "PurchaseError",
+          "BillingCustomerInputError",
+          "BillingPaymentInstrumentSoftError",
+          "BillingPaymentInstrumentHardError",
+          "BillingTransientError",
+          "BillingError",
+          "FulfillmentConfigurationError",
+          "FulfillmentOutOfStockError",
+          "FulfillmentTransientError",
+          "FulfillmentError",
+          "CalculatePriceFailed"
+        ],
+        "x-ms-enum": {
+          "name": "ErrorResponseCode",
+          "modelAsString": true
+        }
+      }
+    },
+    "parameters": {
+      "ReservationOrderIdParameter": {
+        "name": "reservationOrderId",
+        "x-ms-parameter-location": "method",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Order Id of the reservation"
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Supported version for this document is 2021-07-21-preview",
+        "required": true,
+        "type": "string"
+      }
+    }
+  }
+  
