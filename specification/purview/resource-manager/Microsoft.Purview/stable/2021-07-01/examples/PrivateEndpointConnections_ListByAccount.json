@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "SampleResourceGroup",
+    "accountName": "account1",
+    "api-version": "2021-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "14993",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed"
+      },
+      "body": {
+        "value": [
+          {
+            "name": "privateEndpointConnection1",
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/privateEndpointConnection1",
+            "type": "Microsoft.Purview/accounts/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpoint": {
+                "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint1"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Approved by johndoe@company.com"
+              }
+            }
+          },
+          {
+            "name": "privateEndpointConnection2",
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/privateEndpointConnection2",
+            "type": "Microsoft.Purview/accounts/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Deleting",
+              "privateEndpoint": {
+                "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Rejected",
+                "description": "Rejected by johndoe@company.com"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
