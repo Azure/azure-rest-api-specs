@@ -327,12 +327,25 @@
           "format": "date-time",
           "description": "End time of the evaluation period, if such exist",
           "readOnly": true
+        },
+        "mdeIntegration": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "description": "Integration status with MDE",
+          "x-ms-enum": {
+            "name": "MdeIntegration",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "deviceQuota",
         "sentinelWorkspaceResourceIds",
-        "onboardingKind"
+        "onboardingKind",
+        "mdeIntegration"
       ]
     },
     "DownloadLink": {
