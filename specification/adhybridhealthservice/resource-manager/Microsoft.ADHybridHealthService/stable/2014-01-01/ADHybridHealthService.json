@@ -1781,6 +1781,40 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "description": "Updates a service for a given tenant in Azure Active Directory Connect Health.",
+        "x-ms-examples": {
+          "services_update": {
+            "$ref": "./examples/AddService.json"
+          }
+        },
+        "operationId": "services_update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "service",
+            "in": "body",
+            "description": "The service object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceProperties"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.ADHybridHealthService/services/premiumCheck": {
