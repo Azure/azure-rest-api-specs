@@ -29,6 +29,23 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+---
+
+### Tag: package-composite-v1
+
+These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+
+``` yaml $(tag) == 'package-composite-v1'
+input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
+- Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
+- Microsoft.SecurityInsights/stable/2021-04-01/operations.json
+- Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+```
+
+---
 
 ### Tag: package-2021-04-01-only
 
@@ -71,23 +88,6 @@ directive:
     approved-by: "@lirenhe"
 ```
 
----
-
-### Tag: package-composite-v1
-
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
-
-``` yaml $(tag) == 'package-composite-v1'
-input-file:
-- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
-- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
-- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
-- Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
-- Microsoft.SecurityInsights/stable/2021-04-01/operations.json
-- Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
-```
-
----
 
 ### Tag: package-2021-03-preview-only
 
@@ -164,6 +164,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Bookmarks.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Cases.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/DataConnectorsCheckRequirements.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Enrichment.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Entities.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/OfficeConsents.json
