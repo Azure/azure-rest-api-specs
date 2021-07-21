@@ -117,20 +117,25 @@
     },
     "Error": {
       "type": "object",
+      "description": "Error response",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ExtendedErrorInfo"
+          "$ref": "#/definitions/ExtendedErrorInfo",
+          "description": "Error reason if operation failed. Null otherwise"
         }
       }
     },
     "ExtendedErrorInfo": {
       "type": "object",
+      "description": "Error Info response",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorResponseCode"
+          "$ref": "#/definitions/ErrorResponseCode",
+          "description": "Error code if operation failed. Null otherwise"
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error reason if operation failed. Null otherwise"
         }
       }
     },
@@ -196,13 +201,16 @@
       "x-ms-enum": {
         "name": "ErrorResponseCode",
         "modelAsString": true
-      }
+      },
+      "description": "Error code if operation failed. Null otherwise"
     },
     "OperationList": {
       "type": "object",
+      "description": "List of all operations",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of all operations",
           "items": {
             "$ref": "#/definitions/OperationResponse"
           }
@@ -215,6 +223,7 @@
     },
     "OperationResponse": {
       "type": "object",
+      "description": "Operation Resonse",
       "properties": {
         "name": {
           "description": "Name of the operation",
@@ -222,7 +231,7 @@
         },
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
+          "type": "string"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
@@ -234,26 +243,37 @@
         },
         "properties": {
           "$ref": "#/definitions/OperationProperties",
-          "description": "Properties of the operation"
+          "description": "Properties of the operation",
+          "x-ms-client-flatten": true
         }
       }
     },
     "OperationDisplay": {
       "type": "object",
+      "description": "Component of operation uri",
       "properties": {
         "provider": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the service provider"
         },
         "resource": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the resource"
         },
         "operation": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the operation"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the operation"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Additional details about an operation.",
+      "type": "object",
+      "x-ms-client-flatten": true
     }
   },
   "parameters": {
