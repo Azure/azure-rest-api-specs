@@ -10,6 +10,14 @@ namespace: com.microsoft.azure.management.datafactory
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datafactory
+
+directive:
+  - from: swagger-document
+    where: "$.definitions.ManagedPrivateEndpoint"
+    transform: delete $.discriminator
+  - from: swagger-document
+    where: "$.definitions.ManagedVirtualNetwork"
+    transform: delete $.discriminator
 ```
 
 # Validation
@@ -31,7 +39,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-09-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datafactory.v2017_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/datafactory/resource-manager/v2017_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datafactory/mgmt-v2017_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -44,7 +52,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datafactory.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/datafactory/resource-manager/v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datafactory/mgmt-v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```

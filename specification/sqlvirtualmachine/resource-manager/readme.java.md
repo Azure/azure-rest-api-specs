@@ -27,7 +27,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-03-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.sqlvirtualmachine.v2017_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sqlvirtualmachine/resource-manager/v2017_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/sqlvirtualmachine/mgmt-v2017_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
