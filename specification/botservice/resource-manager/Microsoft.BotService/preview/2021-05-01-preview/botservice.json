@@ -1609,6 +1609,10 @@
           "type": "boolean",
           "description": "Whether the bot is in an isolated network"
         },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        },
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
@@ -2136,6 +2140,10 @@
           "x-ms-secret": true,
           "type": "string",
           "description": "The Slack verification token. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "scopes": {
+          "type": "string",
+          "description": "The Slack permission scopes."
         },
         "landingPageUrl": {
           "type": "string",
