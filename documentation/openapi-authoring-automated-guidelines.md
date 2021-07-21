@@ -237,15 +237,19 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 * fooBarBaz
 * resourceKey
 * resourceApiKey
+* publicIPAddress
+* enableSsl
 
 **Bad Examples**: The following would be invalid:
 * PascalCase
 * UpperCamelCase
 * resourceAPIKey
+* enableSSL
 
 **Bad Examples**: The following violate these guidelines but would not be caught by automation: 
 * alllowercase - If there are multiple words, please capitalize starting with the second word
 * miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
+* resourceAPIkey - Automation would incorrectly recognize "Ikey" as a word and not flag the property name
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
