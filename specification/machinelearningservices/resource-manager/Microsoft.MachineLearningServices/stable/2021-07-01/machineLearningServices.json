@@ -5054,19 +5054,25 @@
         }
       }
     },
+    "FQDNEndpointsProperties": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoint"
+          }
+        }
+      }
+    },
     "FQDNEndpoints": {
       "type": "object",
       "properties": {
         "properties": {
-          "category": {
-            "type": "string"
-          },
-          "endpoints": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FQDNEndpoint"
-            }
-          }
+          "$ref": "#/definitions/FQDNEndpointsProperties"
         }
       }
     },
