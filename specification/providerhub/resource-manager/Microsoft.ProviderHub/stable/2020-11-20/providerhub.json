@@ -1231,6 +1231,333 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}": {
+      "get": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Gets a resource type details in the given subscription and provider.",
+        "operationId": "ResourceTypeRegistrations_GetNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Get": {
+            "$ref": "./examples/ResourceTypeRegistrations_GetNestedFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Creates or updates a resource type.",
+        "operationId": "ResourceTypeRegistrations_CreateOrUpdateNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "description": "The required request body parameters supplied to the resource type registration CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdateNestedFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Deletes a resource type",
+        "operationId": "ResourceTypeRegistrations_DeleteNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Delete": {
+            "$ref": "./examples/ResourceTypeRegistrations_DeleteNestedFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}": {
+      "get": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Gets a resource type details in the given subscription and provider.",
+        "operationId": "ResourceTypeRegistrations_GetNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Get": {
+            "$ref": "./examples/ResourceTypeRegistrations_GetNestedSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Creates or updates a resource type.",
+        "operationId": "ResourceTypeRegistrations_CreateOrUpdateNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "description": "The required request body parameters supplied to the resource type registration CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdateNestedSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Deletes a resource type",
+        "operationId": "ResourceTypeRegistrations_DeleteNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Delete": {
+            "$ref": "./examples/ResourceTypeRegistrations_DeleteNestedSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations": {
       "get": {
         "tags": [
