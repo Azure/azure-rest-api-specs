@@ -2604,6 +2604,13 @@
             "type": "object"
           }
         },
+        "applicationInsights": {
+          "description": "Setting for diagnosing dependent application insights",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
         "others": {
           "description": "Setting for diagnosing unclassified category of problems",
           "type": "object",
@@ -2696,6 +2703,12 @@
               }
             },
             "containerRegistryResults": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnoseResult"
+              }
+            },
+            "applicationInsightsResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
