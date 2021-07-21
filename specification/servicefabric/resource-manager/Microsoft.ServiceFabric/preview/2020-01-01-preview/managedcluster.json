@@ -439,6 +439,7 @@
       ]
     },
     "AzureActiveDirectory": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -456,6 +457,7 @@
       "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
+      "type": "object",
       "required": [
         "isAdmin"
       ],
@@ -506,6 +508,7 @@
       ]
     },
     "LoadBalancingRule": {
+      "type": "object",
       "required": [
         "frontendPort",
         "backendPort",
@@ -583,6 +586,7 @@
       }
     },
     "ManagedClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -598,6 +602,7 @@
       "description": "Managed Cluster list results"
     },
     "ManagedClusterProperties": {
+      "type": "object",
       "required": [
         "dnsName",
         "adminUserName"
@@ -694,6 +699,7 @@
       "description": "Describes the managed cluster resource properties."
     },
     "ManagedClusterPropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
         "clientConnectionPort": {
           "type": "integer",
@@ -745,6 +751,7 @@
       "description": "Describes the managed cluster resource properties."
     },
     "ManagedClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -761,6 +768,7 @@
       "description": "Managed cluster update request"
     },
     "ManagedClusterVersionDetails": {
+      "type": "object",
       "properties": {
         "msiVersion": {
           "type": "string",
@@ -778,6 +786,7 @@
       "description": "The detail of the Service Fabric runtime version."
     },
     "Sku": {
+      "type": "object",
       "required": [
         "name"
       ],
@@ -798,6 +807,7 @@
       ]
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -887,6 +897,7 @@
       }
     },
     "ClusterUpgradeDeltaHealthPolicy": {
+      "type": "object",
       "description": "Describes the delta health policies for the cluster upgrade.",
       "required": [
         "maxPercentDeltaUnhealthyApplications",
@@ -922,6 +933,7 @@
       }
     },
     "ClusterUpgradePolicy": {
+      "type": "object",
       "required": [
         "healthCheckRetryTimeout",
         "healthCheckStableDuration",
@@ -972,6 +984,7 @@
       "description": "Describes the policy used when upgrading the cluster."
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -981,6 +994,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1010,6 +1024,7 @@
       ]
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1027,6 +1042,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1048,6 +1064,7 @@
       "description": "Available operation list result"
     },
     "Resource": {
+      "type": "object",
       "required": [
         "location"
       ],
@@ -1134,6 +1151,7 @@
       }
     },
     "SettingsParameterDescription": {
+      "type": "object",
       "required": [
         "name",
         "value"
@@ -1151,6 +1169,7 @@
       "description": "Describes a parameter in fabric settings of the cluster."
     },
     "SettingsSectionDescription": {
+      "type": "object",
       "required": [
         "name",
         "parameters"
