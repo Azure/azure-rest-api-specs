@@ -132,6 +132,15 @@ input-file:
 - Microsoft.DBforMySQL/preview/2021-05-01-preview/mysql.json
 ```
 
+### Tag: package-flexibleserver-2021-05-01
+
+These settings apply only when `--tag=package-flexibleserver-2021-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-05-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
+```
+
 ## Suppression
 ``` yaml
 directive:
