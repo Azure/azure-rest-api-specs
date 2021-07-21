@@ -47,11 +47,31 @@ directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
     where: $.definitions.Incidents
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
+    where: $.definitions.Incident
     reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: R4017
     from: Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+    where: $.definitions.AlertRule
+    reason: The AlertRule does not support list by subscription. It's not a top-level resource. To get the AlertRule, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+    where: $.definitions.AlertRuleTemplate
+    reason: The AlertRuleTemplate does not support list by subscription. It's not a top-level resource. To get the AlertRuleTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.  
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+    where: $.definitions.Bookmark
+    reason: The Bookmark does not support list by subscription. It's not a top-level resource. To get the Bookmark, we should have a subscription as well as a resource group and Log Analytics workspace.  
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
+    where: $.definitions.DataConnector
+    reason: The DataConnector does not support list by subscription. It's not a top-level resource. To get the DataConnector, we should have a subscription as well as a resource group and Log Analytics workspace.  
+
 ```
 
 ---
@@ -74,10 +94,6 @@ directive:
     from: Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
-  - suppress: R2059
-    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
-    approved-by: "@lirenhe"
 ```
 
 ---
