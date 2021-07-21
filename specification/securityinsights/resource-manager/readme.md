@@ -71,7 +71,6 @@ directive:
     from: Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
     where: $.definitions.DataConnector
     reason: The DataConnector does not support list by subscription. It's not a top-level resource. To get the DataConnector, we should have a subscription as well as a resource group and Log Analytics workspace.  
-
 ```
 
 ---
