@@ -418,7 +418,8 @@
       "description": "An error response from the Lockbox service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorBody"
+          "$ref": "#/definitions/ErrorBody",
+          "description": "Detailed information about the error encountered."
         }
       }
     },
@@ -457,6 +458,7 @@
         },
         "info": {
           "type": "object",
+          "description": "Additional information about the request that is in error state.",
           "properties": {
             "currentStatus": {
               "$ref": "#/definitions/LockboxRequestStatus",
