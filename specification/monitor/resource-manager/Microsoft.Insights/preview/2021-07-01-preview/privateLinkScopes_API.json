@@ -940,15 +940,15 @@
     },
     "AccessModeSettings": {
       "type": "object",
-      "description": "Properties that define the scope private link mode settings. These apply to all private endpoint connections associated with the scope unless specified otherwise in the exclusions array.",
+      "description": "Properties that define the scope private link mode settings.",
       "properties": {
-        "queryOnlyPrivateLinkResources": {
-          "description": "Restrict queries from all associated private endpoint connections only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
-          "type": "boolean"
+        "queryAccessMode": {
+          "description": "Specifies the default access mode of ingestion through associated private endpoints. If not specified default value is 'Open'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
+          "$ref": "#/definitions/AccessMode"
         },
-        "ingestOnlyToPrivateLinkResources": {
-          "description": "Restrict queries from all associated private endpoint connections only to scoped resources in the scope. If not specified default value is 'false'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
-          "type": "boolean"
+        "ingestionAccessMode": {
+          "description": "Specifies the default access mode of ingestion through associated private endpoints. If not specified default value is 'Open'. You can override this default setting for a specific private endpoint connection by adding an exclusion in the 'exclusions' array.",
+          "$ref": "#/definitions/AccessMode"
         },
         "exclusions": {
           "description": "List of exclusions that override the default access mode settings for specific private endpoint connections.",
@@ -959,8 +959,8 @@
         }
       },
       "required": [
-        "queryOnlyPrivateLinkResources",
-        "ingestOnlyToPrivateLinkResources"
+        "queryAccessMode",
+        "ingestionAccessMode"
       ]
     },
     "AccessModeSettingsExclusion": {
@@ -971,18 +971,30 @@
           "description": "The private endpoint connection name associated to the private endpoint on which we want to apply the specific access mode settings.",
           "type": "boolean"
         },
-        "queryOnlyPrivateLinkResources": {
-          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specified on the parent settings level.",
-          "type": "boolean"
+        "queryAccessMode": {
+          "description": "Specifies the access mode of queries through the specified private endpoint connection in the exclusion.",
+          "$ref": "#/definitions/AccessMode"
         },
-        "ingestOnlyToPrivateLinkResources": {
-          "description": "Restrict queries from this private endpoint connection only to scoped resources in the scope. If not specified default value is as specified on the parent settings level.",
-          "type": "boolean"
+        "ingestionAccessMode": {
+          "description": "Specifies the access mode of ingestion through the specified private endpoint connection in the exclusion.",
+          "$ref": "#/definitions/AccessMode"
         }
       },
       "required": [
         "privateEndpointConnectionName"
       ]
+    },
+    "AccessMode": {
+      "description": "Access mode types.",
+      "type": "string",
+      "enum": [
+        "Open",
+        "PrivateOnly"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true
+      }
     },
     "AzureMonitorPrivateLinkScopeListResult": {
       "description": "Describes the list of Azure Monitor PrivateLinkScope resources.",
