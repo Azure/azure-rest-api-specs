@@ -2307,7 +2307,7 @@
     "Aggregations": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         },
         {
           "$ref": "#/definitions/AggregationsKind"
@@ -2808,7 +2808,7 @@
     "ActionResponse": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Action for alert rule.",
@@ -2864,7 +2864,7 @@
     "AlertRule": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/AlertRuleKind"
@@ -2921,7 +2921,7 @@
     "AlertRuleTemplate": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         },
         {
           "$ref": "#/definitions/AlertRuleKind"
@@ -3432,7 +3432,7 @@
     "DataConnector": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/DataConnectorKind"
@@ -3749,7 +3749,7 @@
     "Entity": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         },
         {
           "$ref": "#/definitions/EntityKind"
@@ -4060,7 +4060,7 @@
     "EntityQuery": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/EntityQueryKind"
@@ -4689,7 +4689,7 @@
     "Incident": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident in Azure Security Insights.",
@@ -4860,7 +4860,7 @@
     "IncidentComment": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident comment",
@@ -6594,7 +6594,7 @@
       "description": "Represents a relation between two resources",
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "properties": {
@@ -6635,8 +6635,48 @@
     },
     "Resource": {
       "description": "An azure resource object",
-      "$ref": "../../../common/1.0/types.json#/definitions/Resource",
-      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Azure resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Azure resource type",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceWithEtag": {
+      "description": "An azure resource object with an Etag property",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Azure resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Azure resource type",
+          "readOnly": true,
+          "type": "string"
+        },
+        "etag": {
+          "description": "Etag of the azure resource",
+          "type": "string"
+        }
+      },
       "x-ms-azure-resource": true
     },
     "ScheduledAlertRule": {
@@ -7339,7 +7379,7 @@
     "Settings": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/SettingsKind"
@@ -7967,7 +8007,7 @@
     "Watchlist": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a Watchlist in Azure Security Insights.",
@@ -8112,7 +8152,7 @@
     "WatchlistItem": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a Watchlist item in Azure Security Insights.",
