@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-flexibleserver-2021-06
 ```
 
+### Tag: package-2021-06-15-privatepreview
+
+These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-15-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
+```
+
 ### Tag: package-flexibleserver-2021-06
 
 These settings apply only when `--tag=package-flexibleserver-2021-06` is specified on the command line.
@@ -44,7 +54,7 @@ input-file:
 
 ### Tag: package-flexibleserver-2021-06-preview
 
-These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.cd ..
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
@@ -66,6 +76,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
+
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
@@ -76,7 +87,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
-
 
 
 ### Tag: package-2020-11-05-preview
