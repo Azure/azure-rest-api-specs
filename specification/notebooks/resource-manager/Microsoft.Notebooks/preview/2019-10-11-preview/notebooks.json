@@ -403,6 +403,12 @@
               "$ref": "#/definitions/NotebookPEResponse"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -463,6 +469,60 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/publicNetworkAccess": {
+      "put": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_PublicNetworkAccess",
+        "x-ms-examples": {
+          "Remove Notebook Proxy Private Endpoint": {
+            "$ref": "./examples/NBResourcePublicNetworkAccess.json"
+          }
+        },
+        "consumes": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "allowPublicNetworkAccess",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
