@@ -45,7 +45,7 @@
             "required": true,
             "description": "The register body",
             "schema": {
-              "$ref": "#/definitions/registerObject"
+              "$ref": "#/definitions/metastoreRegisterObject"
             }
           }
         ],
@@ -53,7 +53,7 @@
           "201": {
             "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/metadataRequestAcceptedResponse"
+              "$ref": "#/definitions/metaStoreRequestAcceptedResponse"
             }
           },
           "default": {
@@ -87,7 +87,7 @@
             "required": true,
             "description": "The update body",
             "schema": {
-              "$ref": "#/definitions/updateObject"
+              "$ref": "#/definitions/metastoreUpdateObject"
             }
           }
         ],
@@ -95,7 +95,7 @@
           "201": {
             "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/metadataRequestAcceptedResponse"
+              "$ref": "#/definitions/metaStoreRequestAcceptedResponse"
             }
           },
           "default": {
@@ -129,7 +129,7 @@
             "required": true,
             "description": "The delete body",
             "schema": {
-              "$ref": "#/definitions/metadataDeleteObject"
+              "$ref": "#/definitions/metastoreDeleteObject"
             }
           }
         ],
@@ -137,7 +137,7 @@
           "201": {
             "description": "Metadata Request Accepted Response.",
             "schema": {
-              "$ref": "#/definitions/metadataRequestAcceptedResponse"
+              "$ref": "#/definitions/metaStoreRequestAcceptedResponse"
             }
           },
           "default": {
@@ -170,7 +170,7 @@
           "200": {
             "description": "Request Success Response.",
             "schema": {
-              "$ref": "#/definitions/successResponse"
+              "$ref": "#/definitions/metaStoreRequestSuccessResponse"
             }
           },
           "default": {
@@ -237,7 +237,7 @@
         }
       }
     },
-    "metadataRequestAcceptedResponse": {
+    "metaStoreRequestAcceptedResponse": {
       "type": "object",
       "properties": {
         "requestId": {
@@ -245,7 +245,7 @@
         }
       }
     },
-    "successResponse": {
+    "metaStoreRequestSuccessResponse": {
       "type": "object",
       "properties": {
         "requestStatus": {
@@ -253,7 +253,7 @@
         }
       }
     },
-    "registerObject": {
+    "metastoreRegisterObject": {
       "type": "object",
       "required": [
         "inputFolder",
@@ -272,7 +272,7 @@
         }
       }
     },
-    "updateObject": {
+    "metastoreUpdateObject": {
       "type": "object",
       "required": [
         "inputFolder",
@@ -291,7 +291,7 @@
         }
       }
     },
-    "metadataDeleteObject": {
+    "metastoreDeleteObject": {
       "type": "object",
       "required": [
         "databaseName"
