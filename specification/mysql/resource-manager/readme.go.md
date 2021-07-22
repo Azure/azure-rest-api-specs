@@ -28,7 +28,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-flexibleserver-2021-05-01' && $(go)
 rpname: mysql
 namespace: mysqlflexibleservers
-output-folder: $(go-sdk-folder)/services/stable/$(rpname)/mgmt/2021-05-01/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(rpname)/mgmt/2021-05-01/$(namespace)
 ```
 
 ### Tag: package-flexibleserver-2021-05-01-preview and go
