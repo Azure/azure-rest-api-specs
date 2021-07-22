@@ -78,12 +78,13 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2021-07-preview-only
+tag: package-composite-v3
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
 
 ### Tag: package-composite-v1
 
