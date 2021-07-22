@@ -83,15 +83,6 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
 ```
 
-### Tag: package-metadata-2021-07-01-preview
-
-These settings apply only when `--tag=package-metadata-2021-07-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-metadata-2021-07-01-preview'
-input-file:
-- Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
-```
-
 ### Tag: package-access-control-2020-02-01-preview
 
 These settings apply only when `--tag=package-access-control-2020-02-01-preview` is specified on the command line.
@@ -216,7 +207,30 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SqlScript.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Trigger.json
 ```
+### Tag: package-metadata-2021-07-01-preview
 
+These settings apply only when `--tag=package-metadata-2021-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-metadata-2021-07-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-07-01-preview/artifacts.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/bigDataPools.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/gitintegration.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/integrationRuntimes.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/sqlPools.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/DataFlow.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/Dataset.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/LinkedService.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/Notebook.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/Pipeline.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/SqlScript.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/Trigger.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+```
 
 ## Suppression
 ``` yaml
