@@ -1637,6 +1637,14 @@
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Private Endpoint Connections configured for the bot",
+          "items": {
+            "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         }
       },
       "description": "The parameters to provide for the Bot.",

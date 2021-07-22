@@ -44,8 +44,24 @@
           "isCmekEnabled": true,
           "cmekKeyVaultUrl": "https://myCmekKey",
           "isIsolated": false,
+          "schemaTransformationVersion": "1.0",
           "disableLocalAuth": true,
-          "schemaTransformationVersion": "1.0"
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname/privateEndpointConnections/privatelink",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.Network/privateEndpoints/privatelink"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
         }
       }
     }
