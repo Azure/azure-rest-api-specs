@@ -36,6 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/connectivityCheck": {
       "post": {
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "tags": [
           "PerformConnectivityCheck"
         ],
@@ -61,6 +64,7 @@
           },
           {
             "name": "connectivityCheckRequestParams",
+            "description": "Connectivity Check request parameters.",
             "in": "body",
             "required": true,
             "schema": {

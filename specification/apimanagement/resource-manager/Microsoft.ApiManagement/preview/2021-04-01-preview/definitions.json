@@ -6561,7 +6561,7 @@
             "HTTPS"
           ],
           "x-ms-enum": {
-            "name": "Protocol",
+            "name": "ConnectivityCheckProtocol",
             "modelAsString": true
           }
         },
@@ -6589,7 +6589,8 @@
                   "type": "array",
                   "description": "List of HTTP status codes considered valid for the request response.",
                   "items": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                   }
                 },
                 "headers": {
