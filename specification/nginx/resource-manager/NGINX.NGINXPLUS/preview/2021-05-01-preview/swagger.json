@@ -16,6 +16,222 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Get a certificate of given Nginx deployment",
+        "operationId": "Certificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Get": {
+            "$ref": "./examples/Certificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Create or update the Nginx certificates for given Nginx deployment",
+        "operationId": "Certificates_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The certificate",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Certificates_CreateOrUpdate": {
+            "$ref": "./examples/Certificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Deletes a certificate from the nginx deployment",
+        "operationId": "Certificates_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Certificates_Delete": {
+            "$ref": "./examples/Certificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates": {
+      "get": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "List all certificates of given Nginx deployment",
+        "operationId": "Certificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificateListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Certificates_List": {
+            "$ref": "./examples/Certificates_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/configurations": {
       "get": {
         "tags": [
@@ -568,11 +784,79 @@
         "name": "ProvisioningState"
       }
     },
+    "NginxCertificateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "keyVirtualPath": {
+          "type": "string"
+        },
+        "certificateVirtualPath": {
+          "type": "string"
+        },
+        "keyVaultSecretId": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxCertificate": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxCertificateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxCertificateListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxCertificate"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
     "NginxConfigurationProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "virtualPath": {
+          "type": "string"
         },
         "content": {
           "type": "string"
@@ -716,6 +1000,9 @@
         "billingId": {
           "format": "uuid",
           "type": "string"
+        },
+        "managedIdentityEntityId": {
+          "type": "string"
         }
       }
     },
@@ -724,11 +1011,6 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
-        },
-        "organizationId": {
-          "format": "uuid",
-          "type": "string",
-          "readOnly": true
         },
         "nginxVersion": {
           "type": "string",
@@ -779,6 +1061,9 @@
     "NginxDeploymentUpdateParameters": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
