@@ -790,7 +790,7 @@ directive:
     
 ```
 
-``` yaml ($(go) && !$(track2) $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
