@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01-preview",
+    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5",
+    "resourceGroupName": "exampleResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorName",
+            "name": "exampleSecurityConnectorName",
+            "type": "Microsoft.Security/securityConnectors",
+            "etag": "etag value",
+            "location": "Central US",
+            "tags": {},
+            "properties": {
+              "hierarchyId": "exampleHierarchyId",
+              "multiCloudName": "AWS",
+              "offerings": [
+                {
+                  "offeringType": "CSPMMonitorAWS",
+                  "description": "Monitor your resources",
+                  "nativeCloudConnection": {
+                    "policies": [
+                      "s3:ListBucket"
+                    ],
+                    "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
