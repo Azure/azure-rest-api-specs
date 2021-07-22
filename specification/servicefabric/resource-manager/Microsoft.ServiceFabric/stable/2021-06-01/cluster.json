@@ -347,6 +347,12 @@
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
@@ -387,6 +393,12 @@
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
@@ -420,6 +432,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -457,6 +475,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -1207,6 +1231,7 @@
       "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
     },
     "ClusterUpgradePolicy": {
+      "type": "object",
       "required": [
         "healthCheckRetryTimeout",
         "healthCheckStableDuration",
@@ -1257,6 +1282,7 @@
       "description": "Describes the policy used when upgrading the cluster."
     },
     "ClusterVersionDetails": {
+      "type": "object",
       "properties": {
         "codeVersion": {
           "type": "string",
@@ -1274,6 +1300,7 @@
       "description": "The detail of the Service Fabric runtime version result"
     },
     "DiagnosticsStorageAccountConfig": {
+      "type": "object",
       "required": [
         "blobEndpoint",
         "protectedAccountKeyName",
@@ -1319,6 +1346,7 @@
       ]
     },
     "EndpointRangeDescription": {
+      "type": "object",
       "required": [
         "endPort",
         "startPort"
@@ -1338,6 +1366,7 @@
       "description": "Port range details"
     },
     "NodeTypeDescription": {
+      "type": "object",
       "required": [
         "clientConnectionEndpointPort",
         "httpGatewayEndpointPort",
@@ -1516,6 +1545,7 @@
       "description": "Describes the notification target properties."
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1533,6 +1563,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1569,6 +1600,7 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "required": [
         "location"
       ],
@@ -1616,6 +1648,7 @@
       "x-ms-azure-resource": true
     },
     "ServerCertificateCommonName": {
+      "type": "object",
       "description": "Describes the server certificate details using common name.",
       "required": [
         "certificateCommonName",
@@ -1633,6 +1666,7 @@
       }
     },
     "ServerCertificateCommonNames": {
+      "type": "object",
       "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster.",
       "properties": {
         "commonNames": {
@@ -1669,6 +1703,7 @@
       }
     },
     "SettingsParameterDescription": {
+      "type": "object",
       "required": [
         "name",
         "value"
@@ -1686,6 +1721,7 @@
       "description": "Describes a parameter in fabric settings of the cluster."
     },
     "SettingsSectionDescription": {
+      "type": "object",
       "required": [
         "name",
         "parameters"
@@ -1812,6 +1848,7 @@
       "description": "This property defines the upgrade mode for the virtual machine scale set, it is mandatory if a node type with multiple Availability Zones is added."
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError"
@@ -1820,6 +1857,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1838,6 +1876,7 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,

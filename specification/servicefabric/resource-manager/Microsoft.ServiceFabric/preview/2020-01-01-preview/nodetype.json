@@ -533,6 +533,7 @@
   },
   "definitions": {
     "ManagedProxyResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -565,6 +566,7 @@
       "x-ms-azure-resource": true
     },
     "NodeType": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ManagedProxyResource"
@@ -580,6 +582,7 @@
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
     },
     "NodeTypeActionParameters": {
+      "type": "object",
       "required": [
         "nodes"
       ],
@@ -599,6 +602,7 @@
       "description": "Parameters for Node type action."
     },
     "NodeTypeProperties": {
+      "type": "object",
       "required": [
         "isPrimary",
         "vmInstanceCount",
@@ -690,6 +694,7 @@
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
     },
     "NodeTypeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -707,6 +712,7 @@
       "description": "Node type list results"
     },
     "NodeTypePropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
         "vmInstanceCount": {
           "type": "integer",
@@ -759,6 +765,7 @@
       "description": "Node type update properties."
     },
     "NodeTypeUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -776,6 +783,7 @@
       "description": "Node type update request"
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -786,6 +794,7 @@
       "x-ms-azure-resource": true
     },
     "VaultCertificate": {
+      "type": "object",
       "required": [
         "certificateUrl",
         "certificateStore"
@@ -803,6 +812,7 @@
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
     },
     "VaultSecretGroup": {
+      "type": "object",
       "required": [
         "sourceVault",
         "vaultCertificates"
@@ -823,6 +833,7 @@
       "description": "Specifies set of certificates that should be installed onto the virtual machines."
     },
     "VMSSExtension": {
+      "type": "object",
       "required": [
         "name",
         "properties"
@@ -841,6 +852,7 @@
       "description": "Specifies set of extensions that should be installed onto the virtual machines."
     },
     "VMSSExtensionProperties": {
+      "type": "object",
       "required": [
         "publisher",
         "type",
@@ -891,6 +903,7 @@
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -912,6 +925,7 @@
       "description": "Operation supported by the Service Fabric resource provider"
     },
     "EndpointRangeDescription": {
+      "type": "object",
       "required": [
         "endPort",
         "startPort"
@@ -919,16 +933,19 @@
       "properties": {
         "startPort": {
           "type": "integer",
+          "format": "int32",
           "description": "Starting port of a range of ports"
         },
         "endPort": {
           "type": "integer",
+          "format": "int32",
           "description": "End port of a range of ports"
         }
       },
       "description": "Port range details"
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -938,6 +955,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -967,6 +985,7 @@
       ]
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -984,6 +1003,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
