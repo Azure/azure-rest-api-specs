@@ -232,6 +232,64 @@
         "kind"
       ]
     },
+    "DataConnectorAuthorizationState": {
+      "description": "Describes the state of user's authorization for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorAuthorizationState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          }
+        ]
+      }
+    },
+    "DataConnectorLicenseState": {
+      "description": "Describes the state of user's license for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid",
+        "Unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorLicenseState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          },
+          {
+            "value": "Unknown"
+          }
+        ]
+      }
+    },
+    "DataConnectorRequirementsState": {
+      "description": "Data connector requirements status.",
+      "properties": {
+        "authorizationState": {
+          "description": "Authorization state for this connector",
+          "$ref": "#/definitions/DataConnectorAuthorizationState"
+        },
+        "licenseState": {
+          "description": "License state for this connector",
+          "$ref": "#/definitions/DataConnectorLicenseState"
+        }
+      },
+      "type": "object"
+    },
     "Dynamics365CheckRequirements": {
       "allOf": [
         {
