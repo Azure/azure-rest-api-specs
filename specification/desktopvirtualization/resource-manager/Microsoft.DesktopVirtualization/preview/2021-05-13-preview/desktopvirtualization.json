@@ -2058,6 +2058,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/locations/{location}/operationStatuses/{operationStatusId}": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "operationId": "OperationStatuses_Get",
+        "description": "Operation status of an async operation.",
+        "x-ms-examples": {
+          "OperationStatuses_Get": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationStatusIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed."
+          },
+          "202": {
+            "description": "Async operation in progress."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/default": {
       "get": {
         "tags": [
@@ -6884,6 +6929,16 @@
       "required": true,
       "type": "string",
       "description": "The Guid of the operation result.",
+      "maxLength": 36,
+      "minLength": 36,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationStatusIdParameter": {
+      "name": "operationStatusId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Guid of the operation status.",
       "maxLength": 36,
       "minLength": 36,
       "x-ms-parameter-location": "method"
