@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, LUIS Deepstack, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
-    "version": "2021-05-01-preview"
+    "version": "2021-07-15-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -75,13 +75,13 @@
         },
         "x-ms-examples": {
           "Arbitration result": {
-            "$ref": "./examples/conversational_lu/Workflow_SuccessfulAnalyzeConversations.json"
+            "$ref": "./examples/Workflow_arbitration.json"
           },
           "LUIS Deepstack project result": {
-            "$ref": "./examples/conversational_lu/LUIS_DS_SuccessfulAnalyzeConversations.json"
+            "$ref": "./examples/Conversation_project.json"
           },
-          "Workflow direct target": {
-            "$ref": "./examples/conversational_lu/Workflow_direct_target_SuccessfulAnalyzeConversations.json"
+          "Workflow direct target result": {
+            "$ref": "./examples/Workflow_direct_target.json"
           }
         }
       }
@@ -134,7 +134,7 @@
       "properties": {
         "targetType": {
           "type": "string",
-          "description": "The type of the project. It could be one of the following values.",
+          "description": "The type of a target project. It could be one of the following values.",
           "enum": [
             "luis_v2",
             "luis_v3",
@@ -256,25 +256,13 @@
         }
       ],
       "properties": {
-        "projectParameters": {
-          "type": "object",
-          "$ref": "#/definitions/DeepstackProjectParameters"
-        },
         "callingOptions": {
           "type": "object",
           "$ref": "#/definitions/DeepstackCallingOptions"
         }
       }
     },
-    "DeepstackProjectParameters": {
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The query send to a LUIS Deepstack target project."
-        }
-      }
-    },
-    "DeepstackCallingOptions":{
+    "DeepstackCallingOptions": {
       "properties": {
         "language": {
           "description": "The language of the query.",
@@ -300,7 +288,7 @@
       ],
       "properties": {
         "projectParameters": {
-          "$ref": "questionanswering.json#/definitions/KnowledgeBaseQueryOptions"
+          "$ref": "../2021-05-01-preview/questionanswering.json#/definitions/KnowledgeBaseQueryOptions"
         }
       }
     },
@@ -335,7 +323,7 @@
       "properties": {
         "projectType": {
           "type": "string",
-          "description": "The type of the project: either conversation or workflow. Use 'conversation' For LUIS deepstack projects, and workflow for Arbitration projects.",
+          "description": "The type of the project. Use 'conversation' For LUIS deepstack projects, and workflow for Arbitration projects.",
           "enum": [
             "conversation",
             "workflow"
@@ -575,7 +563,7 @@
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "questionanswering.json#/definitions/KnowledgeBaseAnswers",
+          "$ref": "../2021-05-01-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
           "description": "The generated answer by a Question Answering KB.",
           "x-nullable": true
         }
