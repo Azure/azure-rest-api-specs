@@ -4724,6 +4724,10 @@
         }
       ],
       "properties": {
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
         "duration": {
           "format": "duration",
           "description": "Time elapsed during the execution of this job.",
@@ -4762,6 +4766,58 @@
         }
       },
       "x-ms-discriminator-value": "AzureIaaSVMJob"
+    },
+    "AzureIaaSVMJobV2": {
+      "description": "Azure IaaS VM workload-specific job object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "actionsInfo": {
+          "description": "Gets or sets the state/actions applicable on this job like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "duration": {
+          "format": "duration",
+          "description": "Time elapsed during the execution of this job.",
+          "type": "string"
+        },
+        "errorDetails": {
+          "description": "Error details on execution of this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMErrorInfo"
+          }
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
+          "description": "Additional information for this job."
+        }
+      },
+      "x-ms-discriminator-value": "AzureIaaSVMJobV2"
     },
     "AzureIaaSVMJobExtendedInfo": {
       "description": "Azure IaaS VM workload-specific additional information for job.",
@@ -7638,6 +7694,14 @@
         "isRehydrate": {
           "description": "Flag to identify that deferred deleted DS is to be moved into Pause state",
           "type": "boolean"
+        },
+        "policyName": {
+          "description": "Name of the policy used for protection.",
+          "type": "string"
+        },
+        "isArchiveEnabled": {
+          "description": "Flag to identify whether datasource is protected in archive",
+          "type": "boolean"
         }
       },
       "discriminator": "protectedItemType"
@@ -8587,6 +8651,10 @@
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
           }
+        },
+        "isSoftDeleteFeatureStateEditable": {
+          "description": "whether softDeleteFeatureState can be updated or not",
+          "type": "boolean"
         }
       }
     },
@@ -9460,6 +9528,11 @@
         "registrationStatus": {
           "description": "Container registration status",
           "type": "string"
+        },
+        "protectedItemsCount": {
+          "format": "int32",
+          "description": "Number of protected items",
+          "type": "integer"
         }
       }
     },
@@ -10593,6 +10666,10 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
+        },
+        "virtualMachineVersion": {
+          "description": "Version of the virtual machine",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaaSVMProtectableItem"
@@ -11121,6 +11198,10 @@
             "name": "ContainerType",
             "modelAsString": true
           }
+        },
+        "protectableObjectType": {
+          "description": "Type of the protectable object associated with this container.",
+          "type": "string"
         }
       },
       "discriminator": "containerType"
