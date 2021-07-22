@@ -58,13 +58,13 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -74,6 +74,129 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}/providers/Microsoft.ApiSecurity/defenderSettings": {
+      "get": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Get",
+        "description": "Get list pf defender settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to get role assignments for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Get_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}/providers/Microsoft.ApiSecurity/defenderSettings/default": {
+      "get": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSetting_Get",
+        "description": "Get a defender setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to get role assignments for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefenderSetting_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSetting_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "DefenderSettings"
@@ -114,6 +237,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - Indicates an existing resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
           "201": {
             "description": "Created - Returns information about the defender setting.",
             "schema": {
@@ -139,6 +268,150 @@
             "$ref": "./examples/DefenderSettings_Create_MinimumSet_Gen.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Update",
+        "description": "Updates a defender setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to get role assignments for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Patch_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Patch_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Update_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Update_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Update_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Delete",
+        "description": "Deletes a defender setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to get role assignments for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Delete_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -160,101 +433,33 @@
           "type": "string",
           "readOnly": true,
           "description": "The defender setting type."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
-      "description": "Defender Settings"
+      "description": "Defender Settings",
+      "x-ms-azure-resource": true
     },
-    "ErrorDefinition": {
-      "type": "object",
-      "title": "Error",
-      "description": "Error description and code explaining why an operation failed.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinitionProperties",
-          "description": "Error of the list gateway status."
-        }
-      }
-    },
-    "ErrorDefinitionProperties": {
-      "type": "object",
-      "title": "Error",
-      "description": "Error description and code explaining why an operation failed.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Description of the error."
-        },
-        "code": {
-          "type": "string",
-          "description": "Error code of list gateway."
-        }
-      }
-    },
-    "Operation": {
-      "description": "The definition of a Microsoft.ApiSecurity operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Display of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        }
-      }
-    },
-    "OperationDisplay": {
-      "description": "The display information for a Microsoft.ApiSecurity operation.",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "The resource provider name: Microsoft.ApiSecurity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resource": {
-          "description": "The resource on which the operation is performed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "operation": {
-          "description": "The operation that users can perform.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "The description for the operation.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "The result of a request to list Microsoft.ApiSecurity operations.",
+    "DefenderSettingList": {
       "type": "object",
       "properties": {
         "value": {
-          "description": "The collection value.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
-          }
+            "$ref": "#/definitions/DefenderSetting"
+          },
+          "description": "Result of the List DefenderSetting operation."
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of DefenderSetting."
         }
-      }
+      },
+      "description": "The response of the List DefenderSetting operation"
     }
   },
   "parameters": {}
