@@ -78,28 +78,20 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2021-07
+tag: package-preview-2021-07-preview-only
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
-
-### Tag: package-preview-2021-07
-
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-07'
-input-file:
-  - Microsoft.Security/preview/2021-07-01/softwareInventories.json
-```
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -143,6 +135,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -236,6 +229,7 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -474,6 +468,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
+```
+
+### Tag: package-preview-2021-07-preview-only
+
+These settings apply only when `--tag=package-preview-2021-07-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 ```
 
 ---
