@@ -6498,8 +6498,7 @@
       "type": "object",
       "required": [
         "source",
-        "destination",
-        "preferredIPVersion"
+        "destination"
       ],
       "properties": {
         "source": {
@@ -6537,21 +6536,90 @@
             "port": {
               "description": "Destination port.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "example": 80
             }
           }
         },
         "preferredIPVersion": {
-          "description": "The IP version to be used. Can either be IPv4 or IPv6.",
+          "description": "The IP version to be used. Only IPv4 is supported for now.",
           "type": "string",
           "enum": [
-            "IPv4",
-            "IPv6"
+            "IPv4"
           ],
           "x-ms-enum": {
             "name": "PreferredIPVersion",
             "modelAsString": true
           }
+        },
+        "protocol": {
+          "description": "The request's protocol. Specific protocol configuration can be available based on this selection. The specified destination address must be coherent with this value.",
+          "type": "string",
+          "enum": [
+            "TCP",
+            "HTTP",
+            "HTTPS"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
+        "protocolConfiguration": {
+          "description": "Protocol-specific configuration.",
+          "type": "object",
+          "properties": {
+            "HTTPConfiguration": {
+              "description": "Configuration for HTTP or HTTPS requests.",
+              "type": "object",
+              "properties": {
+                "method": {
+                  "description": "The HTTP method to be used.",
+                  "type": "string",
+                  "enum": [
+                    "GET",
+                    "POST"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Method",
+                    "modelAsString": true
+                  }
+                },
+                "validStatusCodes": {
+                  "type": "array",
+                  "description": "List of HTTP status codes considered valid for the request response.",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "headers": {
+                  "type": "array",
+                  "description": "List of headers to be included in the request.",
+                  "items": {
+                    "$ref": "#/definitions/HTTPHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "HTTPHeader": {
+      "description": "HTTP header and it's value.",
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Header name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Header value."
         }
       }
     },
