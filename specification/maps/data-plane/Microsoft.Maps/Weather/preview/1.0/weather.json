@@ -702,6 +702,81 @@
           }
         }
       }
+    },
+    "/weather/climo/actuals/daily/{format}": {
+      "get": {
+        "description": "**Get Daily Climo Actuals**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns climatology data such as past daily actuals for a given coordinate location.",
+        "operationId": "Weather_GetDailyClimoActuals",
+        "x-ms-examples": {
+          "DailyClimoActuals": {
+            "$ref": "./examples/GetDailyClimoActuals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "startDate",
+            "description": "Start date",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherUnit"
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many days the daily climo actuals responses are returned.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyClimoActualsResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -820,6 +895,24 @@
         "maximum": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum temperature for the time period"
+        }
+      }
+    },
+    "WeatherUnitRangeMaxMinAvg": {
+      "type": "object",
+      "description": "Returned temperature values.",
+      "properties": {
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum temperature for the time period."
+        },
+        "minimum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Minimum temperature for the time period"
+        },
+        "average": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Average temperature for the time period"
         }
       }
     },
@@ -1603,6 +1696,48 @@
           "description": "Forecast data for each requested day.",
           "items": {
             "$ref": "#/definitions/DailyForecast"
+          }
+        }
+      }
+    },
+    "DailyClimoActuals": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitRangeMaxMinAvg",
+          "description": "Temperature values for the day."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen for the day."
+
+        },
+        "snow": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Snow"
+        },
+        "snowDepth": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Snow depth"
+        }
+     }
+    },
+    "DailyClimoActualsResponse": {
+      "type": "object",
+      "properties": {
+        "climoActuals": {
+          "type": "array",
+          "description": "Climo actuals for each requested day.",
+          "items": {
+            "$ref": "#/definitions/DailyClimoActuals"
           }
         }
       }
