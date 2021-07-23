@@ -232,7 +232,8 @@ input-file:
   - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/SqlScript.json
   - Microsoft.Synapse/preview/2021-07-01-preview/entityTypes/Trigger.json
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
-=======
+```
+
 ### Tag: package-vnet-2021-06-01-preview
 
 These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specified on the command line.
@@ -240,7 +241,6 @@ These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specif
 ``` yaml $(tag) == 'package-vnet-2021-06-01-preview'
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
-
 ```
 
 ## Suppression
