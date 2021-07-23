@@ -29,6 +29,8 @@ title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 tag: package-preview-2021-04
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 
