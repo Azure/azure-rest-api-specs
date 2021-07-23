@@ -6,6 +6,9 @@
     "api-version": "2021-06-15",
     "resource": {
       "location": "west-us",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "tags": {
         "Category": "sales"
       }
@@ -18,6 +21,11 @@
         "name": "myFluidRelayServer",
         "type": "Microsoft.FluidRelay/fluidRelayServers",
         "location": "west-us",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
         "properties": {
           "frsTenantId": "yyyy-yyyy-yyyyy-yyyy",
           "fluidRelayEndpoints": {
