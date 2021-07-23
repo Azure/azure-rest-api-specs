@@ -477,7 +477,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/notebookProxies/{resourceName}/publicNetworkAccess": {
-      "put": {
+      "post": {
         "tags": [
           "NotebookProxy"
         ],
@@ -745,25 +745,26 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane. True is for data-plane operations and false is for ARM/control-plane operations.",
+          "type": "boolean"
+        },
         "display": {
-          "description": "Display name of operation",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.Notebooks",
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation that users can perform.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The description for the operation.",
-              "type": "string"
-            }
+          "provider": {
+            "description": "The resource provider name: Microsoft.Notebooks",
+            "type": "string"
+          },
+          "resource": {
+            "description": "The resource on which the operation is performed.",
+            "type": "string"
+          },
+          "operation": {
+            "description": "The operation that users can perform.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description for the operation.",
+            "type": "string"
           }
         }
       }
