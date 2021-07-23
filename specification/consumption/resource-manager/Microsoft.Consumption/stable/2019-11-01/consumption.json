@@ -1853,7 +1853,7 @@
         "properties"
       ]
     },
-    "LegacyUsageDetailProperties": {
+      "LegacyUsageDetailProperties": {
       "description": "The properties of the legacy usage detail.",
       "properties": {
         "billingAccountId": {
@@ -2072,6 +2072,12 @@
         "frequency": {
           "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
           "type": "string",
+          "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
@@ -2445,6 +2451,11 @@
           "description": "Retail price for the resource.",
           "type": "number",
           "format": "decimal",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. (Values: On Demand, Reservation, Spot).",
+          "type": "string",
           "readOnly": true
         }
       }
