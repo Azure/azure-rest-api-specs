@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Desktop Virtualization.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DesktopVirtualizationClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,29 @@ To build the SDK for DesktopVirtualizationClient, simply [Install AutoRest](http
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-04-01-preview
+tag: package-preview-2021-05
 ```
 
+
+### Tag: package-preview-2021-05
+
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-05'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2021-05-13-preview/desktopvirtualization.json
+```
 ### Tag: package-2019-01-23-preview
 
 These settings apply only when `--tag=package-2019-01-23-preview` is specified on the command line.
@@ -117,8 +128,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -169,7 +180,7 @@ See configuration in [readme.node.md](./readme.node.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -195,7 +206,7 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'

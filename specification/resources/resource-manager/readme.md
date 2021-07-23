@@ -29,7 +29,7 @@ openapi-type: arm
 ```
 
 ``` yaml $(package-features)
-tag: package-features-2015-12
+tag: package-features-2021-07
 ```
 
 ``` yaml $(package-locks)
@@ -126,6 +126,20 @@ These settings apply only when `--tag=package-deploymentscripts-2019-10-preview`
 ``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
 input-file:
 - Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+```
+
+### Tag: package-features-2021-07
+
+These settings apply only when `--tag=package-features-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-features-2021-07'
+input-file:
+- Microsoft.Features/stable/2021-07-01/features.json
+- Microsoft.Features/stable/2021-07-01/SubscriptionFeatureRegistration.json
+
+# Needed when there is more than one input file
+override-info:
+  title: FeatureClient
 ```
 
 ### Tag: package-features-2015-12
@@ -755,6 +769,9 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - from: SubscriptionFeatureRegistration.json
+    suppress: R4009
+    reason: Currently systemData is not allowed
 ```
 
 ---
@@ -769,16 +786,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
