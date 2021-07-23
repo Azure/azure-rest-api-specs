@@ -545,6 +545,10 @@
             "update"
           ],
           "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The type of identity used for the resource."
         }
       },
       "description": "The updatable properties of a Fluid Relay server"
@@ -662,7 +666,7 @@
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "type": "string",
           "description": "The identity type."
