@@ -3132,6 +3132,12 @@
           "Create a VM with UserData": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithUserData.json"
           },
+          "Create a VM with HibernationEnabled": {
+            "$ref": "./examples/compute/CreateOrUpdateAVmWithHibernationEnabled.json"
+          },
+          "Create a VM with VM Size Properties": {
+            "$ref": "./examples/compute/CreateOrUpdateAVmWithVMSizeProperties.json"
+          },
           "Create or update a VM with capacity reservation": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithCapacityReservation.json"
           }
@@ -3414,6 +3420,13 @@
             "required": true,
             "type": "string",
             "description": "The name of the virtual machine."
+          },
+          {
+            "name": "hibernate",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to hibernate a virtual machine. (Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -9828,7 +9841,6 @@
         }
       },
       "required": [
-        "maximumDuration",
         "rebootSetting"
       ],
       "description": "Input for InstallPatches as directly received by the API"
@@ -10529,9 +10541,29 @@
             "name": "VirtualMachineSizeTypes",
             "modelAsString": true
           }
+        },
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet. <br><br> Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
         }
       },
       "description": "Specifies the hardware settings for the virtual machine."
+    },
+    "VMSizeProperties": {
+      "type": "object",
+      "properties": {
+        "vCPUsAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of vCPUs available for the VM. <br><br> When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list) ."
+        },
+        "vCPUsPerCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the vCPU to physical core ratio. <br><br> When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list) <br><br> Setting this property to 1 also means that hyper-threading is disabled."
+        }
+      },
+      "description": "Specifies VM Size Property settings on the virtual machine."
     },
     "ImageReference": {
       "properties": {
@@ -10959,6 +10991,10 @@
         "ultraSSDEnabled": {
           "type": "boolean",
           "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+        },
+        "hibernationEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables hibernation capability on the VM."
         }
       },
       "description": "Enables or disables a capability on the virtual machine or virtual machine scale set."
