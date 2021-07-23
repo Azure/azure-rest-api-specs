@@ -33,6 +33,10 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
+```
 
 ### Tag: package-preview-2021-04
 
