@@ -77,6 +77,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtags.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtenant.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimconnectivitycheck.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/definitions.json
 ```
 ### Tag: package-preview-2021-01
