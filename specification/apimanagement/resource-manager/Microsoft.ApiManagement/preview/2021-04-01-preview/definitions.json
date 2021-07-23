@@ -6576,120 +6576,119 @@
         }
       }
     },
-  "ConnectivityCheckRequest": {
-    "description": "A request to perform the connectivity check operation on a API Management service.",
-    "type": "object",
-    "required": [
-      "source",
-      "destination"
-    ],
-    "properties": {
-      "source": {
-        "description": "Definitions about the connectivity check origin.",
-        "type": "object",
-        "required": [
-          "region"
-        ],
-        "properties": {
-          "region": {
-            "description": "The API Management service region from where to start the connectivity check operation.",
-            "type": "string",
-            "example": "westus"
-          },
-          "instance": {
-            "description": "The particular VMSS instance from which to fire the request.",
-            "type": "integer",
-            "format": "int64"
+    "ConnectivityCheckRequest": {
+      "description": "A request to perform the connectivity check operation on a API Management service.",
+      "type": "object",
+      "required": [
+        "source",
+        "destination"
+      ],
+      "properties": {
+        "source": {
+          "description": "Definitions about the connectivity check origin.",
+          "type": "object",
+          "required": [
+            "region"
+          ],
+          "properties": {
+            "region": {
+              "description": "The API Management service region from where to start the connectivity check operation.",
+              "type": "string",
+              "example": "westus"
+            },
+            "instance": {
+              "description": "The particular VMSS instance from which to fire the request.",
+              "type": "integer",
+              "format": "int64"
+            }
           }
-        }
-      },
-      "destination": {
-        "description": "The connectivity check operation destination.",
-        "type": "object",
-        "required": [
-          "address",
-          "port"
-        ],
-        "properties": {
-          "address": {
-            "description": "Destination address. Can either be an IP address or a FQDN.",
-            "type": "string",
-            "example": "microsoft.com"
-          },
-          "port": {
-            "description": "Destination port.",
-            "type": "integer",
-            "format": "int64",
-            "example": 80
+        },
+        "destination": {
+          "description": "The connectivity check operation destination.",
+          "type": "object",
+          "required": [
+            "address",
+            "port"
+          ],
+          "properties": {
+            "address": {
+              "description": "Destination address. Can either be an IP address or a FQDN.",
+              "type": "string",
+              "example": "microsoft.com"
+            },
+            "port": {
+              "description": "Destination port.",
+              "type": "integer",
+              "format": "int64",
+              "example": 80
+            }
           }
-        }
-      },
-      "preferredIPVersion": {
-        "description": "The IP version to be used. Only IPv4 is supported for now.",
-        "type": "string",
-        "enum": [
-          "IPv4"
-        ],
-        "x-ms-enum": {
-          "name": "PreferredIPVersion",
-          "modelAsString": true
-        }
-      },
-      "protocol": {
-        "description": "The request's protocol. Specific protocol configuration can be available based on this selection. The specified destination address must be coherent with this value.",
-        "type": "string",
-        "enum": [
-          "TCP",
-          "HTTP",
-          "HTTPS"
-        ],
-        "x-ms-enum": {
-          "name": "ConnectivityCheckProtocol",
-          "modelAsString": true
-        }
-      },
-      "protocolConfiguration": {
-        "description": "Protocol-specific configuration.",
-        "type": "object",
-        "properties": {
-          "HTTPConfiguration": {
-            "description": "Configuration for HTTP or HTTPS requests.",
-            "type": "object",
-            "properties": {
-              "method": {
-                "description": "The HTTP method to be used.",
-                "type": "string",
-                "enum": [
-                  "GET",
-                  "POST"
-                ],
-                "x-ms-enum": {
-                  "name": "Method",
-                  "modelAsString": true
-                }
-              },
-              "validStatusCodes": {
-                "type": "array",
-                "description": "List of HTTP status codes considered valid for the request response.",
-                "items": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              },
-              "headers": {
-                "type": "array",
-                "description": "List of headers to be included in the request.",
-                "items": {
-                  "$ref": "#/definitions/HTTPHeader"
+        },
+        "preferredIPVersion": {
+          "description": "The IP version to be used. Only IPv4 is supported for now.",
+          "type": "string",
+          "enum": [
+            "IPv4"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredIPVersion",
+            "modelAsString": true
+          }
+        },
+        "protocol": {
+          "description": "The request's protocol. Specific protocol configuration can be available based on this selection. The specified destination address must be coherent with this value.",
+          "type": "string",
+          "enum": [
+            "TCP",
+            "HTTP",
+            "HTTPS"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityCheckProtocol",
+            "modelAsString": true
+          }
+        },
+        "protocolConfiguration": {
+          "description": "Protocol-specific configuration.",
+          "type": "object",
+          "properties": {
+            "HTTPConfiguration": {
+              "description": "Configuration for HTTP or HTTPS requests.",
+              "type": "object",
+              "properties": {
+                "method": {
+                  "description": "The HTTP method to be used.",
+                  "type": "string",
+                  "enum": [
+                    "GET",
+                    "POST"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Method",
+                    "modelAsString": true
+                  }
+                },
+                "validStatusCodes": {
+                  "type": "array",
+                  "description": "List of HTTP status codes considered valid for the request response.",
+                  "items": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "headers": {
+                  "type": "array",
+                  "description": "List of headers to be included in the request.",
+                  "items": {
+                    "$ref": "#/definitions/HTTPHeader"
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  },
-
+    },
     "HTTPHeader": {
       "description": "HTTP header and it's value.",
       "type": "object",
