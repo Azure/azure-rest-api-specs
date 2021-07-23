@@ -77,9 +77,9 @@
   },
   "parameters": {
     "Pollutants": {
-      "name": "Pollutants",
+      "name": "pollutants",
       "in": "query",
-      "type": "string",
+      "type": "boolean",
       "required": false,
       "description": "Boolean value that returns detailed information about each pollutant. By default is True."
     },
@@ -805,13 +805,10 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7.",
+            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7. Default value is 1.",
             "default": 1,
             "in": "query",
             "type": "integer"
-          },
-          {
-            "$ref": "#/parameters/Pollutants"
           }
         ],
         "responses": {
