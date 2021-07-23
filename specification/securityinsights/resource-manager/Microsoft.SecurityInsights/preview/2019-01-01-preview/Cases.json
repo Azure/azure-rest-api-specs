@@ -1,0 +1,1186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
+      "get": {
+        "x-ms-examples": {
+          "Get all cases.": {
+            "$ref": "./examples/cases/GetCases.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Gets all cases.",
+        "deprecated": true,
+        "operationId": "Cases_List",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case.": {
+            "$ref": "./examples/cases/GetCaseById.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Gets a case.",
+        "deprecated": true,
+        "operationId": "Cases_Get",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case.": {
+            "$ref": "./examples/cases/CreateCase.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Creates or updates the case.",
+        "deprecated": true,
+        "operationId": "Cases_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/Case"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a case.": {
+            "$ref": "./examples/cases/DeleteCase.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Delete the case.",
+        "deprecated": true,
+        "operationId": "Cases_Delete",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case comments.": {
+            "$ref": "./examples/cases/comments/GetAllCaseComments.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets all case comments.",
+        "deprecated": true,
+        "operationId": "Comments_ListByCase",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case comment.": {
+            "$ref": "./examples/cases/comments/GetCaseCommentById.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets a case comment.",
+        "deprecated": true,
+        "operationId": "Cases_GetComment",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case comment.": {
+            "$ref": "./examples/cases/comments/CreateCaseComment.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Creates the case comment.",
+        "deprecated": true,
+        "operationId": "CaseComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          },
+          {
+            "$ref": "#/parameters/CaseComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case relations.": {
+            "$ref": "./examples/cases/relations/GetAllCaseRelations.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets all case relations.",
+        "deprecated": true,
+        "operationId": "CaseRelations_List",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseRelation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case relation.": {
+            "$ref": "./examples/cases/relations/GetCaseRelationByName.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets a case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case relation.": {
+            "$ref": "./examples/cases/relations/CreateCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Creates or updates the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/RelationInputModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the case relation.": {
+            "$ref": "./examples/cases/relations/DeleteCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Delete the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Case": {
+      "description": "The case",
+      "in": "body",
+      "name": "case",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Case"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CaseComment": {
+      "description": "The case comment",
+      "in": "body",
+      "name": "caseComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CaseComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CaseCommentId": {
+      "description": "Case comment ID",
+      "in": "path",
+      "name": "caseCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CaseId": {
+      "description": "Case ID",
+      "in": "path",
+      "name": "caseId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "Case": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a case in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CaseProperties",
+          "description": "Case properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "CaseComment": {
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a case comment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CaseCommentProperties",
+          "description": "Case comment properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "CaseCommentList": {
+      "description": "List of case comments.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of comments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "items": {
+            "$ref": "#/definitions/CaseComment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseCommentProperties": {
+      "description": "Case comment property bag.",
+      "properties": {
+        "createdTimeUtc": {
+          "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "The comment message",
+          "type": "string"
+        },
+        "userInfo": {
+          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "description": "Describes the user that created the comment",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "CaseList": {
+      "description": "List all the cases.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of cases.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of cases.",
+          "items": {
+            "$ref": "#/definitions/Case"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseProperties": {
+      "description": "Describes case properties",
+      "properties": {
+        "caseNumber": {
+          "description": "a sequential number",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "closeReason": {
+          "description": "The reason the case was closed",
+          "enum": [
+            "Resolved",
+            "Dismissed",
+            "TruePositive",
+            "FalsePositive",
+            "Other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CloseReason",
+            "values": [
+              {
+                "description": "Case was resolved",
+                "value": "Resolved"
+              },
+              {
+                "description": "Case was dismissed",
+                "value": "Dismissed"
+              },
+              {
+                "description": "Case was true positive",
+                "value": "TruePositive"
+              },
+              {
+                "description": "Case was false positive",
+                "value": "FalsePositive"
+              },
+              {
+                "description": "Case was closed for another reason",
+                "value": "Other"
+              }
+            ]
+          }
+        },
+        "closedReasonText": {
+          "description": "the case close reason details",
+          "type": "string"
+        },
+        "createdTimeUtc": {
+          "description": "The time the case was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the case",
+          "type": "string"
+        },
+        "endTimeUtc": {
+          "description": "The end time of the case",
+          "format": "date-time",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this case",
+          "items": {
+            "$ref": "SecurityInsights.json#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "lastComment": {
+          "description": "the last comment in the case",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "The last time the case was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "metrics": {
+          "description": "Dictionary of metrics, for example the number of alerts in the case",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
+        "owner": {
+          "$ref": "SecurityInsights.json#/definitions/UserInfo",
+          "description": "Describes a user that the case is assigned to",
+          "type": "object"
+        },
+        "relatedAlertIds": {
+          "description": "List of related alert identifiers",
+          "items": {
+            "description": "related alert id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "relatedAlertProductNames": {
+          "description": "List of related alert product names",
+          "items": {
+            "description": "related alert product name",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with case",
+          "items": {
+            "$ref": "SecurityInsights.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "description": "The severity of the case",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CaseSeverity",
+            "values": [
+              {
+                "description": "Critical severity",
+                "value": "Critical"
+              },
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "startTimeUtc": {
+          "description": "The start time of the case",
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the case",
+          "enum": [
+            "Draft",
+            "New",
+            "InProgress",
+            "Closed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CaseStatus",
+            "values": [
+              {
+                "description": "Case that wasn't promoted yet to active",
+                "value": "Draft"
+              },
+              {
+                "description": "An active case which isn't handled currently",
+                "value": "New"
+              },
+              {
+                "description": "An active case which is handled",
+                "value": "InProgress"
+              },
+              {
+                "description": "A non active case",
+                "value": "Closed"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the case",
+          "type": "string"
+        },
+        "totalComments": {
+          "description": "the number of total comments in the case",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "title",
+        "severity",
+        "status"
+      ],
+      "type": "object"
+    },
+    "CaseRelationList": {
+      "description": "List of case relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseRelation": {
+      "type": "object",
+      "description": "Represents a case relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case relation properties",
+          "$ref": "#/definitions/CaseRelationProperties"
+        }
+      }
+    },
+    "CaseRelationProperties": {
+      "type": "object",
+      "description": "Case relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "bookmarkName": {
+          "type": "string",
+          "description": "The case related bookmark name"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "RelationsModelInput": {
+      "type": "object",
+      "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "sourceRelationNode": {
+          "type": "object",
+          "description": "Relation source node",
+          "$ref": "#/definitions/RelationNode"
+        },
+        "targetRelationNode": {
+          "type": "object",
+          "description": "Relation target node",
+          "$ref": "#/definitions/RelationNode"
+        }
+      }
+    },
+    "RelationBase": {
+      "type": "object",
+      "description": "Represents a relation",
+      "allOf": [
+        {
+          "$ref": "SecurityInsights.json#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of relation node",
+              "readOnly": true,
+              "enum": [
+                "CasesToBookmarks"
+              ],
+              "x-ms-enum": {
+                "name": "RelationTypes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "CasesToBookmarks",
+                    "description": "Relations between cases and bookmarks"
+                  }
+                ]
+              }
+            },
+            "etag": {
+              "type": "string",
+              "description": "ETag for relation"
+            }
+          }
+        }
+      ]
+    },
+    "RelationNode": {
+      "type": "object",
+      "description": "Relation node",
+      "properties": {
+        "relationNodeId": {
+          "type": "string",
+          "description": "Relation Node Id"
+        },
+        "relationNodeKind": {
+          "type": "string",
+          "description": "The type of relation node",
+          "readOnly": true,
+          "enum": [
+            "Case",
+            "Bookmark"
+          ],
+          "x-ms-enum": {
+            "name": "RelationNodeKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Case",
+                "description": "Case node part of the relation"
+              },
+              {
+                "value": "Bookmark",
+                "description": "Bookmark node part of the relation"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag for relation node"
+        },
+        "relationAdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional set of properties"
+        }
+      }
+    }
+  }
+}
