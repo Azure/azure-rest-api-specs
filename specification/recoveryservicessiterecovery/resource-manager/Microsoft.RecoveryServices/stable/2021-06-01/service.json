@@ -9978,6 +9978,10 @@
         "diskEncryptionSetId": {
           "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
+        },
+        "customTargetDiskName": {
+          "description": "The custom target Azure disk name.",
+          "type": "string"
         }
       }
     },
@@ -12212,6 +12216,13 @@
             "name": "SqlServerLicenseType",
             "modelAsString": true
           }
+        },
+        "vmDisks": {
+          "description": "The list of disk update properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDiskInput"
+          }
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -13138,6 +13149,10 @@
         "diskEncryptionSetId": {
           "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
+        },
+        "targetDiskName": {
+          "description": "The target disk name.",
+          "type": "string"
         }
       }
     },
@@ -13803,6 +13818,13 @@
           "x-ms-enum": {
             "name": "SqlServerLicenseType",
             "modelAsString": true
+          }
+        },
+        "vmDisks": {
+          "description": "The list of disk update properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDiskInput"
           }
         }
       },
@@ -21675,6 +21697,23 @@
       },
       "discriminator": "instanceType"
     },
+    "UpdateDiskInput": {
+      "description": "Disk input for update.",
+      "required": [
+        "diskId"
+      ],
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string"
+        },
+        "targetDiskName": {
+          "description": "The target disk name.",
+          "type": "string"
+        }
+      }
+    },
     "UpdateMigrationItemInput": {
       "description": "Update migration item input.",
       "type": "object",
@@ -22358,6 +22397,10 @@
           "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
           "type": "boolean",
           "default": false
+        },
+        "targetNicName": {
+          "description": "Target NIC name.",
+          "type": "string"
         }
       }
     },
@@ -22419,6 +22462,10 @@
         "tfoReuseExistingNic": {
           "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
           "type": "boolean"
+        },
+        "targetNicName": {
+          "description": "Target NIC name.",
+          "type": "string"
         }
       }
     },
