@@ -220,7 +220,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Looksup a specific program brief.",
+        "summary": "Get a specific program brief.",
         "operationId": "ShortCode_GetProgramBrief",
         "produces": [
           "application/json"
@@ -391,7 +391,7 @@
           "type": "string"
         },
         "programDescription": {
-          "description": "Describes how and why the number will be usef for messaging as part of the program.",
+          "description": "Describes how and why the number will be used for messaging as part of the program.",
           "type": "string"
         },
         "programUrl": {
@@ -419,7 +419,7 @@
           "type": "string"
         },
         "programType": {
-          "description": "Program Type ('NEW-PROGRAM', 'MODIFIED-PROGRAM' or 'MIGRATION').",
+          "description": "Program Type ('newProgram', 'modifiedProgram' or 'migration').",
           "enum": [
             "newProgram",
             "modifiedProgram",
@@ -432,7 +432,7 @@
           }
         },
         "programRating": {
-          "description": "Program Rating ('standard' or 'FTEU', where the latter stands for Free to End User).",
+          "description": "Program Rating ('standard' or 'freeToEndUser', where the latter stands for Free to End User).",
           "enum": [
             "standard",
             "freeToEndUser"
@@ -453,7 +453,7 @@
         },
         "expectedDateOfService": {
           "format": "date-time",
-          "description": "Start date for sending SMS. UTC Date in format yyyy-MM-dd'T'HH:mm:ss.",
+          "description": "Start date for sending SMS.",
           "type": "string"
         }
       }
@@ -499,7 +499,7 @@
       "type": "object",
       "properties": {
         "messageType": {
-          "description": "Applicable message types used in the program ('SMS' or 'MMS').",
+          "description": "Applicable message types used in the program ('sms' or 'mms').",
           "enum": [
             "sms",
             "mms"
@@ -511,7 +511,7 @@
           }
         },
         "recurrence": {
-          "description": "Indicates the nature of the messaging associated with the program ('SUBSCRIPTION' or 'TRANSACTION').",
+          "description": "Indicates the nature of the messaging associated with the program ('subscription' or 'transaction').",
           "enum": [
             "subscription",
             "transaction"
@@ -523,7 +523,7 @@
           }
         },
         "contentType": {
-          "description": "Indicates the messaging content type used in the program ('RINGTONES', 'SMS-CHAT', 'VIDEO', 'LOYALTY-PROGRAM-POINTS-PRIZES',\r\n'GIFTING', 'IN-APPLICATION-BILLING', 'TEXT-TO-SCREEN', 'GAMES', 'AUDIO-CHAT', 'MMS-PICTURES', 'SWEEPSTAKES-CONTEST-AUCTION',\r\n'FINANCIAL-BANKING', 'PREMIUM-WAP', 'QUERY-SERVICE', 'WALLPAPER-SCREENSAVER', 'VOTING', 'APPLICATION', 'MOBILE-GIVING-DONATIONS',\r\n'COUPONS', 'LOYALTY-PROGRAM', 'NO-POINT-PRIZES', 'INFORMATION-ALERTS', 'MICRO-BILLING', 'TRIVIA', 'ENTERTAINMENT-ALERTS', or 'OTHER').",
+          "description": "Indicates the messaging content type used in the program ('ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', 'games', etc).",
           "type": "array",
           "items": {
             "enum": [
@@ -595,7 +595,7 @@
         },
         "monthlyAverageMessagesFromUser": {
           "format": "int32",
-          "description": "Estimated number of Mobile-Originated (MO) messsages likely to be received from a user per month.",
+          "description": "Estimated number of Mobile-Originated (MO) messages likely to be received from a user per month.",
           "type": "integer"
         },
         "monthlyAverageMessagesToUser": {
@@ -614,7 +614,7 @@
       }
     },
     "ProgramBriefEntity": {
-      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience recieving the message.",
+      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "type": "object",
       "properties": {
         "programDetails": {
