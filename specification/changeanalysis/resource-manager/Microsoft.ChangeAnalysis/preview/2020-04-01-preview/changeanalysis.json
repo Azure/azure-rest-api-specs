@@ -381,9 +381,6 @@
     "ConfigurationProfileResource": {
       "description": "A profile object that contains change analysis configuration, such as notification settings, for this subscription",
       "type": "object",
-      "systemData": {
-        "$ref": "#/definitions/SystemData"
-      },
       "allOf": [
         {
           "$ref": "#/definitions/ExtendedProxyResource"
@@ -395,13 +392,9 @@
         },
         "properties": {
           "$ref": "#/definitions/ConfigurationProfileResourceProperties"
-        }
-      },
-      "location": "string",
-      "name": {
-        "$ref": "#/parameters/ProfileNameParameter"
-      },
-      "id": "string"
+        },
+        "location": "string"
+      }
     },
     "ExtendedProxyResource": {
       "description": "An Azure resource.",
