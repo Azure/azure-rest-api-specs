@@ -2243,6 +2243,9 @@
           "200": {
             "description": "Delete successful."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No Content. The request has been accepted but the rule set was not found."
           },
@@ -4034,13 +4037,13 @@
       "description": "Customer Certificate used for https",
       "allOf": [
         {
-          "$ref": "#/definitions/Certificate",
+          "$ref": "#/definitions/Certificate"
         }
       ],
       "properties": {
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
-          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Certificate version.",
@@ -5057,14 +5060,10 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
-        "enableCache": {
-          "description": "A boolean field for enable or disable cache. If enableCache is true, cacheConfiguration cannot be null.",
-          "type": "boolean"
-        },
         "cacheConfiguration": {
-          "description": "The caching configuration for this route.",
+          "description": "The caching configuration for this route. To disable caching, do not provide a cacheConfiguration object.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/CacheConfiguration"
+          "$ref": "#/definitions/CacheConfiguration"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
@@ -5113,6 +5112,37 @@
           "x-ms-enum": {
             "name": "EnabledState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryStringCachingBehavior": {
+          "description": "Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "IgnoreSpecifiedQueryStrings",
+            "IncludeSpecifiedQueryStrings"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "afdQueryStringCachingBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
+        },
+        "compressionSettings": {
+          "description": "compression settings.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/CompressionSettings"
           }
         }
       }

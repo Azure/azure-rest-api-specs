@@ -3779,13 +3779,13 @@
           "enum": [
             "CacheExpiration",
             "CacheKeyQueryString",
-            "ModifyCacheConfiguration",
             "ModifyRequestHeader",
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
             "UrlSigning",
-            "OriginGroupOverride"
+            "OriginGroupOverride",
+            "RouteConfigurationOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3981,19 +3981,6 @@
           "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
-        },
-        "forwardingProtocol": {
-          "description": "Protocol this rule will use when forwarding traffic to backends.",
-          "type": "object",
-          "enum": [
-            "HttpOnly",
-            "HttpsOnly",
-            "MatchRequest"
-          ],
-          "x-ms-enum": {
-            "name": "ForwardingProtocol",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -4231,9 +4218,9 @@
         }
       }
     },
-    "DeliveryRuleCacheConfigurationAction": {
-      "description": "Defines the cache configuration action for the delivery rule. Only applicable to AFDX - need to update this later",
-      "x-ms-discriminator-value": "ModifyCacheConfiguration",
+    "DeliveryRuleRouteConfigurationOverrideAction": {
+      "description": "Defines the route configuration override action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "x-ms-discriminator-value": "RouteConfigurationOverride",
       "allOf": [
         {
           "$ref": "#/definitions/DeliveryRuleAction"
@@ -4245,12 +4232,12 @@
       "properties": {
         "parameters": {
           "description": "Defines the parameters for the action.",
-          "$ref": "#/definitions/CacheConfigurationActionParameters"
+          "$ref": "#/definitions/RouteConfigurationOverrideActionParameters"
         }
       }
     },
-    "CacheConfigurationActionParameters": {
-      "description": "Defines the parameters for the cache configuration action. To disable caching, do not provide a cacheConfiguration object.",
+    "RouteConfigurationOverrideActionParameters": {
+      "description": "Defines the parameters for the route configuration override action.",
       "required": [
         "typeName"
       ],
@@ -4261,13 +4248,38 @@
             "DeliveryRuleCacheConfigurationActionParameters"
           ]
         },
-        "enableCache": {
-          "description": "A boolean field for enable or disable cache. If enableCache is true, cacheConfiguration cannot be null.",
-          "type": "boolean"
+        "originGroupOverride": {
+          "description": "A reference to the origin group override configuration. Leave empty to use the default origin group on route.",
+          "type": "object",
+          "$ref": "#/definitions/OriginGroupOverride"
         },
         "cacheConfiguration": {
-          "description": "The caching configuration associated with this rule.",
+          "description": "The caching configuration associated with this rule. To disable caching, do not provide a cacheConfiguration object.",
+          "type": "object",
           "$ref": "#/definitions/CacheConfiguration"
+        }
+      }
+    },
+    "OriginGroupOverride": {
+      "description": "Defines the parameters for the origin group override configuration.",
+      "properties": {
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup on route.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "object",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4276,22 +4288,34 @@
       "type": "object",
       "properties": {
         "queryStringCachingBehavior": {
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "description": "Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings.",
           "enum": [
-            "IgnoreQueryStrings",
-            "CacheEveryUniqueUrl",
+            "IgnoreQueryString",
+            "UseQueryString",
             "IgnoreSpecifiedQueryStrings",
             "IncludeSpecifiedQueryStrings"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "afdQueryStringCachingBehavior",
+            "name": "ruleQueryStringCachingBehavior",
             "modelAsString": true
           }
         },
         "queryParameters": {
           "description": "query parameters to include or exclude (comma separated).",
           "type": "string"
+        },
+        "IsCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ruleIsCompressionEnabled",
+            "modelAsString": true
+          }
         },
         "cacheBehavior": {
           "description": "Caching behavior for the requests",
@@ -4302,7 +4326,7 @@
             "OverrideIfOriginMissing"
           ],
           "x-ms-enum": {
-            "name": "cacheBehavior",
+            "name": "ruleCacheBehavior",
             "modelAsString": true
           }
         },
@@ -4310,23 +4334,6 @@
           "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
           "type": "string",
           "format": "duration"
-        },
-        "compressionSettings": {
-          "description": "settings for compression.",
-          "type": "object",
-          "properties": {
-            "contentTypesToCompress": {
-              "description": "List of content types on which compression applies. The value should be a valid MIME type.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "isCompressionEnabled": {
-              "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
-              "type": "boolean"
-            }
-          }
         }
       }
     },
