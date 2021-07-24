@@ -927,6 +927,74 @@
           }
         }
       }
+    },
+    "/weather/climo/summary/{format}": {
+      "get": {
+        "description": "**Get Climo Month Summary**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns climatology data such as month summary for a given coordinate location.",
+        "operationId": "Weather_GetClimoSummary",
+        "x-ms-examples": {
+          "ClimoSummary": {
+            "$ref": "./examples/GetClimoSummary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "month",
+            "description": "Month",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherUnit"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClimoSummaryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1911,24 +1979,24 @@
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitMaxMinAvg",
-          "description": "Temperature values for the day."
+          "description": "Temperature values."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+          "description": "Summary of heating or cooling degree day information"
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of precipitation (liquid equivalent) that has fallen for the day."
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
 
         },
         "snow": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Snow"
+          "description": "Snow."
         },
         "snowDepth": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Snow depth"
+          "description": "Snow depth."
         },
         "sources": {
           "type": "array",
@@ -1960,16 +2028,16 @@
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitYearMaxMinAvg",
-          "description": "Temperature values for the the day."
+          "description": "Temperature value."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnitYearMax",
-          "description": "Maximum amount of precipitation (liquid equivalent) that has fallen for the day."
+          "description": "Maximum amount of precipitation (liquid equivalent) that has fallen."
 
         },
         "snow": {
           "$ref": "#/definitions/WeatherUnitYearMax",
-          "description": "Maximum snow for the day."
+          "description": "Maximum snow."
         },
         "sources": {
           "type": "array",
@@ -2001,16 +2069,15 @@
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitMaxMinAvg",
-          "description": "Temperature values for the day."
+          "description": "Temperature values."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+          "description": "Summary of heating or cooling degree day information"
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of precipitation (liquid equivalent) that has fallen for the day."
-
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
         },
         "sources": {
           "type": "array",
@@ -2030,6 +2097,105 @@
           "items": {
             "$ref": "#/definitions/DailyClimoNormals"
           }
+        }
+      }
+    },
+    "MonthlyClimoActuals": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitMaxMinAvg",
+          "description": "Temperature value."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of Heating or Cooling Degree Day information."
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+
+        },
+        "snow": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Snow"
+        },
+        "snowDepth": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Snow depth"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Source(s) of the forecast data."
+          }
+        }
+     }
+    },
+    "MonthlyClimoRecords": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitYearMaxMinAvg",
+          "description": "Temperature value."
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnitYearMax",
+          "description": "Maximum amount of precipitation (liquid equivalent) that has fallen."
+
+        },
+        "snow": {
+          "$ref": "#/definitions/WeatherUnitYearMax",
+          "description": "Maximum snow."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Source(s) of the forecast data."
+          }
+        }
+     }
+    },
+    "MonthlyClimoNormals": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitMaxMinAvg",
+          "description": "Temperature values."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of heating or cooling degree day information"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Source(s) of the forecast data."
+          }
+        }
+     }
+    },
+    "ClimoSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "climoActuals": {
+          "$ref": "#/definitions/MonthlyClimoActuals",
+          "description": "Climo actuals for the requested month."
+        },
+        "climoRecords": {
+          "$ref": "#/definitions/MonthlyClimoRecords",
+          "description": "Climo records for the requested month."
+        },
+        "climoNormals": {
+          "$ref": "#/definitions/MonthlyClimoNormals",
+          "description": "Climo normals for the requested month."
         }
       }
     },
