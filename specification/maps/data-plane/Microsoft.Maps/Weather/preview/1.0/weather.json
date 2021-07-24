@@ -852,6 +852,81 @@
           }
         }
       }
+    },
+    "/weather/climo/normals/daily/{format}": {
+      "get": {
+        "description": "**Get Daily Climo Normals**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns climatology data such as past daily normals for a given coordinate location.",
+        "operationId": "Weather_GetDailyClimoNormals",
+        "x-ms-examples": {
+          "DailyClimoNormals": {
+            "$ref": "./examples/GetDailyClimoNormals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "start",
+            "description": "Start date",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherUnit"
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many days the daily climo actuals responses are returned.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyClimoNormalsResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1913,6 +1988,47 @@
           "description": "Climo records for each requested day.",
           "items": {
             "$ref": "#/definitions/DailyClimoRecords"
+          }
+        }
+      }
+    },
+    "DailyClimoNormals": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitMaxMinAvg",
+          "description": "Temperature values for the day."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen for the day."
+
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Source(s) of the forecast data."
+          }
+        }
+     }
+    },
+    "DailyClimoNormalsResponse": {
+      "type": "object",
+      "properties": {
+        "climoNormals": {
+          "type": "array",
+          "description": "Climo normals for each requested day.",
+          "items": {
+            "$ref": "#/definitions/DailyClimoNormals"
           }
         }
       }
