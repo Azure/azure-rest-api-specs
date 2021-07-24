@@ -136,8 +136,7 @@
           "type": "string",
           "description": "The type of a target project. It could be one of the following values.",
           "enum": [
-            "luis_v2",
-            "luis_v3",
+            "luis",
             "luis_deepstack",
             "question_answering"
           ],
@@ -152,27 +151,29 @@
         }
       }
     },
-    "LUISV2Parameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
-      "x-ms-discriminator-value": "luis_v2",
+    "LUISParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects.",
+      "x-ms-discriminator-value": "luis",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeParameters"
         }
       ],
       "properties": {
-        "projectParameters": {
-          "type": "object",
-          "$ref": "#/definitions/LUISV2ProjectParameters"
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
         },
         "callingOptions": {
           "type": "object",
-          "$ref": "#/definitions/LUISV2CallingOptions"
+          "$ref": "#/definitions/LUISCallingOptions"
         }
-      }
+      },
+      "additionalProperties": true
     },
-    "LUISV2CallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available V2 projects.",
+    "LUISCallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available projects.",
       "properties": {
         "verbose": {
           "description": "Enable verbose response.",
@@ -197,53 +198,6 @@
         "bing-spell-check-subscription-key": {
           "description": "The subscription key to use when enabling Bing spell check",
           "type": "string"
-        }
-      }
-    },
-    "LUISV2ProjectParameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "The utterance to predict."
-        }
-      }
-    },
-    "LUISV3Parameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v3.0.",
-      "x-ms-discriminator-value": "luis_v3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeParameters"
-        }
-      ],
-      "properties": {
-        "projectParameters": {
-          "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
-        },
-        "callingOptions": {
-          "type": "object",
-          "$ref": "#/definitions/LUISV3CallingOptions"
-        }
-      },
-      "additionalProperties": true
-    },
-    "LUISV3CallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available V3 projects.",
-      "properties": {
-        "verbose": {
-          "description": "Enable verbose response.",
-          "type": "boolean"
-        },
-        "log": {
-          "description": "Save log to add in training utterances later.",
-          "type": "boolean"
-        },
-        "show-all-intents": {
-          "description": "Set true to show all intents.",
-          "type": "boolean"
         }
       }
     },
@@ -373,8 +327,7 @@
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
           "enum": [
-            "luis_v2",
-            "luis_v3",
+            "luis",
             "luis_deepstack",
             "question_answering"
           ],
@@ -518,9 +471,9 @@
         }
       }
     },
-    "LUISV2TargetIntentResult": {
-      "description": "It is a wrap up of LUIS Generally Available v2.0 response.",
-      "x-ms-discriminator-value": "luis_v2",
+    "LUISTargetIntentResult": {
+      "description": "It is a wrap up of LUIS Generally Available response.",
+      "x-ms-discriminator-value": "luis",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -529,25 +482,7 @@
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/LuisResult",
-          "description": "The actual response from a LUIS Generally Available application and API version v2.0.",
-          "x-nullable": true
-        }
-      }
-    },
-    "LUISV3TargetIntentResult": {
-      "description": "It is a wrap up a LUIS Generally Available v3.0 response.",
-      "x-ms-discriminator-value": "luis_v3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIntentResult"
-        }
-      ],
-      "properties": {
-        "result": {
-          "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionResponse",
-          "description": "The actual response from a LUIS Generally Available application and API version v3.0.",
+          "description": "The actual response from a LUIS Generally Available application.",
           "x-nullable": true
         }
       }
@@ -563,7 +498,6 @@
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "../2021-05-01-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
           "description": "The generated answer by a Question Answering KB.",
           "x-nullable": true
         }
