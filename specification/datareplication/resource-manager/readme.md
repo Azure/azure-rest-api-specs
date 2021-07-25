@@ -18,19 +18,6 @@ To see additional help and options, run:
 
 ---
 
-## Suppression
-
-``` yaml
-directive:
-  - from: service.json
-    suppress: OAV131 
-    reason: Testing purpose.
-
-  - from: service.json 
-    suppress: R4010
-    reason: Testing purpose
-```
-
 ## Configuration
 
 ### Basic Information
@@ -40,18 +27,11 @@ These are the global settings for the DataReplication API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-02
-
-directive:
-  - where:
-      - $.paths
-    suppress:
-      - UniqueResourcePaths
-      
 ```
 
 ### Tag: package-2021-02
 
-These settings apply only when `--tag=package-2018-07` is specified on the command line.
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-02'
 input-file:
@@ -69,12 +49,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
   - repo: azure-resource-manager-schemas
@@ -96,16 +70,4 @@ csharp:
   output-folder: $(csharp-sdks-folder)/datareplication/Microsoft.DataReplication/src/Generated
   clear-output-folder: true
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
