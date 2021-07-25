@@ -837,7 +837,9 @@
         "type": {
           "enum": [
             "SystemAssigned",
-            "None"
+            "None",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
@@ -845,6 +847,29 @@
           },
           "type": "string",
           "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Class defining User assigned identity details.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
