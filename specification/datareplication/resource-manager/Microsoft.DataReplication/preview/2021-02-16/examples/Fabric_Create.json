@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "7755cb45-c4ce-4363-baf7-e15505ac8945",
+    "resourceGroupName": "ANUTALLU-PC-asrrg",
+    "fabricName": "samplefabric",
+    "api-version": "2021-02-16-preview",
+    "body": {
+      "location": "southeast asia",
+      "properties": {
+        "customProperties": {
+          "instanceType": "VMware"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/7755cb45-c4ce-4363-baf7-e15505ac8945/resourceGroups/ANUTALLU-PC-asrrg/providers/Microsoft.DataReplication/replicationFabrics/samplefabric",
+        "name": "samplefabric",
+        "type": "replicationFabrics",
+        "properties": {
+          "provisioningState": "Created",
+          "customProperties": {
+            "instanceType": "VMware"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "15",
+        "Azure-AsyncOperation": "http://management.windowsazure.com/subscriptions/7755cb45-c4ce-4363-baf7-e15505ac8945/resourceGroups/ANUTALLU-PC-asrrg/providers/Microsoft.DataReplication/replicationFabrics/samplefabric/operations/96163873-f641-4a33-8f43-f1d7e5f6725e?api-version=2021-02-16-preview"
+      }
+    }
+  }
+}

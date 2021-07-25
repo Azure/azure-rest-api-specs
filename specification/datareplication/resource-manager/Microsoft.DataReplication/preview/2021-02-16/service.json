@@ -1,0 +1,2666 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Site Recovery Management Service API",
+    "description": "A first party Azure service enabling the data replication.",
+    "version": "2021-02-16-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}": {
+      "get": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Gets the Dra.",
+        "operationId": "Dra_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Dra Model on success.",
+            "schema": {
+              "$ref": "#/definitions/DraModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dra_Get": {
+            "$ref": "./examples/Dra_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Puts the Dra.",
+        "operationId": "Dra_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dra model.",
+            "schema": {
+              "$ref": "#/definitions/DraModel"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DraModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Dra_Create": {
+            "$ref": "./examples/Dra_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Updates the Dra.",
+        "operationId": "Dra_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dra model.",
+            "schema": {
+              "$ref": "#/definitions/DraModel"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DraModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Dra_Update": {
+            "$ref": "./examples/Dra_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Deletes the Dra.",
+        "operationId": "Dra_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on deletion.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Dra_Delete": {
+            "$ref": "./examples/Dra_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents": {
+      "get": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Lists the Dras.",
+        "operationId": "Dra_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Dra Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/DraModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Dra_List": {
+            "$ref": "./examples/Dra_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}/refresh": {
+      "post": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Refreshes the Dra.",
+        "operationId": "Dra_Refresh",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on refresh.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Dra_Refresh": {
+            "$ref": "./examples/Dra_Refresh.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Dra"
+        ],
+        "summary": "Gets the Dra operation status.",
+        "operationId": "DraOperationStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "draName",
+            "description": "Dra name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraOperationStatus_Get": {
+            "$ref": "./examples/DraOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}": {
+      "get": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Gets the fabric.",
+        "operationId": "Fabric_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Fabric Model on success.",
+            "schema": {
+              "$ref": "#/definitions/FabricModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabric_Get": {
+            "$ref": "./examples/Fabric_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Puts the fabric.",
+        "operationId": "Fabric_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Fabric properties.",
+            "schema": {
+              "$ref": "#/definitions/FabricModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FabricModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Fabric_Create": {
+            "$ref": "./examples/Fabric_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Updates the fabric.",
+        "operationId": "Fabric_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Fabric properties.",
+            "schema": {
+              "$ref": "#/definitions/FabricModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FabricModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on update.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Fabric_Update": {
+            "$ref": "./examples/Fabric_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Deletes the fabric.",
+        "operationId": "Fabric_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on deletion.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Fabric_Delete": {
+            "$ref": "./examples/Fabric_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics": {
+      "get": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Lists the fabrics.",
+        "operationId": "Fabric_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Fabric Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/FabricModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fabric_List": {
+            "$ref": "./examples/Fabric_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Gets the fabric operation status.",
+        "operationId": "FabricOperationsStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "fabricName",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "OperationType",
+            "description": "The operation type.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricOperationsStatus_Get": {
+            "$ref": "./examples/FabricOperationsStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataReplication/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Get a list of REST API supported by Microsoft data replication.",
+        "operationId": "GetOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies/{policyName}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Gets the policy.",
+        "operationId": "Policy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Policy Model on success.",
+            "schema": {
+              "$ref": "#/definitions/PolicyModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policy_Get": {
+            "$ref": "./examples/Policy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Puts the policy.",
+        "operationId": "Policy_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Policy model.",
+            "schema": {
+              "$ref": "#/definitions/PolicyModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Policy_Create": {
+            "$ref": "./examples/Policy_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Updates the policy.",
+        "operationId": "Policy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Policy model.",
+            "schema": {
+              "$ref": "#/definitions/PolicyModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyModel"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Policy_Update": {
+            "$ref": "./examples/Policy_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Deletes the policy.",
+        "operationId": "Policy_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Policy Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on deletion.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Policy_Delete": {
+            "$ref": "./examples/Policy_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Lists the policies.",
+        "operationId": "Policy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Policy Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/PolicyModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Policy_List": {
+            "$ref": "./examples/Policy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies/{policyName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Gets the policy operation status.",
+        "operationId": "PolicyOperationStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyOperationStatus_Get": {
+            "$ref": "./examples/PolicyOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}": {
+      "get": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Gets the protected item.",
+        "operationId": "ProtectedItem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "protectedItemName",
+            "description": "Protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ProtectedItem Model on success.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItem_Get": {
+            "$ref": "./examples/ProtectedItem_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Puts the protected item.",
+        "operationId": "ProtectedItem_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "protectedItemName",
+            "description": "Protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Protected item model.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ProtectedItem_Create": {
+            "$ref": "./examples/ProtectedItem_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Updates the protected item.",
+        "operationId": "ProtectedItem_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "protectedItemName",
+            "description": "Protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Protected item model.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModel"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ProtectedItem_Update": {
+            "$ref": "./examples/ProtectedItem_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Deletes the protected item.",
+        "operationId": "ProtectedItem_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "protectedItemName",
+            "description": "Protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "forceDelete",
+            "description": "A flag indicating whether to do force delete or not.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ProtectedItem_Delete": {
+            "$ref": "./examples/ProtectedItem_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems": {
+      "get": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Lists the protected items.",
+        "operationId": "ProtectedItem_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ProtectedItem Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ProtectedItem_List": {
+            "$ref": "./examples/ProtectedItem_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "ProtectedItem"
+        ],
+        "summary": "Gets the protected item operation status.",
+        "operationId": "ProtectedItemOperationStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "protectedItemName",
+            "description": "Protected Item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItemOperationStatus_Get": {
+            "$ref": "./examples/ProtectedItemOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions/{replicationExtensionName}": {
+      "get": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Gets the replication extension.",
+        "operationId": "ReplicationExtension_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "replicationExtensionName",
+            "description": "Replication extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Replication extension Model on success.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationExtension_Get": {
+            "$ref": "./examples/ReplicationExtension_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Puts the replication extension.",
+        "operationId": "ReplicationExtension_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "replicationExtensionName",
+            "description": "Replication extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Replication extension model.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ReplicationExtension_Create": {
+            "$ref": "./examples/ReplicationExtension_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Updates the replication extension.",
+        "operationId": "ReplicationExtension_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "replicationExtensionName",
+            "description": "Replication extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Replication extension model.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModel"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ReplicationExtension_Update": {
+            "$ref": "./examples/ReplicationExtension_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Deletes the replication extension.",
+        "operationId": "ReplicationExtension_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "replicationExtensionName",
+            "description": "Replication extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on deletion.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ReplicationExtension_Delete": {
+            "$ref": "./examples/ReplicationExtension_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions": {
+      "get": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Lists the replication extensions.",
+        "operationId": "ReplicationExtension_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Replication extension Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationExtensionModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ReplicationExtension_List": {
+            "$ref": "./examples/ReplicationExtension_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions/{replicationExtensionName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "ReplicationExtension"
+        ],
+        "summary": "Gets the replication extension operation status.",
+        "operationId": "ReplicationExtensionOperationStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "replicationExtensionName",
+            "description": "Replication extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationExtensionOperationStatus_Get": {
+            "$ref": "./examples/ReplicationExtensionOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Gets the vault.",
+        "operationId": "Vault_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Vault Model on success.",
+            "schema": {
+              "$ref": "#/definitions/VaultModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Vault_Get": {
+            "$ref": "./examples/Vault_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Puts the vault.",
+        "operationId": "Vault_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Vault properties.",
+            "schema": {
+              "$ref": "#/definitions/VaultModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VaultModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on creation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Vault_Create": {
+            "$ref": "./examples/Vault_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Updates the vault.",
+        "operationId": "Vault_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Vault properties.",
+            "schema": {
+              "$ref": "#/definitions/VaultModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VaultModel"
+            }
+          },
+          "202": {
+            "description": "Returns success on update.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Vault_Update": {
+            "$ref": "./examples/Vault_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Deletes the vault.",
+        "operationId": "Vault_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Returns success on deletion.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Vault_Delete": {
+            "$ref": "./examples/Vault_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Lists the vaults.",
+        "operationId": "Vault_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Vault Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/VaultModelCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Vault_List": {
+            "$ref": "./examples/Vault_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Gets the vault operation status.",
+        "operationId": "VaultOperationStatus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vaultName",
+            "description": "Vault name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "OperationType",
+            "description": "The operation type.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VaultOperationStatus_Get": {
+            "$ref": "./examples/VaultOperationStatus_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DraModel": {
+      "description": "Dra model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Dra Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the Dra.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the Dra.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DraModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DraModelCollection": {
+      "description": "Dra model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of Dras.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DraModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "DraModelCustomProperties": {
+      "description": "Dra model custom properties.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets or sets the instance type.",
+          "type": "string"
+        }
+      }
+    },
+    "DraModelProperties": {
+      "description": "Dra model properties.",
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "description": "Gets or sets the machine Id where Dra is running.",
+          "type": "string"
+        },
+        "machineName": {
+          "description": "Gets or sets the machine name where Dra is running.",
+          "type": "string"
+        },
+        "authenticationIdentity": {
+          "$ref": "#/definitions/IdentityModel"
+        },
+        "resourceAccessIdentity": {
+          "$ref": "#/definitions/IdentityModel"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the Dra.",
+          "enum": [
+            "Creating",
+            "Created",
+            "Deleted",
+            "Updating",
+            "Updated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customProperties": {
+          "$ref": "#/definitions/DraModelCustomProperties"
+        }
+      }
+    },
+    "FabricModel": {
+      "description": "Fabric model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Fabric Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the fabric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the Fabric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Gets or sets the location of the fabric.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/FabricModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "FabricModelCollection": {
+      "description": "Fabric model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of fabrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FabricModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "FabricModelCustomProperties": {
+      "description": "Fabric model custom properties.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets or sets the instance type.",
+          "type": "string"
+        }
+      }
+    },
+    "FabricModelProperties": {
+      "description": "Fabric model properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the fabric.",
+          "enum": [
+            "Creating",
+            "Created",
+            "Deleted",
+            "Updating",
+            "Updated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customProperties": {
+          "$ref": "#/definitions/FabricModelCustomProperties"
+        }
+      }
+    },
+    "IdentityModel": {
+      "description": "Identity model.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Gets or sets the tenant Id of the SPN with which Dra communicates to service.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Gets or sets the client/application Id of the SPN with which Dra communicates to\r\nservice.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "Gets or sets the object Id of the SPN with which Dra communicates to service.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "Gets or sets the audience of the SPN with which Dra communicates to service.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "Gets or sets the authority of the SPN with which Dra communicates to service.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Defines the operation status.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the operation name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the status of the operation. ARM expects the terminal status to be one of\r\nSucceeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Gets or sets the start time.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Gets or sets the end time.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyModel": {
+      "description": "Policy model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Policy Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the policy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the Policy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PolicyModelCollection": {
+      "description": "Policy model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyModelCustomProperties": {
+      "description": "Policy model custom properties.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets or sets the instance type.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyModelProperties": {
+      "description": "Policy model properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the policy.",
+          "enum": [
+            "Creating",
+            "Created",
+            "Deleted",
+            "Updating",
+            "Updated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customProperties": {
+          "$ref": "#/definitions/PolicyModelCustomProperties"
+        }
+      }
+    },
+    "ProtectedItemModel": {
+      "description": "Protected item model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the protected item Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the protected item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the protected item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ProtectedItemModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProtectedItemModelCollection": {
+      "description": "Protected item model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of protected items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtectedItemModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "ProtectedItemModelCustomProperties": {
+      "description": "Protected item model custom properties.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets or sets the instance type.",
+          "type": "string"
+        }
+      }
+    },
+    "ProtectedItemModelProperties": {
+      "description": "Protected item model properties.",
+      "type": "object",
+      "properties": {
+        "policyName": {
+          "description": "Gets or sets the policy name.",
+          "type": "string"
+        },
+        "replicationExtensionName": {
+          "description": "Gets or sets the replication extension name.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Gets or sets the protection state.",
+          "type": "string"
+        },
+        "testFailoverState": {
+          "description": "Gets or sets the test failover state.",
+          "type": "string"
+        },
+        "resynchronizationState": {
+          "description": "Gets or sets the resynchronization state.",
+          "type": "string"
+        },
+        "resyncRequired": {
+          "description": "Gets or sets a value indicating whether resynchronization is required or not.",
+          "type": "boolean"
+        },
+        "customProperties": {
+          "$ref": "#/definitions/ProtectedItemModelCustomProperties"
+        }
+      }
+    },
+    "ReplicationExtensionModel": {
+      "description": "Replication extension model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the replication extension Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the replication extension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the replication extension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicationExtensionModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReplicationExtensionModelCollection": {
+      "description": "Replication extension model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of replication extensions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationExtensionModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationExtensionModelCustomProperties": {
+      "description": "Replication extension model custom properties.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets or sets the instance type.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationExtensionModelProperties": {
+      "description": "Replication extension model properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the replication extension.",
+          "enum": [
+            "Creating",
+            "Created",
+            "Deleted",
+            "Updating",
+            "Updated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customProperties": {
+          "$ref": "#/definitions/ReplicationExtensionModelCustomProperties"
+        }
+      }
+    },
+    "VaultModel": {
+      "description": "Vault model.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the vault id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the vault.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the vault.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Gets or sets the location of the vault.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/VaultModelProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VaultModelCollection": {
+      "description": "Vault model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of vaults.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "VaultModelProperties": {
+      "description": "Vault properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the vault.",
+          "enum": [
+            "Creating",
+            "Created",
+            "Deleted",
+            "Updating",
+            "Updated"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "Resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
