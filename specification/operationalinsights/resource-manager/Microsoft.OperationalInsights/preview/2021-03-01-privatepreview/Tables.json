@@ -85,14 +85,14 @@
           "Tables"
         ],
         "x-ms-examples": {
-          "TableCreate_MetaDataChange": {
-            "$ref": "./examples/TableCreateUpdate_MetaData.json"
+          "TableCreate_MetadataChange": {
+            "$ref": "./examples/TableCreateUpdate_Metadata.json"
           },
           "TableCreate_SchemaChange": {
             "$ref": "./examples/TableCreateUpdate_Schema.json"
           },
-          "TableCreate_SchemaMetadaChange": {
-            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          "TableCreate_SchemaMetadataChange": {
+            "$ref": "./examples/TableCreateUpdate_SchemaMetadata.json"
           }
         },
         "operationId": "Tables_Upsert",
@@ -146,14 +146,14 @@
           "Tables"
         ],
         "x-ms-examples": {
-          "TableCreate_MetaDataChange": {
-            "$ref": "./examples/TableCreateUpdate_MetaData.json"
+          "TableUpdate_MetadataChange": {
+            "$ref": "./examples/TableCreateUpdate_Metadata.json"
           },
-          "TableCreate_SchemaChange": {
+          "TableUpdate_SchemaChange": {
             "$ref": "./examples/TableCreateUpdate_Schema.json"
           },
-          "TableCreate_SchemaMetadaChange": {
-            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          "TableUpdate_SchemaMetadataChange": {
+            "$ref": "./examples/TableCreateUpdate_SchemaMetadata.json"
           }
         },
         "operationId": "Tables_Update",
@@ -295,20 +295,20 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Coulmn's name."
+          "description": "Coulmn name."
         },
         "type": {
           "type": "string",
-          "description": "Coulmn's data type.",
+          "description": "Coulmn data type.",
           "enum": [
-            "String",
-            "Int",
-            "Long",
-            "Real",
-            "Boolean",
-            "DateTime",
-            "Guid",
-            "Dynamic"
+            "string",
+            "int",
+            "long",
+            "real",
+            "boolean",
+            "dateTime",
+            "guid",
+            "dynamic"
           ],
           "x-ms-enum": {
             "name": "ColumnTypeEnum",
@@ -317,12 +317,12 @@
         },
         "dataTypeHint": {
           "type": "string",
-          "description": "Coulmn's data type logical hint.",
+          "description": "Coulmn data type logical hint.",
           "enum": [
-            "URI",
-            "GUID",
-            "ARMPath",
-            "IP"
+            "uri",
+            "guid",
+            "armpath",
+            "ip"
           ],
           "x-ms-enum": {
             "name": "ColumnDataTypeHintEnum",
@@ -401,8 +401,8 @@
           "type": "string",
           "description": "Table's creator.",
           "enum": [
-            "Microsoft",
-            "Customer"
+            "microsoft",
+            "customer"
           ],
           "x-ms-enum": {
             "name": "SourceEnum",
