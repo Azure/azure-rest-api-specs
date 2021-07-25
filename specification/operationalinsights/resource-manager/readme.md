@@ -107,6 +107,15 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
+### Tag: package-2021-03-01-privatepreview
+
+These settings apply only when `--tag=package-2021-03-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-privatepreview'
+input-file:
+- Microsoft.OperationalInsights/preview/2021-03-01-privatepreview/Tables.json
+```
+
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.

@@ -1,0 +1,509 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
+      "get": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesListByWorkspace": {
+            "$ref": "./examples/TableList.json"
+          }
+        },
+        "operationId": "Tables_ListByWorkspace",
+        "description": "Gets all the tables for the specified Log Analytics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/TablesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
+      "put": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TableCreate_MetaDataChange": {
+            "$ref": "./examples/TableCreateUpdate_MetaData.json"
+          },
+          "TableCreate_SchemaChange": {
+            "$ref": "./examples/TableCreateUpdate_Schema.json"
+          },
+          "TableCreate_SchemaMetadaChange": {
+            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          }
+        },
+        "operationId": "Tables_Upsert",
+        "description": "Update or Create a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            },
+            "description": "The parameters required to update table properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "Accepted response definition (Long running operation)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TableCreate_MetaDataChange": {
+            "$ref": "./examples/TableCreateUpdate_MetaData.json"
+          },
+          "TableCreate_SchemaChange": {
+            "$ref": "./examples/TableCreateUpdate_Schema.json"
+          },
+          "TableCreate_SchemaMetadaChange": {
+            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          }
+        },
+        "operationId": "Tables_Update",
+        "description": "Update a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            },
+            "description": "The parameters required to update table properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "Accepted response definition (Long running operation)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TableGet.json"
+          }
+        },
+        "operationId": "Tables_Get",
+        "description": "Gets a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TableDelete.json"
+          }
+        },
+        "operationId": "Tables_Delete",
+        "description": "Delete a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition (Long running operation)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Column": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Coulmn's name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Coulmn's data type.",
+          "enum": [
+            "String",
+            "Int",
+            "Long",
+            "Real",
+            "Boolean",
+            "DateTime",
+            "Guid",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "ColumnTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "dataTypeHint": {
+          "type": "string",
+          "description": "Coulmn's data type logical hint.",
+          "enum": [
+            "URI",
+            "GUID",
+            "ARMPath",
+            "IP"
+          ],
+          "x-ms-enum": {
+            "name": "ColumnDataTypeHintEnum",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Coulmn display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Coulmn description."
+        },
+        "isDefaultDisplay": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Is displayed by default."
+        },
+        "isHidden": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Is column hidden."
+        }
+      },
+      "description": "Table column."
+    },
+    "Schema": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Table's name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Table's display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Table's description."
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "description": "A list of table custom columns."
+        },
+        "standardColumns": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "description": "A list of table standard columns."
+        },
+        "categories": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Table's Categories."
+        },
+        "labels": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Table's Labels."
+        },
+        "source": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Table's creator.",
+          "enum": [
+            "Microsoft",
+            "Customer"
+          ],
+          "x-ms-enum": {
+            "name": "SourceEnum",
+            "modelAsString": true
+          }
+        },
+        "solutions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Table is affiliated with which solutions."
+        },
+        "isTroubleshootingAllowed": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies if IsTroubleshootingEnabled property can be set for this table."
+        }
+      },
+      "description": "Table's schema."
+    },
+    "TableProperties": {
+      "properties": {
+        "retentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 7,
+          "maximum": 730,
+          "description": "The data table data retention in days, between 7 and 730. Setting this property to null will default to the workspace retention."
+        },
+        "isTroubleshootingAllowed": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies if IsTroubleshootingEnabled property can be set for this table."
+        },
+        "isTroubleshootEnabled": {
+          "type": "boolean",
+          "description": "Enable or disable troubleshoot for this table."
+        },
+        "lastTroubleshootDate": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Last time when troubleshooting was set for this table."
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "Table's schema."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Table's current provisioning state, if updating the table is set to resource lock, forbidding any update to the table until the on going operation is concluded.",
+          "enum": [
+            "Updating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Table's properties."
+    },
+    "Table": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TableProperties",
+          "description": "Table's properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Workspace data table definition."
+    },
+    "TablesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Table"
+          },
+          "description": "A list of data tables."
+        }
+      },
+      "description": "The list tables operation response."
+    }
+  },
+  "parameters": {
+    "TableNameParameter": {
+      "name": "tableName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the table.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
