@@ -73,10 +73,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -134,10 +131,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -171,10 +165,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -225,10 +216,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -276,10 +264,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -327,10 +312,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -369,10 +351,7 @@
           "415": {
             "description": "Unsupported Media Type",
             "schema": {
-              "Message": {
-                "type": "string",
-                "description": "The error message"
-              }
+              "$ref": "#/definitions/UnsupportedMediaTypeErrorResponse"
             }
           },
           "default": {
@@ -562,6 +541,16 @@
         }
       },
       "description": "Old Agreement Terms definition"
+    },
+    "UnsupportedMediaTypeErrorResponse": {
+      "description": "Error response that indicates the media type in the request is unsupported.",
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "description": "The details of the error."
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
