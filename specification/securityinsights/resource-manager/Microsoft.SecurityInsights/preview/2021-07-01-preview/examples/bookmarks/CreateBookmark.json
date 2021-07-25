@@ -17,6 +17,12 @@
         ],
         "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
         "queryResult": "Security Event query result",
+        "tactics": [
+          "Execution"
+        ],
+        "techniques": [
+          "T1609"
+        ],
         "entityMappings": [
           {
             "entityType": "Account",
@@ -58,7 +64,24 @@
             "Tag2"
           ],
           "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
-          "queryResult": "Security Event query result"
+          "queryResult": "Security Event query result",
+          "tactics": [
+            "Execution"
+          ],
+          "techniques": [
+            "T1609"
+          ],
+          "entityMappings": [
+            {
+              "entityType": "Account",
+              "fieldMappings": [
+                {
+                  "identifier": "Fullname",
+                  "value": "johndoe@microsoft.com"
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -88,7 +111,24 @@
             "Tag2"
           ],
           "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
-          "queryResult": "Security Event query result"
+          "queryResult": "Security Event query result",
+          "tactics": [
+            "Execution"
+          ],
+          "techniques": [
+            "T1609"
+          ],
+          "entityMappings": [
+            {
+              "entityType": "Account",
+              "fieldMappings": [
+                {
+                  "identifier": "Fullname",
+                  "value": "johndoe@microsoft.com"
+                }
+              ]
+            }
+          ]
         }
       }
     }
