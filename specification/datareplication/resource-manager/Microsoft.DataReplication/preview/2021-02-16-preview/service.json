@@ -47,6 +47,12 @@
             "schema": {
               "$ref": "#/definitions/DraModel"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
           }
         },
         "x-ms-examples": {
@@ -114,6 +120,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DraModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
             }
           }
         },
@@ -184,6 +196,12 @@
             "schema": {
               "$ref": "#/definitions/DraModel"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -199,6 +217,9 @@
         ],
         "summary": "Deletes the Dra.",
         "operationId": "Dra_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -239,6 +260,12 @@
           },
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -283,6 +310,12 @@
             "schema": {
               "$ref": "#/definitions/DraModelCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -302,6 +335,9 @@
         ],
         "summary": "Refreshes the Dra.",
         "operationId": "Dra_Refresh",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -338,6 +374,12 @@
                 "description": "Tracking URL for long running operation.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
             }
           }
         },
@@ -396,6 +438,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
             }
           }
         },
@@ -1311,6 +1359,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
             "description": "Success",
             "headers": {
@@ -2093,6 +2144,25 @@
     }
   },
   "definitions": {
+    "ArmError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ArmErrorInfo"
+        }
+      }
+    },
+    "ArmErrorInfo": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "DraModel": {
       "description": "Dra model.",
       "type": "object",
