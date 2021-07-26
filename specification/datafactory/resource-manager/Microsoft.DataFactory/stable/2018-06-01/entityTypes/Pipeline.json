@@ -4147,7 +4147,8 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "type": "object"
+          "type": "object",
+          "description": "Write behavior when copying data into sql. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4191,6 +4192,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into sql server. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4235,7 +4249,8 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "type": "object"
+          "type": "object",
+          "description": "Write behavior when copying data into Azure SQL. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4285,7 +4300,8 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "type": "object"
+          "type": "object",
+          "description": "White behavior when copying data into azure SQL MI. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4332,7 +4348,8 @@
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
-          "type": "object"
+          "type": "object",
+          "description": "Write behavior when copying data into azure SQL DW. Type: SqlDWWriteBehaviorEnum (or Expression with resultType SqlDWWriteBehaviorEnum)"
         },
         "upsertSettings": {
           "description": "SQL DW upsert settings.",
