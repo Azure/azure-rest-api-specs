@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-05-01"
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -548,6 +548,7 @@
       ]
     },
     "ApplicationTypeVersionsCleanupPolicy": {
+      "type": "object",
       "required": [
         "maxUnusedVersionsToKeep"
       ],
@@ -562,6 +563,7 @@
       "description": "The policy used to clean up unused versions. When the policy is not specified explicitly, the default unused application versions to keep will be 3."
     },
     "AzureActiveDirectory": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -579,6 +581,7 @@
       "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
+      "type": "object",
       "required": [
         "isAdmin"
       ],
@@ -694,7 +697,26 @@
         ]
       }
     },
+    "IPTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "The IP tag type."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The value of the IP tag."
+        }
+      },
+      "description": "IPTag associated with the object."
+    },
     "LoadBalancingRule": {
+      "type": "object",
       "required": [
         "frontendPort",
         "backendPort",
@@ -786,6 +808,7 @@
       "description": "The list results of the Service Fabric runtime versions."
     },
     "ManagedClusterCodeVersionResult": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -807,6 +830,7 @@
       "description": "The result of the Service Fabric runtime versions"
     },
     "ManagedClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -822,6 +846,7 @@
       "description": "Managed Cluster list results"
     },
     "ManagedClusterProperties": {
+      "type": "object",
       "required": [
         "dnsName",
         "adminUserName"
@@ -890,14 +915,14 @@
         },
         "allowRdpAccess": {
           "type": "boolean",
-          "description": "Setting this to true enables RDP access to the VM. The default NSG rule opens RDP port to internet which can be overridden with custom Network Security Rules. The default value for this setting is false."
+          "description": "Setting this to true enables RDP access to the VM. The default NSG rule opens RDP port to Internet which can be overridden with custom Network Security Rules. The default value for this setting is false."
         },
         "networkSecurityRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityRule"
           },
-          "description": "Custom Network Security Rules that are applied to the virtual network of the cluster."
+          "description": "Custom Network Security Rules that are applied to the Virtual Network of the cluster."
         },
         "clients": {
           "type": "array",
@@ -952,11 +977,27 @@
         "applicationTypeVersionsCleanupPolicy": {
           "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
           "description": "The policy used to clean up unused versions."
+        },
+        "enableIpv6": {
+          "type": "boolean",
+          "description": "Setting this to true creates IPv6 address space for the default VNet used by the cluster. This setting cannot be changed once the cluster is created. The default value for this setting is false."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "If specified, the node types for the cluster are created in this subnet instead of the default VNet. The **networkSecurityRules** specified for the cluster are also applied to this subnet. This setting cannot be changed once the cluster is created."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPTag"
+          },
+          "description": "The list of IP tags associated with the default public IP address of the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
     },
     "ManagedClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -969,6 +1010,7 @@
       "description": "Managed cluster update request"
     },
     "ManagedClusterVersionDetails": {
+      "type": "object",
       "properties": {
         "clusterCodeVersion": {
           "type": "string",
@@ -983,6 +1025,111 @@
         }
       },
       "description": "The detail of the Service Fabric runtime version result"
+    },
+    "OsType": {
+      "type": "string",
+      "description": "Cluster operating system, the default will be Windows",
+      "enum": [
+        "Windows"
+      ]
+    },
+    "Sku": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "Sku Name."
+        }
+      },
+      "description": "Service Fabric managed cluster Sku definition"
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "Sku Name.",
+      "enum": [
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic requires a minimum of 3 nodes and allows only 1 node type."
+          },
+          {
+            "value": "Standard",
+            "description": "Requires a minimum of 5 nodes and allows 1 or more node type."
+          }
+        ]
+      }
+    },
+    "AvailableOperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      },
+      "description": "Operation supported by the Service Fabric resource provider"
+    },
+    "ErrorModel": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
     },
     "NetworkSecurityRule": {
       "required": [
@@ -1079,110 +1226,6 @@
         }
       },
       "description": "Describes a network security rule."
-    },
-    "OsType": {
-      "type": "string",
-      "description": "Cluster operating system, the default will be Windows",
-      "enum": [
-        "Windows"
-      ]
-    },
-    "Sku": {
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "Sku Name."
-        }
-      },
-      "description": "Service Fabric managed cluster Sku definition"
-    },
-    "SkuName": {
-      "type": "string",
-      "description": "Sku Name.",
-      "enum": [
-        "Basic",
-        "Standard"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Basic",
-            "description": "Basic requires a minimum of 3 nodes and allows only 1 node type."
-          },
-          {
-            "value": "Standard",
-            "description": "Requires a minimum of 5 nodes and allows 1 or more node type."
-          }
-        ]
-      }
-    },
-    "AvailableOperationDisplay": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The name of the provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that can be performed."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description"
-        }
-      },
-      "description": "Operation supported by the Service Fabric resource provider"
-    },
-    "ErrorModel": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorModelError",
-          "description": "The error details."
-        }
-      },
-      "description": "The structure of the error."
-    },
-    "ErrorModelError": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "The error details."
-    },
-    "ManagedResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the managed resource.",
-      "enum": [
-        "None",
-        "Creating",
-        "Created",
-        "Updating",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleting",
-        "Deleted",
-        "Other"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedResourceProvisioningState",
-        "modelAsString": true
-      }
     },
     "OperationListResult": {
       "properties": {
@@ -1348,11 +1391,11 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-05-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-07-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-05-01"
+        "2021-07-01-preview"
       ],
       "x-ms-parameter-location": "client"
     },
