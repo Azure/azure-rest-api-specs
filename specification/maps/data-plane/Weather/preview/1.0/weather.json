@@ -610,6 +610,59 @@
           }
         }
       }
+    },
+    "/weather/airQuality/forecast/hourly/{format}": {
+      "get": {
+        "description": "**Get Air Quality Hourly forecast**\n\n**Applies to**: S1 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for current air quality.",
+        "operationId": "Weather_GetAirQualityHourlyForecast",
+        "x-ms-examples": {
+          "HourlyAirQualityForecast": {
+            "$ref": "./examples/GetHourlyAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/WeatherApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HourlyAirQualityForecastResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
     }
   },
   "definitions": {
