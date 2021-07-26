@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -241,7 +241,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers": {
       "get": {
         "tags": [
           "Servers"
@@ -283,7 +283,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/flexibleServers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/flexibleServers": {
       "get": {
         "tags": [
           "Servers"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
@@ -376,7 +376,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/start": {
       "post": {
         "tags": [
           "ServerStart"
@@ -419,7 +419,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/stop": {
       "post": {
         "tags": [
           "ServerStop"
@@ -462,7 +462,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -616,7 +616,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -661,7 +661,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -706,7 +706,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}": {
       "get": {
         "tags": [
           "Configurations"
@@ -863,7 +863,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -908,7 +908,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/capabilities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
       "get": {
         "tags": [
           "LocationBasedCapabilities"
@@ -950,7 +950,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
       "post": {
         "tags": [
           "VirtualNetworkSubnetUsage"
@@ -998,7 +998,7 @@
         }
       }
     },
-    "/providers/Microsoft.DBForPostgreSql/operations": {
+    "/providers/Microsoft.DBforPostgreSQL/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1092,6 +1092,11 @@
           "format": "int64",
           "description": "storage size in MB",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "storage size in MB capability"
@@ -1121,6 +1126,11 @@
           "format": "int64",
           "description": "supported memory per vCore in MB",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "Vcores capability"
@@ -1139,6 +1149,11 @@
             "$ref": "#/definitions/VcoreCapability"
           },
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "Server version capabilities."
@@ -1156,11 +1171,38 @@
             "$ref": "#/definitions/StorageMBCapability"
           },
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
         }
       },
       "description": "storage edition capability"
     },
-    "ServerEditionCapability": {
+    "NodeTypeCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "note type name",
+          "readOnly": true
+        },
+        "nodeType": {
+          "type": "string",
+          "description": "note type",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "node type capability"
+    },
+    "FlexibleServerEditionCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1172,6 +1214,7 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
         "supportedServerVersions": {
@@ -1179,10 +1222,56 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
           "readOnly": true
         }
       },
-      "description": "Server edition capabilities."
+      "description": "Flexible server edition capabilities."
+    },
+    "HyperscaleNodeEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "description": "The list of editions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedNodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeCapability"
+          },
+          "description": "The list of Node Types supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Hyperscale node edition capabilities."
     },
     "CapabilityProperties": {
       "properties": {
@@ -1191,11 +1280,38 @@
           "description": "zone name",
           "readOnly": true
         },
+        "geoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
+        "zoneRedundantHaSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can support multi zone HA.",
+          "readOnly": true
+        },
+        "zoneRedundantHaAndGeoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
         "supportedFlexibleServerEditions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerEditionCapability"
+            "$ref": "#/definitions/FlexibleServerEditionCapability"
           },
+          "readOnly": true
+        },
+        "supportedHyperscaleNodeEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperscaleNodeEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
           "readOnly": true
         }
       },
@@ -1330,7 +1446,11 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "availability zone information of the server."
+          "description": "availability zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -1362,10 +1482,6 @@
     },
     "Server": {
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
-          "description": "The Azure Active Directory identity of the server."
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1605,8 +1721,7 @@
         },
         "standbyAvailabilityZone": {
           "type": "string",
-          "description": "availability zone information of the standby.",
-          "readOnly": true
+          "description": "availability zone information of the standby."
         }
       },
       "description": "High availability properties of a server"

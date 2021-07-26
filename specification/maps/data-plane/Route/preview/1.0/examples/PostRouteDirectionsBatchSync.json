@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "json",
+    "api-version": "1.0",
+    "postRouteDirectionsBatchRequestBody": {
+      "batchItems": [
+        {
+          "query": "?query=47.639987,-122.128384:47.621252,-122.184408:47.596437,-122.332000&routeType=fastest&travelMode=car&maxAlternatives=99"
+        },
+        {
+          "query": "?query=47.620659,-122.348934:47.610101,-122.342015&travelMode=bicycle&routeType=eco&traffic=false"
+        },
+        {
+          "query": "?query=40.759856,-73.985108:40.771136,-73.973506&travelMode=pedestrian&routeType=shortest"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "batchItems": [
+          {
+            "statusCode": 400,
+            "response": {
+              "error": {
+                "code": "400 BadRequest",
+                "message": "maxAlternatives parameter value should be between 0 and 5 inclusive"
+              }
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "formatVersion": "0.0.12",
+              "routes": [
+                {
+                  "summary": {
+                    "lengthInMeters": 1754,
+                    "travelTimeInSeconds": 386,
+                    "trafficDelayInSeconds": 0,
+                    "departureTime": "2019-06-21T22:56:23+00:00",
+                    "arrivalTime": "2019-06-21T23:02:49+00:00"
+                  },
+                  "legs": [
+                    {
+                      "summary": {
+                        "lengthInMeters": 1754,
+                        "travelTimeInSeconds": 386,
+                        "trafficDelayInSeconds": 0,
+                        "departureTime": "2019-06-21T22:56:23+00:00",
+                        "arrivalTime": "2019-06-21T23:02:49+00:00"
+                      },
+                      "points": [
+                        {
+                          "latitude": 47.62094,
+                          "longitude": -122.34892
+                        },
+                        {
+                          "latitude": 47.62094,
+                          "longitude": -122.3485
+                        },
+                        {
+                          "latitude": 47.62095,
+                          "longitude": -122.3476
+                        },
+                        {
+                          "latitude": 47.60995,
+                          "longitude": -122.34174
+                        },
+                        {
+                          "latitude": 47.61011,
+                          "longitude": -122.342
+                        }
+                      ]
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "startPointIndex": 0,
+                      "endPointIndex": 44,
+                      "sectionType": "TRAVEL_MODE",
+                      "travelMode": "bicycle"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "formatVersion": "0.0.12",
+              "routes": [
+                {
+                  "summary": {
+                    "lengthInMeters": 1772,
+                    "travelTimeInSeconds": 1276,
+                    "trafficDelayInSeconds": 0,
+                    "departureTime": "2019-06-21T22:56:23+00:00",
+                    "arrivalTime": "2019-06-21T23:17:38+00:00"
+                  },
+                  "legs": [
+                    {
+                      "summary": {
+                        "lengthInMeters": 1772,
+                        "travelTimeInSeconds": 1276,
+                        "trafficDelayInSeconds": 0,
+                        "departureTime": "2019-06-21T22:56:23+00:00",
+                        "arrivalTime": "2019-06-21T23:17:38+00:00"
+                      },
+                      "points": [
+                        {
+                          "latitude": 40.75982,
+                          "longitude": -73.98493
+                        },
+                        {
+                          "latitude": 40.7601,
+                          "longitude": -73.98483
+                        },
+                        {
+                          "latitude": 40.75984,
+                          "longitude": -73.98417
+                        },
+                        {
+                          "latitude": 40.76047,
+                          "longitude": -73.9837
+                        },
+                        {
+                          "latitude": 40.77095,
+                          "longitude": -73.9736
+                        },
+                        {
+                          "latitude": 40.77114,
+                          "longitude": -73.97356
+                        }
+                      ]
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "startPointIndex": 0,
+                      "endPointIndex": 47,
+                      "sectionType": "TRAVEL_MODE",
+                      "travelMode": "pedestrian"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "summary": {
+          "successfulRequests": 2,
+          "totalRequests": 3
+        }
+      }
+    },
+    "408": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "408 Timeout",
+          "message": "Timeout: The request took longer to finish than the maximum amount of time defined in the api."
+        }
+      }
+    }
+  }
+}

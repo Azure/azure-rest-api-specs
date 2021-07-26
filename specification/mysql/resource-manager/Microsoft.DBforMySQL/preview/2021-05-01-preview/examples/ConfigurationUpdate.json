@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "serverName": "testserver",
+    "configurationName": "event_scheduler",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "value": "on",
+        "source": "user-override"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "value": "ON",
+          "description": "Indicates the status of the Event Scheduler. It is always OFF for a replica server to keep the replication consistency.",
+          "defaultValue": "OFF",
+          "dataType": "Enumeration",
+          "allowedValues": "ON,OFF",
+          "source": "user-override",
+          "isConfigPendingRestart": "False",
+          "isDynamicConfig": "True",
+          "isReadOnly": "False"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/configurations/event_scheduler",
+        "name": "event_scheduler",
+        "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+      }
+    },
+    "202": {}
+  }
+}
