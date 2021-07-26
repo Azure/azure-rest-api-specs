@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-02'
 input-file:
-  - Microsoft.DataReplication/preview/2021-02-16/service.json
+  - Microsoft.DataReplication/preview/2021-02-16-preview/service.json
 ```
 ---
 
