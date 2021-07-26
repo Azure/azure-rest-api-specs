@@ -1,0 +1,318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0-preview.1",
+    "title": "Question Answering Client",
+    "description": "An API for Unified Language Service Prebuilt Skill - Question Answering - Prediction"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/questionanswering/v1.0-preview.1",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/generateAnswer": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "GenerateAnswer call to query with prebuilt document text.",
+        "operationId": "Prebuilt_GenerateAnswer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrebuiltGenerateAnswerPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "GenerateAnswer call response.",
+            "schema": {
+              "$ref": "#/definitions/SearchResultList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulPrebuiltGenAns.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ]
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innerError": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerErrorModel"
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human readable error code.",
+      "x-ms-enum": {
+        "name": "ErrorCodeType",
+        "modelAsString": true
+      },
+      "enum": [
+        "BadArgument",
+        "Forbidden",
+        "NotFound",
+        "Unauthorized",
+        "Unspecified",
+        "SKULimitExceeded",
+        "ServiceError",
+        "ValidationFailure"
+      ]
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A more specific error code than was provided by the containing error."
+        },
+        "innerError": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerErrorModel"
+        }
+      }
+    },
+    "Query": {
+      "type": "object",
+      "description": "POST body schema to query for an answer in a paragraph text.",
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "User question to query against paragraph text."
+        },
+        "top": {
+          "type": "integer",
+          "description": "Max number of answers to be returned for the question.",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "description": "Minimum threshold score for answers."
+        },
+        "answerSpanRequest": {
+          "description": "To configure Answer span prediction feature.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanRequest"
+            }
+          ]
+        },
+        "documents": {
+          "type": "array",
+          "description": "Documents with document text for querying",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        }
+      }
+    },
+    "SearchResultList": {
+      "type": "object",
+      "description": "Represents List of Answers.",
+      "additionalProperties": false,
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Search Result list.",
+          "items": {
+            "$ref": "#/definitions/SearchResult"
+          }
+        }
+      }
+    },
+    "SearchResult": {
+      "type": "object",
+      "description": "Represents Search Result.",
+      "additionalProperties": false,
+      "properties": {
+        "answer": {
+          "type": "string",
+          "description": "Answer."
+        },
+        "score": {
+          "type": "number",
+          "description": "Search result score."
+        },
+        "answerSpan": {
+          "type": "object",
+          "description": "Answer span object of Search Result with respect to user's question.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanResponse"
+            }
+          ]
+        }
+      }
+    },
+    "AnswerSpanRequest": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or Disable Answer Span prediction."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span."
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "description": "Number of Top answers to be considered for span prediction.",
+          "format": "int32",
+          "maximum": 10,
+          "minimum": 1
+        }
+      }
+    },
+    "AnswerSpanResponse": {
+      "type": "object",
+      "description": "Answer span object of Answer.",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "score": {
+          "type": "number",
+          "description": "Predicted score of answer span.",
+          "format": "double"
+        },
+        "startIndex": {
+          "type": "integer",
+          "description": "Start index of answer span in answer.",
+          "format": "int32"
+        },
+        "endIndex": {
+          "type": "integer",
+          "description": "End index of answer span in answer.",
+          "format": "int32"
+        }
+      }
+    },
+    "Document" :{
+      "type": "object",
+      "description": "Document to be searched for an answer.",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text in the document."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the document. Please find the list of supported languages <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
+          "maxLength": 100,
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PrebuiltGenerateAnswerPayload": {
+      "name": "prebuiltGenerateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Query"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name >.api.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
