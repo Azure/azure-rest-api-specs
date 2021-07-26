@@ -1,0 +1,5016 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-01-01",
+    "title": "Azure Migrate V2",
+    "description": "Discover your workloads for Azure.",
+    "contact": {
+      "name": "Microsoft",
+      "email": "azuremigrate@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "HyperVCluster"
+        ],
+        "summary": "Method to get a Hyper-V cluster.",
+        "operationId": "HyperVCluster_GetCluster",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Cluster ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVCluster"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster": {
+            "$ref": "./examples/HyperVCluster_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "HyperVCluster"
+        ],
+        "summary": "Method to create or update a cluster in site.",
+        "operationId": "HyperVCluster_PutCluster",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Cluster ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Put cluster body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperVCluster"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add new cluster": {
+            "$ref": "./examples/HyperVCluster_Create.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clusters": {
+      "get": {
+        "tags": [
+          "HyperVCluster"
+        ],
+        "summary": "Method to get all clusters in a site.",
+        "operationId": "HyperVCluster_GetAllClustersInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVClusterCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster by site": {
+            "$ref": "./examples/HyperVCluster_ListBySite.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/hosts/{hostName}": {
+      "get": {
+        "tags": [
+          "HyperVHost"
+        ],
+        "summary": "Method to get a Hyper-V host.",
+        "operationId": "HyperVHost_GetHost",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Host ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVHost"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get host": {
+            "$ref": "./examples/HyperVHost_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "HyperVHost"
+        ],
+        "summary": "Method to create or update a host in site.",
+        "operationId": "HyperVHost_PutHost",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Host ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Put host body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperVHost"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add new host": {
+            "$ref": "./examples/HyperVHost_Create.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/hosts": {
+      "get": {
+        "tags": [
+          "HyperVHost"
+        ],
+        "summary": "Method to get all hosts in a site.",
+        "operationId": "HyperVHost_GetAllHostsInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVHostCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List hosts by site": {
+            "$ref": "./examples/HyperVHost_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "HyperVJobs"
+        ],
+        "summary": "Method to get job.",
+        "operationId": "HyperVJobs_GetJob",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVJob"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          "HyperVJobs"
+        ],
+        "summary": "Method to get all jobs in a site.",
+        "operationId": "HyperVJobs_GetAllJobsInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "HyperVMachines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "HyperVMachines_GetMachine",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVMachine"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get machine.": {
+            "$ref": "./examples/HyperVMachine_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          "HyperVMachines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "HyperVMachines_GetAllMachinesInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total count of machines in the given site.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVMachineCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List hosts by site": {
+            "$ref": "./examples/HyperVMachines_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "tags": [
+          "HyperVOperationsStatus"
+        ],
+        "summary": "Method to get operation status.",
+        "operationId": "HyperVOperationsStatus_GetOperationStatus",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "description": "Operation status ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation status.": {
+            "$ref": "./examples/HyperVOperationsStatus_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          "HyperVRunAsAccounts"
+        ],
+        "summary": "Method to get run as account.",
+        "operationId": "HyperVRunAsAccounts_GetRunAsAccount",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Run as account ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVRunAsAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get run as account.": {
+            "$ref": "./examples/HyperVRunAsAccount_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          "HyperVRunAsAccounts"
+        ],
+        "summary": "Method to get run as accounts.",
+        "operationId": "HyperVRunAsAccounts_GetAllRunAsAccountsInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVRunAsAccountCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Run As Accounts by site": {
+            "$ref": "./examples/HyperVRunAsAccounts_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}": {
+      "get": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to get a site.",
+        "operationId": "HyperVSites_GetSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Hyper-V site": {
+            "$ref": "./examples/HyperVSite_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to create or update a site.",
+        "operationId": "HyperVSites_PutSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Hyper-V site": {
+            "$ref": "./examples/HyperVSite_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to delete a site.",
+        "operationId": "HyperVSites_DeleteSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Hyper-V site.": {
+            "$ref": "./examples/HyperVSite_Delete.json"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to patch an existing site.",
+        "operationId": "HyperVSites_PatchSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Hyper-V site.": {
+            "$ref": "./examples/HyperVSite_Patch.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/refresh": {
+      "post": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to refresh a site.",
+        "operationId": "HyperVSites_RefreshSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh Hyper-V site.": {
+            "$ref": "./examples/HyperVSite_Refresh.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/healthSummary": {
+      "post": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to get site health summary.",
+        "operationId": "HyperVSites_GetSiteHealthSummary",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Hyper-V site health summary.": {
+            "$ref": "./examples/HyperVSiteHealthSummary_Post.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Method to get job.",
+        "operationId": "Jobs_GetJob",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareJob"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Method to get all jobs in a site.",
+        "operationId": "Jobs_GetAllJobsInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "Machines_GetMachine",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareMachine"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware machine.": {
+            "$ref": "./examples/VMwareMachine_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "Machines_GetAllMachinesInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total count of machines in the given site.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareMachineCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VMware machines": {
+            "$ref": "./examples/VMwareMachines_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines/{machineName}/stop": {
+      "post": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Method to stop a machine.",
+        "operationId": "Machines_StopMachine",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines/{machineName}/start": {
+      "post": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Method to start a machine.",
+        "operationId": "Machines_StartMachine",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          "RunAsAccounts"
+        ],
+        "summary": "Method to get run as account.",
+        "operationId": "RunAsAccounts_GetRunAsAccount",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Run as account ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareRunAsAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware run as account.": {
+            "$ref": "./examples/VMwareRunAsAccount_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          "RunAsAccounts"
+        ],
+        "summary": "Method to get run as accounts.",
+        "operationId": "RunAsAccounts_GetAllRunAsAccountsInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareRunAsAccountCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List VMware run as account by site.": {
+            "$ref": "./examples/VMwareRunAsAccount_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to get a site.",
+        "operationId": "Sites_GetSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware site": {
+            "$ref": "./examples/VMwareSite_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to create or update a site.",
+        "operationId": "Sites_PutSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VMware site": {
+            "$ref": "./examples/VMwareSite_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to delete a site.",
+        "operationId": "Sites_DeleteSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete VMware site": {
+            "$ref": "./examples/VMwareSite_Delete.json"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to update an existing site.",
+        "operationId": "Sites_PatchSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch VMware site": {
+            "$ref": "./examples/VMwareSite_Patch.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/refresh": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to refresh a site.",
+        "operationId": "Sites_RefreshSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh VMware site": {
+            "$ref": "./examples/VMwareSite_Refresh.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/healthSummary": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to get site health summary.",
+        "operationId": "Sites_GetSiteHealthSummary",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VMware site health summary.": {
+            "$ref": "./examples/VMwareSiteHealthSummary_Post.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/vCenters/{vcenterName}": {
+      "get": {
+        "tags": [
+          "VCenter"
+        ],
+        "summary": "Method to get a vCenter.",
+        "operationId": "VCenter_GetVCenter",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vcenterName",
+            "in": "path",
+            "description": "VCenter ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware Vcenter.": {
+            "$ref": "./examples/VMwareVcenter_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "VCenter"
+        ],
+        "summary": "Method to create or update a vCenter in site.",
+        "operationId": "VCenter_PutVCenter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vcenterName",
+            "in": "path",
+            "description": "VCenter ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Put vCenter body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VMware Vcenter": {
+            "$ref": "./examples/VMwareVcenter_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "VCenter"
+        ],
+        "summary": "Method to delete vCenter in site.",
+        "operationId": "VCenter_DeleteVCenter",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vcenterName",
+            "in": "path",
+            "description": "VCenter ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete VMware Vcenter.": {
+            "$ref": "./examples/VMwareVcenter_Delete.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/vCenters": {
+      "get": {
+        "tags": [
+          "VCenter"
+        ],
+        "summary": "Method to get all vCenters in a site.",
+        "operationId": "VCenter_GetAllVCentersInSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenterCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List VMware vCenters by site": {
+            "$ref": "./examples/VMwareVcenter_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "tags": [
+          "VMwareOperationsStatus"
+        ],
+        "summary": "Method to get operation status.",
+        "operationId": "VMwareOperationsStatus_GetOperationStatus",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "description": "Operation status ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware operation status.": {
+            "$ref": "./examples/VMwareOperationsStatus_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "HyperVSites"
+        ],
+        "summary": "Method to get site usage.",
+        "operationId": "HyperVSites_GetSiteUsage",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVSiteUsage"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Hyper-V site summary/usage.": {
+            "$ref": "./examples/HyperVSiteSummary_Post.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Method to get site usage/summary.",
+        "operationId": "Sites_GetSiteUsage",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareSiteUsage"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VMware site usage/summary.": {
+            "$ref": "./examples/VMwareSiteSummary_Post.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/providers/Microsoft.OffAzure/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "HyperVCluster": {
+      "description": "Cluster REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the cluster.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/hyperVSites/clusters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/HyperVClusterProperties",
+          "description": "Nested properties of the cluster."
+        }
+      }
+    },
+    "HyperVClusterProperties": {
+      "description": "Class for cluster properties.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "Timestamp marking Hyper-V cluster creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the Hyper-V cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "FQDN/IPAddress of the Hyper-V cluster.",
+          "type": "string"
+        },
+        "functionalLevel": {
+          "format": "int32",
+          "description": "Functional level of the Hyper-V cluster.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Hyper-V cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "description": "Run as account ID of the Hyper-V cluster.",
+          "type": "string"
+        },
+        "hostFqdnList": {
+          "description": "List of hosts (FQDN) currently being tracked by the cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "description": "Errors for Hyper-V clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HealthErrorDetails": {
+      "description": "Error contract returned when some exception occurs in Rest API.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "description": "Error ID.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "code": {
+          "description": "Error name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "Possible causes of error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "Recommended action to resolve error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Error severity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "summaryMessage": {
+          "description": "Error summary message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "Error source.",
+          "type": "string",
+          "readOnly": true
+        },
+        "messageParameters": {
+          "description": "Message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVClusterCollection": {
+      "description": "Collection of Hyper-V clusters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVCluster"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVHost": {
+      "description": "Host REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the host.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/hyperVSites/hosts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/HyperVHostProperties",
+          "description": "Nested properties."
+        }
+      }
+    },
+    "HyperVHostProperties": {
+      "description": "Class for host properties.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "Timestamp marking Hyper-V host creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the Hyper-V host.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "FQDN/IPAddress of the Hyper-V host.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Run as account ID of the Hyper-V host.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the Hyper-V host.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors for Hyper-V hosts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVHostCollection": {
+      "description": "Collection of Hyper-V hosts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of hosts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVHost"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVJob": {
+      "description": "Job REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/HyperVSites/Jobs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "nested properties of Hyper-V job.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobProperties": {
+      "description": "Class for machine properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "Operation end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the Job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientRequestId": {
+          "description": "Client request Id used in the operation execution context.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityId": {
+          "description": "Activity Id used in the operation execution context.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error contract returned when some exception occurs in Rest API.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "Possible causes of error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "Recommended action to resolve error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Error severity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAgentReportedError": {
+          "description": "Value indicating whether the error originated from a agent or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "agentErrorCode": {
+          "description": "Agent error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentErrorMessage": {
+          "description": "Error message from the agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentErrorPossibleCauses": {
+          "description": "Possible causes for the agent error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentErrorRecommendedAction": {
+          "description": "Recommended action for the agent error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVJobCollection": {
+      "description": "Collection of Hyper-V jobs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVJob"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVMachine": {
+      "description": "Machine REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/HyperVSites/Machines.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/HyperVMachineProperties",
+          "description": "Nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVMachineProperties": {
+      "description": "Class for machine properties.",
+      "type": "object",
+      "properties": {
+        "hostFqdn": {
+          "description": "Host FQDN/IPAddress.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostId": {
+          "description": "Host ARM ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterFqdn": {
+          "description": "Cluster FQDN/IPAddress.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterId": {
+          "description": "Cluster ARM ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "managementServerType": {
+          "description": "Management server type of the machine. It is either Host or Cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "generation": {
+          "format": "int32",
+          "description": "Generation of the virtual machine.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "version": {
+          "description": "VM version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "highAvailability": {
+          "description": "Value indicating whether the VM is highly available.",
+          "enum": [
+            "Unknown",
+            "No",
+            "Yes"
+          ],
+          "x-ms-enum": {
+            "name": "HighlyAvailable",
+            "modelAsString": false
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "maxMemoryMB": {
+          "format": "int32",
+          "description": "Max memory of the virtual machine in MB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "firmware": {
+          "description": "Firmware of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDynamicMemoryEnabled": {
+          "description": "Value indicating whether dynamic memory is enabled for the VM.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "disks": {
+          "description": "Disks attached to the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVDisk"
+          },
+          "readOnly": true
+        },
+        "appsAndRoles": {
+          "$ref": "#/definitions/AppsAndRoles",
+          "description": "Apps and Roles of the VM.",
+          "readOnly": true
+        },
+        "networkAdapters": {
+          "description": "Network adapters attached to the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVNetworkAdapter"
+          },
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfProcessorCore": {
+          "format": "int32",
+          "description": "Number of Processor Cores allocated for the machine.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allocatedMemoryInMB": {
+          "format": "double",
+          "description": "Allocated Memory in MB.",
+          "type": "number",
+          "readOnly": true
+        },
+        "vmConfigurationFileLocation": {
+          "description": "Root location of the VM configuration file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operatingSystemDetails": {
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "Operating System Details installed on the machine.",
+          "readOnly": true
+        },
+        "guestOSDetails": {
+          "$ref": "#/definitions/GuestOSDetails",
+          "description": "Operating System Details extracted from the guest by executing script inside the guest VM.",
+          "readOnly": true
+        },
+        "numberOfApplications": {
+          "format": "int32",
+          "description": "Number of applications installed in the guest VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "guestDetailsDiscoveryTimestamp": {
+          "format": "date-time",
+          "description": "The last time at which the Guest Details of machine was discovered.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isGuestDetailsDiscoveryInProgress": {
+          "description": "Whether Refresh Fabric Layout Guest Details has been completed once. Portal will show discovery in progress, if this value is true.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "description": "Timestamp marking machine creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "On-premise Instance UUID of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerStatus": {
+          "description": "Machine power status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosSerialNumber": {
+          "description": "Machine BIOS serial number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosGuid": {
+          "description": "Machine BIOS GUID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmFqdn": {
+          "description": "Machine FQDN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "description": "Value indicating whether VM is deleted.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors for machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVDisk": {
+      "description": "Second level object returned as part of Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "description": "Id of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vhdId": {
+          "description": "VHD Id of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maxSizeInBytes": {
+          "format": "int64",
+          "description": "Bytes allocated for the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskType": {
+          "description": "Type of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lun": {
+          "format": "int32",
+          "description": "LUN of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Path of the disk.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppsAndRoles": {
+      "description": "AppsAndRoles in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "applications": {
+          "description": "Applications of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "readOnly": true
+        },
+        "webApplications": {
+          "description": "WebApplications of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplication"
+          },
+          "readOnly": true
+        },
+        "features": {
+          "description": "Features of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          },
+          "readOnly": true
+        },
+        "sqlServers": {
+          "description": "SQLServers of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLServer"
+          },
+          "readOnly": true
+        },
+        "sharePointServers": {
+          "description": "SharePointServers of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharePointServer"
+          },
+          "readOnly": true
+        },
+        "systemCenters": {
+          "description": "SystemCenters of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemCenter"
+          },
+          "readOnly": true
+        },
+        "bizTalkServers": {
+          "description": "BizTalkServers of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BizTalkServer"
+          },
+          "readOnly": true
+        },
+        "exchangeServers": {
+          "description": "ExchangeServers of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExchangeServer"
+          },
+          "readOnly": true
+        },
+        "otherDatabases": {
+          "description": "OtherDatabaseServers of the AppsAndRoles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OtherDatabase"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVNetworkAdapter": {
+      "description": "Second level object represented in responses as part of Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "networkId": {
+          "description": "Network Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnetName": {
+          "description": "Name of the VM subnet within the virtual network the NIC is attached to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "staticIpAddress": {
+          "description": "Static IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nicType": {
+          "description": "Mac address of the NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nicId": {
+          "description": "NIC Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Mac address of the NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressList": {
+          "description": "IP addresses for the machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkName": {
+          "description": "Network Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressType": {
+          "description": "Type of the IP address.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperatingSystem": {
+      "description": "Second level object returned as part of Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "Type of the operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Name of the operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "description": "Version of the operating system.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GuestOSDetails": {
+      "description": "Data related to a machine's operating system. Serialized and stored as part of Machine Rest object.",
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "Type of the operating system.",
+          "type": "string"
+        },
+        "osName": {
+          "description": "Name of the operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "description": "Version of the operating system.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Application": {
+      "description": "Application in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the Application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "Provider of the Application.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WebApplication": {
+      "description": "WebApplication in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "platform": {
+          "description": "Platform of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupName": {
+          "description": "GroupName of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "webServer": {
+          "description": "WebServer of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        },
+        "applicationPool": {
+          "description": "ApplicationPool of the WebApplication.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Feature": {
+      "description": "Feature in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "featureType": {
+          "description": "FeatureType of the Feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parent": {
+          "description": "Parent of the Feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Feature.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SQLServer": {
+      "description": "SQLServer in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "edition": {
+          "description": "Edition of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "servicePack": {
+          "description": "ServicePack of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clustered": {
+          "description": "Clustered of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterName": {
+          "description": "ClusterName of the SQLServer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharePointServer": {
+      "description": "SharePointServer in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "productName": {
+          "description": "ProductName of the SharePointServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isEnterprise": {
+          "description": "Value indicating whether the SharePointServer is Enterprise.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the SharePointServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the SharePointServer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemCenter": {
+      "description": "SystemCenter in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "productName": {
+          "description": "ProductName of the SystemCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the SystemCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the SystemCenter.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BizTalkServer": {
+      "description": "BizTalkServer in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "productName": {
+          "description": "ProductName of the BizTalkServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the BizTalkServer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExchangeServer": {
+      "description": "ExchangeServer in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "productName": {
+          "description": "ProductName of the ExchangeServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "edition": {
+          "description": "Edition of the ExchangeServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roles": {
+          "description": "Roles of the ExchangeServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "servicePack": {
+          "description": "ServicePack of the ExchangeServer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the ExchangeServer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OtherDatabase": {
+      "description": "OtherDatabase in the guest virtual machine.",
+      "type": "object",
+      "properties": {
+        "databaseType": {
+          "description": "DatabaseType of the OtherDatabase.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instance": {
+          "description": "Instance of the OtherDatabase.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the OtherDatabase.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVMachineCollection": {
+      "description": "Collection of Hyper-V machines.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Operation status REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Operation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the operation. ARM expects the terminal status to be one of Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatusError",
+          "description": "Error stating all error details for the operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusProperties",
+          "description": "Custom data.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "Class for operation status errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatusProperties": {
+      "description": "Class for operation result properties.",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Result or output of the workflow.",
+          "type": "string"
+        }
+      }
+    },
+    "HyperVRunAsAccount": {
+      "description": "Run as account REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/HyperVSites/RunAsAccounts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RunAsAccountProperties",
+          "description": "Nested properties of run as account.",
+          "readOnly": true
+        }
+      }
+    },
+    "RunAsAccountProperties": {
+      "description": "Class for run as account properties.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the run as account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "credentialType": {
+          "description": "Credential type of the run as account.",
+          "enum": [
+            "VMwareFabric",
+            "HyperVFabric",
+            "LinuxGuest",
+            "WindowsGuest",
+            "LinuxServer",
+            "WindowsServer"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "description": "Timestamp marking run as account creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the run as account.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVRunAsAccountCollection": {
+      "description": "Collection of Hyper-V run as accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of run as accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVRunAsAccount"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperVSite": {
+      "description": "Site REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Hyper-V site.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/HyperVSites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure location in which Sites is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "Nested properties of Hyper-V site."
+        }
+      }
+    },
+    "SiteProperties": {
+      "description": "Class for site properties.",
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Service principal identity details used by agent for communication to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "On-premises agent details."
+        },
+        "serviceEndpoint": {
+          "description": "Service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "discoverySolutionId": {
+          "description": "ARM ID of migration hub solution for SDS.",
+          "type": "string"
+        },
+        "applianceName": {
+          "description": "Appliance Name.",
+          "type": "string"
+        }
+      }
+    },
+    "SiteSpnProperties": {
+      "description": "Class for site properties.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "Intended audience for the service principal.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "AAD Authority URL which was used to request the token for the service principal.",
+          "type": "string"
+        },
+        "rawCertData": {
+          "description": "Raw certificate data for building certificate expiry flows.",
+          "type": "string"
+        }
+      }
+    },
+    "SiteAgentProperties": {
+      "description": "Class for site agent properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartBeatUtc": {
+          "format": "date-time",
+          "description": "Last heartbeat time of the agent in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "keyVaultUri": {
+          "description": "Key vault URI.",
+          "type": "string"
+        },
+        "keyVaultId": {
+          "description": "Key vault ARM Id.",
+          "type": "string"
+        }
+      }
+    },
+    "HyperVSiteUsage": {
+      "description": "Hyper-V site usage.",
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "format": "int32",
+          "description": "Number of machines discovered in the site.",
+          "type": "integer"
+        },
+        "runAsAccountCount": {
+          "format": "int32",
+          "description": "Number of run as accounts in the site.",
+          "type": "integer"
+        },
+        "hostCount": {
+          "format": "int32",
+          "description": "Number of hosts part of the site.",
+          "type": "integer"
+        },
+        "clusterCount": {
+          "format": "int32",
+          "description": "Number of clusters part of the site.",
+          "type": "integer"
+        }
+      }
+    },
+    "SiteHealthSummaryCollection": {
+      "description": "Collection of SiteHealthSummary.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of SiteHealthSummary.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteHealthSummary"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SiteHealthSummary": {
+      "description": "Site health summary model.",
+      "type": "object",
+      "properties": {
+        "applianceName": {
+          "description": "Appliance name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "summaryMessage": {
+          "description": "Summary message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorId": {
+          "format": "int64",
+          "description": "Error Id.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "affectedObjectsCount": {
+          "format": "int64",
+          "description": "Count of affected objects.",
+          "type": "integer"
+        },
+        "hitCount": {
+          "format": "int64",
+          "description": "Hit count of the error.",
+          "type": "integer"
+        },
+        "severity": {
+          "description": "Severity of error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "remediationGuidance": {
+          "description": "Remediation guidance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "affectedResourceType": {
+          "description": "Affected resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "affectedResources": {
+          "description": "Affected resources.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VMwareJob": {
+      "description": "Job REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/VMWareSites/Jobs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Nested properties of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareJobCollection": {
+      "description": "Collection of VMware jobs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareJob"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareMachine": {
+      "description": "Machine REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/VMWareSites/Machines.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/VMwareMachineProperties",
+          "description": "Nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareMachineProperties": {
+      "description": "Class for machine properties.",
+      "type": "object",
+      "properties": {
+        "dataCenterScope": {
+          "description": "Scope of the data center.",
+          "type": "string",
+          "readOnly": true
+        },
+        "firmware": {
+          "description": "Firmware of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "User description of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterFQDN": {
+          "description": "VCenter FQDN/IPAddress.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "VCenter ARM ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vMwareToolsStatus": {
+          "description": "VMware tools status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "changeTrackingSupported": {
+          "description": "Value indicating whether change tracking is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "changeTrackingEnabled": {
+          "description": "Value indicating whether change tracking is enabled.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "maxSnapshots": {
+          "format": "int32",
+          "description": "Maximum number of snapshots for the VM. Default value is -1.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "disks": {
+          "description": "Disks attached to the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareDisk"
+          },
+          "readOnly": true
+        },
+        "appsAndRoles": {
+          "$ref": "#/definitions/AppsAndRoles",
+          "description": "Apps And Roles of the VM.",
+          "readOnly": true
+        },
+        "hostInMaintenanceMode": {
+          "description": "Indicates whether the host is in maintenance mode.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "hostName": {
+          "description": "The host name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostPowerState": {
+          "description": "The host power state.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostVersion": {
+          "description": "The host version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkAdapters": {
+          "description": "Network adapters attached to the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareNetworkAdapter"
+          },
+          "readOnly": true
+        },
+        "dependencyMapping": {
+          "description": "If dependency mapping feature is enabled or not for the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dependencyMappingStartTime": {
+          "format": "date-time",
+          "description": "When dependency mapping collection is last started.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfProcessorCore": {
+          "format": "int32",
+          "description": "Number of Processor Cores allocated for the machine.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allocatedMemoryInMB": {
+          "format": "double",
+          "description": "Allocated Memory in MB.",
+          "type": "number",
+          "readOnly": true
+        },
+        "vmConfigurationFileLocation": {
+          "description": "Root location of the VM configuration file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operatingSystemDetails": {
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "Operating System Details installed on the machine.",
+          "readOnly": true
+        },
+        "guestOSDetails": {
+          "$ref": "#/definitions/GuestOSDetails",
+          "description": "Operating System Details extracted from the guest bu executing script inside the guest VM.",
+          "readOnly": true
+        },
+        "numberOfApplications": {
+          "format": "int32",
+          "description": "Number of applications installed in the guest VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "guestDetailsDiscoveryTimestamp": {
+          "format": "date-time",
+          "description": "The last time at which the Guest Details was discovered or the error while discovering guest details based discovery of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isGuestDetailsDiscoveryInProgress": {
+          "description": "Whether Refresh Fabric Layout Guest Details has been completed once. Portal will show discovery in progress, if this value is true.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "description": "Timestamp marking machine creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "On-premise Instance UUID of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerStatus": {
+          "description": "Machine power status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosSerialNumber": {
+          "description": "Machine BIOS serial number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosGuid": {
+          "description": "BIOS GUID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmFqdn": {
+          "description": "Machine FQDN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "description": "Value indicating whether VM is deleted.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors for machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareDisk": {
+      "description": "Second level object returned as part of Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Disk UUID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "label": {
+          "description": "Label of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskProvisioningPolicy": {
+          "description": "The provisioning policy of the disk. It is Thin or Thick or Unknown for the VMWare.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskScrubbingPolicy": {
+          "description": "The scrubbing policy of disks which can be eagerly zeroed or lazily zeroed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskMode": {
+          "description": "Disk mode property used for identifying independent disks.",
+          "enum": [
+            "persistent",
+            "independent_persistent",
+            "independent_nonpersistent",
+            "nonpersistent",
+            "undoable",
+            "append"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualDiskMode",
+            "modelAsString": true
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "maxSizeInBytes": {
+          "format": "int64",
+          "description": "Bytes allocated for the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskType": {
+          "description": "Type of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lun": {
+          "format": "int32",
+          "description": "LUN of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Path of the disk.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareNetworkAdapter": {
+      "description": "Second level object represented in responses as part of Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Label of the NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nicId": {
+          "description": "NIC Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Mac address of the NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressList": {
+          "description": "IP addresses for the machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkName": {
+          "description": "Network Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressType": {
+          "description": "Type of the IP address.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareMachineCollection": {
+      "description": "Collection of VMware machines.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareRunAsAccount": {
+      "description": "Run as account REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Run as account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/VMWareSites/RunAsAccounts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RunAsAccountProperties",
+          "description": "Nested properties of Run as account.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareRunAsAccountCollection": {
+      "description": "Collection of VMware run as accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of run as accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareRunAsAccount"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VMwareSite": {
+      "description": "Site REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the VMware site.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/VMWareSites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure location in which Sites is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "Nested properties of VMWare site."
+        }
+      }
+    },
+    "VMwareSiteUsage": {
+      "description": "VMware site usage.",
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "format": "int32",
+          "description": "Number of machines discovered in the site.",
+          "type": "integer"
+        },
+        "runAsAccountCount": {
+          "format": "int32",
+          "description": "Number of run as accounts in the site.",
+          "type": "integer"
+        },
+        "vCenterCount": {
+          "format": "int32",
+          "description": "Number of vCenters part of the site.",
+          "type": "integer"
+        }
+      }
+    },
+    "VCenter": {
+      "description": "VCenter REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the vCenter.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/VMWareSites/VCenters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/VCenterProperties",
+          "description": "vCenter nested properties."
+        }
+      }
+    },
+    "VCenterProperties": {
+      "description": "Class for vCenter properties.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "Timestamp marking vCenter creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "FQDN/IPAddress of the vCenter.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port of the vCenter.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Run as account ID of the vCenter.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "perfStatisticsLevel": {
+          "description": "Performance statistics enabled on the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "Instance UUID of the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VCenterCollection": {
+      "description": "Collection of vCenter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of vCenter.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VCenter"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Machine": {
+      "type": "object",
+      "properties": {
+        "properties.timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties.monitoringState": {
+          "enum": [
+            "monitored",
+            "discovered"
+          ],
+          "type": "string"
+        },
+        "properties.virtualizationState": {
+          "enum": [
+            "unknown",
+            "physical",
+            "virtual",
+            "hypervisor"
+          ],
+          "type": "string"
+        },
+        "properties.displayName": {
+          "type": "string"
+        },
+        "properties.computerName": {
+          "type": "string"
+        },
+        "properties.fullyQualifiedDomainName": {
+          "type": "string"
+        },
+        "properties.bootTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties.timezone": {
+          "$ref": "#/definitions/Timezone"
+        },
+        "properties.agent": {
+          "$ref": "#/definitions/AgentConfiguration"
+        },
+        "properties.resources": {
+          "$ref": "#/definitions/MachineResourcesConfiguration"
+        },
+        "properties.networking": {
+          "$ref": "#/definitions/NetworkConfiguration"
+        },
+        "properties.operatingSystem": {
+          "$ref": "#/definitions/OperatingSystemConfiguration"
+        },
+        "properties.virtualMachine": {
+          "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "properties.hypervisor": {
+          "$ref": "#/definitions/HypervisorConfiguration"
+        },
+        "properties.hosting": {
+          "$ref": "#/definitions/HostingConfiguration"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Timezone": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string"
+        }
+      }
+    },
+    "AgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string"
+        },
+        "dependencyAgentId": {
+          "type": "string"
+        },
+        "dependencyAgentVersion": {
+          "type": "string"
+        },
+        "dependencyAgentRevision": {
+          "type": "string"
+        },
+        "rebootStatus": {
+          "enum": [
+            "unknown",
+            "rebooted",
+            "notRebooted"
+          ],
+          "type": "string"
+        },
+        "clockGranularity": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "MachineResourcesConfiguration": {
+      "type": "object",
+      "properties": {
+        "physicalMemory": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cpus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cpuSpeed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cpuSpeedAccuracy": {
+          "enum": [
+            "actual",
+            "estimated"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "ipv4Interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ipv4NetworkInterface"
+          }
+        },
+        "ipv6Interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ipv6NetworkInterface"
+          }
+        },
+        "defaultIpv4Gateways": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "macAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsQuestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsCanonicalNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperatingSystemConfiguration": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "enum": [
+            "unknown",
+            "windows",
+            "linux",
+            "solaris",
+            "aix"
+          ],
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "bitness": {
+          "enum": [
+            "32bit",
+            "64bit"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineConfiguration": {
+      "type": "object",
+      "properties": {
+        "virtualMachineType": {
+          "enum": [
+            "unknown",
+            "hyperv",
+            "ldom",
+            "lpar",
+            "vmware",
+            "virtualPc",
+            "xen"
+          ],
+          "type": "string"
+        },
+        "nativeMachineId": {
+          "type": "string"
+        },
+        "virtualMachineName": {
+          "type": "string"
+        },
+        "nativeHostMachineId": {
+          "type": "string"
+        }
+      }
+    },
+    "HypervisorConfiguration": {
+      "type": "object",
+      "properties": {
+        "hypervisorType": {
+          "enum": [
+            "unknown",
+            "hyperv"
+          ],
+          "type": "string"
+        },
+        "nativeHostMachineId": {
+          "type": "string"
+        }
+      }
+    },
+    "HostingConfiguration": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        }
+      }
+    },
+    "Ipv4NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string"
+        },
+        "subnetMask": {
+          "type": "string"
+        }
+      }
+    },
+    "Ipv6NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Displayable properties of the operation.",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider of the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource operated on by the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A REST API operation supported by the provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Displayable properties of the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

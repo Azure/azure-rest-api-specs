@@ -28,16 +28,16 @@ These are the global settings for Azure Time Series Insights Data Plane API.
 openapi-type: data-plane
 add-credentials: true
 license-header: MICROSOFT_MIT
-tag: package-2018-11-01-preview
+tag: package-2020-07-31
 ```
 
-### Tag: package-2018-11-01-preview
+### Tag: package-2020-07-31
 
-These settings apply only when `--tag=package-2018-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-31` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11-01-preview'
+``` yaml $(tag) == 'package-2020-07-31'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/stable/2020-07-31/timeseriesinsights.json
 ```
 
 ## Suppression
@@ -83,7 +83,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
+  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2020-07-31/timeseriesinsights.json
 
 ```
 

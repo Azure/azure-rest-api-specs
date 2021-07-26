@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Disable": {
+      "post": {
+        "tags": [
+          "Workspaces",
+          "IntelligencePacks"
+        ],
+        "x-ms-examples": {
+          "IntelligencePacksDisable": {
+            "$ref": "./examples/WorkspacesDisableIntelligencePack.json"
+          }
+        },
+        "operationId": "IntelligencePacks_Disable",
+        "description": "Disables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the intelligence pack to be disabled."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Enable": {
+      "post": {
+        "tags": [
+          "Workspaces",
+          "IntelligencePacks"
+        ],
+        "x-ms-examples": {
+          "IntelligencePacksEnable": {
+            "$ref": "./examples/WorkspacesEnableIntelligencePack.json"
+          }
+        },
+        "operationId": "IntelligencePacks_Enable",
+        "description": "Enables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the intelligence pack to be enabled."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks": {
+      "get": {
+        "tags": [
+          "Workspaces",
+          "IntelligencePacks"
+        ],
+        "x-ms-examples": {
+          "IntelligencePacksList": {
+            "$ref": "./examples/WorkspacesListIntelligencePacks.json"
+          }
+        },
+        "operationId": "IntelligencePacks_List",
+        "description": "Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IntelligencePack"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IntelligencePack": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the intelligence pack."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "The enabled boolean for the intelligence pack."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the intelligence pack."
+        }
+      },
+      "description": "Intelligence Pack containing a string name and boolean indicating if it's enabled."
+    }
+  },
+  "parameters": {}
+}

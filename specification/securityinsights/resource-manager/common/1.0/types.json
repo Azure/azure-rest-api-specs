@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "CloudError": {
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-ms-external": true
+    },
+    "ResourceWithEtag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "An azure resource object with an Etag property",
+      "properties": {
+        "etag": {
+          "description": "Etag of the azure resource",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Azure resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Azure resource type",
+          "readOnly": true,
+          "type": "string"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationalInsightsResourceProvider": {
+      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+      "in": "path",
+      "name": "operationalInsightsResourceProvider",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2020-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "azureBareMetalInstanceName": "myAzureBareMetalInstance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/57d3422f-467a-448e-b798-ebf490849542/resourceGroups/rg10128/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myAzureBareMetalInstance",
+        "location": "westus2",
+        "name": "myAzureBareMetalInstance",
+        "tags": {
+          "key": "value"
+        },
+        "type": "Microsoft.BareMetalInfrastructure/bareMetalInstances",
+        "properties": {
+          "azureBareMetalInstanceId": "d83c3dfc-db7b-4103-9de7-fddfe6f2812a",
+          "powerState": "restarting",
+          "hwRevision": "Rev 4.2",
+          "hardwareProfile": {
+            "hardwareType": "Cisco_UCS",
+            "azureBareMetalInstanceSize": "S72"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "ipAddress": "123.123.123.123"
+              }
+            ],
+            "circuitId": "/subscriptions/57d3422f-467a-448e-b798-ebf490849542/resourceGroups/rg10128/providers/Microsoft.Network/expressRouteCircuits/myAzureBareMetalInstance"
+          },
+          "storageProfile": {
+            "nfsIpAddress": "123.123.119.123"
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SLES 12 SP2",
+            "version": "12 SP2"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

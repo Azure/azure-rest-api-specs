@@ -5,7 +5,7 @@
     "title": "ComputeDiskAdminManagementClient",
     "description": "The Admin Compute Disk Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -48,6 +48,12 @@
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
           }
         },
         "x-ms-pageable": {
@@ -87,6 +93,12 @@
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
           }
         }
       },
@@ -115,6 +127,12 @@
             "$ref": "DiskMigrationJobs.json#/parameters/TargetShareParameter"
           },
           {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetScaleUnitParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetVolumeLabelParameter"
+          },
+          {
             "$ref": "DiskMigrationJobs.json#/parameters/DiskListParameter"
           },
           {
@@ -126,6 +144,12 @@
             "description": "OK --  Disk migration job is created successfully.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -162,6 +186,12 @@
             "description": "OK --  Disk migration job cancellation is called.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -355,6 +385,37 @@
       "items": {
         "$ref": "Disks.json#/definitions/Disk"
       }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -378,7 +439,23 @@
       "description": "The target share name.",
       "name": "targetShare",
       "in": "query",
-      "required": true,
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetScaleUnitParameter": {
+      "description": "The target scale unit name.",
+      "name": "targetScaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetVolumeLabelParameter": {
+      "description": "The target volume label.",
+      "name": "targetVolumeLabel",
+      "in": "query",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

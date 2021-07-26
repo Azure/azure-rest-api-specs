@@ -12,6 +12,31 @@ that describes the schemas for its events.
 This configuration enables packaging all of the above as one EventGrid data plane library.
 This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
 
+### Guidelines for defining a new event 
+
+In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
+- The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
+- The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
+
+A sample valid event definition is shown below:
+~~~ markdown
+```json
+"AcsChatMessageReceivedEventData": {
+  "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+  "allOf": [
+    {
+      "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+    }
+  ],
+  "properties": {
+    "messageBody": {
+      "description": "The body of the chat message",
+      "type": "string"
+    }
+  }
+}
+```
+~~~
 
 ---
 ## Getting Started
@@ -55,6 +80,22 @@ input-file:
 - Microsoft.Maps/stable/2018-01-01/Maps.json
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 - Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
+- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+- Microsoft.Cache/stable/2018-01-01/RedisCache.json
+- Microsoft.Web/stable/2018-01-01/Web.json
+- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
+- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+    where: $.definitions.CloudEventEvent.properties.data_base64
+    reason: This parameter name is defined by the Cloud Events 1.0 specification
 ```
 
 ---
@@ -104,6 +145,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 azure-arm: true
+fluent: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
@@ -133,6 +175,12 @@ input-file:
   - $(this-folder)/Microsoft.Maps/stable/2018-01-01/Maps.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
+  - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+  - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
+  - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
+  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 
 ```
 
