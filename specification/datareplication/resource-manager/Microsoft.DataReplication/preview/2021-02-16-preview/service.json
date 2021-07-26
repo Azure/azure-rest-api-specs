@@ -810,6 +810,9 @@
         ],
         "summary": "Get a list of REST API supported by Microsoft data replication.",
         "operationId": "GetOperations",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -818,6 +821,12 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2377,6 +2386,14 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/DraModelProperties"
         }
@@ -2814,6 +2831,31 @@
         },
         "customProperties": {
           "$ref": "#/definitions/ReplicationExtensionModelCustomProperties"
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
