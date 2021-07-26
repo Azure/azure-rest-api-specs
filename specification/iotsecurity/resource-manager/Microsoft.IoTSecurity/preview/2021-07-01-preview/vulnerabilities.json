@@ -228,17 +228,26 @@
           "format": "double",
           "example": "6.5"
         },
-        "source": {
-          "description": "The source of the vulnerability",
-          "type": "string",
-          "example": "Nvd",
-          "$ref": "#/definitions/VulnerabilitySource"
-        },
-        "affectedVersion": {
-          "description": "The vulnerability affected version",
+        "exploitType": {
+          "description": "The exploit type of the vulnerability",
           "readOnly": true,
           "type": "string",
-          "example": "cpe:2.3:a:ubuntu:firefox:*:*:*:*:*:ubuntu_linux_18.04:*:*"
+          "example": "ExploitKit"
+        },
+        "source": {
+          "description": "The source of the vulnerability",
+          "readOnly": true,
+          "type": "string",
+          "example": "Nvd"
+        },
+        "affectedVersions": {
+          "description": "The vulnerability affected versions",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "cpe:2.3:a:ubuntu:firefox:*:*:*:*:*:ubuntu_linux_18.04:*:*"
+          }
         }
       }
     },
@@ -255,18 +264,6 @@
       ],
       "x-ms-enum": {
         "name": "severityScore",
-        "modelAsString": true
-      }
-    },
-    "VulnerabilitySource": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The source of the vulnerability",
-      "enum": [
-        "Nvd"
-      ],
-      "x-ms-enum": {
-        "name": "VulnerabilitySource",
         "modelAsString": true
       }
     }
