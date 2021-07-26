@@ -3473,6 +3473,20 @@
                   "default": true,
                   "title": "Enable node public IP.",
                   "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+                },
+                "intellectualPropertyPublisher": {
+                  "type": "string",
+                  "title": "Intellectual property publisher.",
+                  "description": "Intellectual property publisher accessible to compute. Compute where intellectualPropertyPublisher is not 'None' has the following restrictions: 'remoteLoginPortPublicAccess' property must be set as 'Disabled', and an SSH admin user cannot be specified. 'subnet' property cannot be specified. 'isolatedNetwork' property must be set as true.",
+                  "default": "None",
+                  "enum": [
+                    "None",
+                    "OpenAI"
+                  ],
+                  "x-ms-enum": {
+                    "name": "IntellectualPropertyPublisher",
+                    "modelAsString": true
+                  }
                 }
               }
             }
