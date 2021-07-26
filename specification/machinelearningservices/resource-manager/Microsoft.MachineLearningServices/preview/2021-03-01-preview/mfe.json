@@ -129,13 +129,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Name for the Batch Endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -146,6 +139,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch Endpoint.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -245,14 +245,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Name for the Batch inference endpoint.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -263,6 +255,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch inference endpoint.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -313,13 +313,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Endpoint name",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -346,6 +339,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -441,6 +441,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Endpoint name",
@@ -453,18 +465,6 @@
             "description": "The identifier for the Batch deployments.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -501,6 +501,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name",
@@ -515,18 +527,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -572,6 +572,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name",
@@ -586,18 +598,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -648,13 +648,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Inference Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -665,6 +658,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference Endpoint name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -801,13 +801,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -818,6 +811,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -854,14 +854,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -872,6 +864,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -922,13 +922,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -955,6 +948,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1050,6 +1050,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1062,18 +1074,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -1110,6 +1110,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1123,18 +1135,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1286,13 +1286,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1303,6 +1296,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1339,14 +1339,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1357,6 +1349,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -1407,13 +1407,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Data name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1446,6 +1439,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Data name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1541,6 +1541,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1553,18 +1565,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -1601,6 +1601,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1614,18 +1626,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1819,13 +1819,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Datastore name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1836,6 +1829,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1872,14 +1872,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Datastore name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1897,6 +1889,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -1962,13 +1962,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Datastore name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1979,6 +1972,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2116,13 +2116,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2133,6 +2126,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2169,14 +2169,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2187,6 +2179,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -2237,13 +2237,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2270,6 +2263,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2365,6 +2365,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -2377,18 +2389,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -2424,6 +2424,18 @@
           "application/json"
         ],
         "parameters": [
+         {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
           {
             "in": "path",
             "name": "name",
@@ -2438,18 +2450,6 @@
             "description": "Version of EnvironmentSpecificationVersion.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -2647,13 +2647,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2664,6 +2657,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the Job.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2703,14 +2703,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2721,6 +2713,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -2774,13 +2774,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2791,6 +2784,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the Job.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2931,13 +2931,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2960,6 +2953,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2996,14 +2996,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3014,6 +3006,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -3082,13 +3082,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3099,6 +3092,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
           },
           {
             "in": "body",
@@ -3163,13 +3163,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3180,6 +3173,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3212,13 +3212,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3229,6 +3222,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3389,13 +3389,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3406,6 +3399,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3442,14 +3442,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -3460,6 +3452,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -3509,13 +3509,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Model name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
@@ -3574,6 +3567,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3669,6 +3669,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3681,18 +3693,6 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -3730,14 +3730,6 @@
         "parameters": [
           {
             "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
             "name": "version",
             "description": "Version identifier.",
             "required": true,
@@ -3754,6 +3746,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -3986,13 +3986,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -4003,6 +3996,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4039,17 +4039,17 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -4126,14 +4126,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -4144,6 +4136,14 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "body",
@@ -4208,13 +4208,7 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Inference endpoint name.",
-            "required": true,
-            "type": "string"
-          },
+
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
@@ -4242,6 +4236,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4362,6 +4363,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4374,18 +4387,6 @@
             "description": "Inference Endpoint Deployment name.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -4425,6 +4426,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4439,18 +4452,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4524,6 +4525,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4538,18 +4551,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4621,6 +4622,18 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4633,18 +4646,6 @@
             "description": "The name and identifier for the endpoint.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4689,13 +4690,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -4706,6 +4700,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4744,13 +4745,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -4761,6 +4755,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
           },
           {
             "in": "body",
@@ -4821,13 +4822,7 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Online Endpoint name.",
-            "required": true,
-            "type": "string"
-          },
+
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
@@ -4839,6 +4834,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
