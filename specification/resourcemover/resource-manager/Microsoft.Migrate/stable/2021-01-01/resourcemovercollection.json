@@ -1868,6 +1868,20 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "userManagedIdentities": {
+          "description": "Gets or sets user-managed identities",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "targetAvailabilityZone": {
           "description": "Gets or sets the target availability zone.",
           "type": "string",
@@ -1902,6 +1916,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "faultDomain": {
           "description": "Gets or sets the target fault domain.",
           "type": "integer",
@@ -1946,6 +1967,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "enableDdosProtection": {
           "description": "Gets or sets a value indicating whether gets or sets whether the\r\nDDOS protection should be switched on.",
           "type": "boolean",
@@ -2012,6 +2040,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "ipConfigurations": {
           "description": "Gets or sets the IP configurations of the NIC.",
           "type": "array",
@@ -2175,6 +2210,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "securityRules": {
           "description": "Gets or sets Security rules of network security group.",
           "type": "array",
@@ -2229,6 +2271,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "description": "Gets or sets load balancer sku (Basic/Standard).",
           "type": "string"
@@ -2262,7 +2311,15 @@
           "$ref": "#/definitions/ResourceSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "x-ms-discriminator-value": "Microsoft.Sql/servers"
     },
     "ZoneRedundant": {
@@ -2286,6 +2343,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "zoneRedundant": {
           "$ref": "#/definitions/ZoneRedundant"
         }
@@ -2301,6 +2365,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "zoneRedundant": {
           "$ref": "#/definitions/ZoneRedundant"
         }
@@ -2315,7 +2386,15 @@
           "$ref": "#/definitions/ResourceSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "x-ms-discriminator-value": "resourceGroups"
     },
     "PublicIPAddressResourceSettings": {
@@ -2327,6 +2406,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "domainNameLabel": {
           "description": "Gets or sets the domain name label.",
           "type": "string"
@@ -2358,7 +2444,15 @@
           "$ref": "#/definitions/ResourceSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "x-ms-discriminator-value": "Microsoft.KeyVault/vaults"
     },
     "DiskEncryptionSetResourceSettings": {
@@ -2369,7 +2463,15 @@
           "$ref": "#/definitions/ResourceSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "x-ms-discriminator-value": "Microsoft.Compute/diskEncryptionSets"
     },
     "CloudError": {
