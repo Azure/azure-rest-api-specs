@@ -292,6 +292,7 @@
   "definitions": {
     "galleryimagesProperties": {
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "containerName": {
           "type": "string",
@@ -313,8 +314,10 @@
     "galleryimages": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/galleryimagesProperties"
         },
         "id": {

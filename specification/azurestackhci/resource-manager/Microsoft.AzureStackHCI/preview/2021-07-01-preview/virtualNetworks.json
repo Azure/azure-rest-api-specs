@@ -308,6 +308,7 @@
               },
               "properties": {
                 "type": "object",
+                "x-ms-client-flatten": true,
                 "properties": {
                   "addressPrefix": {
                     "type": "string",
@@ -351,6 +352,7 @@
                       },
                       "properties": {
                         "type": "object",
+                        "x-ms-client-flatten": true,
                         "properties": {
                           "routes": {
                             "type": "array",
@@ -363,6 +365,7 @@
                                 },
                                 "properties": {
                                   "type": "object",
+                                  "x-ms-client-flatten": true,
                                   "properties": {
                                     "addressPrefix": {
                                       "type": "string",
@@ -416,8 +419,10 @@
     "virtualnetworks": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualnetworksProperties"
         },
         "id": {

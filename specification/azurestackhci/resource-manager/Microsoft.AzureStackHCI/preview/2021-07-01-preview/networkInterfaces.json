@@ -292,6 +292,7 @@
   "definitions": {
     "networkinterfacesProperties": {
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "ipConfigurations": {
           "type": "array",
@@ -304,6 +305,7 @@
               },
               "properties": {
                 "type": "object",
+                "x-ms-client-flatten": true,
                 "properties": {
                   "gateway": {
                     "type": "string",
@@ -356,8 +358,10 @@
     "networkinterfaces": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/networkinterfacesProperties"
         },
         "id": {

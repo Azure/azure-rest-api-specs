@@ -292,6 +292,7 @@
   "definitions": {
     "virtualmachinesProperties": {
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "hardwareProfile": {
           "type": "object",
@@ -475,8 +476,10 @@
     "virtualmachines": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualmachinesProperties"
         },
         "id": {

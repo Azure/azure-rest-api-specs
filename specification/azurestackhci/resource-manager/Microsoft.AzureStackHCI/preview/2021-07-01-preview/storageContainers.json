@@ -292,6 +292,7 @@
   "definitions": {
     "storagecontainersProperties": {
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "path": {
           "type": "string",
@@ -309,8 +310,10 @@
     "storagecontainers": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/storagecontainersProperties"
         },
         "id": {
