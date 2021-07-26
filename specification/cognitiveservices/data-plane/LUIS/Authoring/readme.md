@@ -6,11 +6,13 @@ Configuration for generating LUIS Authoring SDK.
 
 ``` yaml
 tag: authoring_3_0_preview
+tag: authoring_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
 The current release for the Authoring Endpoint is `authoring_3_0_preview`.
+The current release for the Authoring Endpoint is `authoring_3_0`.
 
 # Releases
 
@@ -50,12 +52,19 @@ directive:
 
 ---
 
-## Authoring 3.0
+## Authoring 3.0-preview
 These settings apply only when `--tag=authoring_3_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0_preview'
 input-file: preview/v3.0/LUIS-Authoring.json
 ```
+## Authoring 3.0
+These settings apply only when `--tag=authoring_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'authoring_3_0'
+input-file: stable/v3.0/LUIS-Authoring.json
+```
+
 
 Deprecated Pattern's Operations
 
@@ -148,8 +157,10 @@ require: $(this-folder)/../../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v2.0/LUIS-Authoring.json
   - $(this-folder)/preview/v3.0/LUIS-Authoring.json
+  - $(this-folder)/stable/v3.0/LUIS-Authoring.json
 
 ```
+
 
 If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
