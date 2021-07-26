@@ -696,6 +696,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataReplication/replicationFabrics": {
+      "get": {
+        "tags": [
+          "Fabric"
+        ],
+        "summary": "Lists the fabrics.",
+        "operationId": "Fabric_ListBySubscriptionId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Fabric Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/FabricModelCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fabric_ListBySubscriptionId": {
+            "$ref": "./examples/Fabric_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics": {
       "get": {
         "tags": [
@@ -2239,6 +2281,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataReplication/replicationVaults": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "summary": "Lists the vaults.",
+        "operationId": "Vault_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Vault Model Collection on success.",
+            "schema": {
+              "$ref": "#/definitions/VaultModelCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ArmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Vault_ListBySubscription": {
+            "$ref": "./examples/Vault_ListBySubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults": {
       "get": {
         "tags": [
@@ -2488,6 +2572,14 @@
           "description": "Gets or sets the location of the fabric.",
           "type": "string"
         },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/FabricModelProperties"
         }
@@ -2616,6 +2708,14 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PolicyModelProperties"
         }
@@ -2690,6 +2790,14 @@
         "type": {
           "description": "Gets or sets the type of the protected item.",
           "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
           "readOnly": true
         },
         "properties": {
@@ -2775,6 +2883,14 @@
         "type": {
           "description": "Gets or sets the type of the replication extension.",
           "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
           "readOnly": true
         },
         "properties": {
@@ -2881,6 +2997,14 @@
         "location": {
           "description": "Gets or sets the location of the vault.",
           "type": "string"
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/VaultModelProperties"
