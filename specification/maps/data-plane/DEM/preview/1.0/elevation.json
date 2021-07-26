@@ -1,0 +1,399 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Elevation API",
+    "version": "1.0",
+    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coordinates, by defining an ordered set of vertices that form a Polyline and a  number of sample points along the length of a Polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "ElevationApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "paths": {
+    "/elevation/point/{format}": {
+      "get": {
+        "summary": "Get Elevation Data on One or More Points",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat,long coordinate format.\n\n Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
+        "operationId": "Elevation_GetDataForPoints",
+        "x-ms-examples": {
+          "GetDataForPoints": {
+            "$ref": "./examples/GetDataForPoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ElevationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "points",
+            "in": "query",
+            "description": "The string representation of a list of points. A point is defined in lon/lat WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list should be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "pipes",
+            "x-ms-skip-url-encoding": true,
+            "items": {
+              "type": "string",
+              "pattern": "\\s*[-]?\\d+[.]\\d+\\s*[,]\\s*[-]?\\d+[.]\\d+\\s*"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointsResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "post": {
+        "summary": "Query Elevation Data for Multiple Points",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined lon/lat coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
+        "operationId": "Elevation_PostDataForPoints",
+        "x-ms-examples": {
+          "PostDataForPoints": {
+            "$ref": "./examples/PostDataForPoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ElevationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "pointsRequestBody",
+            "in": "body",
+            "description": "The string representation of a list of points. A point is defined in lon/lat WGS84 coordinate reference system format.  Each points in a list should be separated by the pipe ('|') character. The number of points that can be requested in  a POST request ranges from 2 to 2,000. The resolution of the elevation data will be the highest for a single point  and will decrease if multiple points are spread further apart. ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PointsInRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointsResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/elevation/line/{format}": {
+      "get": {
+        "summary": "Get Elevation Data Along a Polyline",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline.\n\n A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and endpoints and equally spaced  points along the polyline will be returned.\n\n A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "operationId": "Elevation_GetDataForPolyline",
+        "x-ms-examples": {
+          "GetDataForPolyLine": {
+            "$ref": "./examples/GetDataForPolyline.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ElevationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "lines",
+            "in": "query",
+            "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: `[longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]`.\n\n The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation depends on the distance between the endpoints.",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "pipes",
+            "x-ms-skip-url-encoding": true,
+            "items": {
+              "type": "string",
+              "pattern": "\\s*[-]?\\d+[.]\\d+\\s*[,]\\s*[-]?\\d+[.]\\d+\\s*"
+            }
+          },
+          {
+            "name": "samples",
+            "in": "query",
+            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should range from 2 to 2,000. Default value is 10.",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 2000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinesResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "post": {
+        "summary": "Query Elevation Data Along a Polyline",
+        "description": "**Applies to**: S1 pricing tier.\n\n The Post Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments.\n\n Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "operationId": "Elevation_PostDataForPolyline",
+        "x-ms-examples": {
+          "PostDataForPolyLine": {
+            "$ref": "./examples/PostDataForPolyline.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ElevationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "linesRequestBody",
+            "in": "body",
+            "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: `[longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]`. The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation will depend on the distance between the endpoints.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinesInRequestBody"
+            }
+          },
+          {
+            "name": "samples",
+            "in": "query",
+            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should range from 2 to 2,000. Default value is 10.",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 2000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinesResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/elevation/lattice/{format}": {
+      "get": {
+        "summary": "Get Elevation Data at Equally Spaced Locations Within a Bounding Box",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally spaced locations within a bounding box. A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns.\n\n Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2,000 elevations can be returned in a single request. The returned elevation values are ordered,  starting at the southwest corner, and then proceeding west to east along the row. At the end of the row,  it moves north to the next row, and repeats the process until it reaches the far northeast corner.",
+        "operationId": "Elevation_GetDataForBoundingBox",
+        "x-ms-examples": {
+          "GetDataForBoundingBox": {
+            "$ref": "./examples/GetDataForBoundingBox.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ElevationApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "name": "bounds",
+            "in": "query",
+            "description": "The string that represents the rectangular area of a bounding box. The bounds parameter is defined by the 4 bounding box coordinates, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: `[SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude]`.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "Specifies the number of rows to use to divide the bounding box area into a grid. The number of vertices  in the grid should be less than 2,000. ",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 1000,
+            "required": true
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "description": "Specifies the number of columns to use to divide the bounding box area into a grid. The number of vertices  in the grid should be less than 2,000. ",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 1000,
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BoundingBoxResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ElevationPointResponse": {
+      "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "PointElevationResult": {
+      "type": "object",
+      "description": "The elevation data.",
+      "properties": {
+        "coordinate": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
+        },
+        "elevationInMeter": {
+          "description": "The elevation value in meters.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ElevationLineResponse": {
+      "description": "The response from the Get Data for Polyline API. The results will be listed in the direction from the first endpoint towards the last endpoint.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "ElevationLatticeResponse": {
+      "description": "The response from the Get Data for Bounding Box API. The results are ordered starting with the southwest corner, and then proceed west to east and south to north.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "PointsResult": {
+      "type": "object",
+      "description": "The response from a successful Elevation Points request.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationPointResponse"
+        }
+      }
+    },
+    "LinesResult": {
+      "type": "object",
+      "description": "The response from a successful Elevation Polyline request.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationLineResponse"
+        }
+      }
+    },
+    "BoundingBoxResult": {
+      "type": "object",
+      "description": "The response from a successful Get Data for Bounding Box API.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationLatticeResponse"
+        }
+      }
+    },
+    "PointsInRequestBody": {
+      "type": "array",
+      "description": "The post elevation points array request body. The length of the array ranges from 2 to 2000.",
+      "items": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+      }
+    },
+    "LinesInRequestBody": {
+      "type": "array",
+      "description": "The post elevation lines request body.",
+      "items": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+      }
+    }
+  }
+}
