@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-05-01",
+    "api-version": "2021-07-01-preview",
     "parameters": {
       "location": "eastus",
       "tags": {},
@@ -84,15 +84,22 @@
         "applicationTypeVersionsCleanupPolicy": {
           "maxUnusedVersionsToKeep": 3
         },
-        "zonalResiliency": true
+        "zonalResiliency": true,
+        "enableIpv6": true,
+        "ipTags": [
+          {
+            "ipTagType": "FirstPartyUsage",
+            "tag": "SQL"
+          }
+        ]
       }
     }
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-07-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-07-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -184,14 +191,21 @@
           "applicationTypeVersionsCleanupPolicy": {
             "maxUnusedVersionsToKeep": 3
           },
-          "zonalResiliency": true
+          "zonalResiliency": true,
+          "enableIpv6": true,
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL"
+            }
+          ]
         }
       }
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-07-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-07-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -283,7 +297,14 @@
           "applicationTypeVersionsCleanupPolicy": {
             "maxUnusedVersionsToKeep": 3
           },
-          "zonalResiliency": true
+          "zonalResiliency": true,
+          "enableIpv6": true,
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL"
+            }
+          ]
         }
       }
     }

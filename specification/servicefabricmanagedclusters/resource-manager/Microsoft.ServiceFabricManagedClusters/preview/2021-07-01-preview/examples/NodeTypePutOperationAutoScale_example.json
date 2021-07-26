@@ -23,7 +23,7 @@
         "vmImageOffer": "WindowsServer",
         "vmImageSku": "2016-Datacenter-Server-Core",
         "vmImageVersion": "latest",
-        "vmInstanceCount": 10,
+        "vmInstanceCount": -1,
         "isStateless": true,
         "multiplePlacementGroups": true,
         "vmSecrets": [
@@ -71,6 +71,11 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
         "name": "BE",
         "tags": {},
+        "sku": {
+          "name": "Standard_S2",
+          "tier": "Standard",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "Updating",
           "isPrimary": false,
@@ -131,6 +136,11 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
         "name": "BE",
         "tags": {},
+        "sku": {
+          "name": "Standard_S2",
+          "tier": "Standard",
+          "capacity": 10
+        },
         "properties": {
           "provisioningState": "Creating",
           "isPrimary": false,
