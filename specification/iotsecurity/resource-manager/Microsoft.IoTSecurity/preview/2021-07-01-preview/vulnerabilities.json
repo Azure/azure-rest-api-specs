@@ -216,11 +216,11 @@
           "format": "date-time",
           "example": "2018-98-18T00:00:00Z"
         },
-        "severityScore": {
-          "description": "The severity score of the vulnerability",
+        "severity": {
+          "description": "The severity of the vulnerability",
           "type": "string",
           "example": "Medium",
-          "$ref": "#/definitions/SeverityScore"
+          "$ref": "#/definitions/Severity"
         },
         "score": {
           "description": "The score of the vulnerability",
@@ -251,10 +251,10 @@
         }
       }
     },
-    "SeverityScore": {
-      "type": "string",
+    "Severity": {
+      "description": "The severity of the vulnerability",
       "readOnly": true,
-      "description": "The severity score of the vulnerability",
+      "type": "string",
       "enum": [
         "None",
         "Low",
@@ -263,7 +263,7 @@
         "Critical"
       ],
       "x-ms-enum": {
-        "name": "severityScore",
+        "name": "severity",
         "modelAsString": true
       }
     }
