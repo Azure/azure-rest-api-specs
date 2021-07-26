@@ -50,6 +50,14 @@
   ],
   "responses": {},
   "parameters": {
+    "Pollutants": {
+      "name": "pollutants",
+      "in": "query",
+      "type": "boolean",
+      "required": false,
+      "description": "Boolean value that returns detailed information about each pollutant. By default is True.",
+      "x-ms-parameter-location": "method"
+    },
     "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
@@ -897,6 +905,223 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/StormLocationsResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/airQuality/current/{format}": {
+      "get": {
+        "description": "**Get Current Air Quality**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for current air quality. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "operationId": "Weather_GetCurrentAirQuality",
+        "x-ms-examples": {
+          "Get Current Air Quality": {
+            "$ref": "./examples/GetCurrentAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CurrentAirQualityResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/airQuality/forecast/daily/{format}": {
+      "get": {
+        "description": "**Get Air Quality Daily Forecast**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "operationId": "Weather_GetAirQualityDailyForecast",
+        "x-ms-examples": {
+          "Get Daily Air Quality Forecast": {
+            "$ref": "./examples/GetDailyAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7. Default value is 1.",
+            "default": 1,
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyAirQualityForecastResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/airQuality/forecast/hourly/{format}": {
+      "get": {
+        "description": "**Get Air Quality Hourly Forecast**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "operationId": "Weather_GetAirQualityHourlyForecast",
+        "x-ms-examples": {
+          "Get Hourly Air Quality Forecast": {
+            "$ref": "./examples/GetHourlyAirQuality.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
+            "default": 1,
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              12,
+              24,
+              48,
+              72,
+              96
+            ],
+            "x-ms-enum": {
+              "name": "HourlyDuration",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": 1,
+                  "description": "1 Hours"
+                },
+                {
+                  "value": 12,
+                  "description": "12 Hours"
+                },
+                {
+                  "value": 24,
+                  "description": "24 Hours"
+                },
+                {
+                  "value": 48,
+                  "description": "48 Hours"
+                },
+                {
+                  "value": 72,
+                  "description": "72 Hours"
+                },
+                {
+                  "value": 96,
+                  "description": "96 Hours"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/Pollutants"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HourlyAirQualityForecastResponse"
             }
           },
           "default": {
@@ -3162,6 +3387,257 @@
           },
           "description": "Displayed when details=true or radiiGeometry=true in the request."
         }
+      }
+    },
+    "CurrentAirQualityResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Current Air Quality call.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AirQuality"
+          },
+          "description": "A list of all air quality results for the queried location."
+        }
+      }
+    },
+    "HourlyAirQualityForecastResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Hourly Air Quality Forecast call.",
+      "properties": {
+        "forecasts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AirQuality"
+          },
+          "description": "A list of all hourly air quality forecasts for the queried location."
+        }
+      }
+    },
+    "DailyAirQualityForecastResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Daily Air Quality Forecast call.",
+      "properties": {
+        "forecasts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DailyAirQuality"
+          },
+          "description": "A list of all daily air quality forecasts for the queried location."
+        }
+      }
+    },
+    "AirQuality": {
+      "type": "object",
+      "description": "Information about the air quality in a specific location at a specific time.",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "dominantPollutant": {
+          "type": "string",
+          "description": "The pollutant with the highest concentration."
+        },
+        "category": {
+          "type": "string",
+          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+        },
+        "categoryColor": {
+          "type": "string",
+          "description": "A unique color corresponding to the category of this air quality result."
+        },
+        "description": {
+          "type": "string",
+          "description": "A textual explanation of this air quality result in the requested language."
+        },
+        "pollutants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pollutant"
+          },
+          "description": "Information about individual pollutants."
+        }
+      }
+    },
+    "DailyAirQuality": {
+      "type": "object",
+      "description": "Information about the air quality in a specific location at a specific time.",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "dominantPollutant": {
+          "$ref": "#/definitions/DominantPollutant",
+          "description": "The pollutant with the highest concentration."
+        },
+        "category": {
+          "type": "string",
+          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+        },
+        "categoryColor": {
+          "type": "string",
+          "description": "A unique color corresponding to the category of this air quality result."
+        },
+        "description": {
+          "type": "string",
+          "description": "A textual explanation of this air quality result in the requested language."
+        }
+      }
+    },
+    "Pollutant": {
+      "type": "object",
+      "description": "Detailed information about an individual pollutant. Not returned if `pollutants`=false.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PollutantType",
+          "description": "Type of pollutant. Please note that more may be added at any time."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the pollutant in English."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "concentration": {
+          "$ref": "#/definitions/Concentration",
+          "description": "An object containing the number of pollutant particles per volume of air."
+        }
+      }
+    },
+    "PollutantType": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "CO",
+        "NO2",
+        "O3",
+        "PM2.5",
+        "PM10",
+        "SO2"
+      ],
+      "x-ms-enum": {
+        "name": "PollutantType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CO",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "NO2",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "O3",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "PM2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "PM10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "SO2",
+            "description": "Sulfur dioxide (\"SO2\")"
+          }
+        ]
+      }
+    },
+    "Concentration": {
+      "type": "object",
+      "description": "An object containing the number of pollutant particles per volume of air.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The numerical value indicating the concentration of the corresponding pollutant."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Type of unit for the concentration of the pollutant."
+        },
+        "unitType": {
+          "type": "integer",
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+        }
+      }
+    },
+    "DominantPollutant": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "Carbon Monoxide",
+        "Nitrogen Dioxide",
+        "Ozone",
+        "Particulate Matter 2.5",
+        "Particulate Matter 10",
+        "Sulfur Dioxide"
+      ],
+      "x-ms-enum": {
+        "name": "DominantPollutant",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Carbon Monoxide",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "Nitrogen Dioxide",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "Ozone",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "Particulate Matter 2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "Particulate Matter 10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "Sulfur Dioxide",
+            "description": "Sulfur dioxide (\"SO2\")"
+          }
+        ]
       }
     }
   }
