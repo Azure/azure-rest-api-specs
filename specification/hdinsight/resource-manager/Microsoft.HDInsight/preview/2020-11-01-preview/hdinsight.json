@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HDInsight Hilo Management Client",
-    "description": "The HDInsight Hilo Management Client.",
+    "title": "HDInsight Management Client",
+    "description": "The HDInsight Management Client.",
     "version": "2020-11-01-preview"
   },
   "host": "management.azure.com",
@@ -133,7 +133,7 @@
         "operationId": "ClusterPool_UpdateTags",
         "x-ms-examples": {
           "HDInsightClusterPoolsPatchTags": {
-            "$ref": "./examples/ClusterPoolsPatch.json"
+            "$ref": "./examples/PatchClusterPool.json"
           }
         },
         "parameters": [
@@ -260,7 +260,7 @@
             "$ref": "./examples/ListClusterPools.json"
           }
         },
-        "description": "Lists the HDInsight Hilo cluster pools under a resource group.",
+        "description": "Lists the HDInsight cluster pools under a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -336,7 +336,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}": {
       "get": {
         "operationId": "Clusters_Get",
-        "description": "Gets a hdinsight Hilo cluster.",
+        "description": "Gets a HDInsight cluster.",
         "x-ms-examples": {
           "HDInsightClusterGet": {
             "$ref": "./examples/GetCluster.json"
@@ -438,7 +438,7 @@
         "operationId": "Cluster_UpdateTags",
         "x-ms-examples": {
           "HDInsightClustersPatchTags": {
-            "$ref": "./examples/ClustersPatch.json"
+            "$ref": "./examples/PatchCluster.json"
           }
         },
         "parameters": [
@@ -530,6 +530,260 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters": {
+      "get": {
+        "operationId": "SessionClusters_ListByClusterName",
+        "description": "Lists the HDInsight session clusters under a cluster.",
+        "x-ms-examples": {
+          "HDInsightSessionClustersListByClusterName": {
+            "$ref": "./examples/ListSessionClustersByClusterName.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session clusters successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SessionClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}": {
+      "get": {
+        "operationId": "SessionClusters_Get",
+        "description": "Gets a HDInsight session cluster.",
+        "x-ms-examples": {
+          "HDInsightSessionClusterGet": {
+            "$ref": "./examples/GetSessionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session cluster details.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SessionClusters_CreateOrUpdate",
+        "description": "Creates or updates an HDInsight session cluster.",
+        "x-ms-examples": {
+          "HDInsightSessionClusterPut": {
+            "$ref": "./examples/CreateSessionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionClusterNameParameter"
+          },
+          {
+            "name": "HDInsightSessionCluster",
+            "in": "body",
+            "required": true,
+            "description": "The session cluster to create.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Session create/update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Update tags for an existing HDInsight session cluster.",
+        "operationId": "SessionCluster_UpdateTags",
+        "x-ms-examples": {
+          "HDInsightSessionClustersPatchTags": {
+            "$ref": "./examples/PatchSessionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionClusterNameParameter"
+          },
+          {
+            "name": "sessionClusterTags",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SessionClusters_Delete",
+        "description": "Deletes an HDInsight session cluster.",
+        "x-ms-examples": {
+          "HDInsightSessionClustersDelete": {
+            "$ref": "./examples/DeleteSessionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful."
+          },
+          "202": {
+            "description": "Session cluster delete request accepted."
+          },
+          "204": {
+            "description": "No content - The session cluster doesn't exist."
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Check the availability of the resource name.",
@@ -603,13 +857,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/clusterTypeVersions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/clusterOfferingVersions": {
       "get": {
         "description": "Returns a list of cluster type versions.",
-        "operationId": "ClusterTypeVersions_ListBySubscription",
+        "operationId": "clusterOfferingVersions_ListByLocation",
         "x-ms-examples": {
           "ClusterTypeVersionListResult": {
-            "$ref": "./examples/ListClusterTypeVersion.json"
+            "$ref": "./examples/ListClusterOfferingVersions.json"
           }
         },
         "parameters": [
@@ -627,7 +881,7 @@
           "200": {
             "description": "Clusters successfully returned.",
             "schema": {
-              "$ref": "#/definitions/ClusterTypeVersionsListResult"
+              "$ref": "#/definitions/clusterOfferingVersionsListResult"
             }
           },
           "default": {
@@ -645,6 +899,7 @@
   },
   "definitions": {
     "ClusterPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -675,6 +930,7 @@
       }
     },
     "ClusterPoolResourceProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the resource.",
@@ -730,6 +986,7 @@
       ]
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -742,6 +999,7 @@
       "description": "Tags object for patch operations."
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -771,21 +1029,93 @@
         }
       }
     },
+    "ClusterIdentityProfile": {
+      "type": "object",
+      "description": "Cluster identity profile with details of customer MSI for the cluster.",
+      "required": [
+        "msiResourceId",
+        "msiClientId",
+        "msiObjectId"
+      ],
+      "properties": {
+        "msiResourceId": {
+          "type": "string",
+          "description": "ResourceId of the MSI that has required access to customer resources."
+        },
+        "msiClientId": {
+          "type": "string",
+          "description": "ClientId of the MSI."
+        },
+        "msiObjectId": {
+          "type": "string",
+          "description": "ObjectId of the MSI."
+        }
+      }
+    },
+    "ClusterAuthorizationProfile": {
+      "type": "object",
+      "description": "Authorization profile with details of AAD user Ids and group Ids authorized for data plane access.",
+      "properties": {
+        "userIds": {
+          "type": "array",
+          "description": "AAD user Ids authorized for data plane access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "AAD group Ids authorized for data plane access.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterSecretReference": {
+      "type": "object",
+      "description": "Secret reference and corresponding properties of a key vault secret.",
+      "required": [
+        "referenceName",
+        "type",
+        "keyVaultObjectName"
+      ],
+      "properties": {
+        "referenceName": {
+          "type": "string",
+          "description": "Reference name of the secret to be used in service configs."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of key vault object: secret, key or certificate."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the secret in key vault."
+        },
+        "keyVaultObjectName": {
+          "type": "string",
+          "description": "Object identifier name of the secret in key vault."
+        }
+      }
+    },
     "ClusterSecretsProfile": {
       "type": "object",
       "description": "The cluster secret profile.",
       "required": [
-        "keyVaultResourceId",
-        "msiResourceId"
+        "keyVaultResourceId"
       ],
       "properties": {
         "keyVaultResourceId": {
           "type": "string",
           "description": "Name of the user Key Vault where all the cluster specific user secrets are stored."
         },
-        "msiResourceId": {
-          "type": "string",
-          "description": "ResourceId of the MSI that has access to read secrets from Key Vault."
+        "secrets": {
+          "type": "array",
+          "description": "Properties of Key Vault secret.",
+          "items": {
+            "$ref": "#/definitions/ClusterSecretReference"
+          }
         }
       }
     },
@@ -793,14 +1123,21 @@
       "type": "object",
       "description": "Cluster configuration files.",
       "required": [
-        "fileName",
-        "values"
+        "fileName"
       ],
       "properties": {
         "fileName": {
           "type": "string",
           "description": "Configuration file name.",
           "example": "hive-conf.xml."
+        },
+        "content": {
+          "type": "string",
+          "description": "Free form content of the entire configuration file."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the config file if content is specified."
         },
         "values": {
           "type": "object",
@@ -853,7 +1190,41 @@
         }
       }
     },
+    "ConnectivityProfile": {
+      "type": "object",
+      "description": "Cluster connectivity profile.",
+      "required": [
+        "web"
+      ],
+      "properties": {
+        "web": {
+          "description": "Web connectivity endpoint details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConnectivityEndpoint"
+            }
+          ]
+        }
+      },
+      "readOnly": true
+    },
+    "ConnectivityEndpoint": {
+      "type": "object",
+      "description": "Connectivity endpoint details.",
+      "required": [
+        "fqdn"
+      ],
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "FQDN for connecting to the endpoint.",
+          "example": "clusterName.clusterPoolName.eastus.projecthilo.net"
+        }
+      },
+      "readOnly": true
+    },
     "ClusterResourceProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the resource.",
@@ -911,6 +1282,12 @@
         "networkProfile": {
           "$ref": "#/definitions/ClusterNetworkProfile"
         },
+        "identityProfile": {
+          "$ref": "#/definitions/ClusterIdentityProfile"
+        },
+        "authorizationProfile": {
+          "$ref": "#/definitions/ClusterAuthorizationProfile"
+        },
         "secretsProfile": {
           "$ref": "#/definitions/ClusterSecretsProfile"
         },
@@ -919,6 +1296,9 @@
           "items": {
             "$ref": "#/definitions/ClusterServiceConfigsProfile"
           }
+        },
+        "connectivityProfile": {
+          "$ref": "#/definitions/ConnectivityProfile"
         },
         "kafkaProfile": {
           "type": "object",
@@ -969,6 +1349,72 @@
         }
       ]
     },
+    "SessionClusterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionCluster"
+          },
+          "description": "The list of session clusters."
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "The list session cluster operation response."
+    },
+    "SessionClusterResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "A unique id generated by the RP to identify the resource.",
+          "example": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "readOnly": true
+        }
+      },
+      "description": "Session cluster resource properties."
+    },
+    "SessionCluster": {
+      "type": "object",
+      "description": "The session cluster.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define sessionCluster specific properties.",
+          "$ref": "#/definitions/SessionClusterResourceProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System data of a session cluster.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "NameAvailabilityParameters": {
       "description": "Details of check name availability request body.",
       "type": "object",
@@ -997,7 +1443,7 @@
         }
       }
     },
-    "ClusterTypeVersionsListResult": {
+    "clusterOfferingVersionsListResult": {
       "type": "object",
       "description": "Represents a list of cluster type and stack version mappings.",
       "properties": {
@@ -1005,7 +1451,7 @@
           "type": "array",
           "description": "The cluster type and stack version mappings in the array.",
           "items": {
-            "$ref": "#/definitions/HDInsightClusterTypeVersions"
+            "$ref": "#/definitions/clusterOfferingVersions"
           }
         },
         "nextLink": {
@@ -1015,7 +1461,7 @@
         }
       }
     },
-    "HDInsightClusterTypeVersions": {
+    "clusterOfferingVersions": {
       "type": "object",
       "description": "Cluster type and stack versions mapping.",
       "properties": {
@@ -1026,16 +1472,16 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define cluster type versions properties.",
-          "$ref": "#/definitions/ClusterTypeVersionsProperties"
+          "$ref": "#/definitions/clusterOfferingVersionsProperties"
         }
       }
     },
-    "ClusterTypeVersionsProperties": {
+    "clusterOfferingVersionsProperties": {
       "type": "object",
       "description": "ClusterTypeVersion internal properties.",
       "properties": {
         "stackVersions": {
-          "description": "A list of cluster type versions.",
+          "description": "A list of cluster offering versions.",
           "type": "array",
           "items": {
             "description": "A list of stack versions.",
@@ -1060,7 +1506,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the hdinsight Hilo cluster.",
+      "description": "The name of the HDInsight cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "SessionClusterNameParameter": {
+      "name": "sessionClusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the HDInsight session cluster.",
       "x-ms-parameter-location": "method"
     }
   }
