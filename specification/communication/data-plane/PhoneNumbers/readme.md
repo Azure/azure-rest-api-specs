@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-shortcode-2021-10-25-preview1` is 
 
 ```yaml $(tag) == 'package-shortcode-2021-10-25-preview1'
 input-file:
-  - preview/2021-10-25/shortcodes.json
+  - preview/2021-10-25-preview1/shortcodes.json
 title:
   Azure Communication Services
 ```
