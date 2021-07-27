@@ -4015,38 +4015,7 @@
       },
       "description": "AmlCompute update parameters."
     },
-    "ComputeNodesInformation": {
-      "type": "object",
-      "description": "Compute nodes information related to a Machine Learning compute. Might differ for every type of compute.",
-      "discriminator": "computeType",
-      "properties": {
-        "computeType": {
-          "description": "The type of compute",
-          "$ref": "#/definitions/ComputeType"
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The continuation token."
-        }
-      },
-      "required": [
-        "computeType"
-      ]
-    },
     "AmlComputeNodesInformation": {
-      "description": "Compute node information related to a AmlCompute.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeNodesInformation"
-        },
-        {
-          "$ref": "#/definitions/AmlComputeNodesResult"
-        }
-      ],
-      "x-ms-discriminator-value": "AmlCompute"
-    },
-    "AmlComputeNodesResult": {
       "type": "object",
       "description": "Result of AmlCompute Nodes",
       "properties": {
@@ -4057,6 +4026,11 @@
             "$ref": "#/definitions/AmlComputeNodeInformation"
           },
           "description": "The collection of returned AmlCompute nodes details."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
         }
       }
     },
@@ -4111,8 +4085,7 @@
           "title": "Run ID.",
           "description": "ID of the Experiment running on the node, if any else null."
         }
-      },
-      "x-ms-discriminator-value": "AmlCompute"
+      }
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
