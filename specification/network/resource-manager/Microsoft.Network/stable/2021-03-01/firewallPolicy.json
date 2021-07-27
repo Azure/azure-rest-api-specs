@@ -646,6 +646,10 @@
           "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
           "$ref": "#/definitions/FirewallPolicySNAT"
         },
+        "sql": {
+          "description": "SQL Settings definition.",
+          "$ref": "#/definitions/FirewallPolicySQL"
+        },
         "dnsSettings": {
           "description": "DNS Proxy Settings definition.",
           "$ref": "#/definitions/DnsSettings"
@@ -1183,6 +1187,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "FirewallPolicySQL": {
+      "type": "object",
+      "description": "SQL Settings in Firewall Policy.",
+      "x-ms-discriminator-value": "FirewallPolicySQL",
+      "properties": {
+        "allowSqlRedirect": {
+          "type": "boolean",
+          "description": "A flag to indicate if SQL Redirect traffic filtering is enabled. Turning on the flag requires no rule using port 11000-11999."
         }
       }
     },
