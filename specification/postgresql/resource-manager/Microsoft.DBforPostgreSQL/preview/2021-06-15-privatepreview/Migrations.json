@@ -386,6 +386,15 @@
         "sourceDBServerResourceId": {
           "type": "string"
         },
+        "sourceDBServerFullyQualifiedDomainName": {
+          "type": "string"
+        },
+        "targetDBServerFullyQualifiedDomainName": {
+          "type": "string"
+        },
+        "migrationMode": {
+          "$ref": "#/definitions/MigrationMode"
+        },
         "secretParameters": {
           "$ref": "#/definitions/MigrationSecretParameters"
         },
@@ -684,6 +693,18 @@
         }
       },
       "description": "Migration sub state details."
+    },
+    "MigrationMode": {
+      "enum": [
+        "Online",
+        "Offline"
+      ],
+      "type": "string",
+      "description": "Migration mode.",
+      "x-ms-enum": {
+        "name": "MigrationMode",
+        "modelAsString": true
+      }
     },
     "ServerSku": {
       "type": "object",
