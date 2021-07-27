@@ -50,12 +50,13 @@ directive:
 
 ---
 
-## Authoring 3.0-preview
+## Authoring 3.0
 These settings apply only when `--tag=authoring_3_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0_preview'
 input-file: preview/v3.0/LUIS-Authoring.json
 ```
+
 Deprecated Pattern's Operations
 
 ``` yaml $(tag) == 'authoring_2_0'
@@ -72,13 +73,25 @@ directive:
     remove-operation: Features_DeletePatternFeature
 ```
 
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: DeleteMustNotHaveRequestBody
+    reason: Body is used to specify entity to delete
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Changing casing will break existing clients/consumers
+```
+
+---
+
 ## Authoring 3.0
 These settings apply only when `--tag=authoring_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0'
 input-file: stable/v3.0/LUIS-Authoring.json
 ```
-
 
 Deprecated Pattern's Operations
 
@@ -171,10 +184,8 @@ require: $(this-folder)/../../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v2.0/LUIS-Authoring.json
   - $(this-folder)/preview/v3.0/LUIS-Authoring.json
-  - $(this-folder)/stable/v3.0/LUIS-Authoring.json
 
 ```
-
 
 If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
