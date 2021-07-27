@@ -205,7 +205,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/SecurityAssessmentMetadata"
+            "$ref": "#/parameters/SecurityAssessmentMetadataResponse"
           }
         ],
         "responses": {
@@ -642,6 +642,441 @@
                 },
                 {
                   "value": "impact"
+                }
+              ]
+            }
+          }
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Techniques of the assessment",
+            "enum": [
+              "abuseElevationControlMechanism",
+              "containerandResourceDiscovery",
+              "nonStandardPort",
+              "resourceHijacking",
+              "permissionGroupsDiscovery",
+              "softwareDeploymentTools",
+              "exploitationforCredentialAccess",
+              "serverSoftwareComponent",
+              "audioCapture",
+              "subvertTrustControls",
+              "oSCredentialDumping",
+              "dataStaged",
+              "trustedRelationship",
+              "lateralToolTransfer",
+              "masquerading",
+              "bootorLogonAutostartExecution",
+              "impairDefenses",
+              "exploitationforClientExecution",
+              "processDiscovery",
+              "dataDestruction",
+              "externalRemoteServices",
+              "nonApplicationLayerProtocol",
+              "obtainCapabilities",
+              "accountDiscovery",
+              "domainTrustDiscovery",
+              "screenCapture",
+              "taintSharedContent",
+              "obuscatedFilesorInformation",
+              "networkDenialofService",
+              "phishing",
+              "implantContainerImage",
+              "windowsManagementInstrumentation",
+              "serviceStop",
+              "hideArtifacts",
+              "userExecution",
+              "officeApplicationStartup",
+              "deobfuscateDecodeFilesorInformation",
+              "remoteServices",
+              "exploitationforDefenseEvasion",
+              "fileandDirectoryDiscovery",
+              "accessTokenManipulation",
+              "createorModifySystemProcess",
+              "datafromLocalSystem",
+              "interProcessCommunication",
+              "compromiseClientSoftwareBinary",
+              "indicatorRemovalonHost",
+              "exploitationforPrivilegeEscalation",
+              "unsecuredCredentials",
+              "dynamicResolution",
+              "compromiseInfrastructure",
+              "validAccounts",
+              "systemInformationDiscovery",
+              "defacement",
+              "protocolTunneling",
+              "searchVictimOwnedWebsites",
+              "exploitPublicFacingApplication",
+              "datafromCloudStorageObject",
+              "applicationLayerProtocol",
+              "driveByCompromise",
+              "datafromInformationRepositories",
+              "inputCapture",
+              "queryRegistry",
+              "ingressToolTransfer",
+              "scheduledTaskJob",
+              "activeScanning",
+              "manInTheMiddle",
+              "credentialsfromPasswordStores",
+              "fallbackChannels",
+              "signedBinaryProxyExecution",
+              "hijackExecutionFlow",
+              "exploitationofRemoteServices",
+              "trafficSignaling",
+              "networkServiceScanning",
+              "preOSBoot",
+              "fileandDirectoryPermissionsModification",
+              "processInjection",
+              "obfuscatedFilesorInformation",
+              "modifyAuthenticationProcess",
+              "remoteServiceSessionHijacking",
+              "commandandScriptingInterpreter",
+              "dataManipulation",
+              "proxy",
+              "networkSniffing",
+              "bootorLogonInitializationScripts",
+              "dataEncryptedforImpact",
+              "indirectCommandExecution",
+              "gatherVictimNetworkInformation",
+              "createAccount",
+              "datafromConfigurationRepository",
+              "eventTriggeredExecution",
+              "cloudInfrastructureDiscovery",
+              "cloudServiceDiscovery",
+              "exfiltrationOverAlternativeProtocol",
+              "sQLStoredProcedures",
+              "endpointDenialofService",
+              "bruteForce",
+              "cloudServiceDashboard",
+              "supplyChainCompromise",
+              "transferDatatoCloudAccount",
+              "remoteAccessSoftware",
+              "accountManipulation",
+              "stealorForgeKerberosTickets",
+              "remoteSystemDiscovery",
+              "modifyRegistry",
+              "diskWipe"
+            ],
+            "x-ms-enum": {
+              "name": "tactics",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "abuseElevationControlMechanism"
+                },
+                {
+                  "value": "containerandResourceDiscovery"
+                },
+                {
+                  "value": "nonStandardPort"
+                },
+                {
+                  "value": "resourceHijacking"
+                },
+                {
+                  "value": "permissionGroupsDiscovery"
+                },
+                {
+                  "value": "softwareDeploymentTools"
+                },
+                {
+                  "value": "exploitationforCredentialAccess"
+                },
+                {
+                  "value": "serverSoftwareComponent"
+                },
+                {
+                  "value": "audioCapture"
+                },
+                {
+                  "value": "subvertTrustControls"
+                },
+                {
+                  "value": "oSCredentialDumping"
+                },
+                {
+                  "value": "dataStaged"
+                },
+                {
+                  "value": "trustedRelationship"
+                },
+                {
+                  "value": "lateralToolTransfer"
+                },
+                {
+                  "value": "masquerading"
+                },
+                {
+                  "value": "bootorLogonAutostartExecution"
+                },
+                {
+                  "value": "impairDefenses"
+                },
+                {
+                  "value": "exploitationforClientExecution"
+                },
+                {
+                  "value": "processDiscovery"
+                },
+                {
+                  "value": "dataDestruction"
+                },
+                {
+                  "value": "externalRemoteServices"
+                },
+                {
+                  "value": "nonApplicationLayerProtocol"
+                },
+                {
+                  "value": "obtainCapabilities"
+                },
+                {
+                  "value": "accountDiscovery"
+                },
+                {
+                  "value": "domainTrustDiscovery"
+                },
+                {
+                  "value": "screenCapture"
+                },
+                {
+                  "value": "taintSharedContent"
+                },
+                {
+                  "value": "obuscatedFilesorInformation"
+                },
+                {
+                  "value": "networkDenialofService"
+                },
+                {
+                  "value": "phishing"
+                },
+                {
+                  "value": "implantContainerImage"
+                },
+                {
+                  "value": "windowsManagementInstrumentation"
+                },
+                {
+                  "value": "serviceStop"
+                },
+                {
+                  "value": "hideArtifacts"
+                },
+                {
+                  "value": "userExecution"
+                },
+                {
+                  "value": "officeApplicationStartup"
+                },
+                {
+                  "value": "deobfuscateDecodeFilesorInformation"
+                },
+                {
+                  "value": "remoteServices"
+                },
+                {
+                  "value": "exploitationforDefenseEvasion"
+                },
+                {
+                  "value": "fileandDirectoryDiscovery"
+                },
+                {
+                  "value": "accessTokenManipulation"
+                },
+                {
+                  "value": "createorModifySystemProcess"
+                },
+                {
+                  "value": "datafromLocalSystem"
+                },
+                {
+                  "value": "interProcessCommunication"
+                },
+                {
+                  "value": "compromiseClientSoftwareBinary"
+                },
+                {
+                  "value": "indicatorRemovalonHost"
+                },
+                {
+                  "value": "exploitationforPrivilegeEscalation"
+                },
+                {
+                  "value": "unsecuredCredentials"
+                },
+                {
+                  "value": "dynamicResolution"
+                },
+                {
+                  "value": "compromiseInfrastructure"
+                },
+                {
+                  "value": "validAccounts"
+                },
+                {
+                  "value": "systemInformationDiscovery"
+                },
+                {
+                  "value": "defacement"
+                },
+                {
+                  "value": "protocolTunneling"
+                },
+                {
+                  "value": "searchVictimOwnedWebsites"
+                },
+                {
+                  "value": "exploitPublicFacingApplication"
+                },
+                {
+                  "value": "datafromCloudStorageObject"
+                },
+                {
+                  "value": "applicationLayerProtocol"
+                },
+                {
+                  "value": "driveByCompromise"
+                },
+                {
+                  "value": "datafromInformationRepositories"
+                },
+                {
+                  "value": "inputCapture"
+                },
+                {
+                  "value": "queryRegistry"
+                },
+                {
+                  "value": "ingressToolTransfer"
+                },
+                {
+                  "value": "scheduledTaskJob"
+                },
+                {
+                  "value": "activeScanning"
+                },
+                {
+                  "value": "manInTheMiddle"
+                },
+                {
+                  "value": "credentialsfromPasswordStores"
+                },
+                {
+                  "value": "fallbackChannels"
+                },
+                {
+                  "value": "signedBinaryProxyExecution"
+                },
+                {
+                  "value": "hijackExecutionFlow"
+                },
+                {
+                  "value": "exploitationofRemoteServices"
+                },
+                {
+                  "value": "trafficSignaling"
+                },
+                {
+                  "value": "networkServiceScanning"
+                },
+                {
+                  "value": "preOSBoot"
+                },
+                {
+                  "value": "fileandDirectoryPermissionsModification"
+                },
+                {
+                  "value": "processInjection"
+                },
+                {
+                  "value": "obfuscatedFilesorInformation"
+                },
+                {
+                  "value": "modifyAuthenticationProcess"
+                },
+                {
+                  "value": "remoteServiceSessionHijacking"
+                },
+                {
+                  "value": "commandandScriptingInterpreter"
+                },
+                {
+                  "value": "dataManipulation"
+                },
+                {
+                  "value": "proxy"
+                },
+                {
+                  "value": "networkSniffing"
+                },
+                {
+                  "value": "bootorLogonInitializationScripts"
+                },
+                {
+                  "value": "dataEncryptedforImpact"
+                },
+                {
+                  "value": "indirectCommandExecution"
+                },
+                {
+                  "value": "gatherVictimNetworkInformation"
+                },
+                {
+                  "value": "createAccount"
+                },
+                {
+                  "value": "datafromConfigurationRepository"
+                },
+                {
+                  "value": "eventTriggeredExecution"
+                },
+                {
+                  "value": "cloudInfrastructureDiscovery"
+                },
+                {
+                  "value": "cloudServiceDiscovery"
+                },
+                {
+                  "value": "exfiltrationOverAlternativeProtocol"
+                },
+                {
+                  "value": "sQLStoredProcedures"
+                },
+                {
+                  "value": "endpointDenialofService"
+                },
+                {
+                  "value": "bruteForce"
+                },
+                {
+                  "value": "cloudServiceDashboard"
+                },
+                {
+                  "value": "supplyChainCompromise"
+                },
+                {
+                  "value": "transferDatatoCloudAccount"
+                },
+                {
+                  "value": "remoteAccessSoftware"
+                },
+                {
+                  "value": "accountManipulation"
+                },
+                {
+                  "value": "stealorForgeKerberosTickets"
+                },
+                {
+                  "value": "remoteSystemDiscovery"
+                },
+                {
+                  "value": "modifyRegistry"
+                },
+                {
+                  "value": "diskWipe"
                 }
               ]
             }
