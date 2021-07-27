@@ -4782,6 +4782,14 @@
           "type": "string",
           "readOnly": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of metadata associated with the invoice section.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxItems": 1000
+        },
         "targetCloud": {
           "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
           "$ref": "#/definitions/TargetCloud",
@@ -5332,6 +5340,12 @@
             "$ref": "#/definitions/Product"
           }
         },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -5679,6 +5693,14 @@
           "description": "The sku description of the Azure plan for the subscription.",
           "type": "string",
           "readOnly": true
+        },
+        "suspensionReasons": {
+          "description": "The suspension reason for a subscription. Applies only to legacy subscriptions",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
