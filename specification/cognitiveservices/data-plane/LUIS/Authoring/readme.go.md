@@ -15,6 +15,10 @@ go:
 batch:
   - tag: authoring_2_0
   - tag: authoring_3_0_preview
+
+batch:
+  - tag: authoring_2_0
+  - tag: authoring_3_0_preview
   - tag: authoring_3_0
 ```
 
