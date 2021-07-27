@@ -1585,7 +1585,7 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the bookmark",
           "type": "object"
         },
@@ -1623,7 +1623,7 @@
           "type": "string"
         },
         "updatedBy": {
-          "$ref": "../../../common/1.0/types.json#/definitions/UserInfo",
+          "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
@@ -3734,6 +3734,28 @@
           "description": "A full URL the entity points to",
           "readOnly": true,
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UserInfo": {
+      "description": "User information that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user.",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "type": "object"
