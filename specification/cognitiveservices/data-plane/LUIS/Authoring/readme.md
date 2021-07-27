@@ -5,13 +5,11 @@
 Configuration for generating LUIS Authoring SDK.
 
 ``` yaml
-tag: authoring_3_0_preview
 tag: authoring_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Authoring Endpoint is `authoring_3_0_preview`.
 The current release for the Authoring Endpoint is `authoring_3_0`.
 
 # Releases
@@ -58,6 +56,22 @@ These settings apply only when `--tag=authoring_3_0_preview` is specified on the
 ``` yaml $(tag) == 'authoring_3_0_preview'
 input-file: preview/v3.0/LUIS-Authoring.json
 ```
+Deprecated Pattern's Operations
+
+``` yaml $(tag) == 'authoring_2_0'
+directive:
+  - reason: Deprecated
+    remove-operation: Features_GetApplicationVersionPatternFeatures
+  - reason: Deprecated
+    remove-operation: Features_CreatePatternFeature
+  - reason: Deprecated
+    remove-operation: Features_GetPatternFeatureInfo
+  - reason: Deprecated
+    remove-operation: Features_UpdatePatternFeature
+  - reason: Deprecated
+    remove-operation: Features_DeletePatternFeature
+```
+
 ## Authoring 3.0
 These settings apply only when `--tag=authoring_3_0` is specified on the command line.
 
