@@ -3558,7 +3558,10 @@
     "ApplicationGatewayLoadDistributionPolicyPropertiesFormat": {
       "properties": {
         "loadDistributionTargets": {
-          "$ref": "#/definitions/ApplicationGatewayLoadDistributionTarget",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayLoadDistributionTarget"
+          },
           "description": "Load Distribution Targets resource of an application gateway."
         },
         "loadDistributionAlgorithm": {
@@ -3625,8 +3628,28 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayLoadDistributionTargetPropertiesFormat",
           "description": "Properties of the application gateway load distribution target."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the load distribution policy that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Load Distribution Target of an application gateway."
     },
     "ApplicationGatewayLoadDistributionAlgorithmEnum": {
       "type": "string",

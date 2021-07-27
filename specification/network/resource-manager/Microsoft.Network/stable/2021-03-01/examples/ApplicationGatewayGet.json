@@ -354,15 +354,23 @@
                 "loadDistributionAlgorithm": "RoundRobin",
                 "loadDistributionTargets": [
                   {
-                    "weightPerServer": 40,
-                    "backendAddressPool": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                    "name": "ld11",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
+                    "properties": {
+                      "weightPerServer": 40,
+                      "backendAddressPool": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                      }
                     }
                   },
                   {
-                    "weightPerServer": 60,
-                    "backendAddressPool": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
+                    "name": "ld11",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
+                    "properties": {
+                      "weightPerServer": 60,
+                      "backendAddressPool": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
+                      }
                     }
                   }
                 ]
