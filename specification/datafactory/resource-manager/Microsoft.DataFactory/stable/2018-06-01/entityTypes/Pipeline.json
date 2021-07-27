@@ -4141,6 +4141,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into sql. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4179,6 +4192,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into sql server. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4217,6 +4243,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into Azure SQL. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4255,6 +4294,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "White behavior when copying data into azure SQL MI. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4290,6 +4342,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into azure SQL DW. Type: SqlDWWriteBehaviorEnum (or Expression with resultType SqlDWWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL DW upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlDWUpsertSettings"
         }
       }
     },
@@ -4362,6 +4427,63 @@
           "type": "object",
           "description": "The default value of the column. Type: object (or Expression with resultType string)."
         }
+      }
+    },
+    "SqlUpsertSettings": {
+      "description": "Sql upsert option settings",
+      "type": "object",
+      "properties": {
+        "useTempDB": {
+          "type": "object",
+          "description": "Specifies whether to use temp db for upsert interim table. Type: boolean (or Expression with resultType boolean)."
+        },
+        "interimSchemaName": {
+          "type": "object",
+          "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
+        },
+        "keys": {
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+        }
+      }
+    },
+    "SqlDWUpsertSettings": {
+      "description": "Sql DW upsert option settings",
+      "type": "object",
+      "properties": {
+        "interimSchemaName": {
+          "type": "object",
+          "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
+        },
+        "keys": {
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+        }
+      }
+    },
+    "SqlWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert",
+        "StoredProcedure"
+      ],
+      "x-ms-enum": {
+        "name": "SqlWriteBehaviorEnum",
+        "modelAsString": true
+      }
+    },
+    "SqlDWWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql dw.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "SqlDWWriteBehaviorEnum",
+        "modelAsString": true
       }
     },
     "SnowflakeSink": {
