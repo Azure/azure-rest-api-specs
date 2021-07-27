@@ -54,65 +54,6 @@
             ]
           },
           {
-            "configurationType": "UserPolicy",
-            "connectivityConfiguration": null,
-            "securityUserRule": {
-              "id": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
-              "configurationDisplayName": "SampleConfig",
-              "configurationDescription": "SampleDescription",
-              "ruleCollectionDisplayName": "SampleRuleCollection",
-              "ruleCollectionDescription": "SampleRuleCollectionDescription",
-              "ruleCollectionAppliesToGroups": [
-                {
-                  "networkGroupId": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1"
-                }
-              ],
-              "kind": "Custom",
-              "properties": {
-                "displayName": "SampleUserRule",
-                "description": "Sample User Rule",
-                "protocol": "Tcp",
-                "sources": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "destinations": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "sourcePortRanges": [
-                  "0-65535"
-                ],
-                "destinationPortRanges": [
-                  "22"
-                ],
-                "direction": "Inbound",
-                "provisioningState": "Succeeded"
-              }
-            },
-            "configurationGroups": [
-              {
-                "id": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
-                "properties": {
-                  "displayName": "My Network Group",
-                  "description": "A group for all test Virtual Networks",
-                  "memberType": "VirtualNetwork",
-                  "groupMembers": [
-                    {
-                      "vnetId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
-                    }
-                  ],
-                  "conditionalMembership": "",
-                  "provisioningState": "Succeeded"
-                }
-              }
-            ]
-          },
-          {
             "configurationType": "AdminPolicy",
             "connectivityConfiguration": null,
             "securityAdminRule": {
