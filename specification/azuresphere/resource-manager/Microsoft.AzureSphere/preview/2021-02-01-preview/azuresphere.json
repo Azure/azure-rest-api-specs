@@ -2188,6 +2188,15 @@
             "required": true,
             "description": "Serial number",
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Parameters for the proof of possession nonce",
+            "schema": {
+              "$ref": "#/definitions/ProofOfPossessionNonceRequest"
+            }
           }
         ],
         "responses": {
@@ -3134,6 +3143,19 @@
         }
       },
       "description": "The certificate chain response."
+    },
+    "ProofOfPossessionNonceRequest": {
+      "type": "object",
+      "properties": {
+        "proofOfPossessionNonce": {
+          "type": "string",
+          "description": "The proof of possession nonce"
+        }
+      },
+      "description": "Request for the proof of possession nonce",
+      "required": [
+        "proofOfPossessionNonce"
+      ]
     },
     "ProofOfPossessionNonceResponse": {
       "type": "object",
