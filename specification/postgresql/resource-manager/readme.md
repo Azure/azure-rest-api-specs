@@ -33,7 +33,7 @@ tag: package-flexibleserver-2021-06
 tag: package-flexibleserver-2021-06
 ```
 
-``` yaml $(package-singlseservers)
+``` yaml $(package-singleservers)
 tag: package-2020-01-01
 ```
 
