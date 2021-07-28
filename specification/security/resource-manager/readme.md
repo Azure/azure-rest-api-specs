@@ -199,8 +199,8 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
+- Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
@@ -474,8 +474,6 @@ These settings apply only when `--tag=package-2021-06-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2021-06-only'
 input-file:
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
 - Microsoft.Security/stable/2021-06-01/settings.json
 
 # Needed when there is more than one input file
