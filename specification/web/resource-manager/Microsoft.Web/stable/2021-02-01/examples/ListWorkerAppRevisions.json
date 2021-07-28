@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "workerAppName": "testWorkerApp0",
+    "api-version": "2021-02-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.WebworkerApps/testWorkerApp0/revisions/testWorkerApp0-pjxhsye",
+            "name": "testWorkerApp0-pjxhsye",
+            "type": "Microsoft.Web/workerApps/revisions",
+            "location": "East US",
+            "properties": {
+              "createdTime": "2021-05-24T21:24:22+00:00",
+              "fqdn": "testWorkerApp0-pjxhsye.demokube-t24clv0g.eastus.workerapps.k4apps.io",
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testWorkerApp0:v2",
+                    "name": "testWorkerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "dapr": {
+                  "enabled": true,
+                  "appPort": 3000
+                }
+              },
+              "active": true,
+              "replicas": 1
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
