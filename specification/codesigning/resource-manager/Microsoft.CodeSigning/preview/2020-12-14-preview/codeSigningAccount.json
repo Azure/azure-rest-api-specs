@@ -559,6 +559,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/checkNameAvailability": {
+      "post": {
+        "operationId": "CodeSigningAccount_CheckNameAvailability",
+        "description": "Checks that the code signing account name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "The name of the code signing account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a code signing account name": {
+            "$ref": "./examples/checkAccountNameAvailability.json"
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      }
+    },
     "/providers/Microsoft.CodeSigning/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -829,7 +874,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the vault",
+      "description": "Provisioning state of the code signing account",
       "enum": [
         "Succeeded",
         "Failed",
@@ -864,6 +909,48 @@
       "x-ms-enum": {
         "name": "RotationPolicy",
         "modelAsString": true
+      }
+    },
+    "CheckNameAvailability": {
+      "description": "The parameters used to check the availability of the code signing account name.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Code signing account name."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "The CheckNameAvailability operation response.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An error message explaining the Reason value in more detail."
+        }
       }
     },
     "OperationList": {
