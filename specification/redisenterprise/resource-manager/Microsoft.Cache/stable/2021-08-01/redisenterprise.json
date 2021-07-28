@@ -790,7 +790,7 @@
             "$ref": "./examples/RedisEnterpriseDatabasesImport.json"
           }
         },
-        "description": "Imports a database file to target database.",
+        "description": "Imports database files to target database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -1550,16 +1550,19 @@
       "description": "Specifies which access keys to reset to a new random value."
     },
     "ImportClusterParameters": {
-      "title": "Import an RDB file into a target database",
+      "title": "Import RDB files into a target database",
       "properties": {
-        "sasUri": {
-          "type": "string",
-          "description": "SAS URI for the target blob to import from",
+        "sasUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "SAS URIs for the target blobs to import from",
           "x-ms-secret": true
         }
       },
       "required": [
-        "sasUri"
+        "sasUris"
       ],
       "description": "Parameters for a Redis Enterprise import operation."
     },
