@@ -13,7 +13,6 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2021-04-01-preview
-  - tag: package-2021-06-01-preview
 ```
 
 ### Tag: package-2021-04-01-preview and ruby
@@ -23,15 +22,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2021-04-01-preview' && $(ruby)
 namespace: "Azure::WebPubSub::Mgmt::V2021_04_01_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_webpubsub/lib
-```
-
-### Tag: package-2021-06-01-preview and ruby
-
-These settings apply only when `--tag=package-2021-06-01-preview --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-2021-06-01-preview' && $(ruby)
-namespace: "Azure::WebPubSub::Mgmt::V2021_06_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_webpubsub/lib
 ```

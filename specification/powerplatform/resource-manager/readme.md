@@ -35,7 +35,6 @@ These settings apply only when `--tag=package-2020-10-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-10-30-preview'
 input-file:
-  - Microsoft.PowerPlatform/preview/2020-10-30-preview/account.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/enterprisePolicy.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateEndpointConnection.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateLinkResources.json

@@ -562,6 +562,7 @@
           "description": "List of linked private link scope resources."
         },
         "features": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceFeatures",
           "description": "Workspace features."
         }
@@ -589,11 +590,6 @@
           "type": "string",
           "x-nullable": true,
           "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
-        },
-        "disableLocalAuth": {
-          "type": "boolean",
-          "x-nullable": true,
-          "description": "Disable Non-AAD based Auth."
         }
       },
       "additionalProperties": true,

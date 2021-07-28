@@ -17,7 +17,7 @@ directive:
     - Machines_Update
 ```
 
-``` yaml $(typescript) && !$(profile-content)
+``` yaml $(typescript) && !$(profile)
   package-name: "@azure/arm-hybridcompute"
   output-folder: "$(typescript-sdks-folder)/sdk/hybridcompute/arm-hybridcompute"
   clear-output-folder: true

@@ -26,8 +26,7 @@ These are the global settings for the elastic.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2020-07-01
+tag: package-2020-07-01-preview
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -41,16 +40,6 @@ input-file:
 
 ---
 
-### Tag: package-2020-07-01
-
-These settings apply only when `--tag=package-2020-07-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-07-01'
-input-file:
-  - Microsoft.Elastic/stable/2020-07-01/elastic.json
-```
-
----
 # Code Generation
 
 ## Swagger to SDK
@@ -73,12 +62,6 @@ directive:
   - suppress: SECRET_PROPERTY
     from:
       - Microsoft.Elastic/preview/2020-07-01-preview/elastic.json
-    where:
-      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
-    reason: Secrets are OK to return in a POST response.
-  - suppress: SECRET_PROPERTY
-    from:
-      - Microsoft.Elastic/stable/2020-07-01/elastic.json
     where:
       - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.

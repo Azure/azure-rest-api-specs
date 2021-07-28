@@ -56,12 +56,6 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-pageable": {
@@ -147,12 +141,6 @@
                 "type": "string"
               }
             }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -211,12 +199,6 @@
                 "type": "string"
               }
             }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         }
       },
@@ -254,12 +236,6 @@
           },
           "204": {
             "description": "The streaming job does not exist."
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -311,12 +287,6 @@
                 "type": "string"
               }
             }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         }
       }
@@ -360,12 +330,6 @@
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
             }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-pageable": {
@@ -408,12 +372,6 @@
             "description": "Successfully listed the streaming jobs under the given subscription.",
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
-            }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -469,12 +427,6 @@
           },
           "202": {
             "description": "The start streaming job request was successfully initiated."
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -512,12 +464,6 @@
           },
           "202": {
             "description": "The stop streaming job request was successfully initiated."
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -584,7 +530,7 @@
       "description": "A streaming job object, containing all information associated with the named streaming job.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -793,65 +739,36 @@
       }
     },
     "Resource": {
-      "type": "object",
-      "description": "The base resource definition",
+      "description": "The base resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Resource Id"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource"
+          "description": "Resource name"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "type": "object",
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location. Required on PUT (CreateOrReplace) requests."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

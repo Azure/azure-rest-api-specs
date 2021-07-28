@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a resource group",
         "tags": [
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings/{autoscaleSettingName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
       "put": {
         "description": "Creates or updates an autoscale setting.",
         "tags": [
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a subscription",
         "tags": [
@@ -386,10 +386,6 @@
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
         },
-        "metricResourceLocation": {
-          "type": "string",
-          "description": "the location of the resource the rule monitors."
-        },
         "timeGrain": {
           "type": "string",
           "format": "duration",
@@ -402,8 +398,7 @@
             "Average",
             "Min",
             "Max",
-            "Sum",
-            "Count"
+            "Sum"
           ],
           "x-ms-enum": {
             "name": "MetricStatisticType",
@@ -492,8 +487,7 @@
           "enum": [
             "ChangeCount",
             "PercentChangeCount",
-            "ExactCount",
-            "ServiceAllowedNextValue"
+            "ExactCount"
           ],
           "x-ms-enum": {
             "name": "ScaleType",
@@ -659,13 +653,11 @@
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription administrator.",
-          "default": false
+          "description": "a value indicating whether to send email to subscription administrator."
         },
         "sendToSubscriptionCoAdministrators": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription co-administrators.",
-          "default": false
+          "description": "a value indicating whether to send email to subscription co-administrators."
         },
         "customEmails": {
           "type": "array",
@@ -755,10 +747,6 @@
         "targetResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource that the autoscale setting should be added to."
-        },
-        "targetResourceLocation": {
-          "type": "string",
-          "description": "the location of the resource that the autoscale setting should be added to."
         }
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."

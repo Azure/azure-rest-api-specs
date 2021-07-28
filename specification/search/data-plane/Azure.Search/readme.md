@@ -166,24 +166,6 @@ directive:
       - RequiredReadOnlyProperties
 ```
 
-### Tag: package-2021-04-searchservice-preview
-
-These settings apply only when `--tag=package-2021-04-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-searchservice-preview'
-input-file:
-- preview/2021-04-30-Preview/searchservice.json
-```
-
-### Tag: package-2021-04-searchindex-preview
-
-These settings apply only when `--tag=package-2021-04-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-searchindex-preview'
-input-file:
-- preview/2021-04-30-Preview/searchindex.json
-```
-
 ### Tag: package-2020-06-searchservice-preview
 
 These settings apply only when `--tag=package-2020-06-searchservice-preview` is specified on the command line.
@@ -737,8 +719,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2021-04-30-Preview/searchservice.json
-  - $(this-folder)/preview/2021-04-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30-Preview/searchservice.json
   - $(this-folder)/preview/2020-06-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30/searchservice.json

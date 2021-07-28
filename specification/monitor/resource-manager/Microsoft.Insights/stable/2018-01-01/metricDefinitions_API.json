@@ -2,6 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
     "version": "2018-01-01"
   },
   "host": "management.azure.com",
@@ -33,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
+    "/{resourceUri}/providers/microsoft.insights/metricDefinitions": {
       "get": {
         "tags": [
           "MetricDefinitions"
@@ -74,9 +77,6 @@
           },
           "Get Application Insights Metric Definitions without filter": {
             "$ref": "./examples/GetMetricDefinitionsApplicationInsights.json"
-          },
-          "Get StorageCache Metric Definitions with metric class": {
-            "$ref": "./examples/GetMetricDefinitionsMetricClass.json"
           }
         }
       }
@@ -100,7 +100,6 @@
       "description": "The localizable string class."
     },
     "MetricAvailability": {
-      "type": "object",
       "properties": {
         "timeGrain": {
           "type": "string",
@@ -134,8 +133,8 @@
         "BitsPerSecond"
       ],
       "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": true
+        "name": "Unit",
+        "modelAsString": false
       }
     },
     "AggregationType": {
@@ -154,23 +153,7 @@
         "modelAsString": false
       }
     },
-    "MetricClass": {
-      "type": "string",
-      "description": "The class of the metric.",
-      "enum": [
-        "Availability",
-        "Transactions",
-        "Errors",
-        "Latency",
-        "Saturation"
-      ],
-      "x-ms-enum": {
-        "name": "MetricClass",
-        "modelAsString": true
-      }
-    },
     "MetricDefinition": {
-      "type": "object",
       "properties": {
         "isDimensionRequired": {
           "type": "boolean",
@@ -196,13 +179,9 @@
           "type": "string",
           "description": "Custom category name for this metric."
         },
-        "metricClass": {
-          "$ref": "#/definitions/MetricClass",
-          "description": "The class of the metric."
-        },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "The unit of the metric."
+          "description": "the unit of the metric."
         },
         "primaryAggregationType": {
           "$ref": "#/definitions/AggregationType",
@@ -237,7 +216,6 @@
       "description": "Metric definition class specifies the metadata for a metric."
     },
     "MetricDefinitionCollection": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",

@@ -1,5 +1,5 @@
 import { ParserOptions, FastPath, Doc, doc, Plugin, AST } from 'prettier';
-import { parsers as bundledParsers } from 'prettier/parser-babel';
+import { parsers as bundledParsers } from 'prettier/parser-babylon';
 
 const { concat, indent, hardline, join } = doc.builders;
 

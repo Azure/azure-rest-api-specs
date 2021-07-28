@@ -48,12 +48,6 @@
             "schema": {
               "$ref": "Quotas.json#/definitions/Quota"
             }
-          },
-          "default": {
-            "description": "Default Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
           }
         }
       },
@@ -98,12 +92,6 @@
             "schema": {
               "$ref": "Quotas.json#/definitions/Quota"
             }
-          },
-          "default": {
-            "description": "Default Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
           }
         }
       },
@@ -142,12 +130,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "default": {
-            "description": "Default Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
           }
         }
       }
@@ -187,12 +169,6 @@
             "description": "OK",
             "schema": {
               "$ref": "Quotas.json#/definitions/QuotaList"
-            }
-          },
-          "default": {
-            "description": "Default Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -315,37 +291,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ErrorDetails": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Object containing error details.",
-          "$ref": "#/definitions/ErrorDetailsInternal"
-        }
-      }
-    },
-    "ErrorDetailsInternal": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {

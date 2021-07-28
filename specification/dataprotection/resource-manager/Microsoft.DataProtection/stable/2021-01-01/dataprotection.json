@@ -24,7 +24,7 @@
           "BackupVaults"
         ],
         "description": "Returns resource collection belonging to a subscription.",
-        "operationId": "BackupVaults_GetInSubscription",
+        "operationId": "BackupVaults_GetResourcesInSubscription",
         "produces": [
           "application/json"
         ],
@@ -136,7 +136,7 @@
           "OperationStatus"
         ],
         "summary": "Gets the operation status for a resource.",
-        "operationId": "OperationStatus_Get",
+        "operationId": "GetOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -187,7 +187,7 @@
           "BackupVaults"
         ],
         "description": "Returns resource collection belonging to a resource group.",
-        "operationId": "BackupVaults_GetInResourceGroup",
+        "operationId": "BackupVaults_GetResourcesInResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -389,7 +389,7 @@
           "BackupVaults"
         ],
         "description": "Updates a BackupVault resource belonging to a resource group. For example, updating tags for a resource.",
-        "operationId": "BackupVaults_Update",
+        "operationId": "BackupVaults_Patch",
         "produces": [
           "application/json"
         ],
@@ -446,7 +446,7 @@
         "tags": [
           "Resources"
         ],
-        "operationId": "BackupVaultOperationResults_Get",
+        "operationId": "GetOperationResultPatch",
         "produces": [
           "application/json"
         ],
@@ -555,7 +555,7 @@
           "DppFeatureSupport"
         ],
         "summary": "Validates if a feature is supported",
-        "operationId": "DataProtection_CheckFeatureSupport",
+        "operationId": "CheckFeatureSupport",
         "produces": [
           "application/json"
         ],
@@ -609,7 +609,7 @@
           "Operations"
         ],
         "description": "Returns the list of available operations.",
-        "operationId": "DataProtectionOperations_List",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -632,11 +632,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Returns the list of supported REST operations.": {
-            "$ref": "./examples/Operations/List.json"
-          }
         }
       }
     },
@@ -763,7 +758,6 @@
           },
           {
             "name": "backupPolicyName",
-            "description": "Name of the policy",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1242,7 +1236,7 @@
           "RecoveryPoint"
         ],
         "description": "Returns a list of Recovery Points for a DataSource in a vault.",
-        "operationId": "RecoveryPoints_List",
+        "operationId": "RecoveryPoints_GetList",
         "produces": [
           "application/json"
         ],
@@ -1312,7 +1306,7 @@
           "RecoveryPoint"
         ],
         "description": "Gets a Recovery Point using recoveryPointId for a Datasource.",
-        "operationId": "RecoveryPoints_Get",
+        "operationId": "RecoveryPoint_Get",
         "produces": [
           "application/json"
         ],
@@ -1532,7 +1526,7 @@
           "BackupInstances"
         ],
         "description": "Validates if Restore can be triggered for a DataSource",
-        "operationId": "BackupInstances_ValidateForRestore",
+        "operationId": "BackupInstances_ValidateRestore",
         "produces": [
           "application/json"
         ],
@@ -1654,12 +1648,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstances}/findRestorableTimeRanges": {
       "post": {
         "tags": [
           "FindRestorableTimeRanges"
         ],
-        "operationId": "RestorableTimeRanges_Find",
+        "operationId": "FindRestorableTimeRanges_Post",
         "produces": [
           "application/json"
         ],
@@ -1677,8 +1671,7 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "backupInstanceName",
-            "description": "The name of the backup instance",
+            "name": "backupInstances",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1720,7 +1713,7 @@
           "AzureBackupJob"
         ],
         "description": "Gets a job with id in a backup vault",
-        "operationId": "Jobs_Get",
+        "operationId": "Job_Get",
         "produces": [
           "application/json"
         ],
@@ -2030,7 +2023,9 @@
     "AzureBackupFindRestorableTimeRangesRequest": {
       "description": "List Restore Ranges Request",
       "required": [
-        "sourceDataStoreType"
+        "sourceDataStoreType",
+        "startTime",
+        "endTime"
       ],
       "type": "object",
       "properties": {
@@ -2048,11 +2043,11 @@
           }
         },
         "startTime": {
-          "description": "Start time for the List Restore Ranges request. ISO 8601 format.",
+          "description": "Start time for the List Restore Ranges request",
           "type": "string"
         },
         "endTime": {
-          "description": "End time for the List Restore Ranges request. ISO 8601 format.",
+          "description": "End time for the List Restore Ranges request",
           "type": "string"
         }
       }

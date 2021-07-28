@@ -187,6 +187,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-powershell
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -212,10 +213,6 @@ csharp:
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
 
 
 

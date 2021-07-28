@@ -28,53 +28,10 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-preview-2021-06
+tag: package-2021-04-preview
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
-```
-
-
-### Tag: package-preview-2021-06
-
-These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-06'
-input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/checkNameAvailability.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/firewallRule.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/keys.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/privateEndpointConnections.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/privateLinkResources.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/privatelinkhub.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/sqlPool.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/sqlServer.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
-```
-### Tag: package-2021-05
-
-These settings apply only when `--tag=package-2021-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-05'
-input-file:
-  - Microsoft.Synapse/stable/2021-05-01/bigDataPool.json
-  - Microsoft.Synapse/stable/2021-05-01/checkNameAvailability.json
-  - Microsoft.Synapse/stable/2021-05-01/firewallRule.json
-  - Microsoft.Synapse/stable/2021-05-01/integrationRuntime.json
-  - Microsoft.Synapse/stable/2021-05-01/keys.json
-  - Microsoft.Synapse/stable/2021-05-01/library.json
-  - Microsoft.Synapse/stable/2021-05-01/operations.json
-  - Microsoft.Synapse/stable/2021-05-01/privateEndpointConnections.json
-  - Microsoft.Synapse/stable/2021-05-01/privateLinkResources.json
-  - Microsoft.Synapse/stable/2021-05-01/privatelinkhub.json
-  - Microsoft.Synapse/stable/2021-05-01/sqlPool.json
-  - Microsoft.Synapse/stable/2021-05-01/sqlServer.json
-  - Microsoft.Synapse/stable/2021-05-01/workspace.json
 ```
 
 ### Tag: package-2021-04-preview
@@ -287,6 +244,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
@@ -319,3 +277,5 @@ batch:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+

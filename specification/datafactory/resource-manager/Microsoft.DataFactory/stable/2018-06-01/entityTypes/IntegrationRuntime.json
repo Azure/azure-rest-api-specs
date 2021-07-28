@@ -238,9 +238,9 @@
             "$ref": "#/definitions/PackageStore"
           }
         },
-        "credential": {
-          "$ref": "../datafactory.json#/definitions/CredentialReference",
-          "description": "The credential reference containing authentication information."
+        "managedCredential": {
+          "description": "The user-assigned managed identity reference.",
+          "$ref": "#/definitions/EntityReference"
         }
       },
       "additionalProperties": {
@@ -508,7 +508,8 @@
           "type": "string",
           "enum": [
             "IntegrationRuntimeReference",
-            "LinkedServiceReference"
+            "LinkedServiceReference",
+            "CredentialReference"
           ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEntityReferenceType",

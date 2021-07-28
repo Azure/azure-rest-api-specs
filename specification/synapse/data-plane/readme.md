@@ -28,23 +28,23 @@ openapi-type: data-plane
 ```
 
 ``` yaml $(package-spark)
-tag: package-spark-2020-12-01
+tag: package-spark-2019-11-01-preview
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-2020-12-01
+tag: package-artifacts-2019-06-01-preview
 ```
 
 ``` yaml $(package-access-control)
-tag: package-access-control-2020-12-01
+tag: package-access-control-2020-08-01-preview
 ```
 
 ``` yaml $(package-vnet)
-tag: package-vnet-2020-12-01
+tag: package-vnet-2019-06-01-preview
 ```
 
 ``` yaml $(package-monitoring)
-tag: package-monitoring-2020-12-01
+tag: package-monitoring-2019-11-01-preview
 ```
 
 ### Tag: package-spark-2019-11-01-preview
@@ -116,102 +116,6 @@ These settings apply only when `--tag=package-monitoring-2019-11-01-preview` is 
 ``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-```
-
-### Tag: package-artifacts-2020-12-01
-
-These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-artifacts-2020-12-01'
-input-file:
-  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
-  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
-  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
-  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
-  - Microsoft.Synapse/stable/2020-12-01/library.json
-  - Microsoft.Synapse/stable/2020-12-01/operations.json
-  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
-  - Microsoft.Synapse/stable/2020-12-01/workspace.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
-  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
-```
-
-### Tag: package-monitoring-2020-12-01
-
-These settings apply only when `--tag=package-monitoring-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-monitoring-2020-12-01'
-input-file:
-  - Microsoft.Synapse/stable/2020-12-01/monitoring.json
-```
-
-### Tag: package-access-control-2020-12-01
-
-These settings apply only when `--tag=package-access-control-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-access-control-2020-12-01'
-input-file:
-  - Microsoft.Synapse/stable/2020-12-01/checkAccessSynapseRbac.json
-  - Microsoft.Synapse/stable/2020-12-01/roleAssignments.json
-  - Microsoft.Synapse/stable/2020-12-01/roleDefinitions.json
-```
-
-### Tag: package-vnet-2020-12-01
-
-These settings apply only when `--tag=package-vnet-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-vnet-2020-12-01'
-input-file:
-  - Microsoft.Synapse/stable/2020-12-01/managedPrivateEndpoints.json
-```
-
-### Tag: package-spark-2020-12-01
-
-These settings apply only when `--tag=package-spark-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-spark-2020-12-01'
-input-file:
-  - Microsoft.Synapse/stable/2020-12-01/sparkJob.json
-```
-
-### Tag: package-artifacts-2021-06-01-preview
-
-These settings apply only when `--tag=package-artifacts-2021-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-artifacts-2021-06-01-preview'
-input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/artifacts.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPools.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/gitintegration.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntimes.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/LinkedService.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Notebook.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Pipeline.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkJobDefinition.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SqlScript.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Trigger.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
-```
-
-### Tag: package-vnet-2021-06-01-preview
-
-These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-vnet-2021-06-01-preview'
-input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
 ```
 
 ## Suppression
@@ -304,3 +208,4 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+

@@ -725,7 +725,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -1071,8 +1070,7 @@
             "SoftDeleting",
             "SoftDeleted",
             "Failed",
-            "Succeeded",
-            "Canceled"
+            "Succeeded"
           ],
           "type": "string",
           "readOnly": true,
@@ -1848,21 +1846,6 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
-    },
-    "accountName": {
-      "name": "accountName",
-      "in": "path",
-      "description": "The name of the account.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -1877,6 +1860,21 @@
       "description": "The subscription identifier",
       "required": true,
       "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

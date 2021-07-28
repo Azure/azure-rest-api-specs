@@ -15,7 +15,7 @@ directive:
       set:
         command: disk-pool stop
     - where:
-        command: disk-pool-zone list
+        command: diskpool disk-pool-zone list
       set:
         command: disk-pool list-skus
 ```

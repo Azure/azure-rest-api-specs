@@ -28,16 +28,7 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2021-04-01
-```
-
-### Tag: package-netapp-2021-04-01
-
-These settings apply only when `--tag=package-netapp-2021-04-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-netapp-2021-04-01'
-input-file:
-- Microsoft.NetApp/stable/2021-04-01/netapp.json
+tag: package-netapp-2021-02-01
 ```
 
 ### Tag: package-netapp-2021-04-01-preview
@@ -214,6 +205,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js

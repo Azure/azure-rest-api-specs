@@ -614,11 +614,6 @@
               "type": "string",
               "description": "Provisioning state of the Namespace."
             },
-            "status": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Status of the Namespace."
-            },
             "createdAt": {
               "readOnly": true,
               "format": "date-time",
@@ -717,6 +712,7 @@
         },
         "capacity": {
           "format": "int32",
+          "maximum": 20,
           "minimum": 0,
           "type": "integer",
           "description": "The Event Hubs throughput units for Basic or Standard tiers, where value should be 0 to 20 throughput units. The Event Hubs premium units for Premium tier, where value should be 0 to 10 premium units."
