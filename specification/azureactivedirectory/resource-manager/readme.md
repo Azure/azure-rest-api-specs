@@ -89,6 +89,10 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources"].get.responses'
     from: privateLinkResources.json
     reason: 'If I make this change, it is marked as a breaking change between api versions and I can''t complete the resultant PR.'
+  - suppress: RequiredDefaultResponse
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources/{groupName}"].get.responses'
+    from: privateLinkResources.json
+    reason: 'If I make this change, it is marked as a breaking change between api versions and I can''t complete the resultant PR.'
 ```
 
 ---
