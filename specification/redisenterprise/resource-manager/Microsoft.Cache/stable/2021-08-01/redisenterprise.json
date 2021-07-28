@@ -922,7 +922,7 @@
           "200": {
             "description": "OK -- Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -957,7 +957,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -970,7 +970,7 @@
           "200": {
             "description": "OK -- Get the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1007,14 +1007,14 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection properties."
           }
@@ -1023,7 +1023,7 @@
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1059,7 +1059,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -1108,7 +1108,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -1127,6 +1127,7 @@
   "definitions": {
     "Sku": {
       "description": "SKU parameters supplied to the create RedisEnterprise operation.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1197,6 +1198,7 @@
     },
     "Cluster": {
       "description": "Describes the RedisEnterprise cluster",
+      "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1226,6 +1228,7 @@
     },
     "ClusterUpdate": {
       "description": "A partial update to the RedisEnterprise cluster",
+      "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1253,6 +1256,7 @@
     "ClusterProperties": {
       "title": "RedisEnterprise cluster properties",
       "description": "Properties of RedisEnterprise clusters, as opposed to general resource properties like location, tags",
+      "type": "object",
       "properties": {
         "minimumTlsVersion": {
           "type": "string",
@@ -1292,12 +1296,13 @@
           "readOnly": true,
           "description": "List of private endpoint connections associated with the specified RedisEnterprise cluster",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         }
       }
     },
     "ClusterList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1316,6 +1321,7 @@
     },
     "Database": {
       "description": "Describes a database on the RedisEnterprise cluster",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1331,6 +1337,7 @@
     },
     "DatabaseUpdate": {
       "description": "A partial update to the RedisEnterprise database",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1342,6 +1349,7 @@
     "DatabaseProperties": {
       "title": "RedisEnterprise database properties",
       "description": "Properties of RedisEnterprise databases, as opposed to general resource properties like location, tags",
+      "type": "object",
       "properties": {
         "clientProtocol": {
           "type": "string",
@@ -1426,6 +1434,7 @@
       }
     },
     "DatabaseList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1445,6 +1454,7 @@
     "Persistence": {
       "title": "Persistence settings",
       "description": "Persistence-related configuration for the RedisEnterprise database",
+      "type": "object",
       "properties": {
         "aofEnabled": {
           "type": "boolean",
@@ -1484,6 +1494,7 @@
     "Module": {
       "title": "Module settings",
       "description": "Specifies configuration of a redis module",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1530,6 +1541,7 @@
     },
     "RegenerateKeyParameters": {
       "title": "Regenerate access keys request",
+      "type": "object",
       "properties": {
         "keyType": {
           "type": "string",
@@ -1551,6 +1563,7 @@
     },
     "ImportClusterParameters": {
       "title": "Import RDB files into a target database",
+      "type": "object",
       "properties": {
         "sasUris": {
           "type": "array",
@@ -1568,6 +1581,7 @@
     },
     "ExportClusterParameters": {
       "title": "Export an RDB file into a target database",
+      "type": "object",
       "properties": {
         "sasUri": {
           "type": "string",
