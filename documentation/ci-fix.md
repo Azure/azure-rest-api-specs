@@ -49,13 +49,11 @@ Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/st
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## Breaking Change Check
-There are two kind of breaking change checks: same version breaking change check and cross version breaking change check. Both uses the OAD (OpenAPI Diff) tool to identify breaking changes between swaggers.
-- The same version breaking change check compares the existing version swaggers with updated swaggers of the same version, so that to identify if there are any updates break the version.
-- The cross version breaking change check usually applies to new API version scenario. It uses swaggers of the latest public version as the baseline, comparing swaggers of new version with the baseline, so that to identify if there are any updates lead to breaking experience cross versions.
-The latest public version can be:
-1. The latest stable version which released within 3 years.
-2. When there is no stable version released within 3 years, then the latest preview version which released within 1 years.  
-3. The latest public preview version which released over than 1 year.
+- An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
+    - The same-version breaking change linter rules check for changes to an existing api-version swagger.
+-	When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract. 
+   	- However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
+	- The cross version breaking change linter rules checks for this by comparing the new swagger with the latest GA swagger. If there is no latest GA swagger, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the swagger is considered good.
 
 ### adding label on PR automatically
 The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
