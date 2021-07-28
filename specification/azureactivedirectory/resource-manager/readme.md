@@ -58,6 +58,17 @@ input-file:
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
 ```
 
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkForAzureAD.json
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkResources.json
+  - Microsoft.Aadiam/stable/2020-03-01/privateEndpointConnections.json
+```
+
 ### Tag: package-2017-04-01
 
 These settings apply only when `--tag=package-2017-04-01` is specified on the command line.
