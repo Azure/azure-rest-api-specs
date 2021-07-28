@@ -1,18 +1,28 @@
 {
   "parameters": {
-    "geography": "us",
-    "api-version": "2.0",
-    "tilesetId": "microsoft.base",
-    "zoom": 6,
-    "x": 10,
-    "y": 22
+    "api-version": "2.1",
+    "tilesetId": "microsoft.base"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Content-Type": "application/vnd.mapbox-vector-tile"
-      },
-      "body": "{file}"
+      "headers": {},
+      "body": {
+        "tilejson": "2.2.0",
+        "version": "1.0.0",
+        "attribution": "<a>&copy; 2021 TomTom</a>",
+        "scheme": "xyz",
+        "tiles": [
+          "https://atlas.microsoft.com/map/tile?api-version=2.0&tilesetId={tilesetId}&zoom={zoom}&x={x}&y={y}"
+        ],
+        "minzoom": 0,
+        "maxzoom": 22,
+        "bounds": [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      }
     },
     "400": {
       "headers": {},

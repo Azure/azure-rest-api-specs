@@ -2,23 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Render Service",
-    "version": "2.0",
+    "version": "2.1",
     "description": "Azure Maps Render REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
   "consumes": [],
   "produces": [
-    "application/json"
+    "application/json",
+    "application/xml"
   ],
   "securityDefinitions": {
     "AADToken": {
@@ -88,11 +82,11 @@
   "parameters": {
     "RenderApiVersionV2": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API.",
+      "description": "Version number of Azure Maps API. Current version is 2.1",
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2.0",
+      "default": "2.1",
       "x-ms-parameter-location": "client"
     },
     "TilesetId_rv2": {
@@ -184,13 +178,26 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
+    },
+    "Text": {
+      "name": "text",
+      "in": "query",
+      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
     "/map/tile": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
-        "operationId": "RenderV2_GetMapTilePreview",
+        "operationId": "RenderV2_GetMapTile",
         "x-ms-examples": {
           "GetMapTile": {
             "$ref": "./examples/GetMapTileV2.json"
@@ -219,13 +226,16 @@
             "name": "timeStamp",
             "in": "query",
             "description": "The desired date and time of the requested tile. This parameter must be specified in the standard date-time format (e.g. 2019-11-14T16:03:00-08:00), as defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). This parameter is only supported when tilesetId parameter is set to one of the values below.\n  \n* microsoft.weather.infrared.main: We provide tiles up to 3 hours in the past. Tiles are available in 10-minute intervals. We round the timeStamp value to the nearest 10-minute time frame.\n* microsoft.weather.radar.main: We provide tiles up to 1.5 hours in the past and up to 2 hours in the future. Tiles are available in 5-minute intervals. We round the timeStamp value to the nearest 5-minute time frame.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "tileSize",
             "in": "query",
             "description": "The size of the returned map tile in pixels.",
+            "required": false,
             "type": "string",
+            "default": "256",
             "enum": [
               "256",
               "512"
@@ -261,17 +271,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The tile returned from a successful API call.",
+            "description": "OK",
             "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
+              "$ref": "#/definitions/MapTileResultv2"
             }
           },
           "400": {
@@ -292,6 +294,217 @@
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
+        }
+      }
+    },
+    "/map/tileset": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
+        "operationId": "RenderV2_GetMapTileset",
+        "x-ms-examples": {
+          "GetMapTile": {
+            "$ref": "./examples/GetMapTilesetV2.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RenderApiVersionV2"
+          },
+          {
+            "$ref": "#/parameters/TilesetId_rv2"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MapTilesetResultV2"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/attribution": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Attribution API allows users to request map copyright attribution information for a section of a tileset.",
+        "operationId": "RenderV2_GetMapAttribution",
+        "x-ms-examples": {
+          "GetMapTile": {
+            "$ref": "./examples/GetMapAttributionV2.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RenderApiVersionV2"
+          },
+          {
+            "$ref": "#/parameters/TilesetId_rv2"
+          },
+          {
+            "$ref": "#/parameters/MapTileV2Zoom"
+          },
+          {
+            "name": "bounds",
+            "in": "query",
+            "description": "The string that represents the rectangular area of a bounding box. The bounds parameter is defined by the 4 bounding box coordinates, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: `[SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude]`.",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MapAttributionResultV2"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MapTileResultv2": {
+      "description": "The tile returned from a successful API call.",
+      "type": "string",
+      "format": "binary",
+      "readOnly": true
+    },
+    "MapTilesetResultV2": {
+      "description": "Metadata for a tileset in the TileJSON format.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "tilejson": {
+          "type": "string",
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "description": "Version of the TileJSON spec."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the tileset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text description of the tileset."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "description": "A semver.org style version number for the tiles contained within the tileset."
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Copyright attribution to be displayed on the map."
+        },
+        "template": {
+          "type": "string",
+          "description": "A mustache template to be used to format data from grids for interaction."
+        },
+        "legend": {
+          "type": "string",
+          "description": "A legend to be displayed with the map."
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile coordinates."
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of tile endpoints."
+        },
+        "grids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of interactivity endpoints."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of data files in GeoJSON format."
+        },
+        "minzoom": {
+          "minimum": 0,
+          "maximum": 30,
+          "type": "integer",
+          "description": "The minimum zoom level."
+        },
+        "maxzoom": {
+          "minimum": 0,
+          "maximum": 30,
+          "type": "integer",
+          "description": "The maximum zoom level."
+        },
+        "bounds": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "The WGS84 bounds of the tileset."
+        },
+        "center": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "The default location of the tileset in the form [longitude, latitude, zoom]."
+        }
+      }
+    },
+    "MapAttributionResultV2": {
+      "description": "Copyright attribution for the requested section of a tileset.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "copyrights": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of copyright strings."
         }
       }
     }
