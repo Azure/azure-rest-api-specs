@@ -287,7 +287,23 @@
         "workspaceResourceId": {
           "description": "The Azure Monitor workspace ARM Resource ID. The resource ID should be in the following format: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}",
           "type": "string"
+        },
+        "includeChangeDetails": {
+          "$ref": "#/definitions/ChangeDetailsMode"
         }
+      }
+    },
+    "ChangeDetailsMode": {
+      "description": "The mode of includeChangeDetails feature. The flag configures whether to include or exclude content of the change before and after values.",
+      "enum": [
+        "None",
+        "Include",
+        "Exclude"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChangeDetailsMode",
+        "modelAsString": true
       }
     },
     "NotificationsState": {
@@ -376,6 +392,10 @@
         },
         "properties": {
           "$ref": "#/definitions/ConfigurationProfileResourceProperties"
+        },
+        "location": {
+          "description": "The location where the resource is to be deployed.",
+          "type": "string"
         }
       }
     },
