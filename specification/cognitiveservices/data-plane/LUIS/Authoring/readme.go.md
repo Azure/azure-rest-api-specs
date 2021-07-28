@@ -12,9 +12,6 @@ go:
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
-batch:
-  - tag: authoring_2_0
-  - tag: authoring_3_0_preview
 
 batch:
   - tag: authoring_2_0

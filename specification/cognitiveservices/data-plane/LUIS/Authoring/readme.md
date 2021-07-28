@@ -50,7 +50,7 @@ directive:
 
 ---
 
-## Authoring 3.0
+## Authoring 3.0-preview
 These settings apply only when `--tag=authoring_3_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0_preview'
@@ -85,6 +85,7 @@ directive:
 ```
 
 ---
+
 
 ## Authoring 3.0
 These settings apply only when `--tag=authoring_3_0` is specified on the command line.
