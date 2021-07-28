@@ -7,8 +7,8 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.batch
 package-name: azure-mgmt-batch
+no-namespace-folders: true
 package-version: 14.0.0b1
 clear-output-folder: true
 ```
