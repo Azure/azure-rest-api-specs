@@ -57,10 +57,7 @@ perform-load: false
 These settings apply only when `--tag=package-2021-07-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-05-01-only' && $(python)
-python:
-  namespace: azure.mgmt.containerservice.v2021_07_01
-  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_07_01
+``` yaml $(tag) == 'package-2021-07-01-only' && $(python)
 namespace: azure.mgmt.containerservice.v2021_07_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_07_01
 ```
