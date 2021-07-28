@@ -13,8 +13,8 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2021-04-01-preview
+  - tag: package-2021-07-01-preview
 ```
-
 please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(go)

@@ -23,7 +23,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.VideoIndexer/preview/2021-04-01-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2021-07-01-preview/vi.json
     where:
       - $.definitions.AccessToken.properties.accessToken
     reason: Secrets are OK to return in a POST response.
@@ -40,10 +40,22 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-04-01-preview
+tag: package-2021-07-01-preview
 ```
 
+### Tag: package-2021-07-01-preview
+
+These settings apply only when `--tag=2021-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07-01-preview'
+version: 2021-07-01-preview
+version-with-underscores: 2021_07_01_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2021-07-01-preview/vi.json
+```
 ### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=2021-04-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-04-01-preview'
 version: 2021-04-01-preview
@@ -51,6 +63,7 @@ version-with-underscores: 2021_04_01_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-04-01-preview/vi.json
 ```
+
 
 ---
 
@@ -95,5 +108,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Node.js
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
-
-
