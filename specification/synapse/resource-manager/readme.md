@@ -66,6 +66,7 @@ These settings apply only when `--tag=package-kusto-pool-2021-06-preview` is spe
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
 ```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
