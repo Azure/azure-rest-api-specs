@@ -33,14 +33,23 @@ azure-arm: true
 ```
 
 
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.HealthcareApis/preview/2021-06-01-preview/healthcare-apis.json
+```
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.HealthcareApis/stable/2021-01-11/healthcare-apis.json
 ```
+
 ### Tag: package-2020-03-30
 
 These settings apply only when `--tag=package-2020-03-30` is specified on the command line.
@@ -87,7 +96,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -125,5 +133,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-

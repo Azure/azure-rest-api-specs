@@ -6,7 +6,7 @@
     "fabricName": "Azure",
     "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
     "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
-    "api-version": "2021-01-01"
+    "api-version": "2019-05-13"
   },
   "responses": {
     "200": {
@@ -27,18 +27,13 @@
               "recoveryPointTierDetails": [
                 {
                   "type": "InstantRP",
-                  "status": "Deleted"
+                  "status": "Valid"
                 },
                 {
                   "type": "HardenedRP",
                   "status": "Valid"
                 }
               ],
-              "recoveryPointMoveReadinessInfo": {
-                "Archive": {
-                  "isReadyForMove": true
-                }
-              },
               "isManagedVirtualMachine": true,
               "virtualMachineSize": "Standard_D1",
               "originalStorageAccountOption": false
@@ -59,26 +54,13 @@
               "recoveryPointTierDetails": [
                 {
                   "type": "InstantRP",
-                  "status": "Deleted"
+                  "status": "Valid"
                 },
                 {
                   "type": "HardenedRP",
-                  "status": "Deleted"
-                },
-                {
-                  "type": "ArchivedRP",
-                  "status": "Rehydrated",
-                  "extendedInfo": {
-                    "RehydratedRPExpiryTime": "2020-12-21T22:48:25.4353958Z"
-                  }
+                  "status": "Valid"
                 }
               ],
-              "recoveryPointMoveReadinessInfo": {
-                "ArchivedRP": {
-                  "isReadyForMove": false,
-                  "additionalInfo": "Recovery point cannot be moved to archive tier since it has already been moved."
-                }
-              },
               "isManagedVirtualMachine": true,
               "virtualMachineSize": "Standard_D1",
               "originalStorageAccountOption": false,
