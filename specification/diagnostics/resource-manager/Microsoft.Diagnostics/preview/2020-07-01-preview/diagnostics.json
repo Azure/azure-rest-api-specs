@@ -68,6 +68,50 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Diagnostics/solutions/metadata/search": {
+      "post": {
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Discover list solution metadata for execution",
+        "operationId": "Solutions_Search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "DiscoverRequest",
+            "description": "Discover Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DiscoverRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Solution Metadata Responses.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetaDataListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why solution discover scenario failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_Search": {
+            "$ref": "./examples/Solutions_Search.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Diagnostics/azureKB/azureKBSearch/invoke": {
       "post": {
         "tags": [
@@ -171,6 +215,71 @@
     }
   },
   "definitions": {
+    "DiscoverRequest": {
+      "type": "object",
+      "description": "Discover Request body",
+      "properties": {
+        "customerVerbatim": {
+          "description": "Customer verbatim for ranking purpose",
+          "type": "string"
+        },
+        "sapIds": {
+          "description": "Array of SapIds, which are the GuidIds corresponding to target support topic",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SolutionMetaDataListResult": {
+      "description": "Object that represents list of solution metadata.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "list of solution metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetaData"
+          }
+        }
+      }
+    },
+    "SolutionMetaData": {
+      "description": "Object that represents a Diagnostic Solution Metadata",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Id of the solution",
+          "type": "string"
+        },
+        "solutionType": {
+          "description": "Type of the solution",
+          "type": "string"
+        },
+        "description": {
+          "description": "A detail description of solution",
+          "type": "string"
+        },
+        "targetKeywords": {
+          "description": "target keywords for demo",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredParameterSets": {
+          "description": "Required parameters for invoking this particular solution.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "AzureKBSearchRequest": {
       "type": "object",
       "description": "Search Request body",
