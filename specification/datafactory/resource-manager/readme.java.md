@@ -12,12 +12,16 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datafactory
 
 directive:
-  - from: swagger-document
+  - from: ManagedPrivateEndpoint.json
     where: "$.definitions.ManagedPrivateEndpoint"
     transform: delete $.discriminator
-  - from: swagger-document
+  - from: ManagedVirtualNetwork.json
     where: "$.definitions.ManagedVirtualNetwork"
     transform: delete $.discriminator
+  - from: DataFlow.json
+    where: "$.definitions.DataFlow"
+    transform: $.required = ['type']
+    reason: discriminator property must be required
 ```
 
 # Validation
