@@ -6411,6 +6411,11 @@
           "readOnly": true,
           "description": "The outcome of this indexer execution."
         },
+        "statusDetail": {
+          "$ref": "#/definitions/IndexerExecutionStatusDetail",
+          "readOnly": true,
+          "description": "The outcome of this indexer execution."
+        },
         "errorMessage": {
           "type": "string",
           "readOnly": true,
@@ -6581,6 +6586,24 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
+    },
+    "IndexerExecutionStatusDetail": {
+      "type": "string",
+      "enum": [
+        "resetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatusDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "resetDocs",
+            "name": "ResetDocs",
+            "description": "Indicates that the reset that occurred was for a call to ResetDocs."
+          }
+        ]
+      },
+      "description": "Details the status of an individual indexer execution."
     },
     "SearchIndexerLimits": {
       "properties": {
