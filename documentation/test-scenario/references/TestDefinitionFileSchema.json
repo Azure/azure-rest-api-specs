@@ -1,0 +1,363 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/definitions/VariableScope"
+    }
+  ],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "enum": [
+        "ResourceGroup"
+      ]
+    },
+    "requiredVariables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prepareSteps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TestStep"
+      }
+    },
+    "testScenarios": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TestScenario"
+      }
+    }
+  },
+  "required": [
+    "testScenarios"
+  ],
+  "definitions": {
+    "VariableScope": {
+      "type": "object",
+      "properties": {
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TestStep": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TestStepRestCall"
+        },
+        {
+          "$ref": "#/definitions/TestStepArmTemplateDeployment"
+        },
+        {
+          "$ref": "#/definitions/TestStepRawCall"
+        }
+      ]
+    },
+    "TestStepBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VariableScope"
+        }
+      ],
+      "properties": {
+        "step": {
+          "type": "string"
+        },
+        "fromStep": {
+          "type": "string"
+        }
+      }
+    },
+    "TestStepArmTemplateDeployment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestStepBase"
+        }
+      ],
+      "properties": {
+        "armTemplateDeployment": {
+          "type": "string"
+        },
+        "armTemplateParameters": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "armTemplateDeployment"
+      ]
+    },
+    "TestStepRestCall": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestStepBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "exampleFile"
+          ]
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "exampleFile": {
+          "type": "string"
+        },
+        "resourceUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          }
+        },
+        "requestUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          }
+        },
+        "responseUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          }
+        },
+        "outputVariables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "fromResponse": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "operationId": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "step"
+      ]
+    },
+    "TestStepRawCall": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestStepBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "rawCall"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "POST",
+            "DELETE",
+            "OPTIONS",
+            "HEAD"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "requestHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestBody": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "number"
+        },
+        "responseExpected": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "url",
+        "requestHeaders",
+        "requestBody"
+      ]
+    },
+    "JsonPatchOp": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/JsonPatchOpAdd"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpRemove"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpReplace"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpCopy"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpMove"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpTest"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpMerge"
+        }
+      ]
+    },
+    "JsonPatchOpAdd": {
+      "type": "object",
+      "required": [
+        "add",
+        "value"
+      ],
+      "properties": {
+        "add": {
+          "type": "string"
+        },
+        "value": {}
+      }
+    },
+    "JsonPatchOpRemove": {
+      "type": "object",
+      "required": [
+        "remove"
+      ],
+      "properties": {
+        "remove": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonPatchOpReplace": {
+      "type": "object",
+      "required": [
+        "replace",
+        "value"
+      ],
+      "properties": {
+        "replace": {
+          "type": "string"
+        },
+        "value": {}
+      }
+    },
+    "JsonPatchOpCopy": {
+      "type": "object",
+      "required": [
+        "copy",
+        "path"
+      ],
+      "properties": {
+        "copy": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonPatchOpMove": {
+      "type": "object",
+      "required": [
+        "move",
+        "path"
+      ],
+      "properties": {
+        "move": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonPatchOpTest": {
+      "type": "object",
+      "required": [
+        "test",
+        "value"
+      ],
+      "properties": {
+        "test": {
+          "type": "string"
+        },
+        "value": {}
+      }
+    },
+    "JsonPatchOpMerge": {
+      "type": "object",
+      "required": [
+        "merge",
+        "value"
+      ],
+      "properties": {
+        "merge": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "TestScenario": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VariableScope"
+        }
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "requiredVariables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestStep"
+          }
+        },
+        "shareTestScope": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "steps"
+      ]
+    }
+  }
+}
