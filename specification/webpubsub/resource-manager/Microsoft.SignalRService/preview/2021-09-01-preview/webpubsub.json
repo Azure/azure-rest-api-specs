@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2021-06-01-preview",
+        "version": "2021-09-01-preview",
         "title": "WebPubSubManagementClient",
         "description": "REST API for Azure WebPubSub Service"
     },
@@ -1085,24 +1085,6 @@
                 "modelAsString": true
             }
         },
-        "DiagnosticConfiguration": {
-            "description": "Diagnostic configuration of a Microsoft.SignalRService resource. Used together with Azure monitor DiagnosticSettings.",
-            "type": "object",
-            "properties": {
-                "enableConnectivityLogs": {
-                    "description": "Indicate whether or not enable Connectivity logs.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
-                    "type": "string"
-                },
-                "enableMessagingLogs": {
-                    "description": "Indicate whether or not enable Messaging logs.\r\nAvailable values: Enabled, Disabled.\r\nCase insensitive.",
-                    "type": "string"
-                },
-                "enableLiveTrace": {
-                    "description": "Indicate whether or not enable Live Trace. \r\nAvailable values: Enabled, Disabled. \r\nCase insensitive. \r\nLive Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues.",
-                    "type": "string"
-                }
-            }
-        },
         "Dimension": {
             "description": "Specifications of the Dimension of metrics.",
             "type": "object",
@@ -1176,6 +1158,38 @@
             "x-ms-enum": {
                 "name": "KeyType",
                 "modelAsString": true
+            }
+        },
+        "LiveTraceCategory": {
+            "description": "live trace category configuration of a Microsoft.SignalRService resource.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Gets or sets the log category's name.\r\nAvailable values: ConnectivityLogs, MessagingLogs.\r\nCase insensitive.",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "Indicates whether or the log category is enabled.\r\nAvailable values: true, false.\r\nCase insensitive.",
+                    "type": "string"
+                }
+            }
+        },
+        "LiveTraceConfiguration": {
+            "description": "Live trace configuration of a Microsoft.SignalRService resource.",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "description": "Indicates whether or not enable live trace.\r\nWhen it's set to true, live trace client can connect to the service.\r\nOtherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in \"categories\".\r\nAvailable values: true, false.\r\nCase insensitive.",
+                    "default": "false",
+                    "type": "string"
+                },
+                "categories": {
+                    "description": "Gets or sets the list of category configurations.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LiveTraceCategory"
+                    }
+                }
             }
         },
         "LogSpecification": {
@@ -2164,9 +2178,9 @@
                     "$ref": "#/definitions/WebPubSubTlsSettings",
                     "description": "TLS settings."
                 },
-                "diagnosticConfiguration": {
-                    "$ref": "#/definitions/DiagnosticConfiguration",
-                    "description": "Diagnostic configuration of a Microsoft.SignalRService resource. Used together with Azure monitor DiagnosticSettings."
+                "liveTraceConfiguration": {
+                    "$ref": "#/definitions/LiveTraceConfiguration",
+                    "description": "Live trace configuration of a Microsoft.SignalRService resource."
                 },
                 "eventHandler": {
                     "$ref": "#/definitions/EventHandlerSettings",
