@@ -1,0 +1,358 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-06-24-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.OpenLogisticsPlatform/applicationRegistrationInvites": {
+      "get": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_TenantLevelList",
+        "x-ms-examples": {
+          "Share Get": {
+            "$ref": "./examples/ApplicationRegistrationInvite_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationManifestIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInviteList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces/{applicationWorkspaceName}/applications/{applicationId}/applicationRegistrationInvites": {
+      "get": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_SubscriptionLevelList",
+        "x-ms-examples": {
+          "ApplicationRegistrationInvite Get": {
+            "$ref": "./examples/ApplicationRegistrationInvite_List_SubscriptionLevel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationWorkspaces.json#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInviteList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces/{applicationWorkspaceName}/applications/{applicationId}/applicationRegistrationInvites/{applicationRegistrationInviteId}": {
+      "put": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_SubscriptionLevelPut",
+        "x-ms-examples": {
+          "ApplicationRegistration Put": {
+            "$ref": "./examples/ApplicationRegistrationInvite_Put_SubscriptionLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationWorkspaces.json#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationRegistrationInviteIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ApplicationRegistrationInvite",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInvite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInvite"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "get": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_SubscriptionLevelGet",
+        "x-ms-examples": {
+          "ApplicationRegistration Get": {
+            "$ref": "./examples/ApplicationRegistrationInvite_Get_SubscriptionLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationWorkspaces.json#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationRegistrationInviteIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInvite"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationRegistrationInvite": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "Name to display for application to register"
+            },
+            "applicationManifestId": {
+              "type": "string",
+              "description": "Manifest id for application to register"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters required by application to register, should match parameters in application manifest",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "resources": {
+              "type": "array",
+              "description": "List of resources required by application to register, e.g. share. should match resources in application manifest",
+              "items": {
+                "$ref": "#/definitions/ApplicationRegistrationInviteResource"
+              }
+            },
+            "sourceWorkspaceId": {
+              "type": "string",
+              "description": "sourceWorkspaceId for application to register"
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/ApplicationRegistrationInviteProvisioningState"
+            },
+            "status": {
+              "type": "string",
+              "description": "ISV provided status on application"
+            }
+          }
+        }
+      }
+    },
+    "ApplicationRegistrationInviteProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "ApplicationRegistrationInviteResource": {
+      "type": "object",
+      "description": "A resources required by the application to register, e.g. share. should match resources in application manifest",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationRegistrationInviteResourceShareProperties"
+        }
+      }
+    },
+    "ApplicationRegistrationInviteResourceShareProperties": {
+      "type": "object",
+      "description": "Application share resource information for application registration invite.",
+      "properties": {
+        "shareId": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationRegistrationInviteList": {
+      "description": "The list of ApplicationRegistrationInvite resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ApplicationRegistration resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of ApplicationRegistrationInvites.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationRegistrationInvite"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApplicationManifestIdParameter": {
+      "type": "string",
+      "name": "application-manifest-id",
+      "description": "The manifest Id of application (used part of queries). This is the Id of your application manifest.",
+      "in": "query",
+      "required": true,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationIdParameter": {
+      "type": "string",
+      "name": "applicationId",
+      "in": "path",
+      "description": "The manifest Id of application (used part of URLs). This is the Id of your application manifest.",
+      "required": true,
+      "x-nullable": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationRegistrationInviteIdParameter": {
+      "type": "string",
+      "name": "applicationRegistrationInviteId",
+      "in": "path",
+      "description": "The Id of application registration invite.",
+      "required": true,
+      "x-nullable": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
