@@ -2418,12 +2418,6 @@
           "items": {
             "$ref": "#/definitions/IotHubLocationDescription"
           }
-        },
-        "creationTime": {
-          "readOnly": true,
-          "format": "date-time",
-          "type": "string",
-          "description": "iot hub creation time"
         }
       }
     },
@@ -3309,6 +3303,11 @@
         "identity": {
           "description": "The managed identities for the IotHub.",
           "$ref": "#/definitions/ArmIdentity"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
