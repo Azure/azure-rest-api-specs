@@ -90,6 +90,15 @@ directive:
     reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
 ```
 
+### Tag: package-2021-07-01-preview-only
+
+These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-07-01-preview/authorization-AccessReviewCalls.json
+```
+
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
@@ -341,9 +350,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-authorization --default-api-version=2018-09-01-preview
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -361,6 +368,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 
 
