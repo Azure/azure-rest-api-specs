@@ -6582,6 +6582,25 @@
       "x-nullable": false,
       "description": "Represents the overall indexer status."
     },
+    "IndexerExecutionStatusDetail": {
+      "type": "string",
+      "enum": [
+        "resetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatusDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "resetDocs",
+            "name": "ResetDocs",
+            "description": "Indicates that the reset that occured was for a call to ResetDocs."
+          }
+        ]
+      },
+      "x-nullable": false,
+      "description": "Details the status of an individual indexer execution."
+    },
     "SearchIndexerLimits": {
       "properties": {
         "maxRunTime": {
