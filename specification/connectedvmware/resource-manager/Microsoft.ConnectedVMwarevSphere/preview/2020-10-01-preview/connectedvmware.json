@@ -397,6 +397,332 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/clusters/{clusterName}": {
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Create",
+        "description": "Create Or Update cluster.",
+        "summary": "Implements cluster PUT method.",
+        "x-ms-examples": {
+          "CreateCluster": {
+            "$ref": "./examples/CreateCluster.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "clusterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Get",
+        "summary": "Gets a cluster.",
+        "description": "Implements cluster GET method.",
+        "x-ms-examples": {
+          "GetCluster": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "clusterName",
+            "description": "Name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Update",
+        "summary": "Updates a cluster.",
+        "description": "API to update certain properties of the cluster resource.",
+        "x-ms-examples": {
+          "UpdateCluster": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "clusterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Delete",
+        "summary": "Deletes an cluster.",
+        "description": "Implements cluster DELETE method.",
+        "x-ms-examples": {
+          "DeleteCluster": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "clusterName",
+            "description": "Name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_List",
+        "summary": "Implements GET clusters in a subscription.",
+        "description": "List of clusters in a subscription.",
+        "x-ms-examples": {
+          "ListClusters": {
+            "$ref": "./examples/ListClusters.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClustersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "summary": "Implements GET clusters in a resource group.",
+        "description": "List of clusters in a resource group.",
+        "x-ms-examples": {
+          "ListClustersByResourceGroup": {
+            "$ref": "./examples/ListClustersByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClustersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}": {
       "put": {
         "tags": [
@@ -3954,6 +4280,125 @@
           "readOnly": true
         }
       }
+    },
+    "ClusterProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this cluster resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the cluster.",
+          "type": "string"
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the cluster.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Cluster": {
+      "description": "Define the cluster.",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ClusterProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      }
+    },
+    "ClustersList": {
+      "description": "List of Clusters.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of Clusters.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Clusters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VirtualMachineTemplate": {
       "description": "Define the virtualMachineTemplate.",
