@@ -1,535 +1,534 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "2020-03-01",
-      "title": "azureactivedirectory",
-      "description": "Azure Active Directory Client."
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-03-01",
+    "title": "azureactivedirectory",
+    "description": "Azure Active Directory Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateEndpointConnections": {
-        "get": {
-          "tags": [
-            "PrivateEndpointConnections"
-          ],
-          "operationId": "PrivateEndpointConnections_ListByPolicyName",
-          "x-ms-examples": {
-            "AadiamListPrivateEndpointConnections": {
-              "$ref": "./examples/AzureADPrivateEndpointConnectionsList.json"
-            }
-          },
-          "description": "Lists all Private Endpoint Connections for the given policy.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/resourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/policyNameParameter"
-            },
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/subscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Private Endpoint Connections for given policy returned successfully",
-              "schema": {
-                "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-              }
-            },
-            "default": {
-              "description": "Aadiam error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByPolicyName",
+        "x-ms-examples": {
+          "AadiamListPrivateEndpointConnections": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsList.json"
           }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-        "put": {
-          "tags": [
-            "PrivateEndpointConnections"
-          ],
-          "operationId": "PrivateEndpointConnections_Create",
-          "x-ms-examples": {
-            "AadiamPutPrivateEndpointConnection": {
-              "$ref": "./examples/AzureADPrivateEndpointConnectionsCreate.json"
-            }
-          },
-          "description": "Updates the specified private endpoint connection associated with the given policy.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/subscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/resourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/policyNameParameter"
-            },
-            {
-              "$ref": "#/parameters/privateEndpointConnectionName"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
-              },
-              "description": "The intended state of private endpoint connection."
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The state of private endpoint connection was updated successfully.",
-              "schema": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
-              }
-            },
-            "default": {
-              "description": "Aadiam error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-long-running-operation": true
         },
-        "delete": {
-          "tags": [
-            "PrivateEndpointConnections"
-          ],
-          "operationId": "PrivateEndpointConnections_Delete",
-          "x-ms-examples": {
-            "AadiamDeletePrivateEndpointConnections": {
-              "$ref": "./examples/AzureADPrivateEndpointConnectionsDelete.json"
+        "description": "Lists all Private Endpoint Connections for the given policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Endpoint Connections for given policy returned successfully",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
-          "description": "Deletes the specified private endpoint connection associated with the given policy.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/resourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/policyNameParameter"
-            },
-            {
-              "$ref": "#/parameters/privateEndpointConnectionName"
-            },
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/subscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The private endpoint connection does not exist."
-            },
-            "204": {
-              "description": "The private endpoint connection does not exist."
-            },
-            "default": {
-              "description": "Aadiam error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-long-running-operation": true
-        },
-        "get": {
-          "tags": [
-            "PrivateEndpointConnections"
-          ],
-          "operationId": "PrivateEndpointConnections_Get",
-          "x-ms-examples": {
-            "AadiamGetPrivateEndpointConnections": {
-              "$ref": "./examples/AzureADPrivateEndpointConnectionsGet.json"
-            }
-          },
-          "description": "Gets the specified private endpoint connection associated with the given policy.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/resourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/policyNameParameter"
-            },
-            {
-              "$ref": "#/parameters/privateEndpointConnectionName"
-            },
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/subscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Private endpoint connection successfully returned.",
-              "schema": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
-              }
-            },
-            "default": {
-              "description": "Aadiam error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
+          "default": {
+            "description": "Aadiam error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "patch": {
-          "description": "Updates an existing Private Endpoint Connection's tags. To update other fields use the Put method.",
-          "operationId": "PrivateEndpointConnections_UpdateTags",
-          "parameters": [
-            {
-              "$ref": "#/parameters/resourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/subscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/policyNameParameter"
-            },
-            {
-              "$ref": "#/parameters/privateEndpointConnectionName"
-            },
-            {
-              "name": "privateLinkConnectionTags",
-              "description": "Updated tag information to set into the PrivateLinkConnection instance.",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/TagsResource"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Updating the AzureAD PrivateLinkConnection's tags was successful. PrivateLinkConnection tags are updated and returned with the rest of the PrivateLinkConnection's object properties.",
-              "schema": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "AadiamUpdatePrivateEndpointConnections": {
-              "$ref": "./examples/AzureADPrivateEndpointConnectionsUpdate.json"
-            }
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "definitions": {
-      "ErrorResponse": {
-        "description": "Error response.",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/ErrorDefinition",
-            "description": "The error details."
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Create",
+        "x-ms-examples": {
+          "AadiamPutPrivateEndpointConnection": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsCreate.json"
           }
-        }
-      },
-      "ErrorDefinition": {
-        "description": "Error definition.",
-        "properties": {
-          "code": {
-            "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-            "type": "string",
-            "readOnly": true
+        },
+        "description": "Updates the specified private endpoint connection associated with the given policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "message": {
-            "description": "Description of the error.",
-            "type": "string",
-            "readOnly": true
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
-          "details": {
-            "description": "Internal error details.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ErrorDefinition"
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
             },
-            "readOnly": true
+            "description": "The intended state of private endpoint connection."
           }
-        }
-      },
-      "PrivateEndpointConnectionListResult": {
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "Array of private link resources",
-            "items": {
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of private endpoint connection was updated successfully.",
+            "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "nextLink": {
-            "description": "URL to next page of results",
-            "type": "string"
+          "default": {
+            "description": "Aadiam error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
-        "type": "object",
-        "description": "A list of private link resources"
+        "x-ms-long-running-operation": true
       },
-      "PrivateEndpointConnection": {
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-            "x-ms-client-flatten": true,
-            "description": "Resource properties."
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "AadiamDeletePrivateEndpointConnections": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsDelete.json"
           }
         },
-        "allOf": [
+        "description": "Deletes the specified private endpoint connection associated with the given policy.",
+        "parameters": [
           {
-            "$ref": "#/definitions/TrackedResource"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
-        "type": "object",
-        "description": "Private endpoint connection resource.",
-        "x-ms-azure-resource": true
-      },
-      "PrivateEndpointConnectionProperties": {
-        "properties": {
-          "privateEndpoint": {
-            "$ref": "#/definitions/PrivateEndpoint",
-            "description": "Properties of the private endpoint object."
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection does not exist."
           },
-          "privateLinkServiceConnectionState": {
-            "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-            "description": "Approval state of the private link connection."
+          "204": {
+            "description": "The private endpoint connection does not exist."
           },
-          "provisioningState": {
-            "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-            "description": "Provisioning state of the private endpoint connection."
+          "default": {
+            "description": "Aadiam error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
-        "type": "object",
-        "description": "Properties of the private endpoint connection resource."
+        "x-ms-long-running-operation": true
       },
-      "PrivateEndpoint": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Full identifier of the private endpoint resource."
-          }
-        },
-        "type": "object",
-        "description": "Private endpoint object properties."
-      },
-      "PrivateLinkServiceConnectionState": {
-        "properties": {
-          "status": {
-            "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-            "description": "Indicates whether the connection has been approved, rejected or removed by the given policy owner."
-          },
-          "description": {
-            "type": "string",
-            "description": "The reason for approval or rejection."
-          },
-          "actionsRequired": {
-            "type": "string",
-            "description": "A message indicating if changes on the service provider require any updates on the consumer."
-          }
-        },
-        "type": "object",
-        "description": "An object that represents the approval state of the private link connection."
-      },
-      "PrivateEndpointServiceConnectionStatus": {
-        "type": "string",
-        "description": "The private endpoint connection status.",
-        "enum": [
-          "Approved",
-          "Pending",
-          "Rejected",
-          "Disconnected"
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
         ],
-        "x-ms-enum": {
-          "name": "PrivateEndpointServiceConnectionStatus",
-          "modelAsString": true
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "AadiamGetPrivateEndpointConnections": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsGet.json"
+          }
+        },
+        "description": "Gets the specified private endpoint connection associated with the given policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private endpoint connection successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Aadiam error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       },
-      "PrivateEndpointConnectionProvisioningState": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The current provisioning state.",
-        "enum": [
-          "Succeeded",
-          "Provisioning",
-          "Failed"
-        ],
-        "x-ms-enum": {
-          "name": "PrivateEndpointConnectionProvisioningState",
-          "modelAsString": true
-        }
-      },
-      "TagsResource": {
-        "properties": {
-          "tags": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Resource tags",
-            "type": "object"
-          }
-        },
-        "type": "object",
-        "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkConnection instance."
-      },
-      "TrackedResource": {
-        "properties": {
-          "location": {
-            "type": "string",
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ],
-            "description": "Resource location."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Resource tags."
-          }
-        },
-        "allOf": [
+      "patch": {
+        "description": "Updates an existing Private Endpoint Connection's tags. To update other fields use the Put method.",
+        "operationId": "PrivateEndpointConnections_UpdateTags",
+        "parameters": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/policyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "name": "privateLinkConnectionTags",
+            "description": "Updated tag information to set into the PrivateLinkConnection instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
           }
         ],
-        "required": [
-          "location"
-        ],
-        "type": "object",
-        "description": "Definition of resource."
-      },
-      "Resource": {
-        "properties": {
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource ID."
+        "responses": {
+          "200": {
+            "description": "Updating the AzureAD PrivateLinkConnection's tags was successful. PrivateLinkConnection tags are updated and returned with the rest of the PrivateLinkConnection's object properties.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
-          "name": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource name."
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource type."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
-        "type": "object",
-        "description": "The resource definition.",
-        "x-ms-azure-resource": true
-      }
-    },
-    "parameters": {
-      "privateEndpointConnectionName": {
-        "name": "privateEndpointConnectionName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "x-ms-parameter-location": "method",
-        "description": "The PrivateEndpointConnection name."
-      },
-      "subscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "Azure subscription ID.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "client"
-      },
-      "apiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "client",
-        "description": "Version of the API to be used with the client request."
-      },
-      "resourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[-\\w\\._\\(\\)]+$",
-        "minLength": 1,
-        "maxLength": 90,
-        "x-ms-parameter-location": "method",
-        "description": "Name of an Azure resource group."
-      },
-      "groupNameParameter": {
-        "name": "groupName",
-        "in": "path",
-        "description": "The name of the private link resource.",
-        "required": true,
-        "x-ms-parameter-location": "method",
-        "type": "string"
-      },
-      "policyNameParameter": {
-        "name": "policyName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the private link policy in Azure AD.",
-        "x-ms-parameter-location": "method"
+        "x-ms-examples": {
+          "AadiamUpdatePrivateEndpointConnections": {
+            "$ref": "./examples/AzureADPrivateEndpointConnectionsUpdate.json"
+          }
+        }
       }
     }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "URL to next page of results",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "description": "A list of private link resources"
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "type": "object",
+      "description": "Private endpoint connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Properties of the private endpoint object."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Approval state of the private link connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "type": "object",
+      "description": "Properties of the private endpoint connection resource."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full identifier of the private endpoint resource."
+        }
+      },
+      "type": "object",
+      "description": "Private endpoint object properties."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been approved, rejected or removed by the given policy owner."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval or rejection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "type": "object",
+      "description": "An object that represents the approval state of the private link connection."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Approved",
+        "Pending",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Provisioning",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkConnection instance."
+    },
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "description": "Definition of resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "type": "object",
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The PrivateEndpointConnection name."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Version of the API to be used with the client request."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "groupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "description": "The name of the private link resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "policyNameParameter": {
+      "name": "policyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link policy in Azure AD.",
+      "x-ms-parameter-location": "method"
+    }
   }
-  
+}
