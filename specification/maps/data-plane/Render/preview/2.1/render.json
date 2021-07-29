@@ -323,6 +323,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MapAttributionResultV2"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "default": {
@@ -335,8 +341,8 @@
   "definitions": {
     "MapTileResultv2": {
       "description": "The tile returned from a successful API call.",
-      "type": "string",
-      "format": "binary",
+      "type": "object",
+      "format": "file",
       "readOnly": true
     },
     "MapTilesetResultV2": {
