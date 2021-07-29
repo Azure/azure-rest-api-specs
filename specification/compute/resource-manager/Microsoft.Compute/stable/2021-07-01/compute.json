@@ -1720,7 +1720,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update VM extension.": {
+            "$ref": "./examples/compute/UpdateVMExtensionWithSuppressFailureEnabled.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -5399,6 +5404,9 @@
           },
           "Create a scale set with userData.": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithUserData.json"
+          },
+          "Create a VMSS with an extension that has suppressFailures enabled": {
+            "$ref": "./examples/compute/CreateAScaleSetWithExtensionsSuppressFailuresEnabled.json"
           },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithCapacityReservation.json"
@@ -9530,6 +9538,10 @@
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
           "description": "The virtual machine extension instance view."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -9567,6 +9579,10 @@
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -13297,6 +13313,10 @@
             "type": "string"
           },
           "description": "Collection of extension names after which this extension needs to be provisioned."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
