@@ -2073,6 +2073,12 @@
           "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
           "type": "string",
           "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
         }
       }
     },
@@ -2101,6 +2107,11 @@
       "properties": {
         "billingAccountId": {
           "description": "Billing Account identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. Possible values could be 'On Demand', 'Reservation', 'Spot'.",
           "type": "string",
           "readOnly": true
         },
