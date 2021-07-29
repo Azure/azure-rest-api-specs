@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-preview-2021-09
 ```
 
+
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-09'
+```yaml $(tag) == 'package-preview-2021-09'
 input-file:
   - Microsoft.Devices/preview/2021-09-01-preview/iothub.json
 ```
-
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
@@ -293,13 +293,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.IotHubDescription
-    from: iothub.json
-    reason: I believe this is false positive
-```
