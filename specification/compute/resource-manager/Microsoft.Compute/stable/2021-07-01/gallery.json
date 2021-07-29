@@ -101,6 +101,9 @@
           },
           "Create or update a simple gallery with sharing profile.": {
             "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryWithSharingProfile.json"
+          },
+          "Create or update a simple gallery with soft deletion enabled.": {
+            "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryWithSoftDeletionEnabled.json"
           }
         }
       },
@@ -603,6 +606,9 @@
           },
           "Create or update a simple Gallery Image Version using vhd as a source.": {
             "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryImageVersionWithVHD.json"
+          },
+          "Create or update a simple Gallery Image Version using shallow replication mode.": {
+            "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryImageVersionWithShallowReplicationMode.json"
           }
         }
       },
@@ -1761,6 +1767,9 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/SharingProfile"
+        },
+        "softDeletePolicy": {
+          "$ref": "#/definitions/SoftDeletePolicy"
         }
       },
       "description": "Describes the properties of a Shared Image Gallery."
@@ -1823,6 +1832,16 @@
           "description": "A list of subscription/tenant ids the gallery is aimed to be shared to."
         }
       }
+    },
+    "SoftDeletePolicy": {
+      "type": "object",
+      "properties": {
+        "isSoftDeleteEnabled": {
+          "type": "boolean",
+          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time."
+        }
+      },
+      "description": "Contains information about the soft deletion policy of the gallery."
     },
     "GalleryApplication": {
       "properties": {
@@ -2326,6 +2345,18 @@
           ],
           "x-ms-enum": {
             "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "replicationMode": {
+          "type": "string",
+          "description": "Optional parameter which specifies the mode to be used for replication. This property is not updatable.",
+          "enum": [
+            "Full",
+            "Shallow"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationMode",
             "modelAsString": true
           }
         }
