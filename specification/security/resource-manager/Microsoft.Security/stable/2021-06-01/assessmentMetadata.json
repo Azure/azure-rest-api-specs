@@ -205,7 +205,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/SecurityAssessmentMetadataResponse"
+            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
           }
         ],
         "responses": {
@@ -582,66 +582,66 @@
             "type": "string",
             "description": "Tactic of the assessment",
             "enum": [
-              "reconnaissance",
-              "resourceDevelopment",
-              "initialAccess",
-              "execution",
-              "persistence",
-              "privilegeEscalation",
-              "defenseEvasion",
-              "credentialAccess",
-              "discovery",
-              "lateralMovement",
-              "collection",
-              "commandAndControl",
-              "exfiltration",
-              "impact"
+              "Reconnaissance",
+              "Resource Development",
+              "Initial Access",
+              "Execution",
+              "Persistence",
+              "Privilege Escalation",
+              "Defense Evasion",
+              "Credential Access",
+              "Discovery",
+              "Lateral Movement",
+              "Collection",
+              "Command and Control",
+              "Exfiltration",
+              "Impact"
             ],
             "x-ms-enum": {
               "name": "tactics",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "reconnaissance"
+                  "value": "Reconnaissance"
                 },
                 {
-                  "value": "resourceDevelopment"
+                  "value": "Resource Development"
                 },
                 {
-                  "value": "initialAccess"
+                  "value": "Initial Access"
                 },
                 {
-                  "value": "execution"
+                  "value": "Execution"
                 },
                 {
-                  "value": "persistence"
+                  "value": "Persistence"
                 },
                 {
-                  "value": "privilegeEscalation"
+                  "value": "Privilege Escalation"
                 },
                 {
-                  "value": "defenseEvasion"
+                  "value": "Defense Evasion"
                 },
                 {
-                  "value": "credentialAccess"
+                  "value": "Credential Access"
                 },
                 {
-                  "value": "discovery"
+                  "value": "Discovery"
                 },
                 {
-                  "value": "lateralMovement"
+                  "value": "Lateral Movement"
                 },
                 {
-                  "value": "collection"
+                  "value": "Collection"
                 },
                 {
-                  "value": "commandAndControl"
+                  "value": "Command and Control"
                 },
                 {
-                  "value": "exfiltration"
+                  "value": "Exfiltration"
                 },
                 {
-                  "value": "impact"
+                  "value": "Impact"
                 }
               ]
             }
@@ -653,430 +653,430 @@
             "type": "string",
             "description": "Techniques of the assessment",
             "enum": [
-              "abuseElevationControlMechanism",
-              "containerandResourceDiscovery",
-              "nonStandardPort",
-              "resourceHijacking",
-              "permissionGroupsDiscovery",
-              "softwareDeploymentTools",
-              "exploitationforCredentialAccess",
-              "serverSoftwareComponent",
-              "audioCapture",
-              "subvertTrustControls",
-              "oSCredentialDumping",
-              "dataStaged",
-              "trustedRelationship",
-              "lateralToolTransfer",
-              "masquerading",
-              "bootorLogonAutostartExecution",
-              "impairDefenses",
-              "exploitationforClientExecution",
-              "processDiscovery",
-              "dataDestruction",
-              "externalRemoteServices",
-              "nonApplicationLayerProtocol",
-              "obtainCapabilities",
-              "accountDiscovery",
-              "domainTrustDiscovery",
-              "screenCapture",
-              "taintSharedContent",
-              "obuscatedFilesorInformation",
-              "networkDenialofService",
-              "phishing",
-              "implantContainerImage",
-              "windowsManagementInstrumentation",
-              "serviceStop",
-              "hideArtifacts",
-              "userExecution",
-              "officeApplicationStartup",
-              "deobfuscateDecodeFilesorInformation",
-              "remoteServices",
-              "exploitationforDefenseEvasion",
-              "fileandDirectoryDiscovery",
-              "accessTokenManipulation",
-              "createorModifySystemProcess",
-              "datafromLocalSystem",
-              "interProcessCommunication",
-              "compromiseClientSoftwareBinary",
-              "indicatorRemovalonHost",
-              "exploitationforPrivilegeEscalation",
-              "unsecuredCredentials",
-              "dynamicResolution",
-              "compromiseInfrastructure",
-              "validAccounts",
-              "systemInformationDiscovery",
-              "defacement",
-              "protocolTunneling",
-              "searchVictimOwnedWebsites",
-              "exploitPublicFacingApplication",
-              "datafromCloudStorageObject",
-              "applicationLayerProtocol",
-              "driveByCompromise",
-              "datafromInformationRepositories",
-              "inputCapture",
-              "queryRegistry",
-              "ingressToolTransfer",
-              "scheduledTaskJob",
-              "activeScanning",
-              "manInTheMiddle",
-              "credentialsfromPasswordStores",
-              "fallbackChannels",
-              "signedBinaryProxyExecution",
-              "hijackExecutionFlow",
-              "exploitationofRemoteServices",
-              "trafficSignaling",
-              "networkServiceScanning",
-              "preOSBoot",
-              "fileandDirectoryPermissionsModification",
-              "processInjection",
-              "obfuscatedFilesorInformation",
-              "modifyAuthenticationProcess",
-              "remoteServiceSessionHijacking",
-              "commandandScriptingInterpreter",
-              "dataManipulation",
-              "proxy",
-              "networkSniffing",
-              "bootorLogonInitializationScripts",
-              "dataEncryptedforImpact",
-              "indirectCommandExecution",
-              "gatherVictimNetworkInformation",
-              "createAccount",
-              "datafromConfigurationRepository",
-              "eventTriggeredExecution",
-              "cloudInfrastructureDiscovery",
-              "cloudServiceDiscovery",
-              "exfiltrationOverAlternativeProtocol",
-              "sQLStoredProcedures",
-              "endpointDenialofService",
-              "bruteForce",
-              "cloudServiceDashboard",
-              "supplyChainCompromise",
-              "transferDatatoCloudAccount",
-              "remoteAccessSoftware",
-              "accountManipulation",
-              "stealorForgeKerberosTickets",
-              "remoteSystemDiscovery",
-              "modifyRegistry",
-              "diskWipe"
+              "Abuse Elevation Control Mechanism",
+              "Access Token Manipulation",
+              "Account Discovery",
+              "Account Manipulation",
+              "Active Scanning",
+              "Application Layer Protocol",
+              "Audio Capture",
+              "Boot or Logon Autostart Execution",
+              "Boot or Logon Initialization Scripts",
+              "Brute Force",
+              "Cloud Infrastructure Discovery",
+              "Cloud Service Dashboard",
+              "Cloud Service Discovery",
+              "Command and Scripting Interpreter",
+              "Compromise Client Software Binary",
+              "Compromise Infrastructure",
+              "Container and Resource Discovery",
+              "Create Account",
+              "Create or Modify System Process",
+              "Credentials from Password Stores",
+              "Data Destruction",
+              "Data Encrypted for Impact",
+              "Data from Cloud Storage Object",
+              "Data from Configuration Repository",
+              "Data from Information Repositories",
+              "Data from Local System",
+              "Data Manipulation",
+              "Data Staged",
+              "Defacement",
+              "Deobfuscate/Decode Files or Information",
+              "Disk Wipe",
+              "Domain Trust Discovery",
+              "Drive-by Compromise",
+              "Dynamic Resolution",
+              "Endpoint Denial of Service",
+              "Event Triggered Execution",
+              "Exfiltration Over Alternative Protocol",
+              "Exploit Public-Facing Application",
+              "Exploitation for Client Execution",
+              "Exploitation for Credential Access",
+              "Exploitation for Defense Evasion",
+              "Exploitation for Privilege Escalation",
+              "Exploitation of Remote Services",
+              "External Remote Services",
+              "Fallback Channels",
+              "File and Directory Discovery",
+              "Gather Victim Network Information",
+              "Hide Artifacts",
+              "Hijack Execution Flow",
+              "Impair Defenses",
+              "Implant Container Image",
+              "Indicator Removal on Host",
+              "Indirect Command Execution",
+              "Ingress Tool Transfer",
+              "Input Capture",
+              "Inter-Process Communication",
+              "Lateral Tool Transfer",
+              "Man-in-the-Middle",
+              "Masquerading",
+              "Modify Authentication Process",
+              "Modify Registry",
+              "Network Denial of Service",
+              "Network Service Scanning",
+              "Network Sniffing",
+              "Non-Application Layer Protocol",
+              "Non-Standard Port",
+              "Obfuscated Files or Information",
+              "Obtain Capabilities",
+              "Obuscated Files or Information",
+              "Office Application Startup",
+              "OS Credential Dumping",
+              "Permission Groups Discovery",
+              "Phishing",
+              "Pre-OS Boot",
+              "Process Discovery",
+              "Process Injection",
+              "Protocol Tunneling",
+              "Proxy",
+              "Query Registry",
+              "Remote Access Software",
+              "Remote Service Session Hijacking",
+              "Remote Services",
+              "Remote System Discovery",
+              "Resource Hijacking",
+              "Scheduled Task/Job",
+              "Screen Capture",
+              "Search Victim-Owned Websites",
+              "Server Software Component",
+              "Service Stop",
+              "Signed Binary Proxy Execution",
+              "Software Deployment Tools",
+              "SQL Stored Procedures",
+              "Steal or Forge Kerberos Tickets",
+              "Subvert Trust Controls",
+              "Supply Chain Compromise",
+              "System Information Discovery",
+              "Taint Shared Content",
+              "Traffic Signaling",
+              "Transfer Data to Cloud Account",
+              "Trusted Relationship",
+              "Unsecured Credentials",
+              "User Execution",
+              "Valid Accounts",
+              "Windows Management Instrumentation",
+              "File and Directory Permissions Modification"
             ],
             "x-ms-enum": {
               "name": "tactics",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "abuseElevationControlMechanism"
+                  "value": "Abuse Elevation Control Mechanism"
                 },
                 {
-                  "value": "containerandResourceDiscovery"
+                  "value": "Access Token Manipulation"
                 },
                 {
-                  "value": "nonStandardPort"
+                  "value": "Account Discovery"
                 },
                 {
-                  "value": "resourceHijacking"
+                  "value": "Account Manipulation"
                 },
                 {
-                  "value": "permissionGroupsDiscovery"
+                  "value": "Active Scanning"
                 },
                 {
-                  "value": "softwareDeploymentTools"
+                  "value": "Application Layer Protocol"
                 },
                 {
-                  "value": "exploitationforCredentialAccess"
+                  "value": "Audio Capture"
                 },
                 {
-                  "value": "serverSoftwareComponent"
+                  "value": "Boot or Logon Autostart Execution"
                 },
                 {
-                  "value": "audioCapture"
+                  "value": "Boot or Logon Initialization Scripts"
                 },
                 {
-                  "value": "subvertTrustControls"
+                  "value": "Brute Force"
                 },
                 {
-                  "value": "oSCredentialDumping"
+                  "value": "Cloud Infrastructure Discovery"
                 },
                 {
-                  "value": "dataStaged"
+                  "value": "Cloud Service Dashboard"
                 },
                 {
-                  "value": "trustedRelationship"
+                  "value": "Cloud Service Discovery"
                 },
                 {
-                  "value": "lateralToolTransfer"
+                  "value": "Command and Scripting Interpreter"
                 },
                 {
-                  "value": "masquerading"
+                  "value": "Compromise Client Software Binary"
                 },
                 {
-                  "value": "bootorLogonAutostartExecution"
+                  "value": "Compromise Infrastructure"
                 },
                 {
-                  "value": "impairDefenses"
+                  "value": "Container and Resource Discovery"
                 },
                 {
-                  "value": "exploitationforClientExecution"
+                  "value": "Create Account"
                 },
                 {
-                  "value": "processDiscovery"
+                  "value": "Create or Modify System Process"
                 },
                 {
-                  "value": "dataDestruction"
+                  "value": "Credentials from Password Stores"
                 },
                 {
-                  "value": "externalRemoteServices"
+                  "value": "Data Destruction"
                 },
                 {
-                  "value": "nonApplicationLayerProtocol"
+                  "value": "Data Encrypted for Impact"
                 },
                 {
-                  "value": "obtainCapabilities"
+                  "value": "Data from Cloud Storage Object"
                 },
                 {
-                  "value": "accountDiscovery"
+                  "value": "Data from Configuration Repository"
                 },
                 {
-                  "value": "domainTrustDiscovery"
+                  "value": "Data from Information Repositories"
                 },
                 {
-                  "value": "screenCapture"
+                  "value": "Data from Local System"
                 },
                 {
-                  "value": "taintSharedContent"
+                  "value": "Data Manipulation"
                 },
                 {
-                  "value": "obuscatedFilesorInformation"
+                  "value": "Data Staged"
                 },
                 {
-                  "value": "networkDenialofService"
+                  "value": "Defacement"
                 },
                 {
-                  "value": "phishing"
+                  "value": "Deobfuscate/Decode Files or Information"
                 },
                 {
-                  "value": "implantContainerImage"
+                  "value": "Disk Wipe"
                 },
                 {
-                  "value": "windowsManagementInstrumentation"
+                  "value": "Domain Trust Discovery"
                 },
                 {
-                  "value": "serviceStop"
+                  "value": "Drive-by Compromise"
                 },
                 {
-                  "value": "hideArtifacts"
+                  "value": "Dynamic Resolution"
                 },
                 {
-                  "value": "userExecution"
+                  "value": "Endpoint Denial of Service"
                 },
                 {
-                  "value": "officeApplicationStartup"
+                  "value": "Event Triggered Execution"
                 },
                 {
-                  "value": "deobfuscateDecodeFilesorInformation"
+                  "value": "Exfiltration Over Alternative Protocol"
                 },
                 {
-                  "value": "remoteServices"
+                  "value": "Exploit Public-Facing Application"
                 },
                 {
-                  "value": "exploitationforDefenseEvasion"
+                  "value": "Exploitation for Client Execution"
                 },
                 {
-                  "value": "fileandDirectoryDiscovery"
+                  "value": "Exploitation for Credential Access"
                 },
                 {
-                  "value": "accessTokenManipulation"
+                  "value": "Exploitation for Defense Evasion"
                 },
                 {
-                  "value": "createorModifySystemProcess"
+                  "value": "Exploitation for Privilege Escalation"
                 },
                 {
-                  "value": "datafromLocalSystem"
+                  "value": "Exploitation of Remote Services"
                 },
                 {
-                  "value": "interProcessCommunication"
+                  "value": "External Remote Services"
                 },
                 {
-                  "value": "compromiseClientSoftwareBinary"
+                  "value": "Fallback Channels"
                 },
                 {
-                  "value": "indicatorRemovalonHost"
+                  "value": "File and Directory Discovery"
                 },
                 {
-                  "value": "exploitationforPrivilegeEscalation"
+                  "value": "Gather Victim Network Information"
                 },
                 {
-                  "value": "unsecuredCredentials"
+                  "value": "Hide Artifacts"
                 },
                 {
-                  "value": "dynamicResolution"
+                  "value": "Hijack Execution Flow"
                 },
                 {
-                  "value": "compromiseInfrastructure"
+                  "value": "Impair Defenses"
                 },
                 {
-                  "value": "validAccounts"
+                  "value": "Implant Container Image"
                 },
                 {
-                  "value": "systemInformationDiscovery"
+                  "value": "Indicator Removal on Host"
                 },
                 {
-                  "value": "defacement"
+                  "value": "Indirect Command Execution"
                 },
                 {
-                  "value": "protocolTunneling"
+                  "value": "Ingress Tool Transfer"
                 },
                 {
-                  "value": "searchVictimOwnedWebsites"
+                  "value": "Input Capture"
                 },
                 {
-                  "value": "exploitPublicFacingApplication"
+                  "value": "Inter-Process Communication"
                 },
                 {
-                  "value": "datafromCloudStorageObject"
+                  "value": "Lateral Tool Transfer"
                 },
                 {
-                  "value": "applicationLayerProtocol"
+                  "value": "Man-in-the-Middle"
                 },
                 {
-                  "value": "driveByCompromise"
+                  "value": "Masquerading"
                 },
                 {
-                  "value": "datafromInformationRepositories"
+                  "value": "Modify Authentication Process"
                 },
                 {
-                  "value": "inputCapture"
+                  "value": "Modify Registry"
                 },
                 {
-                  "value": "queryRegistry"
+                  "value": "Network Denial of Service"
                 },
                 {
-                  "value": "ingressToolTransfer"
+                  "value": "Network Service Scanning"
                 },
                 {
-                  "value": "scheduledTaskJob"
+                  "value": "Network Sniffing"
                 },
                 {
-                  "value": "activeScanning"
+                  "value": "Non-Application Layer Protocol"
                 },
                 {
-                  "value": "manInTheMiddle"
+                  "value": "Non-Standard Port"
                 },
                 {
-                  "value": "credentialsfromPasswordStores"
+                  "value": "Obfuscated Files or Information"
                 },
                 {
-                  "value": "fallbackChannels"
+                  "value": "Obtain Capabilities"
                 },
                 {
-                  "value": "signedBinaryProxyExecution"
+                  "value": "Obuscated Files or Information"
                 },
                 {
-                  "value": "hijackExecutionFlow"
+                  "value": "Office Application Startup"
                 },
                 {
-                  "value": "exploitationofRemoteServices"
+                  "value": "OS Credential Dumping"
                 },
                 {
-                  "value": "trafficSignaling"
+                  "value": "Permission Groups Discovery"
                 },
                 {
-                  "value": "networkServiceScanning"
+                  "value": "Phishing"
                 },
                 {
-                  "value": "preOSBoot"
+                  "value": "Pre-OS Boot"
                 },
                 {
-                  "value": "fileandDirectoryPermissionsModification"
+                  "value": "Process Discovery"
                 },
                 {
-                  "value": "processInjection"
+                  "value": "Process Injection"
                 },
                 {
-                  "value": "obfuscatedFilesorInformation"
+                  "value": "Protocol Tunneling"
                 },
                 {
-                  "value": "modifyAuthenticationProcess"
+                  "value": "Proxy"
                 },
                 {
-                  "value": "remoteServiceSessionHijacking"
+                  "value": "Query Registry"
                 },
                 {
-                  "value": "commandandScriptingInterpreter"
+                  "value": "Remote Access Software"
                 },
                 {
-                  "value": "dataManipulation"
+                  "value": "Remote Service Session Hijacking"
                 },
                 {
-                  "value": "proxy"
+                  "value": "Remote Services"
                 },
                 {
-                  "value": "networkSniffing"
+                  "value": "Remote System Discovery"
                 },
                 {
-                  "value": "bootorLogonInitializationScripts"
+                  "value": "Resource Hijacking"
                 },
                 {
-                  "value": "dataEncryptedforImpact"
+                  "value": "Scheduled Task/Job"
                 },
                 {
-                  "value": "indirectCommandExecution"
+                  "value": "Screen Capture"
                 },
                 {
-                  "value": "gatherVictimNetworkInformation"
+                  "value": "Search Victim-Owned Websites"
                 },
                 {
-                  "value": "createAccount"
+                  "value": "Server Software Component"
                 },
                 {
-                  "value": "datafromConfigurationRepository"
+                  "value": "Service Stop"
                 },
                 {
-                  "value": "eventTriggeredExecution"
+                  "value": "Signed Binary Proxy Execution"
                 },
                 {
-                  "value": "cloudInfrastructureDiscovery"
+                  "value": "Software Deployment Tools"
                 },
                 {
-                  "value": "cloudServiceDiscovery"
+                  "value": "SQL Stored Procedures"
                 },
                 {
-                  "value": "exfiltrationOverAlternativeProtocol"
+                  "value": "Steal or Forge Kerberos Tickets"
                 },
                 {
-                  "value": "sQLStoredProcedures"
+                  "value": "Subvert Trust Controls"
                 },
                 {
-                  "value": "endpointDenialofService"
+                  "value": "Supply Chain Compromise"
                 },
                 {
-                  "value": "bruteForce"
+                  "value": "System Information Discovery"
                 },
                 {
-                  "value": "cloudServiceDashboard"
+                  "value": "Taint Shared Content"
                 },
                 {
-                  "value": "supplyChainCompromise"
+                  "value": "Traffic Signaling"
                 },
                 {
-                  "value": "transferDatatoCloudAccount"
+                  "value": "Transfer Data to Cloud Account"
                 },
                 {
-                  "value": "remoteAccessSoftware"
+                  "value": "Trusted Relationship"
                 },
                 {
-                  "value": "accountManipulation"
+                  "value": "Unsecured Credentials"
                 },
                 {
-                  "value": "stealorForgeKerberosTickets"
+                  "value": "User Execution"
                 },
                 {
-                  "value": "remoteSystemDiscovery"
+                  "value": "Valid Accounts"
                 },
                 {
-                  "value": "modifyRegistry"
+                  "value": "Windows Management Instrumentation"
                 },
                 {
-                  "value": "diskWipe"
+                  "value": "File and Directory Permissions Modification"
                 }
               ]
             }
