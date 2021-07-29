@@ -329,6 +329,72 @@
         }
       }
     },
+    "/indexers('{indexerName}')/search.resetdocs": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_ResetDocs",
+        "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
+        "externalDocs": {
+          "url": "N/A"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to reset documents for."
+          },
+          {
+            "name" : "documentKeys",
+            "in" : "body",
+            "required" : false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "document keys to be reset"
+          },
+          {
+            "name" : "datasourceDocumentIds",
+            "in" : "body",
+            "required" : false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "datasource document identifiers to be reset"
+          },
+          {
+            "name" : "overwrite",
+            "in" : "query",
+            "required" : false,
+            "type": "boolean",
+            "description": "If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/indexers('{indexerName}')/search.run": {
       "post": {
         "tags": [
@@ -6654,14 +6720,6 @@
           "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
         }
       },
-      "required": [
-        "allDocsInitialChangeTrackingState",
-        "allDocsFinalChangeTrackingState",
-        "resetDocsInitialChangeTrackingState",
-        "resetDocsFinalChangeTrackingState",
-        "resetDocumentKeys",
-        "resetDatasourceDocumentIds"
-      ],
       "description": "Represents all of the state that defines and dictates the indexer's current execution."
     },
     "IndexingMode": {
