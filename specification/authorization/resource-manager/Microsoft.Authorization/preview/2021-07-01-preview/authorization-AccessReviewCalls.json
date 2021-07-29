@@ -1209,6 +1209,7 @@
   "definitions": {
     "AccessReviewScheduleDefinition": {
       "x-ms-azure-resource": true,
+      "type":"object",
       "properties": {
         "id": {
           "type": "string",
@@ -1234,6 +1235,7 @@
       "description": "Access Review Schedule Definition."
     },
     "AccessReviewScheduleDefinitionProperties": {
+      "type":"object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1325,6 +1327,7 @@
       "description": "Access Review."
     },
     "AccessReviewInstance": {
+      "type":"object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1351,6 +1354,7 @@
       "description": "Access Review Instance."
     },
     "AccessReviewInstanceProperties": {
+      "type":"object",
       "properties": {
         "status": {
           "type": "string",
@@ -1418,6 +1422,7 @@
       "description": "Access Review Instance properties."
     },
     "AccessReviewScheduleSettings": {
+      "type":"object",
       "properties": {
         "mailNotificationsEnabled": {
           "type": "boolean",
@@ -1475,6 +1480,7 @@
       "description": "Settings of an Access Review."
     },
     "AccessReviewDefaultSettings": {
+      "type":"object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1501,6 +1507,7 @@
       "description": "Access Review Default Settings."
     },
     "AccessReviewRecurrenceSettings": {
+      "type":"object",
       "properties": {
         "pattern": {
           "x-ms-client-flatten": true,
@@ -1516,6 +1523,7 @@
       "description": "Recurrence Settings of an Access Review Schedule Definition."
     },
     "AccessReviewRecurrencePattern": {
+      "type":"object",
       "properties": {
         "type": {
           "type": "string",
@@ -1538,6 +1546,7 @@
       "description": "Recurrence Pattern of an Access Review Schedule Definition."
     },
     "AccessReviewRecurrenceRange": {
+      "type":"object",
       "properties": {
         "type": {
           "type": "string",
@@ -1573,6 +1582,7 @@
       "description": "Recurrence Range of an Access Review Schedule Definition."
     },
     "AccessReviewScope": {
+      "type":"object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1626,6 +1636,7 @@
       "description": "Descriptor for what needs to be reviewed"
     },
     "AccessReviewReviewer": {
+      "type":"object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1648,6 +1659,7 @@
       "description": "Descriptor for what needs to be reviewed"
     },
     "AccessReviewDecision": {
+      "type":"object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1674,6 +1686,7 @@
       "description": "Access Review."
     },
     "AccessReviewDecisionProperties": {
+      "type":"object",
       "properties": {
         "principal": {
           "readOnly": true,
@@ -1771,6 +1784,7 @@
       "description": "Approval Step."
     },
     "AccessReviewDecisionResource": {
+      "type":"object",
       "discriminator": "type",
       "required": [
         "type"
@@ -1801,6 +1815,7 @@
       "description": "Target of the decision."
     },
     "AccessReviewDecisionIdentity": {
+      "type":"object",
       "discriminator": "type",
       "required": [
         "type"
@@ -1832,6 +1847,7 @@
       "description": "Target of the decision."
     },
     "AccessReviewDecisionUserIdentity": {
+      "type":"object",
       "allOf": [
         {
           "$ref": "#/definitions/AccessReviewDecisionIdentity"
@@ -1852,6 +1868,7 @@
       "description": "User Decision Target"
     },
     "AccessReviewDecisionServicePrincipalIdentity": {
+      "type":"object",
       "allOf": [
         {
           "$ref": "#/definitions/AccessReviewDecisionIdentity"
@@ -1872,6 +1889,7 @@
       "description": "Service Principal Decision Target"
     },
     "AccessReviewActorIdentity": {
+      "type":"object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1905,6 +1923,7 @@
       "description": "Details of the actor identity"
     },
     "AccessReviewContactedReviewer": {
+      "type":"object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -1931,6 +1950,7 @@
       "description": "Access Review Contacted Reviewer."
     },
     "AccessReviewContactedReviewerProperties": {
+      "type":"object",
       "properties": {
         "userDisplayName": {
           "type": "string",
@@ -1953,6 +1973,7 @@
       "description": "Properties of access review contacted reviewer."
     },
     "AccessReviewScheduleDefinitionListResult": {
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
@@ -1969,6 +1990,7 @@
       "description": "List of Access Review Schedule Definitions."
     },
     "AccessReviewInstanceListResult": {
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
@@ -1985,6 +2007,7 @@
       "description": "List of Access Review Instances."
     },
     "AccessReviewDecisionListResult": {
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
@@ -2001,6 +2024,7 @@
       "description": "List of access review decisions."
     },
     "AccessReviewContactedReviewerListResult": {
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
