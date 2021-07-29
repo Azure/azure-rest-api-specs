@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-07-01",
+    "api-version": "2021-10-01",
     "subscriptionId": "{subscription-id}"
   },
   "responses": {
@@ -8,68 +8,25 @@
       "body": {
         "value": [
           {
-            "resourceType": "workspaces",
-            "name": "Basic",
-            "tier": "Basic",
-            "locations": [
-              "westus"
-            ],
-            "locationInfo": [
+            "ResourceType": "workspaces",
+            "Skus": [
               {
-                "location": "westus",
-                "zones": [
-                  "westus-AZ02",
-                  "westus-AZ01"
-                ]
-              }
-            ],
-            "capabilities": [
-              {
-                "name": "automatedml_readhyperdrivesdk",
-                "value": "{\n  \"id\": \"automatedml_ readhyperdrivesdk\",\n  \"name\": \"Read hyperdrive SDK\",\n  \"description\": \"Read only access to Hyperdrive in the SDK\"\n}"
-              },
-              {
-                "name": "workspace_upgradeworkspacesdk",
-                "value": "{\n  \"id\": \"workspace_upgradeworkspacesdk\",\n  \"name\": \"Upgrade workspace SDK\",\n  \"description\": \"Upgrade workspace from Basic to enterprise from the SDK\"\n}"
-              }
-            ],
-            "restrictions": []
-          },
-          {
-            "resourceType": "workspaces",
-            "name": "Enterprise",
-            "tier": "Enterprise",
-            "locations": [
-              "westus"
-            ],
-            "locationInfo": [
-              {
-                "location": "westus",
-                "zones": [
-                  "westus-AZ01"
-                ],
-                "zoneDetails": [
+                "Name": "Basic",
+                "Tier": "Basic",
+                "Capabilities": [
                   {
-                    "name": [
-                      "westus-AZ01"
-                    ],
-                    "capabilities": [
-                      {
-                        "name": "automatedml_createeditexperimentssdk",
-                        "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
-                      }
-                    ]
+                    "Name": "feature2",
+                    "Value": "{\"id\":\"feature2\",\"name\":\"Feature 2\",\"description\":\"Feature 2 is an enabled feature for basic sku\"}"
+                  }
+                ],
+                "LocationInfo": [
+                  {
+                    "Location": "eastus",
+                    "IsSpotRestricted": false
                   }
                 ]
               }
-            ],
-            "capabilities": [
-              {
-                "name": "automatedml_createeditexperimentssdk",
-                "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
-              }
-            ],
-            "restrictions": []
+            ]
           }
         ],
         "nextLink": null

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Machine Learning Workspaces",
-    "version": "2021-07-01"
+    "version": "2021-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -15,38 +15,38 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces/skus": {
+    "/skus": {
       "get": {
         "tags": [
-          "WorkspaceSkus"
+          "Skus"
         ],
-        "description": "Lists all skus with associated features",
+        "summary": "Lists all skus with associated features",
         "operationId": "WorkspaceSkus_List",
-        "x-ms-examples": {
-          "List Skus": {
-            "$ref": "./examples/WorkspaceSku/list.json"
-          }
-        },
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SkuListResult"
+              "$ref": "#/definitions/ResourceTypeSkuPaginatedResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Skus": {
+            "$ref": "./examples/WorkspaceSku/list.json"
           }
         },
         "x-ms-pageable": {
@@ -56,162 +56,285 @@
     }
   },
   "definitions": {
-    "SkuListResult": {
-      "description": "List of skus with features",
+    "SkuCapacity": {
+      "required": [
+        "minimum"
+      ],
       "type": "object",
       "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "Gets or sets the minimum.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "Gets or sets the maximum.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "description": "Gets or sets the default.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Gets or sets the type of the scale.",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SkuCost": {
+      "required": [
+        "meterId"
+      ],
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "description": "Gets or sets the meter Id.",
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "Gets or sets the quantity.",
+          "type": "integer"
+        },
+        "extendedUnit": {
+          "description": "Gets or sets the extended unit.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuCapability": {
+      "description": "The SKU capability",
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the capability name.",
+          "type": "string"
+        },
         "value": {
-          "uniqueItems": false,
+          "description": "Gets or sets the capability value.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuZoneDetail": {
+      "description": "The SKU zone detail.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Gets or sets the physical zones.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkspaceSku"
+            "type": "string"
           }
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of Workspace Skus. Call ListNext() with this URI to fetch the next page of Workspace Skus"
+        "capabilities": {
+          "description": "Gets or sets the capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          }
         }
       }
     },
-    "SKUCapability": {
-      "description": "Features/user capabilities associated with the sku",
+    "SkuExtendedLocationDetails": {
+      "description": "The sku extended location details",
+      "required": [
+        "Name"
+      ],
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Capability/Feature ID",
-          "type": "string"
-        },
-        "value": {
-          "description": "Details about the feature/capability",
-          "type": "string"
-        }
-      }
-    },
-    "Restriction": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of restrictions. As of now only possible value for this is location."
-        },
-        "values": {
-          "readOnly": true,
+        "Name": {
+          "description": "Gets or sets the extended locations",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
-        },
-        "reasonCode": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "NotAvailableForRegion",
-            "NotAvailableForSubscription"
-          ],
-          "x-ms-enum": {
-            "name": "ReasonCode",
-            "modelAsString": true
-          },
-          "description": "The reason for the restriction."
-        }
-      },
-      "description": "The restriction because of which SKU cannot be used."
-    },
-    "ResourceSkuLocationInfo": {
-      "properties": {
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Location of the SKU"
-        },
-        "zones": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of availability zones where the SKU is supported."
-        },
-        "zoneDetails": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSkuZoneDetails"
-          },
-          "description": "Details of capabilities available to a SKU in specific zones."
-        }
-      }
-    },
-    "ResourceSkuZoneDetails": {
-      "properties": {
-        "name": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          },
-          "description": "The set of zones that the SKU is available in with the specified capabilities."
+          }
         },
         "capabilities": {
+          "description": "Gets or sets the capabilities.",
           "type": "array",
-          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+            "$ref": "#/definitions/SkuCapability"
+          }
         }
-      },
-      "description": "Describes The zonal capabilities of a SKU."
+      }
     },
-    "WorkspaceSku": {
-      "description": "Describes Workspace Sku details and features",
+    "SkuLocationInfo": {
+      "description": "The SKU location info.",
+      "required": [
+        "location"
+      ],
       "type": "object",
       "properties": {
-        "locations": {
-          "readOnly": true,
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "Gets or sets the physical availability zones.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
+          }
+        },
+        "zoneDetails": {
+          "description": "Gets or sets the zone details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuZoneDetail"
+          }
+        },
+        "extendedLocations": {
+          "description": "Gets or sets the extended locations",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Gets or sets the type of extended locations",
+          "enum": [
+            "NotSpecified",
+            "EdgeZone",
+            "CustomLocation",
+            "ArcZone"
+          ],
+          "type": "string"
+        },
+        "locationDetails": {
+          "description": "Gets or sets the location details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuExtendedLocationDetails"
+          }
+        },
+        "isSpotRestricted": {
+          "description": "Gets or sets the Spot restricted flag.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SkuSetting": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the SKU name.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Gets or sets the SKU tier.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Gets or sets the SKU size.",
+          "type": "string"
+        },
+        "family": {
+          "description": "Gets or sets the SKU family.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Gets or sets the SKU kind.",
+          "type": "string"
+        },
+        "requiredQuotaIds": {
+          "description": "Gets or sets the quota Ids SKU supported.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "description": "Gets or sets the required features.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity"
+        },
+        "costs": {
+          "description": "Gets or sets the SKU costs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          }
+        },
+        "capabilities": {
+          "description": "Gets or sets the SKU capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          }
         },
         "locationInfo": {
           "type": "array",
-          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuLocationInfo"
-          },
-          "description": "A list of locations and availability zones in those locations where the SKU is available."
+            "$ref": "#/definitions/SkuLocationInfo"
+          }
         },
-        "tier": {
-          "description": "Sku Tier like Basic or Enterprise",
-          "type": "string",
-          "readOnly": true
-        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceTypeSku": {
+      "description": "The resource type SKU",
+      "required": [
+        "resourceType",
+        "skus"
+      ],
+      "type": "object",
+      "properties": {
         "resourceType": {
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the resource type name.",
+          "type": "string"
         },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "capabilities": {
-          "description": "List of features/user capabilities associated with the sku",
-          "uniqueItems": false,
+        "skus": {
+          "description": "Gets or sets the SKU settings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "readOnly": true
-        },
-        "restrictions": {
+            "$ref": "#/definitions/SkuSetting"
+          }
+        }
+      }
+    },
+    "ResourceTypeSkuPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Restriction"
-          },
-          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+            "$ref": "#/definitions/ResourceTypeSku"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     }
