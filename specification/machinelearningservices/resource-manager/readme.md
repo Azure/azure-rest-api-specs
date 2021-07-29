@@ -30,7 +30,7 @@ openapi-type: arm
 tag: package-2021-10-01
 ```
 
-### Tag: package-2021-07-01
+### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
