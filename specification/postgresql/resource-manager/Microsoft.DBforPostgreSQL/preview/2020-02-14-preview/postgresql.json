@@ -1473,6 +1473,28 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "description": "A value indicating whether Geo-Redundant backup is enabled on the server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeoRedundantBackupEnum",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for server.",
+          "readOnly": true
         }
       },
       "description": "Storage Profile properties of a server"
