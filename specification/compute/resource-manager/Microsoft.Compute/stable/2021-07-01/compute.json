@@ -5405,6 +5405,9 @@
           "Create a scale set with userData.": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithUserData.json"
           },
+          "Create a scale set with scaleInPolicy.": {
+            "$ref": "./examples/compute/CreateAScaleSetWithScaleInPolicy.json"
+          },
           "Create a VMSS with an extension that has suppressFailures enabled": {
             "$ref": "./examples/compute/CreateAScaleSetWithExtensionsSuppressFailuresEnabled.json"
           },
@@ -12234,6 +12237,10 @@
             }
           },
           "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>"
+        },
+        "forceDeletion": {
+          "type": "boolean",
+          "description": "This property allows you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.(Feature in Preview)"
         }
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
@@ -13564,7 +13571,7 @@
         },
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
         "orchestrationMode": {
           "$ref": "#/definitions/OrchestrationMode",
@@ -13609,7 +13616,7 @@
         },
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
