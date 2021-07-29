@@ -23,6 +23,20 @@ batch:
   - tag: package-2020-10-01-preview
   - tag: package-2021-01-01-preview-only
   - tag: package-2021-03-01-preview-only
+  - tag: package-2021-07-01-preview-only
+```
+
+### Tag: package-2021-07-01-preview-only and java
+
+These settings apply only when `--tag=package-2021-07-01-preview-only --java` is specified on he command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-07-01-preview-only' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.authorization.v2021_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/authorization/mgmt-v2021_07_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-03-01-preview-only and java
