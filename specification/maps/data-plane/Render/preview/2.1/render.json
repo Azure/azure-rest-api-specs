@@ -237,6 +237,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MapTileResultv2"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "default": {
@@ -250,7 +256,7 @@
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
         "operationId": "RenderV2_GetMapTileset",
         "x-ms-examples": {
-          "GetMapTile": {
+          "GetMapTileset": {
             "$ref": "./examples/GetMapTilesetV2.json"
           }
         },
@@ -286,7 +292,7 @@
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Attribution API allows users to request map copyright attribution information for a section of a tileset.",
         "operationId": "RenderV2_GetMapAttribution",
         "x-ms-examples": {
-          "GetMapTile": {
+          "GetMapAttribution": {
             "$ref": "./examples/GetMapAttributionV2.json"
           }
         },
@@ -323,12 +329,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MapAttributionResultV2"
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
             }
           },
           "default": {
