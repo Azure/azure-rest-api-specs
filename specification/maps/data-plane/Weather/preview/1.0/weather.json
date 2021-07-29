@@ -642,7 +642,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96.",
+            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -2123,6 +2123,7 @@
       "properties": {
         "dateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "index": {
@@ -2166,6 +2167,7 @@
       "properties": {
         "dateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "index": {
