@@ -153,6 +153,10 @@
           "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
           "type": "integer",
           "minimum": 0
+        },
+        "cleanup": {
+          "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
+          "type": "boolean"
         }
       },
       "additionalProperties": {
@@ -242,9 +246,9 @@
             "$ref": "#/definitions/PackageStore"
           }
         },
-        "managedCredential": {
-          "description": "The user-assigned managed identity reference.",
-          "$ref": "#/definitions/EntityReference"
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "additionalProperties": {
@@ -512,8 +516,7 @@
           "type": "string",
           "enum": [
             "IntegrationRuntimeReference",
-            "LinkedServiceReference",
-            "CredentialReference"
+            "LinkedServiceReference"
           ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEntityReferenceType",
