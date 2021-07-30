@@ -225,7 +225,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 - Microsoft.Security/stable/2021-01-01/alerts.json
-- Microsoft.Security/stable/2021-06-01/settings.json
+- Microsoft.Security/stable/2021-07-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
@@ -462,6 +462,19 @@ These settings apply only when `--tag=package-2021-05-preview-only` is specified
 ``` yaml $(tag) == 'package-package-2021-05-preview-only'
 input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2021-06-only
+
+These settings apply only when `--tag=package-2021-06-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-06-only'
+input-file:
+- Microsoft.Security/stable/2021-06-01/settings.json
 
 # Needed when there is more than one input file
 override-info:
