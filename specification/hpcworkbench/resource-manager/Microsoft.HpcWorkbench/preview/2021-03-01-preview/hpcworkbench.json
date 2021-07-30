@@ -63,12 +63,171 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HpcWorkbench/instances": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InstancePageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Instances by Subscription": {
+            "$ref": "./examples/InstancesListBySubscription.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InstancePageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Instances by Resource Group": {
+            "$ref": "./examples/InstancesListByResourceGroup.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{name}": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "instances_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-examples": {
+          "Instances Get": {
+            "$ref": "./examples/InstancesGet.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Instances"
         ],
         "operationId": "instances_CreateOrUpdate",
-        "description": "Creates or updates the specified instance.",
         "consumes": [
           "application/json"
         ],
@@ -77,14 +236,25 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
-            "description": "instance body",
             "name": "body",
             "schema": {
               "$ref": "#/definitions/Instance"
@@ -92,28 +262,158 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Instance"
             }
           },
           "default": {
-            "description": "Default Error Response",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Put Instance": {
-            "$ref": "./examples/PutInstances.json"
+          "Instances create or update": {
+            "$ref": "./examples/InstancesCreateOrUpdate.json"
           }
-        }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "instances_Patch",
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Instances Update": {
+            "$ref": "./examples/InstancesPatch.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "instances_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "204": {
+            "description": "Success, no content"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Instances Update": {
+            "$ref": "./examples/InstancesDelete.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     }
   },
@@ -162,6 +462,39 @@
           "description": "The error additional info."
         }
       }
+    },
+    "InstancePageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Unknown",
+        "Validating",
+        "Processing",
+        "Deleting",
+        "Accepted",
+        "Canceled",
+        "Completed",
+        "Succeeded",
+        "Failed",
+        "Deleted"
+      ],
+      "type": "string",
+      "readOnly": true
     },
     "ErrorResponse": {
       "type": "object",
@@ -238,6 +571,14 @@
         "environment": {
           "type": "string",
           "description": "Environment of the instance."
+        },
+        "provisioningState": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          ],
+          "description": "Gets the status of the instance at the time the operation was called"
         }
       },
       "description": "Instance properties."
@@ -248,7 +589,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InstancePropertiesFormat",
-          "description": "Nat Gateway properties."
+          "description": "Instance properties"
         }
       },
       "allOf": [
@@ -257,29 +598,6 @@
         }
       ],
       "description": "Instance resource"
-    },
-    "InstanceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Instance"
-          },
-          "description": "A list of Instances that exists in a resource group."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListInstances API service call."
     }
-  },
-  "tags": [
-    {
-      "name": "Instances",
-      "description": "API Methods for interacting with HPC Workbench instances."
-    }
-  ]
+  }
 }

@@ -39,24 +39,6 @@ input-file:
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/hpcworkbench.json
 ```
 
-### Tag: package-2021-04-01-preview
-
-These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-01-preview'
-input-file:
-  - Microsoft.HpcWorkbench/preview/2021-04-01/hpcworkbench.json
-```
-
-### Tag: package-2021-04-01
-
-These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-01'
-input-file:
-  - Microsoft.HpcWorkbench/stable/2021-04-01/hpcworkbench.json
-```
-
 ---
 
 # Code Generation
