@@ -12,6 +12,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-datadog
 no-namespace-folders: true
+clear-output-folder: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
