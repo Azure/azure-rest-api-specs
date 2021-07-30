@@ -1885,6 +1885,16 @@
           },
           "description": "The list of hiveMetastores associated with this account."
         },
+        "hierarchicalQueue": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "root": {
+              "type": "object"
+            }
+          },
+          "description": "The hierarchical queue associated with this account."
+        },
         "hierarchicalQueueState": {
           "readOnly": true,
           "type": "string",
@@ -1976,11 +1986,23 @@
           "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
         },
+        "maxActiveJobCountPerUser": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
+        },
         "maxQueuedJobCountPerUser": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The maximum supported jobs queued under the account at the same time."
+        },
+        "maxJobRunningTimeInMin": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
         },
         "systemMaxJobCount": {
           "readOnly": true,
@@ -3147,6 +3169,7 @@
         },
         "suffix": {
           "type": "string",
+          "default": "azuredatalakestore.net",
           "description": "The optional suffix for the storage account."
         }
       },
