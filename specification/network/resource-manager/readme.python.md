@@ -30,7 +30,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
-clear-output-folder: false
+clear-output-folder: true
 perform-load: false
 ```
 ### Tag: package-2021-02 and python
