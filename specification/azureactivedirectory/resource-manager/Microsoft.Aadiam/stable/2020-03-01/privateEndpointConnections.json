@@ -90,7 +90,7 @@
             "$ref": "./examples/AzureADPrivateEndpointConnectionsCreate.json"
           }
         },
-        "description": "Updates the specified private endpoint connection associated with the given policy.",
+        "description": "Creates specified private endpoint connection associated with the given policy.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -118,7 +118,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "The state of private endpoint connection was updated successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
@@ -162,7 +162,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "The private endpoint connection does not exist."
           },
           "204": {
@@ -217,55 +217,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        }
-      },
-      "patch": {
-        "description": "Updates an existing Private Endpoint Connection's tags. To update other fields use the Put method.",
-        "operationId": "PrivateEndpointConnections_UpdateTags",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/policyNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateEndpointConnectionName"
-          },
-          {
-            "name": "privateLinkConnectionTags",
-            "description": "Updated tag information to set into the PrivateLinkConnection instance.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagsResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updating the AzureAD PrivateLinkConnection's tags was successful. PrivateLinkConnection tags are updated and returned with the rest of the PrivateLinkConnection's object properties.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AadiamUpdatePrivateEndpointConnections": {
-            "$ref": "./examples/AzureADPrivateEndpointConnectionsUpdate.json"
           }
         }
       }
@@ -327,11 +278,16 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
+        },
+        "privateLinkConnectionTags": {
+          "description": "Updated tag information to set into the PrivateLinkConnection instance.",
+          "$ref": "#/definitions/TagsResource",
+          "x-ms-mutability": ["update"]
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "type": "object",
@@ -424,57 +380,6 @@
       },
       "type": "object",
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkConnection instance."
-    },
-    "TrackedResource": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "description": "Definition of resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "type": "object",
-      "description": "The resource definition.",
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
