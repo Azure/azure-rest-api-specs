@@ -59,6 +59,10 @@
           "description": "The connection used to execute the SQL script.",
           "$ref": "#/definitions/SqlConnection"
         },
+        "resultLimit": {
+          "description": "Limit of results, '-1' for no limit.",
+          "type": "number"
+        },
         "metadata": {
           "description": "The metadata of the SQL script.",
           "$ref": "#/definitions/SqlScriptMetadata"
@@ -68,8 +72,7 @@
         "type": "object"
       },
       "required": [
-        "query",
-        "currentConnection"
+        "query"
       ]
     },
     "SqlScriptMetadata": {
@@ -110,7 +113,6 @@
         "type": "object"
       },
       "required": [
-        "type",
         "name"
       ]
     }
