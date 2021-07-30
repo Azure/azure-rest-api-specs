@@ -8,7 +8,10 @@ We use `oav` tools to generate basic test scenario. `oav` analyze swagger file a
 
 `oav` support rule based test scenario file generation. We use this command to generate test scenario file.
 
-`oav generate-static-test-scenario --readme <my-swagger-readme> --tag <my-tag> --rules <generated-rules>`
+`oav generate-static-test-scenario --readme <readme> --tag <tag> --rules <generated-rules>`
+
+- readme: swagger readme file.
+- tag: which tag to generate. oav will analyze swagger file under the tag and generate test scenario.
 
 Example:
 
@@ -34,3 +37,6 @@ testScenarios:
         exampleFile: ../examples/SignalR_Delete.json
 ```
 
+## Reference
+
+- [oav](https://github.com/Azure/oav/tree/develop)
