@@ -70,6 +70,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -419,6 +422,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+          },
+          {
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -727,6 +736,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+          },
+          {
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -6301,6 +6316,14 @@
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
           "x-nullable": true
+        },
+        "cache": {
+          "$ref": "#/definitions/SearchIndexerCache",
+          "x-nullable": true,
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/search-howto-incremental-index"
+          }
         }
       },
       "required": [
@@ -9532,6 +9555,19 @@
       ],
       "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Cognitive Search, such as indexes and synonym maps."
     },
+    "SearchIndexerCache": {
+      "properties": {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the storage account where the cache data will be persisted."
+        },
+        "enableReprocessing": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Specifies whether incremental reprocessing is enabled."
+        }
+      }
+    },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
         "applicationId": {
@@ -9745,6 +9781,22 @@
       "x-ms-skip-url-encoding": true,
       "description": "The endpoint URL of the search service.",
       "x-ms-parameter-location": "client"
+    },
+    "DisableCacheReprocessingChangeDetectionParameter": {
+      "name": "disableCacheReprocessingChangeDetection",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Disables cache reprocessing change detection.",
+      "x-ms-parameter-location": "method"
+    },
+    "IgnoreResetRequirementsParameter": {
+      "name": "ignoreResetRequirements",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Ignores cache reset requirements.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
