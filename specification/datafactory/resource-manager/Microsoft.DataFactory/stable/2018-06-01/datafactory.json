@@ -946,6 +946,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.",
+        "x-ms-examples": {
+          "IntegrationRuntimes_OutboundNetworkDependenciesEndpoints": {
+            "$ref": "./examples/IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo": {
       "post": {
         "tags": [
