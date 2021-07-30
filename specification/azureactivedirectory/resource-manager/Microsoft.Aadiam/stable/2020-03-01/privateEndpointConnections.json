@@ -162,6 +162,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The private endpoint connection does not exist."
+          },
           "202": {
             "description": "The private endpoint connection does not exist."
           },
@@ -278,11 +281,6 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
-        },
-        "privateLinkConnectionTags": {
-          "description": "Updated tag information to set into the PrivateLinkConnection instance.",
-          "$ref": "#/definitions/TagsResource",
-          "x-ms-mutability": ["update"]
         }
       },
       "allOf": [
@@ -307,6 +305,11 @@
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
           "description": "Provisioning state of the private endpoint connection."
+        },
+        "privateLinkConnectionTags": {
+          "description": "Updated tag information to set into the PrivateLinkConnection instance.",
+          "$ref": "#/definitions/TagsResource",
+          "x-ms-mutability": ["update"]
         }
       },
       "type": "object",
