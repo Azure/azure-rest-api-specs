@@ -728,7 +728,43 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "operationId": "ContainerGroups_GetOutboundNetworkDependenciesEndpoints",
+        "x-ms-examples": {
+        },
+        "summary": "Get all network dependencies for container group.",
+        "description": "Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkDependenciesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
   },
   "definitions": {
     "Container": {
@@ -2125,7 +2161,17 @@
         }
       },
       "description": "An error response from the Container Instance service."
-    }
+    },
+    "NetworkDependenciesResponse": {
+      "description": "Response for network dependencies, always empty list..",
+      "type": "object",
+      "properties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+    },
   },
   "parameters": {
     "SubscriptionIdParameter": {
