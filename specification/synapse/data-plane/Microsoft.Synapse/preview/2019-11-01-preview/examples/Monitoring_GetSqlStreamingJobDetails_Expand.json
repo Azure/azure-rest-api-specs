@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "endpoint": "myWorkspace.dev.azuresynapse.net",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+          "resourceGroupName": "myResourceGroup",
+          "workspaceName": "myWorkspace",
+          "sqlPoolName": "myWorkspace-ondemand",
+          "sqlDatabaseName": "myDatabase",
+          "jobName": "myJob",
+          "inputs": [
+            {
+              "name": "blob_input",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/inputs"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "blob_output",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+            }
+          ],
+          "jobStatus": {
+            "status": "Running"
+          },
+          "lastOutputTimeUtc": "2021-07-30T11:15:16.493Z",
+          "outputStartTimeUtc": "2021-07-30T11:14:30.023Z",
+          "query": "\n        INSERT INTO blob_output\n        SELECT *\n        FROM blob_input",
+          "streamingUnits": 3,
+          "location": "West US",
+          "eventsLateArrivalMaxDelayInSeconds": 5,
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsOutOfOrderPolicy": "Adjust",
+          "outputErrorPolicy": "Retry",
+          "provisioningState": "Succeeded",
+          "outputStartMode": "JobStartTime",
+          "jobGraph": {
+            "startDateTime": "2021-07-30T11:14:22.877",
+            "graph": "{\r\n  \"nodes\": [\r\n    {\r\n      \"id\": \"blob_input_0\",\r\n      \"name\": \"blob_input\",\r\n      \"type\": \"Input\",\r\n      \"processorId\": \"blob_input#0$0\",\r\n      \"dataSourceType\": \"InputBlob\",\r\n      \"partitionIds\": [\r\n        0\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"blob_output_blob_output_0\",\r\n      \"name\": \"blob_output\",\r\n      \"type\": \"Step\",\r\n      \"processorId\": \"blob_output#0$0\",\r\n      \"partitionIds\": [\r\n        0\r\n      ],\r\n      \"scriptPosition\": {\r\n        \"startLine\": 3,\r\n        \"startColumn\": 9,\r\n        \"startOffset\": 41,\r\n        \"endLine\": 4,\r\n        \"endColumn\": 23,\r\n        \"endOffset\": 72\r\n      },\r\n      \"inputTimeShift\": \"00:00:00\"\r\n    },\r\n    {\r\n      \"id\": \"blob_output-blob_output_0\",\r\n      \"name\": \"blob_output\",\r\n      \"type\": \"Output\",\r\n      \"processorId\": \"blob_output-blob_output#0$0\",\r\n      \"dataSourceType\": \"OutputBlob\",\r\n      \"partitionIds\": [\r\n        0\r\n      ],\r\n      \"inputTimeShift\": \"00:05:00\"\r\n    }\r\n  ],\r\n  \"edges\": [\r\n    {\r\n      \"source\": \"blob_input_0\",\r\n      \"target\": \"blob_output_blob_output_0\"\r\n    },\r\n    {\r\n      \"source\": \"blob_output_blob_output_0\",\r\n      \"target\": \"blob_output-blob_output_0\"\r\n    }\r\n  ]\r\n}"
+          }
+        },
+        "statusCode": 200,
+        "errorMessage": null
+      }
+    }
+  }
+}

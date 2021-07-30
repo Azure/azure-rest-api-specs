@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "endpoint": "myWorkspace.dev.azuresynapse.net",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "cost": 1885,
+        "timespan": "2021-07-30T03:52:16Z/2021-07-30T04:22:16Z",
+        "interval": "PT1M",
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/myResourceGroup/providers/Microsoft.Synapse/workspaces/myWorkspace/providers/Microsoft.Insights/metrics/SQLStreamingResourceUtilization",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "SQLStreamingResourceUtilization",
+              "localizedValue": "Resource % utilization (preview)"
+            },
+            "displayDescription": "This is a preview metric available in East US, West Europe.\r\n Resource utilization expressed as a percentage. High utilization indicates that the job is using close to the maximum allocated resources.",
+            "unit": "Percent",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "JobName",
+                      "localizedValue": "JobName"
+                    },
+                    "value": "myJob"
+                  },
+                  {
+                    "name": {
+                      "value": "SQLDatabaseName",
+                      "localizedValue": "SQLDatabaseName"
+                    },
+                    "value": "myDatabase"
+                  },
+                  {
+                    "name": {
+                      "value": "SQLPoolName",
+                      "localizedValue": "SQLPoolName"
+                    },
+                    "value": "myWorkspace-ondemand"
+                  }
+                ],
+                "data": [
+                  {
+                    "timeStamp": "2021-07-30T03:52:00Z",
+                    "total": 48,
+                    "average": 8,
+                    "count": 6,
+                    "maximum": 8,
+                    "minimum": 8
+                  },
+                  {
+                    "timeStamp": "2021-07-30T03:53:00Z",
+                    "total": 48,
+                    "average": 8,
+                    "count": 6,
+                    "maximum": 8,
+                    "minimum": 8
+                  },
+                  {
+                    "timeStamp": "2021-07-30T03:54:00Z",
+                    "total": 48,
+                    "average": 8,
+                    "count": 6,
+                    "maximum": 8,
+                    "minimum": 8
+                  }
+                ]
+              }
+            ],
+            "errorCode": "Success",
+            "errorMessage": null
+          }
+        ],
+        "namespace": "Microsoft.Synapse/workspaces",
+        "resourceregion": "eastus2euap"
+      }
+    }
+  }
+}

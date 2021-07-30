@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "endpoint": "myWorkspace.dev.azuresynapse.net",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+          "resourceGroupName": "myResourceGroup",
+          "workspaceName": "myWorkspace",
+          "sqlPoolName": "myWorkspace-ondemand",
+          "sqlDatabaseName": "myDatabase",
+          "jobName": "myJob",
+          "inputs": [
+            {
+              "name": "eh_in",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/inputs"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "blob_out",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+            }
+          ],
+          "jobStatus": {
+            "status": "Running"
+          },
+          "lastOutputTimeUtc": "2021-07-30T04:19:17.867Z",
+          "outputStartTimeUtc": "2021-07-12T07:04:01.61Z",
+          "query": "\n        INSERT INTO [blob_out]\n        SELECT *\n        FROM [eh_in]",
+          "streamingUnits": 3,
+          "location": "West US",
+          "eventsLateArrivalMaxDelayInSeconds": 5,
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsOutOfOrderPolicy": "Adjust",
+          "outputErrorPolicy": "Retry",
+          "provisioningState": "Succeeded",
+          "logAnalyticsWorkspaceId": "bb047391-fd5f-45f8-bdf4-3291d6d46353",
+          "outputStartMode": "JobStartTime"
+        },
+        "statusCode": 200,
+        "errorMessage": null
+      }
+    }
+  }
+}
