@@ -68,6 +68,11 @@ To see additional help and options, run:
 
 These are the global settings for the API.
 
+``` yaml
+openapi-type: arm
+tag: package-2019-10
+```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -122,15 +127,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js migrate/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -28,7 +28,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "Impersonate your user account"
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
@@ -100,7 +100,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common/v1/definitions.json#/definitions/PrivateEndpointConnection"
             }
           }
         },
@@ -137,7 +137,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common/v1/definitions.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -145,7 +145,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common/v1/definitions.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
@@ -154,7 +154,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -212,19 +212,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      },
-      "description": "Error Response."
-    },
     "PrivateEndpointConnectionListResult": {
       "description": "A list of private endpoint connections",
       "type": "object",
@@ -233,67 +220,8 @@
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../common/v1/definitions.json#/definitions/PrivateEndpointConnection"
           }
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "description": "Private endpoint which the connection belongs to.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "description": "Connection State of the Private Endpoint Connection.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
-          "readOnly": true
         }
       }
     }

@@ -121,7 +121,7 @@
           "PUT"
         ],
         "summary": "Create or update the metadata of an IoT hub.",
-        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.",
+        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to default, which may lead to unexpected behavior. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to default, which may lead to unexpected behavior.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "x-ms-examples": {
           "IotHubResource_CreateOrUpdate": {
@@ -3185,6 +3185,10 @@
         "sku": {
           "description": "IotHub SKU info",
           "$ref": "#/definitions/IotHubSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IotHub.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -4154,6 +4158,44 @@
         }
       }
     },
+    "ArmIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "identityType": {
+          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmUserIdentity"
+          }
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "EncryptionPropertiesDescription": {
       "description": "The encryption properties for the IoT hub.",
       "type": "object",
@@ -4178,6 +4220,20 @@
         "keyIdentifier": {
           "type": "string",
           "description": "The identifier of the key."
+        },
+        "identity": {
+          "description": "The identity.",
+          "$ref": "#/definitions/KEKIdentity"
+        }
+      }
+    },
+    "KEKIdentity": {
+      "description": "The properties of the KeyVault identity.",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity."
         }
       }
     }

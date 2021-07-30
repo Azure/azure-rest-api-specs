@@ -12,9 +12,20 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2020-10-01
   - tag: package-2020-03-01
   - tag: package-2019-11-01
   - tag: package-2019-08
+```
+
+### Tag: package-2020-10-01 and ruby
+
+These settings apply only when `--tag=package-2020-10-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2020-10-01' && $(ruby)
+namespace: "Azure::StorageCache::Mgmt::V2020-10-01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storagecache/lib
 ```
 
 ### Tag: package-2020-03-01 and ruby

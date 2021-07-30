@@ -34,8 +34,9 @@ npm install -g oav
 oav validate-example <swagger-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
+Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
 
 ## Semantic Validation
 Run Semantic Validation locally:
@@ -60,14 +61,21 @@ Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for 
 
 ## Linter Validation
 
-Run linter locally:
-```
-npm install -g autorest
-autorest --validation --azure-validator --input-file=<path-to-spec>
-or
-autorest --validation --azure-validator <path-to-readme>
+### Run linter locally:
 
+#### Prerequisites:
+npm install -g autorest
+
+#### Given a swagger spec, run linter:
 ```
+autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec> 
+```
+#### Given a readme file, run linter:
+```
+autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
+```
+
+### Document
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
@@ -90,6 +98,30 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
+
+## SDK Track2 Validation
+
+This CI check is to run [autorest.modelerfour](https://github.com/Azure/autorest.modelerfour) for each changing tag in a PR.
+Since the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended ensure this validation is passed without any error and warning.
+The `modelerfour` has several plugins. If a plugin report an error, you can refer to the following plugin documentations:
+- [PreChecker](https://github.com/Azure/autorest/blob/master/docs/openapi/prechecker.md)
+
+### Run locally:
+
+#### Prerequisites:
+
+```
+npm install -g autorest
+```
+#### Given a swagger spec, run the validator:
+```
+autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec> 
+```
+#### Given a readme file, run the validator:
+```
+autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
+```
 
 ## Suppression Process
 

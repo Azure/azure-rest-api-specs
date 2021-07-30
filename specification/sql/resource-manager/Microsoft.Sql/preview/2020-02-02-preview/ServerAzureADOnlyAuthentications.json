@@ -25,12 +25,6 @@
         "operationId": "ServerAzureADOnlyAuthentications_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
@@ -49,6 +43,12 @@
               "name": "AuthenticationName",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -75,12 +75,6 @@
         "description": "Sets Server Active Directory only authentication property or updates an existing server Active Directory only authentication property.",
         "operationId": "ServerAzureADOnlyAuthentications_CreateOrUpdate",
         "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
@@ -109,6 +103,12 @@
             "schema": {
               "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
             }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -146,12 +146,6 @@
         "operationId": "ServerAzureADOnlyAuthentications_Delete",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
@@ -170,6 +164,12 @@
               "name": "AuthenticationName",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -203,16 +203,16 @@
         "operationId": "ServerAzureADOnlyAuthentications_ListByServer",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -251,44 +251,12 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
     "ServerAzureADOnlyAuthentication": {
       "description": "Azure Active Directory only authentication.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -324,81 +292,6 @@
       "name": "serverName",
       "in": "path",
       "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ManagedInstanceNameParameter": {
-      "name": "managedInstanceName",
-      "in": "path",
-      "description": "The name of the managed instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DatabaseNameParameter": {
-      "name": "databaseName",
-      "in": "path",
-      "description": "The name of the database.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "BlobAuditingPolicyNameParameter": {
-      "name": "blobAuditingPolicyName",
-      "in": "path",
-      "description": "The name of the blob auditing policy.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineInstanceNameParameter": {
-      "name": "sqlVirtualMachineInstanceName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineInstance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineContainerNameParameter": {
-      "name": "sqlVirtualMachineContainerName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineContainer.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "VirtualClusterNameParameter": {
-      "name": "virtualClusterName",
-      "in": "path",
-      "description": "The name of the virtual cluster.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "description": "The name of the workspace.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlPoolNameParameter": {
-      "name": "sqlPoolName",
-      "in": "path",
-      "description": "The name of the sql pool.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlDatabaseNameParameter": {
-      "name": "sqlDatabaseName",
-      "in": "path",
-      "description": "The name of the sql database.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

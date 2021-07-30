@@ -762,6 +762,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "deprecated": false,
@@ -806,7 +812,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}/listWithSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections/{connectionName}/listWithSecrets": {
       "post": {
         "tags": [
           "BotConnection"
@@ -851,7 +857,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/connections/{connectionName}": {
       "put": {
         "tags": [
           "BotConnection"
@@ -1277,6 +1283,14 @@
         "luisKey": {
           "type": "string",
           "description": "The LUIS Key"
+        },
+        "isCmekEnabled": {
+          "type": "boolean",
+          "description": "Whether Cmek is enabled"
+        },
+        "cmekKeyVaultUrl": {
+          "type": "string",
+          "description": "The CMK Url"
         }
       },
       "description": "The parameters to provide for the Bot.",
@@ -1428,7 +1442,6 @@
       "description": "The parameters to provide for the Facebook channel.",
       "required": [
         "appId",
-        "appSecret",
         "isEnabled"
       ]
     },
@@ -1446,8 +1459,7 @@
       },
       "description": "A Facebook page for Facebook channel registration",
       "required": [
-        "id",
-        "accessToken"
+        "id"
       ]
     },
     "EmailChannel": {
@@ -1484,7 +1496,6 @@
       "description": "The parameters to provide for the Email channel.",
       "required": [
         "emailAddress",
-        "password",
         "isEnabled"
       ]
     },
@@ -1622,7 +1633,6 @@
       "description": "The parameters to provide for the Kik channel.",
       "required": [
         "userName",
-        "apiKey",
         "isEnabled"
       ]
     },
@@ -1724,7 +1734,6 @@
       },
       "description": "The parameters to provide for the Telegram channel.",
       "required": [
-        "accessToken",
         "isEnabled"
       ]
     },
@@ -1772,7 +1781,6 @@
       "required": [
         "phone",
         "accountSID",
-        "authToken",
         "isEnabled"
       ]
     },
@@ -1844,9 +1852,6 @@
       },
       "description": "The parameters to provide for the Slack channel.",
       "required": [
-        "clientId",
-        "clientSecret",
-        "verificationToken",
         "isEnabled"
       ]
     },

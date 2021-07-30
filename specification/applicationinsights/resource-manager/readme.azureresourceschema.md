@@ -6,12 +6,14 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-insights-2020-11-20
+  - tag: schema-insights-2020-10-20
+  - tag: schema-insights-2020-10-05-preview
   - tag: schema-insights-2020-06-02-preview
   - tag: schema-insights-2020-03-01-preview
   - tag: schema-insights-2020-02-10-preview
   - tag: schema-insights-2020-02-02-preview
   - tag: schema-insights-2019-10-17-preview
-  - tag: schema-insights-2019-09-01-preview
   - tag: schema-insights-2018-06-17-preview
   - tag: schema-insights-2018-05-01-preview
   - tag: schema-insights-2017-10-01
@@ -20,6 +22,41 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-insights-2020-11-20 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-11-20' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+
+```
+
+### Tag: schema-insights-2020-10-20 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-10-20' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
+  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
+  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
+
+```
+
+### Tag: schema-insights-2020-10-05-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-10-05-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
+
+```
 
 ### Tag: schema-insights-2020-06-02-preview and azureresourceschema
 
@@ -76,18 +113,6 @@ input-file:
 
 ```
 
-### Tag: schema-insights-2019-09-01-preview and azureresourceschema
-
-``` yaml $(tag) == 'schema-insights-2019-09-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files in this apiVersion
-input-file:
-  - Microsoft.Insights/preview/2019-09-01-preview/QueryPackQueries_API.json
-  - Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
-
-```
-
 ### Tag: schema-insights-2018-06-17-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-insights-2018-06-17-preview' && $(azureresourceschema)
@@ -130,19 +155,19 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
   - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
   - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
   - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
   - Microsoft.Insights/stable/2015-05-01/favorites_API.json
   - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
   - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
-  - Microsoft.Insights/stable/2015-05-01/components_API.json
 
 ```

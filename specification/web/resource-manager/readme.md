@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Web.
 
-
 The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,20 +21,20 @@ To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Web API.
 
 ``` yaml
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2019-08
+tag: package-2021-01-15
 ```
 
 ### Suppression
@@ -55,10 +55,427 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
+### Tag: package-2021-01-15
+
+These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-15'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-01-15/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-15/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-15/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-01-15/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-15/Certificates.json
+  - Microsoft.Web/stable/2021-01-15/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-15/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-15/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-15/Global.json
+  - Microsoft.Web/stable/2021-01-15/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-01-15/Provider.json
+  - Microsoft.Web/stable/2021-01-15/Recommendations.json
+  - Microsoft.Web/stable/2021-01-15/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-15/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-15/StaticSites.json
+  - Microsoft.Web/stable/2021-01-15/WebApps.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-01-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-01-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-01-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-01-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-01-01/AppServicePlans.json
+  - Microsoft.Web/stable/2021-01-01/Certificates.json
+  - Microsoft.Web/stable/2021-01-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-01-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-01-01/Diagnostics.json
+  - Microsoft.Web/stable/2021-01-01/Global.json
+  - Microsoft.Web/stable/2021-01-01/Provider.json
+  - Microsoft.Web/stable/2021-01-01/Recommendations.json
+  - Microsoft.Web/stable/2021-01-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-01/StaticSites.json
+  - Microsoft.Web/stable/2021-01-01/WebApps.json
+  - Microsoft.Web/stable/2021-01-01/KubeEnvironments.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+```
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` or `--tag=package-2020-12-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
+``` yaml $(tag) == 'package-2020-12' || $(tag) == 'package-2020-12-only'
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-12-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-12-01/CertificateOrdersDiagnostics.json
+- Microsoft.CertificateRegistration/stable/2020-12-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-12-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-12-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-12-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-12-01/Certificates.json
+- Microsoft.Web/stable/2020-12-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-12-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-12-01/Diagnostics.json
+- Microsoft.Web/stable/2020-12-01/Global.json
+- Microsoft.Web/stable/2020-12-01/Provider.json
+- Microsoft.Web/stable/2020-12-01/Recommendations.json
+- Microsoft.Web/stable/2020-12-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-12-01/WebApps.json
+- Microsoft.Web/stable/2020-12-01/StaticSites.json
+- Microsoft.Web/stable/2020-12-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-12-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-12-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+```
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` or `--tag=package-2020-10-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
+``` yaml $(tag) == 'package-2020-10' || $(tag) == 'package-2020-10-only'
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-10-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-10-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-10-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-10-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-10-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-10-01/Certificates.json
+- Microsoft.Web/stable/2020-10-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-10-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-10-01/Diagnostics.json
+- Microsoft.Web/stable/2020-10-01/Provider.json
+- Microsoft.Web/stable/2020-10-01/Recommendations.json
+- Microsoft.Web/stable/2020-10-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-10-01/WebApps.json
+- Microsoft.Web/stable/2020-10-01/StaticSites.json
+- Microsoft.Web/stable/2020-10-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-10-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-10-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` or `--tag=package-2020-09-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+
+``` yaml $(tag) == 'package-2020-09' || $(tag) == 'package-2020-09-only'
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-09-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-09-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-09-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-09-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-09-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-09-01/Certificates.json
+- Microsoft.Web/stable/2020-09-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-09-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-09-01/Diagnostics.json
+- Microsoft.Web/stable/2020-09-01/Provider.json
+- Microsoft.Web/stable/2020-09-01/Recommendations.json
+- Microsoft.Web/stable/2020-09-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-09-01/WebApps.json
+- Microsoft.Web/stable/2020-09-01/StaticSites.json
+- Microsoft.Web/stable/2020-09-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-09-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-09-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+  approved-by: "@weidongxu-microsoft"
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+  approved-by: "@mark.cowlishaw"
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+  approved-by: "@mark.cowlishaw"
+```
+
 ### Tag: package-2020-06
+
 These settings apply only when `--tag=package-2020-06` or `--tag=package-2020-06-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
-``` yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only' 
+
+``` yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-06-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2020-06-01/CertificateRegistrationProvider.json
@@ -90,7 +507,7 @@ directive:
 These settings apply only when `--tag=package-2019-08` or `--tag=package-2019-08-only` is specified on the command line.
 NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
 
-``` yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only' 
+``` yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only'
 
 input-file:
 - Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
@@ -987,6 +1404,14 @@ directive:
   approved-by: "@ravbhatnagar"
 ```
 
+### Tag: package-2016-06-01
+
+These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-06-01'
+input-file:
+- Microsoft.Web/stable/2016-06-01/logicAppsManagementClient.json
+```
 
 ### Tag: package-2015-08-preview
 
@@ -1055,8 +1480,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -1066,12 +1491,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    autorest_options:
-      use: "@microsoft.azure/autorest.python@4.0.70"
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-web
-      - python ./scripts/trim_aio.py ./sdk/appservice/azure-mgmt-web
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -1080,111 +1500,19 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js web/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.appservice
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appservice
-directive:
-  from: WebApps.json
-  where: $.definitions.MSDeploy.properties.properties
-  transform: >
-    delete $.$ref;
-    $['allOf'] = [{'$ref':'#/definitions/MSDeployCore'}];
-    return $;
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-08
-  - tag: package-2018-02
-  - tag: package-2016-03-01-web
-  - tag: package-2016-08-01-web
-  - tag: package-2016-09-01-web
-```
-
-### Tag: package-2019-08 and java
-
-These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2019_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-02 and java
-
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2018_02_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-03-01-web and java
-
-These settings apply only when `--tag=package-2016-03-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-03-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-08-01-web and java
-
-These settings apply only when `--tag=package-2016-08-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-08-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_08_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-09-01-web and java
-
-These settings apply only when `--tag=package-2016-09-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-09-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_09_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ### Tag: package-2018-03-01-hybrid
 
@@ -1220,7 +1548,18 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```
 
-## AzureResourceSchema
+### Tag: profile-hybrid-2020-09-01
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
 
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Web/stable/2018-02-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
+```

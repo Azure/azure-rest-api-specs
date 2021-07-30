@@ -3116,6 +3116,12 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "An enum value specifying mode of training.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -7488,7 +7494,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "$ref": "#/parameters/ArmTokenParamter"
+            "$ref": "#/parameters/ArmTokenParameter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7537,7 +7543,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "$ref": "#/parameters/ArmTokenParamter"
+            "$ref": "#/parameters/ArmTokenParameter"
           }
         ],
         "responses": {
@@ -7575,7 +7581,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "$ref": "#/parameters/ArmTokenParamter"
+            "$ref": "#/parameters/ArmTokenParameter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7623,7 +7629,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "$ref": "#/parameters/ArmTokenParamter"
+            "$ref": "#/parameters/ArmTokenParameter"
           }
         ],
         "responses": {
@@ -9752,7 +9758,8 @@
         },
         "ExampleId": {
           "description": "The newly created sample ID.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -10748,7 +10755,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ArmTokenParamter": {
+    "ArmTokenParameter": {
       "in": "header",
       "name": "ArmToken",
       "required": false,

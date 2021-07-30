@@ -26,6 +26,30 @@ These are the global settings for the Peering API.
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
+tag: package-2021-06-01
+```
+or
+
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2021-01-01
+```
+or
+
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2020-10-01
+```
+or
+
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
 tag: package-2020-04-01
 ```
 or
@@ -48,6 +72,32 @@ title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
 tag: package-2019-08-01-preview
+```
+### Tag: package-2021-06-01
+
+These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01'
+input-file:
+- Microsoft.Peering/stable/2021-06-01/peering.json
+```
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.Peering/stable/2021-01-01/peering.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Peering/stable/2020-10-01/peering.json
 ```
 
 ### Tag: package-2020-04-01
@@ -96,7 +146,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
@@ -106,9 +156,11 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_peering']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js peering/resource-manager
 ```
+
+## Python 
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C# 
 
@@ -122,7 +174,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.cli.md](./readme.cli.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -1587,6 +1587,12 @@
               "$ref": "#/definitions/DeploymentResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response describes the create or update Deployment request is accepted.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
           "200": {
             "description": "Success. The response describes the updated Deployment.",
             "schema": {
@@ -2380,11 +2386,13 @@
       "properties": {
         "name": {
           "description": "Name of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "S0"
         },
         "tier": {
           "description": "Tier of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "Standard"
         },
         "capacity": {
           "format": "int32",
@@ -2462,23 +2470,43 @@
       "properties": {
         "serviceRuntimeSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceCidr": {
           "description": "Azure Spring Cloud service reserved CIDR",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceRuntimeNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "outboundIPs": {
           "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
@@ -2493,6 +2521,60 @@
               },
               "description": "A list of public IP addresses."
             }
+          }
+        },
+        "requiredTraffics": {
+          "description": "Required inbound or outbound traffics for Azure Spring Cloud instance.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RequiredTraffic"
+          }
+        }
+      }
+    },
+    "RequiredTraffic": {
+      "description": "Required inbound or outbound traffic for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol of required traffic",
+          "type": "string",
+          "readOnly": true
+        },
+        "port": {
+          "description": "The port of required traffic",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "ips": {
+          "description": "The ip list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "description": "The FQDN list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "description": "The direction of required traffic",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "trafficDirection",
+            "modelAsString": true
           }
         }
       }
@@ -2740,7 +2822,8 @@
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -2755,11 +2838,16 @@
         },
         "fqdn": {
           "description": "Fully qualified dns Name.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "createdTime": {
           "format": "date-time",
@@ -2790,7 +2878,8 @@
         },
         "mountPath": {
           "description": "Mount path of the temporary disk",
-          "type": "string"
+          "type": "string",
+          "default": "/tmp"
         }
       }
     },
@@ -3156,6 +3245,10 @@
           "$ref": "#/definitions/DeploymentResourceProperties",
           "description": "Properties of the Deployment resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Deployment resource"
         }
       }
     },
@@ -3182,7 +3275,8 @@
             "Creating",
             "Updating",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -3301,6 +3395,7 @@
         },
         "runtimeVersion": {
           "description": "Runtime version",
+          "default": "Java_8",
           "enum": [
             "Java_8",
             "Java_11",
@@ -3579,6 +3674,10 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
         }
       }
     },

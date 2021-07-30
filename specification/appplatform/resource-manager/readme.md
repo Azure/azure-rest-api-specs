@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07
+tag: package-preview-2021-06
 ```
 
 ### Suppression
@@ -44,20 +44,38 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
-    #where: 
+    #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 
 
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.AppPlatform/preview/2021-06-01-preview/appplatform.json
+```
+### Tag: package-preview-2020-11
+
+These settings apply only when `--tag=package-preview-2020-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-11'
+input-file:
+  - Microsoft.AppPlatform/preview/2020-11-01-preview/appplatform.json
+```
+
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07'
+``` yaml $(tag) == 'package-2020-07'
 input-file:
   - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
 ```
+
 ### Tag: package-2019-05-01-preview
 
 These settings apply only when `--tag=package-2019-05-01-preview` is specified on the command line.
@@ -78,9 +96,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-appplatform
+  - repo: azure-powershell
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
@@ -90,13 +107,15 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_appplatform']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js appplatform/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -116,8 +135,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/appplatform/Microsoft.Azure.Management.AppPlatform/src/Generated
   clear-output-folder: true
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

@@ -838,7 +838,8 @@
             "required": false,
             "type": "integer",
             "minimum": 1,
-            "maximum": 1000
+            "maximum": 1000,
+            "format": "int32"
           }
         ],
         "responses": {
@@ -917,7 +918,8 @@
             "required": false,
             "type": "integer",
             "minimum": 1,
-            "maximum": 1000
+            "maximum": 1000,
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2157,7 +2159,8 @@
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataset"
       ]
     },
     "ForecastDataset": {
@@ -2237,7 +2240,8 @@
       },
       "required": [
         "type",
-        "timeframe"
+        "timeframe",
+        "dataset"
       ]
     },
     "QueryTimePeriod": {
@@ -2296,7 +2300,7 @@
         },
         "filter": {
           "type": "object",
-          "description": "Has filter expression to use in the query.",
+          "description": "The filter expression to use in the query. Please reference our Query API REST documentation for how to properly format the filter.",
           "$ref": "#/definitions/QueryFilter"
         }
       }
@@ -2413,7 +2417,7 @@
             "In"
           ],
           "x-ms-enum": {
-            "name": "OperatorType",
+            "name": "QueryOperatorType",
             "modelAsString": true
           }
         },

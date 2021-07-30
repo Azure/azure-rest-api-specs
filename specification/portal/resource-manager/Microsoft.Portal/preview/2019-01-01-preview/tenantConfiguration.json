@@ -81,6 +81,9 @@
               "$ref": "#/definitions/Configuration"
             }
           },
+          "404": {
+            "description": "Not found. Tenant configuration wasn't created yet."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -205,7 +208,7 @@
           "items": {
             "$ref": "#/definitions/Configuration"
           },
-          "description": "The array of custom resource provider manifests."
+          "description": "The array of tenant configurations."
         },
         "nextLink": {
           "type": "string",

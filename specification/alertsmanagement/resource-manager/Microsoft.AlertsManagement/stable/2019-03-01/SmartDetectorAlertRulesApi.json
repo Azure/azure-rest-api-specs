@@ -214,6 +214,55 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_Patch",
+        "description": "Patch a specific Smart Detector alert rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters supplied to the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRulePatchObject"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to patch Smart Detector alert rule.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch alert rules": {
+            "$ref": "./examples/SmartDetectorAlertRule_Patch.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "SmartDetectorAlertRules"
@@ -357,6 +406,36 @@
         }
       }
     },
+    "AlertRulePatchObject": {
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource name."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRulePatchProperties",
+          "description": "The properties of the alert rule.",
+          "minProperties": 1
+        }
+      },
+      "description": "The alert rule patch information"
+    },
     "Detector": {
       "properties": {
         "id": {
@@ -464,6 +543,55 @@
         "scope",
         "actionGroups"
       ],
+      "description": "The alert rule properties."
+    },
+    "AlertRulePatchProperties": {
+      "properties": {
+        "description": {
+          "description": "The alert rule description.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The alert rule state.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertRuleState",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "The alert rule severity.",
+          "type": "string",
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3",
+            "Sev4"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "frequency": {
+          "description": "The alert rule frequency in ISO8601 format. The time granularity must be in minutes and minimum value is 5 minutes.",
+          "type": "string",
+          "format": "duration"
+        },
+        "actionGroups": {
+          "description": "The alert rule actions.",
+          "$ref": "#/definitions/ActionGroupsInformation"
+        },
+        "throttling": {
+          "description": "The alert rule throttling information.",
+          "$ref": "#/definitions/ThrottlingInformation"
+        }
+      },
       "description": "The alert rule properties."
     }
   },

@@ -57,6 +57,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStack/registrations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all registrations under current subscription.": {
+            "$ref": "examples/Registration/ListBySubscription.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Returns a list of all registrations under current subscription.",
+        "operationId": "Registrations_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistrationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}": {
       "get": {
         "x-ms-examples": {
@@ -178,6 +217,12 @@
             "schema": {
               "$ref": "#/definitions/Registration"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -256,6 +301,48 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ActivationKeyResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/enableRemoteManagement": {
+      "post": {
+        "x-ms-examples": {
+          "Returns empty response for successful action..": {
+            "$ref": "examples/RemoteManagement/Post.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Enables remote management for device under the Azure Stack registration.",
+        "operationId": "Registrations_EnableRemoteManagement",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
             }
           }
         }

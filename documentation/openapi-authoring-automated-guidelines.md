@@ -1,6 +1,6 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/blob/master/tools/tools.md). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/azure-openapi-validator#how-to-run-locally). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
@@ -20,7 +20,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
-- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
+- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) must be followed.
 
 - Rules with severity "Warning" are either strong recommendations made by Azure developer experience team for better SDK/Documentation experience or they point out something to evaluate, for example, the warning for booleans asks the user to evaluate whether the property should be a boolean or not. 
 
@@ -46,8 +46,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3030](#R3030) | [PathResourceProviderMatchNamespace](#R3030) | ARM OpenAPI(swagger) specs |
 | [R2016](#r2016) | [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2062](#r2062) | [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs |
-| [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
-| [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
 | [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs |
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
@@ -61,6 +59,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
+| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -70,8 +69,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3017](#r3017) | [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
+| [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
+| [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
-| [R4009](#r4009) | [RequiredSystemDataInNewApiVersions](#r4009) | ARM OpenAPI(swagger) specs |
 | [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 ### SDK Violations
 
@@ -109,7 +109,14 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
 | [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs |
 | [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
-
+| [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM OpenAPI(swagger) specs |
+| [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs |
+| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs |
+| [R4033](#r4033) | [UniqueModelName](#r4033) | ARM OpenAPI(swagger) specs |
+| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs |
+| [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs |
+| [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs |
+| [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs |
 #### SDK Warnings
 
 | Id | Rule Name | Applies to |
@@ -141,6 +148,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
+| [R4030](#r4030) | [UniqueXmsExample](#r4030) | ARM OpenAPI(swagger) specs |
 
 
 ### RPaaS Violations
@@ -150,7 +158,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
 | [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
-
+| [R4025](#r4025) | [RPaasDeleteLongRunningOperation202Only](#r4025) | ARM OpenAPI(swagger) specs |
+| [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs |
+| [R4031](#r4031) | [RPaasResourceProvisioningState](#r4031) | ARM OpenAPI(swagger) specs |
 ### Documentation
 
 #### Documentation Errors
@@ -227,15 +237,19 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 * fooBarBaz
 * resourceKey
 * resourceApiKey
+* publicIPAddress
+* enableSsl
 
 **Bad Examples**: The following would be invalid:
 * PascalCase
 * UpperCamelCase
 * resourceAPIKey
+* enableSSL
 
 **Bad Examples**: The following violate these guidelines but would not be caught by automation: 
 * alllowercase - If there are multiple words, please capitalize starting with the second word
 * miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
+* resourceAPIkey - Automation would incorrectly recognize "Ikey" as a word and not flag the property name
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -282,7 +296,7 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="r3027" />R3027 TrackedResourceListByResourceGroup
-**Category** : ARM Error
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -303,7 +317,7 @@ If the resource pointed by the rule is not a tracked resource or the operation t
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="r3028" />R3028 TrackedResourceListBySubscription
-**Category** : ARM Error
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
@@ -1585,7 +1599,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
-**Description**: The allowed response status codes for a long DELETE operation are "200", "204". The allowed response status codes for a POST operation are "200", "201" & "204". The allowed response status codes for a PUT operation are  "200" & "201".
+**Description**: For ARM spec, the allowed response status codes for a long DELETE operation are "200" & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200" & "201".
+                 For Data plane spec, the allowed response status codes for a long DELETE operation are "200","202", & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200","201", & "202".
 
 **Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
 
@@ -1897,7 +1912,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 In case of LRO Post operation with return schema, it MAY be ambiguous for the SDK to understand automatically what the return schema is modeling. To avoid any confusion that would lead SDK to incorrectly instantiate the return type, service team needs to explain if the return schema is modeling a result from a "Location" header, or from an "Azure-AsyncOperation" header.
 
-More details on LRO operation could be found [here](https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md)
+More details on LRO operation could be found [here](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation)
 
 **How to fix the violation**: For a Post LRO operation, add "x-ms-long-running-operation-options" extension with "final-state-via" property.
 ``` json
@@ -2264,11 +2279,16 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
-**Description** : Must not have duplicate name in x-ms-enum extension.
+**Description** : This rule will check all the swagger files with the same api-version, and ensure there is no duplicate x-ms-enum name. 
+The following cases are deemed as violation:
+1. if two enums have the same x-ms-enum name , but types are different.
+2. if two enums have the same x-ms-enum name , but 'modelAsString' are different.
+3. if two enums have the same x-ms-enum name , but include different values.
+4. if two enums have the same x-ms-enum name and 'modelAsString' is false , but enums' values have different order.
 
 **CreatedAt**: March 18, 2020
 
-**LastModifiedAt**: March 18, 2020
+**LastModifiedAt**: January 14, 2021
 
 **How to fix the violation**: Update the duplicate x-ms-enum name :
 
@@ -2349,35 +2369,55 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **LastModifiedAt**: April 2, 2020
 
 **How to fix the violation**: Following the ARM specification to modify the schema in the swagger file.
+It's recommended to refer to the 'ErrorResponse' in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json#L273) which is provided for fixing the error.
 
 The following would be invalid:
 
 ```json
- "response":{
-   "default": {
-     "schema":{
-         "error":"error msg",
-         "code": 404,
-         "message":"some details"
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+       "code": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error code."
+       },
+       "message": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error message."
+       }
+       ...
      }
   }
- }
-
+}
 ```
 
 the correct schema:
 
 ```json
- "response":{
-   "default": {
-     "error":
-     {
-        "code": 404,
-        "message":"some details"
-         ...
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+            ...
+        }
      }
   }
- }
+}
 
 ```
 
@@ -2413,25 +2453,39 @@ The following would be invalid:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4009" ></a>R4009 RequiredSystemDataInNewApiVersion
+### <a name="r4009" ></a>R4009 RequiredReadOnlySystemData
 
-**Category** : ARM Warning
+**Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The response of operation '{operation name }' is defined without 'systemData'. Consider adding the systemData to the response.
+**Output Message** : 
+1. if missing the systemData , output:
+The response of operation '{operationId}' is defined without 'systemData'. Consider adding the systemData to the response.
 
-**Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 consider as a new API version.
+2. if the systemData is not read only, output:
+The property systemData in the response of operation:'${operationId}' is not read only. Please add the readonly for the systemData.
+
+**Description** : Per [common-api-contracts](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources), all Azure resources should implement the `systemData` object property in new api-version. The systemData should be readonly.
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 21, 2020
+**LastModifiedAt**: February 26, 2021
 
-**How to fix the violation**: For each response in the GET/PUT/PATCH operation add the systemData object:
+**How to fix the violation**: For each response in the GET/PUT/PATCH operation add a readonly systemData property. 
+It's recommended to refer to the 'systemData' defined in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/7dddc4bf1e402b6e6737c132ecf05b74e2b53b08/specification/common-types/resource-management/v2/types.json#L445) which is provided for fixing the error.
 ``` json
- "systemData": {
-    "$ref": "#/definitions/SystemData"
+"MyResource": {
+  "properties": {
+    ...
+    ...
+    "systemData": {
+      "$ref": "v2/types.json#/definitions/systemData",
+       "readOnly" : true
+    }
   }
+}
+
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
@@ -2758,7 +2812,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
-**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` and `display.resource`,must be included.
 
 **CreatedAt**: July 13, 2020
 
@@ -2909,13 +2963,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : [RPaaS] Only 201 is the supported response code for PUT async response
 
-**Description** : An async PUT operation response include status code 201 with Azure-async-operation header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to describe how the long running operation is tracked.
+**Description** : An async PUT operation response include status code 201 with 'Azure-async-operation' header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 201) and how it is tracked (Azure-async-operation header).
 
 **CreatedAt**: August 10, 2020
 
 **LastModifiedAt**: August 10, 2020
 
-**Why this rule is important**: RPaaS only supports 201 for async operations. This is enforced at runtime via swagger validation.
+**Why this rule is important**: RPaaS only supports 201 for async PUT operations. This is enforced at runtime via swagger validation.
 
 **How to fix the violation**: Add the following for async PUT operations.
 
@@ -2949,7 +3003,7 @@ The following would be valid:
   }
 ...
 ```
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or[Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="r4024" ></a>R4024 PreviewVersionOverOneYear
 
@@ -2970,3 +3024,491 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
    
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
+### <a name="r4025"></a>R4025 RPaasDeleteLongRunningOperation202Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] DELETE async supports
+
+**Description** : An async DELETE operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Must support 204 (resource doesn't exists). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
+
+**CreatedAt**: November 12, 2020
+
+**LastModifiedAt**: November 12, 2020
+
+**Why this rule is important**: RPaaS only supports 202 for async DELETE operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async DELETE operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "202": {
+        "description": "Delete operation accepted",
+      },
+      "200": {
+        "description": "Delete operation succeeded"
+      },
+      "204": {
+        "description": "Resource doesn't exist. Delete operation completed."
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "location"
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4026"></a>R4026 RPaasPostLongRunningOperation202Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] POST async supports
+
+**Description** : An async POST operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
+
+**CreatedAt**: November 12, 2020
+
+**LastModifiedAt**: November 12, 2020
+
+**Why this rule is important**: RPaaS only supports 202 for async POST operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async POST operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "202": {
+        "description": "Operation accepted",
+      },
+      "200": {
+        "description": "Operation completed"
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "location"
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4028" ></a>R4028 ValidResponseCodeRequired
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  There is no declared valid status code.
+
+**Description** : Every operation response must contain a valid code like "200","201","202" or "204" which indicates the operation is succeed and it's not allowed that a response schema just contains a "default" code. 
+
+**Why this rule is important**: If a Swagger just contains "default" status code, this actually means "everything is an error". All track2 SDK will systematically raise an exception at runtime, if there is no declared valid status code.
+
+**CreatedAt**: November 23, 2020
+
+**LastModifiedAt**: November 23, 2020
+
+**How to fix the violation**: Add a valid response code .
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "200": {
+        "description": "Succeeded",
+        "schema": {
+          "$ref": "#/definitions/MySimpleResource"
+        }
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    }
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4029" ></a>R4029 UniqueClientParameterName
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  Do not have duplicate name of client parameter name, make sure every client parameter name unique.
+
+**Description** : This may cause a problem when different swagger files come together. If two APIs with different client name have the same client parameter subscriptionId, but with different reference name in swaggers, the generated model will also have two clients with two client parameters subscriptionId and subscriptionId1 (the latter one has been renamed to avoid collision). We should ensure that the client parameters are all unique in the same API version.
+
+**Why this rule is important**: Make sure no conflict in SDK generation.
+
+**CreatedAt**: November 30, 2020
+
+**LastModifiedAt**: November 30, 2020
+
+**How to fix the violation**: Remove duplicate client parameter, ref to the same one.
+The following would be valid:
+
+```json
+...
+ "/api": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            // ref to the same subcriptionId
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+        ],
+     },
+     "patch": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+     ]
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4030" ></a>R4030 UniqueXmsExample
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  Do not have duplicate name of x-ms-example, make sure every x-ms-example name unique. Duplicate x-ms-example: {ExampleName}
+
+**Description** : x-ms-example name should be unique in the same API version.
+
+**Why this rule is important**: Duplicate example name will bring trouble for test codegen. For example: hard to config used example.
+
+**CreatedAt**: November 30, 2020
+
+**LastModifiedAt**: November 30, 2020
+
+**How to fix the violation**: Rename duplicate x-ms-example name
+The following would be valid:
+
+```json
+...
+"x-ms-examples": {
+          "Create resource": {
+            "$ref": "./examples/createResource"
+          },
+          "Update resource":{
+            "$ref": "./examples/updateResource"
+          }
+          
+        }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4031"></a>R4031 RPaasResourceProvisioningState
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] The resource {0} is defined without 'provisioningState' in properties bag, consider adding the provisioningState for it.
+
+**Description** : Verifies if a Azure resource has a corresponding 'provisioningState' property. If the 'provisioningState' is not defining explicitly , the client will drop the state when the service does return it. 
+
+**CreatedAt**: January 15, 2021
+
+**LastModifiedAt**: January 15, 2021
+
+**Why this rule is important**: Per [Azure RPC](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property), all Azure resources must support "provisioningState" property. 
+
+**How to fix the violation**: Add the 'provisioningState' for every Azure resource.
+
+The following would be valid:
+
+```json
+...
+resourceDefinition": {
+  "description": "resource definition",
+  "type": "object",
+  "properties": {
+    "properties": {
+    "type": "object",
+      "properties" :{
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+        ...
+      }
+    }
+  }
+}
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4032"></a>R4032 MissingXmsErrorResponse
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response code {0} is defined without a x-ms-error-response.
+
+**Description** :  If defines response code 4xx or 5xx ,  x-ms-error-response:true is required. There is one exception: a HEAD operation with 404 SHOULD have x-ms-error-response:false, as it is often used to check for existence of resources, the HEAD with 404 means the resource doesn’t exist.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: As some SDK may treat the 4xx or 5xx as exceptional code, if don't specified x-ms-error-response:true, the SDK will not handle the error schema correctly instead it will throw an exception.
+
+**How to fix the violation**: Add the x-ms-error-response:true for the error response code or remove it.
+
+The following would be valid:
+
+```json
+ "responses": {
+    "400": {
+      "description": "Bad Request",
+      "x-ms-error-response": true
+    }
+ }
+```
+The following would be invalid:
+
+```json
+ "responses": {
+    "400": {
+      "description": "Bad Request",
+    }
+ }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4033"></a>R4033 UniqueModelName
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The model name {0} is duplicated with {1} .
+
+**Description** :  Do not rely on case sensitivity to differentiate models.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: In Python SDK, model names are converted to forms starting with capital. So all of "AAAA", "aaaa", "Aaaa" will be transformed to "Aaaa". So differentiating model names by their case sensitivities would break Python SDK generation.
+
+**How to fix the violation**: Rename the duplicate name .
+
+The following would be invalid:
+
+```json
+"definitions": {
+  "SKU": {
+    "type": "string",
+    "description": "SKU in request"
+  },
+  "sku": {
+    "type": "string",
+    "description": "SKU in response"
+  }
+}
+```
+
+The following would be valid:
+
+```json
+"definitions": {
+  "requestSKU": {
+    "type": "string",
+    "description": "SKU in request"
+  },
+  "responseSKU": {
+    "type": "string",
+    "description": "SKU in response"
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4034"></a>R4034 AzureResourceTagsSchemaValidation
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The property tags in the resource "{0}" does not conform to the common type definition.
+
+**Description** :  This rule is to check if the tags definition of a resource conforms to the common tags definition.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: It will block the SDK generation for Terraform, as it's only accepted that the Golang type for tags is map[string]*string .
+
+**How to fix the violation**: Please reference to the common tags definition in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/0e18f46fd2c210f85b5ec0f9dd9be664242bee82/specification/common-types/resource-management/v2/types.json#L146).
+
+The following would be invalid:
+
+```json
+"tags": {
+  "type": "object",
+  "description": "Resource Tags"
+}
+```
+
+The following would be valid:
+
+```json
+"tags": {
+  "type": "object",
+  "additionalProperties": {
+    "type": "string"
+  },
+  "x-ms-mutability": [
+    "read",
+    "create",
+    "update"
+  ],
+  "description": "Resource Tags"
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4035"></a>R4035 PrivateEndpointResourceSchemaValidation
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The private endpoint model "{0}" schema does not conform to the common type definition.
+
+**Description** :  This rule is to check if the schemas used by private endpoint conform to the common [privateLink](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/privatelinks.json). The rule will check the schemas of following models and their properties:
+1. PrivateEndpointConnection
+2. PrivateEndpointConnectionProperties
+3. PrivateEndpointConnectionListResult
+4. PrivateLinkResource
+5. PrivateLinkResourceProperties
+6. PrivateLinkResourceListResult
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: The schemas used by private endpoint should have same definition. 
+
+**How to fix the violation**: Please reference to the common private endpoint definition in [privateLink](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/privatelinks.json).
+
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings) 
+
+### <a name="r4036"></a>R4036 ImplementPrivateEndpointAPIs
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The private endpoint API: {apiPath} is missing.
+
+**Description** :  This rule is to check if all the APIs for private endpoint are implemented. Per design spec, for supporting private endpoint, the service should implement the following APIs:
+
+PUT/DELETE/GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.[Service]/{resourceType}/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}?api-version=[version]
+ 
+GET https://management.azure.com/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.[Service]/[resources]/{resourceName}/privateEndpointConnections?api-version=[version]
+ 
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.[Service]/[resources]/[resourceName]/privateLinkResources?api-version=[version]
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: To meet the private endpoint design.
+
+**How to fix the violation**: Please add the missing private endpoint API path and operation to the swagger.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r4037"></a>R4037 MissingTypeObject
+
+**Category** : SDK Error
+
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**Output Message** : The schema '{json path}' is considered an object but without a 'type:object', please add the missing 'type:object'.
+
+**Description**: The rule should apply to any schema with "properties" or "additionalProperties". It is to ensure a schema with "properties" or "additionalProperties" must have explicit "type:object" statement, which means a schema is an object. 
+
+**CreatedAt**: May 24, 2021
+
+**LastModifiedAt**: May 24, 2021
+
+**Why this rule is important**: The semantics of with and without "type:object" are different. With “type:object” means “it has to be an object”. Without “type: object” means “it could be any type”. Azure SDK Track 2 generator will honor the difference, and generate different SDK codes.
+A free-form object would like:
+
+**How to fix the violation**:
+Just add the missing 'type:object'.
+
+The following would be valid:
+
+```json
+ "foo": {
+    "type":"object",
+    "properties": {
+      "a" : {
+        "type":"string"
+      }
+      ...
+    }
+ }
+```
+The following would be invalid by default (unless you do it on purpose , then a suppression is required):
+
+```json
+ "foo": {
+    "properties": {
+      "a" : {
+        "type":"string"
+      }
+      ...
+    }
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

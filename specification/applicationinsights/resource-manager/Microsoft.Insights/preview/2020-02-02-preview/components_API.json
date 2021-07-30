@@ -52,6 +52,12 @@
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -84,6 +90,12 @@
             "description": "A list containing 0 or more Application Insights component definitions.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -121,6 +133,12 @@
           },
           "204": {
             "description": "The specified component does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -151,6 +169,12 @@
             "description": "An Application Insights Component definition.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -191,6 +215,12 @@
             "description": "Successful request when creating or updating an Application Insights component. The updated component is returned.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -235,6 +265,12 @@
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -271,6 +307,12 @@
             "schema": {
               "$ref": "#/definitions/ComponentPurgeResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -306,6 +348,12 @@
             "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
             "schema": {
               "$ref": "#/definitions/ComponentPurgeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,6 +421,10 @@
           "type": "string",
           "description": "The kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone."
         },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties that define an Application Insights component resource.",
@@ -401,6 +453,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Application Insights Unique ID for your Application."
+        },
+        "Name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application name."
         },
         "Application_Type": {
           "type": "string",
@@ -507,7 +564,7 @@
         },
         "WorkspaceResourceId": {
           "type": "string",
-          "description": "ResourceId of the log analytics workspace which the data will be ingested to."
+          "description": "Resource Id of the log analytics workspace which the data will be ingested to. This property is required to create an application with this API version. Applications from older versions will not have this property."
         },
         "LaMigrationDate": {
           "type": "string",
@@ -544,11 +601,18 @@
             "name": "IngestionMode",
             "modelAsString": true
           }
+        },
+        "DisableLocalAuth": {
+          "type": "boolean",
+          "description": "Disable Non-AAD based Auth."
+        },
+        "ForceCustomerStorageForProfiler": {
+          "type": "boolean",
+          "description": "Force users to create their own storage account for profiler and debugger."
         }
       },
       "required": [
-        "Application_Type",
-        "WorkspaceResourceId"
+        "Application_Type"
       ]
     },
     "PrivateLinkScopedResource": {

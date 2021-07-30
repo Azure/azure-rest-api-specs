@@ -26,7 +26,34 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04
+tag: package-2021-05
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+- Microsoft.DataBox/stable/2021-05-01/databox.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+- Microsoft.DataBox/stable/2021-03-01/databox.json
+```
+
+### Tag: package-2020-11
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11'
+input-file:
+- Microsoft.DataBox/stable/2020-11-01/databox.json
 ```
 
 ### Tag: package-2020-04
@@ -68,9 +95,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-databox
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-go
@@ -80,8 +105,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js databox/resource-manager
 ```
 
 ## C#
@@ -97,6 +120,12 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
   clear-output-folder: true
+  
+directive:
+- from: swagger-document
+  where: $.definitions.ShippingAddress
+  transform: >
+    $.required = [ "streetAddress1", "country", "postalCode" ];
 ```
 
 ## Python
@@ -113,67 +142,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.databox
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
-```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-01
-  - tag: package-2019-09
-  - tag: package-2020-04
-```
-
-### Tag: package-2018-01 and java
-
-These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databox.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2018_01_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-09 and java
-
-These settings apply only when `--tag=package-2019-09-java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databox.v2019_09-01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2019_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2020-04 and java
-
-These settings apply only when `--tag=package-2020-04-java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2020-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databox.v2020_04-01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2020_04_01
-regenerate-manager: true
-generate-interface: true
-```
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

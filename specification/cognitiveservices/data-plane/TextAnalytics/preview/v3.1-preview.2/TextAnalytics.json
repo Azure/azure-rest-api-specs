@@ -975,14 +975,18 @@
       "type": "object",
       "required": [
         "id",
+        "redactedText",
         "entities",
-        "warnings",
-        "redactedText"
+        "warnings"
       ],
       "properties": {
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
         },
         "entities": {
           "type": "array",
@@ -1001,10 +1005,6 @@
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
         }
       }
     },

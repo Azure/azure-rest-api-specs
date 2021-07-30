@@ -1772,6 +1772,10 @@
         "sku": {
           "description": "Sku info for a provisioning Service.",
           "$ref": "#/definitions/IotDpsSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IotDps instance.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -1920,20 +1924,67 @@
         "location"
       ]
     },
+    "ArmIdentity": {
+      "type": "object",
+      "description": "The set of ARM identities associated with the IoT DPS resource.",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "identityType": {
+          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned.",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of UserAssigned identities associated with the IoT DPS resource.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmUserIdentity"
+          }
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "description": "The ARM UserAssigned identity information",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "EncryptionPropertiesDescription": {
-      "description": "The encryption properties for the IoT DPS instance.",
+      "description": "The customer-managed encryption key (CMK) properties for the IoT DPS instance.",
       "type": "object",
       "properties": {
         "keySource": {
-          "description": "The source of the key.",
+          "description": "The source of the encryption key. Typically, Microsoft.KeyVault",
           "type": "string"
         },
         "keyVaultProperties": {
-          "description": "The properties of the KeyVault key.",
+          "description": "The properties of the encryption key configured in KeyVault.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyVaultKeyProperties"
           }
+        },
+        "identity": {
+          "description": "The identity used to access the encryption key in KeyVault.",
+          "$ref": "#/definitions/EncryptionKeyIdentity"
         }
       }
     },
@@ -1944,6 +1995,16 @@
         "keyIdentifier": {
           "type": "string",
           "description": "The identifier of the key."
+        }
+      }
+    },
+    "EncryptionKeyIdentity": {
+      "description": "The properties of the identity used to access the key encryption key in KeyVault.",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity."
         }
       }
     },

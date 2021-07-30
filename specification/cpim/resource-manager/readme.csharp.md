@@ -1,15 +1,8 @@
-## C
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-```yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AzureActiveDirectory
-  output-folder: $(csharp-sdks-folder)/cpim/management/Microsoft.AzureActiveDirectory/GeneratedProtocol
-```
+  namespace: Microsoft.AzureADB2C
+  output-folder: $(csharp-sdks-folder)/azureadb2c/management/Microsoft.AzureADB2C/GeneratedProtocol

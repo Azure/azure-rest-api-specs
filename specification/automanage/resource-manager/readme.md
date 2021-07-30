@@ -18,6 +18,8 @@ To see additional help and options, run:
 
 ---
 
+## Configuration
+
 ### Basic Information
 
 These are the global settings for the Automanage API.
@@ -60,7 +62,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -69,6 +70,10 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_automanage']
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C#
 

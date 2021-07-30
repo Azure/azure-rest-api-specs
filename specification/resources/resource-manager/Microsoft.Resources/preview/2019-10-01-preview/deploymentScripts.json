@@ -601,12 +601,13 @@
         "retentionInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P7D means one week)."
+          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P1D means one day)."
         },
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "Maximum allowed script execution time specified in ISO 8601 format. Default value is PT1H"
+          "default": "P1D",
+          "description": "Maximum allowed script execution time specified in ISO 8601 format. Default value is P1D"
         }
       }
     },
@@ -633,6 +634,7 @@
             "OnSuccess",
             "OnExpiration"
           ],
+          "default": "Always",
           "x-ms-enum": {
             "name": "cleanupOptions",
             "modelAsString": true
@@ -752,6 +754,11 @@
             "modelAsString": true
           }
         },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the Azure Active Directory."
+        },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
@@ -767,10 +774,12 @@
       "description": "User-assigned managed identity.",
       "properties": {
         "principalId": {
+          "readOnly": true,
           "type": "string",
           "description": "Azure Active Directory principal ID associated with this identity."
         },
         "clientId": {
+          "readOnly": true,
           "type": "string",
           "description": "Client App Id associated with this identity."
         }

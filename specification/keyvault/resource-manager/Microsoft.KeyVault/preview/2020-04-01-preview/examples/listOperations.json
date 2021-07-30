@@ -13,7 +13,8 @@
               "resource": "Key Vault",
               "operation": "View Key Vault",
               "description": "View the properties of a key vault"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/write",
@@ -22,7 +23,8 @@
               "resource": "Key Vault",
               "operation": "Update Key Vault",
               "description": "Create a new key vault or update the properties of an existing key vault"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/delete",
@@ -31,7 +33,8 @@
               "resource": "Key Vault",
               "operation": "Delete Key Vault",
               "description": "Delete a key vault"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/deploy/action",
@@ -40,7 +43,8 @@
               "resource": "Key Vault",
               "operation": "Use Vault for Azure Deployments",
               "description": "Enables access to secrets in a key vault when deploying Azure resources"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/secrets/read",
@@ -49,7 +53,8 @@
               "resource": "Secret",
               "operation": "View Secret Properties",
               "description": "View the properties of a secret, but not its value"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/secrets/write",
@@ -58,7 +63,8 @@
               "resource": "Secret",
               "operation": "Update Secret",
               "description": "Create a new secret or update the value of an existing secret"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/vaults/accessPolicies/write",
@@ -67,7 +73,8 @@
               "resource": "Access Policy",
               "operation": "Update Access Policy",
               "description": "Update an existing access policy by merging or replacing, or add a new access policy to a vault."
-            }
+            },
+            "isDataAction": false
           },
           {
             "origin": "system",
@@ -78,6 +85,7 @@
               "operation": "Read log definition",
               "description": "Gets the available logs for a key vault"
             },
+            "isDataAction": false,
             "properties": {
               "serviceSpecification": {
                 "logSpecifications": [
@@ -85,6 +93,36 @@
                     "name": "AuditEvent",
                     "displayName": "Audit Logs",
                     "blobDuration": "PT1H"
+                  }
+                ],
+                "metricSpecifications": [
+                  {
+                    "name": "ServiceApiHit",
+                    "displayName": "",
+                    "displayDescription": "",
+                    "unit": "",
+                    "aggregationType": "",
+                    "supportedAggregationTypes": [
+                      ""
+                    ],
+                    "supportedTimeGrainTypes": [
+                      ""
+                    ],
+                    "lockAggregationType": "",
+                    "dimensions": [
+                      {
+                        "name": "ActivityType",
+                        "displayName": "",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ActivityName",
+                        "displayName": "",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "fillGapWithZero": false,
+                    "internalMetricName": "AuditEvent"
                   }
                 ]
               }
@@ -98,7 +136,8 @@
               "resource": "Key Vault Diagnostic Settings",
               "operation": "Read diagnostic setting",
               "description": "Gets the diagnostic setting for the resource"
-            }
+            },
+            "isDataAction": false
           },
           {
             "origin": "system",
@@ -108,7 +147,8 @@
               "resource": "Key Vault Diagnostic Settings",
               "operation": "Write diagnostic setting",
               "description": "Creates or updates the diagnostic setting for the resource"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/register/action",
@@ -117,7 +157,8 @@
               "resource": "Subscription",
               "operation": "Register Subscription",
               "description": "Registers a subscription"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/unregister/action",
@@ -126,7 +167,8 @@
               "resource": "Subscription",
               "operation": "Unregister Subscription",
               "description": "Unregisters a subscription"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/operations/read",
@@ -135,7 +177,8 @@
               "resource": "Operations",
               "operation": "Available Key Vault Operations",
               "description": "Lists operations available on Microsoft.KeyVault resource provider"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/checkNameAvailability/read",
@@ -144,7 +187,8 @@
               "resource": "Name Availability",
               "operation": "Check Name Availability",
               "description": "Checks that a key vault name is valid and is not in use"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/deletedVaults/read",
@@ -153,7 +197,8 @@
               "resource": "Soft Deleted Key Vault",
               "operation": "View Soft Deleted Vaults",
               "description": "View the properties of soft deleted key vaults"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/deletedVaults/read",
@@ -162,7 +207,8 @@
               "resource": "Soft Deleted Key Vault",
               "operation": "View Soft Deleted Key Vault",
               "description": "View the properties of a soft deleted key vault"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/deletedVaults/purge/action",
@@ -171,7 +217,8 @@
               "resource": "Soft Deleted Key Vault",
               "operation": "Purge Soft Deleted Key Vault",
               "description": "Purge a soft deleted key vault"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/locations/operationResults/read",
@@ -180,7 +227,8 @@
               "resource": "Long Run Operation Result",
               "operation": "Check Operation Result",
               "description": "Check the result of a long run operation"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/read",
@@ -189,7 +237,8 @@
               "resource": "HSM pool",
               "operation": "View HSM pool",
               "description": "View the properties of an HSM pool"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/write",
@@ -198,7 +247,8 @@
               "resource": "HSM pool",
               "operation": "Create or Update HSM pool",
               "description": "Create a new HSM pool of update the properties of an existing HSM pool"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/delete",
@@ -207,7 +257,8 @@
               "resource": "HSM pool",
               "operation": "Delete HSM pool",
               "description": "Delete an HSM pool"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/hsmPools/joinVault/action",
@@ -216,7 +267,8 @@
               "resource": "HSM pool",
               "operation": "Join KeyVault to HSM pool",
               "description": "Join a key vault to an HSM pool"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/read",
@@ -225,7 +277,8 @@
               "resource": "Managed HSM",
               "operation": "View Managed HSM",
               "description": "View the properties of a Managed HSM"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/write",
@@ -234,7 +287,8 @@
               "resource": "Managed HSM",
               "operation": "Create or Update Managed HSM",
               "description": "Create a new Managed HSM of update the properties of an existing Managed HSM"
-            }
+            },
+            "isDataAction": false
           },
           {
             "name": "Microsoft.KeyVault/managedHSMs/delete",
@@ -243,7 +297,8 @@
               "resource": "Managed HSM",
               "operation": "Delete Managed HSM",
               "description": "Delete a Managed HSM"
-            }
+            },
+            "isDataAction": false
           },
           {
             "origin": "system",
@@ -254,6 +309,7 @@
               "operation": "Read metric definition",
               "description": "Gets the available metrics for a key vault"
             },
+            "isDataAction": false,
             "properties": {
               "serviceSpecification": {}
             }
@@ -266,7 +322,8 @@
               "resource": "Location",
               "operation": "Modify Network ACLs containing the deleted Vitual Network or Subnet ",
               "description": "Notifies Microsoft.KeyVault that a virtual network or subnet is being deleted"
-            }
+            },
+            "isDataAction": false
           }
         ]
       }

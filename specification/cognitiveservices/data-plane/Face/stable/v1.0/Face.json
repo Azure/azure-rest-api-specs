@@ -29,7 +29,7 @@
   "paths": {
     "/findsimilars": {
       "post": {
-        "description": "Given query face's faceId, to search the similar-looking faces from a faceId array, a face list or a large face list. faceId array contains the faces created by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), which will expire 24 hours after creation. A \"faceListId\" is created by [FaceList - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/create) containing persistedFaceIds that will not expire. And a \"largeFaceListId\" is created by [LargeFaceList - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/create) containing persistedFaceIds that will also not expire. Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n<br/>Find similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n<br/>The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.\n",
+        "description": "Given query face's faceId, to search the similar-looking faces from a faceId array, a face list or a large face list. faceId array contains the faces created by [Face - Detect With Url](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl) or [Face - Detect With Stream](https://docs.microsoft.com/rest/api/faceapi/face/detectwithstream), which will expire at the time specified by faceIdTimeToLive after creation. A \"faceListId\" is created by [FaceList - Create](https://docs.microsoft.com/rest/api/faceapi/facelist/create) containing persistedFaceIds that will not expire. And a \"largeFaceListId\" is created by [LargeFaceList - Create](https://docs.microsoft.com/rest/api/faceapi/largefacelist/create) containing persistedFaceIds that will also not expire. Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n<br/>Find similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n<br/>The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.\n",
         "operationId": "Face_FindSimilar",
         "parameters": [
           {
@@ -72,7 +72,7 @@
     },
     "/group": {
       "post": {
-        "description": "Divide candidate faces into groups based on face similarity.<br />\n* The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n* MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n* Group API needs at least 2 candidate faces and 1000 at most. We suggest to try [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface) when you only have 2 candidate faces.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same.\n",
+        "description": "Divide candidate faces into groups based on face similarity.<br />\n* The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n* MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n* Group API needs at least 2 candidate faces and 1000 at most. We suggest to try [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface) when you only have 2 candidate faces.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same.\n",
         "operationId": "Face_Group",
         "parameters": [
           {
@@ -115,7 +115,7 @@
     },
     "/identify": {
       "post": {
-        "description": "1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.\n<br/> For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in [PersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/train) and [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/train).\n<br/>\n \nRemarks:<br />\n* The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n* Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n* Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n* Try [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.\n",
+        "description": "1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.\n<br/> For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in [PersonGroup - Train](https://docs.microsoft.com/rest/api/faceapi/persongroup/train) and [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/faceapi/largepersongroup/train).\n<br/>\n \nRemarks:<br />\n* The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n* Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n* Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n* Try [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.\n",
         "operationId": "Face_Identify",
         "parameters": [
           {
@@ -304,6 +304,9 @@
             "$ref": "#/parameters/personId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -379,6 +382,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -411,6 +417,9 @@
           {
             "$ref": "#/parameters/persistedFaceId"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -467,7 +476,7 @@
         }
       },
       "patch": {
-        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
         "operationId": "PersonGroupPerson_UpdateFace",
         "parameters": [
           {
@@ -493,6 +502,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -513,7 +525,7 @@
     },
     "/persongroups/{personGroupId}": {
       "put": {
-        "description": "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.\n<br /> A person group is the container of the uploaded person data, including face recognition features.\n<br /> After creation, use [PersonGroup Person - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/create) to add persons into the group, and then call [PersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face features in a person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [PersonGroup - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/create). All those person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nPerson group quota:\n* Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n* S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n* to handle larger scale face identification problem, please consider using [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup).",
+        "description": "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.\n<br /> A person group is the container of the uploaded person data, including face recognition features.\n<br /> After creation, use [PersonGroup Person - Create](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/create) to add persons into the group, and then call [PersonGroup - Train](https://docs.microsoft.com/rest/api/faceapi/persongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face features in a person group can't be updated to features extracted by another version of recognition model.\n\nPerson group quota:\n* Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n* S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n* to handle larger scale face identification problem, please consider using [LargePersonGroup](https://docs.microsoft.com/rest/api/faceapi/largepersongroup).",
         "operationId": "PersonGroup_Create",
         "parameters": [
           {
@@ -531,6 +543,9 @@
           }
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "responses": {
@@ -558,6 +573,9 @@
             "$ref": "#/parameters/personGroupId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -576,7 +594,7 @@
         }
       },
       "get": {
-        "description": "Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use [PersonGroup Person - List](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/list).",
+        "description": "Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use [PersonGroup Person - List](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/list).",
         "operationId": "PersonGroup_Get",
         "parameters": [
           {
@@ -628,6 +646,9 @@
           }
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "responses": {
@@ -764,7 +785,7 @@
     },
     "/facelists/{faceListId}": {
       "put": {
-        "description": "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel. Up to 64 face lists are allowed in one subscription.\n<br /> Face list is a list of faces, up to 1,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar).\n<br /> After creation, user should use [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl) to import the faces. No image will be stored. Only the extracted face features are stored on server until [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> Please consider [LargeFaceList](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist) when the face number is large. It can support up to 1,000,000 faces.\n<br />'recognitionModel' should be specified to associate with this face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing face list will use the recognition model that's already associated with the collection. Existing face features in a face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [FaceList- Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/create). All those face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+        "description": "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel. Up to 64 face lists are allowed in one subscription.\n<br /> Face list is a list of faces, up to 1,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar).\n<br /> After creation, user should use [FaceList - Add Face](https://docs.microsoft.com/rest/api/faceapi/facelist/addfacefromurl) to import the faces. No image will be stored. Only the extracted face features are stored on server until [FaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/facelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/faceapi/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/faceapi/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify).\n<br /> Please consider [LargeFaceList](https://docs.microsoft.com/rest/api/faceapi/largefacelist) when the face number is large. It can support up to 1,000,000 faces.\n<br />'recognitionModel' should be specified to associate with this face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing face list will use the recognition model that's already associated with the collection. Existing face features in a face list can't be updated to features extracted by another version of recognition model.\nPlease Refer to [Specify a face recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "FaceList_Create",
         "parameters": [
           {
@@ -859,6 +880,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -884,6 +908,9 @@
             "$ref": "#/parameters/faceListId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -904,7 +931,7 @@
     },
     "/facelists": {
       "get": {
-        "description": "List face lists’ faceListId, name, userData and recognitionModel. <br /> \nTo get face information inside faceList use [FaceList - Get](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/get)\n",
+        "description": "List face lists’ faceListId, name, userData and recognitionModel. <br /> \nTo get face information inside faceList use [FaceList - Get](https://docs.microsoft.com/rest/api/faceapi/facelist/get)\n",
         "operationId": "FaceList_List",
         "parameters": [
           {
@@ -947,6 +974,9 @@
             "$ref": "#/parameters/persistedFaceId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -967,7 +997,7 @@
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedfaces": {
       "post": {
-        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).",
         "operationId": "PersonGroupPerson_AddFaceFromUrl",
         "parameters": [
           {
@@ -1018,22 +1048,14 @@
     },
     "/detect": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'recognition_01': | The default recognition model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). All those faceIds created before 2019 March are bonded with this recognition model. |\n  | 'recognition_02': | Recognition model released in 2019 March. |\n  | 'recognition_03': | Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. |",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
-            "name": "returnFaceId",
-            "in": "query",
-            "description": "A value indicating whether the operation should return faceIds of detected faces.",
-            "type": "boolean",
-            "default": true
+            "$ref": "#/parameters/returnFaceId"
           },
           {
-            "name": "returnFaceLandmarks",
-            "in": "query",
-            "description": "A value indicating whether the operation should return landmarks of the detected faces.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/returnFaceLandmarks"
           },
           {
             "$ref": "#/parameters/returnFaceAttributes"
@@ -1049,6 +1071,9 @@
           },
           {
             "$ref": "#/parameters/detectionModel"
+          },
+          {
+            "$ref": "#/parameters/faceIdTimeToLive"
           }
         ],
         "consumes": [
@@ -1080,7 +1105,7 @@
     },
     "/facelists/{faceListId}/persistedfaces": {
       "post": {
-        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/faceapi/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).",
         "operationId": "FaceList_AddFaceFromUrl",
         "parameters": [
           {
@@ -1231,6 +1256,9 @@
             "$ref": "#/parameters/personId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -1306,6 +1334,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -1338,6 +1369,9 @@
           {
             "$ref": "#/parameters/persistedFaceId"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -1420,6 +1454,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -1440,7 +1477,7 @@
     },
     "/largepersongroups/{largePersonGroupId}": {
       "put": {
-        "description": "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.\n<br /> A large person group is the container of the uploaded person data, including face recognition feature, and up to 1,000,000\npeople.\n<br /> After creation, use [LargePersonGroup Person - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/create) to add person into the group, and call [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face features in a large person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargePersonGroup - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/create). All those large person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nLarge person group quota:\n* Free-tier subscription quota: 1,000 large person groups.\n* S0-tier subscription quota: 1,000,000 large person groups.",
+        "description": "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.\n<br /> A large person group is the container of the uploaded person data, including face recognition feature, and up to 1,000,000\npeople.\n<br /> After creation, use [LargePersonGroup Person - Create](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/create) to add person into the group, and call [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/faceapi/largepersongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face features in a large person group can't be updated to features extracted by another version of recognition model. Please refer to [Specify a face recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).\n\nLarge person group quota:\n* Free-tier subscription quota: 1,000 large person groups.\n* S0-tier subscription quota: 1,000,000 large person groups.",
         "operationId": "LargePersonGroup_Create",
         "parameters": [
           {
@@ -1458,6 +1495,9 @@
           }
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "responses": {
@@ -1485,6 +1525,9 @@
             "$ref": "#/parameters/largePersonGroupId"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -1503,7 +1546,7 @@
         }
       },
       "get": {
-        "description": "Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use [LargePersonGroup Person - List](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/list) instead to retrieve person information under the large person group.\n",
+        "description": "Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use [LargePersonGroup Person - List](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/list) instead to retrieve person information under the large person group.\n",
         "operationId": "LargePersonGroup_Get",
         "parameters": [
           {
@@ -1555,6 +1598,9 @@
           }
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "responses": {
@@ -1691,7 +1737,7 @@
     },
     "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces": {
       "post": {
-        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)",
         "operationId": "LargePersonGroupPerson_AddFaceFromUrl",
         "parameters": [
           {
@@ -1742,7 +1788,7 @@
     },
     "/largefacelists/{largeFaceListId}": {
       "put": {
-        "description": "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.\n<br /> Large face list is a list of faces, up to 1,000,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar).\n<br /> After creation, user should use [LargeFaceList Face - Add](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl) to import the faces and [LargeFaceList - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/train) to make it ready for [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). No image will be stored. Only the extracted face features are stored on server until [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br/>'recognitionModel' should be specified to associate with this large face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large face list will use the recognition model that's already associated with the collection. Existing face features in a large face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargeFaceList- Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/create). All those large face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nLarge face list quota:\n* Free-tier subscription quota: 64 large face lists.\n* S0-tier subscription quota: 1,000,000 large face lists.",
+        "description": "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.\n<br /> Large face list is a list of faces, up to 1,000,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar).\n<br /> After creation, user should use [LargeFaceList Face - Add](https://docs.microsoft.com/rest/api/faceapi/largefacelist/addfacefromurl) to import the faces and [LargeFaceList - Train](https://docs.microsoft.com/rest/api/faceapi/largefacelist/train) to make it ready for [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). No image will be stored. Only the extracted face features are stored on server until [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/largefacelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/faceapi/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/faceapi/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify).\n<br/>'recognitionModel' should be specified to associate with this large face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large face list will use the recognition model that's already associated with the collection. Existing face features in a large face list can't be updated to features extracted by another version of recognition model. Please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).\n\nLarge face list quota:\n* Free-tier subscription quota: 64 large face lists.\n* S0-tier subscription quota: 1,000,000 large face lists.",
         "operationId": "LargeFaceList_Create",
         "parameters": [
           {
@@ -1837,6 +1883,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -1861,6 +1910,9 @@
           {
             "$ref": "#/parameters/largeFaceListId"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -1915,7 +1967,7 @@
     },
     "/largefacelists": {
       "get": {
-        "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/getface)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
+        "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](https://docs.microsoft.com/rest/api/faceapi/largefacelist/getface)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
         "operationId": "LargeFaceList_List",
         "parameters": [
           {
@@ -1987,6 +2039,9 @@
           {
             "$ref": "#/parameters/persistedFaceId"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -2063,6 +2118,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -2083,7 +2141,7 @@
     },
     "/largefacelists/{largeFaceListId}/persistedfaces": {
       "post": {
-        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargeFaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/faceapi/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
         "operationId": "LargeFaceList_AddFaceFromUrl",
         "parameters": [
           {
@@ -2323,6 +2381,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -2347,6 +2408,9 @@
           {
             "$ref": "#/parameters/snapshotId"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -2495,22 +2559,14 @@
     },
     "/detect?overload=stream": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'recognition_01': | The default recognition model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). All those faceIds created before 2019 March are bonded with this recognition model. |\n  | 'recognition_02': | Recognition model released in 2019 March. |\n  | 'recognition_03': | Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. |",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithStream",
         "parameters": [
           {
-            "name": "returnFaceId",
-            "in": "query",
-            "description": "A value indicating whether the operation should return faceIds of detected faces.",
-            "type": "boolean",
-            "default": true
+            "$ref": "#/parameters/returnFaceId"
           },
           {
-            "name": "returnFaceLandmarks",
-            "in": "query",
-            "description": "A value indicating whether the operation should return landmarks of the detected faces.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/returnFaceLandmarks"
           },
           {
             "$ref": "#/parameters/returnFaceAttributes"
@@ -2526,6 +2582,9 @@
           },
           {
             "$ref": "#/parameters/detectionModel"
+          },
+          {
+            "$ref": "#/parameters/faceIdTimeToLive"
           }
         ],
         "consumes": [
@@ -2557,7 +2616,7 @@
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).",
         "operationId": "PersonGroupPerson_AddFaceFromStream",
         "parameters": [
           {
@@ -2608,7 +2667,7 @@
     },
     "/facelists/{faceListId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/faceapi/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).",
         "operationId": "FaceList_AddFaceFromStream",
         "parameters": [
           {
@@ -2656,7 +2715,7 @@
     },
     "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/faceapi/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).",
         "operationId": "LargePersonGroupPerson_AddFaceFromStream",
         "parameters": [
           {
@@ -2707,7 +2766,7 @@
     },
     "/largefacelists/{largeFaceListId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargeFaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/faceapi/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/faceapi/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/faceapi/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
         "operationId": "LargeFaceList_AddFaceFromStream",
         "parameters": [
           {
@@ -2999,7 +3058,7 @@
           "$ref": "#/definitions/Hair"
         },
         "makeup": {
-          "description": "Properties describing present makeups on a given face.",
+          "description": "Properties describing the presence of makeup on a given face.",
           "$ref": "#/definitions/Makeup"
         },
         "occlusion": {
@@ -3021,6 +3080,10 @@
         "noise": {
           "description": "Properties describing noise level of the image.",
           "$ref": "#/definitions/Noise"
+        },
+        "mask": {
+          "description": "Properties describing the presence of a mask on a given face.",
+          "$ref": "#/definitions/Mask"
         }
       }
     },
@@ -3156,7 +3219,7 @@
     },
     "Makeup": {
       "type": "object",
-      "description": "Properties describing present makeups on a given face.",
+      "description": "Properties describing the presence of makeup on a given face.",
       "properties": {
         "eyeMakeup": {
           "type": "boolean",
@@ -3298,6 +3361,32 @@
         }
       }
     },
+    "Mask": {
+      "type": "object",
+      "description": "Properties describing the presence of a mask on a given face.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mask type if any of the face",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "MaskType",
+            "modelAsString": false
+          },
+          "enum": [
+            "noMask",
+            "faceMask",
+            "otherMaskOrOcclusion",
+            "uncertain"
+          ]
+        },
+        "noseAndMouthCovered": {
+          "type": "boolean",
+          "description": "A boolean value indicating whether nose and mouth are covered.",
+          "x-nullable": false
+        }
+      }
+    },
     "FindSimilarRequest": {
       "type": "object",
       "required": [
@@ -3308,7 +3397,7 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call"
+          "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire at the time specified by faceIdTimeToLive after the detection call"
         },
         "faceListId": {
           "type": "string",
@@ -3324,7 +3413,7 @@
         },
         "faceIds": {
           "type": "array",
-          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
+          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire at the time specified by faceIdTimeToLive after the detection call. The number of faceIds is limited to 1000. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
           "maxItems": 1000,
           "items": {
             "type": "string",
@@ -3370,7 +3459,7 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "FaceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
+          "description": "FaceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire at the time specified by faceIdTimeToLive after the detection call"
         },
         "persistedFaceId": {
           "type": "string",
@@ -3694,7 +3783,7 @@
         "persistedFaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "The persistedFaceId of the target face, which is persisted and will not expire. Different from faceId created by Face - Detect and will expire in 24 hours after the detection call."
+          "description": "The persistedFaceId of the target face, which is persisted and will not expire. Different from faceId created by Face - Detect and will expire in at the time specified by faceIdTimeToLive after the detection call."
         },
         "userData": {
           "type": "string",
@@ -3833,6 +3922,26 @@
       "minimum": 0,
       "maximum": 1
     },
+    "NonNullableNameAndNullableUserDataContract": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
     "NameAndUserDataContract": {
       "type": "object",
       "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
@@ -3859,7 +3968,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NameAndUserDataContract"
+          "$ref": "#/definitions/NonNullableNameAndNullableUserDataContract"
         }
       ]
     },
@@ -3875,7 +3984,8 @@
       "enum": [
         "recognition_01",
         "recognition_02",
-        "recognition_03"
+        "recognition_03",
+        "recognition_04"
       ]
     },
     "ApplyScope": {
@@ -4080,7 +4190,7 @@
     "returnFaceAttributes": {
       "name": "returnFaceAttributes",
       "in": "query",
-      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
+      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, and noise. While 'detection_02' does not support any attributes and 'detection_03' only supports mask. Note that each face attribute analysis has additional computational and time cost.",
       "type": "array",
       "x-ms-parameter-location": "method",
       "required": false,
@@ -4106,7 +4216,8 @@
           "accessories",
           "blur",
           "exposure",
-          "noise"
+          "noise",
+          "mask"
         ]
       }
     },
@@ -4259,7 +4370,8 @@
       "enum": [
         "recognition_01",
         "recognition_02",
-        "recognition_03"
+        "recognition_03",
+        "recognition_04"
       ]
     },
     "returnRecognitionModel": {
@@ -4286,8 +4398,35 @@
       },
       "enum": [
         "detection_01",
-        "detection_02"
+        "detection_02",
+        "detection_03"
       ]
+    },
+    "returnFaceId": {
+      "name": "returnFaceId",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "A value indicating whether the operation should return faceIds of detected faces.",
+      "type": "boolean",
+      "default": true
+    },
+    "returnFaceLandmarks": {
+      "name": "returnFaceLandmarks",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "A value indicating whether the operation should return landmarks of the detected faces.",
+      "type": "boolean",
+      "default": false
+    },
+    "faceIdTimeToLive": {
+      "name": "faceIdTimeToLive",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The number of seconds for the faceId being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).",
+      "type": "integer",
+      "default": 86400,
+      "minimum": 60,
+      "maximum": 86400
     }
   }
 }

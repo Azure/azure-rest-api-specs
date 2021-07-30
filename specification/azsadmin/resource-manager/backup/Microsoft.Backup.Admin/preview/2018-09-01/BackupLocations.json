@@ -186,6 +186,55 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/pruneExternalStore": {
+      "post": {
+        "x-ms-examples": {
+          "Prune the external backup store": {
+            "$ref": "./examples/BackupLocations/Prune.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Prune the external backup store.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_PruneExternalStore",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PruneBackupStoreOptionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PruneList"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Error response."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -288,6 +337,52 @@
           "type": "string"
         }
       }
+    },
+    "PruneBackupStoreOperationType": {
+      "description": "Prune backup store operation type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "DryRun"
+      ],
+      "x-ms-enum": {
+        "name": "PruneBackupStoreOperationType",
+        "modelAsString": false
+      }
+    },
+    "PruneBackupStoreOperationOptionModel": {
+      "type": "object",
+      "description": "Prune backup store operation model.",
+      "properties": {
+        "operationType": {
+          "description": "Operation type.",
+          "$ref": "#/definitions/PruneBackupStoreOperationType"
+        }
+      }
+    },
+    "PruneModel": {
+      "description": "Properties for a prune list.",
+      "properties": {
+        "pathsToDelete": {
+          "description": "Garbage file list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PruneList": {
+      "type": "object",
+      "description": "List of files to delete.",
+      "properties": {
+        "properties": {
+          "description": "Holds information for a backup.",
+          "$ref": "#/definitions/PruneModel",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "parameters": {
@@ -306,6 +401,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/BackupLocation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PruneBackupStoreOptionParameter": {
+      "name": "option",
+      "in": "body",
+      "description": "Prune operation option.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/PruneBackupStoreOperationOptionModel"
       },
       "x-ms-parameter-location": "method"
     }

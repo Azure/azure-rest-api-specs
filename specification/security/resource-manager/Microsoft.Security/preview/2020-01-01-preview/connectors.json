@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors": {
       "get": {
         "x-ms-examples": {
-          "Get all Cloud accounts connectors of a subscription": {
+          "Get all cloud accounts connectors of a subscription": {
             "$ref": "./examples/Connectors/GetListConnectorSubscription_example.json"
           }
         },
@@ -62,7 +62,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
@@ -113,7 +113,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "AwsCred -  Create a cloud account connector for a subscription": {
+          "AwsCred - Create a cloud account connector for a subscription": {
             "$ref": "./examples/Connectors/CreateUpdateAwsCredConnectorSubscription_example.json"
           },
           "AwsAssumeRole - Create a cloud account connector for a subscription": {
@@ -126,7 +126,7 @@
         "tags": [
           "Connectors"
         ],
-        "description": "Create a cloud account connector or update an existing one. Connect to your AWS cloud account using either account credentials or role-based authentication.",
+        "description": "Create a cloud account connector or update an existing one. Connect to your cloud account. For AWS, use either account credentials or role-based authentication. For GCP, use account organization credentials.",
         "operationId": "Connectors_CreateOrUpdate",
         "parameters": [
           {
@@ -233,10 +233,10 @@
     },
     "ConnectorSettingProperties": {
       "type": "object",
-      "description": "Describes properties of an connector setting",
+      "description": "Describes properties of a connector setting",
       "properties": {
         "hybridComputeSettings": {
-          "description": "Settings for hybrid compute management, these settings are relevant only Arc autoProvision (Hybrid Compute).",
+          "description": "Settings for hybrid compute management. These settings are relevant only for Arc autoProvision (Hybrid Compute).",
           "type": "object",
           "$ref": "#/definitions/HybridComputeSettingsProperties"
         },
@@ -292,11 +292,11 @@
             "values": [
               {
                 "value": "On",
-                "description": "Install missing Azure Arc agent on VMs automatically"
+                "description": "Install missing Azure Arc agents on machines automatically"
               },
               {
                 "value": "Off",
-                "description": "Do not install Azure Arc agent on the VMs automatically"
+                "description": "Do not install Azure Arc agent on the machines automatically"
               }
             ]
           }
@@ -307,7 +307,7 @@
         },
         "region": {
           "type": "string",
-          "description": "The location where the meta data of machines will be stored",
+          "description": "The location where the metadata of machines will be stored",
           "x-ms-mutability": [
             "create",
             "read"
@@ -334,7 +334,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application id of service principal."
+          "description": "Application ID of service principal."
         },
         "secret": {
           "type": "string",
@@ -371,7 +371,7 @@
               },
               {
                 "value": "Expired",
-                "description": "the connection is expired"
+                "description": "the connection has expired"
               },
               {
                 "value": "IncorrectPolicy",
@@ -422,7 +422,7 @@
     },
     "AwsCredsAuthenticationDetailsProperties": {
       "type": "object",
-      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "description": "AWS cloud account connector based credentials, the credentials is composed of access key ID and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
       "x-ms-discriminator-value": "awsCreds",
       "allOf": [
         {
@@ -451,7 +451,7 @@
     },
     "AwAssumeRoleAuthenticationDetailsProperties": {
       "type": "object",
-      "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
+      "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role Amazon Resource Name (ARN) and external ID. For more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
       "x-ms-discriminator-value": "awsAssumeRole",
       "allOf": [
         {
@@ -480,7 +480,7 @@
     },
     "GcpCredentialsDetailsProperties": {
       "type": "object",
-      "description": "GCP cloud account connector based service to service credentials, the credentials is composed of organization id and json api key (write only)</a>",
+      "description": "GCP cloud account connector based service to service credentials, the credentials are composed of the organization ID and a JSON API key (write only)",
       "x-ms-discriminator-value": "gcpCredentials",
       "allOf": [
         {
@@ -489,7 +489,7 @@
       ],
       "properties": {
         "organizationId": {
-          "description": "The Organization ID of the GCP cloud account",
+          "description": "The organization ID of the GCP cloud account",
           "type": "string"
         },
         "type": {
@@ -498,11 +498,11 @@
         },
         "projectId": {
           "type": "string",
-          "description": "Project Id field of the API key (write only)"
+          "description": "Project ID field of the API key (write only)"
         },
         "privateKeyId": {
           "type": "string",
-          "description": "Private key Id field of the API key (write only)"
+          "description": "Private key ID field of the API key (write only)"
         },
         "privateKey": {
           "type": "string",
@@ -514,23 +514,23 @@
         },
         "clientId": {
           "type": "string",
-          "description": "Client Id field of the API key (write only)"
+          "description": "Client ID field of the API key (write only)"
         },
         "authUri": {
           "type": "string",
-          "description": "Auth Uri field of the API key (write only)"
+          "description": "Auth URI field of the API key (write only)"
         },
         "tokenUri": {
           "type": "string",
-          "description": "Token Uri field of the API key (write only)"
+          "description": "Token URI field of the API key (write only)"
         },
         "authProviderX509CertUrl": {
           "type": "string",
-          "description": "Auth provider x509 certificate url field of the API key (write only)"
+          "description": "Auth provider x509 certificate URL field of the API key (write only)"
         },
         "clientX509CertUrl": {
           "type": "string",
-          "description": "Client x509 certificate url field of the API key (write only)"
+          "description": "Client x509 certificate URL field of the API key (write only)"
         }
       },
       "required": [

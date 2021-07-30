@@ -563,6 +563,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/validate": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check if the config server settings are valid.",
+        "operationId": "ConfigServers_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "configServerSettings",
+            "in": "body",
+            "description": "Config server settings to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the validation result of Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the ConfigServerSetting is validating.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ConfigServers_Validate": {
+            "$ref": "./examples/ConfigServers_Validate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
       "get": {
         "tags": [
@@ -2833,6 +2894,44 @@
         }
       }
     },
+    "ConfigServerSettingsValidateResult": {
+      "description": "Validation result for config server settings",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicate if the config server settings are valid",
+          "type": "boolean"
+        },
+        "details": {
+          "description": "The detail validation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
+          }
+        }
+      }
+    },
+    "ConfigServerSettingsErrorRecord": {
+      "description": "Error record of the config server settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the config server settings error record",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of the config server settings error record",
+          "type": "string"
+        },
+        "messages": {
+          "description": "The detail error messages of the record",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ConfigServerResource": {
       "description": "Config Server resource",
       "type": "object",
@@ -2934,23 +3033,43 @@
       "properties": {
         "serviceRuntimeSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceCidr": {
           "description": "Azure Spring Cloud service reserved CIDR",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceRuntimeNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "outboundIPs": {
           "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
@@ -2965,6 +3084,60 @@
               },
               "description": "A list of public IP addresses."
             }
+          }
+        },
+        "requiredTraffics": {
+          "description": "Required inbound or outbound traffics for Azure Spring Cloud instance.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RequiredTraffic"
+          }
+        }
+      }
+    },
+    "RequiredTraffic": {
+      "description": "Required inbound or outbound traffic for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol of required traffic",
+          "type": "string",
+          "readOnly": true
+        },
+        "port": {
+          "description": "The port of required traffic",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "ips": {
+          "description": "The ip list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "description": "The FQDN list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "description": "The direction of required traffic",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "trafficDirection",
+            "modelAsString": true
           }
         }
       }
@@ -3227,11 +3400,16 @@
         },
         "fqdn": {
           "description": "Fully qualified dns Name.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "createdTime": {
           "format": "date-time",
@@ -3262,7 +3440,8 @@
         },
         "mountPath": {
           "description": "Mount path of the temporary disk",
-          "type": "string"
+          "type": "string",
+          "default": "/tmp"
         }
       }
     },
@@ -3771,6 +3950,7 @@
         },
         "runtimeVersion": {
           "description": "Runtime version",
+          "default": "Java_8",
           "enum": [
             "Java_8",
             "Java_11",
@@ -4049,6 +4229,10 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
         }
       }
     },

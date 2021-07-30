@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -78,6 +84,12 @@
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -115,6 +127,12 @@
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -177,6 +195,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -213,6 +237,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -248,6 +278,12 @@
           },
           "204": {
             "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -298,6 +334,12 @@
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -386,14 +428,25 @@
     "DomainServiceProperties": {
       "description": "Properties of the Domain Service.",
       "properties": {
+        "version": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Data Model Version"
+        },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "Azure Active Directory tenant id"
+          "description": "Azure Active Directory Tenant Id"
         },
         "domainName": {
           "type": "string",
           "description": "The name of the Azure domain that the user would like to deploy Domain Services to."
+        },
+        "deploymentId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deployment Id"
         },
         "vnetSiteId": {
           "readOnly": true,
@@ -408,10 +461,26 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "resourceForestSettings": {
+          "$ref": "#/definitions/ResourceForestSettings",
+          "description": "Resource Forest Settings"
+        },
+        "domainConfigurationType": {
+          "type": "string",
+          "description": "Domain Configuration Type"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku Type"
+        },
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -436,9 +505,10 @@
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
         },
-        "domainSecuritySettings": {
-          "$ref": "#/definitions/DomainSecuritySettings",
-          "description": "DomainSecurity Settings"
+        "migrationProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
         },
         "filteredSync": {
           "type": "string",
@@ -482,6 +552,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
           "x-ms-enum": {
             "name": "Ldaps",
@@ -518,6 +589,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
           "x-ms-enum": {
             "name": "ExternalAccess",
@@ -630,6 +702,82 @@
         }
       }
     },
+    "ResourceForestSettings": {
+      "description": "Settings for Resource Forest",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForestTrust"
+          },
+          "description": "List of settings for Resource Forest"
+        },
+        "resourceForest": {
+          "type": "string",
+          "description": "Resource Forest"
+        }
+      }
+    },
+    "ForestTrust": {
+      "description": "Forest Trust Setting",
+      "properties": {
+        "trustedDomainFqdn": {
+          "type": "string",
+          "description": "Trusted Domain FQDN"
+        },
+        "trustDirection": {
+          "type": "string",
+          "description": "Trust Direction"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "remoteDnsIps": {
+          "type": "string",
+          "description": "Remote Dns ips"
+        },
+        "trustPassword": {
+          "type": "string",
+          "description": "Trust Password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
+        }
+      }
+    },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
       "properties": {
@@ -639,6 +787,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "NtlmV1",
@@ -651,6 +800,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "TlsV1",
@@ -663,9 +813,36 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncOnPremPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncOnPremPasswords",
             "modelAsString": true
           }
         }
@@ -726,6 +903,64 @@
         "resource": {
           "description": "Resource on which the operation is performed.",
           "type": "string"
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "description": "Domain Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "description": "Error details.",
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
         }
       }
     }

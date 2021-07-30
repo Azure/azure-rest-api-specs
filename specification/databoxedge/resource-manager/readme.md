@@ -26,9 +26,48 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08
+tag: package-2021-02-01
 ```
+### Tag: package-2021-02-01
 
+These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2021-02-01/databoxedge.json
+```
+### Tag: package-2021-02-01-preview
+
+These settings apply only when `--tag=package-2021-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2021-02-01-preview/databoxedge.json
+```
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2020-12-01/databoxedge.json
+```
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
+```
+### Tag: package-2020-09-01
+
+These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
+```
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
@@ -64,6 +103,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+```
+
 ---
 # Code Generation
 
@@ -79,6 +128,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-databoxedge
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
@@ -87,8 +137,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js databoxedge/resource-manager
 ```
 
 ## C#
@@ -120,82 +168,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.databoxedge
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 0
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databoxedge
-```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-03
-  - tag: package-2019-07
-  - tag: package-2019-08
-  - tag: package-2020-05-preview
-```
-
-### Tag: package-2020-05-preview and java
-
-These settings apply only when `--tag=package-2020-05-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2020-05-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2020_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2020_05_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-08 and java
-
-These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-07 and java
-
-These settings apply only when `--tag=package-2019-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_07_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-03 and java
-
-These settings apply only when `--tag=package-2019-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

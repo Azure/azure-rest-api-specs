@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+```
+
 ---
 # Code Generation
 
@@ -50,9 +59,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-commerce
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -61,50 +68,12 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js commerce/resource-manager
 ```
 
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.commerce
-  package-name: azure-mgmt-commerce
-  clear-output-folder: true
-  no-namespace-folders: true
-```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2015-06-preview
-```
-
-### Tag: package-2015-06-preview and python
-
-These settings apply only when `--tag=package-2015-06-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2015-06-preview' && $(python)
-namespace: azure.mgmt.commerce.v2015_06_01_preview
-output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
-python:
-  namespace: azure.mgmt.commerce.v2015_06_01_preview
-  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -146,7 +115,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

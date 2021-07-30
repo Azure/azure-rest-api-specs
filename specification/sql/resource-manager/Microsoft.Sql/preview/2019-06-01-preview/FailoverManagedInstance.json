@@ -15,24 +15,6 @@
   "produces": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover": {
       "post": {
@@ -43,16 +25,14 @@
         "operationId": "ManagedInstances_Failover",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance to failover.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "replicaType",
@@ -68,17 +48,23 @@
               "name": "ReplicaType",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully completed managed instance failover."
           },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceFailoverThrottled - There was a recent failover on the managed instance.\n\n * 400 ManagedInstanceFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 403 ManagedInstanceFailoverFullBackupMissing - Automated backup needs to complete the first full backup for a new database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ManagedInstanceNotInStateToFailover - The managed instance is currently in a state such that failover cannot be issued."
+          },
           "202": {
             "description": "Managed instance failover is in progress."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 ManagedInstanceFailoverThrottled - There was a recent failover on the managed instance.\n\n * 400 ManagedInstanceFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ManagedInstanceNotInStateToFailover - The managed instance is currently in a state such that failover cannot be issued."
           }
         },
         "x-ms-long-running-operation": true,
@@ -91,23 +77,16 @@
     }
   },
   "definitions": {},
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ManagedInstanceNameParameter": {
-      "name": "managedInstanceName",
-      "in": "path",
-      "description": "The name of the managed instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
-  },
-  "responses": {}
+  }
 }

@@ -687,7 +687,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -766,7 +767,7 @@
           "Customers"
         ],
         "x-ms-examples": {
-          "CustomersListByBillingAccount": {
+          "CustomersListByBillingProfile": {
             "$ref": "./examples/CustomersListByBillingProfile.json"
           }
         },
@@ -947,7 +948,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1691,16 +1693,16 @@
           "Invoices"
         ],
         "x-ms-examples": {
-          "InvoiceDownload": {
+          "EAInvoiceDownload": {
             "$ref": "./examples/MultipleInvoiceDownload.json"
           }
         },
-        "operationId": "Invoices_DownloadMultipleEAInvoice",
+        "operationId": "Invoices_DownloadMultipleEAInvoices",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download an multiple invoices documents (invoice pdf, tax receipts, credit notes) as a zip file.",
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1802,12 +1804,12 @@
             "$ref": "./examples/MultipleBillingSubscriptionInvoiceDownload.json"
           }
         },
-        "operationId": "Invoices_DownloadMultipleBillingSubscriptionInvoice",
+        "operationId": "Invoices_DownloadMultipleBillingSubscriptionInvoices",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download multiple invoices documents (invoice pdf, tax receipts, credit notes) as a zip file.",
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2042,16 +2044,16 @@
           "Invoices"
         ],
         "x-ms-examples": {
-          "ModernInvoiceDownload": {
+          "BillingProfileInvoiceDownload": {
             "$ref": "./examples/MultipleModernInvoiceDownload.json"
           }
         },
-        "operationId": "Invoices_DownloadMultipleModernInvoice",
+        "operationId": "Invoices_DownloadMultipleBillingProfileInvoices",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download multiple invoices documents (invoice pdf, tax receipts, credit notes) as a zip file.",
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2479,7 +2481,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2746,7 +2749,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -6214,14 +6218,26 @@
       "type": "string",
       "description": "Error code of the transfer validation response.",
       "enum": [
-        "InvalidSource",
-        "SubscriptionNotActive",
-        "InsufficientPermissionOnSource",
-        "InsufficientPermissionOnDestination",
-        "DestinationBillingProfilePastDue",
-        "SubscriptionTypeNotSupported",
+        "BillingAccountInactive",
         "CrossBillingAccountNotAllowed",
-        "NotAvailableForDestinationMarket"
+        "DestinationBillingProfileInactive",
+        "DestinationBillingProfileNotFound",
+        "DestinationBillingProfilePastDue",
+        "DestinationInvoiceSectionInactive",
+        "DestinationInvoiceSectionNotFound",
+        "InsufficientPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "InvalidDestination",
+        "InvalidSource",
+        "MarketplaceNotEnabledOnDestination",
+        "NotAvailableForDestinationMarket",
+        "ProductInactive",
+        "ProductNotFound",
+        "ProductTypeNotSupported",
+        "SourceBillingProfilePastDue",
+        "SourceInvoiceSectionInactive",
+        "SubscriptionNotActive",
+        "SubscriptionTypeNotSupported"
       ],
       "x-ms-enum": {
         "name": "subscriptionTransferValidationErrorCode",
@@ -6866,6 +6882,7 @@
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "currency": {
@@ -8057,6 +8074,7 @@
         "quantity": {
           "description": "The quantity purchased in the transaction.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "invoiceSectionId": {

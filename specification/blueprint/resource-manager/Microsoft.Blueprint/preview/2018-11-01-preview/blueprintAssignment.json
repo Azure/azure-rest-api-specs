@@ -81,6 +81,12 @@
             "schema": {
               "$ref": "#/definitions/Assignment"
             }
+          },
+          "default": {
+            "description": "Blueprints error response.",
+            "schema": {
+              "$ref": "blueprintDefinition.json#/definitions/CloudError"
+            }
           }
         }
       },
@@ -114,6 +120,12 @@
             "description": "OK -- blueprint assignment retrieved.",
             "schema": {
               "$ref": "#/definitions/Assignment"
+            }
+          },
+          "default": {
+            "description": "Blueprints error response.",
+            "schema": {
+              "$ref": "blueprintDefinition.json#/definitions/CloudError"
             }
           }
         }
@@ -173,11 +185,17 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Blueprints error response.",
+            "schema": {
+              "$ref": "blueprintDefinition.json#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/whoIsBlueprint": {
       "post": {
         "operationId": "Assignments_WhoIsBlueprint",
         "description": "Get Blueprints service SPN objectId",
@@ -205,6 +223,12 @@
             "description": "Blueprints service SPN objectId",
             "schema": {
               "$ref": "#/definitions/WhoIsBlueprintContract"
+            }
+          },
+          "default": {
+            "description": "Blueprints error response.",
+            "schema": {
+              "$ref": "blueprintDefinition.json#/definitions/CloudError"
             }
           }
         }
@@ -238,6 +262,12 @@
             "description": "OK -- all blueprint assignments retrieved.",
             "schema": {
               "$ref": "#/definitions/AssignmentList"
+            }
+          },
+          "default": {
+            "description": "Blueprints error response.",
+            "schema": {
+              "$ref": "blueprintDefinition.json#/definitions/CloudError"
             }
           }
         },

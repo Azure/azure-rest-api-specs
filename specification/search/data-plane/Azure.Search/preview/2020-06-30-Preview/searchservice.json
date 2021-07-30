@@ -2495,7 +2495,7 @@
           {
             "value": "lowercase",
             "name": "Lowercase",
-            "description": "Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm"
+            "description": "Normalizes token text to lower case. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
           },
           {
             "value": "nGram_v2",
@@ -2575,7 +2575,7 @@
           {
             "value": "uppercase",
             "name": "Uppercase",
-            "description": "Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+            "description": "Normalizes token text to upper case. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
           },
           {
             "value": "word_delimiter",
@@ -2587,6 +2587,51 @@
       "description": "Defines the names of all token filters supported by Azure Cognitive Search.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
+      }
+    },
+    "LexicalNormalizerName": {
+      "type": "string",
+      "enum": [
+        "asciifolding",
+        "elision",
+        "lowercase",
+        "standard",
+        "uppercase"
+      ],
+      "x-ms-enum": {
+        "name": "LexicalNormalizerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
+          },
+          {
+            "value": "elision",
+            "name": "Elision",
+            "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Normalizes token text to lowercase. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
+          },
+          {
+            "value": "standard",
+            "name": "Standard",
+            "description": "Standard normalizer, which consists of lowercase and asciifolding. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
+          },
+          {
+            "value": "uppercase",
+            "name": "Uppercase",
+            "description": "Normalizes token text to uppercase. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+          }
+        ]
+      },
+      "description": "Defines the names of all text normalizers supported by Azure Cognitive Search.",
+      "externalDocs": {
+        "url": "https://aka.ms/azs-normalizers"
       }
     },
     "CharFilterName": {
@@ -2871,6 +2916,56 @@
       "description": "Divides text at non-letters; Applies the lowercase and stopword token filters. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
+      }
+    },
+    "LexicalNormalizer": {
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "Identifies the concrete type of the normalizer."
+        },
+        "name": {
+          "type": "string",
+          "externalDocs": {
+            "url": "https://aka.ms/azs-normalizers"
+          },
+          "description": "The name of the normalizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor be named 'asciifolding', 'standard', 'lowercase', 'uppercase', or 'elision'."
+        }
+      },
+      "required": [
+        "@odata.type",
+        "name"
+      ],
+      "description": "Base type for normalizers."
+    },
+    "CustomNormalizer": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LexicalNormalizer"
+        }
+      ],
+      "properties": {
+        "tokenFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenFilterName",
+            "x-nullable": false
+          },
+          "description": "A list of token filters used to filter out or modify the input token. For example, you can specify a lowercase filter that converts all characters to lowercase. The filters are run in the order in which they are listed."
+        },
+        "charFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CharFilterName",
+            "x-nullable": false
+          },
+          "description": "A list of character filters used to prepare input text before it is processed. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed."
+        }
+      },
+      "description": "Allows you to configure normalization for filterable, sortable, and facetable fields, which by default operate with strict matching. This is a user-defined configuration consisting of at least one or more filters, which modify the token that is stored.",
+      "externalDocs": {
+        "url": "https://aka.ms/azs-custom-normalizers"
       }
     },
     "LexicalTokenizer": {
@@ -5537,7 +5632,7 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource."
+          "description": "The connection string for the datasource. Set to '<unchanged>' if you do not want the connection string updated."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -5637,7 +5732,8 @@
         "cosmosdb",
         "azureblob",
         "azuretable",
-        "mysql"
+        "mysql",
+        "adlsgen2"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -5656,17 +5752,22 @@
           {
             "value": "azureblob",
             "name": "AzureBlob",
-            "description": "Indicates a Azure Blob datasource."
+            "description": "Indicates an Azure Blob datasource."
           },
           {
             "value": "azuretable",
             "name": "AzureTable",
-            "description": "Indicates a Azure Table datasource."
+            "description": "Indicates an Azure Table datasource."
           },
           {
             "value": "mysql",
             "name": "MySql",
             "description": "Indicates a MySql datasource."
+          },
+          {
+            "value": "adlsgen2",
+            "name": "AdlsGen2",
+            "description": "Indicates an ADLS Gen2 datasource."
           }
         ]
       },
@@ -5711,6 +5812,14 @@
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the data source."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition in Azure Cognitive Search. Once you have encrypted your data source definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -5779,14 +5888,253 @@
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
         "configuration": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+          "$ref": "#/definitions/IndexingParametersConfiguration"
         }
       },
-      "description": "Represents parameters for indexer execution."
+      "description": "Represents parameters for indexer execution.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "IndexingParametersConfiguration": {
+      "type": "object",
+      "properties": {
+        "parsingMode": {
+          "$ref": "#/definitions/ParsingMode"
+        },
+        "excludedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+        },
+        "indexedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+        },
+        "failOnUnsupportedContentType": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+        },
+        "failOnUnprocessableDocument": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+        },
+        "indexStorageMetadataOnlyForOversizedDocuments": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://docs.microsoft.com/azure/search/search-limits-quotas-capacity."
+        },
+        "delimitedTextHeaders": {
+          "type": "string",
+          "description": "For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index."
+        },
+        "delimitedTextDelimiter": {
+          "type": "string",
+          "description": "For CSV blobs, specifies the end-of-line single-character delimiter for CSV files where each line starts a new document (for example, \"|\")."
+        },
+        "firstLineContainsHeaders": {
+          "type": "boolean",
+          "default": true,
+          "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
+        },
+        "dataToExtract": {
+          "$ref": "#/definitions/DataToExtract"
+        },
+        "imageAction": {
+          "$ref": "#/definitions/ImageAction"
+        },
+        "allowSkillsetToReadFileData": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+        },
+        "pdfTextRotationAlgorithm": {
+          "$ref": "#/definitions/PdfTextRotationAlgorithm"
+        },
+        "executionEnvironment": {
+          "$ref": "#/definitions/ExecutionEnvironment"
+        },
+        "queryTimeout": {
+          "type": "string",
+          "default": "00:05:00",
+          "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "ParsingMode": {
+      "type": "string",
+      "enum": [
+        "default",
+        "text",
+        "delimitedText",
+        "json",
+        "jsonArray",
+        "jsonLines"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerParsingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "default",
+            "name": "Default",
+            "description": "Set to default for normal file processing."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Set to text to improve indexing performance on plain text files in blob storage."
+          },
+          {
+            "value": "delimitedText",
+            "name": "DelimitedText",
+            "description": "Set to delimitedText when blobs are plain CSV files."
+          },
+          {
+            "value": "json",
+            "name": "Json",
+            "description": "Set to json to extract structured content from JSON files."
+          },
+          {
+            "value": "jsonArray",
+            "name": "JsonArray",
+            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents in Azure Cognitive Search."
+          },
+          {
+            "value": "jsonLines",
+            "name": "JsonLines",
+            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents in Azure Cognitive Search."
+          }
+        ]
+      },
+      "default": "default",
+      "description": "Represents the parsing mode for indexing from an Azure blob data source."
+    },
+    "DataToExtract": {
+      "type": "string",
+      "enum": [
+        "storageMetadata",
+        "allMetadata",
+        "contentAndMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerDataToExtract",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "storageMetadata",
+            "name": "StorageMetadata",
+            "description": "Indexes just the standard blob properties and user-specified metadata."
+          },
+          {
+            "value": "allMetadata",
+            "name": "AllMetadata",
+            "description": "Extracts metadata provided by the Azure blob storage subsystem and the content-type specific metadata (for example, metadata unique to just .png files are indexed)."
+          },
+          {
+            "value": "contentAndMetadata",
+            "name": "ContentAndMetadata",
+            "description": "Extracts all metadata and textual content from each blob."
+          }
+        ]
+      },
+      "default": "contentAndMetadata",
+      "description": "Specifies the data to extract from Azure blob storage and tells the indexer which data to extract from image content when \"imageAction\" is set to a value other than \"none\".  This applies to embedded image content in a .PDF or other application, or image files such as .jpg and .png, in Azure blobs."
+    },
+    "ImageAction": {
+      "type": "string",
+      "enum": [
+        "none",
+        "generateNormalizedImages",
+        "generateNormalizedImagePerPage"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerImageAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Ignores embedded images or image files in the data set.  This is the default."
+          },
+          {
+            "value": "generateNormalizedImages",
+            "name": "GenerateNormalizedImages",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field.  This action requires that \"dataToExtract\" is set to \"contentAndMetadata\".  A normalized image refers to additional processing resulting in uniform image output, sized and rotated to promote consistent rendering when you include images in visual search results. This information is generated for each image when you use this option."
+          },
+          {
+            "value": "generateNormalizedImagePerPage",
+            "name": "GenerateNormalizedImagePerPage",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field, but treats PDF files differently in that each page will be rendered as an image and normalized accordingly, instead of extracting embedded images.  Non-PDF file types will be treated the same as if \"generateNormalizedImages\" was set."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines how to process embedded images and image files in Azure blob storage.  Setting the \"imageAction\" configuration to any value other than \"none\" requires that a skillset also be attached to that indexer."
+    },
+    "PdfTextRotationAlgorithm": {
+      "type": "string",
+      "enum": [
+        "none",
+        "detectAngles"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerPDFTextRotationAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Leverages normal text extraction.  This is the default."
+          },
+          {
+            "value": "detectAngles",
+            "name": "DetectAngles",
+            "description": "May produce better and more readable text extraction from PDF files that have rotated text within them.  Note that there may be a small performance speed impact when this parameter is used.  This parameter only applies to PDF files, and only to PDFs with embedded text.  If the rotated text appears within an embedded image in the PDF, this parameter does not apply."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines algorithm for text extraction from PDF files in Azure blob storage."
+    },
+    "ExecutionEnvironment": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "standard",
+            "name": "standard",
+            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+          },
+          {
+            "value": "private",
+            "name": "private",
+            "description": "Indicates that the indexer should run with the environment provisioned specifically for the search service. This should only be specified as the execution environment if the indexer needs to access resources securely over shared private link resources."
+          }
+        ]
+      },
+      "default": "standard",
+      "description": "Specifies the environment in which the indexer should execute."
     },
     "FieldMappingFunction": {
       "properties": {
@@ -5900,6 +6248,14 @@
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the indexer."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them in Azure Cognitive Search. Once you have encrypted your indexer definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -6267,6 +6623,14 @@
           "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
           "x-nullable": true
         },
+        "normalizer": {
+          "externalDocs": {
+            "url": "https://aka.ms/azs-normalizers"
+          },
+          "$ref": "#/definitions/LexicalNormalizerName",
+          "description": "The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
+        },
         "synonymMaps": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Synonym-Map-operations"
@@ -6622,7 +6986,8 @@
         "maxAgeInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes."
+          "description": "The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -6751,6 +7116,16 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
           }
         },
+        "normalizers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          },
+          "description": "The normalizers for the index.",
+          "externalDocs": {
+            "url": "https://aka.ms/azs-custom-normalizers"
+          }
+        },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
@@ -6840,10 +7215,22 @@
           "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
+        "knowledgeStore": {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
+          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the skillset."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition in Azure Cognitive Search. Once you have encrypted your skillset definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -6871,6 +7258,138 @@
         "@odata.type"
       ],
       "description": "Base type for describing any cognitive service resource attached to a skillset."
+    },
+    "SearchIndexerKnowledgeStore": {
+      "properties": {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the storage account projections will be stored in."
+        },
+        "projections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjection",
+            "x-nullable": false
+          },
+          "description": "A list of additional projections to perform during indexing."
+        }
+      },
+      "required": [
+        "storageConnectionString",
+        "projections"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/knowledge-store-projection-overview"
+      },
+      "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+    },
+    "SearchIndexerKnowledgeStoreProjection": {
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreTableProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Table storage."
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreObjectProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Blob storage."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreFileProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure File storage."
+        }
+      },
+      "description": "Container object for various projection selectors."
+    },
+    "SearchIndexerKnowledgeStoreProjectionSelector": {
+      "properties": {
+        "referenceKeyName": {
+          "type": "string",
+          "description": "Name of reference key to different projection."
+        },
+        "generatedKeyName": {
+          "type": "string",
+          "description": "Name of generated key to store projection under."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source data to project."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "Source context for complex projections."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Nested inputs for complex projections."
+        }
+      },
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreBlobProjectionSelector": {
+      "properties": {
+        "storageContainer": {
+          "type": "string",
+          "description": "Blob container to store projections in."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "required": [
+        "storageContainer"
+      ],
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreTableProjectionSelector": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Name of the Azure table to store projected data in."
+        }
+      },
+      "required": [
+        "generatedKeyName",
+        "tableName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Tables."
+    },
+    "SearchIndexerKnowledgeStoreObjectProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Blob."
+    },
+    "SearchIndexerKnowledgeStoreFileProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Files."
     },
     "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
@@ -6942,6 +7461,106 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-predefined-skills"
       },
       "description": "Base type for skills."
+    },
+    "CustomEntity": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The top-level entity descriptor. Matches in the skill output will be grouped by this name, and it should represent the \"normalized\" form of the text being found."
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+        },
+        "type": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+        },
+        "subtype": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+        },
+        "caseSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to character casing. Sample case insensitive matches of \"Microsoft\" could be: microsoft, microSoft, MICROSOFT."
+        },
+        "accentSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent."
+        },
+        "fuzzyEditDistance": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Defaults to 0. Maximum value of 5. Denotes the acceptable number of divergent characters that would still constitute a match with the entity name. The smallest possible fuzziness for any given match is returned. For instance, if the edit distance is set to 3, \"Windows10\" would still match \"Windows\", \"Windows10\" and \"Windows 7\". When case sensitivity is set to false, case differences do NOT count towards fuzziness tolerance, but otherwise do."
+        },
+        "defaultCaseSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values."
+        },
+        "defaultAccentSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Changes the default accent sensitivity value for this entity. It be used to change the default value of all aliases accentSensitive values."
+        },
+        "defaultFuzzyEditDistance": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Changes the default fuzzy edit distance value for this entity. It can be used to change the default value of all aliases fuzzyEditDistance values."
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityAlias"
+          },
+          "x-nullable": true,
+          "description": "An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "An object that contains information about the matches that were found, and related metadata."
+    },
+    "CustomEntityAlias": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the alias."
+        },
+        "caseSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Determine if the alias is case sensitive."
+        },
+        "accentSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Determine if the alias is accent sensitive."
+        },
+        "fuzzyEditDistance": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Determine the fuzzy edit distance of the alias."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "description": "A complex object that can be used to specify alternative spellings or synonyms to the root entity name."
     },
     "InputFieldMappingEntry": {
       "properties": {
@@ -7018,6 +7637,11 @@
           "format": "int32",
           "x-nullable": true,
           "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -7090,6 +7714,18 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
+      "properties": {
+        "defaultCountryHint": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
       },
@@ -7186,6 +7822,162 @@
       },
       "description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1."
     },
+    "SentimentSkillV3": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "includeOpinionMining": {
+          "type": "boolean",
+          "default": false,
+          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment-v3"
+      },
+      "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level."
+    },
+    "EntityLinkingSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityLinkingSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-linking-v3"
+      },
+      "description": "Using the Text Analytics API, extracts linked entities from text."
+    },
+    "EntityRecognitionSkillV3": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          },
+          "description": "A list of entity categories that should be extracted."
+        },
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition-v3"
+      },
+      "description": "Using the Text Analytics API, extracts entities of different types from text."
+    },
+    "PIIDetectionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.PIIDetectionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "maskingMode": {
+          "$ref": "#/definitions/PIIDetectionSkillMaskingMode",
+          "description": "A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'."
+        },
+        "maskingCharacter": {
+          "type": "string",
+          "x-nullable": true,
+          "maxLength": 1,
+          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        },
+        "piiCategories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          },
+          "description": "A list of PII entity categories that should be extracted and masked."
+        },
+        "domain": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-pii-detection"
+      },
+      "description": "Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it."
+    },
     "SplitSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
       "allOf": [
@@ -7214,6 +8006,54 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit"
       },
       "description": "A skill to split a string into chunks of text."
+    },
+    "CustomEntityLookupSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "entitiesDefinitionUri": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS."
+        },
+        "inlineEntitiesDefinition": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntity"
+          },
+          "x-nullable": true,
+          "description": "The inline CustomEntity definition."
+        },
+        "globalDefaultCaseSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value."
+        },
+        "globalDefaultAccentSensitive": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value."
+        },
+        "globalDefaultFuzzyEditDistance": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-skill-custom-entity-lookup"
+      },
+      "description": "A skill looks for text from a custom, user-defined list of words and phrases."
     },
     "TextTranslationSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.TranslationSkill",
@@ -7244,6 +8084,38 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation"
       },
       "description": "A skill to translate text from one language to another."
+    },
+    "DocumentExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "parsingMode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The parsingMode for the skill. Will be set to 'default' if not defined."
+        },
+        "dataToExtract": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-nullable": true,
+          "description": "A dictionary of configurations for the skill."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "A skill that extracts content from a file within the enrichment pipeline."
     },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
@@ -7470,6 +8342,30 @@
         ]
       },
       "description": "A string indicating what entity categories to return."
+    },
+    "PIIDetectionSkillMaskingMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "replace"
+      ],
+      "x-ms-enum": {
+        "name": "PIIDetectionSkillMaskingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "No masking occurs and the maskedText output will not be returned."
+          },
+          {
+            "value": "replace",
+            "name": "Replace",
+            "description": "Replaces the detected entities with the character given in the maskingCharacter parameter. The character will be repeated to the length of the detected entity so that the offsets will correctly correspond to both the input text as well as the output maskedText."
+          }
+        ]
+      },
+      "description": "A string indicating what maskingMode to use to mask the personal information detected in the input text."
     },
     "SentimentSkillLanguage": {
       "type": "string",
@@ -7848,6 +8744,63 @@
         ]
       },
       "description": "The language codes supported for input text by SplitSkill."
+    },
+    "CustomEntityLookupSkillLanguage": {
+      "type": "string",
+      "enum": [
+        "da",
+        "de",
+        "en",
+        "es",
+        "fi",
+        "fr",
+        "it",
+        "ko",
+        "pt"
+      ],
+      "x-ms-enum": {
+        "name": "CustomEntityLookupSkillLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "pt",
+            "description": "Portuguese"
+          }
+        ]
+      },
+      "description": "The language codes supported for input text by CustomEntityLookupSkill."
     },
     "EntityRecognitionSkillLanguage": {
       "type": "string",
@@ -8521,8 +9474,7 @@
         "indexersCount",
         "dataSourcesCount",
         "storageSize",
-        "synonymMaps",
-        "skillsetCount"
+        "synonymMaps"
       ],
       "description": "Represents service-level resource counters and quotas."
     },

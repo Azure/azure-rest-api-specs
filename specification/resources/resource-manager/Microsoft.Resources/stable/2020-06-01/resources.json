@@ -1540,7 +1540,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group with the deployment to delete. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1583,7 +1582,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group with the deployment to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1626,7 +1624,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to deploy the resources to. The name is case insensitive. The resource group must already exist.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1695,7 +1692,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1740,7 +1736,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1782,7 +1777,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1844,7 +1838,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1919,7 +1912,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -1963,7 +1955,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group with the deployments to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2037,6 +2028,41 @@
             "schema": {
               "$ref": "#/definitions/Provider"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/{resourceProviderNamespace}/register": {
+      "post": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_RegisterAtManagementGroupScope",
+        "description": "Registers a management group with a resource provider.",
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider to register."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the resource provider."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2286,7 +2312,6 @@
             "required": true,
             "type": "string",
             "description": "The resource group with the resources to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2353,7 +2378,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2397,7 +2421,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to create or update. Can include alphanumeric, underscore, parentheses, hyphen, period (except at end), and Unicode characters that match the allowed characters.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2452,9 +2475,15 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to delete. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "name": "forceDeletionTypes",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The resource types you want to force delete. Currently, only the following is supported: forceDeletionTypes=Microsoft.Compute/virtualMachines,Microsoft.Compute/virtualMachineScaleSets"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2463,6 +2492,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
+        "x-ms-examples": {
+          "Force delete all the Virtual Machines in a resource group": {
+            "$ref": "./examples/ForceDeleteVMsInResourceGroup.json"
+          },
+          "Force delete all the Virtual Machines and Virtual Machine Scale Sets in a resource group": {
+            "$ref": "./examples/ForceDeleteVMsAndVMSSInResourceGroup.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -2492,7 +2529,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2532,7 +2568,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to update. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2691,7 +2726,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group containing the resources to move.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2743,7 +2777,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group containing the resources to validate for move.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2851,7 +2884,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group containing the resource to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -2925,7 +2957,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group that contains the resource to delete. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -3003,7 +3034,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -3096,7 +3126,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -3183,7 +3212,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group containing the resource to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -4043,7 +4071,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -4094,7 +4121,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
           },
@@ -4441,6 +4467,10 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeployment",
           "description": "The deployment on error behavior."
+        },
+        "expressionEvaluationOptions": {
+          "$ref": "#/definitions/ExpressionEvaluationOptions",
+          "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template. Only applicable to nested templates. If not specified, default value is outer."
         }
       },
       "required": [
@@ -4828,6 +4858,12 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
@@ -5208,8 +5244,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The kind of the resource.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$"
+          "description": "The kind of the resource."
         },
         "managedBy": {
           "type": "string",
@@ -6149,6 +6184,38 @@
           "description": "The error reported by the operation."
         }
       }
+    },
+    "ExpressionEvaluationOptions": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The scope to be used for evaluation of parameters, variables and functions in a nested template.",
+          "enum": [
+            "NotSpecified",
+            "Outer",
+            "Inner"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressionEvaluationOptionsScopeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -6183,7 +6250,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method",
       "minLength": 1,
       "maxLength": 64,

@@ -4297,6 +4297,12 @@
           },
           "description": "The API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "capabilities": {
           "type": "string",
           "description": "The additional capabilities offered by this resource type."
@@ -5382,6 +5388,20 @@
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
+        }
+      }
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

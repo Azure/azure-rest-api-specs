@@ -346,35 +346,6 @@
         }
       }
     },
-    "ResourceIdentity": {
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory principal id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory tenant id.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ServerProperties": {
       "description": "The properties of a server.",
       "type": "object",
@@ -594,7 +565,7 @@
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResourceIdentity",
+          "$ref": "../../../common/v1/types.json#/definitions/ResourceIdentity",
           "description": "The Azure Active Directory identity of the server.",
           "x-ms-mutability": [
             "read",

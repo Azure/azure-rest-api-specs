@@ -31,7 +31,7 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:

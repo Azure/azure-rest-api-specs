@@ -9,4 +9,5 @@ typescript:
   package-name: "@azure/arm-synapse"
   output-folder: "$(typescript-sdks-folder)/sdk/synapse/arm-synapse"
   generate-metadata: true
+  clear-output-folder: true 
 ```
