@@ -1257,7 +1257,11 @@
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server."
+          "description": "Maintenance window of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         },
         "haEnabled": {
           "type": "string",
@@ -1270,6 +1274,23 @@
             "name": "HAEnabledEnum",
             "modelAsString": false
           }
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of standbys.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "logBackupStorageSku": {
+          "type": "string",
+          "description": "The log backup storage sku of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sourceServerName": {
           "type": "string",
@@ -1290,7 +1311,11 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "availability Zone information of the server."
+          "description": "availability Zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "standbyAvailabilityZone": {
           "type": "string",
@@ -1414,9 +1439,22 @@
             "modelAsString": false
           }
         },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of standbys.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server."
+          "description": "Maintenance window of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         }
       }
     },
