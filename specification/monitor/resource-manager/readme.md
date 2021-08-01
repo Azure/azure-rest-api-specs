@@ -35,9 +35,18 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-04
+tag: package-2021-08
 ```
 
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
+```
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
@@ -68,6 +77,7 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
+
 ### Tag: package-2021-05-01-preview-only
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
@@ -79,6 +89,7 @@ input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
+
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
@@ -194,7 +205,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-07-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07-only'
+``` yaml $(tag) == 'package-2019-07-only'
 input-file:
   - Microsoft.Insights/stable/2019-07-01/metrics_API.json
   - Microsoft.Insights/stable/2019-07-01/operations_API.json
@@ -411,7 +422,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-09-preview-only'
+``` yaml $(tag) == 'package-2017-09-preview-only'
 input-file:
   - Microsoft.Insights/preview/2017-09-01-preview/operations_API.json
   - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
@@ -588,7 +599,7 @@ input-file:
 
 These settings apply only when `--tag=package-2016-06-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-06-only'
+``` yaml $(tag) == 'package-2016-06-only'
 input-file:
   - Microsoft.Insights/stable/2016-06-01/metrics_API.json
   - Microsoft.Insights/stable/2016-06-01/operations_API.json
@@ -840,5 +851,3 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
-
-
