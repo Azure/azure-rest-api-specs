@@ -210,12 +210,15 @@
           "type": "string",
           "example": "ExploitKit"
         },
-        "source": {
-          "description": "The source of the vulnerability",
-          "readOnly": true,
-          "type": "string",
-          "example": "Nvd"
-        },
+		"sources": {
+		  "description": "The sources of the vulnerability",
+		  "readOnly": true,
+		  "type": "array",
+		  "items": {
+		    "type": "string",
+		    "example": "Nvd"
+		  }
+		},
         "affectedVersions": {
           "description": "The vulnerability affected versions",
           "readOnly": true,
