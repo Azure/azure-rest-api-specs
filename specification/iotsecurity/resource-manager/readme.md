@@ -96,9 +96,9 @@ These settings apply only when `--tag=2021-09-01-preview` is specified on the co
 ``` yaml $(tag) == '2021-09-01-preview'
 input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
-- Microsoft.IoTSecurity/preview/2021-07-01-preview/locations.json
-- Microsoft.IoTSecurity/preview/2021-07-01-preview/sites.json
-- Microsoft.IoTSecurity/preview/2021-07-01-preview/sensors.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/locations.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/sites.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/sensors.json
 ```
 
 ---
