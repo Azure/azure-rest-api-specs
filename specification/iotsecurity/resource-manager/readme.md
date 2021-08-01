@@ -89,6 +89,14 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendationTypes.json
 ```
 
+
+``` yaml
+title: IoTSecurity
+description: API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider
+openapi-type: arm
+tag: 2021-09-01-preview
+```
+
 ### Tag: 2021-09-01-preview
 
 These settings apply only when `--tag=2021-09-01-preview` is specified on the command line.
