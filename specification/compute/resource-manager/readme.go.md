@@ -8,7 +8,8 @@ go:
   clear-output-folder: true
 
 directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum to avoid the generator generates the code by hard-coding the single entried enum value
+    # dynamically add a DummyOrchestrationServiceName value to the enum and then remove it from the generated code to avoid the generator generates the code by hard-coding the single-entry enum value
+    # this directive adds a DummyOrchestrationServiceName to the enum type
   - from: compute.json
     where: $..enum
     transform: >-
@@ -17,6 +18,7 @@ directive:
       }
       return $;
 
+    # this directive removes the DummyOrchestrationServiceName from the generated code, so that we still have only one enum entry in this enum type.
   - from: source-file-go
     where: $ 
     transform: >-
@@ -35,7 +37,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 
 directive:
-  # we do not need to hack to add a dummy enum entry in track 2      
+  # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
   - from: disk.json
     where: "$.definitions.PurchasePlan"
     transform: >
