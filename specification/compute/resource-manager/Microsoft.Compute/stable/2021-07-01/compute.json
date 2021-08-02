@@ -3137,6 +3137,9 @@
           "Create a VM with UserData": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithUserData.json"
           },
+          "Create a vm with Application Profile.": {
+            "$ref": "./examples/compute/CreateAVmWithApplicationProfile.json"
+          },
           "Create a VM with HibernationEnabled": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithHibernationEnabled.json"
           },
@@ -5407,6 +5410,9 @@
           },
           "Create a scale set with userData.": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithUserData.json"
+          },
+          "Create a scale set with Application Profile": {
+            "$ref": "./examples/compute/CreateAScaleSetWithApplicationProfile.json"
           },
           "Create a scale set with scaleInPolicy.": {
             "$ref": "./examples/compute/CreateAScaleSetWithScaleInPolicy.json"
@@ -11012,6 +11018,45 @@
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
     },
+    "VMGalleryApplication": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "string",
+          "description": "Optional, Specifies a passthrough value for more generic context."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional, Specifies the order in which the packages have to be installed"
+        },
+        "packageReferenceId": {
+          "type": "string",
+          "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}"
+        },
+        "configurationReference": {
+          "type": "string",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided"
+        }
+      },
+      "required": [
+        "packageReferenceId"
+      ],
+      "description": "Specifies the required information to reference a compute gallery application version"
+    },
+    "ApplicationProfile": {
+      "type": "object",
+      "properties": {
+        "galleryApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplication"
+          },
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        }
+      },
+      "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
+    },
     "AdditionalCapabilities": {
       "properties": {
         "ultraSSDEnabled": {
@@ -12039,6 +12084,10 @@
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -13470,6 +13519,10 @@
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies the capacity reservation related details of a scale set. <br><br>Minimum api-version: 2021-04-01."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
