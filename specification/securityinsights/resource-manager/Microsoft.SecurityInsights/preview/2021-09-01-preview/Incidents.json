@@ -1026,38 +1026,6 @@
       "type": "object",
       "x-ms-discriminator-value": "Activity"
     },
-    "AlertSeverity": {
-      "description": "The severity of the alert",
-      "enum": [
-        "High",
-        "Medium",
-        "Low",
-        "Informational"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AlertSeverity",
-        "values": [
-          {
-            "description": "High severity",
-            "value": "High"
-          },
-          {
-            "description": "Medium severity",
-            "value": "Medium"
-          },
-          {
-            "description": "Low severity",
-            "value": "Low"
-          },
-          {
-            "description": "Informational severity",
-            "value": "Informational"
-          }
-        ]
-      }
-    },
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
       "enum": [
@@ -3483,8 +3451,9 @@
           "type": "array"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The severity of the alert"
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity of the alert",
+          "type":  "string"
         },
         "startTimeUtc": {
           "description": "The impact start time of the alert (the time of the first event contributing to the alert).",
@@ -3595,7 +3564,7 @@
           "description": "The alert name."
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The alert severity."
         },
         "endTimeUtc": {

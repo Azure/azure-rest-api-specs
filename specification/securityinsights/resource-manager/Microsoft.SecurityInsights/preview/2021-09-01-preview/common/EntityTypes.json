@@ -302,6 +302,35 @@
         }
       },
       "type": "object"
+    },
+    "Entity": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/EntityKind"
+        }
+      ],
+      "description": "Specific entity.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityKind": {
+      "description": "Describes an entity with kind.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
     }
   },
   "parameters": {

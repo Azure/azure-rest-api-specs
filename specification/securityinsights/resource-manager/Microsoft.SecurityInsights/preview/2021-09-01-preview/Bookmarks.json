@@ -585,7 +585,7 @@
             "entities": {
               "description": "Array of the expansion result entities.",
               "items": {
-                "$ref": "#/definitions/Entity"
+                "$ref": "./common/EntityTypes.json#/definitions/Entity"
               },
               "type": "array"
             },
@@ -715,35 +715,6 @@
           "type": "string"
         }
       },
-      "type": "object"
-    },
-    "Entity": {
-      "allOf": [
-        {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/EntityKind"
-        }
-      ],
-      "description": "Specific entity.",
-      "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
-    },
-    "EntityKind": {
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "required": [
-        "kind"
-      ],
       "type": "object"
     },
     "ConnectedEntity": {

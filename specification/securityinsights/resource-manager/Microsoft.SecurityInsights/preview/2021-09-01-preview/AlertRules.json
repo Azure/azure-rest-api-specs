@@ -804,38 +804,6 @@
         "value"
       ]
     },
-    "AlertSeverity": {
-      "description": "The severity of the alert",
-      "enum": [
-        "High",
-        "Medium",
-        "Low",
-        "Informational"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AlertSeverity",
-        "values": [
-          {
-            "description": "High severity",
-            "value": "High"
-          },
-          {
-            "description": "Medium severity",
-            "value": "Medium"
-          },
-          {
-            "description": "Low severity",
-            "value": "Low"
-          },
-          {
-            "description": "Informational severity",
-            "value": "Informational"
-          }
-        ]
-      }
-    },
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
       "enum": [
@@ -904,7 +872,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule.",
           "readOnly": true
         },
@@ -940,7 +908,7 @@
           "description": "MLBehaviorAnalytics alert rule template properties.",
           "properties": {
             "severity": {
-              "$ref": "#/definitions/AlertSeverity",
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
             },
             "tactics": {
@@ -1010,7 +978,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule.",
           "readOnly": true
         },
@@ -1046,7 +1014,7 @@
           "description": "Fusion alert rule template properties",
           "properties": {
             "severity": {
-              "$ref": "#/definitions/AlertSeverity",
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
             },
             "tactics": {
@@ -1116,7 +1084,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule.",
           "readOnly": true
         },
@@ -1152,7 +1120,7 @@
           "description": "Threat Intelligence alert rule template properties",
           "properties": {
             "severity": {
-              "$ref": "#/definitions/AlertSeverity",
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
             },
             "tactics": {
@@ -1231,7 +1199,7 @@
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
-            "$ref": "#/definitions/AlertSeverity"
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
           "type": "array"
         }
@@ -1478,7 +1446,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
