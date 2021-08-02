@@ -38,3 +38,7 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 input-file:
 - preview/2019-11-01-preview/account.json
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
