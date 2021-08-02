@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "ApiVersion": "v3.2-preview.1",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "id": "1",
+          "language": "en",
+          "text": "Microsoft was founded by Bill Gates and Paul Allen."
+        },
+        {
+          "id": "2",
+          "language": "en",
+          "text": "Pike place market is my favorite Seattle attraction."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "entities": [
+              {
+                "dataSource": "Wikipedia",
+                "id": "Bill Gates",
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.52,
+                    "length": 10,
+                    "offset": 25,
+                    "text": "Bill Gates"
+                  }
+                ],
+                "name": "Bill Gates",
+                "url": "https://en.wikipedia.org/wiki/Bill_Gates"
+              },
+              {
+                "dataSource": "Wikipedia",
+                "id": "Paul Allen",
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.54,
+                    "length": 10,
+                    "offset": 40,
+                    "text": "Paul Allen"
+                  }
+                ],
+                "name": "Paul Allen",
+                "url": "https://en.wikipedia.org/wiki/Paul_Allen"
+              },
+              {
+                "dataSource": "Wikipedia",
+                "id": "Microsoft",
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.49,
+                    "length": 9,
+                    "offset": 0,
+                    "text": "Microsoft"
+                  }
+                ],
+                "name": "Microsoft",
+                "url": "https://en.wikipedia.org/wiki/Microsoft"
+              }
+            ],
+            "id": "1",
+            "warnings": []
+          },
+          {
+            "entities": [
+              {
+                "dataSource": "Wikipedia",
+                "id": "Pike Place Market",
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.86,
+                    "length": 17,
+                    "offset": 0,
+                    "text": "Pike place market"
+                  }
+                ],
+                "name": "Pike Place Market",
+                "url": "https://en.wikipedia.org/wiki/Pike_Place_Market"
+              },
+              {
+                "dataSource": "Wikipedia",
+                "id": "Seattle",
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.27,
+                    "length": 7,
+                    "offset": 33,
+                    "text": "Seattle"
+                  }
+                ],
+                "name": "Seattle",
+                "url": "https://en.wikipedia.org/wiki/Seattle"
+              }
+            ],
+            "id": "2",
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-02-01"
+      }
+    }
+  }
+}
