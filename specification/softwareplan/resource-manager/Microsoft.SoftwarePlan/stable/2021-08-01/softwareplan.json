@@ -346,7 +346,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -367,8 +367,45 @@
         "message": {
           "type": "string",
           "description": "A user readable error message. Localized based on x-ms-effective-locale header in the request"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The list of error details.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "ErrorCode": {
       "type": "string",
@@ -380,6 +417,22 @@
       "x-ms-enum": {
         "name": "ErrorCode",
         "modelAsString": true
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        }
       }
     },
     "Sku": {
@@ -407,6 +460,7 @@
     },
     "HybridUseBenefitListResult": {
       "description": "List of hybrid use benefits",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of hybrid use benefits",
@@ -423,6 +477,7 @@
     },
     "HybridUseBenefitModel": {
       "description": "Response on GET of a hybrid use benefit",
+      "type": "object",
       "required": [
         "sku"
       ],
@@ -446,11 +501,16 @@
           "description": "Property bag for a hybrid use benefit response",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HybridUseBenefitProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
     "HybridUseBenefitProperties": {
       "description": "Hybrid use benefit properties",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
