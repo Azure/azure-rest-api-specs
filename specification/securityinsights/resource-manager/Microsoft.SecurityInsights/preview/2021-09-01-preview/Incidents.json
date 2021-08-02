@@ -2051,40 +2051,8 @@
         },
         "severity": {
           "description": "The severity of the incident",
-          "enum": [
-            "Critical",
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "CaseSeverity",
-            "values": [
-              {
-                "description": "Critical severity",
-                "value": "Critical"
-              },
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
         },
         "teamInformation": {
           "$ref": "#/definitions/TeamInformation",
@@ -2121,57 +2089,6 @@
       "required": [
         "value"
       ],
-      "type": "object"
-    },
-    "IncidentOwnerInfo": {
-      "description": "Information on the user an incident is assigned to",
-      "properties": {
-        "email": {
-          "description": "The email of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "assignedTo": {
-          "description": "The name of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user the incident is assigned to.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "ownerType": {
-          "readOnly": true,
-          "description": "The type of the owner the incident is assigned to.",
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "User",
-            "Group"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "OwnerType",
-            "values": [
-              {
-                "description": "The incident owner type is unknown",
-                "value": "Unknown"
-              },
-              {
-                "description": "The incident owner type is an AAD user",
-                "value": "User"
-              },
-              {
-                "description": "The incident owner type is an AAD group",
-                "value": "Group"
-              }
-            ]
-          }
-        }
-      },
       "type": "object"
     },
     "IncidentProperties": {
@@ -2251,7 +2168,7 @@
           "type": "string"
         },
         "owner": {
-          "$ref": "#/definitions/IncidentOwnerInfo",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo",
           "description": "Describes a user that the incident is assigned to",
           "type": "object"
         },

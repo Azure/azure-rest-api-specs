@@ -164,6 +164,57 @@
           }
         ]
       }
+    },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "ownerType": {
+          "readOnly": true,
+          "description": "The type of the owner the incident is assigned to.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OwnerType",
+            "values": [
+              {
+                "description": "The incident owner type is unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "The incident owner type is an AAD user",
+                "value": "User"
+              },
+              {
+                "description": "The incident owner type is an AAD group",
+                "value": "Group"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
