@@ -2,7 +2,7 @@
 
 ## Features
 
-`oav` support run test scenario file.
+`oav` support run test scenario file. [oav：openapi validaiton tool](https://github.com/Azure/oav)
 
 - Very easy to use and run.
 - Support postman collection format. Debug easily.
