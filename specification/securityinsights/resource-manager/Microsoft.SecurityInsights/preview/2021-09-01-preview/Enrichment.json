@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -48,13 +48,13 @@
         "operationId": "IPGeodata_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/EnrichmentIpAddress"
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed to enrich this ip.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -90,13 +90,13 @@
         "operationId": "DomainWhois_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/EnrichmentDomain"
@@ -112,7 +112,7 @@
           "default": {
             "description": "Error response describing why the operation failed to enrich this domain.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -168,7 +168,8 @@
           "description": "The whois record for a given domain",
           "$ref": "#/definitions/EnrichmentDomainWhoisDetails"
         }
-      }
+      },
+      "type":  "object"
     },
     "EnrichmentDomainWhoisDetails": {
       "description": "The whois record for a given domain",
@@ -195,7 +196,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "type": "object"
     },
     "EnrichmentDomainWhoisRegistrarDetails": {
       "description": "The registrar associated with this domain",
@@ -224,7 +226,8 @@
           "description": "The hostname of this registrar's whois server",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "EnrichmentDomainWhoisContacts": {
       "description": "The set of contacts associated with this domain",
@@ -245,7 +248,8 @@
           "description": "The technical contact for this whois record",
           "$ref": "#/definitions/EnrichmentDomainWhoisContact"
         }
-      }
+      },
+      "type": "object"
     },
     "EnrichmentDomainWhoisContact": {
       "description": "An individual contact associated with this domain",
@@ -293,7 +297,8 @@
           "description": "The email address for this contact",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "EnrichmentIpGeodata": {
       "description": "Geodata information for a given IP address",
@@ -369,7 +374,8 @@
           "description": "The abbreviated name for the state this IP address is located in",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     }
   }
 }
