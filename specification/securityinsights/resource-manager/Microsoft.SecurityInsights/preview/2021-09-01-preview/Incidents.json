@@ -2102,42 +2102,6 @@
       },
       "type": "object"
     },
-    "IncidentLabel": {
-      "description": "Represents an incident label",
-      "properties": {
-        "labelName": {
-          "description": "The name of the label",
-          "type": "string"
-        },
-        "labelType": {
-          "description": "The type of the label",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentLabelType",
-            "values": [
-              {
-                "description": "Label manually created by a user",
-                "value": "User"
-              },
-              {
-                "description": "Label automatically created by the system",
-                "value": "System"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "labelName"
-      ],
-      "type": "object"
-    },
     "IncidentList": {
       "description": "List all the incidents.",
       "properties": {
@@ -2221,35 +2185,8 @@
         },
         "classification": {
           "description": "The reason the incident was closed",
-          "enum": [
-            "Undetermined",
-            "TruePositive",
-            "BenignPositive",
-            "FalsePositive"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentClassification",
-            "values": [
-              {
-                "description": "Incident classification was undetermined",
-                "value": "Undetermined"
-              },
-              {
-                "description": "Incident was true positive",
-                "value": "TruePositive"
-              },
-              {
-                "description": "Incident was benign positive",
-                "value": "BenignPositive"
-              },
-              {
-                "description": "Incident was false positive",
-                "value": "FalsePositive"
-              }
-            ]
-          }
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
         },
         "classificationComment": {
           "description": "Describes the reason the incident was closed",
@@ -2257,35 +2194,9 @@
         },
         "classificationReason": {
           "description": "The classification reason the incident was closed with",
-          "enum": [
-            "SuspiciousActivity",
-            "SuspiciousButExpected",
-            "IncorrectAlertLogic",
-            "InaccurateData"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentClassificationReason",
-            "values": [
-              {
-                "description": "Classification reason was suspicious activity",
-                "value": "SuspiciousActivity"
-              },
-              {
-                "description": "Classification reason was suspicious but expected",
-                "value": "SuspiciousButExpected"
-              },
-              {
-                "description": "Classification reason was incorrect alert logic",
-                "value": "IncorrectAlertLogic"
-              },
-              {
-                "description": "Classification reason was inaccurate data",
-                "value": "InaccurateData"
-              }
-            ]
-          }
+
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
         },
         "createdTimeUtc": {
           "description": "The time the incident was created",
@@ -2316,7 +2227,7 @@
         "labels": {
           "description": "List of labels relevant to this incident",
           "items": {
-            "$ref": "#/definitions/IncidentLabel"
+            "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
           },
           "type": "array"
         },
@@ -2355,62 +2266,13 @@
         },
         "severity": {
           "description": "The severity of the incident",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentSeverity",
-            "values": [
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
         },
         "status": {
           "description": "The status of the incident",
-          "enum": [
-            "New",
-            "Active",
-            "Closed"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentStatus",
-            "values": [
-              {
-                "description": "An active incident which isn't being handled currently",
-                "value": "New"
-              },
-              {
-                "description": "An active incident which is being handled",
-                "value": "Active"
-              },
-              {
-                "description": "A non-active incident",
-                "value": "Closed"
-              }
-            ]
-          }
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
         },
         "title": {
           "description": "The title of the incident",

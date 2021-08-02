@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -48,19 +48,19 @@
         "operationId": "AutomationRules_List",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -96,19 +96,19 @@
         "operationId": "AutomationRules_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -124,7 +124,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -142,19 +142,19 @@
         "operationId": "AutomationRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -179,7 +179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -197,19 +197,19 @@
         "operationId": "AutomationRules_Delete",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/AutomationRuleId"
@@ -225,7 +225,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -256,7 +256,7 @@
     "AutomationRule": {
       "allOf": [
         {
-          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an automation rule.",
@@ -371,13 +371,13 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "SecurityInsights.json#/definitions/ClientInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/ClientInfo",
           "description": "Describes the client that created the automation rule",
           "readOnly": true,
           "type": "object"
         },
         "lastModifiedBy": {
-          "$ref": "SecurityInsights.json#/definitions/ClientInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/ClientInfo",
           "description": "Describes the client that last updated the automation rule",
           "readOnly": true,
           "type": "object"
@@ -453,36 +453,40 @@
           "description": "The configuration of the modify properties automation rule action",
           "properties": {
             "classification": {
-              "$ref": "SecurityInsights.json#/definitions/IncidentClassification",
-              "description": "The reason the incident was closed"
+              "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum",
+              "description": "The reason the incident was closed",
+              "type": "string"
             },
             "classificationComment": {
               "description": "Describes the reason the incident was closed",
               "type": "string"
             },
             "classificationReason": {
-              "$ref": "SecurityInsights.json#/definitions/IncidentClassificationReason",
-              "description": "The classification reason to close the incident with"
+              "description": "The classification reason the incident was closed with",
+              "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum",
+              "type":  "string"
             },
             "labels": {
               "description": "List of labels to add to the incident",
               "items": {
-                "$ref": "SecurityInsights.json#/definitions/IncidentLabel"
+                "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
               },
               "type": "array"
             },
             "owner": {
-              "$ref": "SecurityInsights.json#/definitions/IncidentOwnerInfo",
+              "$ref": "#/definitions/IncidentOwnerInfo",
               "description": "Describes a user that the incident is assigned to",
               "type": "object"
             },
             "severity": {
-              "$ref": "SecurityInsights.json#/definitions/IncidentSeverity",
-              "description": "The severity of the incident"
+              "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum",
+              "description": "The severity of the incident",
+              "type": "string"
             },
             "status": {
-              "$ref": "SecurityInsights.json#/definitions/IncidentStatus",
-              "description": "The status of the incident"
+              "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum",
+              "description": "The status of the incident",
+              "type": "string"
             }
           },
           "type": "object"
@@ -912,6 +916,29 @@
         "triggersOn",
         "triggersWhen"
       ],
+      "type": "object"
+    },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        }
+      },
       "type": "object"
     }
   }

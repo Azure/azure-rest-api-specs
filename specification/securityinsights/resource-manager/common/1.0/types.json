@@ -75,6 +75,29 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ClientInfo": {
+      "description": "Information on the client (user or application) that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the client.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the client.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the client.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the client.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
