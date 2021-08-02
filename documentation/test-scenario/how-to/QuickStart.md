@@ -32,7 +32,7 @@ First, create a folder `scenarios` under the api version folder. All test scenar
 ![](./folder-structure.png)
 
 Now write your basic test scenario. For more detail about test scenario file format, please refer to
-[Test Scenario Definition Reference](./TestDefinitionReference.md).
+[Test Scenario Definition Reference](../references/TestDefinitionReference.md).
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/references/TestDefinitionFileSchema.json

@@ -2,7 +2,7 @@
 
 ## Features
 
-`oav` support run test scenario file. [oav：openapi validaiton tool](https://github.com/Azure/oav)
+`oav` support run test scenario file. [oav：openapi validation tool](https://github.com/Azure/oav)
 
 - Very easy to use and run.
 - Support postman collection format. Debug easily.
@@ -12,21 +12,17 @@
 
 #### Demo gif
 
-![](./runApiTest.gif)
+![](./how-to/runApiTest.gif)
 
 ## Quick start
 
-- [Example: Write and run your first test scenario file](./QuickStart.md)
-- [Example: Generate a basic test scenario file](./generateABasicTestScenario.md)
-- [Example: use armTemplate to generate unique resourceName](./testScenarioWithARMTemplate.md)
+- [Example: Write and run your first test scenario file](./how-to/QuickStart.md)
+- [Example: Generate a basic test scenario file](./how-to/generateABasicTestScenario.md)
+- [Example: use armTemplate to generate unique resourceName](./how-to/testScenarioWithARMTemplate.md)
 - [Test scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/testYourService.yaml)
 
 ## References
-
-[Test Scenario Definition Reference](./references/TestDefinitionReference.md)
-
-[Test Scenario Variable Definition Reference](./references/Variables.md)
-
-[Test Scenario Runner Reference](./references/Runner.md)
-
-[Test Scenario Schema Reference](./references/TestDefinitionFileSchema.json)
+- [Test Scenario Definition Reference](./references/TestDefinitionReference.md)
+- [Test Scenario Variable Definition Reference](./references/Variables.md)
+- [Test Scenario Runner Reference](./references/Runner.md)
+- [Test Scenario Schema Reference](./references/TestDefinitionFileSchema.json)
