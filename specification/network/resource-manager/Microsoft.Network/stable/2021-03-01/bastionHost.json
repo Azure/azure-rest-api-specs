@@ -180,6 +180,62 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "patch": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_UpdateTags",
+        "description": "Updates Tags for BastionHost resource",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update BastionHost tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting BastionHost resource.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Bastion Host": {
+            "$ref": "./examples/BastionHostPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/bastionHosts": {
