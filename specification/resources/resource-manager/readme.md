@@ -791,6 +791,9 @@ directive:
   - from: SubscriptionFeatureRegistration.json
     suppress: R4009
     reason: Currently systemData is not allowed
+  - from: Subscriptions.json
+    suppress: OperationsAPIImplementation
+    reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
