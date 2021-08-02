@@ -26,7 +26,7 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-09
+tag: package-2020-01
 ```
 
 
@@ -34,19 +34,27 @@ tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/AlertRules.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityDefinitions.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueries.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/Incidents.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/Metadata.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/OnboardingStates.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/Settings.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/Watchlists.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/dataConnectors.json
-  - Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/AlertRules.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/AutomationRules.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Bookmarks.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Enrichment.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueries.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Entities.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Incidents.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Metadata.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/OnboardingStates.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Settings.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Watchlists.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/dataConnectors.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
+    - Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
+directive:
+    - suppress: R4017
+    reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 ### Tag: package-2021-04-01-only
 
