@@ -683,7 +683,7 @@
           "type": "string"
         },
         "incidentInfo": {
-          "$ref": "#/definitions/IncidentInfo",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
           "type": "object"
         }
@@ -692,29 +692,6 @@
         "displayName",
         "query"
       ],
-      "type": "object"
-    },
-    "IncidentInfo": {
-      "description": "Describes related incident information for the bookmark",
-      "properties": {
-        "incidentId": {
-          "description": "Incident Id",
-          "type": "string"
-        },
-        "severity": {
-          "description": "The severity of the incident",
-          "type": "string",
-          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
-        },
-        "title": {
-          "description": "The title of the incident",
-          "type": "string"
-        },
-        "relationName": {
-          "description": "Relation Name",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "ConnectedEntity": {

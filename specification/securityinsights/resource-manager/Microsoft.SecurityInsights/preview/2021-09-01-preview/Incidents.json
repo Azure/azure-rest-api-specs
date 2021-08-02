@@ -708,7 +708,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RelationList"
+              "$ref": "./common/RelationTypes.json#/definitions/RelationList"
             }
           },
           "default": {
@@ -718,7 +718,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/Relation",
+        "x-ms-odata": "./common/RelationTypes.json#/definitions/Relation",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -756,14 +756,14 @@
             "$ref": "#/parameters/IncidentId"
           },
           {
-            "$ref": "#/parameters/RelationName"
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Relation"
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
             }
           },
           "default": {
@@ -805,23 +805,23 @@
             "$ref": "#/parameters/IncidentId"
           },
           {
-            "$ref": "#/parameters/RelationName"
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
           },
           {
-            "$ref": "#/parameters/Relation"
+            "$ref": "./common/RelationTypes.json#/parameters/Relation"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Relation"
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Relation"
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
             }
           },
           "default": {
@@ -863,7 +863,7 @@
             "$ref": "#/parameters/IncidentId"
           },
           {
-            "$ref": "#/parameters/RelationName"
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
           }
         ],
         "responses": {
@@ -887,7 +887,7 @@
     "AccountEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents an account entity.",
@@ -1052,7 +1052,7 @@
     "AzureResourceEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents an azure resource entity.",
@@ -1130,7 +1130,7 @@
         "labels": {
           "description": "List of labels relevant to this bookmark",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "../../../common/1.0/types.json#/definitions/Label"
           },
           "type": "array"
         }
@@ -1141,33 +1141,10 @@
       "type": "object",
       "x-ms-discriminator-value": "Bookmark"
     },
-    "ClientInfo": {
-      "description": "Information on the client (user or application) that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the client.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the client.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the client.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the client.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "CloudApplicationEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a cloud application entity.",
@@ -1211,7 +1188,7 @@
     "DnsEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a dns entity.",
@@ -1260,142 +1237,6 @@
       },
       "type": "object"
     },
-    "Entity": {
-      "allOf": [
-        {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "description": "Specific entity.",
-      "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
-    },
-    "EntityInnerKind": {
-      "description": "The kind of the entity",
-      "enum": [
-        "Account",
-        "Host",
-        "File",
-        "AzureResource",
-        "CloudApplication",
-        "DnsResolution",
-        "FileHash",
-        "Ip",
-        "Malware",
-        "Process",
-        "RegistryKey",
-        "RegistryValue",
-        "SecurityGroup",
-        "Url",
-        "IoTDevice",
-        "SecurityAlert",
-        "Bookmark",
-        "Mailbox",
-        "MailCluster",
-        "MailMessage",
-        "SubmissionMail"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityKind",
-        "values": [
-          {
-            "description": "Entity represents account in the system.",
-            "value": "Account"
-          },
-          {
-            "description": "Entity represents host in the system.",
-            "value": "Host"
-          },
-          {
-            "description": "Entity represents file in the system.",
-            "value": "File"
-          },
-          {
-            "description": "Entity represents azure resource in the system.",
-            "value": "AzureResource"
-          },
-          {
-            "description": "Entity represents cloud application in the system.",
-            "value": "CloudApplication"
-          },
-          {
-            "description": "Entity represents dns resolution in the system.",
-            "value": "DnsResolution"
-          },
-          {
-            "description": "Entity represents file hash in the system.",
-            "value": "FileHash"
-          },
-          {
-            "description": "Entity represents ip in the system.",
-            "value": "Ip"
-          },
-          {
-            "description": "Entity represents malware in the system.",
-            "value": "Malware"
-          },
-          {
-            "description": "Entity represents process in the system.",
-            "value": "Process"
-          },
-          {
-            "description": "Entity represents registry key in the system.",
-            "value": "RegistryKey"
-          },
-          {
-            "description": "Entity represents registry value in the system.",
-            "value": "RegistryValue"
-          },
-          {
-            "description": "Entity represents security group in the system.",
-            "value": "SecurityGroup"
-          },
-          {
-            "description": "Entity represents url in the system.",
-            "value": "Url"
-          },
-          {
-            "description": "Entity represents IoT device in the system.",
-            "value": "IoTDevice"
-          },
-          {
-            "description": "Entity represents security alert in the system.",
-            "value": "SecurityAlert"
-          },
-          {
-            "description": "Entity represents bookmark in the system.",
-            "value": "Bookmark"
-          },
-          {
-            "description": "Entity represents mail cluster in the system.",
-            "value": "MailCluster"
-          },
-          {
-            "description": "Entity represents mail message in the system.",
-            "value": "MailMessage"
-          },
-          {
-            "description": "Entity represents mailbox in the system.",
-            "value": "Mailbox"
-          },
-          {
-            "description": "Entity represents submission mail in the system.",
-            "value": "SubmissionMail"
-          }
-        ]
-      }
-    },
     "EntityTimelineItem": {
       "description": "Entity timeline Item.",
       "discriminator": "kind",
@@ -1440,7 +1281,7 @@
     "FileEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a file entity.",
@@ -1492,7 +1333,7 @@
     "FileHashEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a file hash entity.",
@@ -1608,7 +1449,7 @@
     "HostEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a host entity.",
@@ -1713,7 +1554,7 @@
     "HuntingBookmark": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a Hunting bookmark entity.",
@@ -1757,7 +1598,7 @@
         "labels": {
           "description": "List of labels relevant to this bookmark",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "../../../common/1.0/types.json#/definitions/Label"
           },
           "type": "array"
         },
@@ -1784,7 +1625,7 @@
           "type": "object"
         },
         "incidentInfo": {
-          "$ref": "#/definitions/IncidentInfo",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
           "type": "object"
         }
@@ -1941,7 +1782,7 @@
           "type": "string"
         },
         "author": {
-          "$ref": "#/definitions/ClientInfo",
+          "$ref": "../../../common/1.0/types.json#/definitions/ClientInfo",
           "description": "Describes the client that created the comment",
           "readOnly": true,
           "type": "object"
@@ -1959,7 +1800,7 @@
           "description": "Array of the incident related entities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Entity"
+            "$ref": "./common/EntityTypes.json#/definitions/Entity"
           }
         },
         "metaData": {
@@ -1981,7 +1822,7 @@
           "format": "int32"
         },
         "entityKind": {
-          "$ref": "#/definitions/EntityInnerKind",
+          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerKind",
           "description": "The kind of the aggregated entity."
         }
       },
@@ -1989,34 +1830,6 @@
         "entityKind",
         "count"
       ],
-      "type": "object"
-    },
-    "IncidentInfo": {
-      "description": "Describes related incident information for the bookmark",
-      "properties": {
-        "incidentId": {
-          "description": "Incident Id",
-          "type": "string"
-        },
-        "severity": {
-          "description": "The severity of the incident",
-          "type": "string",
-          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
-        },
-        "teamInformation": {
-          "$ref": "#/definitions/TeamInformation",
-          "description": "Describes a team for the incident",
-          "type": "object"
-        },
-        "title": {
-          "description": "The title of the incident",
-          "type": "string"
-        },
-        "relationName": {
-          "description": "Relation Name",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "IncidentList": {
@@ -2155,7 +1968,7 @@
     "IoTDeviceEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents an IoT device entity.",
@@ -2275,7 +2088,7 @@
     "IpEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents an ip entity.",
@@ -2317,14 +2130,10 @@
       },
       "type": "object"
     },
-    "Label": {
-      "description": "Label that will be used to tag and filter on.",
-      "type": "string"
-    },
     "MailboxEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a mailbox entity.",
@@ -2373,7 +2182,7 @@
     "MailClusterEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a mail cluster entity.",
@@ -2488,7 +2297,7 @@
     "MailMessageEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a mail message entity.",
@@ -2769,7 +2578,7 @@
     "MalwareEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a malware entity.",
@@ -2825,7 +2634,7 @@
     "ProcessEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a process entity.",
@@ -2921,7 +2730,7 @@
     "RegistryKeyEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a registry key entity.",
@@ -3017,7 +2826,7 @@
     "RegistryValueEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a registry value entity.",
@@ -3110,75 +2919,10 @@
       },
       "type": "object"
     },
-    "Relation": {
-      "type": "object",
-      "description": "Represents a relation between two resources",
-      "allOf": [
-        {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RelationProperties",
-          "description": "Relation properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RelationList": {
-      "description": "List of relations.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of relations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of relations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Relation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "type": "object"
-    },
-    "RelationProperties": {
-      "description": "Relation property bag.",
-      "properties": {
-        "relatedResourceId": {
-          "description": "The resource ID of the related resource",
-          "type": "string"
-        },
-        "relatedResourceName": {
-          "description": "The name of the related resource",
-          "readOnly": true,
-          "type": "string"
-        },
-        "relatedResourceType": {
-          "description": "The resource type of the related resource",
-          "readOnly": true,
-          "type": "string"
-        },
-        "relatedResourceKind": {
-          "description": "The resource kind of the related resource",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "required": [
-        "relatedResourceId"
-      ],
-      "type": "object"
-    },
     "SecurityAlert": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a security alert entity.",
@@ -3583,7 +3327,7 @@
     "SecurityGroupEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a security group entity.",
@@ -3627,7 +3371,7 @@
     "SubmissionMailEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a submission mail entity.",
@@ -3813,7 +3557,7 @@
     "UrlEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "./common/EntityTypes.json#/definitions/Entity"
         }
       ],
       "description": "Represents a url entity.",
@@ -3901,24 +3645,6 @@
       "name": "incidentId",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Relation": {
-      "name": "relation",
-      "in": "body",
-      "description": "The relation model",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Relation"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "RelationName": {
-      "name": "relationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Relation Name",
       "x-ms-parameter-location": "method"
     },
     "TeamProperties": {

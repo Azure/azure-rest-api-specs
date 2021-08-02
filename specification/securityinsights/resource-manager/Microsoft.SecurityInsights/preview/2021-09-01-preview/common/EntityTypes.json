@@ -6,123 +6,6 @@
   },
   "paths": {},
   "definitions": {
-    "EntityInnerKind": {
-      "description": "The kind of the entity",
-      "enum": [
-        "Account",
-        "Host",
-        "File",
-        "AzureResource",
-        "CloudApplication",
-        "DnsResolution",
-        "FileHash",
-        "Ip",
-        "Malware",
-        "Process",
-        "RegistryKey",
-        "RegistryValue",
-        "SecurityGroup",
-        "Url",
-        "IoTDevice",
-        "SecurityAlert",
-        "Bookmark",
-        "Mailbox",
-        "MailCluster",
-        "MailMessage",
-        "SubmissionMail"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityKind",
-        "values": [
-          {
-            "description": "Entity represents account in the system.",
-            "value": "Account"
-          },
-          {
-            "description": "Entity represents host in the system.",
-            "value": "Host"
-          },
-          {
-            "description": "Entity represents file in the system.",
-            "value": "File"
-          },
-          {
-            "description": "Entity represents azure resource in the system.",
-            "value": "AzureResource"
-          },
-          {
-            "description": "Entity represents cloud application in the system.",
-            "value": "CloudApplication"
-          },
-          {
-            "description": "Entity represents dns resolution in the system.",
-            "value": "DnsResolution"
-          },
-          {
-            "description": "Entity represents file hash in the system.",
-            "value": "FileHash"
-          },
-          {
-            "description": "Entity represents ip in the system.",
-            "value": "Ip"
-          },
-          {
-            "description": "Entity represents malware in the system.",
-            "value": "Malware"
-          },
-          {
-            "description": "Entity represents process in the system.",
-            "value": "Process"
-          },
-          {
-            "description": "Entity represents registry key in the system.",
-            "value": "RegistryKey"
-          },
-          {
-            "description": "Entity represents registry value in the system.",
-            "value": "RegistryValue"
-          },
-          {
-            "description": "Entity represents security group in the system.",
-            "value": "SecurityGroup"
-          },
-          {
-            "description": "Entity represents url in the system.",
-            "value": "Url"
-          },
-          {
-            "description": "Entity represents IoT device in the system.",
-            "value": "IoTDevice"
-          },
-          {
-            "description": "Entity represents security alert in the system.",
-            "value": "SecurityAlert"
-          },
-          {
-            "description": "Entity represents bookmark in the system.",
-            "value": "Bookmark"
-          },
-          {
-            "description": "Entity represents mail cluster in the system.",
-            "value": "MailCluster"
-          },
-          {
-            "description": "Entity represents mail message in the system.",
-            "value": "MailMessage"
-          },
-          {
-            "description": "Entity represents mailbox in the system.",
-            "value": "Mailbox"
-          },
-          {
-            "description": "Entity represents submission mail in the system.",
-            "value": "SubmissionMail"
-          }
-        ]
-      }
-    },
     "EntityInnerType": {
       "description": "The type of the entity",
       "enum": [
@@ -307,11 +190,14 @@
       "allOf": [
         {
           "$ref": "../../../../common/1.0/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/EntityKind"
         }
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
       "description": "Specific entity.",
       "discriminator": "kind",
       "type": "object",
@@ -319,18 +205,122 @@
         "kind"
       ]
     },
-    "EntityKind": {
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "required": [
-        "kind"
+    "EntityInnerKind": {
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "IoTDevice",
+        "SecurityAlert",
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
       ],
-      "type": "object"
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityKind",
+        "values": [
+          {
+            "description": "Entity represents account in the system.",
+            "value": "Account"
+          },
+          {
+            "description": "Entity represents host in the system.",
+            "value": "Host"
+          },
+          {
+            "description": "Entity represents file in the system.",
+            "value": "File"
+          },
+          {
+            "description": "Entity represents azure resource in the system.",
+            "value": "AzureResource"
+          },
+          {
+            "description": "Entity represents cloud application in the system.",
+            "value": "CloudApplication"
+          },
+          {
+            "description": "Entity represents dns resolution in the system.",
+            "value": "DnsResolution"
+          },
+          {
+            "description": "Entity represents file hash in the system.",
+            "value": "FileHash"
+          },
+          {
+            "description": "Entity represents ip in the system.",
+            "value": "Ip"
+          },
+          {
+            "description": "Entity represents malware in the system.",
+            "value": "Malware"
+          },
+          {
+            "description": "Entity represents process in the system.",
+            "value": "Process"
+          },
+          {
+            "description": "Entity represents registry key in the system.",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "Entity represents registry value in the system.",
+            "value": "RegistryValue"
+          },
+          {
+            "description": "Entity represents security group in the system.",
+            "value": "SecurityGroup"
+          },
+          {
+            "description": "Entity represents url in the system.",
+            "value": "Url"
+          },
+          {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
+            "description": "Entity represents security alert in the system.",
+            "value": "SecurityAlert"
+          },
+          {
+            "description": "Entity represents bookmark in the system.",
+            "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
+          }
+        ]
+      }
     },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",

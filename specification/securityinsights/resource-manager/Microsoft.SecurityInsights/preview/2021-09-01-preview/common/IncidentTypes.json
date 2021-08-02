@@ -215,6 +215,29 @@
         }
       },
       "type": "object"
+    },
+    "IncidentInfo": {
+      "description": "Describes related incident information for the bookmark",
+      "properties": {
+        "incidentId": {
+          "description": "Incident Id",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "type": "string",
+          "$ref": "#/definitions/IncidentSeverityEnum"
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        },
+        "relationName": {
+          "description": "Relation Name",
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
