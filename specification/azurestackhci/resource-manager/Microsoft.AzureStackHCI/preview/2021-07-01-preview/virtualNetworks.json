@@ -292,6 +292,7 @@
   "definitions": {
     "virtualnetworksProperties": {
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "networkType": {
           "type": "string",
@@ -393,6 +394,13 @@
                     },
                     "description": "RouteTable for the subnet"
                   },
+                  "ipPools": {
+                    "type": "array",
+                    "description": "network associated pool of IP Addresses",
+                    "items": {
+                      "$ref": "#/definitions/IPPool"
+                    }
+                  },
                   "vlan": {
                     "type": "integer",
                     "format": "int32",
@@ -415,6 +423,49 @@
         }
       },
       "description": "MOCVirtualNetworkSpec defines the desired state of MOCVirtualNetwork"
+    },
+    "IPPoolInfo": {
+      "type": "object",
+      "properties": {
+        "used": {
+          "type": "string",
+          "readOnly": true,
+          "description": "no. of ip addresses allocated from the ip pool"
+        },
+        "available": {
+          "type": "string",
+          "readOnly": true,
+          "description": "no. of ip addresses available in the ip pool"
+        }
+      }
+    },
+    "IPPool": {
+      "type": "object",
+      "properties": {
+        "ipPoolType": {
+          "type": "string",
+          "enum": [
+            "vm",
+            "vippool"
+          ],
+          "x-ms-enum": {
+            "name": "IPPoolTypeEnum",
+            "modelAsString": false
+          },
+          "description": "ip pool type"
+        },
+        "start": {
+          "type": "string",
+          "description": "start of the ip address pool"
+        },
+        "end": {
+          "type": "string",
+          "description": "end of the ip address pool"
+        },
+        "info": {
+          "$ref": "#/definitions/IPPoolInfo"
+        }
+      }
     },
     "virtualnetworks": {
       "type": "object",

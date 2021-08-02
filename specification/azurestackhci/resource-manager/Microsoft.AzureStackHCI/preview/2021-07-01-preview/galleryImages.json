@@ -302,8 +302,24 @@
           "type": "string",
           "description": "location of the image the gallery image should be created from"
         },
+        "osType": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          },
+          "description": "operating system type that the gallery image uses. Expected to be linux or windows"
+        },
         "provisioningState": {
           "type": "string"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "name of the object to be used in moc"
         },
         "status": {
           "type": "object",

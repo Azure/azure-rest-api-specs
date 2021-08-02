@@ -215,6 +215,132 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/start": {
+      "post": {
+        "operationId": "virtualmachines_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/stop": {
+      "post": {
+        "operationId": "virtualmachines_Stop",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/restart": {
+      "post": {
+        "operationId": "virtualmachines_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines": {
       "get": {
         "operationId": "virtualmachines_ListByResourceGroup",
@@ -305,10 +431,27 @@
               "format": "int32",
               "description": "number of processors for the virtual machine"
             },
-            "memoryMB": {
+            "memoryGB": {
               "type": "integer",
               "format": "int32",
-              "description": "RAM in mb for the virtual machine"
+              "description": "RAM in gb for the virtual machine"
+            },
+            "dynamicMemoryConfig": {
+              "type": "object",
+              "properties": {
+                "maximumMemoryGB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "minimumMemoryGB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "targetMemoryBuffer": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
             }
           },
           "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
@@ -426,6 +569,10 @@
           },
           "description": "OsProfile - describes the configuration of the operating system and sets login data"
         },
+        "resourceName": {
+          "type": "string",
+          "description": "name of the object to be used in moc"
+        },
         "securityProfile": {
           "type": "object",
           "properties": {
@@ -475,8 +622,8 @@
     },
     "virtualmachines": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -530,9 +677,82 @@
       ],
       "description": "The virtualmachines resource definition."
     },
+    "hardwareProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string"
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of processors for the virtual machine"
+        },
+        "memoryGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "RAM in gb for the virtual machine"
+        }
+      },
+      "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
+    },
+    "networkProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID - Resource Id"
+              }
+            }
+          },
+          "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine"
+        }
+      },
+      "description": "NetworkProfile - describes the network update configuration the virtual machine"
+    },
+    "storageProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "adds data disks to the virtual machine for the update call"
+        }
+      }
+    },
+    "virtualMachineUpdateProperties": {
+      "description": "Defines the resource properties for the update.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/hardwareProfileUpdate"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/storageProfileUpdate"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/networkProfileUpdate"
+        }
+      }
+    },
     "virtualmachinesPatch": {
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/virtualMachineUpdateProperties"
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {

@@ -290,6 +290,18 @@
     }
   },
   "definitions": {
+    "InterfaceDNSSettings": {
+      "type": "object",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of DNS server IP Addresses for the interface"
+        }
+      }
+    },
     "networkinterfacesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
@@ -297,47 +309,7 @@
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
-              },
-              "properties": {
-                "type": "object",
-                "x-ms-client-flatten": true,
-                "properties": {
-                  "gateway": {
-                    "type": "string",
-                    "description": "Gateway for network interface"
-                  },
-                  "prefixLength": {
-                    "type": "string",
-                    "description": "prefixLength for network interface"
-                  },
-                  "privateIPAddress": {
-                    "type": "string",
-                    "description": "PrivateIPAddress - Private IP address of the IP configuration."
-                  },
-                  "privateIPAllocationMethod": {
-                    "type": "string",
-                    "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'"
-                  },
-                  "subnet": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
-                      }
-                    },
-                    "description": "Subnet - Name of Subnet bound to the IP configuration."
-                  }
-                },
-                "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
-              }
-            },
-            "description": "InterfaceIPConfiguration iPConfiguration in a network interface."
+            "$ref": "#/definitions/ipConfiguration"
           },
           "description": "IPConfigurations - A list of IPConfigurations of the network interface."
         },
@@ -345,8 +317,16 @@
           "type": "string",
           "description": "MacAddress - The MAC address of the network interface."
         },
+        "dnsSettings": {
+          "$ref": "#/definitions/InterfaceDNSSettings",
+          "description": "DNS Settings for the interface"
+        },
         "provisioningState": {
           "type": "string"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "name of the object to be used in moc"
         },
         "status": {
           "type": "object",
@@ -354,6 +334,50 @@
         }
       },
       "description": "MOCNetworkInterfaceSpec defines the desired state of MOCNetworkInterface"
+    },
+    "ipConfiguration": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "gateway": {
+              "x-ms-client-flatten": true,
+              "type": "string",
+              "description": "Gateway for network interface"
+            },
+            "prefixLength": {
+              "type": "string",
+              "description": "prefixLength for network interface"
+            },
+            "privateIPAddress": {
+              "type": "string",
+              "description": "PrivateIPAddress - Private IP address of the IP configuration."
+            },
+            "privateIPAllocationMethod": {
+              "type": "string",
+              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'"
+            },
+            "subnet": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+                }
+              },
+              "description": "Subnet - Name of Subnet bound to the IP configuration."
+            }
+          },
+          "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
+        }
+      },
+      "description": "InterfaceIPConfiguration iPConfiguration in a network interface."
     },
     "networkinterfaces": {
       "type": "object",
