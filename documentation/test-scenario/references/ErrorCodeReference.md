@@ -5,19 +5,17 @@
  https://opensource.org/licenses/MIT
 -->
 
-# API testing error code
+# API Test Error Code
 
 OAV api testing define some rules and check whether actual service response match with example. Example is very important for downstream SDK test code generation, code samples and docs. The goal to detect example quality issues and check service behaviors consistent with example.
 
-## Rule descriptions
-
-#### INCORRECT_PROVISIONING_STATE
+## INCORRECT_PROVISIONING_STATE
 
 If service return 200 status code,it means the operation is succeed and finished. So the provisioning state should be one of the terminal states ["succeeded", "failed", "canceled", "ready", "created", "deleted"].
 
-The provisioning state is very important for downstream terraform or cli to manage resource status. For more details about provisioning state, please refer to this [ARM RPC provisioning state](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property)
+The provisioning state is very important for downstream terraform or cli to manage resource status. For more details about provisioning state, please refer to this [ARM RPC provisioning state](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#provisioningstate-property)
 
-#### RESPONSE_MISSING_VALUE
+## RESPONSE_MISSING_VALUE
 
 **Error message**: The response value is missing. Path: {}. Expected: {}. Actual: undefined
 
@@ -42,7 +40,7 @@ Example:
 }
 ```
 
-#### RESPONSE_ADDITIONAL_VALUE
+## RESPONSE_ADDITIONAL_VALUE
 
 **Error message** Return additional response value. Path: {}. Expected: undefined. Actual: {}
 
@@ -68,7 +66,7 @@ Example:
 }
 ```
 
-#### RESPONSE_INCONSISTENT_VALUE
+## RESPONSE_INCONSISTENT_VALUE
 
 **Error message** The actual response value is different from example. Path: {}. Expected: {}. Actual: {}
 
@@ -94,7 +92,7 @@ Example:
 }
 ```
 
-#### ROUNDTRIP_INCONSISTENT_PROPERTY
+## ROUNDTRIP_INCONSISTENT_PROPERTY
 
 **Error message** The property's value in the response is different from what was set in the request. Path: {}. Request: {}. Response: {}
 
