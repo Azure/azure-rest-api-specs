@@ -89,7 +89,7 @@
     "ActivationState": {
       "type": "string",
       "readOnly": true,
-      "description": "The current activation state of the SimProfile on the network.",
+      "description": "The current activation state of the Sim on the network.",
       "enum": [
         "NotActivated",
         "Activated",
@@ -123,6 +123,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "description": "The name of the mobile network.",
       "x-ms-parameter-location": "method"
     },

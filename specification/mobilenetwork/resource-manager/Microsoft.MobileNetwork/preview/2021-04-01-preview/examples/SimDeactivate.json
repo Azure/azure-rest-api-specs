@@ -2,25 +2,8 @@
   "parameters": {
     "api-version": "2021-04-01-preview",
     "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "simName": "testSim",
-    "parameters": {
-      "location": "testLocation",
-      "properties": {
-        "simType": "ESim",
-        "integratedCircuitCardIdentifier": "8900000000000000000",
-        "internationalMobileSubscriberIdentity": "00000",
-        "authenticationKey": "00000000000000000000000000000000",
-        "operatorKeyCode": "00000000000000000000000000000000",
-        "mobileNetwork": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
-        },
-        "deviceType": "Video camera",
-        "simPolicy": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/networks/testNetwork/simPolicies/MySimPolicy"
-        }
-      }
-    }
+    "resourceGroupName": "testResourceGroupName",
+    "simName": "testSim"
   },
   "responses": {
     "200": {
@@ -39,7 +22,7 @@
         "location": "testLocation",
         "properties": {
           "provisioningState": "Succeeded",
-          "activationState": "Activating",
+          "activationState": "Deactivated",
           "simType": "ESim",
           "integratedCircuitCardIdentifier": "8900000000000000000",
           "internationalMobileSubscriberIdentity": "00000",
@@ -53,7 +36,7 @@
         }
       }
     },
-    "201": {
+    "202": {
       "body": {
         "name": "testSim",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sims/testSim",
@@ -69,7 +52,7 @@
         "location": "testLocation",
         "properties": {
           "provisioningState": "Succeeded",
-          "activationState": "Activating",
+          "activationState": "Deactivating",
           "simType": "ESim",
           "integratedCircuitCardIdentifier": "8900000000000000000",
           "internationalMobileSubscriberIdentity": "00000",
