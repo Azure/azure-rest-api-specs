@@ -331,6 +331,25 @@
         "kind"
       ],
       "type": "object"
+    },
+    "EntityCommonProperties": {
+      "description": "Entity common property bag.",
+      "properties": {
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "friendlyName": {
+          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {

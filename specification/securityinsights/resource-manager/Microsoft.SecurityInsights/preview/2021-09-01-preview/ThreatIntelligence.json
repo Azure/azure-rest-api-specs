@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -48,20 +48,20 @@
         "operationId": "ThreatIntelligenceIndicator_CreateIndicator",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
-          },
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          }
           {
             "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
@@ -82,7 +82,7 @@
           "default": {
             "description": "Error response describing why the operation failed to create indicators.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -102,31 +102,31 @@
         "operationId": "ThreatIntelligenceIndicators_List",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ODataFilter"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataFilter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ODataOrderBy"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ODataTop"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataTop"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ODataSkipToken"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -139,7 +139,7 @@
           "default": {
             "description": "Error response describing why the operation failed to get indicators.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -162,19 +162,19 @@
         "operationId": "ThreatIntelligenceIndicator_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceName"
@@ -190,7 +190,7 @@
           "default": {
             "description": "Error response describing why the operation failed to view an indicator.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -208,19 +208,19 @@
         "operationId": "ThreatIntelligenceIndicator_Create",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceName"
@@ -245,7 +245,7 @@
           "default": {
             "description": "Error response describing why the operation failed to update an indicator.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -263,19 +263,19 @@
         "operationId": "ThreatIntelligenceIndicator_Delete",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceName"
@@ -291,7 +291,7 @@
           "default": {
             "description": "Error response describing why the operation failed to delete an indicator.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -311,19 +311,19 @@
         "operationId": "ThreatIntelligenceIndicator_QueryIndicators",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceFilteringCriteria"
@@ -339,7 +339,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -362,19 +362,19 @@
         "operationId": "ThreatIntelligenceIndicatorMetrics_List",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -387,7 +387,7 @@
           "default": {
             "description": "Error response describing why the operation failed to get metrics.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -407,19 +407,19 @@
         "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceName"
@@ -435,7 +435,7 @@
           "default": {
             "description": "Error response describing why the operation failed to append tags.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -455,19 +455,19 @@
         "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ThreatIntelligenceName"
@@ -486,7 +486,7 @@
           "default": {
             "description": "Error response describing why the operation failed to replace tags.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -575,7 +575,7 @@
     "ThreatIntelligenceInformation": {
       "allOf": [
         {
-          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/ThreatIntelligenceResourceKind"
@@ -659,7 +659,7 @@
     "ThreatIntelligenceIndicatorProperties": {
       "allOf": [
         {
-          "$ref": "SecurityInsights.json#/definitions/EntityCommonProperties"
+          "$ref": "./common/EntityTypes.json#/definitions/EntityCommonProperties"
         }
       ],
       "description": "Describes threat intelligence entity properties",
