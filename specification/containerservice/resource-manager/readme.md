@@ -34,9 +34,18 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-2021-07
 ```
 
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.ContainerService/stable/2021-07-01/managedClusters.json
+```
 
 ### Tag: package-2021-05
 
@@ -46,6 +55,7 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 input-file:
   - Microsoft.ContainerService/stable/2021-05-01/managedClusters.json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
@@ -326,6 +336,19 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 
+```
+
+### Tag: package-2021-07-01-only
+
+These settings apply only when `--tag=package-2021-07-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2021-07-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2021-05-01-only
@@ -709,5 +732,3 @@ directive:
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
 ```
-
-
