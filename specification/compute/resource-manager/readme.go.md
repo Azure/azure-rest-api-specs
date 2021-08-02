@@ -16,6 +16,15 @@ directive:
         $.push('DummyOrchestrationServiceName');
       }
       return $;
+
+  - from: source-file-go
+    where: $ 
+    transform: >-
+      return $.
+        replace(/\/\/ DummyOrchestrationServiceName .../g,'').
+        replace(/DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
+        replace(/,DummyOrchestrationServiceName/,'').
+        replace(/, 'DummyOrchestrationServiceName'/,'');
 ```
 
 ``` yaml $(go) && $(track2)
