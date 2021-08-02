@@ -55,6 +55,9 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation. Only **location** filter is supported currently."
+          },
+          {
+            "$ref": "#/parameters/IncludeExtendedLocationsParameter"
           }
         ],
         "responses": {
@@ -74,6 +77,9 @@
           },
           "Lists all available Resource SKUs for the specified region": {
             "$ref": "./examples/skus/ListAvailableResourceSkusForARegion.json"
+          },
+          "Lists all available Resource SKUs with Extended Location information": {
+            "$ref": "./examples/skus/ListAvailableResourceSkusWithExtendedLocations.json"
           }
         }
       }
@@ -328,8 +334,29 @@
             "$ref": "#/definitions/ResourceSkuZoneDetails"
           },
           "description": "Details of capabilities available to a SKU in specific zones."
+        },
+        "extendedLocations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of extended locations."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the extended location.",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "description": "Describes an available Compute SKU Location Information."
     },
     "ResourceSkuRestrictionInfo": {
       "properties": {
@@ -349,7 +376,8 @@
           },
           "description": "List of availability zones where the SKU is restricted."
         }
-      }
+      },
+      "description": "Describes an available Compute SKU Restriction Information."
     },
     "ResourceSkusResult": {
       "properties": {
@@ -385,6 +413,14 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "IncludeExtendedLocationsParameter": {
+      "name": "includeExtendedLocations",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "To Include Extended Locations information or not in the response.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -1720,7 +1720,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update VM extension.": {
+            "$ref": "./examples/compute/UpdateVMExtensionWithSuppressFailureEnabled.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3143,6 +3148,9 @@
           },
           "Create or update a VM with capacity reservation": {
             "$ref": "./examples/compute/CreateOrUpdateAVmWithCapacityReservation.json"
+          },
+          "Create a VM from a shared gallery image": {
+            "$ref": "./examples/compute/CreateAVmFromASharedGalleryImage.json"
           }
         }
       },
@@ -5405,6 +5413,12 @@
           },
           "Create a scale set with Application Profile": {
             "$ref": "./examples/compute/CreateAScaleSetWithApplicationProfile.json"
+          },
+          "Create a scale set with scaleInPolicy.": {
+            "$ref": "./examples/compute/CreateAScaleSetWithScaleInPolicy.json"
+          },
+          "Create a VMSS with an extension that has suppressFailures enabled": {
+            "$ref": "./examples/compute/CreateAScaleSetWithExtensionsSuppressFailuresEnabled.json"
           },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithCapacityReservation.json"
@@ -9536,6 +9550,10 @@
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
           "description": "The virtual machine extension instance view."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -9573,6 +9591,10 @@
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -10593,6 +10615,10 @@
           "type": "string",
           "readOnly": true,
           "description": "Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'."
+        },
+        "sharedGalleryImageId": {
+          "type": "string",
+          "description": "Specified the shared gallery image unique id for vm deployment. This can be fetched from shared gallery image GET call."
         }
       },
       "allOf": [
@@ -12267,6 +12293,10 @@
             }
           },
           "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>"
+        },
+        "forceDeletion": {
+          "type": "boolean",
+          "description": "This property allows you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.(Feature in Preview)"
         }
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
@@ -13346,6 +13376,10 @@
             "type": "string"
           },
           "description": "Collection of extension names after which this extension needs to be provisioned."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
@@ -13576,7 +13610,7 @@
         },
         "zoneBalance": {
           "type": "boolean",
-          "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage."
+          "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage. zoneBalance property can only be set if the zones property of the scale set contains more than one zone. If there are no zones or only one zone specified, then zoneBalance property should not be set."
         },
         "platformFaultDomainCount": {
           "type": "integer",
@@ -13597,7 +13631,7 @@
         },
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
         "orchestrationMode": {
           "$ref": "#/definitions/OrchestrationMode",
@@ -13642,7 +13676,7 @@
         },
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
