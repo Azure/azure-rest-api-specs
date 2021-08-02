@@ -37,6 +37,7 @@ openapi-type: arm
 tag: package-2021-08
 ```
 
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
@@ -45,6 +46,7 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 input-file:
   - Microsoft.ContainerService/stable/2021-08-01/managedClusters.json
 ```
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
