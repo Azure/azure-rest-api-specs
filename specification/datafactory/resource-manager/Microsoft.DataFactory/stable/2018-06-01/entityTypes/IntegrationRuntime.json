@@ -90,6 +90,10 @@
         "ssisProperties": {
           "description": "SSIS properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        },
+        "customerVirtualNetwork": {
+          "description": "The customer virtual network properties for the Azure-SSIS integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
         }
       }
     },
@@ -253,6 +257,16 @@
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeCustomerVirtualNetwork": {
+      "description": "The customer virtual network properties for the Azure-SSIS integration runtime.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The ID of the Subnet that this Azure-SSIS integration runtime will join.",
+          "type": "string"
+        }
       }
     },
     "IntegrationRuntimeSsisCatalogInfo": {
