@@ -256,6 +256,7 @@ input-file:
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-07-01/gallery.json
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+```
 
 ### Tag: package-2021-04-01
 
