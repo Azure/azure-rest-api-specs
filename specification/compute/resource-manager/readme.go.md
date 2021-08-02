@@ -23,10 +23,10 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/\/\/ DummyOrchestrationServiceName .../g,'').
-        replace(/DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
-        replace(/,DummyOrchestrationServiceName/,'').
-        replace(/, 'DummyOrchestrationServiceName'/,'');
+        replace(/\/\/ (OrchestrationServiceNames)?DummyOrchestrationServiceName .../g,'').
+        replace(/(OrchestrationServiceNames)?DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
+        replace(/,(OrchestrationServiceNames)?DummyOrchestrationServiceName/,'').
+        replace(/, '(OrchestrationServiceNames)?DummyOrchestrationServiceName'/,'');
 ```
 
 ``` yaml $(go) && $(track2)
