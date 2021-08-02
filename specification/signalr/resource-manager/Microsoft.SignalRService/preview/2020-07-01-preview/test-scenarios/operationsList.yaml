@@ -1,0 +1,8 @@
+scope: ResourceGroup
+testScenarios:
+  - description: operationsList
+    steps:
+      - step: deploymentScripts
+        armTemplateDeployment: ./deploymentScripts.json
+      - step: operationsList
+        exampleFile: ../examples/Operations_List.json

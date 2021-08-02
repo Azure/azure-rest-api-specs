@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceNamePrefix": {
+      "type": "string",
+       "defaultValue": "signalr-"
+    }
+  },
+  "variables": {
+    "resourceName": "[concat(parameters('resourceNamePrefix'), uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "resourceName": {
+      "type": "string",
+      "value": "[variables('resourceName')]"
+    }
+  }
+}

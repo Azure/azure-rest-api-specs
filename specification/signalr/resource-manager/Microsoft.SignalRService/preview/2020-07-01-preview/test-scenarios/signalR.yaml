@@ -1,8 +1,17 @@
 scope: ResourceGroup
+variables:
+  resourceName: ""
+  resourceGroupPrefix: "apiTest-"
 testScenarios:
   - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
     steps:
+      - step: Generate_Unique_string
+        armTemplateDeployment: ./generate_unique_string.json
+      - step: SignalR_checknameAvailability
+        exampleFile: ../examples/SignalR_CheckNameAvailability.json
       - step: SignalR_CreateOrUpdate
         exampleFile: ../examples/SignalR_CreateOrUpdate.json
+      - step: SignalR_ListKey
+        exampleFile: ../examples/SignalR_ListKeys.json
       - step: SignalR_Delete
         exampleFile: ../examples/SignalR_Delete.json
