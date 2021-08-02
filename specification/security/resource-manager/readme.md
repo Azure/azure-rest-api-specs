@@ -474,8 +474,10 @@ These settings apply only when `--tag=package-2021-06-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2021-06-only'
 input-file:
+- Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
 - Microsoft.Security/stable/2021-06-01/assessments.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
