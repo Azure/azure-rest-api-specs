@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -48,19 +48,19 @@
         "operationId": "OfficeConsents_List",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -96,19 +96,19 @@
         "operationId": "OfficeConsents_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ConsentId"
@@ -124,7 +124,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -142,19 +142,19 @@
         "operationId": "OfficeConsents_Delete",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/ConsentId"
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -191,7 +191,7 @@
     "OfficeConsent": {
       "allOf": [
         {
-          "$ref": "SecurityInsights.json#/definitions/Resource"
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
         }
       ],
       "description": "Consent for Office365 tenant that already made.",
