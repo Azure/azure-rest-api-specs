@@ -32,6 +32,20 @@ tag: package-2021-06-01
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-composite-v3
+
+These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+
+This section contains the "composite-v3" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v1" and "v2" clients.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v3'
+input-file:
+- Microsoft.Marketplace/stable/2021-08-01/Marketplace.json
+- Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+```
+
 ### Tag: package-composite-v2
 
 These settings apply only when `--tag=package-composite-v2` is specified on the command line.
@@ -88,6 +102,15 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
   - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+  - Microsoft.Marketplace/stable/2021-08-01/Marketplace.json
 ```
 
 # Code Generation
