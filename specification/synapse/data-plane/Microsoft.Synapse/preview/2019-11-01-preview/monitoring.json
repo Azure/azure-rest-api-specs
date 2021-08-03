@@ -109,7 +109,7 @@
         }
       }
     },
-    "/monitoring/workloadTypes/sql/sqlpools/{poolName}/sqlStreamingJobs": {
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/sqlStreamingJobs": {
       "get": {
         "tags": [
           "Monitoring"
@@ -139,7 +139,7 @@
         }
       }
     },
-    "/monitoring/workloadTypes/sql/sqlpools/{poolName}/databases/{databaseName}/sqlStreamingJobs/{jobName}": {
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}": {
       "get": {
         "tags": [
           "Monitoring"
@@ -185,7 +185,7 @@
         }
       }
     },
-    "/monitoring/workloadTypes/sql/sqlpools/{poolName}/databases/{databaseName}/sqlStreamingJobs/{jobName}/metrics": {
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}/metrics": {
       "get": {
         "tags": [
           "Monitoring"
@@ -252,7 +252,7 @@
         }
       }
     },
-    "/monitoring/workloadTypes/sql/sqlpools/{poolName}/databases/{databaseName}/sqlStreamingJobs/{jobName}/authoringLogs": {
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}/authoringLogs": {
       "get": {
         "tags": [
           "Monitoring"
@@ -430,7 +430,7 @@
         "sqlDatabaseName": {
           "type": "string"
         },
-        "jobName": {
+        "sqlStreamingJobName": {
           "type": "string"
         },
         "jobStatus": {
@@ -624,21 +624,21 @@
       "description": "The Synapse client API Version."
     },
     "SQLPoolName": {
-      "name": "poolName",
+      "name": "sqlPoolName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The SQL pool name."
     },
     "SQLDatabaseName": {
-      "name": "databaseName",
+      "name": "sqlDatabaseName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The SQL database name."
     },
     "SQLStreamingJobName": {
-      "name": "jobName",
+      "name": "sqlStreamingJobName",
       "in": "path",
       "required": true,
       "type": "string",
