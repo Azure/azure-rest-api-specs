@@ -331,6 +331,9 @@
           },
           "ApiManagementUpdateServicePublisherDetails": {
             "$ref": "./examples/ApiManagementUpdateServicePublisherDetails.json"
+          },
+          "ApiManagementUpdateServiceToNewVnetAndAvailabilityZones": {
+            "$ref": "./examples/ApiManagementUpdateServiceToNewVnetAndAZs.json"
           }
         },
         "parameters": [
@@ -384,6 +387,9 @@
         "x-ms-examples": {
           "ApiManagementServiceGetService": {
             "$ref": "./examples/ApiManagementServiceGetService.json"
+          },
+          "ApiManagementServiceGetServiceHavingMsi": {
+            "$ref": "./examples/ApiManagementServiceGetServiceHavingMsi.json"
           },
           "ApiManagementServiceGetMultiRegionInternalVnet": {
             "$ref": "./examples/ApiManagementServiceGetMultiRegionInternalVnet.json"
@@ -1589,6 +1595,13 @@
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
       "allOf": [
