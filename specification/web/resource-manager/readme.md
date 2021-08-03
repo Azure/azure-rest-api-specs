@@ -57,7 +57,7 @@ directive:
 
 ### Tag: package-2021-01-15
 
-These settings apply only when `--tag=package-2021-01-15` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-15` or `--tag=package-2021-01-15-only` is specified on the command line. NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2021-06-01 are included.
 
 ```yaml $(tag) == 'package-2021-01-15'
 input-file:
