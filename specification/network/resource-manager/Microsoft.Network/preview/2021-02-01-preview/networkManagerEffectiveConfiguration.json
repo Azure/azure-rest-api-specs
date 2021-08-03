@@ -197,6 +197,7 @@
   },
   "definitions": {
     "NetworkManagerEffectiveConnectivityConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -213,6 +214,7 @@
       "description": "Result of the request to list networkManagerEffectiveConnectivityConfiguration. It contains a list of groups and a skiptoken to get the next set of results."
     },
     "NetworkManagerEffectiveSecurityAdminRulesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -229,6 +231,7 @@
       "description": "Result of the request to list networkManagerEffectiveSecurityAdminRules. It contains a list of groups and a skiptoken to get the next set of results."
     },
     "NetworkManagerEffectiveSecurityUserRulesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -245,6 +248,7 @@
       "description": "Result of the request to list NetworkManagerEffectiveSecurityUserRules. It contains a list of groups and a skiptoken to get the next set of results."
     },
     "EffectiveConnectivityConfiguration": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -266,6 +270,7 @@
       "description": "The network manager effective connectivity configuration"
     },
     "EffectiveBaseSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -321,6 +326,7 @@
       "description": "Network base admin rule."
     },
     "EffectiveSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
@@ -337,6 +343,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "EffectiveDefaultSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
@@ -353,6 +360,7 @@
       "x-ms-discriminator-value": "Default"
     },
     "EffectiveBaseSecurityUserRule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -408,6 +416,7 @@
       "description": "Network base rule."
     },
     "EffectiveSecurityUserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
@@ -424,6 +433,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "EffectiveDefaultSecurityUserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
@@ -440,6 +450,7 @@
       "x-ms-discriminator-value": "Default"
     },
     "ConfigurationGroup": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",

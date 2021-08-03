@@ -207,6 +207,7 @@
       "description": "Effective Virtual Networks Parameter."
     },
     "ActiveConnectivityConfiguration": {
+      "type": "object",
       "properties": {
         "commitTime": {
           "type": "string",
@@ -222,9 +223,11 @@
         {
           "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConnectivityConfiguration"
         }
-      ]
+      ],
+      "description": "Active connectivity configuration."
     },
     "ActiveConnectivityConfigurationsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -241,6 +244,7 @@
       "description": "Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results."
     },
     "ActiveSecurityAdminRulesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -257,6 +261,7 @@
       "description": "Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results."
     },
     "ActiveSecurityUserRulesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -273,6 +278,7 @@
       "description": "Result of the request to list active security user rules. It contains a list of active security user rules and a skiptoken to get the next set of results."
     },
     "ActiveBaseSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -337,6 +343,7 @@
       "description": "Network base admin rule."
     },
     "ActiveSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
@@ -353,6 +360,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "ActiveDefaultSecurityAdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
@@ -369,6 +377,7 @@
       "x-ms-discriminator-value": "Default"
     },
     "ActiveBaseSecurityUserRule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -433,6 +442,7 @@
       "description": "Network base rule."
     },
     "ActiveSecurityUserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
@@ -449,6 +459,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "ActiveDefaultSecurityUserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
