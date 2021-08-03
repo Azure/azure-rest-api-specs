@@ -4943,6 +4943,7 @@
         },
         "targetUtilizationPercentage": {
           "format": "int32",
+          "description": "Target CPU usage for the autoscaler.",
           "type": "integer"
         }
       },
@@ -5292,7 +5293,7 @@
       "additionalProperties": false
     },
     "BanditPolicy": {
-      "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
+      "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation.",
       "type": "object",
       "allOf": [
         {
@@ -5302,10 +5303,12 @@
       "properties": {
         "slackAmount": {
           "format": "float",
+          "description": "Absolute distance allowed from the best performing run.",
           "type": "number"
         },
         "slackFactor": {
           "format": "float",
+          "description": "Ratio of the allowed distance from the best performing run.",
           "type": "number"
         }
       },
@@ -5399,6 +5402,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "properties": {
@@ -5421,6 +5425,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of BatchDeployment objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -5506,6 +5511,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "properties": {
@@ -5528,6 +5534,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of BatchEndpoint objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -5779,6 +5786,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of CodeContainer objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -5868,6 +5876,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of CodeVersion objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -6229,6 +6238,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of DataContainer objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -6343,6 +6353,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of DataVersion objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -6495,6 +6506,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of DatastoreProperties objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -6525,6 +6537,7 @@
       "type": "object",
       "properties": {
         "content": {
+          "description": "The retrieved online deployment logs.",
           "type": "string"
         }
       },
@@ -6702,7 +6715,7 @@
       "additionalProperties": false
     },
     "EarlyTerminationPolicy": {
-      "description": "Early termination policies enable canceling poor-performing runs before they complete",
+      "description": "Early termination policies enable canceling poor-performing runs before they complete.",
       "required": [
         "policyType"
       ],
@@ -6710,10 +6723,12 @@
       "properties": {
         "delayEvaluation": {
           "format": "int32",
+          "description": "Number of intervals by which to delay the first evaluation.",
           "type": "integer"
         },
         "evaluationInterval": {
           "format": "int32",
+          "description": "Interval (number of runs) between policy evaluations.",
           "type": "integer"
         },
         "policyType": {
@@ -6886,6 +6901,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of EnvironmentContainer objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -6996,6 +7012,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of EnvironmentSpecificationVersion objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -7078,6 +7095,7 @@
       "type": "object",
       "properties": {
         "data": {
+          "description": "Model flavor-specific data.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -7286,6 +7304,7 @@
           }
         },
         "provisioningState": {
+          "description": "Specifies the job provisioning state.",
           "$ref": "#/definitions/JobProvisioningState",
           "readOnly": true,
           "x-ms-mutability": [
@@ -7334,6 +7353,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of JobBase objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -7376,6 +7396,7 @@
           ]
         },
         "properties": {
+          "description": "Additional properties to set on the endpoint.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -7469,6 +7490,7 @@
       ],
       "properties": {
         "containerResourceRequirements": {
+          "description": "Resource requirements for each container instance within an online deployment.",
           "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         }
       },
@@ -7687,6 +7709,7 @@
           }
         },
         "provisioningState": {
+          "description": "Specifies the labeling job provisioning state.",
           "$ref": "#/definitions/JobProvisioningState",
           "readOnly": true,
           "x-ms-mutability": [
@@ -7809,6 +7832,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of LabelingJob objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -7938,6 +7962,7 @@
       ],
       "properties": {
         "instanceType": {
+          "description": "Compute instance type.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7945,6 +7970,7 @@
           ]
         },
         "readinessProbe": {
+          "description": "Deployment container liveness/readiness probe configuration.",
           "$ref": "#/definitions/ProbeSettings"
         }
       },
@@ -7961,6 +7987,7 @@
       "properties": {
         "instanceCount": {
           "format": "int32",
+          "description": "Fixed number of instances for this deployment.",
           "type": "integer"
         }
       },
@@ -7981,7 +8008,7 @@
       "additionalProperties": false
     },
     "MedianStoppingPolicy": {
-      "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
+      "description": "Defines an early termination policy based on running averages of the primary metric of all runs.",
       "type": "object",
       "allOf": [
         {
@@ -8047,6 +8074,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of ModelContainer objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -8143,6 +8171,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of ModelVersion objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -8166,6 +8195,7 @@
       "properties": {
         "processCountPerInstance": {
           "format": "int32",
+          "description": "Number of processes per MPI node.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -8210,6 +8240,7 @@
       "additionalProperties": false
     },
     "Objective": {
+      "description": "Optimization objective.",
       "required": [
         "goal",
         "primaryMetric"
@@ -8221,6 +8252,7 @@
           "$ref": "#/definitions/Goal"
         },
         "primaryMetric": {
+          "description": "Name of the metric to optimize.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -8261,6 +8293,7 @@
           }
         },
         "livenessProbe": {
+          "description": "Deployment container liveness/readiness probe configuration.",
           "$ref": "#/definitions/ProbeSettings"
         },
         "model": {
@@ -8283,9 +8316,11 @@
           ]
         },
         "requestSettings": {
+          "description": "Online deployment scoring requests configuration.",
           "$ref": "#/definitions/OnlineRequestSettings"
         },
         "scaleSettings": {
+          "description": "Online deployment scaling configuration.",
           "$ref": "#/definitions/OnlineScaleSettings"
         }
       },
@@ -8308,6 +8343,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "properties": {
@@ -8330,6 +8366,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of OnlineDeployment objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -8430,6 +8467,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "properties": {
@@ -8452,6 +8490,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "description": "The link to the next page of OnlineEndpoint objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
@@ -8465,10 +8504,12 @@
       "additionalProperties": false
     },
     "OnlineRequestSettings": {
+      "description": "Online deployment scoring requests configuration.",
       "type": "object",
       "properties": {
         "maxConcurrentRequestsPerInstance": {
           "format": "int32",
+          "description": "The number of requests allowed to queue at once for this deployment.",
           "type": "integer"
         },
         "maxQueueWait": {
@@ -8485,6 +8526,7 @@
       "additionalProperties": false
     },
     "OnlineScaleSettings": {
+      "description": "Online deployment scaling configuration.",
       "required": [
         "scaleType"
       ],
@@ -8492,13 +8534,16 @@
       "properties": {
         "maxInstances": {
           "format": "int32",
+          "description": "Maximum number of instances for this deployment.",
           "type": "integer"
         },
         "minInstances": {
           "format": "int32",
+          "description": "Minimum number of instances for this deployment.",
           "type": "integer"
         },
         "scaleType": {
+          "description": "Type of deployment scaling algorithm",
           "$ref": "#/definitions/ScaleType"
         }
       },
@@ -8611,6 +8656,7 @@
       ],
       "properties": {
         "containerResourceRequirements": {
+          "description": "Resource requirements for each container instance within an online deployment.",
           "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         }
       },
@@ -8637,9 +8683,11 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "location": {
+          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
@@ -8647,6 +8695,7 @@
           "$ref": "#/definitions/PartialBatchDeployment"
         },
         "tags": {
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -8679,9 +8728,11 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "location": {
+          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
@@ -8689,6 +8740,7 @@
           "$ref": "#/definitions/PartialBatchEndpoint"
         },
         "tags": {
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -8706,6 +8758,7 @@
       ],
       "properties": {
         "readinessProbe": {
+          "description": "Deployment container liveness/readiness probe configuration.",
           "$ref": "#/definitions/ProbeSettings"
         }
       },
@@ -8720,19 +8773,23 @@
       "type": "object",
       "properties": {
         "appInsightsEnabled": {
+          "description": "Whether AppInsights telemetry is enabled for this online deployment.",
           "type": "boolean"
         },
         "endpointComputeType": {
-          "description": "Enum to determine endpoint compute type.",
+          "description": "The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
         },
         "livenessProbe": {
+          "description": "Deployment container liveness/readiness probe configuration.",
           "$ref": "#/definitions/ProbeSettings"
         },
         "requestSettings": {
+          "description": "Online deployment scoring requests configuration.",
           "$ref": "#/definitions/OnlineRequestSettings"
         },
         "scaleSettings": {
+          "description": "Online deployment scaling configuration.",
           "$ref": "#/definitions/OnlineScaleSettings"
         }
       },
@@ -8747,9 +8804,11 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "location": {
+          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
@@ -8757,6 +8816,7 @@
           "$ref": "#/definitions/PartialOnlineDeployment"
         },
         "tags": {
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -8789,9 +8849,11 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
         "location": {
+          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
@@ -8799,6 +8861,7 @@
           "$ref": "#/definitions/PartialOnlineEndpoint"
         },
         "tags": {
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -8808,6 +8871,7 @@
       "additionalProperties": false
     },
     "ProbeSettings": {
+      "description": "Deployment container liveness/readiness probe configuration.",
       "type": "object",
       "properties": {
         "failureThreshold": {
@@ -9269,7 +9333,7 @@
           ]
         },
         "earlyTermination": {
-          "description": "Early termination policies enable canceling poor-performing runs before they complete",
+          "description": "Early termination policies enable canceling poor-performing runs before they complete.",
           "$ref": "#/definitions/EarlyTerminationPolicy"
         },
         "experimentName": {
@@ -9290,13 +9354,16 @@
         },
         "maxConcurrentTrials": {
           "format": "int32",
+          "description": "An upper bound on the number of trials performed in parallel.",
           "type": "integer"
         },
         "maxTotalTrials": {
           "format": "int32",
+          "description": "An upper bound on the number of trials to perform.",
           "type": "integer"
         },
         "objective": {
+          "description": "Optimization objective.",
           "$ref": "#/definitions/Objective"
         },
         "output": {
@@ -9355,6 +9422,7 @@
       "properties": {
         "parameterServerCount": {
           "format": "int32",
+          "description": "Number of parameter server tasks.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -9479,6 +9547,7 @@
       "properties": {
         "truncationPercentage": {
           "format": "int32",
+          "description": "The percentage of runs to cancel at each evaluation interval.",
           "type": "integer"
         }
       },
