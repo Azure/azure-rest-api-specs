@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Defender for IoT",
     "description": "API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider",
-    "version": "2021-02-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -38,7 +38,7 @@
       "get": {
         "x-ms-examples": {
           "List IoT sensors": {
-            "$ref": "./examples/Sensors/List.json"
+            "$ref": "./examples/Sensors/IoTHub/List.json"
           }
         },
         "tags": [
@@ -74,7 +74,7 @@
       "get": {
         "x-ms-examples": {
           "Get IoT sensor": {
-            "$ref": "./examples/Sensors/Get.json"
+            "$ref": "./examples/Sensors/IoTHub/Get.json"
           }
         },
         "tags": [
@@ -111,7 +111,7 @@
       "put": {
         "x-ms-examples": {
           "Create or update IoT sensor": {
-            "$ref": "./examples/Sensors/Put.json"
+            "$ref": "./examples/Sensors/IoTHub/Put.json"
           }
         },
         "tags": [
@@ -157,7 +157,7 @@
       "delete": {
         "x-ms-examples": {
           "Delete IoT sensor": {
-            "$ref": "./examples/Sensors/Delete.json"
+            "$ref": "./examples/Sensors/IoTHub/Delete.json"
           }
         },
         "tags": [
@@ -196,7 +196,7 @@
       "post": {
         "x-ms-examples": {
           "Download activation file": {
-            "$ref": "./examples/Sensors/DownloadActivation.json"
+            "$ref": "./examples/Sensors/IoTHub/DownloadActivation.json"
           }
         },
         "tags": [
@@ -239,7 +239,7 @@
       "post": {
         "x-ms-examples": {
           "Download file for reset password of the sensor": {
-            "$ref": "./examples/Sensors/DownloadResetPassword.json"
+            "$ref": "./examples/Sensors/IoTHub/DownloadResetPassword.json"
           }
         },
         "tags": [
@@ -292,7 +292,7 @@
       "post": {
         "x-ms-examples": {
           "Trigger threat intelligence package update": {
-            "$ref": "./examples/Sensors/TriggerTiPackageUpdate.json"
+            "$ref": "./examples/Sensors/IoTHub/TriggerTiPackageUpdate.json"
           }
         },
         "tags": [
@@ -306,6 +306,338 @@
           },
           {
             "$ref": "#/parameters/SensorScope"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Triggered threat intelligence package update"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors": {
+      "get": {
+        "x-ms-examples": {
+          "List IoT sensors": {
+            "$ref": "./examples/Sensors/List.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "description": "List IoT sensors",
+        "operationId": "Sensors_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SensorsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT sensor": {
+            "$ref": "./examples/Sensors/Get.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_Get",
+        "description": "Get IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SensorModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update IoT sensor": {
+            "$ref": "./examples/Sensors/Put.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_CreateOrUpdate",
+        "description": "Create or update IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          },
+          {
+            "$ref": "#/parameters/SensorModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated IoT sensor",
+            "schema": {
+              "$ref": "#/definitions/SensorModel"
+            }
+          },
+          "201": {
+            "description": "Created IoT sensor",
+            "schema": {
+              "$ref": "#/definitions/SensorModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete IoT sensor": {
+            "$ref": "./examples/Sensors/Delete.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_Delete",
+        "description": "Delete IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted IoT sensor"
+          },
+          "204": {
+            "description": "IoT sensor does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/downloadActivation": {
+      "post": {
+        "x-ms-examples": {
+          "Download activation file": {
+            "$ref": "./examples/Sensors/DownloadActivation.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_DownloadActivation",
+        "description": "Download sensor activation file",
+        "produces": [
+          "application/zip"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded activation file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/downloadResetPassword": {
+      "post": {
+        "x-ms-examples": {
+          "Download file for reset password of the sensor": {
+            "$ref": "./examples/Sensors/DownloadResetPassword.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_DownloadResetPassword",
+        "description": "Download file for reset password of the sensor",
+        "produces": [
+          "application/zip"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
+          },
+          {
+            "$ref": "#/parameters/SensorName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "The reset password input.",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordInput"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded reset password file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/sites/{siteName}/sensors/{sensorName}/triggerTiPackageUpdate": {
+      "post": {
+        "x-ms-examples": {
+          "Trigger threat intelligence package update": {
+            "$ref": "./examples/Sensors/TriggerTiPackageUpdate.json"
+          }
+        },
+        "tags": [
+          "Sensors"
+        ],
+        "operationId": "Sensors_TriggerTiPackageUpdate",
+        "description": "Trigger threat intelligence package update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/SiteName"
           },
           {
             "$ref": "#/parameters/SensorName"
@@ -503,6 +835,15 @@
       "required": true,
       "type": "string",
       "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "SiteName": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Site Name",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
