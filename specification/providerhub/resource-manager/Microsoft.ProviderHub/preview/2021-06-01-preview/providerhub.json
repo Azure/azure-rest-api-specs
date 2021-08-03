@@ -2377,6 +2377,10 @@
             }
           ],
           "description": "Properties of the rollout."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -2641,6 +2645,10 @@
             }
           ],
           "description": "Properties of the rollout."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -3557,6 +3565,10 @@
               "$ref": "#/definitions/NotificationRegistrationProperties"
             }
           ]
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4159,6 +4171,10 @@
               "$ref": "#/definitions/ProviderRegistrationProperties"
             }
           ]
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4607,6 +4623,9 @@
               "$ref": "#/definitions/ResourceProviderManagement"
             }
           ]
+        },
+        "openApiConfiguration": {
+          "$ref": "#/definitions/OpenApiConfiguration"
         }
       }
     },
@@ -4624,6 +4643,10 @@
               "$ref": "#/definitions/ResourceTypeRegistrationProperties"
             }
           ]
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4860,6 +4883,10 @@
               "$ref": "#/definitions/ResourceTypeSku"
             }
           ]
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4876,6 +4903,23 @@
         "nextLink": {
           "description": "The URL to get to the next set of results, if there are any.",
           "type": "string"
+        }
+      }
+    },
+    "OpenApiConfiguration": {
+      "type": "object",
+      "properties": {
+        "validation": {
+          "$ref": "#/definitions/OpenApiValidation"
+        }
+      }
+    },
+    "OpenApiValidation": {
+      "type": "object",
+      "properties": {
+        "allowNoncompliantCollectionResponse": {
+          "description": "Indicates whether a non compliance response is allowed for a LIST call",
+          "type": "boolean"
         }
       }
     },
