@@ -122,7 +122,7 @@ input-file:
 
 These settings apply only when `--tag=package-monitoring-2020-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
+``` yaml $(tag) == 'package-monitoring-2020-10-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2020-10-01-preview/monitoring.json
 ```
