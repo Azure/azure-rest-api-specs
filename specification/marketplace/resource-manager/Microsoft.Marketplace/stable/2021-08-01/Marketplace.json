@@ -148,6 +148,34 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -395,6 +423,89 @@
       ],
       "x-ms-enum": {
         "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Marketplace operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SingleOperation"
+          },
+          "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "SingleOperation": {
+      "description": "Microsoft.Marketplace REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "description": "Service provider: Microsoft.Marketplace",
+              "type": "string"
+            },
+            "resource": {
+              "readOnly": true,
+              "description": "Resource on which the operation is performed",
+              "type": "string"
+            },
+            "operation": {
+              "readOnly": true,
+              "description": "Operation type",
+              "type": "string"
+            },
+            "description": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Friendly description for the operation,"
+            }
+          }
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "PrivateStoreOperation": {
+      "description": "Set the Operation for the POST method. Ping or Delete",
+      "type": "string",
+      "enum": [
+        "DeletePrivateStoreOffer",
+        "DeletePrivateStoreCollection",
+        "DeletePrivateStoreCollectionOffer",
+        "Ping"
+      ],
+      "x-ms-enum": {
+        "name": "Operation",
         "modelAsString": true
       }
     }
