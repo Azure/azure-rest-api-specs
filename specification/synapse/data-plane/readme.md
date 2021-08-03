@@ -118,6 +118,15 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 ```
 
+### Tag: package-monitoring-2020-10-01-preview
+
+These settings apply only when `--tag=package-monitoring-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-10-01-preview/monitoring.json
+```
+
 ### Tag: package-artifacts-2020-12-01
 
 These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
@@ -294,6 +303,7 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/library.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-10-01-preview/monitoring.json
 
 ```
 
