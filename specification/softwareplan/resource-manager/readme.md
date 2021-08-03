@@ -26,7 +26,7 @@ These are the global settings for the softwareplan.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06-01-preview
+tag: package-2021-08-01
 ```
 
 ### Tag: package-2019-06-01-preview
@@ -50,6 +50,20 @@ These settings apply only when `--tag=package-2019-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2019-12-01'
 input-file:
   - Microsoft.SoftwarePlan/stable/2019-12-01/softwareplan.json
+```
+
+``` yaml
+openapi-type: arm
+tag: package-2021-08-01
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+  - Microsoft.SoftwarePlan/stable/2021-08-01/softwareplan.json
 ```
 
 ---
