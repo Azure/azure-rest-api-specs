@@ -44,7 +44,7 @@ tag: package-vnet-2020-12-01
 ```
 
 ``` yaml $(package-monitoring)
-tag: package-monitoring-2020-12-01
+tag: package-monitoring-2020-10-01-preview
 ```
 
 ### Tag: package-spark-2019-11-01-preview
@@ -300,7 +300,6 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/library.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-10-01-preview/monitoring.json
