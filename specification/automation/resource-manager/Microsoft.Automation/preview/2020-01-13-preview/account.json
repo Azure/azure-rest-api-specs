@@ -463,8 +463,43 @@
           }
         }
       }
-    }
-  },
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/listbuiltinmodules": {
+      "post": {
+        "tags": [
+          "ListBuiltInModules"
+        ],
+        "operationId": "BuiltinModules_ListByAutomationAccount",
+        "description": "Retrieve the list of versions of the Azure modules.",
+        "x-ms-examples": {
+          "Get lists of an automation account": {
+            "$ref": "./examples/listAutomationAccountKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModuleListResult"
+            }
+          }
+        }
+      }
+    },
   "definitions": {
     "AutomationAccount": {
       "properties": {
@@ -544,6 +579,10 @@
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+        },
+        "runtimeConfiguration":{
+          "$ref": "#/definition/RuntimeConfiguration",
+          "description": "The runtime configuration of the account."
         }
       },
       "description": "Definition of the account property."
@@ -576,6 +615,26 @@
         "name"
       ],
       "description": "The account SKU."
+    },
+    "RuntimeConfiguration":{
+      "type": "object",
+      "properties":{
+        "powershell":{
+          "$ref": "#/definitions/BuiltInModules",
+          "description": "Gets or sets the PowerShell module."
+        },
+        "powershell7":{
+          "$ref": "#/definitions/BuiltInModules",
+          "description": "Gets or sets the PowerShell 7 module."
+        }
+      }
+    },
+    "BuiltInModules":{
+      "type": "object",
+      "additionalProperties":{
+        "type": "string",
+        "description": "Gets or sets the version of Azure Modules."
+      }
     },
     "AutomationAccountCreateOrUpdateParameters": {
       "properties": {
@@ -620,6 +679,10 @@
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+        },
+        "runtimeConfiguration":{
+          "$ref": "#/definition/RuntimeConfiguration",
+          "description": "The runtime configuration of the account."
         }
       },
       "description": "The parameters supplied to the create or update account properties."
@@ -790,6 +853,30 @@
         }
       }
     },
+    "ModuleListResult":{
+      "properties":{
+        "powershell":{
+          "$ref": "#definitions/Module",
+          "description": "List of PowerShell module."
+        },
+        "powershell7":{
+          "$ref": "#definitions/Module",
+          "description": "List of PowerShell 7 module."
+        }
+      },
+      "description": "List of Azure modules."
+    },
+    "Module":{
+      "properties":{
+        "Az":{
+          "type": "array",
+          "items":{
+            "type": "string"
+          },
+          "description": "List of module versions."
+        }
+      }
+    },
     "AutomationAccountUpdateProperties": {
       "properties": {
         "sku": {
@@ -803,6 +890,10 @@
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+        },
+        "runtimeConfiguration":{
+          "$ref": "#/definition/RuntimeConfiguration",
+          "description": "The runtime configuration of the account."
         }
       },
       "description": "The parameters supplied to the update account properties."
