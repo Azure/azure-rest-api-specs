@@ -1,0 +1,484 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-01-preview",
+    "title": "MonitoringClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/sqlStreamingJobs": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSqlStreamingJobList",
+        "description": "Get list of sql streaming jobs which is in a particular sql pool of the workspace.",
+        "x-ms-examples": {
+          "Get list of sql streaming jobs": {
+            "$ref": "./examples/Monitoring_GetSqlStreamingJobList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SQLPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SQLStreamingJobListViewResponse"
+            }
+          }
+        }
+      }
+    },
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSqlStreamingJobDetails",
+        "description": "Get SQL streaming job details for a given streaming job name in the specific SQL database.",
+        "x-ms-examples": {
+          "Get SQL streaming job details and use the $expand OData query parameter to expand job graph": {
+            "$ref": "./examples/Monitoring_GetSqlStreamingJobDetails_Expand.json"
+          },
+          "Get SQL streaming job details and do not use the $expand OData query parameter": {
+            "$ref": "./examples/Monitoring_GetSqlStreamingJobDetails_NoExpand.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SQLPoolName"
+          },
+          {
+            "$ref": "#/parameters/SQLDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/SQLStreamingJobName"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The job graph is included in the response when this parameter is set to 'Graph'."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SQLStreamingJobResponse"
+            }
+          }
+        }
+      }
+    },
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}/metrics": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSqlStreamingJobMetrics",
+        "description": "Get SQL streaming job metrics for a given streaming job name in the specific SQL database.",
+        "x-ms-examples": {
+          "Get SQL job query string": {
+            "$ref": "./examples/Monitoring_GetSqlStreamingJobMetrics.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SQLPoolName"
+          },
+          {
+            "$ref": "#/parameters/SQLDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/SQLStreamingJobName"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "The **$filter** is used to reduce the set of metric data returned. Example: Metric contains metadata A, B and C. - Return all time series of C where A = a1 and B = b1 or b2 **$filter=A eq 'a1' and B eq 'b1' or B eq 'b2' and C eq '*'** - Invalid variant: **$filter=A eq 'a1' and B eq 'b1' and C eq '*' or B = 'b2'** This is invalid because the logical or operator cannot separate two different metadata names. - Return all time series where A = a1, B = b1 and C = c1: **$filter=A eq 'a1' and B eq 'b1' and C eq 'c1'** - Return all time series where A = a1 **$filter=A eq 'a1' and B eq '*' and C eq '*'**. Special case: When dimension name or dimension value uses round brackets. Eg: When dimension name is **dim (test) 1** Instead of using $filter= \"dim (test) 1 eq '*' \" use **$filter= \"dim %2528test%2529 1 eq '*' \"** When dimension name is **dim (test) 3** and dimension value is **dim3 (test) val** Instead of using $filter= \"dim (test) 3 eq 'dim3 (test) val' \" use **$filter= \"dim %2528test%2529 3 eq 'dim3 %2528test%2529 val' \"**",
+            "required": false
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/ResultTypeParameter"
+          },
+          {
+            "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SQLStreamingJobMetrics"
+            }
+          }
+        }
+      }
+    },
+    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/databases/{sqlDatabaseName}/sqlStreamingJobs/{sqlStreamingJobName}/authoringLogs": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSqlStreamingJobAuthoringLogList",
+        "description": "Get SQL streaming job authoring logs for a given streaming job name in the specific SQL database.",
+        "x-ms-examples": {
+          "Get SQL job query string": {
+            "$ref": "./examples/Monitoring_GetSqlStreamingJobAuthoringLogList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SQLPoolName"
+          },
+          {
+            "$ref": "#/parameters/SQLDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/SQLStreamingJobName"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SQLStreamingJobAuthoringLogListViewResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlQueryStringDataModel": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "SQLStreamingJobListViewResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLStreamingJob"
+          }
+        }
+      }
+    },
+    "SQLStreamingJob": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "type": "string"
+        },
+        "workspaceName": {
+          "type": "string"
+        },
+        "sqlPoolName": {
+          "type": "string"
+        },
+        "sqlDatabaseName": {
+          "type": "string"
+        },
+        "jobName": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "error": {
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        },
+        "streamingUnits": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "query": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "eventsLateArrivalMaxDelayInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventsOutOfOrderMaxDelayInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventsOutOfOrderPolicy": {
+          "type": "string"
+        },
+        "outputStartTimeUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "outputStartMode": {
+          "type": "string"
+        },
+        "outputErrorPolicy": {
+          "type": "string"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lastOutputTimeUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "x-nullable": true
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "x-nullable": true
+        },
+        "jobGraph": {
+          "type": "object",
+          "properties": {
+            "graph": {
+              "type": "string"
+            },
+            "startDateTime": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "SQLStreamingJobResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SQLStreamingJob"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SQLStreamingJobMetrics": {
+      "$ref": "../../../../../monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json#/definitions/Response"
+    },
+    "SQLStreamingJobAuthoringLogListViewResponse": {
+      "type": "object",
+      "properties": {
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "jobId": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "operationName": {
+                "type": "string"
+              },
+              "activityId": {
+                "type": "string"
+              },
+              "requestId": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "eventTimestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "eventId": {
+                "type": "string"
+              },
+              "level": {
+                "type": "string"
+              },
+              "eventMessage": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Relative link to the next page of results"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "SQLPoolName": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The SQL pool name.",
+      "x-ms-parameter-location": "method"
+    },
+    "SQLDatabaseName": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The SQL database name.",
+      "x-ms-parameter-location": "method"
+    },
+    "SQLStreamingJobName": {
+      "name": "sqlStreamingJobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The SQL streaming job name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
