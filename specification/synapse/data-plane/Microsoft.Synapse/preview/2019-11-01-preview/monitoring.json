@@ -133,7 +133,6 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": null,
               "$ref": "#/definitions/SQLStreamingJobListViewResponse"
             }
           }
@@ -180,7 +179,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "#/definitions/SQLStreamingJobResponse"
+              "$ref": "#/definitions/SQLStreamingJobResponse"
             }
           }
         }
@@ -247,7 +246,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "#/definitions/SQLStreamingJobMetrics"
+              "$ref": "#/definitions/SQLStreamingJobMetrics"
             }
           }
         }
@@ -298,7 +297,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "#/definitions/SQLStreamingJobAuthoringLogListViewResponse"
+              "$ref": "#/definitions/SQLStreamingJobAuthoringLogListViewResponse"
             }
           }
         }
@@ -596,14 +595,14 @@
         "nextLink": {
           "type": "string",
           "description": "Relative link to the next page of results"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
         }
-      },
-      "errorMessage": {
-        "type": "string"
-      },
-      "statusCode": {
-        "format": "int32",
-        "type": "integer"
       }
     }
   },
