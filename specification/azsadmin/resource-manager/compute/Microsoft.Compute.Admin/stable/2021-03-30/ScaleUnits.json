@@ -9,7 +9,7 @@
     "https"
   ],
   "paths": {
-    "/providers/Microsoft.Compute.Admin/locations/{location}/computeScaleUnits/{scaleUnitName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/computeScaleUnits/{scaleUnitName}": {
       "get": {
         "x-ms-examples": {
           "Get an existing scale set.": {
@@ -30,13 +30,16 @@
         ],
         "parameters": [
           {
-            "$ref": "ScaleUnits.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "ScaleUnits.json#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "ScaleUnits.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -47,9 +50,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -69,7 +72,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/Resource"
         }
       ]
     },
@@ -184,81 +187,9 @@
           }
         }
       }
-    },
-    "Resource": {
-      "description": "Base resource object.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "description": "ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "readOnly": true,
-          "description": "Name of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "readOnly": true,
-          "description": "Type of Resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ErrorDetails": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Object containing error details.",
-          "$ref": "#/definitions/ErrorDetailsInternal"
-        }
-      }
-    },
-    "ErrorDetailsInternal": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string"
-    },
-    "LocationParameter": {
-      "description": "Location of the resource.",
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ScaleUnitParameter": {
       "description": "Name of the scale unit.",
       "name": "scaleUnitName",
