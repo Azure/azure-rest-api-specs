@@ -1,7 +1,10 @@
 {
   "parameters": {
     "endpoint": "myWorkspace.dev.azuresynapse.net",
-    "api-version": "2019-11-01-preview"
+    "api-version": "2019-11-01-preview",
+    "sqlPoolName": "myWorkspace-ondemand",
+    "sqlDatabaseName": "myDatabase",
+    "sqlStreamingJobName": "myJob"
   },
   "responses": {
     "200": {
@@ -40,7 +43,7 @@
           "provisioningState": "Succeeded",
           "outputStartMode": "JobStartTime",
           "jobGraph": {
-            "startDateTime": "2021-07-30T11:14:22.877",
+            "startDateTime": "2021-07-30T11:14:22.877Z",
             "graph": "{\r\n  \"nodes\": [\r\n    {\r\n      \"id\": \"blob_input_0\",\r\n      \"name\": \"blob_input\",\r\n      \"type\": \"Input\",\r\n      \"processorId\": \"blob_input#0$0\",\r\n      \"dataSourceType\": \"InputBlob\",\r\n      \"partitionIds\": [\r\n        0\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"blob_output_blob_output_0\",\r\n      \"name\": \"blob_output\",\r\n      \"type\": \"Step\",\r\n      \"processorId\": \"blob_output#0$0\",\r\n      \"partitionIds\": [\r\n        0\r\n      ],\r\n      \"scriptPosition\": {\r\n        \"startLine\": 3,\r\n        \"startColumn\": 9,\r\n        \"startOffset\": 41,\r\n        \"endLine\": 4,\r\n        \"endColumn\": 23,\r\n        \"endOffset\": 72\r\n      },\r\n      \"inputTimeShift\": \"00:00:00\"\r\n    },\r\n    {\r\n      \"id\": \"blob_output-blob_output_0\",\r\n      \"name\": \"blob_output\",\r\n      \"type\": \"Output\",\r\n      \"processorId\": \"blob_output-blob_output#0$0\",\r\n      \"dataSourceType\": \"OutputBlob\",\r\n      \"partitionIds\": [\r\n        0\r\n      ],\r\n      \"inputTimeShift\": \"00:05:00\"\r\n    }\r\n  ],\r\n  \"edges\": [\r\n    {\r\n      \"source\": \"blob_input_0\",\r\n      \"target\": \"blob_output_blob_output_0\"\r\n    },\r\n    {\r\n      \"source\": \"blob_output_blob_output_0\",\r\n      \"target\": \"blob_output-blob_output_0\"\r\n    }\r\n  ]\r\n}"
           }
         },

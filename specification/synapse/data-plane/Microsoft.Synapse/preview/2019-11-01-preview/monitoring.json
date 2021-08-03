@@ -430,7 +430,7 @@
         "sqlDatabaseName": {
           "type": "string"
         },
-        "sqlStreamingJobName": {
+        "jobName": {
           "type": "string"
         },
         "jobStatus": {
@@ -445,7 +445,7 @@
             }
           }
         },
-        "streamingUnit": {
+        "streamingUnits": {
           "type": "integer",
           "format": "int32"
         },
@@ -573,7 +573,7 @@
               "requestId": {
                 "type": "string"
               },
-              "eventName": {
+              "status": {
                 "type": "string"
               },
               "eventTimestamp": {
@@ -628,21 +628,24 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The SQL pool name."
+      "description": "The SQL pool name.",
+      "x-ms-parameter-location": "method"
     },
     "SQLDatabaseName": {
       "name": "sqlDatabaseName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The SQL database name."
+      "description": "The SQL database name.",
+      "x-ms-parameter-location": "method"
     },
     "SQLStreamingJobName": {
       "name": "sqlStreamingJobName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The SQL streaming job name."
+      "description": "The SQL streaming job name.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
