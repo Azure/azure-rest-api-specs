@@ -35,7 +35,38 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-04
+tag: package-2021-07
+```
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-07'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2019-06-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2021-04
@@ -756,18 +787,30 @@ directive:
     from: autoscale_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-
+    
 ```
 
-``` yaml ($(go) && !$(track2)) || $(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
   transform: delete $["Resource"]
   reason: Missing kind, etag
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ErrorResponse"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["AzureResource"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ActionGroup"]
+  reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && $(tag) == 'package-2021-04'
+``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07')
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
@@ -814,7 +857,7 @@ directive:
 ### Tag: profile-hybrid-2019-03-01
 
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
+Creating this tag to pick proper resources from the hybrid profile. 
 
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
