@@ -17,12 +17,6 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skipToken",
-            "description": "The skipTokenSystem.String.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -30,7 +24,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RoleViewModelPagedResults"
+              "$ref": "#/definitions/RoleViewModelListResults"
             }
           },
           "default": {
@@ -39,6 +33,9 @@
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "MetadataRoles_List": {
@@ -102,12 +99,6 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skipToken",
-            "description": "Continuation token for the next page.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -115,7 +106,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModelPagedResults"
+              "$ref": "#/definitions/MetadataPolicyViewModelListResults"
             }
           },
           "default": {
@@ -124,6 +115,9 @@
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "MetadataPolicy_ListAll": {
@@ -252,19 +246,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "matcherId": {
-          "type": "string"
-        },
-        "matcherConfig": {
-          "type": "object",
-          "additionalProperties": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
         }
       }
     },
@@ -291,47 +272,28 @@
       "properties": {
         "kind": {
           "enum": [
-            "policyset",
-            "policy",
-            "attributerule",
             "decisionrule"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         },
         "effect": {
           "enum": [
-            "NotApplicable",
             "Deny",
-            "Permit",
-            "Indeterminate"
+            "Permit"
           ],
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "updatedAt": {
-          "type": "string"
-        },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
           }
         },
         "dnfCondition": {
           "$ref": "#/definitions/DNFCondition"
-        },
-        "cnfCondition": {
-          "$ref": "#/definitions/CNFCondition"
         }
       }
     },
@@ -340,13 +302,14 @@
       "properties": {
         "kind": {
           "enum": [
-            "policyset",
-            "policy",
-            "attributerule",
-            "decisionrule"
+            "attributerule"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         },
         "id": {
           "type": "string"
@@ -354,24 +317,8 @@
         "name": {
           "type": "string"
         },
-        "version": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "updatedAt": {
-          "type": "string"
-        },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "dnfCondition": {
           "$ref": "#/definitions/DNFCondition"
-        },
-        "cnfCondition": {
-          "$ref": "#/definitions/CNFCondition"
         }
       }
     },
@@ -459,7 +406,7 @@
         }
       }
     },
-    "MetadataPolicyViewModelPagedResults": {
+    "MetadataPolicyViewModelListResults": {
       "required": [
         "values"
       ],
@@ -473,10 +420,6 @@
         },
         "nextLink": {
           "type": "string"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -501,12 +444,6 @@
         "dnfCondition": {
           "$ref": "#/definitions/DNFCondition"
         },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "version": {
           "format": "int64",
           "type": "integer"
@@ -530,7 +467,7 @@
         }
       }
     },
-    "RoleViewModelPagedResults": {
+    "RoleViewModelListResults": {
       "required": [
         "values"
       ],
@@ -544,10 +481,6 @@
         },
         "nextLink": {
           "type": "string"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     }
