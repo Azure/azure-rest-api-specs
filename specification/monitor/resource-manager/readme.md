@@ -23,7 +23,6 @@ To see additional help and options, run:
 ### Basic Information
 
 There are the global settings for the Azure Monitor Control Service (AMCS) extension.
-
 ``` yaml $(AMCS)
 tag: package-2021-04-only
 ```
@@ -723,3 +722,5 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
+
+
