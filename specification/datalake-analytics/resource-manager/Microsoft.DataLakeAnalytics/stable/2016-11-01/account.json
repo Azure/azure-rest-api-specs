@@ -1885,6 +1885,21 @@
           },
           "description": "The list of hiveMetastores associated with this account."
         },
+        "hierarchicalQueue": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "root": {
+              "type": "object"
+            }
+          },
+          "description": "The hierarchical queue associated with this account."
+        },
+        "hierarchicalQueueState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hierarchical queue state associated with this account."
+        },
         "virtualNetworkRules": {
           "readOnly": true,
           "type": "array",
@@ -1970,6 +1985,24 @@
           "minimum": 1,
           "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
+        },
+        "maxActiveJobCountPerUser": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
+        },
+        "maxQueuedJobCountPerUser": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported jobs queued under the account at the same time."
+        },
+        "maxJobRunningTimeInMin": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
         },
         "systemMaxJobCount": {
           "readOnly": true,
@@ -2831,6 +2864,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "FirewallState",
             "modelAsString": false
@@ -2843,6 +2877,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "FirewallAllowAzureIpsState",
             "modelAsString": false
@@ -2862,6 +2897,7 @@
             "Commitment_100000AUHours",
             "Commitment_500000AUHours"
           ],
+          "default": "Consumption",
           "x-ms-enum": {
             "name": "TierType",
             "modelAsString": false
@@ -2886,6 +2922,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1,
+          "default": 32,
           "description": "The maximum supported degree of parallelism per job for this account."
         },
         "minPriorityPerJob": {
@@ -3132,6 +3169,7 @@
         },
         "suffix": {
           "type": "string",
+          "default": "azuredatalakestore.net",
           "description": "The optional suffix for the storage account."
         }
       },

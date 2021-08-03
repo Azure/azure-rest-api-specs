@@ -725,6 +725,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -1034,6 +1035,14 @@
           "type": "string",
           "readOnly": true
         },
+        "managedResourceGroupName": {
+          "description": "Gets or sets the managed resource group name",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "managedResources": {
           "description": "Gets the resource identifiers of the managed resources.",
           "allOf": [
@@ -1062,7 +1071,8 @@
             "SoftDeleting",
             "SoftDeleted",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
@@ -1073,6 +1083,7 @@
         },
         "publicNetworkAccess": {
           "description": "Gets or sets the public network access.",
+          "default": "Enabled",
           "enum": [
             "NotSpecified",
             "Enabled",
@@ -1197,11 +1208,13 @@
         "createdAt": {
           "format": "date-time",
           "description": "The timestamp of resource creation (UTC).",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdBy": {
           "description": "The identity that created the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdByType": {
           "description": "The type of identity that created the resource.",
@@ -1212,6 +1225,7 @@
             "Key"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "createdByType",
             "modelAsString": true
@@ -1220,11 +1234,13 @@
         "lastModifiedAt": {
           "format": "date-time",
           "description": "The timestamp of the last modification the resource (UTC).",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedBy": {
           "description": "The identity that last modified the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedByType": {
           "description": "The type of identity that last modified the resource.",
@@ -1235,6 +1251,7 @@
             "Key"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "lastModifiedByType",
             "modelAsString": true
@@ -1831,13 +1848,6 @@
     }
   },
   "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
     "api-version": {
       "name": "api-version",
       "in": "query",
@@ -1860,6 +1870,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
