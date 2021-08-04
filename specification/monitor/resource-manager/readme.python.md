@@ -19,7 +19,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2021-05-01-preview-only
-  - tag: package-2021-02-01-preview-only
+  - tag: package-2021-02-preview-only
   - tag: package-2021-04-only
   - tag: package-2020-10-only
   - tag: package-2020-05-preview-only
