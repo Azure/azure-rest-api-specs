@@ -230,6 +230,7 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
+- preview/2020-01-13-preview/examples/listAutomationAccountModules.json
 ```
 
 ---

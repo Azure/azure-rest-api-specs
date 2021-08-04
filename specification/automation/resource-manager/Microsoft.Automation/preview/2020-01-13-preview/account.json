@@ -496,6 +496,12 @@
             "schema": {
               "$ref": "#/definitions/ModuleListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -618,7 +624,6 @@
       "description": "The account SKU."
     },
     "RuntimeConfiguration": {
-      "type": "object",
       "properties": {
         "powershell": {
           "$ref": "#/definitions/BuiltInModules",
@@ -631,7 +636,6 @@
       }
     },
     "BuiltInModules": {
-      "type": "object",
       "additionalProperties": {
         "type": "string",
         "description": "Gets or sets the version of Azure Modules."
@@ -873,10 +877,10 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "List of module versions."
+          }
         }
-      }
+      },
+      "description": "List of module versions."
     },
     "AutomationAccountUpdateProperties": {
       "properties": {
