@@ -59,7 +59,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create an IP pool.  Once created an IP pool cannot be deleted.": {
+          "Create an IP pool.": {
             "$ref": "./examples/IpPool/Create.json"
           }
         },
@@ -104,7 +104,54 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an IP pool.": {
+            "$ref": "./examples/IpPool/Delete.json [TODO]"
+          }
+        },
+        "tags": [
+          "IpPools"
+        ],
+        "description": "Delete an IP Pool",
+        "operationId": "IpPools_Delete",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/IpPoolNameParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpPoolParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IpPool"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/IpPool"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+	},
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/ipPools": {
       "get": {
         "x-ms-examples": {
