@@ -203,7 +203,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/gitintegration.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntimes.json
   - Microsoft.Synapse/preview/2021-06-01-preview/library.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/linkedservices.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/linkedServices.json
   - Microsoft.Synapse/preview/2021-06-01-preview/notebooks.json
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/pipelines.json
