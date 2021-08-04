@@ -856,21 +856,23 @@
       }
     },
     "ModuleListResult": {
+      "type": "object",
       "properties": {
         "powershell": {
-          "$ref": "#/definitions/Module",
+          "$ref": "#/definitions/AzModule",
           "description": "List of PowerShell module."
         }
       }
     },
-    "Module": {
+    "AzModule": {
+      "type": "object",
       "properties": {
         "Az": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of module versions."
+          "description": "List of azure module versions."
         }
       }
     },
