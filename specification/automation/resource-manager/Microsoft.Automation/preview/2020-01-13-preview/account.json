@@ -624,14 +624,11 @@
       "description": "The account SKU."
     },
     "RuntimeConfiguration": {
+      "type": "object",
       "properties": {
         "powershell": {
           "$ref": "#/definitions/BuiltInModules",
           "description": "Gets or sets the PowerShell module."
-        },
-        "powershell7": {
-          "$ref": "#/definitions/BuiltInModules",
-          "description": "Gets or sets the PowerShell 7 module."
         }
       }
     },
@@ -863,13 +860,8 @@
         "powershell": {
           "$ref": "#/definitions/Module",
           "description": "List of PowerShell module."
-        },
-        "powershell7": {
-          "$ref": "#/definitions/Module",
-          "description": "List of PowerShell 7 module."
         }
-      },
-      "description": "List of Azure modules."
+      }
     },
     "Module": {
       "properties": {
@@ -877,10 +869,10 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of module versions."
         }
-      },
-      "description": "List of module versions."
+      }
     },
     "AutomationAccountUpdateProperties": {
       "properties": {
