@@ -20,6 +20,11 @@ To see additional help and options, run:
 
 ## Configuration
 
+There are the global settings for the Azure Monitor Control Service (AMCS) extension.
+``` yaml $(AMCS)
+tag: package-2021-02-preview
+```
+
 ### Basic Information
 
 These are the global settings for the MonitorClient API.
