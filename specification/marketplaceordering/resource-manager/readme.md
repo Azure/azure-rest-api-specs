@@ -69,7 +69,7 @@ input-file:
 - Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
 directive:
   # suppress each RPC 3016 error
-- where: $.definitions.UnsupportedMediaTypeErrorResponse.Message
+- where: $.definitions.UnsupportedMediaTypeErrorResponse.properties.Message
   suppress: R3016
   reason: This requires a change in code thats in production for several years
 ```
