@@ -531,16 +531,8 @@
       "type": "object",
       "properties": {
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -639,10 +631,8 @@
       "description": "Request property.",
       "properties": {
         "limit": {
-          "description": "Resource quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "name": {
           "description": "Resource name.",
@@ -672,6 +662,27 @@
           "readOnly": true
         }
       }
+    },
+    "Limit": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LimitValue"
+        },
+        {
+          "$ref": "#/definitions/UsagesValue"
+        }
+      ]
+    },
+    "LimitValue": {
+      "description": "Resource quota limit.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "UsagesValue": {
+      "description": "Resource usages value.",
+      "type": "integer",
+      "format": "int32"
     },
     "QuotaRequestOneResourceSubmitResponse": {
       "description": "Quota request response.",
@@ -723,7 +734,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. \"Microsoft.Quota/quotas\""
         }
       }
     },
@@ -768,16 +779,8 @@
           "readOnly": true
         },
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
