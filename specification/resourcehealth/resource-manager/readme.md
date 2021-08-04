@@ -58,11 +58,11 @@ input-file:
 - Microsoft.ResourceHealth/preview/2018-08-01/ResourceHealth.json
 ```
 
-### Tag: package-2020-05-preview
+### Tag: package-2020-05-01-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-preview'
+``` yaml $(tag) == 'package-2020-05-01-preview'
 input-file:
 - Microsoft.ResourceHealth/preview/2020-05-01/ResourceHealth.json
 ```
@@ -138,7 +138,7 @@ batch:
   - tag: package-2017-07
   - tag: package-2015-01
   - tag: package-2018-08-preview
-  - tag: package-2020-05-preview
+  - tag: package-2020-05-01-preview
   - tag: package-2018-07-01
   - tag: package-2020-05-01
 ```
@@ -180,9 +180,9 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-### Tag: package-2020-05-preview and java
+### Tag: package-2020-05-01-preview and java
 
-These settings apply only when `--tag=package-2020-05-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
