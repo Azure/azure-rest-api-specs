@@ -609,20 +609,6 @@
         "type": "object"
       }
     },
-    "DataFlowStagingInfo": {
-      "description": "Staging info for execute data flow activity.",
-      "type": "object",
-      "properties": {
-        "linkedService": {
-          "description": "Staging linked service reference.",
-          "$ref": "artifacts.json#/definitions/LinkedServiceReference"
-        },
-        "folderPath": {
-          "description": "Folder path for staging blob.",
-          "type": "string"
-        }
-      }
-    },
     "DataFlowDebugPackage": {
       "description": "Request body structure for starting data flow debug session.",
       "type": "object",
@@ -651,7 +637,7 @@
         },
         "staging": {
           "description": "Staging info for debug session.",
-          "$ref": "#/definitions/DataFlowStagingInfo"
+          "$ref": "artifacts.json#/definitions/DataFlowStagingInfo"
         },
         "debugSettings": {
           "description": "Data flow debug settings.",

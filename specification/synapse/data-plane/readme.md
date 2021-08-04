@@ -197,13 +197,21 @@ These settings apply only when `--tag=package-artifacts-2021-06-01-preview` is s
 
 ``` yaml $(tag) == 'package-artifacts-2021-06-01-preview'
 input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/artifacts.json
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPools.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/dataflows.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/datasets.json
   - Microsoft.Synapse/preview/2021-06-01-preview/gitintegration.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntimes.json
   - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/linkedservices.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/notebooks.json
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/pipelines.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkJobDefinitions.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlScripts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/triggers.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json

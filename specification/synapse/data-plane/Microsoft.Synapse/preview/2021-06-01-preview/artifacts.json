@@ -168,7 +168,7 @@
         "error": {
           "x-ms-client-flatten": true,
           "description": "Error data",
-          "$ref": "artifacts.json#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody"
         }
       },
       "required": [
@@ -196,7 +196,7 @@
           "description": "Array with additional error details.",
           "type": "array",
           "items": {
-            "$ref": "artifacts.json#/definitions/CloudError"
+            "$ref": "#/definitions/CloudError"
           }
         }
       },
@@ -481,6 +481,20 @@
         "referenceName"
       ]
     },
+    "DataFlowStagingInfo": {
+      "description": "Staging info for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "description": "Staging linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "folderPath": {
+          "description": "Folder path for staging blob.",
+          "type": "string"
+        }
+      }
+    },
     "RunFilterParameters": {
       "description": "Query parameters for listing runs.",
       "type": "object",
@@ -503,14 +517,14 @@
           "type": "array",
           "description": "List of filters.",
           "items": {
-            "$ref": "artifacts.json#/definitions/RunQueryFilter"
+            "$ref": "#/definitions/RunQueryFilter"
           }
         },
         "orderBy": {
           "type": "array",
           "description": "List of OrderBy option.",
           "items": {
-            "$ref": "artifacts.json#/definitions/RunQueryOrderBy"
+            "$ref": "#/definitions/RunQueryOrderBy"
           }
         }
       },
@@ -667,7 +681,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "artifacts.json#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "properties": {
