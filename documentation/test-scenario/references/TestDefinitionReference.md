@@ -2,12 +2,13 @@
 
 ## Test Definition File
 
-See [Test Definition File Schema](./TestDefinitionFileSchema.json#1)
+See [Test Definition File Schema](./schema.json#1)
 
 File should be in format of yaml.
 
 **Example:**
 ```yaml
+contentVersion: 1.0.0
 scope: ResourceGroup
 requiredVariables:
   - subscriptionId
@@ -53,7 +54,7 @@ testScenarios:
 
 ## Test Scenario
 
-See [Test Scenario Schema](./TestDefinitionFileSchema.json#307).
+See [Test Scenario Schema](./schema.json#337).
 
 It defines one test scenario that could go through on its own.
 
@@ -90,7 +91,7 @@ variables:
 
 ## Test Step
 
-See [Test Step Schema](./TestDefinitionFileSchema.json#49).
+See [Test Step Schema](./schema.json#56).
 
 Defines one test step in test scenario.
 
@@ -120,7 +121,7 @@ All of the above definitions share the following fields:
 
 ## Test Step ARM Template Deployment
 
-See [Test Step ARM Template Deployment Schema](./TestDefinitionFileSchema.json#77).
+See [Test Step ARM Template Deployment Schema](./schema.json#84).
 
 Step to deploy ARM template to the test scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -141,7 +142,7 @@ armTemplateParameters: ./dep-storage-account-params.json
 
 ## Test Step Rest Call
 
-See [Test Step Rest Call Schema](./TestDefinitionFileSchema.json#96)
+See [Test Step Rest Call Schema](./schema.json#103)
 
 Step to run a swagger operation defined rest call. This may not be just one http call.
 

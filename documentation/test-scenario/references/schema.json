@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "allOf": [
     {
@@ -6,6 +7,12 @@
     }
   ],
   "properties": {
+    "contentVersion": {
+      "type": "string",
+      "enum": [
+        "1.0.0"
+      ]
+    },
     "scope": {
       "type": "string",
       "enum": [
@@ -32,6 +39,7 @@
     }
   },
   "required": [
+    "contentVersion",
     "testScenarios"
   ],
   "definitions": {

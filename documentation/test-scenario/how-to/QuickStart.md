@@ -35,8 +35,9 @@ Now write your basic test scenario. For more detail about test scenario file for
 [Test Scenario Definition Reference](../references/TestDefinitionReference.md).
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/references/TestDefinitionFileSchema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/references/schema.json
 
+contentVersion: 1.0.0
 scope: ResourceGroup
 testScenarios:
   - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate

@@ -26,4 +26,4 @@ Test Scenario is a YAML file describing a series of RESTful API calls that form 
 - [Test Scenario Definition Reference](./references/TestDefinitionReference.md)
 - [Test Scenario Variable Definition Reference](./references/Variables.md)
 - [Test Scenario Runner Reference](./references/Runner.md)
-- [Test Scenario Schema Reference](./references/TestDefinitionFileSchema.json)
+- [Test Scenario Schema Reference](./references/schema.json)
