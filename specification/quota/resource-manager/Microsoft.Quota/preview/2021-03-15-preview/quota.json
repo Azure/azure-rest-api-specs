@@ -99,6 +99,9 @@
           },
           "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
+          },
+          "Quotas_Request_ForNetwork_StandardSkuPublicIpAddressesResource": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequestStandardSkuPublicIpAddresses.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -528,16 +531,8 @@
       "type": "object",
       "properties": {
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -636,10 +631,8 @@
       "description": "Request property.",
       "properties": {
         "limit": {
-          "description": "Resource quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "name": {
           "description": "Resource name.",
@@ -667,12 +660,29 @@
           "description": "Quota request ID.",
           "type": "string",
           "readOnly": true
-        },
-        "error": {
-          "description": "Error details of the quota request.",
-          "$ref": "#/definitions/ServiceErrorDetail"
         }
       }
+    },
+    "Limit": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LimitValue"
+        },
+        {
+          "$ref": "#/definitions/UsagesValue"
+        }
+      ]
+    },
+    "LimitValue": {
+      "description": "Resource quota limit.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "UsagesValue": {
+      "description": "Resource usages value.",
+      "type": "integer",
+      "format": "int32"
     },
     "QuotaRequestOneResourceSubmitResponse": {
       "description": "Quota request response.",
@@ -724,7 +734,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. \"Microsoft.Quota/quotas\""
         }
       }
     },
@@ -769,16 +779,8 @@
           "readOnly": true
         },
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/Limit"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -860,6 +862,10 @@
           "type": "string",
           "readOnly": true
         },
+        "error": {
+          "description": "Error details of the quota request.",
+          "$ref": "#/definitions/ServiceErrorDetail"
+        },
         "requestSubmitTime": {
           "description": "The quota request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
           "type": "string",
@@ -930,6 +936,10 @@
           "type": "boolean",
           "readOnly": true
         },
+        "error": {
+          "description": "Error details of the quota request.",
+          "$ref": "#/definitions/ServiceErrorDetail"
+        },
         "properties": {
           "description": "Additional properties for the specific resource provider.",
           "type": "object"
@@ -954,19 +964,8 @@
     },
     "ResourceTypesName": {
       "description": "Resource types. For extensibility, it is a string.",
-      "enum": [
-        "standard",
-        "dedicated",
-        "lowPriority",
-        "shared",
-        "serviceSpecific"
-      ],
       "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true
-      }
+      "type": "string"
     },
     "ExceptionResponse": {
       "type": "object",
