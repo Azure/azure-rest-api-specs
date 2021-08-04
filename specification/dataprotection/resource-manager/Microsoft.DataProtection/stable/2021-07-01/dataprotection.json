@@ -2478,6 +2478,7 @@
     },
     "AzureBackupFindRestorableTimeRangesRequestResource": {
       "description": "List Restore Ranges Request",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DppWorkerRequest"
@@ -2508,6 +2509,7 @@
     },
     "AzureBackupFindRestorableTimeRangesResponseResource": {
       "description": "List Restore Ranges Response",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DppResource"
@@ -2754,6 +2756,7 @@
           "$ref": "#/definitions/AzureBackupRestoreRequest"
         }
       ],
+      "type": "object",
       "description": "Azure backup recoveryPoint based restore request",
       "properties": {
         "recoveryPointId": {
@@ -2764,7 +2767,6 @@
         "recoveryPointId"
       ],
       "title": "AzureBackupRecoveryPointBasedRestoreRequest",
-      "type": "object",
       "x-ms-discriminator-value": "AzureBackupRecoveryPointBasedRestoreRequest"
     },
     "AzureBackupRecoveryPointResource": {
@@ -2773,6 +2775,7 @@
           "$ref": "#/definitions/DppResource"
         }
       ],
+      "type": "object",
       "description": "Azure backup recoveryPoint resource",
       "properties": {
         "properties": {
@@ -3066,6 +3069,7 @@
           "$ref": "#/definitions/DppResource"
         }
       ],
+      "type": "object",
       "description": "BackupInstance Resource",
       "properties": {
         "properties": {
@@ -3152,6 +3156,7 @@
     },
     "BackupVault": {
       "description": "Backup Vault",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the BackupVault resource",
@@ -3180,8 +3185,7 @@
       "required": [
         "storageSettings"
       ],
-      "title": "BackupVault",
-      "type": "object"
+      "title": "BackupVault"
     },
     "BackupVaultResource": {
       "allOf": [
@@ -3189,6 +3193,7 @@
           "$ref": "#/definitions/DppTrackedResource"
         }
       ],
+      "type": "object",
       "description": "Backup Vault Resource",
       "properties": {
         "properties": {
@@ -3249,6 +3254,7 @@
           "$ref": "#/definitions/DppResource"
         }
       ],
+      "type": "object",
       "description": "BaseBackupPolicy resource",
       "properties": {
         "properties": {
@@ -3443,6 +3449,7 @@
     },
     "CloudError": {
       "description": "An error response from Azure Backup.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
@@ -3873,6 +3880,7 @@
     },
     "Error": {
       "description": "The resource management error response.",
+      "type": "object",
       "properties": {
         "additionalInfo": {
           "description": "The error additional info.",
@@ -3909,6 +3917,7 @@
     },
     "ErrorAdditionalInfo": {
       "description": "The resource management error additional info.",
+      "type": "object",
       "properties": {
         "info": {
           "description": "The additional info.",
@@ -4128,7 +4137,8 @@
             "readOnly": true,
             "type": "string"
           },
-          "description": "Job's Additional Details"
+          "description": "Job's Additional Details",
+          "type": "object"
         },
         "backupInstanceState": {
           "description": "State of the Backup Instance",
@@ -4175,7 +4185,8 @@
             "readOnly": true,
             "type": "string"
           },
-          "description": "Additional details of Sub Tasks"
+          "description": "Additional details of Sub Tasks",
+          "type": "object"
         },
         "taskId": {
           "description": "Task Id of the Sub Task",
@@ -5053,6 +5064,7 @@
           "$ref": "#/definitions/DppTrackedResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ResourceGuard",
