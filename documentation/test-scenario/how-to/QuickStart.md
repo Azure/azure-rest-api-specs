@@ -35,7 +35,7 @@ Now write your basic test scenario. For more detail about test scenario file for
 [Test Scenario Definition Reference](../references/TestDefinitionReference.md).
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/references/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/schemas/v1.0/schema.json
 
 contentVersion: 1.0.0
 scope: ResourceGroup
