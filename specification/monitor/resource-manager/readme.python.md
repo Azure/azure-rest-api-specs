@@ -61,14 +61,14 @@ namespace: $(python-base-namespace).v2021_05_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_05_01_preview
 ```
 
-### Tag: package-2021-02-01-preview-only and python
+### Tag: package-2021-02-preview-only and python
 
-These settings apply only when `--tag=package-2021-02-01-preview-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2021-02-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-02-01-preview-only'
-namespace: $(python-base-namespace).v2021_02_01_preview
-output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_02_01_preview
+``` yaml $(tag) == 'package-2021-02-preview-only'
+namespace: $(python-base-namespace).v2021_02_preview
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_02_preview
 ```
 
 ### Tag: package-2021-04-only and python
