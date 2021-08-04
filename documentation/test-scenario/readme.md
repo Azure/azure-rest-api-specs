@@ -1,19 +1,14 @@
 # Test Scenario Documentation
 
-Test Scenario is a YAML file describing a series of RESTful API calls that form usage scenario for your service. The test scenario can be run via [oav](https://github.com/Azure/oav) to validate if the REST API behavior is consistent with API definition in Swagger and examples.
+Test Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. Test scenario can be used for service functional test, API quality validation and SDK/CLIs test.
 
 _**Caution**: This project is in early preview phase, hence breaking changes should be expected._
 ## Features
+- Simple to use: Intuitive test step definition based on Swagger examples and raw REST call.
+- ARM Template integration: Support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
+- Implementation independent: [oav](https://github.com/Azure/oav) is the default test scenario runner, and more runners will be supported, like SDKs in different languages.
 
-`oav` support run test scenario file. [oav：openapi validation tool](https://github.com/Azure/oav)
-
-- Very easy to use and run.
-- Support postman collection format. Debug easily.
-- Request response validation. `oav` implement a powerful validation algorithm and help developer to detect service issue in the early phase.
-- Validation result report. After each run test scenario, developer will get a validation report which contains detect issue in api test.
-- Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
-
-#### Demo gif
+### Demo gif
 
 ![](./how-to/runApiTest.gif)
 
