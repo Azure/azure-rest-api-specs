@@ -36,7 +36,7 @@ We will write test scenario file for SignalR service as an example.
 
 First, create a folder `scenarios` under the api version folder. All test scenario files under the `scenarios` folder should bind with the api version.
 
-![](./folder-structure.png)
+![folder-structure](./folder-structure.png)
 
 Now write your basic test scenario. For more detail about test scenario file format, please refer to
 [Test Scenario Definition Reference](../references/TestDefinitionReference.md).
@@ -72,14 +72,14 @@ The `env.json` file contains required test scenario variables such as, subscript
 #### 3. Run api test
 
 ```sh
-oav run-test-scenario /home/user/<xxx>/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/scenarios/signalR.yaml -e env.json
+oav run /home/user/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/scenarios/signalR.yaml -e env.json
 ```
 
 #### 4. Debug with postman
 
-Sometimes the command `oav run-test-scenario` may fail due to non 2xx HTTP status code. Now you need to debug the test scenario with postman.
+Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the test scenario with postman.
 
-When run `run-test-scenario`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
+When run `run`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
 
 ```
 generated
@@ -96,15 +96,15 @@ generated
 
 Postman is a widely used GUI API testing tool. And you could use Postman import the generated postman collection and env for your local debug.
 
-![](./import-postman-collection.png)
+![import-postman-collection](./import-postman-collection.png)
 
 After you import postman collection, you will get such requests. Now you could debug API test with postman locally.
 
-![](./postman-collection-signalr.PNG)
+![postman-collection-signalr](./postman-collection-signalr.PNG)
 
 #### 5. manual update example value
 
-After debug with postman, you need to rewrite back all the updated values and run `oav run-test-scenario <test-scenario-file> -e <env.json>` again. The result should be successful.
+After debug with postman, you need to rewrite back all the updated values and run `oav run <test-scenario-file> -e <env.json>` again. The result should be successful.
 
 ## Feedback
 

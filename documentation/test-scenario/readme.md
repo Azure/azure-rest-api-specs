@@ -10,7 +10,7 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 
 ### Demo gif
 
-![](./how-to/runApiTest.gif)
+![demo](./how-to/runApiTest.gif)
 
 ## Quick start
 
