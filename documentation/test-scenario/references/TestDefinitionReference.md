@@ -99,7 +99,7 @@ Should be on of the following:
   - [Test Definition File](#test-definition-file)
   - [Test Scenario](#test-scenario)
   - [Test Step](#test-step)
-  - [Test Step Arm Template Deployment](#test-step-arm-template-deployment)
+  - [Test Step ARM Template Deployment](#test-step-arm-template-deployment)
   - [Test Step Rest Call](#test-step-rest-call)
     - [Rest Call](#rest-call)
     - [Rest Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
@@ -117,12 +117,10 @@ All of the above definitions share the following fields:
 - **step**
   - **Type:** Required, String
   - Step name. Must be unique in the same file.
-- **requestUpdate**
-  - 
 
-## Test Step Arm Template Deployment
+## Test Step ARM Template Deployment
 
-See [Test Step Arm Template Deployment Schema](./TestDefinitionFileSchema.json#77).
+See [Test Step ARM Template Deployment Schema](./TestDefinitionFileSchema.json#77).
 
 Step to deploy ARM template to the test scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
