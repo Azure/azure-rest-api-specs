@@ -1,6 +1,8 @@
 # Test Scenario Documentation
 
 Test Scenario is a YAML file describing a series of RESTful API calls that form usage scenario for your service. The test scenario can be run via [oav](https://github.com/Azure/oav) to validate if the REST API behavior is consistent with API definition in Swagger and examples.
+
+_**Caution**: This project is in early preview phase, hence breaking changes should be expected._
 ## Features
 
 `oav` support run test scenario file. [oav：openapi validation tool](https://github.com/Azure/oav)
