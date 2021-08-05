@@ -657,14 +657,14 @@
           {
             "name": "serverCallId",
             "in": "path",
-            "description": "Server call id.",
+            "description": "The server call id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "participantId",
             "in": "path",
-            "description": "Participant id.",
+            "description": "The participant id.",
             "required": true,
             "type": "string"
           },
@@ -711,21 +711,21 @@
           {
             "name": "serverCallId",
             "in": "path",
-            "description": "Server call id.",
+            "description": "The server call id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "participantId",
             "in": "path",
-            "description": "Participant id.",
+            "description": "The participant id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "StartHoldMusicRequest body.",
+            "description": "The start hold music request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartHoldMusicRequest"
@@ -737,7 +737,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the start hold music response."
+            "description": "Returns the start hold music response.",
+            "schema": {
+              "$ref": "#/definitions/StartHoldMusicResult"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -757,7 +760,7 @@
         },
         "x-ms-examples": {
           "Play hold music to a participant.": {
-            "$ref": "./examples/CallConnections_StartHoldMusic.json"
+            "$ref": "./examples/ServerCalls_StartHoldMusic.json"
           }
         }
       }
@@ -774,20 +777,21 @@
           {
             "name": "serverCallId",
             "in": "path",
-            "description": "Server call id.",
+            "description": "The server call id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "participantId",
             "in": "path",
-            "description": "Participant id.",
+            "description": "The participant id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stopHoldMusicRequest",
             "in": "body",
+            "description": "The stop hold music request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopHoldMusicRequest"
@@ -819,7 +823,7 @@
         },
         "x-ms-examples": {
           "Stop hold music to a participant.": {
-            "$ref": "./examples/CallConnections_StopHoldMusic.json"
+            "$ref": "./examples/ServerCalls_StopHoldMusic.json"
           }
         }
       }
@@ -1116,14 +1120,14 @@
           {
             "name": "participantId",
             "in": "path",
-            "description": "Participant id.",
+            "description": "The participant id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "StartHoldMusicRequest body.",
+            "description": "The start hold music request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartHoldMusicRequest"
@@ -1135,7 +1139,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the start hold music response."
+            "description": "Returns the start hold music response.",
+            "schema": {
+              "$ref": "#/definitions/StartHoldMusicResult"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1179,7 +1186,7 @@
           {
             "name": "participantId",
             "in": "path",
-            "description": "Participant id.",
+            "description": "The participant id.",
             "required": true,
             "type": "string"
           },
@@ -1983,6 +1990,30 @@
         "callbackUri": {
           "description": "The callback URI.",
           "type": "string"
+        }
+      }
+    },
+    "StartHoldMusicResult": {
+      "description": "The response payload for start hold music operation.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "resultInfo": {
+          "$ref": "#/definitions/ResultInfo",
+          "description": "The result info for the operation."
         }
       }
     },
