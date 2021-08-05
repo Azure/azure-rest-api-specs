@@ -150,7 +150,7 @@ These settings apply only when `--tag=8.1` is specified on the command line.
 ``` yaml $(tag) == '8.1'
 input-file:
 - Microsoft.ServiceFabric/stable/8.1/servicefabric.json
-
+```
 ---
 
 # Code Generation
