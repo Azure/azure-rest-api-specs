@@ -126,7 +126,8 @@
             "description": "SP"
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "WeatherGovernmentID": {
       "name": "governmentID",
@@ -2795,7 +2796,7 @@
       "type": "object",
       "description": "all government-issued active storms",
       "properties": {
-        "ActiveStorms": {
+        "activeStorms": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActiveStorm"
@@ -2914,7 +2915,7 @@
       "type": "object",
       "description": "Search government-issued storms",
       "properties": {
-        "StormSearches": {
+        "stormSearches": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormSearch"
@@ -2994,7 +2995,7 @@
       "type": "object",
       "description": "The list of Government-issued forecasts",
       "properties": {
-        "StormForecasts": {
+        "stormForecasts": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormForecast"
@@ -3012,8 +3013,8 @@
           "description": "Datetime the forecast is valid, displayed in ISO8601 format."
         },
         "validEpochDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Datetime the forecast is valid, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "initializedDateTime": {
@@ -3021,8 +3022,8 @@
           "description": "Datetime the forecast was created, displayed in ISO8601 format."
         },
         "epochInitializedDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Datetime the forecast was created, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "position": {
@@ -3087,8 +3088,8 @@
           "description": "DateTime of the beginning of the window of movement, displayed in ISO8601 format."
         },
         "epochBeginDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "DateTime of the beginning of the window of movement, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "endDateTime": {
@@ -3096,8 +3097,8 @@
           "description": "DateTime of the end of the window of movement, displayed in ISO8601 format."
         },
         "epochEndDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "DateTime of the end of the window of movement, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "beginStatus": {
@@ -3137,8 +3138,8 @@
           "description": "DateTime for which the wind radii summary data is valid, displayed in ISO8601 format."
         },
         "validEpochDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "DateTime for which the wind radii summary data is valid, displayed as the number of seconds that have lapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "windSpeed": {
@@ -3163,18 +3164,18 @@
       "description": "Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
       "properties": {
         "beginBearing": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Bearing, in degrees, of the beginning of the quadrant."
         },
         "endBearing": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Bearing, in degrees, of the end of the quadrant."
         },
         "range": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "The radius of the quadrant, in nautical miles."
         }
       }
@@ -3183,7 +3184,7 @@
       "type": "object",
       "description": "Positions for an individual government-issued storm",
       "properties": {
-        "Positions": {
+        "positions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PositionResponse"
@@ -3201,8 +3202,8 @@
           "description": "Datetime the forecast is valid, displayed in ISO8601 format."
         },
         "validEpochDateTime": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Datetime the forecast is valid, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "position": {
@@ -3268,13 +3269,13 @@
       "description": "Storm direction",
       "properties": {
         "degrees": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Direction of movement in azimuth degrees. May be NULL."
         },
         "localized": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Direction abbreviated in the language specified in the URL."
         },
         "english": {
@@ -3306,8 +3307,8 @@
       "description": "Direction to the landmark.",
       "properties": {
         "degrees": {
-          "type": "number",
-          "format": "integer",
+          "type": "integer",
+          "format": "int32",
           "description": "Direction in azimuth degrees. May be NULL."
         },
         "english": {
