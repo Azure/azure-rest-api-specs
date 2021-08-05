@@ -3173,8 +3173,7 @@
           }
         },
         "produces": [
-          "application/json",
-          "JSON"
+          "application/json"
         ],
         "x-ms-examples": {
           "Successful Get Application Version Training Status request": {
@@ -8519,6 +8518,11 @@
         "name": {
           "description": "The new name of the list entity.",
           "type": "string"
+        },
+        "fuzzyMatchingEnabled": {
+          "description": "Enables the fuzzy matching for the list of entities",
+          "default": null,
+          "type": "boolean"
         }
       }
     },
@@ -8537,9 +8541,13 @@
         "name": {
           "description": "Name of the list entity.",
           "type": "string"
+        },
+        "fuzzyMatchingEnabled": {
+          "description": "Enables the fuzzy matching for the list of entities",
+          "default": null,
+          "type": "boolean"
         }
-      }
-    },
+      },
     "ExampleLabelObjectArray": {
       "description": "Object model for adding a batch of labeled examples.",
       "items": {
@@ -9294,6 +9302,11 @@
         },
         "readableType": {
           "$ref": "#/definitions/ReadableType"
+        },
+        "fuzzyMatchingEnabled": {
+          "description": "Enables the fuzzy matching for the list of entities",
+          "default": null,
+          "type": "boolean"
         }
       },
       "required": [
@@ -9398,9 +9411,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -9427,9 +9437,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -9456,9 +9463,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -9485,9 +9489,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ]
     },
@@ -9557,12 +9558,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/IntentClassifier"
-        },
-        {
-          "$ref": "#/definitions/EntityExtractor"
         }
       ]
     },
@@ -9600,9 +9595,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -9623,9 +9615,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -10367,9 +10356,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
@@ -10393,9 +10379,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
-        },
-        {
-          "$ref": "#/definitions/EntityModelInfo"
         }
       ],
       "properties": {
