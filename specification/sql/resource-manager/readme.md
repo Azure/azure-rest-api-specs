@@ -121,6 +121,7 @@ input-file:
   - Microsoft.Sql/preview/2021-05-01-preview/ServerAutomaticTuning.json
   - Microsoft.Sql/preview/2021-05-01-preview/ServerAzureADAdministrators.json
   - Microsoft.Sql/preview/2021-05-01-preview/ServerAzureADOnlyAuthentications.json
+  - Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
   - Microsoft.Sql/preview/2021-05-01-preview/ServerDevOpsAudit.json
   - Microsoft.Sql/preview/2021-05-01-preview/ServerDnsAliases.json
   - Microsoft.Sql/preview/2021-05-01-preview/ServerKeys.json
@@ -142,7 +143,6 @@ input-file:
   - Microsoft.Sql/preview/2021-05-01-preview/VirtualNetworkRules.json
   - Microsoft.Sql/preview/2021-05-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2021-05-01-preview/WorkloadGroups.json
-  - Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 ```
 ### Tag: package-composite-v5
 
