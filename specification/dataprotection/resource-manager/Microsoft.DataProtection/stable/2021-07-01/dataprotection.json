@@ -2771,6 +2771,32 @@
             "name": "ProvisioningState"
           }
         },
+        "resourceMoveState": {
+          "description": "Resource move state for backup vault",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "PrepareFailed",
+            "CommitFailed",
+            "Failed",
+            "PrepareTimedout",
+            "CommitTimedout",
+            "CriticalFailure",
+            "PartialSuccess",
+            "MoveSucceeded"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceMoveState",
+            "modelAsString": true
+          }
+        },
+        "resourceMoveDetails": {
+          "$ref": "#/definitions/ResourceMoveDetails",
+          "description": "Resource move details for backup vault",
+          "readOnly": true
+        },
         "storageSettings": {
           "description": "Storage Settings",
           "items": {
@@ -4124,6 +4150,32 @@
         "recoveryOption"
       ],
       "type": "object"
+    },
+    "ResourceMoveDetails": {
+      "description": "ResourceMoveDetails will be returned in response to GetResource call from ARM",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "CorrelationId of latest ResourceMove operation attmepted",
+          "type": "string"
+        },
+        "startTimeUtc": {
+          "description": "Start time in UTC of latest ResourceMove operation attempted. ISO 8601 format.",
+          "type": "string"
+        },
+        "completionTimeUtc": {
+          "description": "Completion time in UTC of latest ResourceMove operation attempted. ISO 8601 format.",
+          "type": "string"
+        },
+        "sourceResourcePath": {
+          "description": "ARM resource path of source resource",
+          "type": "string"
+        },
+        "targetResourcePath": {
+          "description": "ARM resource path of target resource used in latest ResourceMove operation",
+          "type": "string"
+        }
+      }
     },
     "RestorableTimeRange": {
       "required": [
