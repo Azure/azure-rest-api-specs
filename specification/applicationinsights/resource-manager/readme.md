@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2021-03-only
+tag: package-2021-07-only
 ```
 
 ### Suppression
@@ -220,6 +220,17 @@ directive:
     reason: 'consistent with existing response schema | owned by another team'
   - suppress: RequiredReadOnlySystemData
   
+```
+
+### Tag: package-2021-07-only
+
+These settings apply only when `--tag=package-2021-07-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-only'
+input-file:
+  - Microsoft.Insights/stable/2021-03-08/workbooks_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
 ```
 
 ### Tag: package-2021-03-only
