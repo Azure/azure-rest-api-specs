@@ -57,6 +57,8 @@ input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
 - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
 - Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+- Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
+
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
@@ -165,6 +167,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Bookmarks.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Cases.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/DataConnectorsCheckRequirements.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Enrichment.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/Entities.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/OfficeConsents.json

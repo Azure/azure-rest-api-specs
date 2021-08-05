@@ -607,7 +607,8 @@
       "properties": {
         "date": {
           "type": "string",
-          "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
+          "format": "date-time"
         },
         "iconCode": {
           "type": "integer",
@@ -794,6 +795,7 @@
       "properties": {
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The date and time for the start of the interval in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "minute": {
@@ -889,10 +891,11 @@
       "properties": {
         "date": {
           "type": "string",
-          "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date of the forecast as example, 2019-10-27T00:00:00"
         },
         "effectiveDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the beginning of the forecast quarter displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "quarter": {
@@ -1137,6 +1140,7 @@
       "properties": {
         "dateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "phrase": {
@@ -1248,10 +1252,12 @@
       "properties": {
         "startDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time that the summary is in effect, displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "endDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time that the summary period ends, displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "severity": {
@@ -1315,6 +1321,7 @@
       "properties": {
         "date": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "temperature": {
@@ -1771,10 +1778,12 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The start date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
         },
         "endTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The end date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
         },
         "latestStatus": {
@@ -1885,6 +1894,7 @@
         },
         "dateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "value": {
