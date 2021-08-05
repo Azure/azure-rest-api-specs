@@ -94,22 +94,6 @@ These settings apply only when `--tag=authoring_3_0` is specified on the command
 input-file: stable/v3.0/LUIS-Authoring.json
 ```
 
-Deprecated Pattern's Operations
-
-``` yaml $(tag) == 'authoring_2_0'
-directive:
-  - reason: Deprecated
-    remove-operation: Features_GetApplicationVersionPatternFeatures
-  - reason: Deprecated
-    remove-operation: Features_CreatePatternFeature
-  - reason: Deprecated
-    remove-operation: Features_GetPatternFeatureInfo
-  - reason: Deprecated
-    remove-operation: Features_UpdatePatternFeature
-  - reason: Deprecated
-    remove-operation: Features_DeletePatternFeature
-```
-
 AutoRest-Linter Suppressions
 
 ``` yaml
