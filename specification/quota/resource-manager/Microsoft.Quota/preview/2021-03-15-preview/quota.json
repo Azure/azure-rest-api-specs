@@ -664,22 +664,28 @@
       }
     },
     "Limit": {
+      "descriminator" : "type",
+      "description": "Values for Limit and usages.",
       "type": "object",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/LimitValue"
-        },
-        {
-          "$ref": "#/definitions/UsagesValue"
+      "properties": {
+        "type":{
+          "type": "string",
+          "description": "The limit type"
         }
+      },
+      "required": [
+        "type"
       ]
+      
     },
     "LimitValue": {
+      "x-ms-discriminator-value": "limit",
       "description": "Resource quota limit.",
       "type": "integer",
       "format": "int32"
     },
     "UsagesValue": {
+      "x-ms-discriminator-value": "usages",
       "description": "Resource usages value.",
       "type": "integer",
       "format": "int32"
