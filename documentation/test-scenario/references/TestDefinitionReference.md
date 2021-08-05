@@ -94,21 +94,12 @@ See [Test Step Schema](./v1.0/schema.json#L50).
 
 Defines one test step in test scenario.
 
-Should be on of the following:
-- [Test Definition Reference](#test-definition-reference)
-  - [Test Definition File](#test-definition-file)
-  - [Test Scenario](#test-scenario)
-  - [Test Step](#test-step)
-  - [Test Step ARM Template Deployment](#test-step-arm-template-deployment)
-  - [Test Step Rest Call](#test-step-rest-call)
-    - [Rest Call](#rest-call)
-    - [Rest Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
-    - [JsonPatchOp](#jsonpatchop)
-      - [JsonPatchOpAdd](#jsonpatchopadd)
-      - [JsonPatchOpRemove](#jsonpatchopremove)
-      - [JsonPatchOpReplace](#jsonpatchopreplace)
-      - [JsonPatchOpCopy](#jsonpatchopcopy)
-      - [JsonPatchOpMerge](#jsonpatchopmerge)
+Should be one of the following:
+- [Test Step](#test-step)
+- [Test Step ARM Template Deployment](#test-step-arm-template-deployment)
+- [Test Step Rest Call](#test-step-rest-call)
+  - [Rest Call](#rest-call)
+  - [Rest Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
 
 All of the above definitions share the following fields:
 - **variables**
@@ -227,8 +218,16 @@ resourceUpdate will help to automate compute the request body and the expected r
 
 ### JsonPatchOp
 
-JsonPatchOp is used to define the update operation on json. You could add, remove, replace, move, copy, test, and replace on json path. 
+JsonPatchOp is used to define the update operation on json. You could add, remove, replace, move, copy and merge on json path. 
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
+
+  - [JsonPatchOp](#jsonpatchop)
+    - [JsonPatchOpAdd](#jsonpatchopadd)
+    - [JsonPatchOpRemove](#jsonpatchopremove)
+    - [JsonPatchOpReplace](#jsonpatchopreplace)
+    - [JsonPatchOpMove](#jsonpatchopmove)
+    - [JsonPatchOpCopy](#jsonpatchopcopy)
+    - [JsonPatchOpMerge](#jsonpatchopmerge)
 #### JsonPatchOpAdd
 
 **Example**
@@ -340,6 +339,34 @@ result:
 - { "properties": { "location": "eastus" } } }
 ```
 
+#### JsonPatchOpMove
+
+**Example**
+```yaml
+move: /properties/items
+path: /properties/items2
+```
+
+**Fields:**
+- **move**
+  - **Type:** Required, JsonPointer
+- **path**
+  - **Type:** Required, JsonPointer
+
+Move json property at specified path to another path. It works as a combination of remove followed by add. Array index is also supported and works as add/remove does.
+
+**Example of move**
+```
+apply:
+- move: /properties/items
+  path: /properties/items2
+
+on data:
+- { "properties": { "items": [1, 2, 3] } }
+
+result:
+- { "properties": { "items2": [1, 2, 3] } }
+```
 #### JsonPatchOpCopy
 
 **Example**
@@ -354,7 +381,7 @@ path: /properties/items2
 - **path**
   - **Type:** Required, JsonPointer
 
-Copy json property at specified path to another path. It works as a combination of remove followed by add. Array index is also supported and works as add/remove does.
+Copy json property at specified path to another path. Array index is also supported and works as add/remove does.
 
 **Example of copy**
 ```
@@ -366,14 +393,13 @@ on data:
 - { "properties": { "items": [1, 2, 3] } }
 
 result:
-- { "properties": { "items2": [1, 2, 3] } }
+- { "properties": { "items": [1, 2, 3] }, "items2": [1, 2, 3] } }
 ```
-
 #### JsonPatchOpMerge
 
 **Example**
 ```yaml
-merge: /properties/items
+merge: /properties/item
 value:
   a: 1
   b: 2
@@ -388,3 +414,18 @@ value:
 Merge values into the object at specified path.
 1. Property value at the specified path must be an object.
 2. Properties with same key will be overwritten.
+
+**Example of merge**
+```
+apply:
+- merge: /properties
+  value:
+    a: 1
+    b: 2
+
+on data:
+- { "properties": { "b": 0, "c": 0} }
+
+result:
+- { "properties": { "a": 1, "b": 2, "c": 0 } }
+```
