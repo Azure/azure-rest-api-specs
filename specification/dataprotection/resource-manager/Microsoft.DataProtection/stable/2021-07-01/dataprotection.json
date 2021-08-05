@@ -477,6 +477,24 @@
               "$ref": "#/definitions/BackupVaultResource"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2260,7 +2278,6 @@
         "vaultName",
         "backupInstanceFriendlyName",
         "sourceResourceGroup",
-        "dataSourceSetName",
         "dataSourceName",
         "progressEnabled",
         "sourceSubscriptionID",
@@ -2742,6 +2759,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "Time zone for a schedule. Example: Pacific Standard Time",
+          "type": "string"
         }
       },
       "required": [
@@ -2768,6 +2789,32 @@
             "modelAsString": true,
             "name": "ProvisioningState"
           }
+        },
+        "resourceMoveState": {
+          "description": "Resource move state for backup vault",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "PrepareFailed",
+            "CommitFailed",
+            "Failed",
+            "PrepareTimedout",
+            "CommitTimedout",
+            "CriticalFailure",
+            "PartialSuccess",
+            "MoveSucceeded"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceMoveState",
+            "modelAsString": true
+          }
+        },
+        "resourceMoveDetails": {
+          "$ref": "#/definitions/ResourceMoveDetails",
+          "description": "Resource move details for backup vault",
+          "readOnly": true
         },
         "storageSettings": {
           "description": "Storage Settings",
@@ -3816,7 +3863,11 @@
         }
       },
       "title": "OperationExtendedInfo",
-      "type": "object"
+      "discriminator": "objectType",
+      "type": "object",
+      "required": [
+        "objectType"
+      ]
     },
     "OperationJobExtendedInfo": {
       "allOf": [
@@ -3913,6 +3964,10 @@
     "PolicyParameters": {
       "description": "Parameters in Policy",
       "type": "object",
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ],
       "properties": {
         "dataStoreParametersList": {
           "description": "Gets or sets the DataStore Parameters",
@@ -4122,6 +4177,32 @@
         "recoveryOption"
       ],
       "type": "object"
+    },
+    "ResourceMoveDetails": {
+      "description": "ResourceMoveDetails will be returned in response to GetResource call from ARM",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "CorrelationId of latest ResourceMove operation attempted",
+          "type": "string"
+        },
+        "startTimeUtc": {
+          "description": "Start time in UTC of latest ResourceMove operation attempted. ISO 8601 format.",
+          "type": "string"
+        },
+        "completionTimeUtc": {
+          "description": "Completion time in UTC of latest ResourceMove operation attempted. ISO 8601 format.",
+          "type": "string"
+        },
+        "sourceResourcePath": {
+          "description": "ARM resource path of source resource",
+          "type": "string"
+        },
+        "targetResourcePath": {
+          "description": "ARM resource path of target resource used in latest ResourceMove operation",
+          "type": "string"
+        }
+      }
     },
     "RestorableTimeRange": {
       "required": [
