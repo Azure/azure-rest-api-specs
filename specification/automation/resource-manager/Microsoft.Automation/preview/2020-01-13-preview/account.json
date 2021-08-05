@@ -494,7 +494,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AzModuleListResult"
+              "$ref": "#/definitions/AzureModuleListResult"
             }
           },
           "default": {
@@ -625,18 +625,18 @@
     },
     "RuntimeConfiguration": {
       "type": "object",
+      "description": "The runtime configuration of the account.",
       "properties": {
         "powershell": {
-          "$ref": "#/definitions/BuiltInModules",
-          "description": "Gets or sets the PowerShell module."
+          "$ref": "#/definitions/BuiltInModules"
         }
       }
     },
     "BuiltInModules": {
       "type": "object",
+      "description": "Gets or sets the version of Azure Modules.",
       "additionalProperties": {
-        "type": "object",
-        "description": "Gets or sets the version of Azure Modules."
+        "type": "string"
       }
     },
     "AutomationAccountCreateOrUpdateParameters": {
@@ -856,25 +856,22 @@
         }
       }
     },
-    "AzModuleListResult": {
+    "AzureModuleListResult": {
       "type": "object",
-      "properties": {
-        "powershell": {
-          "$ref": "#/definitions/AzModule",
-          "description": "List of PowerShell module."
-        }
+      "description": "List of Azure modules",
+      "additionalProperties": {
+        "$ref": "#/definitions/AzureModule"
       }
-    },
-    "AzModule": {
-      "type": "object",
-      "properties": {
-        "az": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of azure module versions."
-        }
+    }
+  },
+  "AzureModule": {
+    "type": "object",
+    "description": "List of version of Azure module.",
+    "additionalProperties": {
+      "type": "array",
+      "description": "List of version.",
+      "items": {
+        "type": "string"
       }
     },
     "AutomationAccountUpdateProperties": {
