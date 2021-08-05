@@ -626,8 +626,10 @@
     "RuntimeConfiguration": {
       "type": "object",
       "description": "The runtime configuration of the account.",
-      "additionalProperties": {
-        "$ref": "#/definitions/BuiltInModules"
+      "properties": {
+        "powershell": {
+          "$ref": "#/definitions/BuiltInModules"
+        }
       }
     },
     "BuiltInModules": {
@@ -867,7 +869,7 @@
       "additionalProperties": {
         "type": "array",
         "items": {
-            "type": "string"
+          "type": "string"
         },
         "description": "List of versions."
       }
