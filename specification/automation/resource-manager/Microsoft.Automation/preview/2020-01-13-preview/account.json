@@ -626,10 +626,8 @@
     "RuntimeConfiguration": {
       "type": "object",
       "description": "The runtime configuration of the account.",
-      "properties": {
-        "powershell": {
-          "$ref": "#/definitions/BuiltInModules"
-        }
+      "additionalProperties": {
+        "$ref": "#/definitions/BuiltInModules"
       }
     },
     "BuiltInModules": {
@@ -862,16 +860,16 @@
       "additionalProperties": {
         "$ref": "#/definitions/AzureModule"
       }
-    }
-  },
-  "AzureModule": {
-    "type": "object",
-    "description": "List of version of Azure module.",
-    "additionalProperties": {
-      "type": "array",
-      "description": "List of version.",
-      "items": {
-        "type": "string"
+    },
+    "AzureModule": {
+      "type": "object",
+      "description": "List of version of Azure module.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+            "type": "string"
+        },
+        "description": "List of versions."
       }
     },
     "AutomationAccountUpdateProperties": {
