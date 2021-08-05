@@ -77,6 +77,12 @@ directive:
     where:
       - $.definitions.VMExtensionPayload.properties.apiKey
     reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Logz/stable/2020-10-01/logz.json
+    where:
+      - $.definitions.VMExtensionPayload.properties.apiKey
+    reason: Secrets are OK to return in a POST response.
 ```
 
 ## Az
