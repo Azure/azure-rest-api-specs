@@ -1,0 +1,5021 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProviderHub",
+    "description": "Microsoft ProviderHub",
+    "version": "2021-06-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "ProviderHubClient"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/customRollouts/{rolloutName}": {
+      "get": {
+        "tags": [
+          "CustomRollouts"
+        ],
+        "description": "Gets the custom rollout details.",
+        "operationId": "CustomRollouts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the rollout details.",
+            "schema": {
+              "$ref": "#/definitions/CustomRollout"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomRollouts_Get": {
+            "$ref": "./examples/CustomRollouts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CustomRollouts"
+        ],
+        "description": "Creates or updates the rollout details.",
+        "operationId": "CustomRollouts_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomRollout"
+            },
+            "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rollout completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomRollout"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomRollouts_CreateOrUpdate": {
+            "$ref": "./examples/CustomRollouts_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/customRollouts": {
+      "get": {
+        "tags": [
+          "CustomRollouts"
+        ],
+        "description": "Gets the list of the custom rollouts for the given provider.",
+        "operationId": "CustomRollouts_ListByProviderRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of custom rollouts for given provider.",
+            "schema": {
+              "$ref": "#/definitions/CustomRolloutArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomRollouts_ListByProviderRegistration": {
+            "$ref": "./examples/CustomRollouts_ListByProviderRegistration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}": {
+      "get": {
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Gets the default rollout details.",
+        "operationId": "DefaultRollouts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the default rollout details.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Get": {
+            "$ref": "./examples/DefaultRollouts_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Deletes the rollout resource. Rollout must be in terminal state.",
+        "operationId": "DefaultRollouts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the default rollout resource."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Delete": {
+            "$ref": "./examples/DefaultRollouts_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Creates or updates the rollout details.",
+        "operationId": "DefaultRollouts_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "description": "The Default rollout properties supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default rollout started successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "201": {
+            "description": "Default rollout completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_CreateOrUpdate": {
+            "$ref": "./examples/DefaultRollouts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts": {
+      "get": {
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Gets the list of the rollouts for the given provider.",
+        "operationId": "DefaultRollouts_ListByProviderRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of default rollouts.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_ListByProviderRegistration": {
+            "$ref": "./examples/DefaultRollouts_ListByProviderRegistration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}/stop": {
+      "post": {
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Stops or cancels the rollout, if in progress.",
+        "operationId": "DefaultRollouts_Stop",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully cancelled the default rollout."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Stop": {
+            "$ref": "./examples/DefaultRollouts_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateManifest": {
+      "post": {
+        "tags": [
+          "Manifest"
+        ],
+        "description": "Generates the manifest for the given provider.",
+        "operationId": "GenerateManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "GenerateManifest": {
+            "$ref": "./examples/GenerateManifest.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Manifest generated.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderManifest"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/checkinManifest": {
+      "post": {
+        "tags": [
+          "Manifest"
+        ],
+        "description": "Checkin the manifest.",
+        "operationId": "CheckinManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "name": "checkinManifestParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckinManifestParams"
+            },
+            "description": "The required body parameters supplied to the checkin manifest operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "CheckinManifest": {
+            "$ref": "./examples/CheckinManifest.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully checked-in manifest.",
+            "schema": {
+              "$ref": "#/definitions/CheckinManifestInfo"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/notificationRegistrations/{notificationRegistrationName}": {
+      "get": {
+        "tags": [
+          "NotificationRegistration"
+        ],
+        "description": "Gets the notification registration details.",
+        "operationId": "NotificationRegistrations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetNotificationRegistrationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "NotificationRegistrations_Get": {
+            "$ref": "./examples/NotificationRegistrations_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the notification registration.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NotificationRegistration"
+        ],
+        "description": "Creates or updates a notification registration.",
+        "operationId": "NotificationRegistrations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetNotificationRegistrationNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRegistration"
+            },
+            "description": "The required body parameters supplied to the notification registration operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "NotificationRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/NotificationRegistrations_CreateOrUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the notification registration.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NotificationRegistration"
+        ],
+        "description": "Deletes a notification registration.",
+        "operationId": "NotificationRegistrations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetNotificationRegistrationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "NotificationRegistrations_Delete": {
+            "$ref": "./examples/NotificationRegistrations_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the notification registration."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/notificationRegistrations": {
+      "get": {
+        "tags": [
+          "NotificationRegistration"
+        ],
+        "description": "Gets the list of the notification registrations for the given provider.",
+        "operationId": "NotificationRegistrations_ListByProviderRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "NotificationRegistrations_ListByProviderRegistration": {
+            "$ref": "./examples/NotificationRegistrations_ListByProviderRegistration.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the notification registrations.",
+            "schema": {
+              "$ref": "#/definitions/NotificationRegistrationArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ProviderHub/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the operations supported by Microsoft.ProviderHub.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of supported operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsDefinitionArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Gets the operations supported by the given provider.",
+        "operationId": "Operations_ListByProviderRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Operations_ListByProviderRegistration": {
+            "$ref": "./examples/Operations_ListByProviderRegistration.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the supported operations.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OperationsDefinition"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Creates or updates the operation supported by the given provider.",
+        "operationId": "Operations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "name": "OperationsPutContent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationsPutContent"
+            },
+            "description": "The operations content properties supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Operations_CreateOrUpdate": {
+            "$ref": "./examples/Operations_CreateOrUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationsPutContent"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Deletes an operation.",
+        "operationId": "Operations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Operations_Delete": {
+            "$ref": "./examples/Operations_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the operation."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}": {
+      "get": {
+        "tags": [
+          "ProviderRegistration"
+        ],
+        "description": "Gets the provider registration details.",
+        "operationId": "ProviderRegistrations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderRegistrations_Get": {
+            "$ref": "./examples/ProviderRegistrations_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the provider registration.",
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProviderRegistration"
+        ],
+        "description": "Creates or updates the provider registration.",
+        "operationId": "ProviderRegistrations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            },
+            "description": "The provider registration properties supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/ProviderRegistrations_CreateOrUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the provider registration.",
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the provider registration."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProviderRegistration"
+        ],
+        "description": "Deletes a provider registration.",
+        "operationId": "ProviderRegistrations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderRegistrations_Delete": {
+            "$ref": "./examples/ProviderRegistrations_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the provider registration."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations": {
+      "get": {
+        "tags": [
+          "ProviderRegistration"
+        ],
+        "description": "Gets the list of the provider registrations in the subscription.",
+        "operationId": "ProviderRegistrations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderRegistrations_List": {
+            "$ref": "./examples/ProviderRegistrations_List.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the provider registrations.",
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistrationArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateOperations": {
+      "post": {
+        "tags": [
+          "ProviderRegistration"
+        ],
+        "description": "Generates the operations api for the given provider.",
+        "operationId": "ProviderRegistrations_GenerateOperations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ProviderRegistrations_GenerateOperations": {
+            "$ref": "./examples/ProviderRegistrations_GenerateOperations.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operations api has been generated successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OperationsDefinition"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}": {
+      "get": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Gets a resource type details in the given subscription and provider.",
+        "operationId": "ResourceTypeRegistrations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Get": {
+            "$ref": "./examples/ResourceTypeRegistrations_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Creates or updates a resource type.",
+        "operationId": "ResourceTypeRegistrations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "description": "The required request body parameters supplied to the resource type registration CreateOrUpdate operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the resource type.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Deletes a resource type",
+        "operationId": "ResourceTypeRegistrations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_Delete": {
+            "$ref": "./examples/ResourceTypeRegistrations_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations": {
+      "get": {
+        "tags": [
+          "ResourceTypeRegistration"
+        ],
+        "description": "Gets the list of the resource types for the given provider.",
+        "operationId": "ResourceTypeRegistrations_ListByProviderRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_ListByProviderRegistration": {
+            "$ref": "./examples/ResourceTypeRegistrations_ListByProviderRegistration.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource types.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistrationArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "operationId": "Skus_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_Get": {
+            "$ref": "./examples/Skus_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "operationId": "Skus_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSku"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_CreateOrUpdate": {
+            "$ref": "./examples/Skus_CreateOrUpdate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Deletes a resource type sku.",
+        "operationId": "Skus_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_Delete": {
+            "$ref": "./examples/Skus_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type sku."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "operationId": "Skus_GetNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSku"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Deletes a resource type sku.",
+        "operationId": "Skus_DeleteNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type sku."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "operationId": "Skus_GetNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSku"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Deletes a resource type sku.",
+        "operationId": "Skus_DeleteNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type sku."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus/{sku}": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "operationId": "Skus_GetNestedResourceTypeThird",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeThirdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeThird.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeThird",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeThirdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSku"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeThird.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the resource type sku.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Deletes a resource type sku.",
+        "operationId": "Skus_DeleteNestedResourceTypeThird",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeThirdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeThird.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the resource type sku."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "operationId": "Skus_ListByResourceTypeRegistrations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrations": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrations.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SUccessfully retrieved the resource type skus.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SUccessfully retrieved the resource type skus.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SUccessfully retrieved the resource type skus.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus": {
+      "get": {
+        "tags": [
+          "ResourceTypeSku"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeFirstParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeSecondParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceTypeThirdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SUccessfully retrieved the resource type skus.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/deleteResources": {
+      "post": {
+        "tags": [
+          "ResourceActions"
+        ],
+        "description": "Deletes resources.",
+        "operationId": "ResourceActions_DeleteResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceActionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementAction"
+            },
+            "description": "The properties supplied to the DeleteResources operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource management action started.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementAction"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceActions_DeleteResources": {
+            "$ref": "./examples/ResourceActions_DeleteResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "MovingResources",
+        "TransientFailure",
+        "RolloutInProgress"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "TrafficRegions": {
+      "type": "object",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomRolloutSpecification": {
+      "required": [
+        "canary"
+      ],
+      "type": "object",
+      "properties": {
+        "canary": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegions"
+            }
+          ]
+        },
+        "providerRegistration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProviderRegistration"
+            }
+          ]
+        },
+        "resourceTypeRegistrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeRegistration"
+          }
+        }
+      }
+    },
+    "TypedErrorInfo": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "info": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        },
+        "additionalInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypedErrorInfo"
+          }
+        }
+      }
+    },
+    "CheckinManifestParams": {
+      "type": "object",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "description": "The environment supplied to the checkin manifest operation."
+        },
+        "baselineArmManifestLocation": {
+          "type": "string",
+          "description": "The baseline ARM manifest location supplied to the checkin manifest operation."
+        }
+      },
+      "required": [
+        "baselineArmManifestLocation",
+        "environment"
+      ]
+    },
+    "RolloutStatusBase": {
+      "type": "object",
+      "properties": {
+        "completedRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failedOrSkippedRegions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        }
+      }
+    },
+    "CustomRolloutProperties": {
+      "type": "object",
+      "required": [
+        "specification"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "specification": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutSpecification"
+            }
+          ]
+        },
+        "status": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutStatus"
+            }
+          ]
+        }
+      }
+    },
+    "CustomRollout": {
+      "description": "Rollout details.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutProperties"
+            }
+          ],
+          "description": "Properties of the rollout."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "InnerError": {
+      "description": "Inner error containing list of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Specific error code than was provided by the containing error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than the current object about the error.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "Error": {
+      "description": "Standard error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than  the current object about the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerError"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Standard error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Standard error object.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ]
+        }
+      }
+    },
+    "CustomRolloutArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRollout"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "TrafficRegionRolloutConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrafficRegions"
+        }
+      ],
+      "properties": {
+        "waitDuration": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "ExpeditedRolloutDefinition": {
+      "description": "Expedited rollout configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether expedited rollout is enabled/disabled",
+          "type": "boolean"
+        }
+      }
+    },
+    "DefaultRolloutSpecification": {
+      "type": "object",
+      "properties": {
+        "expeditedRollout": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExpeditedRolloutDefinition"
+            }
+          ]
+        },
+        "canary": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CanaryTrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "lowTraffic": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "mediumTraffic": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "highTraffic": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "restOfTheWorldGroupOne": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "restOfTheWorldGroupTwo": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
+            }
+          ]
+        },
+        "providerRegistration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProviderRegistration"
+            }
+          ]
+        },
+        "resourceTypeRegistrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeRegistration"
+          }
+        }
+      }
+    },
+    "DefaultRolloutStatus": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RolloutStatusBase"
+        }
+      ],
+      "properties": {
+        "nextTrafficRegion": {
+          "enum": [
+            "NotSpecified",
+            "Canary",
+            "LowTraffic",
+            "MediumTraffic",
+            "HighTraffic",
+            "None",
+            "RestOfTheWorldGroupOne",
+            "RestOfTheWorldGroupTwo"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrafficRegionCategory",
+            "modelAsString": true
+          }
+        },
+        "nextTrafficRegionScheduledTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "subscriptionReregistrationResult": {
+          "enum": [
+            "NotApplicable",
+            "ConditionalUpdate",
+            "ForcedUpdate",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionReregistrationResult",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DefaultRolloutProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "specification": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutSpecification"
+            }
+          ]
+        },
+        "status": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutStatus"
+            }
+          ]
+        }
+      }
+    },
+    "DefaultRollout": {
+      "description": "Default rollout definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutProperties"
+            }
+          ],
+          "description": "Properties of the rollout."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DefaultRolloutArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefaultRollout"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderAuthentication": {
+      "required": [
+        "allowedAudiences"
+      ],
+      "type": "object",
+      "properties": {
+        "allowedAudiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceProviderAuthorization": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "type": "string"
+        },
+        "managedByRoleDefinitionId": {
+          "type": "string"
+        }
+      }
+    },
+    "FeaturesRule": {
+      "required": [
+        "requiredFeaturesPolicy"
+      ],
+      "type": "object",
+      "properties": {
+        "requiredFeaturesPolicy": {
+          "enum": [
+            "Any",
+            "All"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeaturesPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RequestHeaderOptions": {
+      "type": "object",
+      "properties": {
+        "optInHeaders": {
+          "enum": [
+            "NotSpecified",
+            "SignedUserToken",
+            "ClientGroupMembership",
+            "SignedAuxiliaryTokens",
+            "UnboundedClientGroupMembership"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OptInHeaderType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AuthorizationActionMapping": {
+      "type": "object",
+      "properties": {
+        "original": {
+          "type": "string"
+        },
+        "desired": {
+          "type": "string"
+        }
+      }
+    },
+    "LinkedAccessCheck": {
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "linkedProperty": {
+          "type": "string"
+        },
+        "linkedAction": {
+          "type": "string"
+        },
+        "linkedActionVerb": {
+          "type": "string"
+        },
+        "linkedType": {
+          "type": "string"
+        }
+      }
+    },
+    "LoggingHiddenPropertyPath": {
+      "type": "object",
+      "properties": {
+        "hiddenPathsOnRequest": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hiddenPathsOnResponse": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoggingRule": {
+      "required": [
+        "action",
+        "detailLevel",
+        "direction"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "direction": {
+          "enum": [
+            "None",
+            "Request",
+            "Response"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LoggingDirections",
+            "modelAsString": true
+          }
+        },
+        "detailLevel": {
+          "enum": [
+            "None",
+            "Body"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LoggingDetails",
+            "modelAsString": true
+          }
+        },
+        "hiddenPropertyPaths": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/LoggingHiddenPropertyPath"
+            }
+          ]
+        }
+      }
+    },
+    "ThrottlingMetric": {
+      "required": [
+        "limit",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "NotSpecified",
+            "NumberOfRequests",
+            "NumberOfResources"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThrottlingMetricType",
+            "modelAsString": true
+          }
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "interval": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "ThrottlingRule": {
+      "required": [
+        "action",
+        "metrics"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingMetric"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceProviderEndpoint": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpointUri": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "timeout": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityManagementProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "NotSpecified",
+            "SystemAssigned",
+            "UserAssigned",
+            "Actor",
+            "DelegatedResourceIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityManagementTypes",
+            "modelAsString": true
+          }
+        },
+        "applicationId": {
+          "type": "string"
+        }
+      }
+    },
+    "IdentityManagement": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "NotSpecified",
+            "SystemAssigned",
+            "UserAssigned",
+            "Actor",
+            "DelegatedResourceIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityManagementTypes",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SubscriptionStateRule": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "NotDefined",
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": true
+          }
+        },
+        "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomRolloutStatus": {
+      "type": "object",
+      "properties": {
+        "completedRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failedOrSkippedRegions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        }
+      }
+    },
+    "CanaryTrafficRegionRolloutConfiguration": {
+      "type": "object",
+      "properties": {
+        "skipRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServiceTreeInfo": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "componentId": {
+          "type": "string"
+        }
+      }
+    },
+    "TemplateDeploymentPolicy": {
+      "required": [
+        "capabilities",
+        "preflightOptions"
+      ],
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "enum": [
+            "Default",
+            "Preflight"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TemplateDeploymentCapabilities",
+            "modelAsString": true
+          }
+        },
+        "preflightOptions": {
+          "enum": [
+            "None",
+            "ValidationRequests",
+            "DeploymentRequests",
+            "TestOnly",
+            "RegisteredOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TemplateDeploymentPreflightOptions",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExtendedLocationOptions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "supportedPolicy": {
+          "type": "string"
+        }
+      }
+    },
+    "LinkedOperationRule": {
+      "required": [
+        "linkedAction",
+        "linkedOperation"
+      ],
+      "type": "object",
+      "properties": {
+        "linkedOperation": {
+          "enum": [
+            "None",
+            "CrossResourceGroupResourceMove",
+            "CrossSubscriptionResourceMove"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinkedOperation",
+            "modelAsString": true
+          }
+        },
+        "linkedAction": {
+          "enum": [
+            "NotSpecified",
+            "Blocked",
+            "Validate",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinkedAction",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "routingType": {
+          "enum": [
+            "Default",
+            "ProxyOnly",
+            "HostBased",
+            "Extension",
+            "Tenant",
+            "Fanout",
+            "LocationBased",
+            "Failover",
+            "CascadeExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingType",
+            "modelAsString": true
+          }
+        },
+        "resourceValidation": {
+          "enum": [
+            "NotSpecified",
+            "ReservedWords",
+            "ProfaneWords"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceValidation",
+            "modelAsString": true
+          }
+        },
+        "allowedUnauthorizedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorizationActionMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationActionMapping"
+          }
+        },
+        "linkedAccessChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedAccessCheck"
+          }
+        },
+        "defaultApiVersion": {
+          "type": "string"
+        },
+        "loggingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingRule"
+          }
+        },
+        "throttlingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          }
+        },
+        "marketplaceType": {
+          "enum": [
+            "NotSpecified",
+            "AddOn",
+            "Bypass",
+            "Store"
+          ],
+          "type": "string"
+        },
+        "identityManagement": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IdentityManagement"
+            }
+          ]
+        },
+        "metadata": {},
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "subscriptionStateRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionStateRule"
+          }
+        },
+        "serviceTreeInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceTreeInfo"
+          }
+        },
+        "requestHeaderOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequestHeaderOptions"
+            }
+          ]
+        },
+        "skuLink": {
+          "type": "string"
+        },
+        "disallowedActionVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "templateDeploymentPolicy": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentPolicy"
+            }
+          ]
+        },
+        "extendedLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedLocationOptions"
+          }
+        },
+        "linkedOperationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedOperationRule"
+          }
+        },
+        "resourceDeletionPolicy": {
+          "enum": [
+            "NotSpecified",
+            "Cascade",
+            "Force"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManifestResourceDeletionPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceProviderManagement": {
+      "type": "object",
+      "properties": {
+        "schemaOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manifestOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incidentRoutingService": {
+          "type": "string"
+        },
+        "incidentRoutingTeam": {
+          "type": "string"
+        },
+        "incidentContactEmail": {
+          "type": "string"
+        },
+        "serviceTreeInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceTreeInfo"
+          }
+        },
+        "resourceAccessPolicy": {
+          "enum": [
+            "NotSpecified",
+            "AcisReadAllowed",
+            "AcisActionAllowed"
+          ],
+          "type": "string"
+        },
+        "resourceAccessRoles": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "ResourceProviderCapabilities": {
+      "required": [
+        "effect",
+        "quotaId"
+      ],
+      "type": "object",
+      "properties": {
+        "quotaId": {
+          "type": "string"
+        },
+        "effect": {
+          "enum": [
+            "NotSpecified",
+            "Allow",
+            "Disallow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderCapabilitiesEffect",
+            "modelAsString": true
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReRegisterSubscriptionMetadata": {
+      "required": [
+        "enabled"
+      ],
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "concurrencyLimit": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ResourceProviderManifest": {
+      "type": "object",
+      "properties": {
+        "providerAuthentication": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderAuthentication"
+            }
+          ]
+        },
+        "providerAuthorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderAuthorization"
+          }
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "providerVersion": {
+          "type": "string"
+        },
+        "providerType": {
+          "enum": [
+            "NotSpecified",
+            "Internal",
+            "External",
+            "Hidden",
+            "RegistrationFree",
+            "LegacyRegistrationRequired",
+            "TenantOnly",
+            "AuthorizationFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "requestHeaderOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequestHeaderOptions"
+            }
+          ]
+        },
+        "resourceTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          }
+        },
+        "management": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderManagement"
+            }
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderCapabilities"
+          }
+        },
+        "metadata": {},
+        "globalNotificationEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          }
+        },
+        "reRegisterSubscriptionMetadata": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ReRegisterSubscriptionMetadata"
+            }
+          ]
+        }
+      }
+    },
+    "CheckinManifestInfo": {
+      "required": [
+        "isCheckedIn",
+        "statusMessage"
+      ],
+      "type": "object",
+      "properties": {
+        "isCheckedIn": {
+          "type": "boolean"
+        },
+        "statusMessage": {
+          "type": "string"
+        },
+        "pullRequest": {
+          "type": "string"
+        },
+        "commitId": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationEndpoint": {
+      "type": "object",
+      "properties": {
+        "notificationDestination": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NotificationRegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "notificationMode": {
+          "enum": [
+            "NotSpecified",
+            "EventHub",
+            "WebHook"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationMode",
+            "modelAsString": true
+          }
+        },
+        "messageScope": {
+          "enum": [
+            "NotSpecified",
+            "RegisteredSubscriptions"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MessageScope",
+            "modelAsString": true
+          }
+        },
+        "includedEvents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notificationEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationEndpoint"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      }
+    },
+    "NotificationRegistration": {
+      "description": "The notification registration definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/NotificationRegistrationProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NotificationRegistrationArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationRegistration"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDisplayDefinition": {
+      "required": [
+        "description",
+        "operation",
+        "provider",
+        "resource"
+      ],
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDefinition": {
+      "required": [
+        "display",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "origin": {
+          "enum": [
+            "NotSpecified",
+            "User",
+            "System"
+          ],
+          "type": "string"
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "actionType": {
+          "enum": [
+            "NotSpecified",
+            "Internal"
+          ],
+          "type": "string"
+        },
+        "properties": {}
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationsContent": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Operations content.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationsDefinition"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "LocalizedOperationDisplayDefinition": {
+      "required": [
+        "default"
+      ],
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "en": {
+          "description": "Display information of the operation for en locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "cs": {
+          "description": "Display information of the operation for cs locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "de": {
+          "description": "Display information of the operation for de locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "es": {
+          "description": "Display information of the operation for es locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "fr": {
+          "description": "Display information of the operation for fr locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "hu": {
+          "description": "Display information of the operation for hu locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "it": {
+          "description": "Display information of the operation for it locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ja": {
+          "description": "Display information of the operation for ja locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ko": {
+          "description": "Display information of the operation for ko locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "nl": {
+          "description": "Display information of the operation for nl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "pl": {
+          "description": "Display information of the operation for pl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptBR": {
+          "description": "Display information of the operation for pt-BR locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptPT": {
+          "description": "Display information of the operation for pt-PT locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ru": {
+          "description": "Display information of the operation for ru locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "sv": {
+          "description": "Display information of the operation for sv locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHans": {
+          "description": "Display information of the operation for zh-Hans locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHant": {
+          "description": "Display information of the operation for zh-Hant locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        }
+      }
+    },
+    "LocalizedOperationDefinition": {
+      "required": [
+        "display",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "origin": {
+          "enum": [
+            "NotSpecified",
+            "User",
+            "System"
+          ],
+          "type": "string"
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LocalizedOperationDisplayDefinition"
+            }
+          ]
+        },
+        "actionType": {
+          "enum": [
+            "NotSpecified",
+            "Internal"
+          ],
+          "type": "string"
+        },
+        "properties": {}
+      }
+    },
+    "OperationsContentProperties": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "description": "Operations content.",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/LocalizedOperationDefinition"
+          }
+        }
+      }
+    },
+    "OperationsPutContent": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsContentProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OperationsDefinitionArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "LightHouseAuthorization": {
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "type": "string"
+        }
+      }
+    },
+    "ThirdPartyProviderAuthorization": {
+      "type": "object",
+      "properties": {
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LightHouseAuthorization"
+          }
+        },
+        "managedByTenantId": {
+          "type": "string"
+        }
+      }
+    },
+    "ProviderHubMetadata": {
+      "type": "object",
+      "properties": {
+        "providerAuthorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderAuthorization"
+          }
+        },
+        "providerAuthentication": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderAuthentication"
+            }
+          ]
+        },
+        "thirdPartyProviderAuthorization": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ThirdPartyProviderAuthorization"
+            }
+          ]
+        }
+      }
+    },
+    "SubscriptionStateOverrideAction": {
+      "required": [
+        "action",
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "Registered",
+            "Unregistered",
+            "Warned",
+            "Suspended",
+            "Deleted",
+            "WarnedToRegistered",
+            "WarnedToSuspended",
+            "WarnedToDeleted",
+            "WarnedToUnregistered",
+            "SuspendedToRegistered",
+            "SuspendedToWarned",
+            "SuspendedToDeleted",
+            "SuspendedToUnregistered"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionTransitioningState",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "enum": [
+            "NotDefined",
+            "DeleteAllResources",
+            "SoftDeleteAllResources",
+            "NoOp",
+            "BillingCancellation",
+            "UndoSoftDelete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionNotificationOperation",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SubscriptionLifecycleNotificationSpecifications": {
+      "type": "object",
+      "properties": {
+        "subscriptionStateOverrideActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionStateOverrideAction"
+          }
+        },
+        "softDeleteTTL": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "TemplateDeploymentOptions": {
+      "type": "object",
+      "properties": {
+        "preflightSupported": {
+          "type": "boolean"
+        },
+        "preflightOptions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "None",
+              "ContinueDeploymentOnFailure",
+              "DefaultValidationOnly"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PreflightOption",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "ResourceProviderManifestProperties": {
+      "type": "object",
+      "properties": {
+        "providerAuthentication": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderAuthentication"
+            }
+          ]
+        },
+        "providerAuthorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderAuthorization"
+          }
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "providerVersion": {
+          "type": "string"
+        },
+        "providerType": {
+          "enum": [
+            "NotSpecified",
+            "Internal",
+            "External",
+            "Hidden",
+            "RegistrationFree",
+            "LegacyRegistrationRequired",
+            "TenantOnly",
+            "AuthorizationFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "requestHeaderOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequestHeaderOptions"
+            }
+          ]
+        },
+        "management": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderManagement"
+            }
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderCapabilities"
+          }
+        },
+        "metadata": {},
+        "templateDeploymentOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentOptions"
+            }
+          ]
+        }
+      }
+    },
+    "ProviderRegistrationProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProviderManifestProperties"
+        }
+      ],
+      "properties": {
+        "providerHubMetadata": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProviderHubMetadata"
+            }
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "subscriptionLifecycleNotificationSpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
+        }
+      }
+    },
+    "ProviderRegistration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProviderRegistrationProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProviderRegistrationArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderRegistration"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceTypeExtension": {
+      "type": "object",
+      "properties": {
+        "endpointUri": {
+          "type": "string"
+        },
+        "extensionCategories": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotSpecified",
+              "ResourceCreationValidate",
+              "ResourceCreationBegin",
+              "ResourceCreationCompleted",
+              "ResourceReadValidate",
+              "ResourceReadBegin",
+              "ResourcePatchValidate",
+              "ResourcePatchCompleted",
+              "ResourceDeletionValidate",
+              "ResourceDeletionBegin",
+              "ResourceDeletionCompleted",
+              "ResourcePostAction",
+              "SubscriptionLifecycleNotification",
+              "ResourcePatchBegin",
+              "ResourceMoveBegin",
+              "ResourceMoveCompleted"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionCategory",
+              "modelAsString": true
+            }
+          }
+        },
+        "timeout": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceTypeEndpoint": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeExtension"
+          }
+        },
+        "timeout": {
+          "format": "duration",
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionOptions": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotSpecified",
+              "DoNotMergeExistingReadOnlyAndSecretProperties",
+              "IncludeInternalMetadata"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionOptionType",
+              "modelAsString": true
+            }
+          }
+        },
+        "response": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotSpecified",
+              "DoNotMergeExistingReadOnlyAndSecretProperties",
+              "IncludeInternalMetadata"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionOptionType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "ResourceTypeExtensionOptions": {
+      "type": "object",
+      "properties": {
+        "resourceCreationBegin": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExtensionOptions"
+            }
+          ]
+        }
+      }
+    },
+    "SwaggerSpecification": {
+      "type": "object",
+      "properties": {
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "swaggerSpecFolderUri": {
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilitySpecifications": {
+      "type": "object",
+      "properties": {
+        "enableDefaultValidation": {
+          "type": "boolean"
+        },
+        "resourceTypesWithCustomValidation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceMovePolicy": {
+      "type": "object",
+      "properties": {
+        "validationRequired": {
+          "type": "boolean"
+        },
+        "crossResourceGroupMoveEnabled": {
+          "type": "boolean"
+        },
+        "crossSubscriptionMoveEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ResourceConcurrencyControlOption": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "enum": [
+            "NotSpecified",
+            "SynchronizeBeginExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Policy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceGraphConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "apiVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceTypeRegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "routingType": {
+          "enum": [
+            "Default",
+            "ProxyOnly",
+            "HostBased",
+            "Extension",
+            "Tenant",
+            "Fanout",
+            "LocationBased",
+            "Failover",
+            "CascadeExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingType",
+            "modelAsString": true
+          }
+        },
+        "regionality": {
+          "enum": [
+            "NotSpecified",
+            "Global",
+            "Regional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Regionality",
+            "modelAsString": true
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeEndpoint"
+          }
+        },
+        "extensionOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceTypeExtensionOptions"
+            }
+          ]
+        },
+        "marketplaceType": {
+          "enum": [
+            "NotSpecified",
+            "AddOn",
+            "Bypass",
+            "Store"
+          ],
+          "type": "string"
+        },
+        "swaggerSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SwaggerSpecification"
+          }
+        },
+        "allowedUnauthorizedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorizationActionMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationActionMapping"
+          }
+        },
+        "linkedAccessChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedAccessCheck"
+          }
+        },
+        "defaultApiVersion": {
+          "type": "string"
+        },
+        "loggingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingRule"
+          }
+        },
+        "throttlingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturesRule"
+            }
+          ]
+        },
+        "enableAsyncOperation": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "enableThirdPartyS2S": {
+          "type": "boolean"
+        },
+        "subscriptionLifecycleNotificationSpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
+        },
+        "isPureProxy": {
+          "type": "boolean"
+        },
+        "identityManagement": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IdentityManagementProperties"
+            }
+          ]
+        },
+        "checkNameAvailabilitySpecifications": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CheckNameAvailabilitySpecifications"
+            }
+          ]
+        },
+        "disallowedActionVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceTreeInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceTreeInfo"
+          }
+        },
+        "requestHeaderOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequestHeaderOptions"
+            }
+          ]
+        },
+        "subscriptionStateRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionStateRule"
+          }
+        },
+        "templateDeploymentOptions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TemplateDeploymentOptions"
+            }
+          ]
+        },
+        "extendedLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedLocationOptions"
+          }
+        },
+        "resourceMovePolicy": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceMovePolicy"
+            }
+          ]
+        },
+        "resourceDeletionPolicy": {
+          "enum": [
+            "NotSpecified",
+            "CascadeDeleteAll",
+            "CascadeDeleteProxyOnlyChildren"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceDeletionPolicy",
+            "modelAsString": true
+          }
+        },
+        "resourceConcurrencyControlOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceConcurrencyControlOption"
+          }
+        },
+        "resourceGraphConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceGraphConfiguration"
+            }
+          ]
+        },
+        "management": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceProviderManagement"
+            }
+          ]
+        }
+      }
+    },
+    "ResourceTypeRegistration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceTypeRegistrationProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceTypeRegistrationArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeRegistration"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuCapability": {
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "SkuZoneDetail": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          }
+        }
+      }
+    },
+    "SkuLocationInfo": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zoneDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuZoneDetail"
+          }
+        },
+        "extendedLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "enum": [
+            "NotSpecified",
+            "EdgeZone",
+            "ArcZone"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "required": [
+        "minimum"
+      ],
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scaleType": {
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SkuCost": {
+      "required": [
+        "meterId"
+      ],
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "extendedUnit": {
+          "type": "string"
+        }
+      }
+    },
+    "SkuSetting": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locationInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfo"
+          }
+        },
+        "requiredQuotaIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacity": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkuCapacity"
+            }
+          ]
+        },
+        "costs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          }
+        }
+      }
+    },
+    "ResourceTypeSku": {
+      "required": [
+        "skuSettings"
+      ],
+      "type": "object",
+      "properties": {
+        "skuSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuSetting"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      }
+    },
+    "SkuResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceTypeSku"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SkuResourceArrayResponseWithContinuation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get to the next set of results, if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceManagementEntity": {
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "homeTenantId": {
+          "type": "string",
+          "description": "The home tenant id."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The operation status."
+        }
+      }
+    },
+    "ResourceManagementAction": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "resource management action content.",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/ResourceManagementEntity"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SelectParameter": {
+      "in": "query",
+      "name": "$select",
+      "description": "An OData $select clause. Used to select the properties to be returned in the GET response.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "FilterParameter": {
+      "in": "query",
+      "name": "$filter",
+      "description": "An OData $filter clause. Used to filter results that are returned in the GET response.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "ProviderNamespaceParameter": {
+      "in": "path",
+      "name": "providerNamespace",
+      "description": "The name of the resource provider hosted within ProviderHub.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NestedResourceTypeFirstParameter": {
+      "in": "path",
+      "name": "nestedResourceTypeFirst",
+      "description": "The first child resource type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NestedResourceTypeSecondParameter": {
+      "in": "path",
+      "name": "nestedResourceTypeSecond",
+      "description": "The second child resource type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NestedResourceTypeThirdParameter": {
+      "in": "path",
+      "name": "nestedResourceTypeThird",
+      "description": "The third child resource type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetRolloutNameParameter": {
+      "in": "path",
+      "name": "rolloutName",
+      "description": "The rollout name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentParameter": {
+      "in": "path",
+      "name": "environment",
+      "description": "The environment.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkuParameter": {
+      "in": "path",
+      "name": "sku",
+      "description": "The SKU.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetNotificationRegistrationNameParameter": {
+      "in": "path",
+      "name": "notificationRegistrationName",
+      "description": "The notification registration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetAsyncOperationStatusIdParameter": {
+      "in": "path",
+      "name": "asyncOperationStatusId",
+      "description": "The async operation status ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetApplicationIdParameter": {
+      "in": "path",
+      "name": "applicationId",
+      "description": "The application ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetAccountNameParameter": {
+      "in": "path",
+      "name": "accountName",
+      "description": "The available account name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetResourceTypeParameter": {
+      "in": "path",
+      "name": "resourceType",
+      "description": "The resource type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceActionParameter": {
+      "in": "path",
+      "name": "resourceActionName",
+      "description": "The resource action name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -10,6 +10,11 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
 title: ContainerServiceManagementClient
 description: "Container Service Client"
+
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
 ```
 
 ### Java multi-api
@@ -31,6 +36,20 @@ batch:
   - tag: package-2020-12
   - tag: package-2021-02
   - tag: package-2021-03
+  - tag: package-2021-05
+```
+
+### Tag: package-2021-05 and java
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2021_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2021_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-03 and java
