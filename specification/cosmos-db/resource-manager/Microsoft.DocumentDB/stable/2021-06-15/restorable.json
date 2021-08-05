@@ -350,6 +350,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{containerName}/retrieveContinuousBackupInformation": {
+      "post": {
+        "operationId": "MongodbResources_RetrieveContinuousBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerBackupInformation": {
+            "$ref": "./examples/CosmosDBBackupInformation.json"
+          }
+        },
+        "description": "Retrieves continuous backup information for a Mongodb collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "required": true,
+            "description": "The name of the continuous backup restore location.",
+            "schema": {
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Mongodb collection retrieve backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The Mongodb collection retrieve backup information operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases": {
       "get": {
         "operationId": "RestorableMongodbDatabases_List",
