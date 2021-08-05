@@ -37,6 +37,29 @@
           }
         ]
       }
+    },
+    "AttackTactic": {
+      "description": "The severity for alerts created by this alert rule.",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl",
+        "Impact",
+        "PreAttack"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AttackTactic"
+      }
     }
   },
   "parameters": {

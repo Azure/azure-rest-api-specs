@@ -723,7 +723,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "EntityEdges": {
       "description": "The edge that connects the entity to the other entity.",
@@ -760,7 +761,8 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "EntityExpandResponse": {
       "description": "The entity expansion result operation response.",
@@ -789,7 +791,8 @@
           },
           "type": "object"
         }
-      }
+      },
+      "type": "object"
     },
     "EntityInsightItem": {
       "description": "Entity insight Item.",
@@ -845,6 +848,7 @@
           "type": "array"
         }
       },
+      "type": "object",
       "required": [
         "value"
       ]
@@ -877,7 +881,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "EntityTimelineKind": {
       "description": "The entity query kind",
@@ -932,6 +937,7 @@
           "format": "int32"
         }
       },
+      "type": "object",
       "required": [
         "startTime",
         "endTime"
@@ -941,11 +947,6 @@
       "description": "An abstract Query item for entity",
       "type": "object",
       "discriminator": "kind",
-      "allOf": [
-        {
-          "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind"
-        }
-      ],
       "properties": {
         "id": {
           "description": "Query Template ARM ID",
@@ -959,6 +960,11 @@
         "type": {
           "description": "ARM Type",
           "type": "string"
+        },
+        "kind": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind",
+          "type": "string",
+          "description": "The kind of the entity query"
         }
       },
       "required": [
@@ -978,7 +984,8 @@
                 "description": "Data type name",
                 "type": "string"
               }
-            }
+            },
+            "type": "object"
           }
         },
         "inputEntityType": {
@@ -1018,7 +1025,8 @@
                 "type": "string",
                 "description": "the name of the colum"
               }
-            }
+            },
+            "type": "object"
           }
         },
         "rows": {
@@ -1102,7 +1110,8 @@
                     "type": "boolean",
                     "description": "Is query supports deep-link."
                   }
-                }
+                },
+                "type": "object"
               }
             },
             "queriesDefinitions": {
@@ -1135,10 +1144,12 @@
                           "type": "string",
                           "description": "Insight Link Definition Query."
                         }
-                      }
+                      },
+                      "type": "object"
                     }
                   }
-                }
+                },
+                "type": "object"
               }
             }
           }
@@ -1245,7 +1256,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "SecurityAlertTimelineItem": {
       "allOf": [
