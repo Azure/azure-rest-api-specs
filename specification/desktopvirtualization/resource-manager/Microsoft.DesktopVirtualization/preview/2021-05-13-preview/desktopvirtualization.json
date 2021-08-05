@@ -2103,7 +2103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateValidationOperationResults/{operationResultId}": {
       "get": {
         "tags": [
           "HostPoolUpdate"
@@ -2127,6 +2127,9 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationResultIdParameter"
           }
         ],
         "responses": {
@@ -2136,12 +2139,66 @@
               "$ref": "#/definitions/HostPoolUpdateValidationResponse"
             }
           },
+          "202": {
+            "description": "Async operation in progress."
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/updateOperationResults/default": {
+      "get": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "UpdateOperationResults_Get",
+        "description": "Operation status of a validate hostpool update.",
+        "x-ms-examples": {
+          "UpdateOperationResults_Get": {
+            "$ref": "./examples/UpdateOperationResults_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hostpool update full properties including session host config, hostpool update parameters, and migration progress.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateFullProperties"
+            }
+          },
+          "202": {
+            "description": "Async operation in progress."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
