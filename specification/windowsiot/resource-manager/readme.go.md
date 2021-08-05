@@ -12,7 +12,7 @@ go:
 
 ### Go multi-api
 ``` yaml $(go) && $(multiapi)
-windowsiot:
+batch:
   - tag: package-2019-06
   - tag: package-2018-02-preview
 ```
