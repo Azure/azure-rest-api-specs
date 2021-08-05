@@ -16,9 +16,7 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
+  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -37,11 +35,39 @@
         },
         "parameters": [
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Identifies a subset of the Spark applications from the Collection of applications.The $filter follows the Odata format.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Specifies an expression for determining what values are used to order the collection of applications. The $orderby follows the Odata format.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "Identifies a subset of the Spark applications in the Collection of applications for the workspace. That subset is defined by seeking N Entries into the Collection and selecting only the remaining Entries (starting with Entry N+1). N is an integer greater than or equal to zero specified by this query option. If a value less than zero is specified, the URI should be considered malformed.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Identifies a subset of the spark applications in the Collection of Spark applications. This subset is formed by selecting only the first N items of the set, where N is an integer greater than or equal to zero specified by this query option.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support.",
             "required": false,
-            "type": "string",
-            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -53,6 +79,9 @@
             "schema": {
               "$ref": "#/definitions/SparkJobListViewResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -71,32 +100,35 @@
         },
         "parameters": [
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
+            "description": "Identifies a subset of the Sql requests from the Collection of requests.The $filter follows the Odata format.",
             "required": false,
             "type": "string"
           },
           {
             "name": "$orderby",
             "in": "query",
+            "description": "Specifies an expression for determining what values are used to order the collection of sql requests. The $orderby follows the Odata format.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "skip",
+            "name": "$skip",
             "in": "query",
+            "description": "Identifies a subset of the Sql requests in the Collection of applications for the workspace. That subset is defined by seeking N Entries into the Collection and selecting only the remaining Entries (starting with Entry N+1). N is an integer greater than or equal to zero specified by this query option. If a value less than zero is specified, the URI should be considered malformed.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -105,36 +137,9 @@
             "schema": {
               "$ref": "#/definitions/SqlQueryStringDataModel"
             }
-          }
-        }
-      }
-    },
-    "/monitoring/workloadTypes/sql/sqlpools/{sqlPoolName}/sqlStreamingJobs": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "operationId": "Monitoring_GetSqlStreamingJobList",
-        "description": "Get list of sql streaming jobs which is in a particular sql pool of the workspace.",
-        "x-ms-examples": {
-          "Get list of sql streaming jobs": {
-            "$ref": "./examples/Monitoring_GetSqlStreamingJobList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SQLPoolName"
           },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SQLStreamingJobListViewResponse"
-            }
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -181,6 +186,15 @@
             "schema": {
               "$ref": "#/definitions/SQLStreamingJobResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -248,6 +262,9 @@
             "schema": {
               "$ref": "#/definitions/SQLStreamingJobMetrics"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -280,12 +297,14 @@
           {
             "name": "$filter",
             "in": "query",
+            "description": "Identifies a subset of the authoring logs from the Collection of logs. The $filter follows the Odata format.",
             "required": false,
             "type": "string"
           },
           {
             "name": "$skipToken",
             "in": "query",
+            "description": "Identifies a subset of the authoring logs in the Collection of logs. That subset is defined by server-driven paging.",
             "required": false,
             "type": "string"
           },
@@ -299,6 +318,9 @@
             "schema": {
               "$ref": "#/definitions/SQLStreamingJobAuthoringLogListViewResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -317,8 +339,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkJob"
-          },
-          "x-nullable": true
+          }
         }
       }
     },
@@ -351,12 +372,10 @@
           }
         },
         "sparkJobDefinition": {
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "pipeline": {
           "uniqueItems": false,
-          "x-nullable": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkJob"
@@ -367,13 +386,11 @@
         },
         "submitTime": {
           "format": "date-time",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "queuedDuration": {
           "type": "string"
@@ -391,24 +408,6 @@
       "properties": {
         "query": {
           "type": "string"
-        }
-      }
-    },
-    "SQLStreamingJobListViewResponse": {
-      "type": "object",
-      "properties": {
-        "errorMessage": {
-          "type": "string"
-        },
-        "statusCode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SQLStreamingJob"
-          }
         }
       }
     },
