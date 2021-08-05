@@ -561,6 +561,10 @@
       "description": "Common resource representation.",
       "x-ms-azure-resource": true
     },
+    "CidrBlock": {
+      "description": "this is an extension of IPAddress which includes logic related to Classes Interdomain Routing (CIDR) formatted IP Addresses.  \r\nE.g. 192.168.0.0/24, most people's default class C RFC 1918 IP space for their home router",
+      "type": "string"
+    },
     "InstancePropertiesFormat": {
       "type": "object",
       "properties": {
@@ -572,12 +576,11 @@
           "type": "string",
           "description": "Environment of the instance."
         },
+        "instanceAddressSpace": {
+          "$ref": "#/definitions/CidrBlock"
+        },
         "provisioningState": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProvisioningState"
-            }
-          ],
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Gets the status of the instance at the time the operation was called"
         }
       },
