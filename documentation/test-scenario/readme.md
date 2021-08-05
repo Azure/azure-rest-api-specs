@@ -1,6 +1,6 @@
 # Test Scenario Documentation
 
-Test Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. Test scenario can be used for service functional test, API quality validation and SDK/CLIs test.
+Test Scenario is a YAML file defining RESTful API usage scenarios of your service with a series of API calls. Test scenario can be used for service functional test, API quality validation and SDK/CLIs test generation.
 
 _**Caution**: This project is in early preview phase, hence breaking changes should be expected._
 ## Features
