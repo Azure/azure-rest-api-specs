@@ -664,31 +664,46 @@
       }
     },
     "Limit": {
-      "discriminator" : "type",
+      "discriminator": "limitType",
       "description": "Values for Limit and usages.",
       "type": "object",
       "properties": {
-        "type":{
+        "type": {
           "type": "string",
           "description": "The limit type"
         }
       },
       "required": [
-        "type"
+        "limitType"
       ]
-      
     },
     "LimitValue": {
       "x-ms-discriminator-value": "limit",
       "description": "Resource quota limit.",
-      "type": "integer",
-      "format": "int32"
+      "properties": {
+        "limitValue": {
+          "description": "The Quota Limit value.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "limitValue"
+      ]
     },
     "UsagesValue": {
       "x-ms-discriminator-value": "usages",
       "description": "Resource usages value.",
-      "type": "integer",
-      "format": "int32"
+      "properties": {
+        "usagesValue": {
+          "description": "The resource usages value.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "usagesValue"
+      ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
       "description": "Quota request response.",
