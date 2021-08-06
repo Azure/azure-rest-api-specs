@@ -121,6 +121,8 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/privateEndpointConnections.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/privateLinkResources.json
 ```
 
 
