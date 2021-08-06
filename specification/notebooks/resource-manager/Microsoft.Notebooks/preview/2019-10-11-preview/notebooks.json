@@ -685,33 +685,8 @@
       "type": "object",
       "description": "Wrapper for error response to follow ARM guidelines.",
       "properties": {
-        "message": {
-          "type": "string",
-          "description": "Error message"
-        },
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target"
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of additional nested error response info objects.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "info": {
-                "type": "object"
-              }
-            }
-          }
-        }
+        "description": "The error response.",
+        "$ref": "#/definitions/ErrorResponse"
       }
     },
     "ErrorResponse": {
