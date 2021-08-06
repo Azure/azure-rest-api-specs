@@ -1,0 +1,79 @@
+{
+  "title": "List Azure Virtual Network Manager Effective Configuration",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "virtualNetworkName": "testVirtualNetwork",
+    "parameters": {
+      "$skipToken": "FakeSkipTokenCode"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+            "configurationDisplayName": "SampleConfig",
+            "configurationDescription": "SampleDescription",
+            "ruleCollectionDisplayName": "SampleRuleCollection",
+            "ruleCollectionDescription": "SampleRuleCollectionDescription",
+            "ruleCollectionAppliesToGroups": [
+              {
+                "networkGroupId": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1"
+              }
+            ],
+            "kind": "Default",
+            "properties": {
+              "displayName": "SampleAdminRule",
+              "description": "Sample Admin Rule",
+              "flag": "AllowVnetInbound",
+              "protocol": "Tcp",
+              "sources": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "destinations": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "destinationPortRanges": [
+                "22"
+              ],
+              "direction": "Inbound",
+              "access": "Deny",
+              "priority": 1,
+              "provisioningState": "Succeeded"
+            },
+            "ruleGroups": [
+              {
+                "id": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
+                "properties": {
+                  "displayName": "My Network Group",
+                  "description": "A group for all test Virtual Networks",
+                  "memberType": "VirtualNetwork",
+                  "groupMembers": [
+                    {
+                      "vnetId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
+                    }
+                  ],
+                  "conditionalMembership": "",
+                  "provisioningState": "Succeeded"
+                }
+              }
+            ]
+          }
+        ],
+        "$skipToken": "FakeSkipTokenCode"
+      }
+    }
+  }
+}
