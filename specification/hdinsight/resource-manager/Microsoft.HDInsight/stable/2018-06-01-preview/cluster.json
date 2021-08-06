@@ -1310,6 +1310,13 @@
         "computeIsolationProperties": {
           "$ref": "#/definitions/ComputeIsolationProperties",
           "description": "The compute isolation properties."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "description": "The private link configurations.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConfiguration"
+          }
         }
       }
     },
@@ -1522,6 +1529,21 @@
         "computeIsolationProperties": {
           "$ref": "#/definitions/ComputeIsolationProperties",
           "description": "The compute isolation properties."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "description": "The private link configurations.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConfiguration"
+          }
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The list of private endpoint connections.",
+          "items": {
+            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -1694,7 +1716,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuntimeScriptActionDetail"
-          }
+          },
+          "description": "The list of persisted script action details for the cluster."
         },
         "nextLink": {
           "type": "string",
@@ -1930,6 +1953,115 @@
         "certificatePassword": {
           "description": "The password of the certificate.",
           "type": "string"
+        }
+      }
+    },
+    "PrivateLinkConfiguration": {
+      "type": "object",
+      "description": "The private link configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConfigurationProperties",
+          "description": "The private link configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkConfigurationProperties": {
+      "type": "object",
+      "description": "The private link configuration properties.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "This is used by networking for identifying the private linkable sub-resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The private link configuration provisioning state, which only appears in the response.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "The IP configurations for the private link service.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConfigurationIPConfiguration"
+          }
+        }
+      }
+    },
+    "PrivateLinkConfigurationIPConfiguration": {
+      "type": "object",
+      "description": "The ip configurations for the private link service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConfigurationIPConfigurationProperties",
+          "description": "The private link ip configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkConfigurationIPConfigurationProperties": {
+      "type": "object",
+      "description": "The private link ip configruation properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The private link configuration provisioning state, which only appears in the response.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Indicates whether this IP configuration is primary for the corresponding NIC."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The IP address."
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "The method that private IP address is allocated.",
+          "enum": [
+            "dynamic",
+            "static"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateIPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "subnet": {
+          "type": "string",
+          "description": "The subnet resource id."
         }
       }
     },
