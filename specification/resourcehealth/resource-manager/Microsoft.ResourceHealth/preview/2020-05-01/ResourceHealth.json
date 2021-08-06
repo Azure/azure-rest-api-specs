@@ -704,20 +704,27 @@
       "description": "Error details.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The error details.",
-          "type": "string",
-          "readOnly": true
+        "error":
+        {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "description": "The error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "The error message.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "description": "The error details.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     }
