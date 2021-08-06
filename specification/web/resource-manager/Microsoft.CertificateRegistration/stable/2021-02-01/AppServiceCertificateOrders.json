@@ -304,12 +304,6 @@
               "$ref": "#/definitions/AppServiceCertificateOrder"
             }
           },
-          "201": {
-            "description": "App Service Certificate Order creation operation is in progress",
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateOrder"
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -570,12 +564,6 @@
               "$ref": "#/definitions/AppServiceCertificateResource"
             }
           },
-          "201": {
-            "description": "App Service Certificate creation operation is in progress",
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateResource"
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -725,8 +713,8 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
-        "summary": "Verify domain ownership for this certificate order.",
-        "description": "Description for Verify domain ownership for this certificate order.",
+        "summary": "Resends domain verification email to customer for this certificate order",
+        "description": "Resend domain verification ownership email containing steps on how to verify a domain for a given certificate order",
         "operationId": "AppServiceCertificateOrders_ResendRequestEmails",
         "parameters": [
           {
