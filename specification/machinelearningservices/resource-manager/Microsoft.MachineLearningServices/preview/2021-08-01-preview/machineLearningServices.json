@@ -4098,6 +4098,24 @@
         "computeType"
       ]
     },
+    "AksComputeSecretsProperties": {
+      "type": "object",
+      "description": "Properties of AksComputeSecrets",
+      "properties": {
+        "userKubeConfig": {
+          "type": "string",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+        },
+        "adminKubeConfig": {
+          "type": "string",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+        },
+        "imagePullSecretName": {
+          "type": "string",
+          "description": "Image registry pull secret."
+        }
+      }
+    },
     "AksComputeSecrets": {
       "description": "Secrets related to a Machine Learning compute based on AKS.",
       "allOf": [
@@ -4105,21 +4123,7 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "userKubeConfig": {
-              "type": "string",
-              "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
-            },
-            "adminKubeConfig": {
-              "type": "string",
-              "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
-            },
-            "imagePullSecretName": {
-              "type": "string",
-              "description": "Image registry pull secret."
-            }
-          }
+          "$ref": "#/definitions/AksComputeSecretsProperties"
         }
       ],
       "x-ms-discriminator-value": "AKS"
@@ -4142,6 +4146,16 @@
       ],
       "x-ms-discriminator-value": "VirtualMachine"
     },
+    "DatabricksComputeSecretsProperties": {
+      "type": "object",
+      "description": "Properties of Databricks Compute Secrets",
+      "properties": {
+        "databricksAccessToken": {
+          "description": "access token for databricks account.",
+          "type": "string"
+        }
+      }
+    },
     "DatabricksComputeSecrets": {
       "description": "Secrets related to a Machine Learning compute based on Databricks.",
       "allOf": [
@@ -4149,13 +4163,7 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "databricksAccessToken": {
-              "description": "access token for databricks account.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/DatabricksComputeSecretsProperties"
         }
       ],
       "x-ms-discriminator-value": "Databricks"
@@ -4653,6 +4661,15 @@
         }
       }
     },
+    "ServiceResourceProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Service properties",
+          "$ref": "#/definitions/ServiceResponseBase"
+        }
+      }
+    },
     "ServiceResource": {
       "type": "object",
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
@@ -4661,13 +4678,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Service properties",
-              "$ref": "#/definitions/ServiceResponseBase"
-            }
-          }
+          "$ref": "#/definitions/ServiceResourceProperties"
         }
       ]
     },
@@ -4817,6 +4828,108 @@
         }
       }
     },
+    "ACIServiceResponseProperties": {
+      "type": "object",
+      "properties": {
+        "containerResourceRequirements": {
+          "description": "The container resource requirements.",
+          "$ref": "#/definitions/ContainerResourceRequirements"
+        },
+        "scoringUri": {
+          "description": "The Uri for sending scoring requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The name of the Azure location/region.",
+          "type": "string"
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled on the service.",
+          "type": "boolean"
+        },
+        "sslEnabled": {
+          "description": "Whether or not SSL is enabled.",
+          "type": "boolean"
+        },
+        "appInsightsEnabled": {
+          "description": "Whether or not Application Insights is enabled.",
+          "type": "boolean"
+        },
+        "dataCollection": {
+          "description": "Details of the data collection options specified.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelDataCollection"
+            }
+          ]
+        },
+        "sslCertificate": {
+          "description": "The public SSL certificate in PEM format to use if SSL is enabled.",
+          "type": "string"
+        },
+        "sslKey": {
+          "description": "The public SSL key in PEM format for the certificate.",
+          "type": "string"
+        },
+        "cname": {
+          "description": "The CName for the service.",
+          "type": "string"
+        },
+        "publicIp": {
+          "description": "The public IP address for the service.",
+          "type": "string"
+        },
+        "publicFqdn": {
+          "description": "The public Fqdn for the service.",
+          "type": "string"
+        },
+        "swaggerUri": {
+          "description": "The Uri for sending swagger requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modelConfigMap": {
+          "description": "Details on the models and configurations.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
+        "models": {
+          "description": "The list of models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "environmentImageRequest": {
+          "description": "The Environment, models and assets used for inferencing.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentImageResponse"
+            }
+          ]
+        },
+        "vnetConfiguration": {
+          "description": "The virtual network configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VnetConfiguration"
+            }
+          ]
+        },
+        "encryptionProperties": {
+          "description": "The encryption properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EncryptionProperties"
+            }
+          ]
+        }
+      }
+    },
     "ACIServiceResponse": {
       "description": "The response for an ACI service.",
       "type": "object",
@@ -4825,106 +4938,7 @@
           "$ref": "#/definitions/ServiceResponseBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "containerResourceRequirements": {
-              "description": "The container resource requirements.",
-              "$ref": "#/definitions/ContainerResourceRequirements"
-            },
-            "scoringUri": {
-              "description": "The Uri for sending scoring requests.",
-              "type": "string",
-              "readOnly": true
-            },
-            "location": {
-              "description": "The name of the Azure location/region.",
-              "type": "string"
-            },
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled on the service.",
-              "type": "boolean"
-            },
-            "sslEnabled": {
-              "description": "Whether or not SSL is enabled.",
-              "type": "boolean"
-            },
-            "appInsightsEnabled": {
-              "description": "Whether or not Application Insights is enabled.",
-              "type": "boolean"
-            },
-            "dataCollection": {
-              "description": "Details of the data collection options specified.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelDataCollection"
-                }
-              ]
-            },
-            "sslCertificate": {
-              "description": "The public SSL certificate in PEM format to use if SSL is enabled.",
-              "type": "string"
-            },
-            "sslKey": {
-              "description": "The public SSL key in PEM format for the certificate.",
-              "type": "string"
-            },
-            "cname": {
-              "description": "The CName for the service.",
-              "type": "string"
-            },
-            "publicIp": {
-              "description": "The public IP address for the service.",
-              "type": "string"
-            },
-            "publicFqdn": {
-              "description": "The public Fqdn for the service.",
-              "type": "string"
-            },
-            "swaggerUri": {
-              "description": "The Uri for sending swagger requests.",
-              "type": "string",
-              "readOnly": true
-            },
-            "modelConfigMap": {
-              "description": "Details on the models and configurations.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              },
-              "readOnly": true
-            },
-            "models": {
-              "description": "The list of models.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Model"
-              }
-            },
-            "environmentImageRequest": {
-              "description": "The Environment, models and assets used for inferencing.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EnvironmentImageResponse"
-                }
-              ]
-            },
-            "vnetConfiguration": {
-              "description": "The virtual network configuration.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/VnetConfiguration"
-                }
-              ]
-            },
-            "encryptionProperties": {
-              "description": "The encryption properties.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EncryptionProperties"
-                }
-              ]
-            }
-          }
+          "$ref": "#/definitions/ACIServiceResponseProperties"
         }
       ],
       "x-ms-discriminator-value": "ACI"
@@ -5655,6 +5669,34 @@
         }
       }
     },
+    "AKSVariantResponseProperties": {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "description": "Is this the default variant.",
+          "type": "boolean"
+        },
+        "trafficPercentile": {
+          "format": "float",
+          "description": "The amount of traffic variant receives.",
+          "type": "number",
+          "example": 100
+        },
+        "type": {
+          "description": "The type of the variant.",
+          "enum": [
+            "Control",
+            "Treatment"
+          ],
+          "type": "string",
+          "example": "Control",
+          "x-ms-enum": {
+            "name": "VariantType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AKSVariantResponse": {
       "description": "The response for an AKS variant.",
       "type": "object",
@@ -5663,32 +5705,7 @@
           "$ref": "#/definitions/ServiceResponseBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "isDefault": {
-              "description": "Is this the default variant.",
-              "type": "boolean"
-            },
-            "trafficPercentile": {
-              "format": "float",
-              "description": "The amount of traffic variant receives.",
-              "type": "number",
-              "example": 100
-            },
-            "type": {
-              "description": "The type of the variant.",
-              "enum": [
-                "Control",
-                "Treatment"
-              ],
-              "type": "string",
-              "example": "Control",
-              "x-ms-enum": {
-                "name": "VariantType",
-                "modelAsString": true
-              }
-            }
-          }
+          "$ref": "#/definitions/AKSVariantResponseProperties"
         }
       ],
       "x-ms-discriminator-value": "Custom"
@@ -5789,6 +5806,126 @@
         }
       }
     },
+    "AKSServiceResponseProperties": {
+      "type": "object",
+      "properties": {
+        "models": {
+          "description": "The list of models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "containerResourceRequirements": {
+          "description": "The container resource requirements.",
+          "$ref": "#/definitions/ContainerResourceRequirements"
+        },
+        "maxConcurrentRequestsPerContainer": {
+          "format": "int32",
+          "description": "The maximum number of concurrent requests per container.",
+          "type": "integer",
+          "example": 100
+        },
+        "maxQueueWaitMs": {
+          "format": "int32",
+          "description": "Maximum time a request will wait in the queue (in milliseconds). After this time, the service will return 503 (Service Unavailable)",
+          "type": "integer",
+          "example": 250
+        },
+        "computeName": {
+          "description": "The name of the compute resource.",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "The Kubernetes namespace of the deployment.",
+          "type": "string",
+          "example": "default"
+        },
+        "numReplicas": {
+          "format": "int32",
+          "description": "The number of replicas on the cluster.",
+          "type": "integer",
+          "example": 1
+        },
+        "dataCollection": {
+          "description": "Details of the data collection options specified.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelDataCollection"
+            }
+          ]
+        },
+        "appInsightsEnabled": {
+          "description": "Whether or not Application Insights is enabled.",
+          "type": "boolean"
+        },
+        "autoScaler": {
+          "description": "The auto scaler properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AutoScaler"
+            }
+          ]
+        },
+        "scoringUri": {
+          "description": "The Uri for sending scoring requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "description": "The deployment status.",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/AKSReplicaStatus"
+            }
+          ]
+        },
+        "scoringTimeoutMs": {
+          "format": "int32",
+          "description": "The scoring timeout in milliseconds.",
+          "type": "integer",
+          "example": 100
+        },
+        "livenessProbeRequirements": {
+          "description": "The liveness probe requirements.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LivenessProbeRequirements"
+            }
+          ]
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled.",
+          "type": "boolean"
+        },
+        "aadAuthEnabled": {
+          "description": "Whether or not AAD authentication is enabled.",
+          "type": "boolean"
+        },
+        "swaggerUri": {
+          "description": "The Uri for sending swagger requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modelConfigMap": {
+          "description": "Details on the models and configurations.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
+        "environmentImageRequest": {
+          "description": "The Environment, models and assets used for inferencing.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentImageResponse"
+            }
+          ]
+        }
+      }
+    },
     "AKSServiceResponse": {
       "description": "The response for an AKS service.",
       "type": "object",
@@ -5797,124 +5934,7 @@
           "$ref": "#/definitions/AKSVariantResponse"
         },
         {
-          "type": "object",
-          "properties": {
-            "models": {
-              "description": "The list of models.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Model"
-              }
-            },
-            "containerResourceRequirements": {
-              "description": "The container resource requirements.",
-              "$ref": "#/definitions/ContainerResourceRequirements"
-            },
-            "maxConcurrentRequestsPerContainer": {
-              "format": "int32",
-              "description": "The maximum number of concurrent requests per container.",
-              "type": "integer",
-              "example": 100
-            },
-            "maxQueueWaitMs": {
-              "format": "int32",
-              "description": "Maximum time a request will wait in the queue (in milliseconds). After this time, the service will return 503 (Service Unavailable)",
-              "type": "integer",
-              "example": 250
-            },
-            "computeName": {
-              "description": "The name of the compute resource.",
-              "type": "string"
-            },
-            "namespace": {
-              "description": "The Kubernetes namespace of the deployment.",
-              "type": "string",
-              "example": "default"
-            },
-            "numReplicas": {
-              "format": "int32",
-              "description": "The number of replicas on the cluster.",
-              "type": "integer",
-              "example": 1
-            },
-            "dataCollection": {
-              "description": "Details of the data collection options specified.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelDataCollection"
-                }
-              ]
-            },
-            "appInsightsEnabled": {
-              "description": "Whether or not Application Insights is enabled.",
-              "type": "boolean"
-            },
-            "autoScaler": {
-              "description": "The auto scaler properties.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/AutoScaler"
-                }
-              ]
-            },
-            "scoringUri": {
-              "description": "The Uri for sending scoring requests.",
-              "type": "string",
-              "readOnly": true
-            },
-            "deploymentStatus": {
-              "description": "The deployment status.",
-              "readOnly": true,
-              "allOf": [
-                {
-                  "$ref": "#/definitions/AKSReplicaStatus"
-                }
-              ]
-            },
-            "scoringTimeoutMs": {
-              "format": "int32",
-              "description": "The scoring timeout in milliseconds.",
-              "type": "integer",
-              "example": 100
-            },
-            "livenessProbeRequirements": {
-              "description": "The liveness probe requirements.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LivenessProbeRequirements"
-                }
-              ]
-            },
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled.",
-              "type": "boolean"
-            },
-            "aadAuthEnabled": {
-              "description": "Whether or not AAD authentication is enabled.",
-              "type": "boolean"
-            },
-            "swaggerUri": {
-              "description": "The Uri for sending swagger requests.",
-              "type": "string",
-              "readOnly": true
-            },
-            "modelConfigMap": {
-              "description": "Details on the models and configurations.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              },
-              "readOnly": true
-            },
-            "environmentImageRequest": {
-              "description": "The Environment, models and assets used for inferencing.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EnvironmentImageResponse"
-                }
-              ]
-            }
-          }
+          "$ref": "#/definitions/AKSServiceResponseProperties"
         }
       ],
       "x-ms-discriminator-value": "AKS"
@@ -5993,6 +6013,70 @@
       },
       "discriminator": "computeType"
     },
+    "ACIServiceCreateRequestProperties": {
+      "type": "object",
+      "properties": {
+        "containerResourceRequirements": {
+          "description": "The container resource requirements.",
+          "$ref": "#/definitions/ContainerResourceRequirements"
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled on the service.",
+          "default": false,
+          "type": "boolean"
+        },
+        "sslEnabled": {
+          "description": "Whether or not SSL is enabled.",
+          "default": false,
+          "type": "boolean"
+        },
+        "appInsightsEnabled": {
+          "description": "Whether or not Application Insights is enabled.",
+          "default": false,
+          "type": "boolean"
+        },
+        "dataCollection": {
+          "description": "Details of the data collection options specified.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelDataCollection"
+            }
+          ]
+        },
+        "sslCertificate": {
+          "description": "The public SSL certificate in PEM format to use if SSL is enabled.",
+          "type": "string"
+        },
+        "sslKey": {
+          "description": "The public SSL key in PEM format for the certificate.",
+          "type": "string"
+        },
+        "cname": {
+          "description": "The CName for the service.",
+          "type": "string"
+        },
+        "dnsNameLabel": {
+          "description": "The Dns label for the service.",
+          "type": "string"
+        },
+        "vnetConfiguration": {
+          "description": "The virtual network configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VnetConfiguration"
+            }
+          ]
+        },
+        "encryptionProperties": {
+          "description": "The encryption properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EncryptionProperties"
+            }
+          ]
+        }
+      }
+    },
     "ACIServiceCreateRequest": {
       "type": "object",
       "allOf": [
@@ -6000,71 +6084,88 @@
           "$ref": "#/definitions/CreateServiceRequest"
         },
         {
-          "type": "object",
-          "properties": {
-            "containerResourceRequirements": {
-              "description": "The container resource requirements.",
-              "$ref": "#/definitions/ContainerResourceRequirements"
-            },
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled on the service.",
-              "default": false,
-              "type": "boolean"
-            },
-            "sslEnabled": {
-              "description": "Whether or not SSL is enabled.",
-              "default": false,
-              "type": "boolean"
-            },
-            "appInsightsEnabled": {
-              "description": "Whether or not Application Insights is enabled.",
-              "default": false,
-              "type": "boolean"
-            },
-            "dataCollection": {
-              "description": "Details of the data collection options specified.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelDataCollection"
-                }
-              ]
-            },
-            "sslCertificate": {
-              "description": "The public SSL certificate in PEM format to use if SSL is enabled.",
-              "type": "string"
-            },
-            "sslKey": {
-              "description": "The public SSL key in PEM format for the certificate.",
-              "type": "string"
-            },
-            "cname": {
-              "description": "The CName for the service.",
-              "type": "string"
-            },
-            "dnsNameLabel": {
-              "description": "The Dns label for the service.",
-              "type": "string"
-            },
-            "vnetConfiguration": {
-              "description": "The virtual network configuration.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/VnetConfiguration"
-                }
-              ]
-            },
-            "encryptionProperties": {
-              "description": "The encryption properties.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EncryptionProperties"
-                }
-              ]
-            }
-          }
+          "$ref": "#/definitions/ACIServiceCreateRequestProperties"
         }
       ],
       "x-ms-discriminator-value": "ACI"
+    },
+    "AKSServiceCreateRequestProperties": {
+      "type": "object",
+      "properties": {
+        "numReplicas": {
+          "format": "int32",
+          "description": "The number of replicas on the cluster.",
+          "type": "integer",
+          "example": 1
+        },
+        "dataCollection": {
+          "description": "Details of the data collection options specified.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelDataCollection"
+            }
+          ]
+        },
+        "computeName": {
+          "description": "The name of the compute resource.",
+          "type": "string"
+        },
+        "appInsightsEnabled": {
+          "description": "Whether or not Application Insights is enabled.",
+          "type": "boolean"
+        },
+        "autoScaler": {
+          "description": "The auto scaler properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AutoScaler"
+            }
+          ]
+        },
+        "containerResourceRequirements": {
+          "description": "The container resource requirements.",
+          "$ref": "#/definitions/ContainerResourceRequirements"
+        },
+        "maxConcurrentRequestsPerContainer": {
+          "format": "int32",
+          "description": "The maximum number of concurrent requests per container.",
+          "type": "integer",
+          "example": 100
+        },
+        "maxQueueWaitMs": {
+          "format": "int32",
+          "description": "Maximum time a request will wait in the queue (in milliseconds). After this time, the service will return 503 (Service Unavailable)",
+          "type": "integer",
+          "example": 250
+        },
+        "namespace": {
+          "description": "Kubernetes namespace for the service.",
+          "type": "string",
+          "example": "default"
+        },
+        "scoringTimeoutMs": {
+          "format": "int32",
+          "description": "The scoring timeout in milliseconds.",
+          "type": "integer",
+          "example": 100
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled.",
+          "type": "boolean"
+        },
+        "livenessProbeRequirements": {
+          "description": "The liveness probe requirements.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LivenessProbeRequirements"
+            }
+          ]
+        },
+        "aadAuthEnabled": {
+          "description": "Whether or not AAD authentication is enabled.",
+          "type": "boolean"
+        }
+      }
     },
     "AKSServiceCreateRequest": {
       "description": "The request to create an AKS service.",
@@ -6074,85 +6175,38 @@
           "$ref": "#/definitions/CreateEndpointVariantRequest"
         },
         {
-          "type": "object",
-          "properties": {
-            "numReplicas": {
-              "format": "int32",
-              "description": "The number of replicas on the cluster.",
-              "type": "integer",
-              "example": 1
-            },
-            "dataCollection": {
-              "description": "Details of the data collection options specified.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelDataCollection"
-                }
-              ]
-            },
-            "computeName": {
-              "description": "The name of the compute resource.",
-              "type": "string"
-            },
-            "appInsightsEnabled": {
-              "description": "Whether or not Application Insights is enabled.",
-              "type": "boolean"
-            },
-            "autoScaler": {
-              "description": "The auto scaler properties.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/AutoScaler"
-                }
-              ]
-            },
-            "containerResourceRequirements": {
-              "description": "The container resource requirements.",
-              "$ref": "#/definitions/ContainerResourceRequirements"
-            },
-            "maxConcurrentRequestsPerContainer": {
-              "format": "int32",
-              "description": "The maximum number of concurrent requests per container.",
-              "type": "integer",
-              "example": 100
-            },
-            "maxQueueWaitMs": {
-              "format": "int32",
-              "description": "Maximum time a request will wait in the queue (in milliseconds). After this time, the service will return 503 (Service Unavailable)",
-              "type": "integer",
-              "example": 250
-            },
-            "namespace": {
-              "description": "Kubernetes namespace for the service.",
-              "type": "string",
-              "example": "default"
-            },
-            "scoringTimeoutMs": {
-              "format": "int32",
-              "description": "The scoring timeout in milliseconds.",
-              "type": "integer",
-              "example": 100
-            },
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled.",
-              "type": "boolean"
-            },
-            "livenessProbeRequirements": {
-              "description": "The liveness probe requirements.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LivenessProbeRequirements"
-                }
-              ]
-            },
-            "aadAuthEnabled": {
-              "description": "Whether or not AAD authentication is enabled.",
-              "type": "boolean"
-            }
-          }
+          "$ref": "#/definitions/AKSServiceCreateRequestProperties"
         }
       ],
       "x-ms-discriminator-value": "AKS"
+    },
+    "CreateEndpointVariantRequestProperties": {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "description": "Is this the default variant.",
+          "type": "boolean"
+        },
+        "trafficPercentile": {
+          "format": "float",
+          "description": "The amount of traffic variant receives.",
+          "type": "number",
+          "example": 100
+        },
+        "type": {
+          "description": "The type of the variant.",
+          "enum": [
+            "Control",
+            "Treatment"
+          ],
+          "type": "string",
+          "example": "Control",
+          "x-ms-enum": {
+            "name": "VariantType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "CreateEndpointVariantRequest": {
       "description": "The Variant properties.",
@@ -6162,32 +6216,7 @@
           "$ref": "#/definitions/CreateServiceRequest"
         },
         {
-          "type": "object",
-          "properties": {
-            "isDefault": {
-              "description": "Is this the default variant.",
-              "type": "boolean"
-            },
-            "trafficPercentile": {
-              "format": "float",
-              "description": "The amount of traffic variant receives.",
-              "type": "number",
-              "example": 100
-            },
-            "type": {
-              "description": "The type of the variant.",
-              "enum": [
-                "Control",
-                "Treatment"
-              ],
-              "type": "string",
-              "example": "Control",
-              "x-ms-enum": {
-                "name": "VariantType",
-                "modelAsString": true
-              }
-            }
-          }
+          "$ref": "#/definitions/CreateEndpointVariantRequestProperties"
         }
       ],
       "x-ms-discriminator-value": "Custom"
