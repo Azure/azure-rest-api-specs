@@ -913,7 +913,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/VnetInfo"
+                "$ref": "./CommonDefinitions.json#/definitions/VnetInfoResource"
               }
             }
           },
@@ -963,7 +963,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/VnetInfo"
+              "$ref": "./CommonDefinitions.json#/definitions/VnetInfoResource"
             }
           },
           "404": {
@@ -1608,6 +1608,11 @@
             "kubeEnvironmentProfile": {
               "$ref": "./CommonDefinitions.json#/definitions/KubeEnvironmentProfile",
               "description": "Specification for the Kubernetes Environment to use for the App Service plan."
+            },
+            "zoneRedundant": {
+              "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
+              "default": false,
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true

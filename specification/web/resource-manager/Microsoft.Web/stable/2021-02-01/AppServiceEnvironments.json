@@ -2218,6 +2218,7 @@
         "properties": {
           "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
           "description": "Core resource properties",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       }
@@ -2234,6 +2235,7 @@
         "properties": {
           "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
           "description": "Core resource properties",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       }
@@ -2259,6 +2261,20 @@
               "readOnly": true
             },
             "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
               "type": "array",
               "items": {
                 "type": "string"
