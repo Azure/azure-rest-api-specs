@@ -27,7 +27,7 @@ These are the global settings for the testbase.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-12-16-preview
+tag: package-2021-09-01-preview
 ```
 
 ### Tag: package-2020-12-16-preview
@@ -37,6 +37,20 @@ These settings apply only when `--tag=package-2020-12-16-preview` is specified o
 ```yaml $(tag) == 'package-2020-12-16-preview'
 input-file:
   - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.TestBase/preview/2021-09-01-preview/testbase.json
+```
+
+## Suppression
+
+``` yaml
 directive:
 - suppress: R4031
   from: testbase.json
@@ -67,7 +81,7 @@ swagger-to-sdk:
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+      - testbase.json
     where:
       - $.definitions.DownloadURLResponse.properties.downloadUrl
     reason: Secrets are OK to return in a POST response according to ARM.

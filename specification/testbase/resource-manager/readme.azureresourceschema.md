@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-testbase-2020-12-16-preview
+  - tag: schema-testbase-2021-09-01-preview
   
 ```
 
@@ -20,4 +21,14 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+```
+
+### Tag: schema-testbase-2021-09-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-testbase-2021-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.TestBase/preview/2021-09-01-preview/testbase.json
 ```
