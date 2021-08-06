@@ -76,7 +76,8 @@
         "microsoft.imagery",
         "microsoft.weather.radar.main",
         "microsoft.weather.infrared.main",
-        "microsoft.dem"
+        "microsoft.dem",
+        "microsoft.dem.contours"
       ],
       "x-ms-enum": {
         "name": "TilesetID",
@@ -129,6 +130,10 @@
           {
             "value": "microsoft.dem",
             "description": "Digital Elevation Model tiles. The tiles are in the GeoTIFF format with a single 32-bit floating point band. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters. An elevation value of -32767.0 is used for points that have no data value, most often returned where there isn't landmass (i.e. water).<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tiles are 258x258 pixel squares rather than the standard 256 x 256. This is done to allow for accurate interpolation of values at the tile edges. As such adjacent tiles overlap by 1 pixel along all edges.<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees). <br>\n\nSupports zoom level 13 only. Format: raster (tiff)."
+          },
+          {
+            "value": "microsoft.dem.contours",
+            "description": "Digital elevation contour line tiles. Compared to the microsoft.dem option, these tiles are in vector format and intended for visualization purpose. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters.<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees).<br>\n\nSupports zoom levels 9 through 14. Format: vector (pbf)."
           }
         ]
       },
@@ -168,10 +173,10 @@
             "$ref": "#/parameters/MapTileV2Zoom"
           },
           {
-            "$ref": "../1.0/render.json#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "../1.0/render.json#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
             "name": "timeStamp",
@@ -205,10 +210,10 @@
             }
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "produces": [

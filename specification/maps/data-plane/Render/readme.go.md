@@ -14,6 +14,16 @@ export-clients: true
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: 2.0-preview
+  - tag: 2.1-preview
+```
+
+### Tag: 2.1-preview and go
+
+These settings apply only when `--tag=2.1-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == '2.1-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/maps/2.1/$(namespace)
 ```
 
 ### Tag: 2.0-preview and go
