@@ -3035,7 +3035,7 @@
           "description": "Datetime the forecast was created, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "position": {
-          "$ref": "#/definitions/Position",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Coordinates of the storm"
         },
         "maxWindGust": {
@@ -3063,32 +3063,16 @@
         }
       }
     },
-    "Position": {
-      "type": "object",
-      "description": "Coordinates of the location",
-      "properties": {
-        "latitude": {
-          "type": "number",
-          "format": "float",
-          "description": "The latitude of the position."
-        },
-        "longitude": {
-          "type": "number",
-          "format": "float",
-          "description": "The longitude of the position."
-        }
-      }
-    },
     "Window": {
       "type": "object",
       "description": "Government-issued storm forecast",
       "properties": {
         "left": {
-          "$ref": "#/definitions/Position",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Location of the point on the left side of the window at the time of the timeframe."
         },
         "right": {
-          "$ref": "#/definitions/Position",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Location of the point on the right side of the window at the end of the timeframe."
         },
         "beginDateTime": {
@@ -3215,7 +3199,7 @@
           "description": "Datetime the forecast is valid, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "position": {
-          "$ref": "#/definitions/Position",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Coordinates of the storm"
         },
         "maxWindGust": {
