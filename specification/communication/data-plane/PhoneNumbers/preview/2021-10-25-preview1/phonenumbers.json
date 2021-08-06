@@ -557,7 +557,7 @@
         }
       }
     },
-    "/programbriefs": {
+    "/countries/US/programbriefs": {
       "post": {
         "tags": [
           "ShortCodes - ProgramBrief"
@@ -658,7 +658,7 @@
         }
       }
     },
-    "/programbriefs/{programBriefId}": {
+    "/countries/US/programbriefs/{programBriefId}": {
       "patch": {
         "tags": [
           "ShortCodes - ProgramBrief"
@@ -749,6 +749,46 @@
         "x-ms-examples": {
           "Query a program brief": {
             "$ref": "./examples/GetProgramBriefAsync.json"
+          }
+        }
+      }
+    },
+    "/countries/US/programbriefs/{programBriefId}/:submit": {
+      "post": {
+        "tags": [
+          "ShortCodes - ProgramBrief"
+        ],
+        "summary": "Submits a program brief for review.",
+        "operationId": "ShortCode_SubmitProgramBrief",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "programBriefId",
+            "description": "Program brief Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Submit program brief": {
+            "$ref": "./examples/SubmitProgramBriefAsync.json"
           }
         }
       }
@@ -1242,10 +1282,6 @@
           "description": "Indicates whether the number will be used for political campaigns or not.",
           "type": "boolean"
         },
-        "programCode": {
-          "description": "Identifies a promotion to use for lease term application.",
-          "type": "string"
-        },
         "number": {
           "description": "Number for which the program brief is submitted. Needs to be specified if the customer has already\r\nobtained the number. Is optional when the program brief is for a new number.",
           "type": "string"
@@ -1281,31 +1317,6 @@
         "programSignUp": {
           "description": "Call to action description for the program.\r\n(e.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.').",
           "type": "string"
-        },
-        "programType": {
-          "description": "Program Type ('newProgram', 'modifiedProgram' or 'migration').",
-          "enum": [
-            "newProgram",
-            "modifiedProgram",
-            "migration"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProgramType",
-            "modelAsString": true
-          }
-        },
-        "programRating": {
-          "description": "Program Rating ('standard' or 'freeToEndUser', where the latter stands for Free to End User).",
-          "enum": [
-            "standard",
-            "freeToEndUser"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProgramRating",
-            "modelAsString": true
-          }
         },
         "termsOfServiceUrl": {
           "description": "URL for program terms of service.",
