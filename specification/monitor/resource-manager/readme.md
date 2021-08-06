@@ -68,6 +68,9 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
+### Tag: package-2021-05-01-preview-only
+
+These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
 
 ### Tag: package-2021-04
 
