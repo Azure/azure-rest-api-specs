@@ -68,9 +68,6 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
-### Tag: package-2021-05-01-preview-only
-
-These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
 
 ### Tag: package-2021-04
 
@@ -102,6 +99,18 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
+
+### Tag: package-2021-05-only
+
+These settings apply only when `--tag=package-2021-05-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05-only'
+input-file:
+  - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2021-05-01/metrics_API.json
+  - Microsoft.Insights/stable/2016-06-01/operations_API.json
+```
+
 ### Tag: package-2021-05-01-preview-only
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
@@ -113,6 +122,7 @@ input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
+
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
