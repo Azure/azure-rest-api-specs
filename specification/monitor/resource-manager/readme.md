@@ -782,6 +782,10 @@ directive:
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: OperationsAPIImplementation
+    from: operations_API.json
+    where: $.paths
+    reason: 'The operations API is specified in operations_API.json (obviously) the lint rule doesn't seem to like that the RP name is properly capitalized per R3020'
+  - suppress: OperationsAPIImplementation
     from: serviceDiagnosticsSettings_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
