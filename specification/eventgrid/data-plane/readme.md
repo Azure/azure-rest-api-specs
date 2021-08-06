@@ -12,7 +12,7 @@ that describes the schemas for its events.
 This configuration enables packaging all of the above as one EventGrid data plane library.
 This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
 
-### Guidelines for defining a new event 
+### Guidelines for defining a new event
 
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
+- event_validation.json
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
@@ -152,7 +153,7 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -184,11 +185,11 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
