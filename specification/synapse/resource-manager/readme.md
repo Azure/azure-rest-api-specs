@@ -46,7 +46,6 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/firewallRule.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-06-01-preview/keys.json
-  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
   - Microsoft.Synapse/preview/2021-06-01-preview/library.json
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/privateEndpointConnections.json
@@ -56,6 +55,18 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
 ```
+
+### Tag: package-kusto-pool-2021-06-preview
+
+These settings apply only when `--tag=package-kusto-pool-2021-06-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-kusto-pool-2021-06-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
+```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -312,7 +323,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
 batch:
- - tag: package-2021-04-preview
+ - tag: $(tag)
  - tag: package-sqlGen3-2020-04-01-preview
 ```
 
