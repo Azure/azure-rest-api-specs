@@ -205,6 +205,58 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_Update",
+        "summary": "Updates a policy assignment.",
+        "description": " This operation updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "x-ms-examples": {
+          "Create or update a policy assignment with a system assigned identity": {
+            "$ref": "./examples/updatePolicyAssignmentWithIdentity.json"
+          },
+          "Create or update a policy assignment with a user assigned identity": {
+            "$ref": "./examples/updatePolicyAssignmentWithUserAssignedIdentity.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "policyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the policy assignment to update. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentUpdate"
+            },
+            "description": "Parameters for policy assignment patch request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy assignment.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments": {
@@ -582,6 +634,55 @@
             }
           }
         }
+      },
+      "patch":{
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_UpdateById",
+        "summary": "Updates a policy assignment.",
+        "description": "This operation updates the policy assignment with the given ID. Policy assignments made on a scope apply to all resources contained in that scope. For example, when you assign a policy to a resource group that policy applies to all resources in the group. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
+        "x-ms-examples": {
+          "Update policy assignment with a managed identity by ID": {
+            "$ref": "./examples/updatePolicyAssignmentWithIdentityById.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "policyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the policy assignment to update. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentUpdate"
+            },
+            "description": "Parameters for policy assignment patch request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy assignment.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
@@ -723,6 +824,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The managed identity associated with the policy assignment."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
         }
       },
       "description": "The policy assignment.",
@@ -805,6 +911,18 @@
         }
       },
       "description": "Identity for the resource.  Policy assignments support a maximum of one identity.  That is either a system assigned identity or a single user assigned identity."
+    },
+    "PolicyAssignmentUpdate":{
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the policy assignment. Only required when utilizing managed identity."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The managed identity associated with the policy assignment."
+        }
+      }
     }
   },
   "parameters": {
