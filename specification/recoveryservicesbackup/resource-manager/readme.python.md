@@ -44,3 +44,17 @@ output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservice
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup
 ```
+
+``` yaml $(python) && $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.ProtectionIntent
+    transform: >
+        $['required'] = ['protectionIntentItemType'];
+  - from: swagger-document
+    where: $.definitions.FeatureSupportRequest
+    transform: >
+        $['required'] = ['featureType'];
+
+
+```
