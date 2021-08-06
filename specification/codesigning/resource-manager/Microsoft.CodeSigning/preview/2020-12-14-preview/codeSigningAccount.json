@@ -781,11 +781,6 @@
           "type": "string",
           "description": "Used as CN in the subject name of the certificate"
         },
-        "authority": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Certificate authority of the certificate"
-        },
         "organization": {
           "type": "string",
           "description": "Used as O in the subject name of the certificate"
@@ -862,6 +857,22 @@
       "description": "Properties of the certificate profile",
       "type": "object",
       "properties": {
+        "streetAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "city": {
+          "type": "string",
+          "readOnly": true
+        },
         "certificates": {
           "readOnly": true,
           "type": "array",
