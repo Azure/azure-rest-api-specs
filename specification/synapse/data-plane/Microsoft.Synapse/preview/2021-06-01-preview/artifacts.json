@@ -2649,209 +2649,6 @@
         }
       }
     },
-    "/kqlScripts": {
-      "get": {
-        "tags": [
-          "kqlScripts"
-        ],
-        "operationId": "KqlScripts_GetAll",
-        "description": "Get all KQL scripts",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/KqlScripts_ResourceCollectionResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "KqlScripts_GetAll": {
-            "$ref": "./examples/KqlScripts_GetAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/kqlScripts/{kqlScriptName}": {
-      "put": {
-        "tags": [
-          "kqlScripts"
-        ],
-        "operationId": "KqlScript_CreateOrUpdate",
-        "description": "Creates or updates a KQL Script",
-        "parameters": [
-          {
-            "$ref": "#/parameters/KqlScriptName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "kqlScript",
-            "description": "KQL script",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KqlScriptResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/KqlScriptResource"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "KqlScript_CreateOrUpdate": {
-            "$ref": "./examples/KqlScript_CreateOrUpdate.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "kqlScripts"
-        ],
-        "operationId": "KqlScript_GetByName",
-        "description": "Get KQL script by name",
-        "parameters": [
-          {
-            "$ref": "#/parameters/KqlScriptName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/KqlScriptResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "KqlScript_GetByName": {
-            "$ref": "./examples/KqlScript_GetByName.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "kqlScripts"
-        ],
-        "operationId": "KqlScript_DeleteByName",
-        "description": "Delete KQL script by name",
-        "parameters": [
-          {
-            "$ref": "#/parameters/KqlScriptName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "KqlScript_DeleteByName": {
-            "$ref": "./examples/KqlScript_DeleteByName.json"
-          }
-        }
-      }
-    },
-    "/kqlScripts/{kqlScriptName}/rename": {
-      "post": {
-        "tags": [
-          "kqlScripts"
-        ],
-        "operationId": "KqlScript_Rename",
-        "description": "Rename KQL script",
-        "parameters": [
-          {
-            "$ref": "#/parameters/KqlScriptName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "renameRequest",
-            "description": "Rename request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactRenameRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "KqlScript_Rename": {
-            "$ref": "./examples/KqlScript_Rename.json"
-          }
-        }
-      }
-    },
     "/notebookOperationResults/{operationId}": {
       "get": {
         "tags": [
@@ -2894,6 +2691,231 @@
               "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
+          }
+        }
+      }
+    },
+    "/sparkconfigurations": {
+      "get": {
+        "tags": [
+          "sparkconfigurations"
+        ],
+        "operationId": "SparkConfiguration_GetSparkConfigurationsByWorkspace",
+        "x-ms-examples": {
+          "SparkConfigurations_ListByWorkspace": {
+            "$ref": "./examples/SparkConfigurations_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists sparkconfigurations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkConfigurationListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sparkconfigurations/{sparkConfigurationName}": {
+      "put": {
+        "tags": [
+          "sparkconfigurations"
+        ],
+        "operationId": "SparkConfiguration_CreateOrUpdateSparkConfiguration",
+        "x-ms-examples": {
+          "SparkConfigurations_Create": {
+            "$ref": "./examples/SparkConfigurations_Create.json"
+          },
+          "SparkConfigurations_Update": {
+            "$ref": "./examples/SparkConfigurations_Update.json"
+          }
+        },
+        "description": "Creates or updates a sparkconfiguration.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "ETag of the sparkConfiguration entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "sparkConfiguration",
+            "description": "SparkConfiguration resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkConfigurationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkConfigurationResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "sparkconfigurations"
+        ],
+        "operationId": "SparkConfiguration_GetSparkConfiguration",
+        "x-ms-examples": {
+          "SparkConfigurations_Get": {
+            "$ref": "./examples/SparkConfigurations_Get.json"
+          }
+        },
+        "description": "Gets a sparkConfiguration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "ETag of the sparkConfiguration entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkConfigurationResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sparkconfigurations"
+        ],
+        "operationId": "SparkConfiguration_DeleteSparkConfiguration",
+        "x-ms-examples": {
+          "SparkConfigurations_Delete": {
+            "$ref": "./examples/SparkConfigurations_Delete.json"
+          }
+        },
+        "description": "Deletes a sparkConfiguration.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkconfigurations/{sparkConfigurationName}/rename": {
+      "post": {
+        "tags": [
+          "sparkconfigurations"
+        ],
+        "operationId": "SparkConfiguration_RenameSparkConfiguration",
+        "x-ms-examples": {
+          "SparkConfigurations_Rename": {
+            "$ref": "./examples/SparkConfigurations_Rename.json"
+          }
+        },
+        "description": "Renames a sparkConfiguration.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -3132,6 +3154,44 @@
           "type": "string"
         }
       }
+    },
+    "SparkConfigurationListResponse": {
+      "description": "A list of sparkconfiguration resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sparkconfigurations.",
+          "items": {
+            "$ref": "#/definitions/SparkConfigurationResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SparkConfigurationResource": {
+      "description": "Spark Configuration resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/SparkConfiguration.json#/definitions/SparkConfiguration",
+          "description": "Properties of Spark Configuration."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "CreateDataFlowDebugSessionRequest": {
       "description": "Request body structure for creating data flow debug session.",
@@ -4832,66 +4892,6 @@
           "maxLength": 260
         }
       }
-    },
-    "KqlScripts_ResourceCollectionResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KqlScriptResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "KqlScriptResource": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/KqlScript",
-          "description": "Properties of sql script."
-        }
-      }
-    },
-    "KqlScript": {
-      "properties": {
-        "content": {
-          "properties": {
-            "query": {
-              "type": "string"
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "language": {
-                  "type": "string"
-                }
-              }
-            },
-            "currentConnection": {
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -4914,6 +4914,14 @@
     "sparkJobDefinitionName": {
       "name": "sparkJobDefinitionName",
       "description": "The spark job definition name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sparkConfigurationName": {
+      "name": "sparkConfigurationName",
+      "description": "The spark Configuration name.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -5051,14 +5059,6 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
-    },
-    "KqlScriptName": {
-      "name": "kqlScriptName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "KQL script name",
-      "x-ms-parameter-location": "method"
     }
   }
 }

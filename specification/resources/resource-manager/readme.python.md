@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-features-2021-07
   - tag: package-features-2015-12
   - multiapiscript-features: true
   - tag: package-links-2016-09
@@ -53,6 +54,7 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
   - multiapiscript-resources: true
+  - tag: package-subscriptions-2021-01
   - tag: package-subscriptions-2019-11
   - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
@@ -444,6 +446,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-resources-2016-02'
 namespace: azure.mgmt.resource.resources.v2016_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
+```
+
+### Tag: package-subscriptions-2021-01 and python
+
+These settings apply only when `--tag=package-subscriptions-2021-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2021-01'
+namespace: azure.mgmt.resource.subscriptions.v2021_01_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2021_01_01
 ```
 
 ### Tag: package-subscriptions-2019-11 and python
