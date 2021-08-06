@@ -223,12 +223,19 @@
         },
         "parameters": [
           {
-            "name": "policyAssignmentId",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The ID of the policy assignment to update. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+            "description": "The scope of the policy assignment. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the policy assignment."
           },
           {
             "name": "parameters",
@@ -635,7 +642,7 @@
           }
         }
       },
-      "patch":{
+      "patch": {
         "tags": [
           "PolicyAssignments"
         ],
@@ -912,7 +919,8 @@
       },
       "description": "Identity for the resource.  Policy assignments support a maximum of one identity.  That is either a system assigned identity or a single user assigned identity."
     },
-    "PolicyAssignmentUpdate":{
+    "PolicyAssignmentUpdate": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
