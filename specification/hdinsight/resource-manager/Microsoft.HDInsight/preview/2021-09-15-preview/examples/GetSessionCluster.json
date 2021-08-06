@@ -15,7 +15,27 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters/sessionClusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36"
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "clusterProfile": {
+            "stackVersion": "2.4.1-1.0",
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "sessionCluster1.cluster1.clusterpool1.westus2.projecthilo.net"
+              }
+            },
+            "flinkProfile": {}
+          }
         },
         "systemData": {
           "createdBy": "string",

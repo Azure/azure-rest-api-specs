@@ -21,29 +21,31 @@
         "properties": {
           "provisioningState": "Succeeded",
           "clusterType": "kafka",
-          "stackVersion": "2.4.1-1.0",
           "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
           "computeProfile": {
             "vmSize": "Standard_D3_v2",
             "count": 4
           },
-          "identityProfile": {
-            "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
-            "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
-            "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
-          },
-          "authorizationProfile": {
-            "userIds": [
-              "testuser1",
-              "testuser2"
-            ]
-          },
-          "connectivityProfile": {
-            "web": {
-              "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
-            }
-          },
-          "kafkaProfile": {}
+          "clusterProfile": {
+            "stackVersion": "2.4.1-1.0",
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              }
+            },
+            "kafkaProfile": {}
+          }
         },
         "systemData": {
           "createdBy": "string",
