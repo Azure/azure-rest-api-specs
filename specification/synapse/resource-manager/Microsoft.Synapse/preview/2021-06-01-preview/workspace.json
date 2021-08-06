@@ -931,6 +931,14 @@
         "filesystem": {
           "description": "Filesystem name",
           "type": "string"
+        },
+        "resourceId": {
+          "description": "ARM resource Id of this storage account",
+          "type": "string"
+        },
+        "createManagedPrivateEndpoint": {
+          "description": "Create managed private endpoint to this storage account or not",
+          "type": "boolean"
         }
       }
     },
@@ -1028,6 +1036,33 @@
           "$ref": "#/definitions/UserAssignedManagedIdentities"
         }
       }
+    },    
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The User Assigned Managed Identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "description": "User Assigned Managed Identity",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The principal ID.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "type": "object"
     },
     "UserAssignedManagedIdentities": {
       "type": "object",
@@ -1283,6 +1318,18 @@
         "cspWorkspaceAdminProperties": {
           "description": "Initial workspace AAD admin properties for a CSP subscription",
           "$ref": "#/definitions/CspWorkspaceAdminProperties"
+        },
+        "settings": {
+          "description": "Workspace settings",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object",
+          "readOnly": true
+        },
+        "azureADOnlyAuthentication": {
+          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
+          "type": "boolean"
         }
       }
     },
