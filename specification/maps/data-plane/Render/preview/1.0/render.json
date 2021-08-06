@@ -105,26 +105,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "xTileIndex": {
-      "name": "x",
-      "x-ms-client-name": "xTileIndex",
-      "in": "query",
-      "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "yTileIndex": {
-      "name": "y",
-      "x-ms-client-name": "yTileIndex",
-      "in": "query",
-      "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
     "RasterZoom18": {
       "name": "zoom",
       "in": "query",
@@ -300,10 +280,10 @@
             "maximum": 8192
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "name": "pins",
@@ -442,10 +422,10 @@
             "$ref": "#/parameters/RasterVectorNaturalEarthZoom"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
             "name": "tileSize",
@@ -472,10 +452,10 @@
             }
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "$ref": "../../../Search/preview/1.0/search.json#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "produces": [
@@ -526,10 +506,10 @@
             "$ref": "#/parameters/VectorZoom"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
             "name": "statesetId",
@@ -640,10 +620,10 @@
             "$ref": "#/parameters/ImageryRasterZoom"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           }
         ],
         "produces": [
@@ -745,10 +725,10 @@
             "$ref": "#/parameters/RasterZoom18"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
             "$ref": "#/parameters/IncludeText"
