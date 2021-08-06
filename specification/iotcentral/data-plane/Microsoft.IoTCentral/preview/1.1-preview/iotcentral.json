@@ -431,7 +431,7 @@
           "type": "string"
         },
         "sasTtl": {
-          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires. Enter a value between 1 and 24 hours.​",
+          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires.​",
           "type": "string"
         },
         "state": {
@@ -2618,6 +2618,10 @@
             "$ref": "./examples/fileUpload_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2890,6 +2894,9 @@
             "$ref": "./examples/organizations_get.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -2957,6 +2964,10 @@
             "$ref": "./examples/organizations_create.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Version"
