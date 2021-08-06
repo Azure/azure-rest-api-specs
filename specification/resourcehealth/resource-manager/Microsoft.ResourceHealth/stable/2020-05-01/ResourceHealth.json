@@ -282,7 +282,7 @@
       ]
     },
     "availabilityStatusListResult": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -438,7 +438,7 @@
       }
     },
     "recommendedAction": {
-	  "type": "object",  	
+      "type": "object",
       "description": "Lists actions the user can take based on the current availabilityState of the resource.",
       "properties": {
         "action": {
@@ -456,7 +456,7 @@
       }
     },
     "serviceImpactingEvent": {
-	  "type": "object", 
+      "type": "object",
       "description": "Lists the service impacting events that may be affecting the health of the resource.",
       "properties": {
         "eventStartTime": {
@@ -508,7 +508,7 @@
       }
     },
     "statusBanner": {
-	  "type": "object", 
+      "type": "object",
       "description": "Banner type of emerging issue.",
       "properties": {
         "title": {
@@ -531,7 +531,7 @@
       }
     },
     "impactedRegion": {
-	  "type": "object",  	
+      "type": "object",
       "description": "Object of impacted region.",
       "properties": {
         "id": {
@@ -615,6 +615,13 @@
       "type": "string",
       "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
       "x-ms-parameter-location": "method"
+    },
+    "EventIdParameter": {
+      "name": "eventId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "EventId for the Service health event"
     }
   }
 }
