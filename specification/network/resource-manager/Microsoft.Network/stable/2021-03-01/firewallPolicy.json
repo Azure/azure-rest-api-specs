@@ -654,6 +654,10 @@
           "description": "DNS Proxy Settings definition.",
           "$ref": "#/definitions/DnsSettings"
         },
+        "explicitProxySettings": {
+          "description": "Explicit Proxy Settings definition.",
+          "$ref": "#/definitions/ExplicitProxySettings"
+        },
         "intrusionDetection": {
           "description": "The configuration for Intrusion detection.",
           "$ref": "#/definitions/FirewallPolicyIntrusionDetection"
@@ -1220,6 +1224,49 @@
           "type": "boolean",
           "description": "FQDNs in Network Rules are supported when set to true.",
           "x-nullable": true
+        }
+      }
+    },
+    "ExplicitProxySettings": {
+      "description": "Explicit Proxy Settings in Firewall Policy.",
+      "x-ms-discriminator-value": "ExplicitProxySettings",
+      "type": "object",
+      "properties": {
+        "enableExplicitProxy": {
+          "type": "boolean",
+          "description": "When set to true, explicit proxy mode is enabled.",
+          "x-nullable": true
+        },
+        "httpPort": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 64000,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Port number for explicit proxy http protocol, cannot be greater than 64000."
+        },
+        "httpsPort": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 64000,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Port number for explicit proxy https protocol, cannot be greater than 64000."
+        },
+        "pacFilePort": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 64000,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Port number for firewall to serve PAC file."
+        },
+        "pacFile": {
+          "type": "string",
+          "description": "SAS URL for PAC file."
         }
       }
     },
