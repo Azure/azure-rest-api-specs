@@ -561,7 +561,10 @@
           },
           "Create Managed Cluster with user-assigned NAT gateway as outbound type": {
             "$ref": "./examples/ManagedClustersCreate_UserAssignedNATGateway.json"
-          }
+          },
+          "Create Managed Cluster using a nodepool snapshot": {
+            "$ref": "./examples/ManagedClustersCreate_Snapshot.json"
+          },
         }
       },
       "patch": {
@@ -1038,6 +1041,9 @@
           },
           "Create Agent Pool with FIPS enabled OS": {
             "$ref": "./examples/AgentPoolsCreate_EnableFIPS.json"
+          },
+          "Create Agent Pool using a nodepool snapshot": {
+            "$ref": "./examples/AgentPoolsCreate_Snapshot.json"
           }
         }
       },
@@ -2496,6 +2502,10 @@
         "gpuInstanceProfile": {
           "$ref": "#/definitions/GPUInstanceProfile",
           "description": "GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU."
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -5054,6 +5064,16 @@
         }
       },
       "description": "Azure Defender settings for the security profile."
+    },
+    "CreationData": {
+      "description": "Data used when creating a target resource from a source resource.",
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "description": "This is the ARM ID of the source object to be used to create the target object."
+        }
+      }
     }
   },
   "parameters": {
