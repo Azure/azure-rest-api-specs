@@ -670,7 +670,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The limit type"
+          "description": "The limit type",
+          "enum": [
+            "LimitValue",
+            "UsagesValue"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
         }
       },
       "required": [
