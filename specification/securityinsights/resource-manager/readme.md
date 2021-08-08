@@ -29,6 +29,7 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+---
 
 ### Tag: package-preview-2021-09
 
@@ -122,12 +123,14 @@ input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/ThreatIntelligence.json
 ```
 
+---
+
 ## Suppression
 
 ``` yaml
 directive:
-- suppress: R4017
-  reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
