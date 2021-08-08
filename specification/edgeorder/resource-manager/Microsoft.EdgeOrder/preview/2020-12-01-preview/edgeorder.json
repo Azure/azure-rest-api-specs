@@ -139,7 +139,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on configurations parameter for product, which provides details on the configurations for the product.",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
             "required": false,
             "type": "string"
           },
@@ -1951,6 +1951,28 @@
         }
       }
     },
+    "ForwardShippingDetails": {
+      "description": "Forward shipment details.",
+      "type": "object",
+      "properties": {
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string"
+        },
+        "carrierDisplayName": {
+          "description": "Carrier Name for display purpose. Not to be used for any processing.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "TrackingId of the package",
+          "type": "string"
+        },
+        "trackingUrl": {
+          "description": "TrackingUrl of the package.",
+          "type": "string"
+        }
+      }
+    },
     "HierarchyInformation": {
       "description": "Holds details about product hierarchy information",
       "type": "object",
@@ -2298,12 +2320,12 @@
           "description": "Customer notification Preferences"
         },
         "forwardShippingDetails": {
-          "$ref": "#/definitions/ShippingDetails",
+          "$ref": "#/definitions/ForwardShippingDetails",
           "description": "Forward Package Shipping details",
           "readOnly": true
         },
         "reverseShippingDetails": {
-          "$ref": "#/definitions/ShippingDetails",
+          "$ref": "#/definitions/ReverseShippingDetails",
           "description": "Reverse Package Shipping details",
           "readOnly": true
         },
@@ -2977,6 +2999,32 @@
         },
         "returnReason": {
           "description": "Return Reason.",
+          "type": "string"
+        }
+      }
+    },
+    "ReverseShippingDetails": {
+      "description": "Reverse shipment details.",
+      "type": "object",
+      "properties": {
+        "sasKeyForLabel": {
+          "description": "SAS key to download the reverse shipment label of the package.",
+          "type": "string"
+        },
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string"
+        },
+        "carrierDisplayName": {
+          "description": "Carrier Name for display purpose. Not to be used for any processing.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "TrackingId of the package",
+          "type": "string"
+        },
+        "trackingUrl": {
+          "description": "TrackingUrl of the package.",
           "type": "string"
         }
       }
