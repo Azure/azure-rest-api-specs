@@ -36,23 +36,26 @@ These settings apply only when `--tag=package-preview-2021-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/AlertRules.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/AutomationRules.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Bookmarks.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Enrichment.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueries.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Entities.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Incidents.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Metadata.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/OnboardingStates.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Settings.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/Watchlists.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/dataConnectors.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
-    - Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/AlertRules.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/AutomationRules.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Bookmarks.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Enrichment.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueries.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Entities.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Incidents.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Metadata.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/OnboardingStates.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Watchlists.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/dataConnectors.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
 ```
+
+---
+
 ### Tag: package-2021-04-01-only
 
 These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
