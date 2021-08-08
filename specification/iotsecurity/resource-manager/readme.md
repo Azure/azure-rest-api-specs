@@ -36,10 +36,6 @@ directive:
     from: onPremiseSensors.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/onPremiseSensors"].get'
     reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: vulnerabilities.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/devices/{deviceId}/vulnerabilities"].get'
-    reason: The list returns limited number of items
   - suppress: TopLevelResourcesListByResourceGroup
     from: onPremiseSensors.json
     where: $.definitions.OnPremiseSensor
