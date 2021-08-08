@@ -11,8 +11,12 @@
         "type": "Microsoft.Quota/quotaLimits",
         "name": "MinPublicIpInterNetworkPrefixLength",
         "properties": {
-          "limit": 10,
-          "currentValue": 0,
+          "limit": {
+            "limitType": "UsagesValue",
+            "UsagesValue": {
+              "usagesValue": 10
+            }
+          },
           "unit": "Count",
           "name": {
             "value": "MinPublicIpInterNetworkPrefixLength",
