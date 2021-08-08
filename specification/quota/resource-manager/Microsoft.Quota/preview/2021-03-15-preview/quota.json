@@ -685,34 +685,50 @@
         "limitType"
       ]
     },
-    "LimitValue": {
-      "x-ms-discriminator-value": "LimitValue",
+    "LimitObject": {
+      "description": "The Quota Limit value.",
       "type": "object",
-      "description": "Resource quota limit.",
       "properties": {
-        "limitValue": {
-          "description": "The Quota Limit value.",
+        "limit": {
           "type": "integer",
           "format": "int32"
         }
       },
       "required": [
-        "limitValue"
+        "limit"
+      ]
+    },
+    "LimitValue": {
+      "x-ms-discriminator-value": "LimitValue",
+      "type": "object",
+      "description": "The resource quota limit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LimitObject"
+        }
+      ]
+    },
+    "UsagesObject": {
+      "description": "The resource usages value.",
+      "type": "object",
+      "properties": {
+        "usages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "usages"
       ]
     },
     "UsagesValue": {
       "x-ms-discriminator-value": "UsagesValue",
       "type": "object",
       "description": "Resource usages value.",
-      "properties": {
-        "usagesValue": {
-          "description": "The resource usages value.",
-          "type": "integer",
-          "format": "int32"
+      "allOf": [
+        {
+          "$ref": "#/definitions/UsagesObject"
         }
-      },
-      "required": [
-        "usagesValue"
       ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
