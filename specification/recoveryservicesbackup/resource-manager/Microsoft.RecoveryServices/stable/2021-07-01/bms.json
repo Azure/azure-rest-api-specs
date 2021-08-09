@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01",
+    "version": "2021-07-01",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -18,6 +18,149 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
+      "get": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Fetches resource storage config.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
       "post": {
         "tags": [
@@ -3749,6 +3892,15 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "security pin request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SecurityPinBase"
+            }
           }
         ],
         "responses": {
@@ -3919,6 +4071,263 @@
         "x-ms-examples": {
           "Get Protected Azure Vm Recovery Points Recommended for Move": {
             "$ref": "./examples/AzureIaasVm/RecoveryPointsRecommendedForMove_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "tags": [
+          "ResourceGuardProxies"
+        ],
+        "description": "List the ResourceGuardProxies under vault",
+        "operationId": "ResourceGuardProxies_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Returns ResourceGuardProxy under vault and with the name referenced in request",
+        "operationId": "ResourceGuardProxy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Add or Update ResourceGuardProxy under vault\r\nSecures vault critical operations",
+        "operationId": "ResourceGuardProxy_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Delete ResourceGuardProxy under vault",
+        "operationId": "ResourceGuardProxy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Secures delete ResourceGuardProxy operations.",
+        "operationId": "ResourceGuardProxy_UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
           }
         }
       }
@@ -5892,6 +6301,73 @@
       },
       "x-ms-discriminator-value": "DpmJob"
     },
+    "BackupResourceConfigResource": {
+      "description": "The resource storage details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceConfig",
+          "description": "BackupResourceConfigResource properties"
+        }
+      }
+    },
+    "BackupResourceConfig": {
+      "description": "The resource storage details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "crossRegionRestoreFlag": {
+          "description": "Opt in details of Cross Region Restore feature.",
+          "type": "boolean"
+        }
+      }
+    },
     "DpmJobExtendedInfo": {
       "description": "Additional information on the DPM workload-specific job.",
       "type": "object",
@@ -7428,6 +7904,13 @@
         "isRehydrate": {
           "description": "Flag to identify that deferred deleted DS is to be moved into Pause state",
           "type": "boolean"
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "protectedItemType"
@@ -7567,6 +8050,13 @@
         "backupManagementType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuard Operation Requests",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "backupManagementType"
@@ -8376,6 +8866,13 @@
           "x-ms-enum": {
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
+          }
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuard Operation Requests",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -10947,6 +11444,19 @@
         }
       }
     },
+    "SecurityPinBase": {
+      "description": "Base class for get security pin request body",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuard Operation Requests",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TokenInformation": {
       "description": "The token information details.",
       "type": "object",
@@ -11294,6 +11804,94 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "UnlockDeleteRequest": {
+      "description": "Request body of unlock delete API.",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceToBeDeleted": {
+          "type": "string"
+        }
+      }
+    },
+    "UnlockDeleteResponse": {
+      "description": "Response of Unlock Delete API.",
+      "type": "object",
+      "properties": {
+        "unlockDeleteExpiryTime": {
+          "description": "This is the time when unlock delete privileges will get expired.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardOperationDetail": {
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "type": "string"
+        },
+        "defaultResourceRequest": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBase": {
+      "type": "object",
+      "properties": {
+        "resourceGuardResourceId": {
+          "type": "string"
+        },
+        "resourceGuardOperationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardOperationDetail"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceGuardProxyBase",
+          "description": "ResourceGuardProxyBaseResource properties"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResourceList": {
+      "description": "List of ResourceGuardProxyBase resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardProxyBaseResource"
           }
         }
       }
