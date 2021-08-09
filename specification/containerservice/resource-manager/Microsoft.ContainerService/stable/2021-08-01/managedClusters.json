@@ -2093,6 +2093,56 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_UpdateTags",
+        "summary": "Updates tags on a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update snapshot Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Update Snapshot Tags": {
+            "$ref": "./examples/SnapshotsUpdateTags.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Snapshots"
@@ -2116,6 +2166,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5295,6 +5348,7 @@
       }
     },
     "SnapshotListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5312,6 +5366,7 @@
       "description": "The response from the List Snapshots operation."
     },
     "Snapshot": {
+      "type": "object",
       "properties": {
         "systemData": {
           "$ref": "#/definitions/SystemData",
@@ -5329,9 +5384,10 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Snapshot."
+      "description": "An agent pool snapshot resource."
     },
     "SnapshotProperties": {
+      "type": "object",
       "properties": {
         "creationData": {
           "$ref": "#/definitions/CreationData",
