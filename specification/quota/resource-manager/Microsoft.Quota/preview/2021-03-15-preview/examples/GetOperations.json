@@ -7,20 +7,29 @@
       "body": {
         "value": [
           {
-            "name": "Microsoft.Quota/quotaLimits/read",
+            "name": "Microsoft.Quota/usages/read",
             "display": {
               "provider": "Microsoft Quota",
-              "resource": "Resource service limit",
-              "operation": "Get resource service limit",
+              "resource": "Resource current usages",
+              "operation": "Get resource usages",
+              "description": "Get the current usages of the specified resource and location"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/quota/read",
+            "display": {
+              "provider": "Microsoft Quota",
+              "resource": "Resource quota limit",
+              "operation": "Get resource quota limit",
               "description": "Get the current service limit or quota of the specified resource and location"
             }
           },
           {
-            "name": "Microsoft.Quota/quotaLimits/write",
+            "name": "Microsoft.Quota/quota/write",
             "display": {
               "provider": "Microsoft Quota",
-              "resource": "Resource service limit",
-              "operation": "Create resource service limit",
+              "resource": "Resource quota limit",
+              "operation": "Create resource quota limit",
               "description": "Create service limit or quota for the specified resource and location"
             }
           },

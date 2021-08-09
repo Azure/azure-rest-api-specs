@@ -34,19 +34,118 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Quota/quota/{resourceName}": {
+    "/{scope}/providers/Microsoft.Quota/usages/{resourceName}": {
       "get": {
         "tags": [
-          "QuotaInformation"
+          "UsagesInformation"
         ],
-        "description": "Gets the quota limit and current quota usage of a resource. The response can be used to determine the remaining quota and calculate a new quota limit that can be submitted with a PUT request.",
-        "operationId": "Quota_Get",
+        "description": "Gets the current usage of a resource.",
+        "operationId": "Usages_Get",
         "x-ms-examples": {
           "Quotas_UsagesRequest_ForNetwork": {
             "$ref": "./examples/getNetworkOneSkuUsages.json"
           },
-          "Quotas_Get_Request_ForCompute": {
+          "Quotas_UsagesRequest_ForCompute": {
             "$ref": "./examples/getComputeOneSkuUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The quota information will be returned in the response with pagination.",
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/usages": {
+      "get": {
+        "tags": [
+          "QuotaInformation"
+        ],
+        "description": "Get a list of current usages of all resources.",
+        "operationId": "Quota_List",
+        "x-ms-examples": {
+          "Quotas_listUsagesForNetwork": {
+            "$ref": "./examples/getNetworkUsages.json"
+          },
+          "Quotas_listUsagesForCompute": {
+            "$ref": "./examples/getComputeUsages.json"
+          },
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Quota information will be returned in the response with pagination.",
+            "schema": {
+              "$ref": "#/definitions/QuotaLimits"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}": {
+      "get": {
+        "tags": [
+          "QuotaInformation"
+        ],
+        "description": "Gets the quota limit of a resource. The response can be used to determine the remaining quota and calculate a new quota limit that can be submitted with a PUT request.",
+        "operationId": "Quota_Get",
+        "x-ms-examples": {
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuQuotalimit.json"
+          },
+          "Quotas_Get_Request_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuQuotalimit.json"
           }
         },
         "parameters": [
@@ -209,22 +308,22 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Quota/quotaLimits": {
+    "/{scope}/providers/Microsoft.Quota/quotas": {
       "get": {
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Get a list of current quota limits and usages of all resources. The response from this GET operation can be leveraged to submit requests to update a quota.",
+        "description": "Get a list of current quota limits of all resources. The response from this GET operation can be leveraged to submit requests to update a quota.",
         "operationId": "Quota_List",
         "x-ms-examples": {
-          "Quotas_listUsagesForNetwork": {
-            "$ref": "./examples/getNetworkUsages.json"
+          "Quotas_listQuotaLimitsForNetwork": {
+            "$ref": "./examples/getNetworkQuotaLimits.json"
           },
-          "Quotas_listUsagesForCompute": {
-            "$ref": "./examples/getComputeUsages.json"
+          "Quotas_listQuotaLimitsForCompute": {
+            "$ref": "./examples/getComputeQuotaLimits.json"
           },
-          "Quotas_listUsagesMachineLearningServices": {
-            "$ref": "./examples/getMachineLearningServicesUsages.json"
+          "Quotas_listQuotaLimitsMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesQuotaLimits.json"
           }
         },
         "parameters": [
@@ -689,7 +788,7 @@
       "discriminator": "limitType"
     },
     "UsagesObject": {
-      "description": "The Quota Limit value.",
+      "description": "The resource usages value.",
       "type": "object",
       "properties": {
         "value": {
@@ -706,13 +805,13 @@
       ]
     },
     "LimitObject": {
-      "description": "The usages value.",
+      "description": "The resource quota/limit value.",
       "type": "object",
       "properties": {
         "value": {
           "type": "integer",
           "format": "int32",
-          "description": "The Limit value"
+          "description": "The quota/limit value"
         },
         "limitType": {
           "$ref": "#/definitions/LimitObjectType"
