@@ -47,6 +47,17 @@ tag: package-vnet-2020-12-01
 tag: package-monitoring-2020-12-01
 ```
 
+### Tag: package-kql-script-2021-06-preview
+
+These settings apply only when `--tag=package-kql-script-2021-06-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. KQL script API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-kql-script-2021-06-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
+```
+
 ### Tag: package-spark-2019-11-01-preview
 
 These settings apply only when `--tag=package-spark-2019-11-01-preview` is specified on the command line.
