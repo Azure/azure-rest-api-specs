@@ -72,8 +72,53 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get Metric Definitions without filter": {
+          "Get Subscription level Metric Definitions without filter": {
             "$ref": "./examples/GetMultiResourceMetricDefinitions.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
+      "get": {
+        "tags": [
+          "MetricDefinitions"
+        ],
+        "operationId": "MetricDefinitions_List",
+        "description": "Lists the metric definitions for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamespaceParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric definitions",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Metric Definitions without filter": {
+            "$ref": "./examples/GetMetricDefinitions.json"
+          },
+          "Get Application Insights Metric Definitions without filter": {
+            "$ref": "./examples/GetMetricDefinitionsApplicationInsights.json"
           }
         }
       }
@@ -258,6 +303,15 @@
     }
   },
   "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "RegionParameter": {
       "name": "region",
       "in": "query",

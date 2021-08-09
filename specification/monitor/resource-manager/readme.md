@@ -108,7 +108,7 @@ These settings apply only when `--tag=package-2021-05-only` is specified on the 
 input-file:
   - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2021-05-01/metrics_API.json
-  - Microsoft.Insights/stable/2016-06-01/operations_API.json
+  - Microsoft.Insights/stable/2021-05-01/operations_API.json
 ```
 
 ### Tag: package-2021-05-01-preview-only

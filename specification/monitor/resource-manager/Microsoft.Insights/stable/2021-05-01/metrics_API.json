@@ -100,10 +100,10 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": {
+          "Get subscription level metric data": {
             "$ref": "./examples/GetMultiResourceMetric.json"
           },
-          "Get Metric for metadata": {
+          "Get subscription level metric metadata": {
             "$ref": "./examples/GetMultiResourceMetricMetadata.json"
           }
         }
@@ -182,14 +182,90 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": {
+          "Get subscription level metric data": {
             "$ref": "./examples/GetMultiResourceMetric.json"
           },
-          "Get Metric for data using post": {
+          "Post request for subscription level metric data": {
             "$ref": "./examples/PostMultiResourceMetricBody.json"
           },
-          "Get Metric for metadata": {
+          "Get subscription level metric metadata": {
             "$ref": "./examples/GetMultiResourceMetricMetadata.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_List",
+        "description": "**Lists the metric values for a resource**.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ResultTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoAdjustTimegrain"
+          },
+          {
+            "$ref": "#/parameters/ValidateDimensions"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-examples": {
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          },
+          "Get Metric with error": {
+            "$ref": "./examples/GetMetricError.json"
           }
         }
       }
@@ -197,7 +273,7 @@
   },
   "definitions": {
     "BodyParameters": {
-      "description": "",
+      "description": "Query parameters can also be specified in the body, specifying the same parameter in both the body and query parameters will result in an error.",
       "type": "object",
       "properties": {
         "Timespan": {
@@ -489,6 +565,15 @@
     }
   },
   "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "RegionParameter": {
       "name": "region",
       "in": "query",
