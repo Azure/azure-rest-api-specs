@@ -124,6 +124,34 @@
         }
       }
     },
+    "/providers/Microsoft.ResourceHealth/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the resourcehealth resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of available operations for the resourcehealth resource provider",
+            "schema": {
+              "$ref": "#/definitions/operationListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current": {
       "get": {
         "tags": [
