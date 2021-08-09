@@ -660,9 +660,7 @@
           "type": "string"
         },
         "createdByType": {
-          "format": "int32",
-          "enum": [0, 1, 2, 3],
-          "type": "integer"
+          "$ref": "#/definitions/IdentityType"
         },
         "createdAt": {
           "format": "date-time",
@@ -672,15 +670,17 @@
           "type": "string"
         },
         "lastModifiedByType": {
-          "format": "int32",
-          "enum": [0, 1, 2, 3],
-          "type": "integer"
+          "$ref": "#/definitions/IdentityType"
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string"
         }
       }
+    },
+    "IdentityType": {
+      "enum": [ "User", "Application", "ManagedIdentity", "Key"],
+      "type": "string"
     },
     "CloudError": {
       "type": "object",
