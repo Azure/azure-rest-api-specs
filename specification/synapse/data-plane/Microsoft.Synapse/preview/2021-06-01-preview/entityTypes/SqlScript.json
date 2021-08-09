@@ -28,6 +28,16 @@
         "content": {
           "description": "The content of the SQL script.",
           "$ref": "#/definitions/SqlScriptContent"
+        },
+        "folder": {
+          "description": "The folder that this SQL script is in. If not specified, this SQL script will appear at the root level.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the folder that this SQL script is in.",
+              "type": "string"
+            }
+          }
         }
       },
       "additionalProperties": {
@@ -49,6 +59,10 @@
           "description": "The connection used to execute the SQL script.",
           "$ref": "#/definitions/SqlConnection"
         },
+        "resultLimit": {
+          "description": "Limit of results, '-1' for no limit.",
+          "type": "number"
+        },
         "metadata": {
           "description": "The metadata of the SQL script.",
           "$ref": "#/definitions/SqlScriptMetadata"
@@ -58,8 +72,7 @@
         "type": "object"
       },
       "required": [
-        "query",
-        "currentConnection"
+        "query"
       ]
     },
     "SqlScriptMetadata": {
@@ -94,15 +107,19 @@
         "name": {
           "description": "The identifier of the connection.",
           "type": "string"
+        },
+        "poolName": {
+          "description": "The associated SQL pool name (supported by SQL pool v3)",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The associated database name (supported by SQL pool v3)",
+          "type": "string"
         }
       },
       "additionalProperties": {
         "type": "object"
-      },
-      "required": [
-        "type",
-        "name"
-      ]
+      }
     }
   }
 }
