@@ -500,6 +500,10 @@
           "type": "string",
           "readOnly": true
         },
+        "allowPublicNetworkAccess": {
+          "description": "The flag to enable public network access on a V-Net locked notebook resource",
+          "type": "boolean"
+        },
         "hostname": {
           "description": "The friendly string identifier of the creator of the NotebookProxy resource.",
           "type": "string"
@@ -693,6 +697,10 @@
           "type": "string",
           "description": "Error message."
         },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
         "details": {
           "type": "array",
           "description": "An array of error detail objects.",
@@ -701,31 +709,6 @@
           }
         }
       }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response information.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of error detail objects.",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "Operation": {
       "description": "Azure Notebooks Proxy REST API operation",
