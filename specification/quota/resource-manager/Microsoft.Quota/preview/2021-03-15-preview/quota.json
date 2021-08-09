@@ -532,7 +532,7 @@
       "properties": {
         "limit": {
           "description": "Resource quota limit properties.",
-          "$ref": "#/definitions/Limit"
+          "$ref": "#/definitions/LimitObject"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -694,7 +694,8 @@
       "properties": {
         "value": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "readOnly": false
         }
       },
       "required": [
@@ -707,7 +708,8 @@
       "properties": {
         "value": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "readOnly": true
         }
       },
       "required": [
@@ -836,7 +838,7 @@
         },
         "limit": {
           "description": "Resource quota limit properties.",
-          "$ref": "#/definitions/Limit"
+          "$ref": "#/definitions/LimitObject"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -958,10 +960,8 @@
           "format": "date-time"
         },
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitObject"
         },
         "currentValue": {
           "description": "Usage information for the current resource.",
