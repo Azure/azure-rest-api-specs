@@ -784,7 +784,7 @@ directive:
   - suppress: OperationsAPIImplementation
     from: operations_API.json
     where: $.paths
-    reason: 'The operations API is specified in operations_API.json (obviously) the lint rule doesn't seem to like that the RP name is properly capitalized per R3020'
+    reason: 'The operations API is implemented however the tool is still firing due to the casing being different'
   - suppress: OperationsAPIImplementation
     from: serviceDiagnosticsSettings_API.json
     where: $.paths
