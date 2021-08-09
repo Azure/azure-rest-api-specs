@@ -688,23 +688,6 @@
       },
       "discriminator": "limitType"
     },
-    "LimitObject": {
-      "description": "The usages value.",
-      "type": "object",
-      "properties": {
-        "limitType": {
-          "$ref": "#/definitions/LimitObjectType"
-        },
-        "value": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Limit value"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "UsagesObject": {
       "description": "The Quota Limit value.",
       "type": "object",
@@ -713,6 +696,20 @@
           "type": "integer",
           "format": "int32",
           "description": "The usages value"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LimitObject": {
+      "description": "The usages value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Limit value"
         }
       },
       "required": [
