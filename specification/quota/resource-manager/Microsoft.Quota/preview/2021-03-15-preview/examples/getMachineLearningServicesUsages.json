@@ -12,8 +12,11 @@
             "type": "Microsoft.Quota/quotaLimits",
             "name": "standardDv2Family",
             "properties": {
-              "currentValue": 15,
-              "limit": 20,
+              "limit": {
+                "limitType": "UsagesValue",
+                "value": 10
+              },
+              "unit": "Count",
               "name": {
                 "value": "standardDv2Family",
                 "localizedValue": "Standard Dv2 Family vCPUs"
@@ -26,8 +29,11 @@
             "type": "Microsoft.Quota/quotaLimits",
             "name": "totalLowPriorityCores",
             "properties": {
-              "currentValue": 49,
-              "limit": 600,
+              "limit": {
+                "limitType": "UsagesValue",
+                "value": 10
+              },
+              "unit": "Count",
               "name": {
                 "value": "totalLowPriorityCores",
                 "localizedValue": "Total Regional Low-priority vCPUs"
