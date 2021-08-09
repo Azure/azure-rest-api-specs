@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-15-preview",
+    "version": "2021-08-30-preview",
     "title": "Azure Communication CallingServer Service",
     "description": "Azure Communication CallingServer Service"
   },
@@ -1092,6 +1092,43 @@
         }
       }
     },
+    "RecordingContentType": {
+      "description": "Gets or sets the content type of call recording.",
+      "enum": [
+        "audio",
+        "audioVideo"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingContentType",
+        "modelAsString": true
+      }
+    },
+    "RecordingChannelType": {
+      "description": "Gets or sets the channel type of call recording.",
+      "enum": [
+        "mixed",
+        "unmixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingChannelType",
+        "modelAsString": true
+      }
+    },
+    "RecordingFormatType": {
+      "description": "Gets or sets the format type of call recording.",
+      "enum": [
+        "wav",
+        "mp3",
+        "mp4"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingFormatType",
+        "modelAsString": true
+      }
+    },
     "StartCallRecordingRequest": {
       "description": "The request payload start call recording operation.",
       "type": "object",
@@ -1099,6 +1136,15 @@
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
           "type": "string"
+        },
+        "recordingContentType": {
+          "$ref": "#/definitions/RecordingContentType"
+        },
+        "recordingChannelType": {
+          "$ref": "#/definitions/RecordingChannelType"
+        },
+        "recordingFormatType": {
+          "$ref": "#/definitions/RecordingFormatType"
         }
       }
     },
