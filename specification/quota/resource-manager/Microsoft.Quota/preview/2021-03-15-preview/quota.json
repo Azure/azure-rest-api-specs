@@ -630,10 +630,6 @@
       "type": "object",
       "description": "Request property.",
       "properties": {
-        "limit": {
-          "description": "Resource quota limit properties.",
-          "$ref": "#/definitions/Limit"
-        },
         "name": {
           "description": "Resource name.",
           "$ref": "#/definitions/ResourceName"
@@ -660,16 +656,20 @@
           "description": "Quota request ID.",
           "type": "string",
           "readOnly": true
+        },
+        "limit": {
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitJsonObject"
         }
       }
     },
     "LimitObjectType": {
-      "type": "string",
-      "description": "The limit type",
+      "description": "The limit object type",
       "enum": [
         "LimitValue",
         "UsagesValue"
       ],
+      "type": "string",
       "x-ms-enum": {
         "name": "limitType",
         "modelAsString": true
@@ -687,15 +687,6 @@
         }
       },
       "discriminator": "limitType"
-    },
-    "Limit": {
-      "description": "Values for Limit and usages.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/LimitJsonObject"
-        }
-      }
     },
     "LimitObject": {
       "description": "The Quota Limit value.",
@@ -721,6 +712,9 @@
         {
           "$ref": "#/definitions/LimitObject"
         }
+      ],
+      "required": [
+        "value"
       ]
     },
     "UsagesValue": {
@@ -734,6 +728,9 @@
         {
           "$ref": "#/definitions/LimitObject"
         }
+      ],
+      "required": [
+        "value"
       ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
