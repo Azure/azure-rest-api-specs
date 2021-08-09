@@ -689,6 +689,19 @@
       "discriminator": "limitType"
     },
     "LimitObject": {
+      "description": "The usages value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UsagesObject": {
       "description": "The Quota Limit value.",
       "type": "object",
       "properties": {
@@ -712,9 +725,6 @@
         {
           "$ref": "#/definitions/LimitObject"
         }
-      ],
-      "required": [
-        "value"
       ]
     },
     "UsagesValue": {
@@ -726,11 +736,8 @@
           "$ref": "#/definitions/LimitJsonObject"
         },
         {
-          "$ref": "#/definitions/LimitObject"
+          "$ref": "#/definitions/UsagesObject"
         }
-      ],
-      "required": [
-        "value"
       ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
