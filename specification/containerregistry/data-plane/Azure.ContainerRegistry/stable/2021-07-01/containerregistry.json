@@ -419,6 +419,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
@@ -476,6 +479,9 @@
           },
           {
             "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -527,6 +533,9 @@
           },
           {
             "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -562,6 +571,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
@@ -606,6 +618,9 @@
           },
           {
             "$ref": "#/parameters/QueryNum"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -645,6 +660,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -676,6 +694,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -713,6 +734,9 @@
           },
           {
             "$ref": "#/parameters/RepositoryAttributeValue"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -762,6 +786,9 @@
           },
           {
             "$ref": "#/parameters/QueryDigest"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -804,6 +831,9 @@
           },
           {
             "$ref": "#/parameters/TagReference"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -927,6 +957,9 @@
           },
           {
             "$ref": "#/parameters/QueryOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -969,6 +1002,9 @@
           },
           {
             "$ref": "#/parameters/Digest"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1009,6 +1045,9 @@
           },
           {
             "$ref": "#/parameters/ManifestAttributeValue"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1047,6 +1086,9 @@
           },
           {
             "$ref": "#/parameters/AccessToken"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1116,6 +1158,9 @@
             },
             "x-accessibility": "internal",
             "x-ms-client-default": "refresh_token"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1350,8 +1395,7 @@
           "readEnabled": true,
           "listEnabled": true,
           "deleteEnabled": true,
-          "writeEnabled": true,
-          "teleportEnabled": false
+          "writeEnabled": true
         },
         "imageName": "imageName",
         "createdTime": "2018-09-07T16:30:46.6583219Z",
@@ -1528,7 +1572,7 @@
     },
     "TagOrderBy": {
       "type": "string",
-      "description" : "Sort options for ordering tags in a collection.",
+      "description": "Sort options for ordering tags in a collection.",
       "enum": [
         "none",
         "timedesc",
@@ -1557,7 +1601,7 @@
       "x-accessibility": "public"
     },
     "ArtifactArchitecture": {
-      "description" : "The artifact platform's architecture.",
+      "description": "The artifact platform's architecture.",
       "type": "string",
       "enum": [
         "386",
@@ -1775,9 +1819,7 @@
         "manifests": [
           {
             "changeableAttributes": {
-              "quarantineDetails": "quarantineDetails",
               "readEnabled": true,
-              "quarantineState": "quarantineState",
               "listEnabled": true,
               "deleteEnabled": true,
               "writeEnabled": true
@@ -1797,9 +1839,7 @@
           },
           {
             "changeableAttributes": {
-              "quarantineDetails": "quarantineDetails",
               "readEnabled": true,
-              "quarantineState": "quarantineState",
               "listEnabled": true,
               "deleteEnabled": true,
               "writeEnabled": true
@@ -2381,22 +2421,10 @@
           "type": "boolean",
           "description": "Read enabled",
           "x-ms-client-name": "canRead"
-        },
-        "quarantineState": {
-          "type": "string",
-          "description": "Quarantine state",
-          "x-accessibility": "internal"
-        },
-        "quarantineDetails": {
-          "type": "string",
-          "description": "Quarantine details",
-          "x-accessibility": "internal"
         }
       },
       "example": {
-        "quarantineDetails": "quarantineDetails",
         "readEnabled": true,
-        "quarantineState": "quarantineState",
         "listEnabled": true,
         "deleteEnabled": true,
         "writeEnabled": true
@@ -2426,18 +2454,13 @@
           "type": "boolean",
           "description": "Read enabled",
           "x-ms-client-name": "canRead"
-        },
-        "teleportEnabled": {
-          "type": "boolean",
-          "description": "Enables Teleport functionality on new images in the repository improving Container startup performance"
         }
       },
       "example": {
         "readEnabled": true,
         "listEnabled": true,
         "deleteEnabled": true,
-        "writeEnabled": true,
-        "teleportEnabled": true
+        "writeEnabled": true
       }
     },
     "Manifest": {
@@ -3088,6 +3111,13 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
 }
