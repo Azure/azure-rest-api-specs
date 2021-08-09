@@ -663,27 +663,39 @@
         }
       }
     },
-    "Limit": {
-      "discriminator": "limitType",
-      "description": "Values for Limit and usages.",
+    "LimitObjectType": {
+      "type": "string",
+      "description": "The limit type",
+      "enum": [
+        "LimitValue",
+        "UsagesValue"
+      ],
+      "x-ms-enum": {
+        "name": "limitType",
+        "modelAsString": true
+      }
+    },
+    "LimitJsonObject": {
+      "description": "LimitJson abstract class.",
+      "required": [
+        "limitType"
+      ],
       "type": "object",
       "properties": {
         "limitType": {
-          "type": "string",
-          "description": "The limit type",
-          "enum": [
-            "LimitValue",
-            "UsagesValue"
-          ],
-          "x-ms-enum": {
-            "name": "limitType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/LimitObjectType"
         }
       },
-      "required": [
-        "limitType"
-      ]
+      "discriminator": "limitType"
+    },
+    "Limit": {
+      "description": "Values for Limit and usages.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/LimitJsonObject"
+        }
+      }
     },
     "LimitObject": {
       "description": "The Quota Limit value.",
@@ -704,21 +716,11 @@
       "description": "The resource quota limit.",
       "allOf": [
         {
+          "$ref": "#/definitions/LimitJsonObject"
+        },
+        {
           "$ref": "#/definitions/LimitObject"
         }
-      ]
-    },
-    "UsagesObject": {
-      "description": "The resource usages value.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "UsagesValue": {
@@ -727,7 +729,10 @@
       "description": "Resource usages value.",
       "allOf": [
         {
-          "$ref": "#/definitions/UsagesObject"
+          "$ref": "#/definitions/LimitJsonObject"
+        },
+        {
+          "$ref": "#/definitions/LimitObject"
         }
       ]
     },
