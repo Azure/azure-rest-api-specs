@@ -62,7 +62,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-01-preview'
+``` yaml $(tag) == 'package-2020-05-preview'
 input-file:
 - Microsoft.ResourceHealth/preview/2020-05-01/ResourceHealth.json
 ```
