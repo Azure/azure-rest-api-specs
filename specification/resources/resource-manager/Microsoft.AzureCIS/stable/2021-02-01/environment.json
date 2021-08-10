@@ -42,7 +42,7 @@
           "200": {
             "description": "Get Environment info.",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/EnvironmentResourceResult"
             }
           },
           "default": {
@@ -73,7 +73,7 @@
           "200": {
             "description": "Get Environment info.",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/EnvironmentResourceResult"
             }
           },
           "default": {
@@ -108,13 +108,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentResponse"
+              "$ref": "#/definitions/AutopilotEnvironmentResponse"
             }
           }
         ],
         "responses": {
+          "201": {
+            "description": "Environment Resource created first time successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutopilotEnvironmentResponse"
+            }
+          },
           "200": {
-            "description": "Environment Resource create response.",
+            "description": "Environment Resource updated successfully.",
             "schema": {
               "$ref": "#/definitions/AutopilotEnvironmentResponse"
             }
@@ -149,13 +155,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentResponse"
+              "$ref": "#/definitions/AutopilotEnvironmentResponse"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Environment Resource create response.",
+            "description": "Patch request has been accepted, resource is already in the state matching the PATCH request body",
+            "schema": {
+              "$ref": "#/definitions/AutopilotEnvironmentResponse"
+            }
+          },
+          "202": {
+            "description": "Patch request has been accepted",
             "schema": {
               "$ref": "#/definitions/AutopilotEnvironmentResponse"
             }
@@ -189,7 +201,7 @@
           "200": {
             "description": "Get Environment info.",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/AutopilotEnvironmentResponse"
             }
           },
           "default": {
@@ -219,10 +231,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete Environment.",
-            "schema": {
-              "$ref": "#/definitions/AutopilotEnvironmentResponse"
-            }
+            "description": "Delete request has been accepted"
+          },
+          "202": {
+            "description": "Delete request has been accepted"
+          },
+          "204": {
+            "description": "Delete request has been accepted"
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -235,18 +250,21 @@
     }
   },
   "definitions": {
-    "EnvironmentResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request.",
+    "EnvironmentResourceResult": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "location"
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentResource"
+          },
+          "description": "An array of Dsts ServiceAccount"
         },
-        "properties": {
-          "$ref": "#/definitions/EnvironmentResource",
-          "description": "The error details."
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
         }
-      }
+      },
+      "description": "List of EnvironmentResource"
     },
     "EnvironmentResource": {
       "type": "object",
@@ -280,48 +298,6 @@
         }
       }
     },
-    "OperationStatusResponse": {
-      "required": [
-        "id",
-        "status",
-        "environmentResource"
-      ],
-      "type": "object",
-      "description": "Operation Status response",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "subscriptions/{id}/providers/{providerName}/locations/{location}/operationsStatus/{id}"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location"
-        },
-        "status": {
-          "type": "string",
-          "description": "RP defined values | Succeeded | Failed | Canceled"
-        },
-        "startTime": {
-          "type": "string",
-          "description": "<DateLiteral per ISO8601>",
-          "default": "2020-01-01T00:00:00+00:00"
-        },
-        "endTime": {
-          "type": "string",
-          "description": "<DateLiteral per ISO8601>",
-          "default": "2020-01-01T00:00:00+00:00"
-        },
-        "percentComplete": {
-          "type": "string",
-          "description": "<double between 0 and 100>",
-          "default": "0.0"
-        },
-        "environmentResource": {
-          "$ref": "#/definitions/EnvironmentResource",
-          "description": "EnvironmentResource detail"
-        }
-      }
-    },
     "AutopilotEnvironmentResponse": {
       "type": "object",
       "description": "Autopilot Environment Response",
@@ -337,6 +313,14 @@
         "type": {
           "type": "string",
           "description": "The resource type of the feature."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning State."
+        },
+        "Location": {
+          "type": "string",
+          "description": "The location of resource. Examples:https://<endpoint>/subscriptions/{subscriptionId}/providers/{namespace}/{resourceType}/{resourceName}/operationResults/{operationId}?api-version={api-version}"
         },
         "properties": {
           "$ref": "#/definitions/EnvironmentResource",
