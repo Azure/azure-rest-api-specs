@@ -774,10 +774,22 @@
         "modelAsString": true
       }
     },
+    "LimitTypes": {
+      "description": "The quota limit types.",
+      "enum": [
+        "Independent",
+        "Shared"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "quotaLimitTypes",
+        "modelAsString": true
+      }
+    },
     "LimitJsonObject": {
       "description": "LimitJson abstract class.",
       "required": [
-        "limitType"
+        "limitObjectType"
       ],
       "type": "object",
       "properties": {
@@ -785,7 +797,7 @@
           "$ref": "#/definitions/LimitObjectType"
         }
       },
-      "discriminator": "limitType"
+      "discriminator": "limitObjectType"
     },
     "UsagesObject": {
       "description": "The resource usages value.",
