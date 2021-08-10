@@ -28,20 +28,29 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2021-05
+tag: package-2021-09
 ```
 
 
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/definitions.json
+```
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-05'
+``` yaml $(tag) == 'package-preview-2021-05'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensionTypes.json
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/kubernetesconfiguration.json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
@@ -129,4 +138,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
