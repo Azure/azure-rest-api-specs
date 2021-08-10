@@ -73,7 +73,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -113,7 +113,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -153,7 +153,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -196,7 +196,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -242,7 +242,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -296,7 +296,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -330,6 +330,15 @@
           "200": {
             "description": "OK",
             "headers": {}
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -375,13 +384,13 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}.{privateEndpointGuid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}": {
       "get": {
         "tags": [
           "privateLinkServicesForPowerBI"
@@ -422,7 +431,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -479,6 +488,12 @@
                 "description": "The Azure async operation id to poll on result."
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -526,6 +541,15 @@
                 "description": "The Azure async operation id to poll on result."
               }
             }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -534,7 +558,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}.{privateEndpointGuid}/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}/validate": {
       "post": {
         "tags": [
           "privateLinkServicesForPowerBI"
@@ -584,13 +608,13 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections/{privateEndpointName}.{privateEndpointGuid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections/{privateEndpointName}": {
       "get": {
         "tags": [
           "privateLinkServicesForPowerBI"
@@ -630,7 +654,7 @@
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -679,6 +703,12 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             },
             "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -724,10 +754,13 @@
               }
             }
           },
+          "204": {
+            "description": "No Content."
+          },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1261,7 +1294,74 @@
           "description": "Specifies the error target."
         }
       }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "description": "The error object",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that created/modified the resource.",
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     }
+
   },
   "parameters": {
     "SubscriptionIdParameter": {
