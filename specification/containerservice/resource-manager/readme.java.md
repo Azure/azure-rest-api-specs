@@ -13,7 +13,6 @@ description: "Container Service Client"
 
 input-file:
   - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
-  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - Microsoft.ContainerService/stable/2019-08-01/location.json
 ```
 
