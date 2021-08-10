@@ -1525,6 +1525,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Columns that define the additional columns to copying data from source data store to sink. Example: [{\"name\": \"filePath\",\"value\": \"$$FILEPATH\"},{\"name\": \"newColName\",\"value\": \"$$COLUMN:SourceColumnA\"},{\"name\": \"staticValue\",\"value\": \"sampleValue\"}]. Type: array (or Expression with resultType array)"
         }
       },
       "additionalProperties": {
