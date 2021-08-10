@@ -352,7 +352,8 @@
           "description": "The display name of the alert rule"
         },
         "severity": {
-          "type": "number",
+          "type": "integer",
+          "format": "int32",
           "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.",
           "enum": [
             "0",
@@ -410,9 +411,7 @@
         },
         "actions": {
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/Actions"
-          },
+          "$ref": "#/definitions/Actions",
           "description": "Actions to invoke when the alert fires."
         },
         "isWorkspaceAlertsStorageConfigured": {
