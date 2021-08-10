@@ -29,6 +29,60 @@ openapi-type: arm
 tag: package-2021-07-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].get
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].put
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].get
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].put
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].get
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}"].get
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}"].put
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].get
+    reason: SystemData is not returned
+  - suppress: RequiredReadOnlySystemData
+    from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].put
+    reason: SystemData is not returned
+```
+
 ### Tag: package-2021-07-01
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
