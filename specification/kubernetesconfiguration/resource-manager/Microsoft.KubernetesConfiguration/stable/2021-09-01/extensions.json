@@ -265,7 +265,13 @@
           "202": {
             "description": "Request received successfully.",
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/PatchResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -318,13 +324,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PatchResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Extension"
             }
           },
           "default": {

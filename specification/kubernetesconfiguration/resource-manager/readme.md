@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-09'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-09-01/definitions.json
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
 ```
 ### Tag: package-preview-2021-05
 
