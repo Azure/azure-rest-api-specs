@@ -5,6 +5,16 @@
     "title": "DataPlaneAccountClient",
     "description": "Creates a Microsoft.Purview data plane account client."
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/",
   "schemes": [
     "https"
   ],
@@ -1592,6 +1602,15 @@
       "description": "The api version to use.",
       "required": true,
       "type": "string"
+    },
+    "endpoint": {
+      "name": "endpoint",
+      "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
