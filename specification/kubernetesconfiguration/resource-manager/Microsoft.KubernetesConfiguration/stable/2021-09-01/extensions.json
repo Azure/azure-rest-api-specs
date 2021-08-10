@@ -262,8 +262,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request received successfully.",
+          "201": {
+            "description": "Request received successfully, and the resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/PatchResponse"
             }
@@ -476,7 +476,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -748,6 +748,24 @@
           "type": "string",
           "readOnly": true,
           "description": "URL to get the next set of Operation Result objects, if any."
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Result of the request to list operations.",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to the next set of results, if any."
         }
       }
     },
