@@ -318,7 +318,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionsList"
+              "$ref": "#/definitions/PatchResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -705,6 +711,32 @@
           "type": "string",
           "readOnly": true,
           "description": "URL to get the next set of Operation Result objects, if any."
+        }
+      }
+    },
+    "PatchResponse": {
+      "description": "Patch response body.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an Extension resource",
+          "properties": {
+            "provisioningState": {
+              "description": "Status of installation of this extension.",
+              "type": "string",
+              "readOnly": true,
+              "$ref": "#/definitions/provisioningState"
+            },
+            "statuses": {
+              "description": "Status from this extension.",
+              "type": "array",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/ExtensionStatus"
+              }
+            }
+          }
         }
       }
     }

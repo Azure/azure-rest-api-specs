@@ -38,7 +38,12 @@
     "409": {
       "headers": {},
       "description": "Conflict failure, as another Patch operation is in progress",
-      "body": {}
+      "body": {
+          "error": {
+              "code": "PatchConflict",
+              "message": "Another Patch operation is in progress"
+          }
+      }
     }
   }
 }
