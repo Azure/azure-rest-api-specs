@@ -1,0 +1,50 @@
+scope: ResourceGroup
+variables:
+  resourceName: signalrswaggertest4
+#        can't set the second level parameter now
+  parameters.name: signalrswaggertest4   
+testScenarios:
+  - description: Microsoft.SignalRService/Basic_CRUD
+    steps:
+#        arm template deployment is not fully supported now. Will enable and cover more cases once it has more features
+      - step: Generate_Unique_Name
+        armTemplateDeployment: ./peArmTemplate/Generate_Unique_name_template.json
+      - step: SignalR_CheckNameAvailability
+        exampleFile: ../examples/SignalR_CheckNameAvailability.json
+#     The example is actually an update operation. But in this context, here it is a create operation. The result will dismatch in pe part.
+#     Also, some validations like for keys kike IP or pec ID needs to be suppressed
+      - step: SignalR_CreateOrUpdate
+        exampleFile: ../examples/SignalR_CreateOrUpdate.json
+      - step: SignalR_Get
+        exampleFile: ../examples/SignalR_Get.json
+#     Bug. The patch operation is not validated.
+      - step: SignalR_Update
+        exampleFile: ../examples/SignalR_Update.json
+#     The key should not be printed and should not be compared.
+      - step: SignalR_ListKeys
+        exampleFile: ../examples/SignalR_ListKeys.json
+#     We don't have a 200 response for this operation in this API version.
+      - step: SignalR_RegenerateKey
+        exampleFile: ../examples/SignalR_RegenerateKey.json
+      - step: SignalR_Restart
+        exampleFile: ../examples/SignalR_Restart.json
+      - step: Usages_List
+        exampleFile: ../examples/Usages_List.json
+      - step: SignalR_ListByResourceGroup
+        exampleFile: ../examples/SignalR_ListByResourceGroup.json
+      - step: SignalR_ListBySubscription
+        exampleFile: ../examples/SignalR_ListBySubscription.json
+      - step: Operations_List
+        exampleFile: ../examples/Operations_List.json
+      - step: SignalR_Delete
+        exampleFile: ../examples/SignalR_Delete.json
+#  - description: Microsoft.SignalRService/SignalRPrivateLinkResources_List
+#    steps:
+#      - step: prepare_pe
+#        armTemplateDeployment: ./peArmTemplate/template.json
+#      - step: SignalRPrivateEndpointConnections_Get
+#        exampleFile: ../examples/SignalRPrivateEndpointConnections_Get.json
+#      - step: SignalRPrivateEndpointConnections_Update
+#        exampleFile: ../examples/SignalRPrivateEndpointConnections_Update.json
+#      - step: SignalRPrivateEndpointConnections_Delete
+#        exampleFile: ../examples/SignalRPrivateEndpointConnections_Delete.json
