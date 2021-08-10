@@ -688,7 +688,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+          "$ref": "#/definitions/GeoJsonFeatureCollection"
         },
         {
           "$ref": "#/definitions/ExtendedGeoJsonFeatureCollectionData"
@@ -724,7 +724,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "feature": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
+          "$ref": "#/definitions/GeoJsonFeature"
         },
         "links": {
           "description": "Links to other WFS endpoints.",
@@ -734,6 +734,156 @@
           }
         }
       }
+    },
+	  "GeoJsonFeature": {
+      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "x-ms-discriminator-value": "Feature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonFeatureData"
+        }
+      ]
+    },
+    "GeoJsonObject": {
+      "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Feature and FeatureCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection",
+            "Feature",
+            "FeatureCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry.",
+                "name": "GeoJsonPoint"
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry.",
+                "name": "GeoJsonMultiPoint"
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry.",
+                "name": "GeoJsonLineString"
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry.",
+                "name": "GeoJsonMultiLineString"
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry.",
+                "name": "GeoJsonPolygon"
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry.",
+                "name": "GeoJsonMultiPolygon"
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry.",
+                "name": "GeoJsonGeometryCollection"
+              },
+              {
+                "value": "Feature",
+                "description": "`GeoJSON Feature` object.",
+                "name": "GeoJsonFeature"
+              },
+              {
+                "value": "FeatureCollection",
+                "description": "`GeoJSON FeatureCollection` object.",
+                "name": "GeoJsonFeatureCollection"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "GeoJsonFeatureData": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "type": "object"
+        },
+        "id": {
+          "description": "Identifier for the feature.",
+          "type": "string"
+        },
+        "featureType": {
+          "description": "The type of the feature. The value depends on the data model the current feature is part of. Some data models may have an empty value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "GeoJsonGeometry": {
+      "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        }
+      ]
+    },
+    "GeoJsonFeatureCollection": {
+      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+      "x-ms-discriminator-value": "FeatureCollection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        {
+          "$ref": "#/definitions/GeoJsonFeatureCollectionData"
+        }
+      ]
+    },
+    "GeoJsonFeatureCollectionData": {
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonFeature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ]
     }
   }
 }
