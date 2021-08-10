@@ -85,7 +85,7 @@
     "/{scope}/providers/Microsoft.Quota/usages": {
       "get": {
         "tags": [
-          "QuotaInformation"
+          "UsagesInformation"
         ],
         "description": "Get a list of current usages of all resources.",
         "operationId": "Usages_List",
@@ -762,7 +762,7 @@
         }
       }
     },
-    "LimitObjectType": {
+    "LimitObjectTypes": {
       "description": "The limit object type.",
       "enum": [
         "LimitValue",
@@ -794,7 +794,7 @@
       "type": "object",
       "properties": {
         "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectType"
+          "$ref": "#/definitions/LimitObjectTypes"
         }
       },
       "discriminator": "limitObjectType"
@@ -809,7 +809,7 @@
           "description": "The usages value"
         },
         "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectType"
+          "$ref": "#/definitions/LimitObjectTypes"
         }
       },
       "required": [
@@ -826,7 +826,7 @@
           "description": "The quota/limit value"
         },
         "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectType"
+          "$ref": "#/definitions/LimitObjectTypes"
         },
         "limitType": {
           "$ref": "#/definitions/LimitTypes"
