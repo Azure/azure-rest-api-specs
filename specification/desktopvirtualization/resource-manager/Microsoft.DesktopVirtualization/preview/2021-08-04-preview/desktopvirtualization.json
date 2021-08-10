@@ -4391,25 +4391,15 @@
         },
         "hostPoolType": {
           "enum": [
-            "Personal",
-            "Pooled",
-            "BYODesktop"
+            "Pooled"
           ],
           "x-ms-enum": {
-            "name": "HostPoolType",
+            "name": "ScalingHostPoolType",
             "modelAsString": true,
             "values": [
               {
-                "value": "Personal",
-                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
-              },
-              {
                 "value": "Pooled",
                 "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
-              },
-              {
-                "value": "BYODesktop",
-                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
               }
             ]
           },
@@ -4462,8 +4452,7 @@
           }
         },
         "rampUpStartTime": {
-          "format": "date-time",
-          "type": "string",
+          "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
         },
         "rampUpLoadBalancingAlgorithm": {
@@ -4488,13 +4477,12 @@
         "rampUpCapacityThresholdPct": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 100,
           "description": "Capacity threshold for ramp up period."
         },
         "peakStartTime": {
-          "format": "date-time",
-          "type": "string",
+          "$ref": "#/definitions/Time",
           "description": "Starting time for peak period."
         },
         "peakLoadBalancingAlgorithm": {
@@ -4510,8 +4498,7 @@
           "description": "Load balancing algorithm for peak period."
         },
         "rampDownStartTime": {
-          "format": "date-time",
-          "type": "string",
+          "$ref": "#/definitions/Time",
           "description": "Starting time for ramp down period."
         },
         "rampDownLoadBalancingAlgorithm": {
@@ -4566,8 +4553,7 @@
           "description": "Notification message for users during ramp down period."
         },
         "offPeakStartTime": {
-          "format": "date-time",
-          "type": "string",
+          "$ref": "#/definitions/Time",
           "description": "Starting time for off-peak period."
         },
         "offPeakLoadBalancingAlgorithm": {
@@ -4581,6 +4567,30 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "Time": {
+      "description": "The time for a scaling action to occur.",
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "description": "The hour.",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "description": "The minute.",
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
@@ -4650,34 +4660,6 @@
         "timeZone": {
           "type": "string",
           "description": "Timezone of the scaling plan."
-        },
-        "hostPoolType": {
-          "enum": [
-            "Personal",
-            "Pooled",
-            "BYODesktop"
-          ],
-          "x-ms-enum": {
-            "name": "HostPoolType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Personal",
-                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
-              },
-              {
-                "value": "Pooled",
-                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
-              },
-              {
-                "value": "BYODesktop",
-                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
-              }
-            ]
-          },
-          "type": "string",
-          "description": "HostPool type for desktop.",
-          "x-nullable": false
         },
         "exclusionTag": {
           "type": "string",
@@ -4854,7 +4836,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the scaling plan.",
-      "maxLength": 24,
+      "maxLength": 64,
       "minLength": 3,
       "x-ms-parameter-location": "method"
     }
