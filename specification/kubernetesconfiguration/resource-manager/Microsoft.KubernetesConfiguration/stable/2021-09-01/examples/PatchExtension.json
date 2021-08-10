@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionName": "ClusterMonitor",
+    "api-version": "2021-09-01",
+    "clusterName": "clusterName1",
+    "extension": {
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "releaseTrain": "Preview",
+        "configurationSettings": {
+          "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+          "omsagent.env.clusterName": "clusterName1"
+        },
+        "configurationProtectedSettings": {
+          "omsagent.secret.key": "secretKeyValue01"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      },
+      "description": "Details of the Patch operation, including AsyncOperation url and ProvisioningState.",
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "statuses": []
+        }
+      }
+    },
+    "409": {
+      "headers": {},
+      "description": "Conflict failure, as another Patch operation is in progress",
+      "body": {
+      }
+    }
+  }
+}
