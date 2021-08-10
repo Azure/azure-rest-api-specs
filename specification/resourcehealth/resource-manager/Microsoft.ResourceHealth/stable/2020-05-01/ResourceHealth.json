@@ -480,6 +480,37 @@
       ],
       "description": "Lists the operations response."
     },
+    "operation": {
+      "description": "Operation available in the resourcehealth resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        }
+      }
+    },
     "recommendedAction": {
       "type": "object",
       "description": "Lists actions the user can take based on the current availabilityState of the resource.",
