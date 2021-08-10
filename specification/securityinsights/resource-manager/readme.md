@@ -53,11 +53,6 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
-directive:
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
-    where: $.definitions.SourceControl
-    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
 ```
 
 ---
@@ -136,6 +131,8 @@ input-file:
 directive:
   - suppress: R4017
     reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
 ```
 
 ---
