@@ -3,7 +3,7 @@
   "info": {
     "title": "HDInsightManagementClient",
     "description": "The HDInsight Management Client.",
-    "version": "2018-06-01-preview"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -77,6 +77,9 @@
           },
           "Create cluster with compute isolation properties": {
             "$ref": "./examples/CreateHDInsightClusterWithComputeIsolationProperties.json"
+          },
+          "Create cluster with availability zones": {
+            "$ref": "./examples/CreateHDInsightClusterWithAvailabilityZones.json"
           }
         },
         "parameters": [
@@ -809,7 +812,7 @@
           ],
           "x-ms-enum": {
             "name": "DirectoryType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "domain": {
@@ -893,7 +896,7 @@
             ],
             "x-ms-enum": {
               "name": "DaysOfWeek",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "Days of the week for a schedule-based autoscale rule"
@@ -1251,7 +1254,7 @@
           ],
           "x-ms-enum": {
             "name": "OSType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "tier": {
@@ -1263,7 +1266,7 @@
           ],
           "x-ms-enum": {
             "name": "Tier",
-            "modelAsString": false
+            "modelAsString": true
           },
           "default": "Standard",
           "x-ms-mutability": [
@@ -1310,6 +1313,13 @@
         "computeIsolationProperties": {
           "$ref": "#/definitions/ComputeIsolationProperties",
           "description": "The compute isolation properties."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "description": "The private link configurations.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConfiguration"
+          }
         }
       }
     },
@@ -1325,6 +1335,13 @@
             "type": "string"
           },
           "description": "The resource tags."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The availability zones."
         },
         "properties": {
           "$ref": "#/definitions/ClusterCreateProperties",
@@ -1419,7 +1436,7 @@
           ],
           "x-ms-enum": {
             "name": "OSType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "tier": {
@@ -1431,7 +1448,7 @@
           ],
           "x-ms-enum": {
             "name": "Tier",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "clusterId": {
@@ -1466,7 +1483,7 @@
           ],
           "x-ms-enum": {
             "name": "HDInsightClusterProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "createdDate": {
@@ -1522,6 +1539,21 @@
         "computeIsolationProperties": {
           "$ref": "#/definitions/ComputeIsolationProperties",
           "description": "The compute isolation properties."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "description": "The private link configurations.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkConfiguration"
+          }
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The list of private endpoint connections.",
+          "items": {
+            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -1538,6 +1570,13 @@
         "etag": {
           "type": "string",
           "description": "The ETag for the resource"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The availability zones."
         },
         "properties": {
           "$ref": "#/definitions/ClusterGetProperties",
@@ -1562,7 +1601,11 @@
         },
         "parameters": {
           "type": "string",
-          "description": "The parameters for the script"
+          "description": "The parameters for the script",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "roles": {
           "type": "array",
@@ -1640,51 +1683,50 @@
       "allOf": [
         {
           "$ref": "#/definitions/RuntimeScriptAction"
-        },
-        {
-          "properties": {
-            "scriptExecutionId": {
-              "readOnly": true,
-              "type": "integer",
-              "format": "int64",
-              "description": "The execution id of the script action."
-            },
-            "startTime": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The start time of script action execution."
-            },
-            "endTime": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The end time of script action execution."
-            },
-            "status": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The current execution status of the script action."
-            },
-            "operation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The reason why the script action was executed."
-            },
-            "executionSummary": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScriptActionExecutionSummary"
-              },
-              "description": "The summary of script action execution result."
-            },
-            "debugInformation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The script action execution debug information."
-            }
-          }
         }
       ],
+      "type": "object",
+      "properties": {
+        "scriptExecutionId": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The execution id of the script action."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start time of script action execution."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end time of script action execution."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current execution status of the script action."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason why the script action was executed."
+        },
+        "executionSummary": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptActionExecutionSummary"
+          },
+          "description": "The summary of script action execution result."
+        },
+        "debugInformation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The script action execution debug information."
+        }
+      },
       "description": "The execution details of a script action."
     },
     "ClusterListRuntimeScriptActionDetailResult": {
@@ -1694,7 +1736,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuntimeScriptActionDetail"
-          }
+          },
+          "description": "The list of persisted script action details for the cluster."
         },
         "nextLink": {
           "type": "string",
@@ -1727,34 +1770,38 @@
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              },
-              "tenantId": {
-                "type": "string",
-                "description": "The tenant id of user assigned identity."
-              }
-            }
+            "$ref": "#/definitions/UserAssignedIdentity"
           },
           "description": "The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the cluster."
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "The User Assigned Identity",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      }
     },
     "ClusterListResult": {
       "properties": {
@@ -1905,7 +1952,7 @@
           ],
           "x-ms-enum": {
             "name": "AsyncOperationState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "error": {
@@ -1930,6 +1977,148 @@
         "certificatePassword": {
           "description": "The password of the certificate.",
           "type": "string"
+        }
+      }
+    },
+    "PrivateLinkConfiguration": {
+      "type": "object",
+      "description": "The private link configuration.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The private link configuration id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of private link configuration."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the private link configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConfigurationProperties",
+          "description": "The private link configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "PrivateLinkConfigurationProperties": {
+      "type": "object",
+      "description": "The private link configuration properties.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The HDInsight private linkable sub-resource to apply the private link configuration to. For example, 'headnode', 'gateway', 'edgenode'."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The private link configuration provisioning state, which only appears in the response.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkConfigurationProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "The IP configurations for the private link service.",
+          "items": {
+            "$ref": "#/definitions/IPConfiguration"
+          }
+        }
+      }
+    },
+    "IPConfiguration": {
+      "type": "object",
+      "description": "The ip configurations for the private link service.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The private link IP configuration id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of private link IP configuration."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the private link IP configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/IPConfigurationProperties",
+          "description": "The private link ip configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IPConfigurationProperties": {
+      "type": "object",
+      "description": "The private link ip configuration properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The private link configuration provisioning state, which only appears in the response.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkConfigurationProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Indicates whether this IP configuration is primary for the corresponding NIC."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The IP address."
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "The method that private IP address is allocated.",
+          "enum": [
+            "dynamic",
+            "static"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateIPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "subnet": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "The subnet resource id."
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "description": "The azure resource id.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The azure resource id."
         }
       }
     },

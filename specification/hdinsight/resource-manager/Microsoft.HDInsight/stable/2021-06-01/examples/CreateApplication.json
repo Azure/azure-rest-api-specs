@@ -3,7 +3,7 @@
     "applicationName": "hue",
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
-    "api-version": "2018-06-01-preview",
+    "api-version": "2021-06-01",
     "subscriptionId": "subid",
     "parameters": {
       "properties": {
@@ -67,7 +67,6 @@
             {
               "name": "app-install-app1",
               "uri": "https://.../install.sh",
-              "parameters": "-version latest -port 20000",
               "roles": [
                 "edgenode"
               ]
@@ -76,7 +75,6 @@
           "uninstallScriptActions": [],
           "httpsEndpoints": [
             {
-              "subDomainSuffix": "dss",
               "destinationPort": 20000,
               "accessModes": [
                 "WebPage"

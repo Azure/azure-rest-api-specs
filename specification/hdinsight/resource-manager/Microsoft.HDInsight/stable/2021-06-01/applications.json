@@ -3,7 +3,7 @@
   "info": {
     "title": "HDInsightManagementClient",
     "description": "The HDInsight Management Client.",
-    "version": "2018-06-01-preview"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -312,11 +312,19 @@
         },
         "privateIPAddress": {
           "type": "string",
-          "description": "The private ip address of the endpoint."
+          "description": "The private ip address of the endpoint.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "subDomainSuffix": {
           "type": "string",
-          "description": "The subdomain suffix of the application."
+          "description": "The subdomain suffix of the application.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "disableGatewayAuth": {
           "type": "boolean",
@@ -344,7 +352,11 @@
         },
         "privateIPAddress": {
           "type": "string",
-          "description": "The private ip address of the endpoint."
+          "description": "The private ip address of the endpoint.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -414,6 +426,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The marketplace identifier."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "description": "The private link configurations.",
+          "items": {
+            "$ref": "./cluster.json#/definitions/PrivateLinkConfiguration"
+          }
         }
       }
     },

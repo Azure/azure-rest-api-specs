@@ -3,7 +3,7 @@
   "info": {
     "title": "HDInsightManagementClient",
     "description": "The HDInsight Management Client.",
-    "version": "2018-06-01-preview"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -702,7 +702,7 @@
             ],
             "x-ms-enum": {
               "name": "OSType",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -712,6 +712,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "espApplied": {
+          "description": "Whether apply for ESP cluster. 'true' means only for ESP, 'false' means only for non-ESP, null or empty string or others mean for both.",
+          "type": "string"
+        },
+        "computeIsolationSupported": {
+          "description": "Whether support compute isolation. 'true' means only for ComputeIsolationEnabled, 'false' means only for regular cluster.",
+          "type": "string"
         }
       }
     },
@@ -778,7 +786,7 @@
           ],
           "x-ms-enum": {
             "name": "Tier",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
