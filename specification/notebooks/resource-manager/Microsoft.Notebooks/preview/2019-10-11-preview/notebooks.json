@@ -743,8 +743,12 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane. True is for data-plane operations and false is for ARM/control-plane operations.",
+          "type": "boolean"
+        },
         "display": {
-          "description": "Display name of operation",
+          "description": "Display properties of the operation",
           "properties": {
             "provider": {
               "description": "The resource provider name: Microsoft.Notebooks",
