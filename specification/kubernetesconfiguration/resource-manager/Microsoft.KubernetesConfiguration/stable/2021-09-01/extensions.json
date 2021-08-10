@@ -223,9 +223,9 @@
           "ClusterExtensions"
         ],
         "description": "Patch an existing Kubernetes Cluster Extension.",
-        "operationId": "Extensions_Patch",
+        "operationId": "Extensions_Update",
         "x-ms-examples": {
-          "Create Extension": {
+          "Update Extension": {
             "$ref": "./examples/PatchExtension.json"
           }
         },
@@ -252,11 +252,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "extension",
+            "name": "patchRequest",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/PatchRequest"
             },
             "description": "Properties to Patch in an existing Extension."
           }
@@ -270,6 +270,7 @@
           },
           "409": {
             "description": "Conflict",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -324,7 +325,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/ExtensionsList"
             }
           },
           "default": {
@@ -445,6 +446,42 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.KubernetesConfiguration/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "description": "List all the available operations the KubernetesConfiguration resource provider supports, in this api-version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -714,8 +751,53 @@
         }
       }
     },
+    "PatchRequest": {
+      "description": "The Extension Patch Request object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Updatable properties of an Extension Patch Request",
+          "properties": {
+            "autoUpgradeMinorVersion": {
+              "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+              "type": "boolean",
+              "default": true
+            },
+            "releaseTrain": {
+              "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+              "type": "string",
+              "default": "Stable"
+            },
+            "version": {
+              "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
+              "type": "string"
+            },
+            "configurationSettings": {
+              "description": "Configuration settings, as name-value pairs for configuring this extension.",
+              "type": "object",
+              "x-nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "configurationProtectedSettings": {
+              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+              "type": "object",
+              "x-nullable": true,
+              "x-ms-secret": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "PatchResponse": {
       "description": "Patch response body.",
+      "type": "object",
       "properties": {
         "properties": {
           "type": "object",
