@@ -196,10 +196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NotebookProxy"
-            }
+            "description": "Success"
           },
           "204": {
             "description": "No Content"
@@ -500,8 +497,24 @@
           "type": "string",
           "readOnly": true
         },
+        "allowPublicNetworkAccess": {
+          "description": "The flag to enable public network access on a V-Net locked notebook resource",
+          "type": "boolean"
+        },
         "hostname": {
           "description": "The friendly string identifier of the creator of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The region of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "secondaryAppId": {
+          "description": "The alternate application ID used for auth token request in the data plane",
+          "type": "string"
+        },
+        "publicDns": {
+          "description": "The public DNS name",
           "type": "string"
         }
       }
@@ -632,9 +645,42 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Storage/storageAccounts or Microsoft.Notebooks/notebookProxies."
+        },
+        "systemData": {
+          "$ref": "#/definitions/NotebookResourceSystemData"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "NotebookResourceSystemData": {
+      "type": "object",
+      "description": "System data for notebook resource",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityType": {
+      "enum": [ "User", "Application", "ManagedIdentity", "Key"],
+      "type": "string"
     },
     "CloudError": {
       "type": "object",
@@ -697,8 +743,12 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane. True is for data-plane operations and false is for ARM/control-plane operations.",
+          "type": "boolean"
+        },
         "display": {
-          "description": "Display name of operation",
+          "description": "Display properties of the operation",
           "properties": {
             "provider": {
               "description": "The resource provider name: Microsoft.Notebooks",
