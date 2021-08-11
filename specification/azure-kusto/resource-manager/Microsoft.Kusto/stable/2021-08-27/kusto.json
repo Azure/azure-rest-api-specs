@@ -4932,7 +4932,12 @@
             "$ref": "#/definitions/EndpointDependency"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "EndpointDependency": {
       "description": "A domain name that a service is reached at, including details of the current connection status.",
