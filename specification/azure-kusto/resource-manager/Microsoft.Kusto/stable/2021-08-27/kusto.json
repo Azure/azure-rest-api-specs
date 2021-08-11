@@ -2093,7 +2093,7 @@
           "200": {
             "description": "Successfully updated the managed private endpoint.",
             "schema": {
-              "$ref": "#/definitions/Script"
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
             }
           },
           "202": {
@@ -4921,6 +4921,27 @@
       "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OutboundEnvironmentEndpointProperties",
+          "description": "The outbound environment endpoint properties."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OutboundEnvironmentEndpointProperties": {
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "type": "object",
+      "properties": {
         "category": {
           "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
           "type": "string"
@@ -4932,12 +4953,7 @@
             "$ref": "#/definitions/EndpointDependency"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ]
+      }
     },
     "EndpointDependency": {
       "description": "A domain name that a service is reached at, including details of the current connection status.",
