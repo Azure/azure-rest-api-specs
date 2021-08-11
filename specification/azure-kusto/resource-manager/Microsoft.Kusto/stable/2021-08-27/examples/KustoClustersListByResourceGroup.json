@@ -22,7 +22,12 @@
                 "keyName": "keyName",
                 "keyVersion": "keyVersion"
               },
-              "engineType": "V2"
+              "engineType": "V2",
+              "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList":  [],
+              "allowedFqdnList": [
+                "my-stroage.blob.core.windows.net"
+              ]
             },
             "sku": {
               "name": "Standard_L8s",
@@ -40,7 +45,10 @@
               "enableDiskEncryption": true,
               "enableStreamingIngest": true,
               "engineType": "V3",
-              "provisioningState": "Succeeded"
+              "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList": ["0.0.0.0/0"],
+              "provisioningState": "Succeeded",
+              "restrictOutboundNetworkAccess": "Disabled"
             },
             "sku": {
               "name": "Standard_L8s",

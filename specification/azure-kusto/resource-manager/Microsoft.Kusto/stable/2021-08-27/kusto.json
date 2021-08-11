@@ -890,15 +890,19 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
       "post": {
         "tags": [
-          "Databases"
+          "Databases",
+          "AttachedDatabaseConfigurations"
         ],
-        "operationId": "Databases_CheckNameAvailability",
+        "operationId": "ClusterChildResource_CheckNameAvailability",
         "x-ms-examples": {
-          "KustoDatabaseCheckNameAvailability": {
+          "KustoDatabasesCheckNameAvailability": {
             "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
+          },
+          "KustoAttachedDatabaseConfigurationCheckNameAvailability": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationCheckNameAvailability.json"
           }
         },
-        "description": "Checks that the database name is valid and is not already in use.",
+        "description": "Checks that the cluster child resource name is valid and is not already in use.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -1893,6 +1897,588 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_List",
+        "x-ms-examples": {
+          "KustoManagedPrivateEndpointsList": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsList.json"
+          }
+        },
+        "description": "Returns the list of managed private endpoints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list result of managed private endpoints.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "x-ms-examples": {
+          "KustoManagedPrivateEndpointsGet": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsGet.json"
+          }
+        },
+        "description": "Gets a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The managed private endpoint object.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoManagedPrivateEndpointsCreateOrUpdate": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": "The managed private endpoint parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "201": {
+            "description": "Successfully created the managed private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "202": {
+            "description": "Successfully accepted the managed private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Update",
+        "x-ms-examples": {
+          "KustoManagedPrivateEndpointsUpdate": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Updates a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": "The managed private endpoint parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "202": {
+            "description": "Accepted the update request of the managed private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "x-ms-examples": {
+          "ManagedPrivateEndpointsDelete": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- managed private endpoint deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete managed private endpoint request."
+          },
+          "204": {
+            "description": "NoContent -- If the managed private endpoint resource is already deleted, this is the expected status code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "x-ms-examples": {
+          "KustoPrivateEndpointConnectionsList": {
+            "$ref": "./examples/KustoPrivateEndpointConnectiondsList.json"
+          }
+        },
+        "description": "Returns the list of private endpoint connections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list result of private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/KustoPrivateEndpointConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/KustoPrivateEndpointConnectionsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Accepted. The private endpoint connection update will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/KustoPrivateEndpointConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Returns the list of private link resources.",
+        "operationId": "PrivateLinkResources_List",
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/KustoPrivateLinkResourcesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a private link resource.",
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/KustoPrivateLinkResourcesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private link resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "OutboundNetworkDependenciesEndpoints"
+        ],
+        "operationId": "Clusters_ListOutboundNetworkDependenciesEndpoints",
+        "x-ms-examples": {
+          "Get Kusto cluster outbound network dependencies": {
+            "$ref": "./examples/KustoOutboundNetworkDependenciesList.json"
+          }
+        },
+        "description": "Gets the network endpoints of all outbound dependencies of a Kusto cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations": {
       "get": {
         "tags": [
@@ -2853,6 +3439,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "uri": {
@@ -2918,6 +3505,27 @@
           "default": false,
           "type": "boolean"
         },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Public network access to the cluster is enabled by default. When disabled, only private endpoint connection to the cluster is allowed",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
+        },
+        "allowedIpRangeList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": "[]",
+          "description": "The list of ips in the format of CIDR allowed to connect to the cluster."
+        },
         "engineType": {
           "type": "string",
           "description": "The engine type",
@@ -2930,6 +3538,38 @@
             "modelAsString": true
           },
           "default": "V3"
+        },
+        "acceptedAudiences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcceptedAudiences"
+          },
+          "description": "The cluster's accepted audiences."
+        },
+        "enableAutoStop": {
+          "description": "A boolean value that indicates if the cluster could be automatically stopped (due to lack of data or no activity for many days).",
+          "default": true,
+          "type": "boolean"
+        },
+        "restrictOutboundNetworkAccess": {
+          "description": "Whether or not to restrict outbound network access.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClusterNetworkAccessFlag",
+            "modelAsString": true
+          }
+        },
+        "allowedFqdnList": {
+          "description": "List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.",
+          "type": "array",
+          "items": {
+            "description": "FQDN to be allowed for egress. Example: my-storageaccount.blob.core.windows.net",
+            "type": "string"
+          }
         }
       },
       "description": "Class representing the Kusto cluster properties."
@@ -3229,6 +3869,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "databaseName": {
@@ -3277,6 +3918,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "softDeletePeriod": {
@@ -3305,6 +3947,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "softDeletePeriod": {
@@ -3384,6 +4027,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "managedIdentityResourceId": {
@@ -3432,6 +4076,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         }
       },
@@ -3581,6 +4226,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         }
       },
@@ -3599,6 +4245,10 @@
         "sku": {
           "$ref": "#/definitions/AzureSku",
           "description": "The SKU of the cluster."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         },
         "zones": {
           "$ref": "#/definitions/Zones",
@@ -3876,6 +4526,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         }
       },
@@ -3934,6 +4585,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         }
       },
@@ -3969,10 +4621,41 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         }
       },
       "description": "A class representing database script property."
+    },
+    "ManagedPrivateEndpointProperties": {
+      "type": "object",
+      "required": [
+        "privateLinkResourceId",
+        "groupId"
+      ],
+      "properties": {
+        "privateLinkResourceId": {
+          "description": "The ARM resource ID of the resource for which the managed private endpoint is created.",
+          "type": "string"
+        },
+        "privateLinkResourceRegion": {
+          "description": "The region of the resource to which the managed private endpoint is created.",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The groupId in which the managed private endpoint is created.",
+          "type": "string"
+        },
+        "requestMessage": {
+          "description": "The user request message.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "A class representing the properties of a managed private endpoint object."
     },
     "DatabasePrincipalAssignment": {
       "properties": {
@@ -4034,6 +4717,250 @@
         }
       ],
       "description": "Class representing a database script."
+    },
+    "ManagedPrivateEndpointListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpoint"
+          },
+          "description": "The list of managed private endpoints."
+        }
+      },
+      "description": "The list managed private endpoints operation response."
+    },
+    "ManagedPrivateEndpoint": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedPrivateEndpointProperties",
+          "description": "A managed private endpoint."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a managed private endpoint."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to.",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Group id of the private endpoint.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the private endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "description": "Connection State of the Private Endpoint Connection.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointListResult": {
+      "description": "Collection of Outbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "EndpointDependency": {
+      "description": "A domain name that a service is reached at, including details of the current connection status.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The ports used when connecting to DomainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Current TCP connectivity information from the Kusto cluster to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        }
+      }
     },
     "ClusterListResult": {
       "properties": {
@@ -4595,24 +5522,24 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
+              "type": "object",
+              "properties": {
+                "principalId": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The principal id of user assigned identity."
+                },
+                "clientId": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The client id of user assigned identity."
+                }
               }
-            }
           },
           "description": "The list of user identities associated with the Kusto cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
-      "required": [
+          "required": [
         "type"
       ],
       "description": "Identity for the resource."
@@ -4831,6 +5758,15 @@
         }
       },
       "description": "Tables that will be included and excluded in the follower database"
+    },
+    "AcceptedAudiences": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "GUID or valid URL representing an accepted audience."
+        }
+      },
+      "description": "Represents an accepted audience trusted by the cluster."
     }
   },
   "parameters": {
@@ -4919,6 +5855,30 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the private endpoint connection."
+    },
+    "PrivateLinkResourceNameParameter": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "description": "The name of the private link resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ManagedPrivateEndpointNameParameter": {
+      "name": "managedPrivateEndpointName",
+      "in": "path",
+      "description": "The name of the managed private endpoint.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     }
   },
   "securityDefinitions": {

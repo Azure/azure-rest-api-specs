@@ -17,7 +17,10 @@
       "properties": {
         "enableStreamingIngest": true,
         "enablePurge": true,
-        "enableDoubleEncryption": false
+        "enableDoubleEncryption": false,
+        "enableAutoStop": true,
+        "publicNetworkAccess": "Enabled",
+        "allowedIpRangeList":  ["0.0.0.0/0"]
       }
     }
   },
@@ -34,12 +37,15 @@
           "enableStreamingIngest": true,
           "enablePurge": true,
           "enableDoubleEncryption": false,
+          "enableAutoStop": true,
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
             "keyVersion": "keyVersion"
           },
-          "engineType": "V2"
+          "engineType": "V3",
+          "publicNetworkAccess": "Enabled",
+          "allowedIpRangeList":  ["0.0.0.0/0"]
         },
         "sku": {
           "name": "Standard_L8s",
@@ -67,12 +73,15 @@
           "enableStreamingIngest": true,
           "enablePurge": true,
           "enableDoubleEncryption": false,
+          "enableAutoStop": true,
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
             "keyVersion": "keyVersion"
           },
-          "engineType": "V2"
+          "engineType": "V3",
+          "publicNetworkAccess": "Enabled",
+          "allowedIpRangeList":  ["0.0.0.0/0"]
         },
         "sku": {
           "name": "Standard_L8s",
