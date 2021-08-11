@@ -30,7 +30,6 @@ openapi-type: arm
 tag: package-2021-06
 ```
 
-
 ### Tag: package-2021-07-preview
 
 These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
@@ -43,7 +42,10 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-07-01-preview/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-07-01-preview/rbac.json
   - Microsoft.DocumentDB/stable/2021-07-01-preview/restorable.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
@@ -56,7 +58,10 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-06-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-06-15/rbac.json
   - Microsoft.DocumentDB/stable/2021-06-15/restorable.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -72,20 +77,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-
-### Tag: package-2021-06
-
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-06'
-input-file:
-  - Microsoft.DocumentDB/stable/2021-06-15/cosmos-db.json
-  - Microsoft.DocumentDB/stable/2021-06-15/notebook.json
-  - Microsoft.DocumentDB/stable/2021-06-15/privateEndpointConnection.json
-  - Microsoft.DocumentDB/stable/2021-06-15/privateLinkResources.json
-  - Microsoft.DocumentDB/stable/2021-06-15/rbac.json
-  - Microsoft.DocumentDB/stable/2021-06-15/restorable.json
-```
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
