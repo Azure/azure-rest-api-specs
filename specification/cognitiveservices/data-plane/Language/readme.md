@@ -26,10 +26,10 @@ clear-output-folder: true
 These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2021_07_15_preview'
-input-file: 
+input-file:
 - preview/2021-05-01-preview/questionanswering.json
 - preview/2021-05-01-preview/questionanswering-authoring.json
-title: 
+title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
