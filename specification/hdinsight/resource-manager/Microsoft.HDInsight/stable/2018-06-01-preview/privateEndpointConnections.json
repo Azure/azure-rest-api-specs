@@ -40,9 +40,9 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_ListByCluster",
-        "description": "Lists the private endpoint connections in a HDInsight cluster.",
+        "description": "Lists the private endpoint connections for a HDInsight cluster.",
         "x-ms-examples": {
-          "Get all private endpoint connections in a specific HDInsight cluster.": {
+          "Get all private endpoint connections for a specific HDInsight cluster.": {
             "$ref": "./examples/GetAllPrivateEndpointConnectionsInCluster.json"
           }
         },
@@ -70,7 +70,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionsListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           }
         },
@@ -112,7 +112,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdatePrivateEndpointConnectionRequest"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection update request."
           }
@@ -133,7 +133,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -143,7 +143,7 @@
         "operationId": "PrivateEndpointConnections_Get",
         "description": "Gets the specific private endpoint connection.",
         "x-ms-examples": {
-          "Get specific private endpoint connection in a specific HDInsight cluster.": {
+          "Get specific private endpoint connection for a specific HDInsight cluster.": {
             "$ref": "./examples/GetPrivateEndpointConnection.json"
           }
         },
@@ -186,7 +186,7 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specific private endpoint connection.",
         "x-ms-examples": {
-          "Get specific private endpoint connection in a specific HDInsight cluster.": {
+          "Get specific private endpoint connection for a specific HDInsight cluster.": {
             "$ref": "./examples/DeletePrivateEndpointConnection.json"
           }
         },
@@ -226,13 +226,13 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionsListResult": {
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "The list private endpoint connections response.",
       "properties": {
@@ -250,53 +250,6 @@
         }
       }
     },
-    "UpdatePrivateEndpointConnectionRequest": {
-      "type": "object",
-      "description": "The private endpoint connection update request spec.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The private endpoint connection id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The private endpoint connection name."
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdatePrivateEndpointConnectionProperties",
-          "description": "The update status properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "UpdatePrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "The update properties of update private endpoint connection parameter.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Th concrete private link service connection.",
-          "enum": [
-            "Approved",
-            "Rejected",
-            "Pending",
-            "Removed"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateLinkServiceConnectionStatus",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "The optional description of the status."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Whether there is further actions."
-        }
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "The private endpoint connection.",
@@ -310,6 +263,9 @@
         {
           "$ref": "./cluster.json#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ]
     },
     "PrivateEndpointConnectionProperties": {
@@ -343,7 +299,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
     },
     "PrivateEndpoint": {
       "type": "object",
@@ -361,7 +320,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Th concrete private link service connection.",
+          "description": "The concrete private link service connection.",
           "enum": [
             "Approved",
             "Rejected",
@@ -381,7 +340,10 @@
           "type": "string",
           "description": "Whether there is further actions."
         }
-      }
+      },
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {

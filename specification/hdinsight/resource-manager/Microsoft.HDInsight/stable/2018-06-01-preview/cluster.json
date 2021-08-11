@@ -1990,7 +1990,7 @@
       "properties": {
         "groupId": {
           "type": "string",
-          "description": "This is used by networking for identifying the private linkable sub-resource."
+          "description": "The HDInsight private linkable sub-resource to apply the private link configuration to. For example, 'headnode', 'gateway', 'edgenode'."
         },
         "provisioningState": {
           "type": "string",
@@ -2012,12 +2012,12 @@
           "type": "array",
           "description": "The IP configurations for the private link service.",
           "items": {
-            "$ref": "#/definitions/PrivateLinkConfigurationIPConfiguration"
+            "$ref": "#/definitions/IPConfiguration"
           }
         }
       }
     },
-    "PrivateLinkConfigurationIPConfiguration": {
+    "IPConfiguration": {
       "type": "object",
       "description": "The ip configurations for the private link service.",
       "properties": {
@@ -2036,13 +2036,13 @@
           "description": "The type of the private link IP configuration."
         },
         "properties": {
-          "$ref": "#/definitions/PrivateLinkConfigurationIPConfigurationProperties",
+          "$ref": "#/definitions/IPConfigurationProperties",
           "description": "The private link ip configuration properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "PrivateLinkConfigurationIPConfigurationProperties": {
+    "IPConfigurationProperties": {
       "type": "object",
       "description": "The private link ip configuration properties.",
       "properties": {

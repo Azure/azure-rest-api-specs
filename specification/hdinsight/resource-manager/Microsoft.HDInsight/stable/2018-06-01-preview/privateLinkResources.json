@@ -123,48 +123,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/resolvePrivateLinkServiceId": {
-      "post": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "operationId": "PrivateLinkResources_ResolvePrivateLinkResourceId",
-        "description": "Gets the specific private link resource.",
-        "x-ms-examples": {
-          "Get specific private endpoint connection in a specific HDInsight cluster.": {
-            "$ref": "./examples/ResolvePrivateLinkResourceId.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./operations.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -223,7 +181,8 @@
           "items": {
             "type": "string"
           },
-          "description": "The private link resource Private link DNS zone name."
+          "description": "The private link resource Private link DNS zone name.",
+          "readOnly": true
         }
       },
       "description": "Properties of a private link resource."
