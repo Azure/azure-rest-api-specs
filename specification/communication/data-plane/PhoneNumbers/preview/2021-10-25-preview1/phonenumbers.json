@@ -579,7 +579,7 @@
             "name": "body",
             "description": "Object containing the program brief information",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/ProgramBriefWritableData"
             }
           }
         ],
@@ -687,7 +687,7 @@
             "name": "body",
             "description": "Fields to update on the program brief",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/ProgramBriefWritableData"
             }
           }
         ],
@@ -760,9 +760,6 @@
         ],
         "summary": "Submits a program brief for review.",
         "operationId": "ShortCodes_SubmitUSProgramBrief",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -1229,29 +1226,6 @@
         }
       }
     },
-    "ErrorBody": {
-      "description": "Represents a service error response body.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code in the error response.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message in the error response.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Represents a service error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorBody"
-        }
-      }
-    },
     "ProgramDetails": {
       "type": "object",
       "properties": {
@@ -1281,10 +1255,6 @@
         "isPoliticalCampaign": {
           "description": "Indicates whether the number will be used for political campaigns or not.",
           "type": "boolean"
-        },
-        "number": {
-          "description": "Number for which the program brief is submitted. Needs to be specified if the customer has already\r\nobtained the number. Is optional when the program brief is for a new number.",
-          "type": "string"
         },
         "programName": {
           "description": "Indicates the purpose of filling the program brief and how the number will be used for messaging.",
@@ -1488,7 +1458,7 @@
         }
       }
     },
-    "ProgramBriefEntity": {
+    "ProgramBriefWritableData": {
       "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "type": "object",
       "properties": {
@@ -1513,6 +1483,105 @@
         "id": {
           "description": "Program Brief ID.",
           "type": "string"
+        }
+      }
+    },
+    "ShortCodeCost": {
+      "description": "The incurred cost for a single short code.",
+      "required": [
+        "amount",
+        "billingFrequency",
+        "currencyCode"
+      ],
+      "type": "object",
+      "properties": {
+        "amount": {
+          "format": "double",
+          "description": "The cost amount.",
+          "type": "number"
+        },
+        "currencyCode": {
+          "description": "The ISO 4217 currency code for the cost amount, e.g. USD.",
+          "type": "string"
+        },
+        "billingFrequency": {
+          "description": "The frequency with which the cost gets billed.",
+          "enum": [
+            "monthly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProgramBriefEntity": {
+      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Program Brief Id.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Program Brief status (e.g. 'submitted', 'approved', etc)",
+          "enum": [
+            "pendingReview",
+            "withdrawn",
+            "readyToSubmit",
+            "denied",
+            "submittedToAggregator",
+            "waitingForMicrosoftOperator",
+            "customerInputNeeded",
+            "pendingApproval",
+            "approved",
+            "codeNotAvailable",
+            "pendingCancellation",
+            "cancelled",
+            "submissionUnsuccessful",
+            "draft",
+            "new"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProgramBriefStatus",
+            "modelAsString": true
+          }
+        },
+        "number": {
+          "description": "Number provisioned for the program brief.",
+          "type": "string"
+        },
+        "comment": {
+          "description": "Comments added to the Program Brief after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
+          "type": "string"
+        },
+        "cost": {
+          "$ref": "#/definitions/ShortCodeCost"
+        },
+        "lastUpdateDate": {
+          "format": "date-time",
+          "description": "Last date and time when the Program Brief was updated.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "Date and time when the Program Brief was created.",
+          "type": "string"
+        },
+        "programDetails": {
+          "$ref": "#/definitions/ProgramDetails"
+        },
+        "companyInformation": {
+          "$ref": "#/definitions/CompanyInformation"
+        },
+        "messageDetails": {
+          "$ref": "#/definitions/MessageDetails"
+        },
+        "trafficDetails": {
+          "$ref": "#/definitions/TrafficDetails"
         }
       }
     },
