@@ -54,7 +54,7 @@
         ],
         "summary": "Get all virtual machines for a lab.",
         "description": "Returns a list of all virtual machines for a lab.",
-        "operationId": "VirtualMachines_List",
+        "operationId": "VirtualMachines_ListByLab",
         "responses": {
           "200": {
             "description": "The request was successful; response contains all virtual machines for the given lab.",
@@ -421,6 +421,7 @@
         "username": {
           "description": "The user whose password is being reset",
           "type": "string",
+          "readOnly": true,
           "x-ms-mutability": [
             "read"
           ]
