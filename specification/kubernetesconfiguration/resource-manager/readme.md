@@ -36,7 +36,7 @@ tag: package-2021-09
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09'
+``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
 ```
