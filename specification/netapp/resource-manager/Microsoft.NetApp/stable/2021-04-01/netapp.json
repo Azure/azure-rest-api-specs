@@ -1952,49 +1952,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}/listVolumes": {
-      "get": {
-        "tags": [
-          "Snapshot Policy List Volumes"
-        ],
-        "summary": "Get volumes for snapshot policy",
-        "description": "Get volumes associated with snapshot policy, older version for backwards compatibility",
-        "operationId": "SnapshotPolicies_ListVolumesOldVersion",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/SnapshotPolicyName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/snapshotPolicyVolumeList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "SnapshotPolicies_ListVolumes": {
-            "$ref": "examples/SnapshotPolicies_ListVolumes.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backupStatus": {
       "get": {
         "tags": [
@@ -5482,7 +5439,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the mount target",
+      "description": "The name of the snapshot",
       "x-ms-parameter-location": "method"
     },
     "SnapshotPolicyName": {
@@ -5490,7 +5447,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the snapshot policy target",
+      "description": "The name of the snapshot policy",
       "x-ms-parameter-location": "method"
     },
     "BackupName": {
