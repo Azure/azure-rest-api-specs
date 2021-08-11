@@ -3003,11 +3003,11 @@
           "description": "Coordinates of the storm"
         },
         "maxWindGust": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum wind gust speed associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "sustainedWind": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum sustained wind speed associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "status": {
@@ -3071,20 +3071,6 @@
         }
       }
     },
-    "StormWindSpeed": {
-      "type": "object",
-      "description": "Wind speed associated with the storm",
-      "properties": {
-        "metric": {
-          "$ref": "#/definitions/WeatherUnit",
-          "description": "Metric"
-        },
-        "imperial": {
-          "$ref": "#/definitions/WeatherUnit",
-          "description": "Imperial"
-        }
-      }
-    },
     "StormWindRadiiSummary": {
       "type": "object",
       "description": "Displayed when details=true or radiiGeometry=true in the request.",
@@ -3099,7 +3085,7 @@
           "description": "DateTime for which the wind radii summary data is valid, displayed as the number of seconds that have lapsed since January 1, 1970 (midnight UTC/GMT)."
         },
         "windSpeed": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Wind speed associated with the radiusSectorData. Contains metric and imperial values."
         },
         "radiusSectorData": {
@@ -3167,15 +3153,15 @@
           "description": "Coordinates of the storm"
         },
         "maxWindGust": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum wind gust speed associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "sustainedWind": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum sustained wind speed associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "minimumPressure": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Minimum pressure associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "movement": {
@@ -3215,7 +3201,7 @@
           "description": "Storm direction"
         },
         "speed": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Speed at which the storm is moving. Contains metric and imperial values."
         }
       }
@@ -3253,7 +3239,7 @@
           "description": "Distance to the landmark."
         },
         "range": {
-          "$ref": "#/definitions/StormWindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Distance to the landmark."
         }
       }
