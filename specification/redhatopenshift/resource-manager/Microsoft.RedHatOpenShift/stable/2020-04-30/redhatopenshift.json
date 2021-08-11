@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Red Hat OpenShift Client",
+    "title": "Azure Red Hat OpenShift 4 Client",
     "description": "Rest API for Azure Red Hat OpenShift 4",
     "version": "2020-04-30"
   },
@@ -405,14 +405,14 @@
       "properties": {
         "visibility": {
           "$ref": "#/definitions/Visibility",
-          "description": "API server visibility."
+          "description": "API server visibility (immutable)."
         },
         "url": {
-          "description": "The URL to access the cluster API server.",
+          "description": "The URL to access the cluster API server (immutable).",
           "type": "string"
         },
         "ip": {
-          "description": "The IP of the cluster API server.",
+          "description": "The IP of the cluster API server (immutable).",
           "type": "string"
         }
       }
@@ -454,19 +454,19 @@
       "description": "ClusterProfile represents a cluster profile.",
       "properties": {
         "pullSecret": {
-          "description": "The pull secret for the cluster.",
+          "description": "The pull secret for the cluster (immutable).",
           "type": "string"
         },
         "domain": {
-          "description": "The domain for the cluster.",
+          "description": "The domain for the cluster (immutable).",
           "type": "string"
         },
         "version": {
-          "description": "The version of the cluster.",
+          "description": "The version of the cluster (immutable).",
           "type": "string"
         },
         "resourceGroupId": {
-          "description": "The ID of the cluster resource group.",
+          "description": "The ID of the cluster resource group (immutable).",
           "type": "string"
         }
       }
@@ -475,7 +475,7 @@
       "description": "ConsoleProfile represents a console profile.",
       "properties": {
         "url": {
-          "description": "The URL to access the cluster console.",
+          "description": "The URL to access the cluster console (immutable).",
           "type": "string"
         }
       }
@@ -505,15 +505,15 @@
       "description": "IngressProfile represents an ingress profile.",
       "properties": {
         "name": {
-          "description": "The ingress profile name.",
+          "description": "The ingress profile name.  Must be \"default\" (immutable).",
           "type": "string"
         },
         "visibility": {
           "$ref": "#/definitions/Visibility",
-          "description": "Ingress visibility."
+          "description": "Ingress visibility (immutable)."
         },
         "ip": {
-          "description": "The IP of the ingress.",
+          "description": "The IP of the ingress (immutable).",
           "type": "string"
         }
       }
@@ -523,10 +523,10 @@
       "properties": {
         "vmSize": {
           "$ref": "#/definitions/VMSize",
-          "description": "The size of the master VMs."
+          "description": "The size of the master VMs (immutable)."
         },
         "subnetId": {
-          "description": "The Azure resource ID of the master subnet.",
+          "description": "The Azure resource ID of the master subnet (immutable).",
           "type": "string"
         }
       }
@@ -535,11 +535,11 @@
       "description": "NetworkProfile represents a network profile.",
       "properties": {
         "podCidr": {
-          "description": "The CIDR used for OpenShift/Kubernetes Pods.",
+          "description": "The CIDR used for OpenShift/Kubernetes Pods (immutable).",
           "type": "string"
         },
         "serviceCidr": {
-          "description": "The CIDR used for OpenShift/Kubernetes Services.",
+          "description": "The CIDR used for OpenShift/Kubernetes Services (immutable).",
           "type": "string"
         }
       }
@@ -560,14 +560,14 @@
       }
     },
     "OpenShiftClusterCredentials": {
-      "description": "OpenShiftClusterCredentials represents an OpenShift cluster's credentials.",
+      "description": "OpenShiftClusterCredentials represents an OpenShift cluster's credentials",
       "properties": {
         "kubeadminUsername": {
-          "description": "The username for the kubeadmin user.",
+          "description": "The username for the kubeadmin user",
           "type": "string"
         },
         "kubeadminPassword": {
-          "description": "The password for the kubeadmin user.",
+          "description": "The password for the kubeadmin user",
           "type": "string"
         }
       }
@@ -593,7 +593,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The cluster provisioning state."
+          "description": "The cluster provisioning state (immutable)."
         },
         "clusterProfile": {
           "$ref": "#/definitions/ClusterProfile",
@@ -698,11 +698,11 @@
       "description": "ServicePrincipalProfile represents a service principal profile.",
       "properties": {
         "clientId": {
-          "description": "The client ID used for the cluster.",
+          "description": "The client ID used for the cluster (immutable).",
           "type": "string"
         },
         "clientSecret": {
-          "description": "The client secret used for the cluster.",
+          "description": "The client secret used for the cluster (immutable).",
           "type": "string"
         }
       }
@@ -717,23 +717,9 @@
     "VMSize": {
       "description": "VMSize represents a VM size.",
       "enum": [
-        "Standard_D16as_v4",
-        "Standard_D16s_v3",
         "Standard_D2s_v3",
-        "Standard_D32as_v4",
-        "Standard_D32s_v3",
-        "Standard_D4as_v4",
         "Standard_D4s_v3",
-        "Standard_D8as_v4",
-        "Standard_D8s_v3",
-        "Standard_E16s_v3",
-        "Standard_E32s_v3",
-        "Standard_E4s_v3",
-        "Standard_E8s_v3",
-        "Standard_F16s_v2",
-        "Standard_F32s_v2",
-        "Standard_F4s_v2",
-        "Standard_F8s_v2"
+        "Standard_D8s_v3"
       ],
       "type": "string"
     },
@@ -749,23 +735,23 @@
       "description": "WorkerProfile represents a worker profile.",
       "properties": {
         "name": {
-          "description": "The worker profile name.",
+          "description": "The worker profile name.  Must be \"worker\" (immutable).",
           "type": "string"
         },
         "vmSize": {
           "$ref": "#/definitions/VMSize",
-          "description": "The size of the worker VMs."
+          "description": "The size of the worker VMs (immutable)."
         },
         "diskSizeGB": {
-          "description": "The disk size of the worker VMs.",
+          "description": "The disk size of the worker VMs.  Must be 128 or greater (immutable).",
           "type": "integer"
         },
         "subnetId": {
-          "description": "The Azure resource ID of the worker subnet.",
+          "description": "The Azure resource ID of the worker subnet (immutable).",
           "type": "string"
         },
         "count": {
-          "description": "The number of worker VMs.",
+          "description": "The number of worker VMs.  Must be between 3 and 20 (immutable).",
           "type": "integer"
         }
       }
