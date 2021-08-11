@@ -760,6 +760,9 @@
         ],
         "summary": "Submits a program brief for review.",
         "operationId": "ShortCodes_SubmitUSProgramBrief",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -773,8 +776,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProgramBriefOperationResponse"
+            }
           },
           "default": {
             "description": "Failure",
