@@ -2048,7 +2048,7 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_CreateOrUpdate",
-        "summary": "Creates a snapshot.",
+        "summary": "Creates or updates a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5388,7 +5388,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "An agent pool snapshot resource."
+      "description": "A node pool snapshot resource."
     },
     "SnapshotProperties": {
       "type": "object",
@@ -5401,25 +5401,25 @@
           "$ref": "#/definitions/SnapshotType"
         }
       },
-      "description": "Properties used to configure an agent pool snapshot."
+      "description": "Properties used to configure a node pool snapshot."
     },
     "SnapshotType": {
       "type": "string",
-      "default": "Nodepool",
+      "default": "NodePool",
       "enum": [
-        "Nodepool"
+        "NodePool"
       ],
       "x-ms-enum": {
         "name": "SnapshotType",
         "modelAsString": true,
         "values": [
           {
-            "value": "Nodepool",
+            "value": "NodePool",
             "description": "The snapshot is a snapshot of a node pool."
           }
         ]
       },
-      "description": "The type of a snapshot. The default is Nodepool."
+      "description": "The type of a snapshot. The default is NodePool."
     }
   },
   "parameters": {
