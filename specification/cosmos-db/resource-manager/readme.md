@@ -36,12 +36,14 @@ These settings apply only when `--tag=package-2021-07-preview` is specified on t
 
 ```yaml $(tag) == 'package-2021-07-preview'
 input-file:
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/cosmos-db.json
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/notebook.json
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/privateEndpointConnection.json
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/privateLinkResources.json
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/rbac.json
-  - Microsoft.DocumentDB/stable/2021-07-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/services.json
 modelerfour:
   lenient-model-deduplication: true
 ```
