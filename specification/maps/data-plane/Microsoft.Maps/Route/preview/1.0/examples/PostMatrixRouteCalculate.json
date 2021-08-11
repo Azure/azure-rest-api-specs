@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "routeType": "shortest",
+    "routeMatrixBody": {
+      "origins": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            4.85106,
+            52.36006
+          ],
+          [
+            4.85056,
+            52.36187
+          ]
+        ]
+      },
+      "destinations": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            4.85003,
+            52.36241
+          ],
+          [
+            13.42937,
+            52.50931
+          ]
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "formatVersion": "0.0.1",
+        "matrix": [
+          [
+            {
+              "statusCode": 200,
+              "response": {
+                "routeSummary": {
+                  "lengthInMeters": 495,
+                  "travelTimeInSeconds": 134,
+                  "trafficDelayInSeconds": 0,
+                  "departureTime": "2018-07-27T22:55:29+00:00",
+                  "arrivalTime": "2018-07-27T22:57:43+00:00"
+                }
+              }
+            },
+            {
+              "statusCode": 200,
+              "response": {
+                "routeSummary": {
+                  "lengthInMeters": 647651,
+                  "travelTimeInSeconds": 26835,
+                  "trafficDelayInSeconds": 489,
+                  "departureTime": "2018-07-27T22:55:29+00:00",
+                  "arrivalTime": "2018-07-28T06:22:44+00:00"
+                }
+              }
+            }
+          ],
+          [
+            {
+              "statusCode": 200,
+              "response": {
+                "routeSummary": {
+                  "lengthInMeters": 338,
+                  "travelTimeInSeconds": 104,
+                  "trafficDelayInSeconds": 0,
+                  "departureTime": "2018-07-27T22:55:29+00:00",
+                  "arrivalTime": "2018-07-27T22:57:13+00:00"
+                }
+              }
+            },
+            {
+              "statusCode": 200,
+              "response": {
+                "routeSummary": {
+                  "lengthInMeters": 647494,
+                  "travelTimeInSeconds": 26763,
+                  "trafficDelayInSeconds": 469,
+                  "departureTime": "2018-07-27T22:55:29+00:00",
+                  "arrivalTime": "2018-07-28T06:21:32+00:00"
+                }
+              }
+            }
+          ]
+        ],
+        "summary": {
+          "successfulRoutes": 4,
+          "totalRoutes": 4
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "New URL to check the status of the long running request."
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

@@ -5,23 +5,23 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.servicefabric
-  package-name: azure-servicefabric
-  package-version: 6.5.0.0
-  add-credentials: true
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+namespace: azure.servicefabric
+package-name: azure-servicefabric
+package-version: 8.1.0.0
+add-credentials: true
+clear-output-folder: true
+use: "@microsoft.azure/autorest.python@~4.0.71"
+version: V2
+multiapi: true
+no-async: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/servicefabric/azure-servicefabric/azure/servicefabric
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/servicefabric/azure-servicefabric/azure/servicefabric
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/servicefabric/azure-servicefabric
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/servicefabric/azure-servicefabric
 ```

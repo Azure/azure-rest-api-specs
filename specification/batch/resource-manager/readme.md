@@ -25,15 +25,62 @@ To see additional help and options, run:
 These are the global settings for the Batch API.
 
 ``` yaml
+title: BatchManagementClient
+description: Batch Client
 openapi-type: arm
-tag: package-2019-08
+tag: package-2021-06
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Batch/stable/2021-06-01/BatchManagement.json
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.Batch/stable/2021-01-01/BatchManagement.json
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.Batch/stable/2020-09-01/BatchManagement.json
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Batch/stable/2020-05-01/BatchManagement.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Batch/stable/2020-03-01/BatchManagement.json
 ```
 
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08'
 input-file:
   - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
 ```
@@ -42,7 +89,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
 ```
@@ -71,33 +118,64 @@ Note that this setting should be removed once [this GitHub bug](https://github.c
 
 ``` yaml
 directive:
+  - suppress: R2001
+    where: $.definitions.Operation.properties.properties
+    reason: Breaking change.
+
+  - suppress: R2017
+    where:
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}"].put
+    reason: Matching service response.
+
   - suppress: R2063
-    from: BatchManagement.json
     reason: Bug in linter
-  - from:
-      - 2017-09-01/BatchManagement.json
-      - 2017-05-01/BatchManagement.json
-      - 2017-01-01/BatchManagement.json
-      - 2015-12-01/BatchManagement.json
+
+  - suppress: R2066
     where:
-      - $.definitions.Application
-      - $.definitions.ApplicationPackage
-    suppress:
-      - R2020
-    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future next API versions.
-  - from:
-      - 2017-09-01/BatchManagement.json
-      - 2017-05-01/BatchManagement.json
-      - 2017-01-01/BatchManagement.json
-      - 2015-12-01/BatchManagement.json
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}/cancelDelete"].post.operationId
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys"].post.operationId
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys"].post.operationId
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys"].post.operationId
+    reason: This is fine as long as the OperationIds are all unique (as they presently are), and fixing it would likely involve a breaking change.
+
+  - suppress: R3018
     where:
-      - $.definitions.Application.properties
-      - $.definitions.ApplicationPackage.properties
-    suppress:
-      - R3006
-    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
+     - $.definitions.ApplicationProperties.properties.allowUpdates
+     - $.definitions.BatchAccountProperties.properties.dedicatedCoreQuotaPerVMFamilyEnforced
+     - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
+     - $.definitions.StartTask.properties.waitForSuccess
+     - $.definitions.VMExtension.properties.autoUpgradeMinorVersion
+     - $.definitions.WindowsConfiguration.properties.enableAutomaticUpdates
+    reason: Breaking change.
+
+  - suppress: R3018
+    where:
+     - $.definitions.Operation.properties.isDataAction
+    reason: Boolean required for operations schema.
+
+  - suppress: R4009
+    where:
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}"].patch
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}"].patch
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions/{versionName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions/{versionName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}"].patch
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}"].patch
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}"].patch
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}"].get
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/privateLinkResources/{privateLinkResourceName}"].get
+    reason: Service missing headers.
+
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
-    from: BatchManagement.json
     where: $.definitions.UserAccount
     reason: This field contains a secret (password) and is not returned on a get (but is required on a PUT/PATCH). Previous discussions with the modelling team had said that this was the correct way to model this type of field.
 ```
@@ -131,7 +209,7 @@ input-file:
 
 ---
 
-# Code Generation
+## Code Generation
 
 ## Swagger to SDK
 
@@ -141,7 +219,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -149,9 +227,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_batch']
+  - repo: azure-resource-manager-schemas
 ```
 
-## C#
+## C\#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -170,7 +249,6 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
 
 ## Java
 
@@ -204,7 +282,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2015_12_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -217,7 +295,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -230,7 +308,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -243,40 +321,9 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_05_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_05_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 `
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Batch/stable/2019-08-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2019-04-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2018-12-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-09-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-05-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-01-01/BatchManagement.json
-  - $(this-folder)/Microsoft.Batch/stable/2015-12-01/BatchManagement.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-
