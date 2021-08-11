@@ -1165,6 +1165,52 @@
         "dialog": {
           "description": "Context of a QnA.",
           "$ref": "#/definitions/QnaDialog"
+        },
+        "activeLearningSuggestions": {
+          "type": "array",
+          "description": "List of Active Learning suggestions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestionsCluster"
+          }
+        }
+      }
+    },
+    "SuggestedQuestionsCluster": {
+      "type": "object",
+      "description": "Active Learning suggested questions cluster details.",
+      "additionalProperties": false,
+      "properties": {
+        "clusterHead": {
+          "type": "string",
+          "description": "Question chosen as the head of suggested questions cluster by Active Learning clustering algorithm."
+        },
+        "suggestedQuestions": {
+          "type": "array",
+          "description": "List of all suggested questions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestion"
+          }
+        }
+      }
+    },
+    "SuggestedQuestion": {
+      "type": "object",
+      "description": "Question suggested by the Active Learning feature.",
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "Question suggested by the Active Learning feature."
+        },
+        "userSuggestedCount": {
+          "type": "integer",
+          "description": "The number of times the question was suggested explictly by the user.",
+          "format": "int32"
+        },
+        "autoSuggestedCount": {
+          "type": "integer",
+          "description": "The number of times the question was suggested automatically by the Active Learning algorithm.",
+          "format": "int32"
         }
       }
     },
