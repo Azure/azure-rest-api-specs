@@ -39,25 +39,11 @@
   "paths": {
     "/providers/Microsoft.PowerBI/operations": {
       "get": {
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "tags": [
           "Operations"
         ],
-        "x-ms-examples": {
-          "List private link resources in a subscription": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListAvailableOperations.json"
-          }
-        },
-        "operationId": "privateLinkServicesForPowerBI_ListAvailableOperations",
-        "description": "Indicates which operations can be performed by the Power BI Resource Provider.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Lists all of the available Power BI RP operations.",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -65,9 +51,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request completed successfully",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -76,6 +62,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -614,6 +603,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "privateLinkServicesForPowerBI"
+        ],
+        "operationId": "privateLinkServicesForPowerBIGetPrivateEndpointConnection_List",
+        "x-ms-examples": {
+          "Gets private endpoint connections": {
+            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnections.json"
+          }
+        },
+        "description": "Gets private endpoint connection for Power BI.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of private endpoint connections in the private endpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections/{privateEndpointName}": {
       "get": {
         "tags": [
@@ -813,13 +851,17 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Specifies the name of the resource."
+          "description": "Specifies the name of the resource.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
           "readOnly": true,
           "description": "Specifies the type of the resource."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "location": {
           "type": "string",
@@ -1097,6 +1139,10 @@
           "readOnly": true,
           "description": "Specifies the type of the resource."
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -1104,6 +1150,21 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionList": {
+      "title": "PrivateEndpointConnections",
+      "description": "List of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "PrivateEndpointConnection",
+          "description": "Specifies the name of the private endpoint connection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "title": "PrivateEndpointConnectionProperties",
@@ -1151,33 +1212,41 @@
       }
     },
     "PrivateLinkResource": {
-      "title": "PrivateLinkResource",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Specifies the id of private link resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Specifies the name of private link resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of private link resource."
-        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
         "groupId": {
+          "description": "The private link resource group id.",
           "type": "string",
-          "description": "Specifies the group id of private link resource."
+          "readOnly": true
         },
         "requiredMembers": {
+          "description": "The private link resource required member names.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Specifies the required members of private link resource."
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
         }
-      }
+      },
+      "description": "Properties of a private link resource."
     },
     "RemotePrivateEndpointConnection": {
       "title": "RemotePrivateEndpointConnection",
@@ -1199,32 +1268,156 @@
         "Disconnected"
       ]
     },
-    "OperationList": {
-      "title": "OperationList",
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result list of operations supported for PowerBI. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "array",
+      "properties": {
+        "value": {
+          "description": "List of resources supported by the Microsoft.PowerBI resource provider.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "description": "Specifies the value of operation list."
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
         }
       }
     },
     "Operation": {
-      "title": "Operation",
+      "description": "PowerBI Private link REST API operation.",
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
         },
         "display": {
-          "$ref": "#/definitions/Display",
-          "description": "Specifies the display of operation."
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.PowerBI.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: private endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: create, update, delete, etc.",
+              "type": "string"
+            }
+          }
         }
       }
+    },
+    "Resource": {
+      "description": "Represents an instance of an PowerBI resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the PowerBI resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the PowerBI resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the PowerBI resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the PowerBI resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
     },
     "Display": {
       "title": "Display",
@@ -1318,32 +1511,39 @@
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
-          "description": "An identifier for the identity that created the resource"
+          "description": "An identifier for the identity that created the resource",
+          "readOnly": true
         },
         "createdByType": {
           "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
+          "description": "The type of identity that created the resource",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
+          "description": "The timestamp of resource creation (UTC)",
+          "readOnly": true
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
+          "description": "An identifier for the identity that last modified the resource",
+          "readOnly": true
         },
         "lastModifiedByType": {
           "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
+          "description": "The type of identity that last modified the resource",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
         }
       }
     },
@@ -1361,7 +1561,6 @@
         "modelAsString": true
       }
     }
-
   },
   "parameters": {
     "SubscriptionIdParameter": {
