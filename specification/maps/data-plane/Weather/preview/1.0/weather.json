@@ -681,50 +681,14 @@
     },
     "/weather/tropical/search/{format}": {
       "get": {
-        "description": "**Search government-issued Storms**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSearch government-issued storms.",
+        "description": "**Search government-issued Storms**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSearch government-issued storms by year, basin ID, and government ID.",
         "operationId": "Weather_StormSearch",
         "x-ms-examples": {
           "StormSearch": {
             "$ref": "./examples/GetStormSearch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
-          {
-            "$ref": "#/parameters/WeatherApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "#/parameters/WeatherYear"
-          },
-          {
-            "$ref": "#/parameters/WeatherBasinID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StormSearchResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/weather/tropical/search/single/{format}": {
-      "get": {
-        "description": "**Search single government-issued Storm**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSearch government-issued storms by year, basin ID, and government ID.",
-        "operationId": "Weather_StormSingleSearch",
-        "x-ms-examples": {
-          "StormSingleSearch": {
-            "$ref": "./examples/GetSingleStormSearch.json"
+          "StormSearch with three conditions": {
+            "$ref": "./examples/GetFullStormSearch.json"
           }
         },
         "parameters": [
@@ -751,7 +715,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StormSearch"
+              "$ref": "#/definitions/StormSearchResponse"
             }
           },
           "default": {
