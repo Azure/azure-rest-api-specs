@@ -5,12 +5,12 @@
 Configuration for generating LUIS Authoring SDK.
 
 ``` yaml
-tag: authoring_3_0_preview
+tag: authoring_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Authoring Endpoint is `authoring_3_0_preview`.
+The current release for the Authoring Endpoint is `authoring_3_0`.
 
 # Releases
 
@@ -47,10 +47,9 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Changing casing will break existing clients/consumers
 ```
-
 ---
 
-## Authoring 3.0
+## Authoring 3.0-preview
 These settings apply only when `--tag=authoring_3_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0_preview'
@@ -83,11 +82,29 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Changing casing will break existing clients/consumers
 ```
+---
+
+## Authoring 3.0
+These settings apply only when `--tag=authoring_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'authoring_3_0'
+input-file: stable/v3.0/LUIS-Authoring.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: DeleteMustNotHaveRequestBody
+    reason: Body is used to specify entity to delete
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Changing casing will break existing clients/consumers
+```
 
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -96,7 +113,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -158,4 +174,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
