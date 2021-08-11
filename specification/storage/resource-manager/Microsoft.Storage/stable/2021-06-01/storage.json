@@ -2574,6 +2574,19 @@
     },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Allow or disallow public network access to Storage Account. Enabled by default.",
+          "enum": [
+            "None",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
         "sasPolicy": {
           "$ref": "#/definitions/SasPolicy",
           "description": "SasPolicy assigned to the storage account."
@@ -3217,6 +3230,19 @@
         "allowCrossTenantReplication": {
           "type": "boolean",
           "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "description": "Allow or disallow public network access to Storage Account. Enabled by default."
         }
       },
       "description": "Properties of the storage account."
@@ -3461,6 +3487,19 @@
         "allowCrossTenantReplication": {
           "type": "boolean",
           "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "description": "Allow or disallow public network access to Storage Account. Enabled by default."
         }
       },
       "description": "The parameters used when updating a storage account."
