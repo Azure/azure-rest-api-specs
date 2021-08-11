@@ -690,6 +690,24 @@
         "error": {
           "description": "The error response.",
           "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "deprecated": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message.",
+          "deprecated": true
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "deprecated": true
         }
       }
     },
