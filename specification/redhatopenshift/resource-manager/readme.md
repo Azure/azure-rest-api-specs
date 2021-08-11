@@ -38,13 +38,13 @@ input-file:
   - Microsoft.RedHatOpenShift/stable/2020-04-30/redhatopenshift.json
 ```
 
-### Tag: package-2021-01-31-preview
+### Tag: package-2021-09-01-preview
 
-These settings apply only when `--tag=package-2021-01-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-31-preview'
+``` yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-  - Microsoft.RedHatOpenShift/preview/2021-01-31-preview/redhatopenshift.json
+  - Microsoft.RedHatOpenShift/preview/2021-09-01-preview/redhatopenshift.json
 ```
 
 ---
@@ -60,7 +60,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
-    - python ./scripts/multiapi_init_gen.py azure-mgmt-redhatopenshift
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-redhatopenshift
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
