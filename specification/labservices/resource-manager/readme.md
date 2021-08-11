@@ -36,7 +36,15 @@ These settings apply only when `--tag=package-preview-2020-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-05'
 input-file:
-  - Microsoft.LabServices/preview/2020-05-01/ML.json
+  - Microsoft.LabServices/preview/2020-05-01/LabServices.json
+  - Microsoft.LabServices/preview/2020-05-01/Skus.json
+  - Microsoft.LabServices/preview/2020-05-01/OperationResults.json
+  - Microsoft.LabServices/preview/2020-05-01/LabPlans.json
+  - Microsoft.LabServices/preview/2020-05-01/Images.json
+  - Microsoft.LabServices/preview/2020-05-01/Labs.json
+  - Microsoft.LabServices/preview/2020-05-01/Users.json
+  - Microsoft.LabServices/preview/2020-05-01/VirtualMachines.json
+  - Microsoft.LabServices/preview/2020-05-01/Schedules.json
 ```
 ### Tag: package-2018-10
 
