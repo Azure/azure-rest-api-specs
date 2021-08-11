@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 input-file:
   - Microsoft.Kusto/stable/2021-08-27/kusto.json
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
