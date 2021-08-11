@@ -32,11 +32,11 @@ tag: package-2021-08
 ```
 
 
-### Tag: package-2021-08
+### Tag: package-2021-08-27
 
-These settings apply only when `--tag=package-2021-08` is specified on the command line.
+These settings apply only when `--tag=package-2021-08-27` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+```yaml $(tag) == 'package-2021-08-27'
 input-file:
   - Microsoft.Kusto/stable/2021-08-27/kusto.json
 ```
