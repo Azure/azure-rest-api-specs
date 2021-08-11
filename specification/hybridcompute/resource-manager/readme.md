@@ -26,28 +26,39 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-preview-2021-06
 ```
 
 
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-06-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-06-10-preview/privateLinkScopes.json
+```
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-05'
+``` yaml $(tag) == 'package-preview-2021-05'
 input-file:
   - Microsoft.HybridCompute/preview/2021-05-17-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2021-05-17-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
   - Microsoft.HybridCompute/stable/2021-05-20/HybridCompute.json
   - Microsoft.HybridCompute/stable/2021-05-20/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2021-04
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
@@ -146,7 +157,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-powershell
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -36,30 +36,6 @@ directive:
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
     reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: alertTypes.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: recommendationTypes.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: iotDefenderSettings.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: iotSensors.json
-    where: '$.paths["/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: onPremiseIotSensors.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors"].get'
-    reason: The list returns limited number of items
-  - suppress: TopLevelResourcesListByResourceGroup
-    from: onPremiseIotSensors.json
-    where: $.definitions.OnPremiseIotSensor
-    reason: The resource is managed in a subscription level (instead of inside a resource group)
   - suppress: SECRET_PROPERTY
     from: ingestionSettings.json
     where: $.definitions.IngestionSettingToken.properties.token
@@ -182,7 +158,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
@@ -216,16 +191,8 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/devices.json
-- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 - Microsoft.Security/stable/2021-01-01/alerts.json
+- Microsoft.Security/stable/2021-07-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 
@@ -422,27 +389,6 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-2020-08-preview-only
-
-These settings apply only when `--tag=package-2020-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-08-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/devices.json
-- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
 ### Tag: package-2021-01-preview-only
 
 These settings apply only when `--tag=package-2021-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -468,6 +414,19 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-06-only
+
+These settings apply only when `--tag=package-2021-06-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-06-only'
+input-file:
+- Microsoft.Security/stable/2021-06-01/settings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
@@ -485,6 +444,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
 ```
 
@@ -512,4 +472,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## Java
 
+See configuration in [readme.java.md](./readme.java.md)
