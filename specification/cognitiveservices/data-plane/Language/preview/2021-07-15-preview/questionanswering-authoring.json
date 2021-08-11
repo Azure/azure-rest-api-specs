@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Question Answering - Authoring",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2021-05-01-preview"
+    "version": "2021-07-15-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -634,7 +634,8 @@
           "Successful query": {
             "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSources.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
@@ -770,7 +771,8 @@
           "Successful query": {
             "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateQnas.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
@@ -1204,7 +1206,7 @@
         },
         "userSuggestedCount": {
           "type": "integer",
-          "description": "The number of times the question was suggested explictly by the user.",
+          "description": "The number of times the question was suggested explicitly by the user.",
           "format": "int32"
         },
         "autoSuggestedCount": {

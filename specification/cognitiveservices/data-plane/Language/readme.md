@@ -27,8 +27,8 @@ These settings apply only when `--tag=release_2021_07_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2021_07_15_preview'
 input-file:
-- preview/2021-05-01-preview/questionanswering.json
-- preview/2021-05-01-preview/questionanswering-authoring.json
+- preview/2021-07-15-preview/questionanswering.json
+- preview/2021-07-15-preview/questionanswering-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
