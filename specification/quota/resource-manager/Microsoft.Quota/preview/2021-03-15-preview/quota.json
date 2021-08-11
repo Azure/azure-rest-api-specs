@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The quota information will be returned in the response with pagination.",
+            "description": "OK. The usages information will be returned in the response.",
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
             },
@@ -87,7 +87,7 @@
         "tags": [
           "UsagesInformation"
         ],
-        "description": "Get a list of current usages of all resources.",
+        "description": "Get a list of current usages of all resources for the scope specified.",
         "operationId": "Usages_List",
         "x-ms-examples": {
           "Quotas_listUsagesForNetwork": {
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Quota information will be returned in the response with pagination.",
+            "description": "OK. Usages information will be returned in the response with pagination.",
             "schema": {
               "$ref": "#/definitions/QuotaLimits"
             },
@@ -184,7 +184,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Create or update the quota limit for the specified resource to the requested value. To update the quota, follow these steps:\n1. Use the GET operation to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
+        "description": "Create or update the quota limit for the specified resource to the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
           "Quotas_PutRequest_ForNetwork": {
@@ -252,7 +252,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the GET operation to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
+        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForNetwork": {
@@ -313,7 +313,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Get a list of current quota limits of all resources. The response from this GET operation can be leveraged to submit requests to update a quota.",
+        "description": "Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.",
         "operationId": "Quota_List",
         "x-ms-examples": {
           "Quotas_listQuotaLimitsForNetwork": {
@@ -414,7 +414,7 @@
             "$ref": "./examples/getQuotaRequestsHistory.json"
           }
         },
-        "description": "For the specified location and resource provider, gets the current quota requests under the subscription for a one year period ending at the time is made. Use the **oData** filter can be used to select quota requests.",
+        "description": "For the specified scope, gets the current quota requests for a one year period ending at the time is made. Use the **oData** filter can be used to select quota requests.",
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
@@ -461,7 +461,7 @@
         "tags": [
           "QuotaMetadata"
         ],
-        "description": "Gets the list of current resource providers supported by the Microsoft.Quota resource provider.\r\nFor each resource provider, the resource templates the resource provider supports are be provided. \r\nFor each resource template, the resource dimensions are listed. The resource dimensions are the name-value pairs in the resource URI.\r\nExample: Microsoft.Compute Resource Provider\r\nThe URI template is '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBucket'. The actual dimensions vary depending on the resource provider.\r\nThe resource dimensions are {subscriptions},{locations},{quotaBucket}.",
+        "description": "Gets the list of current resource providers supported by the Microsoft.Quota resource provider.\r\nFor each resource provider, the resource templates the resource provider supports are be provided. \r\nFor each resource template, the resource dimensions are listed. The resource dimensions are the name-value pairs in the resource URI.\r\nExample: Microsoft.Network Resource Provider\r\nThe URI template is '/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/quotaBucket'. The actual dimensions will vary depending on the resource provider.\r\nThe resource dimensions for Microsoft.Network resource provider are {subscriptions},{locations},{quotaBucket}.",
         "operationId": "QuotaResourceProviders_List",
         "x-ms-examples": {
           "Quotas_listMetadataForRPs": {
@@ -492,7 +492,7 @@
     "/providers/Microsoft.Quota/operations": {
       "get": {
         "summary": "GET operations.",
-        "description": "List all GET operations.",
+        "description": "List all the operations suported by the Microsoft.Quota resource provider.",
         "operationId": "Operation_List",
         "x-ms-examples": {
           "GetOperations": {
@@ -512,7 +512,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List all GET operations.",
+            "description": "List all the operations.",
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
@@ -583,7 +583,7 @@
       "description": "Resource properties.",
       "properties": {
         "id": {
-          "description": "Resource ID.",
+          "description": "Resource ID",
           "type": "string",
           "readOnly": true
         },
@@ -595,7 +595,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. Example - \"Microsoft.Quota/quotas\""
         }
       }
     },
@@ -605,7 +605,7 @@
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "The resource Id.",
+          "description": "The resource ID.",
           "type": "string",
           "readOnly": true
         },
@@ -620,7 +620,7 @@
           "readOnly": true
         },
         "properties": {
-          "description": "Quota properties for the specified resource.",
+          "description": "Quota and usages properties for the specified resource, based on the API called - quotas or usages.",
           "$ref": "#/definitions/QuotaProperties"
         }
       }
@@ -634,7 +634,7 @@
           "$ref": "#/definitions/LimitObject"
         },
         "unit": {
-          "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "description": " The quota or usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
           "type": "string",
           "readOnly": true
         },
@@ -775,7 +775,7 @@
       }
     },
     "LimitTypes": {
-      "description": "The quota limit types.",
+      "description": "The quota or usages limit types.",
       "enum": [
         "Independent",
         "Shared"
@@ -817,7 +817,7 @@
       ]
     },
     "LimitObject": {
-      "description": "The resource quota/limit value.",
+      "description": "The resource quota limit value.",
       "type": "object",
       "properties": {
         "value": {
@@ -1001,7 +1001,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. \"Microsoft.Quota/quotas\""
         },
         "properties": {
           "description": "Quota request details.",
@@ -1419,7 +1419,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Resource name for a given resource provider. For example:\r\n- SKU name for Microsoft.Compute\r\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices",
+      "description": "Resource name for a given resource provider. For example:\r\n- SKU name for Microsoft.Compute\r\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\r\n For Mocrosoft.Network PublicIPAddresses.",
       "x-ms-parameter-location": "method"
     },
     "ResourceDimensionTypeInParameter": {
@@ -1458,7 +1458,7 @@
     },
     "ScopeInPath": {
       "name": "scope",
-      "description": "The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotaLimits`, then it's the target Azure resource URI in the GET operation for the specific resource.",
+      "description": "The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.",
       "in": "path",
       "required": true,
       "type": "string",
