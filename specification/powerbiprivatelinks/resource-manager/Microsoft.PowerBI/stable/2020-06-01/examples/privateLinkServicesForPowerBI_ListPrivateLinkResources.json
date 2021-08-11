@@ -13,11 +13,16 @@
             "id": "subscriptions/a0020869-4d28-422a-89f4-c2413130d73c/resourceGroups/resourceGroup/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/azureResourceName/privateLinkResources/tenant",
             "name": "tenant",
             "type": "Microsoft.PowerBI/{resourceType}/privateLinkResources",
-            "groupId": "tenant",
-            "requiredMembers": [
-              "tenant",
-              "capacity:3df897a4f10b49e9bddb0e9cf062adba"
-            ]
+            "properties": {
+              "groupId": "tenant",
+              "requiredMembers": [
+                "tenant",
+                "capacity:3df897a4f10b49e9bddb0e9cf062adba"
+              ],
+              "requiredZoneNames": [
+                "privatelink.powerbi.com"
+              ]
+            }
           }
         ]
       }
