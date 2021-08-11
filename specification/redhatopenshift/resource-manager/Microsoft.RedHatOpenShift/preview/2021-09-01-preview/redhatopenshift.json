@@ -449,6 +449,7 @@
   "definitions": {
     "APIServerProfile": {
       "description": "APIServerProfile represents an API server profile.",
+      "type": "object",
       "properties": {
         "visibility": {
           "$ref": "#/definitions/Visibility",
@@ -466,6 +467,7 @@
     },
     "CloudError": {
       "description": "CloudError represents a cloud error.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
@@ -475,6 +477,7 @@
     },
     "CloudErrorBody": {
       "description": "CloudErrorBody represents the body of a cloud error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
@@ -499,6 +502,7 @@
     },
     "ClusterProfile": {
       "description": "ClusterProfile represents a cluster profile.",
+      "type": "object",
       "properties": {
         "pullSecret": {
           "description": "The pull secret for the cluster.",
@@ -520,6 +524,7 @@
     },
     "ConsoleProfile": {
       "description": "ConsoleProfile represents a console profile.",
+      "type": "object",
       "properties": {
         "url": {
           "description": "The URL to access the cluster console.",
@@ -529,6 +534,7 @@
     },
     "Display": {
       "description": "Display represents the display details of an operation.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "Friendly name of the resource provider.",
@@ -558,6 +564,7 @@
     },
     "IngressProfile": {
       "description": "IngressProfile represents an ingress profile.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The ingress profile name.",
@@ -575,6 +582,7 @@
     },
     "MasterProfile": {
       "description": "MasterProfile represents a master profile.",
+      "type": "object",
       "properties": {
         "vmSize": {
           "$ref": "#/definitions/VMSize",
@@ -596,6 +604,7 @@
     },
     "NetworkProfile": {
       "description": "NetworkProfile represents a network profile.",
+      "type": "object",
       "properties": {
         "sdnProvider": {
           "$ref": "#/definitions/SDNProvider",
@@ -613,6 +622,7 @@
     },
     "OpenShiftCluster": {
       "description": "OpenShiftCluster represents an Azure Red Hat OpenShift cluster.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -633,6 +643,7 @@
     },
     "OpenShiftClusterAdminKubeconfig": {
       "description": "OpenShiftClusterAdminKubeconfig represents an OpenShift cluster's admin kubeconfig.",
+      "type": "object",
       "properties": {
         "kubeconfig": {
           "description": "The base64-encoded kubeconfig file.",
@@ -642,6 +653,7 @@
     },
     "OpenShiftClusterCredentials": {
       "description": "OpenShiftClusterCredentials represents an OpenShift cluster's credentials.",
+      "type": "object",
       "properties": {
         "kubeadminUsername": {
           "description": "The username for the kubeadmin user.",
@@ -655,6 +667,7 @@
     },
     "OpenShiftClusterList": {
       "description": "OpenShiftClusterList represents a list of OpenShift clusters.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of OpenShift clusters.",
@@ -671,6 +684,7 @@
     },
     "OpenShiftClusterProperties": {
       "description": "OpenShiftClusterProperties represents an OpenShift cluster's properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -718,6 +732,7 @@
     },
     "OpenShiftClusterUpdate": {
       "description": "OpenShiftCluster represents an Azure Red Hat OpenShift cluster.",
+      "type": "object",
       "properties": {
         "tags": {
           "$ref": "#/definitions/Tags",
@@ -737,6 +752,7 @@
     },
     "Operation": {
       "description": "Operation represents an RP operation.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
@@ -754,6 +770,7 @@
     },
     "OperationList": {
       "description": "OperationList represents an RP operation list.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of operations supported by the resource provider.",
@@ -794,6 +811,7 @@
     },
     "ServicePrincipalProfile": {
       "description": "ServicePrincipalProfile represents a service principal profile.",
+      "type": "object",
       "properties": {
         "clientId": {
           "description": "The client ID used for the cluster.",
@@ -855,6 +873,7 @@
     },
     "WorkerProfile": {
       "description": "WorkerProfile represents a worker profile.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The worker profile name.",
