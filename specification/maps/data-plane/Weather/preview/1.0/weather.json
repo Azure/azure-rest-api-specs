@@ -80,10 +80,62 @@
       "description": "Year of the cyclone(s)",
       "type": "integer",
       "format": "int32",
+      "required": true,
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "WeatherBasinID": {
+    "RequiredWeatherBasinID": {
+      "name": "basinID",
+      "type": "string",
+      "description": "Basin identifier",
+      "required": true,
+      "in": "query",
+      "enum": [
+        "AL",
+        "EP",
+        "SI",
+        "NI",
+        "CP",
+        "NP",
+        "SP"
+      ],
+      "x-ms-enum": {
+        "name": "basinID",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AL",
+            "description": "AL"
+          },
+          {
+            "value": "EP",
+            "description": "EP"
+          },
+          {
+            "value": "SI",
+            "description": "SI"
+          },
+          {
+            "value": "NI",
+            "description": "NI"
+          },
+          {
+            "value": "CP",
+            "description": "CP"
+          },
+          {
+            "value": "NP",
+            "description": "NP"
+          },
+          {
+            "value": "SP",
+            "description": "SP"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalWeatherBasinID": {
       "name": "basinID",
       "type": "string",
       "description": "Basin identifier",
@@ -133,7 +185,16 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "WeatherGovernmentID": {
+    "RequiredWeatherGovernmentID": {
+      "name": "governmentID",
+      "description": "Government storm ID",
+      "type": "integer",
+      "format": "int32",
+      "required": true,
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalWeatherGovernmentID": {
       "name": "governmentID",
       "description": "Government storm ID",
       "type": "integer",
@@ -705,10 +766,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/WeatherBasinID"
+            "$ref": "#/parameters/OptionalWeatherBasinID"
           },
           {
-            "$ref": "#/parameters/WeatherGovernmentID"
+            "$ref": "#/parameters/OptionalWeatherGovernmentID"
           }
         ],
         "responses": {
@@ -747,10 +808,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/WeatherBasinID"
+            "$ref": "#/parameters/RequiredWeatherBasinID"
           },
           {
-            "$ref": "#/parameters/WeatherGovernmentID"
+            "$ref": "#/parameters/RequiredWeatherGovernmentID"
           },
           {
             "$ref": "#/parameters/WeatherDetails"
@@ -802,10 +863,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/WeatherBasinID"
+            "$ref": "#/parameters/RequiredWeatherBasinID"
           },
           {
-            "$ref": "#/parameters/WeatherGovernmentID"
+            "$ref": "#/parameters/RequiredWeatherGovernmentID"
           },
           {
             "$ref": "#/parameters/WeatherDetails"
@@ -853,10 +914,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/WeatherBasinID"
+            "$ref": "#/parameters/RequiredWeatherBasinID"
           },
           {
-            "$ref": "#/parameters/WeatherGovernmentID"
+            "$ref": "#/parameters/RequiredWeatherGovernmentID"
           }
         ],
         "responses": {
