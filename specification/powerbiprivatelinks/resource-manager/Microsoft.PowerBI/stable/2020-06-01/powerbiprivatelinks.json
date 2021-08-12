@@ -385,14 +385,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnectionProxies"
         ],
-        "operationId": "privateLinkServicesForPowerBI_GetPrivateEndpointConnectionProxy",
-        "x-ms-examples": {
-          "Gets private endpoint connection proxy": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnectionProxy.json"
-          }
-        },
+        "operationId": "PrivateEndpointConnectionProxies_Get",
         "description": "Gets private endpoint connection proxy for Power BI by private endpoint name.",
         "summary": "Synchronous API called by NRP to get private endpoint connection proxy for Power BI by private endpoint name.",
         "parameters": [
@@ -409,7 +404,7 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -426,18 +421,18 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection proxy": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Get.json"
+          }
         }
       },
       "put": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnectionProxies"
         ],
-        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionProxy",
-        "x-ms-examples": {
-          "Creates or updates private endpoint connection proxy": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionProxy.json"
-          }
-        },
+        "operationId": "PrivateEndpointConnectionProxies_Create",
         "description": "Creates or updates private endpoint connection proxy for Power BI by private endpoint name.",
         "parameters": [
           {
@@ -453,7 +448,7 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ClientTenantIdHeaderParameter"
@@ -488,6 +483,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates or updates private endpoint connection proxy": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Create.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -495,12 +495,12 @@
       },
       "delete": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnectionProxies"
         ],
-        "operationId": "privateLinkServicesForPowerBI_DeletePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxies_Delete",
         "x-ms-examples": {
           "Deletes a private endpoint connection proxy": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateEndpointConnectionProxy.json"
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Delete.json"
           }
         },
         "description": "Deletes a private endpoint connection proxy for Power BI by private endpoint name.",
@@ -518,7 +518,7 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
