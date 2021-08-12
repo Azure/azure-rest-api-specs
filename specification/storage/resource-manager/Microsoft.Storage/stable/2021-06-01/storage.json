@@ -740,11 +740,11 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_HnsOnMigration",
+        "operationId": "StorageAccounts_HierarchicalNamespaceMigration",
         "description": "Live Migration of storage account to enable Hns",
         "x-ms-examples": {
-          "StorageAccountHnsOnMigration": {
-            "$ref": "./examples/StorageAccountHnsOnMigration.json"
+          "StorageAccountHierarchicalNamespaceMigration": {
+            "$ref": "./examples/StorageAccountHierarchicalNamespaceMigration.json"
           }
         },
         "parameters": [
@@ -765,15 +765,15 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Required. HnsOn Migration Type, can be either HnsOnValidationRequest or HnsOnHydrationRequest. HnsOnValidationRequest will validate the migration and HnsOnHydrationRequest will migrate the account."
+            "description": "Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hyydration request will migrate the account."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the storage account hnson migration is completed."
+            "description": "OK -- Returned when the storage account migration to hierarchical namespace is completed."
           },
           "202": {
-            "description": "Accepted -- HnsOn Migration request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Hierarchical namespace migration request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true,
@@ -787,11 +787,11 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_AbortHnsOnMigration",
+        "operationId": "StorageAccounts_AbortHierarchicalNamespaceMigration",
         "description": "Abort live Migration of storage account to enable Hns",
         "x-ms-examples": {
-          "StorageAccountAbortHnsOnMigration": {
-            "$ref": "./examples/StorageAccountAbortHnsOnMigration.json"
+          "StorageAccountAbortHierarchicalNamespaceMigration": {
+            "$ref": "./examples/StorageAccountAbortHierarchicalNamespaceMigration.json"
           }
         },
         "parameters": [
@@ -810,10 +810,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the storage account hnson migration is aborted."
+            "description": "OK -- Returned when the storage account migration to hierarchical namespace is aborted."
           },
           "202": {
-            "description": "Accepted -- Abort HnsOn Migration request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Abort hierarchical namespace migration request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true,
