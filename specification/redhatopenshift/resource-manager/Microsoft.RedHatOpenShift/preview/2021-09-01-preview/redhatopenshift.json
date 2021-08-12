@@ -606,9 +606,9 @@
       "description": "NetworkProfile represents a network profile.",
       "type": "object",
       "properties": {
-        "sdnProvider": {
-          "$ref": "#/definitions/SDNProvider",
-          "description": "The SDNProvider to use when installing the cluster."
+        "softwareDefinedNetwork": {
+          "$ref": "#/definitions/SoftwareDefinedNetwork",
+          "description": "The software defined network (SDN) to use when installing the cluster."
         },
         "podCidr": {
           "description": "The CIDR used for OpenShift/Kubernetes Pods.",
@@ -647,7 +647,8 @@
       "properties": {
         "kubeconfig": {
           "description": "The base64-encoded kubeconfig file.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -661,7 +662,8 @@
         },
         "kubeadminPassword": {
           "description": "The password for the kubeadmin user.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -797,18 +799,6 @@
       ],
       "type": "string"
     },
-    "SDNProvider": {
-      "description": "SDNProvider constants.",
-      "enum": [
-        "OVNKubernetes",
-        "OpenShiftSDN"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SDNProvider",
-        "modelAsString": true
-      }
-    },
     "ServicePrincipalProfile": {
       "description": "ServicePrincipalProfile represents a service principal profile.",
       "type": "object",
@@ -821,6 +811,18 @@
           "description": "The client secret used for the cluster.",
           "type": "string"
         }
+      }
+    },
+    "SoftwareDefinedNetwork": {
+      "description": "SoftwareDefinedNetwork constants.",
+      "enum": [
+        "OVNKubernetes",
+        "OpenShiftSDN"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SoftwareDefinedNetwork",
+        "modelAsString": true
       }
     },
     "Tags": {
@@ -884,6 +886,7 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
+          "format": "int64",
           "description": "The disk size of the worker VMs.",
           "type": "integer"
         },
@@ -892,6 +895,7 @@
           "type": "string"
         },
         "count": {
+          "format": "int64",
           "description": "The number of worker VMs.",
           "type": "integer"
         },
