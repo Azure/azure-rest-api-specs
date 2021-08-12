@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-06-01",
-    "title": "Power BI Private Link Service Management Client",
-    "description": "Client to manage your Power BI Private Link Service resources and connection members.",
-    "x-ms-code-generation-settings": {
-      "name": "privatelinkservicesforpowerbiClient"
-    }
+    "title": "PrivateLinkServicesForPowerBIClient",
+    "description": "Client to manage Power BI Private Link Service resources and connection members."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -611,39 +608,43 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "privateLinkServicesForPowerBIGetPrivateEndpointConnection_List",
-        "x-ms-examples": {
-          "Gets private endpoint connections": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnections.json"
-          }
-        },
+        "summary": "Lists all private endpoint connections under a resource.",
         "description": "Gets private endpoint connection for Power BI.",
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceNameParameter"
+            "name": "azureResourceName",
+            "in": "path",
+            "description": "The name of the powerbi resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of private endpoint connections in the private endpoint resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
-            },
-            "headers": {}
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
           },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
@@ -654,21 +655,22 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connections": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnections/{privateEndpointName}": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "privateLinkServicesForPowerBI_GetPrivateEndpointConnection",
-        "x-ms-examples": {
-          "Gets private endpoint connection": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateEndpointConnection.json"
-          }
-        },
-        "description": "Gets private endpoint connection for Power BI by private endpoint name.",
+        "summary": "Get a specific private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Get a specific private endpoint connection for Power BI by private endpoint name.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -683,7 +685,7 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -691,28 +693,28 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {}
+            }
           },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateEndpointConnectionStatus",
-        "x-ms-examples": {
-          "Updates status of private endpoint connection": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_UpdatePrivateEndpointConnectionStatus.json"
-          }
-        },
+        "summary": "Update a specific private endpoint connection.",
         "description": "Updates the status of Private Endpoint Connection object. Used to approve or reject a connection.",
+        "operationId": "PrivateEndpointConnections_Create",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -727,16 +729,16 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
-          },
-          {
-            "name": "body",
+            "name": "privateEndpointConnection",
             "in": "body",
             "required": true,
-            "description": "Private endpoint connection to update.",
+            "description": "Private endpoint connection object to update.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -744,8 +746,7 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {}
+            }
           },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
@@ -753,20 +754,20 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Updates status of private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
         }
       },
       "delete": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "privateLinkServicesForPowerBI_DeletePrivateEndpointConnection",
-        "x-ms-examples": {
-          "Deletes private endpoint connection": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateEndpointConnection.json"
-          }
-        },
         "description": "Deletes a private endpoint connection for Power BI by private endpoint name.",
         "summary": "Asynchronous API to delete a private endpoint connection for Power BI by private endpoint name.",
+        "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -781,7 +782,7 @@
             "$ref": "#/parameters/PrivateEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -805,6 +806,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1156,7 +1162,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "PrivateEndpointConnectionList": {
+    "PrivateEndpointConnectionListResult": {
       "title": "PrivateEndpointConnections",
       "description": "List of private endpoint connections.",
       "type": "object",
