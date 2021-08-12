@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "workloadinsight-demos",
+    "serverName": "misosisvr",
+    "databaseName": "IndexAdvisor_test_3",
+    "advisorName": "CreateIndex",
+    "recommendedActionName": "IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex/recommendedActions/IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+        "name": "IR_[CRM]_[DataPoints]_4821CD2F9510D98184BB",
+        "type": "Microsoft.Sql/servers/databases/advisors/recommendedActions",
+        "location": "East Asia",
+        "kind": "",
+        "properties": {
+          "recommendationReason": "",
+          "validSince": "2017-03-01T14:38:04Z",
+          "lastRefresh": "2017-03-01T14:38:04Z",
+          "state": {
+            "currentValue": "Active",
+            "lastModified": "2017-03-01T14:38:05Z"
+          },
+          "isExecutableAction": true,
+          "isRevertableAction": true,
+          "isArchivedAction": false,
+          "score": 1,
+          "implementationDetails": {
+            "method": "TSql",
+            "script": "CREATE NONCLUSTERED INDEX [nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B] ON [CRM].[DataPoints] ([Name],[Money],[Power]) INCLUDE ([Hour], [System], [LastChanged]) WITH (ONLINE = ON)"
+          },
+          "errorDetails": {},
+          "estimatedImpact": [
+            {
+              "dimensionName": "ActionDuration",
+              "unit": "Seconds",
+              "absoluteValue": 1440.0
+            },
+            {
+              "dimensionName": "SpaceChange",
+              "unit": "Megabytes",
+              "absoluteValue": 209.3125
+            }
+          ],
+          "observedImpact": [],
+          "timeSeries": [],
+          "details": {
+            "indexName": "nci_wi_DataPoints_B892614093BAC56295EF6018BD4CB51B",
+            "indexType": "NONCLUSTERED",
+            "schema": "[CRM]",
+            "table": "[DataPoints]",
+            "indexColumns": "[Name],[Money],[Power]",
+            "includedColumns": "[Hour], [System], [LastChanged]"
+          }
+        }
+      }
+    }
+  }
+}

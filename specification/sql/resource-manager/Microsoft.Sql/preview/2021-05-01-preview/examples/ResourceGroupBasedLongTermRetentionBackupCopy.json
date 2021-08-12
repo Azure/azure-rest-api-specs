@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testResourceGroup",
+    "locationName": "japaneast",
+    "longTermRetentionServerName": "testserver",
+    "longTermRetentionDatabaseName": "testDatabase",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000",
+    "api-version": "2021-05-01-preview",
+    "parameters": {
+      "properties": {
+        "targetServerResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/resourceGroups/resourceGroup/servers/testserver2",
+        "targetDatabaseName": "testDatabase2",
+        "targetBackupStorageRedundancy": "Geo"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japanEast/longTermRetentionBackupOperationResults/a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+        "name": "a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+        "type": "Microsoft.Sql/locations/longTermRetentionBackupOperationResults",
+        "properties": {
+          "requestId": "a1aa7c77-961b-4fbb-bcd6-aa9acfcd1706",
+          "fromBackupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japanEast/longTermRetentionServers/testserver/longterRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000",
+          "operationType": "CopyBackup",
+          "status": "Succeeded",
+          "toBackupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/locations/japanEast/longTermRetentionServers/testserver2/longterRetentionDatabases/testDatabase2/longTermRetentionBackups/55555555-6666-7777-8888-111111111111;131637960820000000",
+          "targetBackupStorageRedundancy": "Geo"
+        }
+      }
+    },
+    "202": {}
+  }
+}
