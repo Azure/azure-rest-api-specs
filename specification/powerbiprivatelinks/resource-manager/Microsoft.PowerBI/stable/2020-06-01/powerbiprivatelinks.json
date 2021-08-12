@@ -1212,27 +1212,40 @@
     },
     "PrivateLinkResourcesListResult": {
       "title": "PrivateLinkResourcesListResult",
+      "description": "Specifies the private link resource.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "A collection of private endpoint connection resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          },
-          "description": "Specifies the private link resource."
+          }
         }
       }
     },
     "PrivateLinkResource": {
+      "description": "A private link resource",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource.",
+          "type": "string"
         }
-      },
-      "description": "A private link resource"
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
