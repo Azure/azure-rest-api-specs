@@ -967,20 +967,30 @@
       }
     },
     "ConnectionState": {
-      "title": "ConnectionState",
+      "description": "ConnectionState information.",
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/ConnectionStatus",
-          "description": "Specifies the connection status."
+          "description": "Status of the connection.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersistedConnectionStatus",
+            "modelAsString": true
+          }
         },
         "description": {
-          "type": "string",
-          "description": "Specifies the connection status description."
+          "description": "Description of the connection state.",
+          "type": "string"
         },
         "actionsRequired": {
-          "$ref": "#/definitions/ActionsRequired",
-          "description": "Specifies the actions required."
+          "description": "Actions required (if any).",
+          "type": "string"
         }
       }
     },
@@ -1282,16 +1292,6 @@
           "description": "Specifies the id of private endpoint connection."
         }
       }
-    },
-    "ConnectionStatus": {
-      "title": "ConnectionStatus",
-      "type": "string",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ]
     },
     "AvailableOperations": {
       "description": "Available operations of the service",
