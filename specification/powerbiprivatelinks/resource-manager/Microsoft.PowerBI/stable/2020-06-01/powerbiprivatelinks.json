@@ -336,19 +336,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateLinkResources": {
       "get": {
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateLinkResources"
         ],
-        "operationId": "privateLinkServicesForPowerBI_ListPrivateLinkResources",
-        "x-ms-examples": {
-          "Gets private link resources in a Azure resource": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListPrivateLinkResources.json"
-          }
-        },
-        "description": "Gets Private Link Resources for Power BI by resource group and resource name.",
+        "summary": "List private link Power BI resource.",
+        "description": "List private link resources under a specific Power BI resource.",
+        "operationId": "PrivateLinkResources_ListByResource",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -368,7 +361,7 @@
             "description": "OK",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/PrivateLinkResources"
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
             },
             "headers": {}
           },
@@ -378,6 +371,14 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets private link resources in a Azure resource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1209,8 +1210,8 @@
         }
       }
     },
-    "PrivateLinkResources": {
-      "title": "PrivateLinkResources",
+    "PrivateLinkResourcesListResult": {
+      "title": "PrivateLinkResourcesListResult",
       "type": "object",
       "properties": {
         "value": {
