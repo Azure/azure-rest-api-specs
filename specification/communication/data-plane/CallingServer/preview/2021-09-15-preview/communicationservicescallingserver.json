@@ -802,8 +802,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Returns the stop hold music response."
+          "202": {
+            "description": "Returns the stop hold music response.",
+            "schema": {
+              "$ref": "#/definitions/StopHoldMusicResult"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1195,8 +1198,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Returns the stop hold music response."
+          "202": {
+            "description": "Returns the stop hold music response.",
+            "schema": {
+              "$ref": "#/definitions/StopHoldMusicResult"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1732,6 +1738,10 @@
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The source of the call."
         },
+        "alternateCallerId": {
+          "$ref": "#/definitions/PhoneNumberIdentifier",
+          "description": "The alternate identity of the source of the call if dialing out to a pstn number"
+        },
         "targets": {
           "description": "The targets of the call.",
           "type": "array",
@@ -1763,6 +1773,10 @@
           "items": {
             "$ref": "#/definitions/EventSubscriptionType"
           }
+        },
+        "serverCallId": {
+          "description": "The server call id.",
+          "type": "string"
         }
       }
     },
@@ -2027,6 +2041,30 @@
         "startHoldMusicOperationId": {
           "description": "The operationId of the StartHoldMusicOperation to stop",
           "type": "string"
+        }
+      }
+    },
+    "StopHoldMusicResult": {
+      "description": "The response payload for start hold music operation.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "resultInfo": {
+          "$ref": "#/definitions/ResultInfo",
+          "description": "The result info for the operation."
         }
       }
     },
