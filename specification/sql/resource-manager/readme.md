@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-preview-2021-05
+tag: package-composite-v5
 ```
 
 ### Composite packages
@@ -32,11 +32,11 @@ tag: package-preview-2021-05
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: package-preview-2021-05
+### Tag: package-composite-v5
 
-These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+These settings apply only when `--tag=package-composite-v5` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-05'
+```yaml $(tag) == 'package-composite-v5'
 input-file:
   - Microsoft.Sql/preview/2021-05-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2021-05-01-preview/BlobAuditing.json
