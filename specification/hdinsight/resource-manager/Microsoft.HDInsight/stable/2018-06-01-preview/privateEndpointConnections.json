@@ -114,7 +114,7 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             },
-            "description": "The private endpoint connection update request."
+            "description": "The private endpoint connection create or update request."
           }
         ],
         "responses": {
@@ -129,6 +129,9 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "201": {
+            "description": "Created response definition"
           }
         },
         "x-ms-long-running-operation": true,
@@ -274,7 +277,8 @@
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint of the private endpoint connection"
+          "description": "The private endpoint of the private endpoint connection",
+          "readOnly": true
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
@@ -282,13 +286,15 @@
         },
         "linkIdentifier": {
           "type": "string",
-          "description": "The link identifier."
+          "description": "The link identifier.",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state, which only appears in the response.",
           "enum": [
             "InProgress",
+            "Updating",
             "Failed",
             "Succeeded",
             "Canceled",
@@ -297,7 +303,8 @@
           "x-ms-enum": {
             "name": "PrivateEndpointConnectionProvisioningState",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
