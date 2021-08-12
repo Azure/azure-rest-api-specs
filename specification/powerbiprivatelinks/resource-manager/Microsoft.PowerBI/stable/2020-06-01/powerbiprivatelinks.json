@@ -43,7 +43,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Lists all of the available Power BI RP operations": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListAvailableOperations.json"
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "parameters": [
@@ -73,11 +73,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateLinkServices"
         ],
         "x-ms-examples": {
           "List private link resources in a subscription": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListBySubscriptionId.json"
+            "$ref": "./examples/PrivateLinkServices_ListBySubscriptionId.json"
           }
         },
         "operationId": "privateLinkServicesForPowerBI_ListBySubscriptionId",
@@ -113,12 +113,12 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateLinkServiceResourceOperationResults"
         ],
-        "operationId": "privateLinkServicesForPowerBI_GetPrivateLinkServiceResourceOperationResult",
+        "operationId": "PrivateLinkServiceResourceOperationResults_Get",
         "x-ms-examples": {
           "Result of operation on private link resources": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_GetPrivateLinkServiceResourceOperationResult.json"
+            "$ref": "./examples/PrivateLinkServiceResourceOperationResults_Get.json"
           }
         },
         "description": "Gets operation result of Private Link Service Resources for Power BI.",
@@ -153,12 +153,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateLinkServices"
         ],
-        "operationId": "privateLinkServicesForPowerBI_ListByResourceGroup",
+        "operationId": "PrivateLinkServices_ListByResourceGroup",
         "x-ms-examples": {
           "List private link resources in a resource group": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListByResourceGroup.json"
+            "$ref": "./examples/PrivateLinkServices_ListByResourceGroup.json"
           }
         },
         "description": "Gets all the private link resources for the given resource group.",
@@ -196,12 +196,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}": {
       "get": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PowerBIResources"
         ],
-        "operationId": "privateLinkServicesForPowerBI_ListByResourceName",
+        "operationId": "PowerBIResources_ListByResourceName",
         "x-ms-examples": {
           "List private link resources in a Azure resource": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ListByAzureResource.json"
+            "$ref": "./examples/PowerBIResources_ListByResourceName.json"
           }
         },
         "description": "Gets all the private link resources for the given Azure resource.",
@@ -240,12 +240,12 @@
       },
       "put": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PowerBIResources"
         ],
-        "operationId": "privateLinkServicesForPowerBI_CreateOrUpdatePrivateLinkService",
+        "operationId": "PowerBIResources_Create",
         "x-ms-examples": {
           "Creates or updates private link service resource": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_CreateOrUpdatePrivateLinkService.json"
+            "$ref": "./examples/PowerBIResources_Create.json"
           }
         },
         "description": "Creates or updates a Private Link Service Resource for Power BI.",
@@ -294,12 +294,12 @@
       },
       "delete": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PowerBIResources"
         ],
-        "operationId": "privateLinkServicesForPowerBI_DeletePrivateLinkService",
+        "operationId": "PowerBIResources_Delete",
         "x-ms-examples": {
           "Deletes private link service resource": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_DeletePrivateLinkService.json"
+            "$ref": "./examples/PowerBIResources_Delete.json"
           }
         },
         "description": "Deletes a Private Link Service Resource for Power BI.",
@@ -553,12 +553,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateEndpointConnectionProxies/{privateEndpointName}/validate": {
       "post": {
         "tags": [
-          "privateLinkServicesForPowerBI"
+          "PrivateEndpointConnectionProxies"
         ],
-        "operationId": "privateLinkServicesForPowerBI_ValidatePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
         "x-ms-examples": {
           "Validates a private endpoint connection": {
-            "$ref": "./examples/privateLinkServicesForPowerBI_ValidatePrivateEndpointConnectionProxy.json"
+            "$ref": "./examples/PrivateEndpointConnectionProxies_Validate.json"
           }
         },
         "description": "Validates a private endpoint connection before create or update.",
@@ -575,9 +575,6 @@
           },
           {
             "$ref": "#/parameters/PrivateEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointGuidParameter"
           },
           {
             "name": "body",
@@ -1600,14 +1597,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint.",
-      "x-ms-parameter-location": "client"
-    },
-    "PrivateEndpointGuidParameter": {
-      "name": "privateEndpointGuid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Guid of the private endpoint. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "x-ms-parameter-location": "client"
     },
     "OperationIdParameter": {
