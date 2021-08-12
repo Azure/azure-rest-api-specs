@@ -15,15 +15,6 @@ module-name: sdk/monitor/armmonitor
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
-
-directive:
-  - from: scheduledQueryRule_API.json # this is to resolve the duplicated schema issue in this swagger
-    where: "$.definitions.Resource"
-    transform: >
-      $["x-ms-client-name"] = "TrackedEntityResource";
-      
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Go multi-api
@@ -118,7 +109,7 @@ output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/$(namespace)
 These settings apply only when `--tag=package-2021-07 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2021-07' && $(go)
+``` yaml $(tag) == 'package-2021-07' && $(go) && !$(track2)
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-07-01-preview/$(namespace)
 directive:
 - from: activityLogAlerts_API.json
