@@ -1710,7 +1710,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsListByBillingProfile": {
+          "LotsListByBillingProfile": {
             "$ref": "./examples/LotsListByBillingProfile.json"
           }
         },
@@ -1829,7 +1829,12 @@
               "$ref": "#/definitions/CreditSummary"
             }
           },
-          "default": {
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results.",
+            "schema": {
+              "$ref": "#/definitions/CreditSummary"
+            }
+          },          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -5044,6 +5049,11 @@
           "description": "The balance in billing currency after the event.",
           "readOnly": true,
           "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag for the resource."
         }
       }
     },
@@ -5125,7 +5135,7 @@
           "type": "string",
           "readOnly": true
         },
-        "purchaseDate": {
+        "purchasedDate": {
           "description": "The date when the lot was added.",
           "type": "string",
           "format": "date-time",
@@ -5172,6 +5182,11 @@
           "description": "The reseller of the lot.",
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag for the resource."
         }
       }
     },
@@ -5229,6 +5244,11 @@
           "description": "Credit's reseller.",
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag for the resource."
         }
       }
     },
@@ -5373,6 +5393,11 @@
     },
     "AmountWithExchangeRate": {
       "description": "The amount with exchange rate.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/amount"
+        }
+      ],
       "properties": {
         "exchangeRate": {
           "description": "The exchange rate.",
