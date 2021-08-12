@@ -51,11 +51,11 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2021-09-01-preview' && $(python) && !$(track2)
 python:
-  namespace: azure.mgmt.redhatopenshift.v2021-09-01-preview
-  output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2021-09-01-preview
+  namespace: azure.mgmt.redhatopenshift.v2021_09_01_preview
+  output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2021_09_01_preview
 ```
 
 ``` yaml $(tag) == 'package-2021-09-01-preview' && $(python) && $(track2)
-namespace: azure.mgmt.redhatopenshift.v2021-09-01-preview
-output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2021-09-01-preview
+namespace: azure.mgmt.redhatopenshift.v2021_09_01_preview
+output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2021_09_01_preview
 ```
