@@ -732,6 +732,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_HnsOnMigration",
+        "description": "Live Migration of storage account to enable Hns",
+        "x-ms-examples": {
+          "StorageAccountHnsOnMigration": {
+            "$ref": "./examples/StorageAccountHnsOnMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "requestType",
+            "in": "query",
+            "type": "string",
+            "description": "Required. HnsOn Migration Type, can be either HnsOnValidationRequest or HnsOnHydrationRequest."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the storage account hnson migration is completed."
+          },
+          "202": {
+            "description": "Accepted -- HnsOn Migration request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_AbortHnsOnMigration",
+        "description": "Abort live Migration of storage account to enable Hns",
+        "x-ms-examples": {
+          "StorageAccountAbortHnsOnMigration": {
+            "$ref": "./examples/StorageAccountAbortHnsOnMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the storage account hnson migration is aborted."
+          },
+          "202": {
+            "description": "Accepted -- Abort HnsOn Migration request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges": {
       "post": {
         "tags": [
