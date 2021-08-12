@@ -783,6 +783,12 @@
           },
           "202": {
             "description": "Accepted -- Hierarchical namespace migration request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -823,6 +829,12 @@
           },
           "202": {
             "description": "Accepted -- Abort hierarchical namespace migration request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2983,6 +2995,7 @@
       "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
     },
     "ImmutableStorageAccount": {
+      "type":"object",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -2997,6 +3010,7 @@
       "description": "This property enables and defines account-level immutability. Enabling the feature auto-enables Blob Versioning."
     },
     "AccountImmutabilityPolicyProperties": {
+      "type":"object",
       "properties": {
         "immutabilityPeriodSinceCreationInDays": {
           "type": "integer",
