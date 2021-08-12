@@ -3,12 +3,14 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(track2)
+``` yaml $(python)
+python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.powerbiprivatelinks
 package-name: azure-mgmt-powerbiprivatelinks
-no-namespace-folders: true
-package-version: 1.0.0b1
+package-version: 2.2.0
+clear-output-folder: true
 clear-output-folder: true
 ```
 
