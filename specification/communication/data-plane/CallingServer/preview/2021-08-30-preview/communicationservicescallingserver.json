@@ -1093,7 +1093,7 @@
       }
     },
     "RecordingContentType": {
-      "description": "Gets or sets the content type of call recording.",
+      "description": "The content type of a call recording.",
       "enum": [
         "audio",
         "audioVideo"
@@ -1105,7 +1105,7 @@
       }
     },
     "RecordingChannelType": {
-      "description": "Gets or sets the channel type of call recording.",
+      "description": "The channel type of a call recording.",
       "enum": [
         "mixed",
         "unmixed"
@@ -1117,7 +1117,7 @@
       }
     },
     "RecordingFormatType": {
-      "description": "Gets or sets the format type of call recording.",
+      "description": "The media container format type of a call recording.",
       "enum": [
         "wav",
         "mp3",
@@ -1138,13 +1138,16 @@
           "type": "string"
         },
         "recordingContentType": {
-          "$ref": "#/definitions/RecordingContentType"
+          "$ref": "#/definitions/RecordingContentType",
+          "description": "Optional, AudioVideo by Default"
         },
         "recordingChannelType": {
-          "$ref": "#/definitions/RecordingChannelType"
+          "$ref": "#/definitions/RecordingChannelType",
+          "description": "Optional, Mixed by Default"
         },
         "recordingFormatType": {
-          "$ref": "#/definitions/RecordingFormatType"
+          "$ref": "#/definitions/RecordingFormatType",
+          "description": "Optional, Mp4 by Default"
         }
       }
     },
