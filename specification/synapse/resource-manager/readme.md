@@ -325,7 +325,6 @@ csharp:
   clear-output-folder: true
 batch:
  - tag: $(tag)
- - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
