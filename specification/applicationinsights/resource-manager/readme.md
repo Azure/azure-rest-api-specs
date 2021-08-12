@@ -222,7 +222,7 @@ directive:
   
 ```
 
-### Tag: package-2021-07-only
+### Tag: package-preview-2021-07
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
 
