@@ -303,6 +303,28 @@
           "description": "Publisher of the update.",
           "type": "string"
         },
+        "tags": {
+          "description": "The tags of the update.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateTag"
+          }
+        },
+        "priority": {
+          "description": "The priority of the update.",
+          "$ref": "#/definitions/Priority"
+        },
+        "updateType": {
+          "description": "Type of the update.",
+          "type": "string"
+        },
+        "requiredComponents": {
+          "description": "Components required of the update.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          }
+        },
         "prerequisites": {
           "description": "List of prerequisites.",
           "type": "array",
@@ -314,13 +336,26 @@
           "description": "Properties when update is in a specific state.",
           "$ref": "#/definitions/UpdateStateProperties"
         },
-        "versionRequiredProperties": {
-          "description": "Version required properties of an update.",
-          "$ref": "#/definitions/VersionRequiredProperties"
+        "additionalProperties": {
+          "description": "Additional properties of the update.",
+          "type": "string"
         },
-        "oemUpdateProperties": {
-          "description": "Properties specific to OEM update.",
-          "$ref": "#/definitions/OemUpdateProperties"
+        "kbLink": {
+          "description": "Link to the KB article about the update.",
+          "type": "string"
+        },
+        "minVersionRequired": {
+          "description": "The minimum version required to install.",
+          "type": "string"
+        },
+        "minOemVersionRequired": {
+          "description": "The minimum OEM version required to install.",
+          "type": "string"
+        },
+        "installedDate": {
+          "description": "Date update was installed.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -368,6 +403,32 @@
         "modelAsString": true
       }
     },
+    "UpdateTag": {
+      "description": "Update tag of the update.",
+      "type": "string",
+      "enum": [
+        "Security",
+        "Bugfix",
+        "Reliablity"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateTag",
+        "modelAsString": true
+      }
+    },
+    "Priority": {
+      "description": "Priority of the update.",
+      "type": "string",
+      "enum": [
+        "Critical",
+        "Major",
+        "Optional"
+      ],
+      "x-ms-enum": {
+        "name": "Priority",
+        "modelAsString": true
+      }
+    },
     "AvailabilityType": {
       "description": "Availability type of update.",
       "type": "string",
@@ -381,20 +442,42 @@
         "modelAsString": true
       }
     },
-    "Prerequisite": {
+	"Component": {
+      "description": "Component of the update.",
+      "type": "object",
+      "properties": {
+        "updateType": {
+          "description": "Type of the component.",
+          "type": "string"
+        },
+        "versionRequired": {
+          "description": "Version required, it can either be a specific version, or versions definded in a pattern with asterisk wildcard.",
+          "type": "string"
+        },
+        "minVersionRequired": {
+          "description": "Minimon version required of the component.",
+          "type": "string"
+        }
+      }
+    },
+	"Prerequisite": {
       "description": "Prerequisite of the update.",
       "type": "object",
       "properties": {
-        "title": {
-          "description": "Title of the prerequisite.",
+        "updateType": {
+          "description": "Update type of prerequisite update.",
           "type": "string"
         },
-        "description": {
-          "description": "Description of the prerequisite.",
+        "name": {
+          "description": "Name of prerequisite update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of prerequisite update.",
           "type": "string"
         },
         "informationLink": {
-          "description": "Link providing details about prerequisite.",
+          "description": "Link providing details about prerequisite update.",
           "type": "string"
         }
       }
@@ -403,51 +486,15 @@
       "description": "State related properties of the update.",
       "type": "object",
       "properties": {
-        "downloadPercentage": {
-          "description": "Package download percentage.",
+        "progressPercentage": {
+          "description": "Progress percentage of a running operation.",
           "type": "integer",
           "format": "int64"
         },
-        "installedDate": {
-          "description": "Date update was installed.",
+        "notifyMessage": {
+          "description": "Notify message of the update in this state.",
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "VersionRequiredProperties": {
-      "description": "Properties for Microsoft update.",
-      "type": "object",
-      "properties": {
-        "minVersionRequired": {
-          "description": "The minimum Azure Stack Hub version required to install.",
-          "type": "string"
-        },
-        "minOemVersionRequired": {
-          "description": "The minimum OEM version required to install.",
-          "type": "string"
-        },
-        "versionRangeRequired": {
-          "description": "The Azure Stack Hub version range required to install.",
-          "type": "string"
-        },
-        "oemVersionRangeRequired": {
-          "description": "The OEM version range required to install.",
-          "type": "string"
-        }
-      }
-    },
-    "OemUpdateProperties": {
-      "description": "Properties for OEM update.",
-      "type": "object",
-      "properties": {
-        "oemFamily": {
-          "description": "The family of models to which the OEM update is applicable.",
-          "type": "string"
-        },
-        "oemNotifyMsg": {
-          "description": "The message from the OEM availability of a relevant OEM update.",
-          "type": "string"
         }
       }
     }

@@ -122,6 +122,21 @@
       "description": "Model which holds information related to update location.",
       "type": "object",
       "properties": {
+        "oemFamily": {
+          "description": "OEM family of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "hardwareModel": {
+          "description": "Hardware model of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "componentMap": {
+          "description": "Component map of your Azure Stack Hub deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          }
+        },
         "currentVersion": {
           "description": "Current version of your Azure Stack Hub deployment.",
           "type": "string"
@@ -143,6 +158,25 @@
         "state": {
           "description": "State with respect to the update.",
           "$ref": "#/definitions/RegionUpdateState"
+        }
+      }
+    },
+    "Component": {
+      "description": "Component of the update.",
+      "type": "object",
+      "properties": {
+        "updateType": {
+          "description": "Update type of the component.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the component.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "Date of last update of the component.",
+          "format": "date-time",
+          "type": "string"
         }
       }
     },

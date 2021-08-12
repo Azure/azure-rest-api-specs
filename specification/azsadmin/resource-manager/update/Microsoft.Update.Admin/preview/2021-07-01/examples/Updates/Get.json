@@ -10,29 +10,56 @@
     "200": {
       "body": {
         "id": "/subscriptions/23d66fd1-4743-42ff-b391-e29dc51d799e/resourcegroups/System.Redmond/providers/Microsoft.Update.Admin/updateLocations/redmond/updates/Microsoft1.0.180302.1",
-        "name": "Microsoft1.0.180302.1",
+        "name": "Microsoft1.2108.0.1",
         "type": "Microsoft.Update.Admin/updateLocations/updates",
         "location": "redmond",
         "tags": {},
         "properties": {
           "displayName": "displayName",
-          "description": "MAS Update 1.0.180302.1",
-          "version": "1.0.180302.1",
+          "description": "MAS Update 1.2108.0.1",
+          "version": "1.2108.0.1",
           "availabilityType": "online",
-          "state": "Installed",
+          "state": "HasPrerequisite",
           "releaseLink": "https://aka.ms/azurestackupdate",
-          "prerequisites": [],
           "packageSizeInMb": 23345,
           "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\Microsoft1.0.180302.1",
           "publisher": "Microsoft",
+          "tags": ["Security"],
+          "updateType": "Azure Stack Hub Service",
+          "requiredComponents": [
+            {
+              "updateType": "Azure Stack Hub OS",
+              "versionRequired": "",
+              "minVersionRequired": "1.2010.0.1"
+            },
+            {
+              "updateType": "Azure Stack Hub Service",
+              "versionRequired": "1.2104.0.1",
+              "minVersionRequired": ""
+            },
+            {
+              "updateType": "OEM",
+              "versionRequired": "2.0.*.*",
+              "minVersionRequired": ""
+            }
+          ],
+          "prerequisites": [
+            {
+              "updateType": "OEM",
+              "name": "OEM HPE 2.0.1709.0",
+              "version": "2.0.1709.0",
+			  "informationLink": "https://aka.ms/azurestackupdate"
+			}
+          ],
           "updateStateProperties": {
-            "downloadPercentage": 100,
-            "installedDate": "2018-03-03T08:09:12.8824552Z"
+            "progressPercentage": 0,
+            "notifyMessage ": ""
           },
-          "versionRequiredProperties": {
-            "minVersionRequired": "1.2008.0.43",
-            "minOemVersionRequired": "2.1.1908.0"
-          }
+          "additionalProperties": "",
+          "kbLink": "https://aka.ms/azurestackupdate",
+          "minVersionRequired": "1.2104.0.1",
+          "minOemVersionRequired": "2.0.1908.0",
+          "installedDate": ""
         }
       }
     }

@@ -43,63 +43,92 @@
             "tags": {},
             "properties": {
               "displayName": "displayName",
-              "description": "MAS Update 1.0.210202.1",
-              "version": "1.0.210202.1",
+              "description": "MAS Update 1.2108.0.1",
+              "version": "1.2108.0.1",
               "availabilityType": "online",
               "state": "HasPrerequisite",
               "releaseLink": "https://aka.ms/azurestackupdate",
-              "prerequisites": [
+              "packageSizeInMb": 23345,
+              "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\Microsoft1.0.180302.1",
+              "publisher": "Microsoft",
+              "tags": ["Security"],
+              "updateType": "Azure Stack Hub Service",
+              "requiredComponents": [
                 {
-                  "title": "Azue Stack Hub",
-                  "description": "MAS Update 1.2008.13.88",
-                  "informationLink": "https://docs.microsoft.com/en-us/azure-stack/operator/release-notes?view=azs-2008"
+                  "updateType": "Azure Stack Hub OS",
+                  "versionRequired": "",
+                  "minVersionRequired": "1.2010.0.1"
                 },
                 {
-                  "title": "OEM",
-                  "description": "OEM Update 2.1.2008.5",
-                  "informationLink": "https://OEMUpdate/2.1.2008.5"
+                  "updateType": "Azure Stack Hub Service",
+                  "versionRequired": "1.2104.0.1",
+                  "minVersionRequired": ""
+                },
+                {
+                  "updateType": "OEM",
+                  "versionRequired": "2.0.*.*",
+                  "minVersionRequired": ""
                 }
               ],
-              "packageSizeInMb": 23345,
-              "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\Microsoft1.2008.13.88",
-              "publisher": "Microsoft",
+              "prerequisites": [
+                {
+                  "updateType": "OEM",
+                  "name": "OEM HPE 2.0.1709.0",
+                  "version": "2.0.1709.0",
+                  "informationLink": "https://aka.ms/azurestackupdate"
+                }
+              ],
               "updateStateProperties": {
-                "downloadPercentage": 0
+                "progressPercentage": 0,
+                "notifyMessage ": ""
               },
-              "versionRequiredProperties": {
-                "minVersionRequired": "1.2008.13.88",
-                "minOemVersionRequired": "2.1.2008.5"
-              }
+              "additionalProperties": "",
+              "kbLink": "https://aka.ms/azurestackupdate",
+              "minVersionRequired": "1.2104.0.43",
+              "minOemVersionRequired": "2.0.1008.0",
+              "installedDate": ""
             }
           },
           {
             "id": "/subscriptions/23d66fd1-4743-42ff-b391-e29dc51d799e/resourceGroups/System.Redmond/providers/Microsoft.Update.Admin/updateLocations/redmond/updates/OEM2.1.2008.5",
-            "name": "OEM2.1.2008.5",
+            "name": "OEM2.0.1709.1",
             "type": "Microsoft.Update.Admin/updateLocations/updates",
-            "location": "redmond ",
+            "location": "redmond",
             "tags": {},
             "properties": {
               "displayName": "displayName",
-              "description": "OEM Update 2.1.2008.5",
-              "version": "2.1.2008.5",
-              "availabilityType": "local",
-              "state": "ReadyToInstall",
+              "description": "OEM Update 2.0.1709.1",
+              "version": "1.2108.0.1",
+              "availabilityType": "online",
+              "state": "Downloading",
               "releaseLink": "https://aka.ms/azurestackupdate",
-              "prerequisites": [],
               "packageSizeInMb": 23345,
-              "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\OEM2.1.2008.5",
+              "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\Microsoft1.0.180302.1",
               "publisher": "Microsoft",
+              "tags": ["Security"],
+              "updateType": "OEM",
+              "requiredComponents": [
+                {
+                  "updateType": "Azure Stack Hub OS",
+                  "versionRequired": "1.2010.0.1",
+                  "minVersionRequired": ""
+                },
+                {
+                  "updateType": "OEM",
+                  "versionRequired": "2.0.*.*",
+                  "minVersionRequired": ""
+                }
+              ],
+              "prerequisites": [],
               "updateStateProperties": {
-                "downloadPercentage": 51
+                "progressPercentage": 51,
+                "notifyMessage ": ""
               },
-              "versionRequiredProperties": {
-                "versionRangeRequired": "1.2008.0.*",
-                "oemVersionRangeRequired": "2.1.1908.*"
-              },
-              "oemUpdateProperties": {
-                "oemFamily": "HPE",
-                "oemNotifyMsg": "This is OEM notify message."
-              }
+              "additionalProperties": "OEMFamily:HPE",
+              "kbLink": "https://aka.ms/azurestackupdate",
+              "minVersionRequired": "1.2008.0.43",
+              "minOemVersionRequired": "2.1.1908.0",
+              "installedDate": ""
             }
           }
         ],
