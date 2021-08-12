@@ -1110,13 +1110,14 @@
     },
     "AmazonRdsForLinkedServiceTypeProperties": {
       "description": "AmazonRdsForOracle database linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
         "password": {
-          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
