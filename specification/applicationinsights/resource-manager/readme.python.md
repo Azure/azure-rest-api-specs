@@ -25,6 +25,7 @@ batch:
   - tag: package-2020-02-02
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
+  - tag: package-2021-03-only
   - multiapiscript: true
 ```
 
@@ -32,6 +33,15 @@ batch:
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2021-03-only and python
+
+These settings apply only when `--tag=package-2021-03-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-only' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2021_03_08
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_03_08
 ```
 
 ### Tag: package-2015-05 and python
