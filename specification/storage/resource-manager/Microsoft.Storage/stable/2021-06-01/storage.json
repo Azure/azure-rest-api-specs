@@ -134,6 +134,9 @@
           },
           "StorageAccountCreateUserAssignedEncryptionIdentityWithCMK": {
             "$ref": "./examples/StorageAccountCreateUserAssignedEncryptionIdentityWithCMK.json"
+          },
+          "StorageAccountCreateWithImmutabilityPolicy":{
+            "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
           }
         },
         "parameters": [
@@ -2681,6 +2684,11 @@
         "allowCrossTenantReplication": {
           "type": "boolean",
           "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+        },
+        "immutableStorageWithVersioning": {
+          "$ref": "#/definitions/ImmutableStorageAccount",
+          "x-ms-client-name": "ImmutableStorageWithVersioning",
+          "description": "The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -2960,6 +2968,49 @@
         }
       },
       "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
+    },
+    "ImmutableStorageAccount": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default."
+        },
+        "immutabilityPolicy": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/AccountImmutabilityPolicyProperties",
+          "description": "Specifies the default account-level immutability policy which is inherited and applied to objects that do not possess an explicit immutability policy at the object level. The object-level immutability policy has higher precedence than the container-level immutability policy, which has a higher precedence than the account-level immutability policy."
+        }
+      },
+      "description": "This property enables and defines account-level immutability. Enabling the feature auto-enables Blob Versioning."
+    },
+    "AccountImmutabilityPolicyProperties": {
+      "properties": {
+        "immutabilityPeriodSinceCreationInDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 146000,
+          "format": "int32",
+          "description": "The immutability period for the blobs in the container since the policy creation, in days."
+        },
+        "state": {
+          "type": "string",
+          "description": "The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.",
+          "enum": [
+            "Unlocked",
+            "Locked",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AccountImmutabilityPolicyState",
+            "modelAsString": true
+          }
+        },
+        "allowProtectedAppendWrites": {
+          "type": "boolean",
+          "description": "This property can only be changed for disabled and unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted."
+        }
+      },
+      "description": "This defines account-level immutability policy properties."
     },
     "BlobRestoreStatus": {
       "properties": {
@@ -3243,6 +3294,11 @@
             "modelAsString": true
           },
           "description": "Allow or disallow public network access to Storage Account. Enabled by default."
+        },
+        "immutableStorageWithVersioning": {
+          "$ref": "#/definitions/ImmutableStorageAccount",
+          "x-ms-client-name": "ImmutableStorageWithVersioning",
+          "description": "The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default."
         }
       },
       "description": "Properties of the storage account."
@@ -3500,6 +3556,11 @@
             "modelAsString": true
           },
           "description": "Allow or disallow public network access to Storage Account. Enabled by default."
+        },
+        "immutableStorageWithVersioning": {
+          "$ref": "#/definitions/ImmutableStorageAccount",
+          "x-ms-client-name": "ImmutableStorageWithVersioning",
+          "description": "The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default."
         }
       },
       "description": "The parameters used when updating a storage account."
