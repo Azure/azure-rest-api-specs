@@ -3196,7 +3196,7 @@
           "description": "Minimum pressure associated with the storm. May be NULL. Contains metric and imperial values."
         },
         "movement": {
-          "$ref": "#/definitions/StormMovement",
+          "$ref": "#/definitions/WindDetails",
           "description": "True when the depression is classified as a subtropical cyclone."
         },
         "status": {
@@ -3220,40 +3220,6 @@
             "$ref": "#/definitions/LandmarkReference"
           },
           "description": "Landmark references"
-        }
-      }
-    },
-    "StormMovement": {
-      "type": "object",
-      "description": "Storm movement",
-      "properties": {
-        "direction": {
-          "$ref": "#/definitions/StormDirection",
-          "description": "Storm direction"
-        },
-        "speed": {
-          "$ref": "#/definitions/WeatherUnit",
-          "description": "Speed at which the storm is moving. Contains metric and imperial values."
-        }
-      }
-    },
-    "StormDirection": {
-      "type": "object",
-      "description": "Storm direction",
-      "properties": {
-        "degrees": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Direction of movement in azimuth degrees. May be NULL."
-        },
-        "localized": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Direction abbreviated in the language specified in the URL."
-        },
-        "english": {
-          "type": "string",
-          "description": "Direction abbreviated in English."
         }
       }
     },
