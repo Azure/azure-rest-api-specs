@@ -217,14 +217,6 @@
       "type": "boolean",
       "default": false,
       "x-ms-parameter-location": "method"
-    },
-    "WeatherIncludeLandmarks": {
-      "name": "includeLandmarks",
-      "description": "When true, landmarkReferences array is returned with landmark-specific information",
-      "in": "query",
-      "type": "boolean",
-      "default": true,
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -876,9 +868,6 @@
           },
           {
             "$ref": "#/parameters/WeatherRadiiGeometry"
-          },
-          {
-            "$ref": "#/parameters/WeatherIncludeLandmarks"
           },
           {
             "name": "current",
@@ -3129,46 +3118,6 @@
             "$ref": "#/definitions/StormWindRadiiSummary"
           },
           "description": "Displayed when details=true or radiiGeometry=true in the request."
-        },
-        "landmarkReferences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LandmarkReference"
-          },
-          "description": "Landmark references"
-        }
-      }
-    },
-    "LandmarkReference": {
-      "type": "object",
-      "description": "Landmark References",
-      "properties": {
-        "landmark": {
-          "type": "string",
-          "description": "Landmark name, in English."
-        },
-        "direction": {
-          "$ref": "#/definitions/LandmarkDirection",
-          "description": "Direction to the landmark."
-        },
-        "range": {
-          "$ref": "#/definitions/WeatherUnit",
-          "description": "Distance to the landmark."
-        }
-      }
-    },
-    "LandmarkDirection": {
-      "type": "object",
-      "description": "Direction to the landmark.",
-      "properties": {
-        "degrees": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Direction in azimuth degrees. May be NULL."
-        },
-        "english": {
-          "type": "string",
-          "description": "Direction abbreviated in English."
         }
       }
     }
