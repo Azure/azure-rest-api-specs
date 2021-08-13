@@ -30,13 +30,13 @@
         "operationId": "ContainerServiceQuota_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -49,7 +49,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -122,66 +122,6 @@
           "type": "string"
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "The error response for request which failed.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "description": "The error description code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "The error description message.",
-              "type": "string",
-              "readOnly": true
-            },
-            "target": {
-              "description": "The error target description.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "description": "The error details information.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            }
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "description": "REST Api Version.",
-      "name": "api-version",
-      "type": "string",
-      "in": "query",
-      "required": true
-    },
-    "LocationParameter": {
-      "description": "Resource location.",
-      "name": "location",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "description": "Subscription Id.",
-      "name": "subscriptionId",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
