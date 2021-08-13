@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount18",
+    "configurationName": "SetupServer",
+    "api-version": "2019-06-01",
+    "parameters": {
+      "properties": {
+        "source": {
+          "hash": {
+            "algorithm": "sha256",
+            "value": "A9E5DB56BA21513F61E0B3868816FDC6D4DF5131F5617D7FF0D769674BD5072F"
+          },
+          "type": "embeddedContent",
+          "value": "Configuration SetupServer {\r\n    Node localhost {\r\n                               WindowsFeature IIS {\r\n                               Name = \"Web-Server\";\r\n            Ensure = \"Present\"\r\n        }\r\n    }\r\n}"
+        },
+        "description": "sample configuration"
+      },
+      "name": "SetupServer",
+      "location": "East US 2"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SetupServer",
+        "name": "SetupServer",
+        "type": "Microsoft.Automation/AutomationAccounts/Configurations",
+        "location": "East US 2",
+        "tags": {},
+        "etag": null,
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobCount": 0,
+          "parameters": {},
+          "description": "sample configuration",
+          "state": null,
+          "creationTime": "0001-01-01T00:00:00+00:00",
+          "lastModifiedTime": "0001-01-01T00:00:00+00:00",
+          "logVerbose": false
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/configurations/SetupServer",
+        "name": "SetupServer",
+        "type": "Microsoft.Automation/AutomationAccounts/Configurations",
+        "location": "East US 2",
+        "tags": {},
+        "etag": "\"636263396635600000\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobCount": 0,
+          "parameters": {},
+          "description": "sample configuration",
+          "state": "Published",
+          "creationTime": "2017-03-28T23:14:23.56+00:00",
+          "lastModifiedTime": "2017-03-28T23:14:23.56+00:00",
+          "logVerbose": false
+        }
+      }
+    }
+  }
+}

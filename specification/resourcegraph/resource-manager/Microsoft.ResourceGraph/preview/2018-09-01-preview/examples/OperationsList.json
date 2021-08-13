@@ -7,7 +7,16 @@
       "body": {
         "value": [
           {
-            "name": "Microsoft.ResourceGraph/resources/action",
+            "name": "Microsoft.ResourceGraph/operations/read",
+            "display": {
+              "provider": "Microsoft Resource Graph",
+              "resource": "Operation",
+              "operation": "Get Operations",
+              "description": "Gets the list of supported operations"
+            }
+          },
+          {
+            "name": "Microsoft.ResourceGraph/resources/read",
             "display": {
               "provider": "Microsoft Resource Graph",
               "resource": "Resources",
@@ -16,12 +25,48 @@
             }
           },
           {
-            "name": "Microsoft.ResourceGraph/queries/action",
+            "name": "Microsoft.ResourceGraph/resourceChanges/read",
             "display": {
               "provider": "Microsoft Resource Graph",
-              "resource": "Queries",
-              "operation": "CRUD operations of graph queries",
-              "description": "Create/Update/Retrieve a query within specified subscription and resource group."
+              "resource": "Resource Changes",
+              "operation": "Query resource changes",
+              "description": "Lists changes to a resource for a given time interval"
+            }
+          },
+          {
+            "name": "Microsoft.ResourceGraph/resourceChangeDetails/read",
+            "display": {
+              "provider": "Microsoft Resource Graph",
+              "resource": "Resource Change Details",
+              "operation": "Query resource change details",
+              "description": "Gets the details of the specified resource change"
+            }
+          },
+          {
+            "name": "Microsoft.ResourceGraph/queries/read",
+            "display": {
+              "provider": "Microsoft Resource Graph",
+              "resource": "Resource Graph Queries",
+              "operation": "Read resource graph queries",
+              "description": "Gets the specified graph query"
+            }
+          },
+          {
+            "name": "Microsoft.ResourceGraph/queries/delete",
+            "display": {
+              "provider": "Microsoft Resource Graph",
+              "resource": "Resource Graph Queries",
+              "operation": "Delete resource graph queries",
+              "description": "Deletes the specified graph query"
+            }
+          },
+          {
+            "name": "Microsoft.ResourceGraph/queries/write",
+            "display": {
+              "provider": "Microsoft Resource Graph",
+              "resource": "Resource Graph Queries",
+              "operation": "Create/Update resource graph queries",
+              "description": "Creates/Updates the specified graph query"
             }
           }
         ]

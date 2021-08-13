@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "keyName": "somekey",
+    "api-version": "2019-06-01-preview",
+    "keyProperties": {
+      "properties": {
+        "isActiveCMK": true,
+        "keyVaultUrl": "https://vault.azure.net/keys/somesecret"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/keys/somekey",
+        "type": "Microsoft.Synapse/workspaces/keys",
+        "name": "somekey",
+        "properties": {
+          "isActiveCMK": true,
+          "keyVaultUrl": "https://vault.azure.net/keys/somesecret"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

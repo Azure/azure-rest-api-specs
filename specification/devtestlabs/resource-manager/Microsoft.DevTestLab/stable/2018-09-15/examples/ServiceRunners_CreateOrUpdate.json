@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{devtestlabName}",
+    "name": "{servicerunnerName}",
+    "serviceRunner": {
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      },
+      "identity": {
+        "type": "{identityType}",
+        "principalId": "{identityPrincipalId}",
+        "tenantId": "{identityTenantId}",
+        "clientSecretUrl": "{identityClientSecretUrl}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "type": "{identityType}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}",
+          "clientSecretUrl": "{identityClientSecretUrl}"
+        }
+      },
+      "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/serviceRunners/{serviceRunnerName}",
+      "name": "{serviceRunnerName}",
+      "type": "Microsoft.DevTestLab/labs/serviceRunners",
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "201": {
+      "body": {
+        "identity": {
+          "type": "{identityType}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}",
+          "clientSecretUrl": "{identityClientSecretUrl}"
+        }
+      },
+      "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/serviceRunners/{serviceRunnerName}",
+      "name": "{serviceRunnerName}",
+      "type": "Microsoft.DevTestLab/labs/serviceRunners",
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  }
+}

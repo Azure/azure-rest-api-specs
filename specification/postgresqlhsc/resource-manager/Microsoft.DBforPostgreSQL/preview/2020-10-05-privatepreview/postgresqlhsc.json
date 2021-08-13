@@ -1,0 +1,2250 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HyperscaleCitusManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL Hyperscale (Citus) resources including server groups, servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations.",
+    "version": "2020-10-05-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_List",
+        "x-ms-examples": {
+          "List all the server groups": {
+            "$ref": "./examples/ServerGroupList.json"
+          }
+        },
+        "description": "List all the server groups in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_ListByResourceGroup",
+        "x-ms-examples": {
+          "List the server groups by resource group": {
+            "$ref": "./examples/ServerGroupListByResourceGroup.json"
+          }
+        },
+        "description": "List all the server groups in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}": {
+      "put": {
+        "description": "Creates a new server group with servers.",
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a new server group": {
+            "$ref": "./examples/ServerGroupCreate.json"
+          },
+          "Create a new server group as a point in time restore": {
+            "$ref": "./examples/ServerGroupCreatePITR.json"
+          },
+          "Create a new server group as a read replica": {
+            "$ref": "./examples/ServerGroupCreateReadReplica.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerGroup"
+            },
+            "description": "The required parameters for creating or updating a server group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a server group.",
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_Get",
+        "x-ms-examples": {
+          "Get the server group": {
+            "$ref": "./examples/ServerGroupGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a server group together with servers in it.",
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the server group": {
+            "$ref": "./examples/ServerGroupDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing server group. The request body can contain one to many of the properties present in the normal server group definition.",
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the server group": {
+            "$ref": "./examples/ServerGroupUpdate.json"
+          },
+          "Scale compute": {
+            "$ref": "./examples/ServerGroupScaleCompute.json"
+          },
+          "Scale storage": {
+            "$ref": "./examples/ServerGroupScaleStorage.json"
+          },
+          "Add new worker nodes": {
+            "$ref": "./examples/ServerGroupAddNode.json"
+          },
+          "Update customer maintenance window": {
+            "$ref": "./examples/ServerGroupUpdateMaintenanceWindow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerGroupForUpdate"
+            },
+            "description": "The parameters for updating a server group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers": {
+      "get": {
+        "description": "Lists servers of a server group.",
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListByServerGroup",
+        "x-ms-examples": {
+          "List servers of the server group": {
+            "$ref": "./examples/ServerListByServerGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers/{serverName}": {
+      "get": {
+        "description": "Gets information about a server in server group.",
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Get",
+        "x-ms-examples": {
+          "Get the server of server group": {
+            "$ref": "./examples/ServerGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers/{serverName}/configurations": {
+      "get": {
+        "description": "List all the configurations of a server in server group.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServer",
+        "x-ms-examples": {
+          "List configurations of the server that in the server group": {
+            "$ref": "./examples/ConfigurationListByServer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations": {
+      "get": {
+        "description": "List all the configurations of a server group.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServerGroup",
+        "x-ms-examples": {
+          "List configurations of the server group": {
+            "$ref": "./examples/ConfigurationListByServerGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations/{configurationName}": {
+      "patch": {
+        "description": "Updates configuration of server role groups in a server group",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update single configuration of the server group": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerGroupConfiguration"
+            },
+            "description": "The required parameters for updating a server group configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about single server group configuration.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get single configuration of the server group": {
+            "$ref": "./examples/ConfigurationGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a firewall rule of the server group": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a server group firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the firewall rule of the server group": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a server group firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "x-ms-examples": {
+          "Get the firewall rule of the server group": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/firewallRules": {
+      "get": {
+        "description": "List all the firewall rules in a given server group.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_ListByServerGroup",
+        "x-ms-examples": {
+          "List firewall rules of the server group": {
+            "$ref": "./examples/FirewallRuleListByServerGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/roles/{roleName}": {
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RoleCreate": {
+            "$ref": "./examples/RoleCreate.json"
+          }
+        },
+        "description": "Creates a new role or updates an existing role.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "description": "The required parameters for creating or updating a role."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RoleDelete": {
+            "$ref": "./examples/RoleDelete.json"
+          }
+        },
+        "description": "Deletes a server group role.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_ListByServerGroup",
+        "x-ms-examples": {
+          "RoleList": {
+            "$ref": "./examples/RoleListByServerGroup.json"
+          }
+        },
+        "description": "List all the roles in a given server group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/restart": {
+      "post": {
+        "description": "Restarts the server group.",
+        "tags": [
+          "ServerGroupOperations"
+        ],
+        "operationId": "ServerGroups_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restart all servers in the server group": {
+            "$ref": "./examples/ServerGroupRestart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/start": {
+      "post": {
+        "description": "Starts the server group.",
+        "tags": [
+          "ServerGroupOperations"
+        ],
+        "operationId": "ServerGroups_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start all servers in the server group": {
+            "$ref": "./examples/ServerGroupStart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/stop": {
+      "post": {
+        "description": "Stops the server group.",
+        "tags": [
+          "ServerGroupOperations"
+        ],
+        "operationId": "ServerGroups_Stop",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Stop all servers in the server group": {
+            "$ref": "./examples/ServerGroupStop.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/checkNameAvailability": {
+      "post": {
+        "description": "Check the availability of name for resource",
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if resource name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBForPostgreSql/operations": {
+      "get": {
+        "description": "Lists all of the available REST API operations.",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List all available operations": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PostgreSQLVersion": {
+      "type": "string",
+      "description": "The PostgreSQL version.",
+      "enum": [
+        "11",
+        "12"
+      ],
+      "x-ms-enum": {
+        "name": "PostgreSQLVersion",
+        "modelAsString": true
+      }
+    },
+    "CitusVersion": {
+      "type": "string",
+      "description": "The Citus version.",
+      "enum": [
+        "8.3",
+        "9.0",
+        "9.1",
+        "9.2",
+        "9.3",
+        "9.4",
+        "9.5"
+      ],
+      "x-ms-enum": {
+        "name": "CitusVersion",
+        "modelAsString": true
+      }
+    },
+    "ServerState": {
+      "type": "string",
+      "description": "A state of a server group/server that is visible to user.",
+      "enum": [
+        "Ready",
+        "Dropping",
+        "Disabled",
+        "Starting",
+        "Stopping",
+        "Stopped",
+        "Updating",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ServerState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "ServerHaState": {
+      "type": "string",
+      "description": "A state of a server role group/server that is visible to user for HA feature.",
+      "enum": [
+        "NotEnabled",
+        "CreatingStandby",
+        "ReplicatingData",
+        "FailingOver",
+        "Healthy",
+        "RemovingStandby",
+        "NotSync"
+      ],
+      "x-ms-enum": {
+        "name": "ServerHaState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "ServerRole": {
+      "type": "string",
+      "description": "The role of a server.",
+      "enum": [
+        "Coordinator",
+        "Worker"
+      ],
+      "x-ms-enum": {
+        "name": "ServerRole",
+        "modelAsString": true
+      }
+    },
+    "FullyQualifiedDomainName": {
+      "type": "string",
+      "description": "The fully qualified domain name of a server.",
+      "readOnly": true
+    },
+    "ServerProperties": {
+      "description": "The properties of a server.",
+      "properties": {
+        "serverEdition": {
+          "type": "string",
+          "description": "The edition of a server (default: GeneralPurpose).",
+          "enum": [
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "ServerEdition",
+            "modelAsString": true
+          }
+        },
+        "storageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a server in MB (max: 2097152 = 2TiB)."
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a server (max: 64)."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
+        },
+        "enablePublicIp": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerRoleGroupList": {
+      "type": "array",
+      "description": "The list of server role groups.",
+      "items": {
+        "$ref": "#/definitions/ServerRoleGroup"
+      },
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "ServerRoleGroup": {
+      "description": "Represents a server role group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the server role group."
+        },
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of servers in the server role group."
+        },
+        "serverCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of servers in the server role group."
+        },
+        "serverNames": {
+          "type": "array",
+          "description": "The list of server names in the server role group.",
+          "items": {
+            "$ref": "#/definitions/ServerNameItem"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        }
+      }
+    },
+    "ServerNameItem": {
+      "description": "The name object for a server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a server."
+        },
+        "fullyQualifiedDomainName": {
+          "$ref": "#/definitions/FullyQualifiedDomainName",
+          "description": "The fully qualified domain name of a server."
+        }
+      }
+    },
+    "ServerGroupServerProperties": {
+      "description": "The properties of a server in server group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerProperties"
+        }
+      ],
+      "properties": {
+        "fullyQualifiedDomainName": {
+          "$ref": "#/definitions/FullyQualifiedDomainName",
+          "description": "The fully qualified domain name of a server."
+        },
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of server in the server group."
+        },
+        "state": {
+          "$ref": "#/definitions/ServerState",
+          "description": "A state of a server that is visible to user."
+        },
+        "haState": {
+          "$ref": "#/definitions/ServerHaState",
+          "description": "A state of a server group that is visible to user for HA feature."
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a servers in server group."
+        },
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The Citus version of server."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability Zone information of the server group."
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "description": "Standby Availability Zone information of the server group."
+        }
+      }
+    },
+    "ServerGroupServer": {
+      "description": "Represents a server in a server group.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerGroupServerProperties",
+          "description": "The properties of a server in a server group.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerGroupServerListResult": {
+      "description": "A list of servers in a server group.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of servers in a server group.",
+          "items": {
+            "$ref": "#/definitions/ServerGroupServer"
+          }
+        }
+      }
+    },
+    "ServerGroupForUpdate": {
+      "description": "Represents a server group for update.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server group."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ServerGroupPropertiesForUpdate": {
+      "description": "The properties used to update a server group.",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The backup retention days for server group."
+        },
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server group."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The Citus version of server group."
+        },
+        "enableShardsOnCoordinator": {
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the server group."
+        },
+        "serverRoleGroups": {
+          "$ref": "#/definitions/ServerRoleGroupList",
+          "description": "The list of server role groups."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server group."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability Zone information of the server group."
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "description": "Standby Availability Zone information of the server group."
+        }
+      }
+    },
+    "ServerGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerGroup"
+          },
+          "description": "The list of server groups"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of server groups."
+    },
+    "ServerGroup": {
+      "description": "Represents a server group for create.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerGroupProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server group create."
+        }
+      }
+    },
+    "ServerGroupProperties": {
+      "description": "The properties used to create a new server group.",
+      "properties": {
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new server group.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "ReadReplica"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The backup retention days for server group."
+        },
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server group."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The Citus version of server group."
+        },
+        "enableMx": {
+          "type": "boolean",
+          "description": "If Citus MX is enabled or not for the server group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "enableZfs": {
+          "type": "boolean",
+          "description": "If ZFS compression is enabled or not for the server group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "enableShardsOnCoordinator": {
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the server group."
+        },
+        "state": {
+          "$ref": "#/definitions/ServerState",
+          "description": "A state of a server group that is visible to user."
+        },
+        "earliestRestoreTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for server group.",
+          "readOnly": true
+        },
+        "resourceProviderType": {
+          "type": "string",
+          "description": "The resource provider type of server group.",
+          "enum": [
+            "Meru",
+            "Marlin"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "serverRoleGroups": {
+          "$ref": "#/definitions/ServerRoleGroupList",
+          "description": "The list of server role groups."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server group."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability Zone information of the server group."
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "description": "Standby Availability Zone information of the server group."
+        },
+        "delegatedSubnetArguments": {
+          "description": "The delegated subnet arguments for a server group.",
+          "properties": {
+            "subnetArmResourceId": {
+              "type": "string",
+              "description": "delegated subnet arm resource id."
+            }
+          }
+        },
+        "privateDnsZoneArguments": {
+          "description": "The private dns zone arguments for a server group.",
+          "properties": {
+            "privateDnsZoneArmResourceId": {
+              "type": "string",
+              "description": "private dns zone arm resource id."
+            }
+          }
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica server groups.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "sourceServerGroup": {
+          "type": "string",
+          "description": "The source server group id for read replica server groups.",
+          "readOnly": true
+        },
+        "sourceSubscriptionId": {
+          "type": "string",
+          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceResourceGroupName": {
+          "type": "string",
+          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceServerGroupName": {
+          "type": "string",
+          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server group.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled"
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
+        }
+      }
+    },
+    "ServerGroupConfiguration": {
+      "description": "Represents the configuration list of server role groups in a server group.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerGroupConfigurationProperties",
+          "description": "The properties of server group configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerGroupConfigurationProperties": {
+      "description": "The properties of server group configuration.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "Allowed values of the configuration.",
+          "readOnly": true
+        },
+        "serverRoleGroupConfigurations": {
+          "type": "array",
+          "description": "The list of server role group configuration values.",
+          "items": {
+            "$ref": "#/definitions/ServerRoleGroupConfiguration"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "serverRoleGroupConfigurations"
+      ]
+    },
+    "ServerRoleGroupConfiguration": {
+      "description": "Represents server role group configuration value.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of servers in the server role group."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "role",
+        "value"
+      ]
+    },
+    "ServerGroupConfigurationListResult": {
+      "description": "A list of server group configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of server group configurations.",
+          "items": {
+            "$ref": "#/definitions/ServerGroupConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerConfigurationProperties": {
+      "description": "The properties of a configuration.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration.",
+          "readOnly": true
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "Allowed values of the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerConfiguration": {
+      "description": "Represents a configuration.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerConfigurationProperties",
+          "description": "The properties of a configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerConfigurationListResult": {
+      "description": "A list of server configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of server configurations.",
+          "items": {
+            "$ref": "#/definitions/ServerConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "FirewallRuleProperties": {
+      "description": "The properties of a server group firewall rule.",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the server group firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the server group firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "FirewallRule": {
+      "description": "Represents a server group firewall rule.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a firewall rule."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FirewallRuleListResult": {
+      "description": "A list of firewall rules.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of firewall rules in a server group.",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        }
+      }
+    },
+    "RoleProperties": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the server group role."
+        }
+      },
+      "required": [
+        "password"
+      ],
+      "description": "The properties of a server group role."
+    },
+    "Role": {
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a role."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a server group role."
+    },
+    "RoleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          },
+          "description": "The list of roles in a server group."
+        }
+      },
+      "description": "A list of roles."
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation resource provider name.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "readOnly": true,
+          "description": "The localized display information for this particular operation or action."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "NotSpecified",
+            "user",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NameAvailabilityRequest": {
+      "description": "Request from client to check resource name availability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DBforPostgreSQL/serverGroupsv2"
+          ],
+          "description": "Resource type used for verification.",
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "NameAvailability": {
+      "description": "Represents a resource name availability.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the PostgreSQL server."
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the server"
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "An error response from the Batch service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "An error response from the Batch service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerGroupNameParameter": {
+      "name": "serverGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server group.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server group configuration.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server group firewall rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "RoleNameParameter": {
+      "name": "roleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server group role name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
