@@ -3,8 +3,10 @@
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-09-15-preview",
     "callRequest": {
-      "alternateCallerId": {
-        "value": "+18440123456"
+      "source": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_c70dcb25-e679-4dcf-8d60-dd4387ca3fdc"
+        }
       },
       "targets": [
         {
@@ -18,10 +20,8 @@
           }
         }
       ],
-      "source": {
-        "communicationUser": {
-          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_c70dcb25-e679-4dcf-8d60-dd4387ca3fdc"
-        }
+      "alternateCallerId": {
+        "value": "+18440123456"
       },
       "subject": "Reminder call",
       "callbackUri": "https://app.contoso.com/callback",
