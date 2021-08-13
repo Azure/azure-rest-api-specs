@@ -847,6 +847,9 @@
         "x-ms-examples": {
           "StormPositions": {
             "$ref": "./examples/GetStormPositions.json"
+          },
+          "StormStormCurrentPosition": {
+            "$ref": "./examples/GetStormCurrentPosition.json"
           }
         },
         "parameters": [
@@ -876,55 +879,20 @@
           },
           {
             "$ref": "#/parameters/WeatherIncludeLandmarks"
+          },
+          {
+            "name": "current",
+            "description": "When true, return the current storm position",
+            "in": "query",
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndividualStormPositionsResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/weather/tropical/storms/positions/current/{format}": {
-      "get": {
-        "description": "**Positions for an individual government-issued storm**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet the current position of an individual government-issued storm.",
-        "operationId": "Weather_StormCurrentPosition",
-        "x-ms-examples": {
-          "StormStormCurrentPosition": {
-            "$ref": "./examples/GetStormCurrentPosition.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/WeatherApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "#/parameters/WeatherYear"
-          },
-          {
-            "$ref": "#/parameters/RequiredWeatherBasinID"
-          },
-          {
-            "$ref": "#/parameters/RequiredWeatherGovernmentID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PositionResponse"
+              "$ref": "#/definitions/StormPositionsResponse"
             }
           },
           "default": {
@@ -3106,7 +3074,7 @@
         }
       }
     },
-    "IndividualStormPositionsResponse": {
+    "StormPositionsResponse": {
       "type": "object",
       "description": "Positions for an individual government-issued storm",
       "properties": {
