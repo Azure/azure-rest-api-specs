@@ -322,7 +322,7 @@
           "description": "Components required of the update.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Component"
+            "$ref": "#/definitions/RequiredComponent"
           }
         },
         "prerequisites": {
@@ -409,7 +409,7 @@
       "enum": [
         "Security",
         "Bugfix",
-        "Reliablity"
+        "Reliability"
       ],
       "x-ms-enum": {
         "name": "UpdateTag",
@@ -442,8 +442,8 @@
         "modelAsString": true
       }
     },
-	"Component": {
-      "description": "Component of the update.",
+    "RequiredComponent": {
+      "description": "Type of the component.",
       "type": "object",
       "properties": {
         "updateType": {
@@ -451,16 +451,16 @@
           "type": "string"
         },
         "versionRequired": {
-          "description": "Version required, it can either be a specific version, or versions definded in a pattern with asterisk wildcard.",
+          "description": "Version required, it can either be a specific version, or versions defined in a pattern with asterisk wildcard.",
           "type": "string"
         },
         "minVersionRequired": {
-          "description": "Minimon version required of the component.",
+          "description": "Minimum version required of the component.",
           "type": "string"
         }
       }
     },
-	"Prerequisite": {
+    "Prerequisite": {
       "description": "Prerequisite of the update.",
       "type": "object",
       "properties": {
