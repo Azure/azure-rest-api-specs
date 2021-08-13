@@ -40,13 +40,13 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-phonenumber-2021-10-25-preview1
+### Tag: package-phonenumber-2021-10-25-preview
 
-These settings apply only when `--tag=package-phonenumber-2021-10-25-preview1` is specified on the command line.
+These settings apply only when `--tag=package-phonenumber-2021-10-25-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2021-10-25-preview1'
+```yaml $(tag) == 'package-phonenumber-2021-10-25-preview'
 input-file:
-  - preview/2021-10-25-preview1/phonenumbers.json
+  - preview/2021-10-25-preview/phonenumbers.json
 title:
   Azure Communication Services
 ```

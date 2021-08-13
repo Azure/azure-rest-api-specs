@@ -3,7 +3,7 @@
   "info": {
     "title": "PhoneNumbersClient",
     "description": "The short codes client uses Azure Communication Services to purchase and manage phone numbers and short codes.",
-    "version": "2021-10-25-preview1"
+    "version": "2021-10-25-preview"
   },
   "paths": {
     "/availablePhoneNumbers/countries/{countryCode}/:search": {
@@ -273,6 +273,93 @@
         ]
       }
     },
+    "/shortCodes/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Long running operations"
+        ],
+        "summary": "Gets an operation by its id.",
+        "operationId": "ShortCodes_GetOperationStatusById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "When the operation is completed, query the final result of the operation using the URL specified in the 'Location' attribute in the response header.",
+            "schema": {
+              "$ref": "#/definitions/ShortCodeOperation"
+            },
+            "headers": {
+              "Location": {
+                "description": "Url to retrieve the final result after operation completes.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get long running operation status by operation id": {
+            "$ref": "./examples/GetShortCodeOperation.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Long running operations"
+        ],
+        "summary": "Cancels an operation by its id.",
+        "operationId": "ShortCodes_CancelOperation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The id of the operation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete long running operation with the given operation id": {
+            "$ref": "./examples/DeleteShortCodeOperation.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/phoneNumbers/{phoneNumber}/capabilities": {
       "patch": {
         "tags": [
@@ -501,7 +588,7 @@
         }
       }
     },
-    "/shortcodes": {
+    "/shortCodes": {
       "get": {
         "tags": [
           "ShortCodes"
@@ -557,7 +644,7 @@
         }
       }
     },
-    "/shortcodes/countries/US/programbriefs": {
+    "/shortCodes/countries/US/programBriefs": {
       "post": {
         "tags": [
           "ShortCodes - ProgramBrief"
@@ -658,7 +745,7 @@
         }
       }
     },
-    "/shortcodes/countries/US/programbriefs/{programBriefId}": {
+    "/shortCodes/countries/US/programBriefs/{programBriefId}": {
       "patch": {
         "tags": [
           "ShortCodes - ProgramBrief"
@@ -753,7 +840,7 @@
         }
       }
     },
-    "/shortcodes/countries/US/programbriefs/{programBriefId}/:submit": {
+    "/shortCodes/countries/US/programBriefs/{programBriefId}/:submit": {
       "post": {
         "tags": [
           "ShortCodes - ProgramBrief"
@@ -776,10 +863,28 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "schema": {
               "$ref": "#/definitions/ProgramBriefOperationResponse"
+            },
+            "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "submitProgramBrief-id": {
+                "description": "The submitProgramBrief operation id.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -788,6 +893,10 @@
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Submit program brief": {
@@ -988,9 +1097,9 @@
         }
       }
     },
-    "PhoneNumberOperation": {
-      "description": "Long running operation.",
+    "PhoneNumberOperationTypePhoneNumberOperationStatusLongRunningOperation": {
       "required": [
+        "$type",
         "createdDateTime",
         "id",
         "operationType",
@@ -998,6 +1107,23 @@
       ],
       "type": "object",
       "properties": {
+        "$type": {
+          "type": "string"
+        },
+        "operationType": {
+          "description": "The type of operation, e.g. Search",
+          "enum": [
+            "purchase",
+            "releasePhoneNumber",
+            "search",
+            "updatePhoneNumberCapabilities"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberOperationType",
+            "modelAsString": true
+          }
+        },
         "status": {
           "description": "Status of operation.",
           "enum": [
@@ -1028,19 +1154,85 @@
           "description": "Id of operation.",
           "type": "string"
         },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The most recent date that the operation was changed.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "$type"
+    },
+    "PhoneNumberOperation": {
+      "description": "Long running operation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PhoneNumberOperationTypePhoneNumberOperationStatusLongRunningOperation"
+        },
+        {
+          "required": [
+            "createdDateTime",
+            "id",
+            "operationType",
+            "status"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "ShortCodeOperationTypeShortCodeOperationStatusLongRunningOperation": {
+      "required": [
+        "$type",
+        "createdDateTime",
+        "id",
+        "operationType",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "$type": {
+          "type": "string"
+        },
         "operationType": {
           "description": "The type of operation, e.g. Search",
           "enum": [
-            "purchase",
-            "releasePhoneNumber",
-            "search",
-            "updatePhoneNumberCapabilities"
+            "submitProgramBrief"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "PhoneNumberOperationType",
+            "name": "ShortCodeOperationType",
             "modelAsString": true
           }
+        },
+        "status": {
+          "description": "Status of operation.",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShortCodeOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceLocation": {
+          "description": "URL for retrieving the result of the operation, if any.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The date that the operation was created.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+        },
+        "id": {
+          "description": "Id of operation.",
+          "type": "string"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -1048,7 +1240,24 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "$type"
+    },
+    "ShortCodeOperation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShortCodeOperationTypeShortCodeOperationStatusLongRunningOperation"
+        },
+        {
+          "required": [
+            "createdDateTime",
+            "id",
+            "operationType",
+            "status"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "PhoneNumberCapabilitiesRequest": {
       "description": "Capabilities of a phone number.",
@@ -1199,15 +1408,6 @@
           "format": "date-time",
           "description": "Date in which number was purchased.",
           "type": "string"
-        },
-        "renewalDate": {
-          "format": "date-time",
-          "description": "Date in which number was renewed.",
-          "type": "string"
-        },
-        "autoRenew": {
-          "description": "Whether auto-renewal is enabled for the number or not.",
-          "type": "boolean"
         },
         "state": {
           "description": "Number state (e.g. 'Acquired')",
@@ -1535,8 +1735,6 @@
           "description": "Program Brief status (e.g. 'submitted', 'approved', etc)",
           "enum": [
             "pendingReview",
-            "withdrawn",
-            "readyToSubmit",
             "denied",
             "submittedToAggregator",
             "waitingForMicrosoftOperator",
