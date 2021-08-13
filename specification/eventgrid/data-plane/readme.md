@@ -38,6 +38,51 @@ A sample valid event definition is shown below:
 ```
 ~~~
 
+In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger. This example must be in a "examples" folder close to your JSON, and called using snakeCase based on the event final name. The example should contain the envelope, but could be CloudEvent or EventGrid schema, whatever is easier. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+
+For the previous schema, the example file should be called "chat_message_received.json" and contains:
+~~~ markdown
+```json
+{
+    "id": "02272459-badb-4e2e-b538-4cb8a2f71da6",
+    "topic": "/subscriptions/{subscription-id}/resourceGroups/{group-name}/providers/Microsoft.Communication/communicationServices/{communication-services-resource-name}",
+    "subject": "thread/{thread-id}/sender/{rawId}/recipient/{rawId}",
+    "data": {
+      "messageBody": "Welcome to Azure Communication Services",
+      "messageId": "1613694358927",
+      "metadata": {
+        "key": "value",
+        "description": "A map of data associated with the message"
+      },
+      "senderId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+      "senderCommunicationIdentifier": {
+        "rawId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+        "communicationUser": {
+          "id": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724"
+        }
+      },
+      "senderDisplayName": "Jhon",
+      "composeTime": "2021-02-19T00:25:58.927Z",
+      "type": "Text",
+      "version": 1613694358927,
+      "recipientId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d",
+      "recipientCommunicationIdentifier": {
+        "rawId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d",
+        "communicationUser": {
+          "id": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d"
+        }
+      },
+      "transactionId": "oh+LGB2dUUadMcTAdRWQxQ.1.1.1.1.1827536918.1.7",
+      "threadId": "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2"
+    },
+    "eventType": "Microsoft.Communication.ChatMessageReceived",
+    "dataVersion": "1.0",
+    "metadataVersion": "1",
+    "eventTime": "2021-02-19T00:25:59.9436666Z"
+  }
+  ```
+  ~~~
+
 ---
 ## Getting Started
 To build the SDK for EventGrid, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
