@@ -1097,9 +1097,8 @@
         }
       }
     },
-    "PhoneNumberOperationTypePhoneNumberOperationStatusLongRunningOperation": {
+    "PhoneNumberOperation": {
       "required": [
-        "$type",
         "createdDateTime",
         "id",
         "operationType",
@@ -1107,9 +1106,6 @@
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
-        },
         "operationType": {
           "description": "The type of operation, e.g. Search",
           "enum": [
@@ -1160,29 +1156,10 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "discriminator": "$type"
+      }
     },
-    "PhoneNumberOperation": {
-      "description": "Long running operation.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PhoneNumberOperationTypePhoneNumberOperationStatusLongRunningOperation"
-        },
-        {
-          "required": [
-            "createdDateTime",
-            "id",
-            "operationType",
-            "status"
-          ],
-          "type": "object"
-        }
-      ]
-    },
-    "ShortCodeOperationTypeShortCodeOperationStatusLongRunningOperation": {
+    "ShortCodeOperation": {
       "required": [
-        "$type",
         "createdDateTime",
         "id",
         "operationType",
@@ -1190,9 +1167,6 @@
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
-        },
         "operationType": {
           "description": "The type of operation, e.g. Search",
           "enum": [
@@ -1240,24 +1214,7 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "discriminator": "$type"
-    },
-    "ShortCodeOperation": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ShortCodeOperationTypeShortCodeOperationStatusLongRunningOperation"
-        },
-        {
-          "required": [
-            "createdDateTime",
-            "id",
-            "operationType",
-            "status"
-          ],
-          "type": "object"
-        }
-      ]
+      }
     },
     "PhoneNumberCapabilitiesRequest": {
       "description": "Capabilities of a phone number.",
