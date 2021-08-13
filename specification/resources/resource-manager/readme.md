@@ -61,7 +61,7 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-03-preview
+tag: package-templatespecs-2021-05
 ```
 
 
@@ -791,6 +791,9 @@ directive:
   - from: SubscriptionFeatureRegistration.json
     suppress: R4009
     reason: Currently systemData is not allowed
+  - from: Subscriptions.json
+    suppress: OperationsAPIImplementation
+    reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
