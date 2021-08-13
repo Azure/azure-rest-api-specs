@@ -831,6 +831,72 @@
         }
       }
     },
+    "/calling/serverCalls/{serverCallId}/participants/{participantId}/:playAudio": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Play audio to a participant.",
+        "description": "Play audio to a participant.",
+        "operationId": "ServerCalls_ParticipantPlayAudio",
+        "parameters": [
+          {
+            "name": "serverCallId",
+            "in": "path",
+            "description": "Server call id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "Participant id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "PlayAudioRequest body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlayAudioRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the play audio response.",
+            "schema": {
+              "$ref": "#/definitions/PlayAudioResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Play audio to a participant.": {
+            "$ref": "./examples/ServerCalls_ParticipantPlayAudio.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants": {
       "get": {
         "tags": [
@@ -1223,6 +1289,72 @@
         "x-ms-examples": {
           "Stop hold music to a participant.": {
             "$ref": "./examples/CallConnections_StopHoldMusic.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants/{participantId}/:playAudio": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "Play audio to a participant.",
+        "description": "Play audio to a participant.",
+        "operationId": "CallConnections_ParticipantPlayAudio",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The callConnectionId.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "Participant id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "PlayAudioRequest body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlayAudioRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the play audio response.",
+            "schema": {
+              "$ref": "#/definitions/PlayAudioResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Play audio to a participant.": {
+            "$ref": "./examples/CallConnections_ParticipantPlayAudio.json"
           }
         }
       }

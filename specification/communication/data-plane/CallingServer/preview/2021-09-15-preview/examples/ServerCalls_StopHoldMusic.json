@@ -2,31 +2,18 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-08-15-preview",
-    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "participantId": "9a6b6ecb-e169-499c-afaa-fa9e40c06c74"
+    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
+    "participantId": "9a6b6ecb-e169-499c-afaa-fa9e40c06c74",
+    "stopHoldMusicRequest": {
+      "startHoldMusicOperationId": "b868c56b-db8f-44ad-a4cf-a6c99b459dbb"
+    }
   },
   "responses": {
-    "200": {
-      "body": [
-        {
-          "identifier": {
-            "communicationUser": {
-              "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_b9168d76-494f-4149-94c1-8a3bf985bbcc"
-            }
-          },
-          "participantId": "5824adad-356d-4a5e-8160-4b2086e36b72",
-          "isMuted": false
-        },
-        {
-          "identifier": {
-            "phoneNumber": {
-              "value": "+14250123456"
-            }
-          },
-          "participantId": "92dfd401-636c-4008-8a19-96cd04a67df5",
-          "isMuted": true
-        }
-      ]
+    "202": {
+      "body": {
+        "status": "completed",
+        "operationContext": "323ab666-5d41-4767-83b2-3c17185e6df1"
+      }
     },
     "400": {
       "body": {

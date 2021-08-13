@@ -2,31 +2,22 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-08-15-preview",
-    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "participantId": "9a6b6ecb-e169-499c-afaa-fa9e40c06c74"
+    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
+    "participantId": "9a6b6ecb-e169-499c-afaa-fa9e40c06c74",
+    "request": {
+      "audioFileUri": "https://app.contoso.com/audio/message.wav",
+      "loop": false,
+      "operationContext": "31130c66-2f86-41b5-af61-23850243e093",
+      "audioFileId": "8d9d6ce8-e533-40c3-8c71-19112677511c",
+      "callbackUri": "https://app.contoso.com/callback"
+    }
   },
   "responses": {
-    "200": {
-      "body": [
-        {
-          "identifier": {
-            "communicationUser": {
-              "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_b9168d76-494f-4149-94c1-8a3bf985bbcc"
-            }
-          },
-          "participantId": "5824adad-356d-4a5e-8160-4b2086e36b72",
-          "isMuted": false
-        },
-        {
-          "identifier": {
-            "phoneNumber": {
-              "value": "+14250123456"
-            }
-          },
-          "participantId": "92dfd401-636c-4008-8a19-96cd04a67df5",
-          "isMuted": true
-        }
-      ]
+    "202": {
+      "body": {
+        "status": "running",
+        "operationContext": "31130c66-2f86-41b5-af61-23850243e093"
+      }
     },
     "400": {
       "body": {
