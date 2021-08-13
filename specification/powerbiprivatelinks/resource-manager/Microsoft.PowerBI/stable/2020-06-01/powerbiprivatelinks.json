@@ -844,7 +844,7 @@
           "description": "The operation end time."
         },
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "description": "The error."
         }
       }
@@ -1450,31 +1450,6 @@
         "origin": {
           "type": "string",
           "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
-        }
-      }
-    },
-    "Error": {
-      "title": "Error",
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Specifies the error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Specifies the error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "Specifies the error target."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "description": "Specifies the error details."
         }
       }
     },
