@@ -7098,6 +7098,30 @@
         "typeProperties"
       ]
     },
+    "ExecuteWranglingDataflowActivity": {
+      "description": "Execute power query activity.",
+      "type": "object",
+      "x-ms-discriminator-value": "ExecuteWranglingDataflow",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute power query activity properties.",
+          "$ref": "#/definitions/ExecutePowerQueryActivityTypeProperties"
+        },
+        "policy": {
+          "$ref": "#/definitions/ActivityPolicy",
+          "description": "Activity policy."
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "ExecuteDataFlowActivityTypeProperties": {
       "description": "Execute data flow activity properties.",
       "properties": {
@@ -7143,6 +7167,24 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ExecutePowerQueryActivityTypeProperties": {
+      "description": "Execute power query data flow activity properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
+        }
+      ],
+      "properties": {
+        "sinks": {
+          "type": "object",
+          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "additionalProperties": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          }
+        }
+      }
     },
     "SharePointOnlineListSource": {
       "description": "A copy activity source for sharePoint online list source.",
