@@ -70,12 +70,9 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -118,74 +115,11 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResource"
             }
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The list private endpoint connections response.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of private endpoint connections.",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The link (url) to the next page of results."
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./cluster.json#/definitions/Resource"
-        }
-      ],
-      "description": "A private link resource"
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource Private link DNS zone name.",
-          "readOnly": true
-        }
-      },
-      "description": "Properties of a private link resource."
     }
   },
   "parameters": {
