@@ -8413,8 +8413,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "description": "Strictly used in update requests.",
+          "$ref": "#/definitions/PartialResourceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
@@ -8430,7 +8430,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "#/definitions/PartialSku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8458,8 +8458,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "description": "Strictly used in update requests.",
+          "$ref": "#/definitions/PartialResourceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
@@ -8475,7 +8475,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "#/definitions/PartialSku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8485,6 +8485,57 @@
           }
         }
       },
+      "additionalProperties": false
+    },
+    "PartialContainerResourceRequirements": {
+      "description": "Resource requirements for each container instance within an online deployment.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "fpga": {
+          "format": "int32",
+          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
+          "type": "integer"
+        },
+        "gpu": {
+          "format": "int32",
+          "description": "The number of GPU cores in the container.",
+          "type": "integer"
+        },
+        "memoryInGB": {
+          "format": "double",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialDefaultScaleSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialOnlineScaleSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "Default",
       "additionalProperties": false
     },
     "PartialK8sOnlineDeployment": {
@@ -8498,7 +8549,7 @@
       "properties": {
         "containerResourceRequirements": {
           "description": "The resource requirements for the container (cpu and memory).",
-          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+          "$ref": "#/definitions/PartialContainerResourceRequirements"
         }
       },
       "x-ms-discriminator-value": "K8S",
@@ -8519,7 +8570,7 @@
         },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/PartialProbeSettings"
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -8542,15 +8593,15 @@
         },
         "livenessProbe": {
           "description": "Liveness probe monitors the health of the container regularly.",
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/PartialProbeSettings"
         },
         "requestSettings": {
           "description": "Request settings for the deployment.",
-          "$ref": "#/definitions/OnlineRequestSettings"
+          "$ref": "#/definitions/PartialOnlineRequestSettings"
         },
         "scaleSettings": {
           "description": "Scale settings for the deployment.",
-          "$ref": "#/definitions/OnlineScaleSettings"
+          "$ref": "#/definitions/PartialOnlineScaleSettings"
         }
       },
       "discriminator": "endpointComputeType"
@@ -8560,8 +8611,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "description": "Strictly used in update requests.",
+          "$ref": "#/definitions/PartialResourceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
@@ -8577,7 +8628,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "#/definitions/PartialSku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8609,8 +8660,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "description": "Strictly used in update requests.",
+          "$ref": "#/definitions/PartialResourceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
@@ -8626,7 +8677,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "#/definitions/PartialSku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8634,6 +8685,166 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineRequestSettings": {
+      "description": "Online deployment scoring requests configuration.",
+      "type": "object",
+      "properties": {
+        "maxConcurrentRequestsPerInstance": {
+          "format": "int32",
+          "description": "The number of maximum concurrent requests per node allowed per deployment. Defaults to 1.",
+          "type": "integer"
+        },
+        "maxQueueWait": {
+          "format": "duration",
+          "description": "The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.",
+          "type": "string"
+        },
+        "requestTimeout": {
+          "format": "duration",
+          "description": "The scoring timeout in ISO 8601 format.\r\nDefaults to 5000ms.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineScaleSettings": {
+      "description": "Online deployment scaling configuration.",
+      "required": [
+        "scaleType"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleType": {
+          "description": "Type of deployment scaling algorithm",
+          "$ref": "#/definitions/ScaleType"
+        }
+      },
+      "discriminator": "scaleType"
+    },
+    "PartialProbeSettings": {
+      "description": "Deployment container liveness/readiness probe configuration.",
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
+          "format": "int32",
+          "description": "The number of failures to allow before returning an unhealthy status.",
+          "type": "integer"
+        },
+        "initialDelay": {
+          "format": "duration",
+          "description": "The delay before the first probe in ISO 8601 format.",
+          "type": "string"
+        },
+        "period": {
+          "format": "duration",
+          "description": "The length of time between probes in ISO 8601 format.",
+          "type": "string"
+        },
+        "successThreshold": {
+          "format": "int32",
+          "description": "The number of successful probes before returning a healthy status.",
+          "type": "integer"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "The probe timeout in ISO 8601 format.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialResourceIdentity": {
+      "description": "Strictly used in update requests.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityAssignment"
+        },
+        "userAssignedIdentities": {
+          "description": "Dictionary of the user assigned identities, key is ARM resource ID of the UAI.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PartialUserAssignedIdentityMeta"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialSku": {
+      "description": "Common SKU defintion.",
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
+          "type": "integer"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code.",
+          "type": "string"
+        },
+        "size": {
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
+          "$ref": "#/definitions/SkuTier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialTargetUtilizationScaleSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialOnlineScaleSettings"
+        }
+      ],
+      "properties": {
+        "maxInstances": {
+          "format": "int32",
+          "description": "The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.",
+          "type": "integer"
+        },
+        "minInstances": {
+          "format": "int32",
+          "description": "The minimum number of instances to always be present.",
+          "type": "integer"
+        },
+        "pollingInterval": {
+          "format": "duration",
+          "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
+          "type": "string"
+        },
+        "targetUtilizationPercentage": {
+          "format": "int32",
+          "description": "Target CPU usage for the autoscaler.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TargetUtilization",
+      "additionalProperties": false
+    },
+    "PartialUserAssignedIdentityMeta": {
+      "description": "Strictly used in update requests.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Aka application ID, a unique identifier generated by Azure AD that is tied to an application and service principal during its initial provisioning.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "The object ID of the service principal object for your managed identity that is used to grant role-based access to an Azure resource.",
+          "type": "string"
         }
       },
       "additionalProperties": false
