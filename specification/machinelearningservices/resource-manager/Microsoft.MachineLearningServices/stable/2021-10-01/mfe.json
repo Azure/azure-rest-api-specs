@@ -5005,7 +5005,8 @@
       "properties": {
         "key": {
           "description": "Storage account key.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "AccountKey",
@@ -5022,12 +5023,14 @@
         "instanceCount": {
           "format": "int32",
           "description": "Number of instances or nodes.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "priority": {
           "format": "int32",
           "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "AmlCompute",
@@ -5097,7 +5100,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "protocol": {
           "description": "Protocol used to communicate with the storage account.",
@@ -5106,7 +5110,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "AzureBlob",
@@ -5178,7 +5183,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "filesystem": {
           "description": "The name of the Data Lake Gen2 filesystem.",
@@ -5196,7 +5202,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen2",
@@ -5232,7 +5239,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "fileShareName": {
           "description": "File share name.",
@@ -5250,7 +5258,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "AzureFile",
@@ -5291,12 +5300,14 @@
         "destination": {
           "description": "Destination reference",
           "type": "string",
-          "example": "jobs.trainingjob.Inputs.myInput"
+          "example": "jobs.trainingjob.Inputs.myInput",
+          "x-nullable": true
         },
         "source": {
           "description": "Source reference",
           "type": "string",
-          "example": "Inputs.data1"
+          "example": "Inputs.data1",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Basic",
@@ -5308,31 +5319,38 @@
       "properties": {
         "codeConfiguration": {
           "description": "Code configuration for the endpoint deployment.",
-          "$ref": "#/definitions/CodeConfiguration"
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
         },
         "compute": {
           "description": "Configuration for compute binding.",
-          "$ref": "#/definitions/ComputeConfiguration"
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-nullable": true
         },
         "description": {
           "description": "Description of the endpoint deployment.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentId": {
           "description": "ARM resource ID of the environment specification for the endpoint deployment.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentVariables": {
           "description": "Environment variables configuration for the deployment.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "errorThreshold": {
           "format": "int32",
           "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "loggingLevel": {
           "description": "Logging level for batch inference operation.",
@@ -5341,11 +5359,13 @@
         "miniBatchSize": {
           "format": "int64",
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "model": {
           "description": "Reference to the model asset for the endpoint deployment.",
-          "$ref": "#/definitions/AssetReferenceBase"
+          "$ref": "#/definitions/AssetReferenceBase",
+          "x-nullable": true
         },
         "outputAction": {
           "description": "Indicates how the output will be organized.",
@@ -5353,7 +5373,8 @@
         },
         "outputFileName": {
           "description": "Customized output file name for append_row output action.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "processsCountPerInstance": {
           "format": "int32",
@@ -5364,12 +5385,15 @@
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "retrySettings": {
           "description": "Retry Settings for the batch inference operation.",
-          "$ref": "#/definitions/BatchRetrySettings"
+          "$ref": "#/definitions/BatchRetrySettings",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5388,11 +5412,13 @@
       "properties": {
         "identity": {
           "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "#/definitions/ResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional attributes of the entity.",
@@ -5400,7 +5426,8 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-nullable": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -5408,7 +5435,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5441,11 +5469,13 @@
         },
         "defaults": {
           "description": "Default values for Batch Endpoint",
-          "$ref": "#/definitions/BatchEndpointDefaults"
+          "$ref": "#/definitions/BatchEndpointDefaults",
+          "x-nullable": true
         },
         "description": {
           "description": "Description of the inference endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "keys": {
           "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
@@ -5453,14 +5483,17 @@
           "x-ms-mutability": [
             "create"
           ],
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "scoringUri": {
           "format": "uri",
@@ -5469,7 +5502,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "swaggerUri": {
           "format": "uri",
@@ -5478,7 +5512,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5489,7 +5524,8 @@
       "properties": {
         "deploymentName": {
           "description": "Name of the deployment that will be default for the endpoint.\r\nThis deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5508,11 +5544,13 @@
       "properties": {
         "identity": {
           "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "#/definitions/ResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional attributes of the entity.",
@@ -5520,7 +5558,8 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-nullable": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -5528,7 +5567,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5590,7 +5630,8 @@
         "timeout": {
           "format": "duration",
           "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5646,7 +5687,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5668,7 +5710,8 @@
       "properties": {
         "authorityUrl": {
           "description": "Authority URL used for authentication.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clientId": {
           "format": "uuid",
@@ -5677,7 +5720,8 @@
         },
         "resourceUrl": {
           "description": "Resource the service principal has access to.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "secrets": {
           "description": "Service principal secrets.",
@@ -5713,7 +5757,8 @@
       "properties": {
         "certificate": {
           "description": "Service principal certificate.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Certificate",
@@ -5732,7 +5777,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "scoringScript": {
           "description": "The script to execute on startup. eg. \"score.py\"",
@@ -5753,7 +5799,8 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "nextVersion": {
           "description": "The next auto incremental version",
@@ -5761,21 +5808,26 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5802,7 +5854,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5832,11 +5885,13 @@
         "codeUri": {
           "description": "Uri where code is located",
           "type": "string",
-          "example": "https://blobStorage/folderName"
+          "example": "https://blobStorage/folderName",
+          "x-nullable": true
         },
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
@@ -5850,15 +5905,19 @@
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5885,7 +5944,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5926,7 +5986,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "command": {
           "description": "The command to execute on startup of the job. eg. \"python train.py\"",
@@ -5944,7 +6005,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "environmentId": {
           "description": "The ARM resource ID of the Environment specification for the job.",
@@ -5952,18 +6014,21 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "environmentVariables": {
           "description": "Environment variables included in the job.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "identity": {
           "description": "Identity configuration. If set, this should be one of AmlToken, ManagedIdentity, or null.\r\nDefaults to AmlToken if null.",
@@ -5971,19 +6036,22 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "inputs": {
           "description": "Mapping of input data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
             "description": "Command job definition.",
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "limits": {
           "description": "Command Job limit.",
@@ -5991,28 +6059,34 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "outputs": {
           "description": "Mapping of output data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
             "description": "Job output definition container information on where to find job output/logs.",
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "parameters": {
           "description": "Input parameters.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "x-nullable": true
+          },
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
@@ -6020,7 +6094,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Command",
@@ -6038,7 +6113,8 @@
         "timeout": {
           "format": "duration",
           "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6049,21 +6125,26 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6090,7 +6171,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6123,7 +6205,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "computeId": {
           "description": "ARM resource ID of the compute resource.",
@@ -6131,31 +6214,36 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "inputs": {
           "description": "Data input set for job.",
           "type": "object",
           "additionalProperties": {
             "description": "Command job definition.",
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "outputs": {
           "description": "Data output set for job.",
           "type": "object",
           "additionalProperties": {
             "description": "Job output definition container information on where to find job output/logs.",
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "overrides": {
           "description": "Override component default settings",
@@ -6163,7 +6251,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6178,11 +6267,13 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
@@ -6196,15 +6287,19 @@
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6231,7 +6326,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6265,7 +6361,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "instanceType": {
           "description": "SKU type to run on.",
@@ -6273,7 +6370,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "isLocal": {
           "description": "Set to true for jobs running on local compute.",
@@ -6289,14 +6387,17 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional properties.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "target": {
           "description": "ARM resource ID of the compute resource.",
@@ -6304,7 +6405,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6348,11 +6450,13 @@
       "properties": {
         "datastoreId": {
           "description": "ARM resource ID of the datastore where the asset is located.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "path": {
           "description": "The path of the file/directory in the datastore.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "DataPath",
@@ -6364,7 +6468,8 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "nextVersion": {
           "description": "The next auto incremental version",
@@ -6372,21 +6477,26 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6413,7 +6523,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6445,7 +6556,8 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
@@ -6470,15 +6582,19 @@
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6505,7 +6621,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6546,7 +6663,8 @@
         },
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "isDefault": {
           "description": "Readonly property to indicate if datastore is the workspace default datastore",
@@ -6560,15 +6678,19 @@
           "description": "Datastore properties",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "discriminator": "datastoreType"
@@ -6609,7 +6731,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6676,7 +6799,8 @@
       "properties": {
         "content": {
           "description": "The retrieved online deployment logs.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6691,7 +6815,8 @@
         "tail": {
           "format": "int32",
           "description": "The maximum number of lines to tail.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6721,15 +6846,18 @@
         "resourceType": {
           "description": "Gets or sets the resource type name.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "sku": {
           "description": "Gets or sets the Sku.",
-          "$ref": "#/definitions/SkuSettingTODO"
+          "$ref": "#/definitions/SkuSettingTODO",
+          "x-nullable": true
         },
         "skuCapacity": {
           "description": "Gets or sets the Sku Capacity.",
-          "$ref": "#/definitions/SkuCapacityTODO"
+          "$ref": "#/definitions/SkuCapacityTODO",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6831,7 +6959,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "secondaryKey": {
           "description": "The secondary key.",
@@ -6839,7 +6968,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6864,7 +6994,8 @@
       "properties": {
         "accessToken": {
           "description": "Access token.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "expiryTimeUtc": {
           "format": "int64",
@@ -6878,7 +7009,8 @@
         },
         "tokenType": {
           "description": "Access token type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6920,7 +7052,8 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "nextVersion": {
           "description": "The next auto incremental version",
@@ -6928,21 +7061,26 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6969,7 +7107,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7027,7 +7166,8 @@
         },
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentType": {
           "description": "Environment type is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
@@ -7074,15 +7214,19 @@
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7109,7 +7253,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7139,8 +7284,10 @@
           "description": "Model flavor-specific data.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7266,11 +7413,13 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "displayName": {
           "description": "Display name of job.",
@@ -7278,7 +7427,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "experimentName": {
           "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
@@ -7286,7 +7436,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "jobType": {
           "description": "Specifies the type of job.",
@@ -7302,21 +7453,26 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "services": {
           "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/JobService"
-          }
+            "$ref": "#/definitions/JobService",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "status": {
           "description": "Status of the job.",
@@ -7330,8 +7486,10 @@
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "discriminator": "jobType"
@@ -7358,7 +7516,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7394,7 +7553,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "jobInputType": {
           "description": "Specifies the type of job.",
@@ -7451,7 +7611,8 @@
       "properties": {
         "value": {
           "description": "Literal value for the input.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Literal",
@@ -7528,7 +7689,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "jobOutputType": {
           "description": "Specifies the type of job.",
@@ -7598,7 +7760,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Uri",
@@ -7614,7 +7777,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "errorMessage": {
           "description": "Any error in the service.",
@@ -7622,7 +7786,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "jobServiceType": {
           "description": "Endpoint type.",
@@ -7630,7 +7795,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "port": {
           "format": "int32",
@@ -7639,14 +7805,17 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional properties to set on the endpoint.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "status": {
           "description": "Status of endpoint.",
@@ -7654,7 +7823,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7710,7 +7880,8 @@
       "properties": {
         "containerResourceRequirements": {
           "description": "The resource requirements for the container (cpu and memory).",
-          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "K8S",
@@ -7744,7 +7915,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "objectId": {
           "format": "uuid",
@@ -7753,7 +7925,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "resourceId": {
           "description": "Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.",
@@ -7761,7 +7934,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -7778,11 +7952,13 @@
       "properties": {
         "modelMountPath": {
           "description": "The path to mount the model in custom container.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -7804,21 +7980,26 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7845,7 +8026,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7892,14 +8074,17 @@
       "properties": {
         "description": {
           "description": "The asset description text.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "flavors": {
           "description": "Mapping of model flavors to their properties.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/FlavorData"
-          }
+            "$ref": "#/definitions/FlavorData",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
@@ -7922,15 +8107,19 @@
           "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7957,7 +8146,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7996,7 +8186,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Mpi",
@@ -8045,11 +8236,13 @@
         },
         "codeConfiguration": {
           "description": "Code configuration for the endpoint deployment.",
-          "$ref": "#/definitions/CodeConfiguration"
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
         },
         "description": {
           "description": "Description of the endpoint deployment.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "endpointComputeType": {
           "description": "The compute type of the endpoint.",
@@ -8057,14 +8250,17 @@
         },
         "environmentId": {
           "description": "ARM resource ID of the environment specification for the endpoint deployment.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentVariables": {
           "description": "Environment variables configuration for the deployment.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "instanceType": {
           "description": "Compute instance type.",
@@ -8072,22 +8268,27 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "livenessProbe": {
           "description": "Liveness probe monitors the health of the container regularly.",
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "model": {
           "description": "The URI path to the model.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
@@ -8099,11 +8300,13 @@
         },
         "requestSettings": {
           "description": "Request settings for the deployment.",
-          "$ref": "#/definitions/OnlineRequestSettings"
+          "$ref": "#/definitions/OnlineRequestSettings",
+          "x-nullable": true
         },
         "scaleSettings": {
           "description": "Scale settings for the deployment.",
-          "$ref": "#/definitions/OnlineScaleSettings"
+          "$ref": "#/definitions/OnlineScaleSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType"
@@ -8122,11 +8325,13 @@
       "properties": {
         "identity": {
           "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "#/definitions/ResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional attributes of the entity.",
@@ -8134,7 +8339,8 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-nullable": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8142,7 +8348,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8182,11 +8389,13 @@
         },
         "compute": {
           "description": "ARM resource ID of the compute if it exists.\r\noptional",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "description": {
           "description": "Description of the inference endpoint.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "keys": {
           "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
@@ -8194,14 +8403,17 @@
           "x-ms-mutability": [
             "create"
           ],
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-nullable": true
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
@@ -8218,7 +8430,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "swaggerUri": {
           "format": "uri",
@@ -8227,7 +8440,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
@@ -8235,7 +8449,8 @@
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
-          }
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8254,11 +8469,13 @@
       "properties": {
         "identity": {
           "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "#/definitions/ResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "description": "Additional attributes of the entity.",
@@ -8266,7 +8483,8 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-nullable": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8274,7 +8492,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8387,11 +8606,13 @@
       "properties": {
         "jobId": {
           "description": "ARM resource ID of the job.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "path": {
           "description": "The path of the file/directory in the job output.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "OutputPath",
@@ -8403,7 +8624,8 @@
       "properties": {
         "description": {
           "description": "Description of the endpoint deployment.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8414,11 +8636,13 @@
       "properties": {
         "identity": {
           "description": "Strictly used in update requests.",
-          "$ref": "#/definitions/PartialResourceIdentity"
+          "$ref": "#/definitions/PartialResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "location": {
           "description": "The geo-location where the resource lives.",
@@ -8426,17 +8650,20 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialBatchDeployment"
+          "$ref": "#/definitions/PartialBatchDeployment",
+          "x-nullable": true
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/PartialSku"
+          "$ref": "#/definitions/PartialSku",
+          "x-nullable": true
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -8448,7 +8675,8 @@
       "properties": {
         "defaults": {
           "description": "Default values for Batch Endpoint",
-          "$ref": "#/definitions/BatchEndpointDefaults"
+          "$ref": "#/definitions/BatchEndpointDefaults",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8459,11 +8687,13 @@
       "properties": {
         "identity": {
           "description": "Strictly used in update requests.",
-          "$ref": "#/definitions/PartialResourceIdentity"
+          "$ref": "#/definitions/PartialResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "location": {
           "description": "The geo-location where the resource lives.",
@@ -8471,17 +8701,20 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialBatchEndpoint"
+          "$ref": "#/definitions/PartialBatchEndpoint",
+          "x-nullable": true
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/PartialSku"
+          "$ref": "#/definitions/PartialSku",
+          "x-nullable": true
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -8495,35 +8728,41 @@
           "format": "double",
           "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
-          "example": 4
+          "example": 4,
+          "x-nullable": true
         },
         "cpuLimit": {
           "format": "double",
           "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
-          "example": 4
+          "example": 4,
+          "x-nullable": true
         },
         "fpga": {
           "format": "int32",
           "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "gpu": {
           "format": "int32",
           "description": "The number of GPU cores in the container.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "memoryInGB": {
           "format": "double",
           "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
-          "example": 64
+          "example": 64,
+          "x-nullable": true
         },
         "memoryInGBLimit": {
           "format": "double",
           "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
-          "example": 64
+          "example": 64,
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8549,7 +8788,8 @@
       "properties": {
         "containerResourceRequirements": {
           "description": "The resource requirements for the container (cpu and memory).",
-          "$ref": "#/definitions/PartialContainerResourceRequirements"
+          "$ref": "#/definitions/PartialContainerResourceRequirements",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "K8S",
@@ -8566,11 +8806,13 @@
       "properties": {
         "modelMountPath": {
           "description": "The path to mount the model in custom container.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/PartialProbeSettings"
+          "$ref": "#/definitions/PartialProbeSettings",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -8585,7 +8827,8 @@
       "properties": {
         "appInsightsEnabled": {
           "description": "If true, enables Application Insights logging.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "endpointComputeType": {
           "description": "The compute type of the endpoint.",
@@ -8593,15 +8836,18 @@
         },
         "livenessProbe": {
           "description": "Liveness probe monitors the health of the container regularly.",
-          "$ref": "#/definitions/PartialProbeSettings"
+          "$ref": "#/definitions/PartialProbeSettings",
+          "x-nullable": true
         },
         "requestSettings": {
           "description": "Request settings for the deployment.",
-          "$ref": "#/definitions/PartialOnlineRequestSettings"
+          "$ref": "#/definitions/PartialOnlineRequestSettings",
+          "x-nullable": true
         },
         "scaleSettings": {
           "description": "Scale settings for the deployment.",
-          "$ref": "#/definitions/PartialOnlineScaleSettings"
+          "$ref": "#/definitions/PartialOnlineScaleSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType"
@@ -8612,11 +8858,13 @@
       "properties": {
         "identity": {
           "description": "Strictly used in update requests.",
-          "$ref": "#/definitions/PartialResourceIdentity"
+          "$ref": "#/definitions/PartialResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "location": {
           "description": "The geo-location where the resource lives.",
@@ -8624,17 +8872,20 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialOnlineDeployment"
+          "$ref": "#/definitions/PartialOnlineDeployment",
+          "x-nullable": true
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/PartialSku"
+          "$ref": "#/definitions/PartialSku",
+          "x-nullable": true
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -8650,7 +8901,8 @@
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
-          }
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8661,11 +8913,13 @@
       "properties": {
         "identity": {
           "description": "Strictly used in update requests.",
-          "$ref": "#/definitions/PartialResourceIdentity"
+          "$ref": "#/definitions/PartialResourceIdentity",
+          "x-nullable": true
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "location": {
           "description": "The geo-location where the resource lives.",
@@ -8673,17 +8927,20 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialOnlineEndpoint"
+          "$ref": "#/definitions/PartialOnlineEndpoint",
+          "x-nullable": true
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/PartialSku"
+          "$ref": "#/definitions/PartialSku",
+          "x-nullable": true
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -8696,17 +8953,20 @@
         "maxConcurrentRequestsPerInstance": {
           "format": "int32",
           "description": "The number of maximum concurrent requests per node allowed per deployment. Defaults to 1.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "maxQueueWait": {
           "format": "duration",
           "description": "The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "requestTimeout": {
           "format": "duration",
           "description": "The scoring timeout in ISO 8601 format.\r\nDefaults to 5000ms.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8732,27 +8992,32 @@
         "failureThreshold": {
           "format": "int32",
           "description": "The number of failures to allow before returning an unhealthy status.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "initialDelay": {
           "format": "duration",
           "description": "The delay before the first probe in ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "period": {
           "format": "duration",
           "description": "The length of time between probes in ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "successThreshold": {
           "format": "int32",
           "description": "The number of successful probes before returning a healthy status.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "timeout": {
           "format": "duration",
           "description": "The probe timeout in ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8768,7 +9033,8 @@
           "description": "Dictionary of the user assigned identities, key is ARM resource ID of the UAI.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/PartialUserAssignedIdentityMeta"
+            "$ref": "#/definitions/PartialUserAssignedIdentityMeta",
+            "x-nullable": true
           }
         }
       },
@@ -8813,22 +9079,26 @@
         "maxInstances": {
           "format": "int32",
           "description": "The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "minInstances": {
           "format": "int32",
           "description": "The minimum number of instances to always be present.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "pollingInterval": {
           "format": "duration",
           "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "targetUtilizationPercentage": {
           "format": "int32",
           "description": "Target CPU usage for the autoscaler.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "TargetUtilization",
@@ -8840,11 +9110,13 @@
       "properties": {
         "clientId": {
           "description": "Aka application ID, a unique identifier generated by Azure AD that is tied to an application and service principal during its initial provisioning.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "principalId": {
           "description": "The object ID of the service principal object for your managed identity that is used to grant role-based access to an Azure resource.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8868,42 +9140,49 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "componentJobs": {
           "description": "JobDefinition set for PipelineStepJobs",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ComponentJob"
+            "$ref": "#/definitions/ComponentJob",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "inputs": {
           "description": "Data input set for jobs.",
           "type": "object",
           "additionalProperties": {
             "description": "Command job definition.",
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "outputs": {
           "description": "Data output set for jobs.",
           "type": "object",
           "additionalProperties": {
             "description": "Job output definition container information on where to find job output/logs.",
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "settings": {
           "description": "Pipeline settings, for things like ContinueRunOnStepFailure etc.",
@@ -8911,7 +9190,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Pipeline",
@@ -8930,7 +9210,8 @@
         "initialDelay": {
           "format": "duration",
           "description": "The delay before the first probe in ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "period": {
           "format": "duration",
@@ -8965,7 +9246,8 @@
         "processCountPerInstance": {
           "format": "int32",
           "description": "Number of processes per node.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "PyTorch",
@@ -8997,7 +9279,8 @@
         },
         "keyValue": {
           "description": "The value the key is set to.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -9022,8 +9305,10 @@
           "description": "Additional properties bag",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "resourceConfigurationType": {
           "description": "Specifies the type of resource configuration.",
@@ -9054,7 +9339,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "tenantId": {
           "description": "AAD Tenant where this identity lives.",
@@ -9062,7 +9348,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "type": {
           "description": "Defines values for a ResourceIdentity's type.",
@@ -9072,7 +9359,8 @@
           "description": "Dictionary of the user assigned identities, key is ARM resource ID of the UAI.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityMeta"
+            "$ref": "#/definitions/UserAssignedIdentityMeta",
+            "x-nullable": true
           }
         }
       },
@@ -9162,7 +9450,8 @@
       "properties": {
         "sasToken": {
           "description": "Storage container SAS token.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Sas",
@@ -9211,7 +9500,8 @@
       "properties": {
         "authorityUrl": {
           "description": "Authority URL used for authentication.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clientId": {
           "format": "uuid",
@@ -9220,7 +9510,8 @@
         },
         "resourceUrl": {
           "description": "Resource the service principal has access to.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "secrets": {
           "description": "Service principal secrets.",
@@ -9251,7 +9542,8 @@
       "properties": {
         "clientSecret": {
           "description": "Service principal secret.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal",
@@ -9347,7 +9639,8 @@
       "properties": {
         "earlyTermination": {
           "description": "Early termination policies enable canceling poor-performing runs before they complete",
-          "$ref": "#/definitions/EarlyTerminationPolicy"
+          "$ref": "#/definitions/EarlyTerminationPolicy",
+          "x-nullable": true
         },
         "identity": {
           "description": "Identity configuration. If set, this should be one of AmlToken, ManagedIdentity or null.\r\nDefaults to AmlToken if null.",
@@ -9355,19 +9648,22 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "inputs": {
           "description": "Mapping of input data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
             "description": "Command job definition.",
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "limits": {
           "description": "Sweep Job limit.",
@@ -9375,7 +9671,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "objective": {
           "description": "Optimization objective.",
@@ -9386,12 +9683,14 @@
           "type": "object",
           "additionalProperties": {
             "description": "Job output definition container information on where to find job output/logs.",
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "samplingAlgorithm": {
           "description": "Type of the hyperparameter sampling algorithms",
@@ -9401,12 +9700,14 @@
           "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
           "type": "object",
           "additionalProperties": {
-            "type": "object"
+            "type": "object",
+            "x-nullable": true
           }
         },
         "trial": {
           "description": "Trial component definition.",
-          "$ref": "#/definitions/TrialComponent"
+          "$ref": "#/definitions/TrialComponent",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Sweep",
@@ -9424,22 +9725,26 @@
         "maxConcurrentTrials": {
           "format": "int32",
           "description": "Sweep Job max concurrent trials.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "maxTotalTrials": {
           "format": "int32",
           "description": "Sweep Job max total trials.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "timeout": {
           "format": "duration",
           "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "trialTimeout": {
           "format": "duration",
           "description": "Sweep Job Trial timeout value.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -9505,7 +9810,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "TensorFlow",
@@ -9524,7 +9830,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "command": {
           "description": "The command to execute on startup of the job. eg. \"python train.py\"",
@@ -9542,22 +9849,26 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "environmentId": {
           "description": "The ARM resource ID of the Environment specification for the job.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "environmentVariables": {
           "description": "Environment variables included in the job.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
@@ -9565,7 +9876,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "timeout": {
           "format": "duration",
@@ -9574,7 +9886,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -9630,11 +9943,13 @@
       "properties": {
         "clientId": {
           "description": "Aka application ID, a unique identifier generated by Azure AD that is tied to an application and service principal during its initial provisioning.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "principalId": {
           "description": "The object ID of the service principal object for your managed identity that is used to grant role-based access to an Azure resource.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
