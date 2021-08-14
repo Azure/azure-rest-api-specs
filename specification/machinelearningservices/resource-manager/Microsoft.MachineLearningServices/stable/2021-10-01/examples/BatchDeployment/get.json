@@ -1,88 +1,85 @@
 {
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "resourceGroup-1234",
-    "workspaceName": "testworkspace",
-    "endpointName": "testBatchEndpoint",
-    "deploymentName": "testBatchDeployment",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "endpointName": "testEndpointName",
+    "deploymentName": "testDeploymentName",
     "api-version": "2021-10-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testBatchEndpoint/deployments/testBatchDeployment",
-        "name": "testBatchDeployment",
-        "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/deployments",
-        "tags": {
-          "additionalProp1": "string",
-          "additionalProp2": "string",
-          "additionalProp3": "string"
-        },
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
-              "clientId": "string"
-            }
-          }
-        },
+        "id": "string",
+        "name": "string",
+        "type": "string",
         "properties": {
+          "description": "string",
+          "properties": {
+            "string": "string"
+          },
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
+          },
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
           "compute": {
-            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/testcompute",
-            "instanceCount": 0,
+            "target": "string",
+            "instanceCount": 1,
             "isLocal": false,
             "location": "string",
             "instanceType": "string",
             "properties": {
-              "additionalProp1": "string",
-              "additionalProp2": "string",
-              "additionalProp3": "string"
+              "string": "string"
             }
           },
-          "errorThreshold": 0,
+          "errorThreshold": 1,
           "retrySettings": {
-            "maxRetries": 0,
-            "timeout": "string"
+            "maxRetries": 1,
+            "timeout": "PT5M"
           },
-          "partitionKeys": [
-            "string"
-          ],
-          "miniBatchSize": 0,
+          "miniBatchSize": 1,
           "loggingLevel": "Info",
-          "outputConfiguration": {
-            "outputAction": "SummaryOnly",
-            "appendRowFileName": "string"
-          },
-          "description": "string",
-          "properties": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
-          },
           "model": {
             "referenceType": "Id",
-            "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/testmodel/versions/1"
+            "assetId": "string"
           },
-          "codeConfiguration": {
-            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testcode/versions/1",
-            "scoringScript": "score.py"
-          },
-          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/myenv",
-          "environmentVariables": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
-          }
+          "processsCountPerInstance": 1,
+          "outputAction": "SummaryOnly",
+          "outputFileName": "string"
         },
         "systemData": {
-          "createdAt": "2021-03-25T20:46:47.062Z",
+          "createdAt": "2020-01-01T12:34:56.999Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2021-03-25T20:46:47.062Z",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
+        },
+        "tags": {},
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string",
+          "userAssignedIdentities": {
+            "string": {
+              "principalId": "string",
+              "clientId": "string"
+            }
+          }
+        },
+        "sku": {
+          "name": "string",
+          "tier": "Free",
+          "size": "string",
+          "family": "string",
+          "capacity": 1
         }
       }
     }
