@@ -5400,7 +5400,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -5520,7 +5520,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8134,7 +8134,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8266,7 +8266,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8430,7 +8430,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8475,7 +8475,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8577,7 +8577,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -8626,7 +8626,7 @@
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
         },
         "tags": {
           "description": "Resource tags.",
@@ -9044,38 +9044,6 @@
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal",
-      "additionalProperties": false
-    },
-    "Sku": {
-      "description": "Common SKU defintion.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "capacity": {
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
-          "type": "integer"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "size": {
-          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
-          "$ref": "#/definitions/SkuTier"
-        }
-      },
       "additionalProperties": false
     },
     "SkuCapacity": {
