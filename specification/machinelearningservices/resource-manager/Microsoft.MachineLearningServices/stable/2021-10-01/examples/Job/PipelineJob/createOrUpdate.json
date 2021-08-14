@@ -1,0 +1,495 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "id": "string",
+    "api-version": "2021-10-01",
+    "body": {
+      "properties": {
+        "description": "string",
+        "tags": {
+          "string": "string"
+        },
+        "properties": {
+          "string": "string"
+        },
+        "displayName": "string",
+        "jobType": "AutoML",
+        "generalSettings": {
+          "primaryMetric": "AUCWeighted",
+          "enableModelExplainability": false,
+          "taskType": "Classification",
+          "logVerbosity": "NotSet"
+        },
+        "limitSettings": {
+          "trialTimeout": "PT5M",
+          "maxTrials": 1,
+          "timeout": "PT5M",
+          "maxConcurrentTrials": 1,
+          "maxCoresPerTrial": 1,
+          "exitScore": 3.14,
+          "enableEarlyTermination": false
+        },
+        "dataSettings": {
+          "targetColumnName": "string",
+          "weightColumnName": "string",
+          "trainingData": {
+            "datasetArmId": "string"
+          },
+          "validationData": {
+            "datasetArmId": "string",
+            "nCrossValidations": 1,
+            "validationDataSize": 3.14,
+            "cvSplitColumnNames": [
+              "string"
+            ]
+          },
+          "testData": {
+            "datasetArmId": "string",
+            "testDataSize": 3.14
+          }
+        },
+        "featurizationSettings": {
+          "featurizationConfig": {
+            "mode": "Auto",
+            "blockedTransformers": [
+              "string"
+            ],
+            "columnPurposes": {
+              "string": "string"
+            },
+            "dropColumns": [
+              "string"
+            ],
+            "transformerParams": {
+              "string": [
+                {
+                  "fields": [
+                    "string"
+                  ],
+                  "parameters": {
+                    "string": {
+                      "Key": "Value"
+                    }
+                  }
+                }
+              ]
+            },
+            "datasetLanguage": "string"
+          },
+          "enableDnnFeaturization": false
+        },
+        "forecastingSettings": {
+          "countryOrRegionForHolidays": "string",
+          "timeColumnName": "string",
+          "targetLags": {
+            "mode": "Auto",
+            "values": [
+              1
+            ]
+          },
+          "targetRollingWindowSize": {
+            "mode": "Auto",
+            "value": 1
+          },
+          "forecastHorizon": {
+            "mode": "Auto",
+            "value": 1
+          },
+          "timeSeriesIdColumnNames": [
+            "string"
+          ],
+          "frequency": "string",
+          "featureLags": "string",
+          "seasonality": {
+            "mode": "Auto",
+            "value": 1
+          },
+          "shortSeriesHandlingConfig": "Auto",
+          "useStl": "Season",
+          "targetAggregateFunction": "Sum"
+        },
+        "trainingSettings": {
+          "blockListModels": [
+            "string"
+          ],
+          "allowListModels": [
+            "string"
+          ],
+          "enableDnnTraining": false,
+          "enableOnnxCompatibleModels": false,
+          "stackEnsembleSettings": {
+            "stackMetaLearnerType": "None",
+            "stackMetaLearnerTrainPercentage": 3.14,
+            "stackMetaLearnerArgs": {
+              "string": {
+                "Key": "Value"
+              }
+            }
+          },
+          "enableStackEnsemble": false,
+          "enableVoteEnsemble": false,
+          "ensembleModelDownloadTimeout": "PT5M"
+        },
+        "compute": {
+          "target": "string",
+          "instanceCount": 1,
+          "isLocal": false,
+          "location": "string",
+          "instanceType": "string",
+          "properties": {
+            "string": "string"
+          }
+        },
+        "priority": 1,
+        "experimentName": "string",
+        "output": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "description": "string",
+          "tags": {
+            "string": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Succeeded",
+          "displayName": "string",
+          "interactionEndpoints": {
+            "string": {
+              "jobEndpointType": "string",
+              "port": 1,
+              "endpoint": "string",
+              "properties": {
+                "string": "string"
+              }
+            }
+          },
+          "jobType": "AutoML",
+          "status": "NotStarted",
+          "generalSettings": {
+            "primaryMetric": "AUCWeighted",
+            "enableModelExplainability": false,
+            "taskType": "Classification",
+            "logVerbosity": "NotSet"
+          },
+          "limitSettings": {
+            "trialTimeout": "PT5M",
+            "maxTrials": 1,
+            "timeout": "PT5M",
+            "maxConcurrentTrials": 1,
+            "maxCoresPerTrial": 1,
+            "exitScore": 3.14,
+            "enableEarlyTermination": false
+          },
+          "dataSettings": {
+            "targetColumnName": "string",
+            "weightColumnName": "string",
+            "trainingData": {
+              "datasetArmId": "string"
+            },
+            "validationData": {
+              "datasetArmId": "string",
+              "nCrossValidations": 1,
+              "validationDataSize": 3.14,
+              "cvSplitColumnNames": [
+                "string"
+              ]
+            },
+            "testData": {
+              "datasetArmId": "string",
+              "testDataSize": 3.14
+            }
+          },
+          "featurizationSettings": {
+            "featurizationConfig": {
+              "mode": "Auto",
+              "blockedTransformers": [
+                "string"
+              ],
+              "columnPurposes": {
+                "string": "string"
+              },
+              "dropColumns": [
+                "string"
+              ],
+              "transformerParams": {
+                "string": [
+                  {
+                    "fields": [
+                      "string"
+                    ],
+                    "parameters": {
+                      "string": {
+                        "Key": "Value"
+                      }
+                    }
+                  }
+                ]
+              },
+              "datasetLanguage": "string"
+            },
+            "enableDnnFeaturization": false
+          },
+          "forecastingSettings": {
+            "countryOrRegionForHolidays": "string",
+            "timeColumnName": "string",
+            "targetLags": {
+              "mode": "Auto",
+              "values": [
+                1
+              ]
+            },
+            "targetRollingWindowSize": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "forecastHorizon": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "timeSeriesIdColumnNames": [
+              "string"
+            ],
+            "frequency": "string",
+            "featureLags": "string",
+            "seasonality": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "shortSeriesHandlingConfig": "Auto",
+            "useStl": "Season",
+            "targetAggregateFunction": "Sum"
+          },
+          "trainingSettings": {
+            "blockListModels": [
+              "string"
+            ],
+            "allowListModels": [
+              "string"
+            ],
+            "enableDnnTraining": false,
+            "enableOnnxCompatibleModels": false,
+            "stackEnsembleSettings": {
+              "stackMetaLearnerType": "None",
+              "stackMetaLearnerTrainPercentage": 3.14,
+              "stackMetaLearnerArgs": {
+                "string": {
+                  "Key": "Value"
+                }
+              }
+            },
+            "enableStackEnsemble": false,
+            "enableVoteEnsemble": false,
+            "ensembleModelDownloadTimeout": "PT5M"
+          },
+          "compute": {
+            "target": "string",
+            "instanceCount": 1,
+            "isLocal": false,
+            "location": "string",
+            "instanceType": "string",
+            "properties": {
+              "string": "string"
+            }
+          },
+          "priority": 1,
+          "experimentName": "string",
+          "output": {
+            "datastoreId": "string",
+            "path": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "description": "string",
+          "tags": {
+            "string": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Succeeded",
+          "displayName": "string",
+          "interactionEndpoints": {
+            "string": {
+              "jobEndpointType": "string",
+              "port": 1,
+              "endpoint": "string",
+              "properties": {
+                "string": "string"
+              }
+            }
+          },
+          "jobType": "AutoML",
+          "status": "NotStarted",
+          "generalSettings": {
+            "primaryMetric": "AUCWeighted",
+            "enableModelExplainability": false,
+            "taskType": "Classification",
+            "logVerbosity": "NotSet"
+          },
+          "limitSettings": {
+            "trialTimeout": "PT5M",
+            "maxTrials": 1,
+            "timeout": "PT5M",
+            "maxConcurrentTrials": 1,
+            "maxCoresPerTrial": 1,
+            "exitScore": 3.14,
+            "enableEarlyTermination": false
+          },
+          "dataSettings": {
+            "targetColumnName": "string",
+            "weightColumnName": "string",
+            "trainingData": {
+              "datasetArmId": "string"
+            },
+            "validationData": {
+              "datasetArmId": "string",
+              "nCrossValidations": 1,
+              "validationDataSize": 3.14,
+              "cvSplitColumnNames": [
+                "string"
+              ]
+            },
+            "testData": {
+              "datasetArmId": "string",
+              "testDataSize": 3.14
+            }
+          },
+          "featurizationSettings": {
+            "featurizationConfig": {
+              "mode": "Auto",
+              "blockedTransformers": [
+                "string"
+              ],
+              "columnPurposes": {
+                "string": "string"
+              },
+              "dropColumns": [
+                "string"
+              ],
+              "transformerParams": {
+                "string": [
+                  {
+                    "fields": [
+                      "string"
+                    ],
+                    "parameters": {
+                      "string": {
+                        "Key": "Value"
+                      }
+                    }
+                  }
+                ]
+              },
+              "datasetLanguage": "string"
+            },
+            "enableDnnFeaturization": false
+          },
+          "forecastingSettings": {
+            "countryOrRegionForHolidays": "string",
+            "timeColumnName": "string",
+            "targetLags": {
+              "mode": "Auto",
+              "values": [
+                1
+              ]
+            },
+            "targetRollingWindowSize": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "forecastHorizon": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "timeSeriesIdColumnNames": [
+              "string"
+            ],
+            "frequency": "string",
+            "featureLags": "string",
+            "seasonality": {
+              "mode": "Auto",
+              "value": 1
+            },
+            "shortSeriesHandlingConfig": "Auto",
+            "useStl": "Season",
+            "targetAggregateFunction": "Sum"
+          },
+          "trainingSettings": {
+            "blockListModels": [
+              "string"
+            ],
+            "allowListModels": [
+              "string"
+            ],
+            "enableDnnTraining": false,
+            "enableOnnxCompatibleModels": false,
+            "stackEnsembleSettings": {
+              "stackMetaLearnerType": "None",
+              "stackMetaLearnerTrainPercentage": 3.14,
+              "stackMetaLearnerArgs": {
+                "string": {
+                  "Key": "Value"
+                }
+              }
+            },
+            "enableStackEnsemble": false,
+            "enableVoteEnsemble": false,
+            "ensembleModelDownloadTimeout": "PT5M"
+          },
+          "compute": {
+            "target": "string",
+            "instanceCount": 1,
+            "isLocal": false,
+            "location": "string",
+            "instanceType": "string",
+            "properties": {
+              "string": "string"
+            }
+          },
+          "priority": 1,
+          "experimentName": "string",
+          "output": {
+            "datastoreId": "string",
+            "path": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
