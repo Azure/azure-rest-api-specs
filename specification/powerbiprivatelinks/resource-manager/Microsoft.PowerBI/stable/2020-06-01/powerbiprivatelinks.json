@@ -117,13 +117,13 @@
         "tags": [
           "PrivateLinkServiceResourceOperationResults"
         ],
+        "description": "Gets operation result of Private Link Service Resources for Power BI.",
         "operationId": "PrivateLinkServiceResourceOperationResults_Get",
         "x-ms-examples": {
           "Result of operation on private link resources": {
             "$ref": "./examples/PrivateLinkServiceResourceOperationResults_Get.json"
           }
         },
-        "description": "Gets operation result of Private Link Service Resources for Power BI.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -142,12 +142,22 @@
               "$ref": "#/definitions/AsyncOperationDetail"
             }
           },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationDetail"
+            }
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": "An error response received from Power BI service."
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -248,6 +258,66 @@
         "x-ms-examples": {
           "Creates or updates private link service resource": {
             "$ref": "./examples/PowerBIResources_Create.json"
+          }
+        },
+        "description": "Creates or updates a Private Link Service Resource for Power BI.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientTenantIdHeaderParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Tenant resource to be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/TenantResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantResource"
+            },
+            "headers": {}
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TenantResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "An error response received from Power BI service."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PowerBIResources"
+        ],
+        "operationId": "PowerBIResources_Update",
+        "x-ms-examples": {
+          "Updates private link service resource": {
+            "$ref": "./examples/PowerBIResources_Update.json"
           }
         },
         "description": "Creates or updates a Private Link Service Resource for Power BI.",
