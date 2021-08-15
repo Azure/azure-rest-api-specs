@@ -414,6 +414,21 @@
           "example": "New",
           "description": "The status of the alert",
           "$ref": "#/definitions/AlertStatus"
+        },
+        "techniques": {
+          "description": "A list of of techniques that lead up to the intent/tactic",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": [
+            {
+              "$id": "T1005",
+              "Name": "Data from Local System",
+              "Description": "Adversaries may search local system sources, such as file systems or local databases, to find files of interest and sensitive data prior to Exfiltration.",
+              "Link": "https://attack.mitre.org/techniques/T1005"
+            }
+          ]
         }
       }
     },
