@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-05-01",
+    "version": "2021-08-01-preview",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -159,6 +159,60 @@
         "x-ms-examples": {
           "Mitigate": {
             "$ref": "./examples/JobMitigate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/markDevicesShipped": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Request to mark devices for a given job as shipped",
+        "operationId": "Jobs_MarkDevicesShipped",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "markDevicesShippedRequest",
+            "in": "body",
+            "description": "Mark Devices Shipped Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MarkDevicesShippedRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarkDevicesShipped": {
+            "$ref": "./examples/MarkDevicesShipped.json"
           }
         }
       }
@@ -1196,7 +1250,8 @@
             "enum": [
               "DataBox",
               "DataBoxDisk",
-              "DataBoxHeavy"
+              "DataBoxHeavy",
+              "DataBoxCustomerDisk"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1214,6 +1269,10 @@
                 {
                   "value": "DataBoxHeavy",
                   "description": "Data Box Heavy."
+                },
+                {
+                  "value": "DataBoxCustomerDisk",
+                  "description": "Data Box Customer Disk"
                 }
               ]
             }
@@ -1394,7 +1453,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1412,12 +1472,100 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy orders."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk orders."
               }
             ]
           }
         }
       },
       "discriminator": "copyLogDetailsType"
+    },
+    "DataBoxCustomerDiskCopyProgress": {
+      "description": "DataBox CustomerDisk Copy Progress",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyProgress"
+        }
+      ],
+      "properties": {
+        "diskSerialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyStatus": {
+          "description": "The Status of the copy",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "CompletedWithErrors",
+            "Failed",
+            "NotReturned",
+            "HardwareError",
+            "DeviceFormatted",
+            "DeviceMetadataModified",
+            "StorageAccountNotAccessible",
+            "UnsupportedData"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CopyStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasn't started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              },
+              {
+                "value": "HardwareError",
+                "description": "The Device has hit hardware issues."
+              },
+              {
+                "value": "DeviceFormatted",
+                "description": "Data copy failed. The Device was formatted by user."
+              },
+              {
+                "value": "DeviceMetadataModified",
+                "description": "Data copy failed. Device metadata was modified by user."
+              },
+              {
+                "value": "StorageAccountNotAccessible",
+                "description": "Data copy failed. Storage Account was not accessible during copy."
+              },
+              {
+                "value": "UnsupportedData",
+                "description": "Data copy failed. The Device data content is not supported."
+              }
+            ]
+          }
+        }
+      }
     },
     "CopyProgress": {
       "description": "Copy progress.",
@@ -1579,7 +1727,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1597,6 +1746,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -1647,6 +1800,89 @@
       },
       "x-ms-discriminator-value": "ValidateCreateOrderLimit"
     },
+    "DataBoxCustomerDiskJobDetails": {
+      "description": "Customer disk job details.",
+      "required": [
+        "jobDetailsType",
+        "returnPackageDetails"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "importDiskDetailsCollection": {
+          "description": "Contains the map of disk serial number to the disk details for import jobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ImportDiskDetails"
+          }
+        },
+        "exportDiskDetailsCollection": {
+          "description": "Contains the map of disk serial number to the disk details for export jobs.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/ExportDiskDetails"
+          }
+        },
+        "copyProgressList": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxCustomerDiskCopyProgress"
+          },
+          "readOnly": true
+        },
+        "deliveryPackageDetails": {
+          "description": "Delivery package shipping details.",
+          "$ref": "#/definitions/PackageCarrierInfo",
+          "readOnly": true
+        },
+        "returnPackageDetails": {
+          "description": "Return package shipping details.",
+          "$ref": "#/definitions/PackageCarrierDetails"
+        },
+        "xtPassthroughJobArmId": {
+          "description": "ARM id of the XT passthrough job.",
+          "type": "string"
+        },
+        "datacenterAddress": {
+          "$ref": "#/definitions/DatacenterAddressResponse",
+          "description": "Datacenter address for given sku in a region.",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxCustomerDisk"
+    },
+    "CustomerDiskJobSecrets": {
+      "description": "The secrets related to customer disk job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "diskSecrets": {
+          "description": "Contains the list of secrets object for that device.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskSecret"
+          },
+          "readOnly": true
+        },
+        "carrierAccountNumber": {
+          "description": "Carrier Account Number of the customer",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxCustomerDisk"
+    },
     "DataAccountDetails": {
       "description": "Account details of the data to be transferred",
       "required": [
@@ -1688,6 +1924,193 @@
       },
       "discriminator": "dataAccountType"
     },
+    "DatacenterAddressInstructionResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "datacenterAddressType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatacenterAddressResponse"
+        }
+      ],
+      "properties": {
+        "communicationInstruction": {
+          "description": "Data center communication instruction",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DatacenterAddressInstruction"
+    },
+    "DatacenterAddressLocationResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "datacenterAddressType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatacenterAddressResponse"
+        }
+      ],
+      "properties": {
+        "contactPersonName": {
+          "description": "Contact person name",
+          "type": "string",
+          "readOnly": true
+        },
+        "company": {
+          "description": "Company name",
+          "type": "string",
+          "readOnly": true
+        },
+        "street1": {
+          "description": "Street address line 1",
+          "type": "string",
+          "readOnly": true
+        },
+        "street2": {
+          "description": "Street address line 2",
+          "type": "string",
+          "readOnly": true
+        },
+        "street3": {
+          "description": "Street address line 3",
+          "type": "string",
+          "readOnly": true
+        },
+        "city": {
+          "description": "City name",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "name of the state",
+          "type": "string",
+          "readOnly": true
+        },
+        "zip": {
+          "description": "Zip code",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "name of the country",
+          "type": "string",
+          "readOnly": true
+        },
+        "phone": {
+          "description": "Phone number",
+          "type": "string",
+          "readOnly": true
+        },
+        "phoneExtension": {
+          "description": "Phone extension",
+          "type": "string",
+          "readOnly": true
+        },
+        "addressType": {
+          "description": "Address type",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalShippingInformation": {
+          "description": "Special instruction for shipping",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DatacenterAddressLocation"
+    },
+    "DatacenterAddressRequest": {
+      "description": "Request body to get the datacenter address.",
+      "required": [
+        "storageLocation",
+        "skuName"
+      ],
+      "type": "object",
+      "properties": {
+        "storageLocation": {
+          "description": "Storage location. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
+          "type": "string"
+        },
+        "skuName": {
+          "description": "Sku Name for which the data center address requested.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DatacenterAddressResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "datacenterAddressType"
+      ],
+      "type": "object",
+      "properties": {
+        "datacenterAddressType": {
+          "description": "Data center address type",
+          "enum": [
+            "DatacenterAddressLocation",
+            "DatacenterAddressInstruction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatacenterAddressType",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DatacenterAddressLocation",
+                "description": "Data center address location."
+              },
+              {
+                "value": "DatacenterAddressInstruction",
+                "description": "Data center address instruction."
+              }
+            ]
+          }
+        },
+        "supportedCarriersForReturnShipment": {
+          "description": "List of supported carriers for return shipment",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "datacenterAddressType"
+    },
     "DataBoxAccountCopyLogDetails": {
       "description": "Copy log details for a storage account of a DataBox job",
       "required": [
@@ -1717,6 +2140,36 @@
         }
       },
       "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxCustomerDiskCopyLogDetails": {
+      "description": "Copy Log Details for customer disk",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "diskSerialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorLogLink": {
+          "description": "Link for copy error logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "verboseLogLink": {
+          "description": "Link for copy verbose logs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxCustomerDisk"
     },
     "DataBoxDiskCopyLogDetails": {
       "description": "Copy Log Details for a disk",
@@ -2237,7 +2690,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2255,6 +2709,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -2447,6 +2905,20 @@
         }
       }
     },
+    "ExportDiskDetails": {
+      "description": "Export disk details",
+      "type": "object",
+      "properties": {
+        "manifestFile": {
+          "description": "Manifest file of drive",
+          "type": "string"
+        },
+        "manifestHash": {
+          "description": "Manifest file of drive",
+          "type": "string"
+        }
+      }
+    },
     "FilterFileDetails": {
       "description": "Details of the filter files to be used for data transfer.",
       "required": [
@@ -2509,6 +2981,30 @@
         "userAssigned": {
           "$ref": "#/definitions/UserAssignedProperties",
           "description": "User assigned identity properties."
+        }
+      }
+    },
+    "ImportDiskDetails": {
+      "description": "Import disk details",
+      "required": [
+        "manifestFile",
+        "manifestHash",
+        "bitLockerKey"
+      ],
+      "type": "object",
+      "properties": {
+        "manifestFile": {
+          "description": "Manifest file of drive",
+          "type": "string"
+        },
+        "manifestHash": {
+          "description": "Manifest file of drive",
+          "type": "string"
+        },
+        "bitLockerKey": {
+          "description": "BitLocker key of drive",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -2576,7 +3072,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2594,6 +3091,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy orders."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk orders."
               }
             ]
           }
@@ -2736,7 +3237,10 @@
             "Aborted",
             "CompletedWithWarnings",
             "ReadyToDispatchFromAzureDC",
-            "ReadyToReceiveAtAzureDC"
+            "ReadyToReceiveAtAzureDC",
+            "Created",
+            "Shipping",
+            "Packaging"
           ],
           "type": "string",
           "readOnly": true,
@@ -2807,6 +3311,18 @@
               {
                 "value": "ReadyToReceiveAtAzureDC",
                 "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Created",
+                "description": "Job created by the customer."
+              },
+              {
+                "value": "Shipping",
+                "description": "User shipping the device to AzureDC"
+              },
+              {
+                "value": "Packaging",
+                "description": "Packaging the device to return to customer"
               }
             ]
           }
@@ -2955,7 +3471,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2973,6 +3490,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy orders."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk orders."
               }
             ]
           }
@@ -3012,7 +3533,10 @@
             "Aborted",
             "CompletedWithWarnings",
             "ReadyToDispatchFromAzureDC",
-            "ReadyToReceiveAtAzureDC"
+            "ReadyToReceiveAtAzureDC",
+            "Created",
+            "Shipping",
+            "Packaging"
           ],
           "type": "string",
           "readOnly": true,
@@ -3083,6 +3607,18 @@
               {
                 "value": "ReadyToReceiveAtAzureDC",
                 "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Created",
+                "description": "Job created by the customer."
+              },
+              {
+                "value": "Shipping",
+                "description": "User shipping the device to AzureDC"
+              },
+              {
+                "value": "Packaging",
+                "description": "Packaging the device to return to customer"
               }
             ]
           }
@@ -3246,6 +3782,19 @@
         }
       },
       "x-ms-discriminator-value": "ManagedDisk"
+    },
+    "MarkDevicesShippedRequest": {
+      "description": "The request body to provide the delivery package details of job",
+      "required": [
+        "deliveryPackageDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "deliveryPackageDetails": {
+          "$ref": "#/definitions/PackageCarrierInfo",
+          "description": "Delivery package details"
+        }
+      }
     },
     "LastMitigationActionOnJob": {
       "description": "Last Mitigation Action Performed On Job",
@@ -3458,24 +4007,55 @@
       "type": "object",
       "properties": {}
     },
-    "PackageShippingDetails": {
-      "description": "Shipping details.",
+    "PackageCarrierDetails": {
+      "description": "Package carrier details.",
+      "type": "object",
+      "properties": {
+        "carrierAccountNumber": {
+          "description": "Carrier Account Number of customer for customer disk.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "Tracking Id of shipment.",
+          "type": "string"
+        }
+      }
+    },
+    "PackageCarrierInfo": {
+      "description": "package carrier info",
       "type": "object",
       "properties": {
         "carrierName": {
           "description": "Name of the carrier.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "trackingId": {
           "description": "Tracking Id of shipment.",
-          "type": "string",
-          "readOnly": true
-        },
+          "type": "string"
+        }
+      }
+    },
+    "PackageShippingDetails": {
+      "description": "package shipping details",
+      "type": "object",
+      "properties": {
         "trackingUrl": {
           "description": "Url where shipment can be tracked.",
           "type": "string",
           "readOnly": true
+        },
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "Tracking Id of shipment.",
+          "type": "string"
         }
       }
     },
@@ -3522,7 +4102,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3540,6 +4121,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -3601,6 +4186,10 @@
         "transportAvailabilityRequest": {
           "$ref": "#/definitions/TransportAvailabilityRequest",
           "description": "Request body to get the transport availability for given sku."
+        },
+        "datacenterAddressRequest": {
+          "$ref": "#/definitions/DatacenterAddressRequest",
+          "description": "Request body to get the datacenter address  ."
         }
       }
     },
@@ -3616,6 +4205,11 @@
         "transportAvailabilityResponse": {
           "$ref": "#/definitions/TransportAvailabilityResponse",
           "description": "Transport options available for given sku in a region.",
+          "readOnly": true
+        },
+        "datacenterAddressResponse": {
+          "$ref": "#/definitions/DatacenterAddressResponse",
+          "description": "Datacenter address for given sku in a region.",
           "readOnly": true
         }
       }
@@ -3699,7 +4293,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3717,6 +4312,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -3961,7 +4560,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3979,6 +4579,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -4014,7 +4618,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4032,6 +4637,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -4275,6 +4884,14 @@
       "properties": {
         "storageAccountId": {
           "description": "Storage Account Resource Id.",
+          "type": "string"
+        },
+        "xtPassthroughStorageAccountId": {
+          "description": "Customer's Storage Account Resource Id of the XT-passthrough job.",
+          "type": "string"
+        },
+        "xtPassthroughStorageAccountTenantId": {
+          "description": "Customer's Storage Account's Tenant Id of the XT-passthrough job.",
           "type": "string"
         }
       },
@@ -4551,7 +5168,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4569,6 +5187,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
@@ -4668,6 +5290,10 @@
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyEncryptionKey",
           "description": "Key encryption key for the job."
+        },
+        "returnPackageDetails": {
+          "$ref": "#/definitions/PackageCarrierDetails",
+          "description": "Return package details of job. This is applicable only for customer disk sku"
         }
       }
     },
@@ -4730,7 +5356,8 @@
           "enum": [
             "DataBox",
             "DataBoxDisk",
-            "DataBoxHeavy"
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4748,6 +5375,10 @@
               {
                 "value": "DataBoxHeavy",
                 "description": "Data Box Heavy."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk."
               }
             ]
           }
