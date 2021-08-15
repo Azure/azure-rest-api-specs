@@ -1,177 +1,247 @@
 {
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "testworkspace",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "id": "string",
     "api-version": "2021-10-01",
-    "id": "testJob",
     "body": {
       "properties": {
+        "description": "string",
+        "tags": {
+          "string": "string"
+        },
+        "properties": {
+          "string": "string"
+        },
+        "displayName": "string",
+        "experimentName": "string",
+        "services": {
+          "string": {
+            "jobServiceType": "string",
+            "port": 1,
+            "endpoint": "string",
+            "properties": {
+              "string": "string"
+            }
+          }
+        },
+        "computeId": "string",
         "jobType": "Command",
-        "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
-        "command": "python file.py test",
-        "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
-        "compute": {
-          "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
-          "instanceCount": 1
+        "resources": {
+          "properties": {
+            "string": "string"
+          },
+          "resourceConfigurationType": "AmlCompute",
+          "instanceCount": 1,
+          "priority": 1
         },
-        "timeout": "PT1M",
-        "experimentName": "myExperiment",
-        "inputDataBindings": {
-          "test": {
-            "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
-            "pathOnCompute": "path/on/compute"
+        "codeId": "string",
+        "command": "string",
+        "environmentId": "string",
+        "inputs": {
+          "string": {
+            "description": "string",
+            "jobInputType": "Dataset",
+            "datasetId": "string",
+            "mode": "ReadOnlyMount"
           }
         },
-        "outputDataBindings": {
-          "test": {
-            "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
-            "pathOnCompute": "path/on/compute"
+        "outputs": {
+          "string": {
+            "description": "string",
+            "jobOutputType": "Dataset",
+            "mode": "ReadWriteMount"
           }
+        },
+        "distribution": {
+          "distributionType": "TensorFlow",
+          "workerCount": 1,
+          "parameterServerCount": 1
+        },
+        "limits": {
+          "timeout": "PT5M",
+          "jobLimitsType": "Command"
+        },
+        "environmentVariables": {
+          "string": "string"
         },
         "identity": {
           "identityType": "AMLToken"
-        },
-        "distribution": {
-          "distributionType": "PyTorch",
-          "processCount": 2
-        },
-        "environmentVariables": {
-          "MY_ENV_VAR1": "string",
-          "MY_ENV_VAR2": "string"
-        },
-        "description": "string",
-        "tags": {
-          "additionalProp1": "string",
-          "additionalProp2": "string",
-          "additionalProp3": "string"
-        },
-        "properties": {
-          "additionalProp1": "string",
-          "additionalProp2": "string",
-          "additionalProp3": "string"
         }
       }
     }
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/jobs/testJob",
-        "name": "testJob",
-        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "id": "string",
+        "name": "string",
+        "type": "string",
         "properties": {
+          "description": "string",
+          "tags": {
+            "string": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "parentJobName": "string",
+          "displayName": "string",
+          "status": "NotStarted",
+          "experimentName": "string",
+          "services": {
+            "string": {
+              "jobServiceType": "string",
+              "port": 1,
+              "endpoint": "string",
+              "status": "string",
+              "errorMessage": "string",
+              "properties": {
+                "string": "string"
+              }
+            }
+          },
+          "computeId": "string",
           "jobType": "Command",
-          "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
-          "command": "python file.py test",
-          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
-          "compute": {
-            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
-            "instanceCount": 1
+          "resources": {
+            "properties": {
+              "string": "string"
+            },
+            "resourceConfigurationType": "AmlCompute",
+            "instanceCount": 1,
+            "priority": 1
           },
-          "timeout": "PT1M",
-          "experimentName": "myExperiment",
-          "inputDataBindings": {
-            "test": {
-              "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
-              "pathOnCompute": "path/on/compute"
+          "codeId": "string",
+          "command": "string",
+          "environmentId": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "Dataset",
+              "datasetId": "string",
+              "mode": "ReadOnlyMount"
             }
           },
-          "outputDataBindings": {
-            "test": {
-              "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
-              "pathOnCompute": "path/on/compute"
+          "outputs": {
+            "string": {
+              "description": "string",
+              "jobOutputType": "Dataset",
+              "mode": "ReadWriteMount"
             }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
           },
           "identity": {
             "identityType": "AMLToken"
           },
-          "distribution": {
-            "distributionType": "PyTorch",
-            "processCount": 2
-          },
-          "environmentVariables": {
-            "MY_ENV_VAR1": "string",
-            "MY_ENV_VAR2": "string"
-          },
-          "description": "string",
-          "tags": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
-          },
-          "properties": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
+          "parameters": {
+            "string": "string"
           }
         },
         "systemData": {
-          "createdAt": "2020-12-08T01:18:36.134Z",
+          "createdAt": "2020-01-01T12:34:56.999Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2020-12-08T01:18:36.134Z",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
       }
     },
     "201": {
+      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/jobs/testJob",
-        "name": "testJob",
-        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "id": "string",
+        "name": "string",
+        "type": "string",
         "properties": {
+          "description": "string",
+          "tags": {
+            "string": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "parentJobName": "string",
+          "displayName": "string",
+          "status": "NotStarted",
+          "experimentName": "string",
+          "services": {
+            "string": {
+              "jobServiceType": "string",
+              "port": 1,
+              "endpoint": "string",
+              "status": "string",
+              "errorMessage": "string",
+              "properties": {
+                "string": "string"
+              }
+            }
+          },
+          "computeId": "string",
           "jobType": "Command",
-          "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
-          "command": "python file.py test",
-          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
-          "compute": {
-            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
-            "instanceCount": 1
+          "resources": {
+            "properties": {
+              "string": "string"
+            },
+            "resourceConfigurationType": "AmlCompute",
+            "instanceCount": 1,
+            "priority": 1
           },
-          "timeout": "PT1M",
-          "experimentName": "myExperiment",
-          "inputDataBindings": {
-            "test": {
-              "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
-              "pathOnCompute": "path/on/compute"
+          "codeId": "string",
+          "command": "string",
+          "environmentId": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "Dataset",
+              "datasetId": "string",
+              "mode": "ReadOnlyMount"
             }
           },
-          "outputDataBindings": {
-            "test": {
-              "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
-              "pathOnCompute": "path/on/compute"
+          "outputs": {
+            "string": {
+              "description": "string",
+              "jobOutputType": "Dataset",
+              "mode": "ReadWriteMount"
             }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
           },
           "identity": {
             "identityType": "AMLToken"
           },
-          "distribution": {
-            "distributionType": "PyTorch",
-            "processCount": 2
-          },
-          "environmentVariables": {
-            "MY_ENV_VAR1": "string",
-            "MY_ENV_VAR2": "string"
-          },
-          "description": "string",
-          "tags": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
-          },
-          "properties": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
+          "parameters": {
+            "string": "string"
           }
         },
         "systemData": {
-          "createdAt": "2020-12-08T01:18:36.134Z",
+          "createdAt": "2020-01-01T12:34:56.999Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2020-12-08T01:18:36.134Z",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }
