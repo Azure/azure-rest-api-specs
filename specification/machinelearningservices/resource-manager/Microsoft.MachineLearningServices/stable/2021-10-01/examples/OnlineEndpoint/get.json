@@ -1,48 +1,61 @@
 {
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "workspace123",
-    "api-version": "2021-10-01",
-    "endpointName": "testEndpoint"
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "endpointName": "testEndpointName",
+    "api-version": "2021-10-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "tags": {
-          "additionalProp1": "string",
-          "additionalProp2": "string",
-          "additionalProp3": "string"
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "description": "string",
+          "properties": {
+            "string": "string"
+          },
+          "scoringUri": "https://www.contoso.com/example",
+          "swaggerUri": "https://www.contoso.com/example",
+          "authMode": "AMLToken",
+          "provisioningState": "Creating",
+          "compute": "string",
+          "allowPublicAccess": false,
+          "traffic": {
+            "string": 1
+          }
         },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {},
         "location": "string",
         "kind": "string",
         "identity": {
-          "type": "UserAssigned",
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string",
           "userAssignedIdentities": {
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+            "string": {
+              "principalId": "string",
               "clientId": "string"
             }
           }
         },
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/onlineEndpoints/testEndpoint",
-        "name": "testEndpoint",
-        "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
-        "properties": {
-          "provisioningState": "Creating",
-          "description": "string",
-          "properties": {
-            "additionalProp1": "string",
-            "additionalProp2": "string",
-            "additionalProp3": "string"
-          },
-          "traffic": {
-            "myDeployment1": 0,
-            "myDeployment2": 1
-          },
-          "scoringUri": "string",
-          "swaggerUri": "string",
-          "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/compute123",
-          "authMode": "AMLToken"
+        "sku": {
+          "name": "string",
+          "tier": "Free",
+          "size": "string",
+          "family": "string",
+          "capacity": 1
         }
       }
     }
