@@ -32,5 +32,5 @@ cli:
     - name: JobsDelete
     - name: JobMitigate
     - name: JobsGetWaitingForAction
-    - name: JobsMarkDevicesShipped
+    - name: MarkDevicesShipped
 ```
