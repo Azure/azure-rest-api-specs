@@ -1280,6 +1280,22 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/ConnectionState",
           "description": "Specifies the connection state."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Private Endpoint Connection.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
