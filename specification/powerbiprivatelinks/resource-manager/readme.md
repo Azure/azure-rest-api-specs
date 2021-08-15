@@ -69,6 +69,26 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbiprivatelinks
 ```
 
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-06-01
+```
+
+### Tag: package-2020-06-01 and java
+
+These settings apply only when `--tag=package-2020-06-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.powerbiprivatelinks.v2020-06-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbiprivatelinks/mgmt-v2020-06-01
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
