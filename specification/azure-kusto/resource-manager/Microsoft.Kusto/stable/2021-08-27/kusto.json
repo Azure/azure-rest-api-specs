@@ -2238,6 +2238,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -2328,6 +2334,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the private endpoint connection."
+          },
           "202": {
             "description": "Accepted. The private endpoint connection delete will complete asynchronously."
           },
@@ -2352,7 +2361,7 @@
         "description": "Returns the list of private link resources.",
         "operationId": "PrivateLinkResources_List",
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connections.": {
             "$ref": "./examples/KustoPrivateLinkResourcesList.json"
           }
         },
@@ -4719,6 +4728,7 @@
       "description": "Class representing a database script."
     },
     "ManagedPrivateEndpointListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4731,6 +4741,7 @@
       "description": "The list managed private endpoints operation response."
     },
     "ManagedPrivateEndpoint": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4861,6 +4872,10 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5548,24 +5563,24 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-              "type": "object",
-              "properties": {
-                "principalId": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "The principal id of user assigned identity."
-                },
-                "clientId": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "The client id of user assigned identity."
-                }
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
               }
+            }
           },
           "description": "The list of user identities associated with the Kusto cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
-          "required": [
+      "required": [
         "type"
       ],
       "description": "Identity for the resource."
