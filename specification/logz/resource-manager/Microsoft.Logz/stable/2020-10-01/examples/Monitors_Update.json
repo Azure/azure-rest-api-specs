@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "properties": {
+        "monitoringStatus": "Enabled"
+      },
+      "tags": {
+        "Environment": "Dev"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Logz/monitors",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "monitoringStatus": "Enabled"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    }
+  }
+}
