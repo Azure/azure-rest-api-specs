@@ -340,92 +340,19 @@
       },
       "readOnly": true
     },
-    "VmSizesCapability": {
-      "description": "The virtual machine sizes capability.",
-      "properties": {
-        "available": {
-          "description": "The list of virtual machine size capabilities.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "readOnly": true
-    },
-    "VmSizeCompatibilityFilter": {
-      "description": "The virtual machine type compatibility filter.",
-      "properties": {
-        "FilterMode": {
-          "description": "The mode for the filter.",
-          "type": "string"
-        },
-        "Regions": {
-          "description": "The list of regions.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ClusterFlavors": {
-          "description": "The list of cluster types available.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "NodeTypes": {
-          "description": "The list of node types.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ClusterVersions": {
-          "description": "The list of cluster versions.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "OsType": {
-          "description": "The list of OS types.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "VMSizes": {
-          "description": "The list of virtual machine sizes.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ESPApplied": {
-          "description": "Whether apply for ESP cluster. 'true' means only for ESP, 'false' means only for non-ESP, null or empty string or others mean for both.",
-          "type": "string"
-        },
-        "ComputeIsolationSupported": {
-          "description": "Whether support compute isolation. 'true' means only for ComputeIsolationEnabled, 'false' means only for regular cluster.",
-          "type": "string"
-        }
-      },
-      "readOnly": true
-    },
     "RegionalQuotaCapability": {
       "description": "The regional quota capacity.",
       "properties": {
-        "region_name": {
+        "regionName": {
           "description": "The region name.",
           "type": "string"
         },
-        "cores_used": {
+        "coresUsed": {
           "description": "The number of cores used in the region.",
           "type": "integer",
           "format": "int64"
         },
-        "cores_available": {
+        "coresAvailable": {
           "description": "The number of cores available in the region.",
           "type": "integer",
           "format": "int64"
@@ -436,12 +363,12 @@
     "QuotaCapability": {
       "description": "The regional quota capability.",
       "properties": {
-        "cores_used": {
+        "coresUsed": {
           "description": "The number of cores used in the subscription.",
           "type": "integer",
           "format": "int64"
         },
-        "max_cores_allowed": {
+        "maxCoresAllowed": {
           "description": "The number of cores that the subscription allowed.",
           "type": "integer",
           "format": "int64"
@@ -471,20 +398,6 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/RegionsCapability"
-          }
-        },
-        "vmsizes": {
-          "description": "The virtual machine sizes.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/VmSizesCapability"
-          }
-        },
-        "vmsize_filters": {
-          "description": "The virtual machine size compatibility filters.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VmSizeCompatibilityFilter"
           }
         },
         "features": {
