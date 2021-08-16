@@ -723,6 +723,332 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/datastores/{datastoreName}": {
+      "put": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_Create",
+        "description": "Create Or Update datastore.",
+        "summary": "Implements datastore PUT method.",
+        "x-ms-examples": {
+          "CreateDatastore": {
+            "$ref": "./examples/CreateDatastore.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "datastoreName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the datastore."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_Get",
+        "summary": "Gets a datastore.",
+        "description": "Implements datastore GET method.",
+        "x-ms-examples": {
+          "GetDatastore": {
+            "$ref": "./examples/GetDatastore.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "datastoreName",
+            "description": "Name of the datastore.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_Update",
+        "summary": "Updates a datastore.",
+        "description": "API to update certain properties of the datastore resource.",
+        "x-ms-examples": {
+          "UpdateDatastore": {
+            "$ref": "./examples/UpdateDatastore.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "datastoreName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the datastore."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_Delete",
+        "summary": "Deletes an datastore.",
+        "description": "Implements datastore DELETE method.",
+        "x-ms-examples": {
+          "DeleteDatastore": {
+            "$ref": "./examples/DeleteDatastore.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "datastoreName",
+            "description": "Name of the datastore.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/datastores": {
+      "get": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_List",
+        "summary": "Implements GET datastores in a subscription.",
+        "description": "List of datastores in a subscription.",
+        "x-ms-examples": {
+          "ListDatastores": {
+            "$ref": "./examples/ListDatastores.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastoresList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/datastores": {
+      "get": {
+        "tags": [
+          "Datastores"
+        ],
+        "operationId": "Datastores_ListByResourceGroup",
+        "summary": "Implements GET datastores in a resource group.",
+        "description": "List of datastores in a resource group.",
+        "x-ms-examples": {
+          "ListDatastoresByResourceGroup": {
+            "$ref": "./examples/ListDatastoresByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastoresList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}": {
       "put": {
         "tags": [
@@ -4405,6 +4731,143 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Cluster"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatastoreProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this datastore resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the datastore.",
+          "type": "string"
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the datastore.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the datastore.",
+          "type": "string",
+          "readOnly": true
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "description": "The current deployment state of resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Created"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Datastore": {
+      "description": "Define the datastore.",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/DatastoreProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      }
+    },
+    "DatastoresList": {
+      "description": "List of Datastores.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of Datastores.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Datastores",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Datastore"
           }
         }
       },
