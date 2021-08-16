@@ -70,6 +70,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimquotas.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimschema.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsettings.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimskus.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsubscriptions.json

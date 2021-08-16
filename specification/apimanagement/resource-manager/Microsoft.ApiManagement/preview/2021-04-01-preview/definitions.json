@@ -4969,7 +4969,7 @@
       ],
       "description": "Parameters supplied to the Save Tenant Configuration operation."
     },
-    "SchemaCollection": {
+    "ApiSchemaCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -4997,6 +4997,65 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiSchemaContractProperties",
+          "description": "Properties of the API Schema."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "API Schema Contract details."
+    },
+    "ApiSchemaContractProperties": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`."
+        },
+        "document": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiSchemaDocumentProperties",
+          "description": "Create or update Properties of the API Schema Document."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "API Schema create or update contract Properties."
+    },
+    "ApiSchemaDocumentProperties": {
+      "type": "object",
+      "description": "Api Schema Document Properties."
+    },
+    "SchemaCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaContract"
+          },
+          "description": "Schema Contract value.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "The response of the list schema operation."
+    },
+    "SchemaContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaContractProperties",
           "description": "Properties of the Schema."
         }
       },
@@ -5007,22 +5066,44 @@
       ],
       "description": "Schema Contract details."
     },
-    "ApiSchemaContractProperties": {
+    "SchemaContractProperties": {
       "properties": {
-        "contentType": {
+        "schemaType": {
           "type": "string",
-          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`."
+          "description": "Schema Type. Immutable.",
+          "enum": [
+            "xml",
+            "json"
+          ],
+          "x-ms-client-name": "SchemaType",
+          "x-ms-enum": {
+            "name": "SchemaType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "xml",
+                "description": "Xml schema type.",
+                "name": "Xml"
+              },
+              {
+                "value": "json",
+                "description": "Json schema type.",
+                "name": "Json"
+              }
+            ]
+          }
         },
         "document": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SchemaDocumentProperties",
-          "description": "Create or update Properties of the Schema Document."
+          "description": "For schemaType json - json object representing json schema. For schemaType xml – string encoded XML schema."
         }
       },
       "required": [
-        "contentType"
+        "schemaType",
+        "document"
       ],
-      "description": "API Schema create or update contract Properties."
+      "description": "Schema create or update contract Properties."
     },
     "SchemaDocumentProperties": {
       "type": "object",

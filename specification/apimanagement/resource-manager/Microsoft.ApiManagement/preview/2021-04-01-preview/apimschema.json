@@ -148,7 +148,7 @@
         "description": "Gets the details of the Schema specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetSchema": {
-            "$ref": "./examples/ApiManagementGetSchemaContract.json"
+            "$ref": "./examples/ApiManagementGetSchema.json"
           }
         },
         "produces": [
@@ -167,7 +167,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+            "$ref": "./apimanagement.json#/parameters/SchemaIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -216,14 +216,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+            "$ref": "./apimanagement.json#/parameters/SchemaIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaCreateOrUpdateParameter"
+              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
             "description": "Create or update parameters."
           },
