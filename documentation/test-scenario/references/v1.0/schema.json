@@ -50,7 +50,9 @@
       "properties": {
         "variables": {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -71,6 +73,9 @@
       ]
     },
     "TestStepBase": {
+      "allOf":[
+        {"$ref": "#/definitions/VariableScope"}
+      ],
       "properties": {
         "step": {
           "$ref": "#/definitions/Name"
@@ -94,7 +99,7 @@
         "step"
       ]
     },
-    "TestStepArmTemplateDeployment": {
+    "TestStepRestCall": {
       "type": "object",
       "allOf": [
         {
@@ -105,26 +110,45 @@
         "type": {
           "type": "string",
           "enum": [
-            "armTemplate"
+            "basic"
           ]
         },
-        "armTemplateDeployment": {
+        "exampleFile": {
           "type": "string"
         },
-        "armTemplateParameters": {
+        "resourceName": {
           "type": "string"
+        },
+        "resourceUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "requestUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          }
+        },
+        "responseUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          }
+        },
+        "statusCode": {
+          "type": "number"
         }
       },
-      "required": [
-        "armTemplateDeployment"
+      "required":[
+        "exampleFile"
       ]
     },
     "TestStepOperation": {
       "type": "object",
       "allOf": [
-        {
-          "$ref": "#/definitions/VariableScope"
-        },
         {
           "$ref": "#/definitions/TestStepBase"
         }
@@ -170,12 +194,9 @@
         "resourceName"
       ]
     },
-    "TestStepRestCall": {
+    "TestStepArmTemplateDeployment": {
       "type": "object",
       "allOf": [
-        {
-          "$ref": "#/definitions/VariableScope"
-        },
         {
           "$ref": "#/definitions/TestStepBase"
         }
@@ -184,48 +205,23 @@
         "type": {
           "type": "string",
           "enum": [
-            "exampleFile"
+            "armTemplate"
           ]
         },
-        "resourceName": {
+        "armTemplateDeployment": {
           "type": "string"
         },
-        "exampleFile": {
+        "armTemplateParameters": {
           "type": "string"
-        },
-        "resourceUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          },
-          "minItems": 1
-        },
-        "requestUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "responseUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "statusCode": {
-          "type": "number"
         }
       },
-      "required":[
-        "exampleFile"
+      "required": [
+        "armTemplateDeployment"
       ]
     },
     "TestStepRawCall": {
       "type": "object",
       "allOf": [
-        {
-          "$ref": "#/definitions/VariableScope"
-        },
         {
           "$ref": "#/definitions/TestStepBase"
         }
@@ -258,15 +254,11 @@
             "type": "string"
           }
         },
-        "requestBody": {
-          "type": "string"
-        },
+        "requestBody": {},
         "statusCode": {
           "type": "number"
         },
-        "responseExpected": {
-          "type": "string"
-        }
+        "responseExpected": {}
       },
       "required": [
         "method",
@@ -395,28 +387,14 @@
         }
       ],
       "properties": {
-        "scenario": {
-          "$ref": "#/definitions/Name",
-          "description": "Name of scenario"
-        },
         "description": {
           "type": "string"
-        },
-        "requiredVariables": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "steps": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TestStep"
           }
-        },
-        "dependsOn": {
-          "$ref": "#/definitions/Name",
-          "description": "Name of scenario that is depended on"
         }
       },
       "required": [
