@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/hpcworkbench.json
+  - Microsoft.HpcWorkbench/preview/2021-03-01-preview/consortium.json
 ```
 
 ---

@@ -601,6 +601,191 @@
         }
       ],
       "description": "Instance resource"
+    },
+    "RemoteDesktop": {
+      "type": "object",
+      "description": "Remote Desktop properties.",
+      "properties": {
+        "etx": {
+          "$ref": "#/definitions/Etx",
+          "description": "The etx object."
+        }
+      }
+    },
+    "Etx": {
+      "type": "object",
+      "properties": {
+        "connectionNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The connection node count."
+        },
+        "licenseActivated": {
+          "description": "The license activated.",
+          "type": "boolean"
+        }
+      },
+      "description": "Etx properties."
+    },
+    "AccessConfiguration": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "accessType": {
+          "description": "Gets or sets the AccessType.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CLI",
+            "GUI"
+          ],
+          "x-ms-enum": {
+            "name": "AccessType",
+            "modelAsString": true
+          }
+        },
+        "gatewayType": {
+          "description": "Gets or sets the GatewayType.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "ExpressRoute",
+            "None",
+            "Vpn"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayType",
+            "modelAsString": true
+          }
+        },
+        "gatewayVnetId": {
+          "type": "string",
+          "description": "Gets or sets the GatewayVnetId."
+        },
+        "accessUrl": {
+          "type": "string",
+          "description": "Gets or sets the AccessUrl."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets or sets the IpAddress."
+        }
+      }
+    },
+    "ConsortiumPageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consortium"
+          }
+        }
+      }
+    },
+    "ConsortiumPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "description": "Gets or sets the SKU.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Gets or sets the Kind.",
+          "type": "string"
+        },
+        "managedBy": {
+          "description": "Gets or sets the Managed By value.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "Gets or sets the Zones.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "description": "Gets or sets the Plan.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "identity": {
+          "description": "Gets or sets the Identity.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "vmSize": {
+          "description": "Gets or sets the VmSize.",
+          "type": "string"
+        },
+        "allowedPublicIps": {
+          "description": "Gets or sets the AllowedPublicIps.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userInterfaceMode": {
+          "description": "Gets or sets the UserInterfaceMode.",
+          "type": "string"
+        },
+        "accessType": {
+          "description": "Gets or sets the Access Type.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CLI",
+            "GUI"
+          ],
+          "x-ms-enum": {
+            "name": "AccessType",
+            "modelAsString": true
+          }
+        },
+        "accessConfigurations": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AccessConfiguration"
+          },
+          "description": "Gets or sets the Access Configuration."
+        },
+        "remoteDesktop": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/RemoteDesktop"
+          },
+          "description": "Gets or sets the Remote Desktop."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the consortium at the time the operation was called"
+        }
+      },
+      "description": "Consortium properties."
+    },
+    "Consortium": {
+      "description": "Consortium resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConsortiumPropertiesFormat",
+          "description": "Consortium properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     }
   }
 }
