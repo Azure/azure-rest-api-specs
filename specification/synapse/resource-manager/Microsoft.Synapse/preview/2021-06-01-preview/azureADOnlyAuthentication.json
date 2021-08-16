@@ -20,12 +20,18 @@
       "description": "Azure Active Directory OAuth2 Flow"
     }
   },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthentication}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthenticationName}": {
       "get": {
         "operationId": "AzureADOnlyAuthentications_Get",
-        "summary": "Get Azure Active Directory only authentication property",
-        "description": "Gets a Azure Active Directory only authentication property",
+        "summary": "Get Azure Active Directory Only Authentication property",
+        "description": "Gets a Azure Active Directory Only Authentication property for the workspace",
         "tags": [
           "WorkspaceAzureADOnlyAuthentications"
         ],
@@ -41,10 +47,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "./azureADOnlyAuthentication.json#/parameters/azureADOnlyAuthenticationNameParameter"
+            "$ref": "#/parameters/azureADOnlyAuthenticationNameParameter"
           }
         ],
         "responses": {
@@ -61,10 +67,6 @@
             "description": ""
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
           "Get Azure Active Directory Only Authentication property": {
             "$ref": "./examples/GetAzureADOnlyAuthentication.json"
@@ -73,8 +75,8 @@
       },
       "put": {
         "operationId": "AzureADOnlyAuthentications_Create",
-        "summary": "Create or Update Azure Active Directory only authentication property",
-        "description": "Create or Update a Azure Active Directory only authentication property for the workspaces",
+        "summary": "Create or Update Azure Active Directory Only Authentication property",
+        "description": "Create or Update a Azure Active Directory Only Authentication property for the workspace",
         "tags": [
           "WorkspaceAzureADOnlyAuthentications"
         ],
@@ -90,10 +92,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "./azureADOnlyAuthentication.json#/parameters/azureADOnlyAuthenticationNameParameter"
+            "$ref": "#/parameters/azureADOnlyAuthenticationNameParameter"
           },
           {
             "schema": {
@@ -128,12 +130,6 @@
             "description": ""
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
           "Create or Update Azure Active Directory Only Authentication property": {
             "$ref": "./examples/CreateOrUpdateAzureADOnlyAuthentication.json"
@@ -148,8 +144,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications": {
       "get": {
         "operationId": "AzureADOnlyAuthentications_List",
-        "summary": "Gets a list of Azure Active Directory only authentication property",
-        "description": "Gets a list of Azure Active Directory only authentication property for a workspace",
+        "summary": "Gets a list of Azure Active Directory Only Authentication property",
+        "description": "Gets a list of Azure Active Directory Only Authentication properties for a workspace",
         "tags": [
           "WorkspaceAzureADOnlyAuthentications"
         ],
@@ -165,7 +161,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           }
         ],
         "responses": {
@@ -182,10 +178,6 @@
             "description": ""
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -199,18 +191,18 @@
   },
   "definitions": {
     "AzureADOnlyAuthenticationProperties": {
-      "description": "Properties of a active directory only authentication.",
+      "description": "Azure Active Directory Only Authentication properties",
       "required": [
         "azureADOnlyAuthentication"
       ],
       "type": "object",
       "properties": {
         "azureADOnlyAuthentication": {
-          "description": "Azure Active Directory only Authentication enabled.",
+          "description": "Azure Active Directory Only Authentication enabled",
           "type": "boolean"
         },
         "state": {
-          "description": "property configuration state",
+          "description": "Azure Active Directory Only Authentication configuration state",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -219,7 +211,7 @@
             "Updating"
           ],
           "x-ms-enum": {
-            "name": "state value",
+            "name": "AuthenticationState",
             "modelAsString": true
           }
         },
@@ -241,7 +233,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "azureADOnlyAuthentication resource properties",
+          "description": "Azure Active Directory Only Authentication resource properties",
           "$ref": "#/definitions/AzureADOnlyAuthenticationProperties",
           "x-ms-client-flatten": true
         },
@@ -252,7 +244,7 @@
       }
     },
     "AzureADOnlyAuthenticationListResult": {
-      "description": "A list of active directory only authentications.",
+      "description": "A list of Azure Active Directory only authentications.",
       "type": "object",
       "properties": {
         "value": {
@@ -283,7 +275,7 @@
     "azureADOnlyAuthenticationNameParameter": {
       "type": "string",
       "in": "path",
-      "name": "azureADOnlyAuthentication",
+      "name": "azureADOnlyAuthenticationName",
       "description": "name of the property",
       "required": true,
       "enum": [
