@@ -287,6 +287,9 @@
         },
         {
           "$ref": "#/definitions/JsonPatchOpMerge"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpTest"
         }
       ]
     },
@@ -376,6 +379,20 @@
           "type": "object",
           "additionalProperties": true
         }
+      },
+      "additionalProperties": false
+    },
+    "JsonPatchOpTest": {
+      "type": "object",
+      "required": [
+        "test",
+        "value"
+      ],
+      "properties": {
+        "test": {
+          "$ref": "#/definitions/JsonPointer"
+        },
+        "value": {}
       },
       "additionalProperties": false
     },
