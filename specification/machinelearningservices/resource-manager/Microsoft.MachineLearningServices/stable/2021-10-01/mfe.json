@@ -6405,6 +6405,53 @@
       },
       "additionalProperties": false
     },
+    "ContainerResourceRequirements": {
+      "description": "Resource requirements for each container instance within an online deployment.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "default": 0.1,
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4,
+          "x-nullable": true
+        },
+        "fpga": {
+          "format": "int32",
+          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "gpu": {
+          "format": "int32",
+          "description": "The number of GPU cores in the container.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "memoryInGB": {
+          "format": "double",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "default": 0.5,
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64,
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "ContainerType": {
       "enum": [
         "StorageInitializer",
@@ -7862,46 +7909,6 @@
         "modelAsString": true
       },
       "additionalProperties": false
-    },
-    "ContainerResourceRequirements": {
-      "description": "The resource requirements for the container (cpu and memory).",
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "format": "double",
-          "description": "The minimum amount of CPU cores to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4
-        },
-        "cpuLimit": {
-          "format": "double",
-          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4
-        },
-        "memoryInGB": {
-          "format": "double",
-          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64
-        },
-        "memoryInGBLimit": {
-          "format": "double",
-          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64
-        },
-        "gpu": {
-          "format": "int32",
-          "description": "The number of GPU cores in the container.",
-          "type": "integer"
-        },
-        "fpga": {
-          "format": "int32",
-          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
-          "type": "integer"
-        }
-      }
     },
     "K8sOnlineDeployment": {
       "description": "Properties specific to a K8sOnlineDeployment.",
