@@ -40,6 +40,7 @@ input-file:
   - Microsoft.SecurityInsights/stable/2021-10-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2021-10-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2021-10-01/operations.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
 ```
 ### Tag: package-2021-04-01-only
 
