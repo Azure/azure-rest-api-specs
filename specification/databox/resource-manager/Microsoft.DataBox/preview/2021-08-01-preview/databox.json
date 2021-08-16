@@ -2911,11 +2911,18 @@
       "properties": {
         "manifestFile": {
           "description": "Manifest file of drive",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "manifestHash": {
           "description": "Manifest file of drive",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "diskHash": {
+          "description": "Hash of the disk",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2989,7 +2996,8 @@
       "required": [
         "manifestFile",
         "manifestHash",
-        "bitLockerKey"
+        "bitLockerKey",
+        "diskHash"
       ],
       "type": "object",
       "properties": {
@@ -3005,6 +3013,10 @@
           "description": "BitLocker key of drive",
           "type": "string",
           "x-ms-secret": true
+        },
+        "diskHash": {
+          "description": "Hash of the disk",
+          "type": "string"
         }
       }
     },
