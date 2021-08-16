@@ -2119,9 +2119,6 @@
         "networkAccessPolicy": {
           "$ref": "#/definitions/NetworkAccessPolicy"
         },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess"
-        },
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
@@ -2149,7 +2146,10 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percent complete of a clone operation"
+          "description": "Percent complete of a clone operation."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "required": [
@@ -2237,9 +2237,6 @@
         "networkAccessPolicy": {
           "$ref": "#/definitions/NetworkAccessPolicy"
         },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess"
-        },
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
@@ -2247,6 +2244,9 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a snapshot supports hibernation."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "required": [
@@ -2493,11 +2493,11 @@
         "values": [
           {
             "value": "Enabled",
-            "description": "Export on disk will depend on the networkAccessPolicy"
+            "description": "Export on disk will depend on the networkAccessPolicy."
           },
           {
             "value": "Disabled",
-            "description": "The disk cannot be exported unless it is associated with a diskAccess"
+            "description": "The disk cannot be exported unless it is associated with a diskAccess."
           }
         ]
       }
@@ -2702,7 +2702,7 @@
             "Copy",
             "Restore",
             "Upload",
-            "Clone"
+            "CopyStart"
           ],
           "x-ms-enum": {
             "name": "DiskCreateOption",
@@ -2737,8 +2737,8 @@
                 "description": "Create a new disk by obtaining a write token and using it to directly upload the contents of the disk."
               },
               {
-                "value": "Clone",
-                "description": "Create a new disk by using a slow/deep copy process, where the resource creation is considered complete only after all data has been copied from the source."
+                "value": "CopyStart",
+                "description": "Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source."
               }
             ]
           },
@@ -3389,7 +3389,7 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percent complete of a clone operation"
+          "description": "Percent complete of a CopyStart operation."
         }
       },
       "description": "Properties of an incremental disk restore point"
