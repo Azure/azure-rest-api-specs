@@ -4515,46 +4515,6 @@
         }
       }
     },
-    "ContainerResourceRequirements": {
-      "description": "The resource requirements for the container (cpu and memory).",
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "format": "double",
-          "description": "The minimum amount of CPU cores to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4
-        },
-        "cpuLimit": {
-          "format": "double",
-          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4
-        },
-        "memoryInGB": {
-          "format": "double",
-          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64
-        },
-        "memoryInGBLimit": {
-          "format": "double",
-          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64
-        },
-        "gpu": {
-          "format": "int32",
-          "description": "The number of GPU cores in the container.",
-          "type": "integer"
-        },
-        "fpga": {
-          "format": "int32",
-          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
-          "type": "integer"
-        }
-      }
-    },
     "ComputeInstanceSshSettings": {
       "type": "object",
       "description": "Specifies policy and settings for SSH access.",
