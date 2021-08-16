@@ -39,7 +39,6 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2021-10-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2021-10-01/mfe.json
   - Microsoft.MachineLearningServices/stable/2021-10-01/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/stable/2021-10-01/workspaceSkus.json
 ```
 
 ### Tag: package-2021-07-01
