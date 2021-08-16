@@ -31,11 +31,11 @@ tag: package-2019-11-01
 
 These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11-01-preview'
+``` yaml $(tag) == 'package-2019-11-01'
 input-file:
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/managedClusters.json"
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json" 
-    - "Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json" 
+    - "Microsoft.ContainerService.Admin/stable/2019-11-01/managedClusters.json"
+    - "Microsoft.ContainerService.Admin/stable/2019-11-01/operations.json" 
+    - "Microsoft.ContainerService.Admin/stable/2019-11-01/quotas.json" 
 ```
 ## Suppression
 ``` yaml
@@ -76,9 +76,9 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/operations.json
-  - $(this-folder)/Microsoft.ContainerService.Admin/preview/2019-11-01-preview/quotas.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/stable/2019-11-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/stable/2019-11-01/operations.json
+  - $(this-folder)/Microsoft.ContainerService.Admin/stable/2019-11-01/quotas.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
