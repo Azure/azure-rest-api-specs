@@ -64,7 +64,7 @@
           "200": {
             "description": "OK. The usages information will be returned in the response.",
             "schema": {
-              "$ref": "#/definitions/CurrentQuotaLimitBase"
+              "$ref": "#/definitions/CurrentUsagesBase"
             },
             "headers": {
               "ETag": {
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK. Usages information will be returned in the response with pagination.",
             "schema": {
-              "$ref": "#/definitions/QuotaLimits"
+              "$ref": "#/definitions/UsagesLimits"
             },
             "headers": {
               "ETag": {
@@ -599,6 +599,86 @@
         }
       }
     },
+    "CurrentUsagesBase": {
+      "type": "object",
+      "description": "Resource Usages.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Usages properties for the specified resource.",
+          "$ref": "#/definitions/UsagesProperties"
+        }
+      }
+    },
+    "UsagesProperties": {
+      "description": "Usages properties for the specified resource.",
+      "type": "object",
+      "properties": {
+        "usages": {
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/UsagesValue"
+        },
+        "unit": {
+          "description": " The usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota.",
+          "$ref": "#/definitions/ResourceName"
+        },
+        "resourceType": {
+          "description": "Resource type name.",
+          "$ref": "#/definitions/ResourceTypesName"
+        },
+        "quotaPeriod": {
+          "description": "The time period over which the quota usage values are summarized. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isQuotaApplicable": {
+          "description": "States if quota can be requested for this resource.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider.",
+          "type": "object"
+        }
+      }
+    },
+    "UsagesLimits": {
+      "type": "object",
+      "description": "Quota limits.",
+      "properties": {
+        "value": {
+          "description": "List of quota limits.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrentUsagesBase"
+          }
+        },
+        "nextLink": {
+          "description": "The URI used to fetch the next page of quota limits. When there are no more pages, this is null.",
+          "type": "string"
+        }
+      }
+    },
     "CurrentQuotaLimitBase": {
       "type": "object",
       "description": "Quota limit.",
@@ -620,7 +700,7 @@
           "readOnly": true
         },
         "properties": {
-          "description": "Quota and usages properties for the specified resource, based on the API called - quotas or usages.",
+          "description": "Quota properties for the specified resource, based on the API called - quotas or usages.",
           "$ref": "#/definitions/QuotaProperties"
         }
       }
@@ -634,7 +714,7 @@
           "$ref": "#/definitions/LimitJsonObject"
         },
         "unit": {
-          "description": " The quota or usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "description": " The quota units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
           "type": "string",
           "readOnly": true
         },
@@ -765,8 +845,7 @@
     "LimitObjectTypes": {
       "description": "The limit object type.",
       "enum": [
-        "LimitValue",
-        "UsagesValue"
+        "LimitValue"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -799,6 +878,18 @@
       },
       "discriminator": "limitObjectType"
     },
+    "UsagesTypes": {
+      "description": "The quota or usages limit types.",
+      "enum": [
+        "Individual",
+        "Combined"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "usagesTypes",
+        "modelAsString": true
+      }
+    },
     "UsagesObject": {
       "description": "The resource usages value.",
       "type": "object",
@@ -808,8 +899,8 @@
           "format": "int32",
           "description": "The usages value"
         },
-        "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectTypes"
+        "usagesType": {
+          "$ref": "#/definitions/UsagesTypes"
         }
       },
       "required": [
@@ -850,13 +941,9 @@
       ]
     },
     "UsagesValue": {
-      "x-ms-discriminator-value": "UsagesValue",
       "type": "object",
       "description": "Resource usages value.",
       "allOf": [
-        {
-          "$ref": "#/definitions/LimitJsonObject"
-        },
         {
           "$ref": "#/definitions/UsagesObject"
         }
