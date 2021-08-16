@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "diskName": "mySnapshot",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "CopyStart",
+          "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "mySnapshot",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "CopyStart",
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "mySnapshot",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "CopyStart",
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+          }
+        }
+      }
+    }
+  }
+}

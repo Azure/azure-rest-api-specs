@@ -38,11 +38,18 @@ These settings apply only when `--tag=package-2021-04-01-only` is specified on t
 input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
 - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
+- Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+- Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
+
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
     where: $.definitions.Incidents
     reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+    where: $.definitions.Watchlist
+    reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
@@ -54,7 +61,11 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-01'
 input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+
 directive:
   - suppress: R2059
     from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
@@ -70,12 +81,14 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 
 ```yaml $(tag) == 'package-2021-03-preview-only'
 input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/SourceControls.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
 directive:
@@ -100,6 +113,22 @@ directive:
     where: $.definitions.SentinelOnboardingState
     reason: The SentinelOnboardingState does not support list by subscription. It's not a top-level resource. To get the SentinelOnboardingState, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+    where: $.definitions.Incidents
+    reason: The Incidents does not support list by subscription. It's not a top-level resource. To get the Incidents, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+    where: $.definitions.Incident
+    reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group, Log Analytics workspace and incident ID.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+    where: $.definitions.AlertRule
+    reason: The AlertRule does not support list by subscription. It's not a top-level resource. To get the AlertRule, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+    where: $.definitions.AlertRuleTemplate
+    reason: The AlertRuleTemplate does not support list by subscription. It's not a top-level resource. To get the AlertRuleTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.  
+  - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
     where: $.definitions.EntityQuery
     reason: The EntityQuery does not support list by subscription. It's not a top-level resource. To get the EntityQuery, we should have a subscription as well as a resource group and Log Analytics workspace.
@@ -117,7 +146,16 @@ These settings apply only when `--tag=package-2019-01-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-01-preview'
 input-file:
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Aggregations.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Bookmarks.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Cases.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/DataConnectorsCheckRequirements.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Enrichment.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Entities.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/OfficeConsents.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/ThreatIntelligence.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
@@ -130,6 +168,10 @@ directive:
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.AutomationRule
+    reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
     where: $.definitions.AutomationRule
     reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
