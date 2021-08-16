@@ -3,7 +3,7 @@
   "info": {
     "title": "DiskResourceProviderClient",
     "description": "The Disk Resource Provider Client.",
-    "version": "2020-12-01"
+    "version": "2021-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -473,6 +473,9 @@
           },
           "Create a snapshot by importing an unmanaged blob from a different subscription.": {
             "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a snapshot from an existing snapshot in the same or a different subscription in a different region.": {
+            "$ref": "./examples/CreateASnapshotFromAnExistingSnapshotInDifferentRegion.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2178,6 +2181,13 @@
         "securityProfile": {
           "$ref": "#/definitions/DiskSecurityProfile",
           "description": "Contains the security related information for the resource."
+        },
+        "completionPercent": {
+          "type": "number",
+          "description": "Percent complete of a clone operation."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "required": [
@@ -2272,6 +2282,9 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a snapshot supports hibernation."
+        },
+        "publicNetworkAccess":{
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "required": [
@@ -2505,6 +2518,28 @@
         ]
       }
     },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Policy for controlling export on the disk.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Export on disk will depend on the networkAccessPolicy."
+          },
+          {
+            "value": "Disabled",
+            "description": "The disk cannot be exported unless it is associated with a diskAccess."
+          }
+        ]
+      }
+    },
     "DiskUpdateProperties": {
       "properties": {
         "osType": {
@@ -2584,6 +2619,9 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a disk supports hibernation."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/NPublicNetworkAccess"
         }
       },
       "description": "Disk resource update properties."
@@ -2625,6 +2663,9 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a snapshot supports hibernation."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "description": "Snapshot resource update properties."
@@ -2698,7 +2739,8 @@
             "Import",
             "Copy",
             "Restore",
-            "Upload"
+            "Upload",
+            "CopyStart"
           ],
           "x-ms-enum": {
             "name": "DiskCreateOption",
@@ -2731,6 +2773,10 @@
               {
                 "value": "Upload",
                 "description": "Create a new disk by obtaining a write token and using it to directly upload the contents of the disk."
+              },
+              {
+                "value": "CopyStart",
+                "description": "Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source."
               }
             ]
           },
@@ -3368,6 +3414,20 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a disk supports hibernation."
+        },
+        "networkAccessPolicy": {
+          "$ref": "#/definitions/NetworkAccessPolicy"
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "diskAccessId": {
+          "type": "string",
+          "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "completionPercent": {
+          "type": "number",
+          "description": "Percent complete of a clone operation."
         }
       },
       "description": "Properties of an incremental disk restore point"
@@ -3520,7 +3580,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "SnapshotNameParameter": {
@@ -3528,7 +3588,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The max name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "DiskEncryptionSetNameParameter": {
@@ -3536,7 +3596,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "DiskAccessNameParameter": {
@@ -3544,7 +3604,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
@@ -3552,7 +3612,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection",
+      "description": "The name of the private endpoint connection.",
       "x-ms-parameter-location": "method"
     },
     "RestorePointCollectionNameParameter": {
@@ -3560,7 +3620,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the restore point collection that the disk restore point belongs. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the restore point collection that the disk restore point belongs.",
       "x-ms-parameter-location": "method"
     },
     "VmRestorePointNameParameter": {
@@ -3568,7 +3628,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the vm restore point that the disk disk restore point belongs. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the vm restore point that the disk disk restore point belongs.",
       "x-ms-parameter-location": "method"
     },
     "DiskRestorePointNameParameter": {
@@ -3576,7 +3636,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk restore point created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "description": "The name of the disk restore point created.",
       "x-ms-parameter-location": "method"
     }
   }

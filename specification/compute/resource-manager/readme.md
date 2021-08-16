@@ -238,7 +238,7 @@ input-file:
 - Microsoft.Compute/stable/2021-04-01/compute.json
 - Microsoft.Compute/stable/2021-04-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
 - Microsoft.Compute/stable/2020-09-30/gallery.json
 - Microsoft.Compute/stable/2020-09-30/sharedGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
