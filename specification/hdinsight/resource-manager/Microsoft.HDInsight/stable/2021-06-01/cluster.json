@@ -744,6 +744,7 @@
   },
   "definitions": {
     "ClusterDefinition": {
+      "type": "object",
       "description": "The cluster definition.",
       "properties": {
         "blueprint": {
@@ -773,6 +774,7 @@
       }
     },
     "ClientGroupInfo": {
+      "type": "object",
       "description": "The information of AAD security group.",
       "properties": {
         "groupName": {
@@ -786,6 +788,7 @@
       }
     },
     "KafkaRestProperties": {
+      "type": "object",
       "description": "The kafka rest proxy configuration which contains AAD security group information.",
       "properties": {
         "clientGroupInfo": {
@@ -802,6 +805,7 @@
       }
     },
     "SecurityProfile": {
+      "type": "object",
       "description": "The security profile which contains Ssh public key for the HDInsight cluster.",
       "properties": {
         "directoryType": {
@@ -861,6 +865,7 @@
       }
     },
     "AutoscaleTimeAndCapacity": {
+      "type": "object",
       "properties": {
         "time": {
           "type": "string",
@@ -880,6 +885,7 @@
       "description": "Time and capacity request parameters"
     },
     "AutoscaleSchedule": {
+      "type": "object",
       "properties": {
         "days": {
           "type": "array",
@@ -909,6 +915,7 @@
       "description": "Parameters for a schedule-based autoscale rule, consisting of an array of days + a time and capacity"
     },
     "AutoscaleCapacity": {
+      "type": "object",
       "properties": {
         "minInstanceCount": {
           "type": "integer",
@@ -924,6 +931,7 @@
       "description": "The load-based autoscale request parameters"
     },
     "AutoscaleRecurrence": {
+      "type": "object",
       "properties": {
         "timeZone": {
           "type": "string",
@@ -940,6 +948,7 @@
       "description": "Schedule-based autoscale request parameters"
     },
     "Autoscale": {
+      "type": "object",
       "properties": {
         "capacity": {
           "$ref": "#/definitions/AutoscaleCapacity",
@@ -953,6 +962,7 @@
       "description": "The autoscale request parameters"
     },
     "AutoscaleConfigurationUpdateParameter": {
+      "type": "object",
       "properties": {
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
@@ -962,6 +972,7 @@
       "description": "The autoscale configuration update parameter."
     },
     "HardwareProfile": {
+      "type": "object",
       "properties": {
         "vmSize": {
           "type": "string",
@@ -971,6 +982,7 @@
       "description": "The hardware profile."
     },
     "VirtualNetworkProfile": {
+      "type": "object",
       "description": "The virtual network properties.",
       "properties": {
         "id": {
@@ -984,6 +996,7 @@
       }
     },
     "DataDisksGroups": {
+      "type": "object",
       "description": "The data disks groups for the role.",
       "properties": {
         "disksPerNode": {
@@ -1005,6 +1018,7 @@
       }
     },
     "SshPublicKey": {
+      "type": "object",
       "description": "The SSH public key for the cluster nodes.",
       "properties": {
         "certificateData": {
@@ -1014,6 +1028,7 @@
       }
     },
     "SshProfile": {
+      "type": "object",
       "description": "The list of SSH public keys.",
       "properties": {
         "publicKeys": {
@@ -1026,6 +1041,7 @@
       }
     },
     "LinuxOperatingSystemProfile": {
+      "type": "object",
       "description": "The ssh username, password, and ssh public key.",
       "properties": {
         "username": {
@@ -1044,6 +1060,7 @@
       }
     },
     "OsProfile": {
+      "type": "object",
       "description": "The Linux operation systems profile.",
       "properties": {
         "linuxOperatingSystemProfile": {
@@ -1053,6 +1070,7 @@
       }
     },
     "Role": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1118,6 +1136,7 @@
       "description": "Describes a role on the cluster."
     },
     "ComputeProfile": {
+      "type": "object",
       "properties": {
         "roles": {
           "type": "array",
@@ -1130,6 +1149,7 @@
       "description": "Describes the compute profile."
     },
     "StorageAccount": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1171,6 +1191,7 @@
       "description": "The storage Account."
     },
     "StorageProfile": {
+      "type": "object",
       "properties": {
         "storageaccounts": {
           "type": "array",
@@ -1183,6 +1204,7 @@
       "description": "The storage profile."
     },
     "ExcludedServicesConfig": {
+      "type": "object",
       "properties": {
         "excludedServicesConfigId": {
           "type": "string",
@@ -1196,6 +1218,7 @@
       "description": "The configuration that services will be excluded when creating cluster."
     },
     "NetworkProperties": {
+      "type": "object",
       "description": "The network properties.",
       "properties": {
         "resourceProviderConnection": {
@@ -1225,6 +1248,7 @@
       }
     },
     "ComputeIsolationProperties": {
+      "type": "object",
       "description": "The compute isolation properties.",
       "properties": {
         "enableComputeIsolation": {
@@ -1239,6 +1263,7 @@
       }
     },
     "ClusterCreateProperties": {
+      "type": "object",
       "description": "The cluster create parameters.",
       "properties": {
         "clusterVersion": {
@@ -1324,6 +1349,7 @@
       }
     },
     "ClusterCreateParametersExtended": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1355,6 +1381,7 @@
       "description": "The CreateCluster request parameters."
     },
     "ClusterPatchParameters": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1368,6 +1395,7 @@
       "description": "The PatchCluster request parameters"
     },
     "QuotaInfo": {
+      "type": "object",
       "description": "The quota properties for the cluster.",
       "properties": {
         "coresUsed": {
@@ -1378,6 +1406,7 @@
       }
     },
     "Errors": {
+      "type": "object",
       "description": "The error message associated with the cluster creation.",
       "properties": {
         "code": {
@@ -1391,6 +1420,7 @@
       }
     },
     "ConnectivityEndpoint": {
+      "type": "object",
       "description": "The connectivity properties",
       "properties": {
         "name": {
@@ -1417,6 +1447,7 @@
       }
     },
     "ClusterGetProperties": {
+      "type": "object",
       "description": "The properties of cluster.",
       "properties": {
         "clusterVersion": {
@@ -1561,6 +1592,7 @@
       ]
     },
     "Cluster": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -1590,6 +1622,7 @@
       "description": "The HDInsight cluster."
     },
     "RuntimeScriptAction": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1628,6 +1661,7 @@
       "description": "Describes a script action on a running cluster."
     },
     "ExecuteScriptActionParameters": {
+      "type": "object",
       "properties": {
         "scriptActions": {
           "type": "array",
@@ -1647,6 +1681,7 @@
       "description": "The parameters for the script actions to execute on a running cluster."
     },
     "ClusterListPersistedScriptActionsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of Persisted Script Actions.",
@@ -1664,6 +1699,7 @@
       "description": "The ListPersistedScriptActions operation response."
     },
     "ScriptActionExecutionSummary": {
+      "type": "object",
       "properties": {
         "status": {
           "readOnly": true,
@@ -1730,6 +1766,7 @@
       "description": "The execution details of a script action."
     },
     "ClusterListRuntimeScriptActionDetailResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -1748,6 +1785,7 @@
       "description": "The list runtime script action detail response."
     },
     "ClusterIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1804,6 +1842,7 @@
       }
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of Clusters.",
@@ -1821,6 +1860,7 @@
       "description": "The List Cluster operation response."
     },
     "ClusterResizeParameters": {
+      "type": "object",
       "properties": {
         "targetInstanceCount": {
           "type": "integer",
@@ -1831,6 +1871,7 @@
       "description": "The Resize Cluster request parameters."
     },
     "ClusterDiskEncryptionParameters": {
+      "type": "object",
       "properties": {
         "vaultUri": {
           "type": "string",
@@ -1848,6 +1889,7 @@
       "description": "The Disk Encryption Cluster request parameters."
     },
     "DiskEncryptionProperties": {
+      "type": "object",
       "description": "The disk encryption properties",
       "properties": {
         "vaultUri": {
