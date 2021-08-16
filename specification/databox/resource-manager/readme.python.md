@@ -20,7 +20,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && !$(track2)
+```yaml $(python) && $(multiapi) && $(track2)
 batch:
   - tag: package-2021-05
   - tag: package-2021-03
