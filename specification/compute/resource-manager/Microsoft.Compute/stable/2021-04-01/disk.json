@@ -3231,10 +3231,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The time when the disk access was created."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location where the disk access will be created. Extended location cannot be changed."
         }
       }
     },
@@ -3243,6 +3239,10 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskAccessProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location where the disk access will be created. Extended location cannot be changed."
         }
       },
       "allOf": [
