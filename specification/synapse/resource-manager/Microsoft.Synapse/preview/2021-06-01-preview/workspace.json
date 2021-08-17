@@ -1283,6 +1283,18 @@
         "cspWorkspaceAdminProperties": {
           "description": "Initial workspace AAD admin properties for a CSP subscription",
           "$ref": "#/definitions/CspWorkspaceAdminProperties"
+        },
+        "settings": {
+          "description": "Workspace settings",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object",
+          "readOnly": true
+        },
+        "azureADOnlyAuthentication": {
+          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
+          "type": "boolean"
         }
       }
     },
