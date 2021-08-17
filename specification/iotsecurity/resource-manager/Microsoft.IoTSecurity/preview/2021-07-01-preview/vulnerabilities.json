@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/devices/{deviceId}/vulnerabilities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/vulnerabilities": {
       "get": {
         "x-ms-examples": {
           "List IoT Device Vulnerabilities": {
@@ -59,8 +59,12 @@
           {
             "$ref": "#/parameters/DeviceGroupName"
           },
-          {
-            "$ref": "#/parameters/DeviceId"
+		  {
+            "in": "query",
+            "name": "deviceId",
+            "required": false,
+            "type": "string",
+            "description": "Device ID filter"
           },
           {
             "in": "query",
@@ -89,7 +93,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/devices/{deviceId}/vulnerabilities/{vulnerabilityId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/vulnerabilities/{vulnerabilityId}": {
       "get": {
         "x-ms-examples": {
           "Get IoT Device Vulnerability": {
@@ -113,9 +117,6 @@
           },
           {
             "$ref": "#/parameters/DeviceGroupName"
-          },
-          {
-            "$ref": "#/parameters/DeviceId"
           },
           {
             "$ref": "#/parameters/VulnerabilityId"
@@ -256,19 +257,11 @@
       "description": "Device group name",
       "x-ms-parameter-location": "method"
     },
-    "DeviceId": {
-      "name": "deviceId",
-      "in": "path",
-      "required": true,
-      "description": "Device Id",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "VulnerabilityId": {
       "name": "vulnerabilityId",
       "in": "path",
       "required": true,
-      "description": "Vulnerability Id",
+      "description": "Vulnerability Id. Format: <CVE ID>|<Device ID>",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
