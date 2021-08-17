@@ -2621,7 +2621,7 @@
           "description": "Indicates the OS on a disk supports hibernation."
         },
         "publicNetworkAccess": {
-          "$ref": "#/definitions/NPublicNetworkAccess"
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       },
       "description": "Disk resource update properties."
@@ -3223,6 +3223,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The time when the disk access was created."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location where the disk access will be created. Extended location cannot be changed."
         }
       }
     },
