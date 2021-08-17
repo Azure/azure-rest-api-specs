@@ -1276,14 +1276,6 @@
           "type": "string",
           "description": "Resource type."
         },
-        "resourceQuery": {
-          "description": "Resource query for dimension values.",
-          "$ref": "#/definitions/resourceQueryDetails"
-        },
-        "resourceUsagesQuery": {
-          "description": "Resource usages query.",
-          "$ref": "#/definitions/resourceQueryDetails"
-        },
         "dimensions": {
           "description": "Resource provider dimensions.",
           "type": "array",
@@ -1382,54 +1374,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QuotaTypeInformationDimensionList"
         }
-      }
-    },
-    "resourceQueryDetails": {
-      "type": "object",
-      "description": "Resource query details.",
-      "properties": {
-        "resourceQueryType": {
-          "description": "Resource query type.",
-          "$ref": "#/definitions/ResourceQueryType"
-        },
-        "resourceQueryMethod": {
-          "description": "Resource query method.",
-          "$ref": "#/definitions/ResourceQueryMethod"
-        },
-        "resourceQueryUri": {
-          "type": "string",
-          "description": "Base URI for for resource query."
-        },
-        "resourceQueryPostTemplate": {
-          "description": "Template to create the resource query.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceQueryType": {
-      "description": "Resource query types. For extensibility, it is a string.",
-      "enum": [
-        "ARG",
-        "RestAPI"
-      ],
-      "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceQueryType",
-        "modelAsString": true
-      }
-    },
-    "ResourceQueryMethod": {
-      "description": "The resource query method.",
-      "enum": [
-        "GET",
-        "POST"
-      ],
-      "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceQueryMethod",
-        "modelAsString": true
       }
     },
     "QuotaTemplatesDetails": {
