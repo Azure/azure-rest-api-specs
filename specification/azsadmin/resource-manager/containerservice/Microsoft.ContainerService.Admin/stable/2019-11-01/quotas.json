@@ -60,28 +60,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Base resource object.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource Type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ContainerServiceQuotaProperties": {
       "description": "Container service quota properties.",
       "type": "object",
@@ -112,7 +90,7 @@
             },
             "allOf": [
               {
-                "$ref": "#/definitions/Resource"
+                "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
               }
             ]
           }
