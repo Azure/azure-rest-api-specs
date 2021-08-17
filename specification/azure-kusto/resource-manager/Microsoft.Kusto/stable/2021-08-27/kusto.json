@@ -887,7 +887,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databaseCheckNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
       "post": {
         "tags": [
           "Databases"
@@ -4995,7 +4995,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5341,7 +5341,7 @@
             "Microsoft.Kusto/clusters/databases"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "DatabasesType",
             "modelAsString": false
           },
           "description": "The type of resource, for instance Microsoft.Kusto/clusters/databases."
@@ -5366,7 +5366,7 @@
             "Microsoft.Kusto/clusters/attachedDatabaseConfigurations"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "AttachedDatabaseType",
             "modelAsString": false
           },
           "description": "The type of resource, for instance Microsoft.Kusto/clusters/attachedDatabaseConfigurations."
