@@ -787,15 +787,6 @@
         }
       }
     },
-    "ResourceId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "PrivateLinkServiceConnectionState": {
       "type": "object",
       "properties": {
@@ -813,6 +804,15 @@
         },
         "actionsRequired": {
           "type": "string"
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -832,124 +832,6 @@
           "description": "Gets the value of next link.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ProjectSummary": {
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "type": "string",
-          "readOnly": true
-        },
-        "refreshSummaryState": {
-          "enum": [
-            "Started",
-            "InProgress",
-            "Completed",
-            "Failed"
-          ],
-          "type": "string"
-        },
-        "lastSummaryRefreshedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "extendedSummary": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "eTag": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "enum": [
-            "Accepted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string"
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        }
-      }
-    },
-    "ResourceId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "actionsRequired": {
-          "type": "string"
-        }
-      }
-    },
-    "ModifyConnectionStateBody": {
-      "type": "object",
-      "properties": {
-        "eTag": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectionStateRequestBodyProperties"
-        }
-      }
-    },
-    "ConnectionStateRequestBodyProperties": {
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         }
       }
     },
