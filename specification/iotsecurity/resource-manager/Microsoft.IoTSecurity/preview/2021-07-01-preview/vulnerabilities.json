@@ -59,7 +59,7 @@
           {
             "$ref": "#/parameters/DeviceGroupName"
           },
-		  {
+          {
             "in": "query",
             "name": "deviceId",
             "required": false,
@@ -191,12 +191,12 @@
           "type": "string",
           "example": "This vulnerability affects the following vendors: Mozilla, Ubuntu. To view more details about this vulnerability please visit the vendor website."
         },
-        "severity": {
-          "description": "The severity of the vulnerability",
+        "severityScore": {
+          "description": "The severity score of the vulnerability",
           "readOnly": true,
           "type": "string",
           "example": "Medium",
-          "$ref": "#/definitions/Severity"
+          "$ref": "#/definitions/SeverityScore"
         },
         "score": {
           "description": "The score of the vulnerability",
@@ -231,8 +231,8 @@
         }
       }
     },
-    "Severity": {
-      "description": "The severity of the vulnerability",
+    "SeverityScore": {
+      "description": "The severity score of the vulnerability",
       "readOnly": true,
       "type": "string",
       "enum": [
@@ -243,7 +243,7 @@
         "Critical"
       ],
       "x-ms-enum": {
-        "name": "severity",
+        "name": "severityScore",
         "modelAsString": true
       }
     }
