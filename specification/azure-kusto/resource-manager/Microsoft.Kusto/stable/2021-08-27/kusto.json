@@ -2473,7 +2473,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointListResult"
+              "$ref": "#/definitions/OutboundNetworkDependenciesEndpointListResult"
             }
           },
           "default": {
@@ -4910,7 +4910,7 @@
         }
       }
     },
-    "OutboundEnvironmentEndpointListResult": {
+    "OutboundNetworkDependenciesEndpointListResult": {
       "description": "Collection of Outbound Environment Endpoints",
       "required": [
         "value"
@@ -4921,7 +4921,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+            "$ref": "#/definitions/OutboundNetworkDependenciesEndpoint"
           }
         },
         "nextLink": {
@@ -4931,13 +4931,13 @@
         }
       }
     },
-    "OutboundEnvironmentEndpoint": {
-      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+    "OutboundNetworkDependenciesEndpoint": {
+      "description": "Endpoints accessed for a common purpose that the Kusto Service Environment requires outbound network access to.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OutboundEnvironmentEndpointProperties",
+          "$ref": "#/definitions/OutboundNetworkDependenciesEndpointProperties",
           "description": "The outbound environment endpoint properties."
         },
         "etag": {
@@ -4952,16 +4952,16 @@
         }
       ]
     },
-    "OutboundEnvironmentEndpointProperties": {
-      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+    "OutboundNetworkDependenciesEndpointProperties": {
+      "description": "Endpoints accessed for a common purpose that the Kusto Service Environment requires outbound network access to.",
       "type": "object",
       "properties": {
         "category": {
-          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "description": "The type of service accessed by the Kusto Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "description": "The endpoints that the Kusto Service Environment reaches the service at.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
@@ -5586,10 +5586,6 @@
     },
     "KeyVaultProperties": {
       "description": "Properties of the key vault.",
-      "required": [
-        "keyName",
-        "keyVaultUri"
-      ],
       "properties": {
         "keyName": {
           "type": "string",
