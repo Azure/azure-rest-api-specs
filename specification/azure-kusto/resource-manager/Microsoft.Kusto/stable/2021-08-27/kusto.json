@@ -887,22 +887,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databaseCheckNameAvailability": {
       "post": {
         "tags": [
-          "Databases",
-          "AttachedDatabaseConfigurations"
+          "Databases"
         ],
-        "operationId": "ClusterChildResource_CheckNameAvailability",
+        "operationId": "Databases_CheckNameAvailability",
         "x-ms-examples": {
           "KustoDatabasesCheckNameAvailability": {
             "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
-          },
-          "KustoAttachedDatabaseConfigurationCheckNameAvailability": {
-            "$ref": "./examples/KustoAttachedDatabaseConfigurationCheckNameAvailability.json"
           }
         },
-        "description": "Checks that the cluster child resource name is valid and is not already in use.",
+        "description": "Checks that the databases resource name is valid and is not already in use.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -921,7 +917,58 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameRequest"
+              "$ref": "#/definitions/DatabasesCheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurationCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "operationId": "AttachedDatabaseConfigurations_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoAttachedDatabaseConfigurationCheckNameAvailability": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the attached database resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfigurationsCheckNameRequest"
             },
             "description": "The name of the resource."
           }
@@ -5281,7 +5328,7 @@
       ],
       "description": "The result returned from a cluster check name availability request."
     },
-    "CheckNameRequest": {
+    "DatabasesCheckNameRequest": {
       "type": "object",
       "properties": {
         "name": {
@@ -5291,8 +5338,7 @@
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Kusto/clusters/databases",
-            "Microsoft.Kusto/clusters/attachedDatabaseConfigurations"
+            "Microsoft.Kusto/clusters/databases"
           ],
           "x-ms-enum": {
             "name": "Type",
@@ -5306,6 +5352,31 @@
         "type"
       ],
       "description": "The result returned from a database check name availability request."
+    },
+    "AttachedDatabaseConfigurationsCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Attached database resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/attachedDatabaseConfigurations"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.Kusto/clusters/attachedDatabaseConfigurations."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a AttachedDatabaseConfigurations check name availability request."
     },
     "ClusterPrincipalAssignmentCheckNameRequest": {
       "type": "object",
