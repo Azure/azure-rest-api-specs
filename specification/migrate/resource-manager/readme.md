@@ -120,7 +120,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
-- Microsoft.OffAzure/stable/2020-05-01/hubmigrate.json
+- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
 ```
 
 ## Suppression
