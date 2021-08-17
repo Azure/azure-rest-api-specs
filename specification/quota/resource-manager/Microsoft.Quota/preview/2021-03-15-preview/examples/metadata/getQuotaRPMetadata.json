@@ -12,6 +12,18 @@
               "value": [
                 {
                   "resourceType": "virtualMachines",
+                  "resourceQuery": {
+                    "resourceQueryType": "",
+                    "resourceQueryMethod": "",
+                    "resourceQueryUri": "",
+                    "resourceQueryPostTemplate": ""
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "RestAPI",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
+                  },
                   "dimensions": [
                     {
                       "name": "subscriptionId",
@@ -32,6 +44,18 @@
               "value": [
                 {
                   "resourceType": "batchAccounts/pool",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "{ \"subscriptions\": [ {{subscriptipnId}} ], \"query\":  \"where type contains 'batchAccounts' and isnotempty(properties.batchAccountName)\" }"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "RestAPI",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "subscriptions/{{subscriptionId}}/providers/Microsoft.Batch/locations/{{location}}/batchAccounts/{{batchAccountName}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
+                  },
                   "dimensions": [
                     {
                       "name": "subscriptionId",
@@ -49,6 +73,18 @@
                 },
                 {
                   "resourceType": "batchAccounts",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "{ \"subscriptions\": [ {{subscriptipnId}} ], \"query\":  \"where type contains 'batchAccounts'\" }"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "RestAPI",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "subscriptions/{{subscriptionId}}/providers/Microsoft.Batch/locations/{{location}}/usages?api-version=2020-12-01",
+                    "resourceQueryPostTemplate": ""
+                  },
                   "dimensions": [
                     {
                       "name": "subscriptionId",
@@ -69,6 +105,17 @@
               "value": [
                 {
                   "resourceType": "PublicIpAddresses",
+                  "resourceQuery": {
+                    "resourceQueryType": "ARG",
+                    "resourceQueryMethod": "POST",
+                    "resourceQueryUri": "providers/Microsoft.ResourceGraph/resources?api-version=2019-04-01",
+                    "resourceQueryPostTemplate": "{ \"subscriptions\": [ {{subscriptipnId}} ], \"query\":  \"where type contains 'publicIPAddresses' and isnotempty(properties.ipAddress)\" }"
+                  },
+                  "resourceUsagesQuery": {
+                    "resourceQueryType": "RestAPI",
+                    "resourceQueryMethod": "GET",
+                    "resourceQueryUri": "subscriptions/{{subscriptionId}}/providers/Microsoft.Network/locations/{{location}}/usages?api-version=2020-12-01"
+                  },
                   "dimensions": [
                     {
                       "name": "subscriptions",
