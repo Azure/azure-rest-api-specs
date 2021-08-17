@@ -923,6 +923,9 @@
         "x-ms-examples": {
           "Get information about a disk encryption set.": {
             "$ref": "./examples/GetInformationAboutADiskEncryptionSet.json"
+          },
+          "Get information about a disk encryption set when auto-key rotation failed.": {
+            "$ref": "./examples/GetInformationAboutADiskEncryptionSetWithAutoKeyRotationError.json"
           }
         }
       },
@@ -2332,6 +2335,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The time when the active key of this disk encryption set was updated."
+        },
+        "autoKeyRotationError": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "The error that was encountered during auto-key rotation."
         }
       }
     },
