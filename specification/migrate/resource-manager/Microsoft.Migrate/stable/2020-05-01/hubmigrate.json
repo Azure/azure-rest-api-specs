@@ -855,6 +855,34 @@
         }
       }
     },
+    "ProjectSummary": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "lastSummaryRefreshedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "extendedSummary": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "properties": {
