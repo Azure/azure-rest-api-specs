@@ -15,7 +15,7 @@
             "name": "schema1",
             "properties": {
               "schemaType": "xml",
-              "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
+              "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
             }
           },
           {
@@ -24,7 +24,35 @@
             "name": "schema2",
             "properties": {
               "schemaType": "json",
-              "document": "{\r\n  \"swagger\": \"2.0\",\r\n  \"info\": {\r\n    \"title\": \"Simple API overview\",\r\n    \"version\": \"v2\"\r\n  },\r\n  \"paths\": {\r\n    \"\/\": {\r\n      \"get\": {\r\n        \"operationId\": \"listVersionsv2\",\r\n        \"summary\": \"List API versions\",\r\n        \"produces\": [\r\n          \"application\/json\"\r\n        ],\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"200 300 response\",\r\n            \"examples\": {\r\n              \"application\/json\": \"{\\n    \\\"versions\\\": [\\n        {\\n            \\\"status\\\": \\\"CURRENT\\\",\\n            \\\"updated\\\": \\\"2011-01-21T11:33:21Z\\\",\\n            \\\"id\\\": \\\"v2.0\\\",\\n            \\\"links\\\": [\\n                {\\n                    \\\"href\\\": \\\"http:\/\/127.0.0.1:8774\/v2\/\\\",\\n                    \\\"rel\\\": \\\"self\\\"\\n                }\\n            ]\\n        },\\n        {\\n            \\\"status\\\": \\\"EXPERIMENTAL\\\",\\n            \\\"updated\\\": \\\"2013-07-23T11:33:21Z\\\",\\n            \\\"id\\\": \\\"v3.0\\\",\\n            \\\"links\\\": [\\n                {\\n                    \\\"href\\\": \\\"http:\/\/127.0.0.1:8774\/v3\/\\\",\\n                    \\\"rel\\\": \\\"self\\\"\\n                }\\n            ]\\n        }\\n    ]\\n}\"\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"consumes\": [\r\n    \"application\/json\"\r\n  ]\r\n}"
+              "document": {
+                "swagger": "2.0",
+                "info": {
+                  "title": "Simple API overview",
+                  "version": "v2"
+                },
+                "paths": {
+                  "/": {
+                    "get": {
+                      "operationId": "listVersionsv2",
+                      "summary": "List API versions",
+                      "produces": [
+                        "application/json"
+                      ],
+                      "responses": {
+                        "200": {
+                          "description": "200 300 response",
+                          "examples": {
+                            "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "consumes": [
+                  "application/json"
+                ]
+              }
             }
           }
         ],

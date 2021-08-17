@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "schemaId": "schema1",
+    "parameters": {
+      "properties": {
+        "schemaType": "xml",
+        "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "schemaType": "xml",
+          "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "schemaType": "xml",
+          "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
+        }
+      }
+    }
+  }
+}

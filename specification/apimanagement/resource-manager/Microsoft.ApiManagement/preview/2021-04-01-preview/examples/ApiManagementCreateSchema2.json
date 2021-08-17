@@ -1,0 +1,123 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "schemaId": "schema1",
+    "parameters": {
+      "properties": {
+        "schemaType": "json",
+        "document": {
+          "swagger": "2.0",
+          "info": {
+            "title": "Simple API overview",
+            "version": "v2"
+          },
+          "paths": {
+            "/": {
+              "get": {
+                "operationId": "listVersionsv2",
+                "summary": "List API versions",
+                "produces": [
+                  "application/json"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "200 300 response",
+                    "examples": {
+                      "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "consumes": [
+            "application/json"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "schemaType": "json",
+          "document": {
+            "swagger": "2.0",
+            "info": {
+              "title": "Simple API overview",
+              "version": "v2"
+            },
+            "paths": {
+              "/": {
+                "get": {
+                  "operationId": "listVersionsv2",
+                  "summary": "List API versions",
+                  "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 300 response",
+                      "examples": {
+                        "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "consumes": [
+              "application/json"
+            ]
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "schemaType": "json",
+          "document": {
+            "swagger": "2.0",
+            "info": {
+              "title": "Simple API overview",
+              "version": "v2"
+            },
+            "paths": {
+              "/": {
+                "get": {
+                  "operationId": "listVersionsv2",
+                  "summary": "List API versions",
+                  "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 300 response",
+                      "examples": {
+                        "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "consumes": [
+              "application/json"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

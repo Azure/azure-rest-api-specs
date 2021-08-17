@@ -5093,15 +5093,18 @@
             ]
           }
         },
+        "value": {
+          "type": "string",
+          "description": "Json-encoded string for non json-based schema."
+        },
         "document": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SchemaDocumentProperties",
-          "description": "For schemaType json - json object representing json schema. For schemaType xml – string encoded XML schema."
+          "description": "Schema document object for json-based schema formats(e.g. json schema)."
         }
       },
       "required": [
-        "schemaType",
-        "document"
+        "schemaType"
       ],
       "description": "Schema create or update contract Properties."
     },
