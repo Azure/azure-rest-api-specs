@@ -419,9 +419,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/NextLink"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
@@ -479,9 +476,6 @@
           },
           {
             "$ref": "#/parameters/NextLink"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -533,9 +527,6 @@
           },
           {
             "$ref": "#/parameters/NextLink"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -571,9 +562,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/NextLink"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
@@ -874,6 +862,9 @@
           },
           {
             "$ref": "#/parameters/TagAttributeValue"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -911,6 +902,9 @@
           },
           {
             "$ref": "#/parameters/TagReference"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2375,14 +2369,9 @@
             "$ref": "#/definitions/ManifestAttributes_manifest_references",
             "description": "Manifest attributes details"
           }
-        },
-        "quarantineTag": {
-          "type": "string",
-          "description": "Quarantine tag name"
         }
       },
       "example": {
-        "quarantineTag": "quarantineTag",
         "references": [
           {
             "os": "os",
