@@ -27,7 +27,7 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-07-01
+tag: package-2021-03-01-preview
 ```
 
 ### Tag: package-2021-07-01
@@ -223,6 +223,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-js-track2
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
