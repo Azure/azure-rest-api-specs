@@ -57,14 +57,14 @@ input-file:
   - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
 ```
 
-### Tag: package-preview-2021-02
+### Tag: package-preview-2021-08
 
-These settings apply only when `--tag=package-preview-2021-02` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-02'
+```yaml $(tag) == 'package-preview-2021-08'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-02-01-preview/ActionRules.json
-  - Microsoft.AlertsManagement/preview/2021-02-01-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/ActionRules.json
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertsManagement.json
 ```
 
 ### Tag: package-preview-2021-01

@@ -1,15 +1,25 @@
 {
   "parameters": {
-    "api-version": "2021-02-01-preview",
+    "api-version": "2021-08-08-preview",
     "subscriptionId": "subId1",
     "resourceGroupName": "alertscorrelationrg",
-    "actionRuleName": "RemoveActionGroupsOutsideBusinessHours",
+    "actionRuleName": "RemoveActionGroupsRecurringMaintenance",
     "actionRule": {
       "location": "Global",
       "tags": {},
       "properties": {
         "scopes": [
-          "/subscriptions/subId1"
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ],
+        "conditions": [
+          {
+            "field": "targetResourceType",
+            "operator": "Equals",
+            "values": [
+              "microsoft.compute/virtualmachines"
+            ]
+          }
         ],
         "actions": [
           {
@@ -17,15 +27,12 @@
           }
         ],
         "schedule": {
-          "timeZone": "Eastern Standard Time",
+          "timeZone": "India Standard Time",
           "recurrences": [
             {
-              "recurrenceType": "Daily",
-              "startTime": "17:00:00",
-              "endTime": "09:00:00"
-            },
-            {
               "recurrenceType": "Weekly",
+              "startTime": "22:00:00",
+              "endTime": "04:00:00",
               "daysOfWeek": [
                 "Saturday",
                 "Sunday"
@@ -33,7 +40,7 @@
             }
           ]
         },
-        "description": "Remove all ActionGroups outside business hours",
+        "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
         "enabled": true
       }
     }
@@ -51,7 +58,17 @@
         },
         "properties": {
           "scopes": [
-            "/subscriptions/subId1"
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "targetResourceType",
+              "operator": "Equals",
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
+            }
           ],
           "actions": [
             {
@@ -59,15 +76,12 @@
             }
           ],
           "schedule": {
-            "timeZone": "Eastern Standard Time",
+            "timeZone": "India Standard Time",
             "recurrences": [
               {
-                "recurrenceType": "Daily",
-                "startTime": "17:00:00",
-                "endTime": "09:00:00"
-              },
-              {
                 "recurrenceType": "Weekly",
+                "startTime": "22:00:00",
+                "endTime": "04:00:00",
                 "daysOfWeek": [
                   "Saturday",
                   "Sunday"
@@ -75,12 +89,12 @@
               }
             ]
           },
-          "description": "Remove all ActionGroups outside business hours",
+          "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
           "enabled": true
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsRecurringMaintenance",
         "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsOutsideBusinessHours",
+        "name": "RemoveActionGroupsRecurringMaintenance",
         "location": "Global",
         "tags": {}
       }
@@ -97,7 +111,17 @@
         },
         "properties": {
           "scopes": [
-            "/subscriptions/subId1"
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "targetResourceType",
+              "operator": "Equals",
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
+            }
           ],
           "actions": [
             {
@@ -105,15 +129,12 @@
             }
           ],
           "schedule": {
-            "timeZone": "Eastern Standard Time",
+            "timeZone": "India Standard Time",
             "recurrences": [
               {
-                "recurrenceType": "Daily",
-                "startTime": "17:00:00",
-                "endTime": "09:00:00"
-              },
-              {
                 "recurrenceType": "Weekly",
+                "startTime": "22:00:00",
+                "endTime": "04:00:00",
                 "daysOfWeek": [
                   "Saturday",
                   "Sunday"
@@ -121,12 +142,12 @@
               }
             ]
           },
-          "description": "Remove all ActionGroups outside business hours",
+          "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
           "enabled": true
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsRecurringMaintenance",
         "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsOutsideBusinessHours",
+        "name": "RemoveActionGroupsRecurringMaintenance",
         "location": "Global",
         "tags": {}
       }
