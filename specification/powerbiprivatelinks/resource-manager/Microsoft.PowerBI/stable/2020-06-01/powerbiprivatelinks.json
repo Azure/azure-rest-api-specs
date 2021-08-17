@@ -65,9 +65,7 @@
             "description": "An error response received from Power BI service."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI": {
@@ -90,9 +88,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -184,9 +179,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -453,9 +445,7 @@
             "$ref": "./examples/PrivateLinkResources_ListByResource.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/{azureResourceName}/privateLinkResources/{privateLinkResourceName}": {
@@ -558,7 +548,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Gets private endpoint connections": {
@@ -994,6 +984,11 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
@@ -1056,6 +1051,11 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
