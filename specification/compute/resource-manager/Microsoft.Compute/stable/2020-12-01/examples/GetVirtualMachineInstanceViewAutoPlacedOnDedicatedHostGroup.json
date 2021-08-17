@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-12-01",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "computerName": "myVM",
+        "osName": "Windows Server 2016 Datacenter",
+        "osVersion": "Microsoft Windows NT 10.0.14393.0",
+        "vmAgent": {
+          "vmAgentVersion": "2.7.41491.949",
+          "statuses": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "level": "Info",
+              "displayStatus": "Ready",
+              "message": "GuestAgent is running and accepting new configurations.",
+              "time": "2020-12-01T23:11:22+00:00"
+            }
+          ]
+        },
+        "disks": [
+          {
+            "name": "myOsDisk",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded",
+                "time": "2020-12-01T21:29:47.477089+00:00"
+              }
+            ]
+          }
+        ],
+        "hyperVGeneration": "V1",
+        "assignedHost": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup/hosts/myHost",
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "time": "2020-12-01T21:30:12.8051917+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "level": "Info",
+            "displayStatus": "VM running"
+          }
+        ]
+      }
+    }
+  }
+}

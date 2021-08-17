@@ -1,0 +1,282 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "vendorName": "TestVendor",
+    "skuName": "TestSku",
+    "parameters": {
+      "properties": {
+        "deploymentMode": "PrivateEdgeZone",
+        "preview": true,
+        "managedApplicationTemplate": {},
+        "networkFunctionTemplate": {
+          "networkFunctionRoleConfigurations": [
+            {
+              "roleName": "test",
+              "roleType": "VirtualMachine",
+              "virtualMachineSize": "Standard_D3_v2",
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "Canonical",
+                  "offer": "UbuntuServer",
+                  "sku": "18.04-LTS",
+                  "version": "18.04.201804262"
+                },
+                "osDisk": {
+                  "osType": "Linux",
+                  "name": "vhdName",
+                  "diskSizeGB": 30,
+                  "vhd": {
+                    "uri": "https://contoso.net/link/vnd.vhd?sp=rl&st=2020-10-08T20:38:19Z&se=2020-12-09T19:38:00Z&sv=2019-12-12&sr=b&sig=7BM2f4yOw%3D"
+                  }
+                },
+                "dataDisks": [
+                  {
+                    "createOption": "Empty",
+                    "name": "DataDisk1",
+                    "diskSizeGB": 10
+                  }
+                ]
+              },
+              "osProfile": {
+                "adminUsername": "dummyuser",
+                "linuxConfiguration": {
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "home/user/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                      }
+                    ]
+                  }
+                },
+                "customData": "base-64 encoded string of custom data"
+              },
+              "customProfile": {
+                "metadataConfigurationPath": "/var/logs/network.cfg"
+              },
+              "networkInterfaces": [
+                {
+                  "networkInterfaceName": "nic1",
+                  "macAddress": "",
+                  "vmSwitchType": "Wan",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                },
+                {
+                  "networkInterfaceName": "nic2",
+                  "macAddress": "",
+                  "vmSwitchType": "Management",
+                  "ipConfigurations": [
+                    {
+                      "ipAllocationMethod": "Dynamic",
+                      "ipAddress": "",
+                      "subnet": "",
+                      "gateway": "",
+                      "ipVersion": "IPv4",
+                      "dnsServers": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestSku",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/vendors/TestVendor/vendorskus/TestSku",
+        "type": "Microsoft.HybridNetwork/vendors/vendorskus",
+        "properties": {
+          "deploymentMode": "PrivateEdgeZone",
+          "preview": true,
+          "provisioningState": "Succeeded",
+          "managedApplicationTemplate": {},
+          "networkFunctionTemplate": {
+            "networkFunctionRoleConfigurations": [
+              {
+                "roleName": "test",
+                "roleType": "VirtualMachine",
+                "virtualMachineSize": "Standard_D3_v2",
+                "storageProfile": {
+                  "imageReference": {
+                    "publisher": "Canonical",
+                    "offer": "UbuntuServer",
+                    "sku": "18.04-LTS",
+                    "version": "18.04.201804262"
+                  },
+                  "osDisk": {
+                    "osType": "Linux",
+                    "name": "vhdName",
+                    "diskSizeGB": 30,
+                    "vhd": {}
+                  },
+                  "dataDisks": [
+                    {
+                      "createOption": "Empty",
+                      "name": "DataDisk1",
+                      "diskSizeGB": 10
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "adminUsername": "dummyuser",
+                  "linuxConfiguration": {
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "path": "home/user/.ssh/authorized_keys",
+                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                        }
+                      ]
+                    }
+                  },
+                  "customData": "base-64 encoded string of custom data"
+                },
+                "customProfile": {
+                  "metadataConfigurationPath": "/var/logs/network.cfg"
+                },
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "nic1",
+                    "macAddress": "",
+                    "vmSwitchType": "Wan",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  },
+                  {
+                    "networkInterfaceName": "nic2",
+                    "macAddress": "",
+                    "vmSwitchType": "Management",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestSku",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/vendors/TestVendor/vendorskus/TestSku",
+        "type": "Microsoft.HybridNetwork/vendors/vendorskus",
+        "properties": {
+          "deploymentMode": "PrivateEdgeZone",
+          "preview": true,
+          "provisioningState": "Accepted",
+          "managedApplicationTemplate": {},
+          "networkFunctionTemplate": {
+            "networkFunctionRoleConfigurations": [
+              {
+                "roleName": "test",
+                "roleType": "VirtualMachine",
+                "virtualMachineSize": "Standard_D3_v2",
+                "storageProfile": {
+                  "imageReference": {
+                    "publisher": "Canonical",
+                    "offer": "UbuntuServer",
+                    "sku": "18.04-LTS",
+                    "version": "18.04.201804262"
+                  },
+                  "osDisk": {
+                    "osType": "Linux",
+                    "name": "vhdName",
+                    "diskSizeGB": 30,
+                    "vhd": {}
+                  },
+                  "dataDisks": [
+                    {
+                      "createOption": "Empty",
+                      "name": "DataDisk1",
+                      "diskSizeGB": 10
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "adminUsername": "dummyuser",
+                  "linuxConfiguration": {
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "path": "home/user/.ssh/authorized_keys",
+                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                        }
+                      ]
+                    }
+                  },
+                  "customData": "base-64 encoded string of custom data"
+                },
+                "customProfile": {
+                  "metadataConfigurationPath": "/var/logs/network.cfg"
+                },
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "nic1",
+                    "macAddress": "",
+                    "vmSwitchType": "",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  },
+                  {
+                    "networkInterfaceName": "nic2",
+                    "macAddress": "",
+                    "vmSwitchType": "",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

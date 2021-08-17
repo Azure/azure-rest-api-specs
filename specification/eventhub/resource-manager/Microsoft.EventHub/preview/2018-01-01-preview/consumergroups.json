@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups/{consumerGroupName}": {
+      "put": {
+        "tags": [
+          "ConsumerGroups"
+        ],
+        "operationId": "ConsumerGroups_CreateOrUpdate",
+        "x-ms-examples": {
+          "ConsumerGroupCreate": {
+            "$ref": "./examples/ConsumerGroup/EHConsumerGroupCreate.json"
+          }
+        },
+        "description": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConsumerGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsumerGroup"
+            },
+            "description": "Parameters supplied to create or update a consumer group resource."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consumer group successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ConsumerGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConsumerGroups"
+        ],
+        "operationId": "ConsumerGroups_Delete",
+        "x-ms-examples": {
+          "ConsumerGroupDelete": {
+            "$ref": "./examples/ConsumerGroup/EHConsumerGroupDelete.json"
+          }
+        },
+        "description": "Deletes a consumer group from the specified Event Hub and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConsumerGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consumer group deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ConsumerGroups"
+        ],
+        "operationId": "ConsumerGroups_Get",
+        "x-ms-examples": {
+          "ConsumerGroupGet": {
+            "$ref": "./examples/ConsumerGroup/EHConsumerGroupGet.json"
+          }
+        },
+        "description": "Gets a description for the specified consumer group.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ConsumerGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the consumer group description.",
+            "schema": {
+              "$ref": "#/definitions/ConsumerGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups": {
+      "get": {
+        "tags": [
+          "ConsumerGroups"
+        ],
+        "operationId": "ConsumerGroups_ListByEventHub",
+        "x-ms-examples": {
+          "ConsumerGroupsListAll": {
+            "$ref": "./examples/ConsumerGroup/EHConsumerGroupListByEventHub.json"
+          }
+        },
+        "description": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of consumer groups.",
+            "schema": {
+              "$ref": "#/definitions/ConsumerGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConsumerGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the message was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            },
+            "userMetadata": {
+              "type": "string",
+              "description": "User Metadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
+            }
+          },
+          "description": "Single item in List or Get Consumer group operation"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get Consumer group operation"
+    },
+    "ConsumerGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumerGroup"
+          },
+          "description": "Result of the List Consumer Group operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Consumer Group"
+        }
+      },
+      "description": "The result to the List Consumer Group operation."
+    }
+  },
+  "parameters": {}
+}

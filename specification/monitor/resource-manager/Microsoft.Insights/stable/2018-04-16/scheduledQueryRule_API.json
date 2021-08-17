@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}": {
       "put": {
         "description": "Creates or updates an log search rule.",
         "tags": [
@@ -43,7 +43,7 @@
         "operationId": "ScheduledQueryRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -52,7 +52,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -68,7 +68,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -110,17 +110,17 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -144,7 +144,7 @@
         "operationId": "ScheduledQueryRules_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -153,7 +153,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -169,7 +169,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -199,17 +199,17 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -235,20 +235,20 @@
         "description": "List the Log Search rules within a subscription group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -269,7 +269,7 @@
         "x-ms-odata": "#/definitions/LogSearchRuleResource"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -281,20 +281,20 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -318,6 +318,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -343,10 +344,21 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
         }
       },
       "required": [
@@ -375,8 +387,10 @@
       "description": "The Log Search Rule resource."
     },
     "LogSearchRuleResourcePatch": {
+      "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -391,6 +405,7 @@
       "description": "The log search rule resource for patch operations."
     },
     "LogSearchRuleResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -520,10 +535,13 @@
     "ConditionalOperator": {
       "type": "string",
       "enum": [
+        "GreaterThanOrEqual",
+        "LessThanOrEqual",
         "GreaterThan",
         "LessThan",
         "Equal"
       ],
+      "default": "GreaterThanOrEqual",
       "x-ms-enum": {
         "name": "ConditionalOperator",
         "modelAsString": true
@@ -536,6 +554,7 @@
         "Consecutive",
         "Total"
       ],
+      "default": "Consecutive",
       "x-ms-enum": {
         "name": "metricTriggerType",
         "modelAsString": true
@@ -569,11 +588,31 @@
       "description": "Set value to 'ResultAccount'"
     },
     "LogSearchRule": {
+      "type": "object",
       "description": "Log Search Rule Definition",
       "properties": {
+        "createdWithApiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The api-version used when creating this alert rule"
+        },
+        "isLegacyLogAnalyticsRule": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if alert rule is legacy Log Analytic rule"
+        },
         "description": {
           "type": "string",
           "description": "The description of the Log Search rule."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the alert rule"
+        },
+        "autoMitigate": {
+          "type": "boolean",
+          "default": false,
+          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is false."
         },
         "enabled": {
           "type": "string",
@@ -627,6 +666,7 @@
       ]
     },
     "LogSearchRulePatch": {
+      "type": "object",
       "description": "Log Search Rule Definition for Patching",
       "properties": {
         "enabled": {
@@ -765,6 +805,16 @@
         "criteria"
       ]
     },
+    "ErrorContract": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -781,20 +831,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",

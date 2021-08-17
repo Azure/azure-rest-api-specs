@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-12-01",
+    "subscriptionId": "subid",
+    "gatewayId": "gw1",
+    "apiId": "echo-api",
+    "parameters": {
+      "properties": {
+        "provisioningState": "created"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1/apis/echo-api",
+        "type": "Microsoft.ApiManagement/service/gateways/apis",
+        "name": "echo-api",
+        "properties": {
+          "displayName": "EchoApi",
+          "apiRevision": "1",
+          "serviceUrl": "https://contoso.com/apis/echo",
+          "path": "",
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1/apis/echo-api",
+        "type": "Microsoft.ApiManagement/service/gateways/apis",
+        "name": "echo-api",
+        "properties": {
+          "displayName": "EchoApi",
+          "apiRevision": "1",
+          "serviceUrl": "https://contoso.com/apis/echo",
+          "path": "",
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    }
+  }
+}
