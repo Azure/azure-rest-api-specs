@@ -12,7 +12,7 @@
     "parameters": [
       {
         "name": "vaultBaseUrl",
-        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "description": "The vault name, for example https://myhsmvault.managedhsm.azure.net.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -233,7 +233,7 @@
         "certificates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityDomainCertificateItem"
+            "$ref": "#/definitions/SecurityDomainJsonWebKey"
           },
           "minItems": 3,
           "maxItems": 10,
@@ -250,17 +250,6 @@
       },
       "required": [
         "certificates"
-      ]
-    },
-    "SecurityDomainCertificateItem": {
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/SecurityDomainJsonWebKey",
-          "description": "Customer generated certificate containing public key in JWK format"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TransferKey": {
