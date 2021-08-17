@@ -883,6 +883,25 @@
         }
       }
     },
+    "ModifyConnectionStateBody": {
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionStateRequestBodyProperties"
+        }
+      }
+    },
+    "ConnectionStateRequestBodyProperties": {
+      "type": "object",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "properties": {
