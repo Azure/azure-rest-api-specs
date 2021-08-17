@@ -28,7 +28,7 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2021-01
+tag: package-2020-12
 ```
 
 
@@ -516,7 +516,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AZ
 
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Suppression
 
