@@ -181,6 +181,9 @@
           "Update a managed disk to add supportsHibernation.": {
             "$ref": "./examples/UpdateAManagedDiskToAddSupportsHibernation.json"
           },
+          "Update a managed disk to add accelerated networking.": {
+            "$ref": "./examples/UpdateAManagedDiskToAddAcceleratedNetworking.json"
+          },
           "Update a managed disk to change tier.": {
             "$ref": "./examples/UpdateAManagedDiskToChangeTier.json"
           }
@@ -2087,6 +2090,10 @@
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information for the the image from which the OS disk was created. E.g. - {name: 2019-Datacenter, publisher: MicrosoftWindowsServer, product: WindowsServer}"
         },
+        "supportedCapabilities": {
+          "$ref": "#/definitions/SupportedCapabilities",
+          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -2233,6 +2240,10 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information for the image from which the source disk for the snapshot was originally created."
+        },
+        "supportedCapabilities": {
+          "$ref": "#/definitions/SupportedCapabilities",
+          "description": "List of supported capabilities (like Accelerated Networking) for the image from which the source disk from the snapshot was originally created."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2619,6 +2630,10 @@
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
         },
+        "supportedCapabilities": {
+          "$ref": "#/definitions/SupportedCapabilities",
+          "description": "List of supported capabilities (like accelerated networking) to be added on the OS disk."
+        },
         "propertyUpdatesInProgress": {
           "readOnly": true,
           "$ref": "#/definitions/PropertyUpdatesInProgress",
@@ -2873,6 +2888,15 @@
         "product"
       ],
       "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
+    },
+    "SupportedCapabilities": {
+      "properties": {
+        "acceleratedNetwork": {
+          "type": "boolean",
+          "description": "Accelerated Networking flag persisted on the disk resource which can be toggled to true or false and used by VM."
+        }
+      },
+      "description": "List of supported capabilities (like accelerated networking) persisted on the disk resource for VM use."
     },
     "PropertyUpdatesInProgress": {
       "properties": {
@@ -3407,6 +3431,10 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information for the the image from which the OS disk was created."
+        },
+        "supportedCapabilities": {
+          "$ref": "#/definitions/SupportedCapabilities",
+          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
         },
         "familyId": {
           "type": "string",
