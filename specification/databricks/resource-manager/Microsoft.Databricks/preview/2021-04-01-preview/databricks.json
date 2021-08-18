@@ -652,6 +652,49 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.",
+        "description": "Gets the list of endpoints that VNET Injected Workspace's Cluster call Azure Databricks Control Plane. You must configure outbound access to these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr",
+        "operationId": "OutboundNetworkDependenciesEndpoints_List",
+        "x-ms-examples": {
+          "List OutboundNetworkDependenciesEndpoints by Workspace": {
+            "$ref": "./examples/OutboundNetworkDependenciesEndpointsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains list of outbound network dependency endpoints",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1531,6 +1574,71 @@
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
+      }
+    },
+    "EndpointDependency": {
+      "description": "A domain name or IP address the Workspace is reaching at.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The Ports used when connecting to domainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Connect information from the Workspace to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "latency": {
+          "format": "double",
+          "description": "The time in milliseconds it takes for the connection to be created from the Workspace to this IpAddress at this Port.",
+          "type": "number"
+        },
+        "isAccessible": {
+          "description": "Whether it is possible to create a connection from the Workspace to this IpAddress at this Port.",
+          "type": "boolean"
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Egress endpoints which Workspace connects to for common purposes.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of endpoints accessed by the Workspace, e.g. azure-storage, azure-mysql, etc.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that Workspace connect to",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of outbound network dependency endpoints",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }
     }
   },
