@@ -4,9 +4,58 @@
     "version": "2020-05-01",
     "title": "Microsoft.Azure.AMH.WebRole.V2020_05_01"
   },
-  "host": "localhost",
+  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "Azure Subscription Id in which project was created.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "Name of the Azure Resource Group that project is part of.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "migrateProjectName": {
+	  "name": "migrateProjectName",
+	  "description": "Migrate project name.",
+	  "in": "path",
+      "x-ms-parameter-location": "method",
+	  "required": true,
+	  "type": "string"
+    },
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}": {
@@ -19,32 +68,17 @@
           
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "api-version",
@@ -75,39 +109,20 @@
         ],
         "operationId": "MigrateProjectsController_PutMigrateProject",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "body",
@@ -157,25 +172,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "api-version",
@@ -206,39 +209,20 @@
         ],
         "operationId": "MigrateProjectsController_PatchMigrateProject",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "body",
@@ -283,30 +267,17 @@
           
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "peConnectionName",
@@ -344,37 +315,20 @@
         ],
         "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "peConnectionName",
@@ -392,7 +346,7 @@
           },
           {
             "name": "body",
-            "description": "Private endpoint body.",
+            "description": "Modify connection state body.",
             "in": "body",
             "required": true,
             "schema": {
@@ -424,32 +378,17 @@
           
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "peConnectionName",
@@ -541,30 +480,17 @@
           
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "privateLinkResourceName",
@@ -607,32 +533,17 @@
           
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "description": "The ID of the target subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "migrateProjectName",
-            "description": "Migrate project name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/migrateProjectName"
           },
           {
             "name": "api-version",
