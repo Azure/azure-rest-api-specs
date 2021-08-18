@@ -2176,6 +2176,81 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets": {
+      "get": {
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "List policy sets in a given lab.",
+        "operationId": "PolicySets_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=provisioningState)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicySetList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PolicySet",
+        "x-ms-examples": {
+          "PolicySets_List": {
+            "$ref": "./examples/PolicySets_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
       "post": {
         "tags": [
@@ -3005,6 +3080,397 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/secrets": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "List lab secrets in a given lab.",
+        "operationId": "labSecrets_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=value)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LabSecretList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/LabSecret",
+        "x-ms-examples": {
+          "labSecrets_List": {
+            "$ref": "./examples/LabSecrets_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/secrets/{name}": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Get lab secret.",
+        "operationId": "labSecrets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab secret.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=value)'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LabSecret"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "labSecrets_Get": {
+            "$ref": "./examples/LabSecrets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Create or replace an existing lab secret. This operation can take a while to complete.",
+        "operationId": "labSecrets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab secret.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labSecret",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabSecret"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LabSecret"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/LabSecret"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "labSecrets_CreateOrUpdate": {
+            "$ref": "./examples/LabSecrets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Delete lab secret. This operation can take a while to complete.",
+        "operationId": "labSecrets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab secret.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "labSecrets_Delete": {
+            "$ref": "./examples/LabSecrets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Allows modifying tags of lab secrets. All other properties will be ignored.",
+        "operationId": "labSecrets_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab secret.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labSecret",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabSecretFragment"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LabSecret"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "labSecrets_Update": {
+            "$ref": "./examples/LabSecrets_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners": {
+      "get": {
+        "tags": [
+          "ServiceRunners"
+        ],
+        "description": "List service runners in a given lab.",
+        "operationId": "ServiceRunners_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=identityUsageType)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceRunnerList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ServiceRunner",
+        "x-ms-examples": {
+          "ServiceRunners_List": {
+            "$ref": "./examples/ServiceRunners_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{name}": {
       "get": {
         "tags": [
@@ -3031,6 +3497,12 @@
             "in": "path",
             "description": "The name of the service runner.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=identityUsageType)'",
             "type": "string"
           },
           {
@@ -3061,7 +3533,7 @@
         "tags": [
           "ServiceRunners"
         ],
-        "description": "Create or replace an existing service runner.",
+        "description": "Create or replace an existing service runner. This operation can take a while to complete.",
         "operationId": "ServiceRunners_CreateOrUpdate",
         "parameters": [
           {
@@ -3121,13 +3593,14 @@
           "ServiceRunners_CreateOrUpdate": {
             "$ref": "./examples/ServiceRunners_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
           "ServiceRunners"
         ],
-        "description": "Delete service runner.",
+        "description": "Delete service runner. This operation can take a while to complete.",
         "operationId": "ServiceRunners_Delete",
         "parameters": [
           {
@@ -3158,6 +3631,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No Content"
           },
@@ -3171,6 +3647,664 @@
         "x-ms-examples": {
           "ServiceRunners_Delete": {
             "$ref": "./examples/ServiceRunners_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/sharedgalleries": {
+      "get": {
+        "tags": [
+          "SharedGalleries"
+        ],
+        "description": "List shared galleries in a given lab.",
+        "operationId": "SharedGalleries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=galleryId)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/SharedGallery",
+        "x-ms-examples": {
+          "SharedGalleries_List": {
+            "$ref": "./examples/SharedGalleries_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/sharedgalleries/{name}": {
+      "get": {
+        "tags": [
+          "SharedGalleries"
+        ],
+        "description": "Get shared gallery.",
+        "operationId": "SharedGalleries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=galleryId)'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedGallery"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedGalleries_Get": {
+            "$ref": "./examples/SharedGalleries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SharedGalleries"
+        ],
+        "description": "Create or replace an existing shared gallery.",
+        "operationId": "SharedGalleries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGallery",
+            "in": "body",
+            "description": "Properties of a shared gallery",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedGallery"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedGallery"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SharedGallery"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedGalleries_CreateOrUpdate": {
+            "$ref": "./examples/SharedGalleries_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SharedGalleries"
+        ],
+        "description": "Delete shared gallery.",
+        "operationId": "SharedGalleries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedGalleries_Delete": {
+            "$ref": "./examples/SharedGalleries_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SharedGalleries"
+        ],
+        "description": "Allows modifying tags of shared galleries. All other properties will be ignored.",
+        "operationId": "SharedGalleries_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGallery",
+            "in": "body",
+            "description": "Properties of a shared gallery",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryFragment"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedGallery"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedGalleries_Update": {
+            "$ref": "./examples/SharedGalleries_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/sharedgalleries/{sharedGalleryName}/sharedimages": {
+      "get": {
+        "tags": [
+          "SharedImages"
+        ],
+        "description": "List shared images in a given shared gallery.",
+        "operationId": "SharedImages_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($expand=versions)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedImageList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/SharedImage",
+        "x-ms-examples": {
+          "SharedImages_List": {
+            "$ref": "./examples/SharedImages_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/sharedgalleries/{sharedGalleryName}/sharedimages/{name}": {
+      "get": {
+        "tags": [
+          "SharedImages"
+        ],
+        "description": "Get shared image.",
+        "operationId": "SharedImages_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($expand=versions)'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedImage"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedImages_Get": {
+            "$ref": "./examples/SharedImages_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SharedImages"
+        ],
+        "description": "Create or replace an existing shared image.",
+        "operationId": "SharedImages_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedImage",
+            "in": "body",
+            "description": "Properties of a shared image",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedImage"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedImage"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SharedImage"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedImages_CreateOrUpdate": {
+            "$ref": "./examples/SharedImages_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SharedImages"
+        ],
+        "description": "Delete shared image.",
+        "operationId": "SharedImages_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedImages_Delete": {
+            "$ref": "./examples/SharedImages_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SharedImages"
+        ],
+        "description": "Allows modifying tags of shared images. All other properties will be ignored.",
+        "operationId": "SharedImages_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the shared gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the shared image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedImage",
+            "in": "body",
+            "description": "Properties of a shared image",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedImageFragment"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedImage"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedImages_Update": {
+            "$ref": "./examples/SharedImages_Update.json"
           }
         }
       }
@@ -5731,6 +6865,9 @@
         },
         "x-ms-odata": "#/definitions/LabVirtualMachine",
         "x-ms-examples": {
+          "VirtualMachines_List_WithFilter": {
+            "$ref": "./examples/VirtualMachines_List_WithFilter.json"
+          },
           "VirtualMachines_List": {
             "$ref": "./examples/VirtualMachines_List.json"
           }
@@ -6156,6 +7293,56 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/clearArtifactResults": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Clears the artifact results of the virtual machine.",
+        "operationId": "VirtualMachines_ClearArtifactResults",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ClearArtifactResults": {
+            "$ref": "./examples/VirtualMachines_ClearArtifactResults.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/detachDataDisk": {
@@ -7437,6 +8624,290 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts": {
+      "get": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "List bastionhosts in a given virtual network.",
+        "operationId": "BastionHosts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=externalBastionHostId)'",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BastionHostList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/BastionHost",
+        "x-ms-examples": {
+          "BastionHosts_List": {
+            "$ref": "./examples/BastionHosts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts/{name}": {
+      "get": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Get bastionhost.",
+        "operationId": "BastionHosts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=externalBastionHostId)'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_Get": {
+            "$ref": "./examples/BastionHosts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Create or replace an existing bastionhost. This operation can take a while to complete.",
+        "operationId": "BastionHosts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHost",
+            "in": "body",
+            "description": "Profile of a BastionHost",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_CreateOrUpdate": {
+            "$ref": "./examples/BastionHosts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Delete bastionhost. This operation can take a while to complete.",
+        "operationId": "BastionHosts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_Delete": {
+            "$ref": "./examples/BastionHosts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
       "get": {
         "tags": [
@@ -7751,6 +9222,49 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/ensureCurrentUserProfile": {
+      "post": {
+        "tags": [
+          "Labs"
+        ],
+        "description": "Ensure the current user has a valid profile in the lab.",
+        "operationId": "Labs_EnsureCurrentUserProfile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_EnsureCurrentUserProfile": {
+            "$ref": "./examples/Labs_EnsureCurrentUserProfile.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/exportResourceUsage": {
@@ -8865,6 +10379,65 @@
       "type": "object",
       "properties": {}
     },
+    "BastionHost": {
+      "description": "Profile of a BastionHost",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BastionHostProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BastionHostList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionHost"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "BastionHostProperties": {
+      "description": "Properties of a BastionHost profile.",
+      "type": "object",
+      "properties": {
+        "externalBastionHostId": {
+          "description": "The ID of the external BastionHost resource that corresponds to this DTL BastionHost",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressId": {
+          "description": "The ID of the PublicIpAddress resource that is created by and paired with this BastionHost",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "BulkCreationParameters": {
       "description": "Parameters for creating multiple virtual machines as a single action.",
       "type": "object",
@@ -9273,7 +10846,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "HostCachingOptions",
+            "name": "HostCachingOption",
             "modelAsString": true
           }
         }
@@ -9507,6 +11080,33 @@
           "type": "string"
         }
       }
+    },
+    "Encryption": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "diskEncryptionSetId": {
+          "description": "Gets or sets resourceId of the disk encryption set to use for enabling encryption at rest.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the type of key used to encrypt the data of the disk. Possible values include: 'EncryptionAtRestWithPlatformKey', 'EncryptionAtRestWithCustomerKey'",
+          "enum": [
+            "EncryptionAtRestWithPlatformKey",
+            "EncryptionAtRestWithCustomerKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EncryptionFragment": {
+      "description": "",
+      "type": "object",
+      "properties": {}
     },
     "EnvironmentDeploymentProperties": {
       "description": "Properties of an environment deployment.",
@@ -9917,7 +11517,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "FileUploadOptions",
+            "name": "FileUploadOption",
             "modelAsString": true
           }
         }
@@ -9964,7 +11564,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "Managed identity.",
+          "description": "Type of identity (SystemAssigned, UserAssigned, None)",
           "enum": [
             "None",
             "SystemAssigned",
@@ -9988,8 +11588,35 @@
         "clientSecretUrl": {
           "description": "The client secret URL of the identity.",
           "type": "string"
+        },
+        "userAssignedIdentities": {
+          "description": "If Type is 'UserAssigned': List of user assigned identities.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
+    },
+    "IdentityPropertiesFragment": {
+      "description": "Properties of a managed identity",
+      "type": "object",
+      "properties": {}
+    },
+    "ImageVersionProperties": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Image version name",
+          "type": "string"
+        }
+      }
+    },
+    "ImageVersionPropertiesFragment": {
+      "description": "",
+      "type": "object",
+      "properties": {}
     },
     "ImportLabVirtualMachineRequest": {
       "description": "This represents the payload required to import a virtual machine from a different lab into the current one",
@@ -10051,6 +11678,10 @@
           "$ref": "#/definitions/LabProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the resource."
         }
       }
     },
@@ -10266,8 +11897,7 @@
         },
         "artifactsStorageAccount": {
           "description": "The lab's artifact storage account.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "premiumDataDiskStorageAccount": {
           "description": "The lab's premium data disk storage account.",
@@ -10345,10 +11975,9 @@
           "$ref": "#/definitions/LabSupportProperties",
           "description": "The properties of any lab support message associated with this lab"
         },
-        "vmCreationResourceGroup": {
-          "description": "The resource group in which all new lab virtual machines will be created. To let DevTest Labs manage resource group creation, set this value to null.",
-          "type": "string",
-          "readOnly": true
+        "vmCreationResourceGroupId": {
+          "description": "The resource group ID in which all new lab virtual machines will be created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage resource group creation, set this value to null.",
+          "type": "string"
         },
         "publicIpId": {
           "description": "The public IP address for the lab's load balancer.",
@@ -10371,6 +12000,49 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "browserConnect": {
+          "description": "Is browser connect enabled for the lab",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnableStatus",
+            "modelAsString": true
+          }
+        },
+        "disableAutoUpgradeCseMinorVersion": {
+          "description": "Is auto upgrade of CSE disabled for the lab?",
+          "type": "boolean"
+        },
+        "managementIdentities": {
+          "description": "List of identities which can be used for management of resources.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "isolateLabResources": {
+          "description": "Indicates whether to create Lab resources (e.g. Storage accounts and Key Vaults) in network isolation.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnableStatus",
+            "modelAsString": true
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Mechanism used for encryption of resources in a lab (such as virtual machines)."
+        },
+        "defaultSecretName": {
+          "description": "Default secret for creating virtual machines.",
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning status of the resource.",
@@ -10431,6 +12103,95 @@
           "type": "string"
         }
       }
+    },
+    "LabSecret": {
+      "description": "",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabSecretProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LabSecretFragment": {
+      "description": "",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "properties": {}
+    },
+    "LabSecretList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabSecret"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "LabSecretProperties": {
+      "description": "The properties of labs secrets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the secret for secret creation.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "keyVaultEntry": {
+          "description": "The name of the entry in the lab KeyVault.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabledForArtifacts": {
+          "description": "Is the secret enabled for use with artifacts?",
+          "type": "boolean"
+        },
+        "enabledForVmCreation": {
+          "description": "Is the secret enabled for use with creation of VMs?",
+          "type": "boolean"
+        },
+        "enabledForArmEnvironments": {
+          "description": "Is the secret enabled for use with ARM environments?",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabSecretPropertiesFragment": {
+      "description": "The properties of labs secrets",
+      "type": "object",
+      "properties": {}
     },
     "LabSupportProperties": {
       "description": "Properties of a lab's support banner",
@@ -10566,6 +12327,18 @@
           "description": "The custom image identifier of the virtual machine.",
           "type": "string"
         },
+        "galleryImageVersionId": {
+          "description": "The shared gallery image version resource identifier of the virtual machine.",
+          "type": "string"
+        },
+        "sharedImageId": {
+          "description": "The shared image resource identifier of the virtual machine.",
+          "type": "string"
+        },
+        "sharedImageVersion": {
+          "description": "The shared image version for the specified shared image Id. Will use latest if not specified.",
+          "type": "string"
+        },
         "size": {
           "description": "The size of the virtual machine.",
           "type": "string"
@@ -10616,6 +12389,11 @@
           "description": "The id of the plan associated with the virtual machine image",
           "type": "string"
         },
+        "osDiskSizeGb": {
+          "format": "int32",
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image.",
+          "type": "integer"
+        },
         "networkInterface": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
           "description": "The network interface properties."
@@ -10631,7 +12409,7 @@
           "type": "boolean"
         },
         "storageType": {
-          "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
+          "description": "Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).",
           "default": "labStorageType",
           "type": "string"
         },
@@ -10728,6 +12506,18 @@
           "description": "The custom image identifier of the virtual machine.",
           "type": "string"
         },
+        "galleryImageVersionId": {
+          "description": "The shared gallery image version resource identifier of the virtual machine.",
+          "type": "string"
+        },
+        "sharedImageId": {
+          "description": "The shared image resource identifier of the virtual machine.",
+          "type": "string"
+        },
+        "sharedImageVersion": {
+          "description": "The shared image version for the specified shared image Id. Will use latest if not specified.",
+          "type": "string"
+        },
         "osType": {
           "description": "The OS type of the virtual machine.",
           "type": "string",
@@ -10793,6 +12583,11 @@
           "description": "The id of the plan associated with the virtual machine image",
           "type": "string"
         },
+        "osDiskSizeGb": {
+          "format": "int32",
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image.",
+          "type": "integer"
+        },
         "computeVm": {
           "$ref": "#/definitions/ComputeVmProperties",
           "description": "The compute virtual machine properties.",
@@ -10818,7 +12613,7 @@
           "type": "boolean"
         },
         "storageType": {
-          "description": "Storage type to use for virtual machine (i.e. Standard, Premium).",
+          "description": "Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).",
           "default": "labStorageType",
           "type": "string"
         },
@@ -10857,6 +12652,11 @@
         "lastKnownPowerState": {
           "description": "Last known compute power state captured in DTL",
           "type": "string",
+          "readOnly": true
+        },
+        "canApplyArtifacts": {
+          "description": "Flag to determine if apply artifacts can be triggered at the time of fetching the document.",
+          "type": "boolean",
           "readOnly": true
         },
         "provisioningState": {
@@ -11169,6 +12969,8 @@
           "enum": [
             "Continue",
             "SwitchingProtocols",
+            "Processing",
+            "EarlyHints",
             "OK",
             "Created",
             "Accepted",
@@ -11176,6 +12978,9 @@
             "NoContent",
             "ResetContent",
             "PartialContent",
+            "MultiStatus",
+            "AlreadyReported",
+            "IMUsed",
             "MultipleChoices",
             "Ambiguous",
             "MovedPermanently",
@@ -11189,6 +12994,7 @@
             "Unused",
             "TemporaryRedirect",
             "RedirectKeepVerb",
+            "PermanentRedirect",
             "BadRequest",
             "Unauthorized",
             "PaymentRequired",
@@ -11207,13 +13013,26 @@
             "UnsupportedMediaType",
             "RequestedRangeNotSatisfiable",
             "ExpectationFailed",
+            "MisdirectedRequest",
+            "UnprocessableEntity",
+            "Locked",
+            "FailedDependency",
             "UpgradeRequired",
+            "PreconditionRequired",
+            "TooManyRequests",
+            "RequestHeaderFieldsTooLarge",
+            "UnavailableForLegalReasons",
             "InternalServerError",
             "NotImplemented",
             "BadGateway",
             "ServiceUnavailable",
             "GatewayTimeout",
-            "HttpVersionNotSupported"
+            "HttpVersionNotSupported",
+            "VariantAlsoNegotiates",
+            "InsufficientStorage",
+            "LoopDetected",
+            "NotExtended",
+            "NetworkAuthenticationRequired"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -11395,6 +13214,58 @@
       "type": "object",
       "properties": {}
     },
+    "PolicySet": {
+      "description": "A PolicySet.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicySetProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PolicySetList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySet"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicySetProperties": {
+      "description": "Properties of a PolicySet.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PolicySetResult": {
       "description": "Result of a policy set evaluation.",
       "type": "object",
@@ -11573,8 +13444,7 @@
         },
         "location": {
           "description": "The location of the new virtual machine or environment",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "tags": {
           "description": "The tags of the resource.",
@@ -11897,6 +13767,11 @@
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceRunnerProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "The identity of the resource."
@@ -11919,6 +13794,227 @@
           "type": "string"
         }
       }
+    },
+    "ServiceRunnerProperties": {
+      "description": "Properties of a virtual machine.",
+      "type": "object",
+      "properties": {
+        "identityUsageType": {
+          "description": "The purpose of bringing the identity to the lab. Ex: To use during Environment creation or to deploy on the VMs.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedGallery": {
+      "description": "Properties of a shared gallery",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedGalleryProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SharedGalleryFragment": {
+      "description": "Properties of a shared gallery",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "properties": {}
+    },
+    "SharedGalleryList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedGallery"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "SharedGalleryProperties": {
+      "description": "Properties of a shared gallery",
+      "type": "object",
+      "properties": {
+        "galleryId": {
+          "description": "The shared image gallery resource Id",
+          "type": "string"
+        },
+        "allowAllImages": {
+          "description": "Enables all images in the gallery to be available in the lab for VM creation. This will override the EnableState on shared images",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnableState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedGalleryPropertiesFragment": {
+      "description": "Properties of a shared gallery",
+      "type": "object",
+      "properties": {}
+    },
+    "SharedImage": {
+      "description": "Properties of a shared image",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedImageProperties",
+          "description": "The properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SharedImageFragment": {
+      "description": "Properties of a shared image",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "properties": {}
+    },
+    "SharedImageList": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of the list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedImage"
+          }
+        },
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "SharedImageProperties": {
+      "description": "Properties of a shared image",
+      "type": "object",
+      "properties": {
+        "definitionName": {
+          "description": "Shared Image definition name in shared image gallery",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The operating system of the image",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          }
+        },
+        "imageType": {
+          "description": "The type of image in the gallery (generalized or specialized)",
+          "enum": [
+            "Generalized",
+            "Specialized"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true
+          }
+        },
+        "enableState": {
+          "description": "Whether or not the image is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnableState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "description": "Display name of the image",
+          "type": "string"
+        },
+        "versions": {
+          "description": "List of image versions in definition",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageVersionProperties"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uniqueIdentifier": {
+          "description": "The unique immutable identifier of a resource (Guid).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedImagePropertiesFragment": {
+      "description": "Properties of a shared image",
+      "type": "object",
+      "properties": {}
     },
     "SharedPublicIpAddressConfiguration": {
       "description": "Properties of a virtual machine that determine how it is connected to a load balancer.",
