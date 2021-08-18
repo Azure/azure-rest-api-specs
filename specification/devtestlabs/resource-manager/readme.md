@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DevTestLab.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DevTestLab API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2021-09
 ```
 
 
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.DevTestLab/stable/2021-09-01/DTL.json
+```
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
@@ -57,10 +65,9 @@ input-file:
 - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -82,7 +89,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devtestlabs']
   - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -109,6 +115,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
