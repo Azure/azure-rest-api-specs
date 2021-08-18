@@ -1,6 +1,13 @@
 {
   "parameters": {
-    "api-version": "2018-12-01-preview"
+    "endpoint": "{endpoint}",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "SampleResourceGroup",
+    "accountName": "account1",
+    "api-version": "2018-12-01-preview",
+    "accountUpdateParameters": {
+      "friendlyName": "friendly-account1"
+    }
   },
   "responses": {
     "200": {
@@ -35,33 +42,18 @@
           "createdAt": "2019-11-22T18:39:58.6929344Z",
           "provisioningState": "Succeeded",
           "endpoints": {
-            "catalog": "https://account1.catalog.babylon.azure-test.com",
-            "scan": "https://account1.scan.babylon.azure-test.com",
+            "catalog": "https://account2.catalog.babylon.azure-test.com",
+            "scan": "https://account2.scan.babylon.azure-test.com",
             "guardian": "https://account1.guardian.babylon.azure-test.com"
           },
-          "privateEndpointConnections": [
-            {
-              "properties": {
-                "provisioningState": "Succeeded",
-                "privateEndpoint": {
-                  "id": "/subscriptions/baca8a88-4527-4c35-a13e-b2775ce0d7fc/resourceGroups/nrpResourceGroupName/providers/Microsoft.Network/privateEndpoints/peName"
-                },
-                "privateLinkServiceConnectionState": {
-                  "status": "Pending",
-                  "description": "Please approve my connection, thanks.",
-                  "actionsRequired": "None"
-                }
-              },
-              "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.ProjectBabylon/accounts/account1/privateEndpointConnections/peName-8536c337-7b36-4d67-a7ce-081655baf59e",
-              "name": "peName-8536c337-7b36-4d67-a7ce-081655baf59e",
-              "type": "Microsoft.ProjectBabylon/accounts/privateEndpointConnections"
-            }
-          ],
           "managedResources": {
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
             "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
           }
+        },
+        "tags": {
+          "tag": "tag value."
         }
       }
     }
