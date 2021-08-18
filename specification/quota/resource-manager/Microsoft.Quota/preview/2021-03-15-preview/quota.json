@@ -456,39 +456,6 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaLimitProviders": {
-      "get": {
-        "tags": [
-          "QuotaMetadata"
-        ],
-        "description": "Gets the list of current resource providers supported by the Microsoft.Quota resource provider.\r\nFor each resource provider, the resource templates the resource provider supports are be provided. \r\nFor each resource template, the resource dimensions are listed. The resource dimensions are the name-value pairs in the resource URI.\r\nExample: Microsoft.Network Resource Provider\r\nThe URI template is '/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/quotaBucket'. The actual dimensions will vary depending on the resource provider.\r\nThe resource dimensions for Microsoft.Network resource provider are {subscriptions},{locations},{quotaBucket}.",
-        "operationId": "QuotaResourceProviders_List",
-        "x-ms-examples": {
-          "Quotas_listMetadataForRPs": {
-            "$ref": "./examples/metadata/getQuotaRPMetadata.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Quota limits type information.",
-            "schema": {
-              "$ref": "#/definitions/resourceProvidersList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Quota/operations": {
       "get": {
         "summary": "GET operations.",
