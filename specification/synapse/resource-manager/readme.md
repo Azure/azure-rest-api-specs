@@ -68,6 +68,20 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
 ```
 
+### Tag: package-kusto-pool-test-2021-06-preview
+
+These settings apply only when `--tag=package-kusto-pool-test-2021-06-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-kusto-pool-test-2021-06-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/firewallRule.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlPool.json
+```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
