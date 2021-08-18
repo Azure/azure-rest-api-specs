@@ -1639,9 +1639,20 @@
     },
     "OutboundEnvironmentEndpointCollection": {
       "description": "Collection of outbound network dependency endpoints",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     }
   },
