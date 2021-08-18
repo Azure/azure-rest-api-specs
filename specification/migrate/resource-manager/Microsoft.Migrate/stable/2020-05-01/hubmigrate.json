@@ -531,21 +531,26 @@
           "$ref": "#/definitions/MigrateProjectProperties"
         },
         "eTag": {
-          "type": "string"
+          "type": "string",
+          "description": "For optimistic concurrency control."
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Azure location in which project is created."
         },
         "id": {
           "type": "string",
+          "description": "Path reference to this project /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}",
           "readOnly": true
         },
         "name": {
           "type": "string",
+          "description": "Name of the project.",
           "readOnly": true
         },
         "type": {
           "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/migrateProjects].",
           "readOnly": true
         }
       }
@@ -556,6 +561,7 @@
       "properties": {
         "registeredTools": {
           "type": "array",
+          "description": "Register tools inside project.",
           "items": {
             "enum": [
               "ServerDiscovery",
@@ -587,10 +593,12 @@
           "readOnly": true
         },
         "serviceEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "Service endpoint."
         },
         "summary": {
           "type": "object",
+          "description": "Project summary.",
           "additionalProperties": {
             "$ref": "#/definitions/ProjectSummary"
           },
@@ -599,6 +607,7 @@
         "lastSummaryRefreshedTime": {
           "format": "date-time",
           "type": "string",
+          "description": "Last summary refresh time.",
           "readOnly": true
         },
         "refreshSummaryState": {
@@ -609,10 +618,12 @@
             "Failed"
           ],
           "type": "string",
+          "description": "Refresh summary state.",
           "readOnly": true
         },
 		"utilityStorageAccountId": {
-		  "type": "string"
+		  "type": "string",
+          "description": "Utility storage account id."
 		},
         "publicNetworkAccess": {
           "description": "Gets or sets the state of public network access.",
@@ -676,6 +687,7 @@
             "Failed"
           ],
           "type": "string",
+          "description": "Provisioning state.",
           "readOnly": true
         },
         "privateEndpoint": {
@@ -683,7 +695,8 @@
           "readOnly": true
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Gets the properties of the object."
         }
       }
     },
@@ -698,13 +711,16 @@
             "Rejected",
             "Disconnected"
           ],
-          "type": "string"
+          "type": "string",
+          "description": "Private link connection state."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the object."
         },
         "actionsRequired": {
-          "type": "string"
+          "type": "string",
+          "description": "Action required."
         }
       }
     },
@@ -740,16 +756,20 @@
       "type": "object",
       "description": "Private link resource.",
       "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
+          "description": "Gets the name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets the resource type.",
           "type": "string",
           "readOnly": true
-        },
-        "id": {
-          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -763,6 +783,7 @@
       "properties": {
         "instanceType": {
           "type": "string",
+          "description": "Instance type.",
           "readOnly": true
         },
         "refreshSummaryState": {
@@ -772,14 +793,17 @@
             "Completed",
             "Failed"
           ],
-          "type": "string"
+          "type": "string",
+          "description": "Refresh summary state."
         },
         "lastSummaryRefreshedTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "Last summary refresh time."
         },
         "extendedSummary": {
           "type": "object",
+          "description": "Extended summary.",
           "additionalProperties": {
             "type": "string"
           }
@@ -791,6 +815,7 @@
       "description": "Modify connection state body.",
       "properties": {
         "eTag": {
+          "description": "Gets the tag for optimistic concurrency control.",
           "type": "string"
         },
         "properties": {
@@ -813,17 +838,20 @@
       "properties": {
         "requiredMembers": {
           "type": "array",
+          "description": "Required members.",
           "items": {
             "type": "string"
           }
         },
         "requiredZoneNames": {
           "type": "array",
+          "description": "Required zone names.",
           "items": {
             "type": "string"
           }
         },
         "groupId": {
+          "description": "Group id.",
           "type": "string"
         }
       }
