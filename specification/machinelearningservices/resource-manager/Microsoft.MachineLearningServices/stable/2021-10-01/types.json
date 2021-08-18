@@ -1,0 +1,52 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "version": "2021-10-01"
+  },
+  "definitions": {
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
+          "type": "integer"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code",
+          "type": "string"
+        },
+        "size": {
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. ",
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier"
+        }
+      }
+    },
+    "SkuTier": {
+      "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      }
+    }
+  }
+}
