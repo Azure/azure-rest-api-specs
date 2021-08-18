@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "serviceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "name": "asc-test.net/asc-api",
+      "type": "Microsoft.Network/dnsZones/CNAME",
+      "apiVersion": "2018-05-01",
+      "properties": {
+        "TTL": "60",
+        "CNAMERecord": {
+          "cname": "[concat(parameters('serviceName'), '.azuremicroservices.io')]"
+        }
+      }
+    }
+  ]
+}
