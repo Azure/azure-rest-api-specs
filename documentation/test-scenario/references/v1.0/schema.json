@@ -30,6 +30,12 @@
       "items": {
         "$ref": "#/definitions/TestScenario"
       }
+    },
+    "cleanUpSteps":{
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TestStep"
+      }
     }
   },
   "required": [
@@ -80,7 +86,7 @@
         "step": {
           "$ref": "#/definitions/Name"
         },
-        "type": {
+        "description": {
           "type": "string"
         },
         "outputVariables": {
@@ -107,12 +113,6 @@
         }
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "basic"
-          ]
-        },
         "exampleFile": {
           "type": "string"
         },
@@ -154,12 +154,6 @@
         }
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "operation"
-          ]
-        },
         "operationId": {
           "type": "string"
         },
@@ -202,12 +196,6 @@
         }
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "armTemplate"
-          ]
-        },
         "armTemplateDeployment": {
           "type": "string"
         },
@@ -227,12 +215,6 @@
         }
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "rawCall"
-          ]
-        },
         "method": {
           "type": "string",
           "enum": [
@@ -404,6 +386,9 @@
         }
       ],
       "properties": {
+        "scenario": {
+          "$ref": "#/definitions/Name"
+        },
         "description": {
           "type": "string"
         },
@@ -415,9 +400,10 @@
         }
       },
       "required": [
-        "description",
+        "scenario",
         "steps"
-      ]
+      ],
+      "additionalProperties": false
     }
   }
 }
