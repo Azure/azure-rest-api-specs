@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PhoneNumbersClient",
-    "description": "The short codes client uses Azure Communication Services to purchase and manage phone numbers and short codes.",
+    "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers and short codes.",
     "version": "2021-10-25-preview"
   },
   "paths": {
@@ -666,7 +666,7 @@
             "name": "body",
             "description": "Object containing the program brief information",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefWritableData"
+              "$ref": "#/definitions/CreateProgramBriefRequest"
             }
           }
         ],
@@ -774,7 +774,7 @@
             "name": "body",
             "description": "Fields to update on the program brief",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefWritableData"
+              "$ref": "#/definitions/UpdateProgramBriefRequest"
             }
           }
         ],
@@ -1168,7 +1168,7 @@
       "type": "object",
       "properties": {
         "operationType": {
-          "description": "The type of operation, e.g. Search",
+          "description": "The type of operation, e.g. SubmitProgramBrief",
           "enum": [
             "submitProgramBrief"
           ],
@@ -1338,11 +1338,11 @@
       "type": "object",
       "properties": {
         "number": {
-          "description": "The value of the ShortCode or the alpha numeric (e.g. '555555', 'CONTOSO', etc).",
+          "description": "The value of the ShortCode or the alpha numeric e.g. '555555', 'CONTOSO', etc.",
           "type": "string"
         },
         "numberType": {
-          "description": "The type of number (e.g. 'ShortCode', 'AlphaId').",
+          "description": "The type of number e.g. 'ShortCode', 'AlphaId'.",
           "enum": [
             "shortCode",
             "alphaId"
@@ -1354,7 +1354,7 @@
           }
         },
         "countryCode": {
-          "description": "ISO 3166 2-char code representing the country (e.g. 'US', 'CA', etc.).",
+          "description": "ISO 3166 2-char code representing the country e.g. 'US'.",
           "type": "string"
         },
         "programBriefId": {
@@ -1364,10 +1364,6 @@
         "purchaseDate": {
           "format": "date-time",
           "description": "Date in which number was purchased.",
-          "type": "string"
-        },
-        "state": {
-          "description": "Number state (e.g. 'Acquired')",
           "type": "string"
         }
       }
@@ -1389,22 +1385,36 @@
         }
       }
     },
-    "ProgramDetails": {
+    "CreateProgramDetails": {
+      "required": [
+        "expectedDateOfService",
+        "isPoliticalCampaign",
+        "isVanity",
+        "numberType",
+        "preferredVanityNumbers",
+        "privacyPolicyUrl",
+        "programDescription",
+        "programName",
+        "programSignUp",
+        "programSignUpTypes",
+        "programUrl",
+        "termsOfServiceUrl"
+      ],
       "type": "object",
       "properties": {
         "isVanity": {
-          "description": "Indicates if customer is requesting vanity (When set to 'true') or random number.",
+          "description": "Set to true if the request is for a vanity number.",
           "type": "boolean"
         },
         "preferredVanityNumbers": {
-          "description": "Priority ordered list of preferred vanity numbers.",
+          "description": "Priority ordered list of preferred vanity numbers.\r\nVanity numbers should be 5 or 6 digit when number type is ShortCode.\r\ne.g. 555555, 222222.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "numberType": {
-          "description": "Type for desired numbers (e.g. 'shortCode' or 'alphaId').",
+          "description": "Type for desired numbers e.g. 'shortCode' or 'alphaId'.",
           "enum": [
             "shortCode",
             "alphaId"
@@ -1420,7 +1430,7 @@
           "type": "boolean"
         },
         "programName": {
-          "description": "Indicates the purpose of filling the program brief and how the number will be used for messaging.",
+          "description": "A program name that indicates the purpose of filling the program brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
           "type": "string"
         },
         "programDescription": {
@@ -1431,13 +1441,14 @@
           "description": "URL for the program or company.",
           "type": "string"
         },
-        "programSignUpType": {
-          "description": "Indicates how the program will be discoverable by the consumer ('website', 'pos' and/or 'sms').",
+        "programSignUpTypes": {
+          "description": "Indicates how the consumer can sign up to the program e.g. 'website', 'pointOfSale' and/or 'sms'.",
           "type": "array",
           "items": {
+            "description": "Indicates how a program will be discoverable by the consumer.",
             "enum": [
               "website",
-              "pos",
+              "pointOfSale",
               "sms"
             ],
             "type": "string",
@@ -1448,7 +1459,7 @@
           }
         },
         "programSignUp": {
-          "description": "Call to action description for the program.\r\n(e.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.').",
+          "description": "Call to action description for the program.\r\ne.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.'.",
           "type": "string"
         },
         "termsOfServiceUrl": {
@@ -1461,12 +1472,22 @@
         },
         "expectedDateOfService": {
           "format": "date-time",
-          "description": "Start date for sending SMS.",
+          "description": "Date in which SMS messages will start to be sent out.\r\nShould follow ISO 8601 internet format for datetimes.\r\ne.g. 2021-08-17T22:02:51.316Z, 2021-08-17T16:39:57-08:00, etc.",
           "type": "string"
         }
       }
     },
-    "CompanyInformation": {
+    "CreateCompanyInformation": {
+      "required": [
+        "companyAddress",
+        "companyName",
+        "companyUrl",
+        "contactEmail",
+        "contactName",
+        "contactPhone",
+        "customerCareEmail",
+        "customerCareTollFreeNumber"
+      ],
       "type": "object",
       "properties": {
         "companyName": {
@@ -1482,7 +1503,7 @@
           "type": "string"
         },
         "contactPhone": {
-          "description": "Contact phone number for the authorized user for the customer.",
+          "description": "Contact phone number for the authorized user for the customer e.g. +14086111111.",
           "type": "string"
         },
         "contactEmail": {
@@ -1494,7 +1515,7 @@
           "type": "string"
         },
         "customerCareTollFreeNumber": {
-          "description": "Customer support phone number for the customer submitting the program brief.",
+          "description": "Customer support phone number for the customer submitting the program brief. e.g. +18005551212",
           "type": "string"
         },
         "customerCareEmail": {
@@ -1503,11 +1524,22 @@
         }
       }
     },
-    "MessageDetails": {
+    "CreateMessageDetails": {
+      "required": [
+        "confirmationMessage",
+        "contentTypes",
+        "helpMessage",
+        "messageType",
+        "optInMessage",
+        "optInReply",
+        "optOutMessage",
+        "recurrence",
+        "useCase"
+      ],
       "type": "object",
       "properties": {
         "messageType": {
-          "description": "Applicable message types used in the program ('sms' or 'mms').",
+          "description": "Applicable message types used in the program e.g. SMS or MMS.",
           "enum": [
             "sms",
             "mms"
@@ -1519,7 +1551,7 @@
           }
         },
         "recurrence": {
-          "description": "Indicates the nature of the messaging associated with the program ('subscription' or 'transaction').",
+          "description": "Indicates the nature of the messaging associated with the program e.g. 'subscription', 'transaction'.",
           "enum": [
             "subscription",
             "transaction"
@@ -1530,10 +1562,11 @@
             "modelAsString": true
           }
         },
-        "contentType": {
-          "description": "Indicates the messaging content type used in the program ('ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', 'games', etc).",
+        "contentTypes": {
+          "description": "Indicates the messaging content types used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
           "type": "array",
           "items": {
+            "description": "Indicates the messaging content type used in the program.",
             "enum": [
               "ringTones",
               "smsChat",
@@ -1570,18 +1603,18 @@
           }
         },
         "helpMessage": {
-          "description": "Message text for mobile terminated message associated with HELP keyword\r\n(e.g 'This is the HELP message test.').",
+          "description": "Message text for mobile terminated message associated with HELP keyword\r\ne.g 'This is the HELP message test.'.",
           "type": "string"
         },
         "optOutMessage": {
-          "description": "\"Message text for mobile terminated message associated with STOP keyword\r\n(e.g. 'This is the STOP message test.').",
+          "description": "\"Message text for mobile terminated message associated with STOP keyword\r\ne.g. 'This is the STOP message test.'.",
           "type": "string"
         },
         "optInMessage": {
           "type": "string"
         },
         "optInReply": {
-          "description": "Keyword used to confirm double Opt-In method (e.g. 'JOIN').",
+          "description": "Keyword used to confirm double Opt-In method e.g. 'JOIN'.",
           "type": "string"
         },
         "confirmationMessage": {
@@ -1598,7 +1631,7 @@
       "properties": {
         "estimatedVolume": {
           "format": "int32",
-          "description": "Estimated messaging volume for the program in terms of message/second.",
+          "description": "Estimated total messages per month.",
           "type": "integer"
         },
         "monthlyAverageMessagesFromUser": {
@@ -1612,27 +1645,33 @@
           "type": "integer"
         },
         "isTrafficSpiky": {
-          "description": "Indicates if the nature of the messaging traffic will be bursty in nature.",
+          "description": "Indicates if the nature of the messaging traffic will be bursty.",
           "type": "boolean"
         },
         "trafficSpikeDetails": {
-          "description": "If isTrafficSpiky=true, then explain additional details about the traffic pattern\r\n(e.g. 'Higher traffic expected during holiday season and Black Friday.').",
+          "description": "If isTrafficSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
           "type": "string"
         }
       }
     },
-    "ProgramBriefWritableData": {
+    "CreateProgramBriefRequest": {
       "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "required": [
+        "companyInformation",
+        "messageDetails",
+        "programDetails",
+        "trafficDetails"
+      ],
       "type": "object",
       "properties": {
         "programDetails": {
-          "$ref": "#/definitions/ProgramDetails"
+          "$ref": "#/definitions/CreateProgramDetails"
         },
         "companyInformation": {
-          "$ref": "#/definitions/CompanyInformation"
+          "$ref": "#/definitions/CreateCompanyInformation"
         },
         "messageDetails": {
-          "$ref": "#/definitions/MessageDetails"
+          "$ref": "#/definitions/CreateMessageDetails"
         },
         "trafficDetails": {
           "$ref": "#/definitions/TrafficDetails"
@@ -1680,6 +1719,212 @@
         }
       }
     },
+    "ProgramDetails": {
+      "type": "object",
+      "properties": {
+        "isVanity": {
+          "description": "Set to true if the request is for a vanity number.",
+          "type": "boolean"
+        },
+        "preferredVanityNumbers": {
+          "description": "Priority ordered list of preferred vanity numbers.\r\nVanity numbers should be 5 or 6 digit when number type is ShortCode.\r\ne.g. 555555, 222222.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "numberType": {
+          "description": "Type for desired numbers e.g. 'shortCode' or 'alphaId'.",
+          "enum": [
+            "shortCode",
+            "alphaId"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NumberType",
+            "modelAsString": true
+          }
+        },
+        "isPoliticalCampaign": {
+          "description": "Indicates whether the number will be used for political campaigns or not.",
+          "type": "boolean"
+        },
+        "programName": {
+          "description": "A program name that indicates the purpose of filling the program brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
+          "type": "string"
+        },
+        "programDescription": {
+          "description": "Describes how and why the number will be used for messaging as part of the program.",
+          "type": "string"
+        },
+        "programUrl": {
+          "description": "URL for the program or company.",
+          "type": "string"
+        },
+        "programSignUpTypes": {
+          "description": "Indicates how the consumer can sign up to the program e.g. 'website', 'pointOfSale' and/or 'sms'.",
+          "type": "array",
+          "items": {
+            "description": "Indicates how a program will be discoverable by the consumer.",
+            "enum": [
+              "website",
+              "pointOfSale",
+              "sms"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ProgramSignUpType",
+              "modelAsString": true
+            }
+          }
+        },
+        "programSignUp": {
+          "description": "Call to action description for the program.\r\ne.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.'.",
+          "type": "string"
+        },
+        "termsOfServiceUrl": {
+          "description": "URL for program terms of service.",
+          "type": "string"
+        },
+        "privacyPolicyUrl": {
+          "description": "URL for privacy policy.",
+          "type": "string"
+        },
+        "expectedDateOfService": {
+          "format": "date-time",
+          "description": "Date in which SMS messages will start to be sent out.\r\nShould follow ISO 8601 internet format for datetimes.\r\ne.g. 2021-08-17T22:02:51.316Z, 2021-08-17T16:39:57-08:00, etc.",
+          "type": "string"
+        }
+      }
+    },
+    "CompanyInformation": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "description": "Legal entity name for customer submitting program brief.",
+          "type": "string"
+        },
+        "companyUrl": {
+          "description": "Company URL for customer submitting program brief.",
+          "type": "string"
+        },
+        "contactName": {
+          "description": "Name of authorized user for purposes of submitting the program brief.",
+          "type": "string"
+        },
+        "contactPhone": {
+          "description": "Contact phone number for the authorized user for the customer e.g. +14086111111.",
+          "type": "string"
+        },
+        "contactEmail": {
+          "description": "Contact email address number for the authorized user for the customer.",
+          "type": "string"
+        },
+        "companyAddress": {
+          "description": "Company's address for the customer submitting the program brief.",
+          "type": "string"
+        },
+        "customerCareTollFreeNumber": {
+          "description": "Customer support phone number for the customer submitting the program brief. e.g. +18005551212",
+          "type": "string"
+        },
+        "customerCareEmail": {
+          "description": "Customer support email address for the customer submitting the program brief.",
+          "type": "string"
+        }
+      }
+    },
+    "MessageDetails": {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "description": "Applicable message types used in the program e.g. SMS or MMS.",
+          "enum": [
+            "sms",
+            "mms"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MessageType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "Indicates the nature of the messaging associated with the program e.g. 'subscription', 'transaction'.",
+          "enum": [
+            "subscription",
+            "transaction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Recurrence",
+            "modelAsString": true
+          }
+        },
+        "contentTypes": {
+          "description": "Indicates the messaging content types used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
+          "type": "array",
+          "items": {
+            "description": "Indicates the messaging content type used in the program.",
+            "enum": [
+              "ringTones",
+              "smsChat",
+              "video",
+              "loyaltyProgramPointsPrizes",
+              "gifting",
+              "inApplicationBilling",
+              "textToScreen",
+              "games",
+              "audioChat",
+              "mmsPictures",
+              "sweepstakesContestAuction",
+              "financialBanking",
+              "premiumWap",
+              "queryService",
+              "wallpaperScreensaver",
+              "voting",
+              "application",
+              "mobileGivingDonations",
+              "coupons",
+              "loyaltyProgram",
+              "noPointPrizes",
+              "informationAlerts",
+              "microBilling",
+              "trivia",
+              "entertainmentAlerts",
+              "other"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ContentType",
+              "modelAsString": true
+            }
+          }
+        },
+        "helpMessage": {
+          "description": "Message text for mobile terminated message associated with HELP keyword\r\ne.g 'This is the HELP message test.'.",
+          "type": "string"
+        },
+        "optOutMessage": {
+          "description": "\"Message text for mobile terminated message associated with STOP keyword\r\ne.g. 'This is the STOP message test.'.",
+          "type": "string"
+        },
+        "optInMessage": {
+          "type": "string"
+        },
+        "optInReply": {
+          "description": "Keyword used to confirm double Opt-In method e.g. 'JOIN'.",
+          "type": "string"
+        },
+        "confirmationMessage": {
+          "type": "string"
+        },
+        "useCase": {
+          "description": "Messaging use case description.",
+          "type": "string"
+        }
+      }
+    },
     "ProgramBriefEntity": {
       "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "type": "object",
@@ -1689,21 +1934,13 @@
           "type": "string"
         },
         "status": {
-          "description": "Program Brief status (e.g. 'submitted', 'approved', etc)",
+          "description": "Program Brief status e.g. 'submitted', 'approved', etc",
           "enum": [
-            "pendingReview",
-            "denied",
-            "submittedToAggregator",
-            "waitingForMicrosoftOperator",
-            "customerInputNeeded",
-            "pendingApproval",
+            "submitted",
             "approved",
-            "codeNotAvailable",
-            "pendingCancellation",
-            "cancelled",
-            "submissionUnsuccessful",
-            "draft",
-            "new"
+            "submitNewVanityNumbers",
+            "updateProgramBrief",
+            "draft"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1712,7 +1949,7 @@
           }
         },
         "number": {
-          "description": "Number provisioned for the program brief.",
+          "description": "Number provisioned for the program brief e.g. 555555, 'CONTOSO'",
           "type": "string"
         },
         "comment": {
@@ -1760,6 +1997,24 @@
         "nextLink": {
           "description": "Represents the URL link to the next page",
           "type": "string"
+        }
+      }
+    },
+    "UpdateProgramBriefRequest": {
+      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "type": "object",
+      "properties": {
+        "programDetails": {
+          "$ref": "#/definitions/ProgramDetails"
+        },
+        "companyInformation": {
+          "$ref": "#/definitions/CompanyInformation"
+        },
+        "messageDetails": {
+          "$ref": "#/definitions/MessageDetails"
+        },
+        "trafficDetails": {
+          "$ref": "#/definitions/TrafficDetails"
         }
       }
     }
