@@ -16,7 +16,7 @@
     "requiredVariables": {
       "type": "array",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/Name"
       }
     },
     "prepareSteps": {
@@ -56,6 +56,9 @@
       "properties": {
         "variables": {
           "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
           "additionalProperties": {
             "type": "string"
           }
@@ -91,6 +94,9 @@
         },
         "outputVariables": {
           "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
           "additionalProperties": {
             "type": "object",
             "properties": {
@@ -236,11 +242,11 @@
             "type": "string"
           }
         },
-        "requestBody": {},
+        "requestBody": true,
         "statusCode": {
           "type": "number"
         },
-        "responseExpected": {}
+        "responseExpected": true
       },
       "required": [
         "method",
@@ -285,7 +291,7 @@
         "add": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": {}
+        "value": true
       },
       "additionalProperties": false
     },
@@ -311,7 +317,7 @@
         "replace": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": {}
+        "value": true
       },
       "additionalProperties": false
     },
@@ -374,7 +380,7 @@
         "test": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": {}
+        "value": true
       },
       "additionalProperties": false
     },
