@@ -31,7 +31,7 @@
           "Account"
         ],
         "description": "Get an account",
-        "operationId": "Accounts_Get",
+        "operationId": "Accounts_GetAccountProperties",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -52,8 +52,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
-            "$ref": "./examples/Accounts_Get.json"
+          "Accounts_GetAccountProperties": {
+            "$ref": "./examples/Accounts_GetAccountProperties.json"
           }
         }
       },
@@ -62,7 +62,7 @@
           "Account"
         ],
         "description": "Updates an account",
-        "operationId": "Accounts_Update",
+        "operationId": "Accounts_UpdateAccountProperties",
         "parameters": [
           {
             "name": "accountUpdateParameters",
@@ -91,8 +91,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Update": {
-            "$ref": "./examples/Accounts_Update.json"
+          "Accounts_UpdateAccountProperties": {
+            "$ref": "./examples/Accounts_UpdateAccountProperties.json"
           }
         }
       }
@@ -103,7 +103,7 @@
           "Account"
         ],
         "description": "List the authorization keys associated with this account.",
-        "operationId": "Accounts_ListKeys",
+        "operationId": "Accounts_GetAccessKeys",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -124,8 +124,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_ListKeys": {
-            "$ref": "./examples/Accounts_ListKeys.json"
+          "Accounts_GetAccessKeys": {
+            "$ref": "./examples/Accounts_GetAccessKeys.json"
           }
         }
       }
@@ -136,7 +136,7 @@
           "Account"
         ],
         "description": "Regenerate the authorization keys associated with this data catalog.",
-        "operationId": "Accounts_RegenerateKeys",
+        "operationId": "Accounts_RegenerateAccessKey",
         "parameters": [
           {
             "name": "keyOptions",
@@ -166,7 +166,7 @@
         },
         "x-ms-examples": {
           "Accounts_RegenerateKeys": {
-            "$ref": "./examples/Accounts_RegenerateKeys.json"
+            "$ref": "./examples/Accounts_RegenerateAccessKey.json"
           }
         }
       }
@@ -177,7 +177,7 @@
           "Collection"
         ],
         "description": "Get a collection",
-        "operationId": "Collections_Get",
+        "operationId": "Collections_GetCollection",
         "parameters": [
           {
             "name": "collectionName",
@@ -204,8 +204,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_Get": {
-            "$ref": "./examples/Collections_Get.json"
+          "Collections_GetCollection": {
+            "$ref": "./examples/Collections_GetCollection.json"
           }
         }
       },
@@ -214,7 +214,7 @@
           "Collection"
         ],
         "description": "Creates or updates a collection entity.",
-        "operationId": "Collections_CreateOrUpdate",
+        "operationId": "Collections_CreateOrUpdateCollection",
         "parameters": [
           {
             "name": "collectionName",
@@ -249,8 +249,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_CreateOrUpdate": {
-            "$ref": "./examples/Collections_CreateOrUpdate.json"
+          "Collections_CreateOrUpdateCollection": {
+            "$ref": "./examples/Collections_CreateOrUpdateCollection.json"
           }
         }
       },
@@ -259,7 +259,7 @@
           "Collection"
         ],
         "description": "Deletes a Collection entity.",
-        "operationId": "Collections_Delete",
+        "operationId": "Collections_DeleteCollection",
         "parameters": [
           {
             "name": "collectionName",
@@ -283,8 +283,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_Delete": {
-            "$ref": "./examples/Collections_Delete.json"
+          "Collections_DeleteCollection": {
+            "$ref": "./examples/Collections_DeleteCollection.json"
           }
         }
       }
@@ -295,7 +295,7 @@
           "Collection"
         ],
         "description": "List the collections in the account.",
-        "operationId": "Collections_ListByAccount",
+        "operationId": "Collections_ListCollections",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -325,8 +325,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Collections_ListByAccount": {
-            "$ref": "./examples/Collections_ListByAccount.json"
+          "Collections_ListCollections": {
+            "$ref": "./examples/Collections_ListCollections.json"
           }
         }
       }
@@ -337,7 +337,7 @@
           "Collection"
         ],
         "description": "Lists the child collections names in the collection.",
-        "operationId": "Collections_GetChildCollectionNames",
+        "operationId": "Collections_ListChildCollectionNames",
         "parameters": [
           {
             "name": "collectionName",
@@ -373,8 +373,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Collections_GetChildCollectionNames": {
-            "$ref": "./examples/Collections_GetChildCollectionNames.json"
+          "Collections_ListChildCollectionNames": {
+            "$ref": "./examples/Collections_ListChildCollectionNames.json"
           }
         }
       }
@@ -395,12 +395,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -430,7 +424,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Get a resource set config service model.",
-        "operationId": "ResourceSetRuleConfigs_Get",
+        "operationId": "ResourceSetRules_GetResourceSetRule",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -451,8 +445,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRuleConfigs_Get": {
-            "$ref": "./examples/ResourceSetRuleConfigs_Get.json"
+          "ResourceSetRules_GetResourceSetRule": {
+            "$ref": "./examples/ResourceSetRules_GetResourceSetRule.json"
           }
         }
       },
@@ -461,7 +455,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Creates or updates an resource set config.",
-        "operationId": "ResourceSetRuleConfigs_CreateOrUpdate",
+        "operationId": "ResourceSetRules_CreateOrUpdateResourceSetRule",
         "parameters": [
           {
             "name": "resourceSetRuleConfig",
@@ -490,8 +484,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRuleConfigs_CreateOrUpdate": {
-            "$ref": "./examples/ResourceSetRuleConfigs_CreateOrUpdate.json"
+          "ResourceSetRules_CreateOrUpdateResourceSetRule": {
+            "$ref": "./examples/ResourceSetRules_CreateOrUpdateResourceSetRule.json"
           }
         }
       },
@@ -500,7 +494,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Deletes a ResourceSetRuleConfig resource.",
-        "operationId": "ResourceSetRuleConfigs_Delete",
+        "operationId": "ResourceSetRules_DeleteResourceSetRule",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -521,8 +515,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRuleConfigs_Delete": {
-            "$ref": "./examples/ResourceSetRuleConfigs_Delete.json"
+          "ResourceSetRules_DeleteResourceSetRule": {
+            "$ref": "./examples/ResourceSetRules_DeleteResourceSetRule.json"
           }
         }
       }
@@ -533,7 +527,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Get a resource set config service model.",
-        "operationId": "ResourceSetRuleConfigs_ListByAccount",
+        "operationId": "ResourceSetRules_ListResourceSetRules",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -563,8 +557,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ResourceSetRuleConfigs_ListByAccount": {
-            "$ref": "./examples/ResourceSetRuleConfigs_ListByAccount.json"
+          "ResourceSetRules_ListResourceSetRules": {
+            "$ref": "./examples/ResourceSetRules_ListResourceSetRules.json"
           }
         }
       }

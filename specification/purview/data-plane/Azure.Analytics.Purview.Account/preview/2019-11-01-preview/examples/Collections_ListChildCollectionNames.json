@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "endpoint": "{endpoint}",
     "collectionName": "myCollection1",
     "api-version": "2019-11-01-preview"
   },
@@ -12,13 +13,21 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
-        "name": "mycollection1",
-        "friendlyName": "Finance",
-        "parentCollection": {
-          "type": "CollectionReference",
-          "referenceName": "accountName"
-        },
-        "collectionProvisioningState": "Succeeded"
+        "value": [
+          {
+            "name": "mycollection1",
+            "friendlyName": "The first collection"
+          },
+          {
+            "name": "mycollection2",
+            "friendlyName": "Some collection"
+          },
+          {
+            "name": "parent2",
+            "friendlyName": "parent2"
+          }
+        ],
+        "count": 3
       }
     }
   }
