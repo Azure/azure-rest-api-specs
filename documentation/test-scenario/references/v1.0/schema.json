@@ -15,24 +15,28 @@
     },
     "requiredVariables": {
       "type": "array",
+      "description": "Variables required at runtime",
       "items": {
         "$ref": "#/definitions/Name"
       }
     },
     "prepareSteps": {
       "type": "array",
+      "description": "Prepare steps before executing scenarios",
       "items": {
         "$ref": "#/definitions/TestStep"
       }
     },
     "testScenarios": {
       "type": "array",
+      "description": "Test scenarios",
       "items": {
         "$ref": "#/definitions/TestScenario"
       }
     },
-    "cleanUpSteps":{
+    "cleanUpSteps": {
       "type": "array",
+      "description": "Clean up steps after executing scenarios",
       "items": {
         "$ref": "#/definitions/TestStep"
       }
@@ -48,7 +52,7 @@
     },
     "JsonPointer": {
       "type": "string",
-      "description": "String syntax for identifying a specific value within JSON document",
+      "description": "JSON Pointer described by RFC 6901, e.g. /foo/bar",
       "pattern": "^(/(([^/~])|(~[01]))*)*$"
     },
     "VariableScope": {
@@ -71,7 +75,7 @@
           "$ref": "#/definitions/TestStepRestCall"
         },
         {
-          "$ref": "#/definitions/TestStepOperation"
+          "$ref": "#/definitions/TestStepRestOperation"
         },
         {
           "$ref": "#/definitions/TestStepArmTemplateDeployment"
@@ -82,15 +86,19 @@
       ]
     },
     "TestStepBase": {
-      "allOf":[
-        {"$ref": "#/definitions/VariableScope"}
+      "allOf": [
+        {
+          "$ref": "#/definitions/VariableScope"
+        }
       ],
       "properties": {
         "step": {
-          "$ref": "#/definitions/Name"
+          "$ref": "#/definitions/Name",
+          "description": "Name of step"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "A long description of the step"
         },
         "outputVariables": {
           "type": "object",
@@ -107,15 +115,53 @@
           }
         }
       },
-      "required":[
+      "required": [
         "step"
       ]
+    },
+    "TestStepRestBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestStepBase"
+        }
+      ],
+      "properties": {
+        "resourceUpdate": {
+          "type": "array",
+          "description": "Update resource properties in body for both request and expected response",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "requestUpdate": {
+          "type": "array",
+          "description": "Update request parameters",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "responseUpdate": {
+          "type": "array",
+          "description": "Update expected response",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "statusCode": {
+          "type": "integer",
+          "description": "Expected response code",
+          "default": 200
+        }
+      }
     },
     "TestStepRestCall": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TestStepBase"
+          "#ref": "#/definitions/TestStepRestBase"
         }
       ],
       "properties": {
@@ -123,73 +169,32 @@
           "type": "string"
         },
         "resourceName": {
-          "type": "string"
-        },
-        "resourceUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          },
-          "minItems": 1
-        },
-        "requestUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "responseUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "statusCode": {
-          "type": "number"
+          "$ref": "#/definitions/Name",
+          "description": "Name a resource for tracking"
         }
       },
-      "required":[
+      "required": [
         "exampleFile"
       ]
     },
-    "TestStepOperation": {
+    "TestStepRestOperation": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TestStepBase"
+          "#ref": "#/definitions/TestStepRestBase"
         }
       ],
       "properties": {
         "operationId": {
-          "type": "string"
+          "type": "string",
+          "description": "The operationId to perform on a tracking resource"
         },
         "resourceName": {
-          "type": "string"
-        },
-        "resourceUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          },
-          "minItems": 1
-        },
-        "requestUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "responseUpdate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonPatchOp"
-          }
-        },
-        "statusCode": {
-          "type": "number"
+          "$ref": "#/definitions/Name",
+          "description": "Reference a tracking resource"
         }
       },
-      "required":[
+      "required": [
         "operationId",
         "resourceName"
       ]
@@ -257,6 +262,7 @@
     },
     "JsonPatchOp": {
       "type": "object",
+      "description": "Change a JSON document in a format described by RFC 6902",
       "oneOf": [
         {
           "$ref": "#/definitions/JsonPatchOpAdd"
@@ -393,13 +399,16 @@
       ],
       "properties": {
         "scenario": {
-          "$ref": "#/definitions/Name"
+          "$ref": "#/definitions/Name",
+          "description": "Name of the scenario"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "A long description of the scenario"
         },
         "steps": {
           "type": "array",
+          "description": "A series of steps defining the scenario",
           "items": {
             "$ref": "#/definitions/TestStep"
           }
