@@ -693,9 +693,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
@@ -1639,22 +1636,10 @@
     },
     "OutboundEnvironmentEndpointCollection": {
       "description": "Collection of outbound network dependency endpoints",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }
-    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
