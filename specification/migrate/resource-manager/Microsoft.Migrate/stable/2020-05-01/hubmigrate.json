@@ -60,6 +60,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}": {
       "get": {
+        "summary": "Get a specific project.",
+        "description": "Get information related to a specific migrate project. Returns a json object of type 'migrateProject' as specified in the models section.",
         "tags": [
           "MigrateProjectsController"
         ],
@@ -101,6 +103,8 @@
         "tags": [
           "MigrateProjectsController"
         ],
+        "summary": "Create a new project with specified settings.",
+        "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
         "operationId": "MigrateProjectsController_PutMigrateProject",
         "parameters": [
           {
@@ -148,6 +152,8 @@
         "tags": [
           "MigrateProjectsController"
         ],
+        "summary": "Delete the project",
+        "description": "Delete the migrate project. It delets summary of the project.",
         "operationId": "MigrateProjectsController_DeleteMigrateProject",
         "parameters": [
           {
@@ -186,6 +192,8 @@
         "tags": [
           "MigrateProjectsController"
         ],
+        "summary": "Update project.",
+        "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
         "operationId": "MigrateProjectsController_PatchMigrateProject",
         "parameters": [
           {
@@ -235,6 +243,8 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
+        "summary": "Get the private endpoint.",
+        "description": "Get the private endpoint with the specified name.",
         "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
         "parameters": [
           {
@@ -280,6 +290,8 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
+        "summary": "Create or update private endpoint.",
+        "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
         "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
         "parameters": [
           {
@@ -334,6 +346,8 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
+        "summary": "Delete the endpoint",
+        "description": "Delete the private endpoint. Deleting non-existent private endpoint is a no-operation.",
         "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
         "parameters": [
           {
@@ -430,6 +444,8 @@
         "tags": [
           "PrivateLinkResourceController"
         ],
+        "summary": "Get the specified private link resource.",
+        "description": "Get the private link resource with the specified name.",
         "operationId": "PrivateLinkResourceController_GetPrivateLinkResource",
         "parameters": [
           {
@@ -477,6 +493,8 @@
         "tags": [
           "PrivateLinkResourceController"
         ],
+        "summary": "Get the list of private link resources.",
+        "description": "Get the list of private link resources.",
         "operationId": "PrivateLinkResourceController_GetPrivateLinkResources",
         "parameters": [
           {
