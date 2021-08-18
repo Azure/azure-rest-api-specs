@@ -40,6 +40,7 @@ input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
 - Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
 - Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
+- Microsoft.SecurityInsights/stable/2021-04-01/AlertRules.json
 
 directive:
   - suppress: R4017
@@ -50,6 +51,10 @@ directive:
     from: Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/stable/2021-04-01/AlertRules.json
+    where: $.definitions.AlertRules
+    reason: The AlertRule does not support list by subscription. It's not a top-level resource. To get the AlertRule, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
