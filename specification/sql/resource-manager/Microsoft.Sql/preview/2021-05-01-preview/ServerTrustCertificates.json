@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-05-01-preview",
+    "version": "2021-05-01",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -99,7 +99,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Certificate already existed."
+            "description": "Certificate already existed.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustCertificate"
+            }
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 MissingPublicBlob - The public blob is missing.\n\n * 400 InvalidPublicBlob - Invalid public blob specified, reason: '{0}'.\n\n * 400 MissingCertificateName - The certificate name is missing.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
@@ -108,7 +111,10 @@
             "description": "Accepted request for creating server trust certificate."
           },
           "201": {
-            "description": "Certificate is successfully created."
+            "description": "Certificate is successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustCertificate"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -217,8 +223,7 @@
       "properties": {
         "publicBlob": {
           "description": "The certificate public blob",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "thumbprint": {
           "description": "The certificate thumbprint",
