@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-07-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/metastore/create-database-operations/{id}": {
+      "put": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Register",
+        "description": "Register files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Register.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Metadata created Response.",
+            "schema": {
+              "$ref": "#/definitions/metaDataCreatedResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_GetDatabaseOperations",
+        "description": "Gets status of the resource",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_GetResourceStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Success Response.",
+            "schema": {
+              "$ref": "#/definitions/metaStoreRequestSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/metastore/update-database-operations/{id}": {
+      "put": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Update",
+        "description": "Update files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Metadata created Response.",
+            "schema": {
+              "$ref": "#/definitions/metaDataCreatedResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/metastore/databases/{id}": {
+      "delete": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Delete",
+        "description": "Remove files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Metadata Deleted Response."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "metaDataCreatedResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "metaStoreRequestSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
