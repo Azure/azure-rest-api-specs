@@ -989,6 +989,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/managedPrivateEndpointsCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoManagedPrivateEndpointsCheckNameAvailability": {
+            "$ref": "./examples/KustoManagedPrivateEndpointsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the managed private endpoints resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointsCheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/skus": {
       "get": {
         "tags": [
@@ -5377,6 +5428,31 @@
         "type"
       ],
       "description": "The result returned from a AttachedDatabaseConfigurations check name availability request."
+    },
+    "ManagedPrivateEndpointsCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed private endpoint resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/managedPrivateEndpoints"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateEndpointsType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.Kusto/clusters/managedPrivateEndpoints."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a managedPrivateEndpoints check name availability request."
     },
     "ClusterPrincipalAssignmentCheckNameRequest": {
       "type": "object",
