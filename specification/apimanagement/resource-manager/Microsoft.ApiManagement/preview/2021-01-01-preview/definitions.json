@@ -3715,6 +3715,10 @@
         "typeName": {
           "type": "string",
           "description": "Type name defined by the schema."
+        },
+        "examples": {
+          "$ref": "#/definitions/ParameterExamplesContract",
+          "description": "Exampled defined for the parameter."
         }
       },
       "required": [
@@ -3722,6 +3726,33 @@
         "type"
       ],
       "description": "Operation parameters details."
+    },
+    "ParameterExamplesContract": {
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterExampleContract",
+        "description": "Parameter example."
+      },
+      "description": "Parameter examples."
+    },
+    "ParameterExampleContract": {
+      "description": "Parameter example.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Short description for the example"
+        },
+        "description": {
+          "type": "string",
+          "description": "Long description for the example"
+        },
+        "value": {
+          "description": "Example value. May be a primitive value, or an object."
+        },
+        "externalValue": {
+          "type": "string",
+          "description": "A URL that points to the literal example"
+        }
+      }
     },
     "PipelineDiagnosticSettings": {
       "properties": {
@@ -4686,10 +4717,6 @@
         "contentType": {
           "type": "string",
           "description": "Specifies a registered or custom content type for this representation, e.g. application/xml."
-        },
-        "sample": {
-          "type": "string",
-          "description": "An example of the representation."
         },
         "schemaId": {
           "type": "string",
