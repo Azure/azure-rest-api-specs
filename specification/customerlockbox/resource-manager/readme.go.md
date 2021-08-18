@@ -17,3 +17,10 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 namespace: customerlockbox
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-02-28-preview/$(namespace)
 ```
+
+### Go multi-api
+
+```yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2018-02-28-preview
+```
