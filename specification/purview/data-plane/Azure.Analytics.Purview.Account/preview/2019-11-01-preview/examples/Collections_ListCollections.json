@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "collectionName": "myCollection1",
+    "endpoint": "{endpoint}",
     "api-version": "2019-11-01-preview"
   },
   "responses": {
@@ -15,18 +15,14 @@
         "value": [
           {
             "name": "mycollection1",
-            "friendlyName": "The first collection"
-          },
-          {
-            "name": "mycollection2",
-            "friendlyName": "Some collection"
-          },
-          {
-            "name": "parent2",
-            "friendlyName": "parent2"
+            "friendlyName": "Finance",
+            "parentCollection": {
+              "type": "CollectionReference",
+              "referenceName": "accountName"
+            },
+            "collectionProvisioningState": "Succeeded"
           }
-        ],
-        "count": 3
+        ]
       }
     }
   }
