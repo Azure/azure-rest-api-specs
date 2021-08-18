@@ -1,0 +1,1014 @@
+swagger: '2.0'
+info:
+  title: Speaker Verification API
+  version: '3.0'
+host: westus.api.cognitive.microsoft.com
+basePath: /speaker/verification/v2.0
+schemes:
+  - https
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  apiKeyHeader:
+    type: apiKey
+    name: Ocp-Apim-Subscription-Key
+    in: header
+  apiKeyQuery:
+    type: apiKey
+    name: subscription-key
+    in: query
+security:
+  - apiKeyHeader: []
+  - apiKeyQuery: []
+x-servers:
+  - url: 'https://westus.api.cognitive.microsoft.com'
+  - url: 'https://cognitive-wu.cognitiveservices.azure.com'
+  - url: 'https://api.ProjectOxford.ai'
+
+parameters:
+  profileIdParam:
+    in: path
+    name: profileId
+    required: true
+    description: Unique identifier for profile id (guid).
+    type: string
+    pattern: '^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$'
+  localeParam:
+    in: path
+    name: locale
+    required: true
+    type: string
+    pattern: '^[a-zA-Z]{2}-[a-zA-Z]{2}$'
+    description: A combination of language code and country code.
+
+definitions:
+  # Properties
+  ProfileId:
+    type: string
+    pattern: '^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$'
+    description: Unique identifier for profile id (guid).
+    example: "49a36324-fc4b-4387-aa06-090cfbf0064f"
+  Locale:
+    type: string
+    pattern: '^[a-zA-Z]{2}-[a-zA-Z]{2}$'
+    description: Language identifier consisting of a combination of language code and country code.
+    example: en-US
+  ProfileStatus:
+    type: string
+    description: |-
+      Status representing the current state of the profile. Available values are:
+      * Active: profile is active and can be used if the enrollment status is 'Enrolled'.
+      * Inactive: profile has not been activated and an activation phrase must be submitted.
+    enum:
+    - Active
+    - Inactive
+    example: Active
+  EnrollmentStatus:
+    type: string
+    description: |-
+      Status representing the current state of the enrollment. Available values are:
+      * Enrolling: profile has no voice print and not ready for recognition requests.
+      * Training: voice print of profile is being created and can’t be used for recognition at the moment.
+      * Enrolled: profile has a voice print and ready for recognition requests.
+    enum:
+    - Enrolling
+    - Training
+    - Enrolled
+    example: Enrolling
+  CreatedDateTime:
+    type: string
+    description: Profile creation datetime.
+    example: "2015-04-23T18:25:43.41Z"
+  LastUpdatedDateTime:
+    type: string
+    description: Last datetime when the profile was updated.
+    example: "2015-04-23T19:34:51.52Z"
+  EnrollmentsCount:
+    type: integer
+    description: Number of enrolment audios accepted for this profile.
+    example: 1
+  EnrollmentsLength:
+    type: number
+    description: Total length of enrollment audios accepted for this profile in seconds.
+    example: 1.83
+  EnrollmentsSpeechLength:
+    type: number
+    description: Summation of pure speech (which is the amount of audio after removing silence and non-speech segments) across all profile enrollments in seconds.
+    example: 1.35
+  RemainingEnrollmentsCount:
+    type: integer
+    description: Number of enrollment audios needed to complete profile enrollment.
+    example: 2
+  RemainingEnrollmentsSpeechLength:
+    type: number
+    description: Amount of pure speech (which is the amount of audio after removing silence and non-speech segments) needed to complete profile enrollment in seconds.
+    example: 18.65
+  ModelVersion:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+    description: Date specifying the model assigned to this profile. Format is yyyy-mm-dd. If profile has no enrollments, this value will be empty.
+    example: "2019-12-05"
+  PassPhrase:
+    type: string
+    description: Passphrase associated with this enrollment.
+    example: my voice is my passport verify me
+  ActivationPhrase:
+    type: string
+    description: Activation phrases available to activate a profile.
+    example: this is my activation phrase to identify me
+
+  # Response Messages
+  TdProfileInfo:
+    description: Speaker profile info
+    properties:
+      profileId:
+        $ref: '#/definitions/ProfileId'
+      locale:
+        $ref: '#/definitions/Locale'
+      enrollmentStatus:
+        $ref: '#/definitions/EnrollmentStatus'
+      createdDateTime:
+        $ref: '#/definitions/CreatedDateTime'
+      lastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+      enrollmentsCount:
+        $ref: '#/definitions/EnrollmentsCount'
+      enrollmentsLength:
+        $ref: '#/definitions/EnrollmentsLength'
+      enrollmentsSpeechLength:
+        $ref: '#/definitions/EnrollmentsSpeechLength'
+      remainingEnrollmentsCount:
+        $ref: '#/definitions/RemainingEnrollmentsCount'
+      modelVersion:
+        $ref: '#/definitions/ModelVersion'
+
+  TdEnrollmentInfo:
+    description: Speaker profile enrollment info
+    properties:
+      profileId:
+        $ref: '#/definitions/ProfileId'
+      enrollmentStatus:
+        $ref: '#/definitions/EnrollmentStatus'
+      enrollmentsCount:
+        $ref: '#/definitions/EnrollmentsCount'
+      enrollmentsLength:
+        $ref: '#/definitions/EnrollmentsLength'
+      enrollmentsSpeechLength:
+        $ref: '#/definitions/EnrollmentsSpeechLength'
+      remainingEnrollmentsCount:
+        $ref: '#/definitions/RemainingEnrollmentsCount'
+      passPhrase:
+        $ref: '#/definitions/PassPhrase'
+      audioLength:
+        type: number
+        description: This enrolment audio length in seconds.
+        example: 1.83
+      audioSpeechLength:
+        type: number
+        description: This enrollment audio pure speech (which is the amount of audio after removing silence and non-speech segments) length in seconds.
+        example: 1.35
+
+  TiProfileInfo:
+    description: Speaker profile info
+    properties:
+      profileId:
+        $ref: '#/definitions/ProfileId'
+      locale:
+        $ref: '#/definitions/Locale'
+      profileStatus:
+        $ref: '#/definitions/ProfileStatus'
+      enrollmentStatus:
+        $ref: '#/definitions/EnrollmentStatus'
+      createdDateTime:
+        $ref: '#/definitions/CreatedDateTime'
+      lastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+      enrollmentsCount:
+        $ref: '#/definitions/EnrollmentsCount'
+      enrollmentsLength:
+        $ref: '#/definitions/EnrollmentsLength'
+      enrollmentsSpeechLength:
+        $ref: '#/definitions/EnrollmentsSpeechLength'
+      remainingEnrollmentsSpeechLength:
+        $ref: '#/definitions/RemainingEnrollmentsSpeechLength'
+      modelVersion:
+        $ref: '#/definitions/ModelVersion'
+
+  TiEnrollmentInfo:
+    description: Speaker profile enrollment info
+    properties:
+      profileId:
+        $ref: '#/definitions/ProfileId'
+      enrollmentStatus:
+        $ref: '#/definitions/EnrollmentStatus'
+      enrollmentsCount:
+        $ref: '#/definitions/EnrollmentsCount'
+      enrollmentsLength:
+        $ref: '#/definitions/EnrollmentsLength'
+      enrollmentsSpeechLength:
+        $ref: '#/definitions/EnrollmentsSpeechLength'
+      remainingEnrollmentsSpeechLength:
+        $ref: '#/definitions/RemainingEnrollmentsSpeechLength'
+      audioLength:
+        type: number
+        description: This enrolment audio length in seconds.
+        example: 1.83
+      audioSpeechLength:
+        type: number
+        description: This enrollment audio pure speech (which is the amount of audio after removing silence and non-speech segments) length in seconds.
+        example: 1.35
+
+  # Error Messages
+  Error:
+    required:
+      - error
+    properties:
+      error:
+        properties:
+          code:
+            type: string
+          message:
+            type: string
+
+responses:
+  NotFound:
+    description: NotFound - Requested profile doesn't exist
+    schema:
+      $ref: '#/definitions/Error'
+    examples:
+      application/json:
+        code: Not Found
+        message: Requested profile doesn't exist
+  Unauthorized:
+    description: Request is not authorized. Make sure subscription key is included and valid.
+    schema:
+      $ref: '#/definitions/Error'
+    examples:
+      application/json:
+        code: Unauthorized
+        message: Request is not authorized. Make sure subscription key is included and valid.
+  RateLimit:
+    description: Rate limit is exceeded.
+    schema:
+      $ref: '#/definitions/Error'
+    examples:
+      application/json:
+        code: RateLimit
+        message: Rate limit is exceeded.
+  ServerError:
+    description: Internal Server Error.
+    schema:
+      $ref: '#/definitions/Error'
+    examples:
+      application/json:
+        code: InternalServerError
+        message: Internal Server Error.
+
+paths:
+  /text-dependent/profiles:
+    post:
+      description: |-
+        Create a new speaker profile with specified locale.
+        One subscription can create 10,000 speaker profiles at most.
+      summary: Create Profile
+      tags:
+      - text-dependent
+      parameters:
+        - in: body
+          name: profileInfo
+          description: |-
+            Provide following detail info when creating a new profile.
+            Fields  | Description
+            ------- | ------------
+            locale  | Locale for the language of this speaker profile. A complete supported locale list is here: <ul><li>**en-US (American English)**</li></li></ul>
+          schema:
+            required:
+            - locale
+            properties:
+              locale:
+                type: string
+                example: "en-us"
+      responses:
+        201:
+          description: |-
+            Speaker profile created successfully. GUID is returned to reference the created profile.
+          headers:
+            location:
+              type: string
+              description: url location of new resource
+          schema:
+            properties:
+              profileId:
+                type: string
+                description: unique identifier for profile id (guid)
+                example: "49a36324-fc4b-4387-aa06-090cfbf0064f"
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Request body is missing.
+            * InvalidRequest - Invalid JSON format.
+            * InvalidRequest - Locale parameter is missing.
+            * InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Request body is missing.
+        403:
+          description: Forbidden - Maximum allowed number of profiles is 10,000.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: Forbidden
+              message: Maximum allowed number of profiles is 10,000.
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only 'application/JSON' is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'application/JSON' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+    get:
+      description: |-
+        Retrieves a set of profiles.
+        Profiles are sorted alphabetically by ProfileId
+      summary: List Profile
+      tags:
+      - text-dependent
+      parameters:
+      - in: query
+        name: $top
+        description: The number of profiles to return. Default is 100 and the maximum is 500
+        type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              profiles:
+                items:
+                  $ref: '#/definitions/TdProfileInfo'
+              "@nextLink":
+                type: string
+                example: "https://{endpoint}/text-dependent/profiles?$top=35&$continuationToken=U21pdGg1QmVuOTk5"
+        400:
+          description: |-
+            Bad Request
+            * InvalidArgument - Invalid $top parameter value. Value should be positive integer in the range [1, 500].
+            * InvalidArgument - Invalid $continuationToken value. $continuationToken must be generated form a prior API call.
+            * InvalidArgument - $filter parameter is not supported.
+            * InvalidArgument - $skip parameter is not supported.
+            * InvalidArgument - $orderBy parameter is not supported.
+            * InvalidArgument - $delta parameter is not supported.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidArgument
+              message: Invalid $top parameter value. Value should be positive integer in the range [1, 500]
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-dependent/profiles/{profileId}:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    get:
+      description: |-
+        Retrieves a single profile by ID.
+      summary: Retrive Single Profile
+      tags:
+      - text-dependent
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TdProfileInfo'
+        404:
+          $ref: '#/responses/NotFound'
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+    delete:
+      description: |-
+        Deletes an existing profile.
+      summary: Delete Profile
+      tags:
+      - text-dependent
+      responses:
+        204:
+          description: OK
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-dependent/profiles/{profileId}/reset:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Resets existing profile to its original creation state. The reset operation does the following:
+        * Updates enrollmentStatus to Enrolling.
+        * Updates lastUpdatedDateTime.
+        * Updates enrollmentsCount to 0.
+        * Updates enrollmentsLength to 0.
+        * Updates enrollmentsSpeechLength to 0.
+        * Updates remainingEnrollmentsCount to the initial required number.
+        * Removes all associated enrollments from storage.
+        * Removes chosen passphrase association.
+        * Resets value of modelVersion.
+      summary: Reset Profile
+      tags:
+      - text-dependent
+      responses:
+        204:
+          description: OK
+        404:
+          $ref: '#/responses/NotFound'
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-dependent/profiles/{profileId}/enrollments:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Adds an enrollment to existing profile.
+        If the minimum number of requested enrollment audios is reached, a voice print is created.
+        If the voice print was created before, it gets recreated from all existing enrollment audios including the new one.
+
+        Limitations:
+        * Minimum enrollments needed for voice print creation is **3**
+        * Maximum enrollment audio length is **10 seconds**
+        * Minimum enrollment audio length is **1 second**
+        * Maximum enrollments number per profile is **50**
+        * Minimum audio Signal-to-noise ratio (SNR) is **2dB**
+
+        Constraints:
+        * First enrollment must match an existing passphrase.
+        * All enrollments after the first one, must use the same passphrase used in the first enrollment.
+      summary: Enroll Profile
+      tags:
+      - text-dependent
+      consumes:
+      - audio/wav; codecs=audio/pcm
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TdEnrollmentInfo'
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Invalid audio length. Maximum allowed length is 10 seconds.
+            * InvalidRequest - Invalid audio length. Minimum allowed length is 1 second.
+            * InvalidRequest - Invalid audio format. Supported format is WAV 16Khz 16bit Mono PCM.
+            * InvalidRequest - Invalid passphrase.
+            * InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Audio is too noisy.
+        403:
+          description: |-
+            Forbidden
+            * InvalidOperation - Maximum allowed number of enrollments per profile is 50.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidOperation
+              message: Maximum allowed number of enrollments per profile is 50.
+        404:
+          $ref: '#/responses/NotFound'
+        409:
+          description: |-
+            Conflict
+            * Conflict - Sending concurrent requests on same profile is not allowed.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: Conflict
+              message: Sending concurrent requests on same profile is not allowed.
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only "audio/wav; codecs=audio/pcm" is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-dependent/profiles/{profileId}/verify:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Verifies existing profiles against input audio.
+
+        Limitations:
+        * Maximum enrollment audio length is **10 seconds**
+        * Minimum enrollment audio length is **1 second**
+        * Minimum audio Signal-to-noise ratio (SNR) is **10 dB**
+      summary: Verify Profile
+      tags:
+      - text-dependent
+      consumes:
+      - audio/wav; codecs=audio/pcm
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              recognitionResult:
+                type: string
+                description: Does audio belong to targeted profile?
+                enum:
+                - accept
+                - reject
+                example: Accept
+              score:
+                type: number
+                description: |-
+                  A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.
+                example: 0.63
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Invalid audio length. Maximum allowed length is 10 seconds.
+            * InvalidRequest - Invalid audio length. Minimum allowed length is 1 second.
+            * InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.
+            * InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.
+            * InvalidRequest - Profile is not enrolled.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Profile is not enrolled.
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only "audio/wav; codecs=audio/pcm" is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-dependent/phrases/{locale}:
+    parameters:
+    - $ref: '#/parameters/localeParam'
+
+    get:
+      description: |-
+        Retrieves list of supported passphrases for a specific locale.
+      summary: Pass Phrases
+      tags:
+      - text-dependent
+      responses:
+        200:
+          description: OK
+          schema:
+            items:
+              properties:
+                passPhrase:
+                  $ref: '#/definitions/PassPhrase'
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Locale parameter is missing.
+            * InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Locale parameter is missing.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/profiles:
+    post:
+      description: |-
+        Creates a new speaker profile with specified locale.
+        One subscription can create 10,000 speaker profiles at most.
+      summary: Create Profile
+      tags:
+      - text-independent
+      parameters:
+        - in: body
+          name: profileInfo
+          description: |-
+            Provide following detail info when creating a new profile.
+            Fields  | Description
+            ------- | ------------
+            locale  | Locale for the language of this speaker profile. A complete supported locale list is here: <ul><li>**en-US (American English)**</li><li>**es-ES (Castilian Spanish)**</li><li>**fr-FR (Standard French)**</li><li>**zh-CN (Mandarin Chinese)**</li></ul>
+          schema:
+            required:
+            - locale
+            properties:
+              locale:
+                type: string
+                example: "en-us"
+      responses:
+        201:
+          description: |-
+            Speaker profile created successfully. GUID is returned to reference the created profile.
+          headers:
+            location:
+              type: string
+              description: url location of new resource
+          schema:
+            properties:
+              profileId:
+                type: string
+                description: unique identifier for profile id (guid)
+                example: "49a36324-fc4b-4387-aa06-090cfbf0064f"
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Request body is missing.
+            * InvalidRequest - Invalid JSON format.
+            * InvalidRequest - Locale parameter is missing.
+            * InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Request body is missing.
+        403:
+          description: Forbidden - Maximum allowed number of profiles is 10,000.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: Forbidden
+              message: Maximum allowed number of profiles is 10,000.
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only 'application/JSON' is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'application/JSON' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+    get:
+      description: |-
+        Retrieves a set of profiles.
+        Profiles are sorted alphabetically by ProfileId
+      summary: List Profile
+      tags:
+      - text-independent
+      parameters:
+      - in: query
+        name: $top
+        description: The number of profiles to return. Default is 100 and the maximum is 500
+        type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              profiles:
+                items:
+                  $ref: '#/definitions/TiProfileInfo'
+              "@nextLink":
+                type: string
+                example: "https://{endpoint}/text-independent/profiles?$top=35&$continuationToken=U21pdGg1QmVuOTk5"
+        400:
+          description: |-
+            Bad Request
+            * InvalidArgument - Invalid $top parameter value. Value should be positive integer in the range [1, 500].
+            * InvalidArgument - Invalid $continuationToken value. $continuationToken must be generated form a prior API call.
+            * InvalidArgument - $filter parameter is not supported.
+            * InvalidArgument - $skip parameter is not supported.
+            * InvalidArgument - $orderBy parameter is not supported.
+            * InvalidArgument - $delta parameter is not supported.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidArgument
+              message: Invalid $top parameter value. Value should be positive integer in the range [1, 500]
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/profiles/{profileId}:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    get:
+      description: |-
+        Retrieves a single profile by ID.
+      summary: Retrive Single Profile
+      tags:
+      - text-independent
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TiProfileInfo'
+        404:
+          $ref: '#/responses/NotFound'
+
+    delete:
+      description: |-
+        Deletes an existing profile.
+      summary: Delete Profile
+      tags:
+      - text-independent
+      responses:
+        204:
+          description: OK
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/profiles/{profileId}/reset:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Resets existing profile to its original creation state. The reset operation does the following:
+        * Updates enrollmentStatus to Enrolling.
+        * Updates lastUpdatedDateTime.
+        * Updates enrollmentsCount to 0.
+        * Updates enrollmentsLength to 0.
+        * Updates enrollmentsSpeechLength to 0.
+        * Updates remainingEnrollmentsSpeechLength to the required number.
+        * Removes all associated enrollments from storage.
+        * Removes chosen passphrase association.
+        * Resets value of modelVersion.
+      summary: Reset Profile
+      tags:
+      - text-independent
+      responses:
+        204:
+          description: OK
+        404:
+          $ref: '#/responses/NotFound'
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/profiles/{profileId}/enrollments:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Adds enrollments to existing profile.
+        The first enrollment must be one of the activation phrase available in the /phrases/{locale} api.
+        If the minimum number of requested enrollment audios is reached, a voice print is created.
+        If the voice print was created before, it gets recreated from all existing enrollment including the new one.
+
+        Limitations:
+        * Minimum amount of speech needed for voice print creation is **20 seconds**
+        * Maximum enrollment audio length is **120 seconds**
+        * Minimum enrollment audio length is **1 second**
+        * Maximum length allowed across all enrollments is **300 seconds**
+        * Minimum audio Signal-to-noise ratio (SNR) is **2dB**
+      summary: Enroll Profile
+      tags:
+      - text-independent
+      consumes:
+      - audio/wav; codecs=audio/pcm
+      parameters:
+      - in: query
+        name: ignoreMinLength
+        type: boolean
+        description: If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TiEnrollmentInfo'
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Invalid audio length. Maximum allowed length per enrollment request is 120 seconds.
+            * InvalidRequest - Invalid audio length. Minimum allowed length per enrollment request is 1 second.
+            * InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.
+            * InvalidArgument - Invalid ignoreMinLength parameter value. Valid values are "true" and "false".
+            * InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.
+            * InvalidRequest - The first enrollment must match an activation phrase.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Audio is too noisy.
+        403:
+          description: |-
+            Forbidden
+            * InvalidRequest - Maximum allowed length across all profile enrollments is 300 seconds.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Maximum allowed length across all profile enrollments is 300 seconds.
+        404:
+          $ref: '#/responses/NotFound'
+        409:
+          description: |-
+            Conflict
+            * Conflict - Sending concurrent requests on same profile is not allowed.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: Conflict
+              message: Sending concurrent requests on same profile is not allowed.
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only "audio/wav; codecs=audio/pcm" is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/profiles/{profileId}/verify:
+    parameters:
+    - $ref: '#/parameters/profileIdParam'
+
+    post:
+      description: |-
+        Verifies existing profiles against input audio.
+
+        Limitations:
+        * Maximum audio length is **120 seconds**
+        * Minimum audio speech length is **20 seconds**
+        * Minimum audio Signal-to-noise ratio (SNR) is **2dB**
+      summary: Verify Profile
+      tags:
+      - text-independent
+      consumes:
+      - audio/wav; codecs=audio/pcm
+      parameters:
+      - in: query
+        name: ignoreMinLength
+        type: boolean
+        description: If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false.
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              recognitionResult:
+                type: string
+                description: Does audio belong to targeted profile?
+                enum:
+                - accept
+                - reject
+                example: Accept
+              score:
+                type: number
+                description: |-
+                  A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.
+                example: 0.63
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Invalid audio length. Maximum allowed length per recognition request is 120 seconds.
+            * InvalidRequest - Invalid audio length. Minimum allowed length per recognition request is 1 second.
+            * InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.
+            * InvalidArgument - Invalid ignoreMinLength parameter value. Valid values are "true" and "false".
+            * InvalidRequest - Profile is not enrolled.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Profile is not enrolled.
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          description: UnsupportedMediaType - Unsupported media type. Only "audio/wav; codecs=audio/pcm" is accepted.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: UnsupportedMediaType
+              message: Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+  /text-independent/phrases/{locale}:
+    parameters:
+    - $ref: '#/parameters/localeParam'
+
+    get:
+      description: |-
+        Retrieves list of supported passphrases for a specific locale.
+      summary: Pass Phrases
+      tags:
+      - text-independent
+      responses:
+        200:
+          description: OK
+          schema:
+            items:
+              properties:
+                activationPhrase:
+                  $ref: '#/definitions/ActivationPhrase'
+        400:
+          description: |-
+            Bad Request
+            * InvalidRequest - Locale parameter is missing.
+            * InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: InvalidRequest
+              message: Locale parameter is missing.
+        401:
+          $ref: '#/responses/Unauthorized'
+        429:
+          $ref: '#/responses/RateLimit'
+        500:
+          $ref: '#/responses/ServerError'
+
+tags: []
