@@ -93,13 +93,14 @@ See configuration in [readme.go.md](./readme.go.md)
 ``` yaml
 directive:
   - suppress: SECRET_PROPERTY
-      where:
-        - $.definitions.AccessKeys.properties.atlasKafkaPrimaryEndpoint
-        - $.definitions.AccessKeys.properties.atlasKafkaSecondaryEndpoint
-      reason: Secrets are OK to return in a POST response.
+    where:
+      - $.definitions.AccessKeys.properties.atlasKafkaPrimaryEndpoint
+      - $.definitions.AccessKeys.properties.atlasKafkaSecondaryEndpoint
+    reason: Secrets are OK to return in a POST response.
   - suppress: R3018  # EnumInsteadOfBoolean
-      where:
-        - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
-        - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
-      reason: Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
+    where:
+      - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
+      - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
+    reason:
+      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
 ```
