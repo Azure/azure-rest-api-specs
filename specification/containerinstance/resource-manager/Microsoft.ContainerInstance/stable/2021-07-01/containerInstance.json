@@ -765,6 +765,7 @@
           }
         }
       }
+    }
   },
   "definitions": {
     "Container": {
@@ -1329,6 +1330,10 @@
                 "diagnostics": {
                   "description": "The diagnostic information for a container group.",
                   "$ref": "#/definitions/ContainerGroupDiagnostics"
+                },
+                "networkProfile": {
+                  "description": "The network profile information for a container group.",
+                  "$ref": "#/definitions/ContainerGroupNetworkProfile"
                 },
                 "subnetIds": {
                   "type": "array",
@@ -2154,15 +2159,12 @@
       "description": "An error response from the Container Instance service."
     },
     "NetworkDependenciesResponse": {
-      "description": "Response for network dependencies, always empty list..",
-      "type": "object",
-      "properties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-    },
+      "description": "Response for network dependencies, always empty list.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
