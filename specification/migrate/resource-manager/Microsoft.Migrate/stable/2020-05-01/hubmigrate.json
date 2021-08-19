@@ -112,7 +112,6 @@
         "summary": "Create a new project with specified settings.",
         "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
         "operationId": "MigrateProjectsController_PutMigrateProject",
-        "x-ms-azure-resource": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -327,7 +326,6 @@
         "summary": "Create or update private endpoint.",
         "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
         "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
-        "x-ms-azure-resource": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -662,6 +660,7 @@
     },
     "MigrateProject": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "description": "Migrate project.",
       "properties": {
         "properties": {
@@ -792,6 +791,7 @@
     "PrivateEndpointConnection": {
       "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "Relative URL to get this Sites.",
