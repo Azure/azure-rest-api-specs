@@ -604,6 +604,12 @@
             "schema": {
               "$ref": "#/definitions/OperationResultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -626,6 +632,7 @@
     },
     "CloudError": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody"
@@ -635,6 +642,7 @@
     },
     "CloudErrorBody": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -688,6 +696,10 @@
           "type": "string",
           "description": "Type of the object = [Microsoft.Migrate/migrateProjects].",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "v2/types.json#/definitions/systemData",
+          "readOnly" : true
         }
       }
     },
@@ -817,6 +829,10 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Gets the properties of the object.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "v2/types.json#/definitions/systemData",
+          "readOnly" : true
         }
       }
     },
@@ -1062,6 +1078,59 @@
         "groupId": {
           "description": "Group id.",
           "type": "string"
+        }
+      }
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
         }
       }
     }
