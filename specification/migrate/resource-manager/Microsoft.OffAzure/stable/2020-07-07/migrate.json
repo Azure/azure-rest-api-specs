@@ -2023,7 +2023,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters/{vCenterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters/{vcenterName}": {
       "get": {
         "tags": [
           "VCenter"
@@ -2053,7 +2053,7 @@
             "type": "string"
           },
           {
-            "name": "vCenterName",
+            "name": "vcenterName",
             "in": "path",
             "description": "VCenter ARM name.",
             "required": true,
@@ -2183,7 +2183,7 @@
             "type": "string"
           },
           {
-            "name": "vCenterName",
+            "name": "vcenterName",
             "in": "path",
             "description": "VCenter ARM name.",
             "required": true,
@@ -2958,6 +2958,41 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/providers/Microsoft.OffAzure/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections": {
