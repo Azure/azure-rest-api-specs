@@ -331,6 +331,9 @@
           },
           "ApiManagementUpdateServicePublisherDetails": {
             "$ref": "./examples/ApiManagementUpdateServicePublisherDetails.json"
+          },
+          "ApiManagementUpdateServiceToNewVnetAndAvailabilityZones": {
+            "$ref": "./examples/ApiManagementUpdateServiceToNewVnetAndAZs.json"
           }
         },
         "parameters": [
@@ -384,6 +387,9 @@
         "x-ms-examples": {
           "ApiManagementServiceGetService": {
             "$ref": "./examples/ApiManagementServiceGetService.json"
+          },
+          "ApiManagementServiceGetServiceHavingMsi": {
+            "$ref": "./examples/ApiManagementServiceGetServiceHavingMsi.json"
           },
           "ApiManagementServiceGetMultiRegionInternalVnet": {
             "$ref": "./examples/ApiManagementServiceGetMultiRegionInternalVnet.json"
@@ -1077,6 +1083,39 @@
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
           "default": false
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Compute Platform Version running the service.",
+          "readOnly": true,
+          "enum": [
+            "undetermined",
+            "stv1",
+            "stv2",
+            "mtv1"
+          ],
+          "x-ms-enum": {
+            "name": "PlatformVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "undetermined",
+                "description": "Platform version cannot be determined, as compute platform is not deployed."
+              },
+              {
+                "value": "stv1",
+                "description": "Platform running the service on Single Tenant V1 platform."
+              },
+              {
+                "value": "stv2",
+                "description": "Platform running the service on Single Tenant V2 platform."
+              },
+              {
+                "value": "mtv1",
+                "description": "Platform running the service on Multi Tenant V1 platform."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1350,6 +1389,39 @@
           "type": "boolean",
           "description": "Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored.",
           "default": false
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Compute Platform Version running the service in this location.",
+          "readOnly": true,
+          "enum": [
+            "undetermined",
+            "stv1",
+            "stv2",
+            "mtv1"
+          ],
+          "x-ms-enum": {
+            "name": "PlatformVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "undetermined",
+                "description": "Platform version cannot be determined, as compute platform is not deployed."
+              },
+              {
+                "value": "stv1",
+                "description": "Platform running the service on Single Tenant V1 platform."
+              },
+              {
+                "value": "stv2",
+                "description": "Platform running the service on Single Tenant V2 platform."
+              },
+              {
+                "value": "mtv1",
+                "description": "Platform running the service on Multi Tenant V1 platform."
+              }
+            ]
+          }
         }
       },
       "description": "Base Properties of an API Management service resource description."
@@ -1523,6 +1595,13 @@
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
       "allOf": [
