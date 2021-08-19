@@ -362,7 +362,7 @@
           "DiskPoolZones"
         ],
         "operationId": "DiskPoolZones_List",
-        "description": "Lists available Disk Pool Skus in an Azure location.",
+        "description": "This API is deprecated. Use ListSkus",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -394,6 +394,48 @@
         "x-ms-examples": {
           "List Disk Pool Skus": {
             "$ref": "./examples/DiskPoolZones_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/locations/{location}/diskPoolSkus": {
+      "get": {
+        "tags": [
+          "DiskPoolSkus"
+        ],
+        "operationId": "DiskPoolSkus_List",
+        "description": "Lists available Disk Pool Skus in an Azure location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Location"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskPoolSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pool Skus": {
+            "$ref": "./examples/DiskPoolSkus_List.json"
           }
         }
       }
@@ -1068,6 +1110,116 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "DiskPoolSkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskPoolSkuInfo"
+          },
+          "description": "The list of Disk Pool Skus."
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string"
+        }
+      },
+      "description": "List Disk Pool skus operation response."
+    },
+    "DiskPoolSkuInfo": {
+      "type": "object",
+      "description": "Disk Pool Sku Details",
+      "properties": {
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for Disk Pool resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of additional capabilities for Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          }
+        },
+        "locationInfo": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "description": "A list of locations and availability zones in those locations where the SKU is available."
+
+        },
+        "sku": {
+          "type": "object",
+          "description": "Determines Disk Pool SKU",
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is supported."
+        },
+        "zoneDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "description": "Details of capabilities available to a SKU in specific zones."
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
+    },
+    "ResourceSkuCapabilities": {
+      "type": "object",
+      "description": "Capability a Disk Pool SKU has.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "value": {
+          "type": "string",
+          "description":""
       }
     },
     "DiskPoolZoneListResult": {
