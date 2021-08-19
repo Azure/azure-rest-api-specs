@@ -247,11 +247,13 @@
             "type": "string"
           }
         },
-        "requestBody": true,
+        "requestBody": {},
         "statusCode": {
-          "type": "number"
+          "type": "integer",
+          "description": "Expected response code",
+          "default": 200
         },
-        "responseExpected": true
+        "responseExpected": {}
       },
       "required": [
         "method",
@@ -294,7 +296,7 @@
         "add": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": true
+        "value": {}
       },
       "additionalProperties": false
     },
@@ -320,7 +322,7 @@
         "replace": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": true
+        "value": {}
       },
       "additionalProperties": false
     },
@@ -328,13 +330,13 @@
       "type": "object",
       "required": [
         "copy",
-        "path"
+        "from"
       ],
       "properties": {
         "copy": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "path": {
+        "from": {
           "$ref": "#/definitions/JsonPointer"
         }
       },
@@ -344,13 +346,13 @@
       "type": "object",
       "required": [
         "move",
-        "path"
+        "from"
       ],
       "properties": {
         "move": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "path": {
+        "from": {
           "$ref": "#/definitions/JsonPointer"
         }
       },
@@ -366,7 +368,7 @@
         "test": {
           "$ref": "#/definitions/JsonPointer"
         },
-        "value": true
+        "value": {}
       },
       "additionalProperties": false
     },
