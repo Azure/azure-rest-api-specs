@@ -1089,6 +1089,236 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "description": "Updates a Private Endpoint connection of the environment in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The definition of the private endpoint connection to update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing private endpoint connection definition was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given private endpoint connection name or the private endpoint connection definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, environment or private endpoint connection could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionGet": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        },
+        "description": "Gets the details of the private endpoint connection of the environment in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The definition of the private endpoint connection was successfully retrieved and is in the response.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, environment or private endpoint connection could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "description": "Disconnects the private endpoint connection and deletes it from the environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection was successfully disconnected and removed from the environment. The response will contain the updated definition of the private endpoint connection."
+          },
+          "204": {
+            "description": "The private endpoint connection was successfully disconnected and removed from the environment. The response will contain the updated definition of the private endpoint connection."
+          },
+          "404": {
+            "description": "The subscription, resource group, environment or private endpoint connection could not be found."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByEnvironment",
+        "x-ms-examples": {
+          "ListPrivateEndpointConnectionsByService": {
+            "$ref": "./examples/PrivateEndpointConnectionsListByEnvironment.json"
+          }
+        },
+        "description": "Gets a list of all private endpoint connections in the given environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all private endpoint connections for the given environment.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "PrivateLinkResources_ListSupported",
+        "x-ms-examples": {
+          "ListSupportedPrivateLinkResources": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
+        },
+        "description": "Gets a list of all supported private link resource types for the given environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all supported private link resource types for the given environment.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1732,6 +1962,27 @@
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/WarmStoreConfigurationProperties",
           "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "enabled",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections to the environment."
         }
       },
       "required": [
@@ -2679,6 +2930,132 @@
         }
       },
       "x-ms-external": true
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Describes the properties of an existing Private Endpoint connection to the environment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes an existing Private Endpoint connection to the environment."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of Private Endpoint connections."
+        }
+      },
+      "description": "Response containing a list of Private Endpoint connections.",
+      "x-ms-external": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
+            }
+          },
+          "description": "The private endpoint resource from Microsoft.Network provider."
+        },
+        "privateLinkServiceConnectionState": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the the private link service connection. Can be Pending, Approved, Rejected, or Disconnected.",
+              "enum": [
+                "Pending",
+                "Approved",
+                "Rejected",
+                "Disconnected"
+              ],
+              "x-ms-enum": {
+                "name": "PrivateLinkServiceConnectionStatus",
+                "modelAsString": false
+              }
+            },
+            "description": {
+              "type": "string",
+              "description": "The description for the private link service connection state."
+            },
+            "actionsRequired": {
+              "type": "string",
+              "description": "A description of any extra actions that may be required.",
+              "default": "None"
+            }
+          },
+          "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+        }
+      },
+      "description": "Describes the properties of an existing Private Endpoint connection to the environment."
+    },
+    "PrivateLinkResourcesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "description": "The list of supported Private Link Resources."
+        }
+      },
+      "description": "Response containing a list of supported Private Link Resources.",
+      "x-ms-external": true
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true,
+          "description": "Describes the properties of a supported private link resource for the Azure Time Series Insights Environment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a supported private link resource for the Azure Time Series Insights Environment."
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The group ID of the private link resource."
+        },
+        "requiredMembers": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of required members of the private link resource."
+        },
+        "requiredZoneNames": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of required DNS zone names of the private link resource."
+        }
+      },
+      "description": "Describes the properties of a supported private link resource for the Azure Time Series Insights."
     }
   },
   "parameters": {
@@ -2742,6 +3119,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Time Series Insights access policy associated with the specified environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection to the environment with the specified resource group.",
       "x-ms-parameter-location": "method"
     }
   }
