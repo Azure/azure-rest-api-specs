@@ -2971,7 +2971,7 @@
           "type": "array"
         },
         "recoveryPointTime": {
-          "format": "date-time",
+          "description": "Time is in ISO 8601 format.",
           "type": "string"
         },
         "policyName": {
@@ -3115,8 +3115,7 @@
           "type": "string"
         },
         "endTime": {
-          "description": "EndTime of the job(in UTC)",
-          "format": "date-time",
+          "description": "EndTime of the job(in ISO 8601 format)",
           "readOnly": true,
           "type": "string"
         },
@@ -3178,8 +3177,7 @@
           "type": "string"
         },
         "startTime": {
-          "description": "StartTime of the job(in UTC)",
-          "format": "date-time",
+          "description": "StartTime of the job(in ISO 8601 format)",
           "type": "string"
         },
         "status": {
@@ -4868,8 +4866,7 @@
       "description": "Operation Resource",
       "properties": {
         "endTime": {
-          "description": "End time of the operation",
-          "format": "date-time",
+          "description": "End time of the operation. ISO 8601 format.",
           "type": "string"
         },
         "error": {
@@ -4889,8 +4886,7 @@
           "description": "End time of the operation"
         },
         "startTime": {
-          "description": "Start time of the operation",
-          "format": "date-time",
+          "description": "Start time of the operation. ISO 8601 format.",
           "type": "string"
         },
         "status": {
@@ -5007,11 +5003,11 @@
       "description": "RecoveryPoint datastore details",
       "properties": {
         "creationTime": {
-          "format": "date-time",
+          "description": "Time is in ISO 8601 format.",
           "type": "string"
         },
         "expiryTime": {
-          "format": "date-time",
+          "description": "Time is in ISO 8601 format.",
           "type": "string"
         },
         "id": {
@@ -5030,7 +5026,7 @@
           "type": "boolean"
         },
         "rehydrationExpiryTime": {
-          "format": "date-time",
+          "description": "Time is in ISO 8601 format.",
           "type": "string",
           "readOnly": true
         },
@@ -5092,7 +5088,7 @@
           "type": "string"
         },
         "recoveryPointTime": {
-          "format": "date-time",
+          "description": "Time is in ISO 8601 format.",
           "type": "string"
         }
       },
@@ -5305,9 +5301,8 @@
           "type": "array"
         },
         "scheduleTimes": {
-          "description": "List of schedule times for backup",
+          "description": "List of schedule times for backup. ISO 8601 format",
           "items": {
-            "format": "date-time",
             "type": "string"
           },
           "type": "array"
