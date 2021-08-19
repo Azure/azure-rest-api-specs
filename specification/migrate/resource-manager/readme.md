@@ -41,12 +41,17 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2020-07
+### Tag: package-2020-07 and java
 
 These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-07'
-input-file: Microsoft.OffAzure/stable/2020-07-07/migrate.json
+``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2020_07_07
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_07_07
+regenerate-manager: true
+generate-interface: true
 ```
 
 ## Getting Started
