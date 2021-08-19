@@ -1,0 +1,1113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Security/assessmentMetadata": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessment metadata": {
+            "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on all assessment types",
+        "operationId": "AssessmentsMetadata_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security assessment metadata": {
+            "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on an assessment type",
+        "operationId": "AssessmentsMetadata_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on all assessment types in a specific subscription",
+        "operationId": "AssessmentsMetadata_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on an assessment type in a specific subscription",
+        "operationId": "AssessmentsMetadata_GetInSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/CreateAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Create metadata information on an assessment type in a specific subscription",
+        "operationId": "AssessmentsMetadata_CreateInSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/SecurityAssessmentMetadataResponse"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/DeleteAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription",
+        "operationId": "AssessmentsMetadata_DeleteInSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityAssessmentMetadataResponseList": {
+      "type": "object",
+      "description": "List of security assessment metadata",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityAssessmentMetadata": {
+      "type": "object",
+      "description": "Security assessment metadata",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "type": "object",
+      "description": "Security assessment metadata response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataPropertiesResponse"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment metadata.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User friendly display name of the assessment"
+        },
+        "policyDefinitionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource ID of the policy definition that turns this assessment calculation on"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human readable description of the assessment"
+        },
+        "remediationDescription": {
+          "type": "string",
+          "description": "Human readable description of what you should do to mitigate this security issue"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The categories of resource that is at risk when the assessment is unhealthy",
+            "enum": [
+              "Compute",
+              "Networking",
+              "Data",
+              "IdentityAndAccess",
+              "IoT"
+            ],
+            "x-ms-enum": {
+              "name": "categories",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Compute"
+                },
+                {
+                  "value": "Networking"
+                },
+                {
+                  "value": "Data"
+                },
+                {
+                  "value": "IdentityAndAccess"
+                },
+                {
+                  "value": "IoT"
+                }
+              ]
+            }
+          }
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity level of the assessment",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "userImpact": {
+          "type": "string",
+          "description": "The user impact of the assessment",
+          "enum": [
+            "Low",
+            "Moderate",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "userImpact",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Moderate"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "implementationEffort": {
+          "type": "string",
+          "description": "The implementation effort required to remediate this assessment",
+          "enum": [
+            "Low",
+            "Moderate",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "implementationEffort",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Moderate"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Threats impact of the assessment",
+            "enum": [
+              "accountBreach",
+              "dataExfiltration",
+              "dataSpillage",
+              "maliciousInsider",
+              "elevationOfPrivilege",
+              "threatResistance",
+              "missingCoverage",
+              "denialOfService"
+            ],
+            "x-ms-enum": {
+              "name": "threats",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "accountBreach"
+                },
+                {
+                  "value": "dataExfiltration"
+                },
+                {
+                  "value": "dataSpillage"
+                },
+                {
+                  "value": "maliciousInsider"
+                },
+                {
+                  "value": "elevationOfPrivilege"
+                },
+                {
+                  "value": "threatResistance"
+                },
+                {
+                  "value": "missingCoverage"
+                },
+                {
+                  "value": "denialOfService"
+                }
+              ]
+            }
+          }
+        },
+        "preview": {
+          "type": "boolean",
+          "description": "True if this assessment is in preview release status"
+        },
+        "assessmentType": {
+          "type": "string",
+          "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
+          "enum": [
+            "BuiltIn",
+            "CustomPolicy",
+            "CustomerManaged",
+            "VerifiedPartner"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BuiltIn",
+                "description": "Azure Security Center managed assessments"
+              },
+              {
+                "value": "CustomPolicy",
+                "description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
+              },
+              {
+                "value": "CustomerManaged",
+                "description": "User assessments pushed directly by the user or other third party to Azure Security Center"
+              },
+              {
+                "value": "VerifiedPartner",
+                "description": "An assessment that was created by a verified 3rd party if the user connected it to ASC"
+              }
+            ]
+          }
+        },
+        "partnerData": {
+          "$ref": "#/definitions/SecurityAssessmentMetadataPartnerData"
+        }
+      },
+      "required": [
+        "displayName",
+        "severity",
+        "assessmentType"
+      ]
+    },
+    "SecurityAssessmentMetadataPartnerData": {
+      "type": "object",
+      "description": "Describes the partner that created the assessment",
+      "properties": {
+        "partnerName": {
+          "type": "string",
+          "description": "Name of the company of the partner"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product of the partner that created the assessment"
+        },
+        "secret": {
+          "type": "string",
+          "description": "Secret to authenticate the partner and verify it created the assessment - write only",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "partnerName",
+        "secret"
+      ]
+    },
+    "SecurityAssessmentMetadataPropertiesResponse": {
+      "type": "object",
+      "description": "Describes properties of an assessment metadata response.",
+      "properties": {
+        "publishDates": {
+          "type": "object",
+          "properties": {
+            "GA": {
+              "type": "string",
+              "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+            },
+            "public": {
+              "type": "string",
+              "pattern": "^([0-9]{2}/){2}[0-9]{4}$"
+            }
+          },
+          "required": [
+            "public"
+          ]
+        },
+        "plannedDeprecationDate": {
+          "type": "string",
+          "pattern": "^[0-9]{2}/[0-9]{4}$"
+        },
+        "tactics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Tactic of the assessment",
+            "enum": [
+              "Reconnaissance",
+              "Resource Development",
+              "Initial Access",
+              "Execution",
+              "Persistence",
+              "Privilege Escalation",
+              "Defense Evasion",
+              "Credential Access",
+              "Discovery",
+              "Lateral Movement",
+              "Collection",
+              "Command and Control",
+              "Exfiltration",
+              "Impact"
+            ],
+            "x-ms-enum": {
+              "name": "tactics",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Reconnaissance"
+                },
+                {
+                  "value": "Resource Development"
+                },
+                {
+                  "value": "Initial Access"
+                },
+                {
+                  "value": "Execution"
+                },
+                {
+                  "value": "Persistence"
+                },
+                {
+                  "value": "Privilege Escalation"
+                },
+                {
+                  "value": "Defense Evasion"
+                },
+                {
+                  "value": "Credential Access"
+                },
+                {
+                  "value": "Discovery"
+                },
+                {
+                  "value": "Lateral Movement"
+                },
+                {
+                  "value": "Collection"
+                },
+                {
+                  "value": "Command and Control"
+                },
+                {
+                  "value": "Exfiltration"
+                },
+                {
+                  "value": "Impact"
+                }
+              ]
+            }
+          }
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Techniques of the assessment",
+            "enum": [
+              "Abuse Elevation Control Mechanism",
+              "Access Token Manipulation",
+              "Account Discovery",
+              "Account Manipulation",
+              "Active Scanning",
+              "Application Layer Protocol",
+              "Audio Capture",
+              "Boot or Logon Autostart Execution",
+              "Boot or Logon Initialization Scripts",
+              "Brute Force",
+              "Cloud Infrastructure Discovery",
+              "Cloud Service Dashboard",
+              "Cloud Service Discovery",
+              "Command and Scripting Interpreter",
+              "Compromise Client Software Binary",
+              "Compromise Infrastructure",
+              "Container and Resource Discovery",
+              "Create Account",
+              "Create or Modify System Process",
+              "Credentials from Password Stores",
+              "Data Destruction",
+              "Data Encrypted for Impact",
+              "Data from Cloud Storage Object",
+              "Data from Configuration Repository",
+              "Data from Information Repositories",
+              "Data from Local System",
+              "Data Manipulation",
+              "Data Staged",
+              "Defacement",
+              "Deobfuscate/Decode Files or Information",
+              "Disk Wipe",
+              "Domain Trust Discovery",
+              "Drive-by Compromise",
+              "Dynamic Resolution",
+              "Endpoint Denial of Service",
+              "Event Triggered Execution",
+              "Exfiltration Over Alternative Protocol",
+              "Exploit Public-Facing Application",
+              "Exploitation for Client Execution",
+              "Exploitation for Credential Access",
+              "Exploitation for Defense Evasion",
+              "Exploitation for Privilege Escalation",
+              "Exploitation of Remote Services",
+              "External Remote Services",
+              "Fallback Channels",
+              "File and Directory Discovery",
+              "Gather Victim Network Information",
+              "Hide Artifacts",
+              "Hijack Execution Flow",
+              "Impair Defenses",
+              "Implant Container Image",
+              "Indicator Removal on Host",
+              "Indirect Command Execution",
+              "Ingress Tool Transfer",
+              "Input Capture",
+              "Inter-Process Communication",
+              "Lateral Tool Transfer",
+              "Man-in-the-Middle",
+              "Masquerading",
+              "Modify Authentication Process",
+              "Modify Registry",
+              "Network Denial of Service",
+              "Network Service Scanning",
+              "Network Sniffing",
+              "Non-Application Layer Protocol",
+              "Non-Standard Port",
+              "Obfuscated Files or Information",
+              "Obtain Capabilities",
+              "Obuscated Files or Information",
+              "Office Application Startup",
+              "OS Credential Dumping",
+              "Permission Groups Discovery",
+              "Phishing",
+              "Pre-OS Boot",
+              "Process Discovery",
+              "Process Injection",
+              "Protocol Tunneling",
+              "Proxy",
+              "Query Registry",
+              "Remote Access Software",
+              "Remote Service Session Hijacking",
+              "Remote Services",
+              "Remote System Discovery",
+              "Resource Hijacking",
+              "Scheduled Task/Job",
+              "Screen Capture",
+              "Search Victim-Owned Websites",
+              "Server Software Component",
+              "Service Stop",
+              "Signed Binary Proxy Execution",
+              "Software Deployment Tools",
+              "SQL Stored Procedures",
+              "Steal or Forge Kerberos Tickets",
+              "Subvert Trust Controls",
+              "Supply Chain Compromise",
+              "System Information Discovery",
+              "Taint Shared Content",
+              "Traffic Signaling",
+              "Transfer Data to Cloud Account",
+              "Trusted Relationship",
+              "Unsecured Credentials",
+              "User Execution",
+              "Valid Accounts",
+              "Windows Management Instrumentation",
+              "File and Directory Permissions Modification"
+            ],
+            "x-ms-enum": {
+              "name": "techniques",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Abuse Elevation Control Mechanism"
+                },
+                {
+                  "value": "Access Token Manipulation"
+                },
+                {
+                  "value": "Account Discovery"
+                },
+                {
+                  "value": "Account Manipulation"
+                },
+                {
+                  "value": "Active Scanning"
+                },
+                {
+                  "value": "Application Layer Protocol"
+                },
+                {
+                  "value": "Audio Capture"
+                },
+                {
+                  "value": "Boot or Logon Autostart Execution"
+                },
+                {
+                  "value": "Boot or Logon Initialization Scripts"
+                },
+                {
+                  "value": "Brute Force"
+                },
+                {
+                  "value": "Cloud Infrastructure Discovery"
+                },
+                {
+                  "value": "Cloud Service Dashboard"
+                },
+                {
+                  "value": "Cloud Service Discovery"
+                },
+                {
+                  "value": "Command and Scripting Interpreter"
+                },
+                {
+                  "value": "Compromise Client Software Binary"
+                },
+                {
+                  "value": "Compromise Infrastructure"
+                },
+                {
+                  "value": "Container and Resource Discovery"
+                },
+                {
+                  "value": "Create Account"
+                },
+                {
+                  "value": "Create or Modify System Process"
+                },
+                {
+                  "value": "Credentials from Password Stores"
+                },
+                {
+                  "value": "Data Destruction"
+                },
+                {
+                  "value": "Data Encrypted for Impact"
+                },
+                {
+                  "value": "Data from Cloud Storage Object"
+                },
+                {
+                  "value": "Data from Configuration Repository"
+                },
+                {
+                  "value": "Data from Information Repositories"
+                },
+                {
+                  "value": "Data from Local System"
+                },
+                {
+                  "value": "Data Manipulation"
+                },
+                {
+                  "value": "Data Staged"
+                },
+                {
+                  "value": "Defacement"
+                },
+                {
+                  "value": "Deobfuscate/Decode Files or Information"
+                },
+                {
+                  "value": "Disk Wipe"
+                },
+                {
+                  "value": "Domain Trust Discovery"
+                },
+                {
+                  "value": "Drive-by Compromise"
+                },
+                {
+                  "value": "Dynamic Resolution"
+                },
+                {
+                  "value": "Endpoint Denial of Service"
+                },
+                {
+                  "value": "Event Triggered Execution"
+                },
+                {
+                  "value": "Exfiltration Over Alternative Protocol"
+                },
+                {
+                  "value": "Exploit Public-Facing Application"
+                },
+                {
+                  "value": "Exploitation for Client Execution"
+                },
+                {
+                  "value": "Exploitation for Credential Access"
+                },
+                {
+                  "value": "Exploitation for Defense Evasion"
+                },
+                {
+                  "value": "Exploitation for Privilege Escalation"
+                },
+                {
+                  "value": "Exploitation of Remote Services"
+                },
+                {
+                  "value": "External Remote Services"
+                },
+                {
+                  "value": "Fallback Channels"
+                },
+                {
+                  "value": "File and Directory Discovery"
+                },
+                {
+                  "value": "Gather Victim Network Information"
+                },
+                {
+                  "value": "Hide Artifacts"
+                },
+                {
+                  "value": "Hijack Execution Flow"
+                },
+                {
+                  "value": "Impair Defenses"
+                },
+                {
+                  "value": "Implant Container Image"
+                },
+                {
+                  "value": "Indicator Removal on Host"
+                },
+                {
+                  "value": "Indirect Command Execution"
+                },
+                {
+                  "value": "Ingress Tool Transfer"
+                },
+                {
+                  "value": "Input Capture"
+                },
+                {
+                  "value": "Inter-Process Communication"
+                },
+                {
+                  "value": "Lateral Tool Transfer"
+                },
+                {
+                  "value": "Man-in-the-Middle"
+                },
+                {
+                  "value": "Masquerading"
+                },
+                {
+                  "value": "Modify Authentication Process"
+                },
+                {
+                  "value": "Modify Registry"
+                },
+                {
+                  "value": "Network Denial of Service"
+                },
+                {
+                  "value": "Network Service Scanning"
+                },
+                {
+                  "value": "Network Sniffing"
+                },
+                {
+                  "value": "Non-Application Layer Protocol"
+                },
+                {
+                  "value": "Non-Standard Port"
+                },
+                {
+                  "value": "Obfuscated Files or Information"
+                },
+                {
+                  "value": "Obtain Capabilities"
+                },
+                {
+                  "value": "Obuscated Files or Information"
+                },
+                {
+                  "value": "Office Application Startup"
+                },
+                {
+                  "value": "OS Credential Dumping"
+                },
+                {
+                  "value": "Permission Groups Discovery"
+                },
+                {
+                  "value": "Phishing"
+                },
+                {
+                  "value": "Pre-OS Boot"
+                },
+                {
+                  "value": "Process Discovery"
+                },
+                {
+                  "value": "Process Injection"
+                },
+                {
+                  "value": "Protocol Tunneling"
+                },
+                {
+                  "value": "Proxy"
+                },
+                {
+                  "value": "Query Registry"
+                },
+                {
+                  "value": "Remote Access Software"
+                },
+                {
+                  "value": "Remote Service Session Hijacking"
+                },
+                {
+                  "value": "Remote Services"
+                },
+                {
+                  "value": "Remote System Discovery"
+                },
+                {
+                  "value": "Resource Hijacking"
+                },
+                {
+                  "value": "Scheduled Task/Job"
+                },
+                {
+                  "value": "Screen Capture"
+                },
+                {
+                  "value": "Search Victim-Owned Websites"
+                },
+                {
+                  "value": "Server Software Component"
+                },
+                {
+                  "value": "Service Stop"
+                },
+                {
+                  "value": "Signed Binary Proxy Execution"
+                },
+                {
+                  "value": "Software Deployment Tools"
+                },
+                {
+                  "value": "SQL Stored Procedures"
+                },
+                {
+                  "value": "Steal or Forge Kerberos Tickets"
+                },
+                {
+                  "value": "Subvert Trust Controls"
+                },
+                {
+                  "value": "Supply Chain Compromise"
+                },
+                {
+                  "value": "System Information Discovery"
+                },
+                {
+                  "value": "Taint Shared Content"
+                },
+                {
+                  "value": "Traffic Signaling"
+                },
+                {
+                  "value": "Transfer Data to Cloud Account"
+                },
+                {
+                  "value": "Trusted Relationship"
+                },
+                {
+                  "value": "Unsecured Credentials"
+                },
+                {
+                  "value": "User Execution"
+                },
+                {
+                  "value": "Valid Accounts"
+                },
+                {
+                  "value": "Windows Management Instrumentation"
+                },
+                {
+                  "value": "File and Directory Permissions Modification"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "AssessmentsMetadataName": {
+      "name": "assessmentMetadataName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAssessmentMetadataResponse": {
+      "name": "assessmentMetadata",
+      "in": "body",
+      "required": true,
+      "description": "AssessmentMetadata object",
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
