@@ -155,6 +155,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/DistributedAvailabilityGroups.json
 
 
 # Needed when there is more than one input file
