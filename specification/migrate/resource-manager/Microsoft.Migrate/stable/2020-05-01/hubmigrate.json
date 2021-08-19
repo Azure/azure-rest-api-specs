@@ -488,7 +488,7 @@
         "tags": [
           "PrivateLinkResourceController"
         ],
-        "summary": "Get the specified private link resource.",
+        "summary": "Get the private link resource.",
         "description": "Get the private link resource with the specified name.",
         "operationId": "PrivateLinkResourceController_GetPrivateLinkResource",
         "parameters": [
@@ -587,6 +587,29 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
       }
     }
   },
@@ -937,6 +960,19 @@
       "properties": {
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "OperationResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
         }
       }
     },
