@@ -1529,7 +1529,7 @@
         "confirmationMessage",
         "contentTypes",
         "helpMessage",
-        "messageType",
+        "messageTypes",
         "optInMessage",
         "optInReply",
         "optOutMessage",
@@ -1538,16 +1538,20 @@
       ],
       "type": "object",
       "properties": {
-        "messageType": {
-          "description": "Applicable message types used in the program e.g. SMS or MMS.",
-          "enum": [
-            "sms",
-            "mms"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MessageType",
-            "modelAsString": true
+        "messageTypes": {
+          "description": "Applicable message types used in the program e.g. SMS, MMS.",
+          "type": "array",
+          "items": {
+            "description": "Applicable message types to be used in a program.",
+            "enum": [
+              "sms",
+              "mms"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MessageType",
+              "modelAsString": true
+            }
           }
         },
         "recurrence": {
@@ -1837,16 +1841,20 @@
     "MessageDetails": {
       "type": "object",
       "properties": {
-        "messageType": {
-          "description": "Applicable message types used in the program e.g. SMS or MMS.",
-          "enum": [
-            "sms",
-            "mms"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MessageType",
-            "modelAsString": true
+        "messageTypes": {
+          "description": "Applicable message types used in the program e.g. SMS, MMS.",
+          "type": "array",
+          "items": {
+            "description": "Applicable message types to be used in a program.",
+            "enum": [
+              "sms",
+              "mms"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MessageType",
+              "modelAsString": true
+            }
           }
         },
         "recurrence": {
