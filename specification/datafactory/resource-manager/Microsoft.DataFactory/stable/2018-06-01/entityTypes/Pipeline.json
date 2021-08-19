@@ -258,6 +258,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -934,6 +938,10 @@
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
         },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
@@ -1321,11 +1329,8 @@
           "description": "Avro store settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1343,11 +1348,8 @@
           "description": "Excel store settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1365,11 +1367,8 @@
           "description": "Parquet store settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1391,11 +1390,8 @@
           "description": "DelimitedText format settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1417,11 +1413,8 @@
           "description": "Json format settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1443,11 +1436,8 @@
           "description": "Xml format settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1465,11 +1455,8 @@
           "description": "ORC store settings."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1660,6 +1647,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -1702,11 +1693,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1774,11 +1762,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1808,11 +1793,8 @@
           "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1830,11 +1812,8 @@
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1852,11 +1831,8 @@
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1874,11 +1850,8 @@
           "description": "FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1896,11 +1869,8 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -1933,11 +1903,8 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2049,11 +2016,8 @@
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2110,11 +2074,8 @@
           }
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2354,11 +2315,8 @@
           "description": "The time to await before sending next page request. "
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2577,11 +2535,8 @@
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2663,11 +2618,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       },
       "required": [
@@ -2700,11 +2652,8 @@
           "$ref": "#/definitions/OraclePartitionSettings"
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2785,11 +2734,8 @@
       ],
       "properties": {
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2842,11 +2788,8 @@
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2876,11 +2819,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2910,11 +2850,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2944,11 +2881,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
-          "type": "array",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
-          "items": {
-            "$ref": "#/definitions/AdditionalColumns"
-          }
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -3868,6 +3802,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -4031,6 +3969,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -4118,6 +4063,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into sql. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4156,6 +4114,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into sql server. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4194,6 +4165,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into Azure SQL. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4232,6 +4216,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "White behavior when copying data into azure SQL MI. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlUpsertSettings"
         }
       }
     },
@@ -4267,6 +4264,19 @@
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterUseTableLock": {
+          "type": "object",
+          "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Write behavior when copying data into azure SQL DW. Type: SqlDWWriteBehaviorEnum (or Expression with resultType SqlDWWriteBehaviorEnum)"
+        },
+        "upsertSettings": {
+          "description": "SQL DW upsert settings.",
+          "type": "object",
+          "$ref": "#/definitions/SqlDWUpsertSettings"
         }
       }
     },
@@ -4339,6 +4349,63 @@
           "type": "object",
           "description": "The default value of the column. Type: object (or Expression with resultType string)."
         }
+      }
+    },
+    "SqlUpsertSettings": {
+      "description": "Sql upsert option settings",
+      "type": "object",
+      "properties": {
+        "useTempDB": {
+          "type": "object",
+          "description": "Specifies whether to use temp db for upsert interim table. Type: boolean (or Expression with resultType boolean)."
+        },
+        "interimSchemaName": {
+          "type": "object",
+          "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
+        },
+        "keys": {
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+        }
+      }
+    },
+    "SqlDWUpsertSettings": {
+      "description": "Sql DW upsert option settings",
+      "type": "object",
+      "properties": {
+        "interimSchemaName": {
+          "type": "object",
+          "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
+        },
+        "keys": {
+          "type": "object",
+          "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+        }
+      }
+    },
+    "SqlWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert",
+        "StoredProcedure"
+      ],
+      "x-ms-enum": {
+        "name": "SqlWriteBehaviorEnum",
+        "modelAsString": true
+      }
+    },
+    "SqlDWWriteBehaviorEnum": {
+      "description": "Specify the write behavior when copying data into sql dw.",
+      "type": "string",
+      "enum": [
+        "Insert",
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "SqlDWWriteBehaviorEnum",
+        "modelAsString": true
       }
     },
     "SnowflakeSink": {
@@ -4600,6 +4667,13 @@
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
           "type": "object"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          }
         }
       }
     },
@@ -6013,11 +6087,12 @@
         "userTenant": {
           "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "WebActivityTypeProperties": {
       "description": "Web activity type properties.",
@@ -7023,6 +7098,30 @@
         "typeProperties"
       ]
     },
+    "ExecuteWranglingDataflowActivity": {
+      "description": "Execute power query activity.",
+      "type": "object",
+      "x-ms-discriminator-value": "ExecuteWranglingDataflow",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute power query activity properties.",
+          "$ref": "#/definitions/ExecutePowerQueryActivityTypeProperties"
+        },
+        "policy": {
+          "$ref": "#/definitions/ActivityPolicy",
+          "description": "Activity policy."
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "ExecuteDataFlowActivityTypeProperties": {
       "description": "Execute data flow activity properties.",
       "properties": {
@@ -7068,6 +7167,24 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ExecutePowerQueryActivityTypeProperties": {
+      "description": "Execute power query data flow activity properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
+        }
+      ],
+      "properties": {
+        "sinks": {
+          "type": "object",
+          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "additionalProperties": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          }
+        }
+      }
     },
     "SharePointOnlineListSource": {
       "description": "A copy activity source for sharePoint online list source.",
@@ -7167,6 +7284,20 @@
       "x-ms-enum": {
         "name": "NetezzaPartitionOption",
         "modelAsString": true
+      }
+    },
+    "MetadataItem": {
+      "description": "Specify the name and value of custom metadata item.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Metadata item key name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Metadata item value. Type: string (or Expression with resultType string)."
+        }
       }
     }
   }
