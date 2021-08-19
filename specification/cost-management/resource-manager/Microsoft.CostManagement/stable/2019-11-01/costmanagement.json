@@ -1217,6 +1217,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1271,6 +1274,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2497,7 +2503,8 @@
       "properties": {
         "nextLink": {
           "description": "The link (url) to the next page of results.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "columns": {
           "description": "Array of columns",
