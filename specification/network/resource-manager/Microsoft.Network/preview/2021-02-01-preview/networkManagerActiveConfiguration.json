@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -55,20 +55,20 @@
           "schema": {
             "$ref": "#/definitions/ActiveConfigurationParameter"
           },
-          "description": "Effective Virtual Networks Parameter."
+          "description": "Active Configuration Parameter."
         }
       ],
       "post": {
         "tags": [
-          "NetworkManagerActiveConfigurations"
+          "NetworkManagerActiveConnectivityConfigurations"
         ],
-        "operationId": "ActiveConfigurations_List",
-        "description": "Lists active configurations in a network manager.",
+        "operationId": "ActiveConnectivityConfigurations_List",
+        "description": "Lists active connectivity configurations in a network manager.",
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns the specified Managed Network active configuration resource.",
+            "description": "Post successful. The operation returns the specified Managed Network active connectivity configuration resource.",
             "schema": {
-              "$ref": "#/definitions/ActiveConfigurationListResult"
+              "$ref": "#/definitions/ActiveConnectivityConfigurationsListResult"
             }
           },
           "default": {
@@ -79,49 +79,116 @@
           }
         },
         "x-ms-examples": {
-          "List Active Configurations": {
-            "$ref": "./examples/NetworkManagerActiveConfigurationList.json"
+          "List Active Connectivity Configurations": {
+            "$ref": "./examples/NetworkManagerActiveConnectivityConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/ActiveConfigurationParameter"
+          },
+          "description": "Active Configuration Parameter."
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkManagerActiveConfigurations"
+        ],
+        "operationId": "ActiveSecurityAdminRules_List",
+        "description": "Lists active security admin rules in a network manager.",
+        "responses": {
+          "200": {
+            "description": "Post successful. The operation returns the specified Managed Network active security admin rules resource.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSecurityAdminRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Active Security Admin Rules": {
+            "$ref": "./examples/NetworkManagerActiveSecurityAdminRulesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityUserRules": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/ActiveConfigurationParameter"
+          },
+          "description": "Active Configuration Parameter."
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkManagerActiveSecurityUserRules"
+        ],
+        "operationId": "ActiveSecurityUserRules_List",
+        "description": "Lists Active Security User Rules in a network manager.",
+        "responses": {
+          "200": {
+            "description": "Post successful. The operation returns the specified Managed Network active security user rules resource.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSecurityUserRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Active Security User Rules": {
+            "$ref": "./examples/NetworkManagerActiveSecurityUserRulesList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ActiveConfiguration": {
-      "properties": {
-        "commitTime": {
-          "type": "string",
-          "description": "Deployment time string.",
-          "format": "date-time"
-        },
-        "region": {
-          "type": "string",
-          "description": "Deployment region."
-        },
-        "committedConfiguration": {
-          "type": "object",
-          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConfiguration",
-          "description": "Configuration such as connectivity configuration or security rule collection."
-        }
-      },
-      "description": "Active Configuration."
-    },
-    "ActiveConfigurationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActiveConfiguration"
-          },
-          "description": "Gets a page of active configurations."
-        },
-        "$skipToken": {
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "type": "string"
-        }
-      },
-      "description": "Result of the request to list active configurations. It contains a list of active configurations and a URL link to get the next set of results."
-    },
     "ActiveConfigurationParameter": {
       "properties": {
         "regions": {
@@ -138,6 +205,275 @@
         }
       },
       "description": "Effective Virtual Networks Parameter."
+    },
+    "ActiveConnectivityConfiguration": {
+      "type": "object",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "description": "Deployment time string.",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConnectivityConfiguration"
+        }
+      ],
+      "description": "Active connectivity configuration."
+    },
+    "ActiveConnectivityConfigurationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveConnectivityConfiguration"
+          },
+          "description": "Gets a page of active connectivity configurations."
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results."
+    },
+    "ActiveSecurityAdminRulesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+          },
+          "description": "Gets a page of active security admin rules."
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results."
+    },
+    "ActiveSecurityUserRulesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveBaseSecurityUserRule"
+          },
+          "description": "Gets a page of active security user rules."
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        }
+      },
+      "description": "Result of the request to list active security user rules. It contains a list of active security user rules and a skiptoken to get the next set of results."
+    },
+    "ActiveBaseSecurityAdminRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "commitTime": {
+          "type": "string",
+          "description": "Deployment time string.",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        },
+        "configurationDisplayName": {
+          "type": "string",
+          "description": "A display name of the security admin configuration."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security admin configuration."
+        },
+        "ruleCollectionDisplayName": {
+          "type": "string",
+          "description": "A display name of the rule collection."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for rule collection"
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup"
+          },
+          "description": "Effective configuration groups."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Whether the rule is custom or default.",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveAdminRuleKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "description": "Network base admin rule."
+    },
+    "ActiveSecurityAdminRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security admin rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "description": "Network admin rule.",
+      "x-ms-discriminator-value": "Custom"
+    },
+    "ActiveDefaultSecurityAdminRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the default security admin rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "description": "Network default admin rule.",
+      "x-ms-discriminator-value": "Default"
+    },
+    "ActiveBaseSecurityUserRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "commitTime": {
+          "type": "string",
+          "description": "Deployment time string.",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        },
+        "configurationDisplayName": {
+          "type": "string",
+          "description": "A display name of the security user configuration."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security user configuration."
+        },
+        "ruleCollectionDisplayName": {
+          "type": "string",
+          "description": "A display name of the rule collection."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for rule collection"
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup"
+          },
+          "description": "Effective configuration groups."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Whether the rule is custom or default.",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveUserRuleKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "description": "Network base rule."
+    },
+    "ActiveSecurityUserRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security user rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityUserRule"
+        }
+      ],
+      "description": "Network security user rule.",
+      "x-ms-discriminator-value": "Custom"
+    },
+    "ActiveDefaultSecurityUserRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security default user rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityUserRule"
+        }
+      ],
+      "description": "Network security default user rule.",
+      "x-ms-discriminator-value": "Default"
     }
   },
   "parameters": {
