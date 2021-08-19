@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -130,7 +130,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -191,7 +191,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -237,7 +237,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -285,7 +285,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -339,7 +339,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -397,7 +397,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -446,7 +446,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -491,7 +491,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -542,7 +542,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -858,6 +858,17 @@
         "modelAsString": true,
         "name": "AttackTactic"
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The error object of the CloudError response"
+        }
+      },
+      "type": "object",
+      "description": "An error response for a resource management request."
     },
     "MLBehaviorAnalyticsAlertRule": {
       "allOf": [
