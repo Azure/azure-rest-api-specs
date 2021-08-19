@@ -832,16 +832,16 @@
         }
       }
     },
-    "/weather/tropical/storms/positions/{format}": {
+    "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "description": "**Positions for an individual government-issued storm**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet positions of an individual government-issued storm.",
-        "operationId": "Weather_StormPositions",
+        "description": "**Locations for an individual government-issued storm**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet locations of an individual government-issued storm.",
+        "operationId": "Weather_StormLocations",
         "x-ms-examples": {
-          "StormPositions": {
-            "$ref": "./examples/GetStormPositions.json"
+          "StormLocations": {
+            "$ref": "./examples/GetStormLocations.json"
           },
-          "StormStormCurrentPosition": {
-            "$ref": "./examples/GetStormCurrentPosition.json"
+          "StormStormCurrentLocation": {
+            "$ref": "./examples/GetStormCurrentLocation.json"
           }
         },
         "parameters": [
@@ -871,7 +871,7 @@
           },
           {
             "name": "current",
-            "description": "When true, return the current storm position",
+            "description": "When true, return the current storm location",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -881,7 +881,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StormPositionsResponse"
+              "$ref": "#/definitions/StormLocationsResponse"
             }
           },
           "default": {
@@ -2944,7 +2944,7 @@
           "type": "string",
           "description": "Datetime the forecast was created, displayed in ISO8601 format."
         },
-        "position": {
+        "location": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Coordinates of the storm"
         },
@@ -3053,28 +3053,28 @@
         }
       }
     },
-    "StormPositionsResponse": {
+    "StormLocationsResponse": {
       "type": "object",
-      "description": "Positions for an individual government-issued storm",
+      "description": "Locations for an individual government-issued storm",
       "properties": {
         "results": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PositionResponse"
+            "$ref": "#/definitions/LocationResponse"
           },
-          "description": "Positions for an individual government-issued storm"
+          "description": "Locations for an individual government-issued storm"
         }
       }
     },
-    "PositionResponse": {
+    "LocationResponse": {
       "type": "object",
-      "description": "Position for an individual Government-issued storm",
+      "description": "Location for an individual Government-issued storm",
       "properties": {
         "validDateTime": {
           "type": "string",
           "description": "Datetime the forecast is valid, displayed in ISO8601 format."
         },
-        "position": {
+        "location": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair",
           "description": "Coordinates of the storm"
         },
