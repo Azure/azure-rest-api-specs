@@ -521,7 +521,8 @@
             "name": "tail",
             "in": "query",
             "description": "The number of lines to show from the tail of the container instance log. If not provided, all available logs are shown up to 4mb.",
-            "type": "integer"
+            "type": "integer",
+            "format": "int32",
           },
           {
             "name": "timestamps",
@@ -828,6 +829,7 @@
             "restartCount": {
               "readOnly": true,
               "type": "integer",
+              "format": "int32",
               "description": "The number of times that the container instance has been restarted."
             },
             "currentState": {
@@ -889,6 +891,7 @@
         },
         "exitCode": {
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "description": "The container instance exit codes correspond to those from the `docker run` command."
         },
@@ -912,6 +915,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "description": "The count of the event."
         },
@@ -1724,11 +1728,13 @@
         "currentValue": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "The current usage of the resource"
         },
         "limit": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "The maximum permitted usage of the resource."
         },
         "name": {
@@ -1791,10 +1797,12 @@
           "properties": {
             "rows": {
               "type": "integer",
+              "format": "int32",
               "description": "The row size of the terminal"
             },
             "cols": {
               "type": "integer",
+              "format": "int32",
               "description": "The column size of the terminal"
             }
           }
@@ -2089,6 +2097,7 @@
             "restartCount": {
               "readOnly": true,
               "type": "integer",
+              "format": "int32",
               "description": "The number of times that the init container has been restarted."
             },
             "currentState": {
