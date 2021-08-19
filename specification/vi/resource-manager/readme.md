@@ -25,6 +25,7 @@ directive:
     from:
       - Microsoft.VideoIndexer/preview/2021-07-01-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-08-01-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2021-08-16-preview/vi.json
     where:
       - $.definitions.AccessToken.properties.accessToken
     reason: Secrets are OK to return in a POST response.
@@ -41,15 +42,25 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-08-01-preview
+tag: package-2021-08-16-preview
 ```
 
+### Tag: package-2021-08-16-preview
+
+These settings apply only when `--tag=2021-08-16-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-16-preview'
+version: 2021-08-16-preview
+version-with-underscores: 2021_08_16_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2021-08-16-preview/vi.json
+```
 ### Tag: package-2021-08-01-preview
 
 These settings apply only when `--tag=2021-08-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-08-01-preview'
-version: 2021-07-01-preview
+version: 2021-08-01-preview
 version-with-underscores: 2021_08_01_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-08-01-preview/vi.json
