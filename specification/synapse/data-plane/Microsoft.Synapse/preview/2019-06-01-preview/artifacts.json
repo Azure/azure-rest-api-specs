@@ -2908,9 +2908,14 @@
     },
     "IntegrationRuntimeDebugResource": {
       "description": "Integration runtime debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntime",
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntime",
           "description": "Integration runtime properties."
         }
       },
