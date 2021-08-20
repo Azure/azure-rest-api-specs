@@ -5048,6 +5048,78 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations": {
+      "get": {
+        "operationId": "LocationList",
+        "x-ms-examples": {
+          "CosmosDBLocationList": {
+            "$ref": "./examples/CosmosDBLocationList.json"
+          }
+        },
+        "description": "List Cosmos DB locations and their properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}": {
+      "get": {
+        "operationId": "LocationGet",
+        "x-ms-examples": {
+          "CosmosDBLocationGet": {
+            "$ref": "./examples/CosmosDBLocationGet.json"
+          }
+        },
+        "description": "Get the properties of an existing Cosmos DB location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cosmos DB location properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8616,7 +8688,79 @@
           "format": "int32",
           "minimum": 0,
           "description": "An integer representing the time (in hours) that each backup is retained"
+        },
+        "backupStorageRedundancy": {
+          "description": "Enum to indicate type of backup residency",
+          "type": "string",
+          "$ref": "#/definitions/BackupStorageRedundancy"
         }
+      }
+    },
+    "LocationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationGetResult"
+          },
+          "description": "List of Cosmos DB locations and their properties."
+        }
+      },
+      "description": "The List operation response, that contains Cosmos DB locations and their properties."
+    },
+    "LocationGetResult": {
+      "description": "Cosmos DB location get result",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Cosmos DB location metadata",
+          "$ref": "#/definitions/LocationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "LocationProperties": {
+      "description": "Cosmos DB location metadata",
+      "type": "object",
+      "properties": {
+        "supportsAvailabilityZone": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Flag indicating whether the location supports availability zones or not."
+        },
+        "isResidencyRestricted": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Flag indicating whether the location is residency sensitive."
+        },
+        "backupStorageRedundancies": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupStorageRedundancy"
+          },
+          "description": "The properties of available backup storage redundancies."
+        }
+      }
+    },
+    "BackupStorageRedundancy": {
+      "description": "Enum to indicate type of backup storage redundancy.",
+      "type": "string",
+      "enum": [
+        "Geo",
+        "Local",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "BackupStorageRedundancy",
+        "modelAsString": true
       }
     }
   },
