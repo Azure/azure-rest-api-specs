@@ -9,38 +9,35 @@
       "properties": {
         "schemaType": "json",
         "document": {
-          "swagger": "2.0",
-          "info": {
-            "title": "Simple API overview",
-            "version": "v2"
-          },
-          "paths": {
-            "/": {
-              "get": {
-                "operationId": "listVersionsv2",
-                "summary": "List API versions",
-                "produces": [
-                  "application/json"
-                ],
-                "responses": {
-                  "200": {
-                    "description": "200 300 response",
-                    "examples": {
-                      "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
-                    }
-                  }
-                }
-              }
+          "$id": "https://example.com/person.schema.json",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Person",
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "The person's first name."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "The person's last name."
+            },
+            "age": {
+              "description": "Age in years which must be equal to or greater than zero.",
+              "type": "integer",
+              "minimum": 0
             }
-          },
-          "consumes": [
-            "application/json"
-          ]
+          }
         }
       }
     }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1?api-version=2021-04-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
     "201": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
@@ -49,33 +46,25 @@
         "properties": {
           "schemaType": "json",
           "document": {
-            "swagger": "2.0",
-            "info": {
-              "title": "Simple API overview",
-              "version": "v2"
-            },
-            "paths": {
-              "/": {
-                "get": {
-                  "operationId": "listVersionsv2",
-                  "summary": "List API versions",
-                  "produces": [
-                    "application/json"
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 300 response",
-                      "examples": {
-                        "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
-                      }
-                    }
-                  }
-                }
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Person",
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              },
+              "age": {
+                "description": "Age in years which must be equal to or greater than zero.",
+                "type": "integer",
+                "minimum": 0
               }
-            },
-            "consumes": [
-              "application/json"
-            ]
+            }
           }
         }
       }
@@ -88,33 +77,25 @@
         "properties": {
           "schemaType": "json",
           "document": {
-            "swagger": "2.0",
-            "info": {
-              "title": "Simple API overview",
-              "version": "v2"
-            },
-            "paths": {
-              "/": {
-                "get": {
-                  "operationId": "listVersionsv2",
-                  "summary": "List API versions",
-                  "produces": [
-                    "application/json"
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 300 response",
-                      "examples": {
-                        "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
-                      }
-                    }
-                  }
-                }
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Person",
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              },
+              "age": {
+                "description": "Age in years which must be equal to or greater than zero.",
+                "type": "integer",
+                "minimum": 0
               }
-            },
-            "consumes": [
-              "application/json"
-            ]
+            }
           }
         }
       }

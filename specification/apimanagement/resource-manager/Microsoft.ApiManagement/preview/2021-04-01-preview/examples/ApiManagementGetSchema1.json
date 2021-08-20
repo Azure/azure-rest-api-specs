@@ -14,7 +14,7 @@
         "name": "schema1",
         "properties": {
           "schemaType": "xml",
-          "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>"
+          "value": "<xsd:schema xmlns:xsd=\"http:\/\/www.w3.org\/2001\/XMLSchema\"\r\n           xmlns:tns=\"http:\/\/tempuri.org\/PurchaseOrderSchema.xsd\"\r\n           targetNamespace=\"http:\/\/tempuri.org\/PurchaseOrderSchema.xsd\"\r\n           elementFormDefault=\"qualified\">\r\n <xsd:element name=\"PurchaseOrder\" type=\"tns:PurchaseOrderType\"\/>\r\n <xsd:complexType name=\"PurchaseOrderType\">\r\n  <xsd:sequence>\r\n   <xsd:element name=\"ShipTo\" type=\"tns:USAddress\" maxOccurs=\"2\"\/>\r\n   <xsd:element name=\"BillTo\" type=\"tns:USAddress\"\/>\r\n  <\/xsd:sequence>\r\n  <xsd:attribute name=\"OrderDate\" type=\"xsd:date\"\/>\r\n <\/xsd:complexType>\r\n\r\n <xsd:complexType name=\"USAddress\">\r\n  <xsd:sequence>\r\n   <xsd:element name=\"name\"   type=\"xsd:string\"\/>\r\n   <xsd:element name=\"street\" type=\"xsd:string\"\/>\r\n   <xsd:element name=\"city\"   type=\"xsd:string\"\/>\r\n   <xsd:element name=\"state\"  type=\"xsd:string\"\/>\r\n   <xsd:element name=\"zip\"    type=\"xsd:integer\"\/>\r\n  <\/xsd:sequence>\r\n  <xsd:attribute name=\"country\" type=\"xsd:NMTOKEN\" fixed=\"US\"\/>\r\n <\/xsd:complexType>\r\n<\/xsd:schema>"
         }
       }
     }
