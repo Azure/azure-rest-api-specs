@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2021-06-01-preview",
+    "properties": {
+      "properties": {
+        "providerType": "Internal",
+        "providerVersion": "2.0",
+        "management": {
+          "incidentRoutingService": "Contoso Resource Provider",
+          "incidentRoutingTeam": "Contoso Triage",
+          "incidentContactEmail": "helpme@contoso.com",
+          "serviceTreeInfos": [
+            {
+              "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+              "readiness": "InDevelopment"
+            }
+          ]
+        },
+        "capabilities": [
+          {
+            "quotaId": "CSP_2015-05-01",
+            "effect": "Allow"
+          },
+          {
+            "quotaId": "CSP_MG_2017-12-01",
+            "effect": "Allow"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "properties": {
+          "namespace": "Microsoft.Contoso",
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            }
+          ],
+          "management": {
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "incidentContactEmail": "helpme@contoso.com",
+            "serviceTreeInfos": [
+              {
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
+                "readiness": "InDevelopment"
+              }
+            ],
+            "resourceAccessPolicy": "NotSpecified"
+          },
+          "capabilities": [
+            {
+              "quotaId": "CSP_2015-05-01",
+              "effect": "Allow"
+            },
+            {
+              "quotaId": "CSP_MG_2017-12-01",
+              "effect": "Allow"
+            }
+          ],
+          "metadata": {
+            "onboardedVia": "ProviderHub"
+          },
+          "providerVersion": "2.0",
+          "providerType": "Internal, Hidden",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    },
+    "201": {
+      "description": "Successfully created the provider registration."
+    }
+  }
+}
