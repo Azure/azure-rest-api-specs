@@ -278,7 +278,7 @@
         "tags": [
           "Long running operations"
         ],
-        "summary": "Gets an operation by its id.",
+        "summary": "Gets a short code operation by its id.",
         "operationId": "ShortCodes_GetOperation",
         "produces": [
           "application/json"
@@ -325,7 +325,7 @@
         "tags": [
           "Long running operations"
         ],
-        "summary": "Cancels an operation by its id.",
+        "summary": "Cancels a short codes operation by its id.",
         "operationId": "ShortCodes_CancelOperation",
         "parameters": [
           {
@@ -649,7 +649,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Creates a new program brief.",
+        "summary": "Creates a new Program Brief.",
         "operationId": "ShortCodes_CreateUSProgramBrief",
         "consumes": [
           "application/json"
@@ -664,7 +664,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Object containing the program brief information",
+            "description": "Object containing the Program Brief information",
             "schema": {
               "$ref": "#/definitions/CreateProgramBriefRequest"
             }
@@ -685,7 +685,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a program brief": {
+          "Create a Program Brief": {
             "$ref": "./examples/CreateProgramBriefAsync.json"
           }
         }
@@ -694,7 +694,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Gets the list of program briefs for the current resource.",
+        "summary": "Gets the list of Program Briefs for the current resource.",
         "operationId": "ShortCodes_GetUSProgramBriefs",
         "produces": [
           "application/json"
@@ -739,7 +739,7 @@
           "itemName": "programBriefs"
         },
         "x-ms-examples": {
-          "List program briefs": {
+          "List Program Briefs": {
             "$ref": "./examples/GetProgramBriefsAsync.json"
           }
         }
@@ -750,7 +750,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Updates a program brief.",
+        "summary": "Updates a Program Brief.",
         "operationId": "ShortCodes_UpdateUSProgramBrief",
         "consumes": [
           "application/merge-patch+json"
@@ -762,7 +762,7 @@
           {
             "in": "path",
             "name": "programBriefId",
-            "description": "Program brief Id",
+            "description": "Program Brief Id",
             "required": true,
             "type": "string"
           },
@@ -772,7 +772,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Fields to update on the program brief",
+            "description": "Fields to update on the Program Brief",
             "schema": {
               "$ref": "#/definitions/UpdateProgramBriefRequest"
             }
@@ -793,7 +793,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a program brief": {
+          "Update a Program Brief": {
             "$ref": "./examples/UpdateProgramBriefAsync.json"
           }
         }
@@ -802,7 +802,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Get a program brief by id.",
+        "summary": "Get a Program Brief by id.",
         "operationId": "ShortCodes_GetUSProgramBrief",
         "produces": [
           "application/json"
@@ -811,7 +811,7 @@
           {
             "in": "path",
             "name": "programBriefId",
-            "description": "Program brief Id",
+            "description": "Program Brief Id",
             "required": true,
             "type": "string"
           },
@@ -834,7 +834,7 @@
           }
         },
         "x-ms-examples": {
-          "Query a program brief": {
+          "Query a Program Brief": {
             "$ref": "./examples/GetProgramBriefAsync.json"
           }
         }
@@ -845,7 +845,7 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Submits a program brief for review.",
+        "summary": "Submits a Program Brief for review.",
         "operationId": "ShortCodes_SubmitUSProgramBrief",
         "produces": [
           "application/json"
@@ -854,7 +854,7 @@
           {
             "in": "path",
             "name": "programBriefId",
-            "description": "Program brief Id",
+            "description": "Program Brief Id",
             "required": true,
             "type": "string"
           },
@@ -899,7 +899,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Submit program brief": {
+          "Submit Program Brief": {
             "$ref": "./examples/SubmitProgramBriefAsync.json"
           }
         }
@@ -1430,7 +1430,7 @@
           "type": "boolean"
         },
         "programName": {
-          "description": "A program name that indicates the purpose of filling the program brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
+          "description": "A program name that indicates the purpose of filling the Program Brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
           "type": "string"
         },
         "programDescription": {
@@ -1491,19 +1491,19 @@
       "type": "object",
       "properties": {
         "companyName": {
-          "description": "Legal entity name for customer submitting program brief.",
+          "description": "Legal entity name for customer submitting Program Brief.",
           "type": "string"
         },
         "companyUrl": {
-          "description": "Company URL for customer submitting program brief.",
+          "description": "Company URL for customer submitting Program Brief.",
           "type": "string"
         },
         "contactName": {
-          "description": "Name of authorized user for purposes of submitting the program brief.",
+          "description": "Name of authorized user for purposes of submitting the Program Brief.",
           "type": "string"
         },
         "contactPhone": {
-          "description": "Contact phone number for the authorized user for the customer e.g. +14086111111.",
+          "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
           "type": "string"
         },
         "contactEmail": {
@@ -1511,15 +1511,15 @@
           "type": "string"
         },
         "companyAddress": {
-          "description": "Company's address for the customer submitting the program brief.",
+          "description": "Company's address for the customer submitting the Program Brief.",
           "type": "string"
         },
         "customerCareTollFreeNumber": {
-          "description": "Customer support phone number for the customer submitting the program brief. e.g. +18005551212",
+          "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
           "type": "string"
         },
         "customerCareEmail": {
-          "description": "Customer support email address for the customer submitting the program brief.",
+          "description": "Customer support email address for the customer submitting the Program Brief.",
           "type": "string"
         }
       }
@@ -1666,7 +1666,7 @@
       }
     },
     "CreateProgramBriefRequest": {
-      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "required": [
         "companyInformation",
         "messageDetails",
@@ -1761,7 +1761,7 @@
           "type": "boolean"
         },
         "programName": {
-          "description": "A program name that indicates the purpose of filling the program brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
+          "description": "A program name that indicates the purpose of filling the Program Brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
           "type": "string"
         },
         "programDescription": {
@@ -1812,19 +1812,19 @@
       "type": "object",
       "properties": {
         "companyName": {
-          "description": "Legal entity name for customer submitting program brief.",
+          "description": "Legal entity name for customer submitting Program Brief.",
           "type": "string"
         },
         "companyUrl": {
-          "description": "Company URL for customer submitting program brief.",
+          "description": "Company URL for customer submitting Program Brief.",
           "type": "string"
         },
         "contactName": {
-          "description": "Name of authorized user for purposes of submitting the program brief.",
+          "description": "Name of authorized user for purposes of submitting the Program Brief.",
           "type": "string"
         },
         "contactPhone": {
-          "description": "Contact phone number for the authorized user for the customer e.g. +14086111111.",
+          "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
           "type": "string"
         },
         "contactEmail": {
@@ -1832,15 +1832,15 @@
           "type": "string"
         },
         "companyAddress": {
-          "description": "Company's address for the customer submitting the program brief.",
+          "description": "Company's address for the customer submitting the Program Brief.",
           "type": "string"
         },
         "customerCareTollFreeNumber": {
-          "description": "Customer support phone number for the customer submitting the program brief. e.g. +18005551212",
+          "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
           "type": "string"
         },
         "customerCareEmail": {
-          "description": "Customer support email address for the customer submitting the program brief.",
+          "description": "Customer support email address for the customer submitting the Program Brief.",
           "type": "string"
         }
       }
@@ -1969,7 +1969,7 @@
       }
     },
     "ProgramBriefEntity": {
-      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "type": "object",
       "properties": {
         "id": {
@@ -1992,7 +1992,7 @@
           }
         },
         "number": {
-          "description": "Number provisioned for the program brief e.g. 555555, 'CONTOSO'",
+          "description": "Number provisioned for the Program Brief e.g. 555555, 'CONTOSO'",
           "type": "string"
         },
         "comment": {
@@ -2031,7 +2031,7 @@
       "type": "object",
       "properties": {
         "programBriefs": {
-          "description": "List of program briefs.",
+          "description": "List of Program ¨Briefs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProgramBriefEntity"
@@ -2044,7 +2044,7 @@
       }
     },
     "UpdateProgramBriefRequest": {
-      "description": "A program brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA program brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "type": "object",
       "properties": {
         "programDetails": {
