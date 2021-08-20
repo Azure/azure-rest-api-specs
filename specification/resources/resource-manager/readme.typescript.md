@@ -70,8 +70,8 @@ typescript:
 
 ```yaml $(typescript) && $(package-subscriptions) && !$(profile-content)
 typescript:
-  package-name: "@azure/arm-subscriptions"
-  output-folder: "$(typescript-sdks-folder)/sdk/subscriptions/arm-subscriptions"
+  package-name: "@azure/arm-resources-subscriptions"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources-subscriptions/arm-resources-subscriptions"
   clear-output-folder: true
 ```
 
