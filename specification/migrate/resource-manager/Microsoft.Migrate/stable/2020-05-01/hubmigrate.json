@@ -979,7 +979,9 @@
     },
     "ServersProjectSummary": {
 	  "type": "object",
-	  "extends": "ProjectSummary",
+	  "extends": {
+	    "$ref": "#/definitions/ProjectSummary"
+	  },
       "description": "Servers project summary.",
 	  "properties": {
 		"discoveredCount": {
@@ -1010,21 +1012,23 @@
 	  }
     },
     "DatabaseProjectSummary": {
-   	  "extends":
-	  {
-	  "$ref": "#/definitions/ProjectSummary"},
+   	  "extends": {
+	    "$ref": "#/definitions/ProjectSummary"
+	  },
       "type": "object",
       "description": "Database project summary."
     },
     "WebApplicationsProjectSummary": {
-	  "extends":
+	  "extends": {
 	    "$ref": "#/definitions/ProjectSummary"
+	  },
       "type": "object",
       "description": "Web application project summary."
     },
     "DesktopVirtualizationProjectSummary": {
-	  "extends":
+	  "extends": {
 	    "$ref": "#/definitions/ProjectSummary"
+	  },
       "type": "object",
       "description": "Desktop virtualization project summary."
     },
