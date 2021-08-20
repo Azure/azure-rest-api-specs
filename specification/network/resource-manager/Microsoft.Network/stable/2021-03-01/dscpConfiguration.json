@@ -315,6 +315,61 @@
     },
     "DscpConfigurationPropertiesFormat": {
       "properties": {
+        "markings": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "List of markings to be used in the configuration."
+        },
+        "sourceIpRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QosIpRange"
+          },
+          "description": "Source IP ranges."
+        },
+        "destinationIpRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QosIpRange"
+          },
+          "description": "Destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QosPortRange"
+          },
+          "description": "Sources port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QosPortRange"
+          },
+          "description": "Destination port ranges."
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "DoNotUse",
+            "Icmp",
+            "Tcp",
+            "Udp",
+            "Gre",
+            "Esp",
+            "Ah",
+            "Vxlan",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "ProtocolType",
+            "modelAsString": true
+          },
+          "description": "RNM supported protocol types."
+        },
         "qosDefinitionCollection": {
           "type": "array",
           "items": {
