@@ -975,6 +975,35 @@
         }
       }
     },
+    "ServersProjectSummary": {
+	  "allof": {
+	    "$ref": "#/definitions/ProjectSummary"
+      },
+	  "type": "object",
+      "description": "Servers project summary.",
+	  "properties": {
+		"discoveredCount": {
+	      "type": "int",
+		  "description": "Discovered count."
+        },
+        "assessedCount": {
+	      "type": "int",
+		  "description": "Asessed count."
+        },
+		"replicatingCount": {
+		  "type": "int",
+		  "description": "Replicating count."
+		},
+		"testMigratedCount": {
+	      "type": "int",
+		  "description": "Test migrated count."
+		},
+		"migratedCount": {
+		  "type": "int",
+		  "desciption": "Migrated count."
+		}
+	  }
+    },
     "ModifyConnectionStateBody": {
       "type": "object",
       "description": "Modify connection state body.",
