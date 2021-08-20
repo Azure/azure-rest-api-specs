@@ -330,11 +330,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           }
         ],
         "responses": {
@@ -389,11 +385,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network site."
+            "$ref": "./common.json#/parameters/SiteNameParameter"
           }
         ],
         "responses": {
@@ -443,11 +435,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network site."
+            "$ref": "./common.json#/parameters/SiteNameParameter"
           }
         ],
         "responses": {
@@ -490,11 +478,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network site."
+            "$ref": "./common.json#/parameters/SiteNameParameter"
           },
           {
             "name": "parameters",
@@ -556,11 +540,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network site."
+            "$ref": "./common.json#/parameters/SiteNameParameter"
           },
           {
             "name": "parameters",
@@ -593,87 +573,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/sites": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_ListBySubscription",
-        "description": "Lists all sites in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
-            "schema": {
-              "$ref": "#/definitions/SiteListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List mobile network sites in a subscription": {
-            "$ref": "./examples/SiteListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sites": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_ListByResourceGroup",
-        "description": "Lists all sites in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
-            "schema": {
-              "$ref": "#/definitions/SiteListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List mobile network sites in a resource group": {
-            "$ref": "./examples/SiteListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites": {
       "get": {
         "tags": [
@@ -692,11 +591,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           }
         ],
         "responses": {
@@ -741,11 +636,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           }
         ],
         "responses": {
@@ -792,11 +683,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           }
         ],
         "responses": {
@@ -836,11 +723,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           },
           {
             "name": "parameters",
@@ -899,11 +782,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           },
           {
             "name": "parameters",
@@ -1035,11 +914,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           }
         ],
         "responses": {
@@ -1091,11 +966,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "simName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the sim."
+            "$ref": "./common.json#/parameters/SimNameParameter"
           }
         ],
         "responses": {
@@ -1175,7 +1046,10 @@
           "type": "string",
           "description": "The spectrum access provider for the mobile network."
         }
-      }
+      },
+      "required": [
+        "publicLandMobileNetworkIdentifier"
+      ]
     },
     "MobileNetworkListResult": {
       "type": "object",
@@ -1247,7 +1121,7 @@
         },
         "authenticationKey": {
           "type": "string",
-          "pattern": "^[A-Fa-f0-9]{32}$",
+          "pattern": "^[0-9a-fA-F]{32}$",
           "x-ms-secret": true,
           "x-ms-mutability": [
             "create"
@@ -1256,7 +1130,7 @@
         },
         "operatorKeyCode": {
           "type": "string",
-          "pattern": "^[A-Fa-f0-9]{32}$",
+          "pattern": "^[0-9a-fA-F]{32}$",
           "x-ms-secret": true,
           "x-ms-mutability": [
             "create"
@@ -1264,18 +1138,23 @@
           "description": "The Opc value for the sim."
         },
         "mobileNetwork": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "mobile network that this sim belongs to"
+          "$ref": "./common.json#/definitions/MobileNetworkResourceId",
+          "description": "Mobile network that this sim belongs to"
         },
         "deviceType": {
           "type": "string",
           "description": "An optional free-form text field that can be used to record the device type this sim is associated with, for example 'Video camera'. The Azure portal allows Sims to be grouped and filtered based on this value."
         },
         "simPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SimPolicyResourceId",
           "description": "The simPolicy used by this sim."
         }
-      }
+      },
+      "required": [
+        "internationalMobileSubscriberIdentity",
+        "authenticationKey",
+        "operatorKeyCode"
+      ]
     },
     "SimIdListResult": {
       "type": "object",
@@ -1349,7 +1228,7 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "An array of ids of the network functions deployed on the sites."
+          "description": "An array of ids of the network functions deployed on the site, maintained by the user."
         }
       }
     },

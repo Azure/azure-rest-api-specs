@@ -36,6 +36,7 @@
   "paths": {},
   "definitions": {
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -43,6 +44,78 @@
         }
       },
       "description": "Reference to another sub resource.",
+      "x-ms-azure-resource": true
+    },
+    "DataNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Data Network resource ID."
+        }
+      },
+      "description": "Reference to a Data Network resource.",
+      "x-ms-azure-resource": true
+    },
+    "MobileNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Mobile Network resource ID."
+        }
+      },
+      "description": "Reference to a Mobile Network resource.",
+      "x-ms-azure-resource": true
+    },
+    "ServiceResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][eE][rR][vV][iI][cC][eE][sS]/[^/?#]+$",
+          "description": "Service resource ID."
+        }
+      },
+      "description": "Reference to a Service resource.",
+      "x-ms-azure-resource": true
+    },
+    "SimPolicyResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][pP][oO][lL][iI][cC][iI][eE][sS]/[^/?#]+$",
+          "description": "SIM Policy resource ID."
+        }
+      },
+      "description": "Reference to a SIM Policy resource.",
+      "x-ms-azure-resource": true
+    },
+    "SliceResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][lL][iI][cC][eE][sS]/[^/?#]+$",
+          "description": "Slice resource ID."
+        }
+      },
+      "description": "Reference to a Slice resource.",
+      "x-ms-azure-resource": true
+    },
+    "CustomLocationResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$",
+          "description": "Azure ARC custom location resource ID."
+        }
+      },
+      "description": "Reference to an Azure ARC custom location resource.",
       "x-ms-azure-resource": true
     },
     "ProvisioningState": {
@@ -62,6 +135,7 @@
       }
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -75,7 +149,7 @@
     },
     "SimType": {
       "type": "string",
-      "description": "The sim type.",
+      "description": "The SIM type.",
       "enum": [
         "Unknown",
         "Physical",
@@ -103,7 +177,13 @@
         "modelAsString": true
       }
     },
+    "SemVer2Version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "description": "Semantic Versioning 2.0 version string."
+    },
     "InterfaceProperties": {
+      "type": "object",
       "properties": {
         "ipv4Address": {
           "$ref": "./ts29571.json#/definitions/Ipv4Addr",
@@ -112,18 +192,48 @@
         "ipv4Subnet": {
           "$ref": "./ts29571.json#/definitions/Ipv4AddrMask",
           "description": "The IPv4 subnet."
+        },
+        "ipv4Gateway": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The default IPv4 gateway (router)."
         }
       },
+      "required": [
+        "ipv4Address",
+        "ipv4Subnet",
+        "ipv4Gateway"
+      ],
       "description": "IP address and subnet."
     }
   },
   "parameters": {
+    "AttachedDataNetworkNameParameter": {
+      "name": "attachedDataNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the attached data network.",
+      "x-ms-parameter-location": "method"
+    },
+    "DataNetworkNameParameter": {
+      "name": "dataNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the mobile network dataNetwork.",
+      "x-ms-parameter-location": "method"
+    },
     "MobileNetworkNameParameter": {
       "name": "mobileNetworkName",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
       "description": "The name of the mobile network.",
       "x-ms-parameter-location": "method"
     },
@@ -132,6 +242,8 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
       "description": "The name of the packet core control plane.",
       "x-ms-parameter-location": "method"
     },
@@ -140,7 +252,59 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
       "description": "The name of the packet core data plane.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the service. You must not use any of the following reserved strings - `default`, `requested` or `service`",
+      "x-ms-parameter-location": "method"
+    },
+    "SimNameParameter": {
+      "name": "simName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the SIM.",
+      "x-ms-parameter-location": "method"
+    },
+    "SimPolicyNameParameter": {
+      "name": "simPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the SIM policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the mobile network site.",
+      "x-ms-parameter-location": "method"
+    },
+    "SliceNameParameter": {
+      "name": "sliceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the mobile network slice.",
       "x-ms-parameter-location": "method"
     }
   }

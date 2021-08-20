@@ -55,11 +55,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "sliceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network slice."
+            "$ref": "./common.json#/parameters/SliceNameParameter"
           }
         ],
         "responses": {
@@ -109,11 +105,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "sliceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network slice."
+            "$ref": "./common.json#/parameters/SliceNameParameter"
           }
         ],
         "responses": {
@@ -156,11 +148,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "sliceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network slice."
+            "$ref": "./common.json#/parameters/SliceNameParameter"
           },
           {
             "name": "parameters",
@@ -222,11 +210,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "sliceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network slice."
+            "$ref": "./common.json#/parameters/SliceNameParameter"
           },
           {
             "name": "parameters",
@@ -259,87 +243,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/slices": {
-      "get": {
-        "tags": [
-          "Slices"
-        ],
-        "operationId": "Slices_ListBySubscription",
-        "description": "Gets all the slices in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of slice resources.",
-            "schema": {
-              "$ref": "#/definitions/SliceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List slices in a subscription": {
-            "$ref": "./examples/SliceListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/slices": {
-      "get": {
-        "tags": [
-          "Slices"
-        ],
-        "operationId": "Slices_ListByResourceGroup",
-        "description": "Gets all the slices in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of slice resources.",
-            "schema": {
-              "$ref": "#/definitions/SliceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List slices in resource group": {
-            "$ref": "./examples/SliceListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/slices": {
       "get": {
         "tags": [
@@ -358,11 +261,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           }
         ],
         "responses": {
@@ -392,6 +291,7 @@
   },
   "definitions": {
     "Slice": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -414,6 +314,7 @@
     },
     "SlicePropertiesFormat": {
       "description": "Network slice properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -428,9 +329,13 @@
           "type": "string",
           "description": "An optional description for this network slice."
         }
-      }
+      },
+      "required": [
+        "snssai"
+      ]
     },
     "SliceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

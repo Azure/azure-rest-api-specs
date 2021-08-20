@@ -49,11 +49,7 @@
             "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
           },
           {
-            "name": "attachedDataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the attached data network."
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -106,11 +102,7 @@
             "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
           },
           {
-            "name": "attachedDataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the attached data network."
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -156,11 +148,7 @@
             "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
           },
           {
-            "name": "attachedDataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the attached data network resource."
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
             "name": "parameters",
@@ -225,11 +213,7 @@
             "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
           },
           {
-            "name": "attachedDataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the attached data network."
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
             "name": "parameters",
@@ -268,132 +252,6 @@
           "Update attached data network tags": {
             "$ref": "./examples/AttachedDataNetworkUpdateTags.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/attachedDataNetworks": {
-      "get": {
-        "tags": [
-          "AttachedDataNetwork"
-        ],
-        "operationId": "AttachedDataNetworks_ListBySubscription",
-        "description": "Gets all the attachedDataNetworks in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of attached data network resources.",
-            "schema": {
-              "$ref": "#/definitions/AttachedDataNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List attached data networks in a subscription": {
-            "$ref": "./examples/AttachedDataNetworkListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/attachedDataNetworks": {
-      "get": {
-        "tags": [
-          "AttachedDataNetwork"
-        ],
-        "operationId": "AttachedDataNetworks_ListByResourceGroup",
-        "description": "Gets all the AttachedDataNetworks in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of attached data network resources.",
-            "schema": {
-              "$ref": "#/definitions/AttachedDataNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List attached data networks in resource group": {
-            "$ref": "./examples/AttachedDataNetworkListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/attachedDataNetworks": {
-      "get": {
-        "tags": [
-          "AttachedDataNetwork"
-        ],
-        "operationId": "AttachedDataNetworks_ListByPacketCoreControlPlane",
-        "description": "Gets all the data networks associated with a packet core control plane.",
-        "parameters": [
-          {
-            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of attached data network resources.",
-            "schema": {
-              "$ref": "#/definitions/AttachedDataNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List attached data networks in a control plane": {
-            "$ref": "./examples/AttachedDataNetworkListByPacketCoreControlPlane.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -448,6 +306,7 @@
   },
   "definitions": {
     "AttachedDataNetwork": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -470,26 +329,24 @@
     },
     "AttachedDataNetworkPropertiesFormat": {
       "description": "Data network properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the attached data network resource."
         },
-        "n6": {
+        "n6Interface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
-          "description": "IP address and subnet for the N6 interface, which connects the packetCore to the attachedDataNetwork."
+          "description": "Interface configuration for N6 reference point, which connects the packetCore to the attachedDataNetwork."
         },
         "dnsAddresses": {
           "type": "array",
           "items": {
             "$ref": "./ts29571.json#/definitions/Ipv4Addr"
           },
+          "uniqueItems": true,
           "description": "The DNS addresses of the attached data network."
-        },
-        "dnsProvider": {
-          "type": "string",
-          "description": "The DNS provider for the attached data network."
         },
         "naptConfiguration": {
           "$ref": "#/definitions/NaptConfiguration",
@@ -500,11 +357,18 @@
           "items": {
             "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
           },
+          "minItems": 1,
+          "uniqueItems": true,
           "description": "The user equipment address pool prefixes for the attached data network."
         }
-      }
+      },
+      "required": [
+        "n6Interface",
+        "userEquipmentAddressPoolPrefix"
+      ]
     },
     "AttachedDataNetworkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -523,6 +387,7 @@
     },
     "NaptConfiguration": {
       "description": "The Network Address and Port Translation settings to use for the attached data network.",
+      "type": "object",
       "properties": {
         "enabled": {
           "description": "Whether NAPT is enabled for connections to this attachedDataNetwork.",
@@ -540,7 +405,9 @@
           "description": "Maximum number of UDP and TCP pinholes that can be open simultaneously on the core interface.",
           "type": "integer",
           "format": "int32",
-          "default": 1000000
+          "minimum": 1,
+          "maximum": 65536,
+          "default": 65536
         },
         "pinholeTimeouts": {
           "description": "Expiry times of inactive NAPT pinholes, in seconds. All timers must be at least 1 second.",
@@ -563,6 +430,7 @@
     },
     "PortRange": {
       "description": "Range of port numbers to use as translated ports on each translated address. If not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.",
+      "type": "object",
       "properties": {
         "minPort": {
           "description": "The minimum port number",
@@ -584,6 +452,7 @@
     },
     "PortReuseHoldTimes": {
       "description": "The minimum time (in seconds) that will pass before a port that was used by a closed pinhole can be recycled for use by another pinhole. All hold times must be minimum 1 second.",
+      "type": "object",
       "properties": {
         "tcp": {
           "description": "Minimum time in seconds that will pass before a TCP port that was used by a closed pinhole can be reused. Default for TCP is 2 minutes.",
@@ -603,6 +472,7 @@
     },
     "PinholeTimeouts": {
       "description": "Expiry times of inactive NAPT pinholes, in seconds. All timers must be at least 1 second.",
+      "type": "object",
       "properties": {
         "tcp": {
           "description": "Pinhole timeout for TCP pinholes in seconds. Default for TCP is 2 hours 4 minutes per RFC 5382 section 5.",

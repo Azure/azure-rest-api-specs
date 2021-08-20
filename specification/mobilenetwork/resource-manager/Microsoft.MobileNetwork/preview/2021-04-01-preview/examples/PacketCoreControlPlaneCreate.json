@@ -7,20 +7,30 @@
     "parameters": {
       "location": "eastus",
       "properties": {
-        "customLocation": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation",
+        "mobileNetwork": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+        },
+        "customLocation": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+        },
         "coreNetworkTechnology": "5GC",
-        "version": "0.2",
+        "version": "0.2.0",
         "tacList": [
           "aabb",
           "ccdd"
         ],
         "n2Interface": {
           "ipv4Address": "10.28.128.2",
-          "ipv4Subnet": "10.28.128.0/24"
+          "ipv4Subnet": "10.28.128.0/24",
+          "ipv4Gateway": "10.28.128.1"
         },
         "simPolicies": [
-          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy1",
-          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy2"
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy1"
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy2"
+          }
         ]
       }
     }
@@ -43,20 +53,30 @@
         "tags": {},
         "properties": {
           "provisioningState": "Succeeded",
-          "customLocation": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation",
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          },
+          "customLocation": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+          },
           "coreNetworkTechnology": "5GC",
-          "version": "0.2",
+          "version": "0.2.0",
           "tacList": [
             "aabb",
             "ccdd"
           ],
           "n2Interface": {
             "ipv4Address": "10.28.128.2",
-            "ipv4Subnet": "10.28.128.0/24"
+            "ipv4Subnet": "10.28.128.0/24",
+            "ipv4Gateway": "10.28.128.1"
           },
           "simPolicies": [
-            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy1",
-            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy2"
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy2"
+            }
           ]
         }
       }
@@ -78,20 +98,30 @@
         "tags": {},
         "properties": {
           "provisioningState": "Succeeded",
-          "customLocation": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation",
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          },
+          "customLocation": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+          },
           "coreNetworkTechnology": "5GC",
-          "version": "0.2",
+          "version": "0.2.0",
           "tacList": [
             "aabb",
             "ccdd"
           ],
           "n2Interface": {
             "ipv4Address": "10.28.128.2",
-            "ipv4Subnet": "10.28.128.0/24"
+            "ipv4Subnet": "10.28.128.0/24",
+            "ipv4Gateway": "10.28.128.1"
           },
           "simPolicies": [
-            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy1",
-            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simPolicies/policy2"
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/policy2"
+            }
           ]
         }
       }

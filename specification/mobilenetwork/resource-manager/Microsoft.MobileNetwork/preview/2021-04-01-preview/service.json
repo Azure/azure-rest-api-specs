@@ -49,11 +49,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the service."
+            "$ref": "./common.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -103,11 +99,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of service."
+            "$ref": "./common.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -147,11 +139,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Service."
+            "$ref": "./common.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
@@ -222,11 +210,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Service."
+            "$ref": "./common.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -256,87 +240,6 @@
           "Update service tags": {
             "$ref": "./examples/ServiceUpdateTags.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/services": {
-      "get": {
-        "tags": [
-          "Service"
-        ],
-        "operationId": "Services_ListBySubscription",
-        "description": "Gets all the services in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of service resources.",
-            "schema": {
-              "$ref": "#/definitions/ServiceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List services in a subscription": {
-            "$ref": "./examples/ServiceListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/services": {
-      "get": {
-        "tags": [
-          "Service"
-        ],
-        "operationId": "Services_ListByResourceGroup",
-        "description": "Gets all the services in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of service resources.",
-            "schema": {
-              "$ref": "#/definitions/ServiceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List services in resource group": {
-            "$ref": "./examples/ServiceListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -388,6 +291,7 @@
   },
   "definitions": {
     "Service": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -410,14 +314,11 @@
     },
     "ServicePropertiesFormat": {
       "description": "Service properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of the service resource.",
           "$ref": "./common.json#/definitions/ProvisioningState"
-        },
-        "serviceName": {
-          "description": "The name of the service. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
-          "type": "string"
         },
         "servicePrecedence": {
           "description": "A precedence value that is used to decide between services when identifying the QoS values to use for a particular Sim. A lower value means a higher priority. This value should be unique among all services configured in the Mobile Network.",
@@ -441,17 +342,19 @@
         }
       },
       "required": [
-        "serviceName",
         "servicePrecedence",
         "pccRules"
       ]
     },
     "PccRuleConfiguration": {
       "description": "PCC rule configuration",
+      "type": "object",
       "properties": {
         "ruleName": {
           "description": "The name of the rule. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 64
         },
         "rulePrecedence": {
           "description": "A precedence value that is used to decide between PCC Rules when identifying the QoS values to use for a particular Sim. A lower value means a higher priority. This value should be unique among all PCC Rules configured in the Mobile Network.",
@@ -487,10 +390,13 @@
     },
     "ServiceDataFlowTemplate": {
       "description": "Service data flow (SDF) template",
+      "type": "object",
       "properties": {
         "templateName": {
           "description": "The name of the SDF template. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 64
         },
         "direction": {
           "description": "The direction of this flow.",
@@ -500,7 +406,8 @@
           "description": "A list of the allowed protocol(s) for this flow. If you want this flow to be able to use any protocol within the internet protocol suite, use the value `ip`. If you only want to allow a selection of protocols, you must use the corresponding IANA Assigned Internet Protocol Number for each protocol, as described in https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml. For example, for UDP, you must use 17.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^(ip|[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
           },
           "minItems": 1,
           "uniqueItems": true
@@ -509,16 +416,17 @@
           "description": "The remote IP address(es) to which UEs will connect for this flow. If you want to allow connections on any IP address, use the value `any`. Otherwise, you must provide each of the remote IP addresses to which Fusion Core will connect for this flow. You must provide each IP address in CIDR notation, including the netmask (for example, 192.0.2.54/24).",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
           },
           "minItems": 1,
           "uniqueItems": true
         },
         "ports": {
-          "description": "The port(s) to which UEs will connect for this flow. You can specify one or more ports or port ranges. This is an optional setting. If you do not specify it then connections will be allowed on all ports. Port ranges must be specified as <FirstPort>-<LastPort>. For example: [`8080`, `8082-8085`].",
+          "description": "The port(s) to which UEs will connect for this flow. You can specify zero or more ports or port ranges. This is an optional setting. If you do not specify it then connections will be allowed on all ports. Port ranges must be specified as <FirstPort>-<LastPort>. For example: [`8080`, `8082-8085`].",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "([1-9]|[1-9][0-9]|1[0-9][0-9]|1[0-9][0-9][0-9]|[1-5][0-9][0-9][0-9][0-9]|6[0-4][0-9][0-9][0-9]|65[0-4][0-9][0-9]655[0-2][0-9]|6553[0-5])(-([1-9]|[1-9][0-9]|1[0-9][0-9]|1[0-9][0-9][0-9]|[1-5][0-9][0-9][0-9][0-9]|6[0-4][0-9][0-9][0-9]|65[0-4][0-9][0-9]655[0-2][0-9]|6553[0-5]))?"
           },
           "uniqueItems": true
         }
@@ -531,6 +439,7 @@
       ]
     },
     "ServiceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -550,6 +459,7 @@
     "QosPolicy": {
       "description": "QoS policy",
       "x-nullable": true,
+      "type": "object",
       "properties": {
         "5qi": {
           "description": "QoS Flow 5G QoS Indicator value.  The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. This must not be a standardized 5QI value selecting a GBR (Guaranteed Bit Rate) QoS.  The illegal GBR 5QI values are: 1, 2, 3, 4, 65, 66, 67, 71, 72, 73, 74, 75, 76, 82, 83, 84, and 85. See 3GPP TS23.501 section 5.7.2.1 for a full description of the 5Qi parameter, and table 5.7.4-1 for the definition of which are the GBR 5QI values.",
@@ -583,6 +493,7 @@
     "PccRuleQosPolicy": {
       "description": "PCC rule QoS policy",
       "x-nullable": true,
+      "type": "object",
       "properties": {
         "guaranteedBitRate": {
           "description": "The Guaranteed Bit Rate (GBR) for all service data flows that use this PCC Rule. This is an optional setting. If you do not provide a value, there will be no GBR set for the PCC Rule that uses this QoS definition.",

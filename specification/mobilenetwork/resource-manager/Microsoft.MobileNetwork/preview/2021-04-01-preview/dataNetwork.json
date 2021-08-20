@@ -55,11 +55,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "dataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network dataNetwork."
+            "$ref": "./common.json#/parameters/DataNetworkNameParameter"
           }
         ],
         "responses": {
@@ -109,11 +105,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "dataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network dataNetwork."
+            "$ref": "./common.json#/parameters/DataNetworkNameParameter"
           }
         ],
         "responses": {
@@ -156,11 +148,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "dataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network dataNetwork."
+            "$ref": "./common.json#/parameters/DataNetworkNameParameter"
           },
           {
             "name": "parameters",
@@ -222,11 +210,7 @@
             "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           },
           {
-            "name": "dataNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network dataNetwork."
+            "$ref": "./common.json#/parameters/DataNetworkNameParameter"
           },
           {
             "name": "parameters",
@@ -259,87 +243,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/dataNetworks": {
-      "get": {
-        "tags": [
-          "DataNetworks"
-        ],
-        "operationId": "DataNetworks_ListBySubscription",
-        "description": "Gets all the data networks in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of data network resources.",
-            "schema": {
-              "$ref": "#/definitions/DataNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List data networks in a subscription": {
-            "$ref": "./examples/DataNetworkListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/dataNetworks": {
-      "get": {
-        "tags": [
-          "DataNetworks"
-        ],
-        "operationId": "DataNetworks_ListByResourceGroup",
-        "description": "Gets all the data networks in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of data network resources.",
-            "schema": {
-              "$ref": "#/definitions/DataNetworkListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List data networks in resource group": {
-            "$ref": "./examples/DataNetworkListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/dataNetworks": {
       "get": {
         "tags": [
@@ -358,11 +261,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
           }
         ],
         "responses": {
@@ -392,6 +291,7 @@
   },
   "definitions": {
     "DataNetwork": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -414,6 +314,7 @@
     },
     "DataNetworkPropertiesFormat": {
       "description": "Data network properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -427,6 +328,7 @@
       }
     },
     "DataNetworkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

@@ -243,87 +243,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/packetCoreDataPlanes": {
-      "get": {
-        "tags": [
-          "PacketCoreDataPlanes"
-        ],
-        "operationId": "PacketCoreDataPlanes_ListBySubscription",
-        "description": "Lists all the packetCoreDataPlanes in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of packet core data plane resources.",
-            "schema": {
-              "$ref": "#/definitions/PacketCoreDataPlaneListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List packet core data planes in a subscription": {
-            "$ref": "./examples/PacketCoreDataPlaneListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreDataPlanes": {
-      "get": {
-        "tags": [
-          "PacketCoreDataPlanes"
-        ],
-        "operationId": "PacketCoreDataPlanes_ListByResourceGroup",
-        "description": "Lists all the packetCoreDataPlanes in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of packet core data plane resources.",
-            "schema": {
-              "$ref": "#/definitions/PacketCoreDataPlaneListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List packet core data planes in resource group": {
-            "$ref": "./examples/PacketCoreDataPlaneListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes": {
       "get": {
         "tags": [
@@ -372,6 +291,7 @@
   },
   "definitions": {
     "PacketCoreDataPlane": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -394,6 +314,7 @@
     },
     "PacketCoreDataPlanePropertiesFormat": {
       "description": "PacketCoreDataPlane properties.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -401,15 +322,15 @@
           "description": "The provisioning state of the packet core data plane resource."
         },
         "customLocation": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "Azure arc custom location where the packet core is deployed."
+          "$ref": "./common.json#/definitions/CustomLocationResourceId",
+          "description": "Azure ARC custom location where the packet core is deployed."
         },
         "coreNetworkTechnology": {
           "$ref": "./ts29571.json#/definitions/CoreNetworkType",
           "description": "The core network technology generation."
         },
         "version": {
-          "type": "string",
+          "$ref": "./common.json#/definitions/SemVer2Version",
           "description": "The version of the packet core software that is deployed."
         },
         "pduSessionType": {
@@ -425,24 +346,29 @@
           "items": {
             "$ref": "#/definitions/AccessControlRule"
           },
-          "minItems": 1,
+          "uniqueItems": true,
           "description": "Access control list."
         },
         "slices": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SliceResourceId"
           },
-          "minItems": 1,
+          "uniqueItems": true,
           "description": "List of supported network slices."
         },
         "vpnGateway": {
           "$ref": "./common.json#/definitions/SubResource",
           "description": "The VPN Gateway used to connect the N6 interface."
         }
-      }
+      },
+      "required": [
+        "customLocation",
+        "n3Interface"
+      ]
     },
     "PacketCoreDataPlaneListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -461,6 +387,7 @@
     },
     "AccessControlRule": {
       "description": "An access control list entry, manages blocking or allowing data plane traffic. Access control can be applied in four places. Source address matches are evaluated on ingress. Destination address matches are evaluated on egress.",
+      "type": "object",
       "properties": {
         "action": {
           "$ref": "#/definitions/AccessControlAction",
@@ -470,26 +397,20 @@
           "$ref": "#/definitions/AccessControlDirection",
           "description": "Direction of flow of data plane traffic."
         },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or source IP range."
-        },
-        "destinationAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or destination IP range."
-        },
         "sourceAddressPrefixes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
           },
+          "uniqueItems": true,
           "description": "The CIDR or source IP ranges."
         },
         "destinationAddressPrefixes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
           },
+          "uniqueItems": true,
           "description": "The CIDR or source IP ranges."
         },
         "description": {

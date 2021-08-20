@@ -10,7 +10,7 @@
     "200": {
       "body": {
         "name": "testPolicy",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetwork/testMobileNetwork/services/TestService",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/TestService",
         "type": "Microsoft.MobileNetwork/service",
         "systemData": {
           "createdBy": "user1",
@@ -24,7 +24,6 @@
         "tags": {},
         "properties": {
           "provisioningState": "Accepted",
-          "serviceName": "TestService",
           "servicePrecedence": 255,
           "serviceQosPolicy": {
             "5qi": 9,
@@ -38,7 +37,7 @@
           },
           "pccRules": [
             {
-              "ruleName": "Default rule",
+              "ruleName": "default-rule",
               "rulePrecedence": 255,
               "ruleQosPolicy": {
                 "5qi": 9,
@@ -53,7 +52,7 @@
               "trafficControl": "Enabled",
               "serviceDataFlowTemplates": [
                 {
-                  "templateName": "IP to server",
+                  "templateName": "IP-to-server",
                   "direction": "Uplink",
                   "protocol": [
                     "ip"
@@ -61,9 +60,7 @@
                   "remoteIpList": [
                     "10.3.4.0/24"
                   ],
-                  "ports": [
-                    "any"
-                  ]
+                  "ports": []
                 }
               ]
             }
