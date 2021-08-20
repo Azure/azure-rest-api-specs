@@ -8,17 +8,6 @@ go:
   namespace: purview
   clear-output-folder: true
 ```
-## Suppression
-
-``` yaml
-directive:
-  - suppress: R3018  # EnumInsteadOfBoolean
-    where:
-      - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
-      - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
-    reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
-```
 
 ### Go multi-api
 
