@@ -946,12 +946,14 @@
       "type": "object",
       "description": "Project summary.",
 	  "discriminator": "instanceType",
+	  "required": [
+	    "instanceType"
+	  ],
       "properties": {
         "instanceType": {
           "type": "string",
           "description": "Instance type.",
-          "readOnly": true,
-		  "required": true
+          "readOnly": true
         },
         "refreshSummaryState": {
           "enum": [
@@ -979,7 +981,11 @@
     },
     "ServersProjectSummary": {
 	  "type": "object",
-	  "extends": "#/definitions/ProjectSummary",
+	  "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      }
+      ],
       "description": "Servers project summary.",
 	  "properties": {
 		"discoveredCount": {
@@ -1010,23 +1016,29 @@
 	  }
     },
     "DatabaseProjectSummary": {
-   	  "extends": {
-	    "$ref": "#/definitions/ProjectSummary"
-	  },
+   	  	  "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      }
+      ],
       "type": "object",
       "description": "Database project summary."
     },
     "WebApplicationsProjectSummary": {
-	  "extends": {
-	    "$ref": "#/definitions/ProjectSummary"
-	  },
+	  	  "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      }
+      ],
       "type": "object",
       "description": "Web application project summary."
     },
     "DesktopVirtualizationProjectSummary": {
-	  "extends": {
-	    "$ref": "#/definitions/ProjectSummary"
-	  },
+	  	  "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      }
+      ],
       "type": "object",
       "description": "Desktop virtualization project summary."
     },
