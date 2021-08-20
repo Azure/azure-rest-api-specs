@@ -41,11 +41,11 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
-### Tag: package-2021-06
+### Tag: package-2021-07
 
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+```yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
