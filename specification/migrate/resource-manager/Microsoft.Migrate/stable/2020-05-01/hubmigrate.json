@@ -602,7 +602,7 @@
           "200": {
             "description": "OK. Returns list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationResultList"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -997,63 +997,65 @@
         }
       }
     },
-    "OperationResultList": {
+	"AvailableOperations": {
+    "description": "Available operations of the service",
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Collection of available operation details",
+        "uniqueItems": false,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/OperationDetail"
+        }
+      },
+      "nextLink": {
+        "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+        "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
       "type": "object",
-      "description": "List of API operations.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations.",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
         }
       }
     },
     "OperationDisplay": {
+      "description": "Operation display payload",
       "type": "object",
-      "description": "Displayable properties of the operation.",
-      "readOnly": true,
       "properties": {
         "provider": {
-          "type": "string",
-          "description": "Provider of the operation.",
-          "readOnly": true
+          "description": "Resource provider of the operation",
+          "type": "string"
         },
         "resource": {
-          "type": "string",
-          "description": "Resource operated on by the operation.",
-          "readOnly": true
+          "description": "Resource of the operation",
+          "type": "string"
         },
         "operation": {
-          "type": "string",
-          "description": "Operation Type.",
-          "readOnly": true
+          "description": "Localized friendly name for the operation",
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "description": "Description of the operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "type": "object",
-      "description": "A REST API operation supported by the provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation.",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Displayable properties of the operation.",
-          "$ref": "#/definitions/OperationDisplay"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation.",
-          "readOnly": true
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     },
