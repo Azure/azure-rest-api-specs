@@ -945,11 +945,13 @@
     "ProjectSummary": {
       "type": "object",
       "description": "Project summary.",
+	  "descriminator": "instanceType",
       "properties": {
         "instanceType": {
           "type": "string",
           "description": "Instance type.",
-          "readOnly": true
+          "readOnly": true,
+		  "required": true
         },
         "refreshSummaryState": {
           "enum": [
@@ -976,12 +978,8 @@
       }
     },
     "ServersProjectSummary": {
-	  "allof": [
-	  {
-	    "$ref": "#/definitions/ProjectSummary"
-      }
-	  ],
 	  "type": "object",
+	  "extends": "ProjectSummary",
       "description": "Servers project summary.",
 	  "properties": {
 		"discoveredCount": {
@@ -1010,6 +1008,24 @@
 		  "description": "Migrated count."
 		}
 	  }
+    },
+    "DatabaseProjectSummary": {
+   	  "extends":
+	    "$ref": "#/definitions/ProjectSummary"
+      "type": "object",
+      "description": "Database project summary."
+    },
+    "WebApplicationsProjectSummary": {
+	  "extends":
+	    "$ref": "#/definitions/ProjectSummary"
+      "type": "object",
+      "description": "Web application project summary."
+    },
+    "DesktopVirtualizationProjectSummary": {
+	  "extends":
+	    "$ref": "#/definitions/ProjectSummary"
+      "type": "object",
+      "description": "Desktop virtualization project summary."
     },
     "ModifyConnectionStateBody": {
       "type": "object",
