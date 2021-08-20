@@ -1630,7 +1630,14 @@
         }
       }
     },
-    "TrafficDetails": {
+    "CreateTrafficDetails": {
+      "required": [
+        "estimatedVolume",
+        "isTrafficSpiky",
+        "monthlyAverageMessagesFromUser",
+        "monthlyAverageMessagesToUser",
+        "trafficSpikeDetails"
+      ],
       "type": "object",
       "properties": {
         "estimatedVolume": {
@@ -1678,7 +1685,7 @@
           "$ref": "#/definitions/CreateMessageDetails"
         },
         "trafficDetails": {
-          "$ref": "#/definitions/TrafficDetails"
+          "$ref": "#/definitions/CreateTrafficDetails"
         }
       }
     },
@@ -1929,6 +1936,34 @@
         },
         "useCase": {
           "description": "Messaging use case description.",
+          "type": "string"
+        }
+      }
+    },
+    "TrafficDetails": {
+      "type": "object",
+      "properties": {
+        "estimatedVolume": {
+          "format": "int32",
+          "description": "Estimated total messages per month.",
+          "type": "integer"
+        },
+        "monthlyAverageMessagesFromUser": {
+          "format": "int32",
+          "description": "Estimated number of Mobile-Originated messages likely to be received from a user per month.",
+          "type": "integer"
+        },
+        "monthlyAverageMessagesToUser": {
+          "format": "int32",
+          "description": "Estimated number of Mobile-Terminated messages likely to be sent per user per month.",
+          "type": "integer"
+        },
+        "isTrafficSpiky": {
+          "description": "Indicates if the nature of the messaging traffic will be bursty.",
+          "type": "boolean"
+        },
+        "trafficSpikeDetails": {
+          "description": "If isTrafficSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
           "type": "string"
         }
       }
