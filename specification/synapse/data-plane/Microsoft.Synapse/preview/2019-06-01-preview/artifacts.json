@@ -2888,31 +2888,35 @@
       "description": "Request body structure for creating data flow debug session.",
       "type": "object",
       "properties": {
-        "dataFlowName": {
-          "description": "The name of the data flow.",
+        "computeType": {
+          "description": "Compute type of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "string"
         },
-        "existingClusterId": {
-          "description": "The ID of existing Databricks cluster.",
-          "type": "string"
-        },
-        "clusterTimeout": {
-          "description": "Timeout setting for Databricks cluster.",
+        "coreCount": {
+          "description": "Core count of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "integer"
         },
-        "newClusterName": {
-          "description": "The name of new Databricks cluster.",
-          "type": "string"
+        "timeToLive": {
+          "description": "Time to live setting of the cluster in minutes.",
+          "type": "integer"
         },
-        "newClusterNodeType": {
-          "description": "The type of new Databricks cluster.",
-          "type": "string"
-        },
-        "dataBricksLinkedService": {
-          "description": "Data bricks linked service.",
-          "$ref": "#/definitions/LinkedServiceResource"
+        "integrationRuntime": {
+          "description": "Set to use integration runtime setting for data flow debug session.",
+          "$ref": "#/definitions/IntegrationRuntimeDebugResource"
         }
       }
+    },
+    "IntegrationRuntimeDebugResource": {
+      "description": "Integration runtime debug resource.",
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntime",
+          "description": "Integration runtime properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "CreateDataFlowDebugSessionResponse": {
       "description": "Response body structure for creating data flow debug session.",
