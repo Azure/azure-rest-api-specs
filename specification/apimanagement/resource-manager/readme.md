@@ -643,6 +643,9 @@ directive:
     from: apimportalrevisions.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
+    from: apimschema.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
     from: apimsettings.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
   - suppress: R4009
