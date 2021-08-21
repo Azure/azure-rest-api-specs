@@ -981,11 +981,6 @@
     },
     "ServersProjectSummary": {
 	  "type": "object",
-	  "allOf": [
-      {
-        "$ref": "#/definitions/ProjectSummary"
-      }
-      ],
       "description": "Servers project summary.",
 	  "properties": {
 		"discoveredCount": {
@@ -1013,7 +1008,12 @@
           "format": "int32",
 		  "description": "Migrated count."
 		}
-	  }
+	  },
+  	  "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      }
+      ]
     },
     "DatabaseProjectSummary": {
    	  	  "allOf": [
