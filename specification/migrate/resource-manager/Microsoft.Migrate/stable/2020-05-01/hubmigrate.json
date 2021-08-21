@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "version": "2020-05-01",
     "title": "Microsoft.Azure.AMH.WebRole.V2020_05_01"
@@ -982,6 +982,11 @@
     "ServersProjectSummary": {
 	  "type": "object",
       "description": "Servers project summary.",
+      "allOf": [
+      {
+        "$ref": "#/definitions/ProjectSummary"
+      },
+	  {
 	  "properties": {
 		"discoveredCount": {
 	      "type": "integer",
@@ -1008,12 +1013,9 @@
           "format": "int32",
 		  "description": "Migrated count."
 		}
-	  },
-  	  "allOf": [
-      {
-        "$ref": "#/definitions/ProjectSummary"
-      }
-      ]
+	  }
+	  }
+	  ]
     },
     "DatabaseProjectSummary": {
    	  	  "allOf": [
