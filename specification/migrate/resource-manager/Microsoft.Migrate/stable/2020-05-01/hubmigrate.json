@@ -945,14 +945,11 @@
     "ProjectSummary": {
       "type": "object",
       "description": "Project summary.",
-	  "discriminator": "instanceType",
-	  "required": [
-	    "instanceType"
-	  ],
       "properties": {
         "instanceType": {
           "type": "string",
-          "description": "Instance type."
+          "description": "Instance type.",
+		  "readOnly": true
         },
         "refreshSummaryState": {
           "enum": [
