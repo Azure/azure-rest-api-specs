@@ -1,40 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "2.0",
     "title": "Common types"
   },
   "paths": {},
   "definitions": {
-    "CloudError": {
-      "description": "Error response structure.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error data",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "message": {
-          "description": "A message describing the error, intended to be suitable for display in a user interface.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
-    },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",
       "properties": {
@@ -57,7 +28,7 @@
     "ResourceWithEtag": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "description": "An azure resource object with an Etag property",
@@ -68,47 +39,9 @@
         }
       },
       "type": "object"
-    },
-    "Resource": {
-      "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
-      "type": "object",
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
-    "WorkspaceName": {
-      "description": "The name of the workspace.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "workspaceName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "OperationalInsightsResourceProvider": {
       "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
       "in": "path",
@@ -116,25 +49,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupName": {
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "resourceGroupName",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionId": {
-      "description": "Azure subscription ID",
-      "in": "path",
-      "name": "subscriptionId",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "required": true,
-      "type": "string"
     },
     "ODataFilter": {
       "description": "Filters the results, based on a Boolean condition. Optional.",
