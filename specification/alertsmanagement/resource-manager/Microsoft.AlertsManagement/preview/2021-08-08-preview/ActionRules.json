@@ -29,7 +29,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "description": "List all action rules of the subscription and given input filters",
+        "description": "List all action rules of the subscription",
         "operationId": "ActionRules_ListBySubscription",
         "parameters": [
           {
@@ -72,7 +72,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
         "operationId": "ActionRules_ListByResourceGroup",
-        "description": "List all action rules of the subscription, created in given resource group and given input filters",
+        "description": "List all action rules of the subscription, created in given resource group",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -128,7 +128,7 @@
           {
             "name": "actionRuleName",
             "in": "path",
-            "description": "The name of action rule that needs to be fetched",
+            "description": "The name of the action rule that needs to be fetched",
             "required": true,
             "type": "string"
           },
@@ -164,7 +164,7 @@
       },
       "put": {
         "operationId": "ActionRules_CreateUpdate",
-        "description": "Create or updates an action rule",
+        "description": "Create or update an action rule",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -175,7 +175,7 @@
           {
             "name": "actionRuleName",
             "in": "path",
-            "description": "The name of action rule that needs to be created/updated",
+            "description": "The name of the action rule that needs to be created/updated",
             "required": true,
             "type": "string"
           },
@@ -258,7 +258,7 @@
           {
             "name": "actionRuleName",
             "in": "path",
-            "description": "The name that needs to be deleted",
+            "description": "The name of the action rule that needs to be deleted",
             "required": true,
             "type": "string"
           },
@@ -488,8 +488,12 @@
             "Severity",
             "MonitorService",
             "MonitorCondition",
+            "SignalType",
             "TargetResourceType",
+            "TargetResource",
+            "TargetResourceGroup",
             "AlertRuleId",
+            "AlertRuleName",
             "Description",
             "AlertContext"
           ],
@@ -534,13 +538,13 @@
       "properties": {
         "effectiveFrom": {
           "type": "string",
-          "format": "date-time",
-          "description": "Scheduling effective from time. Date-Time in ISO-8601 format."
+          "pattern": "^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$",
+          "description": "Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix."
         },
         "effectiveUntil": {
           "type": "string",
-          "format": "date-time",
-          "description": "Scheduling effective until time. Date-Time in ISO-8601 format."
+          "pattern": "^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$",
+          "description": "Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix."
         },
         "timeZone": {
           "type": "string",
@@ -582,7 +586,7 @@
         },
         "endTime": {
           "type": "string",
-          "description": "End date for recurrence"
+          "description": "End time for recurrence"
         }
       }
     },
@@ -681,9 +685,10 @@
       }
     },
     "ActionRuleProperties": {
-      "description": "Action rule properties defining scopes, conditions, scheduling logic for action rule",
+      "description": "Action rule properties defining scopes, conditions and scheduling logic for action rule",
       "required": [
-        "scopes"
+        "scopes",
+        "actions"
       ],
       "properties": {
         "scopes": {
