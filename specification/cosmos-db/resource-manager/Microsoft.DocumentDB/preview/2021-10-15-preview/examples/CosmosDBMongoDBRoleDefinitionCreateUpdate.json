@@ -8,22 +8,24 @@
     "createUpdateMongoDbRoleDefinitionParameters": {
       "properties": {
         "roleName": "myRoleName",
-        "databaseName" : "sales",
-        "privileges" : [
+        "databaseName": "sales",
+        "privileges": [
           {
             "resource": {
               "db": "sales",
               "collection": "sales"
             },
-            "actions": [ "insert", "find" ]
+            "actions": [
+              "insert",
+              "find"
+            ]
           }
         ],
         "roles": [
-            {
-              "role": "myInheritedRole",
-              "db": "sales"
-            }
-
+          {
+            "role": "myInheritedRole",
+            "db": "sales"
+          }
         ]
       }
     }
@@ -40,14 +42,20 @@
           "databaseName": "sales",
           "privileges": [
             {
-              "resource" : {"db": "sales", "collection": "coll"},
-              "actions" : ["find", "insert"]
+              "resource": {
+                "db": "sales",
+                "collection": "coll"
+              },
+              "actions": [
+                "find",
+                "insert"
+              ]
             }
           ],
           "roles": [
             {
               "db": "sales",
-              "role" : "myReadRole"
+              "role": "myReadRole"
             }
           ]
         }
