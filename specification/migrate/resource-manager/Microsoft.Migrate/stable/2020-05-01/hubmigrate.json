@@ -572,9 +572,9 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PrivateLinkResource"
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/PrivateLinkResourceCollection"
               }
             }
           },
@@ -938,6 +938,25 @@
         },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "description": "Collection of private link resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of private links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
           "readOnly": true
         }
       }
