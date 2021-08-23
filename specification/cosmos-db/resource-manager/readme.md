@@ -153,6 +153,22 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-04-01-preview/restorable.json
 ```
 
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-10-15-previeww/rbac.json
+  - Microsoft.DocumentDB/preview/2021-10-15-previeww/mongorbac.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/restorable.json
+```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -386,6 +402,9 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: rbac.json
     reason: The name of the provider is Microsoft.DocumentDB
+ - suppress: PathResourceProviderNamePascalCase
+    from: mongorbac.json
+    reason: The name of the provider is Microsoft.DocumentDB
   - suppress: RequiredReadOnlySystemData
     reason: We do not yet support system data
   - suppress: ListInOperationName
@@ -459,6 +478,7 @@ input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-10-15-preview/mongorbac.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json

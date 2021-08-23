@@ -2,20 +2,20 @@
   "parameters": {
     "accountName": "ddb1",
     "resourceGroupName": "rg1",
-    "api-version": "2021-06-15",
+    "api-version": "2021-04-01-preview",
     "subscriptionId": "subid",
     "createUpdateParameters": {
       "location": "westus",
       "properties": {
         "databaseAccountOfferType": "Standard",
-        "createMode": "Default",
         "locations": [
           {
             "failoverPriority": 0,
             "locationName": "southcentralus",
             "isZoneRedundant": false
           }
-        ]
+        ],
+        "createMode": "Default"
       }
     }
   },
@@ -76,18 +76,18 @@
           "enableFreeTier": false,
           "apiProperties": {},
           "enableAnalyticalStorage": false,
-          "analyticalStorageConfiguration": null,
-          "networkAclBypass": "None",
-          "networkAclBypassResourceIds": [],
           "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
           "createMode": "Default",
           "backupPolicy": {
             "type": "Periodic",
             "periodicModeProperties": {
               "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 720
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Geo"
             }
-          }
+          },
+          "networkAclBypass": "None",
+          "networkAclBypassResourceIds": []
         },
         "systemData": {
           "createdAt": "2021-03-12T22:05:09Z"
