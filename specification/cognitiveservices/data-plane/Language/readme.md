@@ -6,7 +6,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release QuestionAnswering is 2021-07-15-preview
+The current preview release QuestionAnswering and LUIS Deepstack are both 2021-07-15-preview.
 
 ```yaml
 tag: release_2021_07_15_preview
@@ -29,6 +29,7 @@ These settings apply only when `--tag=release_2021_07_15_preview` is specified o
 input-file:
 - preview/2021-07-15-preview/questionanswering.json
 - preview/2021-07-15-preview/questionanswering-authoring.json
+- preview/2021-07-15-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
