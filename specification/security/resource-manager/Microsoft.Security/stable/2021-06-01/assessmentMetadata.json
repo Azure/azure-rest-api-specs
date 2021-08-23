@@ -205,7 +205,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/SecurityAssessmentMetadata"
+            "$ref": "#/parameters/SecurityAssessmentMetadataResponse"
           }
         ],
         "responses": {
@@ -582,66 +582,501 @@
             "type": "string",
             "description": "Tactic of the assessment",
             "enum": [
-              "reconnaissance",
-              "resourceDevelopment",
-              "initialAccess",
-              "execution",
-              "persistence",
-              "privilegeEscalation",
-              "defenseEvasion",
-              "credentialAccess",
-              "discovery",
-              "lateralMovement",
-              "collection",
-              "commandAndControl",
-              "exfiltration",
-              "impact"
+              "Reconnaissance",
+              "Resource Development",
+              "Initial Access",
+              "Execution",
+              "Persistence",
+              "Privilege Escalation",
+              "Defense Evasion",
+              "Credential Access",
+              "Discovery",
+              "Lateral Movement",
+              "Collection",
+              "Command and Control",
+              "Exfiltration",
+              "Impact"
             ],
             "x-ms-enum": {
               "name": "tactics",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "reconnaissance"
+                  "value": "Reconnaissance"
                 },
                 {
-                  "value": "resourceDevelopment"
+                  "value": "Resource Development"
                 },
                 {
-                  "value": "initialAccess"
+                  "value": "Initial Access"
                 },
                 {
-                  "value": "execution"
+                  "value": "Execution"
                 },
                 {
-                  "value": "persistence"
+                  "value": "Persistence"
                 },
                 {
-                  "value": "privilegeEscalation"
+                  "value": "Privilege Escalation"
                 },
                 {
-                  "value": "defenseEvasion"
+                  "value": "Defense Evasion"
                 },
                 {
-                  "value": "credentialAccess"
+                  "value": "Credential Access"
                 },
                 {
-                  "value": "discovery"
+                  "value": "Discovery"
                 },
                 {
-                  "value": "lateralMovement"
+                  "value": "Lateral Movement"
                 },
                 {
-                  "value": "collection"
+                  "value": "Collection"
                 },
                 {
-                  "value": "commandAndControl"
+                  "value": "Command and Control"
                 },
                 {
-                  "value": "exfiltration"
+                  "value": "Exfiltration"
                 },
                 {
-                  "value": "impact"
+                  "value": "Impact"
+                }
+              ]
+            }
+          }
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Techniques of the assessment",
+            "enum": [
+              "Abuse Elevation Control Mechanism",
+              "Access Token Manipulation",
+              "Account Discovery",
+              "Account Manipulation",
+              "Active Scanning",
+              "Application Layer Protocol",
+              "Audio Capture",
+              "Boot or Logon Autostart Execution",
+              "Boot or Logon Initialization Scripts",
+              "Brute Force",
+              "Cloud Infrastructure Discovery",
+              "Cloud Service Dashboard",
+              "Cloud Service Discovery",
+              "Command and Scripting Interpreter",
+              "Compromise Client Software Binary",
+              "Compromise Infrastructure",
+              "Container and Resource Discovery",
+              "Create Account",
+              "Create or Modify System Process",
+              "Credentials from Password Stores",
+              "Data Destruction",
+              "Data Encrypted for Impact",
+              "Data from Cloud Storage Object",
+              "Data from Configuration Repository",
+              "Data from Information Repositories",
+              "Data from Local System",
+              "Data Manipulation",
+              "Data Staged",
+              "Defacement",
+              "Deobfuscate/Decode Files or Information",
+              "Disk Wipe",
+              "Domain Trust Discovery",
+              "Drive-by Compromise",
+              "Dynamic Resolution",
+              "Endpoint Denial of Service",
+              "Event Triggered Execution",
+              "Exfiltration Over Alternative Protocol",
+              "Exploit Public-Facing Application",
+              "Exploitation for Client Execution",
+              "Exploitation for Credential Access",
+              "Exploitation for Defense Evasion",
+              "Exploitation for Privilege Escalation",
+              "Exploitation of Remote Services",
+              "External Remote Services",
+              "Fallback Channels",
+              "File and Directory Discovery",
+              "Gather Victim Network Information",
+              "Hide Artifacts",
+              "Hijack Execution Flow",
+              "Impair Defenses",
+              "Implant Container Image",
+              "Indicator Removal on Host",
+              "Indirect Command Execution",
+              "Ingress Tool Transfer",
+              "Input Capture",
+              "Inter-Process Communication",
+              "Lateral Tool Transfer",
+              "Man-in-the-Middle",
+              "Masquerading",
+              "Modify Authentication Process",
+              "Modify Registry",
+              "Network Denial of Service",
+              "Network Service Scanning",
+              "Network Sniffing",
+              "Non-Application Layer Protocol",
+              "Non-Standard Port",
+              "Obfuscated Files or Information",
+              "Obtain Capabilities",
+              "Obuscated Files or Information",
+              "Office Application Startup",
+              "OS Credential Dumping",
+              "Permission Groups Discovery",
+              "Phishing",
+              "Pre-OS Boot",
+              "Process Discovery",
+              "Process Injection",
+              "Protocol Tunneling",
+              "Proxy",
+              "Query Registry",
+              "Remote Access Software",
+              "Remote Service Session Hijacking",
+              "Remote Services",
+              "Remote System Discovery",
+              "Resource Hijacking",
+              "Scheduled Task/Job",
+              "Screen Capture",
+              "Search Victim-Owned Websites",
+              "Server Software Component",
+              "Service Stop",
+              "Signed Binary Proxy Execution",
+              "Software Deployment Tools",
+              "SQL Stored Procedures",
+              "Steal or Forge Kerberos Tickets",
+              "Subvert Trust Controls",
+              "Supply Chain Compromise",
+              "System Information Discovery",
+              "Taint Shared Content",
+              "Traffic Signaling",
+              "Transfer Data to Cloud Account",
+              "Trusted Relationship",
+              "Unsecured Credentials",
+              "User Execution",
+              "Valid Accounts",
+              "Windows Management Instrumentation",
+              "File and Directory Permissions Modification"
+            ],
+            "x-ms-enum": {
+              "name": "techniques",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Abuse Elevation Control Mechanism"
+                },
+                {
+                  "value": "Access Token Manipulation"
+                },
+                {
+                  "value": "Account Discovery"
+                },
+                {
+                  "value": "Account Manipulation"
+                },
+                {
+                  "value": "Active Scanning"
+                },
+                {
+                  "value": "Application Layer Protocol"
+                },
+                {
+                  "value": "Audio Capture"
+                },
+                {
+                  "value": "Boot or Logon Autostart Execution"
+                },
+                {
+                  "value": "Boot or Logon Initialization Scripts"
+                },
+                {
+                  "value": "Brute Force"
+                },
+                {
+                  "value": "Cloud Infrastructure Discovery"
+                },
+                {
+                  "value": "Cloud Service Dashboard"
+                },
+                {
+                  "value": "Cloud Service Discovery"
+                },
+                {
+                  "value": "Command and Scripting Interpreter"
+                },
+                {
+                  "value": "Compromise Client Software Binary"
+                },
+                {
+                  "value": "Compromise Infrastructure"
+                },
+                {
+                  "value": "Container and Resource Discovery"
+                },
+                {
+                  "value": "Create Account"
+                },
+                {
+                  "value": "Create or Modify System Process"
+                },
+                {
+                  "value": "Credentials from Password Stores"
+                },
+                {
+                  "value": "Data Destruction"
+                },
+                {
+                  "value": "Data Encrypted for Impact"
+                },
+                {
+                  "value": "Data from Cloud Storage Object"
+                },
+                {
+                  "value": "Data from Configuration Repository"
+                },
+                {
+                  "value": "Data from Information Repositories"
+                },
+                {
+                  "value": "Data from Local System"
+                },
+                {
+                  "value": "Data Manipulation"
+                },
+                {
+                  "value": "Data Staged"
+                },
+                {
+                  "value": "Defacement"
+                },
+                {
+                  "value": "Deobfuscate/Decode Files or Information"
+                },
+                {
+                  "value": "Disk Wipe"
+                },
+                {
+                  "value": "Domain Trust Discovery"
+                },
+                {
+                  "value": "Drive-by Compromise"
+                },
+                {
+                  "value": "Dynamic Resolution"
+                },
+                {
+                  "value": "Endpoint Denial of Service"
+                },
+                {
+                  "value": "Event Triggered Execution"
+                },
+                {
+                  "value": "Exfiltration Over Alternative Protocol"
+                },
+                {
+                  "value": "Exploit Public-Facing Application"
+                },
+                {
+                  "value": "Exploitation for Client Execution"
+                },
+                {
+                  "value": "Exploitation for Credential Access"
+                },
+                {
+                  "value": "Exploitation for Defense Evasion"
+                },
+                {
+                  "value": "Exploitation for Privilege Escalation"
+                },
+                {
+                  "value": "Exploitation of Remote Services"
+                },
+                {
+                  "value": "External Remote Services"
+                },
+                {
+                  "value": "Fallback Channels"
+                },
+                {
+                  "value": "File and Directory Discovery"
+                },
+                {
+                  "value": "Gather Victim Network Information"
+                },
+                {
+                  "value": "Hide Artifacts"
+                },
+                {
+                  "value": "Hijack Execution Flow"
+                },
+                {
+                  "value": "Impair Defenses"
+                },
+                {
+                  "value": "Implant Container Image"
+                },
+                {
+                  "value": "Indicator Removal on Host"
+                },
+                {
+                  "value": "Indirect Command Execution"
+                },
+                {
+                  "value": "Ingress Tool Transfer"
+                },
+                {
+                  "value": "Input Capture"
+                },
+                {
+                  "value": "Inter-Process Communication"
+                },
+                {
+                  "value": "Lateral Tool Transfer"
+                },
+                {
+                  "value": "Man-in-the-Middle"
+                },
+                {
+                  "value": "Masquerading"
+                },
+                {
+                  "value": "Modify Authentication Process"
+                },
+                {
+                  "value": "Modify Registry"
+                },
+                {
+                  "value": "Network Denial of Service"
+                },
+                {
+                  "value": "Network Service Scanning"
+                },
+                {
+                  "value": "Network Sniffing"
+                },
+                {
+                  "value": "Non-Application Layer Protocol"
+                },
+                {
+                  "value": "Non-Standard Port"
+                },
+                {
+                  "value": "Obfuscated Files or Information"
+                },
+                {
+                  "value": "Obtain Capabilities"
+                },
+                {
+                  "value": "Obuscated Files or Information"
+                },
+                {
+                  "value": "Office Application Startup"
+                },
+                {
+                  "value": "OS Credential Dumping"
+                },
+                {
+                  "value": "Permission Groups Discovery"
+                },
+                {
+                  "value": "Phishing"
+                },
+                {
+                  "value": "Pre-OS Boot"
+                },
+                {
+                  "value": "Process Discovery"
+                },
+                {
+                  "value": "Process Injection"
+                },
+                {
+                  "value": "Protocol Tunneling"
+                },
+                {
+                  "value": "Proxy"
+                },
+                {
+                  "value": "Query Registry"
+                },
+                {
+                  "value": "Remote Access Software"
+                },
+                {
+                  "value": "Remote Service Session Hijacking"
+                },
+                {
+                  "value": "Remote Services"
+                },
+                {
+                  "value": "Remote System Discovery"
+                },
+                {
+                  "value": "Resource Hijacking"
+                },
+                {
+                  "value": "Scheduled Task/Job"
+                },
+                {
+                  "value": "Screen Capture"
+                },
+                {
+                  "value": "Search Victim-Owned Websites"
+                },
+                {
+                  "value": "Server Software Component"
+                },
+                {
+                  "value": "Service Stop"
+                },
+                {
+                  "value": "Signed Binary Proxy Execution"
+                },
+                {
+                  "value": "Software Deployment Tools"
+                },
+                {
+                  "value": "SQL Stored Procedures"
+                },
+                {
+                  "value": "Steal or Forge Kerberos Tickets"
+                },
+                {
+                  "value": "Subvert Trust Controls"
+                },
+                {
+                  "value": "Supply Chain Compromise"
+                },
+                {
+                  "value": "System Information Discovery"
+                },
+                {
+                  "value": "Taint Shared Content"
+                },
+                {
+                  "value": "Traffic Signaling"
+                },
+                {
+                  "value": "Transfer Data to Cloud Account"
+                },
+                {
+                  "value": "Trusted Relationship"
+                },
+                {
+                  "value": "Unsecured Credentials"
+                },
+                {
+                  "value": "User Execution"
+                },
+                {
+                  "value": "Valid Accounts"
+                },
+                {
+                  "value": "Windows Management Instrumentation"
+                },
+                {
+                  "value": "File and Directory Permissions Modification"
                 }
               ]
             }
@@ -664,13 +1099,13 @@
       "description": "The Assessment Key - Unique key for the assessment type",
       "x-ms-parameter-location": "method"
     },
-    "SecurityAssessmentMetadata": {
+    "SecurityAssessmentMetadataResponse": {
       "name": "assessmentMetadata",
       "in": "body",
       "required": true,
       "description": "AssessmentMetadata object",
       "schema": {
-        "$ref": "#/definitions/SecurityAssessmentMetadata"
+        "$ref": "#/definitions/SecurityAssessmentMetadataResponse"
       },
       "x-ms-parameter-location": "method"
     }

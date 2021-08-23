@@ -56,5 +56,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-sdk-for-go
 ```
 

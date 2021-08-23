@@ -27,6 +27,7 @@ batch:
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
+  - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
@@ -54,6 +55,7 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
   - multiapiscript-resources: true
+  - tag: package-subscriptions-2021-01
   - tag: package-subscriptions-2019-11
   - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
@@ -195,6 +197,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
 namespace: azure.mgmt.resource.managedapplications
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+```
+
+### Tag: package-policy-2021-06 and python
+
+These settings apply only when `--tag=package-policy-2021-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2021-06'
+namespace: azure.mgmt.resource.policy.v2021_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2021_06_01
 ```
 
 ### Tag: package-policy-2020-09 and python
@@ -445,6 +457,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-resources-2016-02'
 namespace: azure.mgmt.resource.resources.v2016_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
+```
+
+### Tag: package-subscriptions-2021-01 and python
+
+These settings apply only when `--tag=package-subscriptions-2021-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2021-01'
+namespace: azure.mgmt.resource.subscriptions.v2021_01_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2021_01_01
 ```
 
 ### Tag: package-subscriptions-2019-11 and python
