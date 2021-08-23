@@ -135,64 +135,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/listNetworkManagerEffectiveSecurityUserRules": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/VirtualNetworkNameParameter"
-        },
-        {
-          "name": "subnetName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the subnet."
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-          },
-          "description": "Parameters supplied to list correct page."
-        }
-      ],
-      "post": {
-        "tags": [
-          "NetworkManagerEffectiveSecurityUserRules"
-        ],
-        "operationId": "EffectiveSecurityUserRules_ListBySubnet",
-        "description": "List all effective security user rules in a subnet.",
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about all effective configurations in a subnet.",
-            "schema": {
-              "$ref": "#/definitions/NetworkManagerEffectiveSecurityUserRulesListResult"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List effective security user rules applied on a subnet": {
-            "$ref": "./examples/NetworkManagerEffectiveSecurityUserRulesListBySubnet.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -229,23 +171,6 @@
         }
       },
       "description": "Result of the request to list networkManagerEffectiveSecurityAdminRules. It contains a list of groups and a skiptoken to get the next set of results."
-    },
-    "NetworkManagerEffectiveSecurityUserRulesListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EffectiveBaseSecurityUserRule"
-          },
-          "description": "Gets a page of NetworkManagerEffectiveSecurityUserRules"
-        },
-        "$skipToken": {
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "type": "string"
-        }
-      },
-      "description": "Result of the request to list NetworkManagerEffectiveSecurityUserRules. It contains a list of groups and a skiptoken to get the next set of results."
     },
     "EffectiveConnectivityConfiguration": {
       "type": "object",
@@ -357,96 +282,6 @@
         }
       ],
       "description": "Network default admin rule.",
-      "x-ms-discriminator-value": "Default"
-    },
-    "EffectiveBaseSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "configurationDisplayName": {
-          "type": "string",
-          "description": "A display name of the security user configuration."
-        },
-        "configurationDescription": {
-          "type": "string",
-          "description": "A description of the security user configuration."
-        },
-        "ruleCollectionDisplayName": {
-          "type": "string",
-          "description": "A display name of the rule collection."
-        },
-        "ruleCollectionDescription": {
-          "type": "string",
-          "description": "A description of the rule collection."
-        },
-        "ruleCollectionAppliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
-          },
-          "description": "Groups for rule collection"
-        },
-        "ruleGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationGroup"
-          },
-          "description": "Effective configuration groups."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Whether the rule is custom or default.",
-          "enum": [
-            "Custom",
-            "Default"
-          ],
-          "x-ms-enum": {
-            "name": "EffectiveUserRuleKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "discriminator": "kind",
-      "description": "Network base rule."
-    },
-    "EffectiveSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
-          "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security user rule"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EffectiveBaseSecurityUserRule"
-        }
-      ],
-      "description": "Network security user rule.",
-      "x-ms-discriminator-value": "Custom"
-    },
-    "EffectiveDefaultSecurityUserRule": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
-          "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security default user rule"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EffectiveBaseSecurityUserRule"
-        }
-      ],
-      "description": "Network security default user rule.",
       "x-ms-discriminator-value": "Default"
     },
     "ConfigurationGroup": {
