@@ -605,7 +605,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -613,7 +613,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resources."
+            "description": "The maximum number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1033,7 +1033,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter."
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -1041,7 +1041,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resource groups."
+            "description": "The maximum number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1117,7 +1117,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1184,7 +1185,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1255,7 +1257,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1341,7 +1344,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1421,7 +1425,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1458,7 +1463,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -1490,7 +1496,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -1526,7 +1533,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1577,7 +1585,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1622,7 +1631,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -1922,6 +1932,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/calculateTemplateHash": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CalculateTemplateHash",
+        "description": "Calculate the hash of the given template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "template",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The template provided to calculate hash."
+          }
+        ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the hash.",
+            "schema": {
+              "$ref": "#/definitions/TemplateHashResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2065,6 +2117,15 @@
       },
       "description": "The deployment export result. "
     },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
+    },
     "ResourceManagementErrorWithDetails": {
       "properties": {
         "code": {
@@ -2151,6 +2212,12 @@
             "type": "string"
           },
           "description": "The API version."
+        },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
         },
         "properties": {
           "type": "object",
@@ -2406,6 +2473,33 @@
       ],
       "description": "Resource information."
     },
+    "GenericResourceExpanded": {
+      "properties": {
+        "createdTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "changedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource. This is only present if requested via the $expand query parameter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericResource"
+        }
+      ],
+      "description": "Resource information."
+    },
     "Plan": {
       "properties": {
         "name": {
@@ -2492,7 +2586,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenericResource"
+            "$ref": "#/definitions/GenericResourceExpanded"
           },
           "description": "An array of resources."
         },
@@ -2884,6 +2978,33 @@
         }
       },
       "description": "Resource group export result."
+    },
+    "TemplateHashResult": {
+      "description": "Result of the request to calculate template hash. It contains a string of minified template and its hash.",
+      "properties": {
+        "minifiedTemplate": {
+          "type": "string",
+          "description": "The minified template string."
+        },
+        "templateHash": {
+          "type": "string",
+          "description": "The template hash."
+        }
+      }
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

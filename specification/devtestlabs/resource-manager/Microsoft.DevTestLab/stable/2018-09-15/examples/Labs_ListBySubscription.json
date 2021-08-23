@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "api-version": "2018-09-15"
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}"
   },
   "responses": {
     "200": {
@@ -9,11 +9,11 @@
         "value": [
           {
             "properties": {
-              "defaultStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-1}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-1}",
-              "defaultPremiumStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-1}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-1}",
-              "artifactsStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-1}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-1}",
-              "premiumDataDiskStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-1}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-1}",
-              "vaultName": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-1}/providers/Microsoft.KeyVault/vaults/{keyvault-name-1}",
+              "defaultStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
+              "defaultPremiumStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
+              "artifactsStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
+              "premiumDataDiskStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
+              "vaultName": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/{keyVaultName}",
               "labStorageType": "Premium",
               "mandatoryArtifactsResourceIdsLinux": [],
               "mandatoryArtifactsResourceIdsWindows": [],
@@ -31,21 +31,23 @@
                 "markdown": ""
               },
               "provisioningState": "Succeeded",
-              "uniqueIdentifier": "{unique-identifier}"
+              "uniqueIdentifier": "{uniqueIdentifier}"
             },
-            "id": "/subscriptions/{subscription-id}/resourcegroups/{resourcegroup-name-1}/providers/microsoft.devtestlab/labs/{lab-name-1}",
-            "name": "{lab-name-1}",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName1}",
+            "name": "{labName1}",
             "type": "Microsoft.DevTestLab/labs",
             "location": "westcentralus",
-            "tags": {}
+            "tags": {
+              "tagName1": "tagValue1"
+            }
           },
           {
             "properties": {
-              "defaultStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-2}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-2}",
-              "defaultPremiumStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-2}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-2}",
-              "artifactsStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-2}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-2}",
-              "premiumDataDiskStorageAccount": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-2}/providers/Microsoft.Storage/storageAccounts/{storageaccount-name-2}",
-              "vaultName": "/subscriptions/{subscription-id}/resourceGroups/{resourcegroup-name-2}/providers/Microsoft.KeyVault/vaults/{keyvault-name-2}",
+              "defaultStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName2}/providers/Microsoft.Storage/storageAccounts/{storageAccountName2}",
+              "defaultPremiumStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName2}/providers/Microsoft.Storage/storageAccounts/{storageAccountName2}",
+              "artifactsStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName2}/providers/Microsoft.Storage/storageAccounts/{storageAccountName2}",
+              "premiumDataDiskStorageAccount": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName2}/providers/Microsoft.Storage/storageAccounts/{storageAccountName2}",
+              "vaultName": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName2}/providers/Microsoft.KeyVault/vaults/{keyVaultName2}",
               "labStorageType": "Premium",
               "mandatoryArtifactsResourceIdsLinux": [],
               "mandatoryArtifactsResourceIdsWindows": [],
@@ -63,13 +65,15 @@
                 "markdown": ""
               },
               "provisioningState": "Succeeded",
-              "uniqueIdentifier": "{unique-identifier}"
+              "uniqueIdentifier": "{uniqueIdentifier}"
             },
-            "id": "/subscriptions/{subscription-id}/resourcegroups/{resourcegroup-name-2}/providers/microsoft.devtestlab/labs/{lab-name-2}",
-            "name": "{lab-name-2}",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName2}/providers/microsoft.devtestlab/labs/{labName2}",
+            "name": "{labName2}",
             "type": "Microsoft.DevTestLab/labs",
             "location": "japaneast",
-            "tags": {}
+            "tags": {
+              "tagName1": "tagValue1"
+            }
           }
         ]
       }
