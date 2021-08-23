@@ -27,7 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2021-06
+tag: package-2021-07-preview
 ```
 
 ### Tag: package-2021-07-preview
