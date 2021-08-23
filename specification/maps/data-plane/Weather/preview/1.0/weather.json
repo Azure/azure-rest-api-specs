@@ -84,8 +84,8 @@
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "RequiredWeatherBasinID": {
-      "name": "basinID",
+    "RequiredWeatherBasinId": {
+      "name": "basinId",
       "type": "string",
       "description": "Basin identifier",
       "required": true,
@@ -100,7 +100,7 @@
         "SP"
       ],
       "x-ms-enum": {
-        "name": "basinID",
+        "name": "basinId",
         "modelAsString": true,
         "values": [
           {
@@ -135,8 +135,8 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "OptionalWeatherBasinID": {
-      "name": "basinID",
+    "OptionalWeatherBasinId": {
+      "name": "basinId",
       "type": "string",
       "description": "Basin identifier",
       "in": "query",
@@ -150,53 +150,53 @@
         "SP"
       ],
       "x-ms-enum": {
-        "name": "basinID",
+        "name": "basinId",
         "modelAsString": true,
         "values": [
           {
             "value": "AL",
-            "description": "AL"
+            "description": "Atlantic"
           },
           {
             "value": "EP",
-            "description": "EP"
+            "description": "Eastern Pacific"
           },
           {
             "value": "SI",
-            "description": "SI"
+            "description": "Southwest Indian Ocean"
           },
           {
             "value": "NI",
-            "description": "NI"
+            "description": "North Indian Ocean"
           },
           {
             "value": "CP",
-            "description": "CP"
+            "description": "Central Pacific"
           },
           {
             "value": "NP",
-            "description": "NP"
+            "description": "Northwest Pacific"
           },
           {
             "value": "SP",
-            "description": "SP"
+            "description": "South Pacific"
           }
         ]
       },
       "x-ms-parameter-location": "method"
     },
-    "RequiredWeatherGovernmentID": {
-      "name": "governmentID",
-      "description": "Government storm ID",
+    "RequiredWeatherGovernmentId": {
+      "name": "governmentId",
+      "description": "Government storm Id",
       "type": "integer",
       "format": "int32",
       "required": true,
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "OptionalWeatherGovernmentID": {
-      "name": "governmentID",
-      "description": "Government storm ID",
+    "OptionalWeatherGovernmentId": {
+      "name": "governmentId",
+      "description": "Government storm Id",
       "type": "integer",
       "format": "int32",
       "in": "query",
@@ -758,10 +758,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/OptionalWeatherBasinID"
+            "$ref": "#/parameters/OptionalWeatherBasinId"
           },
           {
-            "$ref": "#/parameters/OptionalWeatherGovernmentID"
+            "$ref": "#/parameters/OptionalWeatherGovernmentId"
           }
         ],
         "responses": {
@@ -800,10 +800,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/RequiredWeatherBasinID"
+            "$ref": "#/parameters/RequiredWeatherBasinId"
           },
           {
-            "$ref": "#/parameters/RequiredWeatherGovernmentID"
+            "$ref": "#/parameters/RequiredWeatherGovernmentId"
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -861,10 +861,10 @@
             "$ref": "#/parameters/WeatherYear"
           },
           {
-            "$ref": "#/parameters/RequiredWeatherBasinID"
+            "$ref": "#/parameters/RequiredWeatherBasinId"
           },
           {
-            "$ref": "#/parameters/RequiredWeatherGovernmentID"
+            "$ref": "#/parameters/RequiredWeatherGovernmentId"
           },
           {
             "$ref": "#/parameters/WeatherDetails"
@@ -2807,7 +2807,7 @@
           "description": "Year of origination"
         },
         "basinId": {
-          "$ref": "#/definitions/basinID",
+          "$ref": "#/definitions/basinId",
           "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
         },
         "name": {
@@ -2829,7 +2829,7 @@
         }
       }
     },
-    "basinID": {
+    "basinId": {
       "type": "string",
       "description": "Basin identifier",
       "enum": [
@@ -2842,36 +2842,36 @@
         "SP"
       ],
       "x-ms-enum": {
-        "name": "basinID",
+        "name": "basinId",
         "modelAsString": true,
         "values": [
           {
             "value": "AL",
-            "description": "AL"
+            "description": "Atlantic"
           },
           {
             "value": "EP",
-            "description": "EP"
+            "description": "Eastern Pacific"
           },
           {
             "value": "SI",
-            "description": "SI"
+            "description": "Southwest Indian Ocean"
           },
           {
             "value": "NI",
-            "description": "NI"
+            "description": "North Indian Ocean"
           },
           {
             "value": "CP",
-            "description": "CP"
+            "description": "Central Pacific"
           },
           {
             "value": "NP",
-            "description": "NP"
+            "description": "Northwest Pacific"
           },
           {
             "value": "SP",
-            "description": "SP"
+            "description": "South Pacific"
           }
         ]
       }
@@ -2899,7 +2899,7 @@
           "description": "Year of origination"
         },
         "basinId": {
-          "$ref": "#/definitions/basinID",
+          "$ref": "#/definitions/basinId",
           "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
         },
         "name": {
@@ -3098,7 +3098,7 @@
         },
         "movement": {
           "$ref": "#/definitions/WindDetails",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "The storm movement information."
         },
         "status": {
           "type": "string",
@@ -3106,7 +3106,7 @@
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "Automated Tropical Cyclone Forecasting (ATCF) storm ID. May be NULL. If NULL, this parameter will not be displayed."
+          "description": "True when the depression is classified as a subtropical cyclone."
         },
         "hasTropicalPotential": {
           "type": "boolean",
