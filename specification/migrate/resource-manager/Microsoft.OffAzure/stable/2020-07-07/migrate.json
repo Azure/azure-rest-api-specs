@@ -5799,47 +5799,6 @@
           "readOnly": true
         }
       }
-    },
-    "SiteErrorSummary": {
-      "type": "object",
-      "properties": {
-        "applianceName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "discoveryScopeErrorSummaries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiscoveryScopeErrorSummary"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DiscoveryScopeErrorSummary": {
-      "type": "object",
-      "properties": {
-        "affectedResourceType": {
-          "type": "string"
-        },
-        "affectedObjectsCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "discoveryScope": {
-          "enum": [
-            "AppsAndRoles",
-            "DependencyMap",
-            "StaticData"
-          ],
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   }
 }
