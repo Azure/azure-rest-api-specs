@@ -64,6 +64,10 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
+``` yaml $(package-deploymentstacks)
+tag: package-deploymentstacks-2021-05
+```
+
 ### Tag: package-policy-2021-06
 
 These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
@@ -860,6 +864,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-deploymentstacks: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
