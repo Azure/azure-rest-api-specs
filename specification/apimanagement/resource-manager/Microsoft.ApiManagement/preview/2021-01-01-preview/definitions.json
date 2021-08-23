@@ -5013,7 +5013,20 @@
       "description": "API Schema create or update contract Properties."
     },
     "SchemaDocumentProperties": {
-      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Json escaped string defining the document representing the Schema. Used for schemas other than Swagger/OpenAPI."
+        },
+        "definitions": {
+          "type": "object",
+          "description": "Types definitions. Used for Swagger/OpenAPI v1 schemas only, null otherwise."
+        },
+        "components": {
+          "type": "object",
+          "description": "Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise."
+        }
+      },
       "description": "Schema Document Properties."
     },
     "SubscriptionCollection": {
