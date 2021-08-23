@@ -16,6 +16,7 @@ batch:
   - package-links: true
   - package-managedapplications: true
   - package-templatespecs: true
+  - package-subscriptions: true
 ```
 
 ```yaml $(typescript) && $(package-features) && !$(profile-content)
@@ -64,6 +65,13 @@ typescript:
 typescript:
   package-name: "@azure/arm-templatespecs"
   output-folder: "$(typescript-sdks-folder)/sdk/templatespecs/arm-templatespecs"
+  clear-output-folder: true
+```
+
+```yaml $(typescript) && $(package-subscriptions) && !$(profile-content)
+typescript:
+  package-name: "@azure/arm-resources-subscriptions"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources-subscriptions/arm-resources-subscriptions"
   clear-output-folder: true
 ```
 
