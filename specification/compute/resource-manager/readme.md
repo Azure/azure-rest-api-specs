@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Compute.
 
-
 The compute RP comprises of small services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,21 +21,20 @@ To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Compute API.
 
 ``` yaml
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-07-01
-
+tag: package-2021-08
 directive:
   - where:
       - $.definitions.VirtualMachine.properties
@@ -218,10 +217,10 @@ directive:
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
   - where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get'
     suppress:
       - D5001
-    reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
+    reason: 'The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.'
   - where:
       - $.definitions.RestorePoint
     suppress:
@@ -230,6 +229,19 @@ directive:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
 
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Compute/stable/2021-08-01/compute.json
+  - Microsoft.Compute/stable/2021-08-01/gallery.json
+  - Microsoft.Compute/stable/2021-08-01/runCommands.json
+  - Microsoft.Compute/stable/2021-08-01/sharedGallery.json
+  - Microsoft.Compute/stable/2021-08-01/skus.json
+```
 ### Tag: package-2021-07-01
 
 These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
@@ -358,6 +370,7 @@ input-file:
 ```
 
 ### Tag: package-2020-09-30
+
 These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-09-30'
@@ -883,10 +896,9 @@ input-file:
 - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -925,5 +937,3 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
-
-
