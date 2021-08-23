@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Security/standards": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards": {
       "get": {
         "x-ms-examples": {
           "List security standards": {
@@ -51,7 +51,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           }
         ],
         "responses": {
@@ -73,7 +76,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/standards/{standardId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards/{standardId}": {
       "get": {
         "x-ms-examples": {
           "Get a specific security standard by scope and standardId": {
@@ -90,7 +93,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/StandardId"
@@ -127,7 +133,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/StandardId"
@@ -173,7 +182,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/StandardId"
@@ -236,16 +248,20 @@
       "description": "Describes properties of a standard.",
       "properties": {
         "displayName": {
+          "description": "display name of the standard, equivalent to the standardId",
           "type": "string"
         },
         "standardType": {
+          "description": "standard type (Custom or BuiltIn only currently)",
           "type": "string",
           "readOnly": true
         },
         "description": {
+          "description": "description of the standard",
           "type": "string"
         },
         "category": {
+          "description": "category of the standard provided",
           "type": "string"
         }
       }
