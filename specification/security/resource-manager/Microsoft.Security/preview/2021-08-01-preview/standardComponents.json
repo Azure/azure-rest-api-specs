@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardComponents": {
       "get": {
         "x-ms-examples": {
-          "List security standards": {
-            "$ref": "./examples/Standards/ListStandards_example.json"
+          "List security standardComponents": {
+            "$ref": "./examples/StandardComponents/ListStandardComponents_example.json"
           }
         },
         "tags": [
-          "Standards"
+          "StandardComponents"
         ],
-        "description": "Get security standards on all your resources inside a scope",
-        "operationId": "Standards_List",
+        "description": "Get all standardComponents on all resources in the provided scope",
+        "operationId": "StandardComponents_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -61,7 +61,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StandardList"
+              "$ref": "#/definitions/StandardComponentList"
             }
           },
           "default": {
@@ -76,18 +76,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards/{standardId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardComponents/{standardComponentId}": {
       "get": {
         "x-ms-examples": {
-          "Get a specific security standard by scope and standardId": {
-            "$ref": "./examples/Standards/GetStandard_example.json"
+          "Get a specific security standard component by scope and standardComponentId": {
+            "$ref": "./examples/StandardComponents/GetStandardComponent_example.json"
           }
         },
         "tags": [
-          "Standards"
+          "StandardComponents"
         ],
-        "description": "Get a specific security standard for the requested scope",
-        "operationId": "Standards_Get",
+        "description": "Get a specific standardComponent for the requested scope",
+        "operationId": "StandardComponents_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -99,14 +99,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardId"
+            "$ref": "#/parameters/StandardComponentId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Standard"
+              "$ref": "#/definitions/StandardComponent"
             }
           },
           "default": {
@@ -119,15 +119,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create a security standard on a specified scope": {
-            "$ref": "./examples/Standards/PutStandard_example.json"
+          "Create a security standard component on a specified scope": {
+            "$ref": "./examples/StandardComponents/PutStandardComponent_example.json"
           }
         },
         "tags": [
-          "Standards"
+          "StandardComponents"
         ],
-        "description": "Create a security standard on the given scope.  Available only for custom standards.  Will create/update the required standard definitions.",
-        "operationId": "Standards_CreateOrUpdate",
+        "description": "Create a security component on the given scope.",
+        "operationId": "StandardComponents_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -139,23 +139,23 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardId"
+            "$ref": "#/parameters/StandardComponentId"
           },
           {
-            "$ref": "#/parameters/StandardBody"
+            "$ref": "#/parameters/StandardComponentBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Standard"
+              "$ref": "#/definitions/StandardComponent"
             }
           },
           "200": {
             "description": "OK - Updated",
             "schema": {
-              "$ref": "#/definitions/Standard"
+              "$ref": "#/definitions/StandardComponent"
             }
           },
           "default": {
@@ -168,15 +168,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a security standard over the specified scope": {
-            "$ref": "./examples/Standards/DeleteStandard_example.json"
+          "Delete a security standard component over the specified scope": {
+            "$ref": "./examples/StandardComponents/DeleteStandardComponents_example.json"
           }
         },
         "tags": [
-          "Standards"
+          "StandardComponents"
         ],
-        "description": "Delete a security standard on a scope.",
-        "operationId": "Standards_Delete",
+        "description": "Delete a security component over the given scope",
+        "operationId": "StandardComponents_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -188,15 +188,15 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardId"
+            "$ref": "#/parameters/StandardComponentId"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Standard was deleted"
+            "description": "OK - StandardComponent was deleted"
           },
           "204": {
-            "description": "No Content - Standard does not exist"
+            "description": "No Content - StandardComponent does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -209,16 +209,16 @@
     }
   },
   "definitions": {
-    "StandardList": {
+    "StandardComponentList": {
       "type": "object",
-      "description": "Page of a Standard list",
+      "description": "Page of a standardComponent list",
       "properties": {
         "value": {
-          "description": "Collection of standards in this page",
+          "description": "Collection of standardComponents in this page",
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Standard"
+            "$ref": "#/definitions/StandardComponent"
           }
         },
         "nextLink": {
@@ -228,14 +228,14 @@
         }
       }
     },
-    "Standard": {
+    "StandardComponent": {
       "type": "object",
-      "description": "Security Standard on a resource",
+      "description": "Individual component of a Security Standard, with mapped resourceType and definitions",
       "properties": {
         "properties": {
-          "description": "Properties of a security standard",
+          "description": "Properties of a standardComponent",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StandardProperties"
+          "$ref": "#/definitions/StandardComponentProperties"
         }
       },
       "allOf": [
@@ -244,47 +244,67 @@
         }
       ]
     },
-    "StandardProperties": {
+    "StandardComponentProperties": {
       "type": "object",
-      "description": "Describes properties of a standard.",
+      "description": "Describes properties of a standardComponent",
       "properties": {
-        "displayName": {
-          "description": "display name of the standard, equivalent to the standardId",
+        "mappedResourceType": {
+          "description": "Azure resource type tied to this standard, default is microsoft.security/assessments",
           "type": "string"
         },
-        "standardType": {
-          "description": "standard type (Custom or BuiltIn only currently)",
+        "defaultEffect": {
+          "description": "the effect of the component, such as a policy effect (audit, exemptByResource, etc)",
+          "type": "string"
+        },
+        "allowedEffects": {
+          "description": "the allowable effect types as applied to this component",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "effect type such as audit or exemptByResource"
+          }
+        },
+        "standardDefinitions": {
+          "type": "array",
+          "description": "an array of standardDefinition objects",
+          "items": {
+            "$ref": "#/definitions/StandardDefinitionProperties"
+          }
+        }
+      }
+    },
+    "StandardDefinitionProperties": {
+      "type": "object",
+      "description": "Describes properties of a standard definition",
+      "properties": {
+        "name": {
           "type": "string",
-          "readOnly": true
+          "description": "name of the standard definition e.g. 'asc default'"
         },
-        "description": {
-          "description": "description of the standard",
-          "type": "string"
-        },
-        "category": {
-          "description": "category of the standard provided",
+        "id": {
+          "description": "Azure resourceId of the standardDefinition",
           "type": "string"
         }
       }
     }
   },
   "parameters": {
-    "StandardId": {
-      "name": "standardId",
+    "StandardComponentId": {
+      "name": "standardComponentId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Security Standard key - unique key for the standard type",
+      "description": "the standardComponent key - unique key for the standardComponent type",
       "x-ms-parameter-location": "method"
     },
-    "StandardBody": {
-      "name": "standard",
+    "StandardComponentBody": {
+      "name": "standardComponent",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/Standard"
+        "$ref": "#/definitions/StandardComponent"
       },
-      "description": "Custom security standard over a pre-defined scope",
+      "description": "Custom security standardComponent over a pre-defined scope",
       "x-ms-parameter-location": "method"
     }
   }

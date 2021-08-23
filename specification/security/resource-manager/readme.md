@@ -70,6 +70,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/settings.json
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
+  - Microsoft.Security/preview/2021-08-01-preview/standardComponents.json
 ```
 ### Tag: package-composite-v1
 
