@@ -923,7 +923,8 @@
         "FulfillmentOutOfStockError",
         "FulfillmentTransientError",
         "FulfillmentError",
-        "CalculatePriceFailed"
+        "CalculatePriceFailed",
+        "AppliedScopesSameAsExisting"
       ],
       "x-ms-enum": {
         "name": "ErrorResponseCode",
@@ -956,7 +957,10 @@
         "Swapped",
         "PendingRefunds",
         "Exchanged",
-        "PendingRefundCollection"
+        "PendingRefundCollection",
+        "PendingResourceHold",
+        "ConfirmedResourceHold",
+        "Split"
       ]
     },
     "ReservedResourceType": {
@@ -1232,6 +1236,36 @@
           "items": {
             "$ref": "#/definitions/SkuRestriction"
           }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of this SKU",
+          "readOnly": true
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of this SKU",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          }
+        }
+      }
+    },
+    "SkuCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "An invariant to describe the feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "An invariant if the feature is measured by quantity."
         }
       }
     },
@@ -1501,7 +1535,6 @@
       "properties": {
         "location": {
           "type": "string",
-          "readOnly": true,
           "description": "The Azure Region where the reserved resource lives."
         },
         "etag": {
@@ -1530,6 +1563,17 @@
           "type": "string",
           "readOnly": true,
           "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource Provider type to be reserved.",
+          "enum": [
+            "Microsoft.Compute"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": false
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
@@ -2767,7 +2811,7 @@
       "name": "reservedResourceType",
       "x-ms-parameter-location": "method",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "The type of the resource for which the skus should be provided."
     },
