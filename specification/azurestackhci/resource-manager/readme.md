@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2021-07
+tag: package-preview-2021-09
 ```
 
 ## Suppression
@@ -50,7 +50,23 @@ directive:
       - virtualNetworks.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
+### Tag: package-preview-2021-09
 
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualNetworks.json
+```
 
 ### Tag: package-preview-2021-07
 
