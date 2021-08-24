@@ -33,7 +33,27 @@ generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
 ```
+### Tag: package-2021-06
 
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/library.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+```
 
 ### Tag: package-preview-2021-06
 
