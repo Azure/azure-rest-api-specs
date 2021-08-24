@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "resourceGroupName": "examplerg",
+    "resourceName": "configuration1",
+    "api-version": "2021-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
+        "name": "configuration1",
+        "location": "westus2",
+        "properties": {
+          "namespace": "Microsoft.Maintenance",
+          "maintenanceScope": "InGuestPatch",
+          "visibility": "Custom",
+          "maintenanceWindow": {
+            "startDateTime": "2020-04-30 08:00",
+            "expirationDateTime": "9999-12-31 00:00",
+            "duration": "05:00",
+            "timeZone": "Pacific Standard Time",
+            "recurEvery": "5Days"
+          },
+          "installPatches": {
+            "linuxParameters": {
+              "classificationsToInclude": [
+                "Critical"
+              ],
+              "packageNameMasksToExclude": [
+                "apt",
+                "http"
+              ],
+              "packageNameMasksToInclude": [
+                "binutils",
+                "bin"
+              ]
+            },
+            "tasks": {
+              "preTasks": [
+                {
+                  "source": "/subscriptions/42c974dd-2c03-4f1b-96ad-b07f050aaa74/resourceGroups/functionstest/providers/Microsoft.Web/sites/aktestfunction/functions/HttpTrigger1",
+                  "parameters": {
+                    "COMPUTERNAME": "Computer1"
+                  },
+                  "taskScope": "Global"
+                }
+              ],
+              "postTasks": [
+                {
+                  "source": "/subscriptions/42c974dd-2c03-4f1b-96ad-b07f050aaa74/resourcegroups/akkubdev/providers/Microsoft.Logic/workflows/TestLogicAppMRP",
+                  "parameters": null,
+                  "taskScope": "Resource"
+                }
+              ]
+            },
+            "rebootSetting": "AlwaysReboot"
+          }
+        }
+      }
+    }
+  }
+}
