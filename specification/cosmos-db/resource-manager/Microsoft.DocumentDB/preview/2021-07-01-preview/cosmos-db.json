@@ -6938,13 +6938,11 @@
             "type": "string"
           }
         },
-		"diagnosticLogSettings": {
+        "diagnosticLogSettings": {
             "type": "object",
             "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account.",
-            "items": {
-              "type": "string"
-            }
-		},
+            "$ref": "#/definitions/DiagnosticLogSettings"
+        },
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
           "type": "boolean"
@@ -7072,12 +7070,10 @@
             "type": "string"
           }
         },
-		"diagnosticLogSettings": {
+        "diagnosticLogSettings": {
           "type": "object",
           "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account.",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/DiagnosticLogSettings"
         },
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
@@ -7248,6 +7244,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "diagnosticLogSettings": {
+          "type": "object",
+          "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account.",
+          "$ref": "#/definitions/DiagnosticLogSettings"
         },
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
@@ -8814,6 +8815,25 @@
       "x-ms-enum": {
         "name": "NetworkAclBypass",
         "modelAsString": false
+      }
+    },
+    "DiagnosticLogSettings": {
+      "type": "object",
+      "description": "Indicates what diagnostic log settings are to be enabled",
+      "properties": {
+        "enableFullTextQuery": {
+          "description": "Describe the level of detail with which queries are to be logged.",
+          "type": "string",
+          "enum": [
+            "None",
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "EnableFullTextQuery",
+            "modelAsString": false
+          }
+        }
       }
     },
     "Operation": {
