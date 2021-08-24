@@ -15,6 +15,54 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
+      "get": {
+        "tags": [
+          "ConnectedRegistries"
+        ],
+        "description": "Lists all connected registries for the specified container registry.",
+        "operationId": "ConnectedRegistries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectedRegistryFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedRegistryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectedRegistryList": {
+            "$ref": "./examples/ConnectedRegistryList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}": {
       "get": {
         "tags": [
@@ -225,54 +273,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
-      "get": {
-        "tags": [
-          "ConnectedRegistries"
-        ],
-        "description": "Lists all connected registries for the specified container registry.",
-        "operationId": "ConnectedRegistries_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectedRegistryFilterParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistryListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConnectedRegistryList": {
-            "$ref": "./examples/ConnectedRegistryList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/deactivate": {
       "post": {
         "tags": [
@@ -317,6 +317,45 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines": {
+      "get": {
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Lists all export pipelines for the specified container registry.",
+        "operationId": "ExportPipelines_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipelineListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineList": {
+            "$ref": "./examples/ExportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
@@ -452,45 +491,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines": {
-      "get": {
-        "tags": [
-          "ExportPipelines"
-        ],
-        "description": "Lists all export pipelines for the specified container registry.",
-        "operationId": "ExportPipelines_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ExportPipelineListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExportPipelineList": {
-            "$ref": "./examples/ExportPipelineList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage": {
       "post": {
         "tags": [
@@ -541,6 +541,45 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines": {
+      "get": {
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Lists all import pipelines for the specified container registry.",
+        "operationId": "ImportPipelines_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipelineListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineList": {
+            "$ref": "./examples/ImportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}": {
@@ -676,38 +715,29 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines": {
+    "/providers/Microsoft.ContainerRegistry/operations": {
       "get": {
         "tags": [
-          "ImportPipelines"
+          "Operation"
         ],
-        "description": "Lists all import pipelines for the specified container registry.",
-        "operationId": "ImportPipelines_List",
+        "description": "Lists all of the available Azure Container Registry REST API operations.",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ImportPipelineListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         },
         "x-ms-examples": {
-          "ImportPipelineList": {
-            "$ref": "./examples/ImportPipelineList.json"
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
           }
         },
         "x-ms-pageable": {
@@ -757,29 +787,38 @@
         }
       }
     },
-    "/providers/Microsoft.ContainerRegistry/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
       "get": {
         "tags": [
-          "Operation"
+          "PipelineRuns"
         ],
-        "description": "Lists all of the available Azure Container Registry REST API operations.",
-        "operationId": "Operations_List",
+        "description": "Lists all the pipeline runs for the specified container registry.",
+        "operationId": "PipelineRuns_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The request was successful; the request was well - formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/PipelineRunListResult"
             }
           }
         },
         "x-ms-examples": {
-          "OperationList": {
-            "$ref": "./examples/OperationList.json"
+          "PipelineRunList": {
+            "$ref": "./examples/PipelineRunList.json"
           }
         },
         "x-ms-pageable": {
@@ -923,13 +962,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "PipelineRuns"
+          "PrivateEndpointConnections"
         ],
-        "description": "Lists all the pipeline runs for the specified container registry.",
-        "operationId": "PipelineRuns_List",
+        "description": "List all private endpoint connections in a container registry.",
+        "operationId": "PrivateEndpointConnections_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -946,15 +985,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well - formed and received properly.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PipelineRunListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           }
         },
         "x-ms-examples": {
-          "PipelineRunList": {
-            "$ref": "./examples/PipelineRunList.json"
+          "PrivateEndpointConnectionList": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
           }
         },
         "x-ms-pageable": {
@@ -1095,13 +1134,46 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
       "get": {
         "tags": [
-          "PrivateEndpointConnections"
+          "Registries"
         ],
-        "description": "List all private endpoint connections in a container registry.",
-        "operationId": "PrivateEndpointConnections_List",
+        "description": "Lists all the container registries under the specified subscription.",
+        "operationId": "Registries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryList": {
+            "$ref": "./examples/RegistryList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists all the container registries under the specified resource group.",
+        "operationId": "Registries_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1111,22 +1183,19 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/RegistryListResult"
             }
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnectionList": {
-            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          "RegistryListByResourceGroup": {
+            "$ref": "./examples/RegistryListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1311,13 +1380,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
       "get": {
         "tags": [
           "Registries"
         ],
-        "description": "Lists all the container registries under the specified resource group.",
-        "operationId": "Registries_ListByResourceGroup",
+        "description": "Gets the quota usages for the specified container registry.",
+        "operationId": "Registries_ListUsages",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1327,52 +1396,58 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The request was successful; the registry usages retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/RegistryListResult"
+              "$ref": "#/definitions/RegistryUsageListResult"
             }
           }
         },
         "x-ms-examples": {
-          "RegistryListByResourceGroup": {
-            "$ref": "./examples/RegistryListByResourceGroup.json"
+          "RegistryListUsages": {
+            "$ref": "./examples/RegistryListUsages.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources": {
       "get": {
         "tags": [
           "Registries"
         ],
-        "description": "Lists all the container registries under the specified subscription.",
-        "operationId": "Registries_List",
+        "description": "Lists the private link resources for a container registry.",
+        "operationId": "Registries_ListPrivateLinkResources",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The request was successful; the private link resources were retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/RegistryListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           }
         },
         "x-ms-examples": {
-          "RegistryList": {
-            "$ref": "./examples/RegistryList.json"
+          "RegistryListPrivateLinkResources": {
+            "$ref": "./examples/RegistryListPrivateLinkResources.json"
           }
         },
         "x-ms-pageable": {
@@ -1461,13 +1536,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications": {
       "get": {
         "tags": [
-          "Registries"
+          "Replications"
         ],
-        "description": "Gets the quota usages for the specified container registry.",
-        "operationId": "Registries_ListUsages",
+        "description": "Lists all the replications for the specified container registry.",
+        "operationId": "Replications_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1484,51 +1559,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the registry usages retrieved and returned successfully.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/RegistryUsageListResult"
+              "$ref": "#/definitions/ReplicationListResult"
             }
           }
         },
         "x-ms-examples": {
-          "RegistryListUsages": {
-            "$ref": "./examples/RegistryListUsages.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "Registries"
-        ],
-        "description": "Lists the private link resources for a container registry.",
-        "operationId": "Registries_ListPrivateLinkResources",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the private link resources were retrieved and returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RegistryListPrivateLinkResources": {
-            "$ref": "./examples/RegistryListPrivateLinkResources.json"
+          "ReplicationList": {
+            "$ref": "./examples/ReplicationList.json"
           }
         },
         "x-ms-pageable": {
@@ -1725,13 +1764,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps": {
       "get": {
         "tags": [
-          "Replications"
+          "ScopeMaps"
         ],
-        "description": "Lists all the replications for the specified container registry.",
-        "operationId": "Replications_List",
+        "description": "Lists all the scope maps for the specified container registry.",
+        "operationId": "ScopeMaps_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1750,13 +1789,13 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ReplicationListResult"
+              "$ref": "#/definitions/ScopeMapListResult"
             }
           }
         },
         "x-ms-examples": {
-          "ReplicationList": {
-            "$ref": "./examples/ReplicationList.json"
+          "ScopeMapList": {
+            "$ref": "./examples/ScopeMapList.json"
           }
         },
         "x-ms-pageable": {
@@ -1950,13 +1989,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens": {
       "get": {
         "tags": [
-          "ScopeMaps"
+          "Tokens"
         ],
-        "description": "Lists all the scope maps for the specified container registry.",
-        "operationId": "ScopeMaps_List",
+        "description": "Lists all the tokens for the specified container registry.",
+        "operationId": "Tokens_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1975,13 +2014,13 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ScopeMapListResult"
+              "$ref": "#/definitions/TokenListResult"
             }
           }
         },
         "x-ms-examples": {
-          "ScopeMapList": {
-            "$ref": "./examples/ScopeMapList.json"
+          "TokenList": {
+            "$ref": "./examples/TokenList.json"
           }
         },
         "x-ms-pageable": {
@@ -2175,45 +2214,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens": {
-      "get": {
-        "tags": [
-          "Tokens"
-        ],
-        "description": "Lists all the tokens for the specified container registry.",
-        "operationId": "Tokens_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/TokenListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TokenList": {
-            "$ref": "./examples/TokenList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
       "post": {
         "tags": [
@@ -2261,6 +2261,45 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Lists all the webhooks for the specified container registry.",
+        "operationId": "Webhooks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WebhookListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookList": {
+            "$ref": "./examples/WebhookList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}": {
@@ -2449,45 +2488,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
-      "get": {
-        "tags": [
-          "Webhooks"
-        ],
-        "description": "Lists all the webhooks for the specified container registry.",
-        "operationId": "Webhooks_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WebhookListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebhookList": {
-            "$ref": "./examples/WebhookList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/ping": {
       "post": {
         "tags": [
@@ -2523,45 +2523,6 @@
         "x-ms-examples": {
           "WebhookPing": {
             "$ref": "./examples/WebhookPing.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/getCallbackConfig": {
-      "post": {
-        "tags": [
-          "Webhooks"
-        ],
-        "description": "Gets the configuration of service URI and custom headers for the webhook.",
-        "operationId": "Webhooks_GetCallbackConfig",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WebhookNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/CallbackConfig"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebhookGetCallbackConfig": {
-            "$ref": "./examples/WebhookGetCallbackConfig.json"
           }
         }
       }
@@ -2607,9 +2568,70 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/getCallbackConfig": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Gets the configuration of service URI and custom headers for the webhook.",
+        "operationId": "Webhooks_GetCallbackConfig",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CallbackConfig"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookGetCallbackConfig": {
+            "$ref": "./examples/WebhookGetCallbackConfig.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "IActionResult": {
+      "description": "This type exists in ASP.NET Core but not in legacy ASP.NET, so creating a dummy type\r\nhere so that it can be used as a return type in a controller which makes the compiler happy.\r\nNote that we still derive from IHttpActionResult because that is the out-of-box supported type\r\nby legacy ASP.NET. So the gist is that if an controller action returns an instance of IActionResult, legacy\r\nASP.NET checks if the instance type implements IHttpActionResult and if yes, calls a particular method on it.",
+      "type": "object",
+      "properties": {}
+    },
+    "ConnectedRegistryListResult": {
+      "description": "The result of a request to list connected registries for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of connected registries. Since this list may be incomplete, the nextLink field should be used to request the next list of connected registries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedRegistry"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of connected registries.",
+          "type": "string"
+        }
+      }
+    },
     "ConnectedRegistry": {
       "description": "An object that represents a connected registry for a container registry.",
       "type": "object",
@@ -3007,19 +3029,19 @@
         }
       }
     },
-    "ConnectedRegistryListResult": {
-      "description": "The result of a request to list connected registries for a container registry.",
+    "ExportPipelineListResult": {
+      "description": "The result of a request to list export pipelines for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of connected registries. Since this list may be incomplete, the nextLink field should be used to request the next list of connected registries.",
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectedRegistry"
+            "$ref": "#/definitions/ExportPipeline"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of connected registries.",
+          "description": "The URI that can be used to request the next list of pipeline runs.",
           "type": "string"
         }
       }
@@ -3164,23 +3186,6 @@
         }
       }
     },
-    "ExportPipelineListResult": {
-      "description": "The result of a request to list export pipelines for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportPipeline"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of pipeline runs.",
-          "type": "string"
-        }
-      }
-    },
     "ImportImageParameters": {
       "required": [
         "source"
@@ -3256,6 +3261,23 @@
         },
         "password": {
           "description": "The password used to authenticate with the source registry.",
+          "type": "string"
+        }
+      }
+    },
+    "ImportPipelineListResult": {
+      "description": "The result of a request to list import pipelines for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportPipeline"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
           "type": "string"
         }
       }
@@ -3391,69 +3413,6 @@
             "name": "TriggerStatus",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "ImportPipelineListResult": {
-      "description": "The result of a request to list import pipelines for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImportPipeline"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of pipeline runs.",
-          "type": "string"
-        }
-      }
-    },
-    "RegistryNameCheckRequest": {
-      "description": "A request to check whether a container registry name is available.",
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the container registry.",
-          "maxLength": 50,
-          "minLength": 5,
-          "pattern": "^[a-zA-Z0-9]*$",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'.",
-          "enum": [
-            "Microsoft.ContainerRegistry/registries"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ContainerRegistryResourceType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "RegistryNameStatus": {
-      "description": "The result of a request to check the availability of a container registry name.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "description": "The value that indicates whether the name is available.",
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "If any, the reason that the name is not available.",
-          "type": "string"
-        },
-        "message": {
-          "description": "If any, the error message that provides more detail for the reason that the name is not available.",
-          "type": "string"
         }
       }
     },
@@ -3597,6 +3556,69 @@
         },
         "blobDuration": {
           "description": "Log blob duration.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryNameCheckRequest": {
+      "description": "A request to check whether a container registry name is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the container registry.",
+          "maxLength": 50,
+          "minLength": 5,
+          "pattern": "^[a-zA-Z0-9]*$",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'.",
+          "enum": [
+            "Microsoft.ContainerRegistry/registries"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerRegistryResourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "RegistryNameStatus": {
+      "description": "The result of a request to check the availability of a container registry name.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value that indicates whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "If any, the reason that the name is not available.",
+          "type": "string"
+        },
+        "message": {
+          "description": "If any, the error message that provides more detail for the reason that the name is not available.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRunListResult": {
+      "description": "The result of a request to list pipeline runs for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of pipeline runs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
           "type": "string"
         }
       }
@@ -3803,19 +3825,19 @@
         }
       }
     },
-    "PipelineRunListResult": {
-      "description": "The result of a request to list pipeline runs for a container registry.",
+    "PrivateEndpointConnectionListResult": {
+      "description": "The result of a request to list private endpoint connections for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of pipeline runs.",
+          "description": "The list of private endpoint connections. Since this list may be incomplete, the nextLink field should be used to request the next list of private endpoint connections.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PipelineRun"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "description": "The URI that can be used to request the next list of private endpoint connections.",
           "type": "string"
         }
       }
@@ -3913,19 +3935,19 @@
         }
       }
     },
-    "PrivateEndpointConnectionListResult": {
-      "description": "The result of a request to list private endpoint connections for a container registry.",
+    "RegistryListResult": {
+      "description": "The result of a request to list container registries.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of private endpoint connections. Since this list may be incomplete, the nextLink field should be used to request the next list of private endpoint connections.",
+          "description": "The list of container registries. Since this list may be incomplete, the nextLink field should be used to request the next list of container registries.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/Registry"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of private endpoint connections.",
+          "description": "The URI that can be used to request the next list of container registries.",
           "type": "string"
         }
       }
@@ -4037,6 +4059,10 @@
           "default": false,
           "type": "boolean"
         },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
+        },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "The network rule set for a container registry."
@@ -4137,6 +4163,19 @@
         }
       }
     },
+    "StorageAccountProperties": {
+      "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID of the storage account.",
+          "type": "string"
+        }
+      }
+    },
     "NetworkRuleSet": {
       "description": "The network rule set for a container registry.",
       "required": [
@@ -4213,6 +4252,21 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Key vault properties."
+        }
+      }
+    },
+    "PackageType": {
+      "description": "The properties of a package type.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the package type.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint of the package type.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4431,6 +4485,10 @@
           "description": "The value that indicates whether the admin user is enabled.",
           "type": "boolean"
         },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry."
+        },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "The network rule set for a container registry."
@@ -4475,83 +4533,6 @@
         "anonymousPullEnabled": {
           "description": "Enables registry-wide pull from unauthenticated clients.",
           "type": "boolean"
-        }
-      }
-    },
-    "RegistryListResult": {
-      "description": "The result of a request to list container registries.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of container registries. Since this list may be incomplete, the nextLink field should be used to request the next list of container registries.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Registry"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of container registries.",
-          "type": "string"
-        }
-      }
-    },
-    "RegistryListCredentialsResult": {
-      "description": "The response from the ListCredentials operation.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "The username for a container registry.",
-          "type": "string"
-        },
-        "passwords": {
-          "description": "The list of passwords for a container registry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegistryPassword"
-          }
-        }
-      }
-    },
-    "RegistryPassword": {
-      "description": "The login password for the container registry.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The password name.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "description": "The password value.",
-          "type": "string"
-        }
-      }
-    },
-    "RegenerateCredentialParameters": {
-      "description": "The parameters used to regenerate the login credential.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Specifies name of the password which should be regenerated -- password or password2.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
         }
       }
     },
@@ -4665,6 +4646,83 @@
         }
       }
     },
+    "RegistryListCredentialsResult": {
+      "description": "The response from the ListCredentials operation.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username for a container registry.",
+          "type": "string"
+        },
+        "passwords": {
+          "description": "The list of passwords for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryPassword"
+          }
+        }
+      }
+    },
+    "RegistryPassword": {
+      "description": "The login password for the container registry.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The password name.",
+          "enum": [
+            "password",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PasswordName",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "The password value.",
+          "type": "string"
+        }
+      }
+    },
+    "RegenerateCredentialParameters": {
+      "description": "The parameters used to regenerate the login credential.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Specifies name of the password which should be regenerated -- password or password2.",
+          "enum": [
+            "password",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PasswordName",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ReplicationListResult": {
+      "description": "The result of a request to list replications for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of replications. Since this list may be incomplete, the nextLink field should be used to request the next list of replications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replication"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of replications.",
+          "type": "string"
+        }
+      }
+    },
     "Replication": {
       "description": "An object that represents a replication for a container registry.",
       "type": "object",
@@ -4754,19 +4812,19 @@
         }
       }
     },
-    "ReplicationListResult": {
-      "description": "The result of a request to list replications for a container registry.",
+    "ScopeMapListResult": {
+      "description": "The result of a request to list scope maps for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of replications. Since this list may be incomplete, the nextLink field should be used to request the next list of replications.",
+          "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Replication"
+            "$ref": "#/definitions/ScopeMap"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of replications.",
+          "description": "The URI that can be used to request the next list of scope maps.",
           "type": "string"
         }
       }
@@ -4863,19 +4921,19 @@
         }
       }
     },
-    "ScopeMapListResult": {
-      "description": "The result of a request to list scope maps for a container registry.",
+    "TokenListResult": {
+      "description": "The result of a request to list tokens for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
+          "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScopeMap"
+            "$ref": "#/definitions/Token"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of scope maps.",
+          "description": "The URI that can be used to request the next list of tokens.",
           "type": "string"
         }
       }
@@ -5077,23 +5135,6 @@
         }
       }
     },
-    "TokenListResult": {
-      "description": "The result of a request to list tokens for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Token"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of tokens.",
-          "type": "string"
-        }
-      }
-    },
     "GenerateCredentialsParameters": {
       "description": "The parameters used to generate credentials for a specified token or user of a container registry.",
       "type": "object",
@@ -5135,6 +5176,23 @@
           "items": {
             "$ref": "#/definitions/TokenPassword"
           }
+        }
+      }
+    },
+    "WebhookListResult": {
+      "description": "The result of a request to list webhooks for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of webhooks. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Webhook"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of webhooks.",
+          "type": "string"
         }
       }
     },
@@ -5367,23 +5425,6 @@
         }
       }
     },
-    "WebhookListResult": {
-      "description": "The result of a request to list webhooks for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of webhooks. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Webhook"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of webhooks.",
-          "type": "string"
-        }
-      }
-    },
     "EventInfo": {
       "description": "The basic information of an event.",
       "type": "object",
@@ -5391,26 +5432,6 @@
         "id": {
           "description": "The event ID.",
           "type": "string"
-        }
-      }
-    },
-    "CallbackConfig": {
-      "description": "The configuration of service URI and custom headers for the webhook.",
-      "required": [
-        "serviceUri"
-      ],
-      "type": "object",
-      "properties": {
-        "serviceUri": {
-          "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
-        },
-        "customHeaders": {
-          "description": "Custom headers that will be added to the webhook notifications.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -5634,6 +5655,26 @@
         "instanceID": {
           "description": "The running instance of an application. Changes after each restart.",
           "type": "string"
+        }
+      }
+    },
+    "CallbackConfig": {
+      "description": "The configuration of service URI and custom headers for the webhook.",
+      "required": [
+        "serviceUri"
+      ],
+      "type": "object",
+      "properties": {
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
