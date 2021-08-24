@@ -1179,18 +1179,18 @@
       "type": "object",
       "description": "Resource SKU Details",
       "properties": {
+        "apiVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "StoragePool RP API version"
+        },
         "resourceType": {
+          "readOnly": true,
           "type": "string",
           "description": "StoragePool resource type"
         },
-        "availabilityZones": {
-          "type": "array",
-          "description": "Logical zone for StoragePool resource; example: [\"1\"].",
-          "items": {
-            "$ref": "#/definitions/AvailabilityZone"
-          }
-        },
         "capabilities": {
+          "readOnly": true,
           "type": "array",
           "description": "List of additional capabilities for StoragePool resource.",
           "items": {
@@ -1204,9 +1204,18 @@
           "description": "Zones and zone capabilities in those locations where the SKU is available."
         },
         "sku": {
+          "readOnly": true,
           "type": "object",
           "description": "Determines resource SKU",
           "$ref": "#/definitions/Sku"
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       }
     },
@@ -1264,18 +1273,86 @@
       "description": "Capability a resource SKU has.",
       "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Capability name"
         },
         "value": {
+          "readOnly": true,
           "type": "string",
           "description": "Capability value"
         }
       }
     },
+    "ResourceSkuRestrictions": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
+    },
+    "ResourceSkuRestrictionInfo": {
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      },
+      "description": "Describes an available Compute SKU Restriction Information."
+    },
     "DiskPoolZoneListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskPoolZoneInfo"
@@ -1283,6 +1360,7 @@
           "description": "The list of Disk Pool Skus."
         },
         "nextLink": {
+          "readOnly": true,
           "description": "URI to fetch the next section of the paginated response.",
           "type": "string"
         }
@@ -1294,6 +1372,7 @@
       "description": "Disk Pool SKU Details",
       "properties": {
         "availabilityZones": {
+          "readOnly": true,
           "type": "array",
           "description": "Logical zone for Disk Pool resource; example: [\"1\"].",
           "items": {
@@ -1301,6 +1380,7 @@
           }
         },
         "additionalCapabilities": {
+          "readOnly": true,
           "type": "array",
           "description": "List of additional capabilities for Disk Pool.",
           "items": {
@@ -1308,6 +1388,7 @@
           }
         },
         "sku": {
+          "readOnly": true,
           "description": "Determines the SKU of VM deployed for Disk Pool",
           "type": "string",
           "$ref": "#/definitions/Sku"
@@ -1330,6 +1411,16 @@
           "x-ms-client-flatten": true,
           "description": "Properties of Disk Pool.",
           "$ref": "#/definitions/DiskPoolProperties"
+        },
+        "managedBy": {
+          "readOnly": true,
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "readOnly": true,
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
         },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
@@ -1396,6 +1487,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
         }
       },
       "x-ms-azure-resource": true
@@ -1407,6 +1506,14 @@
         "properties"
       ],
       "properties": {
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties for Disk Pool update request.",
@@ -1589,10 +1696,12 @@
           "$ref": "#/definitions/SystemMetadata"
         },
         "managedBy": {
+          "readOnly": true,
           "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
           "$ref": "#/definitions/ManagedBy"
         },
         "managedByExtended": {
+          "readOnly": true,
           "description": "List of Azure resource ids that manage this resource.",
           "$ref": "#/definitions/ManagedByExtended"
         }
@@ -1713,6 +1822,7 @@
           "description": "The port used by iSCSI Target portal group."
         },
         "activeSessions": {
+          "readOnly": true,
           "description": "List of identifiers for active sessions on the iSCSI target",
           "type": "array",
           "items": {

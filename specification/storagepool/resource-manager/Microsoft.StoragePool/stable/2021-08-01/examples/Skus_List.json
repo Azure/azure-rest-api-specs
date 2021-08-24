@@ -9,10 +9,11 @@
       "body": {
         "value": [
           {
+            "apiVersion": "2021-08-01",
             "resourceType": "diskPools",
             "capabilities": [
               {
-                "name": "MaxDataDiskCount",
+                "name": "MaxNumberOfDisks",
                 "value": "1"
               }
             ],
@@ -29,7 +30,7 @@
                   ],
                   "capabilities": [
                     {
-                      "name": "UltraSSDAvailable",
+                      "name": "DiskPool.CapabilityA",
                       "value": "True"
                     }
                   ]
@@ -40,7 +41,11 @@
                   ],
                   "capabilities": [
                     {
-                      "name": "UltraSSDAvailable",
+                      "name": "DiskPool.CapabilityA",
+                      "value": "True"
+                    },
+                    {
+                      "name": "DiskPool.CapabilityB",
                       "value": "True"
                     }
                   ]
@@ -50,13 +55,44 @@
             "sku": {
               "name": "Standard_V1",
               "tier": "Standard"
-            }
+            },
+            "restrictions": [
+              {
+                "type": "Location",
+                "values": [
+                  "FranceSouth"
+                ],
+                "restrictionInfo": {
+                  "locations": [
+                    "FranceSouth"
+                  ]
+                },
+                "reasonCode": "NotAvailableForSubscription"
+              },
+              {
+                "type": "Zone",
+                "values": [
+                  "FranceCentral"
+                ],
+                "restrictionInfo": {
+                  "locations": [
+                    "FranceCentral"
+                  ],
+                  "zones": [
+                    "2",
+                    "3",
+                    "1"
+                  ]
+                },
+                "reasonCode": "NotAvailableForSubscription"
+              }
+            ]
           },
           {
             "resourceType": "diskPools",
             "capabilities": [
               {
-                "name": "MaxDataDiskCount",
+                "name": "MaxNumberOfDisks",
                 "value": "1"
               }
             ],
