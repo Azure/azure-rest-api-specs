@@ -208,6 +208,59 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_Update",
+        "x-ms-examples": {
+          "Update Notebook Proxy": {
+            "$ref": "./examples/NBResourcePatch.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Patch NotebookProxy resource.",
+        "description": "Patch NotebookProxy resource with specified configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the NotebookProxy to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MutableNotebookProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "NotFound"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/notebookProxies": {
@@ -400,6 +453,9 @@
               "$ref": "#/definitions/NotebookPEResponse"
             }
           },
+          "404": {
+            "description": "Not found"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -461,6 +517,9 @@
           "200": {
             "description": "Success"
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -511,6 +570,31 @@
         },
         "publicDns": {
           "description": "The public DNS name",
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "description": "Allow public network access on a V-Net locked notebook resource",
+          "type": "string"
+        }
+      }
+    },
+    "MutableNotebookProxy": {
+      "description": "The mutable properties on a NotebookProxy resource ",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MutableNotebookResource",
+          "description": "The mutable properties of NotebookProxy resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MutableNotebookResource": {
+      "description": "Properties of NotebookProxy resource",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "A flag that allows public network access to a private link locked notebook resource.",
           "type": "string"
         }
       }
