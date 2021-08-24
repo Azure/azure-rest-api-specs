@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "resourceName": "testHub",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/IotHubs/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Please approve my request!",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}
