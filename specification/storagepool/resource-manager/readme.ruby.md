@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_storagepool
-package-version: 2021-04-01-preview
+package-version: 2021-08-01
 azure-arm: true
 ```
 

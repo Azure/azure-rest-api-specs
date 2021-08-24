@@ -33,7 +33,7 @@ tag: package-2021-08-01
 
 These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04-01-preview'
+```yaml $(tag) == 'package-2021-08-01'
 input-file:
   - Microsoft.StoragePool/stable/2021-08-01/storagepool.json
 ```
