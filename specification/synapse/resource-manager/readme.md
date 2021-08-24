@@ -55,6 +55,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/azureADOnlyAuthentication.json
 ```
 
 ### Tag: package-kusto-pool-2021-06-preview
@@ -209,18 +210,18 @@ directive:
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
@@ -245,18 +246,18 @@ directive:
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
