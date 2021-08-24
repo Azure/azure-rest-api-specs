@@ -10,17 +10,21 @@ requiredVariables:
   - mysqlKey
   - dnsSubscriptionId
   - dnsResourceGroup
+  - keyVaultName
+  - blobUrl
+  - userAssignedIdentity
+  - storageAccountName
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
     armTemplateDeployment: templates/generate_service_name.json
 
   # outside resource group, outside subscription operation
-  - step: Add_DNS_CNAME_record
-    armTemplateDeployment: templates/create_dns_cname_record.json
-    variables:
-      subscriptionId: $(dnsSubscriptionId)
-      resourceGroup: $(dnsResourceGroup)
+  # - step: Add_DNS_CNAME_record
+  #   armTemplateDeployment: templates/create_dns_cname_record.json
+  #   variables:
+  #     subscriptionId: $(dnsSubscriptionId)
+  #     resourceGroup: $(dnsResourceGroup)
 
 testScenarios:
 - scenario: Spring
@@ -37,14 +41,15 @@ testScenarios:
     exampleFile: ../examples/Services_CreateOrUpdate.json
     resourceName: myservice
 
-  - step: Services_Update
-    resourceName: myservice
-    operationId: Services_Update
-    resourceUpdate:
-      - replace: /tags
-        value:
-          hello: world
-          created-by: api-test
+  # TODO: resourceUpdate could only be used with "PUT".
+  # - step: Services_Update
+  #   resourceName: myservice
+  #   operationId: Services_Update
+  #   resourceUpdate:
+  #     - replace: /tags
+  #       value:
+  #         hello: world
+  #         created-by: api-test
 
   - step: Services_DisableTestEndpoint
     exampleFile: ../examples/Services_DisableTestEndpoint.json
@@ -226,7 +231,40 @@ testScenarios:
       relativePath:
         fromResponse: /relativePath
 
-  # TODO upload jar file here, use uploadUrl
+  - step: Upload_jar
+    armTemplateDeployment: ./templates/uploadJar.json
+    variables: 
+      scriptsContent: | 
+          $uploadUrl = ${Env:uploadUrl}
+          $BlobUri = ${Env:blobUrl}
+          $storageAccountName = ${Env:storageAccountName}
+          $localFilePath = './helloWorld.jar'
+          $keyVaultName = ${Env:keyVaultName}
+          function DownloadJarFromBlob([string]$blobUri, [string]$storageAccountName, [string]$storageAccountKey, [string]$localOutputFilePath) {
+
+            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::new($storageAccountName, $storageAccountKey)
+            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($BlobUri, $StorageCredentials)
+            $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
+            $DownLoadTask
+          }
+
+          function UploadToFileShare([string]$uploadUrl, [string]$localFilePath) {
+            $Uri = [System.Uri]::New($uploadUrl.Split('?')[0])
+
+            $SasToken = $uploadUrl.Split('?')[-1]
+            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
+            $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($Uri, $StorageCredentials)
+
+            $UploadTask = $CloudFile.UploadFromFileAsync($localFilePath)
+            $UploadTask
+          }
+
+          Connect-AzAccount -Identity
+          $storageAccountKey = Get-AzKeyVaultSecret -VaultName $keyVaultName  -Name 'storageAccountKey' -AsPlainText
+          DownloadJarFromBlob $BlobUri $storageAccountName $storageAccountKey $localFilePath
+          UploadToFileShare $uploadUrl $localFilePath
+
+   
 
   - step: Deployments_CreateOrUpdate
     exampleFile: ../examples/Deployments_CreateOrUpdate.json
