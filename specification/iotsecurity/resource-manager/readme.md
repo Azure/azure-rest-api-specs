@@ -87,7 +87,6 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/alertTypes.json
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendations.json
 - Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendationTypes.json
-- Microsoft.IoTSecurity/preview/2021-07-01-preview/vulnerabilities.json
 ```
 
 

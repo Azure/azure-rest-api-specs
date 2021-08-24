@@ -5,16 +5,6 @@
     "title": "DataPlaneAccountClient",
     "description": "Creates a Microsoft.Purview data plane account client."
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/endpoint"
-      }
-    ]
-  },
-  "basePath": "/",
   "schemes": [
     "https"
   ],
@@ -31,7 +21,7 @@
           "Account"
         ],
         "description": "Get an account",
-        "operationId": "Accounts_GetAccountProperties",
+        "operationId": "Accounts_Get",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -52,8 +42,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_GetAccountProperties": {
-            "$ref": "./examples/Accounts_GetAccountProperties.json"
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
           }
         }
       },
@@ -62,7 +52,7 @@
           "Account"
         ],
         "description": "Updates an account",
-        "operationId": "Accounts_UpdateAccountProperties",
+        "operationId": "Accounts_Update",
         "parameters": [
           {
             "name": "accountUpdateParameters",
@@ -91,8 +81,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_UpdateAccountProperties": {
-            "$ref": "./examples/Accounts_UpdateAccountProperties.json"
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
           }
         }
       }
@@ -103,7 +93,7 @@
           "Account"
         ],
         "description": "List the authorization keys associated with this account.",
-        "operationId": "Accounts_GetAccessKeys",
+        "operationId": "Accounts_ListKeys",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -124,8 +114,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_GetAccessKeys": {
-            "$ref": "./examples/Accounts_GetAccessKeys.json"
+          "Accounts_ListKeys": {
+            "$ref": "./examples/Accounts_ListKeys.json"
           }
         }
       }
@@ -136,7 +126,7 @@
           "Account"
         ],
         "description": "Regenerate the authorization keys associated with this data catalog.",
-        "operationId": "Accounts_RegenerateAccessKey",
+        "operationId": "Accounts_RegenerateKeys",
         "parameters": [
           {
             "name": "keyOptions",
@@ -166,7 +156,7 @@
         },
         "x-ms-examples": {
           "Accounts_RegenerateKeys": {
-            "$ref": "./examples/Accounts_RegenerateAccessKey.json"
+            "$ref": "./examples/Accounts_RegenerateKeys.json"
           }
         }
       }
@@ -177,7 +167,7 @@
           "Collection"
         ],
         "description": "Get a collection",
-        "operationId": "Collections_GetCollection",
+        "operationId": "Collections_Get",
         "parameters": [
           {
             "name": "collectionName",
@@ -204,8 +194,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_GetCollection": {
-            "$ref": "./examples/Collections_GetCollection.json"
+          "Collections_Get": {
+            "$ref": "./examples/Collections_Get.json"
           }
         }
       },
@@ -214,7 +204,7 @@
           "Collection"
         ],
         "description": "Creates or updates a collection entity.",
-        "operationId": "Collections_CreateOrUpdateCollection",
+        "operationId": "Collections_CreateOrUpdate",
         "parameters": [
           {
             "name": "collectionName",
@@ -249,8 +239,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_CreateOrUpdateCollection": {
-            "$ref": "./examples/Collections_CreateOrUpdateCollection.json"
+          "Collections_CreateOrUpdate": {
+            "$ref": "./examples/Collections_CreateOrUpdate.json"
           }
         }
       },
@@ -259,7 +249,7 @@
           "Collection"
         ],
         "description": "Deletes a Collection entity.",
-        "operationId": "Collections_DeleteCollection",
+        "operationId": "Collections_Delete",
         "parameters": [
           {
             "name": "collectionName",
@@ -283,8 +273,8 @@
           }
         },
         "x-ms-examples": {
-          "Collections_DeleteCollection": {
-            "$ref": "./examples/Collections_DeleteCollection.json"
+          "Collections_Delete": {
+            "$ref": "./examples/Collections_Delete.json"
           }
         }
       }
@@ -295,7 +285,7 @@
           "Collection"
         ],
         "description": "List the collections in the account.",
-        "operationId": "Collections_ListCollections",
+        "operationId": "Collections_ListByAccount",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -325,8 +315,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Collections_ListCollections": {
-            "$ref": "./examples/Collections_ListCollections.json"
+          "Collections_ListByAccount": {
+            "$ref": "./examples/Collections_ListByAccount.json"
           }
         }
       }
@@ -337,7 +327,7 @@
           "Collection"
         ],
         "description": "Lists the child collections names in the collection.",
-        "operationId": "Collections_ListChildCollectionNames",
+        "operationId": "Collections_GetChildCollectionNames",
         "parameters": [
           {
             "name": "collectionName",
@@ -373,8 +363,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Collections_ListChildCollectionNames": {
-            "$ref": "./examples/Collections_ListChildCollectionNames.json"
+          "Collections_GetChildCollectionNames": {
+            "$ref": "./examples/Collections_GetChildCollectionNames.json"
           }
         }
       }
@@ -395,6 +385,12 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -424,7 +420,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Get a resource set config service model.",
-        "operationId": "ResourceSetRules_GetResourceSetRule",
+        "operationId": "ResourceSetRuleConfigs_Get",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -445,8 +441,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRules_GetResourceSetRule": {
-            "$ref": "./examples/ResourceSetRules_GetResourceSetRule.json"
+          "ResourceSetRuleConfigs_Get": {
+            "$ref": "./examples/ResourceSetRuleConfigs_Get.json"
           }
         }
       },
@@ -455,7 +451,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Creates or updates an resource set config.",
-        "operationId": "ResourceSetRules_CreateOrUpdateResourceSetRule",
+        "operationId": "ResourceSetRuleConfigs_CreateOrUpdate",
         "parameters": [
           {
             "name": "resourceSetRuleConfig",
@@ -484,8 +480,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRules_CreateOrUpdateResourceSetRule": {
-            "$ref": "./examples/ResourceSetRules_CreateOrUpdateResourceSetRule.json"
+          "ResourceSetRuleConfigs_CreateOrUpdate": {
+            "$ref": "./examples/ResourceSetRuleConfigs_CreateOrUpdate.json"
           }
         }
       },
@@ -494,7 +490,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Deletes a ResourceSetRuleConfig resource.",
-        "operationId": "ResourceSetRules_DeleteResourceSetRule",
+        "operationId": "ResourceSetRuleConfigs_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -515,8 +511,8 @@
           }
         },
         "x-ms-examples": {
-          "ResourceSetRules_DeleteResourceSetRule": {
-            "$ref": "./examples/ResourceSetRules_DeleteResourceSetRule.json"
+          "ResourceSetRuleConfigs_Delete": {
+            "$ref": "./examples/ResourceSetRuleConfigs_Delete.json"
           }
         }
       }
@@ -527,7 +523,7 @@
           "ResourceSetRuleConfig"
         ],
         "description": "Get a resource set config service model.",
-        "operationId": "ResourceSetRules_ListResourceSetRules",
+        "operationId": "ResourceSetRuleConfigs_ListByAccount",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -557,8 +553,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ResourceSetRules_ListResourceSetRules": {
-            "$ref": "./examples/ResourceSetRules_ListResourceSetRules.json"
+          "ResourceSetRuleConfigs_ListByAccount": {
+            "$ref": "./examples/ResourceSetRuleConfigs_ListByAccount.json"
           }
         }
       }
@@ -1596,15 +1592,6 @@
       "description": "The api version to use.",
       "required": true,
       "type": "string"
-    },
-    "endpoint": {
-      "name": "endpoint",
-      "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
