@@ -1446,6 +1446,243 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs": {
+      "get": {
+        "operationId": "GraphResources_ListGraphs",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseList": {
+            "$ref": "./examples/CosmosDBGraphResourceList.json"
+          }
+        },
+        "description": "Lists the graphs under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The graph resource properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GraphResourcesListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}": {
+      "get": {
+        "operationId": "GraphResources_GetGraph",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseGet": {
+            "$ref": "./examples/CosmosDBGraphResourceGet.json"
+          }
+        },
+        "description": "Gets the Graph resource under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Graph resource property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GraphResourceGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GraphResources_CreateUpdateGraph",
+        "x-ms-examples": {
+          "CosmosDBGraphCreateUpdate": {
+            "$ref": "./examples/CosmosDBGraphResourceCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Graph.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateGraphParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GraphResourceCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current graph."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The graph create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Graph create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GraphResourceGetResults"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GraphResources_DeleteGraphResource",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseDelete": {
+            "$ref": "./examples/CosmosDBGraphResourceDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Graph Resource.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The graph delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The graph delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}/throughputSettings/default": {
+      "get": {
+        "operationId": "GraphResources_GetGraphResourceThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseThroughputGet": {
+            "$ref": "./examples/CosmosDBGraphResourceThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the graph under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Graph Resource was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GraphResources_UpdateGraphResourceThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseThroughputUpdate": {
+            "$ref": "./examples/CosmosDBGraphResourceThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB graph",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+            },
+            "description": "The parameters to provide for the RUs per second of the current graph resource."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the graph resource update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the graph resource update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases": {
       "get": {
         "operationId": "SqlResources_ListSqlDatabases",
@@ -5492,6 +5729,20 @@
       },
       "description": "The List operation response, that contains the database accounts and their properties."
     },
+    "GraphResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GraphResourceGetResults"
+          },
+          "description": "List of Graph resource and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Graph resource and their properties."
+    },
     "SqlDatabaseListResult": {
       "properties": {
         "value": {
@@ -5917,6 +6168,46 @@
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB SQL database",
           "$ref": "#/definitions/SqlDatabaseGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "GraphResourceGetProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
+        }
+      }
+    },
+    "GraphResourceGetResults": {
+      "description": "An Azure Cosmos DB Graph resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Graph resource.",
+          "$ref": "#/definitions/GraphResourceGetProperties"
         }
       },
       "allOf": [
@@ -7096,6 +7387,55 @@
       },
       "required": [
         "resource"
+      ]
+    },
+    "GraphResourceCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Graph resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Graph resource.",
+          "$ref": "#/definitions/GraphResourceCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "GraphResourceCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Graph resource.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Graph resource",
+          "$ref": "#/definitions/GraphResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "GraphResource": {
+      "type": "object",
+      "description": "Cosmos DB Graph resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Graph"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "SqlDatabaseCreateUpdateParameters": {
@@ -9299,6 +9639,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
+    },
+    "graphResourceNameParameter": {
+      "name": "graphName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB graph resource name."
     },
     "databaseNameParameter": {
       "name": "databaseName",
