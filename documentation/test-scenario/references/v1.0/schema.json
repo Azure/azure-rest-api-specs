@@ -64,21 +64,21 @@
       "additionalProperties": {
         "oneOf": [
           {
-            "type": [
-              "string"
-            ]
+            "type": "string"
           },
           {
             "type": "object",
             "properties": {
-              "secret": {
-                "type": "boolean",
-                "default": false
+              "type": {
+                "type": "string",
+                "enum": [
+                  "string",
+                  "secureString"
+                ],
+                "default": "string"
               },
               "defaultValue": {
-                "type": [
-                  "string"
-                ]
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -157,6 +157,11 @@
           "additionalProperties": {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["string", "secureString"],
+                "default": "string"
+              },
               "fromResponse": {
                 "type": "string"
               }
