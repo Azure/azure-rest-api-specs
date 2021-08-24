@@ -4042,6 +4042,20 @@
         }
       }
     },
+    "PrivateResourceProviderConfigurations": {
+      "type": "object",
+      "properties": {
+        "enabledSubscriptions": {
+          "type":"array",
+          "items": {
+            "type":"string"
+          }
+        }
+      },
+      "required": [
+        "enabledSubscriptions"
+      ]
+    },
     "TemplateDeploymentOptions": {
       "type": "object",
       "properties": {
@@ -4170,6 +4184,13 @@
           "allOf": [
             {
               "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
+            }
+          ]
+        },
+        "privateResourceProviderConfigurations": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateResourceProviderConfigurations"
             }
           ]
         }
