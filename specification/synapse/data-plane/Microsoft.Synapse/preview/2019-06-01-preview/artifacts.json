@@ -2990,10 +2990,6 @@
         "sessionId": {
           "description": "The ID of data flow debug session.",
           "type": "string"
-        },
-        "dataFlowName": {
-          "description": "The data flow which contains the debug session.",
-          "type": "string"
         }
       }
     },
@@ -3071,29 +3067,58 @@
       }
     },
     "DataFlowDebugCommandRequest": {
-      "description": "Request body structure for data flow expression preview.",
+      "description": "Request body structure for data flow debug command.",
       "type": "object",
       "properties": {
         "sessionId": {
           "description": "The ID of data flow debug session.",
           "type": "string"
         },
-        "dataFlowName": {
-          "description": "The data flow which contains the debug session.",
-          "type": "string"
-        },
-        "commandName": {
-          "description": "The command name.",
-          "type": "string"
+        "command": {
+          "description": "The command type.",
+          "type": "string",
+          "enum": [
+            "executePreviewQuery",
+            "executeStatisticsQuery",
+            "executeExpressionQuery"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowDebugCommandType",
+            "modelAsString": true
+          }
         },
         "commandPayload": {
           "description": "The command payload object.",
-          "type": "object"
+          "$ref": "#/definitions/DataFlowDebugCommandPayload"
+        }
+      }
+    },
+    "DataFlowDebugCommandPayload": {
+      "description": "Structure of command payload.",
+      "type": "object",
+      "properties": {
+        "streamName": {
+          "description": "The stream name which is used for preview.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "Row limits for preview response.",
+          "type": "integer"
+        },
+        "columns": {
+          "description": "Array of column names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "description": "The expression which is used for preview.",
+          "type": "string"
         }
       },
       "required": [
-        "sessionId",
-        "commandPayload"
+        "streamName"
       ]
     },
     "DataFlowDebugQueryResponse": {
