@@ -362,7 +362,7 @@
           "DiskPoolZones"
         ],
         "operationId": "DiskPoolZones_List",
-        "description": "This API is deprecated. Use ListSkus",
+        "description": "Lists available Disk Pool Skus in an Azure location.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -618,7 +618,7 @@
         },
         "x-ms-examples": {
           "Deallocate Disk Pool": {
-            "$ref": "./examples/DiskPools_Deallocate.json"
+            "$ref": "./examples/DiskPools_Upgrade.json"
           }
         }
       }
@@ -1176,8 +1176,12 @@
     },
     "ResourceSkuInfo": {
       "type": "object",
-      "description": "Resource Sku Details",
+      "description": "Resource SKU Details",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "StoragePool resource type"
+        },
         "availabilityZones": {
           "type": "array",
           "description": "Logical zone for StoragePool resource; example: [\"1\"].",
@@ -1189,7 +1193,7 @@
           "type": "array",
           "description": "List of additional capabilities for StoragePool resource.",
           "items": {
-            "$ref": "#/definitions/ResourceSkuCapabilities"
+            "$ref": "#/definitions/ResourceSkuCapability"
           }
         },
         "locationInfo": {
@@ -1217,7 +1221,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AvailabilityZone"
           },
           "description": "List of availability zones where the SKU is supported."
         },
@@ -1237,7 +1241,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AvailabilityZone"
           },
           "description": "The set of zones that the SKU is available in with the specified capabilities."
         },
@@ -1245,14 +1249,14 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuCapabilities"
+            "$ref": "#/definitions/ResourceSkuCapability"
           },
           "description": "A list of capabilities that are available for the SKU in the specified list of zones."
         }
       },
       "description": "Describes The zonal capabilities of a SKU."
     },
-    "ResourceSkuCapabilities": {
+    "ResourceSkuCapability": {
       "type": "object",
       "description": "Capability a resource SKU has.",
       "properties": {
@@ -1284,7 +1288,7 @@
     },
     "DiskPoolZoneInfo": {
       "type": "object",
-      "description": "Disk Pool Sku Details",
+      "description": "Disk Pool SKU Details",
       "properties": {
         "availabilityZones": {
           "type": "array",
@@ -1704,6 +1708,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The port used by iSCSI Target portal group."
+        },
+        "activeSessions": {
+          "description": "List of identifiers for active sessions on the iSCSI target",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
