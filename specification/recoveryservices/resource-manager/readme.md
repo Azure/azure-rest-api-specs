@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2021-06
+tag: package-2021-07
 ```
 
 ### Validations
@@ -41,7 +41,17 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+### Tag: package-2021-07
 
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaultusages.json
+```
 
 ### Tag: package-2021-06
 
