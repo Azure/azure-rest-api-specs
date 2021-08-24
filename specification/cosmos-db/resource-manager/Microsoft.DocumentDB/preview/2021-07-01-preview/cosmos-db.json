@@ -1568,7 +1568,7 @@
         "operationId": "GraphResources_DeleteGraphResource",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseDelete": {
-            "$ref": "./examples/CosmosDBSqlDatabaseDelete.json"
+            "$ref": "./examples/CosmosDBGraphResourceDelete.json"
           }
         },
         "description": "Deletes an existing Azure Cosmos DB Graph Resource.",
@@ -1591,7 +1591,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "The graph delete operation will complete asynchronously."
           },
           "204": {
@@ -5727,6 +5727,7 @@
       "description": "The List operation response, that contains the database accounts and their properties."
     },
     "GraphResourcesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -6177,8 +6178,7 @@
       "type": "object",
       "properties": {
         "resource": {
-          "properties": {
-          },
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/GraphResource"
@@ -7421,7 +7421,7 @@
       "required": [
         "resource"
       ]
-    },    
+    },
     "GraphResource": {
       "type": "object",
       "description": "Cosmos DB Graph resource object",
