@@ -1,12 +1,12 @@
 # SearchServiceClient and SearchIndexClient
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SearchServiceClient and SearchIndexClient.
 
 
 ---
-## Getting Started 
+## Getting Started
 
 To build the SDK for SearchServiceClient and SearchIndexClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for SearchServiceClient and SearchIndexClient.
 
 ``` yaml
@@ -510,7 +510,7 @@ directive:
           .replace(/(COSMOS_DB)/g, "COSMOS")
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -523,7 +523,7 @@ csharp:
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/search/Azure.Search/src/Generated
 
-directive: 
+directive:
   # TODO: Simplify all the below regexes once we gain the ability to target them at specific files.
 
   # Rename the IDocumentsOperations interface and implementation, then make the interface internal so we can version it freely.
@@ -694,10 +694,10 @@ directive:
   - from: source-file-csharp
     where: $
     transform: >-
-      if ($.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
+      if ($.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") ||
         $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ||
-        $.includes("class SkillsetsOperations")) 
-        
+        $.includes("class SkillsetsOperations"))
+
         return $.
           replace( /this.SearchServiceName/g, "Client.SearchServiceName" ).
           replace( /this.SearchDnsSuffix/g, "Client.SearchDnsSuffix" ).
@@ -709,7 +709,7 @@ directive:
   # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
   # Field just for .NET for the sake of backward compatibility, but for other languages the client behavior will conform
   # to the REST API.
-  # 
+  #
   # To achieve this, we need to make the generated constructors internal, as well as some of the generated properties.
   - from: source-file-csharp
     where: $
@@ -725,7 +725,7 @@ directive:
           replace( /public (bool\? Facetable { get; set; })/g, "internal $1" );
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -750,10 +750,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
