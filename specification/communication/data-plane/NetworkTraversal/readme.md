@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-02-22-preview1` is specified 
 
 ```yaml $(tag) == 'package-2021-02-22-preview1'
 input-file:
-  - preview/2021-02-22-preview1/CommunicationTurn.json
+  - preview/2021-02-22-preview1/CommunicationNetworkTraversal.json
 title:
   Azure Communication Services
 ```
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2021-06-21-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-21-preview'
 input-file:
-  - preview/2021-06-21-preview/CommunicationTurn.json
+  - preview/2021-06-21-preview/CommunicationNetworkTraversal.json
 ```
 
 ---
