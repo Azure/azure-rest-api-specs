@@ -1044,6 +1044,9 @@
           },
           "Create Agent Pool using an agent pool snapshot": {
             "$ref": "./examples/AgentPoolsCreate_Snapshot.json"
+          },
+          "Create Agent Pool with Krustlet and the WASI runtime": {
+            "$ref": "./examples/AgentPoolsCreate_WasmWasi.json"
           }
         }
       },
@@ -2617,6 +2620,9 @@
         },
         "kubeletDiskType": {
           "$ref": "#/definitions/KubeletDiskType"
+        },
+        "workloadRuntime": {
+          "$ref": "#/definitions/WorkloadRuntime"
         },
         "vnetSubnetID": {
           "type": "string",
@@ -4877,6 +4883,28 @@
           {
             "value": "Temporary",
             "description": "Kubelet will use the temporary disk for its data."
+          }
+        ]
+      },
+      "description": "Determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage."
+    },
+    "WorkloadRuntime": {
+      "type": "string",
+      "enum": [
+        "OCIContainer",
+        "WasmWasi"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadRuntime",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "OCIContainer",
+            "description": "Nodes will use Kubelet to run standard OCI container workloads."
+          },
+          {
+            "value": "WasmWasi",
+            "description": "Nodes will use Krustlet to run WASM workloads using the WASI provider (Preview)."
           }
         ]
       },
