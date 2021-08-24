@@ -392,7 +392,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Disk Pool Skus": {
+          "List Disk Pool Zones": {
             "$ref": "./examples/DiskPoolZones_List.json"
           }
         }
@@ -617,7 +617,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Deallocate Disk Pool": {
+          "Upgrade Disk Pool": {
             "$ref": "./examples/DiskPools_Upgrade.json"
           }
         }
@@ -1159,6 +1159,7 @@
       }
     },
     "ResourceSkuListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1211,6 +1212,7 @@
     },
     "ResourceSkuLocationInfo": {
       "type": "object",
+      "description": "Zone and capability info for resource sku",
       "properties": {
         "location": {
           "readOnly": true,
@@ -1236,6 +1238,7 @@
       }
     },
     "ResourceSkuZoneDetails": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "array",
