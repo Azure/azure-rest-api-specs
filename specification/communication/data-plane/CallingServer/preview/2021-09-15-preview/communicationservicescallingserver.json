@@ -591,6 +591,68 @@
         }
       }
     },
+    "/calling/serverCalls/{serverCallId}/participants/:getUser": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Get participant from the call using identifier.",
+        "description": "Get participant from the call using identifier.",
+        "operationId": "ServerCalls_GetParticipantById",
+        "parameters": [
+          {
+            "name": "serverCallId",
+            "in": "path",
+            "description": "The server call id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "getParticipantByIdRequest",
+            "in": "body",
+            "description": "The identifier of the participant to get from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetParticipantByIdRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the get participant response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CallParticipant"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Get participant from the call using identifier.": {
+            "$ref": "./examples/ServerCalls_GetParticipantById.json"
+          }
+        }
+      }
+    },
     "/calling/serverCalls/{serverCallId}/participants/{participantId}": {
       "get": {
         "tags": [
@@ -1058,6 +1120,68 @@
         "x-ms-examples": {
           "Remove participant from the call using identifier.": {
             "$ref": "./examples/CallConnections_RemoveParticipantById.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants/:getUser": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "Get participant from the call using identifier.",
+        "description": "Get participant from the call using identifier.",
+        "operationId": "CallConnections_GetParticipantById",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "getParticipantByIdRequest",
+            "in": "body",
+            "description": "The identifier of the participant to get from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetParticipantByIdRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the get participant response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CallParticipant"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Get participant from the call using identifier.": {
+            "$ref": "./examples/CallConnections_GetParticipantById.json"
           }
         }
       }
@@ -2116,7 +2240,20 @@
       "properties": {
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
-          "description": "The identifier of the participant to be added from the call."
+          "description": "The identifier of the participant to be removed from the call."
+        }
+      }
+    },
+    "GetParticipantByIdRequest": {
+      "description": "The get participant by identifier request.",
+      "required": [
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
         }
       }
     },
@@ -2199,6 +2336,43 @@
         }
       }
     },
+    "RecordingContentType": {
+      "description": "Content type of call recording.",
+      "enum": [
+        "audio",
+        "audioVideo"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingContentType",
+        "modelAsString": true
+      }
+    },
+    "RecordingChannelType": {
+      "description": "Channel type of call recording.",
+      "enum": [
+        "mixed",
+        "unmixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingChannelType",
+        "modelAsString": true
+      }
+    },
+    "RecordingFormatType": {
+      "description": "Format type of call recording.",
+      "enum": [
+        "wav",
+        "mp3",
+        "mp4"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingFormatType",
+        "modelAsString": true
+      }
+    },
     "StartCallRecordingRequest": {
       "description": "The request payload start call recording operation.",
       "type": "object",
@@ -2206,6 +2380,15 @@
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
           "type": "string"
+        },
+        "recordingContentType": {
+          "$ref": "#/definitions/RecordingContentType"
+        },
+        "recordingChannelType": {
+          "$ref": "#/definitions/RecordingChannelType"
+        },
+        "recordingFormatType": {
+          "$ref": "#/definitions/RecordingFormatType"
         }
       }
     },

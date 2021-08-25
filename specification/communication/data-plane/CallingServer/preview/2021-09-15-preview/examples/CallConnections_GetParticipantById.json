@@ -2,28 +2,28 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-09-15-preview",
-    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
-    "callRequest": {
-      "source": {
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "getParticipantByIdRequest": {
+      "identifier": {
         "communicationUser": {
-          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_acacdeb5-dba7-479b-ab45-5e76469d87b2"
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_f95c7b38-6c4e-4898-93b3-2553402304d6"
         }
-      },
-      "subject": "Incident meeting",
-      "callbackUri": "https://app.contoso.com/callback",
-      "requestedMediaTypes": [
-        "audio"
-      ],
-      "requestedCallEvents": [
-        "participantsUpdated"
-      ]
+      }
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "callConnectionId": "b9614373-fd0b-480c-8fd2-cb58b70eab9f"
-      }
+    "200": {
+      "body": [
+        {
+          "identifier": {
+            "communicationUser": {
+              "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_f95c7b38-6c4e-4898-93b3-2553402304d6"
+            }
+          },
+          "participantId": "5135a656-d86f-4ac2-88fd-080f8009a79b",
+          "isMuted": false
+        }
+      ]
     },
     "400": {
       "body": {
@@ -46,6 +46,14 @@
         "error": {
           "code": "403",
           "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "404",
+          "message": "Resource not found on the server."
         }
       }
     },
