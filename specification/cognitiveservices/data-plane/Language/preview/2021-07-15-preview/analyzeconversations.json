@@ -76,13 +76,13 @@
         },
         "x-ms-examples": {
           "Arbitration result": {
-            "$ref": "./examples/Workflow_arbitration.json"
+            "$ref": "./examples/conversations/Workflow_arbitration.json"
           },
           "LUIS Deepstack project result": {
-            "$ref": "./examples/Conversation_project.json"
+            "$ref": "./examples/conversations/Conversation_project.json"
           },
           "Workflow direct target result": {
-            "$ref": "./examples/Workflow_direct_target.json"
+            "$ref": "./examples/conversations/Workflow_direct_target.json"
           }
         }
       }
@@ -106,7 +106,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The language to use in this request. This will be the language setting when communicating all target projects."
+          "description": "The language to use in this request. This will be the language setting when communicating with all other target projects."
         },
         "verbose": {
           "type": "boolean",
@@ -127,28 +127,28 @@
     },
     "AnalyzeParameters": {
       "type": "object",
-      "description": "This is the parameter set of either the conversation application itself or one of the target projects.",
+      "description": "This is the parameter set of either the conversation application itself or one of the target services.",
       "required": [
-        "targetKind"
+        "targetType"
       ],
-      "discriminator": "targetKind",
+      "discriminator": "targetType",
       "properties": {
-        "targetKind": {
+        "targetType": {
           "type": "string",
-          "description": "The type of a target project. It could be one of the following values.",
+          "description": "The type of a target service.",
           "enum": [
             "luis",
             "luis_deepstack",
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetType",
             "modelAsString": true
           }
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version to use when call a specific target project."
+          "description": "The API version to use when call a specific target service."
         }
       }
     },
@@ -281,19 +281,19 @@
       "type": "object",
       "description": "This is the base class of prediction",
       "required": [
-        "projectKind"
+        "projectType"
       ],
-      "discriminator": "projectKind",
+      "discriminator": "projectType",
       "properties": {
-        "projectKind": {
+        "projectType": {
           "type": "string",
-          "description": "The type of the project. Use 'conversation' For LUIS deepstack projects, and workflow for Arbitration projects.",
+          "description": "The type of the project.",
           "enum": [
             "conversation",
             "workflow"
           ],
           "x-ms-enum": {
-            "name": "projectKind",
+            "name": "projectType",
             "modelAsString": true
           }
         },
@@ -317,7 +317,7 @@
       ],
       "properties": {
         "intents": {
-          "description": "A dictionary that contains all intents. Each key is an intent name and the value is its confidence score and project type. The top intent's value also contains the actual response from the target project.",
+          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/TargetIntentResult"
@@ -328,13 +328,13 @@
     "TargetIntentResult": {
       "type": "object",
       "description": "This is the base class of an intent prediction",
-      "discriminator": "targetKind",
+      "discriminator": "targetType",
       "required": [
         "confidenceScore",
-        "targetKind"
+        "targetType"
       ],
       "properties": {
-        "targetKind": {
+        "targetType": {
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
           "enum": [
@@ -343,20 +343,20 @@
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetType",
             "modelAsString": true
           }
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version used to call a target project."
+          "description": "The API version used to call a target service."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "The prediction score and it ranges from 0.0 to 1.0.",
-          "minimum": 0.0,
-          "maximum": 1.0
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },
@@ -446,8 +446,8 @@
           "format": "float",
           "description": "The confidence score of the class from 0.0 to 1.0.",
           "type": "number",
-          "minimum": 0.0,
-          "maximum": 1.0
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },
