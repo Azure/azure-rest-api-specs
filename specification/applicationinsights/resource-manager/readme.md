@@ -228,8 +228,8 @@ These settings apply only when `--tag=package-2021-08-25` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-08-25'
 input-file:
-  - Microsoft.Insights/stable/2021-03-08/workbooks_API.json
-  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2021-08-25/workbooks_API.json
+  - Microsoft.Insights/stable/2021-08-25/workbookOperations_API.json
 ```
 
 ### Tag: package-2021-03-only
