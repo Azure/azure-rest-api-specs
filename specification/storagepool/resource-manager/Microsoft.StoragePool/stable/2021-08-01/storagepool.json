@@ -1203,11 +1203,15 @@
           "$ref": "#/definitions/ResourceSkuLocationInfo",
           "description": "Zones and zone capabilities in those locations where the SKU is available."
         },
-        "sku": {
+        "name": {
           "readOnly": true,
-          "type": "object",
-          "description": "Determines resource SKU",
-          "$ref": "#/definitions/Sku"
+          "type": "string",
+          "description": "Sku name"
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sku tier"
         },
         "restrictions": {
           "type": "array",
@@ -1821,7 +1825,7 @@
           "format": "int32",
           "description": "The port used by iSCSI Target portal group."
         },
-        "activeSessions": {
+        "sessions": {
           "readOnly": true,
           "description": "List of identifiers for active sessions on the iSCSI target",
           "type": "array",
