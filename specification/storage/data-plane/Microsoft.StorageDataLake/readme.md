@@ -53,4 +53,3 @@ directive:
     from: stable/2020-06-12/DataLakeStorage.json
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
 ```
----
