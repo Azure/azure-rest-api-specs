@@ -8667,20 +8667,6 @@
       ],
       "description": "Describes a Virtual Machine Extension."
     },
-    "VirtualMachineExtensionResource": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineExtensionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResourceReadOnly"
-        }
-      ],
-      "description": "Describes a Virtual Machine Extension."
-    },
     "VirtualMachineScaleSetVMExtension": {
       "properties": {
         "name": {
@@ -11117,47 +11103,6 @@
       ],
       "description": "Describes a Virtual Machine."
     },
-    "VirtualMachineResource": {
-      "properties": {
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineProperties"
-        },
-        "resources": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineExtensionResource"
-          },
-          "description": "The virtual machine child extension resources."
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "The identity of the virtual machine, if configured."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The virtual machine zones."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location of the Virtual Machine."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Describes a Virtual Machine."
-    },
     "VirtualMachineUpdate": {
       "properties": {
         "plan": {
@@ -11192,7 +11137,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualMachineResource"
+            "$ref": "#/definitions/VirtualMachine"
           },
           "description": "The list of virtual machines."
         },
@@ -13647,9 +13592,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "UpdateResource": {
