@@ -155,7 +155,22 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
-
+- ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ManagedInstances.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/GetManagedInstanceOperation.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ListManagedInstanceOperations.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceCreateMax.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceCreateMin.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceDelete.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceGet.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceGetWithExpandEqualsAdministrators.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceList.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceListByInstancePool.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceListByInstancePoolWithExpandEqualsAdministrators.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceListByResourceGroup.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceListByResourceGroupWithExpandEqualsAdministrators.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/examples/ManagedInstanceListWithExpandEqualsAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
