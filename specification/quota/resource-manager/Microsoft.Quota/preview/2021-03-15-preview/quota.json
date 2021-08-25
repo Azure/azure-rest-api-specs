@@ -39,7 +39,7 @@
         "tags": [
           "UsagesInformation"
         ],
-        "description": "Gets the current usage of a resource.",
+        "description": "Get the current usage of a resource.",
         "operationId": "Usages_Get",
         "x-ms-examples": {
           "Quotas_UsagesRequest_ForNetwork": {
@@ -87,7 +87,7 @@
         "tags": [
           "UsagesInformation"
         ],
-        "description": "Get a list of current usages for all resources for the scope specified.",
+        "description": "Get a list of current usage for all resources for the scope specified.",
         "operationId": "Usages_List",
         "x-ms-examples": {
           "Quotas_listUsagesForNetwork": {
@@ -110,13 +110,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Usages information will be returned in the response with pagination.",
+            "description": "OK. Usage information will be returned in the response with pagination.",
             "schema": {
               "$ref": "#/definitions/UsagesLimits"
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "description": "Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
             }
@@ -138,7 +138,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Gets the quota limit of a resource. The response can be used to determine the remaining quota and calculate a new quota limit that can be submitted with a PUT request.",
+        "description": "Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.",
         "operationId": "Quota_Get",
         "x-ms-examples": {
           "Quotas_UsagesRequest_ForNetwork": {
@@ -184,7 +184,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Create or update the quota limit for the specified resource to the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
+        "description": "Create or update the quota limit for the specified resource with the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
           "Quotas_PutRequest_ForNetwork": {
@@ -252,7 +252,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
+        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the Usages-GET and Quota-GET operations to determine the remaining quota for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForNetwork": {
@@ -375,7 +375,7 @@
             "$ref": "./examples/getQuotaRequestStatusFailed.json"
           }
         },
-        "description": "Gets the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.",
+        "description": "Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.",
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
