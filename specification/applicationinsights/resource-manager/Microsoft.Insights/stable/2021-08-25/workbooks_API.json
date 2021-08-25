@@ -461,6 +461,18 @@
           },
           "description": "Resource tags"
         },
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
         "etag": {
           "additionalProperties": {
             "type": "string"
@@ -495,18 +507,6 @@
         }
       ],
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
@@ -692,7 +692,10 @@
       "description": "Customer Managed Identity",
       "properties": {
         "userAssignedIdentities": {
-          "$ref": "#/definitions/WorkbookUserAssignedIdentities"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkbookUserAssignedIdentities"
+          }
         },
         "type": {
           "type": "string",
