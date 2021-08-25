@@ -597,20 +597,29 @@
       "properties": {
         "domain" : {
           "description" : "Category domain for the solution content item",
-          "type":"array"
+          "type":"array",
+          "example": ["str1", "str2", "str3"],
+          "items": {
+            "type": "string"
+        }
         },
         "verticals" : {
           "description" : "Category verticals for the solution content item",
-          "type":"array"
+          "type":"array",
+          "items": {
+            "type": "string"
+        },
+          "example": ["str1", "str2", "str3"]
       }
     }
   },
     "metadataProviders":{
       "description": "Providers for the solution content item",
       "type":"array",
+      "example": ["str1", "str2", "str3"],
       "items": {
-        "$ref": "#/definition/provider"
-    }
+            "type": "string"
+        }
   },
     "firstPublishDate":{
       "description": "first publish date of solution content item",
