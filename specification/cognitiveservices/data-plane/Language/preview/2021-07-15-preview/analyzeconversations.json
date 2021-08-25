@@ -3,11 +3,12 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, LUIS Deepstack, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
-    "version": "2021-05-01-preview"
+    "version": "2021-07-15-preview"
   },
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
+      "description": "An APIM subscription key.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
@@ -29,8 +30,8 @@
   "paths": {
     "/:analyze-conversations": {
       "post": {
-        "description": "Analyzes the input conversation.",
         "operationId": "ConversationAnalysis_AnalyzeConversations",
+        "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
             "name": "projectName",
@@ -74,8 +75,14 @@
           }
         },
         "x-ms-examples": {
-          "Successful query": {
-            "$ref": "./examples/SuccessfulAnalyzeConversations.json"
+          "Arbitration result": {
+            "$ref": "./examples/conversations/Workflow_arbitration.json"
+          },
+          "LUIS Deepstack project result": {
+            "$ref": "./examples/conversations/Conversation_project.json"
+          },
+          "Workflow direct target result": {
+            "$ref": "./examples/conversations/Workflow_direct_target.json"
           }
         }
       }
@@ -99,7 +106,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The language to use in this request. This will be the language setting when communicating all target projects."
+          "description": "The language to use in this request. This will be the language setting when communicating with all other target projects."
         },
         "verbose": {
           "type": "boolean",
@@ -120,53 +127,57 @@
     },
     "AnalyzeParameters": {
       "type": "object",
-      "description": "This is the parameter set of either the conversation application itself or one of the target projects.",
+      "description": "This is the parameter set of either the conversation application itself or one of the target services.",
       "required": [
-        "projectType"
+        "targetType"
       ],
-      "discriminator": "projectType",
+      "discriminator": "targetType",
       "properties": {
-        "projectType": {
+        "targetType": {
           "type": "string",
-          "description": "The type of the project. It could be one of the following values.",
+          "description": "The type of a target service.",
           "enum": [
-            "luis_v2",
-            "luis_v3",
+            "luis",
             "luis_deepstack",
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "projectType",
+            "name": "targetType",
             "modelAsString": true
           }
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version to use when call a specific target project."
+          "description": "The API version to use when call a specific target service."
         }
       }
     },
-    "LUISV2Parameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
-      "x-ms-discriminator-value": "luis_v2",
+    "LUISParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects.",
+      "x-ms-discriminator-value": "luis",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeParameters"
         }
       ],
       "properties": {
-        "projectParameters": {
-          "type": "object",
-          "$ref": "#/definitions/LUISV2ProjectParameters"
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
         },
         "callingOptions": {
           "type": "object",
-          "$ref": "#/definitions/LUISV2CallingOptions"
+          "description": "This customizes how the service calls LUIS Generally Available projects.",
+          "$ref": "#/definitions/LUISCallingOptions"
         }
-      }
+      },
+      "additionalProperties": true
     },
-    "LUISV2CallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available V2 projects.",
+    "LUISCallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available projects.",
+      "type": "object",
       "properties": {
         "verbose": {
           "description": "Enable verbose response.",
@@ -194,54 +205,8 @@
         }
       }
     },
-    "LUISV2ProjectParameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v2.0.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "maxLength": 500,
-          "description": "The utterance to predict."
-        }
-      }
-    },
-    "LUISV3Parameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects and API version v3.0.",
-      "x-ms-discriminator-value": "luis_v3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeParameters"
-        }
-      ],
-      "properties": {
-        "projectParameters": {
-          "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionRequest"
-        },
-        "callingOptions": {
-          "type": "object",
-          "$ref": "#/definitions/LUISV3CallingOptions"
-        }
-      },
-      "additionalProperties": true
-    },
-    "LUISV3CallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available V3 projects.",
-      "properties": {
-        "verbose": {
-          "description": "Enable verbose response.",
-          "type": "boolean"
-        },
-        "log": {
-          "description": "Save log to add in training utterances later.",
-          "type": "boolean"
-        },
-        "show-all-intents": {
-          "description": "Set true to show all intents.",
-          "type": "boolean"
-        }
-      }
-    },
     "DeepstackParameters": {
+      "type": "object",
       "description": "This is a set of request parameters for LUIS Deepstack projects.",
       "x-ms-discriminator-value": "luis_deepstack",
       "allOf": [
@@ -250,8 +215,18 @@
         }
       ],
       "properties": {
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/DeepstackCallingOptions"
+        }
+      }
+    },
+    "DeepstackCallingOptions": {
+      "type": "object",
+      "description": "The option to set to call a LUIS Deepstack project.",
+      "properties": {
         "language": {
-          "description": "The detected language of the input query.",
+          "description": "The language of the query.",
           "type": "string"
         },
         "verbose": {
@@ -265,6 +240,7 @@
       }
     },
     "QuestionAnsweringParameters": {
+      "type": "object",
       "description": "This is a set of request parameters for Question Answering knowledge bases.",
       "x-ms-discriminator-value": "question_answering",
       "allOf": [
@@ -274,91 +250,123 @@
       ],
       "properties": {
         "projectParameters": {
-          "$ref": "questionanswering.json#/definitions/KnowledgebaseQueryParameters"
+          "type": "object",
+          "description": "The parameters send to a Question Answering KB."
         }
       }
     },
     "ConversationAnalysisResult": {
+      "type": "object",
+      "description": "Represents a conversation analysis response.",
       "required": [
         "query",
         "prediction"
       ],
-      "type": "object",
-      "description": "Represents a conversation analysis response.",
       "properties": {
         "query": {
           "type": "string",
           "description": "The conversation utterance given by the caller."
         },
+        "detectedLanguage": {
+          "type": "string",
+          "description": "The system detected language for the query."
+        },
         "prediction": {
           "description": "The prediction result of a conversation project.",
-          "$ref": "#/definitions/AnalyzePrediction"
+          "$ref": "#/definitions/BasePrediction"
         }
       }
     },
-    "AnalyzePrediction": {
-      "required": [
-        "topIntent",
-        "intents"
-      ],
-      "description": "Represents the prediction section in the response body.",
+    "BasePrediction": {
       "type": "object",
-      "properties": {
-        "topIntent": {
-          "description": "The name of the top scoring intent.",
-          "type": "string"
-        },
-        "intents": {
-          "description": "A dictionary that contains all intents. Each key is an intent name and the value is its confidence score and project type. The top intent's value also contains the actual response from the target project.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/BaseIntent"
-          }
-        }
-      }
-    },
-    "BaseIntent": {
-      "type": "object",
-      "description": "This is the base class of an intent prediction",
-      "discriminator": "projectType",
+      "description": "This is the base class of prediction",
       "required": [
-        "confidenceScore",
         "projectType"
       ],
+      "discriminator": "projectType",
       "properties": {
         "projectType": {
           "type": "string",
-          "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
+          "description": "The type of the project.",
           "enum": [
-            "luis_v2",
-            "luis_v3",
-            "luis_deepstack",
-            "question_answering"
+            "conversation",
+            "workflow"
           ],
           "x-ms-enum": {
             "name": "projectType",
             "modelAsString": true
           }
         },
+        "topIntent": {
+          "type": "string",
+          "description": "The intent with the highest score."
+        }
+      }
+    },
+    "WorkflowPrediction": {
+      "type": "object",
+      "description": "This represents the prediction result of an Workflow project.",
+      "x-ms-discriminator-value": "workflow",
+      "required": [
+        "intents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetIntentResult"
+          }
+        }
+      }
+    },
+    "TargetIntentResult": {
+      "type": "object",
+      "description": "This is the base class of an intent prediction",
+      "discriminator": "targetType",
+      "required": [
+        "confidenceScore",
+        "targetType"
+      ],
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
+          "enum": [
+            "luis",
+            "luis_deepstack",
+            "question_answering"
+          ],
+          "x-ms-enum": {
+            "name": "targetType",
+            "modelAsString": true
+          }
+        },
         "apiVersion": {
           "type": "string",
-          "description": "The API version used to call a target project."
+          "description": "The API version used to call a target service."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "The prediction score and it ranges from 0.0 to 1.0.",
-          "minimum": 0.0,
-          "maximum": 1.0
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },
-    "DeepstackIntent": {
+    "DSTargetIntentResult": {
+      "type": "object",
       "description": "A wrap up of LUIS Deepstack response.",
       "x-ms-discriminator-value": "luis_deepstack",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
@@ -372,6 +380,7 @@
     },
     "DeepstackResult": {
       "type": "object",
+      "description": "The response returned by a LUIS Deepstack project.",
       "required": [
         "query",
         "prediction"
@@ -392,11 +401,18 @@
       }
     },
     "DeepstackPrediction": {
+      "type": "object",
+      "description": "Represents the prediction section of a LUIS Deepstack project.",
+      "x-ms-discriminator-value": "conversation",
       "required": [
         "classifications",
         "entities"
       ],
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
       "properties": {
         "classifications": {
           "description": "The classification results.",
@@ -415,11 +431,12 @@
       }
     },
     "DeepstackClassification": {
+      "type": "object",
+      "description": "The classification result of a LUIS Deepstack project.",
       "required": [
         "category",
         "confidenceScore"
       ],
-      "type": "object",
       "properties": {
         "category": {
           "description": "A predicted class.",
@@ -429,12 +446,14 @@
           "format": "float",
           "description": "The confidence score of the class from 0.0 to 1.0.",
           "type": "number",
-          "minimum": 0.0,
-          "maximum": 1.0
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },
     "DeepstackEntity": {
+      "type": "object",
+      "description": "The entity extraction result of a LUIS Deepstack project.",
       "required": [
         "category",
         "text",
@@ -442,7 +461,6 @@
         "length",
         "confidenceScore"
       ],
-      "type": "object",
       "properties": {
         "category": {
           "description": "The entity category.",
@@ -469,52 +487,35 @@
         }
       }
     },
-    "LUISIntentV2": {
-      "description": "It is a wrap up of LUIS Generally Available v2.0 response.",
-      "x-ms-discriminator-value": "luis_v2",
+    "LUISTargetIntentResult": {
+      "type": "object",
+      "description": "It is a wrap up of LUIS Generally Available response.",
+      "x-ms-discriminator-value": "luis",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v2.0/LUIS-Runtime.json#/definitions/LuisResult",
-          "description": "The actual response from a LUIS Generally Available application and API version v2.0.",
+          "description": "The actual response from a LUIS Generally Available application.",
           "x-nullable": true
         }
       }
     },
-    "LUISIntentV3": {
-      "description": "It is a wrap up a LUIS Generally Available v3.0 response.",
-      "x-ms-discriminator-value": "luis_v3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseIntent"
-        }
-      ],
-      "properties": {
-        "result": {
-          "type": "object",
-          "$ref": "../../../LUIS/Runtime/stable/v3.0/LUIS-Runtime.json#/definitions/PredictionResponse",
-          "description": "The actual response from a LUIS Generally Available application and API version v3.0.",
-          "x-nullable": true
-        }
-      }
-    },
-    "QuestionAnsweringIntent": {
+    "QuestionAnsweringTargetIntentResult": {
+      "type": "object",
       "description": "It is a wrap up a Question Answering KB response.",
       "x-ms-discriminator-value": "question_answering",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseIntent"
+          "$ref": "#/definitions/TargetIntentResult"
         }
       ],
       "properties": {
         "result": {
           "type": "object",
-          "$ref": "questionanswering.json#/definitions/KnowledgebaseAnswers",
           "description": "The generated answer by a Question Answering KB.",
           "x-nullable": true
         }

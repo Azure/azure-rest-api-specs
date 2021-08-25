@@ -3,40 +3,19 @@
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
-    "api-version": "2021-05-01-preview",
+    "api-version": "2021-07-15-preview",
     "projectName": "{project-name}",
     "deploymentName": "{deployment-name}",
     "ConversationAnalysisInput": {
       "query": "How do I integrate QnA Maker and LUIS?",
-      "directTarget": "${luis-target-app}",
-      "language": "en",
+      "language": "en-us",
       "parameters": {
-        "${luis-target-app}": {
-          "projectType": "luis_v2",
-          "apiVersion": "v2.0",
+        "qnaTargetApp": {
+          "targetType": "question_answering",
+          "apiVersion": "2021-07-15-preview",
           "projectParameters": {
-            "query": "test query"
-          },
-          "callingOptions": {
-            "verbose": true,
-            "log": false,
-            "show-all-intents": true,
-            "spellCheck": false
-          }
-        },
-        "${luis-target-app-v3}": {
-          "projectType": "luis_v3",
-          "apiVersion": "v3.0",
-          "projectParameters": {
-            "query": "test query",
-            "options": {
-              "preferExternalEntities": true
-            }
-          },
-          "callingOptions": {
-            "verbose": true,
-            "log": true,
-            "show-all-intents": true
+            "qnaId": 15,
+            "question": "test question"
           }
         }
       }
@@ -48,11 +27,12 @@
       "body": {
         "query": "How do I integrate QnA Maker and LUIS?",
         "prediction": {
+          "projectType": "workflow",
           "topIntent": "qnaTargetApp1",
           "intents": {
-            "qnaTargetApp1": {
-              "projectType": "question_answering",
-              "apiVersion": "v1.0-private_preview",
+            "qnaTargetApp": {
+              "targetType": "question_answering",
+              "apiVersion": "2021-05-01-preview",
               "confidenceScore": 0.913329,
               "result": {
                 "answers": [
@@ -85,7 +65,7 @@
                     },
                     "answerSpan": {
                       "text": "two to four hours",
-                      "confidenceScore": 0.30,
+                      "confidenceScore": 0.3,
                       "offset": 33,
                       "length": 50
                     }
@@ -102,12 +82,12 @@
                 ]
               }
             },
-            "mcluApp1": {
-              "projectType": "luis_deepstack",
-              "confidenceScore": 0.083329
+            "mcluApp": {
+              "targetType": "luis_deepstack",
+              "confidenceScore": 0.082329
             },
-            "luisApp1": {
-              "projectType": "luis",
+            "luisApp": {
+              "targetType": "luis_v2",
               "confidenceScore": 0.001
             }
           }
