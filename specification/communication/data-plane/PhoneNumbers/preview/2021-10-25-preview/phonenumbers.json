@@ -273,93 +273,6 @@
         ]
       }
     },
-    "/shortCodes/operations/{operationId}": {
-      "get": {
-        "tags": [
-          "Long running operations"
-        ],
-        "summary": "Gets a short code operation by its id.",
-        "operationId": "ShortCodes_GetOperation",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "operationId",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "When the operation is completed, query the final result of the operation using the URL specified in the 'Location' attribute in the response header.",
-            "schema": {
-              "$ref": "#/definitions/ShortCodeOperation"
-            },
-            "headers": {
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get long running operation status by operation id": {
-            "$ref": "./examples/GetShortCodeOperation.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Long running operations"
-        ],
-        "summary": "Cancels a short codes operation by its id.",
-        "operationId": "ShortCodes_CancelOperation",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "operationId",
-            "description": "The id of the operation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete long running operation with the given operation id": {
-            "$ref": "./examples/DeleteShortCodeOperation.json"
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/phoneNumbers/{phoneNumber}/capabilities": {
       "patch": {
         "tags": [
@@ -644,29 +557,36 @@
         }
       }
     },
-    "/shortCodes/countries/US/programBriefs": {
-      "post": {
+    "/shortCodes/countries/US/programBriefs/{programBriefId}": {
+      "patch": {
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Creates a new Program Brief.",
-        "operationId": "ShortCodes_CreateUSProgramBrief",
+        "summary": "Creates or updates a US Program Brief.",
+        "operationId": "ShortCodes_UpsertUSProgramBrief",
         "consumes": [
-          "application/json"
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "in": "path",
+            "name": "programBriefId",
+            "description": "Program Brief Id",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Object containing the Program Brief information",
+            "description": "Data to create new a Program Brief or fields to update an existing Program Brief",
             "schema": {
-              "$ref": "#/definitions/CreateProgramBriefRequest"
+              "$ref": "#/definitions/ProgramBriefEntity"
             }
           }
         ],
@@ -674,7 +594,13 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefOperationResponse"
+              "$ref": "#/definitions/ProgramBriefEntity"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProgramBriefEntity"
             }
           },
           "default": {
@@ -685,8 +611,43 @@
           }
         },
         "x-ms-examples": {
-          "Create a Program Brief": {
-            "$ref": "./examples/CreateProgramBriefAsync.json"
+          "Update a US Program Brief": {
+            "$ref": "./examples/UpsertUSProgramBriefAsync.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ShortCodes - ProgramBrief"
+        ],
+        "summary": "Deletes a US Program Brief.",
+        "operationId": "ShortCodes_DeleteUSProgramBrief",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "programBriefId",
+            "description": "Program Brief Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a US Program Brief": {
+            "$ref": "./examples/DeleteUSProgramBriefAsync.json"
           }
         }
       },
@@ -694,7 +655,93 @@
         "tags": [
           "ShortCodes - ProgramBrief"
         ],
-        "summary": "Gets the list of Program Briefs for the current resource.",
+        "summary": "Get a US Program Brief by id.",
+        "operationId": "ShortCodes_GetUSProgramBrief",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "programBriefId",
+            "description": "Program Brief Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProgramBriefEntity"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query a US Program Brief": {
+            "$ref": "./examples/GetUSProgramBriefAsync.json"
+          }
+        }
+      }
+    },
+    "/shortCodes/countries/US/programBriefs/{programBriefId}/:submit": {
+      "post": {
+        "tags": [
+          "ShortCodes - ProgramBrief"
+        ],
+        "summary": "Submits a US Program Brief for review.",
+        "operationId": "ShortCodes_SubmitUSProgramBrief",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "programBriefId",
+            "description": "Program Brief Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProgramBriefEntity"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Submit a US Program Brief": {
+            "$ref": "./examples/SubmitUSProgramBriefAsync.json"
+          }
+        }
+      }
+    },
+    "/shortCodes/countries/US/programBriefs": {
+      "get": {
+        "tags": [
+          "ShortCodes - ProgramBrief"
+        ],
+        "summary": "Gets the list of US Program Briefs for the current resource.",
         "operationId": "ShortCodes_GetUSProgramBriefs",
         "produces": [
           "application/json"
@@ -739,168 +786,8 @@
           "itemName": "programBriefs"
         },
         "x-ms-examples": {
-          "List Program Briefs": {
-            "$ref": "./examples/GetProgramBriefsAsync.json"
-          }
-        }
-      }
-    },
-    "/shortCodes/countries/US/programBriefs/{programBriefId}": {
-      "patch": {
-        "tags": [
-          "ShortCodes - ProgramBrief"
-        ],
-        "summary": "Updates a Program Brief.",
-        "operationId": "ShortCodes_UpdateUSProgramBrief",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "programBriefId",
-            "description": "Program Brief Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Fields to update on the Program Brief",
-            "schema": {
-              "$ref": "#/definitions/UpdateProgramBriefRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProgramBriefOperationResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a Program Brief": {
-            "$ref": "./examples/UpdateProgramBriefAsync.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "ShortCodes - ProgramBrief"
-        ],
-        "summary": "Get a Program Brief by id.",
-        "operationId": "ShortCodes_GetUSProgramBrief",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "programBriefId",
-            "description": "Program Brief Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query a Program Brief": {
-            "$ref": "./examples/GetProgramBriefAsync.json"
-          }
-        }
-      }
-    },
-    "/shortCodes/countries/US/programBriefs/{programBriefId}/:submit": {
-      "post": {
-        "tags": [
-          "ShortCodes - ProgramBrief"
-        ],
-        "summary": "Submits a Program Brief for review.",
-        "operationId": "ShortCodes_SubmitUSProgramBrief",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "programBriefId",
-            "description": "Program Brief Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
-            "schema": {
-              "$ref": "#/definitions/ProgramBriefOperationResponse"
-            },
-            "headers": {
-              "Location": {
-                "description": "URL to retrieve the final result after operation completes.",
-                "type": "string"
-              },
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "operation-id": {
-                "description": "The operation id.",
-                "type": "string"
-              },
-              "submitProgramBrief-id": {
-                "description": "The submitProgramBrief operation id.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Submit Program Brief": {
-            "$ref": "./examples/SubmitProgramBriefAsync.json"
+          "List US Program Briefs": {
+            "$ref": "./examples/GetUSProgramBriefsAsync.json"
           }
         }
       }
@@ -1158,64 +1045,6 @@
         }
       }
     },
-    "ShortCodeOperation": {
-      "required": [
-        "createdDateTime",
-        "id",
-        "operationType",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationType": {
-          "description": "The type of operation, e.g. SubmitProgramBrief",
-          "enum": [
-            "submitProgramBrief"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ShortCodeOperationType",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Status of operation.",
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ShortCodeOperationStatus",
-            "modelAsString": true
-          }
-        },
-        "resourceLocation": {
-          "description": "URL for retrieving the result of the operation, if any.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The date that the operation was created.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
-        },
-        "id": {
-          "description": "Id of operation.",
-          "type": "string"
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The most recent date that the operation was changed.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "PhoneNumberCapabilitiesRequest": {
       "description": "Capabilities of a phone number.",
       "type": "object",
@@ -1357,9 +1186,12 @@
           "description": "ISO 3166 2-char code representing the country e.g. 'US'.",
           "type": "string"
         },
-        "programBriefId": {
+        "programBriefIds": {
           "description": "Program Brief Name.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "purchaseDate": {
           "format": "date-time",
@@ -1381,320 +1213,6 @@
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
-          "type": "string"
-        }
-      }
-    },
-    "CreateProgramDetails": {
-      "required": [
-        "expectedDateOfService",
-        "isPoliticalCampaign",
-        "isVanity",
-        "numberType",
-        "preferredVanityNumbers",
-        "privacyPolicyUrl",
-        "programDescription",
-        "programName",
-        "programSignUp",
-        "programSignUpTypes",
-        "programUrl",
-        "termsOfServiceUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "isVanity": {
-          "description": "Set to true if the request is for a vanity number.",
-          "type": "boolean"
-        },
-        "preferredVanityNumbers": {
-          "description": "Priority ordered list of preferred vanity numbers.\r\nVanity numbers should be 5 or 6 digit when number type is ShortCode.\r\ne.g. 555555, 222222.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "numberType": {
-          "description": "Type for desired numbers e.g. 'shortCode' or 'alphaId'.",
-          "enum": [
-            "shortCode",
-            "alphaId"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NumberType",
-            "modelAsString": true
-          }
-        },
-        "isPoliticalCampaign": {
-          "description": "Indicates whether the number will be used for political campaigns or not.",
-          "type": "boolean"
-        },
-        "programName": {
-          "description": "A program name that indicates the purpose of filling the Program Brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
-          "type": "string"
-        },
-        "programDescription": {
-          "description": "Describes how and why the number will be used for messaging as part of the program.",
-          "type": "string"
-        },
-        "programUrl": {
-          "description": "URL for the program or company.",
-          "type": "string"
-        },
-        "programSignUpTypes": {
-          "description": "Indicates how the consumer can sign up to the program e.g. 'website', 'pointOfSale' and/or 'sms'.",
-          "type": "array",
-          "items": {
-            "description": "Indicates how a program will be discoverable by the consumer.",
-            "enum": [
-              "website",
-              "pointOfSale",
-              "sms"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ProgramSignUpType",
-              "modelAsString": true
-            }
-          }
-        },
-        "programSignUp": {
-          "description": "Call to action description for the program.\r\ne.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.'.",
-          "type": "string"
-        },
-        "termsOfServiceUrl": {
-          "description": "URL for program terms of service.",
-          "type": "string"
-        },
-        "privacyPolicyUrl": {
-          "description": "URL for privacy policy.",
-          "type": "string"
-        },
-        "expectedDateOfService": {
-          "format": "date-time",
-          "description": "Date in which SMS messages will start to be sent out.\r\nShould follow ISO 8601 internet format for datetimes.\r\ne.g. 2021-08-17T22:02:51.316Z, 2021-08-17T16:39:57-08:00, etc.",
-          "type": "string"
-        }
-      }
-    },
-    "CreateCompanyInformation": {
-      "required": [
-        "companyAddress",
-        "companyName",
-        "companyUrl",
-        "contactEmail",
-        "contactName",
-        "contactPhone",
-        "customerCareEmail",
-        "customerCareTollFreeNumber"
-      ],
-      "type": "object",
-      "properties": {
-        "companyName": {
-          "description": "Legal entity name for customer submitting Program Brief.",
-          "type": "string"
-        },
-        "companyUrl": {
-          "description": "Company URL for customer submitting Program Brief.",
-          "type": "string"
-        },
-        "contactName": {
-          "description": "Name of authorized user for purposes of submitting the Program Brief.",
-          "type": "string"
-        },
-        "contactPhone": {
-          "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
-          "type": "string"
-        },
-        "contactEmail": {
-          "description": "Contact email address number for the authorized user for the customer.",
-          "type": "string"
-        },
-        "companyAddress": {
-          "description": "Company's address for the customer submitting the Program Brief.",
-          "type": "string"
-        },
-        "customerCareTollFreeNumber": {
-          "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
-          "type": "string"
-        },
-        "customerCareEmail": {
-          "description": "Customer support email address for the customer submitting the Program Brief.",
-          "type": "string"
-        }
-      }
-    },
-    "CreateMessageDetails": {
-      "required": [
-        "confirmationMessage",
-        "contentTypes",
-        "helpMessage",
-        "messageTypes",
-        "optInMessage",
-        "optInReply",
-        "optOutMessage",
-        "recurrence",
-        "useCase"
-      ],
-      "type": "object",
-      "properties": {
-        "messageTypes": {
-          "description": "Applicable message types used in the program e.g. SMS, MMS.",
-          "type": "array",
-          "items": {
-            "description": "Applicable message types to be used in a program.",
-            "enum": [
-              "sms",
-              "mms"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "MessageType",
-              "modelAsString": true
-            }
-          }
-        },
-        "recurrence": {
-          "description": "Indicates the nature of the messaging associated with the program e.g. 'subscription', 'transaction'.",
-          "enum": [
-            "subscription",
-            "transaction"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Recurrence",
-            "modelAsString": true
-          }
-        },
-        "contentTypes": {
-          "description": "Indicates the messaging content types used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
-          "type": "array",
-          "items": {
-            "description": "Indicates the messaging content type used in the program.",
-            "enum": [
-              "ringTones",
-              "smsChat",
-              "video",
-              "loyaltyProgramPointsPrizes",
-              "gifting",
-              "inApplicationBilling",
-              "textToScreen",
-              "games",
-              "audioChat",
-              "mmsPictures",
-              "sweepstakesContestAuction",
-              "financialBanking",
-              "premiumWap",
-              "queryService",
-              "wallpaperScreensaver",
-              "voting",
-              "application",
-              "mobileGivingDonations",
-              "coupons",
-              "loyaltyProgram",
-              "noPointPrizes",
-              "informationAlerts",
-              "microBilling",
-              "trivia",
-              "entertainmentAlerts",
-              "other"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ContentType",
-              "modelAsString": true
-            }
-          }
-        },
-        "helpMessage": {
-          "description": "Message text for mobile terminated message associated with HELP keyword\r\ne.g 'This is the HELP message test.'.",
-          "type": "string"
-        },
-        "optOutMessage": {
-          "description": "\"Message text for mobile terminated message associated with STOP keyword\r\ne.g. 'This is the STOP message test.'.",
-          "type": "string"
-        },
-        "optInMessage": {
-          "type": "string"
-        },
-        "optInReply": {
-          "description": "Keyword used to confirm double Opt-In method e.g. 'JOIN'.",
-          "type": "string"
-        },
-        "confirmationMessage": {
-          "type": "string"
-        },
-        "useCase": {
-          "description": "Messaging use case description.",
-          "type": "string"
-        }
-      }
-    },
-    "CreateTrafficDetails": {
-      "required": [
-        "estimatedVolume",
-        "isTrafficSpiky",
-        "monthlyAverageMessagesFromUser",
-        "monthlyAverageMessagesToUser",
-        "trafficSpikeDetails"
-      ],
-      "type": "object",
-      "properties": {
-        "estimatedVolume": {
-          "format": "int32",
-          "description": "Estimated total messages per month.",
-          "type": "integer"
-        },
-        "monthlyAverageMessagesFromUser": {
-          "format": "int32",
-          "description": "Estimated number of Mobile-Originated messages likely to be received from a user per month.",
-          "type": "integer"
-        },
-        "monthlyAverageMessagesToUser": {
-          "format": "int32",
-          "description": "Estimated number of Mobile-Terminated messages likely to be sent per user per month.",
-          "type": "integer"
-        },
-        "isTrafficSpiky": {
-          "description": "Indicates if the nature of the messaging traffic will be bursty.",
-          "type": "boolean"
-        },
-        "trafficSpikeDetails": {
-          "description": "If isTrafficSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
-          "type": "string"
-        }
-      }
-    },
-    "CreateProgramBriefRequest": {
-      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
-      "required": [
-        "companyInformation",
-        "messageDetails",
-        "programDetails",
-        "trafficDetails"
-      ],
-      "type": "object",
-      "properties": {
-        "programDetails": {
-          "$ref": "#/definitions/CreateProgramDetails"
-        },
-        "companyInformation": {
-          "$ref": "#/definitions/CreateCompanyInformation"
-        },
-        "messageDetails": {
-          "$ref": "#/definitions/CreateMessageDetails"
-        },
-        "trafficDetails": {
-          "$ref": "#/definitions/CreateTrafficDetails"
-        }
-      }
-    },
-    "ProgramBriefOperationResponse": {
-      "description": "Response object for operations on a Program Brief like creation or update.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Program Brief ID.",
           "type": "string"
         }
       }
@@ -1760,19 +1278,19 @@
           "description": "Indicates whether the number will be used for political campaigns or not.",
           "type": "boolean"
         },
-        "programName": {
+        "name": {
           "description": "A program name that indicates the purpose of filling the Program Brief and how the number will be used for messaging.\r\ne.g. 'CONTOSO Shipping'",
           "type": "string"
         },
-        "programDescription": {
+        "description": {
           "description": "Describes how and why the number will be used for messaging as part of the program.",
           "type": "string"
         },
-        "programUrl": {
+        "url": {
           "description": "URL for the program or company.",
           "type": "string"
         },
-        "programSignUpTypes": {
+        "signUpTypes": {
           "description": "Indicates how the consumer can sign up to the program e.g. 'website', 'pointOfSale' and/or 'sms'.",
           "type": "array",
           "items": {
@@ -1789,7 +1307,7 @@
             }
           }
         },
-        "programSignUp": {
+        "signUp": {
           "description": "Call to action description for the program.\r\ne.g. 'This program will allow for consumers to receive a one-time passcode to validate their\r\nauthenticity when making a purchase online.  Through a verification process, they will have an\r\noption to validate using a passcode sent via SMS, amongst the options. If they choose to have\r\nthe passcode sent over SMS they will receive this one-time message.  If they chose to opt out,\r\nthey may select \\\"STOP\\\" rather than continuing.'.",
           "type": "string"
         },
@@ -1811,12 +1329,16 @@
     "CompanyInformation": {
       "type": "object",
       "properties": {
-        "companyName": {
+        "name": {
           "description": "Legal entity name for customer submitting Program Brief.",
           "type": "string"
         },
-        "companyUrl": {
+        "url": {
           "description": "Company URL for customer submitting Program Brief.",
+          "type": "string"
+        },
+        "address": {
+          "description": "Company's address for the customer submitting the Program Brief.",
           "type": "string"
         },
         "contactName": {
@@ -1829,10 +1351,6 @@
         },
         "contactEmail": {
           "description": "Contact email address number for the authorized user for the customer.",
-          "type": "string"
-        },
-        "companyAddress": {
-          "description": "Company's address for the customer submitting the Program Brief.",
           "type": "string"
         },
         "customerCareTollFreeNumber": {
@@ -1848,7 +1366,7 @@
     "MessageDetails": {
       "type": "object",
       "properties": {
-        "messageTypes": {
+        "types": {
           "description": "Applicable message types used in the program e.g. SMS, MMS.",
           "type": "array",
           "items": {
@@ -1958,12 +1476,12 @@
           "description": "Estimated number of Mobile-Terminated messages likely to be sent per user per month.",
           "type": "integer"
         },
-        "isTrafficSpiky": {
+        "isSpiky": {
           "description": "Indicates if the nature of the messaging traffic will be bursty.",
           "type": "boolean"
         },
-        "trafficSpikeDetails": {
-          "description": "If isTrafficSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
+        "spikeDetails": {
+          "description": "If isSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
           "type": "string"
         }
       }
@@ -2040,24 +1558,6 @@
         "nextLink": {
           "description": "Represents the URL link to the next page",
           "type": "string"
-        }
-      }
-    },
-    "UpdateProgramBriefRequest": {
-      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
-      "type": "object",
-      "properties": {
-        "programDetails": {
-          "$ref": "#/definitions/ProgramDetails"
-        },
-        "companyInformation": {
-          "$ref": "#/definitions/CompanyInformation"
-        },
-        "messageDetails": {
-          "$ref": "#/definitions/MessageDetails"
-        },
-        "trafficDetails": {
-          "$ref": "#/definitions/TrafficDetails"
         }
       }
     }
