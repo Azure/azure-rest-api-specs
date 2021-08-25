@@ -6,7 +6,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Luis Deepstack is `2021-07-15-preview`.
+The current preview release QuestionAnswering and Luis Deepstack are 2021-07-15-preview
 
 ```yaml
 tag: release_2021_07_15_preview
@@ -34,6 +34,21 @@ title:
 modelerfour:
   lenient-model-deduplication: true
 ```
+
+### Release 2021-07-15-preview
+
+These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_07_15_preview'
+input-file:
+- preview/2021-07-15-preview/questionanswering.json
+- preview/2021-07-15-preview/questionanswering-authoring.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 
 ### Release 2021-05-01-preview
 
