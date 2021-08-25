@@ -1639,11 +1639,15 @@
         },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive."
+          "description": "The name of the analyzer to use to break the given text."
         },
         "tokenizer": {
           "$ref": "#/definitions/LexicalTokenizerName",
-          "description": "The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive."
+          "description": "The name of the tokenizer to use to break the given text."
+        },
+        "normalizer": {
+          "$ref": "#/definitions/LexicalNormalizerName",
+          "description": "The name of the normalizer to use to normalize the given text."
         },
         "tokenFilters": {
           "type": "array",
@@ -1651,7 +1655,7 @@
             "$ref": "#/definitions/TokenFilterName",
             "x-nullable": false
           },
-          "description": "An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+          "description": "An optional list of token filters to use when breaking the given text."
         },
         "charFilters": {
           "type": "array",
@@ -1659,7 +1663,7 @@
             "$ref": "#/definitions/CharFilterName",
             "x-nullable": false
           },
-          "description": "An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+          "description": "An optional list of character filters to use when breaking the given text."
         }
       },
       "required": [
