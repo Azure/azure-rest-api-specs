@@ -129,11 +129,11 @@
       "type": "object",
       "description": "This is the parameter set of either the conversation application itself or one of the target services.",
       "required": [
-        "targetKind"
+        "targetType"
       ],
-      "discriminator": "targetKind",
+      "discriminator": "targetType",
       "properties": {
-        "targetKind": {
+        "targetType": {
           "type": "string",
           "description": "The type of a target service.",
           "enum": [
@@ -142,7 +142,7 @@
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetType",
             "modelAsString": true
           }
         },
@@ -281,11 +281,11 @@
       "type": "object",
       "description": "This is the base class of prediction",
       "required": [
-        "projectKind"
+        "projectType"
       ],
-      "discriminator": "projectKind",
+      "discriminator": "projectType",
       "properties": {
-        "projectKind": {
+        "projectType": {
           "type": "string",
           "description": "The type of the project.",
           "enum": [
@@ -293,7 +293,7 @@
             "workflow"
           ],
           "x-ms-enum": {
-            "name": "projectKind",
+            "name": "projectType",
             "modelAsString": true
           }
         },
@@ -328,13 +328,13 @@
     "TargetIntentResult": {
       "type": "object",
       "description": "This is the base class of an intent prediction",
-      "discriminator": "targetKind",
+      "discriminator": "targetType",
       "required": [
         "confidenceScore",
-        "targetKind"
+        "targetType"
       ],
       "properties": {
-        "targetKind": {
+        "targetType": {
           "type": "string",
           "description": "This discriminator property specifies the type of the target project that returns the response. 'luis' means the type is LUIS Generally Available. 'luis_deepstack' means LUIS vNext. 'question_answering' means Question Answering.",
           "enum": [
@@ -343,7 +343,7 @@
             "question_answering"
           ],
           "x-ms-enum": {
-            "name": "targetKind",
+            "name": "targetType",
             "modelAsString": true
           }
         },
