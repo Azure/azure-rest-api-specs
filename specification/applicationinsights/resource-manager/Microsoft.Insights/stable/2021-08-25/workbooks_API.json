@@ -459,6 +459,7 @@
           "additionalProperties": {
             "type": "string"
           },
+          "type": "object",
           "description": "Resource tags"
         },
         "kind": {
@@ -477,10 +478,12 @@
           "additionalProperties": {
             "type": "string"
           },
+          "type": "object",
           "description": "Resource etag"
         }
       },
       "x-ms-azure-resource": true,
+      "type": "object",
       "description": "An azure resource object"
     },
     "WorkbooksListResult": {
@@ -497,10 +500,12 @@
           "type": "string"
         }
       },
+      "type": "object",
       "description": "Workbook list result."
     },
     "Workbook": {
       "description": "An Application Insights workbook definition.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/WorkbookResource"
@@ -520,6 +525,7 @@
     },
     "WorkbookProperties": {
       "description": "Properties that contain a workbook.",
+      "type": "object",
       "required": [
         "displayName",
         "category",
@@ -608,10 +614,12 @@
           "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
         }
       },
+      "type": "object",
       "description": "The parameters that can be provided when updating workbook properties properties."
     },
     "WorkbookPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -646,6 +654,7 @@
     },
     "WorkbookError": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -655,6 +664,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -677,6 +687,7 @@
     },
     "InnerErrorTrace": {
       "description": "Error details",
+      "type": "object",
       "properties": {
         "trace": {
           "description": "detailed error trace",
@@ -690,6 +701,7 @@
     },
     "WorkbookManagedIdentity": {
       "description": "Customer Managed Identity",
+      "type": "object",
       "properties": {
         "userAssignedIdentities": {
           "type": "object",
@@ -709,6 +721,7 @@
     },
     "WorkbookUserAssignedIdentities": {
       "description": "Customer Managed Identity",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
