@@ -16,7 +16,6 @@ typescript:
 typescript:
   package-name: "@azure/arm-monitor"
   output-folder: "$(typescript-sdks-folder)/sdk/monitor/arm-monitor"
-  clear-output-folder: true
 ```
 
 ### Profile: hybrid_2019_03_01
@@ -27,7 +26,6 @@ These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is 
 typescript:
   package-name: "@azure/arm-monitor-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/monitor/arm-monitor-profile-2019-03-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2019-03-01
 ```
@@ -40,7 +38,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-monitor-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/monitor/arm-monitor-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2020-09-01
 ```

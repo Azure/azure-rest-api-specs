@@ -91,7 +91,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -128,7 +128,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -165,7 +165,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -211,7 +211,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -247,7 +247,7 @@
           "default": {
             "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -286,7 +286,7 @@
           "default": {
             "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -294,49 +294,11 @@
     }
   },
   "definitions": {
-    "AzureResource": {
-      "description": "An Azure resource object.",
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
-          "type": "string",
-          "default": "global",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ActivityLogAlertResource": {
       "description": "An Activity Log Alert rule resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -461,12 +423,12 @@
           "description": "The list of the Action Groups.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActionGroup"
+            "$ref": "#/definitions/ActionGroupV2"
           }
         }
       }
     },
-    "ActionGroup": {
+    "ActionGroupV2": {
       "description": "A pointer to an Azure Action Group.",
       "properties": {
         "actionGroupId": {
@@ -507,22 +469,6 @@
           "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
           "type": "boolean",
           "default": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "The error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
