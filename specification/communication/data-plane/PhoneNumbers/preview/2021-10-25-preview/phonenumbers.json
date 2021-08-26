@@ -1325,6 +1325,38 @@
         }
       }
     },
+    "ContactInformation": {
+      "description": "Contact Information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of authorized user for purposes of submitting the Program Brief.",
+          "type": "string"
+        },
+        "phone": {
+          "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Contact email address number for the authorized user for the customer.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomerCareInformation": {
+      "description": "Customer Care Information",
+      "type": "object",
+      "properties": {
+        "tollFreeNumber": {
+          "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
+          "type": "string"
+        },
+        "email": {
+          "description": "Customer support email address for the customer submitting the Program Brief.",
+          "type": "string"
+        }
+      }
+    },
     "CompanyInformation": {
       "type": "object",
       "properties": {
@@ -1340,25 +1372,11 @@
           "description": "Company's address for the customer submitting the Program Brief.",
           "type": "string"
         },
-        "contactName": {
-          "description": "Name of authorized user for purposes of submitting the Program Brief.",
-          "type": "string"
+        "contactInformation": {
+          "$ref": "#/definitions/ContactInformation"
         },
-        "contactPhone": {
-          "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
-          "type": "string"
-        },
-        "contactEmail": {
-          "description": "Contact email address number for the authorized user for the customer.",
-          "type": "string"
-        },
-        "customerCareTollFreeNumber": {
-          "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
-          "type": "string"
-        },
-        "customerCareEmail": {
-          "description": "Customer support email address for the customer submitting the Program Brief.",
-          "type": "string"
+        "customerCareInformation": {
+          "$ref": "#/definitions/CustomerCareInformation"
         }
       }
     },
