@@ -880,6 +880,9 @@
         "x-ms-examples": {
           "ProviderRegistrations_Get": {
             "$ref": "./examples/ProviderRegistrations_Get.json"
+          },
+          "ProviderRegistrations_PrivateResourceProvider_Get": {
+            "$ref": "./examples/ProviderRegistrations_PrivateResourceProvider_Get.json"
           }
         },
         "responses": {
@@ -929,6 +932,9 @@
         "x-ms-examples": {
           "ProviderRegistrations_CreateOrUpdate": {
             "$ref": "./examples/ProviderRegistrations_CreateOrUpdate.json"
+          },
+          "ProviderRegistrations_PrivateResourceProvider_CreateOrUpdate": {
+            "$ref": "./examples/ProviderRegistrations_PrivateResourceProvider_CreateOrUpdate.json"
           }
         },
         "responses": {
@@ -4042,10 +4048,10 @@
         }
       }
     },
-    "PrivateResourceProviderConfigurations": {
+    "PrivateResourceProviderConfiguration": {
       "type": "object",
       "properties": {
-        "enabledSubscriptions": {
+        "allowedSubscriptions": {
           "type": "array",
           "items": {
             "type": "string"
@@ -4053,7 +4059,7 @@
         }
       },
       "required": [
-        "enabledSubscriptions"
+        "allowedSubscriptions"
       ]
     },
     "TemplateDeploymentOptions": {
@@ -4187,10 +4193,10 @@
             }
           ]
         },
-        "privateResourceProviderConfigurations": {
+        "privateResourceProviderConfiguration": {
           "allOf": [
             {
-              "$ref": "#/definitions/PrivateResourceProviderConfigurations"
+              "$ref": "#/definitions/PrivateResourceProviderConfiguration"
             }
           ]
         }
