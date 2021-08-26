@@ -4048,10 +4048,10 @@
         }
       }
     },
-    "PrivateResourceProviderConfigurations": {
+    "PrivateResourceProviderConfiguration": {
       "type": "object",
       "properties": {
-        "enabledSubscriptions": {
+        "allowedSubscriptions": {
           "type": "array",
           "items": {
             "type": "string"
@@ -4059,7 +4059,7 @@
         }
       },
       "required": [
-        "enabledSubscriptions"
+        "allowedSubscriptions"
       ]
     },
     "TemplateDeploymentOptions": {
@@ -4193,10 +4193,10 @@
             }
           ]
         },
-        "privateResourceProviderConfigurations": {
+        "privateResourceProviderConfiguration": {
           "allOf": [
             {
-              "$ref": "#/definitions/PrivateResourceProviderConfigurations"
+              "$ref": "#/definitions/PrivateResourceProviderConfiguration"
             }
           ]
         }
