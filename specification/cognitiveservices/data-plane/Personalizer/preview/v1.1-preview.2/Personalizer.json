@@ -1,12 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Personalizer Client v2.1-preview.1",
+    "title": "Personalizer Client v1.1-preview.2",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
-    "version": "v2.1-preview.1"
+    "version": "v1.1-preview.2"
   },
-  "host": "localhost:5001",
-  "basePath": "/personalizer/v2.1-preview.1",
+  "basePath": "/personalizer/v1.1-preview.2",
   "schemes": [
     "https"
   ],
@@ -458,13 +457,16 @@
     "/logs/interactions": {
       "post": {
         "tags": [
-          "LogsV2Dot1Preview1"
+          "LogsV1Dot1Preview2"
         ],
-        "summary": "Logs interactions.",
-        "description": "Logs interactions that will be used by Personalizer for training the model.",
+        "summary": "Post interactions.",
+        "description": "The endpoint is intended to be used from within a SDK for logging interactions and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
         "operationId": "Log_Interactions",
         "consumes": [
           "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -472,14 +474,20 @@
             "name": "body",
             "required": true,
             "schema": {
-              "format": "byte",
+              "format": "binary",
               "type": "string"
             }
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -492,13 +500,16 @@
     "/logs/observations": {
       "post": {
         "tags": [
-          "LogsV2Dot1Preview1"
+          "LogsV1Dot1Preview2"
         ],
-        "summary": "Logs observations.",
-        "description": "Logs observations that will be used by Personalizer for training the model.",
+        "summary": "Post observations.",
+        "description": "The endpoint is intended to be used from within a SDK for logging observations and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
         "operationId": "Log_Observations",
         "consumes": [
           "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -506,14 +517,20 @@
             "name": "body",
             "required": true,
             "schema": {
-              "format": "byte",
+              "format": "binary",
               "type": "string"
             }
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -526,7 +543,7 @@
     "/logs": {
       "delete": {
         "tags": [
-          "LogsV2Dot1Preview1"
+          "LogsV1Dot1Preview2"
         ],
         "summary": "Deletes Logs.",
         "description": "Delete all logs of Rank and Reward calls stored by Personalizer.",
@@ -546,7 +563,7 @@
     "/logs/properties": {
       "get": {
         "tags": [
-          "LogsV2Dot1Preview1"
+          "LogsV1Dot1Preview2"
         ],
         "summary": "Get Log Properties.",
         "description": "Get properties of the Personalizer logs.",
@@ -1035,6 +1052,7 @@
             "InvalidEventIdToActivate",
             "InvalidRankRequest",
             "InvalidExportLogsRequest",
+            "InvalidRequest",
             "InvalidContainer",
             "InvalidModelMetadata",
             "ApprenticeModeNeverTurnedOn",
@@ -1113,6 +1131,10 @@
               },
               {
                 "value": "InvalidExportLogsRequest",
+                "description": "Invalid request."
+              },
+              {
+                "value": "InvalidRequest",
                 "description": "Invalid request."
               },
               {
@@ -1895,7 +1917,7 @@
       "description": "Manages ranking operations."
     },
     {
-      "name": "LogsV2Dot1Preview1",
+      "name": "LogsV1Dot1Preview2",
       "description": "Manages reinforcement learning logs."
     }
   ],
