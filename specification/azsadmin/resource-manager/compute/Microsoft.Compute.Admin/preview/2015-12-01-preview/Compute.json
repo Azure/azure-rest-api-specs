@@ -4,7 +4,7 @@
     "version": "2015-12-01-preview",
     "title": "Compute Admin Client"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -29,7 +29,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -37,6 +37,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "Compute.json#/definitions/CrpErrorResponse"
             }
           }
         },
@@ -48,6 +54,32 @@
   },
   "definitions": {
     "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CrpResource": {
       "description": "Base resource object.",
       "type": "object",
       "properties": {
@@ -88,10 +120,16 @@
     },
     "Operation": {
       "description": "Describes the supported REST operation.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
         },
         "display": {
           "description": "Contains the localized display information for this particular operation or action.",
@@ -101,6 +139,7 @@
     },
     "Display": {
       "description": "Contains the localized display information for this particular operation or action.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
@@ -122,6 +161,7 @@
     },
     "OperationList": {
       "description": "List of Operations",
+      "type": "object",
       "properties": {
         "value": {
           "description": "Array of operations",
@@ -135,6 +175,54 @@
           "type": "string"
         }
       }
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        }
+      }
+    },
+    "CrpErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     }
   },
   "parameters": {
@@ -144,14 +232,6 @@
       "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "required": true,
       "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2015-12-01-preview"
     },
     "LocationParameter": {
       "description": "Location of the resource.",

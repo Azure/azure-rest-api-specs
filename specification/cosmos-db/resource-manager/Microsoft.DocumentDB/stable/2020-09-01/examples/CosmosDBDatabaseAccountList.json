@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+            "name": "ddb1",
+            "location": "West US",
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "GlobalDocumentDB",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "documentEndpoint": "https://ddb1.documents.azure.com:443/",
+              "ipRules": [],
+              "databaseAccountOfferType": "Standard",
+              "disableKeyBasedMetadataWriteAccess": false,
+              "consistencyPolicy": {
+                "defaultConsistencyLevel": "Session",
+                "maxIntervalInSeconds": 5,
+                "maxStalenessPrefix": 100
+              },
+              "writeLocations": [
+                {
+                  "id": "ddb1-eastus",
+                  "locationName": "East US",
+                  "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+                  "provisioningState": "Succeeded",
+                  "failoverPriority": 0
+                }
+              ],
+              "readLocations": [
+                {
+                  "id": "ddb1-eastus",
+                  "locationName": "East US",
+                  "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+                  "provisioningState": "Succeeded",
+                  "failoverPriority": 0
+                }
+              ],
+              "locations": [
+                {
+                  "id": "ddb1-eastus",
+                  "locationName": "East US",
+                  "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+                  "provisioningState": "Succeeded",
+                  "failoverPriority": 0
+                }
+              ],
+              "failoverPolicies": [
+                {
+                  "id": "ddb1-eastus",
+                  "locationName": "East US",
+                  "failoverPriority": 0
+                }
+              ],
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.DocumentDB/databaseAccounts/account1/privateEndpointConnections/pe1",
+                  "properties": {
+                    "privateEndpoint": {
+                      "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe1"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ],
+              "cors": [],
+              "enableFreeTier": false,
+              "apiProperties": {},
+              "enableAnalyticalStorage": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a resource group",
         "tags": [
@@ -48,10 +48,10 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings/{autoscaleSettingName}": {
       "put": {
         "description": "Creates or updates an autoscale setting.",
         "tags": [
@@ -102,10 +102,10 @@
             "description": "Parameters supplied to the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -148,10 +148,10 @@
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -188,10 +188,10 @@
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -219,7 +219,7 @@
         "operationId": "AutoscaleSettings_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -228,7 +228,7 @@
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "autoscaleSettingResource",
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a subscription",
         "tags": [
@@ -270,10 +270,10 @@
         "operationId": "AutoscaleSettings_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -378,9 +378,17 @@
           "type": "string",
           "description": "the name of the metric that defines what the rule monitors."
         },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric that defines what the rule monitors."
+        },
         "metricResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
+        },
+        "metricResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource the rule monitors."
         },
         "timeGrain": {
           "type": "string",
@@ -394,7 +402,8 @@
             "Average",
             "Min",
             "Max",
-            "Sum"
+            "Sum",
+            "Count"
           ],
           "x-ms-enum": {
             "name": "MetricStatisticType",
@@ -442,6 +451,17 @@
           "type": "number",
           "format": "double",
           "description": "the threshold of the metric that triggers the scale action."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleMetricDimension"
+          },
+          "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
+        },
+        "dividePerInstance": {
+          "type": "boolean",
+          "description": "a value indicating whether metric should divide per instance."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -472,7 +492,8 @@
           "enum": [
             "ChangeCount",
             "PercentChangeCount",
-            "ExactCount"
+            "ExactCount",
+            "ServiceAllowedNextValue"
           ],
           "x-ms-enum": {
             "name": "ScaleType",
@@ -638,11 +659,13 @@
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription administrator."
+          "description": "a value indicating whether to send email to subscription administrator.",
+          "default": false
         },
         "sendToSubscriptionCoAdministrators": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription co-administrators."
+          "description": "a value indicating whether to send email to subscription co-administrators.",
+          "default": false
         },
         "customEmails": {
           "type": "array",
@@ -732,6 +755,10 @@
         "targetResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource that the autoscale setting should be added to."
+        },
+        "targetResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource that the autoscale setting should be added to."
         }
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
@@ -803,23 +830,42 @@
           "type": "string"
         }
       }
+    },
+    "ScaleRuleMetricDimension": {
+      "required": [
+        "DimensionName",
+        "Operator",
+        "Values"
+      ],
+      "properties": {
+        "DimensionName": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "Operator": {
+          "type": "string",
+          "description": "the dimension operator. Only 'Equals' and 'NotEquals' are supported. 'Equals' being equal to any of the values. 'NotEquals' being not equal to all of the values",
+          "enum": [
+            "Equals",
+            "NotEquals"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleRuleMetricDimensionOperationType",
+            "modelAsString": true
+          }
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "list of dimension values. For example: [\"App1\",\"App2\"]."
+        }
+      },
+      "description": "Specifies an auto scale rule metric dimension."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",

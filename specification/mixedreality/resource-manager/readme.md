@@ -4,8 +4,11 @@
 
 This is the AutoRest configuration file for Mixed-Reality Azure Resource Management.
 
+
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Resource Management, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,26 +16,125 @@ To build the SDK for Azure Resource Management, simply [Install AutoRest](https:
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ---
+
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Mixed Reality Azure Resource Management Client.
 
 ``` yaml
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2019-02-preview
+tag: package-2021-03-01-preview
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/stable/2021-01-01/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/stable/2020-05-01/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/preview/2020-04-06-preview/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+```
+
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/preview/2021-03-01-preview/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.MixedReality/stable/2021-01-01/proxy.json
+  - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
+  - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+```
+
+### Tag: package-2020-04-06-preview
+
+These settings apply only when `--tag=package-2020-04-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-06-preview'
+input-file:
+- Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
+- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
 ```
 
 ### Tag: package-2019-12-preview
 
-These settings apply only when `--tag=package-2019-12-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-12-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-12-preview'
+``` yaml $(tag) == 'package-2019-12-02-preview'
 input-file:
 - Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
 - Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
@@ -49,6 +151,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -59,9 +162,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -81,60 +186,14 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.mixedreality
-  package-name: azure-mgmt-mixedreality
-  package-version: 0.0.1
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
-```
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Java
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+See configuration in [readme.java.md](./readme.java.md)
 
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
-  - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
-  - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
-  - $(this-folder)/Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 
