@@ -53,6 +53,9 @@ batch:
   - tag: package-2016-09
   - tag: package-2015-06split
   - multiapiscript: true
+
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(multiapiscript)
