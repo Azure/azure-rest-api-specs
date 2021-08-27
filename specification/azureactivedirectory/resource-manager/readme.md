@@ -26,14 +26,24 @@ These are the global settings for the azureactivedirectory.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-07
+tag: package-2020-03
 ```
 
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkForAzureAD.json
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkResources.json
+```
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
   - Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
 ```
@@ -42,7 +52,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
@@ -58,6 +68,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: BodyTopLevelProperties
@@ -117,6 +128,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-
-
