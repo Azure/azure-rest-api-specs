@@ -75,9 +75,9 @@ These settings apply only when `--tag=package-2021-09-privatepreview` is specifi
 
 ``` yaml $(tag) == 'package-2021-09-privatepreview'
 input-file:
-- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/managedapplication.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/managedcluster.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/nodetype.json
+- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/nodetype.json
 ```
 
 ### Tag: package-2021-07-preview
@@ -86,9 +86,9 @@ These settings apply only when `--tag=package-2021-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-07-preview'
 input-file:
-- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/managedapplication.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/managedcluster.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/nodetype.json
+- Microsoft.ServiceFabric/preview/2021-07-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2021-07-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2021-07-01-preview/nodetype.json
 ```
 
 ### Tag: package-2021-05
@@ -97,9 +97,9 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-05'
 input-file:
-- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/managedapplication.json
-- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/managedcluster.json
-- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/nodetype.json
+- Microsoft.ServiceFabric/stable/2021-05-01/managedapplication.json
+- Microsoft.ServiceFabric/stable/2021-05-01/managedcluster.json
+- Microsoft.ServiceFabric/stable/2021-05-01/nodetype.json
 ```
 
 ### Tag: package-2021-01-preview
@@ -108,9 +108,9 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-01-preview'
 input-file:
-- Microsoft.ServiceFabricManagedClusters/preview/2021-01-01-preview/managedapplication.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-01-01-preview/managedcluster.json
-- Microsoft.ServiceFabricManagedClusters/preview/2021-01-01-preview/nodetype.json
+- Microsoft.ServiceFabric/preview/2021-01-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2021-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2021-01-01-preview/nodetype.json
 ```
 
 ---
