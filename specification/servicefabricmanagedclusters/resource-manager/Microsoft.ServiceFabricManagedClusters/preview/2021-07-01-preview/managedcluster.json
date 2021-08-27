@@ -495,6 +495,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedVMSizes": {
+      "get": {
+        "tags": [
+          "managedVMSizes"
+        ],
+        "summary": "Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.",
+        "description": "Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.",
+        "operationId": "managedVMSizes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List unsupported vm sizes": {
+            "$ref": "./examples/managedVMSizes_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVMSizesResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.ServiceFabric/operations": {
       "get": {
         "tags": [
@@ -1026,6 +1069,50 @@
       },
       "description": "The detail of the Service Fabric runtime version result"
     },
+    "ManagedVMSize": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "VM Size properties.",
+          "$ref": "#/definitions/VMSize",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "VM Size type.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes a VM Sizes."
+    },
+    "ManagedVMSizesResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of unsupported Managed VM Sizes by the Service Fabric Managed Clusters.",
+          "items": {
+            "$ref": "#/definitions/ManagedVMSize"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Managed VM Sizes if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list unsupported Managed VM Sizes by the Service Fabric Managed Clusters."
+    },
     "OsType": {
       "type": "string",
       "description": "Cluster operating system, the default will be Windows",
@@ -1067,6 +1154,17 @@
           }
         ]
       }
+    },
+    "VMSize": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        }
+      },
+      "description": "VM Sizes properties."
     },
     "AvailableOperationDisplay": {
       "type": "object",
