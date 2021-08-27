@@ -3,7 +3,7 @@
   "info": {
     "title": "ProviderHub",
     "description": "Microsoft ProviderHub",
-    "version": "2021-09-01-privatepreview",
+    "version": "2021-09-01-preview",
     "x-ms-code-generation-settings": {
       "name": "ProviderHubClient"
     }
@@ -880,9 +880,6 @@
         "x-ms-examples": {
           "ProviderRegistrations_Get": {
             "$ref": "./examples/ProviderRegistrations_Get.json"
-          },
-          "ProviderRegistrations_PrivateResourceProvider_Get": {
-            "$ref": "./examples/ProviderRegistrations_PrivateResourceProvider_Get.json"
           }
         },
         "responses": {
@@ -932,9 +929,6 @@
         "x-ms-examples": {
           "ProviderRegistrations_CreateOrUpdate": {
             "$ref": "./examples/ProviderRegistrations_CreateOrUpdate.json"
-          },
-          "ProviderRegistrations_PrivateResourceProvider_CreateOrUpdate": {
-            "$ref": "./examples/ProviderRegistrations_PrivateResourceProvider_CreateOrUpdate.json"
           }
         },
         "responses": {
@@ -4048,20 +4042,6 @@
         }
       }
     },
-    "PrivateResourceProviderConfiguration": {
-      "type": "object",
-      "properties": {
-        "allowedSubscriptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "allowedSubscriptions"
-      ]
-    },
     "TemplateDeploymentOptions": {
       "type": "object",
       "properties": {
@@ -4190,13 +4170,6 @@
           "allOf": [
             {
               "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
-            }
-          ]
-        },
-        "privateResourceProviderConfiguration": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PrivateResourceProviderConfiguration"
             }
           ]
         }
