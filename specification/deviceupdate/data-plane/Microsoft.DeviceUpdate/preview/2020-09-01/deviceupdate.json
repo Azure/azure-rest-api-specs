@@ -31,11 +31,39 @@
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "azure_auth_implicit": {
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "any",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Implicit Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    },
+    "azure_auth_code": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 AccessCode Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    },
+    "azure_auth_application": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+      "flow": "application",
+      "description": "Azure Active Directory OAuth2 Application Flow",
+      "scopes": {
+        ".default": "client credential scope"
+      }
+    },
+    "azure_auth_password": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+      "flow": "password",
+      "description": "Azure Active Directory OAuth2 Password Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
