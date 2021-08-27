@@ -1598,9 +1598,8 @@
         "responses": {
           "200": {
             "description": "OK -- Get the private endpoint connection properties successfully.",
-            "type": "array",
-            "items": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointListResponse"
             }
           },
           "default": {
@@ -2612,6 +2611,12 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "PrivateEndpointListResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+      }
     }
   },
   "parameters": {
