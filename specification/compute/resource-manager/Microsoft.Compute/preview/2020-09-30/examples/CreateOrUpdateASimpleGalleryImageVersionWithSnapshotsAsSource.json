@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-09-30",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "location": "West US",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1,
+              "encryption": {
+                "osDiskImage": {
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                },
+                "dataDiskImages": [
+                  {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                    "lun": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2,
+              "storageAccountType": "Standard_ZRS"
+            }
+          ]
+        },
+        "storageProfile": {
+          "osDiskImage": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}"
+            },
+            "hostCaching": "ReadOnly"
+          },
+          "dataDiskImages": [
+            {
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+              },
+              "lun": 1,
+              "hostCaching": "None"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+}

@@ -5,7 +5,7 @@
 The files in the folder describe the map of each resource provider's resource types and their supported api versions in the api profile.
 
 ## Basics
-An API profile represents a map of resource provider namespaces and their API versions. It is a representation of an Azure Platform declaring a set of APIs to be supported across all our clouds.Instead of specifying individual api-versions for each resource type across each namespace, the developer can just align the application to a profile and the tools/SDKs will themselves select the right api-versions as directed by the profile. With API Profiles developers can specify a profile version that applies to an entire template and, at runtime, ARM will pick the right versions of the resources. This way, the customers don’t have to worry about which are the right resource versions to specific clouds.
+An API profile represents a map of resource provider namespaces and their API versions. It is a representation of an Azure Platform declaring a set of APIs to be supported across all our clouds. Instead of specifying individual api-versions for each resource type across each namespace, the developer can just align the application to a profile and the tools/SDKs will themselves select the right api-versions as directed by the profile. With API Profiles developers can specify a profile version that applies to an entire template and, at runtime, ARM will pick the right versions of the resources. This way, the customers don’t have to worry about which are the right resource versions to specific clouds.
 
 https://docs.microsoft.com/en-us/azure/azure-stack/user/azure-stack-version-profiles
 

@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Nas Cluster operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2019-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/nasClusters/{nasCluster}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the requested a nas cluster.": {
+            "$ref": "./examples/NasCluster/Get.json"
+          }
+        },
+        "tags": [
+          "NasClusters"
+        ],
+        "description": "Return the requested nas cluster.",
+        "operationId": "NasClusters_Get",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/NasClusterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NasCluster"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/nasClusters": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all storage nas clusters at a location.": {
+            "$ref": "./examples/NasCluster/List.json"
+          }
+        },
+        "tags": [
+          "NasClusters"
+        ],
+        "description": "Returns a list of all nas clusters at a location.",
+        "operationId": "NasClusters_List",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Common.json#/parameters/SkipParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NasClusterList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/NasCluster"
+      }
+    }
+  },
+  "definitions": {
+    "NasCluster": {
+      "description": "Representation of a nas cluster resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a nas cluster.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NasClusterModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NasClusterModel": {
+      "description": "Properties of a nas cluster.",
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "description": "Name of nas cluster",
+          "type": "string",
+          "readOnly": true
+        },
+        "portalUri": {
+          "description": "The portal Uri of Nas Cluster",
+          "type": "string",
+          "readOnly": true
+        },
+        "size": {
+          "description": "The size of Nas Cluster in bytes",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sizeRemaining": {
+          "description": "The remaining size of Nas Cluster in bytes",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "NasClusterList": {
+      "description": "Pageable list of nas clusters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of nas clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NasCluster"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2019-05-01"
+    },
+    "NasClusterParameter": {
+      "name": "nasCluster",
+      "description": "Name of the nas cluster.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

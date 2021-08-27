@@ -112,6 +112,7 @@
         ],
         "description": "Creates or updates a workspace with the specified parameters.",
         "operationId": "Workspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Workspace": {
             "$ref": "./examples/createWorkspace.json"
@@ -153,6 +154,12 @@
               "$ref": "#/definitions/Workspace"
             }
           },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -172,6 +179,7 @@
             "$ref": "./examples/deleteWorkspace.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -189,6 +197,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -1339,7 +1350,6 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "readOnly": true,
           "description": "The identity of the resource."
         },
         "location": {

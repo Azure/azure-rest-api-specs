@@ -27,6 +27,50 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/availableScopes": {
+      "post": {
+        "summary": "Get Available Scopes for `Reservation`.",
+        "description": "Get Available Scopes for `Reservation`.\n",
+        "operationId": "Reservation_AvailableScopes",
+        "x-ms-examples": {
+          "AvailableScopes": {
+            "$ref": "./examples/GetAvailableScope.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, AvailableScopes"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Subscription`s created after the filter.",
+            "schema": {
+              "$ref": "#/definitions/Properties"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/catalogs": {
       "get": {
         "summary": "Get the regions and skus that are available for RI purchase for the specified Azure subscription.",
@@ -75,7 +119,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations": {
       "get": {
         "summary": "Get list of applicable `Reservation`s.",
-        "description": "Get applicable `Reservation`s that are applied to this subscription.",
+        "description": "Get applicable `Reservation`s that are applied to this subscription or a resource group under this subscription.",
         "operationId": "GetAppliedReservationList",
         "x-ms-examples": {
           "AppliedReservationList": {
@@ -239,6 +283,9 @@
         "x-ms-examples": {
           "GetReservation": {
             "$ref": "./examples/GetReservationOrderDetails.json"
+          },
+          "GetReservationWithExpandPayments": {
+            "$ref": "./examples/GetReservationOrderDetailsWithExpandPlanInformation.json"
           }
         },
         "parameters": [
@@ -247,6 +294,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the planInformation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -279,6 +333,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -326,6 +383,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -534,6 +594,80 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/archive": {
+      "post": {
+        "summary": "Archive a `Reservation`.",
+        "description": "Archiving a `Reservation` moves it to `Archived` state.",
+        "operationId": "Reservation_Archive",
+        "x-ms-examples": {
+          "Archive": {
+            "$ref": "./examples/Archive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Archive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Archived a reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/unarchive": {
+      "post": {
+        "summary": "Unarchive a `Reservation`.",
+        "description": "Unarchiving a `Reservation` moves it to the state it was before archiving.\n",
+        "operationId": "Reservation_Unarchive",
+        "x-ms-examples": {
+          "Unarchive": {
+            "$ref": "./examples/Unarchive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Unarchive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Unarchive complete for the reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/operations": {
       "get": {
         "summary": "Get operations.",
@@ -676,6 +810,16 @@
           "description": "The name of SKU",
           "readOnly": true
         },
+        "billingPlans": {
+          "type": "object",
+          "description": "The billing plan options available for this SKU.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ReservationBillingPlan"
+            }
+          }
+        },
         "terms": {
           "type": "array",
           "readOnly": true,
@@ -769,6 +913,18 @@
         }
       }
     },
+    "ReservationBillingPlan": {
+      "type": "string",
+      "description": "Represent the billing plans.",
+      "enum": [
+        "Upfront",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationBillingPlan",
+        "modelAsString": true
+      }
+    },
     "ReservationTerm": {
       "type": "string",
       "description": "Represent the term of Reservation.",
@@ -779,6 +935,80 @@
       "x-ms-enum": {
         "name": "ReservationTerm",
         "modelAsString": true
+      }
+    },
+    "PaymentStatus": {
+      "type": "string",
+      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Scheduled",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentStatus",
+        "modelAsString": true
+      }
+    },
+    "PaymentDetail": {
+      "type": "object",
+      "description": "Information about payment related to a reservation order.",
+      "properties": {
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the payment needs to be done."
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the transaction is completed. Is null when it is scheduled."
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount in pricing currency. Tax not included."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
+        },
+        "billingAccount": {
+          "type": "string",
+          "description": "Shows the Account that is charged for this payment."
+        },
+        "status": {
+          "$ref": "#/definitions/PaymentStatus"
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "ReservationOrderBillingPlanInformation": {
+      "type": "object",
+      "description": "Information describing the type of billing plan for this reservation.",
+      "properties": {
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount of money to be paid for the Order. Tax is not included."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the billing plan has started."
+        },
+        "nextPaymentDueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          }
+        }
       }
     },
     "ReservationOrderProperties": {
@@ -812,6 +1042,12 @@
         "provisioningState": {
           "type": "string",
           "description": "Current state of the reservation."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "planInformation": {
+          "$ref": "#/definitions/ReservationOrderBillingPlanInformation"
         },
         "reservations": {
           "type": "array",
@@ -911,6 +1147,18 @@
             }
           }
         },
+        "netTotal": {
+          "description": "Net total",
+          "type": "number"
+        },
+        "taxTotal": {
+          "description": "Tax total",
+          "type": "number"
+        },
+        "grandTotal": {
+          "description": "Grand Total",
+          "type": "number"
+        },
         "isBillingPartnerManaged": {
           "description": "True if billing is managed by Microsoft Partner. Used only for CSP accounts.",
           "type": "boolean"
@@ -937,6 +1185,12 @@
             "amount": {
               "type": "number"
             }
+          }
+        },
+        "paymentSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
           }
         }
       }
@@ -990,6 +1244,9 @@
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
         },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
         "splitProperties": {
           "$ref": "#/definitions/ReservationSplitProperties"
         },
@@ -1015,6 +1272,14 @@
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Property to determine if a reservation is archived or not"
+        },
+        "capabilities": {
+          "type": "string",
+          "description": "List the Capabilities of a reservation"
         }
       }
     },
@@ -1056,11 +1321,17 @@
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType"
         },
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
         },
         "quantity": {
           "$ref": "#/definitions/ReservationQuantity"
@@ -1393,6 +1664,39 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionScopeProperties"
+        }
+      }
+    },
+    "SubscriptionScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeProperties"
+          }
+        }
+      }
+    },
+    "ScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
     "ReservedResourceType": {
       "type": "string",
       "description": "The type of the resource that is being reserved.",
@@ -1404,15 +1708,71 @@
         "RedHat",
         "SqlDataWarehouse",
         "VMwareCloudSimple",
-        "RedHatOsa"
+        "RedHatOsa",
+        "Databricks",
+        "AppService",
+        "ManagedDisk",
+        "BlockBlob",
+        "RedisCache",
+        "AzureDataExplorer",
+        "MySql",
+        "MariaDb",
+        "PostgreSql",
+        "DedicatedHost",
+        "SapHana",
+        "SqlAzureHybridBenefit"
       ],
       "x-ms-enum": {
         "name": "ReservedResourceType",
         "modelAsString": true
       }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code for the currency used by this purchase record."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "AvailableScopeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableScopeRequestProperties"
+        }
+      }
+    },
+    "AvailableScopeRequestProperties": {
+      "description": "List of scopes for which availability should be checked",
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "Scopes to be checked for availability",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
+    "ScopeParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Parameter for listing the available scopes",
+      "schema": {
+        "$ref": "#/definitions/AvailableScopeRequest"
+      }
+    },
     "PurchaseParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",

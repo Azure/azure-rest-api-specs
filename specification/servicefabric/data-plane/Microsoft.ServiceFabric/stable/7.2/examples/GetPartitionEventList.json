@@ -1,0 +1,37 @@
+{
+  "operationId": "GetPartitionEventList",
+  "description": "This example shows how to get all partition-related events during a certain time window.",
+  "parameters": {
+    "partitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+    "api-version": "6.4",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "PartitionReconfigured",
+          "NodeName": "node1",
+          "NodeInstanceId": "ba001a8bb353543e646be031afb10f1e",
+          "ServiceType": "Svc1Type",
+          "CcEpochDataLossVersion": 131672604833413107,
+          "CcEpochConfigVersion": 8589934595,
+          "ReconfigType": "Other",
+          "Result": "Completed",
+          "Phase0DurationMs": 0.0,
+          "Phase1DurationMs": 0.0,
+          "Phase2DurationMs": 203.1935,
+          "Phase3DurationMs": 0.0262,
+          "Phase4DurationMs": 628.8527,
+          "TotalDurationMs": 832.0724,
+          "PartitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+          "EventInstanceId": "e00fa5b7-f747-40dd-9e09-f5a031e96de4",
+          "TimeStamp": "2018-04-03T20:21:47.3778996Z",
+          "HasCorrelatedEvents": true
+        }
+      ]
+    }
+  }
+}

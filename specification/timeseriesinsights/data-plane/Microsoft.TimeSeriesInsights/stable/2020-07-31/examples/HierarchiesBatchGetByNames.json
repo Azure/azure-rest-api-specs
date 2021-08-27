@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2020-07-31",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "get": {
+        "names": [
+          "Location",
+          "ManufactureDate"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "get": [
+          {
+            "hierarchy": {
+              "id": "6e292e54-9a26-4be1-9034-607d71492707",
+              "name": "Location",
+              "source": {
+                "instanceFieldNames": [
+                  "state",
+                  "city"
+                ]
+              }
+            }
+          },
+          {
+            "hierarchy": {
+              "id": "a28fd14c-6b98-4ab5-9301-3840f142d30e",
+              "name": "ManufactureDate",
+              "source": {
+                "instanceFieldNames": [
+                  "year",
+                  "month"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
