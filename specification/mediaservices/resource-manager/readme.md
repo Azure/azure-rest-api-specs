@@ -24,12 +24,50 @@ To see additional help and options, run:
 
 These are the global settings for the MediaServices API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-06
 opt-in-extensible-enums: true
 ```
 
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Media/stable/2021-06-01/Accounts.json
+  - Microsoft.Media/stable/2021-06-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-06-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-06-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-06-01/Encoding.json
+  - Microsoft.Media/stable/2021-06-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-06-01/streamingservice.json
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: location is a required property for our patch calls
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Media/stable/2020-05-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-05-01/Accounts.json
+  - Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2020-05-01/Encoding.json
+  - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/stable/2020-05-01/Common.json
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: location is a required property for our patch calls
+```
 
 ### Tag: package-2020-05
 
@@ -50,11 +88,12 @@ directive:
     where: $.definitions.TrackedResource.required
     reason: location is a required property for our patch calls
 ```
+
 ### Tag: package-2020-02-preview
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-02-preview'
+```yaml $(tag) == 'package-2020-02-preview'
 input-file:
   - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
@@ -70,7 +109,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-09-preview'
+```yaml $(tag) == 'package-2019-09-preview'
 input-file:
   - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
@@ -86,7 +125,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-preview'
+```yaml $(tag) == 'package-2019-05-preview'
 input-file:
   - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
@@ -102,7 +141,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-07'
+```yaml $(tag) == 'package-2018-07'
 input-file:
   - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
@@ -118,37 +157,37 @@ input-file:
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-10'
+```yaml $(tag) == 'package-2015-10'
 input-file:
-- Microsoft.Media/stable/2015-10-01/media.json
+  - Microsoft.Media/stable/2015-10-01/media.json
 ```
 
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-03-preview'
+```yaml $(tag) == 'package-2018-03-preview'
 input-file:
-- Microsoft.Media/preview/2018-03-30-preview/Accounts.json
-- Microsoft.Media/preview/2018-03-30-preview/Assets.json
-- Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
-- Microsoft.Media/preview/2018-03-30-preview/Encoding.json
-- Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
-- Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
+  - Microsoft.Media/preview/2018-03-30-preview/Accounts.json
+  - Microsoft.Media/preview/2018-03-30-preview/Assets.json
+  - Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
+  - Microsoft.Media/preview/2018-03-30-preview/Encoding.json
+  - Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
 ```
 
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-preview'
+```yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.Media/preview/2018-06-01-preview/Accounts.json
-- Microsoft.Media/preview/2018-06-01-preview/Assets.json
-- Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
-- Microsoft.Media/preview/2018-06-01-preview/Encoding.json
-- Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
-- Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
+  - Microsoft.Media/preview/2018-06-01-preview/Accounts.json
+  - Microsoft.Media/preview/2018-06-01-preview/Assets.json
+  - Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/preview/2018-06-01-preview/Encoding.json
+  - Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
 ```
 
 ---
@@ -160,10 +199,11 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -172,16 +212,14 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js mediaservices/resource-manager
 ```
 
-## C#
+## C
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   # last generated from commit 3586e2989d502434c4f607dd38d40e46aabede5c
   azure-arm: true
@@ -206,7 +244,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: Encoding.json
@@ -217,8 +255,3 @@ directive:
     where: $.definitions.JobProperties
     reason: Output not required for job update
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

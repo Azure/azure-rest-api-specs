@@ -601,7 +601,7 @@
         "retentionInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P7D means one week)."
+          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P1D means one day)."
         },
         "timeout": {
           "type": "string",
@@ -755,6 +755,7 @@
           }
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "ID of the Azure Active Directory."
         },

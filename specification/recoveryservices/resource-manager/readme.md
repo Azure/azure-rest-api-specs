@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for RecoveryServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for RecoveryServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,24 @@ To build the SDK for RecoveryServices, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the RecoveryServices API.
 
 ``` yaml
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2020-10
+tag: package-2021-07
 ```
 
 ### Validations
+
 Run validations when `--validate` is specified on command line
 
 ``` yaml $(validate)
@@ -39,6 +40,64 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaultusages.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-06-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/vaultusages.json
+```
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-04-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/vaultusages.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
 ```
 
 ### Tag: package-2016-06
@@ -52,6 +111,7 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
 - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
 ```
+
 ### Tag: package-2020-02
 
 These settings apply only when `--tag=package-2020-02` is specified on the command line.
@@ -63,6 +123,7 @@ input-file:
 - Microsoft.RecoveryServices/stable/2020-02-02/vaults.json
 - Microsoft.RecoveryServices/stable/2020-02-02/vaultusages.json
 ```
+
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
@@ -74,9 +135,22 @@ input-file:
 - Microsoft.RecoveryServices/stable/2020-10-01/vaults.json
 - Microsoft.RecoveryServices/stable/2020-10-01/vaultusages.json
 ```
----
-# Code Generation
 
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+- Microsoft.RecoveryServices/stable/2021-01-01/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2021-01-01/replicationusages.json
+- Microsoft.RecoveryServices/stable/2021-01-01/vaults.json
+- Microsoft.RecoveryServices/stable/2021-01-01/vaultusages.json
+```
+
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -86,7 +160,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -95,10 +169,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js recoveryservices/resource-manager
 ```
-
 
 ## C#
 
@@ -118,6 +189,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -152,10 +227,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

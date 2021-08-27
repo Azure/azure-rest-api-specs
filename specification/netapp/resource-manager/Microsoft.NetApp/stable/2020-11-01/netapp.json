@@ -3461,15 +3461,13 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types, default NFSv3, CIFS fro SMB protocol",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
           },
           "example": [
-            [
-              "NFSv4.1"
-            ]
+            "NFSv4.1"
           ]
         },
         "provisioningState": {
@@ -3894,7 +3892,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "example": 128.22,
           "maximum": 4500,
           "minimum": 1,
           "multipleOf": 0.001
@@ -4531,9 +4529,29 @@
           "description": "Label for backup"
         },
         "backupType": {
+          "title": "backupType",
           "type": "string",
           "readOnly": true,
-          "description": "Type of backup adhoc or scheduled"
+          "description": "Type of backup Manual or Scheduled",
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "backupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Manual backup"
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled backup"
+              }
+            ]
+          },
+          "example": "Manual"
         },
         "failureReason": {
           "type": "string",

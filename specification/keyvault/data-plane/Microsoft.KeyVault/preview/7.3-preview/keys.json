@@ -79,6 +79,48 @@
         }
       }
     },
+    "/keys/{key-name}/rotate": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "RotateKey",
+        "summary": "Creates a new key version, stores it, then returns key parameters, attributes and policy to the client.",
+        "description": "The operation will rotate the key based on the key policy. It requires the keys/rotate permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "description": "The name of key to be rotated. The system will generate a new version in the specified key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A key bundle containing the result of the rotate key request.",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rotate key": {
+            "$ref": "./examples/RotateKey-example.json"
+          }
+        }
+      }
+    },
     "/keys/{key-name}": {
       "put": {
         "tags": [
@@ -1088,15 +1130,176 @@
           }
         }
       }
+    },
+    "/keys/{key-name}/rotationpolicy": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "GetKeyRotationPolicy",
+        "summary": "Lists the policy for a key.",
+        "description": "The GetKeyRotationPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key in a given key vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The key rotation policy.",
+            "schema": {
+              "$ref": "#/definitions/KeyRotationPolicy"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetKeyRotationPolicy": {
+            "$ref": "./examples/GetKeyRotationPolicy-example.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "UpdateKeyRotationPolicy",
+        "summary": "Updates the rotation policy for a key.",
+        "description": "Set specified members in the key policy. Leave others as undefined. This operation requires the keys/update permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key in the given vault."
+          },
+          {
+            "name": "keyRotationPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyRotationPolicy"
+            },
+            "description": "The policy for the key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The policy for the key.",
+            "schema": {
+              "$ref": "#/definitions/KeyRotationPolicy"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateKeyRotationPolicy": {
+            "$ref": "./examples/UpdateKeyRotationPolicy-example.json"
+          }
+        }
+      }
+    },
+    "/rng": {
+      "post": {
+        "tags": [
+          "RNG"
+        ],
+        "operationId": "GetRandomBytes",
+        "summary": "Get the requested number of bytes containing random values.",
+        "description": "Get the requested number of bytes containing random values from a managed HSM.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/GetRandomBytesRequest"
+            },
+            "description": "The request object to get random bytes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The bytes encoded as a base64url string.",
+            "schema": {
+              "$ref": "#/definitions/RandomBytes"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRandomBytes": {
+            "$ref": "./examples/GetRandomBytes-example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "GetRandomBytesRequest": {
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The requested number of random bytes."
+        }
+      },
+      "description": "The get random bytes request object.",
+      "required": [
+        "count"
+      ]
+    },
+    "RandomBytes": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The bytes encoded as a base64url string."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The get random bytes response object containing the bytes."
+    },
     "KeyReleasePolicy": {
       "properties": {
         "contentType": {
           "description": "Content type and version of key release policy",
           "type": "string",
-          "default": "application/json; charset=utf-8; version=1.0"
+          "default": "application/json; charset=utf-8"
         },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
@@ -1352,6 +1555,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1562,6 +1766,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1594,6 +1799,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1604,28 +1810,60 @@
     },
     "KeyExportParameters": {
       "properties": {
-        "kek": {
+        "wrappingKey": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        },
+        "wrappingKid": {
+          "type": "string",
+          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
-      "description": "The export key parameters.",
-      "required": [
-        "kek"
-      ]
+      "description": "The export key parameters."
     },
     "KeyReleaseParameters": {
       "properties": {
-        "env": {
-          "x-ms-client-name": "environment",
+        "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The target environment assertion."
+          "description": "The attestation assertion for the target of the key release."
+        },
+        "nonce": {
+          "type": "string",
+          "description": "A client provided nonce for freshness."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
       "description": "The release key parameters.",
       "required": [
-        "env"
+        "target"
       ]
     },
     "KeyOperationsParameters": {
@@ -1846,6 +2084,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
+          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1955,16 +2194,110 @@
       },
       "description": "The backup key result, containing the backup blob."
     },
+    "KeyRotationPolicy": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The key policy id.",
+          "readOnly": true
+        },
+        "lifetimeActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LifetimeActions"
+          },
+          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions can only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable."
+        },
+        "attributes": {
+          "$ref": "#/definitions/KeyRotationPolicyAttributes",
+          "description": "The key rotation policy attributes."
+        }
+      },
+      "description": "Management policy for a key."
+    },
+    "LifetimeActions": {
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/LifetimeActionsTrigger",
+          "description": "The condition that will execute the action."
+        },
+        "action": {
+          "$ref": "#/definitions/LifetimeActionsType",
+          "description": "The action that will be executed."
+        }
+      },
+      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
+    },
+    "LifetimeActionsTrigger": {
+      "properties": {
+        "timeAfterCreate": {
+          "type": "string",
+          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\" "
+        },
+        "timeBeforeExpiry": {
+          "type": "string",
+          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\""
+        }
+      },
+      "description": "A condition to be satisfied for an action to be executed."
+    },
+    "LifetimeActionsType": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the action.",
+          "enum": [
+            "rotate",
+            "notify"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "rotate",
+                "description": "Rotate the key based on the key policy."
+              },
+              {
+                "value": "notify",
+                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
+              }
+            ]
+          }
+        }
+      },
+      "description": "The action that will be executed."
+    },
+    "KeyRotationPolicyAttributes": {
+      "properties": {
+        "expiryTime": {
+          "type": "string",
+          "description": "The expiryTime will be applied on the new key version. It should be at least 28 days. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48 hours: PT48H, 1 year and 10 days: P1Y10D"
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The key rotation policy created time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The key rotation policy's last updated time in UTC."
+        }
+      },
+      "description": "The key rotation policy attributes."
+    },
     "KeyReleaseResult": {
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
           "readOnly": true,
-          "description": "The blob containing the released key."
+          "description": "A signed object containing the released key."
         }
       },
-      "description": "The release result, containing the released key blob."
+      "description": "The release result, containing the released key."
     }
   },
   "parameters": {

@@ -24,7 +24,23 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-04
+```
+
+### Tag: package-2021-04
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.Management/stable/2021-04-01/management.json
+```
+
+### Tag: package-2020-10
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.Management/stable/2020-10-01/management.json
 ```
 
 ### Tag: package-2020-05
@@ -95,15 +111,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js managementgroups/resource-manager
 ```
 
 ## C#
@@ -176,6 +190,8 @@ batch:
   - tag: package-2019-11
   - tag: package-2020-02
   - tag: package-2020-05
+  - tag: package-2020-10
+  - tag: package-2021-04
 ```
 
 ### Tag: package-2017-08 and java
@@ -269,8 +285,32 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-10 and java
 
-## AzureResourceSchema
+These settings apply only when `--tag=package-2020-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+``` yaml $(tag) == 'package-2020-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-04 and java
+
+These settings apply only when `--tag=package-2021-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2021_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2021_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
 

@@ -3455,6 +3455,21 @@
     },
     "OperationResultContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationResultContractProperties",
+          "description": "Properties of the Operation Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Long Running Git Operation Results."
+    },
+    "OperationResultContractProperties": {
+      "properties": {
         "id": {
           "type": "string",
           "description": "Operation result identifier."
@@ -5409,6 +5424,16 @@
     },
     "TenantConfigurationSyncStateContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantConfigurationSyncStateContractProperties",
+          "description": "Properties returned Tenant Configuration Sync State check."
+        }
+      },
+      "description": "Result of Tenant Configuration Sync State."
+    },
+    "TenantConfigurationSyncStateContractProperties": {
+      "properties": {
         "branch": {
           "type": "string",
           "description": "The name of Git branch."
@@ -5438,6 +5463,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "lastOperationId": {
+          "type": "string",
+          "description": "Most recent tenant configuration operation identifier"
         }
       },
       "description": "Tenant Configuration Synchronization State."

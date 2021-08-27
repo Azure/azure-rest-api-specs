@@ -69,8 +69,43 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ValidationResponse.properties.isValid
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
+  - suppress: RequiredSystemDataInNewApiVersions
+    reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
+  - suppress: RequiredReadOnlySystemData
+    reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
+  - suppress: XmsPathsMustOverloadPaths
+    from: authorization-RoleDefinitionsCalls.json
+    reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
+  - suppress: AddedPropertyInResponse
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: AddingOptionalProperty
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+```
+
+### Tag: package-2021-07-01-preview-only
+
+These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-07-01-preview/authorization-AccessReviewCalls.json
+```
+
+### Tag: package-2021-03-01-preview-only
+
+These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2020-10-01-preview
@@ -87,6 +122,23 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
+### Tag: package-2020-08-01-preview
+
+These settings apply only when `--tag=package-2020-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+- Microsoft.Authorization/preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview
@@ -100,6 +152,7 @@ input-file:
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
@@ -118,13 +171,13 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-PermissionsCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview
@@ -297,9 +350,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-authorization --default-api-version=2018-09-01-preview
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -308,8 +359,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js authorization/resource-manager
 ```
 
 ## Go
@@ -320,7 +369,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
+## Python
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+See configuration in [readme.python.md](./readme.python.md)
+
+
 

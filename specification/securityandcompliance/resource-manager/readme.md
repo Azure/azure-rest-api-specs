@@ -25,10 +25,11 @@ To see additional help and options, run:
 These are the global settings for the SecurityAndCompliance API.
 
 ``` yaml
+title: SecurityAndComplianceClient
+description: Security And Compliance Client
 openapi-type: arm
-tag: package-2021-01-11
+tag: package-2021-03-08
 ```
-
 
 ### Tag: package-2021-01-11
 
@@ -42,6 +43,21 @@ input-file:
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSCCPowershell.json
+```
+
+### Tag: package-2021-03-08
+
+These settings apply only when `--tag=package-2021-03-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-08'
+input-file:
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/common-types.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForEDMUpload.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForM365ComplianceCenter.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForM365SecurityCenter.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForO365ManagementActivityAPI.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForSCCPowershell.json
+- Microsoft.SecurityAndCompliance/stable/2021-03-08/privateLinkServicesForMIPPolicySync.json
 ```
 
 ---
@@ -61,8 +77,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js securityandcompliance/resource-manager
 ```
 
 ## C#
@@ -117,13 +131,29 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2021-03-08
+```
+
+### Tag: package-2021-03-08 and java
+
+These settings apply only when `--tag=package-2021-03-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-03-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.securityandcompliance.v2021_03_08
+  output-folder: $(azure-libraries-for-java-folder)/sdk/securityandcompliance/mgmt-v2021_03_08
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
