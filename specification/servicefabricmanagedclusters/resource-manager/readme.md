@@ -69,6 +69,17 @@ directive:
 
 ```
 
+### Tag: package-2021-09-privatepreview
+
+These settings apply only when `--tag=package-2021-09-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-privatepreview'
+input-file:
+- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/managedapplication.json
+- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/managedcluster.json
+- Microsoft.ServiceFabricManagedClusters/preview/2021-09-01-privatepreview/nodetype.json
+```
+
 ### Tag: package-2021-07-preview
 
 These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
