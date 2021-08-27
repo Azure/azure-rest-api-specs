@@ -31,6 +31,10 @@ openapi-type: arm
 tag: package-preview-2021-04
 ```
 
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
+```
 
 ### Tag: package-preview-2021-04
 
@@ -65,6 +69,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimprivatelink.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproductsByTags.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimquotas.json
@@ -652,5 +657,8 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimnotifications.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimprivatelink.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```
