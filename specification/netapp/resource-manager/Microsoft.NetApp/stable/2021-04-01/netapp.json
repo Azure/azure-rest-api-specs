@@ -207,6 +207,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
+      "get": {
+        "summary": "Describe all NetApp Accounts in a subscription",
+        "description": "List and describe all NetApp accounts in the subscription.",
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/netAppAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_List": {
+            "$ref": "examples/Accounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a resource group",
@@ -2821,6 +2858,40 @@
           "type": "string",
           "description": "Unit could be Bytes or Count."
         },
+        "supportedAggregationTypes": {
+          "description": "Support metric aggregation type.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Average"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "The internal metric name."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
         "dimensions": {
           "description": "Dimensions of blobs, including blob type and access tier.",
           "type": "array",
@@ -3011,6 +3082,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource name"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
           "type": "string",
@@ -3306,6 +3382,11 @@
           "readOnly": true,
           "description": "Resource name"
         },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
         "type": {
           "type": "string",
           "readOnly": true,
@@ -3425,6 +3506,36 @@
           "default": false,
           "example": false,
           "description": "If enabled (true) the pool can contain cool Access enabled volumes."
+        },
+        "encryptionType": {
+          "title": "encryptionType",
+          "type": "string",
+          "x-nullable": true,
+          "description": "Encryption type of the capacity pool, set encryption type for data at rest for this pool and all volumes in it. This value can only be set when creating new pool.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "Single",
+            "Double"
+          ],
+          "x-ms-enum": {
+            "name": "encryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Single",
+                "description": "EncryptionType Single, volumes will use single encryption at rest"
+              },
+              {
+                "value": "Double",
+                "description": "EncryptionType Double, volumes will use double encryption at rest"
+              }
+            ]
+          },
+          "example": "Single",
+          "default": "Single"
         }
       }
     },
@@ -3546,6 +3657,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource name"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
           "type": "string",
@@ -3701,6 +3817,7 @@
         "backupId": {
           "title": "Backup ID",
           "type": "string",
+          "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Backup.",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
           "maxLength": 36,
@@ -3833,7 +3950,8 @@
           "minLength": 4,
           "maxLength": 4,
           "x-nullable": true,
-          "example": "0770"
+          "example": "0770",
+          "default": "0770"
         }
       }
     },
@@ -3953,7 +4071,6 @@
       "description": "Replication properties",
       "type": "object",
       "required": [
-        "replicationSchedule",
         "remoteVolumeResourceId"
       ],
       "properties": {
@@ -4400,6 +4517,11 @@
           "readOnly": true,
           "description": "Resource name"
         },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
         "type": {
           "type": "string",
           "readOnly": true,
@@ -4837,6 +4959,11 @@
           "readOnly": true,
           "description": "Name of backup policy"
         },
+        "backupPolicyId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Backup Policy Resource ID"
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -4906,6 +5033,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource name"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
           "type": "string",
@@ -5316,7 +5448,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the mount target",
+      "description": "The name of the snapshot",
       "x-ms-parameter-location": "method"
     },
     "SnapshotPolicyName": {
@@ -5324,7 +5456,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the snapshot policy target",
+      "description": "The name of the snapshot policy",
       "x-ms-parameter-location": "method"
     },
     "BackupName": {
