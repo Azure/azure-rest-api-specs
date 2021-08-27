@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2021-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-07-01'
 input-file:
-- Azure.Analytics.Purview.MetadataPolicies/stable/2021-07-01/purviewMetadataPolicy.json
+- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01/purviewMetadataPolicy.json
 modelerfour:
   lenient-model-deduplication: true
 ```
