@@ -192,7 +192,7 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specific private endpoint connection.",
         "x-ms-examples": {
-          "Get specific private endpoint connection for a specific HDInsight cluster.": {
+          "Delete specific private endpoint connection for a specific HDInsight cluster.": {
             "$ref": "./examples/DeletePrivateEndpointConnection.json"
           }
         },
@@ -262,7 +262,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties."
+          "description": "The private endpoint connection properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [

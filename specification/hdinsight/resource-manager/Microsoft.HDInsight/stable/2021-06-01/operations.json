@@ -76,25 +76,8 @@
           "type": "string"
         },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "The service provider: Microsoft.HDInsight",
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed: Cluster, Applications, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation type: read, write, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Localized friendly description for the operation",
-              "type": "string"
-            }
-          }
+          "description": "The display of operation.",
+          "$ref": "#/definitions/OperationDisplay"
         },
         "properties": {
           "description": "The operation properties.",
@@ -102,6 +85,28 @@
         }
       },
       "readOnly": true
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "description": "The service provider: Microsoft.HDInsight",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed: Cluster, Applications, etc.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation type: read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
     },
     "OperationProperties": {
       "description": "The details of operation.",
@@ -232,6 +237,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {

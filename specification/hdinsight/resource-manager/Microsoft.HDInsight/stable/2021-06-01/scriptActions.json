@@ -128,7 +128,8 @@
             "description": "Accepted response definition."
           },
           "404": {
-            "description": "Bad Request definition."
+            "description": "Bad Request definition.",
+            "x-ms-error-response": true
           }
         },
         "x-ms-long-running-operation": true,
@@ -362,6 +363,7 @@
   },
   "definitions": {
     "ScriptActionExecutionHistoryList": {
+      "type": "object",
       "description": "The list script execution history response.",
       "properties": {
         "value": {
@@ -380,6 +382,7 @@
       }
     },
     "ScriptAction": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -402,6 +405,7 @@
       "description": "Describes a script action on role on the cluster."
     },
     "ScriptActionPersistedGetResponseSpec": {
+      "type": "object",
       "description": "The persisted script action for cluster.",
       "properties": {
         "name": {
@@ -430,6 +434,7 @@
       }
     },
     "ScriptActionsList": {
+      "type": "object",
       "description": "The persisted script action for the cluster.",
       "properties": {
         "value": {

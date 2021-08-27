@@ -1617,6 +1617,10 @@
         "identity": {
           "$ref": "#/definitions/ClusterIdentity",
           "description": "The identity of the cluster, if configured."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "description": "The HDInsight cluster."
@@ -1910,6 +1914,7 @@
       }
     },
     "EncryptionInTransitProperties": {
+      "type": "object",
       "description": "The encryption-in-transit properties.",
       "properties": {
         "isEncryptionInTransitEnabled": {
@@ -1920,6 +1925,7 @@
       }
     },
     "UpdateGatewaySettingsParameters": {
+      "type": "object",
       "properties": {
         "restAuthCredential.isEnabled": {
           "type": "boolean",
@@ -1941,6 +1947,7 @@
       "description": "The update gateway settings request parameters."
     },
     "GatewaySettings": {
+      "type": "object",
       "properties": {
         "restAuthCredential.isEnabled": {
           "type": "string",
@@ -1964,6 +1971,7 @@
       "description": "Gateway settings."
     },
     "AsyncOperationResult": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -2154,6 +2162,7 @@
       }
     },
     "Resource": {
+      "type": "object",
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
