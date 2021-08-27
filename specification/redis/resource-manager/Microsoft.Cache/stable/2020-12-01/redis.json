@@ -1543,7 +1543,7 @@
           "200": {
             "description": "OK -- Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointListResponse"
             }
           },
           "default": {
@@ -2611,6 +2611,12 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "PrivateEndpointListResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+      }
     }
   },
   "parameters": {
