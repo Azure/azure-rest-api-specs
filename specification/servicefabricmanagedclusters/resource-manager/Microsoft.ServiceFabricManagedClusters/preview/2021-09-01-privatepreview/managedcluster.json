@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-07-01-preview"
+    "version": "2021-09-01-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -330,7 +330,7 @@
         "description": "Gets information about an available Service Fabric managed cluster code version.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -373,7 +373,7 @@
         "description": "Gets information about an available Service Fabric cluster code version by environment.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/environment"
@@ -419,7 +419,7 @@
         "description": "Gets all available code versions for Service Fabric cluster resources by location.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -459,7 +459,7 @@
         "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/environment"
@@ -492,6 +492,49 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes": {
+      "get": {
+        "tags": [
+          "managedVMSizes"
+        ],
+        "summary": "Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.",
+        "description": "Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.",
+        "operationId": "managedUnsupportedVMSizes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List unsupported vm sizes": {
+            "$ref": "./examples/managedUnsupportedVMSizes_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVMSizesResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1026,6 +1069,50 @@
       },
       "description": "The detail of the Service Fabric runtime version result"
     },
+    "ManagedVMSize": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "VM Size properties.",
+          "$ref": "#/definitions/VMSize",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "VM Size type.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes a VM Sizes."
+    },
+    "ManagedVMSizesResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Managed VM Sizes for Service Fabric Managed Clusters.",
+          "items": {
+            "$ref": "#/definitions/ManagedVMSize"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Managed VM Sizes if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters."
+    },
     "OsType": {
       "type": "string",
       "description": "Cluster operating system, the default will be Windows",
@@ -1067,6 +1154,17 @@
           }
         ]
       }
+    },
+    "VMSize": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        }
+      },
+      "description": "VM Sizes properties."
     },
     "AvailableOperationDisplay": {
       "type": "object",
@@ -1400,11 +1498,11 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-07-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-09-01-privatepreview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-07-01-preview"
+        "2021-09-01-privatepreview"
       ],
       "x-ms-parameter-location": "client"
     },
@@ -1435,7 +1533,7 @@
       ],
       "x-ms-parameter-location": "method"
     },
-    "locationForClusterCodeVersions": {
+    "location": {
       "name": "location",
       "in": "path",
       "description": "The location for the cluster code versions. This is different from cluster location.",
