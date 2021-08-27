@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2019-08-01-preview",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignmentsUsageMetrics": {
+      "get": {
+        "tags": [
+          "RoleAssignmentMetrics"
+        ],
+        "operationId": "RoleAssignmentMetrics_GetMetricsForSubscription",
+        "description": "Get role assignment usage metrics for a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns current role assignment usage metrics.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentMetricsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role assignment metrics for subscription": {
+            "$ref": "./examples/RoleAssignmentMetrics_GetForSubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleAssignmentMetricsResult": {
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The subscription ID."
+        },
+        "roleAssignmentsLimit": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The role assignment limit."
+        },
+        "roleAssignmentsCurrentCount": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The number of current role assignments."
+        },
+        "roleAssignmentsRemainingCount": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The number of remaining role assignments available."
+        }
+      },
+      "description": "Role Assignment Metrics"
+    }
+  },
+  "parameters": {}
+}

@@ -32,46 +32,65 @@ azure-arm: true
 tag: package-2018-06-preview
 ```
 
-## Suppression
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
+```
  
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
+```
 
- ``` yaml
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: 
+      - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+      - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
+    where:
+      - $.definitions.Role.properties.VMGroupName
+```
+
+``` yaml
 directive:
   - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
     from: cluster.json
@@ -80,6 +99,12 @@ directive:
       - $..["restAuthCredential.isEnabled"]
       - $..["restAuthCredential.username"]
       - $..["restAuthCredential.password"]
+```
+
+``` yaml
+directive:
+  - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
+    reason: Update the default error response to a new format would be a braking change for service.
 ```
 
 ### Tag: package-2018-06-preview
@@ -95,6 +120,7 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
 
 
@@ -111,6 +137,7 @@ input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
 ```
 
 
@@ -128,9 +155,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 ## Python
@@ -186,7 +214,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hdinsight.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -200,47 +228,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hdinsight.v2015_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2015_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2015_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
 
-## Multi-API/Profile support for AutoRest v3 generators 
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
-  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/configurations.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
-  - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 
