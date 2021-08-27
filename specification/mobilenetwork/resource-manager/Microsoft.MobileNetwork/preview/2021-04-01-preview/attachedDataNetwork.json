@@ -350,7 +350,7 @@
         },
         "naptConfiguration": {
           "$ref": "#/definitions/NaptConfiguration",
-          "description": "The Network Address and Port Translation configuration."
+          "description": "The Network Address and Port Translation configuration.\nIf not specified the attached data network uses a default NAPT configuration with NAPT enabled."
         },
         "userEquipmentAddressPoolPrefix": {
           "type": "array",
@@ -394,7 +394,7 @@
           "$ref": "#/definitions/NaptEnabled"
         },
         "portRange": {
-          "description": "Range of port numbers to use as translated ports on each translated address. If not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.",
+          "description": "Range of port numbers to use as translated ports on each translated address.\nIf not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.)",
           "$ref": "#/definitions/PortRange"
         },
         "portReuseHoldTime": {
@@ -429,7 +429,7 @@
       "default": "Enabled"
     },
     "PortRange": {
-      "description": "Range of port numbers to use as translated ports on each translated address. If not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.",
+      "description": "Range of port numbers to use as translated ports on each translated address.\nIf not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.)",
       "type": "object",
       "properties": {
         "minPort": {
