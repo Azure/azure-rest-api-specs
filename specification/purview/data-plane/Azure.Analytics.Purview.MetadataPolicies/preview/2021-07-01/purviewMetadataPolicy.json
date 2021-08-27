@@ -24,13 +24,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RoleViewModelListResults"
+              "$ref": "#/definitions/MetadataRoleList"
             }
           },
           "default": {
             "description": "An error response received from the Metadata Policy Service",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
@@ -70,13 +76,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicy"
             }
           },
           "default": {
             "description": "An error response received from the Metadata Policy Service",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
@@ -106,13 +118,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModelListResults"
+              "$ref": "#/definitions/MetadataPolicyList"
             }
           },
           "default": {
             "description": "An error response received from the Metadata Policy Service",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
@@ -155,7 +173,7 @@
             "name": "body",
             "description": "Policy to be updated.",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicy"
             }
           }
         ],
@@ -163,13 +181,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicy"
             }
           },
           "default": {
             "description": "An error response received from the Metadata Policy Service",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
@@ -204,13 +228,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyViewModel"
+              "$ref": "#/definitions/MetadataPolicy"
             }
           },
           "default": {
             "description": "An error response received from the Metadata Policy Service",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
@@ -224,24 +254,30 @@
   },
   "definitions": {
     "AttributeMatcher": {
+      "description": "Attribute matcher for a rule",
       "type": "object",
       "properties": {
         "attributeName": {
+          "description": "AttributeName",
           "type": "string"
         },
         "attributeValueIncludes": {
+          "description": "Value for attribute",
           "type": "string"
         },
         "attributeValueIncludedIn": {
+          "description": "List of values for attribute",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "attributeValueExcludes": {
+          "description": "Value excluded for attribute",
           "type": "string"
         },
         "attributeValueExcludedIn": {
+          "description": "List of values excluded for attribute",
           "type": "array",
           "items": {
             "type": "string"
@@ -249,7 +285,8 @@
         }
       }
     },
-    "DNFCondition": {
+    "DnfCondition": {
+      "description": "The dnfCondition for a riule",
       "type": "array",
       "items": {
         "type": "array",
@@ -259,6 +296,7 @@
       }
     },
     "CNFCondition": {
+      "description": "The cnfCondition for a riule",
       "type": "array",
       "items": {
         "type": "array",
@@ -268,9 +306,11 @@
       }
     },
     "DecisionRule": {
+      "description": "The decision rule for a policy",
       "type": "object",
       "properties": {
         "kind": {
+          "description": "The kind of rule",
           "enum": [
             "decisionrule"
           ],
@@ -282,6 +322,7 @@
           }
         },
         "effect": {
+          "description": "The effect for rule",
           "enum": [
             "Deny",
             "Permit"
@@ -293,14 +334,16 @@
           }
         },
         "dnfCondition": {
-          "$ref": "#/definitions/DNFCondition"
+          "$ref": "#/definitions/DnfCondition"
         }
       }
     },
     "AttributeRule": {
+      "description": "The attribute rule for a policy",
       "type": "object",
       "properties": {
         "kind": {
+          "description": "The kind of rule",
           "enum": [
             "attributerule"
           ],
@@ -312,24 +355,29 @@
           }
         },
         "id": {
+          "description": "The id for rule",
           "type": "string"
         },
         "name": {
+          "description": "The name for rule",
           "type": "string"
         },
         "dnfCondition": {
-          "$ref": "#/definitions/DNFCondition"
+          "$ref": "#/definitions/DnfCondition"
         }
       }
     },
     "CollectionReference": {
+      "description": "The collection reference for a policy",
       "type": "object",
       "properties": {
         "type": {
+          "description": "The type of reference",
           "type": "string",
           "readOnly": true
         },
         "referenceName": {
+          "description": "The name of reference",
           "type": "string"
         }
       }
@@ -338,15 +386,18 @@
       "type": "object",
       "properties": {
         "description": {
+          "description": "The description of policy",
           "type": "string"
         },
         "decisionRules": {
+          "description": "The DecisionRules of policy",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DecisionRule"
           }
         },
         "attributeRules": {
+          "description": "The AttributeRules of policy",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AttributeRule"
@@ -356,21 +407,25 @@
           "$ref": "#/definitions/CollectionReference"
         },
         "parentCollectionName": {
+          "description": "The parent collection of the policy",
           "type": "string"
         }
       }
     },
-    "MetadataPolicyViewModel": {
+    "MetadataPolicy": {
       "type": "object",
       "properties": {
         "name": {
+          "description": "The name of policy",
           "type": "string"
         },
         "id": {
+          "description": "The id of policy",
           "type": "string"
         },
         "version": {
           "format": "int32",
+          "description": "The version of policy",
           "type": "integer"
         },
         "properties": {
@@ -379,18 +434,27 @@
       }
     },
     "ErrorModel": {
+      "description": "The error model for metadata policy",
+      "required": [
+        "code",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
+          "description": "The error code",
           "type": "string"
         },
         "message": {
+          "description": "The error message",
           "type": "string"
         },
         "target": {
+          "description": "The error target",
           "type": "string"
         },
         "details": {
+          "description": "The error details",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorModel"
@@ -399,6 +463,10 @@
       }
     },
     "ErrorResponseModel": {
+      "description": "The error response model for metadata policy",
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
@@ -406,7 +474,8 @@
         }
       }
     },
-    "MetadataPolicyViewModelListResults": {
+    "MetadataPolicyList": {
+      "description": "List of Metadata Policies",
       "required": [
         "values"
       ],
@@ -415,7 +484,7 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MetadataPolicyViewModel"
+            "$ref": "#/definitions/MetadataPolicy"
           }
         },
         "nextLink": {
@@ -423,51 +492,60 @@
         }
       }
     },
-    "RolePropertiesModel": {
+    "MetadataRoleProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "The provisioningState of role",
           "type": "string"
         },
         "roleType": {
+          "description": "The type of role",
           "type": "string"
         },
         "friendlyName": {
+          "description": "The friendly name of role",
           "type": "string"
         },
         "description": {
+          "description": "The description of role",
           "type": "string"
         },
         "cnfCondition": {
           "$ref": "#/definitions/CNFCondition"
         },
         "dnfCondition": {
-          "$ref": "#/definitions/DNFCondition"
+          "$ref": "#/definitions/DnfCondition"
         },
         "version": {
           "format": "int64",
+          "description": "The version of role",
           "type": "integer"
         }
       }
     },
-    "RoleViewModel": {
+    "MetadataRole": {
       "type": "object",
       "properties": {
         "id": {
+          "description": "The Id of role",
           "type": "string"
         },
         "name": {
+          "description": "The name of role",
           "type": "string"
         },
         "type": {
+          "description": "The type of role",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/RolePropertiesModel"
+          "$ref": "#/definitions/MetadataRoleProperties"
         }
       }
     },
-    "RoleViewModelListResults": {
+    "MetadataRoleList": {
+      "description": "List of Metadata roles",
       "required": [
         "values"
       ],
@@ -476,7 +554,7 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RoleViewModel"
+            "$ref": "#/definitions/MetadataRole"
           }
         },
         "nextLink": {
