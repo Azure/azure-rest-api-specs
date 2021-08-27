@@ -1685,6 +1685,28 @@
       },
       "discriminator": "dataAccountType"
     },
+    "DatacenterAddressInstructionResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "communicationInstruction",
+        "datacenterAddressType",
+        "supportedCarriersForReturnShipment"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatacenterAddressResponse"
+        }
+      ],
+      "properties": {
+        "communicationInstruction": {
+          "description": "Data center communication instruction",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DatacenterAddressInstruction"
+    },
     "DataBoxAccountCopyLogDetails": {
       "description": "Copy log details for a storage account of a DataBox job",
       "required": [
@@ -2130,6 +2152,139 @@
           "readOnly": true
         }
       }
+    },
+    "DatacenterAddressResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "datacenterAddressType",
+        "supportedCarriersForReturnShipment"
+      ],
+      "type": "object",
+      "properties": {
+        "datacenterAddressType": {
+          "description": "Data center address type",
+          "enum": [
+            "DatacenterAddressLocation",
+            "DatacenterAddressInstruction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatacenterAddressType",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DatacenterAddressLocation",
+                "description": "Data center address location."
+              },
+              {
+                "value": "DatacenterAddressInstruction",
+                "description": "Data center address instruction."
+              }
+            ]
+          }
+        },
+        "supportedCarriersForReturnShipment": {
+          "description": "List of supported carriers for return shipment",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "datacenterAddressType"
+    },
+    "DatacenterAddressLocationResponse": {
+      "description": "Datacenter address for given storage location.",
+      "required": [
+        "contactPersonName",
+        "company",
+        "street1",
+        "street2",
+        "street3",
+        "city",
+        "state",
+        "zip",
+        "country",
+        "phone",
+        "additionalShippingInformation",
+        "datacenterAddressType",
+        "supportedCarriersForReturnShipment"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatacenterAddressResponse"
+        }
+      ],
+      "properties": {
+        "contactPersonName": {
+          "description": "Contact person name",
+          "type": "string",
+          "readOnly": true
+        },
+        "company": {
+          "description": "Company name",
+          "type": "string",
+          "readOnly": true
+        },
+        "street1": {
+          "description": "Street address line 1",
+          "type": "string",
+          "readOnly": true
+        },
+        "street2": {
+          "description": "Street address line 2",
+          "type": "string",
+          "readOnly": true
+        },
+        "street3": {
+          "description": "Street address line 3",
+          "type": "string",
+          "readOnly": true
+        },
+        "city": {
+          "description": "City name",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "State",
+          "type": "string",
+          "readOnly": true
+        },
+        "zip": {
+          "description": "Zip code",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "Country",
+          "type": "string",
+          "readOnly": true
+        },
+        "phone": {
+          "description": "Phone number",
+          "type": "string",
+          "readOnly": true
+        },
+        "phoneExtension": {
+          "description": "Phone extension",
+          "type": "string",
+          "readOnly": true
+        },
+        "addressType": {
+          "description": "Address type",
+          "type": "string"
+        },
+        "additionalShippingInformation": {
+          "description": "Special instruction for shipping",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DatacenterAddressLocation"
     },
     "DataExportDetails": {
       "description": "Details of the data to be used for exporting data from azure.",
