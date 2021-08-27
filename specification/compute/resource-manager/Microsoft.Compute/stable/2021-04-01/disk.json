@@ -2092,7 +2092,7 @@
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
+          "description": "List of supported capabilities for the image from which the OS disk was created."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2194,7 +2194,7 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percent complete of a clone operation."
+          "description": "Percent complete of a CopyStart operation."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
@@ -2302,7 +2302,7 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percent complete of a clone operation."
+          "description": "Percent complete of a CopyStart operation."
         }
       },
       "required": [
@@ -2554,11 +2554,11 @@
         "values": [
           {
             "value": "Enabled",
-            "description": "Export on disk will depend on the networkAccessPolicy."
+            "description": "You can generate a SAS URI to access the underlying data of the disk publicly on the internet when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate."
           },
           {
             "value": "Disabled",
-            "description": "The disk cannot be exported unless it is associated with a diskAccess."
+            "description": "You cannot access the underlying data of the disk publicly on the internet even when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate."
           }
         ]
       }
@@ -2898,7 +2898,7 @@
       "properties": {
         "acceleratedNetwork": {
           "type": "boolean",
-          "description": "Accelerated Networking flag persisted on the disk resource which can be toggled to true or false and used by VM."
+          "description": "True if the image from which the OS disk is created supports accelerated networking."
         }
       },
       "description": "List of supported capabilities (like accelerated networking) persisted on the disk resource for VM use."
@@ -3472,7 +3472,7 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percent complete of a clone operation."
+          "description": "Percent complete of a CopyStart operation."
         }
       },
       "description": "Properties of an incremental disk restore point"
@@ -3625,7 +3625,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
+      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "SnapshotNameParameter": {
@@ -3633,7 +3633,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The max name length is 80 characters.",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "DiskEncryptionSetNameParameter": {
@@ -3641,7 +3641,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
+      "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "DiskAccessNameParameter": {
@@ -3649,7 +3649,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, underscore and hyphen. The maximum name length is 80 characters.",
+      "description": "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
