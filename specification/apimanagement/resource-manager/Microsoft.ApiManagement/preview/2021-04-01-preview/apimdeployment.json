@@ -1390,6 +1390,13 @@
           "description": "Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored.",
           "default": false
         },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./definitions.json#/definitions/RemotePrivateEndpointConnectionWrapper"
+          },
+          "description": "List of Private Endpoint Connections of this service."
+        },
         "platformVersion": {
           "type": "string",
           "description": "Compute Platform Version running the service in this location.",
