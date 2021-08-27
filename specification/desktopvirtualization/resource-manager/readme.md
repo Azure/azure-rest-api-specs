@@ -38,14 +38,6 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 input-file:
   - Microsoft.DesktopVirtualization/stable/2021-07-12/desktopvirtualization.json
 ```
-### Tag: package-preview-2021-05
-
-These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-05'
-input-file:
-  - Microsoft.DesktopVirtualization/preview/2021-05-13-preview/desktopvirtualization.json
-```
 
 ### Tag: package-2019-01-23-preview
 
@@ -129,13 +121,6 @@ input-file:
 - Microsoft.DesktopVirtualization/preview/2021-03-09-preview/desktopvirtualization.json
 ```
 
-### Tag: package-2021-04-01-preview
-
-``` yaml $(tag) == 'package-2021-04-01-preview'
-input-file:
-- Microsoft.DesktopVirtualization/preview/2021-04-01-preview/desktopvirtualization.json
-```
-
 ---
 
 # Code Generation
@@ -211,7 +196,6 @@ input-file:
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-03-09-preview/desktopvirtualization.json
-  - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-04-01-preview/desktopvirtualization.json
 
 ```
 
