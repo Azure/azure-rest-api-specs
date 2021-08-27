@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Personalizer Client v1.1-preview.2",
+    "title": "Personalizer Base",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
     "version": "v1.1-preview.2"
   },
@@ -27,7 +27,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "config",
             "description": "The personalizer service configuration.",
             "required": true,
             "schema": {
@@ -121,7 +121,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "policy",
             "description": "The learning settings.",
             "required": true,
             "schema": {
@@ -180,7 +180,7 @@
           "ConfigurationsV1Dot1Preview1"
         ],
         "summary": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
-        "operationId": "Evaluation_Apply",
+        "operationId": "ServiceConfiguration_ApplyFromEvaluation",
         "consumes": [
           "application/json"
         ],
@@ -209,8 +209,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_Apply request": {
-            "$ref": "./examples/Evaluation_Apply.json"
+          "Successful ServiceConfiguration_ApplyFromEvaluation request": {
+            "$ref": "./examples/ServiceConfiguration_ApplyFromEvaluation.json"
           }
         }
       }
@@ -329,7 +329,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "evaluation",
             "description": "The Offline Evaluation job definition.",
             "required": true,
             "schema": {
@@ -389,7 +389,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "reward",
             "description": "The reward should be a floating point number, typically between 0 and 1.",
             "required": true,
             "schema": {
@@ -824,7 +824,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "rankRequest",
             "description": "A Personalizer Rank request.",
             "required": true,
             "schema": {
@@ -855,73 +855,6 @@
     }
   },
   "definitions": {
-    "ApprenticeLearningMetrics": {
-      "required": [
-        "numberOfEvents",
-        "numberOfImitatedEvents",
-        "sumOfImitatedRewards",
-        "sumOfRewards"
-      ],
-      "type": "object",
-      "properties": {
-        "numberOfEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfRewards": {
-          "format": "float",
-          "type": "number"
-        },
-        "numberOfImitatedEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfImitatedRewards": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "ApprenticeModeMetrics": {
-      "required": [
-        "lastProcessedEventTime",
-        "numberOfEvents",
-        "numberOfImitatedEvents",
-        "startTime",
-        "sumOfImitatedRewards",
-        "sumOfRewards"
-      ],
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastProcessedEventTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastBatchMetrics": {
-          "$ref": "#/definitions/ApprenticeLearningMetrics"
-        },
-        "numberOfEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfRewards": {
-          "format": "float",
-          "type": "number"
-        },
-        "numberOfImitatedEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfImitatedRewards": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
     "ServiceConfiguration": {
       "description": "The configuration of the service.",
       "required": [
@@ -995,9 +928,6 @@
             "name": "LearningMode",
             "modelAsString": true
           }
-        },
-        "latestApprenticeModeMetrics": {
-          "$ref": "#/definitions/ApprenticeModeMetrics"
         },
         "isAutoOptimizationEnabled": {
           "description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
@@ -1398,6 +1328,8 @@
           "readOnly": true
         },
         "totalSummary": {
+          "description": "The aggregate total of the Offline Evaluation.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/PolicyResultSummary"
@@ -1466,6 +1398,7 @@
           }
         },
         "featureImportance": {
+          "description": "Feature Importance.",
           "type": "array",
           "items": {
             "type": "array",
@@ -1475,6 +1408,7 @@
           }
         },
         "evaluationType": {
+          "description": "Evaluation type (manual or through Automatic Optimization).",
           "enum": [
             "Manual",
             "Auto"
@@ -1486,9 +1420,11 @@
           }
         },
         "optimalPolicy": {
+          "description": "Thr optimal policy.",
           "type": "string"
         },
         "creationTime": {
+          "description": "Creation time.",
           "format": "date-time",
           "type": "string"
         }
@@ -1569,6 +1505,8 @@
       "type": "object",
       "properties": {
         "dateRange": {
+          "description": "Date range.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/DateRange"
@@ -1624,6 +1562,7 @@
       "type": "object",
       "properties": {
         "reward": {
+          "description": "List of SlotRewards",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SlotReward"
@@ -1654,7 +1593,7 @@
       }
     },
     "SlotRequest": {
-      "description": "A slot with it\u0027s associated features and list of excluded actions",
+      "description": "A slot with it's associated features and list of excluded actions",
       "required": [
         "baselineAction",
         "id"
@@ -1680,7 +1619,7 @@
           }
         },
         "baselineAction": {
-          "description": "The \u0027baseline action\u0027 ID for the slot.\r\nThe BaselineAction is the Id of the Action your application would use in that slot if Personalizer didn\u0027t exist.\r\nBaselineAction must be defined for every slot.\r\nBaselineAction should never be part of ExcludedActions.\r\nEach slot must have a unique BaselineAction which corresponds to an an action from the event\u0027s Actions list.",
+          "description": "The 'baseline action' ID for the slot.\r\nThe BaselineAction is the Id of the Action your application would use in that slot if Personalizer didn't exist.\r\nBaselineAction must be defined for every slot.\r\nBaselineAction should never be part of ExcludedActions.\r\nEach slot must have a unique BaselineAction which corresponds to an an action from the event's Actions list.",
           "type": "string"
         }
       }
@@ -1842,7 +1781,7 @@
           "readOnly": true
         },
         "rewardActionId": {
-          "description": "The action chosen by the Personalizer service.\r\nThis is the action your application should display, and for which to report the reward.\r\nThis might not be the first found in \u0027ranking\u0027.",
+          "description": "The action chosen by the Personalizer service.\r\nThis is the action your application should display, and for which to report the reward.\r\nThis might not be the first found in 'ranking'.",
           "maxLength": 256,
           "type": "string",
           "readOnly": true
@@ -1875,18 +1814,7 @@
       "x-ms-skip-url-encoding": true
     }
   },
-  "securityDefinitions": {
-    "apim_key": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
       
-    }
-  ],
   "tags": [
     {
       "name": "ConfigurationsV1Dot1Preview1",
