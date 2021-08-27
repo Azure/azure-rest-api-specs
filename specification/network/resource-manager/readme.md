@@ -205,6 +205,22 @@ input-file:
 
 ```
 
+### Tag: package-2021-02-preview-only
+
+These settings apply only when `--tag=2021-02-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-preview-only'
+input-file:
+  - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
+```
+
 ### Tag: package-2021-02-preview
 
 These settings apply only when `--tag=2021-02-preview` is specified on the command line.
