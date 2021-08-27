@@ -6533,6 +6533,89 @@
         }
       }
     },
+    "PrivateEndpointConnectionRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Private Endpoint Connection Resource Id.",
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The connection state of the private endpoint connection.",
+          "properties": {
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
+            }
+          }
+        }
+      }
+    },
+    "RemotePrivateEndpointConnectionWrapper": {
+      "description": "Remote Private Endpoint Connection resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Private Endpoint connection resource id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Private Endpoint Connection Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Private Endpoint Connection Resource Type",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionWrapperProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      }
+    },
+    "PrivateEndpointConnectionWrapperProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "All the Group ids."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties.",
+      "type": "object"
+    },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ConnectivityCheckRequest": {
       "description": "A request to perform the connectivity check operation on a API Management service.",
       "type": "object",
