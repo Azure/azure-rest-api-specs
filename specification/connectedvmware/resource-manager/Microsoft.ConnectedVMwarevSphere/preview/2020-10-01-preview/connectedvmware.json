@@ -3843,6 +3843,14 @@
           "description": "Gets or sets the unit number of the disk on the controller.",
           "format": "int32",
           "type": "integer"
+        },
+        "deviceName": {
+          "description": "Gets or sets the device name.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "Gets or sets the disk backing type.",
+          "$ref": "#/definitions/DiskType"
         }
       }
     },
@@ -3886,6 +3894,14 @@
           "description": "Gets or sets the unit number of the disk on the controller.",
           "format": "int32",
           "type": "integer"
+        },
+        "deviceName": {
+          "description": "Gets or sets the device name.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "Gets or sets the disk backing type.",
+          "$ref": "#/definitions/DiskType"
         }
       }
     },
@@ -5183,6 +5199,23 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "DiskMode"
+      }
+    },
+    "DiskType": {
+      "description": "Defines the different types of disks.",
+      "enum": [
+        "flat",
+        "pmem",
+        "rawphysical",
+        "rawvirtual",
+        "sparse",
+        "sesparse",
+        "unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DiskType"
       }
     },
     "NICType": {
