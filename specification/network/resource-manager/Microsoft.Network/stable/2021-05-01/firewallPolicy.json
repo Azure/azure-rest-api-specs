@@ -567,6 +567,256 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
+      "post": {
+        "operationId": "FirewallPolicyIdpsSignatures_List",
+        "description": "Retrieves the current status of IDPS signatures for the relevant policy",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IDPSQueryObject"
+            }
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns an IDPS Query Response",
+            "schema": {
+              "$ref": "#/definitions/QueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "query signature overrides": {
+            "$ref": "./examples/FirewallPolicyQuerySignatureOverrides.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides/default": {
+      "patch": {
+        "operationId": "FirewallPolicyIdpsSignaturesOverrides_Patch",
+        "description": "Will update the status of policy's signature overrides for IDPS",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Will contain all properties of the object to put",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverrides"
+            }
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Will return the policy current signature overrides object",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverrides"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patch signature overrides": {
+            "$ref": "./examples/FirewallPolicySignatureOverridesPatch.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Will override/create a new signature overrides for the policy's IDPS",
+        "operationId": "FirewallPolicyIdpsSignaturesOverrides_Put",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Will contain all properties of the object to put",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverrides"
+            }
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Will return the policy current signature overrides object",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverrides"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "put signature overrides": {
+            "$ref": "./examples/FirewallPolicySignatureOverridesPut.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns all signatures overrides for a specific policy.",
+        "operationId": "FirewallPolicyIdpsSignaturesOverrides_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Will return the policy current signature overrides object",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverrides"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "get signature overrides": {
+            "$ref": "./examples/FirewallPolicySignatureOverridesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/": {
+      "post": {
+        "operationId": "FirewallPolicyIdpsSignaturesFilterValues_List",
+        "description": "Retrieves the current filter values for the signatures overrides",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignatureOverridesFilterValuesQuery"
+            }
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all valid filter values for the requested column",
+            "schema": {
+              "$ref": "#/definitions/SignatureOverridesFilterValuesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "query signature overrides": {
+            "$ref": "./examples/FirewallPolicyQuerySignatureOverridesFilterValues.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1462,6 +1712,236 @@
         "workspaceId": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The workspace Id for Firewall Policy Insights."
+        }
+      }
+    },
+    "IDPSQueryObject": {
+      "description": "Will describe the query to run against the IDPS signatures DB",
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "object",
+          "description": "Contain all filters names and values",
+          "$ref": "#/definitions/Filters"
+        },
+        "search": {
+          "type": "string",
+          "description": "Search term in all columns"
+        },
+        "orderBy": {
+          "type": "object",
+          "$ref": "#/definitions/OrderBy",
+          "description": "Column to sort response by"
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "The number of the results to return in each page"
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records matching the filter to skip"
+        }
+      }
+    },
+    "Filters": {
+      "description": "Describers the filters to filter response by",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FilterItems"
+      }
+    },
+    "FilterItems": {
+      "description": "Will contain the filter name and values to operate on",
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the field we would like to filter"
+        },
+        "values": {
+          "type": "array",
+          "description": "List of values to filter the current field by",
+          "items": {
+            "type": "string",
+            "description": "Value of the field to filter by"
+          }
+        }
+      }
+    },
+    "OrderBy": {
+      "description": "Describes a column to sort",
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Describes the actual column name to sort by"
+        },
+        "asc": {
+          "type": "boolean",
+          "description": "Describes if results should be in ascending order"
+        }
+      }
+    },
+    "QueryResults": {
+      "description": "Query result",
+      "type": "object",
+      "properties": {
+        "allRecords": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of total records matching the query."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        },
+        "signatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SingleQueryResult"
+          },
+          "description": "Array containing the results of the query"
+        }
+      }
+    },
+    "SingleQueryResult": {
+      "type": "object",
+      "properties": {
+        "signatureId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ID of the signature"
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Describes the severity of signature: 1 - Low, 2 - Medium, 3 - High",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Describes in which direction signature is being enforced: 0 - Inbound, 1 - OutBound, 2 - Bidirectional",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "group": {
+          "type": "string",
+          "description": "Describes the groups the signature belongs to"
+        },
+        "description": {
+          "type": "string",
+          "description": "Describes what is the signature enforces"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Describes the protocol the signatures is being enforced in"
+        },
+        "sourcePorts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortsList"
+          },
+          "description": "Describes the list of source ports related to this signature"
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortsList"
+          },
+          "description": "Describes the list of destination ports related to this signature"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Describes the last updated time of the signature (provided from 3rd party vendor)"
+        },
+        "inheritedFromParentPolicy": {
+          "type": "boolean",
+          "description": "Describes if this override is inherited from base policy or not"
+        }
+      }
+    },
+    "PortsList": {
+      "type": "string",
+      "description": "Describes a port, port range, or negation of a port"
+    },
+    "Signatures": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SignaturesOverrides": {
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Contains all specific policy signatures overrides for the IDPS",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Contains the name of the resource (default)"
+        },
+        "id": {
+          "description": "Will contain the resource id of the signature override resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Will contain the type of the resource: Microsoft.Network/firewallPolicies/intrusionDetectionSignaturesOverrides"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Will contain the properties of the resource (the actual signature overrides)",
+          "properties": {
+            "signatures": {
+              "type": "object",
+              "$ref": "#/definitions/Signatures"
+            }
+          }
+        }
+      }
+    },
+    "SignatureOverridesFilterValuesQuery": {
+      "description": "Describes the filter values possibles for a given column",
+      "type": "object",
+      "properties": {
+        "filterName": {
+          "type": "string",
+          "description": "Describes the name of the column which values will be returned"
+        }
+      }
+    },
+    "SignatureOverridesFilterValuesResponse": {
+      "description": "Describes the list of all possible values for a specific filter value",
+      "type": "object",
+      "properties": {
+        "filterValues": {
+          "description": "Describes the possible values",
+          "type": "array",
+          "items": {
+            "description": "Describes a single value of the filter",
+            "type": "string"
+          }
         }
       }
     }
