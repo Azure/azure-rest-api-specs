@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-07-01",
+    "version": "2021-08-01",
     "title": "SiteRecoveryManagementClient",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
@@ -7909,6 +7909,18 @@
         "automationAccountArmId": {
           "description": "The automation account arm id.",
           "type": "string"
+        },
+        "automationAccountAuthenticationType": {
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8027,6 +8039,34 @@
         },
         "recoveryAvailabilityZone": {
           "description": "The recovery availability zone.",
+          "type": "string"
+        },
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "automationAccountAuthenticationType": {
+          "description": "A value indicating the authentication type for automation account. The default value is \"RunAsAccount\".",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
           "type": "string"
         }
       },
@@ -8204,6 +8244,10 @@
         },
         "recoveryVirtualMachineScaleSetId": {
           "description": "The virtual machine scale set Id.",
+          "type": "string"
+        },
+        "recoveryCapacityReservationGroupId": {
+          "description": "The recovery capacity reservation group Id.",
           "type": "string"
         }
       },
@@ -8577,6 +8621,18 @@
         "automationAccountArmId": {
           "description": "The automation account arm id.",
           "type": "string"
+        },
+        "automationAccountAuthenticationType": {
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true
+          }
         },
         "scheduleName": {
           "description": "The schedule arm name.",
@@ -8954,6 +9010,10 @@
         "recoveryVirtualMachineScaleSetId": {
           "description": "The recovery virtual machine scale set id.",
           "type": "string"
+        },
+        "recoveryCapacityReservationGroupId": {
+          "description": "The recovery capacity reservation group Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -9059,6 +9119,34 @@
         "recoveryAvailabilityType": {
           "description": "The recovery availability type of the virtual machine.",
           "type": "string"
+        },
+        "agentAutoUpdateStatus": {
+          "description": "A value indicating whether the auto update is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AgentAutoUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "automationAccountArmId": {
+          "description": "The automation account arm id.",
+          "type": "string"
+        },
+        "automationAccountAuthenticationType": {
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -9161,6 +9249,10 @@
           "description": "The virtual machine scale set id.",
           "type": "string"
         },
+        "recoveryCapacityReservationGroupId": {
+          "description": "The recovery capacity reservation group Id.",
+          "type": "string"
+        },
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information."
@@ -9255,6 +9347,18 @@
         "automationAccountArmId": {
           "description": "The automation account arm id.",
           "type": "string"
+        },
+        "automationAccountAuthenticationType": {
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -9301,6 +9405,10 @@
         },
         "recoveryVirtualMachineScaleSetId": {
           "description": "The recovery virtual machine scale set Id.",
+          "type": "string"
+        },
+        "recoveryCapacityReservationGroupId": {
+          "description": "The recovery capacity reservation group Id.",
           "type": "string"
         }
       },
@@ -12734,6 +12842,10 @@
             "name": "PresenceStatus",
             "modelAsString": true
           }
+        },
+        "hyperVHostId": {
+          "description": "The Id of the hyper-v host in fabric.",
+          "type": "string"
         }
       },
       "discriminator": "instanceType",
