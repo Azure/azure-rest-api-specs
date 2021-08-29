@@ -64,7 +64,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List scheduled query rules by subscription": {
@@ -106,7 +106,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List scheduled query rules by resource group": {
@@ -506,6 +506,11 @@
             "$ref": "#/definitions/ScheduledQueryRuleResource"
           },
           "description": "The values for the scheduled query rule resources."
+        },
+        "nextLink": {
+          "description": "Provides the link to retrieve the next set of elements.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "Represents a collection of scheduled query rule resources."
