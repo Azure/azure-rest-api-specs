@@ -106,6 +106,9 @@
           "Get an AwsCloudTrail data connector": {
             "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
           },
+          "Get an Aws S3 data connector": {
+            "$ref": "./examples/dataConnectors/GetAmazonWebServicesS3ById.json"
+          },
           "Get an AATP data connector": {
             "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
           },
@@ -456,6 +459,16 @@
       "description": "Amazon Web Services CloudTrail requirements check request.",
       "type": "object",
       "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
+    },
+    "AwsS3CheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Amazon Web Services S3 requirements check request.",
+      "type": "object",
+      "x-ms-discriminator-value": "AmazonWebServicesS3"
     },
     "DataConnectorsCheckRequirements": {
       "description": "Data connector requirements properties.",
@@ -1028,6 +1041,73 @@
         "dataTypes"
       ]
     },
+    "AwsS3DataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Amazon Web Services S3 data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AwsS3DataConnectorProperties",
+          "description": "Amazon Web Services S3 data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AmazonWebServicesS3"
+    },
+    "AwsS3DataConnectorDataTypes": {
+      "description": "The available data types for Amazon Web Services S3 data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "AwsS3DataConnectorProperties": {
+      "description": "Amazon Web Services S3 data connector properties.",
+      "properties": {
+        "destinationTable": {
+          "description": "The logs destination table name in LogAnalytics.",
+          "type": "string"
+        },
+        "sqsUrls": {
+          "description": "The AWS sqs urls for the connector.",
+          "type": "array",
+          "items": {
+            "description": "AWS sqs url.",
+            "type": "string"
+          }
+        },
+        "roleArn": {
+          "description": "The Aws Role Arn that is used to access the Aws account.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AwsS3DataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "destinationTable",
+        "sqsUrls",
+        "roleArn",
+        "dataTypes"
+      ]
+    },
     "DataConnector": {
       "description": "Data connector",
       "allOf": [
@@ -1089,6 +1169,7 @@
         "Office365",
         "OfficeATP",
         "AmazonWebServicesCloudTrail",
+        "AmazonWebServicesS3",
         "AzureAdvancedThreatProtection",
         "MicrosoftDefenderAdvancedThreatProtection",
         "Dynamics365",
@@ -1124,6 +1205,9 @@
           },
           {
             "value": "AmazonWebServicesCloudTrail"
+          },
+          {
+            "value": "AmazonWebServicesS3"
           },
           {
             "value": "AzureAdvancedThreatProtection"
