@@ -41,18 +41,25 @@
           },
           "description": "The error additional info."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ErrorResponse": {
       "type": "object",
       "title": "Error response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "description": "Error response body for all Azure services to return error details for failed operations.",
       "properties": {
         "error": {
           "description": "The error object.",
           "$ref": "#/definitions/ErrorDetail"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ErrorAdditionalInfo": {
       "type": "object",
@@ -69,6 +76,41 @@
         }
       },
       "description": "The resource management error additional info."
+    }
+  },
+  "responses": {
+    "ErrorResponse": {
+      "description": "Error response for all Azure services to return error details for failed operations.",
+      "headers": {
+        "x-ms-error-code": {
+          "type": "string",
+          "description": "The error code"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
