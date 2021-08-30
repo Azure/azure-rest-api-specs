@@ -1129,6 +1129,210 @@
           }
         }
       }
+    },
+    "/weather/historical/actuals/daily/{format}": {
+      "get": {
+        "description": "**Get Daily Historical Actuals**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Actuals service returns climatology data such as past daily actual observed temperatures, precipitation, snowfall, snow depth and cooling/heating degree day information, for the day at a given coordinate location. The data is requested for a specified date range, up to 31 days in a single API request. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "operationId": "Weather_GetDailyHistoricalActuals",
+        "x-ms-examples": {
+          "Successful Daily Historical Actuals Request": {
+            "$ref": "./examples/GetDailyHistoricalActuals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "x-ms-client-name": "coordinates",
+            "in": "query",
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "startDate",
+            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherDataUnit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyHistoricalActualsResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/historical/records/daily/{format}": {
+      "get": {
+        "description": "**Get Daily Historical Records**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Records service returns climatology data such as past daily record temperatures, precipitation and snowfall at a given coordinate location. Availability of records data will vary by location. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "operationId": "Weather_GetDailyHistoricalRecords",
+        "x-ms-examples": {
+          "Successful Daily Historical Records Request": {
+            "$ref": "./examples/GetDailyHistoricalRecords.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "x-ms-client-name": "coordinates",
+            "in": "query",
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "startDate",
+            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherDataUnit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyHistoricalRecordsResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/historical/normals/daily/{format}": {
+      "get": {
+        "description": "**Get Daily Historical Normals**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Normals service returns climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for the day at a given coordinate location. Normals are a 30-year average for temperatures and precipitation for a specific location. As is standard practice in climatology, the 30-year average covers years 1991-2020, this data will be used for one decade and then will reset in the year 2030. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "operationId": "Weather_GetDailyHistoricalNormals",
+        "x-ms-examples": {
+          "Successful Daily Historical Normals Request": {
+            "$ref": "./examples/GetDailyHistoricalNormals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "x-ms-client-name": "coordinates",
+            "in": "query",
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "startDate",
+            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherDataUnit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyHistoricalNormalsResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3638,6 +3842,186 @@
             "description": "Sulfur dioxide (\"SO2\")"
           }
         ]
+      }
+    },
+    "DailyHistoricalActualsResponse": {
+      "type": "object",
+      "properties": {
+        "historicalActuals": {
+          "type": "array",
+          "description": "Historical actuals for each requested day.",
+          "items": {
+            "$ref": "#/definitions/DailyHistoricalActuals"
+          }
+        }
+      }
+    },
+    "DailyHistoricalActuals": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitMaxMinAvg",
+          "description": "Temperature values."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of heating or cooling degree day information. Degree days are measures of how cold or warm a location is. A degree day compares the mean (the average of the high and low) outdoor temperatures recorded for a location to a standard temperature of 65 degrees F/ 18 degree C."
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+        },
+        "snowfall": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of snow that has fallen."
+        },
+        "snowDepth": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Snow depth."
+        }
+      }
+    },
+    "DailyHistoricalRecordsResponse": {
+      "type": "object",
+      "properties": {
+        "historicalRecords": {
+          "type": "array",
+          "description": "Historical records for each requested day.",
+          "items": {
+            "$ref": "#/definitions/DailyHistoricalRecords"
+          }
+        }
+      }
+    },
+    "DailyHistoricalRecords": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitYearMaxMinAvg",
+          "description": "Temperature value."
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnitYearMax",
+          "description": "Maximum amount of precipitation (liquid equivalent) that has fallen."
+        },
+        "snowfall": {
+          "$ref": "#/definitions/WeatherUnitYearMax",
+          "description": "Maximum snowfall."
+        }
+      }
+    },
+    "DailyHistoricalNormalsResponse": {
+      "type": "object",
+      "properties": {
+        "historicalNormals": {
+          "type": "array",
+          "description": "Historical normals for each requested day.",
+          "items": {
+            "$ref": "#/definitions/DailyHistoricalNormals"
+          }
+        }
+      }
+    },
+    "DailyHistoricalNormals": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "temperature": {
+          "$ref": "#/definitions/WeatherUnitMaxMinAvg",
+          "description": "Temperature values."
+        },
+        "degreeDaySummary": {
+          "$ref": "#/definitions/DegreeDaySummary",
+          "description": "Summary of heating or cooling degree day information"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+        }
+      }
+    },
+    "WeatherUnitMaxMinAvg": {
+      "type": "object",
+      "description": "Returned temperature values.",
+      "properties": {
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum temperature for the time period."
+        },
+        "minimum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Minimum temperature for the time period."
+        },
+        "average": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Average temperature for the time period."
+        }
+      }
+    },
+    "WeatherUnitYearMax": {
+      "type": "object",
+      "description": "Returned temperature values.",
+      "properties": {
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnitYear",
+          "description": "Maximum temperature for the time period."
+        }
+      }
+    },
+    "WeatherUnitYearMaxMinAvg": {
+      "type": "object",
+      "description": "Returned temperature values.",
+      "properties": {
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnitYear",
+          "description": "Maximum temperature for the time period."
+        },
+        "minimum": {
+          "$ref": "#/definitions/WeatherUnitYear",
+          "description": "Minimum temperature for the time period."
+        },
+        "average": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Average temperature for the time period."
+        }
+      }
+    },
+    "WeatherUnitYear": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "Rounded value."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Type of unit for the returned value."
+        },
+        "unitType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Year the value occurred."
+        }
       }
     }
   }
