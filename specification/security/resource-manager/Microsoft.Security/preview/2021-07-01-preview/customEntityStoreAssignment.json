@@ -244,18 +244,19 @@
           "description": "The link to entity store database.",
           "type": "string"
         }
-      },
-      "CustomEntityStoreAssignmentRequestProperties": {
-        "type": "object",
-        "description": "describes the custom entity store assignment request properties",
-        "properties": {
-          "principal": {
-            "description": "The principal assigned with entity store. Format of principal is: [aadtype]=[PrincipalObjectId];[TenantId]",
-            "type": "string"
-          }
-        }
       }
     },
+    "CustomEntityStoreAssignmentRequestProperties": {
+      "type": "object",
+      "description": "describes the custom entity store assignment request properties",
+      "properties": {
+        "principal": {
+          "description": "The principal assigned with entity store. Format of principal is: [aadtype]=[PrincipalObjectId];[TenantId]",
+          "type": "string"
+        }
+      }
+    }
+  },
   "parameters": {
     "customEntityStoreAssignmentName": {
       "name": "customEntityStoreAssignmentName",
@@ -274,6 +275,6 @@
         "$ref": "#/definitions/CustomEntityStoreAssignmentRequestProperties"
       },
       "x-ms-parameter-location": "method"
-    },
+    }
   }
 }
