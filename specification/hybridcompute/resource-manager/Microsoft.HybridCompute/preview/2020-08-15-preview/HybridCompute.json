@@ -260,7 +260,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/assessPatches": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/assessPatches": {
       "post": {
         "tags": [
           "machines"
@@ -1138,8 +1138,8 @@
         }
       }
     },
-	"MachineAssessPatchesResult": {
-	  "type": "object",
+    "MachineAssessPatchesResult": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -1177,13 +1177,13 @@
           "format": "date-time",
           "description": "The UTC timestamp when the operation began."
         },
-		"lastModifiedDateTime": {
+        "lastModifiedDateTime": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp when the operation finished."
         },
-		"startedBy": {
+        "startedBy": {
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1196,16 +1196,16 @@
           },
           "description": "Indicates if operation was triggered by user or by platform."
         },
-		"patchServiceUsed": {
+        "patchServiceUsed": {
           "type": "string",
           "readOnly": true,
           "enum": [
             "Unknown",
             "WU",
-			"WU_WSUS",
-			"YUM",
-			"APT",
-			"Zypper"
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
           ],
           "x-ms-enum": {
             "name": "PatchServiceUsed",
@@ -1213,7 +1213,7 @@
           },
           "description": "Specifies the patch service used for the operation."
         },
-		"osType": {
+        "osType": {
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1234,8 +1234,8 @@
       },
       "description": "Describes the properties of an AssessPatches result."
     },
-	"AvailablePatchCountByClassification": {
-	  "type": "object",
+    "AvailablePatchCountByClassification": {
+      "type": "object",
       "properties": {
         "security": {
           "readOnly": true,
@@ -1295,7 +1295,7 @@
       "description": "Summarization of patches available for installation on the machine by classification."
     },
     "MachineInstallPatchesParameters": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "maximumDuration": {
           "type": "string",
@@ -1330,7 +1330,7 @@
       "description": "Input for InstallPatches as directly received by the API"
     },
     "WindowsParameters": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "classificationsToInclude": {
           "type": "array",
@@ -1380,7 +1380,7 @@
       "description": "Input for InstallPatches on a Windows VM, as directly received by the API"
     },
     "LinuxParameters": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "classificationsToInclude": {
           "type": "array",
@@ -1416,7 +1416,7 @@
       "description": "Input for InstallPatches on a Linux VM, as directly received by the API"
     },
     "MachineInstallPatchesResult": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -1497,13 +1497,13 @@
           "format": "date-time",
           "description": "The UTC timestamp when the operation began."
         },
-		"lastModifiedDateTime": {
+        "lastModifiedDateTime": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp when the operation finished."
         },
-		"startedBy": {
+        "startedBy": {
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1516,16 +1516,16 @@
           },
           "description": "Indicates if operation was triggered by user or by platform."
         },
-		"patchServiceUsed": {
+        "patchServiceUsed": {
           "type": "string",
           "readOnly": true,
           "enum": [
             "Unknown",
             "WU",
-			"WU_WSUS",
-			"YUM",
-			"APT",
-			"Zypper"
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
           ],
           "x-ms-enum": {
             "name": "PatchServiceUsed",
@@ -1533,7 +1533,7 @@
           },
           "description": "Specifies the patch service used for the operation."
         },
-		"osType": {
+        "osType": {
           "type": "string",
           "readOnly": true,
           "enum": [
