@@ -95,7 +95,7 @@
             "$ref": "#/parameters/customEntityStoreAssignmentName"
           },
           {
-            "$ref": "#/parameters/customEntityStoreAssignmentBody"
+            "$ref": "#/parameters/customEntityStoreAssignmentRequestBody"
           }
         ],
         "x-ms-examples": {
@@ -244,9 +244,18 @@
           "description": "The link to entity store database.",
           "type": "string"
         }
+      },
+      "CustomEntityStoreAssignmentRequestProperties": {
+        "type": "object",
+        "description": "describes the custom entity store assignment request properties",
+        "properties": {
+          "principal": {
+            "description": "The principal assigned with entity store. Format of principal is: [aadtype]=[PrincipalObjectId];[TenantId]",
+            "type": "string"
+          }
+        }
       }
-    }
-  },
+    },
   "parameters": {
     "customEntityStoreAssignmentName": {
       "name": "customEntityStoreAssignmentName",
@@ -256,15 +265,15 @@
       "description": "Name of the custom entity store assignment. Generated name is GUID.",
       "x-ms-parameter-location": "method"
     },
-    "customEntityStoreAssignmentBody": {
-      "name": "customEntityStoreAssignmentBody",
+    "customEntityStoreAssignmentRequestBody": {
+      "name": "customEntityStoreAssignmentRequestBody",
       "in": "body",
       "description": "Custom entity store assignment body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/CustomEntityStoreAssignmentProperties"
+        "$ref": "#/definitions/CustomEntityStoreAssignmentRequestProperties"
       },
       "x-ms-parameter-location": "method"
-    }
+    },
   }
 }
