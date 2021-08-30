@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-05-01-preview
+tag: package-2021-08-01-preview
 ```
 
 ### Suppression
@@ -37,6 +37,16 @@ directive:
     reason: For this data plane API, it is not a long run operation and the status code indicates the results.
   - suppress: XmsExamplesRequired
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
+```
+
+### Tag: package-2021-08-01-preview
+
+These settings apply only when `--tag=package-2021-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-preview'
+input-file:
+- WebPubSub/preview/2021-08-01-preview/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
 ```
 
 ### Tag: package-2021-05-01-preview
@@ -61,8 +71,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net-track2
 ```
 
 ## C#
@@ -78,37 +87,6 @@ csharp:
   namespace: Azure.Messaging.WebPubSub
   output-folder: $(csharp-sdks-folder)/webpubsub/Azure.Messaging.WebPubSub/src/Generated
   clear-output-folder: true
-```
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: false
-fluent: true
-namespace: com.azure.messaging.webpubsub
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/webpubsub/data-plane
-```
-
-## TypeScript
-
-These settings apply only when `--typescript` is specified on the command line.
-Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
-
-``` yaml $(typescript)
-azure-arm: false
-package-name: "@azure/web-pubsub"
-license-header: MICROSOFT_MIT_NO_VERSION
-output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/web-pubsub"
-clear-output-folder: true
-generate-metadata: true
-v3: true
-use-extension:
-  "@autorest/typescript": "6.0.0-dev.20201105.2"
 ```
 
 ## Python
