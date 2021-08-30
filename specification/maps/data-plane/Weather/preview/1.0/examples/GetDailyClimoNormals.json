@@ -1,0 +1,182 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "query": "39.952583,-75.165222",
+    "startDate": "2012-01-20",
+    "endDate": "2012-01-22"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "climoNormals": [
+          {
+            "date": "2012-01-20T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 4.4,
+                "unit": "C",
+                "unitType": 17
+              },
+              "minimum": {
+                "value": -3.7,
+                "unit": "C",
+                "unitType": 17
+              },
+              "average": {
+                "value": 0.4,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "degreeDaySummary": {
+              "heating": {
+                "value": 18.0,
+                "unit": "C",
+                "unitType": 17
+              },
+              "cooling": {
+                "value": 0.0,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "value": 2.5,
+              "unit": "mm",
+              "unitType": 3
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          },
+          {
+            "date": "2012-01-21T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 4.5,
+                "unit": "C",
+                "unitType": 17
+              },
+              "minimum": {
+                "value": -3.7,
+                "unit": "C",
+                "unitType": 17
+              },
+              "average": {
+                "value": 0.4,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "degreeDaySummary": {
+              "heating": {
+                "value": 18.0,
+                "unit": "C",
+                "unitType": 17
+              },
+              "cooling": {
+                "value": 0.0,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "value": 2.5,
+              "unit": "mm",
+              "unitType": 3
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          },
+          {
+            "date": "2012-01-22T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 4.5,
+                "unit": "C",
+                "unitType": 17
+              },
+              "minimum": {
+                "value": -3.7,
+                "unit": "C",
+                "unitType": 17
+              },
+              "average": {
+                "value": 0.4,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "degreeDaySummary": {
+              "heating": {
+                "value": 18.0,
+                "unit": "C",
+                "unitType": 17
+              },
+              "cooling": {
+                "value": 0.0,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "value": 2.3,
+              "unit": "mm",
+              "unitType": 3
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

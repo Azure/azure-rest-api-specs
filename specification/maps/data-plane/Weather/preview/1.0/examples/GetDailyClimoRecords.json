@@ -1,0 +1,185 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "query": "39.952583,-75.165222",
+    "startDate": "2012-01-20",
+    "endDate": "2012-01-22"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "climoRecords": [
+          {
+            "date": "2012-01-20T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 18.3,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1951
+              },
+              "minimum": {
+                "value": -19.4,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1984
+              },
+              "average": {
+                "value": -0.6,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "maximum": {
+                "value": 48.0,
+                "unit": "mm",
+                "unitType": 3,
+                "year": 1978
+              }
+            },
+            "snow": {
+              "maximum": {
+                "value": 12.19,
+                "unit": "cm",
+                "unitType": 4,
+                "year": 1978
+              }
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          },
+          {
+            "date": "2012-01-21T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 16.7,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1959
+              },
+              "minimum": {
+                "value": -21.1,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1985
+              },
+              "average": {
+                "value": -2.2,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "maximum": {
+                "value": 33.5,
+                "unit": "mm",
+                "unitType": 3,
+                "year": 1979
+              }
+            },
+            "snow": {
+              "maximum": {
+                "value": 34.29,
+                "unit": "cm",
+                "unitType": 4,
+                "year": 2014
+              }
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          },
+          {
+            "date": "2012-01-22T00:00:00-04:00",
+            "temperature": {
+              "maximum": {
+                "value": 21.1,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1906
+              },
+              "minimum": {
+                "value": -21.7,
+                "unit": "C",
+                "unitType": 17,
+                "year": 1984
+              },
+              "average": {
+                "value": -0.3,
+                "unit": "C",
+                "unitType": 17
+              }
+            },
+            "precipitation": {
+              "maximum": {
+                "value": 26.2,
+                "unit": "mm",
+                "unitType": 3,
+                "year": 1987
+              }
+            },
+            "snow": {
+              "maximum": {
+                "value": 22.35,
+                "unit": "cm",
+                "unitType": 4,
+                "year": 1987
+              }
+            },
+            "sources": [
+              "AccuWeather"
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
