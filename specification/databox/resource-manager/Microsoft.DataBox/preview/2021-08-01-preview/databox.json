@@ -1849,11 +1849,6 @@
           "description": "Flag to indicate if disk manifest should be backed-up in the Storage Account.",
           "type": "boolean",
           "default": false
-        },
-        "datacenterAddress": {
-          "$ref": "#/definitions/DatacenterAddressResponse",
-          "description": "Datacenter address for given sku in a region.",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "DataBoxCustomerDisk"
@@ -2919,11 +2914,6 @@
           "description": "Manifest file of drive",
           "type": "string",
           "readOnly": true
-        },
-        "diskHash": {
-          "description": "Hash of the disk",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -2997,8 +2987,7 @@
       "required": [
         "manifestFile",
         "manifestHash",
-        "bitLockerKey",
-        "diskHash"
+        "bitLockerKey"
       ],
       "type": "object",
       "properties": {
@@ -3014,10 +3003,6 @@
           "description": "BitLocker key of drive",
           "type": "string",
           "x-ms-secret": true
-        },
-        "diskHash": {
-          "description": "Hash of the disk",
-          "type": "string"
         }
       }
     },
@@ -3179,6 +3164,11 @@
           "$ref": "#/definitions/LastMitigationActionOnJob",
           "description": "Last mitigation action performed on the job.",
           "readOnly": true
+        },
+        "datacenterAddress": {
+          "$ref": "#/definitions/DatacenterAddressResponse",
+          "description": "Datacenter address for given sku in a region.",
+          "readOnly": true
         }
       },
       "discriminator": "jobDetailsType"
@@ -3252,8 +3242,10 @@
             "ReadyToDispatchFromAzureDC",
             "ReadyToReceiveAtAzureDC",
             "Created",
-            "Shipping",
-            "Packaging"
+            "ShippedToAzureDC",
+            "AwaitingShipmentDetails",
+            "PreparingToShipFromAzureDC",
+            "ShippedToCustomer"
           ],
           "type": "string",
           "readOnly": true,
@@ -3330,12 +3322,20 @@
                 "description": "Job created by the customer."
               },
               {
-                "value": "Shipping",
-                "description": "User shipping the device to AzureDC"
+                "value": "ShippedToAzureDC",
+                "description": "User shipped the device to AzureDC."
               },
               {
-                "value": "Packaging",
-                "description": "Packaging the device to return to customer"
+                "value": "AwaitingShipmentDetails",
+                "description": "Awaiting shipment details of disks from customer."
+              },
+              {
+                "value": "PreparingToShipFromAzureDC",
+                "description": "Preparing the disks to return to customer."
+              },
+              {
+                "value": "ShippedToCustomer",
+                "description": "Shipped the disks to customer."
               }
             ]
           }
@@ -3548,8 +3548,10 @@
             "ReadyToDispatchFromAzureDC",
             "ReadyToReceiveAtAzureDC",
             "Created",
-            "Shipping",
-            "Packaging"
+            "ShippedToAzureDC",
+            "AwaitingShipmentDetails",
+            "PreparingToShipFromAzureDC",
+            "ShippedToCustomer"
           ],
           "type": "string",
           "readOnly": true,
@@ -3626,12 +3628,20 @@
                 "description": "Job created by the customer."
               },
               {
-                "value": "Shipping",
-                "description": "User shipping the device to AzureDC"
+                "value": "ShippedToAzureDC",
+                "description": "User shipped the device to AzureDC."
               },
               {
-                "value": "Packaging",
-                "description": "Packaging the device to return to customer"
+                "value": "AwaitingShipmentDetails",
+                "description": "Awaiting shipment details of disks from customer."
+              },
+              {
+                "value": "PreparingToShipFromAzureDC",
+                "description": "Preparing the disks to return to customer."
+              },
+              {
+                "value": "ShippedToCustomer",
+                "description": "Shipped the disks to customer."
               }
             ]
           }
@@ -3903,7 +3913,9 @@
             "Delivered",
             "PickedUp",
             "AtAzureDC",
-            "DataCopy"
+            "DataCopy",
+            "Created",
+            "ShippedToCustomer"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3933,6 +3945,14 @@
               {
                 "value": "DataCopy",
                 "description": "Notification at data copy started stage."
+              },
+              {
+                "value": "Created",
+                "description": "Notification at created stage."
+              },
+              {
+                "value": "ShippedToCustomer",
+                "description": "Notification at shipped disk to customer stage."
               }
             ]
           }
