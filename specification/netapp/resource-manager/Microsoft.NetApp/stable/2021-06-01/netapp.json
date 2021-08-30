@@ -207,6 +207,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/quotaLimits": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get quota limits",
+        "description": "Get the default and current limits for quotas",
+        "operationId": "NetAppResourceQuotaLimits_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaLimitsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "QuotaLimits": {
+            "$ref": "examples/QuotaLimits.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a subscription",
@@ -3040,6 +3077,75 @@
         }
       }
     },
+    "SubscriptionQuotaItem": {
+      "description": "Information regarding Subscription Quota Item",
+      "type": "object",
+      "properties": {
+        "current": {
+          "description": "The current quota value.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "The default quota value.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "QuotaLimitsResponse": {
+      "description": "Information regarding quota limits on subscription",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription identifier.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountsPerSubscription": {
+          "description": "The quota for maximum number of accounts per subscription.",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "poolsPerAccount": {
+          "description": "The quota for maximum number of capacity pools per account.",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "volumesPerPool": {
+          "description": "The quota for maximum number of volumes per capacity pool.",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "snapshotsPerVolume": {
+          "description": "The quota for maximum number of snapshots per volume",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "totalTiBsPerSubscription": {
+          "description": "The quota for maximum number of Tebibytes per subscription",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "totalDPVolumesPerSubscription": {
+          "description": "The quota for maximum number of data protection volumes per subscription.",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "totalVolumesPerSubscription": {
+          "description": "The quota for maximum number of volumes per subscription.",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        },
+        "totalCoolAccessVolumesPerSubscription": {
+          "description": "The quota for maximum number of cool access volumes per subscription",
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionQuotaItem"
+        }
+      }
+    },
     "netAppAccountList": {
       "description": "List of NetApp account resources",
       "type": "object",
@@ -3782,6 +3888,71 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "networkFeatures": {
+          "title": "Network features",
+          "description": "Basic network, or Standard features available to the volume.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFeatures",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Basic",
+                "description": "Basic network feature."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard network feature."
+              }
+            ]
+          },
+          "example": "Standard",
+          "default": "Basic"
+        },
+        "networkSiblingSetId": {
+          "title": "Network Sibling Set ID",
+          "description": "Network Sibling Set ID for the the group of volumes sharing networking resources.",
+          "type": "string",
+          "readOnly": true,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information for the volume.",
+          "type": "string",
+          "enum": [
+            "Default",
+            "T1",
+            "T2"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VolumeStorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Basic storage to network connectivity."
+              },
+              {
+                "value": "T1",
+                "description": "Standard T1 storage to network connectivity."
+              },
+              {
+                "value": "T2",
+                "description": "Standard T2 storage to network connectivity."
+              }
+            ]
+          },
+          "example": "T1"
         },
         "mountTargets": {
           "title": "mountTargets",
