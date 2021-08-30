@@ -19,8 +19,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the PostgreSQL API.
 
@@ -29,6 +27,24 @@ title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
 tag: package-flexibleserver-2021-06
+```
+
+``` yaml $(package-flexibleservers)
+tag: package-flexibleserver-2021-06
+```
+
+``` yaml $(package-singleservers)
+tag: package-2020-01-01
+```
+
+### Tag: package-2021-06-15-privatepreview
+
+These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-15-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
@@ -44,7 +60,7 @@ input-file:
 
 ### Tag: package-flexibleserver-2021-06-preview
 
-These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.cd ..
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
@@ -66,6 +82,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
+
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
@@ -76,7 +93,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
-
 
 
 ### Tag: package-2020-11-05-preview
@@ -209,6 +225,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
 ```
