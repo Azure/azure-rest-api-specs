@@ -246,9 +246,19 @@
         }
       }
     },
+    "CustomEntityStoreAssignmentRequest": {
+      "type": "object",
+      "description": "describes the custom entity store assignment request",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomEntityStoreAssignmentRequestProperties"
+        }
+      }
+    },
     "CustomEntityStoreAssignmentRequestProperties": {
       "type": "object",
-      "description": "describes the custom entity store assignment request properties",
+      "description": "describes properties of custom entity store assignment request",
       "properties": {
         "principal": {
           "description": "The principal assigned with entity store. Format of principal is: [aadtype]=[PrincipalObjectId];[TenantId]",
@@ -272,7 +282,7 @@
       "description": "Custom entity store assignment body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/CustomEntityStoreAssignmentRequestProperties"
+        "$ref": "#/definitions/CustomEntityStoreAssignmentRequest"
       },
       "x-ms-parameter-location": "method"
     }
