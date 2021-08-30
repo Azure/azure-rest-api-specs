@@ -64,7 +64,6 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/library.json
   - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
   - Microsoft.Synapse/stable/2020-12-01/notebooks.json
-  - Microsoft.Synapse/stable/2020-12-01/operations.json
   - Microsoft.Synapse/stable/2020-12-01/pipelines.json
   - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
   - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
