@@ -49,9 +49,9 @@ tag: package-monitoring-2020-12-01
 
 ### Tag: package-artifacts-composite-v1
 
-These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
+These settings apply only when `--tag=package-artifacts-composite-v1` is specified on the command line.
 
-``` yaml $(tag) == 'package-artifacts-2020-12-01'
+``` yaml $(tag) == 'package-artifacts-composite-v1'
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
