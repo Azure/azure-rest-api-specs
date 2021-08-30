@@ -194,6 +194,9 @@
               "name": "SelectPermissions",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/ODataExpandQueryParameter"
           }
         ],
         "responses": {
@@ -2871,6 +2874,20 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ODataExpandQueryParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The expand query option to apply on the operation.",
+      "enum": [
+        "SharingProfile/Groups"
+      ],
+      "x-ms-enum": {
+        "name": "ExpandParams",
+        "modelAsString": true
+      }
     }
   }
 }
