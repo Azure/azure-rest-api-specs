@@ -28,7 +28,7 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-composite-v1
+tag: package-2021-06
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
@@ -370,7 +370,6 @@ csharp:
   clear-output-folder: true
 batch:
  - tag: $(tag)
- - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
