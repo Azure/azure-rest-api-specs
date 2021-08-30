@@ -574,14 +574,6 @@
         "description": "Retrieves the current status of IDPS signatures for the relevant policy",
         "parameters": [
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IDPSQueryObject"
-            }
-          },
-          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -597,6 +589,14 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IDPSQueryObject"
+            }
           }
         ],
         "responses": {
