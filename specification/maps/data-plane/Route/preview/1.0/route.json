@@ -809,7 +809,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     }
-
   },
   "paths": {
     "/route/matrix/{format}": {
@@ -2876,32 +2875,12 @@
           "$ref": "#/definitions/GeoJSONFeature"
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONLineString"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonLineString"
         },
         "properties": {
           "$ref": "#/definitions/RoadElementProperties"
         }
       }
-    },
-    "GeoJSONLineString": {
-      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the geometry. Value should always be equal to `LineString`.",
-          "$ref": "#/definitions/LineString"
-        },
-        "coordinates": {
-          "description": "Coordinates for the `LineString` geometry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoJSONPosition"
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
     },
     "RoadPoints": {
       "description": "A point that has a geometry field and may has a properties field.",
@@ -2915,7 +2894,7 @@
           "$ref": "#/definitions/GeoJSONFeature"
         },
         "geometry": {
-          "$ref": "#/definitions/Point"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
           "type": "object",
@@ -3015,7 +2994,7 @@
           "$ref": "#/definitions/GeoJSONFeature"
         },
         "geometry": {
-          "$ref": "#/definitions/Point"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
           "$ref": "#/definitions/SnapToRoadsProjectedPointProperties"
@@ -3030,7 +3009,7 @@
           "$ref": "#/definitions/GeoJSONFeature"
         },
         "geometry": {
-          "$ref": "#/definitions/Point"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
           "$ref": "#/definitions/RoadSegmentProjectedPointProperties"
@@ -3142,49 +3121,6 @@
         }
       }
     },
-    "LineString": {
-      "description": "The type of the geometry. Value should always be equal to `LineString`.",
-      "type": "string",
-      "enum": [
-        "LineString"
-      ],
-      "x-ms-enum": {
-        "name": "LineString",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "LineString",
-            "description": "LineString"
-          }
-        ]
-      }
-    },
-    "Point": {
-      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
-              "type": "string",
-              "enum": [
-                "Point"
-              ]
-            },
-            "coordinates": {
-              "$ref": "#/definitions/GeoJSONPosition"
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
-        }
-      ]
-    },
     "GeoJSONFeature": {
       "description": "A Feature object has a type member with the value Feature.",
       "type": "string",
@@ -3200,71 +3136,6 @@
             "description": "Feature"
           }
         ]
-      }
-    },
-    "GeoJSONPosition": {
-      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
-      }
-    },
-    "GeoJSONGeometry": {
-      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
-          "type": "string",
-          "enum": [
-            "Point",
-            "MultiPoint",
-            "LineString",
-            "MultiLineString",
-            "Polygon",
-            "MultiPolygon",
-            "GeometryCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJSONGeometryType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Point",
-                "description": "`GeoJSON Point` geometry."
-              },
-              {
-                "value": "MultiPoint",
-                "description": "`GeoJSON MultiPoint` geometry."
-              },
-              {
-                "value": "LineString",
-                "description": "`GeoJSON LineString` geometry."
-              },
-              {
-                "value": "MultiLineString",
-                "description": "`GeoJSON MultiLineString` geometry."
-              },
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry."
-              },
-              {
-                "value": "MultiPolygon",
-                "description": "`GeoJSON MultiPolygon` geometry."
-              },
-              {
-                "value": "GeometryCollection",
-                "description": "`GeoJSON GeometryCollection` geometry."
-              }
-            ]
-          }
-        }
       }
     },
     "FormOfWay": {
