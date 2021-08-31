@@ -50,66 +50,23 @@
         }
       }
     },
-    "/collections/{collectionName}/metadataPolicy": {
-      "get": {
-        "tags": [
-          "MetadataPolicy"
-        ],
-        "description": "Gets a metadata policy for collection",
-        "operationId": "MetadataPolicy_GetByCollection",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "collectionName",
-            "description": "The name of an existing collection for which one policy needs to be fetched.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/MetadataPolicy"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Metadata Policy Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetadataPolicy_GetByCollection": {
-            "$ref": "./examples/MetadataPolicy_GetByCollection.json"
-          }
-        }
-      }
-    },
     "/metadataPolicies": {
       "get": {
         "tags": [
           "MetadataPolicy"
         ],
-        "description": "List metadata policies",
+        "description": "List or Get metadata policies",
         "operationId": "MetadataPolicy_ListAll",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "query",
+            "name": "collectionName",
+            "description": "The name of an existing collection for which one policy needs to be fetched.",
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/api-version"
           }
@@ -295,7 +252,7 @@
         }
       }
     },
-    "CNFCondition": {
+    "CnfCondition": {
       "description": "The cnf Condition for a rule",
       "type": "array",
       "items": {
@@ -512,7 +469,7 @@
           "type": "string"
         },
         "cnfCondition": {
-          "$ref": "#/definitions/CNFCondition"
+          "$ref": "#/definitions/CnfCondition"
         },
         "dnfCondition": {
           "$ref": "#/definitions/DnfCondition"
