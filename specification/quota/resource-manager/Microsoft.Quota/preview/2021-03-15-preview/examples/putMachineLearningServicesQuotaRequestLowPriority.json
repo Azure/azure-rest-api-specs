@@ -5,7 +5,10 @@
     "api-version": "2021-03-15-preview",
     "createQuotaRequest": {
       "properties": {
-        "limit": 200,
+        "limit": {
+          "limitObjectType": "LimitValue",
+          "value": 10
+        },
         "name": {
           "value": "TotalLowPriorityCores"
         },
@@ -15,29 +18,24 @@
   },
   "responses": {
     "202": {
-      "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotaLimits/TotalLowPriorityCores",
-        "type": "Microsoft.Quota/quotaLimits",
-        "name": "TotalLowPriorityCores",
-        "properties": {
-          "name": {
-            "value": "TotalLowPriorityCores"
-          },
-          "resourceType": "lowPriority"
-        }
+      "headers": {
+        "Retry-After": "30",
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/operationsStatus/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15-preview"
       }
     },
     "200": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15-preview",
-        "Retry-After": "30",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/operationsStatus/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15-preview"
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2021-03-15-preview"
       },
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotaLimits/TotalLowPriorityCores",
-        "type": "Microsoft.Quota/quotaLimits",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotas/TotalLowPriorityCores",
+        "type": "Microsoft.Quota/quotas",
         "name": "TotalLowPriorityCores",
         "properties": {
+          "limit": {
+            "limitObjectType": "LimitValue",
+            "value": 10
+          },
           "name": {
             "value": "TotalLowPriorityCores"
           },
