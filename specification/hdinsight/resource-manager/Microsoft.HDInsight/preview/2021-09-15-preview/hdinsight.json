@@ -1202,6 +1202,23 @@
         }
       }
     },
+    "ClusterPoolLogAnalyticsProfile": {
+      "type": "object",
+      "description": "Cluster pool log analytics profile used to enable or disable OMS agent for AKS cluster.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True if log analytics is enabled for cluster pool, otherwise false."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Log analytics workspace to associate with the OMS agent."
+        }
+      }
+    },
     "ClusterPoolResourceProperties": {
       "type": "object",
       "properties": {
@@ -1243,6 +1260,14 @@
           "allOf": [
             {
               "$ref": "#/definitions/ClusterPoolNetworkProfile"
+            }
+          ]
+        },
+        "logAnalyticsProfile": {
+          "description": "Cluster pool log analytics profile to enable OMS agent for AKS cluster.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolLogAnalyticsProfile"
             }
           ]
         }
@@ -1311,6 +1336,40 @@
         "subnetId": {
           "type": "string",
           "description": "Cluster subnet resource id."
+        }
+      }
+    },
+    "ClusterLogAnalyticsProfile": {
+      "type": "object",
+      "description": "Cluster log analytics profile to enable or disable OMS agent for cluster.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True if log analytics is enabled for the cluster, otherwise false."
+        },
+        "applicationLogs": {
+          "$ref": "#/definitions/ClusterLogAnalyticsApplicationLogs"
+        },
+        "metricsEnabled": {
+          "type": "boolean",
+          "description": "True if metrics are enabled, otherwise false."
+        }
+      }
+    },
+    "ClusterLogAnalyticsApplicationLogs": {
+      "type": "object",
+      "description": "Collection of logs to be enabled or disabled for log analytics.",
+      "properties": {
+        "stdOutEnabled": {
+          "type": "boolean",
+          "description": "True if stdout is enabled, otherwise false."
+        },
+        "stdErrorEnabled": {
+          "type": "boolean",
+          "description": "True if stderror is enabled, otherwise false."
         }
       }
     },
@@ -1629,6 +1688,9 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/ClusterNetworkProfile"
+        },
+        "logAnalyticsProfile": {
+          "$ref": "#/definitions/ClusterLogAnalyticsProfile"
         },
         "clusterProfile": {
           "$ref": "#/definitions/ClusterProfile"
