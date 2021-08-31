@@ -36,7 +36,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments/{customEntityStoreAssignmentName}": {
       "get": {
-        "description": "Get a single custom entity store assignment by name for the provided subscription and resource group.",
+        "summary": "Gets a custom entity store assignment",
+        "description": "Gets a single custom entity store assignment by name for the provided subscription and resource group.",
         "tags": [
           "customEntityStoreAssignments"
         ],
@@ -76,7 +77,8 @@
         }
       },
       "put": {
-        "description": "Create or update a custom entity store assignment for the provided subscription. Please note that providing an existing custom entity store assignment will replace the existing record.",
+        "summary": "Creates a custom entity store assignment",
+        "description": "Creates a custom entity store assignment for the provided subscription, if not already exists.",
         "tags": [
           "customEntityStoreAssignments"
         ],
@@ -125,6 +127,7 @@
         }
       },
       "delete": {
+        "summary": "Deleted a custom entity store assignment",
         "description": "Delete a custom entity store assignment by name for a provided subscription",
         "tags": [
           "customEntityStoreAssignments"
@@ -167,6 +170,8 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments": {
       "get": {
+        "summary": "List custom entity store assignments in a subscription",
+        "description": "List custom entity store assignments by a provided subscription",
         "tags": [
           "customEntityStoreAssignments"
         ],
@@ -205,6 +210,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customEntityStoreAssignments": {
       "get": {
+        "summary": "List custom entity store assignments in a resource group",
+        "description": "List custom entity store assignments by provided subscription and resource group",
         "tags": [
           "customEntityStoreAssignments"
         ],
