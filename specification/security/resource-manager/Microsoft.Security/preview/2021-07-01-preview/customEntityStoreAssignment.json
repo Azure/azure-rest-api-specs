@@ -165,6 +165,44 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments": {
+      "get": {
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "x-ms-examples": {
+          "List custom entity store assignments": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListByResourceGroup_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of custom entity store assignments",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignmentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customEntityStoreAssignments": {
       "get": {
         "tags": [
@@ -181,7 +219,7 @@
         ],
         "x-ms-examples": {
           "List custom entity store assignments": {
-            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentList_example.json"
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListBySubscription_example.json"
           }
         },
         "responses": {
