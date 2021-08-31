@@ -71,6 +71,7 @@ input-file:
   - Microsoft.Security/preview/2021-08-01-preview/settings.json
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
   - Microsoft.Security/preview/2021-08-01-preview/standardComponents.json
+  - Microsoft.Security/preview/2021-08-01-preview/standardAssignments.json
 ```
 ### Tag: package-composite-v1
 

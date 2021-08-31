@@ -1,0 +1,350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/standardAssignments": {
+      "get": {
+        "x-ms-examples": {
+          "List security standardAssignments by subscription level scope": {
+            "$ref": "./examples/StandardAssignments/ListBySubscriptionStandardAssignments_example.json"
+          }
+        },
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Get a list of all relevant standardAssignments over a subscription level scope",
+        "operationId": "StandardAssignments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardAssignments": {
+      "get": {
+        "x-ms-examples": {
+          "List security standardAssignments by subscriptionId and resourceGroup scope": {
+            "$ref": "./examples/StandardAssignments/ListStandardAssignments_example.json"
+          }
+        },
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Get a list of all relevant standardAssignments available for scope",
+        "operationId": "StandardAssignments_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardAssignments/{standardAssignmentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security standardAssignments by by specific standardAssignmentId": {
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment_example.json"
+          }
+        },
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Get a specific standard assignment for the requested scope by resourceId",
+        "operationId": "StandardAssignments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardAssignmentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update security standardAssignment": {
+            "$ref": "./examples/StandardAssignments/PutStandardAssignment_example.json"
+          }
+        },
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Create a security assignment on the given scope. Will create/update the required standard assignment. ",
+        "operationId": "StandardAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardAssignmentId"
+          },
+          {
+            "$ref": "#/parameters/StandardAssignmentBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete security standardAssignment": {
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment_example.json"
+          }
+        },
+        "tags": [
+          "StandardAssignments"
+        ],
+        "description": "Delete a standard assignment over a given scope",
+        "operationId": "StandardAssignments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardAssignmentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Standard was deleted"
+          },
+          "204": {
+            "description": "No Content - Standard does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StandardAssignmentList": {
+      "type": "object",
+      "description": "Page of a standard assignment list",
+      "properties": {
+        "value": {
+          "description": "Collection of standardAssignments in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardAssignment"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "StandardAssignment": {
+      "type": "object",
+      "description": "Security Assignment on a resource group over a given scope",
+      "properties": {
+        "properties": {
+          "description": "Properties of a security assignment",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StandardAssignmentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StandardAssignmentProperties": {
+      "type": "object",
+      "description": "Describes the properties of a standardAssignment",
+      "properties": {
+        "displayName": {
+          "description": "display name of the standardAssignment",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the standardAssignment",
+          "type": "string"
+        },
+        "standardDefinitions": {
+          "description": "List of standardDefinitions applicable to the standardAssignment over the provided scope",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardDefinitionItem"
+          }
+        },
+        "scope": {
+          "description": "Scope to which the standardAssignment applies - can be a subscription path or a resource group under that subscription",
+          "type": "string"
+        },
+        "notScope": {
+          "description": "excluded scope for the standard Assignment",
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../common/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "StandardDefinitionItem": {
+      "type": "object",
+      "description": "describe the properties of a standardDefinition",
+      "properties": {
+        "name": {
+          "description": "name of the appropriate standard definition",
+          "type": "string"
+        },
+        "id": {
+          "description": "full resourceId of the standardDefinition object",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "StandardAssignmentId": {
+      "name": "standardAssignmentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security assignment key - unique key for the standard assignment",
+      "x-ms-parameter-location": "method"
+    },
+    "StandardAssignmentBody": {
+      "name": "standardAssignmentBody",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StandardAssignment"
+      },
+      "description": "Custom standard assignment over a pre-defined scope",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
