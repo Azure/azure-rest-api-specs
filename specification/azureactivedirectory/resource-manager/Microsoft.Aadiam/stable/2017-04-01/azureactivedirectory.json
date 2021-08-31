@@ -64,7 +64,7 @@
           "default": {
             "description": "Error, failed to get list of AadIam operations.",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -86,7 +86,7 @@
           "default": {
             "description": "Error. Request for AadIam diagnostic settings has failed",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -122,7 +122,7 @@
           "default": {
             "description": "Error. Request for AadIam diagnostic setting has failed.",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -176,7 +176,7 @@
           "default": {
             "description": "Error. The request to create diagnostic setting has failed.",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -199,7 +199,7 @@
           "default": {
             "description": "Error. The request to delete named diagnostic setting has failed.",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -232,7 +232,7 @@
           "default": {
             "description": "Error. The request to view diagnostic setting categories has failed.",
             "schema": {
-              "$ref": "../../common/1.0/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -378,6 +378,38 @@
         }
       },
       "description": "Represents a collection of alert rule resources."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
     },
     "OperationsDiscoveryProperties": {
       "description": "ClientDiscovery properties.",
