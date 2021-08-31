@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2021-10-15"
+    "version": "2021-10-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1850,7 +1850,7 @@
               "$ref": "#/definitions/ClientEncryptionKeyGetResults"
             }
           },
-		  "404": {
+          "404": {
             "description": "Not Found."
           }
         }
@@ -1901,8 +1901,9 @@
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
         "x-ms-examples": {

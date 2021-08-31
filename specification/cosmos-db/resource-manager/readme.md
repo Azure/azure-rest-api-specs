@@ -44,6 +44,20 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-10-15/restorable.json
 ```
 
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-preview'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/restorable.json
+```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
