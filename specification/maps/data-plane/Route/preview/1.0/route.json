@@ -742,7 +742,74 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "SnapToRoadsPoints": {
+      "name": "points",
+      "in": "query",
+      "description": "Specifies the semicolon-separated list of coordinates. Each coordinate has to be comma-separated and calculated using EPSG4326 projection.The maximum allowed number of coordinates is **100** while the the minimum is **2**. \n e.g. `-122.336729,47.590868;-122.336042,47.590868`.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RoadSegmentPoints": {
+      "name": "points",
+      "in": "query",
+      "description": "Specifies the semicolon-separated list of coordinates. Each coordinate has to be comma-separated and calculated using EPSG4326 projection.The maximum allowed number of coordinates is **100** while the the minimum is **1**. \n e.g. `-122.336729,47.590868;-122.336042,47.590868`.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VehicleType": {
+      "name": "vehicleType",
+      "in": "query",
+      "description": "It can contribute to a more accurate road identification by possibly excluding roads which are not suited for a given value. The default value is `PassengerCar`",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "PassengerCar",
+        "Bus",
+        "Truck"
+      ],
+      "default": "PassengerCar",
+      "x-ms-enum": {
+        "name": "VehicleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PassengerCar",
+            "description": "Passenger Car"
+          },
+          {
+            "value": "Bus",
+            "description": "Bus"
+          },
+          {
+            "value": "Truck",
+            "description": "Truck"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VehicleHeadings": {
+      "name": "headings",
+      "in": "query",
+      "description": "A semicolon-separated list indicating the direction of movement. If provided, the heading will be taken into account by the map matching algorithm. The number of headings must be the same as the number of points. \n\n The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359 \n\n e.g. `0;0`",
+      "required": false,
+      "type": "string",
+      "minimum": 0,
+      "maximum": 359,
+      "x-ms-parameter-location": "method"
+    },
+    "Timestamp": {
+      "name": "timestamps",
+      "in": "query",
+      "description": "Specifies the semicolon-separated list of timestamps.\n <ul><li>If provided, the timestamp will be taken into account by the algorithm to determine end time of selected restrictions.</li><li>The number of timestamps must be the same as the number of coordinates.</li> <li>The timestamp value must be compliant with `ISO 8601` date and time format</li>",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
+
   },
   "paths": {
     "/route/matrix/{format}": {
@@ -1628,6 +1695,197 @@
             }
           },
           "408": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/route/snapToRoads/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Snap To Roads API**\n\n**Applies to**: S0,S1 and Gen2 pricing tiers.\n\n\n The Snap to Roads API matches provided points (gathered from GPS devices) to a road network and reconstructs the driven road.Input points must be related to themselves and be part of the same route.\nThe matching algorithm chooses the driven road fitting to the given points and takes into account additional restrictions provided.It also gives detailed information about the corresponding roads that the points matched to.",
+        "operationId": "Route_GetSnapToRoads",
+        "x-ms-examples": {
+          "GetSnapToRoads": {
+            "$ref": "./examples/GetSnapToRoads.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RouteApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/SnapToRoadsPoints"
+          },
+          {
+            "$ref": "#/parameters/VehicleHeadings"
+          },
+          {
+            "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "$ref": "#/parameters/Timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsResponse"
+            }
+          },
+          "400": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "post": {
+        "x-publish": true,
+        "description": "**Snap To Roads API**\n\n**Applies to**: S0,S1 and Gen2 pricing tiers.\n\n\n The Snap to Roads API matches provided points (gathered from GPS devices) to a road network and reconstructs the driven road.Input points must be related to themselves and be part of the same route.\nThe matching algorithm chooses the driven road fitting to the given points and takes into account additional restrictions provided.It also gives detailed information about the corresponding roads that the points matched to.",
+        "operationId": "Route_PostSnapToRoads",
+        "x-ms-examples": {
+          "PostSnapToRoads": {
+            "$ref": "./examples/PostSnapToRoads.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RouteApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "name": "snapToRoadRequestBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsResponse"
+            }
+          },
+          "400": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/route/roadSegment/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Road Segment API**\n\n**Applies to**: S0,S1 and Gen2 pricing tiers.\n\n\n The Road Segment API matches provided points (gathered from GPS devices) to road networks and gives detailed information about the corresponding road segment attributes (or a set of road segments) that the points matched to.Input points can be unrelated to themselves and don't have to be a part of the same route. The matching algorithm chooses the closest road, or in case of a few possibilities, takes into account additional restrictions provided.",
+        "operationId": "Route_GetRoadSegment",
+        "x-ms-examples": {
+          "GetRoadSegment": {
+            "$ref": "./examples/GetRoadSegment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RouteApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/RoadSegmentPoints"
+          },
+          {
+            "$ref": "#/parameters/VehicleHeadings"
+          },
+          {
+            "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "$ref": "#/parameters/Timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoadSegmentResponse"
+            }
+          },
+          "400": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "post": {
+        "x-publish": true,
+        "description": "**Road Segment API**\n\n**Applies to**: S0,S1 and Gen2 pricing tiers.\n\n\n The Road Segment API matches provided points (gathered from GPS devices) to road networks and gives detailed information about the corresponding road segment attributes (or a set of road segments) that the points matched to.Input points can be unrelated to themselves and don't have to be a part of the same route. The matching algorithm chooses the closest road, or in case of a few possibilities, takes into account additional restrictions provided.",
+        "operationId": "Route_PostRoadSegment",
+        "x-ms-examples": {
+          "PostRoadSegment": {
+            "$ref": "./examples/PostRoadSegment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/RouteApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "name": "roadSegmentRequestBody",
+            "description": "Used for reconstructing a route by received coordinates",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoadSegmentRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoadSegmentResponse"
+            }
+          },
+          "400": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/408"
           },
           "default": {
@@ -2550,6 +2808,620 @@
             }
           ]
         }
+      }
+    },
+    "SnapToRoadsResponse": {
+      "description": "This object is returned from a successful Snap To Roads call.",
+      "type": "object",
+      "required": [
+        "route"
+      ],
+      "properties": {
+        "route": {
+          "description": "The list of road elements forming the reconstructed route.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RoadElement"
+          }
+        },
+        "projectedPoints": {
+          "description": "The list of the points projected on the road network which relates to the points from a request.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SnapToRoadProjectedPoint"
+          },
+          "maxItems": 100
+        },
+        "totalDistance": {
+          "description": "The length of the route in meters.",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "RoadSegmentResponse": {
+      "description": "This object is returned from a successful Road Segment call.",
+      "type": "object",
+      "required": [
+        "projectedPoints"
+      ],
+      "properties": {
+        "projectedPoints": {
+          "description": "The list of the points projected on the road network which relates to the points from a request.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RoadSegmentProjectedPoint"
+          },
+          "maxItems": 100
+        },
+        "roadElements": {
+          "description": "The list of matched road elements.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RoadElement"
+          }
+        }
+      }
+    },
+    "RoadElement": {
+      "description": "A road element on the road network that forms the reconstructed route.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJSONFeature"
+        },
+        "geometry": {
+          "$ref": "#/definitions/GeoJSONLineString"
+        },
+        "properties": {
+          "$ref": "#/definitions/RoadElementProperties"
+        }
+      }
+    },
+    "GeoJSONLineString": {
+      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the geometry. Value should always be equal to `LineString`.",
+          "$ref": "#/definitions/LineString"
+        },
+        "coordinates": {
+          "description": "Coordinates for the `LineString` geometry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSONPosition"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "RoadPoints": {
+      "description": "A point that has a geometry field and may has a properties field.",
+      "type": "object",
+      "required": [
+        "type",
+        "geometry"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJSONFeature"
+        },
+        "geometry": {
+          "$ref": "#/definitions/Point"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional request properties. (it's not required)",
+          "properties": {
+            "heading": {
+              "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 359
+            },
+            "timestamp": {
+              "description": "If provided, the timestamp will be taken into account by the algorithm to determine end time of selected restrictions. The number of timestamps must be the same as the number of coordinates. The timestamp value must be compliant with `ISO 8601` date and time format",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "SnapToRoadsRequestBody": {
+      "description": "Post body parameter for Snap to Road. It should contain at least **2** points and at most **100** points.",
+      "type": "object",
+      "required": [
+        "points"
+      ],
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoadPoints"
+          },
+          "minItems": 2,
+          "maxItems": 100
+        }
+      }
+    },
+    "RoadSegmentRequestBody": {
+      "description": "Post body parameter for Road Segment. It should contain at least **1** points and at most **100** points.",
+      "type": "object",
+      "required": [
+        "points"
+      ],
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoadPoints"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      }
+    },
+    "SnapToRoadsProjectedPointProperties": {
+      "description": "Projected point properties of Snap To Road",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "routeIndex": {
+          "description": "The index of a matching road element from the route array. It can be equal to null if a point is not able to be matched to any road element",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "RoadSegmentProjectedPointProperties": {
+      "description": "Projected point properties of Road Segment.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "roadElements": {
+          "description": "The list of matched road elements.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "index": {
+                "description": "The index of matched road elements.",
+                "type": "integer",
+                "format": "int32",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "SnapToRoadProjectedPoint": {
+      "description": "A point projected on the road network which relates to the point from a request.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJSONFeature"
+        },
+        "geometry": {
+          "$ref": "#/definitions/Point"
+        },
+        "properties": {
+          "$ref": "#/definitions/SnapToRoadsProjectedPointProperties"
+        }
+      }
+    },
+    "RoadSegmentProjectedPoint": {
+      "description": "A point projected on the road network which relates to the point from a request.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJSONFeature"
+        },
+        "geometry": {
+          "$ref": "#/definitions/Point"
+        },
+        "properties": {
+          "$ref": "#/definitions/RoadSegmentProjectedPointProperties"
+        }
+      }
+    },
+    "RoadElementProperties": {
+      "description": "Road element properties.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "Unique ID of the road element.",
+          "type": "string",
+          "readOnly": true
+        },
+        "speedRestrictions": {
+          "description": "Speed restriction for a given `vehicleType`.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "maximumSpeed": {
+              "description": "Maximum allowed speed.",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "value": {
+                  "description": "The actual value of speed",
+                  "type": "number",
+                  "format": "double",
+                  "readOnly": true
+                },
+                "unit": {
+                  "description": "The name of the used unit",
+                  "type": "string",
+                  "enum": [
+                    "kmph"
+                  ],
+                  "readOnly": true
+                }
+              }
+            }
+          }
+        },
+        "address": {
+          "description": "Address information relevant to the road element.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "roadName": {
+              "description": "Road name",
+              "type": "string",
+              "readOnly": true
+            },
+            "roadNumbers": {
+              "description": "The list of road numbers.",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "municipality": {
+              "description": "City name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "countryName": {
+              "description": "Country name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "countrySubdivision": {
+              "description": "State or province name.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "frc": {
+          "description": "[Functional Road Class](https://developer.tomtom.com/traffic-stats/support/faq/what-are-functional-road-classes-frc) represents a classification of roads based on the importance that the constituting roads have in the total road network.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 8
+        },
+        "formOfWay": {
+          "description": "Form of way represents the physical form of a road.This is based on a number of certain physical characteristics and traffic properties.",
+          "$ref": "#/definitions/FormOfWay"
+        },
+        "roadUse": {
+          "description": "It specifies how the road element is used for travel.",
+          "$ref": "#/definitions/RoadUse"
+        },
+        "laneInfo": {
+          "description": "Lane Information refers to the collection of lane-related information stored in a Road Element.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "numberOfLanes": {
+              "description": "Number of lanes the road segment has.",
+              "type": "integer",
+              "format": "int32",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "LineString": {
+      "description": "The type of the geometry. Value should always be equal to `LineString`.",
+      "type": "string",
+      "enum": [
+        "LineString"
+      ],
+      "x-ms-enum": {
+        "name": "LineString",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LineString",
+            "description": "LineString"
+          }
+        ]
+      }
+    },
+    "Point": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
+              "type": "string",
+              "enum": [
+                "Point"
+              ]
+            },
+            "coordinates": {
+              "$ref": "#/definitions/GeoJSONPosition"
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONFeature": {
+      "description": "A Feature object has a type member with the value Feature.",
+      "type": "string",
+      "enum": [
+        "Feature"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJSONFeature",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Feature",
+            "description": "Feature"
+          }
+        ]
+      }
+    },
+    "GeoJSONPosition": {
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "FormOfWay": {
+      "description": "Form of way represents the physical form of a road.This is based on a number of certain physical characteristics and traffic properties.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "DualCarriageway",
+        "SingleCarriageway",
+        "Roundabout",
+        "MajorSlipRoad",
+        "ParallelRoad",
+        "RoadForAuthorities",
+        "EntranceToOrExitFromACarPark",
+        "SmallSlipRoad",
+        "RoadInEnclosedTrafficArea",
+        "RoadInPedestrianZone",
+        "ServiceRoad",
+        "ETAParkingArea",
+        "SpecialTrafficFigure",
+        "SmallMajorSlipRoad",
+        "ETAParkingBuilding",
+        "Walkway",
+        "Stairs",
+        "CulDeSac",
+        "ETAGallery",
+        "Connector",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "FormOfWay",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DualCarriageway",
+            "description": "DualCarriageway"
+          },
+          {
+            "value": "SingleCarriageway",
+            "description": "SingleCarriageway"
+          },
+          {
+            "value": "Roundabout",
+            "description": "Roundabout"
+          },
+          {
+            "value": "MajorSlipRoad",
+            "description": "MajorSlipRoad"
+          },
+          {
+            "value": "ParallelRoad",
+            "description": "ParallelRoad"
+          },
+          {
+            "value": "RoadForAuthorities",
+            "description": "RoadForAuthorities"
+          },
+          {
+            "value": "EntranceToOrExitFromACarPark",
+            "description": "EntranceToOrExitFromACarPark"
+          },
+          {
+            "value": "SmallSlipRoad",
+            "description": "SmallSlipRoad"
+          },
+          {
+            "value": "RoadInEnclosedTrafficArea",
+            "description": "RoadInEnclosedTrafficArea"
+          },
+          {
+            "value": "RoadInPedestrianZone",
+            "description": "RoadInPedestrianZone"
+          },
+          {
+            "value": "ServiceRoad",
+            "description": "ServiceRoad"
+          },
+          {
+            "value": "ETAParkingArea",
+            "description": "ETAParkingArea"
+          },
+          {
+            "value": "SpecialTrafficFigure",
+            "description": "SpecialTrafficFigure"
+          },
+          {
+            "value": "SmallMajorSlipRoad",
+            "description": "SmallMajorSlipRoad"
+          },
+          {
+            "value": "ETAParkingBuilding",
+            "description": "ETAParkingBuilding"
+          },
+          {
+            "value": "Walkway",
+            "description": "Walkway"
+          },
+          {
+            "value": "Stairs",
+            "description": "Stairs"
+          },
+          {
+            "value": "CulDeSac",
+            "description": "CulDeSac"
+          },
+          {
+            "value": "ETAGallery",
+            "description": "ETAGallery"
+          },
+          {
+            "value": "Connector",
+            "description": "Connector"
+          },
+          {
+            "value": "Unknown",
+            "description": "Unknown"
+          }
+        ]
+      }
+    },
+    "RoadUse": {
+      "description": "It specifies how the road element is used for travel.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "LimitedAccess",
+        "Arterial",
+        "Terminal",
+        "Ramp",
+        "Rotary",
+        "LocalStreet"
+      ],
+      "x-ms-enum": {
+        "name": "RoadUse",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Arterial",
+            "description": "Arterial"
+          },
+          {
+            "value": "Terminal",
+            "description": "Terminal"
+          },
+          {
+            "value": "Ramp",
+            "description": "Ramp"
+          },
+          {
+            "value": "Rotary",
+            "description": "Rotary"
+          },
+          {
+            "value": "LocalStreet",
+            "description": "Local Street"
+          }
+        ]
       }
     }
   }

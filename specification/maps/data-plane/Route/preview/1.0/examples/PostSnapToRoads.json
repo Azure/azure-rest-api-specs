@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "vehicleType": "PassengerCar",
+    "snapToRoadRequestBody": {
+      "points": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -122.653690,
+              38.467323
+            ]
+          },
+          "properties": {
+            "heading": 0,
+            "timestamp": "2021-01-01T12:00:00Z"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -122.654001,
+              38.468818
+            ]
+          },
+          "properties": {
+            "heading": 0,
+            "timestamp": "2021-01-01T12:00:00Z"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "route": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -122.6536671817,
+                  38.4673243761
+                ],
+                [
+                  -122.6537610590,
+                  38.4681652486
+                ]
+              ]
+            },
+            "properties": {
+              "id": "98b43701-f6ce-417f-b8d8-63817315e557",
+              "speedRestrictions": {
+                "maximumSpeed": {
+                  "value": 56,
+                  "unit": "kmph"
+                }
+              },
+              "address": {
+                "roadName": "Calistoga Rd",
+                "roadNumbers": [],
+                "municipality": "Santa Rosa",
+                "countryName": "United States",
+                "countrySubdivision": "CA"
+              },
+              "frc": 4,
+              "formOfWay": "SingleCarriageway",
+              "roadUse": "Arterial",
+              "laneInfo": {
+                "numberOfLanes": null
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -122.6537610590,
+                  38.4681652486
+                ],
+                [
+                  -122.6538361609,
+                  38.4688290954
+                ]
+              ]
+            },
+            "properties": {
+              "id": "f79d2dd0-b605-42a3-9979-f9faf60fb9df",
+              "speedRestrictions": {
+                "maximumSpeed": {
+                  "value": 56,
+                  "unit": "kmph"
+                }
+              },
+              "address": {
+                "roadName": "Calistoga Rd",
+                "roadNumbers": [],
+                "municipality": "Santa Rosa",
+                "countryName": "United States",
+                "countrySubdivision": "CA"
+              },
+              "frc": 4,
+              "formOfWay": "SingleCarriageway",
+              "roadUse": "Arterial",
+              "laneInfo": {
+                "numberOfLanes": null
+              }
+            }
+          }
+        ],
+        "projectedPoints": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.6536668331,
+                38.4673246498
+              ]
+            },
+            "properties": {
+              "routeIndex": 0
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.6538361475,
+                38.4688294659
+              ]
+            },
+            "properties": {
+              "routeIndex": 1
+            }
+          }
+        ],
+        "totalDistance": 167.9626841293
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

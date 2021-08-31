@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "points": "-122.336729,47.590868;-122.336042,47.590868",
+    "headings": "0;0",
+    "vehicleType": "PassengerCar",
+    "timestamps": "2021-01-01T00:00:00Z;2021-01-01T00:00:01Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "route": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -122.3364436626,
+                  47.5908583403
+                ],
+                [
+                  -122.3366528749,
+                  47.5909280777
+                ]
+              ]
+            },
+            "properties": {
+              "id": "00005557-4100-0400-0000-0000001eadd5",
+              "speedRestrictions": {
+                "maximumSpeed": {
+                  "value": 80,
+                  "unit": "kmph"
+                }
+              },
+              "address": {
+                "roadName": "",
+                "roadNumbers": [],
+                "municipality": "Seattle",
+                "countryName": "United States",
+                "countrySubdivision": "WA"
+              },
+              "frc": 4,
+              "formOfWay": "MajorSlipRoad",
+              "roadUse": "Ramp",
+              "laneInfo": {
+                "numberOfLanes": 2
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -122.3366528749,
+                  47.5909280777
+                ],
+                [
+                  -122.3366233706,
+                  47.5909924507
+                ]
+              ]
+            },
+            "properties": {
+              "id": "00005557-4100-0400-0000-0000001d36c3",
+              "speedRestrictions": {
+                "maximumSpeed": {
+                  "value": 80,
+                  "unit": "kmph"
+                }
+              },
+              "address": {
+                "roadName": "",
+                "roadNumbers": [],
+                "municipality": "Seattle",
+                "countryName": "United States",
+                "countrySubdivision": "WA"
+              },
+              "frc": 4,
+              "formOfWay": "MajorSlipRoad",
+              "roadUse": "Ramp",
+              "laneInfo": {
+                "numberOfLanes": 2
+              }
+            }
+          }
+        ],
+        "projectedPoints": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.3366864730,
+                47.5908587250
+              ]
+            },
+            "properties": {
+              "routeIndex": 0
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.3366230219,
+                47.5909920208
+              ]
+            },
+            "properties": {
+              "routeIndex": 1
+            }
+          }
+        ],
+        "totalDistance": 15.6440008589
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
