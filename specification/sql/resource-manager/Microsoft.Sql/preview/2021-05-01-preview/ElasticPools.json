@@ -108,6 +108,9 @@
         "x-ms-examples": {
           "Get an elastic pool": {
             "$ref": "./examples/ElasticPoolGet.json"
+          },
+          "Get a Hyperscale elastic pool": {
+            "$ref": "./examples/HyperscaleElasticPoolGet.json"
           }
         }
       },
@@ -177,6 +180,9 @@
           },
           "Create or update elastic pool with maintenance configuration parameter": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateSetMaintenanceConfiguration.json"
+          },
+          "Create or update Hyperscale elastic pool with high availability replica count parameter": {
+            "$ref": "./examples/HyperscaleElasticPoolCreateOrUpdateSetHighAvailabilityReplicaCount.json"
           }
         }
       },
@@ -291,6 +297,9 @@
           },
           "Resets maintenance configuration of an elastic pool to default.": {
             "$ref": "./examples/ElasticPoolUpdateResetMaintenanceConfiguration.json"
+          },
+          "Update high availability replica count of a Hyperscale elastic pool.": {
+            "$ref": "./examples/HyperscaleElasticPoolUpdateSetHighAvailabilityReplicaCount.json"
           }
         }
       }
@@ -415,6 +424,11 @@
         "maintenanceConfigurationId": {
           "description": "Maintenance configuration id assigned to the elastic pool. This configuration defines the period when the maintenance updates will will occur.",
           "type": "string"
+        },
+        "highAvailabilityReplicaCount": {
+          "format": "int32",
+          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability.",
+          "type": "integer"
         }
       }
     },
@@ -515,6 +529,11 @@
         "maintenanceConfigurationId": {
           "description": "Maintenance configuration id assigned to the elastic pool. This configuration defines the period when the maintenance updates will will occur.",
           "type": "string"
+        },
+        "highAvailabilityReplicaCount": {
+          "format": "int32",
+          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability.",
+          "type": "integer"
         }
       }
     }
