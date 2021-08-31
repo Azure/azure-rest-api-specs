@@ -165,6 +165,41 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customAssessmentAutomations": {
+      "get": {
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List Custom Assessment Automations": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationListByResourceGroup_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of Custom Assessment Automations",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customAssessmentAutomations": {
       "get": {
         "tags": [
@@ -181,7 +216,7 @@
         ],
         "x-ms-examples": {
           "List Custom Assessment Automations": {
-            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationList_example.json"
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationListBySubscription_example.json"
           }
         },
         "responses": {
