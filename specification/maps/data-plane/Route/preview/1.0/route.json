@@ -1771,6 +1771,7 @@
           },
           {
             "name": "snapToRoadRequestBody",
+            "description": "Used for reconstructing a route by received coordinates",
             "in": "body",
             "required": true,
             "schema": {
@@ -2807,7 +2808,6 @@
         "route": {
           "description": "The list of road elements forming the reconstructed route.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/RoadElement"
           }
@@ -2839,7 +2839,6 @@
         "projectedPoints": {
           "description": "The list of the points projected on the road network which relates to the points from a request.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/RoadSegmentProjectedPoint"
           },
