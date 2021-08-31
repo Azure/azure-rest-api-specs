@@ -26,19 +26,9 @@ These are the global settings for the azureactivedirectory.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+tag: package-preview-2020-07
 ```
 
-
-### Tag: package-2020-03
-
-These settings apply only when `--tag=package-2020-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-03'
-input-file:
-  - Microsoft.Aadiam/stable/2020-03-01/privateLinkForAzureAD.json
-  - Microsoft.Aadiam/stable/2020-03-01/privateLinkResources.json
-```
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
@@ -56,6 +46,17 @@ These settings apply only when `--tag=package-preview-2020-03` is specified on t
 input-file:
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
   - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkForAzureAD.json
+  - Microsoft.Aadiam/stable/2020-03-01/privateLinkResources.json
+  - Microsoft.Aadiam/stable/2020-03-01/privateEndpointConnections.json
 ```
 
 ### Tag: package-2017-04-01
@@ -85,6 +86,14 @@ directive:
     where: $.definitions.privateLinkPolicy
   - suppress: R3020
   - suppress: R3023
+  - suppress: RequiredDefaultResponse
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources"].get.responses'
+    from: privateLinkResources.json
+    reason: 'If I make this change, it is marked as a breaking change between api versions and I can''t complete the resultant PR.'
+  - suppress: RequiredDefaultResponse
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources/{groupName}"].get.responses'
+    from: privateLinkResources.json
+    reason: 'If I make this change, it is marked as a breaking change between api versions and I can''t complete the resultant PR.'
 ```
 
 ---

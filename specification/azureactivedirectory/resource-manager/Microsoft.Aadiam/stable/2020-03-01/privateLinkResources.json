@@ -67,7 +67,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, and policy name": {
             "$ref": "./examples/AzureADPrivateLinkResourceListGet.json"
           }
         }
@@ -106,7 +106,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, policy name, and group name": {
             "$ref": "./examples/AzureADPrivateLinkResourceGet.json"
           }
         }
@@ -114,38 +114,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "PrivateLinkResourceListResult": {
       "description": "A list of private link resources",
       "type": "object",
@@ -235,6 +203,7 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "client",
       "description": "Version of the API to be used with the client request."
     },
     "resourceGroupNameParameter": {
