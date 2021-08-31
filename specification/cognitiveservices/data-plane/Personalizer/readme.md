@@ -42,6 +42,7 @@ These settings apply only when `--tag=release_1_1_preview.2` is specified on the
 ``` yaml $(tag) == 'release_1_1_preview.2'
 input-file: 
   - preview/v1.1-preview.2/Personalizer.json
+```  
 
 ## Swagger to SDK
 
