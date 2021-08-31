@@ -28,9 +28,16 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-flexibleserver-2021-05-01
 ```
 
+``` yaml $(package-flexibleservers)
+tag: package-flexibleserver-2021-05-01
+```
+
+``` yaml $(package-singleservers)
+tag: package-2020-01-01
+```
 
 ### Tag: package-2017-12-01-preview
 
