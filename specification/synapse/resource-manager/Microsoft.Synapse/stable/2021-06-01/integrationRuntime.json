@@ -1405,7 +1405,7 @@
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
         },
         "customerVirtualNetwork": {
-          "description": "The customer virtual network properties for the Azure-SSIS integration runtime.",
+          "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
           "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
         }
       }
@@ -1562,11 +1562,11 @@
       }
     },
     "IntegrationRuntimeCustomerVirtualNetwork": {
-      "description": "The customer virtual network properties for the Azure-SSIS integration runtime.",
+      "description": "The definition and properties of virtual network to which Azure-SSIS integration runtime will join.",
       "type": "object",
       "properties": {
         "subnetId": {
-          "description": "The ID of the Subnet that this Azure-SSIS integration runtime will join.",
+          "description": "The ID of subnet to which Azure-SSIS integration runtime will join.",
           "type": "string"
         }
       }
