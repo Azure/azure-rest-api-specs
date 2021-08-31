@@ -262,7 +262,7 @@
         "hubs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/hubItem"
+            "$ref": "#/definitions/Hub"
           },
           "description": "List of hubItems"
         },
@@ -308,7 +308,7 @@
       ],
       "description": "Properties of network manager connectivity configuration"
     },
-    "hubItem": {
+    "Hub": {
       "type": "object",
       "properties": {
         "resourceId": {
@@ -318,6 +318,7 @@
         "resourceType": {
           "type": "string",
           "enum": [
+            "Invalid",
             "VirtualNetwork"
           ],
           "description": "Resource Type."
