@@ -16,6 +16,17 @@ python:
 
 ```yaml $(python)
 python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: Microsoft.Aadiam
+  package-name: azureactivedirectory
+  package-version: 2017-04-01-preview
+  clear-output-folder: true
+```
+
+```yaml $(python)
+python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory
 ```
