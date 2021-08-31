@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-- stable/2020-06-12/DataLakeStorage.json
+- preview/2020-06-12/DataLakeStorage.json
 ```
 
 ### Suppression
@@ -80,5 +80,7 @@ directive:
   - suppress: OperationIdNounConflictingModelNames
     from: stable/2020-06-12/DataLakeStorage.json
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    from: stable/2020-06-12/DataLakeStorage.json
 ```
 ---
