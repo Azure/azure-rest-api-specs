@@ -71,16 +71,16 @@ input-file:
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: stable/2020-06-12/DataLakeStorage.json
+    from: preview/2020-06-12/DataLakeStorage.json
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-    from: stable/2020-06-12/DataLakeStorage.json
+    from: preview/2020-06-12/DataLakeStorage.json
   - suppress: XmsExamplesRequired
-    from: stable/2020-06-12/DataLakeStorage.json
+    from: preview/2020-06-12/DataLakeStorage.json
   - suppress: OperationIdNounConflictingModelNames
-    from: stable/2020-06-12/DataLakeStorage.json
+    from: preview/2020-06-12/DataLakeStorage.json
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
   - suppress: LongRunningOperationsWithLongRunningExtension
-    from: stable/2020-06-12/DataLakeStorage.json
+    from: preview/2020-06-12/DataLakeStorage.json
 ```
 ---
