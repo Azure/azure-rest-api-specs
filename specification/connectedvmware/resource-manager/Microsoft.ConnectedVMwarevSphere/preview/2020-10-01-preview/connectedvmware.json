@@ -5648,6 +5648,26 @@
       ],
       "x-ms-discriminator-value": "VirtualNetwork"
     },
+    "ClusterInventoryItem": {
+      "description": "The cluster inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Cluster"
+    },
+    "DatastoreInventoryItem": {
+      "description": "The datastore inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Datastore"
+    },
     "InventoryType": {
       "type": "string",
       "description": "The inventory type.",
@@ -5655,7 +5675,9 @@
         "ResourcePool",
         "VirtualMachine",
         "VirtualMachineTemplate",
-        "VirtualNetwork"
+        "VirtualNetwork",
+        "Cluster",
+        "Datastore"
       ],
       "x-ms-enum": {
         "name": "InventoryType",
