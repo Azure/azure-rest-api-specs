@@ -24,7 +24,12 @@
               "displayName": "myTestConnectivityConfig",
               "description": "Sample Configuration",
               "connectivityTopology": "HubAndSpoke",
-              "hubId": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+              "hubs": [
+                {
+                    "resourceId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
+                    "resourceType": "VirtualNetwork"
+                }
+              ],
               "isGlobal": "True",
               "deleteExistingPeering": "True",
               "appliesToGroups": [
@@ -46,7 +51,7 @@
                   "memberType": "VirtualNetwork",
                   "groupMembers": [
                     {
-                      "vnetId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
+                      "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
                     }
                   ],
                   "conditionalMembership": "",
