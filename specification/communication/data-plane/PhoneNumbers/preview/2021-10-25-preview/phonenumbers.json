@@ -1216,6 +1216,21 @@
         }
       }
     },
+    "Note": {
+      "description": "Holds a note about a Program Brief that has gone thru stages of review process.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Note related to a Program Brief that may imply changes needed from the client.",
+          "type": "string"
+        },
+        "date": {
+          "format": "date-time",
+          "description": "Date and time when the note was added to the Program Brief.",
+          "type": "string"
+        }
+      }
+    },
     "ShortCodeCost": {
       "description": "The incurred cost for a single short code.",
       "required": [
@@ -1505,6 +1520,9 @@
     },
     "ProgramBriefEntity": {
       "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+      "required": [
+        "id"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -1531,21 +1549,24 @@
           "description": "Number provisioned for the Program Brief e.g. 555555, 'CONTOSO'",
           "type": "string"
         },
-        "comment": {
-          "description": "Comments added to the Program Brief after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
-          "type": "string"
+        "notes": {
+          "description": "Notes added to the Program Brief after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          }
         },
         "cost": {
           "$ref": "#/definitions/ShortCodeCost"
         },
-        "lastUpdateDate": {
+        "submissionDate": {
           "format": "date-time",
-          "description": "Last date and time when the Program Brief was updated.",
+          "description": "Date and time when the Program Brief was submitted.",
           "type": "string"
         },
-        "creationDate": {
+        "statusUpdatedDate": {
           "format": "date-time",
-          "description": "Date and time when the Program Brief was created.",
+          "description": "Last date and time when the Program Brief status was updated.",
           "type": "string"
         },
         "programDetails": {
