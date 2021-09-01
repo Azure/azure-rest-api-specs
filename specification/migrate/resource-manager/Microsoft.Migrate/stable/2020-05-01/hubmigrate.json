@@ -262,6 +262,62 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionsController"
+        ],
+        "summary": "Get the private endpoint connections.",
+        "description": "Get all the private endpoint connections under a migrate project.",
+        "operationId": "PrivateEndpointConnectionsController_GetPrivateEndpointConnections",
+        "consumes": [
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByProject": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByProject.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections/{peConnectionName}": {
       "get": {
         "tags": [
@@ -533,6 +589,103 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the subscription.",
+        "operationId": "Projects_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjectsInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the resource group.",
+        "operationId": "Projects_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjects_List.json"
+          }
+        }
       }
     },
     "/providers/Microsoft.Migrate/operations": {
@@ -1040,6 +1193,22 @@
         },
         "groupId": {
           "description": "Group id.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectResultList": {
+      "type": "object",
+      "description": "List of projects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects.",
+          "items": {
+            "$ref": "#/definitions/MigrateProject"
+          }
+        },
+        "nextLink": {
           "type": "string"
         }
       }
