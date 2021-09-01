@@ -20,19 +20,13 @@ To see additional help and options, run:
 
 ## Configuration
 
+
 ### Basic Information
 
 These are the global settings for the RecoveryServicesBackup API.
 
-``` yaml
-openapi-type: arm
-
 ``` yaml $(package-RecoveryServicesBackupActive)
 tag: package-RecoveryServicesBackupActive-2021-06
-```
-
-``` yaml $(package-RecoveryServicesBackupPassive)
-tag: package-RecoveryServicesBackupPassive-2018-12
 ```
 
 csharp-sdks-folder: ./Generated/CSharp
@@ -51,19 +45,19 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
-### Tag: package-active-2021-06
+### Tag: package-RecoveryServicesBackupActive-2021-06
 
-These settings apply only when `--tag=package-active-2021-06` is specified on the command line.
+These settings apply only when `--tag=package-RecoveryServicesBackupActive-2021-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-active-2021-06'
+``` yaml $(tag) == 'package-RecoveryServicesBackupActive-2021-06'
 input-file:
 -  Microsoft.RecoveryServices/stable/2021-06-01/bms.json
 ```
 ### Tag: package-passive-2018-12
 
-These settings apply only when `--tag=package-passive-2018-12` is specified on the command line.
+These settings apply only when `--tag=package-RecoveryServicesBackupPassive` is specified on the command line.
 
-``` yaml $(tag) == 'package-passive-2018-12'
+``` yaml $(tag) == 'package-RecoveryServicesBackupPassive'
 input-file:
 -  Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
