@@ -23,4 +23,4 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 - [Test Scenario Definition Reference](./references/TestDefinitionReference.md)
 - [Test Scenario Variable Definition Reference](./references/Variables.md)
 - [Test Scenario Runner Reference](./references/Runner.md)
-- [Test Scenario Schema Reference](./references/v1.0/schema.json)
+- [Test Scenario Schema Reference](./references/v1.1/schema.json)
