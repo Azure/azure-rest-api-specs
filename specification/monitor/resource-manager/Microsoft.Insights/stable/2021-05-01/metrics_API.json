@@ -38,7 +38,7 @@
         "tags": [
           "Metrics"
         ],
-        "operationId": "MultiResourceMetrics_List",
+        "operationId": "Metrics_ListAtSubscriptionScope",
         "description": "**Lists the metric data for a subscription**.",
         "parameters": [
           {
@@ -112,7 +112,7 @@
         "tags": [
           "Metrics"
         ],
-        "operationId": "MultiResourceMetricsPost_List",
+        "operationId": "Metrics_ListAtSubscriptionScopePost",
         "description": "**Lists the metric data for a subscription**. Parameters can be specified on either query params or the body.",
         "parameters": [
           {
@@ -162,7 +162,7 @@
             "name": "body",
             "description": "Parameters serialized in the body",
             "schema": {
-              "$ref": "#/definitions/BodyParameters"
+              "$ref": "#/definitions/MultiMetricsRequestBodyParameters"
             }
           }
         ],
@@ -272,7 +272,7 @@
     }
   },
   "definitions": {
-    "BodyParameters": {
+    "MultiMetricsRequestBodyParameters": {
       "description": "Query parameters can also be specified in the body, specifying the same parameter in both the body and query parameters will result in an error.",
       "type": "object",
       "properties": {
