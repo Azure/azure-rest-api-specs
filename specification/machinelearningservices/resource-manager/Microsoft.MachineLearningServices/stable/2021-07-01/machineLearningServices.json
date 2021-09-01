@@ -2004,8 +2004,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "location": {
           "description": "Specifies the location of the resource.",
@@ -2185,8 +2184,7 @@
           "description": "The sku of the workspace."
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
@@ -2872,79 +2870,6 @@
       },
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
-    "Identity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "SystemAssigned,UserAssigned",
-            "UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentities",
-          "description": "The user assigned identities associated with the resource."
-        }
-      },
-      "description": "Identity for the resource."
-    },
-    "UserAssignedIdentities": {
-      "description": "dictionary containing all the user assigned identities, with resourceId of the UAI as key.",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedIdentity"
-      }
-    },
-    "UserAssignedIdentity": {
-      "description": "User Assigned Identity",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of the user assigned identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of the user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The clientId(aka appId) of the user assigned identity."
-        }
-      }
-    },
-    "ResourceId": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
-      "x-ms-azure-resource": true
-    },
     "ListWorkspaceKeysResult": {
       "type": "object",
       "properties": {
@@ -3080,8 +3005,7 @@
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "location": {
           "description": "Specifies the location of the resource.",
