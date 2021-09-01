@@ -6,7 +6,7 @@
     "resourceGroupName": "myResourceGroup",
     "virtualNetworkName": "testVirtualNetwork",
     "parameters": {
-      "$skipToken": "FakeSkipTokenCode"
+      "skipToken": "FakeSkipTokenCode"
     }
   },
   "responses": {
@@ -19,7 +19,12 @@
               "displayName": "myTestConnectivityConfig",
               "description": "Sample Configuration",
               "connectivityTopology": "HubAndSpoke",
-              "hubId": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+              "hubs": [
+                {
+                  "resourceId": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+                  "resourceType": "Microsoft.Network/virtualNetworks"
+                }
+              ],
               "isGlobal": "True",
               "deleteExistingPeering": "True",
               "appliesToGroups": [
@@ -38,10 +43,10 @@
                 "properties": {
                   "displayName": "My Network Group",
                   "description": "A group for all test Virtual Networks",
-                  "memberType": "VirtualNetwork",
+                  "memberType": "Microsoft.Network/virtualNetworks",
                   "groupMembers": [
                     {
-                      "vnetId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
+                      "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
                     }
                   ],
                   "conditionalMembership": "",
@@ -51,7 +56,7 @@
             ]
           }
         ],
-        "$skipToken": "FakeSkipTokenCode"
+        "skipToken": "FakeSkipTokenCode"
       }
     }
   }
