@@ -3588,7 +3588,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -4052,7 +4052,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='Type eq <type>' to filter on user type property",
             "required": false,
@@ -4289,6 +4289,10 @@
             "name": "AddonType",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Addon type",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -4359,6 +4363,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Alert generated in the resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Properties of alert.",
@@ -4612,6 +4620,7 @@
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionAlgorithm": {
@@ -4683,6 +4692,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Bandwidth object related to ASE resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
@@ -4978,6 +4991,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Container in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
           "description": "The container properties.",
@@ -5106,6 +5123,10 @@
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -5273,6 +5294,10 @@
       "description": "The properties of the Data Box Edge/Gateway device.",
       "type": "object",
       "properties": {
+        "systemData": {
+          "description": "DataBoxEdge Device Properties",
+          "$ref": "#/definitions/SystemData"
+        },
         "dataBoxEdgeDeviceStatus": {
           "description": "The status of the Data Box Edge/Gateway device.",
           "enum": [
@@ -5676,6 +5701,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "DiagnosticProactiveLogCollectionSettings",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ProactiveLogCollectionSettingsProperties",
           "description": "Properties of the diagnostic proactive log collection settings.",
@@ -5695,6 +5724,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "DiagnosticRemoteSupportSettings",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/DiagnosticRemoteSupportSettingsProperties",
           "description": "Properties of the remote support  settings.",
@@ -5882,6 +5915,7 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
+          "x-ms-secret": true,
           "type": "string"
         },
         "expiryTimeInUTC": {
@@ -7020,6 +7054,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "MonitoringConfiguration on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/MonitoringMetricConfigurationProperties",
           "description": "The metric setting properties.",
@@ -7262,6 +7300,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "NetworkSettings on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
           "description": "The properties of network settings of a device.",
@@ -7496,6 +7538,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Order configured on ASE resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/OrderProperties",
           "description": "The order properties.",
@@ -7920,6 +7966,10 @@
             "name": "RoleTypes",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Role configured on ASE resource",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -8029,6 +8079,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Share on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
           "description": "The share properties.",
@@ -8313,6 +8367,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccount object on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Storage Account properties.",
@@ -8332,6 +8390,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccountCredential object",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
           "description": "The storage account credential properties.",
@@ -8558,6 +8620,59 @@
         }
       }
     },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
     "TrackingInfo": {
       "description": "Tracking courier information.",
       "type": "object",
@@ -8592,6 +8707,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Trigger in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "kind": {
           "description": "Trigger Kind.",
           "enum": [
@@ -8812,6 +8931,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "UpdateSummary Result",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/UpdateSummaryProperties",
           "description": "The device update information summary.",
@@ -9089,6 +9212,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "User in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/UserProperties",
           "description": "The storage account credential properties.",
@@ -9145,6 +9272,9 @@
     },
     "UserProperties": {
       "description": "The user properties.",
+      "required": [
+        "userType"
+      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
