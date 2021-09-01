@@ -20,7 +20,7 @@
     },
     "scenarios": {
       "type": "array",
-      "description": "API usage scenarios",
+      "description": "API scenarios",
       "items": {
         "$ref": "#/definitions/Scenario"
       },
@@ -210,16 +210,8 @@
         }
       ],
       "properties": {
-        "example": {
-          "oneOf": [
-            {
-              "type": "string",
-              "default": "!include ../examples/"
-            },
-            {
-              "$ref": "#/definitions/Example"
-            }
-          ]
+        "exampleFile": {
+          "type": "string"
         },
         "resourceName": {
           "$ref": "#/definitions/Name",
@@ -227,7 +219,7 @@
         }
       },
       "required": [
-        "example"
+        "exampleFile"
       ]
     },
     "StepRestOperation": {
@@ -260,20 +252,12 @@
         }
       ],
       "properties": {
-        "armTemplate": {
-          "oneOf": [
-            {
-              "type": "string",
-              "default": "!include ./templates/"
-            },
-            {
-              "type": "object"
-            }
-          ]
+        "armTemplateDeployment": {
+          "type": "string"
         }
       },
       "required": [
-        "armTemplate"
+        "armTemplateDeployment"
       ]
     },
     "StepRawCall": {
@@ -318,67 +302,6 @@
         "url",
         "requestHeaders",
         "requestBody"
-      ]
-    },
-    "Example": {
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "A dictionary of parameter names and their sample values for a particular operation. Commonly used parameters in Azure, like 'api-version', 'subscriptionId' and 'resourceGroupName' have been defined as optional properties for ease of use. Please add other parameters as applicable in your example.",
-          "additionalProperties": true,
-          "properties": {
-            "api-version": {
-              "type": "string",
-              "description": "An example of the api-version used in the request."
-            },
-            "subscriptionId": {
-              "type": "string",
-              "description": "An example of the subscriptionId used in the request."
-            },
-            "resourceGroupName": {
-              "type": "string",
-              "description": "An example of the resourceGroupName used in the request."
-            }
-          }
-        },
-        "responses": {
-          "type": "object",
-          "description": "A dictionary of {possible HTTP status codes (as the dictionary key)} that can be received from that operation and {examples (as the dictionary value)} of response {body} and {headers (for long running operations)}.",
-          "minProperties": 1,
-          "additionalProperties": false,
-          "patternProperties": {
-            "^([0-9]{3})$|^(default)$": {
-              "type": "object",
-              "description": "Describes headers and body of an example HTTP response, in the context of the x-ms-examples extension.",
-              "properties": {
-                "headers": {
-                  "type": "object",
-                  "description": "Examples of response headers. Common response headers like 'location', 'azure-asyncoperation', 'retry-after', etc. are defined as optional properties for ease of use. Please feel free to add other response headers as applicable in the example.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "body": {
-                  "description": "Example of the response body if applicable for the operation. Don't specify the body if the server is not sending a response body. The outcome from `JSON.parse()`, needs to be described over here."
-                }
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "parameters",
-        "responses"
       ]
     },
     "JsonPatchOp": {
