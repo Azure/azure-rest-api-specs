@@ -18,14 +18,6 @@
       "type": "string",
       "defaultValue": "$(scriptsContent)"
     },
-    "keyVaultName": {
-      "type": "string",
-      "defaultValue": "$(keyValutName)"
-    },
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": "$(storageAccountName)"
-    },
     "blobUrl": {
       "type": "string",
       "defaultValue": "$(blobUrl)"
@@ -54,16 +46,8 @@
             "secureValue": "[parameters('uploadUrl')]"
           },
           {
-            "name": "keyVaultName",
-            "value": "[parameters('keyVaultName')]"
-          },
-          {
-            "name": "storageAccountName",
-            "value": "[parameters('storageAccountName')]"
-          },
-          {
             "name": "blobUrl",
-            "value": "[parameters('blobUrl')]"
+            "secureValue": "[parameters('blobUrl')]"
           }
         ],
         "timeout": "PT1H",

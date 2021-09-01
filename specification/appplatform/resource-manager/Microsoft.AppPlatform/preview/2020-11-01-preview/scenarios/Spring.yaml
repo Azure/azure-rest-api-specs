@@ -10,10 +10,8 @@ requiredVariables:
   - mysqlKey
   - dnsSubscriptionId
   - dnsResourceGroup
-  - keyVaultName
   - blobUrl
   - userAssignedIdentity
-  - storageAccountName
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
@@ -233,17 +231,17 @@ testScenarios:
 
   - step: Upload_jar
     armTemplateDeployment: ./templates/uploadJar.json
-    variables: 
-      scriptsContent: | 
+    variables:
+      scriptsContent: |
           $uploadUrl = ${Env:uploadUrl}
           $BlobUri = ${Env:blobUrl}
-          $storageAccountName = ${Env:storageAccountName}
           $localFilePath = './helloWorld.jar'
-          $keyVaultName = ${Env:keyVaultName}
-          function DownloadJarFromBlob([string]$blobUri, [string]$storageAccountName, [string]$storageAccountKey, [string]$localOutputFilePath) {
+          function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
+            $Uri = [System.Uri]::New($blobUri.Split('?')[0])
+            $SasToken = $blobUri.Split('?')[-1]
 
-            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::new($storageAccountName, $storageAccountKey)
-            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($BlobUri, $StorageCredentials)
+            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
+            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($Uri, $StorageCredentials)
             $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
             $DownLoadTask
           }
@@ -260,11 +258,10 @@ testScenarios:
           }
 
           Connect-AzAccount -Identity
-          $storageAccountKey = Get-AzKeyVaultSecret -VaultName $keyVaultName  -Name 'storageAccountKey' -AsPlainText
-          DownloadJarFromBlob $BlobUri $storageAccountName $storageAccountKey $localFilePath
+          DownloadJarFromBlob $BlobUri $localFilePath
           UploadToFileShare $uploadUrl $localFilePath
 
-   
+
 
   - step: Deployments_CreateOrUpdate
     exampleFile: ../examples/Deployments_CreateOrUpdate.json

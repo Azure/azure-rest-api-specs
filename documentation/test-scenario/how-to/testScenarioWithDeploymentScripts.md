@@ -18,9 +18,8 @@ In Azure Spring cloud service, After we create an app in Azure spring cloud serv
 
 #### Step 1: prerequisite
 
-- ManagedIdentity: required for deploymentScripts. Azure use this managedIdentity to communicate with azure resource. NOTE: please assign keyVault permission to this managedIdentity which is used for deploymentScripts retrieve secret from keyVault.
+- ManagedIdentity: required for deploymentScripts. Azure use this managedIdentity to communicate with azure resource.
 - StorageBlob: The main functionality is upload a helloWorld.jar to Spring Cloud blob SAS URI. This storage blob stored prepared helloWorld.jar.
-- KeyVault: Store storageAccountKey for deploymentScripts access storageBlob.
 
 Below is components architecture. In this case, we use Powershell to upload prepared 'helloWorld.jar' to Azure spring cloud service blob SAS URI.
 
@@ -35,9 +34,7 @@ There are some required parameters which should be prepared in test scenario env
 - uploadUrl: Spring cloud SAS URI. runtime variables from `Apps_GetResourceUploadUrlGet_uploadUrl` step.
 - userAssignedIdentity: ManagedIdentity for deploymentScripts
 - scriptsContent: Powershell scripts to do upload task which is passed in from step variables.
-- keyVaultName: KeyVault name
-- storageAccountName: storageAccountName for prepared storage blob
-- blobUrl: helloWorld.jar blobUrl
+- blobUrl: helloWorld.jar blob SAS Url
 
 For more details about deploymentScripts, pls refer to [Use deploymentScripts in ARM template](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template)
 
@@ -61,14 +58,6 @@ For more details about deploymentScripts, pls refer to [Use deploymentScripts in
     "scriptsContent": {
       "type": "string",
       "defaultValue": "$(scriptsContent)"
-    },
-    "keyVaultName": {
-      "type": "string",
-      "defaultValue": "$(keyVaultName)"
-    },
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": "$(storageAccountName)"
     },
     "blobUrl": {
       "type": "string",
@@ -98,16 +87,8 @@ For more details about deploymentScripts, pls refer to [Use deploymentScripts in
             "secureValue": "[parameters('uploadUrl')]"
           },
           {
-            "name": "keyVaultName",
-            "value": "[parameters('keyVaultName')]"
-          },
-          {
-            "name": "storageAccountName",
-            "value": "[parameters('storageAccountName')]"
-          },
-          {
             "name": "blobUrl",
-            "value": "[parameters('blobUrl')]"
+            "secureValue": "[parameters('blobUrl')]"
           }
         ],
         "timeout": "PT1H",
@@ -121,7 +102,40 @@ For more details about deploymentScripts, pls refer to [Use deploymentScripts in
 
 #### Step 3: Test scenario file
 
-Below is the part of test scenario file from Spring Cloud which includes three steps. The first step is `Apps_GetResourceUploadUrl` get blob SAS URI and write the URI as runtime variables. The second step is `Upload_jar` the scriptsContent is step variable which will be resolved in deploymentScripts. The scripts is to download `helloWorld.jar` from blob and upload to Spring cloud blob SAS URI. The third step is `Deployments_CreateOrUpdate` after upload `helloWorld.jar`, we could create a deployment.
+First, we need to write Powershell Scripts to download `helloWorld.jar` from prepared blob and upload to file share.
+
+```PowerShell
+$uploadUrl = ${Env:uploadUrl}
+$BlobUri = ${Env:blobUrl}
+$localFilePath = './helloWorld.jar'
+function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
+  $Uri = [System.Uri]::New($blobUri.Split('?')[0])
+  $SasToken = $blobUri.Split('?')[-1]
+
+  $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
+  $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($Uri, $StorageCredentials)
+  $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
+  $DownLoadTask
+}
+
+function UploadToFileShare([string]$uploadUrl, [string]$localFilePath) {
+  $Uri = [System.Uri]::New($uploadUrl.Split('?')[0])
+
+  $SasToken = $uploadUrl.Split('?')[-1]
+  $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
+  $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($Uri, $StorageCredentials)
+
+  $UploadTask = $CloudFile.UploadFromFileAsync($localFilePath)
+  $UploadTask
+}
+
+Connect-AzAccount -Identity
+DownloadJarFromBlob $BlobUri $localFilePath
+UploadToFileShare $uploadUrl $localFilePath
+
+```
+
+After write this scripts we could use this script as `scriptsContent` variables in test scenario file. Below is the part of test scenario file from Spring Cloud which includes three steps. The first step is `Apps_GetResourceUploadUrl` get blob SAS URI and write the URI as runtime variables. The second step is `Upload_jar` the scriptsContent is step variable which will be resolved in deploymentScripts. The scripts is to download `helloWorld.jar` from blob and upload to Spring cloud blob SAS URI. The third step is `Deployments_CreateOrUpdate` after upload `helloWorld.jar`, we could create a deployment.
 
 ```yaml
  - step: Apps_GetResourceUploadUrl
@@ -138,13 +152,13 @@ Below is the part of test scenario file from Spring Cloud which includes three s
       scriptsContent: |
           $uploadUrl = ${Env:uploadUrl}
           $BlobUri = ${Env:blobUrl}
-          $storageAccountName = ${Env:storageAccountName}
           $localFilePath = './helloWorld.jar'
-          $keyVaultName = ${Env:keyVaultName}
-          function DownloadJarFromBlob([string]$blobUri, [string]$storageAccountName, [string]$storageAccountKey, [string]$localOutputFilePath) {
+          function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
+            $Uri = [System.Uri]::New($blobUri.Split('?')[0])
+            $SasToken = $blobUri.Split('?')[-1]
 
-            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::new($storageAccountName, $storageAccountKey)
-            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($BlobUri, $StorageCredentials)
+            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
+            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($Uri, $StorageCredentials)
             $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
             $DownLoadTask
           }
@@ -161,8 +175,7 @@ Below is the part of test scenario file from Spring Cloud which includes three s
           }
 
           Connect-AzAccount -Identity
-          $storageAccountKey = Get-AzKeyVaultSecret -VaultName $keyVaultName  -Name 'storageAccountKey' -AsPlainText
-          DownloadJarFromBlob $BlobUri $storageAccountName $storageAccountKey $localFilePath
+          DownloadJarFromBlob $BlobUri $localFilePath
           UploadToFileShare $uploadUrl $localFilePath
 
   - step: Deployments_CreateOrUpdate
