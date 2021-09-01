@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview-only
+tag: package-2020-10-01-preview
 ```
 
 ### Suppression
@@ -46,33 +46,7 @@ directive:
     from: authorization-ProviderOperationsCalls.json
     reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
   - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.ProviderOperation.properties.isDataAction
-    from: authorization-ProviderOperationsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.DenyAssignmentProperties.properties.doNotApplyToChildScopes
-    from: authorization-DenyAssignmentGetCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
-    from: authorization-DenyAssignmentGetCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.ValidationResponse.properties.isValid
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
+    reason: booleans are only used when the values reduce to true or false
   - suppress: R4024
     reason: Preview versions still in use
   - suppress: RequiredSystemDataInNewApiVersions
@@ -88,6 +62,24 @@ directive:
   - suppress: AddingOptionalProperty
     from: authorization-AccessReviewCalls.json
     reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: R1003
+    from: EligibleChildResources.json
+    reason: Fixing warning would create a breaking change
+  - suppress: R1006
+    from: authorization-AccessReviewCalls.json
+    reason: Fixing warning would create a breaking change
+  - suppress: R1007
+    from: authorization-AccessReviewCalls.json
+    reason: Fixing warning would create a breaking change
+  - suppress: R2017
+    from: authorization-AccessReviewCalls.json
+    reason: Request body is a subset of response body. Additional properties in the response are not settable by the user
+  - suppress: R2063
+    from: authorization-AccessReviewCalls.json
+    reason: Disambiguation resolution is acceptable and desired. When generating the models the _Suffix doesn't get included
+  - suppress: R2015
+    from: common-types.json
+    reason: common-types doesn't need to reference api version.
 ```
 
 ### Tag: package-2021-07-01-preview-only
@@ -108,12 +100,29 @@ input-file:
 - Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
 ```
 
+### Tag: package-2021-01-01-preview-only
+
+These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+```
+
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
+- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+- Microsoft.Authorization/preview/2020-10-01-preview/common-types.json
+- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
@@ -122,8 +131,19 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
-- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
-- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-08-01-preview
@@ -178,6 +198,19 @@ input-file:
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview
@@ -303,41 +336,6 @@ input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 ```
 
-### Tag: profile-hybrid-2020-09-01
-
-These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2020-09-01'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-```
-
-### Tag: package-2021-01-01-preview-only
-
-These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-01-01-preview-only'
-input-file:
-- Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
-```
-
 ---
 
 # Code Generation
@@ -372,6 +370,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-
-
