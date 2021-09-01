@@ -23,7 +23,7 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2021-08-01' && $(go)
 namespace: storagepool
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2021-08-01/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-08-01/$(namespace)
 ```
 
 
