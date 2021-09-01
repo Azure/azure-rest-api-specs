@@ -332,6 +332,82 @@
         }
       }
     },
+    "/indexers('{indexerName}')/search.resetdocs": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_ResetDocs",
+        "x-ms-examples": {
+          "SearchServiceResetDocs": {
+            "$ref": "./examples/SearchServiceResetDocs.json"
+          }
+        },
+        "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
+        "externalDocs": {
+          "url": "N/A"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to reset documents for."
+          },
+          {
+            "name": "keysOrIds",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "documentKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "document keys to be reset"
+                },
+                "datasourceDocumentIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "datasource document identifiers to be reset"
+                }
+              }
+            }
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/indexers('{indexerName}')/search.run": {
       "post": {
         "tags": [
@@ -6438,6 +6514,16 @@
           "readOnly": true,
           "description": "The outcome of this indexer execution."
         },
+        "statusDetail": {
+          "$ref": "#/definitions/IndexerExecutionStatusDetail",
+          "readOnly": true,
+          "description": "The outcome of this indexer execution."
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "readOnly": true,
+          "description": "All of the state that defines and dictates the indexer's current execution."
+        },
         "errorMessage": {
           "type": "string",
           "readOnly": true,
@@ -6608,6 +6694,95 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
+    },
+    "IndexerExecutionStatusDetail": {
+      "type": "string",
+      "enum": [
+        "resetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatusDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "resetDocs",
+            "name": "ResetDocs",
+            "description": "Indicates that the reset that occurred was for a call to ResetDocs."
+          }
+        ]
+      },
+      "description": "Details the status of an individual indexer execution."
+    },
+    "IndexerCurrentState": {
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/IndexingMode",
+          "readOnly": true,
+          "description": "The mode the indexer is running in."
+        },
+        "allDocsInitialChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state used when indexing starts on all documents in the datasource."
+        },
+        "allDocsFinalChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state value when indexing finishes on all documents in the datasource."
+        },
+        "resetDocsInitialChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state used when indexing starts on select, reset documents in the datasource."
+        },
+        "resetDocsFinalChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state value when indexing finishes on select, reset documents in the datasource."
+        },
+        "resetDocumentKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of document keys that have been reset. The document key is the document's unique identifier for the data in the search index. The indexer will prioritize selectively re-ingesting these keys."
+        },
+        "resetDatasourceDocumentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
+        }
+      },
+      "description": "Represents all of the state that defines and dictates the indexer's current execution."
+    },
+    "IndexingMode": {
+      "type": "string",
+      "enum": [
+        "indexingAllDocs",
+        "indexingResetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "indexingAllDocs",
+            "name": "IndexingAllDocs",
+            "description": "The indexer is indexing all documents in the datasource."
+          },
+          {
+            "value": "indexingResetDocs",
+            "name": "indexingResetDocs",
+            "description": "The indexer is indexing selective, reset documents in the datasource. The documents being indexed are defined on indexer status."
+          }
+        ]
+      },
+      "x-nullable": false,
+      "description": "Represents the mode the indexer is executing in."
     },
     "SearchIndexerLimits": {
       "properties": {
