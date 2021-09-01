@@ -4669,6 +4669,11 @@
             "$ref": "#/definitions/ResourceStatus"
           }
         },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -4787,6 +4792,11 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           }
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -6104,6 +6114,11 @@
       "description": "Defines the resource properties.",
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "credentials": {
           "description": "Username / Password Credentials to provision guest agent.",
           "$ref": "#/definitions/GuestCredential"
@@ -6119,6 +6134,11 @@
         },
         "status": {
           "description": "Gets or sets the guest agent status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
           "readOnly": true
         },
