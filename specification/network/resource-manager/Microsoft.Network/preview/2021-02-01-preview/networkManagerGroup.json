@@ -324,15 +324,7 @@
         },
         "memberType": {
           "type": "string",
-          "description": "Group member type.",
-          "enum": [
-            "VirtualNetwork",
-            "Subnet"
-          ],
-          "x-ms-enum": {
-            "name": "MemberType",
-            "modelAsString": true
-          }
+          "description": "Group member type."
         },
         "groupMembers": {
           "type": "array",
@@ -356,20 +348,16 @@
     "groupMembersItem": {
       "type": "object",
       "properties": {
-        "vnetId": {
+        "resourceId": {
           "type": "string",
-          "description": "Vnet Id."
-        },
-        "subnetId": {
-          "type": "string",
-          "description": "Subnet Id."
+          "description": "Resource Id."
         }
       },
       "description": "GroupMembers Item."
     },
     "QueryRequestOptions": {
       "properties": {
-        "$skipToken": {
+        "skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
           "type": "string"
         }
@@ -385,7 +373,7 @@
           },
           "description": "Gets a page of EffectiveVirtualNetwork"
         },
-        "$skipToken": {
+        "skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
           "type": "string"
         }
