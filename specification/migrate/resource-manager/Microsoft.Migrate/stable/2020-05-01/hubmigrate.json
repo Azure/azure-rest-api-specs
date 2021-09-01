@@ -5,9 +5,15 @@
     "title": "Microsoft.Azure.AMH.WebRole.V2020_05_01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "parameters": {
     "subscriptionId": {
       "name": "subscriptionId",
@@ -46,7 +52,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "paths": {
@@ -54,7 +62,9 @@
       "get": {
         "summary": "Get a specific project.",
         "description": "Get information related to a specific migrate project. Returns a json object of type 'migrateProject' as specified in the models section.",
-        "tags": ["MigrateProjectsController"],
+        "tags": [
+          "MigrateProjectsController"
+        ],
         "operationId": "MigrateProjectsController_GetMigrateProject",
         "parameters": [
           {
@@ -96,7 +106,9 @@
         "deprecated": false
       },
       "put": {
-        "tags": ["MigrateProjectsController"],
+        "tags": [
+          "MigrateProjectsController"
+        ],
         "summary": "Create a new project with specified settings.",
         "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
         "operationId": "MigrateProjectsController_PutMigrateProject",
@@ -193,7 +205,9 @@
         "deprecated": false
       },
       "patch": {
-        "tags": ["MigrateProjectsController"],
+        "tags": [
+          "MigrateProjectsController"
+        ],
         "summary": "Update project.",
         "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
         "operationId": "MigrateProjectsController_PatchMigrateProject",
@@ -248,7 +262,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections": {
       "get": {
-        "tags": ["PrivateEndpointConnectionsController"],
+        "tags": [
+          "PrivateEndpointConnectionsController"
+        ],
         "summary": "Get the private endpoint connections.",
         "description": "Get all the private endpoint connections under a migrate project.",
         "operationId": "PrivateEndpointConnectionsController_GetPrivateEndpointConnections",
@@ -301,7 +317,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections/{peConnectionName}": {
       "get": {
-        "tags": ["PrivateEndpointConnectionController"],
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
         "summary": "Get the private endpoint.",
         "description": "Get the private endpoint with the specified name.",
         "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
@@ -352,7 +370,9 @@
         "deprecated": false
       },
       "put": {
-        "tags": ["PrivateEndpointConnectionController"],
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
         "summary": "Create or update private endpoint.",
         "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
         "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
@@ -412,7 +432,9 @@
         "deprecated": false
       },
       "delete": {
-        "tags": ["PrivateEndpointConnectionController"],
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
         "summary": "Delete the endpoint",
         "description": "Delete the private endpoint. Deleting non-existent private endpoint is a no-operation.",
         "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
@@ -465,7 +487,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
-        "tags": ["PrivateLinkResourceController"],
+        "tags": [
+          "PrivateLinkResourceController"
+        ],
         "summary": "Get the private link resource.",
         "description": "Get the private link resource with the specified name.",
         "operationId": "PrivateLinkResourceController_GetPrivateLinkResource",
@@ -518,7 +542,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources": {
       "get": {
-        "tags": ["PrivateLinkResourceController"],
+        "tags": [
+          "PrivateLinkResourceController"
+        ],
         "summary": "Get the list of private link resources.",
         "description": "Get the list of private link resources.",
         "operationId": "PrivateLinkResourceController_GetPrivateLinkResources",
@@ -827,7 +853,12 @@
           "readOnly": true
         },
         "refreshSummaryState": {
-          "enum": ["Started", "InProgress", "Completed", "Failed"],
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
           "type": "string",
           "description": "Refresh summary state.",
           "readOnly": true,
@@ -842,7 +873,11 @@
         },
         "publicNetworkAccess": {
           "description": "Gets or sets the state of public network access.",
-          "enum": ["NotSpecified", "Enabled", "Disabled"],
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string"
         },
         "privateEndpointConnections": {
@@ -916,7 +951,12 @@
       "description": "Private endpoint connection state.",
       "properties": {
         "status": {
-          "enum": ["Approved", "Pending", "Rejected", "Disconnected"],
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
           "type": "string",
           "description": "Private link connection state.",
           "x-ms-enum": {
@@ -1016,7 +1056,12 @@
           "readOnly": true
         },
         "refreshSummaryState": {
-          "enum": ["Started", "InProgress", "Completed", "Failed"],
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
           "type": "string",
           "description": "Refresh summary state."
         },
@@ -1170,7 +1215,12 @@
         "createdByType": {
           "type": "string",
           "description": "The type of identity that created the resource.",
-          "enum": ["User", "Application", "ManagedIdentity", "Key"],
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
           "x-ms-enum": {
             "name": "createdByType",
             "modelAsString": true
