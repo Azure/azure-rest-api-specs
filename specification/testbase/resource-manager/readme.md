@@ -27,7 +27,7 @@ These are the global settings for the testbase.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-09-01-preview
+tag: package-2021-09-01
 ```
 
 ### Tag: package-2020-12-16-preview
@@ -46,6 +46,15 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
   - Microsoft.TestBase/preview/2021-09-01-preview/testbase.json
+```
+
+### Tag: package-2021-09-01
+
+These settings apply only when `--tag=package-2021-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01'
+input-file:
+  - Microsoft.TestBase/stable/2021-09-01/testbase.json
 ```
 
 ## Suppression
