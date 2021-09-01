@@ -958,6 +958,9 @@
           },
           {
             "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/ignoreTermsAndCategories"
           }
         ],
         "responses": {
@@ -6622,6 +6625,15 @@
     "includeTermHierarchy": {
       "name": "includeTermHierarchy",
       "description": "Whether include term hierarchy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ignoreTermsAndCategories": {
+      "name": "ignoreTermsAndCategories",
+      "description": "Whether ignore terms and categories",
       "in": "query",
       "required": false,
       "type": "boolean",
