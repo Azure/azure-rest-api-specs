@@ -21,3 +21,8 @@ output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactive
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactivedirectory
 ```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
