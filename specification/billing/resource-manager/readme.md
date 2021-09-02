@@ -35,7 +35,8 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.Billing/stable/2021-10-01/billing.json
+- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+- Microsoft.Billing/stable/2021-10-01/billingSubscriptionAlias.json
 ```
 
 ### Tag: package-2020-05
