@@ -72,7 +72,7 @@
         "tags": [
           "BatchEndpoint"
         ],
-        "summary": "Delete Batch Inference Endpoint.",
+        "summary": "Delete Batch Inference Endpoint (asynchronous).",
         "operationId": "BatchEndpoints_Delete",
         "produces": [
           "application/json"
@@ -108,6 +108,27 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
           "204": {
             "description": "No Content"
           }
@@ -116,6 +137,10 @@
           "Delete Batch Endpoint.": {
             "$ref": "./examples/BatchEndpoint/delete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -172,7 +197,7 @@
         "tags": [
           "BatchEndpoint"
         ],
-        "summary": "Update a batch inference endpoint.",
+        "summary": "Update a batch inference endpoint (asynchronous).",
         "operationId": "BatchEndpoints_Update",
         "consumes": [
           "application/json"
@@ -223,19 +248,44 @@
             "schema": {
               "$ref": "#/definitions/BatchEndpointTrackedResource"
             }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           }
         },
         "x-ms-examples": {
           "Update Batch Endpoint.": {
             "$ref": "./examples/BatchEndpoint/update.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "put": {
         "tags": [
           "BatchEndpoint"
         ],
-        "summary": "Creates a batch inference endpoint.",
+        "summary": "Creates a batch inference endpoint (asynchronous).",
         "operationId": "BatchEndpoints_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -291,6 +341,17 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/BatchEndpointTrackedResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
             }
           }
         },
@@ -298,6 +359,10 @@
           "CreateOrUpdate Batch Endpoint.": {
             "$ref": "./examples/BatchEndpoint/createOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -377,7 +442,7 @@
         "tags": [
           "BatchDeployment"
         ],
-        "summary": "Delete Batch Inference deployment.",
+        "summary": "Delete Batch Inference deployment (asynchronous).",
         "operationId": "BatchDeployments_Delete",
         "produces": [
           "application/json"
@@ -417,6 +482,27 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
           "200": {
             "description": "Success"
           },
@@ -428,6 +514,10 @@
           "Delete Batch Deployment.": {
             "$ref": "./examples/BatchDeployment/delete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -491,7 +581,7 @@
         "tags": [
           "BatchDeployment"
         ],
-        "summary": "Update a batch inference deployment.",
+        "summary": "Update a batch inference deployment (asynchronous).",
         "operationId": "BatchDeployments_Update",
         "consumes": [
           "application/json"
@@ -550,19 +640,44 @@
             "schema": {
               "$ref": "#/definitions/BatchDeploymentTrackedResource"
             }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           }
         },
         "x-ms-examples": {
           "Update Batch Deployment.": {
             "$ref": "./examples/BatchDeployment/update.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "put": {
         "tags": [
           "BatchDeployment"
         ],
-        "summary": "Creates/updates a batch inference deployment.",
+        "summary": "Creates/updates a batch inference deployment (asynchronous).",
         "operationId": "BatchDeployments_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -626,6 +741,17 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
             }
           }
         },
@@ -633,6 +759,10 @@
           "CreateOrUpdate Batch Deployment.": {
             "$ref": "./examples/BatchDeployment/createOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3591,6 +3721,12 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "feed",
+            "description": "Name of the feed.",
+            "type": "string"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -3850,7 +3986,7 @@
             "type": "string",
             "enum": [
               "Managed",
-              "K8S",
+              "Kubernetes",
               "AzureMLCompute"
             ],
             "x-ms-enum": {
@@ -5006,30 +5142,6 @@
       "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
-    "AmlComputeConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceConfigurationBase"
-        }
-      ],
-      "properties": {
-        "instanceCount": {
-          "format": "int32",
-          "description": "Number of instances or nodes.",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
-          "type": "integer",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "AmlCompute",
-      "additionalProperties": false
-    },
     "AmlToken": {
       "description": "AML Token identity configuration.",
       "type": "object",
@@ -5106,6 +5218,14 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "AzureBlob",
@@ -5124,6 +5244,14 @@
         }
       ],
       "properties": {
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "storeName": {
           "description": "Azure Data Lake store name.",
           "pattern": "[a-zA-Z0-9_]",
@@ -5198,6 +5326,14 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen2",
@@ -5254,6 +5390,14 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "AzureFile",
@@ -5271,11 +5415,13 @@
         "slackAmount": {
           "format": "float",
           "description": "Absolute distance allowed from the best performing run.",
+          "default": 0,
           "type": "number"
         },
         "slackFactor": {
           "format": "float",
           "description": "Ratio of the allowed distance from the best performing run.",
+          "default": 0,
           "type": "number"
         }
       },
@@ -5317,8 +5463,8 @@
           "x-nullable": true
         },
         "compute": {
-          "description": "Configuration for compute binding.",
-          "$ref": "#/definitions/ComputeConfiguration",
+          "description": "Compute target for batch inference operation.",
+          "type": "string",
           "x-nullable": true
         },
         "description": {
@@ -5350,6 +5496,12 @@
           "description": "Logging level for batch inference operation.",
           "$ref": "#/definitions/BatchLoggingLevel"
         },
+        "maxConcurrencyPerInstance": {
+          "format": "int32",
+          "description": "Indicates maximum number of parallelism per instance.",
+          "type": "integer",
+          "x-nullable": true
+        },
         "miniBatchSize": {
           "format": "int64",
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
@@ -5367,13 +5519,9 @@
         },
         "outputFileName": {
           "description": "Customized output file name for append_row output action.",
+          "default": "predictions.csv",
           "type": "string",
           "x-nullable": true
-        },
-        "processCountPerInstance": {
-          "format": "int32",
-          "description": "Indicates number of processes per instance",
-          "type": "integer"
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
@@ -5382,6 +5530,19 @@
             "type": "string",
             "x-nullable": true
           },
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint deployment.",
+          "$ref": "#/definitions/DeploymentProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "resources": {
+          "description": "Indicates compute configuration for the job.",
+          "$ref": "#/definitions/ResourceConfiguration",
           "x-nullable": true
         },
         "retrySettings": {
@@ -5488,6 +5649,14 @@
             "x-nullable": true
           },
           "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint.",
+          "$ref": "#/definitions/EndpointProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "scoringUri": {
           "format": "uri",
@@ -5619,6 +5788,7 @@
         "maxRetries": {
           "format": "int32",
           "description": "Maximum retry count for a mini-batch",
+          "default": 3,
           "type": "integer"
         },
         "timeout": {
@@ -5631,7 +5801,7 @@
       "additionalProperties": false
     },
     "Binding": {
-      "description": "TODO - Binding",
+      "description": "Binding Inputs/Outputs to ComponentJob Inputs/Outputs etc",
       "required": [
         "bindingType"
       ],
@@ -5796,6 +5966,15 @@
           "type": "string",
           "x-nullable": true
         },
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
         "nextVersion": {
           "description": "The next auto incremental version",
           "type": "string",
@@ -5889,6 +6068,7 @@
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -6084,7 +6264,7 @@
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
-          "$ref": "#/definitions/ResourceConfigurationBase",
+          "$ref": "#/definitions/ResourceConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6120,6 +6300,24 @@
         "description": {
           "description": "The asset description text.",
           "type": "string",
+          "x-nullable": true
+        },
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "nextVersion": {
+          "description": "The next auto incremental version",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         },
         "properties": {
@@ -6271,6 +6469,7 @@
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -6344,109 +6543,42 @@
       },
       "additionalProperties": false
     },
-    "ComputeConfiguration": {
-      "description": "Configuration for compute binding.",
+    "ContainerResourceRequirements": {
+      "description": "Resource requirements for each container instance within an online deployment.",
       "type": "object",
       "properties": {
-        "instanceCount": {
-          "format": "int32",
-          "description": "Number of instances or nodes.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
+        "containerResourceLimits": {
+          "description": "Container resource limit info:",
+          "$ref": "#/definitions/ContainerResourceSettings",
           "x-nullable": true
         },
-        "instanceType": {
-          "description": "SKU type to run on.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "isLocal": {
-          "description": "Set to true for jobs running on local compute.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "location": {
-          "description": "Location for virtual cluster run.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Additional properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "target": {
-          "description": "ARM resource ID of the compute resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
+        "containerResourceRequests": {
+          "description": "Container resource request info:",
+          "$ref": "#/definitions/ContainerResourceSettings",
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "ContainerResourceRequirements": {
-      "description": "Resource requirements for each container instance within an online deployment.",
+    "ContainerResourceSettings": {
       "type": "object",
       "properties": {
         "cpu": {
-          "format": "double",
-          "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "default": 0.1,
-          "type": "number",
-          "example": 4
-        },
-        "cpuLimit": {
-          "format": "double",
-          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4,
-          "x-nullable": true
-        },
-        "fpga": {
-          "format": "int32",
-          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
-          "type": "integer",
+          "description": "Number of vCPUs request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"1\"",
           "x-nullable": true
         },
         "gpu": {
-          "format": "int32",
-          "description": "The number of GPU cores in the container.",
-          "type": "integer",
+          "description": "Number of Nvidia GPU cards request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"1\"",
           "x-nullable": true
         },
-        "memoryInGB": {
-          "format": "double",
-          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "default": 0.5,
-          "type": "number",
-          "example": 64
-        },
-        "memoryInGBLimit": {
-          "format": "double",
-          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64,
+        "memory": {
+          "description": "Memory size request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"2Gi\"",
           "x-nullable": true
         }
       },
@@ -6510,6 +6642,15 @@
         "description": {
           "description": "The asset description text.",
           "type": "string",
+          "x-nullable": true
+        },
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         },
         "nextVersion": {
@@ -6602,6 +6743,7 @@
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -6884,20 +7026,23 @@
       "description": "Fulfills ARM Contract requirement to list all available SKUS for a resource.",
       "type": "object",
       "properties": {
+        "capacity": {
+          "description": "Gets or sets the Sku Capacity.",
+          "$ref": "#/definitions/SkuCapacity",
+          "x-nullable": true
+        },
         "resourceType": {
           "description": "Gets or sets the resource type name.",
           "type": "string",
           "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         },
         "sku": {
           "description": "Gets or sets the Sku.",
           "$ref": "#/definitions/SkuSetting",
-          "x-nullable": true
-        },
-        "skuCapacity": {
-          "description": "Gets or sets the Sku Capacity.",
-          "$ref": "#/definitions/SkuCapacity",
           "x-nullable": true
         }
       },
@@ -6963,11 +7108,13 @@
         "delayEvaluation": {
           "format": "int32",
           "description": "Number of intervals by which to delay the first evaluation.",
+          "default": 0,
           "type": "integer"
         },
         "evaluationInterval": {
           "format": "int32",
           "description": "Interval (number of runs) between policy evaluations.",
+          "default": 0,
           "type": "integer"
         },
         "policyType": {
@@ -7034,18 +7181,20 @@
       "type": "object",
       "properties": {
         "accessToken": {
-          "description": "TODO - Access token.",
+          "description": "Access token for endpoint authentication.",
           "type": "string",
           "x-nullable": true
         },
         "expiryTimeUtc": {
           "format": "int64",
           "description": "Access token expiry time (UTC).",
+          "default": 0,
           "type": "integer"
         },
         "refreshAfterTimeUtc": {
           "format": "int64",
           "description": "Refresh access token after time (UTC).",
+          "default": 0,
           "type": "integer"
         },
         "tokenType": {
@@ -7060,7 +7209,7 @@
       "description": "Enum to determine endpoint compute type.",
       "enum": [
         "Managed",
-        "K8S",
+        "Kubernetes",
         "AzureMLCompute"
       ],
       "type": "string",
@@ -7094,6 +7243,15 @@
         "description": {
           "description": "The asset description text.",
           "type": "string",
+          "x-nullable": true
+        },
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         },
         "nextVersion": {
@@ -7237,6 +7395,7 @@
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -7621,7 +7780,7 @@
       ],
       "properties": {
         "datasetId": {
-          "description": "TODO - Dataset Id.",
+          "description": "Dataset ARM Id for the input",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -7925,7 +8084,7 @@
           "x-nullable": true
         }
       },
-      "x-ms-discriminator-value": "K8S",
+      "x-ms-discriminator-value": "Kubernetes",
       "additionalProperties": false
     },
     "KeyType": {
@@ -7991,11 +8150,6 @@
         }
       ],
       "properties": {
-        "modelMountPath": {
-          "description": "The path to mount the model in custom container.",
-          "type": "string",
-          "x-nullable": true
-        },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
           "$ref": "#/definitions/ProbeSettings",
@@ -8020,8 +8174,26 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "The asset description text.",
+          "description": "The model container description text.",
           "type": "string",
+          "x-nullable": true
+        },
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "nextVersion": {
+          "description": "The next auto incremental version",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         },
         "properties": {
@@ -8129,11 +8301,17 @@
         },
         "isAnonymous": {
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "type": "boolean",
           "x-ms-mutability": [
             "create",
             "read"
           ]
+        },
+        "jobName": {
+          "description": "Name of the training job which produced this model",
+          "type": "string",
+          "x-nullable": true
         },
         "modelFormat": {
           "description": "The storage format for this entity. Used for NCD.",
@@ -8273,6 +8451,7 @@
       "properties": {
         "appInsightsEnabled": {
           "description": "If true, enables Application Insights logging.",
+          "default": false,
           "type": "boolean"
         },
         "codeConfiguration": {
@@ -8319,6 +8498,11 @@
         },
         "model": {
           "description": "The URI path to the model.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "modelMountPath": {
+          "description": "The path to mount the model in custom container.",
           "type": "string",
           "x-nullable": true
         },
@@ -8422,6 +8606,7 @@
       "properties": {
         "allowPublicAccess": {
           "description": "Set to true for endpoints that should allow public access when Private Link is enabled.",
+          "default": true,
           "type": "boolean"
         },
         "authMode": {
@@ -8659,13 +8844,101 @@
       "x-ms-discriminator-value": "OutputPath",
       "additionalProperties": false
     },
+    "PartialAssetReferenceBase": {
+      "description": "Base definition for asset references.",
+      "required": [
+        "referenceType"
+      ],
+      "type": "object",
+      "properties": {
+        "referenceType": {
+          "description": "Specifies the type of asset reference.",
+          "$ref": "#/definitions/ReferenceType"
+        }
+      },
+      "discriminator": "referenceType"
+    },
     "PartialBatchDeployment": {
       "description": "Mutable batch inference settings per deployment.",
       "type": "object",
       "properties": {
+        "codeConfiguration": {
+          "description": "Code configuration for the endpoint deployment.",
+          "$ref": "#/definitions/PartialCodeConfiguration",
+          "x-nullable": true
+        },
+        "compute": {
+          "description": "Compute binding definition.",
+          "type": "string",
+          "x-nullable": true
+        },
         "description": {
           "description": "Description of the endpoint deployment.",
           "type": "string",
+          "x-nullable": true
+        },
+        "environmentId": {
+          "description": "ARM resource ID of the environment specification for the endpoint deployment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables configuration for the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "errorThreshold": {
+          "format": "int32",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "loggingLevel": {
+          "description": "Logging level for batch inference operation.",
+          "$ref": "#/definitions/BatchLoggingLevel"
+        },
+        "maxConcurrencyPerInstance": {
+          "format": "int32",
+          "description": "Indicates number of processes per instance",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "miniBatchSize": {
+          "format": "int64",
+          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "model": {
+          "description": "Reference to the model asset for the endpoint deployment.",
+          "$ref": "#/definitions/PartialAssetReferenceBase",
+          "x-nullable": true
+        },
+        "outputAction": {
+          "description": "Indicates how the output will be organized.",
+          "$ref": "#/definitions/BatchOutputAction"
+        },
+        "outputFileName": {
+          "description": "Customized output file name for append_row output action.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "retrySettings": {
+          "description": "Retry Settings for the batch inference operation.",
+          "$ref": "#/definitions/PartialBatchRetrySettings",
           "x-nullable": true
         }
       },
@@ -8761,51 +9034,113 @@
       },
       "additionalProperties": false
     },
+    "PartialBatchRetrySettings": {
+      "description": "Retry settings for a batch inference operation.",
+      "type": "object",
+      "properties": {
+        "maxRetries": {
+          "format": "int32",
+          "description": "Maximum retry count for a mini-batch",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialCodeConfiguration": {
+      "description": "Configuration for a scoring code asset.",
+      "type": "object",
+      "properties": {
+        "codeId": {
+          "description": "ARM resource ID of the code asset.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "scoringScript": {
+          "description": "The script to execute on startup. eg. \"score.py\"",
+          "minLength": 1,
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "PartialContainerResourceRequirements": {
       "description": "Resource requirements for each container instance within an online deployment.",
       "type": "object",
       "properties": {
-        "cpu": {
-          "format": "double",
-          "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4,
+        "containerResourceLimits": {
+          "description": "Container resource limit info:",
+          "$ref": "#/definitions/PartialContainerResourceSettings",
           "x-nullable": true
         },
-        "cpuLimit": {
-          "format": "double",
-          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 4,
-          "x-nullable": true
-        },
-        "fpga": {
-          "format": "int32",
-          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "gpu": {
-          "format": "int32",
-          "description": "The number of GPU cores in the container.",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "memoryInGB": {
-          "format": "double",
-          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64,
-          "x-nullable": true
-        },
-        "memoryInGBLimit": {
-          "format": "double",
-          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "number",
-          "example": 64,
+        "containerResourceRequests": {
+          "description": "Container resource request info:",
+          "$ref": "#/definitions/PartialContainerResourceSettings",
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "PartialContainerResourceSettings": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Number of vCPUs request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"1\"",
+          "x-nullable": true
+        },
+        "gpu": {
+          "description": "Number of Nvidia GPU cards request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"1\"",
+          "x-nullable": true
+        },
+        "memory": {
+          "description": "Memory size request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "string",
+          "example": "\"2Gi\"",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialDataPathAssetReference": {
+      "description": "Reference to an asset via its path in a datastore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialAssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "datastoreId": {
+          "description": "ARM resource ID of the datastore where the asset is located.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "path": {
+          "description": "The path of the file/directory in the datastore.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "DataPath",
       "additionalProperties": false
     },
     "PartialDefaultScaleSettings": {
@@ -8816,6 +9151,24 @@
         }
       ],
       "x-ms-discriminator-value": "Default",
+      "additionalProperties": false
+    },
+    "PartialIdAssetReference": {
+      "description": "Reference to an asset via its ARM resource ID.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialAssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "assetId": {
+          "description": "ARM resource ID of the asset.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Id",
       "additionalProperties": false
     },
     "PartialK8sOnlineDeployment": {
@@ -8833,7 +9186,7 @@
           "x-nullable": true
         }
       },
-      "x-ms-discriminator-value": "K8S",
+      "x-ms-discriminator-value": "Kubernetes",
       "additionalProperties": false
     },
     "PartialManagedOnlineDeployment": {
@@ -9026,6 +9379,29 @@
       },
       "discriminator": "scaleType"
     },
+    "PartialOutputPathAssetReference": {
+      "description": "Reference to an asset via its path in a job output.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialAssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "ARM resource ID of the job.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "path": {
+          "description": "The path of the file/directory in the job output.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
+    },
     "PartialProbeSettings": {
       "description": "Deployment container liveness/readiness probe configuration.",
       "type": "object",
@@ -9068,6 +9444,7 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "The type of the ResourceIdentity",
           "$ref": "#/definitions/ResourceIdentityAssignment"
         },
         "userAssignedIdentities": {
@@ -9175,7 +9552,7 @@
           "description": "Binding to represent relation between inputs, outputs and parameters",
           "type": "array",
           "items": {
-            "description": "TODO - Binding",
+            "description": "Binding Inputs/Outputs to ComponentJob Inputs/Outputs etc",
             "$ref": "#/definitions/Binding"
           },
           "x-ms-mutability": [
@@ -9328,45 +9705,39 @@
     },
     "ResourceConfiguration": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceConfigurationBase"
-        }
-      ],
-      "x-ms-discriminator-value": "Base",
-      "additionalProperties": false
-    },
-    "ResourceConfigurationBase": {
-      "required": [
-        "resourceConfigurationType"
-      ],
-      "type": "object",
       "properties": {
-        "properties": {
-          "description": "Additional properties bag",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
+        "instanceCount": {
+          "format": "int32",
+          "description": "Optional number of instances or nodes used by the compute target.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
           "x-nullable": true
         },
-        "resourceConfigurationType": {
-          "description": "Specifies the type of resource configuration.",
-          "$ref": "#/definitions/ResourceConfigurationType"
+        "instanceType": {
+          "description": "Optional type of VM used as supported by the compute target.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Additional properties bag.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
-      },
-      "discriminator": "resourceConfigurationType"
-    },
-    "ResourceConfigurationType": {
-      "enum": [
-        "Base",
-        "AmlCompute"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceConfigurationType",
-        "modelAsString": true
       },
       "additionalProperties": false
     },
@@ -9393,7 +9764,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "Defines values for a ResourceIdentity's type.",
+          "description": "The type of the ResourceIdentity",
           "$ref": "#/definitions/ResourceIdentityAssignment"
         },
         "userAssignedIdentities": {
@@ -9525,6 +9896,19 @@
       },
       "additionalProperties": false
     },
+    "ServiceDataAccessAuthIdentity": {
+      "enum": [
+        "None",
+        "WorkspaceSystemAssignedIdentity",
+        "WorkspaceUserAssignedIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServiceDataAccessAuthIdentity",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ServicePrincipalDatastoreCredentials": {
       "description": "Service Principal datastore credentials configuration.",
       "required": [
@@ -9597,16 +9981,19 @@
         "default": {
           "format": "int32",
           "description": "Gets or sets the default capacity.",
+          "default": 0,
           "type": "integer"
         },
         "maximum": {
           "format": "int32",
           "description": "Gets or sets the maximum.",
+          "default": 0,
           "type": "integer"
         },
         "minimum": {
           "format": "int32",
           "description": "Gets or sets the minimum.",
+          "default": 0,
           "type": "integer"
         },
         "scaleType": {
@@ -9823,6 +10210,7 @@
         "parameterServerCount": {
           "format": "int32",
           "description": "Number of parameter server tasks.",
+          "default": 0,
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -9898,17 +10286,7 @@
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
-          "$ref": "#/definitions/ResourceConfigurationBase",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "timeout": {
-          "format": "duration",
-          "description": "The max run duration in ISO 8601 format, after which the trial component will be cancelled.\r\nOnly supports duration with precision as low as Seconds.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
@@ -9930,6 +10308,7 @@
         "truncationPercentage": {
           "format": "int32",
           "description": "The percentage of runs to cancel at each evaluation interval.",
+          "default": 0,
           "type": "integer"
         }
       },
@@ -9938,27 +10317,25 @@
     },
     "UriReference": {
       "description": "TODO - UriReference.",
-      "required": [
-        "path"
-      ],
       "type": "object",
       "properties": {
-        "isFile": {
-          "description": "File or Folder\r\nDefault to false",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "path": {
-          "description": "Uri path",
-          "pattern": "[a-zA-Z0-9_]",
+        "file": {
+          "description": "Single file uri path",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
+        },
+        "folder": {
+          "description": "Folder uri path",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
