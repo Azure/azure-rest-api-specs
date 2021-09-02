@@ -37,7 +37,7 @@
     "/providers/Microsoft.ContainerService/operations": {
       "get": {
         "tags": [
-          "managedClusters"
+          "ManagedClusters"
         ],
         "operationId": "Operations_List",
         "summary": "Gets a list of operations.",
@@ -68,7 +68,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/osOptions/default": {
       "get": {
         "tags": [
-          "managedClusters"
+          "ManagedClusters"
         ],
         "operationId": "ManagedClusters_GetOSOptions",
         "summary": "Gets supported OS options in the specified subscription.",
@@ -1044,6 +1044,9 @@
           },
           "Create Agent Pool using an agent pool snapshot": {
             "$ref": "./examples/AgentPoolsCreate_Snapshot.json"
+          },
+          "Create Agent Pool with Krustlet and the WASI runtime": {
+            "$ref": "./examples/AgentPoolsCreate_WasmWasi.json"
           }
         }
       },
@@ -1920,6 +1923,273 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_List",
+        "summary": "Gets a list of snapshots in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Snapshots": {
+            "$ref": "./examples/SnapshotsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_ListByResourceGroup",
+        "summary": "Lists snapshots in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Snapshots by Resource Group": {
+            "$ref": "./examples/SnapshotsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/snapshots/{resourceName}": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Get",
+        "summary": "Gets a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Snapshot": {
+            "$ref": "./examples/SnapshotsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_CreateOrUpdate",
+        "summary": "Creates or updates a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "description": "The snapshot to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Snapshot": {
+            "$ref": "./examples/SnapshotsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_UpdateTags",
+        "summary": "Updates tags on a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update snapshot Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Snapshot Tags": {
+            "$ref": "./examples/SnapshotsUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Delete",
+        "summary": "Deletes a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Snapshot": {
+            "$ref": "./examples/SnapshotsDelete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2350,6 +2620,9 @@
         },
         "kubeletDiskType": {
           "$ref": "#/definitions/KubeletDiskType"
+        },
+        "workloadRuntime": {
+          "$ref": "#/definitions/WorkloadRuntime"
         },
         "vnetSubnetID": {
           "type": "string",
@@ -3184,6 +3457,10 @@
           "minimum": 4,
           "description": "Desired outbound flow idle timeout in minutes. Allowed values are in the range of 4 to 120 (inclusive). The default value is 30 minutes.",
           "default": 30
+        },
+        "enableMultipleStandardLoadBalancers": {
+          "type": "boolean",
+          "description": "Enable multiple standard load balancers per AKS cluster or not."
         }
       },
       "description": "Profile of the managed cluster load balancer."
@@ -4611,6 +4888,28 @@
       },
       "description": "Determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage."
     },
+    "WorkloadRuntime": {
+      "type": "string",
+      "enum": [
+        "OCIContainer",
+        "WasmWasi"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadRuntime",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "OCIContainer",
+            "description": "Nodes will use Kubelet to run standard OCI container workloads."
+          },
+          {
+            "value": "WasmWasi",
+            "description": "Nodes will use Krustlet to run WASM workloads using the WASI provider (Preview)."
+          }
+        ]
+      },
+      "description": "Determines the type of workload a node can run."
+    },
     "KubeletConfig": {
       "title": "Kubelet configurations of agent nodes.",
       "description": "See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.",
@@ -5082,6 +5381,76 @@
           "description": "This is the ARM ID of the source object to be used to create the target object."
         }
       }
+    },
+    "SnapshotListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "description": "The list of snapshots."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of snapshot results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Snapshots operation."
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this snapshot."
+        },
+        "properties": {
+          "description": "Properties of a snapshot.",
+          "$ref": "#/definitions/SnapshotProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A node pool snapshot resource."
+    },
+    "SnapshotProperties": {
+      "type": "object",
+      "properties": {
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "CreationData to be used to specify the source agent pool resource ID to create this snapshot."
+        },
+        "snapshotType": {
+          "$ref": "#/definitions/SnapshotType"
+        }
+      },
+      "description": "Properties used to configure a node pool snapshot."
+    },
+    "SnapshotType": {
+      "type": "string",
+      "default": "NodePool",
+      "enum": [
+        "NodePool"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NodePool",
+            "description": "The snapshot is a snapshot of a node pool."
+          }
+        ]
+      },
+      "description": "The type of a snapshot. The default is NodePool."
     }
   },
   "parameters": {
