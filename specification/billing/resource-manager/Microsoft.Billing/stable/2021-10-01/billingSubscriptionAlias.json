@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources and logs for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/aliases": {
+      "get": {
+        "tags": [
+          "BillingSubscriptionsAliases"
+        ],
+        "operationId": "BillingSubscriptionsAliases_ListByBillingAccount",
+        "description": "Lists the subscription aliases for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionAliasListByBillingAccount": {
+            "$ref": "./examples/BillingSubscriptionAliasListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAliasListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/aliases/{aliasName}": {
+      "get": {
+        "tags": [
+          "BillingSubscriptionsAliases"
+        ],
+        "operationId": "BillingSubscriptionsAliases_Get",
+        "description": "Gets a subscription by its alias ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionAlias": {
+            "$ref": "./examples/BillingSubscriptionAlias.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionAliasNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAlias"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingSubscriptionsAliases"
+        ],
+        "operationId": "BillingSubscriptionsAliases_Put",
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates a billing subscription by its alias ID.",
+        "x-ms-examples": {
+          "PutBillingSubscription": {
+            "$ref": "./examples/PutBillingSubscriptionAlias.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionAliasNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAlias"
+            },
+            "description": "New or updated billing subscription alias."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAlias"
+            }
+          },
+          "201": {
+            "description": "Created. Billing subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingSubscriptionAliasListResult": {
+      "description": "The list of billing subscription aliases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of billing subscription aliases.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingSubscriptionAlias"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingSubscriptionAlias": {
+      "description": "A billing subscription alias.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingSubscriptionAliasProperties",
+          "title": "Billing subscription alias properties."
+        }
+      }
+    },
+    "BillingSubscriptionAliasProperties": {
+      "description": "Billing subscription alias properties.",
+      "type": "object",
+      "properties": {
+        "billingSubscriptionId": {
+          "description": "The ID of the billing subscription of the subscription alias.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./billingSubscription.json#/definitions/BillingSubscriptionProperties"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "billingSubscriptionAliasNameParameter": {
+      "name": "billingSubscriptionAliasName",
+      "in": "path",
+      "description": "The ID that uniquely identifies a subscription alias.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -2,7 +2,10 @@
   "parameters": {
     "version": "2021-10-01",
     "billingAccountName": "{billingAccountName}",
-    "billingSubscriptionName": "418b0e9c-5dc3-4260-918f-30b90619fe07"
+    "billingSubscriptionName": "418b0e9c-5dc3-4260-918f-30b90619fe07",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664/invoiceSections/06febd6b-3cb7-47fe-ac7d-7b4e83e80f53"
+    }
   },
   "responses": {
     "200": {
@@ -13,10 +16,11 @@
         "properties": {
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664",
           "billingProfileDisplayName": "Contoso operations billing profile",
+          "billingFrequency": "P1M",
           "consumptionCostCenter": "ABC1234",
           "consumptionSubscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
           "displayName": "Subscription 1",
-          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664/invoiceSections/5c562559-e31b-4bfe-b608-f8b5b3fbd073",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664/invoiceSections/06febd6b-3cb7-47fe-ac7d-7b4e83e80f53",
           "invoiceSectionDisplayName": "Contoso operations invoice section",
           "lastMonthCharges": {
             "currency": "USD",
@@ -36,6 +40,12 @@
           "skuDescription": "Azure Plan",
           "status": "Active"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/moveBillingSubscription_2b72f936-0166-47d6-91a3-ef9f84f36664:06febd6b-3cb7-47fe-ac7d-7b4e83e80f53:6b96d3f2-9008-4a9d-912f-f87744185aa3:418b0e9c-5dc3-4260-918f-30b90619fe07:f9bd2643-e786-4c93-9978-3c7f2d574580?api-version=2020-12-15-privatepreview",
+        "Retry-After": "30"
       }
     }
   }
