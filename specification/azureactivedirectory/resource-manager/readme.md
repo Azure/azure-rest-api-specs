@@ -26,9 +26,18 @@ These are the global settings for the azureactivedirectory.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-07
+tag: package-preview-2017-04
 ```
 
+
+### Tag: package-preview-2017-04
+
+These settings apply only when `--tag=package-preview-2017-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2017-04'
+input-file:
+  - Microsoft.Aadiam/preview/2017-04-01-preview/azureactivedirectory.json
+```
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
