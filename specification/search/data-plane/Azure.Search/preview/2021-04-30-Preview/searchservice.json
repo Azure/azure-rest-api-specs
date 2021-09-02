@@ -1060,9 +1060,17 @@
             "name": "skillNames",
             "in": "body",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "skillNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "the names of skills to be reset"
+                }
+              }
             },
             "description": "The names of skills to reset."
           },
@@ -1076,7 +1084,7 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "204": {
-            "description": ""
+            "description": "The skills in the skillset are successfully reset."
           },
           "default": {
             "description": "Error response.",
