@@ -30,15 +30,23 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2021-06
+tag: package-preview-2020-09
 ```
 
 
+### Tag: package-preview-2020-09
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.DataMigration/preview/2020-09-01-preview/datamigration.json
+```
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
 - Microsoft.DataMigration/stable/2021-06-30/datamigration.json
 - Microsoft.DataMigration/stable/2021-06-30/definitions/Commands.json
