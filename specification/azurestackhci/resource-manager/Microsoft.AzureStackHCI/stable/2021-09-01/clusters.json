@@ -401,8 +401,8 @@
           "readOnly": true
         },
         "cloudManagementEndpoint": {
-          "type": "string",
-          "description": "Endpoint configured for management from the Azure portal"
+          "description": "Endpoint configured for management from the Azure portal.",
+          "type": "string"
         },
         "aadClientId": {
           "description": "App id of cluster AAD identity.",
@@ -411,6 +411,10 @@
         "aadTenantId": {
           "description": "Tenant id of cluster AAD identity.",
           "type": "string"
+        },
+        "desiredProperties": {
+          "description": "Desired properties of the cluster.",
+          "$ref": "#/definitions/ClusterDesiredProperties"
         },
         "reportedProperties": {
           "description": "Properties reported by cluster agent.",
@@ -452,8 +456,51 @@
       "type": "object",
       "properties": {
         "cloudManagementEndpoint": {
+          "description": "Endpoint configured for management from the Azure portal",
+          "type": "string"
+        },
+        "aadClientId": {
+          "description": "App id of cluster AAD identity.",
+          "type": "string"
+        },
+        "aadTenantId": {
+          "description": "Tenant id of cluster AAD identity.",
+          "type": "string"
+        },
+        "desiredProperties": {
+          "description": "Desired properties of the cluster.",
+          "$ref": "#/definitions/ClusterDesiredProperties"
+        }
+      }
+    },
+    "ClusterDesiredProperties": {
+      "description": "Desired properties of the cluster.",
+      "type": "object",
+      "properties": {
+        "windowsServerSubscription": {
+          "description": "Desired state of Windows Server Subscription.",
           "type": "string",
-          "description": "Endpoint configured for management from the Azure portal"
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          }
+        },
+        "diagnosticLevel": {
+          "description": "Desired level of diagnostic data emitted by the cluster.",
+          "type": "string",
+          "enum": [
+            "Off",
+            "Required",
+            "RequiredAndOptional"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticLevel",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -489,6 +536,32 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "imdsAttestation": {
+          "description": "IMDS attestation status of the cluster.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ImdsAttestation",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "diagnosticLevel": {
+          "description": "Level of diagnostic data emitted by the cluster.",
+          "type": "string",
+          "enum": [
+            "Off",
+            "Required",
+            "RequiredAndOptional"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticLevel",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -504,6 +577,19 @@
         "id": {
           "description": "Id of the node in the cluster.",
           "type": "number",
+          "readOnly": true
+        },
+        "windowsServerSubscription": {
+          "description": "State of Windows Server Subscription.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "manufacturer": {
