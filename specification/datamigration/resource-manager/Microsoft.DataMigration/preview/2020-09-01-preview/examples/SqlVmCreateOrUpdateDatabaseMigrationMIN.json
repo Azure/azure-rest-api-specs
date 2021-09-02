@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "targetDbName": "db1",
+    "api-version": "2020-09-01-preview",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "SourceDatabaseName": "aaa",
+        "MigrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+        "BackupConfiguration": {
+          "TargetLocation": {
+            "StorageAccountResourceId": "account.database.windows.net",
+            "AccountKey": "abcd"
+          },
+          "SourceLocation": {
+            "FileShare": {
+              "Path": "C:\\aaa\\bbb\\ccc",
+              "Username": "name",
+              "Password": "placeholder"
+            }
+          }
+        },
+        "SourceSqlConnection": {
+          "DataSource": "aaa",
+          "UserName": "bbb",
+          "Password": "placeholder",
+          "EncryptConnection": true,
+          "TrustServerCertificate": true,
+          "Authentication": "WindowsAuthentication"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "db1",
+          "ProvisioningState": "Accepted",
+          "SourceDatabaseName": "aaa",
+          "MigrationOperationId": "55b88724-d895-4b0f-8da5-03b9d5c153a1",
+        },
+        "type": "Microsoft.DataMigration/dataMigrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "name": "db1",
+          "ProvisioningState": "Accepted",
+          "SourceDatabaseName": "aaa",
+          "MigrationOperationId": "55b88724-d895-4b0f-8da5-03b9d5c153a1",
+        },
+        "type": "Microsoft.DataMigration/dataMigrations"
+      }
+    }
+  }
+}
