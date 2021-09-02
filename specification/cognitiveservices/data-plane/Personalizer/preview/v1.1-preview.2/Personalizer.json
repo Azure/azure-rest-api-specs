@@ -4,7 +4,6 @@
     "version": "v1.1-preview.2",
     "title": "Personalizer Base",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
-    
   },
   "basePath": "/personalizer/v1.1-preview.2",
   "schemes": [
@@ -12,7 +11,7 @@
   ],
   "paths": {
     "/configurations/service": {
-    "get": {
+      "get": {
         "tags": [
           "ConfigurationsV1Dot1Preview1"
         ],
@@ -81,7 +80,7 @@
             "$ref": "./examples/ServiceConfiguration_Update.json"
           }
         }
-      }      
+      }
     },
     "/configurations/policy": {
       "get": {
@@ -180,9 +179,9 @@
           }
         }
       }
-    },    
+    },
     "/evaluations/{evaluationId}": {
-    "get": {
+      "get": {
         "tags": [
           "EvaluationsV1Dot1Preview1"
         ],
@@ -195,7 +194,7 @@
         ],
         "parameters": [
           {
-   	    "name": "evaluationId",
+            "name": "evaluationId",
             "in": "path",
             "description": "Id of the Offline Evaluation.",
             "required": true,
@@ -234,8 +233,8 @@
         "produces": [],
         "parameters": [
           {
-  	    "name": "evaluationId",
-            "in": "path",            
+            "name": "evaluationId",
+            "in": "path",
             "description": "Id of the Offline Evaluation to delete.",
             "required": true,
             "type": "string",
@@ -252,7 +251,7 @@
             "$ref": "./examples/Evaluations_Delete.json"
           }
         }
-      }      
+      }
     },
     "/evaluations": {
       "get": {
@@ -299,8 +298,8 @@
         ],
         "parameters": [
           {
-  	    "name": "evaluation",
-            "in": "body",            
+            "name": "evaluation",
+            "in": "body",
             "description": "The Offline Evaluation job definition.",
             "required": true,
             "schema": {
@@ -400,8 +399,8 @@
         ],
         "parameters": [
           {
- 	    "name": "eventId",
-            "in": "path",            
+            "name": "eventId",
+            "in": "path",
             "description": "The event ID to be activated.",
             "required": true,
             "type": "string",
@@ -847,7 +846,7 @@
         ],
         "parameters": [
           {
- 	    "name": "rankRequest",
+            "name": "rankRequest",
             "in": "body",
             "description": "A Personalizer Rank request.",
             "required": true,
@@ -980,7 +979,7 @@
           "$ref": "#/definitions/PersonalizerError"
         }
       }
-    },    
+    },
     "PersonalizerError": {
       "description": "The error object.",
       "required": [
@@ -1213,7 +1212,7 @@
           "$ref": "#/definitions/InternalError"
         }
       }
-    },    
+    },
     "PolicyContract": {
       "description": "Learning settings specifying how to train the model.",
       "required": [
@@ -1374,7 +1373,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "PolicyResultSummary": {
       "description": "This class contains the summary of evaluating a policy on a counterfactual evaluation.",
       "type": "object",
@@ -1453,7 +1452,7 @@
           "type": "string"
         }
       }
-    },        
+    },
     "EvaluationContract": {
       "description": "A counterfactual evaluation.",
       "required": [
@@ -1539,7 +1538,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "ModelProperties": {
       "description": "Properties related to the trained model.",
       "type": "object",
@@ -1765,7 +1764,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "RankResponse": {
       "description": "Returns which action to use as rewardActionId, and additional information about each action as a result of a Rank request.",
       "type": "object",
@@ -1811,7 +1810,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "ServiceStatus": {
       "type": "object",
       "properties": {
