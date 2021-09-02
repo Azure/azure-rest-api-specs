@@ -275,6 +275,12 @@
           "description": "Properties of a security standard",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StandardProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../common/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -310,10 +316,6 @@
           "items": {
             "$ref": "#/definitions/StandardAssessmentProperties"
           }
-        },
-        "systemData": {
-          "$ref": "../../../common/v2/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },

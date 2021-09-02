@@ -272,6 +272,12 @@
           "description": "Properties of a security assignment",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StandardAssignmentProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../common/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -329,13 +335,10 @@
           "properties": {
             "ticketId": {
               "type": "integer",
+              "format": "int64",
               "description": "TicketID in reference to this standardAssignment"
             }
           }
-        },
-        "systemData": {
-          "$ref": "../../../common/v2/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },
