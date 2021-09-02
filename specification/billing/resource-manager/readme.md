@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2020-05
 ```
 
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+- Microsoft.Billing/stable/2021-10-01/billingSubscriptionAlias.json
+```
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
