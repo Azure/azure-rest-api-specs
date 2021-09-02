@@ -53,6 +53,14 @@ directive:
     from: WebApps.json
     where: $.definitions.KeyInfo.properties
     reason: Model type is not an Azure resource
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: WebApps.json
+    where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
+    reason: Property name contains WWW which is an acronym, so camel case does not apply here.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: WebApps.json
+    where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
+    reason: Property name contains WWW which is an acronym, so camel case does not apply here.
 ```
 
 ### Tag: package-2021-02
