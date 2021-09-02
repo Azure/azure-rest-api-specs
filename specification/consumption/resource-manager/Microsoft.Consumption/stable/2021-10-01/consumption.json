@@ -1418,62 +1418,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/forecasts": {
-      "get": {
-        "tags": [
-          "Forecasts"
-        ],
-        "x-ms-odata": "#/definitions/Forecast",
-        "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "ForecastsList": {
-            "$ref": "./examples/ForecastsList.json"
-          },
-          "ForecastsListFilterByGrain": {
-            "$ref": "./examples/ForecastsListFilterByGrain.json"
-          },
-          "ForecastsListFilterByDates": {
-            "$ref": "./examples/ForecastsListFilterByDates.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "$filter",
-            "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ForecastsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/providers/Microsoft.Consumption/operations": {
       "get": {
         "tags": [
@@ -2177,6 +2121,16 @@
           "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
           "type": "string",
           "readOnly": true
+        },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2552,12 +2506,12 @@
           "readOnly": true
         },
         "benefitId": {
-          "description": "Unique identifier for the applicable benefit",
+          "description": "Unique identifier for the applicable benefit.",
           "type": "string",
           "readOnly": true
         },
         "benefitName": {
-          "description": "Name of the applicable benefit",
+          "description": "Name of the applicable benefit.",
           "type": "string",
           "readOnly": true
         }
@@ -4373,117 +4327,6 @@
         "offerId": {
           "description": "Offer Id",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Forecast": {
-      "description": "A forecast resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ForecastProperties",
-          "title": "Forecast properties"
-        }
-      }
-    },
-    "ForecastsListResult": {
-      "description": "Result of listing forecasts. It contains a list of available forecasts.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of forecasts.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Forecast"
-          }
-        }
-      }
-    },
-    "ForecastProperties": {
-      "description": "The properties of the forecast charge.",
-      "type": "object",
-      "properties": {
-        "usageDate": {
-          "description": "The usage date of the forecast.",
-          "type": "string",
-          "readOnly": true
-        },
-        "grain": {
-          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Monthly",
-            "Yearly"
-          ],
-          "x-ms-enum": {
-            "name": "Grain",
-            "modelAsString": true
-          }
-        },
-        "charge": {
-          "description": "The amount of charge",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
-        "currency": {
-          "description": "The ISO currency in which the meter is charged, for example, USD.",
-          "type": "string",
-          "readOnly": true
-        },
-        "chargeType": {
-          "description": "The type of the charge. Could be actual or forecast",
-          "type": "string",
-          "enum": [
-            "Actual",
-            "Forecast"
-          ],
-          "x-ms-enum": {
-            "name": "ChargeType",
-            "modelAsString": true
-          }
-        },
-        "confidenceLevels": {
-          "description": "The details about the forecast confidence levels. This is populated only when chargeType is Forecast.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "percentage": {
-                "description": "The percentage level of the confidence",
-                "type": "number",
-                "format": "decimal",
-                "readOnly": true
-              },
-              "bound": {
-                "description": "The boundary of the percentage, values could be 'Upper' or 'Lower'",
-                "type": "string",
-                "enum": [
-                  "Upper",
-                  "Lower"
-                ],
-                "x-ms-enum": {
-                  "name": "Bound",
-                  "modelAsString": true
-                }
-              },
-              "value": {
-                "description": "The amount of forecast within the percentage level",
-                "type": "number",
-                "format": "decimal",
-                "readOnly": true
-              }
-            }
-          },
           "readOnly": true
         }
       }
