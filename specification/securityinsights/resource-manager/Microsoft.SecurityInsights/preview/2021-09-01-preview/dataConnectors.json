@@ -126,6 +126,9 @@
           },
           "Get a GenericUI data connector": {
             "$ref": "./examples/dataConnectors/GetGenericUI.json"
+          },
+          "Get a APIPolling data connector": {
+            "$ref": "./examples/dataConnectors/GetAPIPolling.json"
           }
         },
         "tags": [
@@ -184,6 +187,9 @@
           },
           "Creates or updates a GenericUI data connector": {
             "$ref": "./examples/dataConnectors/CreateGenericUI.json"
+          },
+          "Creates or updates a APIPolling data connector": {
+            "$ref": "./examples/dataConnectors/CreateAPIPolling.json"
           }
         },
         "tags": [
@@ -242,6 +248,9 @@
           },
           "Delete a GenericUI data connector": {
             "$ref": "./examples/dataConnectors/DeleteGenericUI.json"
+          },
+          "Delete a APIPolling data connector": {
+            "$ref": "./examples/dataConnectors/DeleteAPIPolling.json"
           }
         },
         "tags": [
@@ -275,6 +284,94 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect": {
+      "put": {
+        "x-ms-examples": {},
+        "tags": [
+          "Data Connectors Connect"
+        ],
+        "description": "Connects a data connector.",
+        "operationId": "DataConnectors_Connect",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorConnectBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect": {
+      "put": {
+        "x-ms-examples": {},
+        "tags": [
+          "Data Connectors Disconnect"
+        ],
+        "description": "Disconnect a data connector.",
+        "operationId": "DataConnectors_Disconnect",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorDisconnectBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1094,7 +1191,8 @@
         "Dynamics365",
         "MicrosoftThreatProtection",
         "MicrosoftThreatIntelligence",
-        "GenericUI"
+        "GenericUI",
+        "APIPolling"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1142,6 +1240,9 @@
           },
           {
             "value": "GenericUI"
+          },
+          {
+            "value": "APIPolling"
           }
         ]
       }
@@ -1714,6 +1815,324 @@
         "instructionSteps"
       ]
     },
+    "DataConnectorConnectBody": {
+      "description": "Represents Codeless API Polling data connector.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The authentication kind used to poll the data",
+          "enum": [
+            "Basic",
+            "OAuth2",
+            "APIKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConnectAuthKind"
+          }
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key of the audit server."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The client secret of the OAuth 2.0 application."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of the OAuth 2.0 application."
+        },
+        "authorizationCode": {
+          "type": "string",
+          "description": "The authorization code used in OAuth 2.0 code flow to issue a token."
+        },
+        "userName": {
+          "type": "string",
+          "description": "The user name in the audit log server."
+        },
+        "password": {
+          "type": "string",
+          "description": "The user password in the audit log server."
+        },
+        "requestConfigUserInputValues": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "DataConnectorDisconnectBody": {
+      "description": "Represents Codeless API Polling disconnect body.",
+      "type": "object"
+    },
+    "CodelessApiPollingDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Codeless API Polling data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiPollingParameters",
+          "description": "Codeless poling data connector properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "APIPolling"
+    },
+    "ApiPollingParameters": {
+      "description": "Represents Codeless API Polling data connector",
+      "type": "object",
+      "properties": {
+        "connectorUiConfig": {
+          "$ref": "#/definitions/CodelessUiConnectorConfigProperties",
+          "description": "Config to describe the instructions blade"
+        },
+        "pollingConfig": {
+          "$ref": "#/definitions/CodelessConnectorPollingConfigProperties",
+          "description": "Config to describe the polling instructions"
+        }
+      }
+    },
+    "CodelessConnectorPollingConfigProperties": {
+      "description": "Config to describe the polling config for API poller connector",
+      "type": "object",
+      "properties": {
+        "isActive": {
+          "description": "The poller active status",
+          "type": "boolean"
+        },
+        "auth": {
+          "type": "object",
+          "$ref": "#/definitions/CodelessConnectorPollingAuthProperties",
+          "description": "Describe the authentication type of the poller"
+        },
+        "request": {
+          "type": "object",
+          "$ref": "#/definitions/CodelessConnectorPollingRequestProperties",
+          "description": "Describe the poll request config parameters of the poller"
+        },
+        "paging": {
+          "type": "object",
+          "$ref": "#/definitions/CodelessConnectorPollingPagingProperties",
+          "description": "Describe the poll request paging config of the poller"
+        },
+        "response": {
+          "type": "object",
+          "$ref": "#/definitions/CodelessConnectorPollingResponseProperties",
+          "description": "Describe the response config parameters of the poller"
+        }
+      },
+      "required": [
+        "auth",
+        "request"
+      ]
+    },
+    "CodelessConnectorPollingResponseProperties": {
+      "description": "Describes the response from the external server",
+      "type": "object",
+      "properties": {
+        "eventsJsonPaths": {
+          "description": "Describes the path we should extract the data in the response",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "successStatusJsonPath": {
+          "description": "Describes the path we should extract the status code in the response",
+          "type": "string"
+        },
+        "successStatusValue": {
+          "description": "Describes the path we should extract the status value in the response",
+          "type": "string"
+        },
+        "isGzipCompressed": {
+          "description": "Describes if the data in the response is Gzip",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "eventsJsonPaths"
+      ]
+    },
+    "CodelessConnectorPollingPagingProperties": {
+      "description": "Describe the properties needed to make a pagination call",
+      "type": "object",
+      "properties": {
+        "pagingType": {
+          "description": "Describes the type. could be 'None', 'PageToken', 'PageCount', 'TimeStamp'",
+          "type": "string"
+        },
+        "nextPageParaName": {
+          "description": "Defines the name of a next page attribute",
+          "type": "string"
+        },
+        "nextPageTokenJsonPath": {
+          "description": "Defines the path to a next page token JSON",
+          "type": "string"
+        },
+        "pageCountAttributePath": {
+          "description": "Defines the path to a page count attribute",
+          "type": "string"
+        },
+        "pageTotalCountAttributePath": {
+          "description": "Defines the path to a page total count attribute",
+          "type": "string"
+        },
+        "pageTimeStampAttributePath": {
+          "description": "Defines the path to a paging time stamp attribute",
+          "type": "string"
+        },
+        "searchTheLatestTimeStampFromEventsList": {
+          "description": "Determines whether to search for the latest time stamp in the events list",
+          "type": "string"
+        },
+        "pageSizeParaName": {
+          "description": "Defines the name of the page size parameter",
+          "type": "string"
+        },
+        "pageSize": {
+          "description": "Defines the paging size",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "pagingType"
+      ]
+    },
+    "CodelessConnectorPollingRequestProperties": {
+      "description": "Describe the request properties needed to successfully pull from the server",
+      "type": "object",
+      "properties": {
+        "apiEndpoint": {
+          "description": "Describe the endpoint we should pull the data from",
+          "type": "string"
+        },
+        "rateLimitQPS": {
+          "description": "Defines the rate limit QPS",
+          "format": "double",
+          "type": "number"
+        },
+        "queryWindowInMin": {
+          "description": "The window interval we will use the pull the data",
+          "format": "int32",
+          "type": "integer"
+        },
+        "httpMethod": {
+          "description": "The http method type we will use in the poll request, GET or POST",
+          "type": "string"
+        },
+        "queryTimeFormat": {
+          "description": "The time format will be used the query events in a specific window",
+          "type": "string"
+        },
+        "retryCount": {
+          "description": "Describe the amount of time we should try and poll the data in case of failure",
+          "format": "int32",
+          "type": "integer"
+        },
+        "timeoutInSeconds": {
+          "description": "The number of seconds we will consider as a request timeout",
+          "format": "int32",
+          "type": "integer"
+        },
+        "headers": {
+          "description": "Describe the headers sent in the poll request",
+          "type": "object"
+        },
+        "queryParameters": {
+          "description": "Describe the query parameters sent in the poll request",
+          "type": "object"
+        },
+        "queryParametersTemplate": {
+          "description": "For advanced scenarios for example user name/password embedded in nested JSON payload",
+          "type": "string"
+        },
+        "startTimeAttributeName": {
+          "description": "This will be used the query events from a start of the time window",
+          "type": "string"
+        },
+        "endTimeAttributeName": {
+          "description": "This will be used the query events from the end of the time window",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apiEndpoint",
+        "httpMethod",
+        "queryWindowInMin",
+        "queryTimeFormat"
+      ]
+    },
+    "CodelessConnectorPollingAuthProperties": {
+      "description": "Describe the authentication properties needed to successfully authenticate with the server",
+      "type": "object",
+      "properties": {
+        "authType": {
+          "description": "The authentication type",
+          "type": "string"
+        },
+        "apiKeyName": {
+          "description": "The header name which the token is sent with",
+          "type": "string"
+        },
+        "apiKeyIdentifier": {
+          "description": "A prefix send in the header before the actual token",
+          "type": "string"
+        },
+        "isApiKeyInPostPayload": {
+          "description": "Marks if the key should sent in header",
+          "type": "string"
+        },
+        "flowName": {
+          "description": "Describes the flow name, for example 'AuthCode' for Oauth 2.0",
+          "type": "string"
+        },
+        "tokenEndpoint": {
+          "description": "The endpoint used to issue a token, used in Oauth 2.0 flow",
+          "type": "string"
+        },
+        "authorizationEndpoint": {
+          "description": "The endpoint used to authorize the user, used in Oauth 2.0 flow",
+          "type": "string"
+        },
+        "authorizationEndpointQueryParameters": {
+          "description": "The query parameters used in authorization request, used in Oauth 2.0 flow",
+          "type": "object"
+        },
+        "redirectionEndpoint": {
+          "description": "The redirect endpoint where we will get the authorization code, used in Oauth 2.0 flow",
+          "type": "string"
+        },
+        "tokenEndpointHeaders": {
+          "description": "The query headers used in token request, used in Oauth 2.0 flow",
+          "type": "object"
+        },
+        "tokenEndpointQueryParameters": {
+          "description": "The query parameters used in token request, used in Oauth 2.0 flow",
+          "type": "object"
+        },
+        "isClientSecretInHeader": {
+          "description": "Marks if we should send the client secret in header or payload, used in Oauth 2.0 flow",
+          "type": "boolean"
+        },
+        "scope": {
+          "description": "The OAuth token scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authType"
+      ]
+    },
     "LastDataReceivedDataType": {
       "description": "Data type for last data received",
       "type": "object",
@@ -2001,6 +2420,26 @@
       "name": "dataConnectorId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectorConnectBody": {
+      "description": "The data connector",
+      "in": "body",
+      "name": "DataConnectorConnectBody",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnectorConnectBody"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectorDisconnectBody": {
+      "description": "The data connector",
+      "in": "body",
+      "name": "DataConnectorDisconnectBody",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnectorDisconnectBody"
+      },
       "x-ms-parameter-location": "method"
     },
     "DataConnectorsCheckRequirementsBody": {
