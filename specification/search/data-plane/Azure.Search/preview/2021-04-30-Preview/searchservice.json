@@ -1033,6 +1033,60 @@
         }
       }
     },
+    "/skillsets('{skillsetName}')/search.resetskills": {
+      "post": {
+        "tags": [
+          "Skillsets"
+        ],
+        "operationId": "Skillsets_ResetSkills",
+        "x-ms-examples": {
+          "SearchServiceResetSkills": {
+            "$ref": "./examples/SearchServiceResetSkills.json"
+          }
+        },
+        "description": "Reset an existing skillset in a search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/searchservice/preview-api/reset-skills"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to reset."
+          },
+          {
+            "name": "skillNames",
+            "in": "body",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The names of skills to reset."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/synonymmaps('{synonymMapName}')": {
       "put": {
         "tags": [
