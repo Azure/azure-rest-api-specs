@@ -34,6 +34,45 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/standards": {
+      "get": {
+        "x-ms-examples": {
+          "List security standards by subscription level scope": {
+            "$ref": "./examples/Standards/ListBySubscriptionStandards_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Get a list of all relevant security standards over a subscription level scope.",
+        "operationId": "Standards_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards": {
       "get": {
         "x-ms-examples": {
@@ -263,6 +302,23 @@
         },
         "category": {
           "description": "category of the standard provided",
+          "type": "string"
+        },
+        "components": {
+          "description": "List of assessment objects containing assessment unique keys to apply to standard scope",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardAssessmentProperties"
+          }
+        }
+      }
+    },
+    "StandardAssessmentProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment as related to the standard",
+      "properties": {
+        "key": {
+          "description": "Assessment Key matching assessmentMetadata",
           "type": "string"
         }
       }

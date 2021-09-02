@@ -292,36 +292,68 @@
           "description": "description of the standardAssignment",
           "type": "string"
         },
-        "standardDefinitions": {
-          "description": "List of standardDefinitions applicable to the standardAssignment over the provided scope",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StandardDefinitionItem"
-          }
+        "assignedStandard": {
+          "description": "List of assigned standards as applied to this standard assignment over the given scope",
+          "$ref": "#/definitions/AssignedStandardItem"
+        },
+        "assignedComponent": {
+          "description": "List of Microsoft.Security/assessments as applied to this standard assignment over the given scope",
+          "$ref": "#/definitions/AssignedComponentItem"
         },
         "scope": {
           "description": "Scope to which the standardAssignment applies - can be a subscription path or a resource group under that subscription",
           "type": "string"
         },
-        "notScope": {
-          "description": "excluded scope for the standard Assignment",
+        "effect": {
+          "description": "expected effect of this assignment (Disable/Exempt/etc)",
           "type": "string"
+        },
+        "expiresOn": {
+          "description": "Expiration date of this assignment as a full ISO date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "description": "Additional data about the assignment",
+          "type": "object",
+          "properties": {
+            "exemptionCategory": {
+              "description": "Exemption category of this assignment",
+              "type": "string"
+            }
+          }
+        },
+        "metadata": {
+          "description": "Metadata about this standardAssignment",
+          "type": "object",
+          "properties": {
+            "ticketId": {
+              "type": "integer",
+              "description": "TicketID in reference to this standardAssignment"
+            }
+          }
         },
         "systemData": {
           "$ref": "../../../common/v2/types.json#/definitions/systemData"
         }
       }
     },
-    "StandardDefinitionItem": {
+    "AssignedStandardItem": {
       "type": "object",
-      "description": "describe the properties of a standardDefinition",
+      "description": "describe the properties of a of a security standard object reference",
       "properties": {
-        "name": {
-          "description": "name of the appropriate standard definition",
-          "type": "string"
-        },
         "id": {
-          "description": "full resourceId of the standardDefinition object",
+          "description": "full resourceId of the Microsoft.Security/standard object",
+          "type": "string"
+        }
+      }
+    },
+    "AssignedComponentItem": {
+      "type": "object",
+      "description": "describe the properties of a security assessment object reference (by key)",
+      "properties": {
+        "key": {
+          "description": "unique key to a security assessment object",
           "type": "string"
         }
       }
