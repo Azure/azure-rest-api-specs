@@ -25,7 +25,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Billing/stable/2021-10-01/billing.json
+  - Microsoft.Billing/stable/2021-10-01/payment.json
 
 ```
 
