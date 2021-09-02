@@ -1,21 +1,23 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "version": "2021-10-01",
     "billingAccountName": "{billingAccountName}",
-    "customerName": "{customerName}"
+    "customerName": "e259ec08-fc9f-481c-a052-8b0c83a3a051"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/billinSubscriptionId1",
-            "name": "billingSubscriptionId1",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/418b0e9c-5dc3-4260-918f-30b90619fe07",
+            "name": "418b0e9c-5dc3-4260-918f-30b90619fe07",
+            "type": "Microsoft.Billing/billingSubscriptions",
             "properties": {
-              "displayName": "My subscription",
-              "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
-              "subscriptionBillingStatus": "Active",
+              "billingFrequency": "P1M",
+              "consumptionSubscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
+              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/e259ec08-fc9f-481c-a052-8b0c83a3a051",
+              "customerDisplayName": "Customer 1",
+              "displayName": "Subscription 1",
               "lastMonthCharges": {
                 "currency": "USD",
                 "value": 5000.00
@@ -24,25 +26,30 @@
                 "currency": "USD",
                 "value": 600.00
               },
-              "costCenter": "ABC1234",
-              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
-              "customerDisplayName": "Customer1",
+              "productCategory": "UsageBasedSubscription",
+              "productType": "AzureAccessPass",
+              "productTypeId": "DZH318Z0BPS6",
+              "publisherName": "Microsoft Corporation",
+              "purchaseDate": "2021-10-01T00:00:00Z",
+              "quantity": 1,
               "reseller": {
                 "resellerId": "89e87bdf-a2a2-4687-925f-4c18b27bccfd",
                 "description": "Reseller1"
               },
-              "skuId": "0002",
-              "skuDescription": "Microsoft Azure Plan for DevTest"
+              "skuId": "0001",
+              "skuDescription": "Azure Plan",
+              "status": "Active"
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/billinSubscriptionId2",
-            "name": "billingSubscriptionId2",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/9e030ae5-51ed-4e02-8e17-d51b3aa55980",
+            "name": "9e030ae5-51ed-4e02-8e17-d51b3aa55980",
+            "type": "Microsoft.Billing/billingSubscriptions",
             "properties": {
-              "displayName": "Test subscription",
-              "subscriptionId": "6b96d3f2-9008-4a9d-912f-6b96d3f2",
-              "subscriptionBillingStatus": "Active",
+              "billingFrequency": "P1M",
+              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/e259ec08-fc9f-481c-a052-8b0c83a3a051",
+              "customerDisplayName": "Customer 1",
+              "displayName": "Subscription 2",
               "lastMonthCharges": {
                 "currency": "USD",
                 "value": 1000.00
@@ -51,15 +58,22 @@
                 "currency": "USD",
                 "value": 400
               },
-              "costCenter": "ABC1234",
-              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
-              "customerDisplayName": "Customer1",
+              "productCategory": "M365",
+              "productType": "PASS",
+              "productTypeId": "CFQ7TTC0LDPB",
+              "publisherName": "Microsoft Corporation",
+              "purchaseDate": "2021-08-01T00:12:49.7261677+00:00",
+              "quantity": 4,
               "reseller": {
-                "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
-                "description": "Reseller3"
+                "resellerId": "89e87bdf-a2a2-4687-925f-4c18b27bccfd",
+                "description": "Reseller1"
               },
-              "skuId": "0002",
-              "skuDescription": "Microsoft Azure Plan for DevTest"
+              "skuId": "0001",
+              "skuDescription": "Microsoft 365 Business Standard",
+              "status": "Active",
+              "termDuration": "P1Y",
+              "termStartDate": "2021-10-01T00:00:00Z",
+              "termEndDate": "2022-09-30T00:00:00Z"
             }
           }
         ]

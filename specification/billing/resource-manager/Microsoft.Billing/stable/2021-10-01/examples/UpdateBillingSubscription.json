@@ -2,17 +2,23 @@
   "parameters": {
     "version": "2021-10-01",
     "billingAccountName": "{billingAccountName}",
-    "billingSubscriptionName": "418b0e9c-5dc3-4260-918f-30b90619fe07"
+    "billingSubscriptionName": "418b0e9c-5dc3-4260-918f-30b90619fe07",
+    "parameters": {
+      "properties": {
+        "consumptionCostCenter": "ABC1234"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/418b0e9c-5dc3-4260-918f-30b90619fe07",
-        "name": "418b0e9c-5dc3-4260-918f-30b90619fe07",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/9e030ae5-51ed-4e02-8e17-d51b3aa55980",
+        "name": "9e030ae5-51ed-4e02-8e17-d51b3aa55980",
         "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
         "properties": {
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664",
           "billingProfileDisplayName": "Contoso operations billing profile",
+          "billingFrequency": "P1M",
           "consumptionCostCenter": "ABC1234",
           "consumptionSubscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
           "displayName": "Subscription 1",
