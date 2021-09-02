@@ -668,6 +668,34 @@
           "x-nullable": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         },
+        "aksAssignedIdentity": {
+          "description": "Identity of the Extension resource in an AKS cluster",
+          "x-nullable": true,
+          "type": "object",
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of resource."
+            },
+            "type": {
+              "type": "string",
+              "description": "The identity type.",
+              "enum": [
+                "SystemAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "ResourceIdentityType",
+                "modelAsString": false
+              }
+            }
+          }
+            },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
