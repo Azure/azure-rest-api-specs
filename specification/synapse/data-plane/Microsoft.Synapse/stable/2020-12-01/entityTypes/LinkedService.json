@@ -1088,6 +1088,47 @@
         "connectionString"
       ]
     },
+    "AmazonRdsForOracleLinkedService": {
+      "x-ms-discriminator-value": "AmazonRdsForOracle",
+      "description": "AmazonRdsForOracle database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AmazonRdsForOracle database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonRdsForLinkedServiceTypeProperties": {
+      "description": "AmazonRdsForOracle database linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
     "AzureMySqlLinkedService": {
       "x-ms-discriminator-value": "AzureMySql",
       "description": "Azure MySQL database linked service.",
