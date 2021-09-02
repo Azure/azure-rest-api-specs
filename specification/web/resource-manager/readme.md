@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2021-02
+tag: package-2021-03
 ```
 
 ### Suppression
@@ -63,11 +63,33 @@ directive:
     reason: Property name contains WWW which is an acronym, so camel case does not apply here.
 ```
 
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.Web/stable/2021-03-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-03-01/AppServicePlans.json
+  - Microsoft.Web/stable/2021-03-01/Certificates.json
+  - Microsoft.Web/stable/2021-03-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-03-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-03-01/Diagnostics.json
+  - Microsoft.Web/stable/2021-03-01/Global.json
+  - Microsoft.Web/stable/2021-03-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-03-01/Provider.json
+  - Microsoft.Web/stable/2021-03-01/Recommendations.json
+  - Microsoft.Web/stable/2021-03-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-03-01/StaticSites.json
+  - Microsoft.Web/stable/2021-03-01/WebApps.json
+```
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02' || $(tag) == 'package-2021-02-only'
+``` yaml $(tag) == 'package-2021-02' || $(tag) == 'package-2021-02-only'
 input-file:
   - Microsoft.CertificateRegistration/stable/2021-02-01/AppServiceCertificateOrders.json
   - Microsoft.CertificateRegistration/stable/2021-02-01/CertificateOrdersDiagnostics.json
