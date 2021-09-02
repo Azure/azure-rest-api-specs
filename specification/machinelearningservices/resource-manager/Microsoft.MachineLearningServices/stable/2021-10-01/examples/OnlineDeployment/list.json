@@ -39,6 +39,7 @@
                 "requestTimeout": "PT5M",
                 "maxConcurrentRequestsPerInstance": 1
               },
+              "modelMountPath": "string",
               "appInsightsEnabled": false,
               "livenessProbe": {
                 "failureThreshold": 1,
@@ -50,14 +51,18 @@
               "provisioningState": "Creating",
               "instanceType": "string",
               "model": "string",
-              "endpointComputeType": "K8S",
+              "endpointComputeType": "Kubernetes",
               "containerResourceRequirements": {
-                "cpu": 3.14,
-                "cpuLimit": 4.0,
-                "memoryInGB": 3.14,
-                "memoryInGBLimit": 64.0,
-                "gpu": 1,
-                "fpga": 1
+                "containerResourceRequests": {
+                  "cpu": "\"1\"",
+                  "memory": "\"2Gi\"",
+                  "gpu": "\"1\""
+                },
+                "containerResourceLimits": {
+                  "cpu": "\"1\"",
+                  "memory": "\"2Gi\"",
+                  "gpu": "\"1\""
+                }
               }
             },
             "systemData": {
