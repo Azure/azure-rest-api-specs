@@ -8962,8 +8962,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialBatchDeployment",
-          "x-nullable": true
+          "$ref": "#/definitions/PartialBatchDeployment"
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
@@ -9013,8 +9012,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialBatchEndpoint",
-          "x-nullable": true
+          "$ref": "#/definitions/PartialBatchEndpoint"
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
@@ -9039,8 +9037,7 @@
         "maxRetries": {
           "format": "int32",
           "description": "Maximum retry count for a mini-batch",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "timeout": {
           "format": "duration",
@@ -9071,8 +9068,7 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "x-nullable": true
+          ]
         }
       },
       "additionalProperties": false
@@ -9162,8 +9158,7 @@
       "properties": {
         "assetId": {
           "description": "ARM resource ID of the asset.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Id",
@@ -9214,8 +9209,7 @@
       "properties": {
         "appInsightsEnabled": {
           "description": "If true, enables Application Insights logging.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         },
         "endpointComputeType": {
           "description": "The compute type of the endpoint.",
@@ -9264,8 +9258,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialOnlineDeployment",
-          "x-nullable": true
+          "$ref": "#/definitions/PartialOnlineDeployment"
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
@@ -9319,8 +9312,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialOnlineEndpoint",
-          "x-nullable": true
+          "$ref": "#/definitions/PartialOnlineEndpoint"
         },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
@@ -9345,20 +9337,17 @@
         "maxConcurrentRequestsPerInstance": {
           "format": "int32",
           "description": "The number of maximum concurrent requests per node allowed per deployment. Defaults to 1.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "maxQueueWait": {
           "format": "duration",
           "description": "The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "requestTimeout": {
           "format": "duration",
           "description": "The scoring timeout in ISO 8601 format.\r\nDefaults to 5000ms.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -9407,8 +9396,7 @@
         "failureThreshold": {
           "format": "int32",
           "description": "The number of failures to allow before returning an unhealthy status.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "initialDelay": {
           "format": "duration",
@@ -9419,20 +9407,17 @@
         "period": {
           "format": "duration",
           "description": "The length of time between probes in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "successThreshold": {
           "format": "int32",
           "description": "The number of successful probes before returning a healthy status.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "timeout": {
           "format": "duration",
           "description": "The probe timeout in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -9495,26 +9480,22 @@
         "maxInstances": {
           "format": "int32",
           "description": "The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "minInstances": {
           "format": "int32",
           "description": "The minimum number of instances to always be present.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "pollingInterval": {
           "format": "duration",
           "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "targetUtilizationPercentage": {
           "format": "int32",
           "description": "Target CPU usage for the autoscaler.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "TargetUtilization",
