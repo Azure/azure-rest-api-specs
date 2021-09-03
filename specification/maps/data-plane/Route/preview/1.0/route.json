@@ -746,7 +746,7 @@
     "SnapToRoadsPoints": {
       "name": "points",
       "in": "query",
-      "description": "Specifies the semicolon-separated list of coordinates. Each coordinate has to be comma-separated and calculated using EPSG4326 projection.The maximum allowed number of coordinates is **100** while the the minimum is **2**. \n e.g. `-122.336729,47.590868;-122.336042,47.590868`.",
+      "description": "Specifies the semicolon-separated list of coordinates. <ul><li>Each coordinate has to be comma-separated and calculated using EPSG4326 projection.</li><li>The maximum allowed number of coordinates is **100** while the the minimum is **2**.</li><li>The maximum distance between two consecutive points cannot exceed ***1000*** meters.</li></ul> \n e.g. `-122.336729,47.590868;-122.336042,47.590868`.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2903,7 +2903,7 @@
       }
     },
     "SnapToRoadsRequestBody": {
-      "description": "Post body parameter for Snap to Road. It should contain at least **2** points and at most **100** points.",
+      "description": "Post body parameter for Snap to Road. It should contain at least **2** points and at most **100** points. The maximum distance between two consecutive points cannot exceed ***1000*** meters",
       "type": "object",
       "required": [
         "points"
@@ -3259,6 +3259,10 @@
         "name": "RoadUse",
         "modelAsString": true,
         "values": [
+          {
+            "value": "LimitedAccess",
+            "description": "LimitedAccess"
+          },
           {
             "value": "Arterial",
             "description": "Arterial"
