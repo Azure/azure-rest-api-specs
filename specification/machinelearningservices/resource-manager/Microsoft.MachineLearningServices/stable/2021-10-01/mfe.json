@@ -8149,13 +8149,6 @@
           "$ref": "#/definitions/OnlineDeployment"
         }
       ],
-      "properties": {
-        "readinessProbe": {
-          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/ProbeSettings",
-          "x-nullable": true
-        }
-      },
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
@@ -8522,6 +8515,11 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "readinessProbe": {
+          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "requestSettings": {
           "description": "Request settings for the deployment.",
@@ -9202,11 +9200,6 @@
           "description": "The path to mount the model in custom container.",
           "type": "string",
           "x-nullable": true
-        },
-        "readinessProbe": {
-          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/PartialProbeSettings",
-          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -9230,6 +9223,11 @@
         },
         "livenessProbe": {
           "description": "Liveness probe monitors the health of the container regularly.",
+          "$ref": "#/definitions/PartialProbeSettings",
+          "x-nullable": true
+        },
+        "readinessProbe": {
+          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
           "$ref": "#/definitions/PartialProbeSettings",
           "x-nullable": true
         },
