@@ -5,16 +5,20 @@
     "deviceName": "service8596",
     "api-version": "2019-06-01",
     "deviceService": {
-      "billingDomainName": "a.b.c",
-      "adminDomainName": "d.e.f",
-      "notes": "blah",
-      "quantity": 1000000
+      "location": "East US",
+      "properties": {
+        "billingDomainName": "a.b.c",
+        "adminDomainName": "d.e.f",
+        "notes": "blah",
+        "quantity": 1000000
+      }
     },
     "monitor": "true"
   },
   "responses": {
     "200": {
       "body": {
+        "location": "East US",
         "properties": {
           "billingDomainName": "a.b.c",
           "adminDomainName": "d.e.f",
@@ -22,7 +26,6 @@
           "startDate": "2018-01-01T12:00:00000Z",
           "quantity": 1000000
         },
-        "location": "westus",
         "type": "Microsoft.WindowsIoT/Services"
       }
     }

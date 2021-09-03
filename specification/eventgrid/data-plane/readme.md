@@ -12,6 +12,76 @@ that describes the schemas for its events.
 This configuration enables packaging all of the above as one EventGrid data plane library.
 This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
 
+### Guidelines for defining a new event 
+
+In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
+- The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
+- The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
+
+A sample valid event definition is shown below:
+~~~ markdown
+```json
+"AcsChatMessageReceivedEventData": {
+  "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+  "allOf": [
+    {
+      "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+    }
+  ],
+  "properties": {
+    "messageBody": {
+      "description": "The body of the chat message",
+      "type": "string"
+    }
+  }
+}
+```
+~~~
+
+In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger. This example must be in a "examples" folder close to your JSON, and called using snakeCase based on the event final name. The example should contain the envelope, but could be CloudEvent or EventGrid schema, whatever is easier. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+
+For the previous schema, the example file should be called "chat_message_received.json" and contains:
+~~~ markdown
+```json
+{
+    "id": "02272459-badb-4e2e-b538-4cb8a2f71da6",
+    "topic": "/subscriptions/{subscription-id}/resourceGroups/{group-name}/providers/Microsoft.Communication/communicationServices/{communication-services-resource-name}",
+    "subject": "thread/{thread-id}/sender/{rawId}/recipient/{rawId}",
+    "data": {
+      "messageBody": "Welcome to Azure Communication Services",
+      "messageId": "1613694358927",
+      "metadata": {
+        "key": "value",
+        "description": "A map of data associated with the message"
+      },
+      "senderId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+      "senderCommunicationIdentifier": {
+        "rawId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+        "communicationUser": {
+          "id": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724"
+        }
+      },
+      "senderDisplayName": "Jhon",
+      "composeTime": "2021-02-19T00:25:58.927Z",
+      "type": "Text",
+      "version": 1613694358927,
+      "recipientId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d",
+      "recipientCommunicationIdentifier": {
+        "rawId": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d",
+        "communicationUser": {
+          "id": "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7d05-83fe-084822000f6d"
+        }
+      },
+      "transactionId": "oh+LGB2dUUadMcTAdRWQxQ.1.1.1.1.1827536918.1.7",
+      "threadId": "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2"
+    },
+    "eventType": "Microsoft.Communication.ChatMessageReceived",
+    "dataVersion": "1.0",
+    "metadataVersion": "1",
+    "eventTime": "2021-02-19T00:25:59.9436666Z"
+  }
+  ```
+  ~~~
 
 ---
 ## Getting Started
@@ -55,6 +125,22 @@ input-file:
 - Microsoft.Maps/stable/2018-01-01/Maps.json
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 - Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
+- Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+- Microsoft.Cache/stable/2018-01-01/RedisCache.json
+- Microsoft.Web/stable/2018-01-01/Web.json
+- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
+- Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+    where: $.definitions.CloudEventEvent.properties.data_base64
+    reason: This parameter name is defined by the Cloud Events 1.0 specification
 ```
 
 ---
@@ -70,6 +156,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -104,6 +191,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 azure-arm: true
+fluent: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
@@ -133,6 +221,12 @@ input-file:
   - $(this-folder)/Microsoft.Maps/stable/2018-01-01/Maps.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
+  - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+  - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
+  - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
+  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 
 ```
 

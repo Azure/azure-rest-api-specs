@@ -17,6 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
+
 ### Basic Information
 These are the global settings for the Compute API.
 
@@ -24,21 +25,31 @@ These are the global settings for the Compute API.
 title: ComputeAdminClient
 description: Compute Admin Client
 openapi-type: arm
-tag: package-2018-02-09
+tag: package-2021-04-01
+
+directive:
+  - where:
+      - $.definitions.ScaleUnit
+    suppress:
+      - NestedResourcesMustHaveListOperation
+    reason:
+      - CRP cannot support the list API for scale units due to the undesired load that would inflict on the system
 ```
 
-### Tag: package-2018-02-09
+### Tag: package-2021-04-01
 
-These settings apply only when `--tag=package-2018-02-09` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02-09'
+``` yaml $(tag) == 'package-2021-04-01'
 input-file:
-    - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
-    - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
-    - Microsoft.Compute.Admin/preview/2018-02-09/Quotas.json
-    - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
-    - Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
-    - Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
+   - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
+   - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
+   - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
+   - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
+   - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
+   - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
+   - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
+   - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
 ```
 
 ---
@@ -56,6 +67,22 @@ csharp:
   clear-output-folder: true
 ```
 
+# AutoRest v3 generators
+
+> see https://aka.ms/autorest
+
+``` yaml
+input-file:  
+     - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
+     - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
+     - Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
+     - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
+     - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
+     - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
+     - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
+     - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -68,13 +95,17 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2018-02-09/Quotas.json
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
-  - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
-
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2018-02-09/Quotas.json
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
+   - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2020-11-01/Features.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "subscriptionId": "{subscriptionId}",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "My Subscription",
+          "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
+          "subscriptionBillingStatus": "Active",
+          "lastMonthCharges": {
+            "currency": "USD",
+            "value": 5000.00
+          },
+          "monthToDateCharges": {
+            "currency": "USD",
+            "value": 600
+          },
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/22000000-0000-0000-0000-000000000000",
+          "invoiceSectionDisplayName": "Contoso operations invoiceSection",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+          "billingProfileDisplayName": "Contoso operations billing",
+          "costCenter": "ABC1234",
+          "skuId": "0001",
+          "skuDescription": "Microsoft Azure Plan"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/moveBillingSubscription_11000000-0000-0000-0000-000000000000:22000000-0000-0000-0000-000000000000:{subscriptionId}:44000000-0000-0000-0000-000000000055:10000000-0000-0000-0000-000000000001?api-version=2020-05-01",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

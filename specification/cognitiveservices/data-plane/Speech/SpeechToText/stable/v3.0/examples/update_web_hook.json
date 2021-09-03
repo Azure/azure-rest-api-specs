@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "id": "2e856efe-ef53-465a-a632-6a084c1d349d",
+    "webHookUpdate": {
+      "properties": {
+        "secret": "$CREDENTIAL_PLACEHOLDER$"
+      },
+      "events": {
+        "evaluationCreation": true,
+        "evaluationProcessing": true,
+        "evaluationCompletion": true,
+        "evaluationDeletion": true
+      },
+      "webUrl": "https://contoso.com/call/me/back",
+      "displayName": "TranscriptionCompletionWebHook",
+      "description": "I registered this URL to get a POST request for each completed transcription.",
+      "customProperties": {
+        "key": "value"
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "displayName": "TranscriptionCompletionWebHook",
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d",
+        "links": {
+          "ping": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d/test",
+          "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d/ping"
+        },
+        "properties": {
+          "apiVersion": "v3.0"
+        },
+        "webUrl": "https://contoso.com/call/me/back",
+        "events": {
+          "transcriptionCompletion": true
+        },
+        "description": "I registered this URL to get a POST request for each completed transcription.",
+        "createdDateTime": "2018-11-11T00:00:00Z",
+        "lastActionDateTime": "2018-11-28T00:00:00Z",
+        "status": "Succeeded"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "InvalidRequest",
+        "message": "The base model isn't valid for this operation.",
+        "innerError": {
+          "code": "InvalidBaseModel",
+          "message": "The base model isn't valid for this operation."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "code": "NotFound",
+        "message": "The specified entity cannot be found."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}
