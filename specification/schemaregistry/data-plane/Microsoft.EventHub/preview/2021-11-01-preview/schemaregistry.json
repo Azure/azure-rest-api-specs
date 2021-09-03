@@ -40,7 +40,7 @@
         },
         "operationId": "Schema_GetById",
         "produces": [
-          "text/plain;"
+          "text/plain"
         ],
         "parameters": [
           {
@@ -115,7 +115,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -249,7 +249,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -433,7 +433,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -451,16 +451,16 @@
         }
       }
     },
-    "ErrorResponse": {
+    "Error": {
       "type": "object",
       "description": "An error response returned from Azure Schema Registry service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ServiceErrorResponse"
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
-    "ServiceErrorResponse": {
+    "ErrorDetail": {
       "description": "Error response returned from Azure Schema Registry service.",
       "properties": {
         "code": {
@@ -474,25 +474,12 @@
         "details": {
           "type": "string",
           "description": "Error message details to help user understand/debug failure."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError"
         }
       },
       "required": [
         "code",
         "message"
       ]
-    },
-    "InnerError": {
-      "type": "object",
-      "description": "Internal error details.",
-      "properties": {
-        "errordetail": {
-          "type": "string",
-          "description": "Internal error message."
-        }
-      }
     }
   },
   "parameters": {
