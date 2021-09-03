@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2021-09
 ```
 
-
 ### Tag: package-2021-09
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09'
+``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.DevTestLab/stable/2021-09-01/DTL.json
 ```
+
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
@@ -115,3 +115,73 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.ArtifactSource
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.ArmTemplate
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Artifact
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.CustomImage
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Formula
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.GalleryImage
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.NotificationChannel
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Policy
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.LabSecret
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.SharedGallery
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.SharedImage
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Disk
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Environment
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.ServiceFabric
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.VirtualNetwork
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.BastionHost
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+```
