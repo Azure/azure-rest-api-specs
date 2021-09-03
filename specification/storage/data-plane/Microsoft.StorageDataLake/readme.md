@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
-- stable/2019-10-31/DataLakeStorage.json
+- $(this-folder)/stable/2019-10-31/DataLakeStorage.json
 ```
 
 ### Tag: package-2018-11
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2018-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-11'
 input-file:
-- stable/2018-11-09/DataLakeStorage.json
+- $(this-folder)/stable/2018-11-09/DataLakeStorage.json
 ```
 
 ### Tag: package-2018-06-preview
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- preview/2018-06-17/DataLakeStorage.json
+- $(this-folder)/preview/2018-06-17/DataLakeStorage.json
 ```
 
 ### Tag: package-2020-06
@@ -64,23 +64,23 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-- preview/2020-06-12/DataLakeStorage.json
+- $(this-folder)/preview/2020-06-12/DataLakeStorage.json
 ```
 
 ### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: preview/2020-06-12/DataLakeStorage.json
+    from: $(this-folder)/preview/2020-06-12/DataLakeStorage.json
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-    from: preview/2020-06-12/DataLakeStorage.json
+    from: $(this-folder)/preview/2020-06-12/DataLakeStorage.json
   - suppress: XmsExamplesRequired
     from: preview/2020-06-12/DataLakeStorage.json
   - suppress: OperationIdNounConflictingModelNames
-    from: preview/2020-06-12/DataLakeStorage.json
+    from: $(this-folder)/preview/2020-06-12/DataLakeStorage.json
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
   - suppress: LongRunningOperationsWithLongRunningExtension
-    from: preview/2020-06-12/DataLakeStorage.json
+    from: $(this-folder)/preview/2020-06-12/DataLakeStorage.json
 ```
 ---
