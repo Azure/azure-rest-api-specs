@@ -591,44 +591,56 @@
         }
       }
     },
-    "metadataCategory":{
+    "metadataCategory": {
       "type": "object",
       "description": "Category for the solution content item",
       "properties": {
-        "domains" : {
-          "description" : "Category domain for the solution content item",
-          "type":"array",
-          "example": ["str1", "str2", "str3"],
+        "domains": {
+          "description": "Category domain for the solution content item",
+          "type": "array",
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ],
           "items": {
             "type": "string"
+          }
+        },
+        "verticals": {
+          "description": "Category verticals for the solution content item",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ]
         }
-        },
-        "verticals" : {
-          "description" : "Category verticals for the solution content item",
-          "type":"array",
-          "items": {
-            "type": "string"
-        },
-          "example": ["str1", "str2", "str3"]
       }
-    }
-  },
-    "metadataProviders":{
+    },
+    "metadataProviders": {
       "description": "Providers for the solution content item",
-      "type":"array",
-      "example": ["str1", "str2", "str3"],
+      "type": "array",
+      "example": [
+        "str1",
+        "str2",
+        "str3"
+      ],
       "items": {
-            "type": "string"
-        }
-  },
-    "firstPublishDate":{
+        "type": "string"
+      }
+    },
+    "firstPublishDate": {
       "description": "first publish date of solution content item",
-      "type" : "string",
+      "type": "string",
       "format": "date"
     },
-    "lastPublishDate":{
+    "lastPublishDate": {
       "description": "last publish date of solution content item",
-      "type" : "string",
+      "type": "string",
       "format": "date"
     },
     "metadataProperties": {
@@ -675,21 +687,21 @@
           "$ref": "#/definitions/metadataCategory",
           "description": "Category for the solution content item"
         },
-        "providers":{
+        "providers": {
           "$ref": "#/definitions/metadataProviders",
           "description": "Providers for the solution content item"
         },
-        "firstPublishDate":{
+        "firstPublishDate": {
           "$ref": "#/definitions/firstPublishDate",
           "description": "first publish date solution content item"
         },
-        "lastPublishDate":{
+        "lastPublishDate": {
           "$ref": "#/definitions/lastPublishDate",
           "description": "last publish date for the solution content item"
         },
         "svg": {
           "type": "string",
-          "description" : "specifies the svg image content/link for the content type"
+          "description": "specifies the svg image content/link for the content type"
         }
       }
     },
@@ -733,21 +745,21 @@
           "$ref": "#/definitions/metadataCategory",
           "description": "Category for the solution content item"
         },
-        "providers":{
+        "providers": {
           "$ref": "#/definitions/metadataProviders",
           "description": "Providers for the solution content item"
         },
-        "firstPublishDate":{
+        "firstPublishDate": {
           "$ref": "#/definitions/firstPublishDate",
           "description": "first publish date solution content item"
         },
-        "lastPublishDate":{
+        "lastPublishDate": {
           "$ref": "#/definitions/lastPublishDate",
           "description": "last publish date for the solution content item"
         },
         "svg": {
           "type": "string",
-          "description" : "specifies the svg image content/link for the content type"
+          "description": "specifies the svg image content/link for the content type"
         }
       }
     }
