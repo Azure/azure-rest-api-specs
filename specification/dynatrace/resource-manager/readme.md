@@ -27,7 +27,16 @@ These are the global settings for the dynatrace.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-06-01-preview
+tag: package-2021-09-01-preview
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
 ```
 
 ### Tag: package-2021-06-01-preview
