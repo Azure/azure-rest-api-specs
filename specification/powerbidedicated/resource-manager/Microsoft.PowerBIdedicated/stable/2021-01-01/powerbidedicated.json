@@ -139,6 +139,12 @@
               "$ref": "#/definitions/DedicatedCapacity"
             }
           },
+          "202": {
+            "description": "InProgress. The operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -655,6 +661,97 @@
               "description": "Operation type: create, update, delete, etc.",
               "type": "string",
               "readOnly": true
+            },
+            "description": {
+              "type": "string",
+              "description": "Localized description of the operation."
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "type": "object",
+              "description": "Service specification for exposing performance metrics to shoebox.",
+              "properties": {
+                "metricSpecifications": {
+                  "type": "array",
+                  "description": "Metric specification for exposing performance metrics to shoebox.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Metric name"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "Localizable metric name"
+                      },
+                      "displayDescription": {
+                        "type": "string",
+                        "description": "Localizable description of metric"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Unit for the metric"
+                      },
+                      "aggregationType": {
+                        "type": "string",
+                        "description": "Aggregation type for the metric"
+                      },
+                      "metricFilterPattern": {
+                        "type": "string",
+                        "description": "Pattern used to filter the metric"
+                      },
+                      "dimensions": {
+                        "type": "array",
+                        "description": "For describing multi dimensional metrics",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Dimension of the metric"
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "description": "Localizable dimension of the metric"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "logSpecifications": {
+                  "type": "array",
+                  "description": "Log specification for exposing diagnostic logs to shoebox.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the log"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "Localizable name of the log"
+                      },
+                      "blobDuration": {
+                        "type": "string",
+                        "description": "Blob duration for the log"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -842,6 +939,11 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of the SKU."
         }
       },
       "required": [
@@ -867,6 +969,14 @@
             "name": "Mode",
             "modelAsString": true
           }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID for the capacity. Used for creating Pro Plus capacity."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Capacity name"
         }
       }
     },
@@ -914,6 +1024,10 @@
       "description": "An object that represents SKU details for existing resources",
       "type": "object",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type"
+        },
         "sku": {
           "$ref": "#/definitions/CapacitySku",
           "description": "The SKU in SKU details for existing resources."
@@ -931,9 +1045,36 @@
               "type": "string",
               "description": "Error code"
             },
+            "subCode": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Error sub code"
+            },
+            "httpStatusCode": {
+              "type": "string",
+              "description": "HTTP status code returned"
+            },
             "message": {
               "type": "string",
               "description": "Error message indicating why the operation failed."
+            },
+            "timestamp": {
+              "type": "string",
+              "description": "Timestamp for the error"
+            },
+            "details": {
+              "type": "object",
+              "description": "The details object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Error code"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error message indicating why the operation failed."
+                }
+              }
             }
           }
         }
