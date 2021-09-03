@@ -184,4 +184,12 @@ directive:
     where: $.definitions.BastionHost
     from: DTL.json
     reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.User
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.ApplicableSchedule
+    from: DTL.json
+    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
 ```
