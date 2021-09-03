@@ -39,7 +39,7 @@ directive:
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
     where:
-      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
       - $.definitions.RegionalQuotaCapability.properties.cores_used
       - $.definitions.RegionalQuotaCapability.properties.region_name
@@ -50,6 +50,10 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
  
 ``` yaml
@@ -69,13 +73,19 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
 
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+    from: 
+      - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+      - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
     where:
       - $.definitions.Role.properties.VMGroupName
 ```
@@ -127,6 +137,7 @@ input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
 ```
 
 
@@ -144,12 +155,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hdinsight/resource-manager
 ```
 
 ## Python
@@ -226,7 +235,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -1,5 +1,25 @@
 ---
 - rule:
+    # translator data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/TranslatorText/**"
+    reviewers:
+      - kristapratico
+      - maririos
+
+- rule:
+    paths:
+      - "specification/confidentialledger/data-plane/**"
+    reviewers:
+      - christothes 
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights)/**"
+    reviewers:
+      - akning-ms
+
+- rule:
     # eventgrid data-plane PR
     paths:
       - "specification/eventgrid/data-plane/**"
@@ -11,7 +31,14 @@
     paths:
       - "specification/synapse/data-plane/**"
     reviewers:
-      - jonathandturner
+      - lmazuel
+
+- rule:
+    # data-plane PR
+    paths:
+      - "specification/**/data-plane/iot**"
+    reviewers:
+      - drwill-ms
 
 - rule:
     # data-plane PR
@@ -21,7 +48,116 @@
       - anuchandy
       - jhendrixMSFT
       - tjprescott
+
+- rule:
+    paths:
+      - "specification/network/**"
+    reviewers:
+      - lirenhe
+
+
+- rule:
+    paths: "specification/common-types/**"
+    reviewers:
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+      - zhenglaizhang
       
+      
+- rule:
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
+    reviewers:
+      - raych1
+      
+- rule:
+    paths: "specification/@(security|edgeorder|synapse)/**"
+    reviewers:
+      - ruowan
+      
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - zhenglaizhang
+      
+- rule:
+    paths: "specification/signalr/**"
+    reviewers:
+      - leni-msft
+      
+- rule:
+    paths: "specification/eventhub/**"
+    reviewers:
+      - ruowan
+- rule:
+    paths: "specification/compute/**"
+    reviewers:
+      - ArcturusZhang
+      - yungezz
+
+- rule:
+    paths:
+      - "specification/machinelearningservices/**"
+    reviewers:
+      - ArcturusZhang
+
+- rule:
+    paths:
+      - "specification/authorization/**"
+    reviewers:
+      - ruowan
+
+- rule:
+    paths:
+      - "specification/datafactory/**"
+    reviewers:
+      - leni-msft
+
+- rule:
+    paths:
+      - "specification/storage/**"
+    reviewers:
+      - jianyexi
+
+
+- rule:	
+    paths: "specification/mediaservices/**"	
+    reviewers:	
+      - allenjzhang
+      
+- rule:
+    paths:
+      - "specification/containerregistry/**"
+    reviewers:
+      - fengzhou-msft
+
+- rule:
+    paths:
+      - "specification/mixedreality/**"
+      - "specification/hdinsight/**"
+    reviewers:
+      - leni-msft
+
+- rule:
+    paths:
+      - "specification/web/**"
+    reviewers:
+      - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/servicelinker/**"
+    reviewers:
+      - raych1
+      
+- rule:
+    paths:
+      - "specification/keyvault/**"
+    reviewers:
+      - zhenglaizhang
+
 - rule:
     paths:
       - "documentation/**"
@@ -39,7 +175,6 @@
       - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - PhoenixHe-msft
       - raych1
       - zhenglaizhang
 
@@ -48,5 +183,16 @@
     paths:
       - "**"
     reviewers:
-      - allenjzhang
-      - markcowl
+      - lirenhe
+      - weidongxu-microsoft
+      - ArcturusZhang
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+      - zhenglaizhang
+      - chunyu3
+      - changlong-liu
+      - msyyc
+      - qwordy

@@ -371,7 +371,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Query",
             "QueryAll"
@@ -577,7 +577,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -1148,7 +1148,7 @@
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "String",
         "Int",
@@ -1207,7 +1207,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Update"
@@ -1231,7 +1231,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -1406,7 +1406,7 @@
     },
     "PolybaseSettingsRejectType": {
       "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "value",
         "percentage"
@@ -1501,7 +1501,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Merge",
             "Upload"
@@ -1539,7 +1539,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Upsert"
           ],
@@ -1568,7 +1568,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Upsert"

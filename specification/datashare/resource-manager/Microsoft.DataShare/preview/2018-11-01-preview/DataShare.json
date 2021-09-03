@@ -311,7 +311,7 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/ListInvitations": {
+    "/providers/Microsoft.DataShare/listInvitations": {
       "get": {
         "tags": [
           "ConsumerInvitation"
@@ -403,7 +403,7 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/locations/{location}/RejectInvitation": {
+    "/providers/Microsoft.DataShare/locations/{location}/rejectInvitation": {
       "post": {
         "tags": [
           "ConsumerInvitation"
@@ -1985,7 +1985,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/consumerSourceDataSets": {
       "get": {
         "tags": [
           "ShareSubscription"
@@ -2262,7 +2262,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/Synchronize": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/synchronize": {
       "post": {
         "tags": [
           "ShareSubscription"
@@ -2627,7 +2627,7 @@
           "SynchronizationSetting"
         ],
         "summary": "Adds a new synchronization setting to an existing share.",
-        "description": "Create or update a synchronizationSetting ",
+        "description": "Create a synchronizationSetting",
         "operationId": "SynchronizationSettings_Create",
         "parameters": [
           {
@@ -4408,7 +4408,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "dataSetKind",
             "modelAsString": true
           }
         }
@@ -4464,7 +4464,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "dataSetMappingKind",
             "modelAsString": true
           }
         }
@@ -4538,20 +4538,15 @@
     "DefaultDto": {
       "description": "Base data transfer object implementation for default resources.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource id of the azure resource",
-          "type": "string",
-          "readOnly": true
-        },
         "location": {
           "description": "Location of the azure resource.",
           "type": "string"
-        },
-        "name": {
-          "description": "Name of the azure resource",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -4559,14 +4554,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "type": {
-          "description": "Type of the azure resource",
-          "type": "string",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "DimensionProperties": {
       "description": "properties for dimension",
@@ -5038,6 +5027,10 @@
         "enableRegionalMdmAccount": {
           "description": "enable regional mdm account",
           "type": "string"
+        },
+        "fillGapWithZero": {
+          "description": "fill gap with zero",
+          "type": "boolean"
         },
         "internalMetricName": {
           "description": "internal metric name",
@@ -5930,13 +5923,13 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Kind of synchronization",
+          "description": "Kind of synchronization setting on share.",
           "enum": [
             "ScheduleBased"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "sourceShareSynchronizationSettingKind",
             "modelAsString": true
           }
         }
@@ -6379,13 +6372,13 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of synchronization",
+          "description": "Kind of synchronization setting.",
           "enum": [
             "ScheduleBased"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "synchronizationSettingKind",
             "modelAsString": true
           }
         }
@@ -6444,13 +6437,13 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of synchronization",
+          "description": "Kind of synchronization on trigger.",
           "enum": [
             "ScheduleBased"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "kind",
+            "name": "triggerKind",
             "modelAsString": true
           }
         }

@@ -79,6 +79,59 @@ directive:
     where: $.definitions.Attestation.properties
     reason: systemData is now a required top level property
 
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: policyEvents.json
+    reason: unnecessary check
+
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: policyStates.json
+    reason: unnecessary check
+
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: policyEvents.json
+    reason: unnecessary check
+
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: policyStates.json
+    reason: unnecessary check
+
+```
+
+``` yaml !$(python)
+directive:
+  - from: policyEvents.json
+    where: $
+    transform: delete $['x-ms-paths']
+    reason: other languages which still use track1 does not support remove '/' for 'next_link'
+
+  - from: policyStates.json
+    where: $
+    transform: delete $['x-ms-paths']
+    reason: other languages which still use track1 does not support remove '/' for 'next_link'
+
+  - from: policyEvents.json
+    where:
+      - $.path["/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults"]
+    transform: delete $['post']['x-ms-pageable']['operationName']
+
+  - from: policyStates.json
+    where:
+      - $.path["/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+      - $.path["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"]
+    transform: delete $['post']['x-ms-pageable']['operationName']
 ```
 
 ### Tag: package-2021-01
@@ -160,14 +213,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js policyinsights/resource-manager
 ```
 
 
@@ -187,54 +237,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python) && !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.policyinsights
-  package-name: azure-mgmt-policyinsights
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(track2)
-python-mode: create
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.policyinsights
-package-name: azure-mgmt-policyinsights
-package-version: 1.0.0b1
-clear-output-folder: true
-
-directive:
-  - from: policyEvents.json
-    where: $.parameters.fromParameter
-    transform: $['x-ms-client-name'] = 'FromProperty'
-
-  - from: policyStates.json
-    where: $.parameters.fromParameter
-    transform: $['x-ms-client-name'] = 'FromProperty'
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
-```
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -333,7 +336,5 @@ generate-interface: true
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

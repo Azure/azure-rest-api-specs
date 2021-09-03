@@ -28,6 +28,18 @@ directive:
     from: defenderSettings.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: sensors.json
+    where: '$.paths["/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}"].get'
+    reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: onPremiseSensors.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/onPremiseSensors"].get'
+    reason: The list returns limited number of items
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: onPremiseSensors.json
+    where: $.definitions.OnPremiseSensor
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
 ```
 
 ### Basic Information
@@ -49,6 +61,53 @@ These settings apply only when `--tag=2021-02-01-preview` is specified on the co
 input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/sensors.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/onPremiseSensors.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/locations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceGroups.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/devices.json
+```
+
+``` yaml
+title: IoTSecurity
+description: API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider
+openapi-type: arm
+tag: 2021-07-01-preview
+```
+
+### Tag: 2021-07-01-preview
+
+These settings apply only when `--tag=2021-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2021-07-01-preview'
+input-file:
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/alerts.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/alertTypes.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendations.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/recommendationTypes.json
+- Microsoft.IoTSecurity/preview/2021-07-01-preview/vulnerabilities.json
+```
+
+
+``` yaml
+title: IoTSecurity
+description: API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider
+openapi-type: arm
+tag: 2021-09-01-preview
+```
+
+### Tag: 2021-09-01-preview
+
+These settings apply only when `--tag=2021-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2021-09-01-preview'
+input-file:
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/locations.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/sites.json
+- Microsoft.IoTSecurity/preview/2021-09-01-preview/sensors.json
 ```
 
 ---

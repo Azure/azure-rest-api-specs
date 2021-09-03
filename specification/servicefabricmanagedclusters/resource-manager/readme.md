@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2021-01-preview
+tag: package-2021-07-preview
 
 directive:
   - suppress: ListInOperationName
@@ -69,6 +69,28 @@ directive:
 
 ```
 
+### Tag: package-2021-07-preview
+
+These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-preview'
+input-file:
+- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/managedapplication.json
+- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/managedcluster.json
+- Microsoft.ServiceFabricManagedClusters/preview/2021-07-01-preview/nodetype.json
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/managedapplication.json
+- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/managedcluster.json
+- Microsoft.ServiceFabricManagedClusters/stable/2021-05-01/nodetype.json
+```
+
 ### Tag: package-2021-01-preview
 
 These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
@@ -92,12 +114,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js servicefabricmanagedlusters/resource-manager
 ```
-
 
 ## C#
 
@@ -110,37 +129,13 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabricManagedClusters
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/servicefabricmanagedlusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
+  output-folder: $(csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
   clear-output-folder: true
 ```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+See configuration in [readme.python.md](./readme.python.md)
 
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.servicefabricmanagedclusters
-  package-name: azure-mgmt-servicefabricmanagedclusters
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/servicefabricmanagedclusters/azure-mgmt-servicefabricmanagedclusters/azure/mgmt/servicefabricmanagedclusters
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/servicefabricmanagedclusters/azure-mgmt-servicefabricmanagedclusters
-```
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

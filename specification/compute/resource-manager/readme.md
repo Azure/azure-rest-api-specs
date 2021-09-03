@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-12-01
+tag: package-2021-07-01
 
 directive:
   - where:
@@ -59,6 +59,16 @@ directive:
       - BodyTopLevelProperties
   - where:
       - $.definitions.Snapshot.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.RestorePointCreate.properties
+    suppress:
+      - BodyTopLevelProperties
+    reason:
+      - CRP has already been using existing ‘RestorePoint’ model definition with these properties as top level properties for many years now.
+  - where:
+      - $.definitions.RestorePoint.properties
     suppress:
       - BodyTopLevelProperties
   - where:
@@ -207,8 +217,123 @@ directive:
       - TrackedResourcePatchOperation
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
-
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
+    suppress:
+      - D5001
+    reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
+  - where:
+      - $.definitions.RestorePoint
+    suppress:
+      - NestedResourcesMustHaveListOperation
+    reason:
+      - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01'
+input-file:
+- Microsoft.Compute/stable/2021-07-01/compute.json
+- Microsoft.Compute/stable/2021-07-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2021-07-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-07-01-only
+
+These settings apply only when `--tag=package-2021-07-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-07-01/compute.json
+- Microsoft.Compute/stable/2021-07-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-07-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+```
+
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
+```
+
+### Tag: package-2021-06-01-preview-only
+
+These settings apply only when `--tag=package-2021-06-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview-only'
+input-file:
+- Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
+```
+
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01'
+input-file:
+- Microsoft.Compute/stable/2021-04-01/compute.json
+- Microsoft.Compute/stable/2021-04-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-04-01-only
+
+These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-04-01/compute.json
+- Microsoft.Compute/stable/2021-04-01/runCommands.json
+```
+
+### Tag: package-2021-03-01
+
+These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-03-01-only
+
+These settings apply only when `--tag=package-2021-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
+```
+
 ### Tag: package-2020-12-01
 
 These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
@@ -218,7 +343,7 @@ input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-09-30/disk.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
 ```
 
@@ -228,6 +353,7 @@ These settings apply only when `--tag=package-2020-12-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-12-01-only'
 input-file:
+- Microsoft.Compute/stable/2020-12-01/disk.json
 - Microsoft.Compute/stable/2020-12-01/compute.json
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
 ```
@@ -804,8 +930,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js compute/resource-manager
 ```
 
 ## Go
@@ -827,6 +951,4 @@ input-file:
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

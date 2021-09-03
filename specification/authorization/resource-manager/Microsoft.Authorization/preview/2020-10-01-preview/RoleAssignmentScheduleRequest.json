@@ -47,7 +47,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment schedule request to create. The scope can be any REST resource instance. For example, use '/subscriptions/{subscription-id}/' for a subscription, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "description": "The scope of the role assignment schedule request to create. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -67,7 +67,7 @@
             "description": "Parameters for the role assignment schedule request."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -113,7 +113,7 @@
             "description": "The name (guid) of the role assignment schedule request to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -161,7 +161,7 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -213,7 +213,7 @@
             "description": "The name of the role assignment request to cancel."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -255,6 +255,7 @@
           "description": "Returns role assignment requests of specific status."
         }
       },
+      "type": "object",
       "description": "Role assignment schedule request filter"
     },
     "RoleAssignmentScheduleRequestProperties": {
@@ -279,10 +280,12 @@
           "enum": [
             "User",
             "Group",
-            "ServicePrincipal"
+            "ServicePrincipal",
+            "ForeignGroup",
+            "Device"
           ],
           "x-ms-enum": {
-            "name": "PrincipalType",
+            "name": "principalType",
             "modelAsString": true
           }
         },
@@ -383,9 +386,11 @@
                   "description": "Duration of the role assignment schedule in TimeSpan."
                 }
               },
+              "type": "object",
               "description": "Expiration of the role assignment schedule"
             }
           },
+          "type": "object",
           "description": "Schedule info of the role assignment schedule"
         },
         "linkedRoleEligibilityScheduleId": {
@@ -407,6 +412,7 @@
               "description": "Ticket system name for the role assignment"
             }
           },
+          "type": "object",
           "description": "Ticket Info of the role assignment"
         },
         "condition": {
@@ -427,6 +433,12 @@
           "type": "string",
           "readOnly": true,
           "description": "Id of the user who created this request"
+        },
+        "expandedProperties": {
+          "type": "object",
+          "readOnly": true,
+          "description": "Additional properties of principal, scope and role definition",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "required": [
@@ -434,6 +446,7 @@
         "principalId",
         "requestType"
       ],
+      "type": "object",
       "description": "Role assignment schedule request properties with scope."
     },
     "RoleAssignmentScheduleRequest": {
@@ -459,6 +472,7 @@
           "description": "Role assignment schedule request properties."
         }
       },
+      "type": "object",
       "description": "Role Assignment schedule request"
     },
     "RoleAssignmentScheduleRequestListResult": {
@@ -475,6 +489,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role assignment schedule request list operation result."
     },
     "CloudError": {
@@ -484,6 +499,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
@@ -498,16 +514,71 @@
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
       },
+      "type": "object",
       "description": "An error response from the service."
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "principal": {
+          "type": "object",
+          "description": "Details of the principal",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the principal"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the principal"
+            },
+            "email": {
+              "type": "string",
+              "description": "Email id of the principal"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the principal"
+            }
+          }
+        }
+      },
+      "type": "object"
     }
   }
 }
