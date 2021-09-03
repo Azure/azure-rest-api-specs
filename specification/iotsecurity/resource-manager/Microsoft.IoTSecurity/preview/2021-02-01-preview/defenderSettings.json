@@ -307,11 +307,54 @@
           "items": {
             "type": "string"
           }
+        },
+        "onboardingKind": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "MigratedToAzure",
+            "Evaluation",
+            "Purchased"
+          ],
+          "description": "The kind of onboarding for the subscription",
+          "x-ms-enum": {
+            "name": "OnboardingKind",
+            "modelAsString": true
+          }
+        },
+        "evaluationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the evaluation period, if such exist",
+          "readOnly": true
+        },
+        "mdeIntegration": {
+          "type": "object",
+          "description": "MDE integration configuration",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Disabled",
+                "Enabled"
+              ],
+              "description": "Integration status",
+              "x-ms-enum": {
+                "name": "MdeIntegration",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "status"
+          ]
         }
       },
       "required": [
         "deviceQuota",
-        "sentinelWorkspaceResourceIds"
+        "sentinelWorkspaceResourceIds",
+        "onboardingKind",
+        "mdeIntegration"
       ]
     },
     "DownloadLink": {

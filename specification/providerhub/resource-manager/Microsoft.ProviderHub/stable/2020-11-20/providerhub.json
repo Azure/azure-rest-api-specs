@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Providerhub",
-    "description": "Microsoft Provider Hub",
+    "title": "ProviderHub",
+    "description": "Microsoft ProviderHub",
     "version": "2020-11-20",
     "x-ms-code-generation-settings": {
-      "name": "providerhubClient"
+      "name": "ProviderHubClient"
     }
   },
   "securityDefinitions": {
@@ -93,6 +93,15 @@
           },
           {
             "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomRollout"
+            },
+            "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -269,6 +278,15 @@
           },
           {
             "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "description": "The Default rollout properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -452,6 +470,15 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
+            "name": "checkinManifestParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckinManifestParams"
+            },
+            "description": "The required body parameters supplied to the checkin manifest operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -538,6 +565,15 @@
           },
           {
             "$ref": "#/parameters/GetNotificationRegistrationNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRegistration"
+            },
+            "description": "The required body parameters supplied to the notification registration operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -747,6 +783,15 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
+            "name": "OperationsPutContent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationsPutContent"
+            },
+            "description": "The operations content properties supplied to the CreateOrUpdate operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -869,6 +914,15 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            },
+            "description": "The provider registration properties supplied to the CreateOrUpdate operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -982,48 +1036,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProviderHub/providerRegistrations": {
-      "get": {
-        "tags": [
-          "ProviderRegistration"
-        ],
-        "description": "Pending route: Gets the list of the provider registrations by the resource group.",
-        "operationId": "ProviderRegistrations_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "ProviderRegistrations_ListByResourceGroup": {
-            "$ref": "./examples/ProviderRegistrations_ListByResourceGroup.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the provider registrations.",
-            "schema": {
-              "$ref": "#/definitions/ProviderRegistrationArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateOperations": {
       "post": {
         "tags": [
@@ -1118,7 +1130,7 @@
           "ResourceTypeRegistration"
         ],
         "description": "Creates or updates a resource type.",
-        "operationId": "ResourceTypeRegistration_CreateOrUpdate",
+        "operationId": "ResourceTypeRegistrations_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -1133,12 +1145,21 @@
             "$ref": "#/parameters/GetResourceTypeParameter"
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "description": "The required request body parameters supplied to the resource type registration CreateOrUpdate operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
-          "ResourceTypeRegistration_CreateOrUpdate": {
-            "$ref": "./examples/ResourceTypeRegistration_CreateOrUpdate.json"
+          "ResourceTypeRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdate.json"
           }
         },
         "responses": {
@@ -1171,7 +1192,7 @@
           "ResourceTypeRegistration"
         ],
         "description": "Deletes a resource type",
-        "operationId": "ResourceTypeRegistration_Delete",
+        "operationId": "ResourceTypeRegistrations_Delete",
         "produces": [
           "application/json"
         ],
@@ -1190,8 +1211,8 @@
           }
         ],
         "x-ms-examples": {
-          "ResourceTypeRegistration_Delete": {
-            "$ref": "./examples/ResourceTypeRegistration_Delete.json"
+          "ResourceTypeRegistrations_Delete": {
+            "$ref": "./examples/ResourceTypeRegistrations_Delete.json"
           }
         },
         "responses": {
@@ -1323,6 +1344,15 @@
           },
           {
             "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1469,6 +1499,15 @@
           },
           {
             "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1624,6 +1663,15 @@
           },
           {
             "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1788,6 +1836,15 @@
           },
           {
             "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            },
+            "description": "The required body parameters supplied to the resource sku operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -2161,6 +2218,23 @@
         }
       }
     },
+    "CheckinManifestParams": {
+      "type": "object",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "description": "The environment supplied to the checkin manifest operation."
+        },
+        "baselineArmManifestLocation": {
+          "type": "string",
+          "description": "The baseline ARM manifest location supplied to the checkin manifest operation."
+        }
+      },
+      "required": [
+        "baselineArmManifestLocation",
+        "environment"
+      ]
+    },
     "RolloutStatusBase": {
       "type": "object",
       "properties": {
@@ -2180,6 +2254,9 @@
     },
     "CustomRolloutProperties": {
       "type": "object",
+      "required": [
+        "specification"
+      ],
       "properties": {
         "provisioningState": {
           "enum": [
@@ -2222,6 +2299,9 @@
     "CustomRollout": {
       "description": "Rollout details.",
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2229,8 +2309,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
@@ -2247,11 +2330,7 @@
         },
         "innerError": {
           "description": "Object containing more specific information than the current object about the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerError"
-            }
-          ],
+          "type": "object",
           "readOnly": true
         }
       },
@@ -2495,8 +2574,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefaultRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
@@ -3379,6 +3461,28 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
+        },
+        "provisioningState": {
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3496,6 +3600,20 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "OperationsPutContent": {
+      "required": [
+        "contents"
+      ],
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDefinition"
+          }
+        }
+      }
     },
     "OperationsDefinitionArrayResponseWithContinuation": {
       "type": "object",
@@ -4429,6 +4547,28 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuSetting"
+          }
+        },
+        "provisioningState": {
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
           }
         }
       }

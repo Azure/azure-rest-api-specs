@@ -387,7 +387,7 @@
           "description": "Number of unused versions per application type to keep."
         }
       },
-      "description": "The policy used to clean up unused versions."
+      "description": "The policy used to clean up unused versions.  When the policy is not specified explicitly, the default unused application versions to keep will be 3."
     },
     "AzureActiveDirectory": {
       "properties": {
@@ -429,6 +429,33 @@
         }
       },
       "description": "Client certificate definition."
+    },
+    "ClusterUpgradeCadence": {
+      "type": "string",
+      "enum": [
+        "Wave0",
+        "Wave1",
+        "Wave2"
+      ],
+      "x-ms-enum": {
+        "name": "clusterUpgradeCadence",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Wave0",
+            "description": "Cluster upgrade starts immediately after a new version is rolled out. Recommended for Test/Dev clusters."
+          },
+          {
+            "value": "Wave1",
+            "description": "Cluster upgrade starts 7 days after a new version is rolled out. Recommended for Pre-prod clusters."
+          },
+          {
+            "value": "Wave2",
+            "description": "Cluster upgrade starts 14 days after a new version is rolled out. Recommended for Production clusters."
+          }
+        ]
+      },
+      "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
     },
     "ClusterState": {
       "type": "string",
@@ -638,6 +665,10 @@
         "clusterCodeVersion": {
           "type": "string",
           "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+        },
+        "clusterUpgradeCadence": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
         },
         "addonFeatures": {
           "type": "array",
@@ -981,17 +1012,7 @@
         },
         "createdByType": {
           "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that created the resource."
         },
         "createdAt": {
           "type": "string",
@@ -1004,17 +1025,7 @@
         },
         "lastModifiedByType": {
           "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
           "type": "string",

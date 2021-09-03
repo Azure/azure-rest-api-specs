@@ -38,17 +38,15 @@ tag: package-preview-2020-06
 ```
 
 
-### Tag: package-preview-2020-06
+### Tag: package-2016-01
 
-These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
+These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-06'
+```yaml $(tag) == 'package-2016-01'
 input-file:
-  - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
+  - Microsoft.AzureStack/stable/2016-01-01/AzureStack.json
+  - Microsoft.AzureStack/stable/2016-01-01/Product.json
+  - Microsoft.AzureStack/stable/2016-01-01/Registration.json
 ```
 ### Tag: package-2017-06-01
 
@@ -60,6 +58,18 @@ input-file:
 - Microsoft.AzureStack/stable/2017-06-01/Product.json
 - Microsoft.AzureStack/stable/2017-06-01/Registration.json
 - Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
+```
+### Tag: package-preview-2020-06
+
+These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-06'
+input-file:
+  - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
 ```
 
 ---
@@ -86,14 +96,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js azurestack/resource-manager
 ```
 
 ## C#
@@ -154,6 +162,4 @@ generate-interface: true
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

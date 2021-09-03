@@ -77,8 +77,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric_mesh']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js servicefabricmesh/resource-manager
 ```
 
 
@@ -172,7 +170,5 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

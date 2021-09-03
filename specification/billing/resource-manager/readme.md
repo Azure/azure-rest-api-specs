@@ -48,6 +48,26 @@ input-file:
 - Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
 ```
 
+### Tag: package-2020-09-preview
+
+These settings apply only when `--tag=package-2020-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-preview'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2020-09-01-preview/billingPromotions.json
+```
+
+### Tag: package-2020-11-preview
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-preview'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2020-11-01-preview/billingPromotions.json
+```
+
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
@@ -105,18 +125,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
-  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js billing/resource-manager
 ```
 
 
@@ -133,6 +151,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/billing/Microsoft.Azure.Management.Billing/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -258,6 +280,4 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

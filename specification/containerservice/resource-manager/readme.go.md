@@ -2,16 +2,28 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/containerservice/armcontainerservice
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-07
+  - tag: package-2021-05
+  - tag: package-2021-03
+  - tag: package-2021-02
   - tag: package-2020-12
   - tag: package-2020-11
   - tag: package-2020-09
@@ -35,6 +47,43 @@ batch:
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-07
+```
+
+### Tag: package-2021-07 and go
+
+These settings apply only when `--package-2021-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-07' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-07-01/$(namespace)
+```
+### Tag: package-2021-05 and go
+
+These settings apply only when `--package-2021-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-05' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-05-01/$(namespace)
+```
+### Tag: package-2021-03 and go
+
+These settings apply only when `--package-2021-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-03' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-03-01/$(namespace)
+```
+### Tag: package-2021-02 and go
+
+These settings apply only when `--package-2021-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-02' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-02-01/$(namespace)
 ```
 ### Tag: package-2020-12 and go
 

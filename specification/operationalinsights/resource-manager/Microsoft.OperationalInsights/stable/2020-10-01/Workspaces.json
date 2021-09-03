@@ -424,12 +424,6 @@
           "format": "int32",
           "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
         },
-        "maxCapacityReservationLevel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum capacity reservation level available for this workspace, when CapacityReservation sku is selected.",
-          "readOnly": true
-        },
         "lastSkuUpdate": {
           "type": "string",
           "description": "The last time when the sku was updated.",
@@ -530,13 +524,22 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "minimum": 30,
-          "maximum": 730,
-          "description": "The workspace data retention in days, between 30 and 730."
+          "x-nullable": true,
+          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details."
         },
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
           "description": "The daily volume cap for ingestion."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Workspace creation date.",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "Workspace modification date.",
+          "readOnly": true
         },
         "publicNetworkAccessForIngestion": {
           "description": "The network access type for accessing Log Analytics ingestion.",
@@ -557,9 +560,44 @@
             "$ref": "#/definitions/PrivateLinkScopedResource"
           },
           "description": "List of linked private link scope resources."
+        },
+        "features": {
+          "$ref": "#/definitions/WorkspaceFeatures",
+          "description": "Workspace features."
         }
       },
       "description": "Workspace properties."
+    },
+    "WorkspaceFeatures": {
+      "properties": {
+        "enableDataExport": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate if data should be exported."
+        },
+        "immediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that describes if we want to remove the data after 30 days."
+        },
+        "enableLogAccessUsingOnlyResourcePermissions": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate which permission to use - resource or workspace or both."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Disable Non-AAD based Auth."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Workspace features."
     },
     "PrivateLinkScopedResource": {
       "properties": {

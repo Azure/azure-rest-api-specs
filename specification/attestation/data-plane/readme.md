@@ -25,7 +25,7 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-09-01
+tag: package-2020-10-01
 ```
 
 ### Tag: package-2018-09-01
@@ -57,6 +57,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```

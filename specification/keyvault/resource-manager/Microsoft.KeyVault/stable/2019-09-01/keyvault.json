@@ -1261,6 +1261,11 @@
           "type": "string",
           "description": "The URI of the vault for performing operations on keys and secrets. This property is readonly"
         },
+        "hsmPoolResourceId": {
+          "type": "string",
+          "description": "The resource id of HSM Pool.",
+          "readOnly": true
+        },
         "enabledForDeployment": {
           "type": "boolean",
           "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
@@ -1287,7 +1292,7 @@
         "enableRbacAuthorization": {
           "type": "boolean",
           "default": false,
-          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored (warning: this is a preview feature). When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC."
+          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC."
         },
         "createMode": {
           "type": "string",
@@ -1299,7 +1304,11 @@
           "x-ms-enum": {
             "name": "CreateMode",
             "modelAsString": false
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "enablePurgeProtection": {
           "type": "boolean",
@@ -1372,7 +1381,7 @@
         },
         "enableRbacAuthorization": {
           "type": "boolean",
-          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored (warning: this is a preview feature). When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not change."
+          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not change."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
@@ -1805,6 +1814,10 @@
         "id": {
           "type": "string",
           "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
         },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
