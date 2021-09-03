@@ -1302,6 +1302,13 @@
           },
           "description": "This is the collection of backup reviewers."
         },
+        "additionalNotificationRecipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewNotificationRecipient"
+          },
+          "description": "This is the collection of notification recipients."
+        },        
         "reviewersType": {
           "type": "string",
           "readOnly": true,
@@ -1404,6 +1411,13 @@
           },
           "description": "This is the collection of backup reviewers."
         },
+        "additionalNotificationRecipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewNotificationRecipient"
+          },
+          "description": "This is the collection of notification recipients."
+        },         
         "reviewersType": {
           "type": "string",
           "readOnly": true,
@@ -1658,6 +1672,33 @@
       },
       "description": "Descriptor for what needs to be reviewed"
     },
+    "AccessReviewNotificationRecipient": {
+      "type": "object",
+      "properties": {
+        "notificationTemplateType": {
+          "type": "string",
+          "description": "The email template type recipient receive"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The id of the notification recipient(user/servicePrincipal)"
+        },        
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type : user/group",
+          "enum": [
+            "user",
+            "group"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewNotificationRecipientType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Descriptor for what notification needs to be send"
+    },    
     "AccessReviewDecision": {
       "type": "object",
       "x-ms-azure-resource": true,
