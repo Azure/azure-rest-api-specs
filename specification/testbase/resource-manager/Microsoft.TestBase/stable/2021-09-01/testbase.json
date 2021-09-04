@@ -1309,6 +1309,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/runTest": {
+      "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_RunTest",
+        "description": "Trigger a test run on the package.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PackageRunTestParameters"
+            },
+            "description": "The parameters supplied to the Test Base Package to start a Test Run."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The test is triggered successfully."
+          },
+          "202": {
+            "description": "The request to trigger a test was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The test is triggered successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageRunTest": {
+            "$ref": "./examples/PackageRunTest.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testSummaries": {
       "get": {
         "tags": [
@@ -3036,6 +3102,45 @@
       "type": "object",
       "description": "Description of a Check Name availability response properties."
     },
+    "PackageRunTestParameters": {
+      "description": "The parameters supplied to the Test Base Package to start a Test Run.",
+      "type": "object",
+      "properties": {
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "The type of the test."
+        },
+        "osUpdateType": {
+          "type": "string",
+          "description": "Specifies the OS update type to test against.",
+          "default": "SecurityUpdate",
+          "enum": [
+            "SecurityUpdate",
+            "FeatureUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "osUpdateType",
+            "modelAsString": true
+          }
+        },
+        "osName": {
+          "type": "string",
+          "description": "The operating system name. e.g. Windows 10 1809."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The name of the tested release (OS update)."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring, only for release of feature updates."
+        }
+      },
+      "required": [
+        "testType",
+        "osName"
+      ]
+    },
     "PackageListResult": {
       "description": "A list of Test Base Packages.",
       "type": "object",
@@ -3248,6 +3353,11 @@
             "name": "validationRunStatus",
             "modelAsString": true
           }
+        },
+        "validationResultId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource identifier of the validation test result."
         },
         "isActive": {
           "type": "boolean",
