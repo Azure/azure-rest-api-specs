@@ -116,7 +116,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutopilotEnvironmentResponse"
+              "$ref": "#/definitions/EnvironmentResponse"
             }
           }
         ],
@@ -163,7 +163,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutopilotEnvironmentResponse"
+              "$ref": "#/definitions/EnvironmentResponse"
             }
           }
         ],
@@ -258,6 +258,19 @@
     }
   },
   "definitions": {
+    "EnvironmentResponse": {
+      "description": "Autopilot environment resource.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "location"
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentResource",
+          "description": "Autopilot environment resource payload."
+        }
+      }
+    },
     "EnvironmentResourceResult": {
       "properties": {
         "value": {
@@ -265,7 +278,7 @@
           "items": {
             "$ref": "#/definitions/EnvironmentResource"
           },
-          "description": "An array of Dsts ServiceAccount"
+          "description": "An array of autopilot environment resources."
         },
         "nextLink": {
           "type": "string",
