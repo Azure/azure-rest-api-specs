@@ -917,7 +917,7 @@
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "playAudioRequest",
             "in": "body",
             "description": "PlayAudioRequest body.",
             "required": true,
@@ -955,6 +955,69 @@
         "x-ms-examples": {
           "Play audio to a participant.": {
             "$ref": "./examples/ServerCalls_ParticipantPlayAudio.json"
+          }
+        }
+      }
+    },
+    "/calling/serverCalls/{serverCallId}/participants/{participantId}/:cancelAllMediaOperations": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "cancel media operation for a participant.",
+        "description": "cancel media operation for a participant.",
+        "operationId": "ServerCalls_CancelMediaOperation",
+        "parameters": [
+          {
+            "name": "serverCallId",
+            "in": "path",
+            "description": "The server call id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "The participant id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cancelMediaOperationRequest",
+            "in": "body",
+            "description": "The cancel media operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelMediaOperationRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the cancel media operation response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "cancel media operation for a participant.": {
+            "$ref": "./examples/ServerCalls_CancelMediaOperation.json"
           }
         }
       }
@@ -1423,7 +1486,6 @@
           "CallConnection"
         ],
         "summary": "Play audio to a participant.",
-        "description": "Play audio to a participant.",
         "operationId": "CallConnections_ParticipantPlayAudio",
         "parameters": [
           {
@@ -1441,7 +1503,7 @@
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "playAudioRequest",
             "in": "body",
             "description": "PlayAudioRequest body.",
             "required": true,
@@ -1479,6 +1541,69 @@
         "x-ms-examples": {
           "Play audio to a participant.": {
             "$ref": "./examples/CallConnections_ParticipantPlayAudio.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants/{participantId}/:cancelAllMediaOperations": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "cancel media operation for a participant.",
+        "description": "cancel media operation for a participant.",
+        "operationId": "CallConnections_CancelMediaOperation",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The callConnectionId.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "The participant id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cancelMediaOperationRequest",
+            "in": "body",
+            "description": "The cancel media operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelMediaOperationRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the cancel media operation response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "cancel media operation for a participant.": {
+            "$ref": "./examples/CallConnections_CancelMediaOperation.json"
           }
         }
       }
@@ -1865,6 +1990,62 @@
         "x-ms-examples": {
           "Play audio in the call.": {
             "$ref": "./examples/ServerCalls_PlayAudio.json"
+          }
+        }
+      }
+    },
+    "/calling/serverCalls/{serverCallId}/:cancelAllMediaOperations": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "cancel media operation.",
+        "description": "cancel media operation.",
+        "operationId": "ServerCalls_CancelMediaOperation",
+        "parameters": [
+          {
+            "name": "serverCallId",
+            "in": "path",
+            "description": "The server call id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cancelMediaOperationRequest",
+            "in": "body",
+            "description": "The cancel media operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelMediaOperationRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the cancel media operation response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "cancel media operation.": {
+            "$ref": "./examples/ServerCalls_CancelMediaOperation.json"
           }
         }
       }
@@ -2333,6 +2514,19 @@
         "resultInfo": {
           "$ref": "#/definitions/ResultInfo",
           "description": "The result info for the operation."
+        }
+      }
+    },
+    "CancelMediaOperationRequest": {
+      "description": "The request payload for stopping a media operation for a participant.",
+      "required": [
+        "mediaOperationId"
+      ],
+      "type": "object",
+      "properties": {
+        "mediaOperationId": {
+          "description": "The operationId of the media operation to cancel",
+          "type": "string"
         }
       }
     },

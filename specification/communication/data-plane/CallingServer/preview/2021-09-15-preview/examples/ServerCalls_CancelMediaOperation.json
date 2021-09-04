@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2021-08-15-preview",
+    "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
+    "cancelMediaOperationRequest": {
+      "mediaOperationId": "335dc962-2535-4bc7-9a97-74df5b6ef5e5"
+    }
+  },
+  "responses": {
+    "200": {},
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "The request contains invalid data."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "401",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "403",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "404",
+          "message": "Resource not found on the server."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}
