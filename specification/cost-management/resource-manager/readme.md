@@ -41,6 +41,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 input-file:
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
 ```
 ### Tag: package-2021-01
 
