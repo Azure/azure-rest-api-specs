@@ -4,6 +4,9 @@
   "parameters": {
     "serviceName": {
       "type": "string"
+    },
+    "ascDomainName": {
+      "type": "string"
     }
   },
   "resources": [
@@ -14,7 +17,7 @@
       "properties": {
         "TTL": "60",
         "CNAMERecord": {
-          "cname": "[concat(parameters('serviceName'), '.azuremicroservices.io')]"
+          "cname": "[concat(parameters('serviceName'), parameters('ascDomainName'))]"
         }
       }
     }
