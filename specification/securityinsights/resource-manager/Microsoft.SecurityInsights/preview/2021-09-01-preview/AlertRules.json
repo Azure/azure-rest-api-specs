@@ -1268,6 +1268,10 @@
           "description": "The Name of the alert rule template used to create this rule.",
           "type": "string"
         },
+        "templateVersion": {
+          "description": "The version of the alert rule template used to create this rule - in the format <a.b.c>, where all are numbers, for example 0 <1.0.2>",
+          "type": "string"
+        },
         "description": {
           "description": "The description of the alert rule.",
           "type": "string"
@@ -1346,6 +1350,10 @@
                 "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
+            },
+            "tactics": {
+              "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>."
+              "type": "string
             }
           },
           "required": [
@@ -1565,7 +1573,7 @@
               {
                 "description": "Grouping alerts into a single incident if all the entities match",
                 "value": "AllEntities"
-              },
+             
               {
                 "description": "Grouping any alerts triggered by this rule into a single incident",
                 "value": "AnyAlert"
