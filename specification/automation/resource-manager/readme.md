@@ -232,6 +232,18 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
+### Tag: package-2021-06-22
+
+These settings apply only when `--tag=package-2021-06-22` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-22'
+input-file:
+- Microsoft.Automation/stable/2021-06-22/account.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2021-06-22/operations.json
+```
+
 ---
 ## Suppression
 ``` yaml
@@ -257,6 +269,21 @@ directive:
   - suppress: LongRunningResponseStatusCode
     from: runbook.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/publish"].post["x-ms-long-running-operation"]
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorkerGroup.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorker.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: operations.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: BodyTopLevelProperties
+    from: hybridRunbookWorkerGroup.json
+    reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: hybridRunbookWorkerGroup.json
+    reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
 ---

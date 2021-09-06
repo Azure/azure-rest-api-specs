@@ -53,6 +53,14 @@ directive:
     from: WebApps.json
     where: $.definitions.KeyInfo.properties
     reason: Model type is not an Azure resource
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: WebApps.json
+    where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
+    reason: Property name contains WWW which is an acronym, so camel case does not apply here.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: WebApps.json
+    where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
+    reason: Property name contains WWW which is an acronym, so camel case does not apply here.
 ```
 
 ### Tag: package-2021-02
@@ -1654,6 +1662,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
