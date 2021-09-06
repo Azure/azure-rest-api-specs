@@ -3271,14 +3271,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3477,6 +3474,212 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the subscription.",
+        "operationId": "VMwareSites_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VMWareSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/VMwareSitesInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the resource group.",
+        "operationId": "VMwareSites_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VMWareSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/VMwareSites_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "summary": "Get all hyperv sites.",
+        "description": "Get all the hyperv sites in the subscription.",
+        "operationId": "HyperVSites_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+{
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HyperVSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVSites_List": {
+            "$ref": "./examples/HyperVSitesInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "summary": "Get all hyperv sites.",
+        "description": "Get all the hyperv sites in the subscription.",
+        "operationId": "HyperVSites_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HyperVSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/HyperVSites_List.json"
+          }
+        }
       }
     }
   },
@@ -4195,6 +4398,38 @@
         }
       }
     },
+    "HyperVSitesResultList": {
+      "type": "object",
+      "description": "List of sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sites.",
+          "items": {
+            "$ref": "#/definitions/HyperVSite"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "VMWareSitesResultList": {
+      "type": "object",
+      "description": "List of sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sites.",
+          "items": {
+            "$ref": "#/definitions/VMWareSite"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
     "HyperVNetworkAdapter": {
       "description": "Second level object represented in responses as part of Machine REST resource.",
       "type": "object",
@@ -4729,6 +4964,10 @@
         "properties": {
           "$ref": "#/definitions/SiteProperties",
           "description": "Nested properties of Hyper-V site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -5409,6 +5648,10 @@
         "properties": {
           "$ref": "#/definitions/SiteProperties",
           "description": "Nested properties of VMWare site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -5463,6 +5706,10 @@
         "properties": {
           "$ref": "#/definitions/MasterSiteProperties",
           "description": "Nested properties of Master site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -5507,6 +5754,7 @@
     "PrivateEndpointConnection": {
       "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "Relative URL to get this Sites.",
@@ -6135,6 +6383,59 @@
         }
       },
       "description": "An error response from the Azure Migrate service."
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     },
     "OperationResultList": {
       "type": "object",
