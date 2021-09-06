@@ -28,10 +28,34 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-composite-v1
+tag: package-preview-2021-09-kustotest
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
+```
+
+### Tag: package-preview-2021-09-kustotest
+
+These settings apply only when `--tag=package-preview-2021-09-kustotest` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09-kustotest'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/kustoPool.json
 ```
 
 ### Tag: package-composite-v1
