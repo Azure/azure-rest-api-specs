@@ -243,8 +243,81 @@
               }
             }
           },
-          "400": {
-            "$ref": "../../../../Common/preview/1.0/common.json#/responses/408"
+          "400":{
+            "description": "The request contained an error",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "401":{
+            "description": "Access was denied. You may have entered your credentials incorrectly, or you might not have access to the requested resource or operation.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "403":
+          {
+            "description": "The request is for something forbidden. Authorization will not help.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "429":
+          {
+            "description": "The user has sent too many requests in a given amount of time. The account is being rate limited.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "500":
+          {
+            "description": "Your request could not be completed because there was a problem with the service.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "503":
+          {
+            "description": "There's a problem with the service right now. Please try again later.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
           },
           "default": {
             "$ref": "../../../../Common/preview/1.0/common.json#/responses/default"
@@ -355,8 +428,13 @@
               "description": "Query property",
               "type": "string",
               "readOnly": true
-            }
-          }
+            },
+            "numResults": {
+              "description": "NumResults property for the number of results returned",
+              "type": "integer",
+              "readOnly": true
+            }     
+          }     
         },
         "features": {
           "type": "array",
