@@ -3057,20 +3057,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationResultList"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -5781,6 +5772,10 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Gets the properties of the object.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -6304,50 +6299,65 @@
         }
       }
     },
-    "OperationDisplay": {
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
-      "description": "Displayable properties of the operation.",
-      "readOnly": true,
       "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Provider of the operation.",
-          "readOnly": true
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
         },
-        "resource": {
-          "type": "string",
-          "description": "Resource operated on by the operation.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation Type.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the operation.",
-          "readOnly": true
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
-    "Operation": {
+    "OperationDetail": {
+      "description": "Operation detail payload",
       "type": "object",
-      "description": "A REST API operation supported by the provider.",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Name of the operation.",
-          "readOnly": true
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
-          "description": "Displayable properties of the operation.",
-          "$ref": "#/definitions/OperationDisplay"
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
         },
         "origin": {
-          "type": "string",
-          "description": "Origin of the operation.",
-          "readOnly": true
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     },
@@ -6435,19 +6445,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The type of identity that last modified the resource."
-        }
-      }
-    },
-    "OperationResultList": {
-      "type": "object",
-      "description": "List of API operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations.",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
         }
       }
     }
