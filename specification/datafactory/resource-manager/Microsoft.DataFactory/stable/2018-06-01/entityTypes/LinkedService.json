@@ -299,6 +299,55 @@
         "connectionString"
       ]
     },
+    "AmazonRdsForSqlServerLinkedService": {
+      "x-ms-discriminator-value": "AmazonRdsForSqlServer",
+      "description": "Amazon RDS for SQL Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon RDS for SQL Server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForSqlServerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonRdsForSqlServerLinkedServiceTypeProperties": {
+      "description": "Amazon Rds for SQL Server linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
     "AzureSqlDatabaseLinkedService": {
       "x-ms-discriminator-value": "AzureSqlDatabase",
       "description": "Microsoft Azure SQL Database linked service.",
