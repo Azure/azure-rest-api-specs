@@ -44,6 +44,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
         }
       }
     },
@@ -80,6 +85,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableSkus": {
+            "$ref": "./examples/AvailableSkusList.json"
+          }
         }
       }
     },
@@ -123,6 +133,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetBySubscription": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetBySubscription.json"
+          }
         }
       }
     },
@@ -170,6 +185,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetByResourceGroup": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByResourceGroup.json"
+          }
         }
       }
     },
@@ -213,6 +233,14 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetByName": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByName.json"
+          },
+          "DataBoxEdgeDeviceGetByNameWithDataResidency": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByNameWithDataResidency.json"
           }
         }
       },
@@ -265,6 +293,14 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDevicePut": {
+            "$ref": "./examples/DataBoxEdgeDevicePut.json"
+          },
+          "DataBoxEdgeDevicePutWithDataResidency": {
+            "$ref": "./examples/DataBoxEdgeDevicePutWithDataResidency.json"
+          }
         }
       },
       "delete": {
@@ -295,14 +331,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the resource."
+          },
           "202": {
             "description": "Accepted the request to delete the resource."
           },
           "204": {
             "description": "The resource is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -311,7 +347,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceDelete": {
+            "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -362,6 +403,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDevicePatch": {
+            "$ref": "./examples/DataBoxEdgeDevicePatch.json"
+          }
         }
       }
     },
@@ -409,6 +455,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AlertGetAllInDevice": {
+            "$ref": "./examples/AlertGetAllInDevice.json"
+          }
         }
       }
     },
@@ -460,6 +511,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "AlertGet": {
+            "$ref": "./examples/AlertGet.json"
+          }
         }
       }
     },
@@ -507,6 +563,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BandwidthScheduleGetAllInDevice": {
+            "$ref": "./examples/BandwidthScheduleGetAllInDevice.json"
+          }
         }
       }
     },
@@ -558,6 +619,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "BandwidthScheduleGet": {
+            "$ref": "./examples/BandwidthScheduleGet.json"
+          }
         }
       },
       "put": {
@@ -604,14 +670,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the bandwidth schedule."
-          },
           "200": {
             "description": "Successfully created or updated the bandwidth schedule.",
             "schema": {
               "$ref": "#/definitions/BandwidthSchedule"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the bandwidth schedule."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -620,7 +686,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BandwidthSchedulePut": {
+            "$ref": "./examples/BandwidthSchedulePut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -657,14 +728,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
             "description": "Accepted the request to delete the bandwidth schedule."
           },
           "204": {
             "description": "Successfully deleted the bandwidth schedule."
-          },
-          "200": {
-            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -673,7 +744,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BandwidthScheduleDelete": {
+            "$ref": "./examples/BandwidthScheduleDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticProactiveLogCollectionSettings/default": {
@@ -717,6 +793,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetDiagnosticProactiveLogCollectionSettings": {
+            "$ref": "./examples/GetDiagnosticProactiveLogCollectionSettings.json"
+          }
         }
       },
       "put": {
@@ -756,14 +837,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to update the proactive log collection settings."
-          },
           "200": {
             "description": "Successfully updated the proactive log collection settings.",
             "schema": {
               "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
             }
+          },
+          "202": {
+            "description": "Accepted the request to update the proactive log collection settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -772,7 +853,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UpdateDiagnosticProactiveLogCollectionSettings": {
+            "$ref": "./examples/UpdateDiagnosticProactiveLogCollectionSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticRemoteSupportSettings/default": {
@@ -815,6 +901,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetDiagnosticRemoteSupportSettings": {
+            "$ref": "./examples/GetDiagnosticRemoteSupportSettings.json"
           }
         }
       },
@@ -871,7 +962,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UpdateDiagnosticRemoteSupportSettings": {
+            "$ref": "./examples/UpdateDiagnosticRemoteSupportSettings.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/downloadUpdates": {
@@ -903,11 +999,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to download the updates on the device."
-          },
           "200": {
             "description": "Successfully downloaded the updates on the device."
+          },
+          "202": {
+            "description": "Accepted the request to download the updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -916,7 +1012,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DownloadUpdatesPost": {
+            "$ref": "./examples/DownloadUpdatesPost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/generateCertificate": {
@@ -959,6 +1060,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateCertificate": {
+            "$ref": "./examples/GenerateCertificate.json"
           }
         }
       }
@@ -1004,6 +1110,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ExtendedInfoPost": {
+            "$ref": "./examples/ExtendedInfoPost.json"
+          }
         }
       }
     },
@@ -1036,11 +1147,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to install updates on the device."
-          },
           "200": {
             "description": "Successfully installed updates on the device."
+          },
+          "202": {
+            "description": "Accepted the request to install updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1049,7 +1160,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "InstallUpdatesPost": {
+            "$ref": "./examples/InstallUpdatesPost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/jobs/{name}": {
@@ -1100,6 +1216,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "JobsGet": {
+            "$ref": "./examples/JobsGet.json"
+          }
         }
       }
     },
@@ -1143,6 +1264,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSettingsGet": {
+            "$ref": "./examples/NetworkSettingsGet.json"
           }
         }
       }
@@ -1191,6 +1317,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NodesGetAllInDevice": {
+            "$ref": "./examples/NodeGetAllInDevice.json"
+          }
         }
       }
     },
@@ -1242,6 +1373,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "OperationsStatusGet": {
+            "$ref": "./examples/OperationsStatusGet.json"
+          }
         }
       }
     },
@@ -1289,6 +1425,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGetAllInDevice": {
+            "$ref": "./examples/OrderGetAllInDevice.json"
+          }
         }
       }
     },
@@ -1333,6 +1474,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/OrderGet.json"
+          }
         }
       },
       "put": {
@@ -1372,14 +1518,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the order."
-          },
           "200": {
             "description": "Successfully created or updated the order.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1388,7 +1534,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OrderPut": {
+            "$ref": "./examples/OrderPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1418,14 +1569,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the order."
+          },
           "202": {
             "description": "Accepted the request to delete the order."
           },
           "204": {
             "description": "The order is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1434,7 +1585,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OrderDelete": {
+            "$ref": "./examples/OrderDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/listDCAccessCode": {
@@ -1477,6 +1633,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetDCAccessCode": {
+            "$ref": "./examples/GetDCAccessCode.json"
           }
         }
       }
@@ -1525,6 +1686,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RoleGetAllInDevice": {
+            "$ref": "./examples/RoleGetAllInDevice.json"
+          }
         }
       }
     },
@@ -1576,6 +1742,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "RoleGet": {
+            "$ref": "./examples/RoleGet.json"
+          }
         }
       },
       "put": {
@@ -1622,14 +1793,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the role."
-          },
           "200": {
             "description": "Successfully created or updated the role.",
             "schema": {
               "$ref": "#/definitions/Role"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1638,7 +1809,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RolePut": {
+            "$ref": "./examples/RolePut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1675,14 +1851,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the role."
+          },
           "202": {
             "description": "Accepted the request to delete the role."
           },
           "204": {
             "description": "The role is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1691,7 +1867,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RoleDelete": {
+            "$ref": "./examples/RoleDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons": {
@@ -1745,6 +1926,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RoleListAddOns": {
+            "$ref": "./examples/RoleListAddOns.json"
+          }
         }
       }
     },
@@ -1803,6 +1989,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAddOns": {
+            "$ref": "./examples/GetAddons.json"
+          }
         }
       },
       "put": {
@@ -1856,14 +2047,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the addon."
-          },
           "200": {
             "description": "Successfully created or updated the addon.",
             "schema": {
               "$ref": "#/definitions/Addon"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1872,7 +2063,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PutAddOns": {
+            "$ref": "./examples/PutAddons.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1916,14 +2112,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the addon."
+          },
           "202": {
             "description": "Accepted the request to delete the addon."
           },
           "204": {
             "description": "The addon is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1932,7 +2128,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeleteAddOns": {
+            "$ref": "./examples/DeleteAddons.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig": {
@@ -1986,6 +2187,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListMonitoringConfig": {
+            "$ref": "./examples/ListMonitoringConfig.json"
+          }
         }
       }
     },
@@ -2037,6 +2243,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetMonitoringConfig": {
+            "$ref": "./examples/GetMonitoringConfig.json"
+          }
         }
       },
       "put": {
@@ -2083,14 +2294,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the metrics configuration."
-          },
           "200": {
             "description": "Successfully created or updated the metrics configuration.",
             "schema": {
               "$ref": "#/definitions/MonitoringMetricConfiguration"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the metrics configuration."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2099,7 +2310,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PutMonitoringConfig": {
+            "$ref": "./examples/PutMonitoringConfig.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2152,7 +2368,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeleteMonitoringConfig": {
+            "$ref": "./examples/DeleteMonitoringConfig.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/scanForUpdates": {
@@ -2184,11 +2405,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to scan for updates on the device."
-          },
           "200": {
             "description": "Successfully scanned the device for updates."
+          },
+          "202": {
+            "description": "Accepted the request to scan for updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2197,7 +2418,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScanForUpdatesPost": {
+            "$ref": "./examples/ScanForUpdatesPost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/securitySettings/default/update": {
@@ -2251,7 +2477,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "CreateOrUpdateSecuritySettings": {
+            "$ref": "./examples/SecuritySettingsUpdatePost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares": {
@@ -2298,6 +2529,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareGetAllInDevice": {
+            "$ref": "./examples/ShareGetAllInDevice.json"
+          }
         }
       }
     },
@@ -2349,6 +2585,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ShareGet": {
+            "$ref": "./examples/ShareGet.json"
+          }
         }
       },
       "put": {
@@ -2395,14 +2636,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the share."
-          },
           "200": {
             "description": "Successfully created or updated the share.",
             "schema": {
               "$ref": "#/definitions/Share"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2411,7 +2652,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SharePut": {
+            "$ref": "./examples/SharePut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2448,14 +2694,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the share."
+          },
           "202": {
             "description": "Accepted the request to delete the share."
           },
           "204": {
             "description": "The share is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2464,7 +2710,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareDelete": {
+            "$ref": "./examples/ShareDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}/refresh": {
@@ -2503,11 +2754,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to refresh the share on the device."
-          },
           "200": {
             "description": "Successfully refreshed the share on the device."
+          },
+          "202": {
+            "description": "Accepted the request to refresh the share on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2516,7 +2767,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareRefreshPost": {
+            "$ref": "./examples/ShareRefreshPost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials": {
@@ -2563,6 +2819,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SACGetAllInDevice": {
+            "$ref": "./examples/SACGetAllInDevice.json"
+          }
         }
       }
     },
@@ -2614,6 +2875,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "SACGet": {
+            "$ref": "./examples/SACGet.json"
+          }
         }
       },
       "put": {
@@ -2660,14 +2926,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the storage account credential."
-          },
           "200": {
             "description": "Successfully created or updated the storage account credential.",
             "schema": {
               "$ref": "#/definitions/StorageAccountCredential"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2676,7 +2942,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SACPut": {
+            "$ref": "./examples/SACPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2713,14 +2984,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the storage account credential."
+          },
           "202": {
             "description": "Accepted the request to delete the storage account credential."
           },
           "204": {
             "description": "The storage account credential is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2729,7 +3000,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SACDelete": {
+            "$ref": "./examples/SACDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts": {
@@ -2776,6 +3052,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "StorageAccountGetAllInDevice": {
+            "$ref": "./examples/StorageAccountGetAllInDevice.json"
+          }
         }
       }
     },
@@ -2827,6 +3108,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "StorageAccountGet": {
+            "$ref": "./examples/StorageAccountGet.json"
+          }
         }
       },
       "put": {
@@ -2873,14 +3159,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the StorageAccount."
-          },
           "200": {
             "description": "Successfully created or updated the StorageAccount.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the StorageAccount."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2889,7 +3175,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageAccountPut": {
+            "$ref": "./examples/StorageAccountPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2939,7 +3230,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageAccountDelete": {
+            "$ref": "./examples/StorageAccountDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers": {
@@ -2993,6 +3289,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerListAllInDevice": {
+            "$ref": "./examples/ContainerListAllInDevice.json"
+          }
         }
       }
     },
@@ -3051,6 +3352,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ContainerGet": {
+            "$ref": "./examples/ContainerGet.json"
+          }
         }
       },
       "put": {
@@ -3104,14 +3410,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the container."
-          },
           "200": {
             "description": "Successfully created or updated the container.",
             "schema": {
               "$ref": "#/definitions/Container"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the container."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3120,7 +3426,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerPut": {
+            "$ref": "./examples/ContainerPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3177,7 +3488,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerDelete": {
+            "$ref": "./examples/ContainerDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers/{containerName}/refresh": {
@@ -3223,11 +3539,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to refresh the container on the device."
-          },
           "200": {
             "description": "Successfully refreshed the container on the device."
+          },
+          "202": {
+            "description": "Accepted the request to refresh the container on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3236,7 +3552,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerRefresh": {
+            "$ref": "./examples/ContainerRefresh.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggers": {
@@ -3267,7 +3588,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -3290,6 +3611,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TriggerGetAllInDevice": {
+            "$ref": "./examples/TriggerGetAllInDevice.json"
+          }
         }
       }
     },
@@ -3341,6 +3667,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "TriggerGet": {
+            "$ref": "./examples/TriggerGet.json"
+          }
         }
       },
       "put": {
@@ -3387,14 +3718,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the trigger."
-          },
           "200": {
             "description": "Successfully created or updated the trigger.",
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3403,7 +3734,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TriggerPut": {
+            "$ref": "./examples/TriggerPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3440,14 +3776,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the trigger."
+          },
           "202": {
             "description": "Accepted the request to delete the trigger."
           },
           "204": {
             "description": "The trigger is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3456,7 +3792,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TriggerDelete": {
+            "$ref": "./examples/TriggerDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggerSupportPackage": {
@@ -3497,11 +3838,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to trigger support package on the device."
-          },
           "200": {
             "description": "Successfully triggered support package on the device."
+          },
+          "202": {
+            "description": "Accepted the request to trigger support package on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3510,7 +3851,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TriggerSupportPackage": {
+            "$ref": "./examples/TriggerSupportPackage.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateExtendedInformation": {
@@ -3563,6 +3909,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetUpdateExtendedInfo": {
+            "$ref": "./examples/GetUpdateExtendedInfo.json"
+          }
         }
       }
     },
@@ -3606,6 +3957,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateSummaryGet": {
+            "$ref": "./examples/UpdateSummaryGet.json"
           }
         }
       }
@@ -3660,6 +4016,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "UploadCertificatePost": {
+            "$ref": "./examples/UploadCertificatePost.json"
+          }
         }
       }
     },
@@ -3691,7 +4052,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='Type eq <type>' to filter on user type property",
             "required": false,
@@ -3714,6 +4075,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UserGetAllInDevice": {
+            "$ref": "./examples/UserGetAllInDevice.json"
+          }
         }
       }
     },
@@ -3765,6 +4131,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "UserGet": {
+            "$ref": "./examples/UserGet.json"
+          }
         }
       },
       "put": {
@@ -3811,14 +4182,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the user."
-          },
           "200": {
             "description": "Successfully created or updated the user.",
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3827,7 +4198,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserPut": {
+            "$ref": "./examples/UserPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3864,14 +4240,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the user."
+          },
           "202": {
             "description": "Accepted the request to delete the user."
           },
           "204": {
             "description": "The user is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3880,7 +4256,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserDelete": {
+            "$ref": "./examples/UserDelete.json"
+          }
+        }
       }
     }
   },
@@ -3908,6 +4289,10 @@
             "name": "AddonType",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Addon type",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -3978,6 +4363,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Alert generated in the resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Properties of alert.",
@@ -4231,6 +4620,7 @@
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionAlgorithm": {
@@ -4302,6 +4692,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Bandwidth object related to ASE resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
@@ -4597,6 +4991,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Container in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
           "description": "The container properties.",
@@ -4725,6 +5123,10 @@
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -4892,6 +5294,10 @@
       "description": "The properties of the Data Box Edge/Gateway device.",
       "type": "object",
       "properties": {
+        "systemData": {
+          "description": "DataBoxEdge Device Properties",
+          "$ref": "#/definitions/SystemData"
+        },
         "dataBoxEdgeDeviceStatus": {
           "description": "The status of the Data Box Edge/Gateway device.",
           "enum": [
@@ -5295,6 +5701,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "DiagnosticProactiveLogCollectionSettings",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ProactiveLogCollectionSettingsProperties",
           "description": "Properties of the diagnostic proactive log collection settings.",
@@ -5314,6 +5724,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "DiagnosticRemoteSupportSettings",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/DiagnosticRemoteSupportSettingsProperties",
           "description": "Properties of the remote support  settings.",
@@ -5501,6 +5915,7 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
+          "x-ms-secret": true,
           "type": "string"
         },
         "expiryTimeInUTC": {
@@ -6229,7 +6644,7 @@
       }
     },
     "KubernetesRoleResources": {
-      "description": "Kubernetes role resoures",
+      "description": "Kubernetes role resources",
       "required": [
         "compute"
       ],
@@ -6639,6 +7054,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "MonitoringConfiguration on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/MonitoringMetricConfigurationProperties",
           "description": "The metric setting properties.",
@@ -6881,6 +7300,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "NetworkSettings on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
           "description": "The properties of network settings of a device.",
@@ -7115,6 +7538,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Order configured on ASE resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/OrderProperties",
           "description": "The order properties.",
@@ -7220,7 +7647,7 @@
           "description": "Status of the order as per the allowed status types.",
           "enum": [
             "Untracked",
-            "AwaitingFulfilment",
+            "AwaitingFulfillment",
             "AwaitingPreparation",
             "AwaitingShipment",
             "Shipped",
@@ -7539,6 +7966,10 @@
             "name": "RoleTypes",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Role configured on ASE resource",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -7648,6 +8079,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Share on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
           "description": "The share properties.",
@@ -7932,6 +8367,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccount object on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Storage Account properties.",
@@ -7951,6 +8390,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccountCredential object",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
           "description": "The storage account credential properties.",
@@ -8177,6 +8620,59 @@
         }
       }
     },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
     "TrackingInfo": {
       "description": "Tracking courier information.",
       "type": "object",
@@ -8211,6 +8707,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Trigger in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "kind": {
           "description": "Trigger Kind.",
           "enum": [
@@ -8431,6 +8931,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "UpdateSummary Result",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/UpdateSummaryProperties",
           "description": "The device update information summary.",
@@ -8708,6 +9212,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "User in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/UserProperties",
           "description": "The storage account credential properties.",
@@ -8764,6 +9272,9 @@
     },
     "UserProperties": {
       "description": "The user properties.",
+      "required": [
+        "userType"
+      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
