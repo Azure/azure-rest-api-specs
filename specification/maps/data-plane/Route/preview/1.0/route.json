@@ -808,6 +808,33 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "MeasurementSystem": {
+      "name": "measurementSystem",
+      "in": "query",
+      "description": "Indicates measurement system in which client request data. The default value is `metric`.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "metric",
+        "imperial"
+      ],
+      "default": "metric",
+      "x-ms-enum": {
+        "name": "MeasurementSystem",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "metric",
+            "description": "metric"
+          },
+          {
+            "value": "imperial",
+            "description": "imperial"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -1733,6 +1760,9 @@
           },
           {
             "$ref": "#/parameters/Timestamp"
+          },
+          {
+            "$ref": "#/parameters/MeasurementSystem"
           }
         ],
         "responses": {
@@ -1768,6 +1798,9 @@
           },
           {
             "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "$ref": "#/parameters/MeasurementSystem"
           },
           {
             "name": "snapToRoadRequestBody",
@@ -1823,6 +1856,9 @@
           },
           {
             "$ref": "#/parameters/Timestamp"
+          },
+          {
+            "$ref": "#/parameters/MeasurementSystem"
           }
         ],
         "responses": {
@@ -1858,6 +1894,9 @@
           },
           {
             "$ref": "#/parameters/VehicleType"
+          },
+          {
+            "$ref": "#/parameters/MeasurementSystem"
           },
           {
             "name": "roadSegmentRequestBody",
