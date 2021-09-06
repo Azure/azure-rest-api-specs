@@ -447,10 +447,10 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "SubscriptionAlerts": {
+          "SingleSubscriptionAlerts": {
             "$ref": "./examples/SingleSubscriptionAlert.json"
           },
-          "ResourceGroupAlerts": {
+          "SingleResourceGroupAlerts": {
             "$ref": "./examples/SingleResourceGroupAlert.json"
           }
         },
@@ -1636,6 +1636,7 @@
       }
     },
     "Dimension": {
+      "description": "List of Dimensions.",
       "type": "object",
       "allOf": [
         {
@@ -1651,6 +1652,7 @@
       }
     },
     "DimensionProperties": {
+      "description": "Dimension properties.",
       "type": "object",
       "properties": {
         "description": {
@@ -1669,6 +1671,7 @@
           "readOnly": true
         },
         "data": {
+          "description": "Dimension data array.",
           "type": "array",
           "items": {
             "description": "Dimension data item.",
@@ -1742,6 +1745,7 @@
       }
     },
     "AlertProperties": {
+      "description": "Properties of alert.",
       "type": "object",
       "properties": {
         "definition": {
@@ -1964,7 +1968,7 @@
           "type": "string"
         },
         "statusModificationUserName": {
-          "description": "",
+          "description": "User who last modified",
           "type": "string"
         },
         "statusModificationTime": {
@@ -2001,6 +2005,7 @@
       }
     },
     "QueryProperties": {
+      "description": "Properties of query.",
       "type": "object",
       "properties": {
         "nextLink": {
@@ -2025,6 +2030,7 @@
       }
     },
     "QueryColumn": {
+      "description": "Query Column",
       "type": "object",
       "properties": {
         "name": {
