@@ -46,6 +46,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+- Microsoft.DataProtection/preview/2021-10-01-preview/dataprotection.json
+```
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
