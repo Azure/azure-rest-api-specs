@@ -5805,6 +5805,22 @@
           }
         }
       }
+    },
+    "VmwareVMProperties": {
+      "description": "VMware VM specific data source properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "instanceUUID": {
+          "description": "Unique Identifier of Vmware VM on VCenter (guid)",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VmwareVMProperties"
     }
   },
   "parameters": {
