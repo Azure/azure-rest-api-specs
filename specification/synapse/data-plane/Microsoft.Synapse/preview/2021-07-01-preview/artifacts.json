@@ -188,9 +188,6 @@
           "200": {
             "description": "OK."
           },
-          "202": {
-            "description": "Accepted."
-          },
           "204": {
             "description": "No Content."
           },
@@ -2665,7 +2662,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/KqlScripts_ResourceCollectionResponse"
+              "$ref": "#/definitions/KqlScripts_ResourceCollection"
             }
           },
           "default": {
@@ -4833,7 +4830,7 @@
         }
       }
     },
-    "KqlScripts_ResourceCollectionResponse": {
+    "KqlScripts_ResourceCollection": {
       "type": "object",
       "properties": {
         "value": {
@@ -4845,9 +4842,13 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "KqlScriptResource": {
+      "description": "The KQL Script.",
       "properties": {
         "id": {
           "type": "string"
