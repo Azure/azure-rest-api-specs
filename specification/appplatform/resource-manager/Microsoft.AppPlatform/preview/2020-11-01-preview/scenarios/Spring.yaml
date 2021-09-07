@@ -1,3 +1,4 @@
+## yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/test-scenario/references/v1.1/schema.json
 scope: ResourceGroup
 
 variables:
@@ -6,12 +7,14 @@ variables:
   ascDomainName: .azuremicroservices.io
   domainName: asc-api.asc-test.net
   customDomainName: asc-api.asc-test.net
-
-requiredVariables:
-  - mysqlKey
-  - dnsSubscriptionId
-  - dnsResourceGroup
-  - blobUrl
+  mysqlKey:
+    type: secureString
+  dnsSubscriptionId:
+    type: string
+  dnsResourceGroup:
+    type: string
+  blobUrl:
+    type: secureString
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
@@ -26,331 +29,326 @@ prepareSteps:
       subscriptionId: $(dnsSubscriptionId)
       resourceGroup: $(dnsResourceGroup)
 
-testScenarios:
-- scenario: Spring
-  description: Microsoft.AppPlatform/Spring
-  steps:
-  - step: Services_CheckNameAvailability
-    exampleFile: ../examples/Services_CheckNameAvailability.json
-    requestUpdate:
-      - replace: /availabilityParameters/name
-        value: $(serviceName)
+scenarios:
+  - scenario: Spring
+    description: Microsoft.AppPlatform/Spring
+    steps:
+      - step: Services_CheckNameAvailability
+        exampleFile: ../examples/Services_CheckNameAvailability.json
+        requestUpdate:
+          - replace: /availabilityParameters/name
+            value: $(serviceName)
 
-  # Services
-  - step: Services_CreateOrUpdate
-    exampleFile: ../examples/Services_CreateOrUpdate.json
+      # Services
+      - step: Services_CreateOrUpdate
+        exampleFile: ../examples/Services_CreateOrUpdate.json
 
-  - step: Services_Get
-    exampleFile: ../examples/Services_Get.json
-    resourceName: myservice
+      - step: Services_Get
+        exampleFile: ../examples/Services_Get.json
+        resourceName: myservice
 
-  # TODO: resourceUpdate could only be used with "PUT".
-#  - step: Services_Update
-#    exampleFile: ../examples/Services_Update.json
-#    resourceName: myservice
-#    operationId: Services_Update
-#    requestUpdate:
-#      - replace: /tags
-#        value:
-#          hello: world
-#          created-by: api-test
+      - step: Services_Update
+        resourceName: myservice
+        operationId: Services_Update
+        requestUpdate:
+          - replace: /tags
+            value:
+              hello: world
+              created-by: api-test
 
-  - step: Services_DisableTestEndpoint
-    exampleFile: ../examples/Services_DisableTestEndpoint.json
+      - step: Services_DisableTestEndpoint
+        exampleFile: ../examples/Services_DisableTestEndpoint.json
 
-  - step: Services_EnableTestEndpoint
-    exampleFile: ../examples/Services_EnableTestEndpoint.json
+      - step: Services_EnableTestEndpoint
+        exampleFile: ../examples/Services_EnableTestEndpoint.json
 
-  - step: Services_RegenerateTestKey
-    exampleFile: ../examples/Services_RegenerateTestKey.json
+      - step: Services_RegenerateTestKey
+        exampleFile: ../examples/Services_RegenerateTestKey.json
 
-  - step: Services_ListTestKeys
-    exampleFile: ../examples/Services_ListTestKeys.json
+      - step: Services_ListTestKeys
+        exampleFile: ../examples/Services_ListTestKeys.json
 
-  - step: Certificates_CreateOrUpdate
-    exampleFile: ../examples/Certificates_CreateOrUpdate.json
+      - step: Certificates_CreateOrUpdate
+        exampleFile: ../examples/Certificates_CreateOrUpdate.json
+        variables:
+          certificateName: asc-certificate
+        resourceUpdate:
+          - replace: /properties
+            value:
+              vaultUri: https://integration-test-prod.vault.azure.net/
+              keyVaultCertName: pfx-cert
+
+      - step: Certificates_Get
+        exampleFile: ../examples/Certificates_Get.json
+
+      - step: Certificates_List
+        exampleFile: ../examples/Certificates_List.json
+
+      # ConfigServers
+      - step: ConfigServers_Validate
+        exampleFile: ../examples/ConfigServers_Validate.json
+        resourceUpdate:
+          - replace: /gitProperty
+            value:
+              {
+                "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
+                "label": "master",
+                "searchPaths": ["/"],
+              }
+
+      - step: ConfigServers_UpdatePut
+        exampleFile: ../examples/ConfigServers_UpdatePut.json
+        resourceUpdate:
+          - replace: /properties/configServer/gitProperty
+            value:
+              {
+                "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
+                "label": "master",
+                "searchPaths": ["/"],
+              }
+
+      # - step: ConfigServers_UpdatePatch
+      #   exampleFile: ../examples/ConfigServers_UpdatePatch.json
+      #   resourceUpdate:
+      #     - replace: /configServerResource/properties/configServer/gitProperty
+      #       value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
+
+      - step: ConfigServers_Get
+        exampleFile: ../examples/ConfigServers_Get.json
+
+      # Monitoring
+      - step: MonitoringSettings_UpdatePut
+        exampleFile: ../examples/MonitoringSettings_UpdatePut.json
+        resourceUpdate:
+          - replace: /properties
+            value:
+              {
+                "traceEnabled": true,
+                "appInsightsInstrumentationKey": "$(insightsInstrumentationKey)",
+                "appInsightsSamplingRate": 50.0,
+              }
+
+      - step: MonitoringSettings_Get
+        exampleFile: ../examples/MonitoringSettings_Get.json
+
+      - step: MonitoringSettings_UpdatePatch
+        exampleFile: ../examples/MonitoringSettings_UpdatePatch.json
+        resourceUpdate:
+          - replace: /properties/appInsightsSamplingRate
+            value: 100
+
+      # Apps
+      - step: Apps_Create
+        exampleFile: ../examples/Apps_CreateOrUpdate.json
+        resourceUpdate:
+          - remove: /properties/temporaryDisk
+          - remove: /properties/persistentDisk
+          - replace: /properties/public
+            value: false
+
+      - step: Apps_Get
+        exampleFile: ../examples/Apps_Get.json
+        resourceName: app01
+      #    outputVariables:
+      #      fqdn:
+      #        fromResponse: /properties/fqdn
+
+      - step: Deployments_CreateOrUpdate_Default
+        exampleFile: ../examples/Deployments_CreateOrUpdate.json
+        variables:
+          deploymentName: default
+        resourceUpdate:
+          - replace: /properties/source/type
+            value: Jar
+          - replace: /properties/source/relativePath
+            value: "<default>"
+
+      - step: Deployments_Get
+        exampleFile: ../examples/Deployments_Get.json
+        variables:
+          deploymentName: default
+        resourceName: default
+
+      - step: Apps_Update_ActiveDeployment # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        requestUpdate:
+          - replace: /appResource/properties/activeDeploymentName
+            value: default
+
+      - step: Apps_Update_Disk # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        requestUpdate:
+          - replace: /properties/temporaryDisk
+            value: { "sizeInGB": 3, "mountPath": "/tmpdisk" }
+          - replace: /properties/persistentDisk
+            value: { "sizeInGB": 10, "mountPath": "/data" }
+          - replace: /properties/public
+            value: true
+
+      - step: Apps_List
+        exampleFile: ../examples/Apps_List.json
+
+      #    # Bindings
+      - step: Bindings_Create
+        exampleFile: ../examples/Bindings_CreateOrUpdate.json
+        variables:
+          bindingName: mysql-binding
+        resourceUpdate:
+          - replace: /properties/resourceId
+            value: "/subscriptions/b46590cb-a111-4b84-935f-c305aaf1f424/resourceGroups/mary-west/providers/Microsoft.DBforMySQL/servers/fake-sql"
+          - replace: /properties/key
+            value: $(mysqlKey)
+          - replace: /properties/bindingParameters
+            value: { "databaseName": "mysqldb", "username": "test" }
+
+      - step: Bindings_Update # PATCH
+        exampleFile: ../examples/Bindings_Update.json
+        variables:
+          bindingName: mysql-binding
+        resourceUpdate:
+          - replace: /properties/key
+            value: $(mysqlKey)
+          - replace: /properties/bindingParameters
+            value: { "databaseName": "mysqldb2", "username": "test2" }
+
+      - step: Bindings_Get
+        exampleFile: ../examples/Bindings_Get.json
+        variables:
+          bindingName: mysql-binding
+
+      - step: Bindings_List
+        exampleFile: ../examples/Bindings_List.json
+
+      - step: Bindings_Delete
+        exampleFile: ../examples/Bindings_Delete.json
+        variables:
+          bindingName: mysql-binding
+
+      # CustomDomains         # depends on DNS
+      - step: Apps_ValidateDomain
+        exampleFile: ../examples/Apps_ValidateDomain.json
+        resourceUpdate:
+          - replace: /name
+            value: $(customDomainName)
+
+      - step: CustomDomains_CreateOrUpdate
+        exampleFile: ../examples/CustomDomains_CreateOrUpdate.json
+        #    variables:
+        #      domainName: $(customDomainName)
+        resourceUpdate:
+          - replace: /properties
+            value: { "certName": "asc-certificate" }
+
+      - step: CustomDomains_Update
+        exampleFile: ../examples/CustomDomains_Update.json
+        resourceUpdate:
+          - replace: /properties
+            value: { "certName": "asc-certificate" } # TODO: use another cert
+
+      - step: CustomDomains_Get
+        exampleFile: ../examples/CustomDomains_Get.json
+
+      # Deployments
+      - step: Apps_GetResourceUploadUrl
+        exampleFile: ../examples/Apps_GetResourceUploadUrl.json
+        outputVariables:
+          uploadUrl:
+            fromResponse: /uploadUrl
+          relativePath:
+            fromResponse: /relativePath
+
+      - step: Upload_File
+        armTemplateDeployment: ./templates/upload_file.json
+        variables:
+          scriptsContent: !include ./templates/uploadJar.ps1
+
+      - step: Deployments_CreateOrUpdate
+        exampleFile: ../examples/Deployments_CreateOrUpdate.json
+        variables:
+          deploymentName: blue
+        resourceName: deploymentBlue
+        resourceUpdate:
+          - replace: /sku/capacity
+            value: 2
+          - replace: /properties/source/type
+            value: Jar
+          - replace: /properties/source/relativePath
+            value: $(relativePath)
+
+      - step: Apps_Update # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        requestUpdate:
+          - replace: /appResource/properties/activeDeploymentName
+            value: blue
+
+      - step: Deployments_Restart
+        exampleFile: ../examples/Deployments_Restart.json
+        variables:
+          deploymentName: blue
+
+      - step: Deployments_Stop
+        exampleFile: ../examples/Deployments_Stop.json
+        variables:
+          deploymentName: blue
+
+      - step: Deployments_Start
+        exampleFile: ../examples/Deployments_Start.json
+        variables:
+          deploymentName: blue
+
+      - step: Deployments_GetLogFileUrl
+        exampleFile: ../examples/Deployments_GetLogFileUrl.json
+
+      - step: Deployments_List
+        exampleFile: ../examples/Deployments_List.json
+
+      - step: Deployments_ListForCluster
+        exampleFile: ../examples/Deployments_ListForCluster.json
+
+      - step: Services_List
+        exampleFile: ../examples/Services_List.json
+
+      - step: Services_ListBySubscription
+        exampleFile: ../examples/Services_ListBySubscription.json
+
+      - step: Deployments_Delete
+        exampleFile: ../examples/Deployments_Delete.json
+        variables:
+          deploymentName: blue
+
+      - step: Apps_Delete
+        variables:
+          appName: app01
+        exampleFile: ../examples/Apps_Delete.json
+
+      - step: CustomDomains_Delete
+        exampleFile: ../examples/CustomDomains_Delete.json
+        variable:
+          domainName: $(customDomainName)
+
+      - step: Certificates_Delete
+        exampleFile: ../examples/Certificates_Delete.json
+        variables:
+          certificateName: asc-certificate
+
+      - step: Services_Delete
+        exampleFile: ../examples/Services_Delete.json
+
+      - step: Skus_List
+        exampleFile: ../examples/Skus_List.json
+
+      #  - step: RuntimeVersions_ListRuntimeVersions          # ASC team bug
+      #    exampleFile: ../examples/RuntimeVersions_ListRuntimeVersions.json
+
+      - step: Operations_List
+        exampleFile: ../examples/Operations_List.json
+
+cleanUpSteps:
+  - step: Delete_Dns_Cname_Record
+    armTemplateDeployment: templates/create_dns_cname_record.json
     variables:
-      certificateName: asc-certificate
-    resourceUpdate:
-      - replace: /properties
-        value: {"vaultUri": "https://integration-test-prod.vault.azure.net/", "keyVaultCertName": "pfx-cert"}
-
-  - step: Certificates_Get
-    exampleFile: ../examples/Certificates_Get.json
-
-  - step: Certificates_List
-    exampleFile: ../examples/Certificates_List.json
-
-  # ConfigServers
-  - step: ConfigServers_Validate
-    exampleFile: ../examples/ConfigServers_Validate.json
-    resourceUpdate:
-      - replace: /gitProperty
-        value: {"uri": "https://github.com/VSChina/asc-config-server-test-public.git","label": "master","searchPaths": ["/"]}
-
-  - step: ConfigServers_UpdatePut
-    exampleFile: ../examples/ConfigServers_UpdatePut.json
-    resourceUpdate:
-      - replace: /properties/configServer/gitProperty
-        value: {"uri": "https://github.com/VSChina/asc-config-server-test-public.git","label": "master","searchPaths": ["/"]}
-
-  # - step: ConfigServers_UpdatePatch
-  #   exampleFile: ../examples/ConfigServers_UpdatePatch.json
-  #   resourceUpdate:
-  #     - replace: /configServerResource/properties/configServer/gitProperty
-  #       value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
-
-  - step: ConfigServers_Get
-    exampleFile: ../examples/ConfigServers_Get.json
-
-  # Monitoring
-  - step: MonitoringSettings_UpdatePut
-    exampleFile: ../examples/MonitoringSettings_UpdatePut.json
-    resourceUpdate:
-      - replace: /properties
-        value: {
-          "traceEnabled": true,
-          "appInsightsInstrumentationKey": "$(insightsInstrumentationKey)",
-          "appInsightsSamplingRate": 50.0
-        }
-
-  - step: MonitoringSettings_Get
-    exampleFile: ../examples/MonitoringSettings_Get.json
-
-  - step: MonitoringSettings_UpdatePatch
-    exampleFile: ../examples/MonitoringSettings_UpdatePatch.json
-    resourceUpdate:
-      - replace: /properties/appInsightsSamplingRate
-        value: 100
-
-  # Apps
-  - step: Apps_Create
-    exampleFile: ../examples/Apps_CreateOrUpdate.json
-    resourceUpdate:
-      - remove: /properties/temporaryDisk
-      - remove: /properties/persistentDisk
-      - replace: /properties/public
-        value: false
-
-  - step: Apps_Get
-    exampleFile: ../examples/Apps_Get.json
-    resourceName: app01
-#    outputVariables:
-#      fqdn:
-#        fromResponse: /properties/fqdn
-
-  - step: Deployments_CreateOrUpdate_Default
-    exampleFile: ../examples/Deployments_CreateOrUpdate.json
-    variables:
-      deploymentName: default
-    resourceUpdate:
-      - replace: /properties/source/type
-        value: Jar
-      - replace: /properties/source/relativePath
-        value: "<default>"
-
-  - step: Deployments_Get
-    exampleFile: ../examples/Deployments_Get.json
-    variables:
-      deploymentName: default
-    resourceName: default
-
-#  - step: Apps_Update_ActiveDeployment   # PATCH
-#    resourceName: app01
-#    requestUpdate:
-#      - replace: /appResource/properties/activeDeploymentName
-#        value: default
-
-#  - step: Apps_Update_Disk       # PATCH
-#    resourceName: app01
-#    requestUpdate:
-#      - replace: /properties/temporaryDisk
-#        value: {
-#          "sizeInGB": 3,
-#          "mountPath": "/tmpdisk"
-#        }
-#      - replace: /properties/persistentDisk
-#        value: {
-#          "sizeInGB": 10,
-#          "mountPath": "/data"
-#        }
-#      - replace: /properties/public
-#        value: true
-
-  - step: Apps_List
-    exampleFile: ../examples/Apps_List.json
-
-#    # Bindings
-  - step: Bindings_Create
-    exampleFile: ../examples/Bindings_CreateOrUpdate.json
-    variables:
-      bindingName: mysql-binding
-    resourceUpdate:
-      - replace: /properties/resourceId
-        value: "/subscriptions/b46590cb-a111-4b84-935f-c305aaf1f424/resourceGroups/mary-west/providers/Microsoft.DBforMySQL/servers/fake-sql"
-      - replace: /properties/key
-        value: $(mysqlKey)
-      - replace: /properties/bindingParameters
-        value: { "databaseName": "mysqldb", "username": "test" }
-
-  - step: Bindings_Update        # PATCH
-    exampleFile: ../examples/Bindings_Update.json
-    variables:
-      bindingName: mysql-binding
-    resourceUpdate:
-      - replace: /properties/key
-        value: $(mysqlKey)
-      - replace: /properties/bindingParameters
-        value: { "databaseName": "mysqldb2", "username": "test2" }
-
-  - step: Bindings_Get
-    exampleFile: ../examples/Bindings_Get.json
-    variables:
-      bindingName: mysql-binding
-
-  - step: Bindings_List
-    exampleFile: ../examples/Bindings_List.json
-
-  - step: Bindings_Delete
-    exampleFile: ../examples/Bindings_Delete.json
-    variables:
-      bindingName: mysql-binding
-
-  # CustomDomains         # depends on DNS
-  - step: Apps_ValidateDomain
-    exampleFile: ../examples/Apps_ValidateDomain.json
-    resourceUpdate:
-      - replace: /name
-        value: $(customDomainName)
-
-  - step: CustomDomains_CreateOrUpdate
-    exampleFile: ../examples/CustomDomains_CreateOrUpdate.json
-#    variables:
-#      domainName: $(customDomainName)
-    resourceUpdate:
-      - replace: /properties
-        value: { "certName": "asc-certificate" }
-
-  - step: CustomDomains_Update
-    exampleFile: ../examples/CustomDomains_Update.json
-    resourceUpdate:
-      - replace: /properties
-        value: { "certName": "asc-certificate" }  # TODO: use another cert
-
-  - step: CustomDomains_Get
-    exampleFile: ../examples/CustomDomains_Get.json
-
-  # Deployments
-  - step: Apps_GetResourceUploadUrl
-    exampleFile: ../examples/Apps_GetResourceUploadUrl.json
-    outputVariables:
-      uploadUrl:
-        fromResponse: /uploadUrl
-      relativePath:
-        fromResponse: /relativePath
-
-  - step: Upload_File
-    armTemplateDeployment: ./templates/upload_file.json
-    variables:
-      scriptsContent: |
-          $uploadUri = ${Env:uploadUrl}
-          $blobUri = ${Env:blobUrl}
-          $localFilePath = '/tmp/temp.file'
-          function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
-            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($blobUri)
-            $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
-            $DownLoadTask
-          }
-
-          function UploadToFileShare([string]$uploadUri, [string]$localFilePath) {
-            $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($uploadUri)
-            $UploadTask = $CloudFile.UploadFromFileAsync($localFilePath)
-            $UploadTask
-          }
-
-          Connect-AzAccount -Identity
-          DownloadJarFromBlob $blobUri $localFilePath
-          UploadToFileShare $uploadUri $localFilePath
-
-
-
-  - step: Deployments_CreateOrUpdate
-    exampleFile: ../examples/Deployments_CreateOrUpdate.json
-    variables:
-      deploymentName: blue
-    resourceName: deploymentBlue
-    resourceUpdate:
-      - replace: /sku/capacity
-        value: 2
-      - replace: /properties/source/type
-        value: Jar
-      - replace: /properties/source/relativePath
-        value: $(relativePath)
-
-#  - step: Apps_Update       # PATCH
-#    resourceName: app01
-#    requestUpdate:
-#      - replace: /appResource/properties/activeDeploymentName
-#        value: blue
-
-  - step: Deployments_Restart
-    exampleFile: ../examples/Deployments_Restart.json
-    variables:
-      deploymentName: blue
-
-  - step: Deployments_Stop
-    exampleFile: ../examples/Deployments_Stop.json
-    variables:
-      deploymentName: blue
-
-  - step: Deployments_Start
-    exampleFile: ../examples/Deployments_Start.json
-    variables:
-      deploymentName: blue
-
-  - step: Deployments_GetLogFileUrl
-    exampleFile: ../examples/Deployments_GetLogFileUrl.json
-
-  - step: Deployments_List
-    exampleFile: ../examples/Deployments_List.json
-
-  - step: Deployments_ListForCluster
-    exampleFile: ../examples/Deployments_ListForCluster.json
-
-  - step: Services_List
-    exampleFile: ../examples/Services_List.json
-
-  - step: Services_ListBySubscription
-    exampleFile: ../examples/Services_ListBySubscription.json
-
-  - step: Deployments_Delete
-    exampleFile: ../examples/Deployments_Delete.json
-    variables:
-      deploymentName: blue
-
-  - step: Apps_Delete
-    variables:
-      appName: app01
-    exampleFile: ../examples/Apps_Delete.json
-
-  - step: CustomDomains_Delete
-    exampleFile: ../examples/CustomDomains_Delete.json
-    variable:
-      domainName: $(customDomainName)
-
-  - step: Certificates_Delete
-    exampleFile: ../examples/Certificates_Delete.json
-    variables:
-      certificateName: asc-certificate
-
-  - step: Services_Delete
-    exampleFile: ../examples/Services_Delete.json
-
-  - step: Skus_List
-    exampleFile: ../examples/Skus_List.json
-
-#  - step: RuntimeVersions_ListRuntimeVersions          # ASC team bug
-#    exampleFile: ../examples/RuntimeVersions_ListRuntimeVersions.json
-
-  - step: Operations_List
-    exampleFile: ../examples/Operations_List.json
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroup: $(dnsResourceGroup)
