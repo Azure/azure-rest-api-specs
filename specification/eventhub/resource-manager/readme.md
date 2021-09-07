@@ -80,6 +80,10 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-01-preview'
 input-file:
+- Microsoft.EventHub/preview/2021-01-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/sku.json
 - Microsoft.EventHub/preview/2021-01-01-preview/namespaces-preview.json
 - Microsoft.EventHub/preview/2021-01-01-preview/operations.json
 - Microsoft.EventHub/preview/2021-01-01-preview/eventhubs.json
