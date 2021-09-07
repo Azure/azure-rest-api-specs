@@ -157,7 +157,7 @@ directive:
     from: costmanagement.json
     reason: 'This needs api change ' 
  - suppress: R4037
-    from: costmanagement.json
+    from: costmanagement.exports.json
     reason: 'This needs api change ' 
   - suppress: R2066
     from: costmanagement.exports.json
