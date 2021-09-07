@@ -1,4 +1,4 @@
-## yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/test-scenario/references/v1.1/schema.json
+# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/test-scenario/references/v1.1/schema.json
 scope: ResourceGroup
 
 variables:
@@ -172,14 +172,14 @@ scenarios:
       - step: Apps_Update_ActiveDeployment # PATCH
         resourceName: app01
         operationId: Apps_Update
-        requestUpdate:
-          - replace: /appResource/properties/activeDeploymentName
+        resourceUpdate:
+          - replace: /properties/activeDeploymentName
             value: default
 
       - step: Apps_Update_Disk # PATCH
         resourceName: app01
         operationId: Apps_Update
-        requestUpdate:
+        resourceUpdate:
           - replace: /properties/temporaryDisk
             value: { "sizeInGB": 3, "mountPath": "/tmpdisk" }
           - replace: /properties/persistentDisk
@@ -255,6 +255,7 @@ scenarios:
         exampleFile: ../examples/Apps_GetResourceUploadUrl.json
         outputVariables:
           uploadUrl:
+            type: secureString
             fromResponse: /uploadUrl
           relativePath:
             fromResponse: /relativePath
@@ -280,8 +281,8 @@ scenarios:
       - step: Apps_Update # PATCH
         resourceName: app01
         operationId: Apps_Update
-        requestUpdate:
-          - replace: /appResource/properties/activeDeploymentName
+        resourceUpdate:
+          - replace: /properties/activeDeploymentName
             value: blue
 
       - step: Deployments_Restart
