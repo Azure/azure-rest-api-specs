@@ -151,6 +151,7 @@ input-file:
   - Microsoft.DataProtection/stable/2021-01-01/dataprotection.json 
   - Microsoft.DataProtection/preview/2021-02-01-preview/dataprotection.json
   - Microsoft.DataProtection/preview/2021-06-01-preview/dataprotection.json 
+  - Microsoft.DataProtection/preview/2021-10-01-preview/dataprotection.json 
 ```
 
 If there are files that should not be in the `all-api-versions` set,
