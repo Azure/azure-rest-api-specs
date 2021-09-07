@@ -192,4 +192,10 @@ directive:
     where: $.definitions.ApplicableSchedule
     from: DTL.json
     reason: tags and location are defined on "$.definitions.Resource" which is our base type.
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{locationName}/operations/{name}"].get'
+    from: DTL.json
+    reason: |-
+      This was years ago, where if "isMonitor" is specified, we return "Accepted" if an operation is still running. To get rid of it, would be a breaking change.
+      Adding x-ms-long-running would be incorrect in the regular case (where isMonitor isn't supplied)
 ```
