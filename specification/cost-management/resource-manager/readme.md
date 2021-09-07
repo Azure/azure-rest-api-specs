@@ -153,6 +153,15 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4037
+    from: costmanagement.generatedetailedcostreport.json
+    reason: 'This needs api change ' 
+  - suppress: R2066
+    from: costmanagement.exports.json
+    reason: 'This needs api change ' 
+  - suppress: R2066
+    from: costmanagement.json
+    reason: 'This needs api change ' 
   - suppress: R3018
     from: costmanagement.exports.json
     reason: 'This needs api change ' 
