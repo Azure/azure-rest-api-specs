@@ -1417,18 +1417,6 @@
           "description": "Cost Management scope to save the view on. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for ExternalBillingAccount scope, and '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for ExternalSubscription scope.",
           "type": "string"
         },
-        "createdOn": {
-          "description": "Date the user created this view.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "modifiedOn": {
-          "description": "Date when the user last modified this view.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
         "query": {
           "description": "Query body configuration. Required.",
           "type": "object",
@@ -1488,6 +1476,30 @@
           "items": {
             "$ref": "#/definitions/PivotProperties"
           }
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "#/definitions/SystemDataViewProperties"
+        }
+      }
+    },
+    "SystemDataViewProperties": {
+      "description": "Read only system data",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdOn": {
+          "description": "Date the user created this view.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
@@ -1955,6 +1967,18 @@
             "modelAsString": true
           }
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "#/definitions/SystemDataAlertProperties"
+        }
+      }
+    },
+    "SystemDataAlertProperties": {
+      "description": "Read only system data",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
         "creationTime": {
           "description": "dateTime in which alert was created",
           "type": "string"
