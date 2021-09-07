@@ -214,7 +214,7 @@
         ],
         "summary": "Get quota limits",
         "description": "Get the default and current limits for quotas",
-        "operationId": "NetAppResourceQuotaLimits_Get",
+        "operationId": "NetAppResourceQuotaLimits_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -230,7 +230,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/QuotaLimitsResponse"
+              "$ref": "#/definitions/SubscriptionQuotaItemList"
             }
           },
           "default": {
@@ -239,7 +239,47 @@
         },
         "x-ms-examples": {
           "QuotaLimits": {
-            "$ref": "examples/QuotaLimits.json"
+            "$ref": "examples/QuotaLimits_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/quotaLimits/{quotaLimitName}": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get quota limits",
+        "description": "Get the default and current subscription quota limit",
+        "operationId": "NetAppResourceQuotaLimits_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/QuotaLimitName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "QuotaLimits": {
+            "$ref": "examples/QuotaLimits_Get.json"
           }
         }
       }
@@ -3077,10 +3117,28 @@
         }
       }
     },
+    "SubscriptionQuotaItemList": {
+      "description": "List of Subscription Quota Items",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of SubscriptionQuotaItems",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        }
+      }
+    },
     "SubscriptionQuotaItem": {
       "description": "Information regarding Subscription Quota Item",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Quota Item name"
+        },
         "current": {
           "description": "The current quota value.",
           "readOnly": true,
@@ -5660,6 +5718,14 @@
       "required": true,
       "type": "string",
       "description": "Backup policy Name which uniquely identify backup policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaLimitName": {
+      "name": "quotaLimitName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the Quota Limit",
       "x-ms-parameter-location": "method"
     }
   }
