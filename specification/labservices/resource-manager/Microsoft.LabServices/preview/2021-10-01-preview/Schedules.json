@@ -46,7 +46,7 @@
         "tags": ["Schedule"],
         "summary": "Get all schedules for a lab.",
         "description": "Returns a list of all schedules for a lab.",
-        "operationId": "Schedules_List",
+        "operationId": "Schedules_ListByLab",
         "responses": {
           "200": {
             "description": "The request was successful; response contains all schedules for the given lab.",
@@ -255,6 +255,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The array page of schedule results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schedule"
@@ -262,6 +263,7 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "The link to get the next page of schedule results.",
           "type": "string",
           "readOnly": true
         }

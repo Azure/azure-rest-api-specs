@@ -46,7 +46,7 @@
         "tags": ["Image"],
         "summary": "Gets all images.",
         "description": "Gets all images from galleries attached to a lab plan.",
-        "operationId": "Images_List",
+        "operationId": "Images_ListByLabPlan",
         "responses": {
           "200": {
             "description": "The request was successful; a list of images is returned",
@@ -217,6 +217,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The array page of virtual machine images.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Image"
@@ -224,6 +225,7 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "The link to get the next page of image results.",
           "type": "string",
           "readOnly": true
         }

@@ -46,7 +46,7 @@
         "tags": ["User"],
         "summary": "Get all users for a lab.",
         "description": "Returns a list of all users for a lab.",
-        "operationId": "Users_List",
+        "operationId": "Users_ListByLab",
         "responses": {
           "200": {
             "description": "The request was successful; response contains all users for the given lab.",
@@ -334,6 +334,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The array page of user results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/User"
@@ -341,6 +342,7 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "The link to get the next page of image results.",
           "type": "string",
           "readOnly": true
         }

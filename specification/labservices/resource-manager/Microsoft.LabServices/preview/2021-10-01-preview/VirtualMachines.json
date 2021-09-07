@@ -46,7 +46,7 @@
         "tags": ["VirtualMachine"],
         "summary": "Get all virtual machines for a lab.",
         "description": "Returns a list of all virtual machines for a lab.",
-        "operationId": "VirtualMachines_List",
+        "operationId": "VirtualMachines_ListByLab",
         "responses": {
           "200": {
             "description": "The request was successful; response contains all virtual machines for the given lab.",
@@ -395,6 +395,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The array page of virtual machine results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachine"
@@ -402,6 +403,7 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "The link to get the next page of virtual machine results.",
           "type": "string",
           "readOnly": true
         }
