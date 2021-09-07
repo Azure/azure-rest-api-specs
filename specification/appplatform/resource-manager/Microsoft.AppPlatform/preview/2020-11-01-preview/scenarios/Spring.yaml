@@ -5,7 +5,7 @@ variables:
   appName: app01
   ascDomainName: .azuremicroservices.io
   domainName: asc-api.asc-test.net
-#  customDomainName: asc-api.asc-test.net
+  customDomainName: asc-api.asc-test.net
 
 requiredVariables:
   - mysqlKey
@@ -14,18 +14,17 @@ requiredVariables:
   - blobUrl
 
 prepareSteps:
-#  - step: Generate_Unique_ServiceName
-#    armTemplateDeployment: templates/generate_service_name.json
+  - step: Generate_Unique_ServiceName
+    armTemplateDeployment: templates/generate_service_name.json
 
   - step: Create_Application_Insight_Instance
     armTemplateDeployment: templates/create_application_insights_instance.json
 
-#  - step: Add_Dns_Cname_Record
-#    armTemplateDeployment: templates/create_dns_cname_record.json
-#    variables:
-#      subscriptionId: $(dnsSubscriptionId)
-#      resourceGroup: $(dnsResourceGroup)
-#      ascDomainName: $(ascDomainName)
+  - step: Add_Dns_Cname_Record
+    armTemplateDeployment: templates/create_dns_cname_record.json
+    variables:
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroup: $(dnsResourceGroup)
 
 testScenarios:
 - scenario: Spring
@@ -95,11 +94,11 @@ testScenarios:
       - replace: /properties/configServer/gitProperty
         value: {"uri": "https://github.com/VSChina/asc-config-server-test-public.git","label": "master","searchPaths": ["/"]}
 
-  - step: ConfigServers_UpdatePatch
-    exampleFile: ../examples/ConfigServers_UpdatePatch.json
-    resourceUpdate:
-      - replace: /configServerResource/properties/configServer/gitProperty
-        value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
+  # - step: ConfigServers_UpdatePatch
+  #   exampleFile: ../examples/ConfigServers_UpdatePatch.json
+  #   resourceUpdate:
+  #     - replace: /configServerResource/properties/configServer/gitProperty
+  #       value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
 
   - step: ConfigServers_Get
     exampleFile: ../examples/ConfigServers_Get.json
@@ -111,7 +110,7 @@ testScenarios:
       - replace: /properties
         value: {
           "traceEnabled": true,
-          "appInsightsInstrumentationKey": "33d245b6-9cb4-4fb2-922d-675f4a8db181",
+          "appInsightsInstrumentationKey": "$(insightsInstrumentationKey)",
           "appInsightsSamplingRate": 50.0
         }
 
@@ -254,34 +253,24 @@ testScenarios:
     armTemplateDeployment: ./templates/upload_file.json
     variables:
       scriptsContent: |
-          $uploadUrl = ${Env:uploadUrl}
-          $BlobUri = ${Env:blobUrl}
+          $uploadUri = ${Env:uploadUrl}
+          $blobUri = ${Env:blobUrl}
           $localFilePath = '/tmp/temp.file'
           function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
-#            $Uri = [System.Uri]::New($blobUri.Split('?')[0])
-#            $SasToken = $blobUri.Split('?')[-1]
-#
-#            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
-#            $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($Uri, $StorageCredentials)
             $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($blobUri)
             $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
             $DownLoadTask
           }
 
-          function UploadToFileShare([string]$uploadUrl, [string]$localFilePath) {
-#            $Uri = [System.Uri]::New($uploadUrl.Split('?')[0])
-#
-#            $SasToken = $uploadUrl.Split('?')[-1]
-#            $StorageCredentials = [Microsoft.WindowsAzure.Storage.Auth.StorageCredentials]::New($SasToken)
-#            $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($Uri, $StorageCredentials)
-            $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($Uri)
+          function UploadToFileShare([string]$uploadUri, [string]$localFilePath) {
+            $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($uploadUri)
             $UploadTask = $CloudFile.UploadFromFileAsync($localFilePath)
             $UploadTask
           }
 
           Connect-AzAccount -Identity
-          DownloadJarFromBlob $BlobUri $localFilePath
-          UploadToFileShare $uploadUrl $localFilePath
+          DownloadJarFromBlob $blobUri $localFilePath
+          UploadToFileShare $uploadUri $localFilePath
 
 
 

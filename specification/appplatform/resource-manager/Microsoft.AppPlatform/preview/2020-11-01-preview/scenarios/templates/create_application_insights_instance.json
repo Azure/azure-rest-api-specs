@@ -1,5 +1,5 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
@@ -12,17 +12,23 @@
   },
   "resources": [
     {
-      "name": "parameters('name')",
+      "name": "[parameters('name')]",
       "type": "microsoft.insights/components",
       "location": "eastus",
       "tags": {},
-      "apiVersion": "2014-08-01",
+      "apiVersion": "2014-04-01",
       "properties": {
-        "ApplicationId": "parameters('name')",
+        "ApplicationId": "[parameters('name')]",
         "Application_Type": "web",
         "Flow_Type": "Redfield",
         "Request_Source": "CustomDeployment"
       }
     }
-  ]
+  ],
+  "outputs": {
+    "insightsInstrumentationKey": {
+      "value": "[reference(resourceId('Microsoft.Insights/components', parameters('name')), '2014-04-01').InstrumentationKey]",
+      "type": "string"
+    }
+  }
 }
