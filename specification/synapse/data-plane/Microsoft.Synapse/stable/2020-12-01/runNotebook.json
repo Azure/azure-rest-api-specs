@@ -1,0 +1,231 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "RunNotebook"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/runNotebookApi/versions/{version}/run": {
+      "post": {
+        "tags": [
+          "RunNotebook"
+        ],
+        "operationId": "Run_Notebook",
+        "x-ms-examples": {
+          "Run Notebook": {
+            "$ref": "./examples/RunNotebook_Create.json"
+          }
+        },
+        "description": "Run notebook",
+        "parameters": [
+          {
+            "$ref": "#/parameters/VersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/RunNotebookResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/runNotebookApi/versions/{version}/run/{runId}": {
+      "get": {
+        "tags": [
+          "RunNotebook"
+        ],
+        "operationId": "Get_Runnotebook_Status",
+        "x-ms-examples": {
+          "Get Run Notebook Status": {
+            "$ref": "./examples/RunNotebook_GetStatus.json"
+          }
+        },
+        "description": "Get Runnotebook Status for run id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RunId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/RunNotebookResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/runNotebookApi/versions/{version}/run/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "RunNotebook"
+        ],
+        "operationId": "Cancel_Run_Notebook",
+        "x-ms-examples": {
+          "Cancel Run Notebook": {
+            "$ref": "./examples/RunNotebook_Cancel.json"
+          }
+        },
+        "description": "Cancel notebook run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RunId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/RunNotebookResponse"
+            }
+          },
+          "408": {
+            "description": "RequestTimeout.",
+            "schema": {
+              "$ref": "#/definitions/RunNotebookResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "description": "Run notebook error.",
+      "type": "object",
+      "properties": {
+        "ename": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Error name."
+        },
+        "evalue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Error message."
+        },
+        "traceback": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Result": {
+      "description": "Result of run notebook.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "Run id."
+        },
+        "runStatus": {
+          "description": "Status of the run notebook.",
+          "type": "string"
+        },
+        "lastCheckedOn": {
+          "description": "Timestamp of .",
+          "type": "string"
+        },
+        "errors": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "RunNotebookResponse": {
+      "description": "Run notebook response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Http state code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Response message."
+        },
+        "result": {
+          "$ref": "#/definitions/Result"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "VersionParameter": {
+      "name": "version",
+      "in": "path",
+      "maxLength": 50,
+      "required": true,
+      "type": "string",
+      "description": "Api version.",
+      "x-ms-parameter-location": "method"
+    },
+    "RunId": {
+      "name": "runId",
+      "in": "path",
+      "maxLength": 100,
+      "required": true,
+      "type": "string",
+      "description": "Spark pool name.",
+      "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
