@@ -153,6 +153,9 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4009
+    from: costmanagement.json
+    reason: We don not yet support systemdata
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
