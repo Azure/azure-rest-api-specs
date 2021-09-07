@@ -153,6 +153,12 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R2029
+    from: costmanagement.exports.json
+    reason: 'false alarm ' 
+  - suppress: R2029
+    from: costmanagement.json
+    reason: 'false alarm ' 
   - suppress: R4009
     from: costmanagement.exports.json
     reason: We don not yet support systemdata

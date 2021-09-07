@@ -1662,13 +1662,27 @@
         },
         "filterEnabled": {
           "description": "Filter enabled.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "filterEnabledType",
+            "modelAsString": true
+          }
         },
         "groupingEnabled": {
           "description": "Grouping enabled.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "groupingEnabledType",
+            "modelAsString": true
+          }
         },
         "data": {
           "description": "Dimension data array.",
@@ -2137,11 +2151,27 @@
         },
         "includeActualCost": {
           "description": "a boolean determining if actualCost will be included",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "includeActualCostType",
+            "modelAsString": true
+          }
         },
         "includeFreshPartialCost": {
           "description": "a boolean determining if FreshPartialCost will be included",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "includeFreshPartialCostType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
