@@ -959,14 +959,14 @@
         }
       }
     },
-    "/calling/serverCalls/{serverCallId}/participants/{participantId}/:cancelAllMediaOperations": {
+    "/calling/serverCalls/{serverCallId}/participants/{participantId}/:cancelMediaOperation": {
       "post": {
         "tags": [
           "ServerCall"
         ],
         "summary": "cancel media operation for a participant.",
         "description": "cancel media operation for a participant.",
-        "operationId": "ServerCalls_CancelMediaOperation",
+        "operationId": "ServerCalls_CancelParticipantMediaOperation",
         "parameters": [
           {
             "name": "serverCallId",
@@ -1017,7 +1017,7 @@
         },
         "x-ms-examples": {
           "cancel media operation for a participant.": {
-            "$ref": "./examples/ServerCalls_CancelMediaOperation.json"
+            "$ref": "./examples/ServerCalls_CancelParticipantMediaOperation.json"
           }
         }
       }
@@ -1545,14 +1545,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/{participantId}/:cancelAllMediaOperations": {
+    "/calling/callConnections/{callConnectionId}/participants/{participantId}/:cancelMediaOperation": {
       "post": {
         "tags": [
           "CallConnection"
         ],
         "summary": "cancel media operation for a participant.",
         "description": "cancel media operation for a participant.",
-        "operationId": "CallConnections_CancelMediaOperation",
+        "operationId": "CallConnections_CancelParticipantMediaOperation",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -1603,7 +1603,7 @@
         },
         "x-ms-examples": {
           "cancel media operation for a participant.": {
-            "$ref": "./examples/CallConnections_CancelMediaOperation.json"
+            "$ref": "./examples/CallConnections_CancelParticipantMediaOperation.json"
           }
         }
       }
@@ -1994,7 +1994,7 @@
         }
       }
     },
-    "/calling/serverCalls/{serverCallId}/:cancelAllMediaOperations": {
+    "/calling/serverCalls/{serverCallId}/:cancelMediaOperation": {
       "post": {
         "tags": [
           "ServerCall"
