@@ -94,14 +94,39 @@
       }
     },
     "400": {
-      "headers": {
-        "x-ms-request-id":"DE04D7C5-1C19-4C30-9F26-07E3624D442A"
-      },
       "body": {
-        "error": {
-          "code": "400 BadRequest",
-          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
-        }
+        "code": "Bad Request",
+        "message": "Invalid request"
+      }
+    },
+    "401": {
+      "body": {
+        "code": "Unauthorized",
+        "message": "Request is not authorized."
+      }
+    },
+    "403": {
+      "body": {
+        "code": "Forbidden",
+        "message": "User is not allowed to perform specified action."
+      }
+    },
+    "429": {
+      "body": {
+        "code": "TooManyRequests",
+        "message": "Rate limit exceeded."
+      }
+    },
+    "500": {
+      "body": {
+        "code": "InternalServerError",
+        "message": "The internal server error occus."
+      }
+    },
+    "503": {
+      "body": {
+        "code": "ServiceUnavailable",
+        "message": "The server is currently unable to handle the request."
       }
     }
   }
