@@ -153,6 +153,12 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R3018
+    from: costmanagement.exports.json
+    reason: 'This needs api change ' 
+  - suppress: R3018
+    from: costmanagement.json
+    reason: 'This needs api change ' 
   - suppress: R2029
     from: costmanagement.exports.json
     reason: 'false alarm ' 
@@ -209,6 +215,22 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.filterEnabled
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.groupingEnabled
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeActualCost
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeFreshPartialCost
+    reason: 'false alarm '
 ```
 
 ### Tag: package-2018-08-preview
