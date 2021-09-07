@@ -201,7 +201,7 @@ directive:
   - suppress: ListInOperationName
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies"].post'
     from: DTL.json
-    reason: While evaluatePolicies returns a list, it's the result of an operation and not just listing resources under another resource.
+    reason: 'While evaluatePolicies returns a list, it''s the result of an operation and not just listing resources under another resource.'
   - suppress: RequiredSystemDataInNewApiVersions
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}"].get'
     from: DTL.json
@@ -252,6 +252,10 @@ directive:
     reason: SystemData is specified. Not sure why it's not picked up.
   - suppress: RequiredSystemDataInNewApiVersions
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}"].get'
     from: DTL.json
     reason: SystemData is specified. Not sure why it's not picked up.
 ```
