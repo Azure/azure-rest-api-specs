@@ -198,4 +198,60 @@ directive:
     reason: |-
       This was years ago, where if "isMonitor" is specified, we return "Accepted" if an operation is still running. To get rid of it, would be a breaking change.
       Adding x-ms-long-running would be incorrect in the regular case (where isMonitor isn't supplied)
+  - suppress: ListInOperationName
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies"].post'
+    from: DTL.json
+    reason: While evaluatePolicies returns a list, it's the result of an operation and not just listing resources under another resource.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
+  - suppress: RequiredSystemDataInNewApiVersions
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{name}"].get'
+    from: DTL.json
+    reason: SystemData is specified. Not sure why it's not picked up.
 ```
