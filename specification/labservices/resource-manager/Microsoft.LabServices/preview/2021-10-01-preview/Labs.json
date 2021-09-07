@@ -324,6 +324,7 @@
   "definitions": {
     "Lab": {
       "description": "The lab resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -345,6 +346,7 @@
     },
     "PagedLabs": {
       "description": "Paged list of labs.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -361,6 +363,7 @@
     },
     "LabNetworkProfile": {
       "description": "Profile for how to handle networking for Labs.",
+      "type": "object",
       "properties": {
         "subnetId": {
           "description": "The external subnet resource id",
@@ -378,6 +381,7 @@
     },
     "LabUpdate": {
       "description": "The lab resource for updates.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "LabServices.json#/definitions/TrackedResourceUpdate"
@@ -393,6 +397,7 @@
     },
     "LabUpdateProperties": {
       "description": "Properties of a lab resource used for updates.",
+      "type": "object",
       "properties": {
         "autoShutdownProfile": {
           "description": "The resource auto shutdown configuration for the lab. This controls whether actions are taken on resources that are sitting idle.",
@@ -432,6 +437,7 @@
     },
     "LabProperties": {
       "description": "Properties of a lab resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/LabUpdateProperties"
@@ -463,6 +469,7 @@
     },
     "SecurityProfile": {
       "description": "The lab security profile.",
+      "type": "object",
       "properties": {
         "registrationCode": {
           "description": "The registration code for the lab.",
@@ -477,6 +484,7 @@
     },
     "RosterProfile": {
       "description": "The lab user list management profile.",
+      "type": "object",
       "properties": {
         "activeDirectoryGroupId": {
           "description": "The AAD group ID which this lab roster is populated from. Having this set enables AAD sync mode.",
@@ -502,6 +510,7 @@
     },
     "VirtualMachineProfile": {
       "description": "The base virtual machine configuration for a lab.",
+      "type": "object",
       "properties": {
         "createOption": {
           "description": "Indicates what lab virtual machines are created from.",
@@ -573,6 +582,7 @@
     },
     "VirtualMachineAdditionalCapabilities": {
       "description": "The additional capabilities for a lab VM.",
+      "type": "object",
       "properties": {
         "installGpuDrivers": {
           "description": "Flag to pre-install dedicated GPU drivers.",
@@ -583,6 +593,7 @@
     },
     "Credentials": {
       "description": "Credentials for a user on a lab VM.",
+      "type": "object",
       "properties": {
         "username": {
           "description": "The username to use when signing in to lab VMs.",
@@ -600,6 +611,7 @@
     },
     "ImageReference": {
       "description": "Image reference information. Used in the virtual machine profile.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Image resource ID",

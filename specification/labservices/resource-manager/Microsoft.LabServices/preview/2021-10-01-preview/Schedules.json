@@ -200,6 +200,7 @@
   "definitions": {
     "Schedule": {
       "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -221,6 +222,7 @@
     },
     "PagedSchedules": {
       "description": "Paged list of schedules.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -237,6 +239,7 @@
     },
     "ScheduleUpdate": {
       "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times. Used for updates.",
+      "type": "object",
       "properties": {
         "properties": {
           "description": "Schedule resource properties",
@@ -247,6 +250,7 @@
     },
     "ScheduleUpdateProperties": {
       "description": "Schedule resource properties used for updates.",
+      "type": "object",
       "properties": {
         "startAt": {
           "description": "When lab user virtual machines will be started. Timestamp offsets will be ignored and timeZoneId is used instead.",
@@ -276,6 +280,7 @@
     },
     "ScheduleProperties": {
       "description": "Schedule resource properties",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScheduleUpdateProperties"
@@ -292,6 +297,7 @@
     },
     "RecurrencePattern": {
       "description": "Recurrence pattern of a lab schedule.",
+      "type": "object",
       "properties": {
         "frequency": {
           "description": "The frequency of the recurrence.",

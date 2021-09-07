@@ -296,6 +296,7 @@
   "definitions": {
     "LabPlan": {
       "description": "Lab Plans act as a permission container for creating labs via labs.azure.com. Additionally, they can provide a set of default configurations that will apply at the time of creating a lab, but these defaults can still be overwritten.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -317,6 +318,7 @@
     },
     "PagedLabPlans": {
       "description": "Paged list of lab plans.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -333,6 +335,7 @@
     },
     "LabPlanNetworkProfile": {
       "description": "Profile for how to handle networking for Lab Plans.",
+      "type": "object",
       "properties": {
         "subnetId": {
           "description": "The external subnet resource id",
@@ -342,6 +345,7 @@
     },
     "LabPlanUpdate": {
       "description": "Contains lab configuration and default settings. This variant is used for PATCH.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "LabServices.json#/definitions/TrackedResourceUpdate"
@@ -357,6 +361,7 @@
     },
     "LabPlanUpdateProperties": {
       "description": "Lab plan resource properties for updates",
+      "type": "object",
       "properties": {
         "defaultConnectionProfile": {
           "description": "The default lab connection profile. This can be changed on a lab resource and only provides a default profile.",
@@ -393,6 +398,7 @@
     },
     "LabPlanProperties": {
       "description": "Lab plan resource properties",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/LabPlanUpdateProperties"
@@ -408,6 +414,7 @@
     },
     "SupportInfo": {
       "description": "Support contact information and instructions.",
+      "type": "object",
       "properties": {
         "url": {
           "description": "Support web address.",
@@ -429,6 +436,7 @@
     },
     "SaveImageBody": {
       "description": "Body for the save image POST",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name for the image we create.",
