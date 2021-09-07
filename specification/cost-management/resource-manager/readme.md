@@ -153,6 +153,18 @@ input-file:
 
 ``` yaml
 directive:  
+  - suppress: R4014
+    from: costmanagement.json
+    reason: 'false alarm - does not have get operation' 
+  - suppress: R4014
+    from: costmanagement.exports.json
+    reason: 'false alarm - does not have get operation' 
+  - suppress: R3018
+    from: costmanagement.exports.json
+    reason: 'This needs api change - EnumInsteadOfBoolean' 
+  - suppress: R2029
+    from: costmanagement.exports.json
+    reason: 'false operation ' 
   - suppress: R2066
     from: costmanagement.exports.json
     reason: 'This needs api change ' 
