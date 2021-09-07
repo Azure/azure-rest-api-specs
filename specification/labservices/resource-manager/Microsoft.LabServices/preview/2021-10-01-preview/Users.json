@@ -53,6 +53,12 @@
             "schema": {
               "$ref": "#/definitions/PagedUsers"
             }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -93,6 +99,12 @@
             "description": "The request was successful; response contains the lab user.",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -136,6 +148,12 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -177,6 +195,12 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -203,6 +227,12 @@
           },
           "204": {
             "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -256,6 +286,12 @@
           },
           "202": {
             "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -295,6 +331,7 @@
     },
     "PagedUsers": {
       "description": "Paged list of users.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -428,6 +465,7 @@
     },
     "InviteBody": {
       "description": "Body for a user invite request",
+      "type": "object",
       "properties": {
         "text": {
           "description": "Custom text for the invite email.",
