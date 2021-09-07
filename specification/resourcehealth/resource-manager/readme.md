@@ -58,6 +58,15 @@ input-file:
 - Microsoft.ResourceHealth/preview/2018-08-01/ResourceHealth.json
 ```
 
+### Tag: package-2020-05-01-preview
+
+These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01-preview'
+input-file:
+- Microsoft.ResourceHealth/preview/2020-05-01-preview/ResourceHealth.json
+```
+
 ### Tag: package-2018-07-01
 
 These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
@@ -67,6 +76,14 @@ input-file:
 - Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 ```
 
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.ResourceHealth/stable/2020-05-01/ResourceHealth.json
+```
 
 ---
 # Code Generation
@@ -121,7 +138,9 @@ batch:
   - tag: package-2017-07
   - tag: package-2015-01
   - tag: package-2018-08-preview
+  - tag: package-2020-05-01-preview
   - tag: package-2018-07-01
+  - tag: package-2020-05-01
 ```
 
 ### Tag: package-2017-07 and java
@@ -161,6 +180,18 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+### Tag: package-2020-05-01-preview and java
+
+These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2020_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2020_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
 ### Tag: package-2018-07-01 and java
 
 These settings apply only when `--tag=package-2018-07-01 --java` is specified on the command line.
@@ -174,6 +205,18 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-05-01 and java
+
+These settings apply only when `--tag=package-2020-05-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
 
 
 
