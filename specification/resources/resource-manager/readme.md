@@ -33,7 +33,7 @@ tag: package-features-2021-07
 ```
 
 ``` yaml $(package-locks)
-tag: package-locks-2016-09
+tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
@@ -90,6 +90,16 @@ input-file:
 - Microsoft.Authorization/stable/2020-05-01/privateLinks.json
 ```
 
+### Tag: package-locks-2020-05
+
+These settings apply only when `--tag=package-locks-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2020-05'
+input-file:
+- Microsoft.Authorization/stable/2020-05-01/locks.json
+```
+
+
 ### Tag: package-resources-2021-04
 
 
@@ -116,6 +126,15 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+### Tag: package-locks-2017-04
+
+These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2017-04'
+input-file:
+- Microsoft.Authorization/stable/2017-04-01/locks.json
+```
+
 
 ### Tag: package-preview-2020-08
 
