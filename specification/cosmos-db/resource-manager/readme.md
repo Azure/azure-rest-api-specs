@@ -42,7 +42,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-10-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-10-15/rbac.json
   - Microsoft.DocumentDB/stable/2021-10-15/restorable.json
-  - Microsoft.DocumentDB/stable/2021-10-15/mongorbac.json
 ```
 
 ### Tag: package-2021-10-preview
