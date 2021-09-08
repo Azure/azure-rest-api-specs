@@ -139,7 +139,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
+            "description": "$expand is supported on configurations parameter for product, which provides details on the configurations for the product.",
             "required": false,
             "type": "string"
           },
@@ -354,7 +354,7 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Lists order at subscription level.",
+        "description": "Lists order item at subscription level.",
         "operationId": "ListOrderItemsAtSubscriptionLevel",
         "consumes": [
           "application/json"
@@ -377,16 +377,23 @@
             "type": "string"
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of order.",
+            "description": "$skipToken is supported on Get list of order items, which provides the next page in the list of order items.",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Order item object",
+            "description": "List of Order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResourceList"
             }
@@ -554,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Address object.",
+            "description": "Address resource object.",
             "schema": {
               "$ref": "#/definitions/AddressResource"
             }
@@ -832,7 +839,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
             "required": false,
             "type": "string"
           },
@@ -897,7 +904,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported on device details parameter for order item, which provides details on the devices of the product.",
+            "description": "$expand is supported on device details, forward shipping details and reverse shipping details parameters. Each of these can be provided as a comma separated list. Device Details for order item provides details on the devices of the product, Forward and Reverse Shipping details provide forward and reverse shipping details respectively.",
             "required": false,
             "type": "string"
           }
@@ -1781,6 +1788,11 @@
           "description": "Management Resource Id",
           "type": "string",
           "readOnly": true
+        },
+        "managementResourceTenantId": {
+          "description": "Management Resource Tenant ID",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1887,7 +1899,7 @@
       "type": "object",
       "properties": {
         "doubleEncryptionStatus": {
-          "description": "Defines secondary layer of software-based encryption enablement.",
+          "description": "Double encryption status as entered by the customer. It is compulsory to give this parameter if the 'Deny' or 'Disabled' policy is configured.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -2343,7 +2355,7 @@
           "readOnly": true
         },
         "cancellationStatus": {
-          "description": "Describes whether the orderItem is cancellable or not.",
+          "description": "Describes whether the order item is cancellable or not.",
           "enum": [
             "Cancellable",
             "CancellableWithFee",
@@ -2399,7 +2411,7 @@
           "readOnly": true
         },
         "returnStatus": {
-          "description": "Describes whether the orderItem is returnable or not.",
+          "description": "Describes whether the order item is returnable or not.",
           "enum": [
             "Returnable",
             "ReturnableWithFee",
@@ -2759,7 +2771,32 @@
         "count": {
           "format": "int32",
           "description": "Quantity of the product",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
+        },
+        "productDoubleEncryptionStatus": {
+          "description": "Double encryption status of the configuration. Read-only field.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DoubleEncryptionStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Double encryption is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "Double encryption is enabled"
+              }
+            ]
+          },
+          "default": "Disabled"
         },
         "deviceDetails": {
           "description": "list of device details",
@@ -3000,6 +3037,15 @@
         "returnReason": {
           "description": "Return Reason.",
           "type": "string"
+        },
+        "serviceTag": {
+          "description": "Service tag (located on the bottom-right corner of the device)",
+          "type": "string"
+        },
+        "shippingBoxRequired": {
+          "description": "Shipping Box required",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
