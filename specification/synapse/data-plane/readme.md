@@ -205,6 +205,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlPools.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/runNotebook.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/DataFlow.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/Dataset.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/LinkedService.json
@@ -236,7 +237,7 @@ directive:
       - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these properties.
     from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
