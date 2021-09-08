@@ -82,7 +82,7 @@
       "in": "header",
       "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes) for details.",
       "required": false,
-       "type": "string",
+      "type": "string",
       "x-ms-parameter-location": "client"
     },
     "location": {
@@ -243,7 +243,7 @@
               }
             }
           },
-          "400":{
+          "400": {
             "description": "The request contained an error",
             "headers": {
               "x-ms-request-id": {
@@ -256,7 +256,7 @@
             },
             "x-ms-error-response": true
           },
-          "401":{
+          "401": {
             "description": "Access was denied. You may have entered your credentials incorrectly, or you might not have access to the requested resource or operation.",
             "headers": {
               "x-ms-request-id": {
@@ -269,8 +269,7 @@
             },
             "x-ms-error-response": true
           },
-          "403":
-          {
+          "403": {
             "description": "The request is for something forbidden. Authorization will not help.",
             "headers": {
               "x-ms-request-id": {
@@ -283,8 +282,7 @@
             },
             "x-ms-error-response": true
           },
-          "429":
-          {
+          "429": {
             "description": "The user has sent too many requests in a given amount of time. The account is being rate limited.",
             "headers": {
               "x-ms-request-id": {
@@ -297,8 +295,7 @@
             },
             "x-ms-error-response": true
           },
-          "500":
-          {
+          "500": {
             "description": "Your request could not be completed because there was a problem with the service.",
             "headers": {
               "x-ms-request-id": {
@@ -311,8 +308,7 @@
             },
             "x-ms-error-response": true
           },
-          "503":
-          {
+          "503": {
             "description": "There's a problem with the service right now. Please try again later.",
             "headers": {
               "x-ms-request-id": {
@@ -375,7 +371,7 @@
       }
     },
     "bbox": {
-      "description": "information on the coordinate range for point Geomerty.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+      "description": "information on the coordinate range for point Geometry.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
       "type": "array",
       "minItems": 4,
       "maxItems": 4,
@@ -385,7 +381,7 @@
       }
     },
     "geocodePoints": {
-      "description": "A collection of geocoded points that differ in how they were calculated and their suggested use. For a description of the points in this collection, see the Geocode Point Fields",
+      "description": "A collection of geocode points that differ in how they were calculated and their suggested use. For a description of the points in this collection, see the Geocode Point Fields",
       "type": "array",
       "items": {
         "type": "object",
@@ -439,8 +435,8 @@
               "description": "NumResults property for the number of results returned",
               "type": "integer",
               "readOnly": true
-            }     
-          }     
+            }
+          }
         },
         "features": {
           "type": "array",
@@ -490,7 +486,7 @@
           }
         },
         "nextLink": {
-          "type":"string",
+          "type": "string",
           "description": "The is the link to the next page of the features returned, if there is only one page for results, this field will be NULL"
         }
       }
@@ -514,20 +510,19 @@
           "type": "string",
           "readOnly": true
         },
-        "adminDistricts":
-        {
-          "type":"array",
-          "items":{
-            "type":"object",
+        "adminDistricts": {
+          "type": "array",
+          "items": {
+            "type": "object",
             "properties": {
-               "name":{
-                 "type":"string",
-                 "description": "The name for the correponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
-               },
-               "shortName":{
-                 "type":"string",
-                 "description": "The short name for the correponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
-               }
+              "name": {
+                "type": "string",
+                "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
+              },
+              "shortName": {
+                "type": "string",
+                "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
+              }
             }
           }
         },
@@ -536,7 +531,7 @@
           "type": "string",
           "readOnly": true
         },
-        "countryRegion":{
+        "countryRegion": {
           "type": "object",
           "properties": {
             "ISO": {
