@@ -155,10 +155,7 @@ input-file:
 directive:
   - suppress: R4037
     from: costmanagement.generatedetailedcostreport.json
-    reason: 'This needs api change - MissingTypeObject'
-  - suppress: R3023
-    from: costmanagement.generatedetailedcostreport.json    
-    reason: 'API change needed, Operations API must be implemented for operations'
+    reason: 'This needs api change - MissingTypeObject' 
   - suppress: R4009
     from: costmanagement.exports.json
     reason: API change needed, we do not yet support systemdata
@@ -184,13 +181,7 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.ForecastDefinition.properties.includeActualCost
-    reason: 'API change needed'
-  - suppress: R4011
-    from: costmanagement.exports.json
-    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
-  - suppress: R4018
-    from: costmanagement.json    
-    reason: 'API change needed, Response schema of OperatioAPI does not match Arm Schema'
+    reason: 'API change needed'    
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
