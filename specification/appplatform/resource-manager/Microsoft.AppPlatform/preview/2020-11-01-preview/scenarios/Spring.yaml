@@ -87,8 +87,8 @@ scenarios:
       # ConfigServers
       - step: ConfigServers_Validate
         exampleFile: ../examples/ConfigServers_Validate.json
-        resourceUpdate:
-          - replace: /gitProperty
+        requestUpdate:
+          - replace: /configServerSettings/gitProperty
             value:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
@@ -229,8 +229,8 @@ scenarios:
       # CustomDomains         # depends on DNS
       - step: Apps_ValidateDomain
         exampleFile: ../examples/Apps_ValidateDomain.json
-        resourceUpdate:
-          - replace: /name
+        requestUpdate:
+          - replace: /validatePayload/name
             value: $(customDomainName)
 
       - step: CustomDomains_CreateOrUpdate
