@@ -156,6 +156,9 @@ directive:
   - suppress: R4037
     from: costmanagement.generatedetailedcostreport.json
     reason: 'This needs api change - MissingTypeObject'
+  - suppress: R3023
+    from: costmanagement.generatedetailedcostreport.json    
+    reason: 'API change needed, Operations API must be implemented for operations'
   - suppress: R4009
     from: costmanagement.exports.json
     reason: API change needed, we do not yet support systemdata
