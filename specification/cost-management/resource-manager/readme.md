@@ -153,6 +153,15 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4037
+    from: costmanagement.generatedetailedcostreport.json
+    reason: 'This needs api change - MissingTypeObject'
+  - suppress: R4009
+    from: costmanagement.exports.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: R4009
+    from: costmanagement.json
+    reason: API change needed, we do not yet support systemdata
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.exports.json
     where: $.definitions.CommonExportProperties.properties.partitionData
