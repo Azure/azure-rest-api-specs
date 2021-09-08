@@ -153,6 +153,26 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.exports.json
+    where: $.definitions.CommonExportProperties.properties.partitionData
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.filterEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.groupingEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeFreshPartialCost
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeActualCost
+    reason: 'API change needed'
   - suppress: R4011
     from: costmanagement.exports.json
     reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'
