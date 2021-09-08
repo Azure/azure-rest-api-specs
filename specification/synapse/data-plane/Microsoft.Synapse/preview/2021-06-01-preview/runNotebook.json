@@ -63,7 +63,7 @@
         "responses": {
           "202": {
             "description": "Accepted.",
-            "x-ms-long-running-operation" : true,
+            "x-ms-long-running-operation": true,
             "schema": {
               "$ref": "#/definitions/RunNotebookResponse"
             }
@@ -238,6 +238,22 @@
           "type": "integer",
           "format": "int64"
         },
+        "sparkPool": {
+          "description": "SparkPool name.",
+          "type": "string"
+        },
+        "snapshot": {
+          "description": "Notebook output.",
+          "type": "object"
+        },
+        "sessionDetail": {
+          "description": "Run notebook session details.",
+          "type": "object"
+        },
+        "exitValue": {
+          "description": "Output of exit command.",
+          "type": "string"
+        },
         "errors": {
           "$ref": "#/definitions/Error"
         }
@@ -259,10 +275,15 @@
           "type": "string",
           "description": "SparkPool name."
         },
+        "sessionOptions": {
+          "$ref": "./entityTypes/Notebook.json#/definitions/NotebookSessionProperties"
+        },
         "parameters": {
           "type": "object",
           "description": "Run notebook parameters",
-          "$ref": "#/definitions/parameter"
+          "additionalProperties": {
+            "$ref": "#/definitions/parameter"
+          }
         }
       },
       "required": [
@@ -279,7 +300,7 @@
           "description": "Parameter type."
         },
         "value": {
-          "type": "string",
+          "type": "object",
           "description": "Parameter value."
         }
       }
