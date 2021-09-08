@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Monitor Data Collection Rules API",
     "description": "Provides operations for working with Azure Monitor data collection rules",
-    "version": "2021-04-01",
+    "version": "2021-09-01-preview",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     }
@@ -310,6 +310,45 @@
     }
   },
   "definitions": {
+    "ColumnDefinition": {
+      "description": "Definition of custom data column.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the column data.",
+          "enum": [
+            "string",
+            "int",
+            "long",
+            "real",
+            "boolean",
+            "datetime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KnownColumnDefinitionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StreamDeclaration": {
+      "description": "Declaration of a custom stream.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "List of columns used by data in this stream.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnDefinition"
+          }
+        }
+      }
+    },
     "PerfCounterDataSource": {
       "description": "Definition of which performance counters will be collected and how they will be collected by this data collection rule.\r\nCollected from both Windows and Linux machines where the counter is present.",
       "type": "object",
@@ -630,6 +669,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "transformKql": {
+          "description": "The KQL query to transform stream data.",
+          "type": "string"
+        },
+        "outputStream": {
+          "description": "The output stream of the transform. Only required if the transform changes data to a different stream.",
+          "type": "string",
+          "example": "\"Microsoft-SecurityEvent\""
         }
       }
     },
@@ -649,6 +697,13 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "streamDeclarations": {
+          "description": "Declaration of custom streams used in this rule.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StreamDeclaration"
+          }
         },
         "dataSources": {
           "description": "The specification of data sources. \r\nThis property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.",
