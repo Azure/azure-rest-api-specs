@@ -163,6 +163,19 @@ input-file:
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 ```
 
+### Tag: package-2020-07-preview
+
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-preview'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/preview/2020-07-01-preview/checkPolicyRestrictions.json
+```
 
 ### Tag: package-2019-10
 
