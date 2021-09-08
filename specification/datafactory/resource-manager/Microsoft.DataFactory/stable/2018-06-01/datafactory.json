@@ -5400,6 +5400,18 @@
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
         }
+      },
+      "publicNetworkAccess": {
+        "description": "Whether or not public network access is allowed for the data factory.",
+        "enum": [
+          "Enabled",
+          "Disabled"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PublicNetworkAccess",
+          "modelAsString": true
+        }
       }
     },
     "FactoryIdentity": {
