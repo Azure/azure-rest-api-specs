@@ -76,6 +76,24 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-preview'
+input-file:
+- Microsoft.DocumentDB/preview/2021-10-01-preview/cosmos-db.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/rbac.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/restorable.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/managedCassandra.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/privateEndpointConnection.json
+- Microsoft.DocumentDB/preview/2021-10-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ### Tag: package-2021-04-preview
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
