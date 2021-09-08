@@ -2187,6 +2187,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "ociArtifacts": {
+          "type": "array",
+          "description": "The list of Open Container Initiative (OCI) artifacts.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceOciArtifactEntry"
+          }
         }
       }
     },
@@ -2202,6 +2210,24 @@
     "ServiceCorsConfigurationMethodEntry": {
       "description": "A method for CORS.",
       "type": "string"
+    },
+    "ServiceOciArtifactEntry": {
+      "description": "An Open Container Initiative (OCI) artifact.",
+      "type": "object",
+      "properties": {
+        "loginServer": {
+          "description": "The Azure Container Registry login server.",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "The artifact name.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The artifact digest.",
+          "type": "string"
+        }
+      }
     },
     "ServicesDescription": {
       "description": "The description of the service.",
