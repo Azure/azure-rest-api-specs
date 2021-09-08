@@ -184,10 +184,7 @@ directive:
     reason: 'API change needed'
   - suppress: R4011
     from: costmanagement.exports.json
-    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'
-  - suppress: R3023
-    from: costmanagement.generatedetailedcostreport.json    
-    reason: 'API change needed, Operations API must be implemented for operations'
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
   - suppress: R4018
     from: costmanagement.json    
     reason: 'API change needed, Response schema of OperatioAPI does not match Arm Schema'
