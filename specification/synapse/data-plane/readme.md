@@ -358,7 +358,7 @@ directive:
       - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these properties.
     from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
