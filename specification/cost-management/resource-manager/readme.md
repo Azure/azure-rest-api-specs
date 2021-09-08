@@ -153,6 +153,15 @@ input-file:
 
 ``` yaml
 directive:  
+  - suppress: R3023
+    from: costmanagement.generatedetailedcostreport.json
+    reason: 'This needs api change' 
+  - suppress: R4018
+    from: costmanagement.json
+    reason: 'This needs api change' 
+  - suppress: R4011
+    from: costmanagement.exports.json
+    reason: 'This needs api change, del operation is deinfed without 200 or 204 implementation' 
   - suppress: R4014
     from: costmanagement.json
     reason: 'false alarm - does not have get operation' 
