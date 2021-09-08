@@ -26,24 +26,24 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-7.4-preview
+tag: package-preview-7.4-preview.1
 ```
 
 
-### Tag: package-preview-7.4-preview
+### Tag: package-preview-7.4-preview.1
 
-These settings apply only when `--tag=package-preview-7.4-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-7.4-preview.1` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.4-preview'
+```yaml $(tag) == 'package-preview-7.4-preview.1'
 input-file:
-  - Microsoft.KeyVault/preview/7.4-preview/backuprestore.json
-  - Microsoft.KeyVault/preview/7.4-preview/certificates.json
-  - Microsoft.KeyVault/preview/7.4-preview/common.json
-  - Microsoft.KeyVault/preview/7.4-preview/keys.json
-  - Microsoft.KeyVault/preview/7.4-preview/rbac.json
-  - Microsoft.KeyVault/preview/7.4-preview/secrets.json
-  - Microsoft.KeyVault/preview/7.4-preview/securitydomain.json
-  - Microsoft.KeyVault/preview/7.4-preview/storage.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/backuprestore.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/certificates.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/common.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/keys.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/rbac.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/secrets.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/securitydomain.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/storage.json
 ```
 ### Tag: package-preview-7.3-preview
 
