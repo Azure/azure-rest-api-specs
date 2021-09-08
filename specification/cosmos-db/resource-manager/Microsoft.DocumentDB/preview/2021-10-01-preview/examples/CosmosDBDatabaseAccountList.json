@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-04-01-preview",
+    "api-version": "2021-06-15",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -74,18 +74,20 @@
                 }
               ],
               "cors": [],
+              "defaultIdentity": "FirstPartyIdentity",
               "enableFreeTier": false,
               "apiProperties": {},
               "enableAnalyticalStorage": true,
+              "analyticalStorageConfiguration": {
+                "schemaType": "WellDefined"
+              },
               "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
               "createMode": "Default",
-              "defaultIdentity": "FirstPartyIdentity",
               "backupPolicy": {
                 "type": "Periodic",
                 "periodicModeProperties": {
                   "backupIntervalInMinutes": 240,
-                  "backupRetentionIntervalInHours": 720,
-                  "backupStorageRedundancy": "Geo"
+                  "backupRetentionIntervalInHours": 720
                 }
               },
               "networkAclBypass": "None",
@@ -93,6 +95,17 @@
             },
             "systemData": {
               "createdAt": "2021-03-12T22:05:09Z"
+            },
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "52f4fef3-3c3f-4ff3-b52e-b5c9eeb68656",
+              "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+              "userAssignedIdentities": {
+                "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+                  "principalId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
+                }
+              }
             }
           }
         ]
