@@ -591,12 +591,12 @@
         }
       }
     },
-    "metadataCategory": {
+    "metadataCategories": {
       "type": "object",
-      "description": "Category for the solution content item",
+      "description": "ies for the solution content item",
       "properties": {
         "domains": {
-          "description": "Category domain for the solution content item",
+          "description": "domain for the solution content item",
           "type": "array",
           "example": [
             "str1",
@@ -608,7 +608,7 @@
           }
         },
         "verticals": {
-          "description": "Category verticals for the solution content item",
+          "description": "Industry verticals for the solution content item",
           "type": "array",
           "items": {
             "type": "string"
@@ -683,9 +683,9 @@
           "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
-        "category": {
-          "$ref": "#/definitions/metadataCategory",
-          "description": "Category for the solution content item"
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
         },
         "providers": {
           "$ref": "#/definitions/metadataProviders",
@@ -737,9 +737,9 @@
           "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
-        "category": {
-          "$ref": "#/definitions/metadataCategory",
-          "description": "Category for the solution content item"
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
         },
         "providers": {
           "$ref": "#/definitions/metadataProviders",
