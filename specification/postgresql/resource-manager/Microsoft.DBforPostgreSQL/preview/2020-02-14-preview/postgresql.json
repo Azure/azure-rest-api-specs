@@ -1189,6 +1189,11 @@
           "$ref": "#/definitions/ServerVersion",
           "description": "PostgreSQL Server version."
         },
+        "minorVersion": {
+          "type": "string",
+          "description": "The minor version of the server.",
+          "readOnly": true
+        },
         "state": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
@@ -1252,7 +1257,11 @@
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server."
+          "description": "Maintenance window of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         },
         "haEnabled": {
           "type": "string",
@@ -1265,6 +1274,23 @@
             "name": "HAEnabledEnum",
             "modelAsString": false
           }
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of standbys.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "logBackupStorageSku": {
+          "type": "string",
+          "description": "The log backup storage sku of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sourceServerName": {
           "type": "string",
@@ -1285,7 +1311,11 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "availability Zone information of the server."
+          "description": "availability Zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "standbyAvailabilityZone": {
           "type": "string",
@@ -1409,9 +1439,22 @@
             "modelAsString": false
           }
         },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of standbys.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server."
+          "description": "Maintenance window of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         }
       }
     },
@@ -1468,6 +1511,28 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "description": "A value indicating whether Geo-Redundant backup is enabled on the server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeoRedundantBackupEnum",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for server.",
+          "readOnly": true
         }
       },
       "description": "Storage Profile properties of a server"

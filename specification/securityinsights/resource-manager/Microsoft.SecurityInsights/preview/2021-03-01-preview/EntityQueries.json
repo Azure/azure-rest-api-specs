@@ -239,147 +239,6 @@
     }
   },
   "definitions": {
-    "EntityInnerType": {
-      "description": "The type of the entity",
-      "enum": [
-        "Account",
-        "Host",
-        "File",
-        "AzureResource",
-        "CloudApplication",
-        "DNS",
-        "FileHash",
-        "IP",
-        "Malware",
-        "Process",
-        "RegistryKey",
-        "RegistryValue",
-        "SecurityGroup",
-        "URL",
-        "IoTDevice",
-        "SecurityAlert",
-        "HuntingBookmark",
-        "MailCluster",
-        "MailMessage",
-        "Mailbox",
-        "SubmissionMail"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityType",
-        "values": [
-          {
-            "description": "Entity represents account in the system.",
-            "value": "Account"
-          },
-          {
-            "description": "Entity represents host in the system.",
-            "value": "Host"
-          },
-          {
-            "description": "Entity represents file in the system.",
-            "value": "File"
-          },
-          {
-            "description": "Entity represents azure resource in the system.",
-            "value": "AzureResource"
-          },
-          {
-            "description": "Entity represents cloud application in the system.",
-            "value": "CloudApplication"
-          },
-          {
-            "description": "Entity represents dns in the system.",
-            "value": "DNS"
-          },
-          {
-            "description": "Entity represents file hash in the system.",
-            "value": "FileHash"
-          },
-          {
-            "description": "Entity represents ip in the system.",
-            "value": "IP"
-          },
-          {
-            "description": "Entity represents malware in the system.",
-            "value": "Malware"
-          },
-          {
-            "description": "Entity represents process in the system.",
-            "value": "Process"
-          },
-          {
-            "description": "Entity represents registry key in the system.",
-            "value": "RegistryKey"
-          },
-          {
-            "description": "Entity represents registry value in the system.",
-            "value": "RegistryValue"
-          },
-          {
-            "description": "Entity represents security group in the system.",
-            "value": "SecurityGroup"
-          },
-          {
-            "description": "Entity represents url in the system.",
-            "value": "URL"
-          },
-          {
-            "description": "Entity represents IoT device in the system.",
-            "value": "IoTDevice"
-          },
-          {
-            "description": "Entity represents security alert in the system.",
-            "value": "SecurityAlert"
-          },
-          {
-            "description": "Entity represents HuntingBookmark in the system.",
-            "value": "HuntingBookmark"
-          },
-          {
-            "description": "Entity represents mail cluster in the system.",
-            "value": "MailCluster"
-          },
-          {
-            "description": "Entity represents mail message in the system.",
-            "value": "MailMessage"
-          },
-          {
-            "description": "Entity represents mailbox in the system.",
-            "value": "Mailbox"
-          },
-          {
-            "description": "Entity represents submission mail in the system.",
-            "value": "SubmissionMail"
-          }
-        ]
-      }
-    },
-    "EntityQueryKind": {
-      "description": "The kind of the entity query",
-      "enum": [
-        "Expansion",
-        "Insight",
-        "Activity"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityQueryKind",
-        "values": [
-          {
-            "value": "Expansion"
-          },
-          {
-            "value": "Insight"
-          },
-          {
-            "value": "Activity"
-          }
-        ]
-      }
-    },
     "CustomEntityQueryKind": {
       "description": "The kind of the entity query that supports put request.",
       "enum": [
@@ -426,7 +285,7 @@
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/EntityQueryKind",
+          "$ref": "EntityDefinitions.json#/definitions/EntityQueryKind",
           "description": "the entity query kind"
         }
       },
@@ -487,7 +346,7 @@
           "type": "string"
         },
         "inputEntityType": {
-          "$ref": "#/definitions/EntityInnerType",
+          "$ref": "EntityDefinitions.json#/definitions/EntityInnerType",
           "description": "The type of the query's source entity"
         },
         "inputFields": {
@@ -501,7 +360,7 @@
         "outputEntityTypes": {
           "description": "List of the desired output types to be constructed from the result",
           "items": {
-            "$ref": "#/definitions/EntityInnerType",
+            "$ref": "EntityDefinitions.json#/definitions/EntityInnerType",
             "description": "output entity type"
           },
           "type": "array"
@@ -573,7 +432,7 @@
           "type": "object"
         },
         "inputEntityType": {
-          "$ref": "#/definitions/EntityInnerType",
+          "$ref": "EntityDefinitions.json#/definitions/EntityInnerType",
           "description": "The type of the query's source entity"
         },
         "requiredInputFieldsSets": {
