@@ -38,14 +38,6 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 input-file:
   - Microsoft.DesktopVirtualization/stable/2021-07-12/desktopvirtualization.json
 ```
-### Tag: package-preview-2021-05
-
-These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-05'
-input-file:
-  - Microsoft.DesktopVirtualization/preview/2021-05-13-preview/desktopvirtualization.json
-```
 
 ### Tag: package-2019-01-23-preview
 
