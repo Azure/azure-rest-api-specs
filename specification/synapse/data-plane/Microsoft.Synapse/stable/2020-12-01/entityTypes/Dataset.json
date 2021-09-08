@@ -402,8 +402,8 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "Type of dataset compression."
+          "type": "object",
+          "description": "Type of dataset compression. Type: string (or Expression with resultType string)."
         }
       },
       "additionalProperties": {
@@ -1703,6 +1703,37 @@
         "table": {
           "type": "object",
           "description": "The table name of the on-premises Oracle database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonRdsForOracleTableDataset": {
+      "x-ms-discriminator-value": "AmazonRdsForOracleTable",
+      "description": "The AmazonRdsForOracle database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AmazonRdsForOracle dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForOracleTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AmazonRdsForOracleTableDatasetTypeProperties": {
+      "description": "AmazonRdsForOracle dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the AmazonRdsForOracle database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the AmazonRdsForOracle database. Type: string (or Expression with resultType string)."
         }
       }
     },

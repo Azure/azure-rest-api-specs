@@ -2,13 +2,14 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go) && !(track2)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 
 directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum and then remove it from the generated code to avoid the generator generates the code by hard-coding the single-entry enum value
+    # this directive adds a DummyOrchestrationServiceName to the enum type
   - from: compute.json
     where: $..enum
     transform: >-
@@ -17,14 +18,15 @@ directive:
       }
       return $;
 
+    # this directive removes the DummyOrchestrationServiceName from the generated code, so that we still have only one enum entry in this enum type.
   - from: source-file-go
     where: $ 
     transform: >-
       return $.
-        replace(/\/\/ DummyOrchestrationServiceName .../g,'').
-        replace(/DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
-        replace(/,DummyOrchestrationServiceName/,'').
-        replace(/, 'DummyOrchestrationServiceName'/,'');
+        replace(/\/\/ (OrchestrationServiceNames)?DummyOrchestrationServiceName .../g,'').
+        replace(/(OrchestrationServiceNames)?DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
+        replace(/,(OrchestrationServiceNames)?DummyOrchestrationServiceName/,'').
+        replace(/, '(OrchestrationServiceNames)?DummyOrchestrationServiceName'/,'');
 ```
 
 ``` yaml $(go) && $(track2)
@@ -35,6 +37,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 
 directive:
+  # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
   - from: disk.json
     where: "$.definitions.PurchasePlan"
     transform: >
@@ -45,6 +48,8 @@ directive:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-07-01
+  - tag: package-2021-04-01
   - tag: package-2021-03-01
   - tag: package-2020-12-01
   - tag: package-2020-10-01-preview
@@ -67,6 +72,26 @@ batch:
   - tag: package-container-service-2016-09
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
+```
+
+### Tag: package-2021-07-01 and go
+
+These settings apply only when `--tag=package-2021-07-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2021-07-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-07-01/$(namespace)
+```
+
+### Tag: package-2021-04-01 and go
+
+These settings apply only when `--tag=package-2021-04-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2021-04-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-04-01/$(namespace)
 ```
 
 ### Tag: package-2021-03-01 and go

@@ -725,6 +725,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -1070,7 +1071,8 @@
             "SoftDeleting",
             "SoftDeleted",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
@@ -1846,21 +1848,6 @@
     }
   },
   "parameters": {
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
     "api-version": {
       "name": "api-version",
       "in": "query",
@@ -1875,6 +1862,21 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
