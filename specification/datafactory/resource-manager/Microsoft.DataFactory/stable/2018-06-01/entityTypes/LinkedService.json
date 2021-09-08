@@ -686,6 +686,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -2586,13 +2590,14 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
-        "office365TenantId",
-        "servicePrincipalTenantId",
-        "servicePrincipalId",
-        "servicePrincipalKey"
+        "office365TenantId"
       ]
     },
     "SalesforceLinkedService": {
@@ -5727,6 +5732,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
