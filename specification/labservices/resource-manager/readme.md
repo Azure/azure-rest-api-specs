@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-preview-2021-10` is specified on t
 ```yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.LabServices/preview/2021-10-01-preview/LabServices.json
-  - Microsoft.LabServices/preview/2021-10-01-preview/Skus.json
   - Microsoft.LabServices/preview/2021-10-01-preview/OperationResults.json
   - Microsoft.LabServices/preview/2021-10-01-preview/LabPlans.json
   - Microsoft.LabServices/preview/2021-10-01-preview/Images.json
