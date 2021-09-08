@@ -1100,6 +1100,7 @@
   "definitions": {
     "ReportConfigDefinition": {
       "description": "The definition of a report config.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the report. Usage represents actual usage, forecast represents forecasted data and UsageAndForecast represents both usage and forecasted data. Actual usage and forecasted data can be differentiated based on dates.",
@@ -1142,6 +1143,7 @@
     },
     "ReportConfigTimePeriod": {
       "description": "The start and end date for pulling data for the report.",
+      "type": "object",
       "properties": {
         "from": {
           "description": "The start date to pull data from.",
@@ -1161,6 +1163,7 @@
     },
     "ReportConfigDataset": {
       "description": "The definition of data present in the report.",
+      "type": "object",
       "properties": {
         "granularity": {
           "description": "The granularity of rows in the report.",
@@ -1211,6 +1214,7 @@
     },
     "ReportConfigDatasetConfiguration": {
       "description": "The configuration of dataset in the report.",
+      "type": "object",
       "properties": {
         "columns": {
           "description": "Array of column names to be included in the report. Any valid report column name is allowed. If not provided, then report includes all columns.",
@@ -1223,6 +1227,7 @@
     },
     "ReportConfigAggregation": {
       "description": "The aggregation expression to be used in the report.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the column to aggregate.",
@@ -1247,6 +1252,7 @@
     },
     "ReportConfigSorting": {
       "description": "The order by expression to be used in the report.",
+      "type": "object",
       "properties": {
         "direction": {
           "description": "Direction of sort.",
@@ -1267,6 +1273,7 @@
     },
     "ReportConfigGrouping": {
       "description": "The group by expression to be used in the report.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "Has type of the column to group.",
@@ -1284,6 +1291,7 @@
     },
     "ReportConfigFilter": {
       "description": "The filter expression to be used in the report.",
+      "type": "object",
       "properties": {
         "and": {
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
@@ -1329,6 +1337,7 @@
     },
     "ReportConfigComparisonExpression": {
       "description": "The comparison expression to be used in the report.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the column to use in comparison.",
@@ -1532,6 +1541,7 @@
     },
     "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Error code.",
@@ -1557,6 +1567,7 @@
     },
     "Resource": {
       "description": "The Resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1586,6 +1597,7 @@
     },
     "ProxyResource": {
       "description": "The Resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1967,6 +1979,7 @@
     },
     "DismissAlertPayload": {
       "description": "The request payload to update an alert",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2032,6 +2045,7 @@
     },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of cost management operations supported by the Microsoft.CostManagement resource provider.",
@@ -2059,6 +2073,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.CostManagement.",
@@ -2081,6 +2096,7 @@
     },
     "ForecastDefinition": {
       "description": "The definition of a forecast.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the forecast.",
@@ -2170,6 +2186,7 @@
     },
     "QueryDefinition": {
       "description": "The definition of a query.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the query.",
@@ -2217,6 +2234,7 @@
     },
     "QueryTimePeriod": {
       "description": "The start and end date for pulling data for the query.",
+      "type": "object",
       "properties": {
         "from": {
           "description": "The start date to pull data from.",
@@ -2236,6 +2254,7 @@
     },
     "QueryDataset": {
       "description": "The definition of data present in the query.",
+      "type": "object",
       "properties": {
         "granularity": {
           "description": "The granularity of rows in the query.",
@@ -2278,6 +2297,7 @@
     },
     "QueryDatasetConfiguration": {
       "description": "The configuration of dataset in the query.",
+      "type": "object",
       "properties": {
         "columns": {
           "description": "Array of column names to be included in the query. Any valid query column name is allowed. If not provided, then query includes all columns.",
@@ -2290,6 +2310,7 @@
     },
     "QueryAggregation": {
       "description": "The aggregation expression to be used in the query.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the column to aggregate.",
@@ -2314,6 +2335,7 @@
     },
     "QueryGrouping": {
       "description": "The group by expression to be used in the query.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "Has type of the column to group.",
@@ -2331,6 +2353,7 @@
     },
     "QueryFilter": {
       "description": "The filter expression to be used in the export.",
+      "type": "object",
       "properties": {
         "and": {
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
@@ -2376,6 +2399,7 @@
     },
     "QueryComparisonExpression": {
       "description": "The comparison expression to be used in the query.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the column to use in comparison.",
