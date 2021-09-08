@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-03-01-preview",
+    "version": "2020-03-01",
     "title": "azureactivedirectory",
     "description": "Azure Active Directory Client."
   },
@@ -67,7 +67,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, and policy name": {
             "$ref": "./examples/AzureADPrivateLinkResourceListGet.json"
           }
         }
@@ -106,7 +106,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Gets private endpoint connection by subscription id, resource group name, policy name, and group name": {
             "$ref": "./examples/AzureADPrivateLinkResourceGet.json"
           }
         }
@@ -203,6 +203,7 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "client",
       "description": "Version of the API to be used with the client request."
     },
     "resourceGroupNameParameter": {
