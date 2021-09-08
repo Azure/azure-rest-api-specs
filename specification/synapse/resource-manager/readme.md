@@ -28,12 +28,56 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-preview-2021-06
+tag: package-composite-v1
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-composite-v1
+
+These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+
+```yaml $(tag) == 'package-composite-v1'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/library.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+```
 
 ### Tag: package-preview-2021-06
 
@@ -55,6 +99,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/azureADOnlyAuthentication.json
 ```
 
 ### Tag: package-kusto-pool-2021-06-preview
@@ -209,18 +254,18 @@ directive:
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
@@ -245,18 +290,18 @@ directive:
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
