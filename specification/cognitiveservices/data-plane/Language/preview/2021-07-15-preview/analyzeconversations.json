@@ -249,9 +249,9 @@
         }
       ],
       "properties": {
-        "projectParameters": {
+        "callingOptions": {
           "type": "object",
-          "description": "The parameters send to a Question Answering KB."
+          "description": "The options sent to a Question Answering KB."
         }
       }
     },
@@ -405,7 +405,7 @@
       "description": "Represents the prediction section of a LUIS Deepstack project.",
       "x-ms-discriminator-value": "conversation",
       "required": [
-        "classifications",
+        "intents",
         "entities"
       ],
       "allOf": [
@@ -414,11 +414,11 @@
         }
       ],
       "properties": {
-        "classifications": {
-          "description": "The classification results.",
+        "intents": {
+          "description": "The intent classification results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeepstackClassification"
+            "$ref": "#/definitions/DeepstackIntent"
           }
         },
         "entities": {
@@ -430,9 +430,9 @@
         }
       }
     },
-    "DeepstackClassification": {
+    "DeepstackIntent": {
       "type": "object",
-      "description": "The classification result of a LUIS Deepstack project.",
+      "description": "The intent classification result of a LUIS Deepstack project.",
       "required": [
         "category",
         "confidenceScore"
