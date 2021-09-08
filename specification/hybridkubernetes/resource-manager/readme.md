@@ -55,6 +55,14 @@ These settings apply only when `--tag=package-2021-03-01` is specified on the co
 input-file:
 - Microsoft.Kubernetes/stable/2021-03-01/connectedClusters.json
 ```
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.Kubernetes/stable/2021-10-01/connectedClusters.json
+```
 ---
 
 # Code Generation
