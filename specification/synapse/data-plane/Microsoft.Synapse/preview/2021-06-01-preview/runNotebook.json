@@ -180,7 +180,7 @@
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/RunNotebookResponse"
+              "$ref": "#/definitions/RunNotebookSnapshotResult"
             }
           },
           "default": {
@@ -242,10 +242,6 @@
           "description": "SparkPool name.",
           "type": "string"
         },
-        "snapshot": {
-          "description": "Notebook output.",
-          "type": "object"
-        },
         "sessionDetail": {
           "description": "Run notebook session details.",
           "type": "object"
@@ -254,7 +250,7 @@
           "description": "Output of exit command.",
           "type": "string"
         },
-        "errors": {
+        "error": {
           "$ref": "#/definitions/Error"
         }
       }
@@ -277,7 +273,11 @@
         },
         "sessionOptions": {
           "description": "Session properties.",
-          "$ref": "./entityTypes/Notebook.json#/definitions/NotebookSessionProperties"
+          "$ref": "#/definitions/SparkSessionOptions"
+        },
+        "honorSessionTimeToLive": {
+          "description": "Whether session should run till time to live after run completes.",
+          "type": "boolean"
         },
         "parameters": {
           "type": "object",
@@ -306,16 +306,226 @@
         }
       }
     },
+    "snapshot": {
+      "description": "Run notebook snapshot.",
+      "type": "object",
+      "properties": {
+        "exitValue": {
+          "description": "Output of exit command.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Run notebook runId.",
+          "type": "string"
+        },
+        "notebook": {
+          "description": "Notebook name.",
+          "type": "string"
+        },
+        "sessionOptions": {
+          "description": "Session properties.",
+          "$ref": "#/definitions/SparkSessionOptions"
+        },
+        "honorSessionTimeToLive": {
+          "description": "Whether session should run till time to live after run completes.",
+          "type": "boolean"
+        },
+        "sessionId": {
+          "description": "Livy session id.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sparkPool": {
+          "description": "SparkPool name.",
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Run notebook parameters",
+          "additionalProperties": {
+            "$ref": "#/definitions/parameter"
+          }
+        },
+        "notebookContent": {
+          "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
+        }
+      },
+      "required": [
+        "id",
+        "notebook"
+      ]
+    },
+    "SnapshotResult": {
+      "description": "Run notebook snapshot result.",
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/definitions/snapshot"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "runId": {
+          "type": "string",
+          "description": "Run id."
+        },
+        "runStatus": {
+          "description": "Status of the run notebook.",
+          "type": "string"
+        },
+        "lastCheckedOn": {
+          "description": "Timestamp of last update.",
+          "type": "string"
+        },
+        "sessionId": {
+          "description": "Livy session id.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sparkPool": {
+          "description": "SparkPool name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "runStatus",
+        "snapshot"
+      ]
+    },
+    "RunNotebookSnapshotResult": {
+      "description": "Run notebook snapshot result.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Response message."
+        },
+        "result": {
+          "$ref": "#/definitions/SnapshotResult"
+        }
+      }
+    },
+    "SparkSessionOptions": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "x-nullable": true,
+          "type": "string"
+        },
+        "proxyUser": {
+          "x-nullable": true,
+          "type": "string"
+        },
+        "artifactId": {
+          "type": "string"
+        },
+        "name": {
+          "x-nullable": true,
+          "type": "string"
+        },
+        "file": {
+          "x-nullable": true,
+          "type": "string"
+        },
+        "className": {
+          "x-nullable": true,
+          "type": "string"
+        },
+        "args": {
+          "x-ms-client-name": "arguments",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "jars": {
+          "uniqueItems": false,
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pyFiles": {
+          "x-ms-client-name": "pythonFiles",
+          "uniqueItems": false,
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "uniqueItems": false,
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "archives": {
+          "uniqueItems": false,
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queue": {
+          "type": "object",
+          "x-nullable": true
+        },
+        "conf": {
+          "x-ms-client-name": "configuration",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "driverMemory": {
+          "type": "string"
+        },
+        "driverCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "executorMemory": {
+          "type": "string"
+        },
+        "executorCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numExecutors": {
+          "x-ms-client-name": "executorCount",
+          "format": "int32",
+          "type": "integer"
+        },
+        "isQueueable": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "heartbeatTimeoutInSecond": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        }
+      }
+    },
     "RunNotebookResponse": {
       "description": "Run notebook response.",
       "type": "object",
       "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Http state code."
-        },
         "message": {
           "readOnly": true,
           "type": "string",
@@ -335,7 +545,8 @@
       "required": true,
       "type": "string",
       "description": "Api version.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client",
+      "x-ms-client-default": "2021-06-01-preview"
     },
     "RunId": {
       "name": "runId",

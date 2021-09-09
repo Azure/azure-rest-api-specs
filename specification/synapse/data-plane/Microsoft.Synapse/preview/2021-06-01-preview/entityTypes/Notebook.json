@@ -6,14 +6,43 @@
   },
   "paths": {},
   "definitions": {
-    "Notebook": {
-      "description": "Notebook.",
+    "NotebookResource": {
+      "description": "Notebook resource type.",
       "type": "object",
       "properties": {
-        "description": {
-          "description": "The description of the notebook.",
-          "type": "string"
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "$ref": "#/definitions/Notebook",
+          "description": "Properties of Notebook."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "Notebook": {
+      "description": "Notebook properties.",
+      "type": "object",
+      "properties": {
         "bigDataPool": {
           "description": "Big data pool reference.",
           "$ref": "#/definitions/BigDataPoolReference",
@@ -30,11 +59,13 @@
         },
         "nbformat": {
           "description": "Notebook format (major number). Incremented between backwards incompatible changes to the notebook format.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "nbformat_minor": {
           "description": "Notebook format (minor number). Incremented for backward compatible changes to the notebook format.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "cells": {
           "description": "Array of cells of the current notebook.",
@@ -215,6 +246,10 @@
           "description": "Number of executors to launch for this session.",
           "type": "integer",
           "format": "int32"
+        },
+        "conf": {
+          "description": "Configuration.",
+          "type": "object"
         }
       },
       "required": [
@@ -235,7 +270,8 @@
         },
         "execution_count": {
           "description": "Execution sequence number.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "output_type": {
           "description": "Execution, display, or stream outputs.",
