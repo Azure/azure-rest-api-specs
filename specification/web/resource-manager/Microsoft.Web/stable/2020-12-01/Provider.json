@@ -777,6 +777,18 @@
           "description": "<code>true</code> if this supports Application Insights; otherwise, <code>false</code>.",
           "type": "boolean"
         },
+        "isPreview": {
+          "description": "<code>true</code> if this stack is in Preview, otherwise <code>false</code>.",
+          "type": "boolean"
+        },
+        "isDeprecated": {
+          "description": "<code>true</code> if this stack has been deprecated, otherwise <code>false</code>.",
+          "type": "boolean"
+        },
+        "isHidden": {
+          "description": "<code>true</code> if this stack should be hidden for new customers on portal, otherwise <code>false</code>.",
+          "type": "boolean"
+        },
         "appSettingsDictionary": {
           "description": "<appSettings>\n <appSetting name=\"FUNCTIONS_WORKER_RUNTIME\" value=\"dotnet\" />\n</appSettings>\n Example: All the function apps need AppSetting: \"FUNCTIONS_WORKER_RUNTIME\" to be set stack name",
           "type": "object",
@@ -790,18 +802,6 @@
           "additionalProperties": {
             "type": "object"
           }
-        },
-        "isPreview": {
-          "description": "<code>true</code> if this stack is in Preview, otherwise <code>false</code>.",
-          "type": "boolean"
-        },
-        "isDeprecated": {
-          "description": "<code>true</code> if this stack has been deprecated, otherwise <code>false</code>.",
-          "type": "boolean"
-        },
-        "isHidden": {
-          "description": "<code>true</code> if this stack should be hidden for new customers on portal, otherwise <code>false</code>.",
-          "type": "boolean"
         }
       }
     },

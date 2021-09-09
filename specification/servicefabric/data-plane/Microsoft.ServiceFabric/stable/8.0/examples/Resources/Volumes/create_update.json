@@ -1,0 +1,53 @@
+{
+  "operationId": "MeshVolume_CreateOrUpdate",
+  "description": "This example shows how to create or update a volume resource.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "volumeResourceName": "sampleVolume",
+    "volumeResourceDescription": {
+      "name": "sampleVolume",
+      "properties": {
+        "description": "Service Fabric Mesh sample volume.",
+        "provider": "SFAzureFile",
+        "azureFileParameters": {
+          "accountName": "sbzdemoaccount",
+          "accountKey": "provide-account-key-here",
+          "shareName": "sharel"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleVolume",
+        "properties": {
+          "description": "Service Fabric Mesh sample volume.",
+          "provider": "SFAzureFile",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "accountKey": null,
+            "shareName": "sharel"
+          },
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleVolume",
+        "properties": {
+          "description": "Service Fabric Mesh Hello World sample volume.",
+          "provider": "SFAzureFile",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "accountKey": null,
+            "shareName": "sharel"
+          },
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

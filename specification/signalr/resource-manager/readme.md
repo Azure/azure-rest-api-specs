@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07-01-preview
+tag: package-2021-06-01-preview
 ```
 
 ### Suppression
@@ -35,16 +35,12 @@ tag: package-2020-07-01-preview
 directive:
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
-    where: $.definitions.NameAvailability.properties.nameAvailable
-    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
-  - suppress: EnumInsteadOfBoolean
-    from: signalr.json
-    where: $.definitions.Dimension.properties.toBeExportedForShoebox
-    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics.
-  - suppress: EnumInsteadOfBoolean
-    from: signalr.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason:  The boolean properties 'isDataAction' is a standard property for Azure Operations.
+    where:
+    - $.definitions.NameAvailability.properties.nameAvailable
+    - $.definitions.Dimension.properties.toBeExportedForShoebox
+    - $.definitions.Operation.properties.isDataAction
+    - $.definitions.SignalRTlsSettings.properties.clientCertEnabled
+    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers.
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: AvoidNestedProperties
@@ -52,7 +48,31 @@ directive:
     where:
     - $.definitions.SignalRFeature.properties.properties
     - $.definitions.PrivateEndpointConnection.properties.properties
+    - $.definitions.ShareablePrivateLinkResourceType.properties.properties
     reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+  - suppress: PutInOperationName
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
+    reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+```
+
+
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-06-01-preview/signalr.json
+```
+
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-04-01-preview/signalr.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -103,7 +123,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
@@ -112,10 +132,11 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_signalr']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js signalr/resource-manager
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -140,7 +161,5 @@ csharp:
   clear-output-folder: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -16,6 +16,56 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}": {
+      "delete": {
+        "tags": [
+          "DatabaseReplicationLinks"
+        ],
+        "operationId": "ReplicationLinks_Delete",
+        "description": "Deletes a database replication link. Cannot be done during failover.",
+        "x-ms-examples": {
+          "Delete a replication link": {
+            "$ref": "./examples/ReplicationLinkDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database that has the replication link to be dropped."
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the replication link to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover": {
       "post": {
         "tags": [

@@ -15,17 +15,26 @@
         "properties": {
           "administratorLogin": "cloudsa",
           "version": "12",
+          "minorVersion": "6",
           "state": "Ready",
           "haState": "NotEnabled",
+          "haEnabled": "Disabled",
+          "standbyCount": 0,
+          "logBackupStorageSku": "Standard_ZRS",
           "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
           "displayName": "demosingleserver",
           "publicNetworkAccess": "Disabled",
           "delegatedSubnetArguments": {
             "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
           },
+          "privateDnsZoneArguments": {
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone"
+          },
           "storageProfile": {
             "storageMB": 524288,
-            "backupRetentionDays": 7
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-05-26T23:07:25.8166567+00:00"
           },
           "availabilityZone": "1"
         },

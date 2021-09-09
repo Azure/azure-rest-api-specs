@@ -10,16 +10,21 @@
       "properties": {
         "displayName": "myTestConnectivityConfig",
         "description": "Sample Configuration",
-        "connectivityTopology": "HubAndSpokeTopology",
-        "hubId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
-        "deleteExistingPeering": true,
-        "isGlobal": true,
+        "connectivityTopology": "HubAndSpoke",
+        "hubs": [
+          {
+            "resourceId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
+            "resourceType": "Microsoft.Network/virtualNetworks"
+          }
+        ],
+        "deleteExistingPeering": "True",
+        "isGlobal": "True",
         "appliesToGroups": [
           {
-            "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkManagerGroups/group1",
-            "useHubGateway": true,
-            "groupConnectivity": "Transitive",
-            "isGlobal": false
+            "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
+            "useHubGateway": "True",
+            "groupConnectivity": "None",
+            "isGlobal": "False"
           }
         ]
       }
@@ -42,16 +47,21 @@
         "properties": {
           "displayName": "myTestConnectivityConfig",
           "description": "Sample Connectivity Configuration",
-          "connectivityTopology": "HubAndSpokeTopology",
-          "hubId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
-          "deleteExistingPeering": true,
-          "isGlobal": true,
+          "connectivityTopology": "HubAndSpoke",
+          "hubs": [
+            {
+              "resourceId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
+              "resourceType": "Microsoft.Network/virtualNetworks"
+            }
+          ],
+          "deleteExistingPeering": "True",
+          "isGlobal": "True",
           "appliesToGroups": [
             {
               "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/groups/group1",
-              "useHubGateway": true,
-              "groupConnectivity": "Transitive",
-              "isGlobal": false
+              "useHubGateway": "True",
+              "groupConnectivity": "None",
+              "isGlobal": "False"
             }
           ],
           "provisioningState": "Succeeded"
@@ -74,16 +84,21 @@
         "properties": {
           "displayName": "myTestConnectivityConfig",
           "description": "Sample Configuration",
-          "connectivityTopology": "HubAndSpokeTopology",
-          "hubId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
-          "deleteExistingPeering": true,
-          "isGlobal": true,
+          "connectivityTopology": "HubAndSpoke",
+          "hubs": [
+            {
+              "resourceId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myTestConnectivityConfig",
+              "resourceType": "Microsoft.Network/virtualNetworks"
+            }
+          ],
+          "deleteExistingPeering": "True",
+          "isGlobal": "True",
           "appliesToGroups": [
             {
-              "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkManagerGroups/group1",
-              "useHubGateway": true,
-              "groupConnectivity": "Transitive",
-              "isGlobal": false
+              "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
+              "useHubGateway": "True",
+              "groupConnectivity": "None",
+              "isGlobal": "False"
             }
           ],
           "provisioningState": "Succeeded"

@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-2021-03
+tag: package-preview-2021-06
 ```
 
 ### Validations
@@ -40,6 +40,28 @@ semantic-validator: true
 model-validator: true
 message-format: json
 ```
+
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+```
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
@@ -106,8 +128,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js resourcegraph/resource-manager
 ```
 
 ## C#
@@ -156,10 +176,6 @@ directive:
     from: resourcegraph.json
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## cli
 

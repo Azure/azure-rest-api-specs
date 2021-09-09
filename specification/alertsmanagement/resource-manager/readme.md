@@ -45,6 +45,16 @@ tag: package-2019-06-preview
 ```
 
 
+
+### Tag: package-2021-04-only
+
+These settings apply only when `--tag=package-2021-04-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-only'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
+```
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
@@ -137,14 +147,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js alertsmanagement/resource-manager
 ```
 
 ## C#
@@ -175,7 +182,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

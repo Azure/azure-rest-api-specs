@@ -83,6 +83,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -133,6 +136,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -185,6 +191,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -289,6 +298,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -330,6 +342,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -420,6 +435,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -463,6 +481,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -515,6 +536,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -555,6 +579,7 @@
           "description": "The Delegation flag for the role assignment"
         }
       },
+      "type": "object",
       "description": "Role Assignments filter"
     },
     "RoleAssignmentPropertiesWithScope": {
@@ -578,13 +603,7 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
-            "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone"
+            "ForeignGroup"
           ],
           "x-ms-enum": {
             "name": "PrincipalType",
@@ -630,6 +649,7 @@
           "description": "Id of the delegated managed identity resource"
         }
       },
+      "type": "object",
       "description": "Role assignment properties with scope."
     },
     "RoleAssignment": {
@@ -655,6 +675,7 @@
           "description": "Role assignment properties."
         }
       },
+      "type": "object",
       "description": "Role Assignments"
     },
     "RoleAssignmentListResult": {
@@ -671,6 +692,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role assignment list operation result."
     },
     "RoleAssignmentProperties": {
@@ -690,13 +712,7 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
-            "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone"
+            "ForeignGroup"
           ],
           "default": "User",
           "x-ms-enum": {
@@ -729,6 +745,7 @@
         "roleDefinitionId",
         "principalId"
       ],
+      "type": "object",
       "description": "Role assignment properties."
     },
     "RoleAssignmentCreateParameters": {
@@ -742,6 +759,7 @@
       "required": [
         "properties"
       ],
+      "type": "object",
       "description": "Role assignment create parameters."
     }
   },
@@ -752,6 +770,15 @@
       "required": true,
       "type": "string",
       "description": "The namespace of the resource provider.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdQueryParameter": {
+      "name": "tenantId",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Tenant ID for cross-tenant request",
       "x-ms-parameter-location": "method"
     }
   }
