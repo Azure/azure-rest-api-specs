@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": "example",
+      "filter": {
+        "and": [
+          {
+            "not": {
+              "or": [
+                {
+                  "attributeName": "size",
+                  "operator": "eq",
+                  "attributeValue": 0
+                },
+                {
+                  "attributeName": "fileSize",
+                  "operator": "eq",
+                  "attributeValue": 0
+                }
+              ]
+            }
+          },
+          {
+            "not": {
+              "classification": "MICROSOFT.SYSTEM.TEMP_FILE"
+            }
+          },
+          {
+            "not": {
+              "entityType": "AtlasGlossaryTerm",
+              "includeSubTypes": false
+            }
+          }
+        ]
+      },
+      "limit": 2,
+      "offset": 0,
+      "facets": [
+        {
+          "facet": "assetType",
+          "count": 0
+        },
+        {
+          "facet": "classification",
+          "count": 10
+        },
+        {
+          "facet": "terms",
+          "count": 10
+        }
+      ],
+      "taxonomySetting": {
+        "assetTypes": [
+          "Azure Blob Storage"
+        ],
+        "facet": {
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        }
+      }
+    },
+    "api-version": "2021-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 339,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "97dc2d61-ef37-4cfd-8be8-d0a8b3524c1a",
+            "qualifiedName": "ExampleName1@Glossary",
+            "name": "examplename1",
+            "description": null,
+            "owner": null,
+            "entityType": "AtlasGlossaryTerm",
+            "classification": [],
+            "label": [],
+            "assetType": [],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "477b0278-81e3-473f-a2d4-d134f1b52f84",
+            "qualifiedName": "ExampleName2@Glossary",
+            "name": "examplename2",
+            "description": null,
+            "owner": null,
+            "entityType": "AtlasGlossaryTerm",
+            "classification": [],
+            "label": [],
+            "assetType": [],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "e09577ab-8d46-48af-b4b6-9476e2b5afb7",
+            "qualifiedName": "ExampleName3@Glossary",
+            "name": "examplename3",
+            "description": null,
+            "owner": null,
+            "entityType": "AtlasGlossaryTerm",
+            "classification": [],
+            "label": [],
+            "assetType": [],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}
