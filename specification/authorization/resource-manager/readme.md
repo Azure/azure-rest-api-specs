@@ -180,15 +180,6 @@ input-file:
 - Microsoft.Authorization/preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
-### Tag: package-2019-08-01-preview-only
-
-These settings apply only when `--tag=package-2019-08-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08-01-preview-only'
-input-file:
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-RoleAssignmentsCalls.json
-```
-
 ### Tag: package-2020-04-01-preview
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
@@ -225,6 +216,15 @@ input-file:
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+```
+
+### Tag: package-2019-08-01-preview-only
+
+These settings apply only when `--tag=package-2019-08-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-preview-only'
+input-file:
 - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
