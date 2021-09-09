@@ -265,7 +265,7 @@
           "202": {
             "description": "Request received successfully, and the resource will be updated asynchronously.",
             "schema": {
-              "$ref": "#/definitions/PatchResponse"
+              "$ref": "#/definitions/Extension"
             }
           },
           "409": {
@@ -817,33 +817,6 @@
               "x-ms-secret": true,
               "additionalProperties": {
                 "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "PatchResponse": {
-      "description": "Patch response body.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "Properties of an Extension resource",
-          "properties": {
-            "provisioningState": {
-              "description": "Status of installation of this extension.",
-              "type": "string",
-              "readOnly": true,
-              "$ref": "#/definitions/provisioningState"
-            },
-            "statuses": {
-              "description": "Status from this extension.",
-              "type": "array",
-              "x-nullable": true,
-              "items": {
-                "$ref": "#/definitions/ExtensionStatus"
               }
             }
           }
