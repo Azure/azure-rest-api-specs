@@ -333,7 +333,13 @@
           "$ref": "#/definitions/ClusterSku",
           "description": "Properties of the cluster SKU."
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        },
         "properties": {
+          "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
             "createdAt": {
@@ -394,6 +400,7 @@
       "description": "SKU parameters particular to a cluster instance."
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -410,6 +417,7 @@
       "description": "The response of the List Event Hubs Clusters operation."
     },
     "EHNamespaceIdListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
