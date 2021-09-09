@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "diskSizeGB": 1024,
+        "burstingEnabled": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "burstingEnabled": true,
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  }
+}
