@@ -2396,6 +2396,44 @@
         }
       }
     },
+    "AmazonRdsForSqlServerSource": {
+      "description": "A copy activity Amazon RDS for SQL Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
     "AzureSqlSource": {
       "description": "A copy activity Azure SQL source.",
       "type": "object",
@@ -2668,6 +2706,75 @@
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Names of the physical partitions of Oracle table. "
+        },
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonRdsForOracleSource": {
+      "description": "A copy activity AmazonRdsForOracle source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "oracleReaderQuery": {
+          "type": "object",
+          "description": "AmazonRdsForOracle reader query. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "The partition mechanism that will be used for AmazonRdsForOracle read in parallel. Type: string (or Expression with resultType string)."
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+          "$ref": "#/definitions/AmazonRdsForOraclePartitionSettings"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "AmazonRdsForOraclePartitionOption": {
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRdsForOraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "AmazonRdsForOraclePartitionSettings": {
+      "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionNames": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Names of the physical partitions of AmazonRdsForOracle table. "
         },
         "partitionColumnName": {
           "type": "object",
