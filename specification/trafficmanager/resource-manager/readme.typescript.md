@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-trafficmanager"
   output-folder: "$(typescript-sdks-folder)/sdk/trafficmanager/arm-trafficmanager"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

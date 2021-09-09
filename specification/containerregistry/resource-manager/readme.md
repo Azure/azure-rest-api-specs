@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ContainerRegistry.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ContainerRegistry, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,76 @@ To build the SDK for ContainerRegistry, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06-preview
+tag: package-2021-06-preview
+```
+
+### Tag: package-2021-06-preview-only
+
+These settings apply only when `--tag=package-2021-06-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2021-06-01-preview/containerregistry.json
+```
+
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2021-06-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2020-11-preview-only
+
+These settings apply only when `--tag=package-2020-11-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2020-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2020-11-preview
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2020-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2019-12-preview-only
+
+These settings apply only when `--tag=package-2019-12-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+```
+
+### Tag: package-2019-12-preview
+
+These settings apply only when `--tag=package-2019-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-06-preview
@@ -37,6 +95,7 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 input-file:
 - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
 - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-06-preview-only
@@ -48,6 +107,15 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
+### Tag: package-2019-05-only
+
+These settings apply only when `--tag=package-2019-05-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-only'
+input-file:
+- Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -56,6 +124,15 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 input-file:
 - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
 - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+```
+
+### Tag: package-2019-05-preview-only
+
+These settings apply only when `--tag=package-2019-05-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-05-preview
@@ -87,6 +164,15 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
 ```
 
+### Tag: package-2018-09-only
+
+These settings apply only when `--tag=package-2018-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-only'
+input-file:
+- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+```
+
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
@@ -95,6 +181,15 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+```
+
+### Tag: package-2018-02-preview-only
+
+These settings apply only when `--tag=package-2018-02-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2018-02-preview
@@ -143,10 +238,9 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -156,12 +250,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    autorest_options:
-      use: "@microsoft.azure/autorest.python@4.0.70"
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry
-      - python ./scripts/trim_aio.py ./sdk/containerregistry/azure-mgmt-containerregistry
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -169,8 +258,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
+  - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -190,6 +279,9 @@ csharp:
   output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
   clear-output-folder: true
 ```
+## Pyhton
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -199,36 +291,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-03-01/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

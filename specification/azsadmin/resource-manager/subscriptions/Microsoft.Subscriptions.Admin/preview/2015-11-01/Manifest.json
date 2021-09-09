@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -37,6 +37,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -73,6 +79,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -278,7 +290,8 @@
         },
         "obsoleteBundlesBitmask": {
           "description": "The obsolete bundles bitmask.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "resourceAccess": {
           "description": "The resource access.",
@@ -662,7 +675,7 @@
         "Enabled"
       ],
       "x-ms-enum": {
-        "name": "ResourceDeletionPolicy",
+        "name": "LinkedAction",
         "modelAsString": true,
         "values": [
           {
@@ -827,7 +840,8 @@
         },
         "maxChildResourceConsistencyJobLimit": {
           "description": "The next child resource consistency job limit.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -875,7 +889,7 @@
         "Succeeded"
       ],
       "x-ms-enum": {
-        "name": "MetricPrimaryAggregationType",
+        "name": "ManifestProvisioningState",
         "modelAsString": true,
         "values": [
           {

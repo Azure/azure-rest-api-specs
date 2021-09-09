@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "$top": 5,
+    "$expand": "properties/data",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "name": "dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "properties": {
+              "data": [
+                "dcrg",
+                "rg",
+                "offlinegalleryrg",
+                "system.orlando.adminkeyvault",
+                "system.orlando.keyvault"
+              ],
+              "total": 68,
+              "category": "ResourceGroup",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "description": "Resource group",
+              "filterEnabled": true,
+              "groupingEnabled": true
+            }
+          },
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "properties": {
+              "data": [
+                "microsoft.storage/storageaccounts",
+                "microsoft.web.admin/role",
+                "microsoft.sql/servers",
+                "microsoft.compute/virtualmachines"
+              ],
+              "total": 4,
+              "category": "ResourceType",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "description": "Resource type",
+              "filterEnabled": true,
+              "groupingEnabled": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

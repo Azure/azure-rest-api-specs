@@ -1417,6 +1417,51 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/checkConnectorEligibility": {
+      "post": {
+        "tags": [
+          "CheckConnectorEligibility"
+        ],
+        "operationId": "Connector_CheckEligibility",
+        "description": "Check if a connector already exists and return it's definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CheckEligibility_Post": {
+            "$ref": "./examples/CheckEligibilityPost.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "connectorCredentials",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckEligibilityDefinition"
+            },
+            "description": "Connector credentials"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/externalBillingAccounts": {
       "get": {
         "tags": [
@@ -2615,6 +2660,42 @@
           "type": "string",
           "description": "Time the error started occurring (Last time error occurred in lastChecked)",
           "readOnly": true
+        }
+      }
+    },
+    "CheckEligibilityDefinition": {
+      "type": "object",
+      "description": "The check eligibility Connector credentials definition",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Connector kind (eg aws)"
+        },
+        "credentialsKey": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Credentials authentication key (eg AWS ARN)"
+        },
+        "credentialsSecret": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Credentials secret (eg AWS ExternalId)"
+        },
+        "reportId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Identifying source report. (For AWS this is a CUR report name, defined with Daily and with Resources)"
         }
       }
     },

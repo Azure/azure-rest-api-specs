@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for web test results.",
+    "version": "2020-02-10-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations.",
+        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}/getTestResultFile": {
+      "post": {
+        "tags": [
+          "WebTests_GetTestResultFile"
+        ],
+        "operationId": "getTestResultFile",
+        "description": "Returns a file test result for the matching test",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GeolocationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeStampParameter"
+          },
+          {
+            "$ref": "#/parameters/DownloadAsParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuccessfulCriteriaParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestResultFileResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Example Get call:": {
+            "$ref": "./examples/WebTestResultsTestResultFile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "TestResultFileResponse": {
+      "description": "Test result.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "File contents.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next section of the result file in the event the file is too large for a single request.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WebTestNameParameter": {
+      "name": "webTestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights webtest resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "GeolocationIdParameter": {
+      "name": "geoLocationId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The location ID where the webtest was physically run.",
+      "x-ms-parameter-location": "method"
+    },
+    "TimeStampParameter": {
+      "name": "timeStamp",
+      "in": "query",
+      "required": true,
+      "type": "integer",
+      "format": "int64",
+      "description": "The posix (epoch) time stamp for the webtest result.",
+      "x-ms-parameter-location": "method"
+    },
+    "DownloadAsParameter": {
+      "name": "downloadAs",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "WebTestResult",
+        "Json"
+      ],
+      "x-ms-enum": {
+        "name": "downloadAs",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "WebTestResult",
+            "description": "Returned file will be in visual studio webtestresult file format."
+          },
+          {
+            "value": "Json",
+            "description": "Returned file will be in json file format."
+          }
+        ]
+      },
+      "description": "The format to use when returning the webtest result.",
+      "x-ms-parameter-location": "method"
+    },
+    "TestSuccessfulCriteriaParameter": {
+      "name": "testSuccessfulCriteria",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "The success state criteria for the webtest result.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContinuationTokenParameter": {
+      "name": "continuationToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The continuation token.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
