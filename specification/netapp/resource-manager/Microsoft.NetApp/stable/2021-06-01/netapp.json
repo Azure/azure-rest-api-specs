@@ -226,15 +226,15 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotaItemList"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": null
           },
           "default": {
             "description": "Error response describing why the operation failed."
@@ -3160,7 +3160,24 @@
       }
     },
     "SubscriptionQuotaItem": {
-      "description": "Information regarding Subscription Quota Item",
+      "description": "Information regarding Subscription Quota Item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SubscriptionQuotaItem properties",
+          "$ref": "#/definitions/SubscriptionQuotaItemProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+
+    "SubscriptionQuotaItemProperties": {
+      "description": "SubscriptionQuotaItem Properties",
       "type": "object",
       "properties": {
         "name": {
