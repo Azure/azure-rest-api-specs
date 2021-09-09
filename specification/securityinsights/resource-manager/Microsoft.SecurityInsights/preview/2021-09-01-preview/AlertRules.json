@@ -88,6 +88,9 @@
           "Get a Scheduled alert rule.": {
             "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
           },
+          "Get a Nrt alert rule.": {
+            "$ref": "./examples/alertRules/GetNrtAlertRule.json"
+          },
           "Get a Fusion alert rule.": {
             "$ref": "./examples/alertRules/GetFusionAlertRule.json"
           },
@@ -139,6 +142,9 @@
         "x-ms-examples": {
           "Creates or updates a Scheduled alert rule.": {
             "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
+          },
+          "Creates or updates a Nrt alert rule.": {
+            "$ref": "./examples/alertRules/CreateNrtAlertRule.json"
           },
           "Creates or updates a Fusion alert rule.": {
             "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
@@ -622,7 +628,8 @@
         "MicrosoftSecurityIncidentCreation",
         "Fusion",
         "MLBehaviorAnalytics",
-        "ThreatIntelligence"
+        "ThreatIntelligence",
+        "NRT"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -643,6 +650,9 @@
           },
           {
             "value": "ThreatIntelligence"
+          },
+          {
+            "value": "NRT"
           }
         ]
       }
@@ -1256,13 +1266,8 @@
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
-    "ScheduledAlertRuleProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
-        }
-      ],
-      "description": "Scheduled alert rule base property bag.",
+    "QueryBasedAlertRuleProperties": {
+      "description": "Query based alert rule base property bag.",
       "properties": {
         "alertRuleTemplateName": {
           "description": "The Name of the alert rule template used to create this rule.",
@@ -1270,6 +1275,10 @@
         },
         "description": {
           "description": "The description of the alert rule.",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query that creates alerts for this rule.",
           "type": "string"
         },
         "displayName": {
@@ -1295,6 +1304,10 @@
           "description": "Determines whether the suppression for this alert rule is enabled or disabled.",
           "type": "boolean"
         },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
@@ -1310,6 +1323,24 @@
       "required": [
         "displayName",
         "enabled",
+        "suppressionEnabled",
+        "suppressionDuration"
+      ],
+      "type": "object"
+    },
+    "ScheduledAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
+        },
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Scheduled alert rule base property bag.",
+      "required": [
+        "displayName",
+        "enabled",
         "severity",
         "query",
         "queryFrequency",
@@ -1319,6 +1350,15 @@
         "suppressionEnabled",
         "suppressionDuration"
       ],
+      "type": "object"
+    },
+    "NrtAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Nrt alert rule base property bag.",
       "type": "object"
     },
     "ScheduledAlertRuleTemplate": {
@@ -1404,6 +1444,23 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "NrtAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents NRT alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NrtAlertRuleProperties",
+          "description": "NRT alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "NRT"
     },
     "ScheduledAlertRuleCommonProperties": {
       "description": "Scheduled alert rule template property bag.",
