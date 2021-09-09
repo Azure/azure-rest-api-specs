@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}/providers/Microsoft.ApiSecurity/defenderSettings": {
+    "/{resourceUri}/providers/Microsoft.ApiSecurity/defenderSettings": {
       "get": {
         "tags": [
           "DefenderSettings"
@@ -82,35 +82,10 @@
         "description": "Get list pf defender settings.",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get role assignments for."
           }
         ],
         "responses": {
@@ -137,7 +112,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}/providers/Microsoft.ApiSecurity/defenderSettings/default": {
+    "/{resourceUri}/providers/Microsoft.ApiSecurity/defenderSettings/default": {
       "get": {
         "tags": [
           "DefenderSettings"
@@ -146,35 +121,10 @@
         "description": "Get a defender setting.",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get role assignments for."
           }
         ],
         "responses": {
@@ -194,6 +144,9 @@
         "x-ms-examples": {
           "DefenderSetting_Get_MaximumSet_Gen": {
             "$ref": "./examples/DefenderSetting_Get_MaximumSet_Gen.json"
+          },
+          "DefenderSetting_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSetting_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -205,35 +158,10 @@
         "description": "Creates a defender setting.",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get role assignments for."
           }
         ],
         "responses": {
@@ -277,35 +205,10 @@
         "description": "Updates a defender setting.",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get role assignments for."
           }
         ],
         "responses": {
@@ -352,35 +255,10 @@
         "description": "Deletes a defender setting.",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get role assignments for."
           }
         ],
         "responses": {
@@ -462,5 +340,15 @@
       "description": "The response of the List DefenderSetting operation"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
