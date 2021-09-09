@@ -294,6 +294,10 @@
         "entityStoreDatabaseLink": {
           "description": "The link to entity store database.",
           "type": "string"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       }
     },
@@ -312,7 +316,7 @@
       "description": "describes properties of custom entity store assignment request",
       "properties": {
         "principal": {
-          "description": "The principal assigned with entity store. Format of principal is: [AAD type]=[PrincipalObjectId];[TenantId]",
+          "description": "The principal assigned with entity store. If not provided, will use caller principal. Format of principal is: [AAD type]=[PrincipalObjectId];[TenantId]",
           "type": "string"
         }
       }
