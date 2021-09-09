@@ -277,8 +277,6 @@
           "$ref": "#/definitions/StandardProperties"
         },
         "systemData": {
-          "readOnly": true,
-          "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "$ref": "../../../common/v2/types.json#/definitions/systemData"
         }
@@ -311,20 +309,20 @@
           "type": "string"
         },
         "components": {
-          "description": "List of assessment objects containing assessment unique keys to apply to standard scope",
+          "description": "List of component objects containing component unique keys (such as assessment keys) to apply to standard scope.  Currently only supports assessment keys.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StandardAssessmentProperties"
+            "$ref": "#/definitions/StandardComponentProperties"
           }
         }
       }
     },
-    "StandardAssessmentProperties": {
+    "StandardComponentProperties": {
       "type": "object",
-      "description": "Describes properties of an assessment as related to the standard",
+      "description": "Describes properties of an component as related to the standard",
       "properties": {
         "key": {
-          "description": "Assessment Key matching assessmentMetadata",
+          "description": "Component Key matching componentMetadata",
           "type": "string"
         }
       }

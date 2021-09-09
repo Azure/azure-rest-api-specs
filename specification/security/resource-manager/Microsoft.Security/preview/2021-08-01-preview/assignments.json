@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/standardAssignments": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assignments": {
       "get": {
         "x-ms-examples": {
           "List security standardAssignments by subscription level scope": {
-            "$ref": "./examples/StandardAssignments/ListBySubscriptionStandardAssignments_example.json"
+            "$ref": "./examples/Assignments/ListBySubscriptionAssignments_example.json"
           }
         },
         "tags": [
-          "StandardAssignments"
+          "Assignments"
         ],
         "description": "Get a list of all relevant standardAssignments over a subscription level scope",
-        "operationId": "StandardAssignments_ListBySubscription",
+        "operationId": "Assignments_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StandardAssignmentList"
+              "$ref": "#/definitions/AssignmentList"
             }
           },
           "default": {
@@ -73,18 +73,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/assignments": {
       "get": {
         "x-ms-examples": {
           "List security standardAssignments by subscriptionId and resourceGroup scope": {
-            "$ref": "./examples/StandardAssignments/ListStandardAssignments_example.json"
+            "$ref": "./examples/Assignments/ListAssignments_example.json"
           }
         },
         "tags": [
-          "StandardAssignments"
+          "Assignments"
         ],
         "description": "Get a list of all relevant standardAssignments available for scope",
-        "operationId": "StandardAssignments_List",
+        "operationId": "Assignments_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StandardAssignmentList"
+              "$ref": "#/definitions/AssignmentList"
             }
           },
           "default": {
@@ -115,18 +115,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standardAssignments/{standardAssignmentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/assignments/{assignmentId}": {
       "get": {
         "x-ms-examples": {
           "Get security standardAssignments by by specific standardAssignmentId": {
-            "$ref": "./examples/StandardAssignments/GetStandardAssignment_example.json"
+            "$ref": "./examples/Assignments/GetAssignment_example.json"
           }
         },
         "tags": [
-          "StandardAssignments"
+          "Assignments"
         ],
         "description": "Get a specific standard assignment for the requested scope by resourceId",
-        "operationId": "StandardAssignments_Get",
+        "operationId": "Assignments_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -138,14 +138,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardAssignmentId"
+            "$ref": "#/parameters/AssignmentId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StandardAssignment"
+              "$ref": "#/definitions/Assignment"
             }
           },
           "default": {
@@ -158,15 +158,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update security standardAssignment": {
-            "$ref": "./examples/StandardAssignments/PutStandardAssignment_example.json"
+          "Create or update security assignment": {
+            "$ref": "./examples/Assignments/PutAssignment_example.json"
           }
         },
         "tags": [
-          "StandardAssignments"
+          "Assignments"
         ],
         "description": "Create a security assignment on the given scope. Will create/update the required standard assignment. ",
-        "operationId": "StandardAssignments_CreateOrUpdate",
+        "operationId": "Assignments_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -178,23 +178,23 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardAssignmentId"
+            "$ref": "#/parameters/AssignmentId"
           },
           {
-            "$ref": "#/parameters/StandardAssignmentBody"
+            "$ref": "#/parameters/AssignmentBody"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/StandardAssignment"
+              "$ref": "#/definitions/Assignment"
             }
           },
           "200": {
             "description": "OK - Updated",
             "schema": {
-              "$ref": "#/definitions/StandardAssignment"
+              "$ref": "#/definitions/Assignment"
             }
           },
           "default": {
@@ -207,15 +207,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete security standardAssignment": {
-            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment_example.json"
+          "Delete security assignment": {
+            "$ref": "./examples/Assignments/DeleteAssignment_example.json"
           }
         },
         "tags": [
-          "StandardAssignments"
+          "Assignments"
         ],
         "description": "Delete a standard assignment over a given scope",
-        "operationId": "StandardAssignments_Delete",
+        "operationId": "Assignments_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -227,7 +227,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/StandardAssignmentId"
+            "$ref": "#/parameters/AssignmentId"
           }
         ],
         "responses": {
@@ -245,7 +245,7 @@
     }
   },
   "definitions": {
-    "StandardAssignmentList": {
+    "AssignmentList": {
       "type": "object",
       "description": "Page of a standard assignment list",
       "properties": {
@@ -254,7 +254,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StandardAssignment"
+            "$ref": "#/definitions/Assignment"
           }
         },
         "nextLink": {
@@ -264,18 +264,16 @@
         }
       }
     },
-    "StandardAssignment": {
+    "Assignment": {
       "type": "object",
       "description": "Security Assignment on a resource group over a given scope",
       "properties": {
         "properties": {
           "description": "Properties of a security assignment",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StandardAssignmentProperties"
+          "$ref": "#/definitions/AssignmentProperties"
         },
         "systemData": {
-          "readOnly": true,
-          "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "$ref": "../../../common/v2/types.json#/definitions/systemData"
         }
@@ -286,7 +284,7 @@
         }
       ]
     },
-    "StandardAssignmentProperties": {
+    "AssignmentProperties": {
       "type": "object",
       "description": "Describes the properties of a standardAssignment",
       "properties": {
@@ -364,20 +362,20 @@
     }
   },
   "parameters": {
-    "StandardAssignmentId": {
-      "name": "standardAssignmentId",
+    "AssignmentId": {
+      "name": "assignmentId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The security assignment key - unique key for the standard assignment",
       "x-ms-parameter-location": "method"
     },
-    "StandardAssignmentBody": {
-      "name": "standardAssignment",
+    "AssignmentBody": {
+      "name": "assignment",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/StandardAssignment"
+        "$ref": "#/definitions/Assignment"
       },
       "description": "Custom standard assignment over a pre-defined scope",
       "x-ms-parameter-location": "method"

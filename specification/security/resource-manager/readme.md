@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 ```yaml $(tag) == 'package-preview-2021-08'
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
-  - Microsoft.Security/preview/2021-08-01-preview/standardAssignments.json
+  - Microsoft.Security/preview/2021-08-01-preview/assignments.json
 ```
 ### Tag: package-composite-v1
 
