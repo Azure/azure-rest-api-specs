@@ -15,7 +15,6 @@
         "features": [
           {
             "type": "Feature",
-            "id": "",
             "properties": {
               "type": "Address",
               "confidence": "High",
@@ -26,11 +25,9 @@
                 "locality": "Redmond",
                 "adminDistricts": [
                   {
-                    "name": "",
                     "shortName": "WA"
                   },
                   {
-                    "name": "",
                     "shortName": "King"
                   }
                 ],
@@ -40,8 +37,7 @@
                 },
                 "postalCode": "98052",
                 "formattedAddress": "1 Microsoft Way, Redmond, WA 98052",
-                "addressLine": "1 Microsoft Way",
-                "neighborhood": ""
+                "addressLine": "1 Microsoft Way"
               },
               "geocodePoints": [
                 {
@@ -89,10 +85,8 @@
           }
         ],
         "summary": {
-          "query": "1 microsoft way redmond wa",
-          "numResults": 1
-        },
-        "nextLink": ""
+          "query": "1 microsoft way redmond wa"
+        }
       }
     },
     "400": {
@@ -101,7 +95,7 @@
       },
       "body": {
         "error": {
-          "code": "Bad Request",
+          "code": "400",
           "message": "Invalid request"
         }
       }
@@ -112,7 +106,7 @@
       },
       "body": {
         "error": {
-          "code": "Unauthorized",
+          "code": "401",
           "message": "Request is not authorized."
         }
       }
@@ -123,7 +117,7 @@
       },
       "body": {
         "error": {
-          "code": "Forbidden",
+          "code": "403",
           "message": "User is not allowed to perform specified action."
         }
       }
@@ -134,7 +128,7 @@
       },
       "body": {
         "error": {
-          "code": "TooManyRequests",
+          "code": "429",
           "message": "Rate limit exceeded."
         }
       }
@@ -145,7 +139,7 @@
       },
       "body": {
         "error": {
-          "code": "InternalServerError",
+          "code": "500",
           "message": "The internal server error occus."
         }
       }
@@ -156,7 +150,7 @@
       },
       "body": {
         "error": {
-          "code": "ServiceUnavailable",
+          "code": "503",
           "message": "The server is currently unable to handle the request."
         }
       }

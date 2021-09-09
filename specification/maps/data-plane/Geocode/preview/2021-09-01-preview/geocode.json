@@ -5,14 +5,7 @@
     "version": "2021-09-01-preview",
     "description": "Azure Maps Geocode REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
@@ -66,15 +59,15 @@
       "default": "2021-09-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "maxResults": {
-      "name": "maxResults",
+    "maxResult": {
+      "name": "maxResult",
       "in": "query",
-      "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 100.",
+      "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
       "required": false,
       "type": "integer",
       "default": 5,
       "minimum": 1,
-      "maximum": 100,
+      "maximum": 20,
       "x-ms-parameter-location": "method"
     },
     "Accept-Language": {
@@ -96,15 +89,7 @@
     "bbox": {
       "name": "bbox",
       "in": "query",
-      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1, lan1,lon2,lan2",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Query": {
-      "name": "query",
-      "in": "query",
-      "description": "The applicable query string. Must be properly URL encoded.",
+      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -133,7 +118,7 @@
   "paths": {
     "/geocode": {
       "get": {
-        "description": "**Geocoding**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
+        "description": "**Geocoding**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
         "operationId": "Geocode_GetGeocode",
         "x-ms-examples": {
           "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
@@ -151,20 +136,12 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "$ref": "#/parameters/maxResults"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "The address to search for (e.g., \"1 Microsoft way, Redmond, WA\"), must be properly URL encoded. \n\n**If addressLine parameter is not provided, this is parameter is required.**",
-            "required": false,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/maxResult"
           },
           {
             "name": "addressLine",
             "in": "query",
-            "description": "The official street line of an address relative to the area, as specified by the Locality, or PostalCode, properties. Typical use of this element would be to provide a street address or any official address. \n\n**If query parameter is not provided, this is parameter is required.**",
+            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.",
             "required": false,
             "type": "string"
           },
@@ -183,51 +160,45 @@
           {
             "name": "adminDistrict",
             "in": "query",
-            "description": "The country subdivision portion of an address, such as WA. \n\nThis is ignored when parameter **query** is provided ",
+            "description": "The country subdivision portion of an address, such as WA.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict2",
             "in": "query",
-            "description": "The county for the structured address, such as King. \n\nThis is ignored when parameter **query** is provided ",
+            "description": "The county for the structured address, such as King.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict3",
             "in": "query",
-            "description": "The named area for the structured address. This is ignored when parameter **query** is provided ",
+            "description": "The named area for the structured address.",
             "required": false,
             "type": "string"
           },
           {
             "name": "locality",
             "in": "query",
-            "description": "The locality portion of an address,such as Seattle. This is ignored when parameter **query** is provided ",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "neighborhood",
-            "in": "query",
-            "description": "The neighborhood for the structured address. This is ignored when parameter **query** is provided ",
+            "description": "The locality portion of an address, such as Seattle.",
             "required": false,
             "type": "string"
           },
           {
             "name": "postalCode",
             "in": "query",
-            "description": "The postal code portion of an address. This is ignored when parameter **query** is provided ",
+            "description": "The postal code portion of an address.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "StrictMatch",
+            "name": "strictMatch",
             "in": "query",
-            "description": "Restricts the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nOne of the following values:\n- 1: Restrict results to the specified countryRegion and adminDistrict.\n- 0 [default]: Do not restrict results to the specified countryRegion and adminDistrict.\nExample:\nstrictMatch=1",
+            "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nOne of the following values:\n- 1: Restrict results to the specified countryRegion and adminDistrict.\n- 0 [default]: Do not restrict results to the specified countryRegion and adminDistrict.\nExample:\nstrictMatch=1",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": ["0", "1"]
           }
         ],
         "responses": {
@@ -252,7 +223,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -265,7 +236,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -278,7 +249,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -291,7 +262,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -304,7 +275,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
@@ -317,36 +288,18 @@
               }
             },
             "schema": {
-              "$ref": "../../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           },
           "default": {
-            "$ref": "../../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
     }
   },
   "definitions": {
-    "CoordinateAbbreviated": {
-      "description": "A location represented as a latitude and longitude.",
-      "type": "object",
-      "properties": {
-        "lat": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        },
-        "lon": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        }
-      }
-    },
     "GeoJSONPoint": {
       "type": "object",
       "description": "A structure for Point Geometry",
@@ -431,10 +384,8 @@
               "type": "string",
               "readOnly": true
             },
-            "numResults": {
-              "description": "NumResults property for the number of results returned",
-              "type": "integer",
-              "readOnly": true
+            "error": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
             }
           }
         },
@@ -446,9 +397,7 @@
               "type": {
                 "type": "string",
                 "description": "must be Feature",
-                "enum": [
-                  "Feature"
-                ]
+                "enum": ["Feature"]
               },
               "id": {
                 "type": "string",
@@ -487,7 +436,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The is the link to the next page of the features returned, if there is only one page for results, this field will be NULL"
+          "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
         }
       }
     },
