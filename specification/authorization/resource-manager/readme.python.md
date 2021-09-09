@@ -22,6 +22,7 @@ batch:
   - tag: package-2021-01-01-preview-only
   - tag: package-2020-10-01-preview-only
   - tag: package-2020-04-01-preview-only
+  - tag: package-2019-08-01-preview-only
   - tag: package-2018-09-01-preview-only
   - tag: package-2018-07-01-preview-only
   - tag: package-2018-05-01-preview
