@@ -170,8 +170,8 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments": {
       "get": {
-        "summary": "List custom entity store assignments in a subscription",
-        "description": "List custom entity store assignments by a provided subscription",
+        "summary": "List custom entity store assignments in a subscription and a resource group",
+        "description": "List custom entity store assignments by a provided subscription and resource group",
         "tags": [
           "customEntityStoreAssignments"
         ],
@@ -188,7 +188,7 @@
           }
         ],
         "x-ms-examples": {
-          "List custom entity store assignments": {
+          "List custom entity store assignments in a subscription and a resource group": {
             "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListByResourceGroup_example.json"
           }
         },
@@ -207,14 +207,14 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customEntityStoreAssignments": {
       "get": {
-        "summary": "List custom entity store assignments in a resource group",
-        "description": "List custom entity store assignments by provided subscription and resource group",
+        "summary": "List custom entity store assignments in a subscription",
+        "description": "List custom entity store assignments by provided subscription",
         "tags": [
           "customEntityStoreAssignments"
         ],
@@ -228,7 +228,7 @@
           }
         ],
         "x-ms-examples": {
-          "List custom entity store assignments": {
+          "List custom entity store assignments in a subscription": {
             "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListBySubscription_example.json"
           }
         },
@@ -247,7 +247,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     }
