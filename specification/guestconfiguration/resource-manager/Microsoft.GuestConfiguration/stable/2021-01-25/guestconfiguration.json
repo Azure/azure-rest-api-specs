@@ -1211,12 +1211,25 @@
             "ApplyAndMonitor"
           ]
         },
+        "contentType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the content type of the configuration. Possible values could be Builtin or Custom.",
+          "x-nullable": true     
+        },
         "configurationParameter": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConfigurationParameter"
           },
           "description": "The configuration parameters for the guest configuration."
+        },
+        "configurationProtectedParameter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationParameter"
+          },
+          "description": "The protected configuration parameters for the guest configuration."
         },
         "configurationSetting": {
           "$ref": "#/definitions/ConfigurationSetting",
@@ -1397,6 +1410,12 @@
           "type": "string",
           "readOnly": true,
           "description": "Id of the latest report for the guest configuration assignment. ",
+          "x-nullable": true
+        },
+        "parameterHash": {
+          "type": "string",
+          "readOnly": true,
+          "description": "parameter hash for the guest configuration assignment. ",
           "x-nullable": true
         },
         "latestAssignmentReport": {
