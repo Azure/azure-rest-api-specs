@@ -1219,6 +1219,24 @@
         }
       }
     },
+    "AksClusterProfile": {
+      "type": "object",
+      "description": "Properties of the cluster pool underlying AKS cluster.",
+      "properties": {
+        "aksClusterResourceId": {
+          "type": "string",
+          "description": "ARM Resource ID of the AKS cluster"
+        },
+        "aksClusterAgentPoolIdentityProfile": {
+          "description": "Identity properties of the AKS cluster agentpool MSI",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IdentityProfile"
+            }
+          ]
+        }
+      }
+    },
     "ClusterPoolResourceProperties": {
       "type": "object",
       "properties": {
@@ -1249,11 +1267,14 @@
           "example": "hdi-45cd32aead6e4a91b079a0cdbfac8c36",
           "readOnly": true
         },
-        "aksAgentPoolMsiResourceId": {
-          "type": "string",
-          "description": "Resource ID of underlying AKS agent pool MSI.",
-          "example": "/subscriptions/subid/resourceGroups/hdi-45cd32aead6e4a91b079a0cdbfac8c36/providers/Microsoft.ManagedIdentity/userAssignedIdentities/clusterpool1-agentpool",
-          "readOnly": true
+        "aksClusterProfile": {
+          "description": "Properties of underlying AKS cluster.",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/AksClusterProfile"
+            }
+          ]
         },
         "networkProfile": {
           "description": "Cluster pool network profile.",
@@ -1373,9 +1394,9 @@
         }
       }
     },
-    "ClusterIdentityProfile": {
+    "IdentityProfile": {
       "type": "object",
-      "description": "Cluster identity profile with details of customer MSI for the cluster.",
+      "description": "Identity Profile with details of an MSI.",
       "required": [
         "msiResourceId",
         "msiClientId",
@@ -1384,7 +1405,7 @@
       "properties": {
         "msiResourceId": {
           "type": "string",
-          "description": "ResourceId of the MSI that has required access to customer resources."
+          "description": "ResourceId of the MSI."
         },
         "msiClientId": {
           "type": "string",
@@ -1581,7 +1602,7 @@
           "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})-(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
         },
         "identityProfile": {
-          "$ref": "#/definitions/ClusterIdentityProfile"
+          "$ref": "#/definitions/IdentityProfile"
         },
         "authorizationProfile": {
           "$ref": "#/definitions/ClusterAuthorizationProfile"
