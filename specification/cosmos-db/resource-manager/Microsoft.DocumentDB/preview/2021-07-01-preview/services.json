@@ -253,6 +253,7 @@
     "ServiceResourceProperties": {
       "description": "Services response resource.",
       "type": "object",
+      "discriminator": "serviceType",
       "properties": {
         "creationTime": {
           "readOnly": true,
@@ -354,6 +355,7 @@
     "DataTransferServiceResourceProperties": {
       "description": "Properties for DataTransferServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
@@ -383,6 +385,7 @@
     "SqlDedicatedGatewayServiceResourceProperties": {
       "description": "Properties for SqlDedicatedGatewayServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
@@ -416,6 +419,7 @@
     "GraphAPIComputeServiceResourceProperties": {
       "description": "Properties for GraphAPIComputeServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
