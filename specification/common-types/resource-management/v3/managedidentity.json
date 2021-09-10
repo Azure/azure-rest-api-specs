@@ -68,7 +68,34 @@
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedIdentities"
         }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SystemAssignedServiceIdentityType": {
+      "description": "Type of managed service identity (either system assigned, or none).",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SystemAssignedServiceIdentityType",
+        "modelAsString": true
       }
+    },
+    "SystemAssignedServiceIdentity": {
+      "description": "Managed service identity (either system assigned, or none)",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SystemAssignedServiceIdentityType"
+        }
+      },
+      "required": [
+        "type"
+      ]
     }
   }
 }
