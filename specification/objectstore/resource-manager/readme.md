@@ -27,7 +27,16 @@ These are the global settings for the objectstore.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2020-09-02-preview
+tag: package-2021-09-01-preview
+```
+
+## Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.ObjectStore/preview/2021-09-01-preview/objectstore.json
 ```
 
 ### Tag: package-2020-09-02-preview
