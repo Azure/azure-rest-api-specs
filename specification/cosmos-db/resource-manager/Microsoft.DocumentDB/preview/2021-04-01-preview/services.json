@@ -80,8 +80,7 @@
       "put": {
         "tags": [
           "DataTransfer",
-          "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "SqlDedicatedGateway"
         ],
         "x-ms-examples": {
           "DataTransferServiceCreate": {
@@ -89,9 +88,6 @@
           },
           "SqlDedicatedGatewayServiceCreate": {
             "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
-          },
-          "GraphAPIComputeServiceCreate": {
-            "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
           }
         },
         "operationId": "Service_Create",
@@ -144,15 +140,11 @@
       "get": {
         "tags": [
           "DataTransfer",
-          "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "SqlDedicatedGateway"
         ],
         "x-ms-examples": {
           "DataTransferServiceGet": {
             "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
-          },
-          "GraphAPIComputeServiceGet": {
-            "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
           "SqlDedicatedGatewayServiceGet": {
             "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
@@ -195,8 +187,7 @@
       "delete": {
         "tags": [
           "DataTransfer",
-          "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "SqlDedicatedGateway"
         ],
         "x-ms-examples": {
           "DataTransferServiceDelete": {
@@ -204,9 +195,6 @@
           },
           "SqlDedicatedGatewayServiceDelete": {
             "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
-          },
-          "GraphAPIComputeServiceDelete": {
-            "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
           }
         },
         "operationId": "Service_Delete",
@@ -285,6 +273,21 @@
         "serviceType"
       ]
     },
+    "ServiceResource": {
+      "description": "Properties for the database account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      }
+    },
     "ServiceResourceCreateUpdateParameters": {
       "description": "",
       "type": "object",
@@ -313,23 +316,7 @@
         }
       }
     },
-    "ServiceResource": {
-      "description": "Properties for the database account.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/ServiceResourceProperties"
-        }
-      }
-    },
     "ServiceResourceListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -406,40 +393,6 @@
         }
       }
     },
-    "GraphAPIComputeServiceResource": {
-      "description": "Describes the service response property for GraphAPICompute.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/GraphAPIComputeServiceResourceProperties"
-        }
-      }
-    },
-    "GraphAPIComputeServiceResourceProperties": {
-      "description": "Properties for GraphAPIComputeServiceResource.",
-      "type": "object",
-      "x-ms-discriminator-value": "GraphAPICompute",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResourceProperties"
-        }
-      ],
-      "properties": {
-        "graphApiComputeEndpoint": {
-          "type": "string",
-          "description": "GraphAPICompute endpoint for the service."
-        },
-        "locations": {
-          "type": "array",
-          "readOnly": true,
-          "description": "An array that contains all of the locations for the service.",
-          "items": {
-            "$ref": "#/definitions/GraphAPIComputeRegionalServiceResource"
-          }
-        }
-      }
-    },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
       "type": "object",
@@ -474,22 +427,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The regional endpoint for SqlDedicatedGateway."
-        }
-      }
-    },
-    "GraphAPIComputeRegionalServiceResource": {
-      "description": "Resource for a regional service location.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegionalServiceResource"
-        }
-      ],
-      "properties": {
-        "graphApiComputeEndpoint": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The regional endpoint for GraphAPICompute."
         }
       }
     },
@@ -536,8 +473,7 @@
       "type": "string",
       "enum": [
         "SqlDedicatedGateway",
-        "DataTransfer",
-        "GraphAPICompute"
+        "DataTransfer"
       ],
       "description": "ServiceType for the service.",
       "x-ms-enum": {
