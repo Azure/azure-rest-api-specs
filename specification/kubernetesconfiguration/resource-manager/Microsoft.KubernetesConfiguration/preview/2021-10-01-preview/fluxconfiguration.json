@@ -564,7 +564,7 @@
         "modelAsString": true
       }
     },
-    "ComplianceStateDefinition": {
+    "FluxComplianceStateDefinition": {
       "description": "Compliance state of the cluster object.",
       "type": "string",
       "enum": [
@@ -576,7 +576,7 @@
       ],
       "default": "pending",
       "x-ms-enum": {
-        "name": "ComplianceStateType",
+        "name": "FluxComplianceState",
         "modelAsString": true
       }
     },
@@ -648,7 +648,7 @@
               "x-nullable": true,
               "readOnly": true
             },
-            "lastSyncedCommit": {
+            "lastSourceSyncedCommit": {
               "description": "Branch and SHA of the last source commit synced with the cluster.",
               "type": "string",
               "x-nullable": true,
@@ -664,7 +664,7 @@
               "description": "Combined status of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects.",
               "type": "string",
               "readOnly": true,
-              "$ref": "#/definitions/ComplianceStateDefinition"
+              "$ref": "#/definitions/FluxComplianceStateDefinition"
             },
             "provisioningState": {
               "description": "Status of the creation of the fluxConfiguration.",
