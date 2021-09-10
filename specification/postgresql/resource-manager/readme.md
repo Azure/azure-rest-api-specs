@@ -39,17 +39,16 @@ tag: package-flexibleserver-2021-06
 tag: package-preview-2021-09
 ```
 
+### Tag: package-migration-2021-09-privatepreview
 
-### Tag: package-preview-2021-09
+These settings apply only when `--tag=package-migration-2021-09-privatepreview is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-migration-2021-09-privatepreview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2021-09-01/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2021-09-01/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2021-09-01/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2021-09-01-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
+
 ### Tag: package-2021-06-15-privatepreview
 
 These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
