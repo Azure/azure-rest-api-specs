@@ -708,6 +708,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/transferOut": {
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Transfer out domain to another registrar",
+        "operationId": "Domains_TransferOut",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned transfer code to transfer domain to another registrar.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "400": {
+            "description": "Domain does not exist in Azure database",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2021-03-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Transfer out domain": {
+            "$ref": "./examples/TransferOutDomain.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
