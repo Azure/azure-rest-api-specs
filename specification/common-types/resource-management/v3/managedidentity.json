@@ -89,6 +89,18 @@
       "description": "Managed service identity (either system assigned, or none)",
       "type": "object",
       "properties": {
+        "principalId": {
+          "readOnly": true,
+          "format": "uuid",
+          "type": "string",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "format": "uuid",
+          "type": "string",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity."
+        },
         "type": {
           "$ref": "#/definitions/SystemAssignedServiceIdentityType"
         }
