@@ -1810,6 +1810,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/logoffAllUsers": {
+      "post": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHosts_LogoffAllUsers",
+        "description": "Logoff all user sessions on a session host.",
+        "x-ms-examples": {
+          "SessionHost_LogoffAllUsers": {
+            "$ref": "./examples/SessionHost_LogoffAllUsers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Logged off all user sessions on the session host.",
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts": {
       "get": {
         "tags": [
