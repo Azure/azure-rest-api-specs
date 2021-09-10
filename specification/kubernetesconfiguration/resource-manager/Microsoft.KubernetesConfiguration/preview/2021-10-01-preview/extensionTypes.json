@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-05-01-preview",
+    "version": "2021-10-01-preview",
     "title": "ExtensionTypes",
     "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
   },
@@ -51,13 +51,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterTypeParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -99,10 +99,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -360,38 +360,6 @@
     }
   },
   "parameters": {
-    "ClusterRpParameter": {
-      "name": "clusterRp",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Microsoft.ContainerService",
-        "Microsoft.Kubernetes"
-      ],
-      "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterTypeParameter": {
-      "name": "clusterType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "managedClusters",
-        "connectedClusters"
-      ],
-      "description": "The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or connectedClusters (for OnPrem K8S clusters).",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterNameParameter": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the kubernetes cluster.",
-      "x-ms-parameter-location": "method"
-    },
     "ExtensionLocationParameter": {
       "name": "location",
       "in": "path",

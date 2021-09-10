@@ -1,0 +1,653 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01-preview",
+    "title": "FluxConfigurationClient",
+    "description": "Use these APIs to create Flux Configuration resources through ARM, for Kubernetes Clusters."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}": {
+      "get": {
+        "tags": [
+          "FluxConfiguration",
+          "Flux"
+        ],
+        "description": "Gets details of the Flux Configuration.",
+        "operationId": "FluxConfigurations_Get",
+        "x-ms-examples": {
+          "Get Flux Configuration": {
+            "$ref": "./examples/GetFluxConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FluxConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FluxConfiguration",
+          "Flux"
+        ],
+        "description": "Create a new Kubernetes Flux Configuration.",
+        "operationId": "FluxConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Flux Configuration": {
+            "$ref": "./examples/CreateFluxConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FluxConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "fluxConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            },
+            "description": "Properties necessary to Create a FluxConfiguration."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request received successfully.",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "FluxConfiguration",
+          "Flux"
+        ],
+        "description": "This will delete the YAML file used to set up the Flux Configuration, thus stopping future sync from the source repo.",
+        "operationId": "FluxConfigurations_Delete",
+        "x-ms-examples": {
+          "Delete Flux Configuration": {
+            "$ref": "./examples/DeleteFluxConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FluxConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.  The request has been completed successfully."
+          },
+          "202": {
+            "description": "Accepted.  The request has been accepted for processing."
+          },
+          "204": {
+            "description": "No Content.  The request has been accepted but the configuration was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations": {
+      "get": {
+        "tags": [
+          "FluxConfiguration",
+          "Flux"
+        ],
+        "description": "List all Flux Configurations.",
+        "operationId": "FluxConfigurations_List",
+        "x-ms-examples": {
+          "List Flux Configuration": {
+            "$ref": "./examples/ListFluxConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FluxConfigurationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "FluxConfigOperationStatus_Get",
+        "description": "Get Async Operation status",
+        "x-ms-examples": {
+          "AsyncOperationStatus Get": {
+            "$ref": "./examples/GetFluxConfigurationAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FluxConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "operation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Status",
+            "schema": {
+              "$ref": "../../common/2021-10-01-preview/definitions.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScopeDefinition": {
+      "description": "Scope at which the configuration will be installed.",
+      "type": "string",
+      "enum": [
+        "cluster",
+        "namespace"
+      ],
+      "default": "cluster",
+      "x-ms-enum": {
+        "name": "ScopeType",
+        "modelAsString": true
+      }
+    },
+    "SourceKindDefinition": {
+      "description": "Source Kind to pull the configuration data from.",
+      "type": "string",
+      "enum": [
+        "GitRepository"
+      ],
+      "x-ms-enum": {
+        "name": "SourceKindType",
+        "modelAsString": true
+      }
+    },
+    "GitRepositoryDefinition": {
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration git repository.",
+          "type": "string"
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "repositoryRef": {
+          "description": "The source reference for the GitRepository object.",
+          "$ref": "#/definitions/RepositoryRefDefinition"
+        },
+        "sshKnownHosts": {
+          "description": "Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH",
+          "type": "string",
+          "x-nullable": true
+        },
+        "httpsUser": {
+          "description": "HTTPS username used to access private git repositories over HTTPS",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "RepositoryRefDefinition": {
+      "description": "The source reference for the GitRepository object.",
+      "type": "object",
+      "properties": {
+        "branch": {
+          "description": "The git repository branch name to checkout.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "tag": {
+          "description": "The git repository tag name to checkout. This takes precedence over branch.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "semver": {
+          "description": "The semver range used to match against git repository tags. This takes precedence over tag.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "commit": {
+          "description": "The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "KustomizationDefinition": {
+      "description": "",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "name": {
+          "description": "The name of the Kustomization object to create on the cluster.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The path in the source reference to reconcile on the cluster.",
+          "type": "string",
+          "default": ""
+        },
+        "dependsOn": {
+          "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the Kustomization on the cluster.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "retryIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "prune": {
+          "description": "Enable/disable garbage collections of Kubernetes objects created by this Kustomization.",
+          "type": "boolean"
+        },
+        "validation": {
+          "description": "Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.",
+          "$ref": "#/definitions/KustomizationValidationDefinition"
+        },
+        "force": {
+          "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
+          "type": "boolean"
+        }
+      }
+    },
+    "KustomizationValidationDefinition": {
+      "description": "Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.",
+      "type": "string",
+      "enum": [
+        "none",
+        "client",
+        "server"
+      ],
+      "default": "none",
+      "x-ms-enum": {
+        "name": "KustomizationValidationType",
+        "modelAsString": true
+      }
+    },
+    "SyncStateDefinition": {
+      "description": "Compliance state of the cluster object.",
+      "type": "string",
+      "enum": [
+        "compliant",
+        "non-compliant",
+        "pending",
+        "suspended",
+        "unknown"
+      ],
+      "default": "pending",
+      "x-ms-enum": {
+        "name": "SyncStateType",
+        "modelAsString": true
+      }
+    },
+    "FluxConfiguration": {
+      "type": "object",
+      "description": "The Flux Configuration object returned in Get & Put response.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties to create a Flux Configuration resource",
+          "properties": {
+            "scope": {
+              "description": "Scope at which the operator will be installed.",
+              "$ref": "#/definitions/ScopeDefinition"
+            },
+            "namespace": {
+              "description": "The namespace to which this configuration is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
+              "type": "string",
+              "default": "default"
+            },
+            "sourceKind": {
+              "description": "Source Kind to pull the configuration data from.",
+              "$ref": "#/definitions/SourceKindDefinition"
+            },
+            "suspend": {
+              "description": "Whether this configuration should suspend its reconciliation of its kustomizations and sources.",
+              "type": "boolean",
+              "default": false
+            },
+            "gitRepository": {
+              "description": "Parameters to reconcile to the GitRepository source kind type.",
+              "type": "object",
+              "$ref": "#/definitions/GitRepositoryDefinition"
+            },
+            "kustomizations": {
+              "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
+              "type": "array",
+              "x-nullable": true,
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/KustomizationDefinition"
+              }
+            },
+            "configurationProtectedSettings": {
+              "description": "Key-value pairs of protected configuration settings for the configuration",
+              "type": "object",
+              "x-nullable": true,
+              "x-ms-secret": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "statuses": {
+              "description": "Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.",
+              "type": "array",
+              "readOnly": true,
+              "x-nullable": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            },
+            "repositoryPublicKey": {
+              "description": "Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true
+            },
+            "lastSyncedTime": {
+              "description": "Datetime the fluxConfiguration has been synced with the Azure control plane.",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true
+            },
+            "lastSyncedCommit": {
+              "description": "Branch and SHA of the last source commit synced with the cluster.",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true
+            },
+            "lastConfigAppliedTime": {
+              "description": "Datetime the fluxConfiguration was last applied.",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true
+            },
+            "syncState": {
+              "description": "Combined status of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects.",
+              "type": "string",
+              "readOnly": true,
+              "$ref": "#/definitions/SyncStateDefinition"
+            },
+            "provisioningState": {
+              "description": "Status of the creation of the fluxConfiguration.",
+              "type": "string",
+              "readOnly": true,
+              "$ref": "../../common/2021-10-01-preview/definitions.json#/definitions/ProvisioningStateDefinition"
+            },
+            "message": {
+              "description": "Error message returned to the user in the case of provisioning failure.",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true
+            }
+          }
+        },
+        "systemData": {
+          "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FluxConfigurationsList": {
+      "description": "Result of the request to list Flux Configurations.  It contains a list of FluxConfiguration objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FluxConfiguration"
+          },
+          "description": "List of Flux Configurations within a Kubernetes cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of configuration objects, if any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FluxConfigurationNameParameter": {
+      "name": "fluxConfigurationName",
+      "in": "path",
+      "description": "Name of the Flux Configuration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
