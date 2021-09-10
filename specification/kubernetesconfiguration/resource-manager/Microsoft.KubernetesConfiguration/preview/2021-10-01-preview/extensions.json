@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-09-01",
+    "version": "2021-10-01-preview",
     "title": "ExtensionsClient",
     "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
   },
@@ -55,13 +55,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -124,13 +124,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -174,13 +174,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -237,13 +237,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -309,13 +309,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -326,57 +326,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ExtensionsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations in a Cluster"
-        ],
-        "operationId": "OperationStatus_List",
-        "description": "List Async Operations, currently in progress, in a cluster",
-        "x-ms-examples": {
-          "AsyncOperationStatus List": {
-            "$ref": "./examples/ListAsyncOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
-          },
-          {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
-          },
-          {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operations in a cluster",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusList"
             }
           },
           "default": {
@@ -411,13 +360,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2021-09-01/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -446,42 +395,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "description": "List all the available operations the KubernetesConfiguration resource provider supports, in this api-version.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "../../common/2021-09-01/definitions.json#/definitions/ResourceProviderOperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -523,22 +436,6 @@
           "description": "Specifies that the scope of the extension is Namespace",
           "$ref": "#/definitions/ScopeNamespace"
         }
-      }
-    },
-    "provisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the extension resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
       }
     },
     "ExtensionStatus": {
@@ -629,7 +526,7 @@
               "description": "Status of installation of this extension.",
               "type": "string",
               "readOnly": true,
-              "$ref": "#/definitions/provisioningState"
+              "$ref": "../../common/2021-10-01-preview/definitions.json#/definitions/ProvisioningState"
             },
             "statuses": {
               "description": "Status from this extension.",
@@ -722,60 +619,6 @@
           "type": "string",
           "readOnly": true,
           "description": "URL to get the next set of extension objects, if any."
-        }
-      }
-    },
-    "OperationStatusResult": {
-      "description": "The current status of an async operation.",
-      "type": "object",
-      "required": [
-        "status"
-      ],
-      "properties": {
-        "id": {
-          "description": "Fully qualified ID for the async operation.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the async operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Operation status.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Additional information, if available.",
-          "type": "object",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "error": {
-          "description": "If present, details of the operation error.",
-          "type": "object",
-          "readOnly": true,
-          "x-nullable": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "OperationStatusList": {
-      "description": "The async operations in progress, in the cluster.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationStatusResult"
-          },
-          "description": "List of async operations in progress, in the cluster."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of Operation Result objects, if any."
         }
       }
     },
