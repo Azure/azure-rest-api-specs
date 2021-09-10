@@ -420,56 +420,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema group, schema name, and version."
-              },
-              "Serialization-Type": {
-                "type": "string",
-                "description": "Serialization type for the schema being registered.",
-                "enum": [
-                  "avro"
-                ],
-                "x-ms-enum": {
-                  "name": "SerializationType",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "value": "avro",
-                      "name": "AVRO",
-                      "description": "Avro Serialization schema type"
-                    }
-                  ]
-                }
-              },
-              "Schema-Id": {
-                "type": "string",
-                "description": "References specific schema in registry namespace."
-              },
-              "Schema-Id-Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema ID."
-              },
-              "Schema-Group-Name": {
-                "type": "string",
-                "description": "References schema group."
-              },
-              "Schema-Name": {
-                "type": "string",
-                "description": "References schema name."
-              },
-              "Schema-Version": {
-                "type": "integer",
-                "description": "Version of the returned schema."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/SchemaId"
-            }
-          },
           "204": {
             "description": "No Content",
             "headers": {
